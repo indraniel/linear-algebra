@@ -1,0 +1,353 @@
+% Chapter 4, Section 1 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\chapter{Similarity}
+While studying matrix equivalence, we have shown that for any 
+homomorphism there are bases $B$ and~$D$ such that the 
+representation matrix has a block partial-identity form.
+\begin{equation*}
+  \rep{h}{B,D}
+  =
+    \begin{pmat}{c|c}
+       \text{\textit{Identity}}  &\text{\textit{Zero}}   \\
+       \hline
+       \text{\textit{Zero}}      &\text{\textit{Zero}}
+    \end{pmat}
+\end{equation*}
+This representation describes
+the map as sending
+\( c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \) to
+\(c_1\vec{\delta}_1+\dots+c_k\vec{\delta}_k+\zero+\dots+\zero \),
+where $n$ is the dimension of the domain and \( k \) is the dimension of
+the range.
+So, under this representation 
+the action of the map is easy to understand 
+because most of the matrix entries are zero.
+
+This chapter considers the special case where the domain and
+the codomain are equal, that is, where
+the homomorphism is a transformation.
+In this case we naturally ask to find a single basis
+\( B \) so that \( \rep{t}{B,B} \) is as simple as possible
+(we will take `simple' to mean that it has many zeroes).
+A matrix having the above block partial-identity form
+is not always possible here.
+But we will develop a form that comes close, a
+representation that is nearly diagonal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Complex Vector Spaces}
+\index{vector space!over complex numbers}
+This chapter requires that we factor polynomials.
+Of course, many polynomials do not factor over the real numbers;
+for instance,
+\( x^2+1 \) does not factor into the product of two linear polynomials
+with real coefficients.
+For that reason, we shall from now on take our scalars from the complex
+numbers.
+
+That is, we are shifting from studying vector spaces over the real numbers
+to vector spaces over the complex numbers\Dash
+in this chapter
+vector and matrix entries are complex.
+
+Any real number is a complex number and
+a glance through this chapter shows that most of the examples use
+only real numbers.
+Nonetheless, the critical theorems require that the scalars be complex
+numbers, so
+the first section below is a quick review of complex numbers.
+%We shall not do an extensive development; instead, we shall only
+%quote the facts we need.
+%Specifically, we shall define of the addition and multiplication operations, 
+%and state the Fundamental Theorem.
+
+In this book we are moving to the more general context 
+of taking scalars to be complex only for the 
+pragmatic reason that we must do so in order to 
+develop the representation.
+We will not go into using other sets of scalars in more detail because
+it could distract from our goal.
+However, the idea of taking scalars from a structure other than the real
+numbers is an interesting one.
+Delightful
+presentations taking this approach are in
+\cite{Halmos} and \cite{HoffmanKunze}.
+
+
+
+
+
+
+\subsectionoptional{Factoring and Complex Numbers; A Review}
+\textit{
+  This subsection is a review only and we take the main results as known.
+  For proofs, see \cite{BirkhoffMaclane} or \cite{Ebbinghaus}.}
+
+Just as integers have a division operation\Dash e.g., 
+`\( 4 \) goes \( 5 \) times into \( 21 \) with remainder \( 1 \)'\Dash so 
+do polynomials.
+
+\begin{theorem}[Division Theorem for Polynomials]
+\label{th:EuclidForPolys}
+\index{division theorem}\index{polynomials!division theorem}
+Let \( c(x) \) be a polynomial.
+If \( m(x) \) is a non-zero polynomial then there are \definend{quotient} and
+\definend{remainder} polynomials \( q(x) \) and \( r(x) \) such that
+\begin{equation*}
+  c(x)=m(x)\cdot q(x)+r(x)
+\end{equation*}
+where the degree of \( r(x) \) is strictly less than the degree of \( m(x) \).
+\end{theorem}
+
+\noindent In this book constant polynomials, 
+including the zero polynomial, are said to have degree \( 0 \).
+(This is not the standard definition, but it is convienent here.)
+
+The point of the integer division statement
+`\( 4 \) goes \( 5 \) times into \( 21 \) with remainder \( 1 \)'
+is that the remainder is less than \( 4 \)\Dash while \( 4 \) goes \( 5 \)
+times, it does not go \( 6 \) times.
+In the same way, the point of the polynomial division statement
+is its final clause.
+
+\begin{example}
+If \( c(x)=2x^3-3x^2+4x \) and \( m(x)=x^2+1 \) then \( q(x)=2x-3 \) and
+\( r(x)=2x+3 \).
+Note that \( r(x) \) has a lower degree than \( m(x) \).
+\end{example}
+
+\begin{corollary}
+The remainder when \( c(x) \) is divided by \( x-\lambda \) is the constant
+polynomial \( r(x)=c(\lambda) \).
+\end{corollary}
+
+\begin{proof}
+The remainder must be a constant polynomial
+because it is of degree less than the divisor \( x-\lambda \), 
+To determine the constant,
+take $m(x)$ from the theorem to be $x-\lambda$ and 
+substitute \( \lambda\/ \) for $x$ to get
+\( c(\lambda)=(\lambda-\lambda)\cdot q(\lambda)+r(x) \). 
+\end{proof}
+
+If a divisor \( m(x) \) goes into a dividend \( c(x) \) evenly,
+meaning that \( r(x) \) is the zero polynomial,
+then \( m(x) \) is a \definend{factor\/} of \( c(x) \).
+Any \definend{root\/} of the factor (any \( \lambda\in\Re \) such that
+\( m(\lambda)=0 \)) is a root of \( c(x) \) since
+\( c(\lambda)=m(\lambda)\cdot q(\lambda)=0 \).
+The prior corollary immediately yields the following converse.
+
+\begin{corollary}
+If \( \lambda \) is a root of the polynomial \( c(x) \)
+then \( x-\lambda \) divides \( c(x) \) evenly, that is, 
+$x-\lambda$ is a factor of $c(x)$.
+\end{corollary}
+
+Finding the roots and factors of a high-degree polynomial can be hard.
+But for second-degree polynomials we have the quadratic formula:~the
+roots of \( ax^2+bx+c \) are
+\begin{equation*}
+   \lambda_1=\frac{-b+\sqrt{b^2-4ac}}{2a}
+   \qquad
+   \lambda_2=\frac{-b-\sqrt{b^2-4ac}}{2a}
+\end{equation*}
+(if the discriminant \( b^2-4ac \) is negative then the polynomial
+has no real number roots).
+A polynomial that cannot be factored into two lower-degree polynomials
+with real number coefficients is \definend{irreducible over the reals}.
+
+\begin{theorem}
+Any constant or linear polynomial is irreducible over the reals.
+A quadratic polynomial is irreducible over the reals if and only if its
+discriminant is negative.
+No cubic or higher-degree polynomial is irreducible over the reals.
+\end{theorem}
+
+\begin{corollary}
+Any polynomial with real coefficients can be factored into linear and
+irreducible quadratic polynomials.
+That factorization is unique; any two factorizations have the same powers of
+the same factors.
+\end{corollary}
+
+Note the analogy with the prime factorization of integers.
+In both cases, the uniqueness clause is very useful.
+
+\begin{example}
+Because of uniqueness we know, without multiplying them out, that
+\( (x+3)^2(x^2+1)^3 \) does not equal
+\( (x+3)^4(x^2+x+1)^2 \).
+\end{example}
+
+\begin{example}
+By uniqueness, if \( c(x)=m(x)\cdot q(x) \) then where
+\( c(x)=(x-3)^2(x+2)^3 \) and \( m(x)=(x-3)(x+2)^2 \),
+we know that \( q(x)=(x-3)(x+2) \).
+\end{example}
+
+While \( x^2+1 \) has no real roots and so doesn't factor over the real
+numbers, if we imagine a root\Dash traditionally denoted \( i \) 
+so that \( i^2+1=0 \)\Dash then \( x^2+1 \) factors into a product of linears 
+\( (x-i)(x+i) \).
+
+So we adjoin this root \( i \) to the reals and close the new system with
+respect to addition, multiplication, etc.\ (i.e., we also add
+\( 3+i \), and \( 2i \), and \( 3+2i \), etc., putting in all linear
+combinations of $1$ and $i$).
+We then get a new structure, the \definend{complex numbers}, denoted
+\( \C \).
+
+In $\C$ we can factor (obviously, at least some) quadratics that would be
+irreducible if we were to stick to the real numbers.
+Surprisingly, in \( \C \) we can not only factor \( x^2+1 \)
+and its close relatives, we can factor any quadratic.
+%Any quadratic polynomial factors over the complex numbers.
+\begin{equation*}
+   ax^2+bx+c=
+   a\cdot \big(x-\frac{-b+\sqrt{b^2-4ac}}{2a}\big)
+    \cdot \big(x-\frac{-b-\sqrt{b^2-4ac}}{2a}\big)
+\end{equation*}
+
+\begin{example}
+The second degree polynomial \( x^2+x+1 \) factors over the complex numbers 
+into the product of two first degree polynomials.
+\begin{equation*}
+   \big(x-\frac{-1+\sqrt{-3}}{2}\big)
+   \big(x-\frac{-1-\sqrt{-3}}{2}\big)
+   =
+   \big(x-(-\frac{1}{2}+\frac{\sqrt{3}}{2}i)\big)
+   \big(x-(-\frac{1}{2}-\frac{\sqrt{3}}{2}i)\big)
+\end{equation*}
+\end{example}
+
+\begin{corollary}[Fundamental Theorem of Algebra]
+\hspace*{0em plus2em}
+Polynomials with complex coefficients factor into linear
+polynomials with complex coefficients.
+The factorization is unique.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Complex Representations}
+Recall the definitions of the complex number addition
+\begin{equation*}
+   (a+bi)\,+\,(c+di)=(a+c)+(b+d)i                  
+\end{equation*}
+and multiplication.
+\begin{align*}
+     (a+bi)(c+di) &=ac+adi+bci+bd(-1)  \\
+                  &=(ac-bd)+(ad+bc)i
+\end{align*}
+
+\begin{example}
+For instance,
+\( (1-2i)\,+\,(5+4i)=6+2i \) and
+\( (2-3i)(4-0.5i)=6.5-13i \).
+\end{example}
+
+Handling scalar operations with those rules, all of
+the operations that we've covered
+for real vector spaces carry over unchanged.
+
+\begin{example}
+Matrix multiplication is the same, although the scalar arithmetic involves more
+bookkeeping.
+\begin{multline*}
+  \begin{pmatrix}
+     1+1i  &2-0i  \\
+      i    &-2+3i
+  \end{pmatrix}
+  \begin{pmatrix}
+     1+0i  &1-0i  \\
+     3i    &-i
+  \end{pmatrix}             \\
+ \begin{aligned}
+  &=\begin{pmatrix}
+     (1+1i)\cdot(1+0i)+(2-0i)\cdot(3i)   &(1+1i)\cdot(1-0i)+(2-0i)\cdot(-i) \\
+     (i)\cdot(1+0i)+(-2+3i)\cdot(3i)     &(i)\cdot(1-0i)+(-2+3i)\cdot(-i)
+  \end{pmatrix}                                                  \\
+  &=\begin{pmatrix}
+     1+7i  &1-1i  \\
+    -9-5i  &3+3i
+  \end{pmatrix}
+ \end{aligned}
+\end{multline*}
+\end{example}
+
+Everything else from prior chapters that we can, 
+we shall also carry over unchanged.
+For instance, we shall call this
+\begin{equation*}
+   \sequence{\colvec{1+0i \\ 0+0i \\ \vdots \\ 0+0i},
+             \dots,
+             \colvec{0+0i \\ 0+0i \\ \vdots \\ 1+0i}}
+\end{equation*}
+the \definend{standard basis\/}\index{basis!standard}%
+\index{basis!standard over the complex numbers} 
+for \( \C^n \) as a vector space over $\C$
+and again denote it \( \stdbasis_n \).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

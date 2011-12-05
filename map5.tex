@@ -1,0 +1,2114 @@
+% Chapter 3, Section 5 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\section{Change of Basis}
+\index{change of basis|(}
+Representations, whether of vectors or of maps, vary with the bases.
+For instance, with respect to the two bases $\stdbasis_2$ and 
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+\end{equation*}
+for $\Re^2$, the vector 
+$\vec{e}_1$ has two different representations.
+\begin{equation*}
+  \rep{\vec{e}_1}{\stdbasis_2}=\colvec{1 \\ 0}
+  \qquad
+  \rep{\vec{e}_1}{B}=\colvec{1/2 \\ 1/2}
+\end{equation*}
+Similarly, with respect to $\stdbasis_2,\stdbasis_2$ and $\stdbasis_2,B$, the identity map
+has two different representations.
+\begin{equation*}
+  \rep{\text{id}}{\stdbasis_2,\stdbasis_2}=
+   \begin{pmatrix}
+     1  &0  \\
+     0  &1
+   \end{pmatrix}
+   \qquad
+  \rep{\text{id}}{\stdbasis_2,B}=
+   \begin{pmatrix}
+     1/2  &1/2  \\
+     1/2  &-1/2
+   \end{pmatrix}
+\end{equation*}
+With our point of view that the objects of our studies are vectors and
+maps, in fixing bases 
+we are adopting a scheme of tags or names for these objects, that are
+convienent for computation.
+We will now see how to translate among these names\Dash we will
+see exactly how representations vary as the bases vary.
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Changing Representations of Vectors}
+In converting 
+$\rep{\vec{v}}{B}$ to $\rep{\vec{v}}{D}$
+the underlying vector $\vec{v}$ doesn't change.
+Thus,  
+this translation is accomplished by the identity map on the space,
+described so that
+the domain space vectors are represented with respect to $B$ and
+the codomain space vectors are represented with respect to $D$. 
+\index{arrow diagram}
+\begin{equation*}
+  \begin{CD}
+    V_\wrt{B}                      \\
+    @V\scriptstyle\identity VV   \\
+    V_\wrt{D}
+  \end{CD}
+\end{equation*}
+(The diagram is
+vertical to fit with the ones in the next subsection.)
+
+\begin{definition}
+The \definend{change of basis matrix}\index{vector!representation of}%
+\index{matrix!change of basis}\index{basis!change of}
+for bases \( B,D\subset V \) is the representation of the identity
+map  \( \map{\identity}{V}{V} \) with respect to those bases.
+\begin{equation*}
+  \rep{\identity}{B,D}=
+  \begin{pmat}{c|@{\hspace{1em}}c@{\hspace{1em}}|c}
+     \vdots                  &             &\vdots                  \\
+     \rep{\vec{\beta}_1}{D}  &\;\cdots\;   &\rep{\vec{\beta}_n}{D}  \\
+     \vdots                  &             &\vdots
+  \end{pmat}
+\end{equation*}
+%\( B=\basis{\beta}{n} \).
+\end{definition}
+
+\begin{lemma}  \label{le:ChBasisMatDoesChBases}
+Left-multiplication by the change of basis matrix for \( B,D \)
+converts a representation with respect to \( B \) to one with respect to
+\( D \).
+Conversly, if left-multiplication by a matrix changes bases 
+$M\cdot\rep{\vec{v}}{B}=\rep{\vec{v}}{D}$
+then $M$ is a change of basis matrix.
+\end{lemma}
+
+\begin{proof}
+For the first sentence, for each \( \vec{v} \),
+as matrix-vector multiplication represents a map application,
+\( \rep{\identity}{B,D}\cdot\rep{\vec{v}}{B}=\rep{\,\identity(\vec{v})\,}{D}
+  =\rep{\vec{v}}{D} \). 
+For the second sentence,
+with respect to $B,D$ the matrix $M$ represents some linear
+map, whose action is $\vec{v}\mapsto\vec{v}$, and is therefore
+the identity map.
+\end{proof}
+
+\begin{example}
+With these bases for \( \Re^2 \),
+\begin{equation*}
+  B=
+  \sequence{
+            \colvec{2 \\ 1},
+            \colvec{1 \\ 0} }
+  \qquad
+  D=
+  \sequence{
+            \colvec{-1 \\ 1},
+            \colvec{1 \\ 1} }
+\end{equation*}
+because
+\begin{equation*}
+  \rep{\,\identity(\colvec{2 \\ 1})}{D}
+  =\colvec{-1/2 \\ 3/2}_D
+  \qquad
+  \rep{\,\identity(\colvec{1 \\ 0})}{D}
+  =\colvec{-1/2 \\ 1/2}_D
+\end{equation*}
+the change of basis matrix is this.
+\begin{equation*}
+  \rep{\rm id}{B,D}
+  =
+    \begin{pmatrix}
+       -1/2  &-1/2  \\
+        3/2  &1/2
+    \end{pmatrix}
+\end{equation*}
+We can see this matrix at work by finding the two representations of
+$\vec{e}_2$ 
+\begin{equation*}
+  \rep{\colvec{0 \\ 1} }{B}
+  =\colvec{1 \\ -2}
+  \qquad
+  \rep{\colvec{0 \\ 1} }{D}
+  =\colvec{1/2 \\ 1/2}
+\end{equation*}
+and checking that the conversion goes as expected. 
+\begin{equation*}
+    \begin{pmatrix}
+       -1/2  &-1/2  \\
+        3/2  &1/2
+    \end{pmatrix}
+  \colvec{1 \\ -2}
+  =
+  \colvec{1/2 \\ 1/2}
+\end{equation*}
+\end{example}
+
+We finish this subsection by recognizing that the change of basis matrices
+are familiar.
+
+\begin{lemma}    \label{le:NonSingIsChBasis}
+A matrix changes bases if and only if it is nonsingular.
+\end{lemma}
+
+\begin{proof}
+For one direction, if left-multiplication by a matrix changes bases then
+the matrix represents an invertible function,
+simply because the function is inverted by changing the bases back.
+Such a matrix is itself invertible, and so nonsingular.
+
+To finish, we will show that any nonsingular matrix $M$ 
+performs a change of basis operation from any given starting basis $B$ 
+to some ending basis.
+Because the matrix is nonsingular, it will Gauss-Jordan reduce to the
+identity, so there are elementatry reduction matrices such that
+$R_r\cdots R_1\cdot M=I$.
+Elementary matrices are invertible and their inverses are also elementary,
+so multiplying from the left first
+by ${R_r}^{-1}$, then by ${R_{r-1}}^{-1}$, etc., gives 
+$M$ as a product of elementary matrices
+$M={R_1}^{-1}\cdots {R_r}^{-1}$.
+Thus, we will be done if we show that elementary matrices 
+change a given basis to another basis, for then 
+${R_r}^{-1}$ changes $B$ to some other basis $B_r$, and
+${R_{r-1}}^{-1}$ changes $B_r$ to some $B_{r-1}$, \ldots, and
+the net effect is that $M$ changes $B$ to $B_1$.
+We will prove this about elementary matrices by covering the three types as
+separate cases.
+
+Applying a row-multiplication matrix
+\begin{equation*}
+  M_{i}(k)
+    \colvec{
+       c_1     \\
+       \vdots  \\
+       c_i    \\
+       \vdots  \\
+       c_n  }
+  =
+    \colvec{
+       c_1     \\
+       \vdots  \\
+       kc_i    \\
+       \vdots  \\
+       c_n  }
+\end{equation*}
+changes a representation with respect to
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_n } \)
+to one with respect to
+\( \sequence{\vec{\beta}_1,\dots,(1/k)\vec{\beta}_i,\dots,\vec{\beta}_n } \)
+in this way.
+\begin{multline*}
+   \vec{v}= c_1\cdot\vec{\beta}_1+\dots+c_i\cdot\vec{\beta}_i
+                                   +\dots+c_n\cdot\vec{\beta}_n  
+   \\  \mapsto\;                                                       
+    c_1\cdot\vec{\beta}_1+\dots+kc_i\cdot(1/k)\vec{\beta}_i+\dots
+                                  +c_n\cdot\vec{\beta}_n=\vec{v}     
+\end{multline*}
+Similarly, left-multiplication by a row-swap matrix $P_{i,j}$
+changes a representation with respect to the basis
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_j,
+  \dots,\vec{\beta}_n } \)
+into one with respect to the basis
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_j,\dots,\vec{\beta}_i,
+  \dots,\vec{\beta}_n } \) in this way.
+\begin{multline*}
+   \vec{v}= c_1\cdot\vec{\beta}_1+\dots+c_i\cdot\vec{\beta}_i
+                   +\dots+c_j\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n  
+   \\  \mapsto\;                                                       
+    c_1\cdot\vec{\beta}_1+\dots+c_j\cdot\vec{\beta}_j+\dots
+               +c_i\cdot\vec{\beta}_i+\dots+c_n\cdot\vec{\beta}_n=\vec{v}     
+\end{multline*}
+And, a representation with respect to
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_j,
+  \dots,\vec{\beta}_n } \)
+changes via left-multiplication by a row-combination matrix
+$C_{i,j}(k)$ into a representation with respect to
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i-k\vec{\beta}_j,
+  \dots,\vec{\beta}_j,\dots,\vec{\beta}_n } \)
+\begin{multline*}
+   \vec{v}= c_1\cdot\vec{\beta}_1+\dots+c_i\cdot\vec{\beta}_i
+                       +c_j\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n  
+   \\  \mapsto\;                                                       
+    c_1\cdot\vec{\beta}_1+\dots+c_i\cdot(\vec{\beta}_i-k\vec{\beta}_j)+\dots
+          +(kc_i+c_j)\cdot\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n=\vec{v} 
+\end{multline*}
+(the definition of reduction matrices specifies that \( i\neq k \) and
+\( k\neq 0 \) and so this last one is a basis).
+\end{proof}
+
+\begin{corollary}
+A matrix is nonsingular if and only if it represents the identity map
+with respect to some pair of bases.
+\end{corollary}
+
+%\begin{proof}
+%One direction of the double implication is easy:~if a matrix represents the
+%identity map then it must be square and, 
+%because the identity map has a rank equal to the dimension
+%of its domain, it must have a rank equal to the number of its
+%columns, and so must be nonsingular.
+
+%For the other implication we must show that if a vector space 
+%$V$ is $n$-dimensional and $H$ is a
+%nonsingular $\nbyn{n}$ matrix, then there are bases $B$ and $D$ such
+%that $H=\rep{\text{id}}{B,D}$.
+
+%Fix any starting basis $B$.
+%Write $H$ as a product of elementary reduction matrices
+%$H=R_1\cdots R_r$.
+%By the previous result, we have that $R_r$ is the change of basis matrix
+%from the basis $B$ to some other basis $B_r$.
+%Similarly, the previous result gives that $R_{r-1}$ is the change of basis
+%matrix from $B_r$ to some $B_{r-1}$, etc.
+%Thus
+%\begin{equation*}
+%  H=R_1\cdots R_r=\rep{\text{id}}{B_2,B_1}\cdots\rep{\text{id}}{B,B_r}
+%     =\rep{\text{id}}{B,B_1}
+%\end{equation*}
+%and we are finished on recognizing that $B_1$ is the required basis $D$.
+%\end{proof}
+
+In the next subsection we will
+see how to translate among representations of 
+maps, that is, how to change
+$\rep{h}{B,D}$ to $\rep{h}{\hat{B},\hat{D}}$.
+The above corollary is a special case of this, where the domain and range are
+the same space, and where the map is the identity map.
+
+
+\begin{exercises}
+  \recommended \item 
+    In \( \Re^2 \), where
+    \begin{equation*}
+      D=\sequence{\colvec{2 \\ 1},\colvec{-2 \\ 4}}
+    \end{equation*}
+    find the change of basis matrices from \( D \) to \( \stdbasis_2 \) and 
+    from \( \stdbasis_2 \) to \( D \).
+    Multiply the two.
+    \begin{answer}
+      For the matrix to change bases from $D$ to $\stdbasis_2$ we need that
+      $\rep{\identity(\vec{\delta}_1)}{\stdbasis_2}
+        =\rep{\vec{\delta}_1}{\stdbasis_2}$ 
+      and that 
+      $\rep{\identity(\vec{\delta}_2)}{\stdbasis_2}
+        =\rep{\vec{\delta}_2}{\stdbasis_2}$.
+      Of course, the representation of a vector in $\Re^2$ with respect to 
+      the standard basis is easy.
+      \begin{equation*}
+        \rep{\vec{\delta}_1}{\stdbasis_2}=\colvec{2 \\ 1}
+        \qquad
+        \rep{\vec{\delta}_2}{\stdbasis_2}=\colvec{-2 \\ 4}
+      \end{equation*}
+      Concatenating those two together to make the columns of the change of
+      basis matrix gives this. 
+      \begin{equation*}
+        \rep{\identity}{D,\stdbasis_2}
+        =\begin{pmatrix}
+          2     &-2    \\
+          1     &4
+        \end{pmatrix}
+      \end{equation*}
+      The change of basis matrix in the other direction can be gotten by
+      calculating $\rep{\identity(\vec{e}_1)}{D}=\rep{\vec{e}_1}{D}$ and 
+      $\rep{\identity(\vec{e}_2)}{D}=\rep{\vec{e}_2}{D}$ (this job is routine)
+      or it can be found by taking the inverse of the above matrix.
+      Because of the formula for the inverse of a $\nbyn{2}$ matrix, 
+      this is easy. 
+      \begin{equation*}
+        \rep{\identity}{\stdbasis_2,D}=
+        \frac{1}{10}\cdot\begin{pmatrix}
+          4  &2  \\
+         -1  &2
+        \end{pmatrix}
+        =\begin{pmatrix}
+          4/10  &2/10  \\
+         -1/10  &2/10
+        \end{pmatrix}
+      \end{equation*}
+    \end{answer}
+  \recommended \item \label{exer:ChngeBasMatsRTwo}
+    Find the change of basis matrix for \( B,D\subseteq\Re^2 \).
+    \begin{exparts*}
+      \partsitem \( B=\stdbasis_2 \),
+        \( D=\sequence{\vec{e}_2,\vec{e}_1} \)
+      \partsitem \( B=\stdbasis_2 \),
+        \( D=\sequence{\colvec{1 \\ 2},\colvec{1 \\ 4}} \)
+      \partsitem  \( B=\sequence{\colvec{1 \\ 2},\colvec{1 \\ 4}} \),
+        \( D=\stdbasis_2 \)
+      \partsitem  \( B=\sequence{\colvec{-1 \\ 1},\colvec{2 \\ 2}} \),
+        \( D=\sequence{\colvec{0 \\ 4},\colvec{1 \\ 3}} \)
+    \end{exparts*}
+    \begin{answer}
+      In each case, the columns 
+      $\rep{\identity(\vec{\beta}_1)}{D}=\rep{\vec{\beta}_1}{D}$
+      and $\rep{\identity(\vec{\beta}_2)}{D}=\rep{\vec{\beta}_2}{D}$
+      are concatenated to make the change of basis matrix
+      $\rep{\identity}{B,D}$.
+      \begin{exparts*}
+        \partsitem \( \begin{pmatrix}
+                   0  &1  \\
+                   1  &0
+                 \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+                   2  &-1/2  \\
+                   -1 &1/2
+                 \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+                   1  &1     \\
+                   2  &4
+                 \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+                   1  &-1    \\
+                  -1  &2
+                 \end{pmatrix} \)
+      \end{exparts*}  
+    \end{answer}
+  \item 
+    For the bases in \nearbyexercise{exer:ChngeBasMatsRTwo}, 
+    find the change of basis matrix in the other direction, from $D$ to $B$.
+    \begin{answer}
+       One way to go is to find 
+       $\rep{\vec{\delta}_1}{B}$ and $\rep{\vec{\delta}_2}{B}$,
+       and then concatenate them into the columns of the desired 
+       change of basis matrix.
+       Another way is to find the inverse of the matrices that answer
+       \nearbyexercise{exer:ChngeBasMatsRTwo}. 
+       \begin{exparts*}
+        \partsitem
+          $\begin{pmatrix}
+            0  &1  \\
+            1  &0
+          \end{pmatrix}$
+        \partsitem \( \begin{pmatrix}
+            1  &1  \\
+            2  &4
+          \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+            2  &-1/2  \\
+            -1 &1/2
+          \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+            2  &1  \\
+            1  &1
+          \end{pmatrix} \)
+      \end{exparts*} 
+    \end{answer}
+  \recommended \item
+    Find the change of basis matrix for each \( B,D\subseteq\polyspace_2 \).
+    \begin{exparts*}
+      \partsitem \( B=\sequence{1,x,x^2},
+               D=\sequence{x^2,1,x} \)
+      \partsitem \( B=\sequence{1,x,x^2},
+               D=\sequence{1,1+x,1+x+x^2} \)
+      \partsitem \( B=\sequence{2,2x,x^2},
+               D=\sequence{1+x^2,1-x^2,x+x^2} \)
+    \end{exparts*}
+    \begin{answer}
+      The columns vector representations
+      $\rep{\identity(\vec{\beta}_1)}{D}=\rep{\vec{\beta}_1}{D}$,
+      and $\rep{\identity(\vec{\beta}_2)}{D}=\rep{\vec{\beta}_2}{D}$,
+      and $\rep{\identity(\vec{\beta}_3)}{D}=\rep{\vec{\beta}_3}{D}$
+      make the change of basis matrix
+      $\rep{\identity}{B,D}$.
+      \begin{exparts*}
+        \partsitem \( \begin{pmatrix}
+                   0  &0  &1  \\
+                   1  &0  &0  \\
+                   0  &1  &0
+                 \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+                   1  &-1 &0  \\
+                   0  &1  &-1 \\
+                   0  &0  &1
+                 \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+                   1  &-1 &1/2  \\
+                   1  &1  &-1/2 \\
+                   0  &2  &0
+                 \end{pmatrix} \)
+      \end{exparts*}  
+      E.g., for the first column of the first matrix,
+      $1=0\cdot x^2+1\cdot 1+0\cdot x$.
+     \end{answer}
+  \recommended \item 
+    Decide if each changes bases on \( \Re^2 \).
+    To what basis is \( \stdbasis_2 \) changed?
+    \begin{exparts*}
+      \partsitem \( \begin{pmatrix}
+                 5  &0  \\
+                 0  &4
+               \end{pmatrix}  \)
+      \partsitem \( \begin{pmatrix}
+                 2  &1  \\
+                 3  &1
+               \end{pmatrix}  \)
+      \partsitem \( \begin{pmatrix}
+                -1  &4  \\
+                 2  &-8
+               \end{pmatrix}  \)
+      \partsitem \( \begin{pmatrix}
+                 1  &-1 \\
+                 1  &1
+               \end{pmatrix}  \)
+    \end{exparts*}
+    \begin{answer}
+       A matrix changes bases if and only if it is nonsingular.
+       \begin{exparts}
+        \partsitem This matrix is nonsingular and so changes bases.
+          Finding to what basis \( \stdbasis_2 \) is changed 
+          means finding $D$ such that 
+          \begin{equation*}
+            \rep{\identity}{\stdbasis_2,D}=
+            \begin{pmatrix}
+                 5  &0  \\
+                 0  &4
+            \end{pmatrix}
+          \end{equation*}
+          and by the definition of how a matrix represents a linear map,
+          we have this.
+          \begin{equation*}
+            \rep{\identity(\vec{e}_1)}{D}=\rep{\vec{e}_1}{D}=\colvec{5 \\ 0}
+            \qquad
+            \rep{\identity(\vec{e}_2)}{D}=\rep{\vec{e}_2}{D}=\colvec{0 \\ 4}
+          \end{equation*}
+          Where
+          \begin{equation*}
+            D=\sequence{\colvec{x_1 \\ y_1},\colvec{x_2 \\ y_2}}
+          \end{equation*}
+          we can either solve the system
+          \begin{equation*}
+            \colvec{1 \\ 0}
+            =5\colvec{x_1 \\ y_1}+0\colvec{x_2 \\ y_1}
+            \qquad
+            \colvec{0 \\ 1}
+            =0\colvec{x_1 \\ y_1}+4\colvec{x_2 \\ y_1}
+          \end{equation*}
+          or else just spot the answer
+          (thinking of the proof of \nearbylemma{le:NonSingIsChBasis}).
+          \begin{equation*}
+            D=\sequence{\colvec{1/5 \\ 0},
+                        \colvec{0 \\ 1/4}}
+          \end{equation*}
+        \partsitem Yes, this matrix is nonsingular and so changes bases.
+          To calculate $D$, we proceed as above with 
+          \begin{equation*}
+            D=\sequence{\colvec{x_1 \\ y_1},
+                        \colvec{x_2 \\ y_2}}
+          \end{equation*}
+          to solve 
+          \begin{equation*}
+            \colvec{1 \\ 0}
+            =2\colvec{x_1 \\ y_1}+3\colvec{x_2 \\ y_1}
+            \quad\text{and}\quad
+            \colvec{0 \\ 1}
+            =1\colvec{x_1 \\ y_1}+1\colvec{x_2 \\ y_1}
+          \end{equation*}
+          and get this.
+          \begin{equation*}
+            D=\sequence{\colvec{-1 \\ 3},
+                        \colvec{1 \\ -2}}
+          \end{equation*}
+        \partsitem No, this matrix does not change bases because it
+           is singular.
+        \partsitem Yes, this matrix changes bases because it is nonsingular.
+          The calculation of the changed-to basis is as above. 
+          \begin{equation*}
+            D=\sequence{\colvec{1/2 \\ -1/2},
+                        \colvec{1/2 \\ 1/2}}
+          \end{equation*}
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Find bases such that this matrix represents the identity map
+    with respect to those bases.
+    \begin{equation*}
+      \begin{pmatrix}
+        3  &1  &4  \\
+        2  &-1 &1  \\
+        0  &0  &4
+      \end{pmatrix}
+    \end{equation*}
+    \begin{answer}
+      This question has many different solutions.
+      One way to proceed is to make up any basis $B$ for any space,
+      and then compute the appropriate $D$ (necessarily for the same space,
+      of course).
+      Another, easier, way to proceed is to fix the codomain as $\Re^3$ and
+      the codomain basis as $\stdbasis_3$.
+      This way (recall that the representation of any vector with respect
+      to the standard basis is just the vector itself),
+      we have this. 
+      \begin{equation*}
+        B=\sequence{\colvec{3 \\ 2 \\ 0},
+                    \colvec{1 \\ -1 \\ 0},
+                    \colvec{4 \\ 1 \\ 4}  }
+        \qquad
+        D=\stdbasis_3
+      \end{equation*}  
+    \end{answer}
+  \item 
+    Conside the vector space of real-valued functions with basis
+    \( \sequence{\sin(x),\cos(x)} \).
+    Show that \( \sequence{2\sin(x)+\cos(x),3\cos(x)} \)
+    is also a basis for this space.
+    Find the change of basis matrix in each direction.
+    \begin{answer}
+      Checking that \( B=\sequence{2\sin(x)+\cos(x),3\cos(x)} \) is a basis
+      is routine.
+      Call the natural basis $D$.
+      To compute the change of basis matrix $\rep{\identity}{B,D}$ we must
+      find $\rep{2\sin(x)+\cos(x)}{D}$ and $\rep{3\cos(x)}{D}$, that is,
+      we need $x_1,y_1, x_2,y_2$ such that these equations hold.
+      \begin{align*}
+        x_1\cdot \sin(x)+y_1\cdot\cos(x) &= 2\sin(x)+\cos(x) \\
+        x_2\cdot \sin(x)+y_2\cdot\cos(x) &= 3\cos(x) 
+      \end{align*}
+      Obviously this is the answer.
+      \begin{equation*}
+        \rep{\identity}{B,D}
+        =\begin{pmatrix}
+          2  &0  \\
+          1  &3
+        \end{pmatrix}
+      \end{equation*}
+      For the change of basis matrix in the other direction we could 
+      look for $\rep{\sin(x)}{B}$ and $\rep{\cos(x)}{B}$ by solving these. 
+      \begin{align*}
+        w_1\cdot (2\sin(x)+\cos(x))+z_1\cdot(3\cos(x)) &= \sin(x) \\
+        w_2\cdot (2\sin(x)+\cos(x))+z_2\cdot(3\cos(x)) &= \cos(x) 
+      \end{align*}
+      An easier method is to find the inverse of the matrix found above.
+      \begin{equation*}
+        \rep{\identity}{D,B}
+        =\begin{pmatrix}
+          2  &0  \\
+          1  &3  
+        \end{pmatrix}^{-1}
+        =\frac{1}{6}\cdot\begin{pmatrix}
+          3  &0  \\
+          -1  &2  
+        \end{pmatrix}
+        =\begin{pmatrix}
+           1/2  &0  \\
+          -1/6  &1/3
+         \end{pmatrix}
+      \end{equation*}
+    \end{answer}
+  \item 
+    Where does this matrix
+    \begin{equation*}
+        \begin{pmatrix}
+           \cos(2\theta)   &\sin(2\theta)   \\
+           \sin(2\theta)   &-\cos(2\theta)
+        \end{pmatrix}
+    \end{equation*}
+    send the standard basis for \( \Re^2 \)?
+    Any other bases?
+    \textit{Hint.}
+    Consider the inverse.
+    \begin{answer} 
+      We start by taking
+      the inverse of the matrix, that is, by deciding what is the inverse to
+      the map of interest.
+      \begin{equation*}
+        \rep{\identity}{D,\stdbasis_2}
+        \rep{\identity}{D,\stdbasis_2}^{-1}
+        =\frac{1}{-\cos^2(2\theta)-\sin^2(2\theta)}\cdot\begin{pmatrix}
+           -\cos(2\theta)   &-\sin(2\theta)  \\
+           -\sin(2\theta)   &\cos(2\theta)
+        \end{pmatrix}
+        =\begin{pmatrix}
+           \cos(2\theta)   &\sin(2\theta)  \\
+           \sin(2\theta)   &-\cos(2\theta)
+        \end{pmatrix}
+      \end{equation*}
+      This is more tractable than the representation the other way
+      because this matrix is the concatenation of these two column vectors
+      \begin{equation*}
+        \rep{\vec{\delta}_1}{\stdbasis_2}
+           =\colvec{\cos(2\theta) \\ \sin(2\theta)}
+        \qquad 
+        \rep{\vec{\delta}_2}{\stdbasis_2}
+           =\colvec{\sin(2\theta) \\ -\cos(2\theta)}
+      \end{equation*}
+      and representations with respect to $\stdbasis_2$ are transparent.
+      \begin{equation*}
+        \vec{\delta}_1=\colvec{\cos(2\theta) \\ \sin(2\theta)}
+        \qquad 
+        \vec{\delta}_2=\colvec{\sin(2\theta) \\ -\cos(2\theta)}
+      \end{equation*}
+      This pictures the action of the map that transforms $D$ to $\stdbasis_2$
+      (it is, again, the inverse of the map that is the answer to
+      this question).
+      The line lies at an angle $\theta$ to the $x$~axis.
+      \begin{center}  \small
+        \includegraphics{ch3.81}
+      \end{center}
+      This map reflects vectors over that line.
+      Since reflections are self-inverse, the answer to the question is:~the
+      original map reflects about the line
+      through the origin with angle of elevation $\theta$. 
+      (Of course, it does this to any basis.)
+    \end{answer}
+  \recommended \item
+    What is the change of basis matrix with respect to \( B,B \)?
+    \begin{answer}
+       The appropriately-sized identity matrix.  
+     \end{answer}
+  \item 
+    Prove that a matrix changes bases if and only if it is invertible.
+    \begin{answer}
+       Each is true if and only if the matrix is nonsingular.
+    \end{answer}
+  \item 
+    Finish the proof of \nearbylemma{le:NonSingIsChBasis}.
+    \begin{answer}
+      What remains to be shown is that 
+      left multiplication by a reduction matrix represents a
+      change from another basis to \( B=\basis{\beta}{n} \).
+
+      Application of a row-multiplication matrix \( M_i(k) \) translates a
+      representation with respect to the basis
+      \( \sequence{\vec{\beta}_1,\dots,k\vec{\beta}_i,\dots,\vec{\beta}_n} \)
+      to one with respect to \( B \), as here.
+      \begin{equation*}
+         \vec{v}=c_1\cdot\vec{\beta}_1+\dots+c_i\cdot(k\vec{\beta}_i)
+                   +\dots+c_n\cdot\vec{\beta}_n  
+         \;\mapsto\;                                                       
+         c_1\cdot\vec{\beta}_1+\dots
+             +(kc_i)\cdot\vec{\beta}_i+\dots+c_n\cdot\vec{\beta}_n=\vec{v}
+      \end{equation*}
+      Applying a row-swap matrix \( P_{i,j} \) translates a representation
+      with respect to
+      \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_j,\dots,
+        \vec{\beta}_i,\dots,\vec{\beta}_n} \)
+      to one with respect to
+            \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,
+        \vec{\beta}_j,\dots,\vec{\beta}_n} \).
+      Finally, applying a row-combination matrix \( C_{i,j}(k) \) changes a
+      representation with respect to
+      \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i+k\vec{\beta}_j,\dots,
+        \vec{\beta}_j,\dots,\vec{\beta}_n} \)
+      to one with respect to \( B \).  
+      \begin{multline*}
+         \vec{v}= c_1\cdot\vec{\beta}_1+\dots
+                     +c_i\cdot(\vec{\beta}_i+k\vec{\beta}_j)
+                       +\dots+c_j\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n  
+         \\  \mapsto\;                                                       
+         c_1\cdot\vec{\beta}_1+\dots+c_i\cdot\vec{\beta}_i
+               +\dots+(kc_i+c_j)\cdot\vec{\beta}_j
+               +\dots+c_n\cdot\vec{\beta}_n=\vec{v}     
+      \end{multline*}
+      (As in the part of the proof in the body of this subsection, 
+      the various conditions on the
+      row operations, e.g., that the scalar $k$ is nonzero, assure that these
+      are all bases.)
+    \end{answer}
+  \recommended \item 
+    Let \( H \) be a \( \nbyn{n} \) nonsingular matrix.
+    What basis of \( \Re^n \) does \( H \) change to the standard basis?
+    \begin{answer}
+       Taking $H$ as a change of basis matrix 
+       $H=\rep{\identity}{B,\stdbasis_n}$, 
+       its columns are
+       \begin{equation*}
+         \colvec{h_{1,i} \\ \vdots \\ h_{n,i}}
+         =\rep{\identity(\vec{\beta}_i)}{\stdbasis_n}
+         =\rep{\vec{\beta}_i}{\stdbasis_n}
+       \end{equation*}
+       and, because representations with respect to the standard basis
+       are transparent, we have this.
+       \begin{equation*}
+         \colvec{h_{1,i} \\ \vdots \\ h_{n,i}}
+         =\vec{\beta}_i
+       \end{equation*}
+       That is, the basis is the one composed of the columns of \( H \).  
+    \end{answer}
+  \recommended \item \label{exer:AnyNonZeroRepChgTOAnyOther}
+    \begin{exparts}
+      \partsitem  In \( \polyspace_3 \) with basis
+        \( B=\sequence{1+x,1-x,x^2+x^3,x^2-x^3} \) we have this
+        represenatation.
+        \begin{equation*}
+          \rep{1-x+3x^2-x^3}{B}=
+            \colvec{0 \\ 1 \\ 1 \\ 2}_B
+        \end{equation*}
+        Find a basis \( D \) 
+        giving this different representation for the same
+        polynomial. 
+        \begin{equation*}
+          \rep{1-x+3x^2-x^3}{D}=
+            \colvec{1 \\ 0 \\ 2 \\ 0}_D
+        \end{equation*}
+      \partsitem State and prove that any nonzero vector
+        representation can be changed to any other.
+    \end{exparts}
+    \noindent\textit{Hint.}
+    The proof of \nearbylemma{le:NonSingIsChBasis}
+    is constructive\Dash it not only says the bases change, it shows
+    how they change.
+    \begin{answer}
+      \begin{exparts}
+        \partsitem We can change the starting vector representation
+          to the ending one through a sequence of row operations.
+          The proof tells us what how the bases change. 
+          We start by swapping the first and second rows
+          of the representation with respect to $B$ to get a representation
+          with resepect to a new basis $B_1$.
+          \begin{equation*}
+            \rep{1-x+3x^2-x^3}{B_1}=
+              \colvec{1 \\ 0 \\ 1 \\ 2}_{B_1}
+            \qquad
+            B_1=\sequence{1-x,1+x,x^2+x^3,x^2-x^3}
+          \end{equation*}
+          We next add \( -2 \) times the third row of the vector
+          representation to the fourth row.
+          \begin{equation*}
+            \rep{1-x+3x^2-x^3}{B_3}=
+              \colvec{1 \\ 0 \\ 1 \\ 0}_{B_2}
+            \qquad
+            B_2=\sequence{1-x,1+x,3x^2-x^3,x^2-x^3}
+          \end{equation*}
+          (The third element of \( B_2 \) is the third element of 
+          \( B_1 \) minus \( -2 \) times the fourth element of $B_1$.)
+          Now we can finish by doubling the third row.
+          \begin{equation*}
+            \rep{1-x+3x^2-x^3}{D}=
+              \colvec{1 \\ 0 \\ 2 \\ 0}_{D}
+            \qquad
+            D=\sequence{1-x,1+x,(3x^2-x^3)/2,x^2-x^3}
+          \end{equation*}
+        \partsitem 
+          Here are three different approaches to stating such a result.
+          The first is the assertion:~where $V$ is a vector space with
+          basis $B$ and $\vec{v}\in V$ is nonzero, for any nonzero column
+          vector $\vec{z}$ 
+          (whose number of components equals the dimension of $V$) 
+          there is a change of basis matrix $M$ such that
+          $M\cdot \rep{\vec{v}}{B}=\vec{z}$. 
+          The second possible statement:~for any ($n$-dimensional)
+          vector space $V$ and any nonzero
+          vector \( \vec{v}\in V \), where \( \vec{z}_1, \vec{z}_2\in\Re^n \)
+          are nonzero, there are bases \( B, D\subset V \) such that
+          \( \rep{\vec{v}}{B}=\vec{z}_1 \) and 
+          \( \rep{\vec{v}}{D}=\vec{z}_2 \).
+          The third is:~for any nonzero $\vec{v}$ member of 
+          any vector space (of dimension~$n$) and any nonzero column vector
+          (with $n$ components) there is a basis such that $\vec{v}$ is 
+          represented with respect to that basis by that column vector.
+
+          The first and second statements follow easily from the third.
+          The first follows because the third statement gives a basis $D$
+          such that $\rep{\vec{v}}{D}=\vec{z}$ and then 
+          $\rep{\identity}{B,D}$ is the desired~$M$.
+          The second follows from the third because it is just a
+          doubled application of it.
+
+          A way to prove the third is as in the answer to the first part
+          of this question.
+          Here is a sketch.
+          Represent $\vec{v}$ with respect to any basis $B$ with a column
+          vector $\vec{z}_1$.
+          This column vector must have a nonzero component because $\vec{v}$
+          is a nonzero vector.
+          Use that component in a sequence of row operations to convert 
+          $\vec{z}_1$ to $\vec{z}$.
+          (This sketch could be filled out as an induction 
+          argument on the dimension of $V$.)  
+       \end{exparts}  
+     \end{answer}
+  \item 
+    Let \( V,W \) be vector spaces, and let \( B,\hat{B} \) be bases for
+    \( V \) and \( D,\hat{D} \) be bases for \( W \).
+    Where \( \map{h}{V}{W} \) is linear, find a formula relating
+    \( \rep{h}{B,D} \) to \( \rep{h}{\hat{B},\hat{D}} \).
+    \begin{answer}
+      This is the topic of the next subsection.
+    \end{answer}
+  \recommended \item
+    Show that the columns of an \( \nbyn{n} \) change of basis matrix
+    form a basis for \( \Re^n \).
+    Do all bases appear in that way:~can 
+    the vectors from any $\Re^n$ basis make the columns of a change of 
+    basis matrix?
+    \begin{answer}
+      A change of basis matrix is nonsingular and thus
+      has rank equal to the number of its columns.
+      Therefore its set of columns is a linearly independent subset of size 
+      $n$ in $\Re^n$ and it is thus a basis.
+      The answer to the second half is also `yes'; all implications in the 
+      prior sentence reverse
+      (that is, all of the `if \ldots then~\ldots' parts of the prior sentence
+      convert to `if and only if' parts).
+    \end{answer}
+  \recommended \item 
+    Find a matrix having this effect.
+    \begin{equation*}
+      \colvec{1 \\ 3}
+      \;\mapsto\;
+      \colvec{4 \\ -1}
+    \end{equation*}
+    That is, find a $M$ that left-multiplies the 
+    starting vector to yield the ending vector.
+    Is there a matrix having these two effects?
+    \begin{exparts*}
+      \partsitem
+        $
+          \colvec{1 \\ 3}\mapsto\colvec{1 \\ 1}
+          \quad
+          \colvec{2 \\ -1}\mapsto\colvec{-1 \\ -1}
+        $
+      \partsitem $
+          \colvec{1 \\ 3}\mapsto\colvec{1 \\ 1}
+          \quad
+          \colvec{2 \\ 6}\mapsto\colvec{-1 \\ -1}
+        $
+   \end{exparts*}
+   Give a necessary and sufficient condition for there to be a
+   matrix such that
+   $\vec{v}_1\mapsto\vec{w}_1$ and $\vec{v}_2\mapsto\vec{w}_2$.
+    \begin{answer}
+      In response to the first half of the question, 
+      there are infinitely many such matrices. 
+      One of them  represents with respect to
+      \( \stdbasis_2 \) the transformation of \( \Re^2 \) with this action.
+      \begin{equation*}
+        \colvec{1 \\ 0}\mapsto\colvec{4 \\ 0}
+        \qquad
+        \colvec{0 \\ 1}\mapsto\colvec{0 \\ -1/3}
+      \end{equation*}  
+     The problem of specifying two distinct input/output pairs is a bit 
+     trickier.
+     The fact that matrices have a linear action precludes some possibilities.
+     \begin{exparts}
+       \partsitem Yes, there is such a matrix.
+         These conditions
+         \begin{equation*}
+           \begin{pmatrix}
+             a  &b  \\
+             c  &d
+           \end{pmatrix}
+           \colvec{1 \\ 3}
+           =
+           \colvec{1 \\ 1}
+           \qquad
+           \begin{pmatrix}
+             a  &b  \\
+             c  &d
+           \end{pmatrix}
+           \colvec{2 \\ -1}
+           =
+           \colvec{-1 \\ -1}
+         \end{equation*}
+         can be solved
+         \begin{equation*}
+           \begin{linsys}{4}
+             a  &+  &3b  &   &   &   &   &=  &1  \\
+                &   &    &   &c  &+  &3d &=  &1  \\
+            2a  &-  &b   &   &   &   &   &=  &-1 \\
+                &   &    &   &2c &-  &d  &=  &-1 
+           \end{linsys}
+         \end{equation*}
+         to give this matrix.
+         \begin{equation*}
+           \begin{pmatrix}
+             -2/7  &3/7 \\
+             -2/7  &3/7 
+           \end{pmatrix}
+         \end{equation*}
+       \partsitem No, because
+         \begin{equation*}
+           2\cdot\colvec{1 \\ 3}=\colvec{2 \\ 6}
+           \quad\text{but}\quad
+           2\cdot\colvec{1 \\ 1}\neq\colvec{-1 \\ -1}
+         \end{equation*}
+         no linear action can produce this effect.
+       \partsitem A sufficient condition is that 
+         \( \set{\vec{v}_1,\vec{v}_2} \) be linearly independent, but
+         that's not a necessary condition.
+         A necessary and sufficient condition is that any linear dependences
+         among the starting vectors appear also among the ending vectors.
+         That is,
+         \begin{equation*}
+           c_1\vec{v}_1+c_2\vec{v}_2=\zero
+           \quad\text{implies}\quad
+           c_1\vec{w}_1+c_2\vec{w}_2=\zero.
+         \end{equation*}
+         The proof of this condition is routine.
+     \end{exparts} 
+   \end{answer}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Changing Map Representations}
+\index{matrix equivalence|(}
+The first subsection shows how to convert the representation
+of a vector with respect to one basis to the representation of that
+same vector with respect to another basis.
+Here we will see how to
+convert the representation of a map  with
+respect to one pair of bases  to the representation of that
+map with respect to a different pair, how to change
+$\rep{h}{B,D}$ to $\rep{h}{\hat{B},\hat{D}}$.
+
+That is, we want the relationship between the matrices in this 
+arrow diagram.\index{arrow diagram}
+\begin{equation*}
+  \begin{CD}
+    V_\wrt{B}                   @>h>H>        W_\wrt{D}       \\
+    @V\scriptstyle\identity VV                @V\scriptstyle\identity VV \\
+    V_\wrt{\hat{B}}             @>h>\hat{H}>  W_\wrt{\hat{D}}
+  \end{CD}
+\end{equation*}
+To move from the lower-left of this diagram 
+to the lower-right we can either go straight over, or
+else up to $V_B$ then over to $W_D$ and then down.
+So 
+we can calculate $\hat{H}=\rep{h}{\hat{B},\hat{D}}$ 
+either by simply using $\hat{B}$ and $\hat{D}$,
+or else by first changing bases with $\rep{\identity}{\hat{B},B}$ 
+then multiplying by \( H=\rep{h}{B,D} \)
+and then changing bases with $\rep{\identity}{D,\hat{D}}$.
+
+This equation summarizes.
+\begin{equation*}
+   \hat{H}=
+   \rep{\identity}{D,\hat{D}}\cdot H\cdot \rep{\identity}{\hat{B},B}
+\tag*{\text{($*$})}\end{equation*}
+(To compare this equation with the sentence before it, remember that the
+equation is read from right to left because 
+function composition is read right to left and matrix multiplication 
+represent the composition.)
+
+\begin{example}
+The matrix
+\begin{equation*}
+  T=\begin{pmatrix}
+     \cos(\pi/6)  &-\sin(\pi/6)  \\
+     \sin(\pi/6)  &\cos(\pi/6)
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+     \sqrt{3}/2  &-1/2  \\
+     1/2         &\sqrt{3}/2
+  \end{pmatrix}
+\end{equation*}
+represents, with respect to \( \stdbasis_2,\stdbasis_2 \),
+the transformation \( \map{t}{\Re^2}{\Re^2} \) that rotates vectors
+\( \pi/6 \) radians counterclockwise.
+\begin{center}
+  \includegraphics{ch3.22}
+\end{center}
+We can translate that representation with respect to $\stdbasis_2,\stdbasis_2$ 
+to one with respect to
+\begin{equation*}
+  \hat{B}=\sequence{
+              \colvec{1 \\ 1}
+              \colvec{0 \\ 2} }
+  \qquad
+  \hat{D}=\sequence{
+              \colvec{-1 \\ 0}
+              \colvec{2 \\ 3} }
+\end{equation*}
+by using the arrow diagram and formula~($*$) above.
+\begin{equation*}
+  \begin{CD}
+    \Re^2_\wrt{\stdbasis_2}              @>t>T>        \Re^2_\wrt{\stdbasis_2}       \\
+    @V\scriptstyle\identity VV                @V\scriptstyle\identity VV \\
+    \Re^2_\wrt{\hat{B}}          @>t>\hat{T}>  \Re^2_\wrt{\hat{D}}
+  \end{CD}
+  \qquad
+   \hat{T}=
+   \rep{\identity}{\stdbasis_2,\hat{D}}\cdot T\cdot \rep{\identity}{\hat{B},\stdbasis_2}
+\end{equation*}
+Note that $\rep{\identity}{\stdbasis_2,\hat{D}}$ can be calculated as
+the matrix inverse of $\rep{\identity}{\hat{D},\stdbasis_2}$.
+\begin{align*}
+   \rep{t}{\hat{B},\hat{D}}
+  &=\begin{pmatrix}
+     -1     &2   \\
+     0      &3
+  \end{pmatrix}^{-1}
+  \begin{pmatrix}
+     \sqrt{3}/2  &-1/2  \\
+     1/2         &\sqrt{3}/2
+  \end{pmatrix}
+  \begin{pmatrix}
+     1      &0   \\
+     1      &2
+  \end{pmatrix}                              \\                            
+  &=\begin{pmatrix}
+     (5-\sqrt{3})/6   &(3+2\sqrt{3})/3 \\
+     (1+\sqrt{3})/6  &\sqrt{3}/3
+  \end{pmatrix}
+\end{align*}
+Although the new matrix is messier-appearing,
+the map that it represents is the same. 
+For instance, to replicate the effect of $t$ in the picture, 
+start with $\hat{B}$,
+\begin{equation*}
+  \rep{\colvec{1 \\ 3}}{\hat{B}}=\colvec{1 \\ 1}_{\hat{B}}
+\end{equation*}
+apply $\hat{T}$,
+\begin{equation*}
+  \begin{pmatrix}
+     (5-\sqrt{3})/6   &(3+2\sqrt{3})/3 \\
+     (1+\sqrt{3})/6  &\sqrt{3}/3
+  \end{pmatrix}_{\hat{B},\hat{D}}
+  \colvec{1 \\ 1}_{\hat{B}}
+  =
+  \colvec{(11+3\sqrt{3})/6 \\ (1+3\sqrt{3})/6}_{\hat{D}}
+\end{equation*}
+and check it against $\hat{D}$
+\begin{equation*}
+  \frac{11+3\sqrt{3}}{6}\cdot\colvec{-1 \\ 0}
+  +\frac{1+3\sqrt{3}}{6}\cdot\colvec{2 \\ 3}
+  =\colvec{(-3+\sqrt{3})/2 \\ (1+3\sqrt{3})/2}
+\end{equation*}
+to see that it is the same result as above.
+\end{example}
+
+\begin{example} \label{ex:DiagizedMat}
+One reason to change bases is that the matrix may be simpler.
+On \( \Re^3 \) the map
+\begin{equation*}
+  \colvec{x \\ y \\ z}\mapsunder{t}\colvec{y+z \\ x+z \\ x+y}
+\end{equation*}
+that is represented with respect to the standard basis in this way
+\begin{equation*}
+  \rep{t}{\stdbasis_3,\stdbasis_3}=
+  \begin{pmatrix}
+    0  &1  &1  \\
+    1  &0  &1  \\
+    1  &1  &0
+  \end{pmatrix}
+\end{equation*}
+can also  be represented with respect to another basis
+\begin{center}
+  if 
+  $B=\sequence{\colvec{1 \\ -1 \\ 0},
+                             \colvec{1 \\ 1 \\ -2},
+                             \colvec{1 \\ 1 \\ 1}}$ 
+  \hspace*{1.5em} then 
+  $\rep{t}{B,B}=
+  \begin{pmatrix}
+   -1  &0  &0  \\
+    0  &-1 &0  \\
+    0  &0  &2
+  \end{pmatrix}$
+\end{center}
+in a way that is simpler, in that the action of a diagonal
+matrix is easy to understand.
+\end{example}
+
+Naturally, we usually prefer basis changes that make the
+representation easier to understand.
+When the representation with respect to equal starting
+and ending bases is a diagonal matrix we say the map or matrix
+has been \definend{diagonalized}.\index{matrix!diagonalized}
+In Chaper Five we shall see which maps and matrices are diagonalizable, 
+and where one is not, we shall see how to get a representation that is nearly 
+diagonal.
+
+We finish this subsection by considering the easier case 
+where representations are with respect to possibly different starting and 
+ending bases.
+Recall that the prior subsection 
+shows that a matrix changes bases if and only if it is nonsingular.
+That gives us another version of the above  arrow diagram
+and equation~($*$).
+
+\begin{definition}
+\label{def:MatEquiv}
+Same-sized matrices \( H \) and \( \hat{H} \) are
+\definend{matrix equivalent\/}\index{matrix equivalence!definition}%
+\index{matrix!equivalent}\index{equivalence relation!matrix equivalence}
+if there are nonsingular matrices \( P \) and \( Q \) such that
+$\hat{H}=PHQ$.
+\end{definition}
+
+\begin{corollary}
+\label{le:MatEqIsSameMap}
+Matrix equivalent matrices represent the same map, with respect to appropriate
+pairs of bases.
+\end{corollary}
+
+\nearbyexercise{exer:MatEqIsEqRel} checks that
+matrix equivalence is an equivalence relation.
+Thus it  partitions\index{partition!matrix equivalence classes} 
+the set of matrices into matrix equivalence classes.
+\begin{center}
+  \raisebox{.4in}{\begin{tabular}{l}
+                    All matrices:
+                  \end{tabular}}
+  \includegraphics{ch3.23}
+  \raisebox{.4in}{\begin{tabular}{l}
+                     $H$ matrix equivalent \\ to $\hat{H}$
+                  \end{tabular}}
+\end{center}
+We can get some insight into the classes by comparing matrix equivalence
+with row equivalence
+(recall that matrices are row equivalent when they can be reduced to each
+other by row operations).
+In $\hat{H}=PHQ$, the matrices $P$ and $Q$ are nonsingular and 
+thus each can be written as a product of elementary reduction matrices
+(\nearbylemma{lem:ComputeInvMat}).
+Left-multiplication by the reduction matrices making up $P$
+has the effect of performing row operations.
+Right-multiplication by the reduction matrices making up $Q$
+performs column operations.
+Therefore, matrix equivalence is a generalization of row equivalence\Dash two
+matrices are row equivalent if one can be converted to the other by
+a sequence of row reduction steps, while
+two matrices are matrix equivalent if one can be converted to the other by a 
+sequence of row reduction steps followed by a sequence of column reduction
+steps. 
+
+Thus, if matrices are row equivalent then they are also
+matrix equivalent (since we can take $Q$ to be the identity matrix and so 
+perform no column operations).
+The converse, however, does not hold:
+two matrices can be matrix equivalent but not row equivalent.
+
+\begin{example}
+These two
+\begin{equation*} 
+  \begin{pmatrix}
+    1  &0  \\
+    0  &0
+  \end{pmatrix}
+  \qquad
+  \begin{pmatrix}
+    1  &1  \\
+    0  &0
+  \end{pmatrix}
+\end{equation*}
+are matrix equivalent because the second can be reduced to the first by
+the column operation of taking $-1$ times the first column and adding
+to the second.
+They are not row equivalent because they have different reduced echelon
+forms (in fact, both are already in reduced form).
+\end{example}
+
+We will close this section by finding 
+a set of representatives
+for the matrix equivalence classes.\appendrefs{class representatives}%
+\index{representative!of matrix equivalence classes}
+
+\begin{theorem}
+\label{th:CanonFormForMatEquiv}
+\index{matrix equivalence!canonical form}
+\index{canonical form!for matrix equivalence}
+Any \( \nbym{m}{n} \) matrix of rank \( k \) is matrix equivalent to
+the \( \nbym{m}{n} \) matrix that is all zeros except that
+the first \( k \) diagonal entries are ones.
+\begin{equation*}
+    \begin{pmatrix}
+      1  &0      &\ldots &0  &0  &\ldots  &0  \\
+      0  &1      &\ldots &0  &0  &\ldots  &0  \\
+         &\vdots                              \\
+      0  &0      &\ldots &1  &0  &\ldots  &0  \\
+      0  &0      &\ldots &0  &0  &\ldots  &0  \\
+         &\vdots                              \\
+      0  &0      &\ldots &0  &0  &\ldots  &0
+    \end{pmatrix}
+\end{equation*}
+\end{theorem}
+
+\noindent Sometimes this is described as a 
+\definend{block partial-identity}\index{matrix!block} 
+form.
+\begin{equation*}
+    \begin{pmat}{c|c}
+      I  &Z  \\  \hline
+      Z  &Z
+    \end{pmat}
+\end{equation*}
+
+\begin{proof}
+As discussed above, Gauss-Jordan reduce the given matrix
+and combine all the reduction matrices used there to make \( P \).
+Then use the leading entries to do column reduction and
+finish by swapping columns to put the leading ones on the diagonal.
+Combine the reduction matrices used for those column operations into
+\( Q \). 
+\end{proof}
+
+\begin{example}
+We illustrate the proof by finding the $P$ and $Q$ for this matrix. 
+\begin{equation*}
+    \begin{pmatrix}
+       1  &2  &1  &-1  \\
+       0  &0  &1  &-1  \\
+       2  &4  &2  &-2
+    \end{pmatrix}
+\end{equation*}
+First Gauss-Jordan row-reduce.
+\begin{equation*}
+    \begin{pmatrix}
+       1  &-1 &0    \\
+       0  &1  &0    \\
+       0  &0  &1
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &0  &0    \\
+       0  &1  &0    \\
+       -2 &0  &1
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &2  &1  &-1  \\
+       0  &0  &1  &-1  \\
+       2  &4  &2  &-2
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+       1  &2  &0  &0   \\
+       0  &0  &1  &-1  \\
+       0  &0  &0  &0
+    \end{pmatrix}
+\end{equation*}
+Then column-reduce, which involves right-multiplication.
+\begin{equation*}
+    \begin{pmatrix}
+       1  &2  &0  &0   \\
+       0  &0  &1  &-1  \\
+       0  &0  &0  &0
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &-2 &0  &0   \\
+       0  &1  &0  &0   \\
+       0  &0  &1  &0   \\
+       0  &0  &0  &1
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &0  &0  &0   \\
+       0  &1  &0  &0   \\
+       0  &0  &1  &1   \\
+       0  &0  &0  &1
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+       1  &0  &0  &0   \\
+       0  &0  &1  &0  \\
+       0  &0  &0  &0
+    \end{pmatrix}
+\end{equation*}
+Finish by swapping columns.
+\begin{equation*}
+    \begin{pmatrix}
+       1  &0  &0  &0   \\
+       0  &0  &1  &0  \\
+       0  &0  &0  &0
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &0  &0  &0   \\
+       0  &0  &1  &0   \\
+       0  &1  &0  &0   \\
+       0  &0  &0  &1
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+       1  &0  &0  &0   \\
+       0  &1  &0  &0  \\
+       0  &0  &0  &0
+    \end{pmatrix}
+\end{equation*}
+Finally, combine the left-multipliers together as $P$ and the
+right-multipliers together as $Q$ to get the $PHQ$ equation.
+\begin{equation*}
+    \begin{pmatrix}
+       1  &-1 &0    \\
+       0  &1  &0    \\
+       -2 &0  &1
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &2  &1  &-1  \\
+       0  &0  &1  &-1  \\
+       2  &4  &2  &-2
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  &0  &-2  &0   \\
+       0  &0  &1  &0   \\
+       0  &1  &0  &1   \\
+       0  &0  &0  &1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+       1  &0  &0  &0   \\
+       0  &1  &0  &0  \\
+       0  &0  &0  &0
+    \end{pmatrix}
+\end{equation*}
+\end{example}
+
+\begin{corollary}
+Two same-sized matrices are matrix equivalent if and only if they
+have the same rank.
+That is, the matrix equivalence classes are
+characterized\index{characterizes} by rank.
+\end{corollary}
+
+\begin{proof}
+Two same-sized matrices with the same rank
+are equivalent to the same block partial-identity matrix.
+\end{proof}
+
+\begin{example}
+%Now that we know that the block partial-identity matrices form
+%canonical representatives of the matrix-equivalence classes, we can
+%see what the classes look like and how many classes there are.
+The $\nbyn{2}$ matrices have
+only three possible ranks:~zero, one, or~two.
+Thus there are three matrix-equivalence classes.
+\index{partition!matrix equivalence classes}
+\begin{center} % make an exercise comparing these classes with the ones for row-equivalence?
+  \raisebox{.4in}{\begin{tabular}{l}
+                    All $\nbyn{2}$ matrices:
+                  \end{tabular}}
+  \includegraphics{ch3.24}
+  \raisebox{.4in}{\begin{tabular}{l}
+                    Three equivalence \\ classes
+                  \end{tabular}}
+\end{center}
+Each class consists of all of the $\nbyn{2}$ matrices with the same rank. 
+There is only one rank~zero matrix, so that class has only
+one member, but
+the other two classes each have infinitely many members.
+\end{example}
+
+In this subsection
+we have seen how to change the representation of a map with
+respect to a first pair of bases to one with respect to a second pair.
+That led to a definition describing when matrices are equivalent in
+this way.
+Finally we noted that,
+with the proper choice of (possibly different) starting and ending bases, any
+map can be represented in block partial-identity form.
+
+One of the nice things about this representation is that,
+in some sense, we can completely understand the map when it is
+expressed in this way:
+if the bases are
+\( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+and
+\( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \)
+then the map sends
+\begin{equation*}
+  c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k+c_{k+1}\vec{\beta}_{k+1}+\dots
+     +c_n\vec{\beta}_n
+  \;\longmapsto\;
+  c_1\vec{\delta}_1+\dots+c_k\vec{\delta}_k+\zero+\dots+\zero
+\end{equation*}
+where \( k \) is the map's rank.
+Thus, we can understand any linear map as a kind of projection.
+\begin{equation*}
+  \colvec{c_1 \\ \vdots \\ c_k \\ c_{k+1} \\ \vdots \\ c_n}_B
+  \;\mapsto\;
+  \colvec{c_1 \\ \vdots \\ c_k \\ 0 \\ \vdots \\ 0}_D
+\end{equation*}
+Of course, ``understanding'' a map expressed in this way 
+requires that we understand the relationship between \( B \) and \( D \).
+However, despite that difficulty, 
+this is a good classification of linear maps.
+
+\begin{exercises}
+  \recommended \item 
+    Decide if these matrices are matrix equivalent.
+    \begin{exparts}
+      \partsitem \( \begin{pmatrix}
+                 1  &3  &0  \\
+                 2  &3  &0
+               \end{pmatrix} \),
+            \( \begin{pmatrix}
+                 2  &2  &1  \\
+                 0  &5  &-1
+               \end{pmatrix} \)
+      \partsitem \( \begin{pmatrix}
+                 0  &3  \\
+                 1  &1
+               \end{pmatrix} \),
+            \( \begin{pmatrix}
+                 4  &0  \\
+                 0  &5
+               \end{pmatrix} \)
+      \partsitem \( \begin{pmatrix}
+                 1  &3  \\
+                 2  &6
+               \end{pmatrix} \),
+            \( \begin{pmatrix}
+                 1  &3  \\
+                 2  &-6
+               \end{pmatrix} \)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes, each has rank two.
+        \partsitem Yes, they have the same rank.
+        \partsitem No, they have different ranks.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Find the canonical representative of the matrix-equivalence class of
+    each matrix.
+    \begin{exparts*}
+      \partsitem \( \begin{pmatrix}
+                 2  &1  &0  \\
+                 4  &2  &0
+               \end{pmatrix} \)
+      \partsitem \( \begin{pmatrix}
+                 0  &1  &0  &2  \\
+                 1  &1  &0  &4  \\
+                 3  &3  &3  &-1
+               \end{pmatrix} \)
+    \end{exparts*}
+    \begin{answer}
+      We need only decide what the rank of each is.
+      \begin{exparts*}
+        \partsitem \( \begin{pmatrix}
+                   1  &0  &0  \\
+                   0  &0  &0
+                 \end{pmatrix} \)
+        \partsitem \( \begin{pmatrix}
+                   1  &0  &0  &0  \\
+                   0  &1  &0  &0  \\
+                   0  &0  &1  &0
+                 \end{pmatrix} \)
+      \end{exparts*}  
+    \end{answer}
+  \item 
+    Suppose that, with respect to
+    \begin{equation*}
+      B=\stdbasis_2
+      \qquad
+      D=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+    \end{equation*}
+    the transformation \( \map{t}{\Re^2}{\Re^2} \) is represented by
+    this matrix.
+    \begin{equation*}
+      \begin{pmatrix}
+        1  &2  \\
+        3  &4
+      \end{pmatrix}
+    \end{equation*}
+    Use change of basis matrices to represent \( t  \) with respect
+    to each pair.
+    \begin{exparts}
+      \partsitem \( \hat{B}=\sequence{\colvec{0 \\ 1},\colvec{1 \\ 1}} \),
+        \( \hat{D}=\sequence{\colvec{-1 \\ 0},\colvec{2 \\ 1}} \)
+      \partsitem \( \hat{B}=\sequence{\colvec{1 \\ 2},\colvec{1 \\ 0}} \),
+        \( \hat{D}=\sequence{\colvec{1 \\ 2},\colvec{2 \\ 1}} \)
+    \end{exparts}
+    \begin{answer}
+      Recall the diagram
+      and the formula.
+      \begin{equation*}
+        \begin{CD}
+          \Re^2_\wrt{B}                   @>t>T>        \Re^2_\wrt{D}       \\
+          @V\scriptstyle\identity VV             @V\scriptstyle\identity VV \\
+          \Re^2_\wrt{\hat{B}}             @>t>\hat{T}>  \Re^2_\wrt{\hat{D}}
+        \end{CD}
+        \qquad \hat{T}=
+         \rep{\identity}{D,\hat{D}}\cdot T\cdot \rep{\identity}{\hat{B},B}
+      \end{equation*}
+      \begin{exparts}
+        \partsitem These two 
+          \begin{equation*}
+            \colvec{1 \\ 1}=1\cdot\colvec{-1 \\ 0}
+                            +1\cdot\colvec{2 \\ 1}
+            \qquad
+            \colvec{1 \\ -1}=(-3)\cdot\colvec{-1 \\ 0}
+                            +(-1)\cdot\colvec{2 \\ 1}
+          \end{equation*}
+          show that
+          \begin{equation*}
+            \rep{\identity}{D,\hat{D}}=\begin{pmatrix}
+              1  &-3  \\
+              1  &-1
+            \end{pmatrix}
+          \end{equation*}
+          and similarly these two
+          \begin{equation*}
+            \colvec{0 \\ 1}=0\cdot\colvec{1 \\ 0}
+                            +1\cdot\colvec{0 \\ 1}
+            \qquad
+            \colvec{1 \\  1}=1\cdot\colvec{1 \\ 0}
+                            +1\cdot\colvec{0 \\ 1}
+          \end{equation*}
+          give the other nonsinguar matrix.
+          \begin{equation*}
+            \rep{\identity}{\hat{B},B}=\begin{pmatrix}
+              0  &1  \\
+              1  &1
+            \end{pmatrix}
+          \end{equation*}
+          Then the answer is this.
+          \begin{equation*}
+            \hat{T}=
+            \begin{pmatrix}
+              1  &-3  \\
+              1  &-1
+            \end{pmatrix}
+            \begin{pmatrix}
+              1  &2  \\
+              3  &4
+            \end{pmatrix}
+            \begin{pmatrix}
+              0  &1  \\
+              1  &1
+            \end{pmatrix}
+            =\begin{pmatrix}
+              -10  &-18  \\
+              -2   &-4 
+            \end{pmatrix}
+          \end{equation*}
+          Although not strictly necessary, a check is reassuring.
+          Arbitrarily fixing 
+          \begin{equation*}
+            \vec{v}=\colvec{3 \\ 2}
+          \end{equation*}
+          we have that
+          \begin{equation*}
+            \rep{\vec{v}}{B}=\colvec{3 \\ 2}_B
+            \qquad
+            \begin{pmatrix}
+              1  &2  \\
+              3  &4
+            \end{pmatrix}_{B,D}
+            \colvec{3 \\ 2}_B
+            =\colvec{7 \\ 17}_D
+          \end{equation*}
+          and so $t(\vec{v})$ is this.
+          \begin{equation*}
+            7\cdot\colvec{1 \\ 1}+17\cdot\colvec{1 \\ -1}=\colvec{24 \\ -10}
+          \end{equation*}
+          Doing the calculation with respect to $\hat{B},\hat{D}$ starts with
+          \begin{equation*}
+            \rep{\vec{v}}{\hat{B}}=\colvec{-1 \\ 3}_{\hat{B}}
+            \qquad
+            \begin{pmatrix}
+              -10  &-18  \\
+               -2  &-4
+            \end{pmatrix}_{\hat{B},\hat{D}}
+            \colvec{-1 \\ 3}_{\hat{B}}
+            =\colvec{-44 \\ -10}_{\hat{D}}
+          \end{equation*}
+          and then checks that this is the same result.
+          \begin{equation*}
+            -44\cdot\colvec{-1 \\ 0}-10\cdot\colvec{2 \\ 1}=\colvec{24 \\ -10}
+          \end{equation*}
+    \partsitem These two
+      \begin{equation*}
+        \colvec{1 \\ 1}=\frac{1}{3}\cdot\colvec{1 \\ 2}
+                  +\frac{1}{3}\cdot\colvec{2 \\ 1}
+        \qquad
+        \colvec{1 \\ -1}=-1\cdot\colvec{1 \\ 2}
+                  +1\cdot\colvec{2 \\ 1}
+      \end{equation*}
+      show that
+      \begin{equation*}
+        \rep{\identity}{D,\hat{D}}=\begin{pmatrix}
+          1/3  &-1  \\
+          1/3  &1
+        \end{pmatrix}
+      \end{equation*}
+      and these two
+      \begin{equation*}
+        \colvec{1 \\ 2}=1\cdot\colvec{1 \\ 0}
+                  +2\cdot\colvec{0 \\ 1}
+        \qquad
+        \colvec{1 \\ 0}=-1\cdot\colvec{1 \\ 0}
+                  +0\cdot\colvec{0 \\ 1}
+      \end{equation*}
+      show this.
+      \begin{equation*}
+        \rep{\identity}{\hat{B},B}=\begin{pmatrix}
+          1  &1  \\
+          2  &0
+        \end{pmatrix}
+      \end{equation*}
+      With those, the conversion goes in this way.
+      \begin{equation*}
+        \hat{T}=\begin{pmatrix}
+          1/3  &-1  \\
+          1/3  &1
+        \end{pmatrix}
+        \begin{pmatrix}
+          1  &2  \\
+          3  &4
+        \end{pmatrix}
+        \begin{pmatrix}
+          1  &1  \\
+          2  &0
+        \end{pmatrix}
+        =\begin{pmatrix}
+          -28/3  &-8/3  \\
+          38/3   &10/3
+        \end{pmatrix}
+      \end{equation*}
+      As in the prior item, a check provides some confidence that this
+      calculation was performed without mistakes.
+      We can for instance, fix the vector
+      \begin{equation*}
+        \vec{v}=\colvec{-1 \\ 2}
+      \end{equation*}
+      (this is selected for no reason, out of thin air).
+      Now we have
+      \begin{equation*}
+        \rep{\vec{v}}{B}=\colvec{-1 \\ 2}
+        \qquad
+        \begin{pmatrix}
+          1  &2  \\
+          3  &4
+        \end{pmatrix}_{B,D}
+        \colvec{-1  \\ 2}_{B}
+        =\colvec{3  \\ 5}_D
+      \end{equation*}
+      and so $t(\vec{v})$ is this vector.
+      \begin{equation*}
+        3\cdot\colvec{1 \\ 1}+5\cdot\colvec{1 \\ -1}=\colvec{8 \\ -2}
+      \end{equation*}
+      With respect to $\hat{B},\hat{D}$ we first calculate
+      \begin{equation*}
+        \rep{\vec{v}}{\hat{B}}=\colvec{1 \\ -2}
+        \qquad
+        \begin{pmatrix}
+          -28/3  &-8/3  \\
+          38/3   &10/3
+        \end{pmatrix}_{\hat{B},\hat{D}}
+        \colvec{1 \\ -2}_{\hat{B}}
+        =\colvec{-4 \\ 6}_{\hat{D}}
+      \end{equation*}
+      and, sure enough, that is the same result for $t(\vec{v})$.
+      \begin{equation*}
+        -4\cdot\colvec{1 \\ 2}+6\cdot\colvec{2 \\ 1}=\colvec{8 \\ -2}
+      \end{equation*}
+      \end{exparts} 
+    \end{answer}
+  \recommended \item 
+    What sizes are \( P \) and \( Q \) in the equation $\hat{H}=PHQ$?
+    \begin{answer}
+      Where \( H \) and \( \hat{H} \) are \( \nbym{m}{n} \), the
+      matrix \( P \) is \( \nbyn{m} \) while \( Q \) is \( \nbyn{n} \).  
+    \end{answer}
+  \recommended \item
+    Use \nearbytheorem{th:CanonFormForMatEquiv} to show that a square matrix
+    is nonsingular if and only if it is equivalent to an identity matrix.
+    \begin{answer}
+        Any \( \nbyn{n} \) matrix is nonsingular if and only if it has 
+        rank \( n \), that is, by  \nearbytheorem{th:CanonFormForMatEquiv},
+        if and only if it is matrix equivalent to 
+        the $\nbyn{n}$ matrix whose diagonal is all ones.  
+    \end{answer}
+  \recommended \item
+    Show that, where \( A \) is a nonsingular square matrix, if
+    \( P \) and \( Q \) are nonsingular square matrices such that \( PAQ=I \)
+    then \( QP=A^{-1} \).
+    \begin{answer}
+      If \( PAQ=I \) then \( QPAQ=Q \), so \( QPA=I \), and so
+      \( QP=A^{-1} \).  
+    \end{answer}
+  \recommended \item
+    Why does \nearbytheorem{th:CanonFormForMatEquiv} not show that every matrix
+    is diagonalizable (see \nearbyexample{ex:DiagizedMat})?
+    \begin{answer}
+      By the definition following  \nearbyexample{ex:DiagizedMat}, a matrix
+      $M$ is diagonalizable if it represents $M=\rep{t}{B,D}$
+      a transformation with the property that there is some basis
+      $\hat{B}$ such that $\rep{t}{\hat{B},\hat{B}}$ is a diagonal 
+      matrix\Dash the starting and ending bases must be equal. 
+      But \nearbytheorem{th:CanonFormForMatEquiv}  says only that there are 
+      $\hat{B}$ and $\hat{D}$ such that we can 
+      change to a representation $\rep{t}{\hat{B},\hat{D}}$ and get a diagonal
+      matrix.
+      We have no reason to suspect that we could pick the two
+      $\hat{B}$ and $\hat{D}$ so that they are equal.
+    \end{answer}
+  \item 
+    Must matrix equivalent matrices have matrix equivalent transposes?
+    \begin{answer}
+      Yes.
+      Row rank equals column rank, so the rank of the transpose equals
+      the rank of the matrix.
+      Same-sized matrices with equal ranks are matrix equivalent.  
+    \end{answer}
+  \item 
+    What happens in \nearbytheorem{th:CanonFormForMatEquiv} if \( k=0 \)?
+    \begin{answer}
+      Only a zero matrix has rank zero.  
+    \end{answer}
+  \recommended \item \label{exer:MatEqIsEqRel}
+    Show that matrix-equivalence is an equivalence relation.
+    \begin{answer}
+      For reflexivity, to show that any matrix is matrix equivalent to
+      itself, 
+      take \( P \) and \( Q \) to be identity matrices.
+      For symmetry, if \( H_1=PH_2Q \) then
+      \( H_2=P^{-1}H_1Q^{-1} \) (inverses exist because $P$ and $Q$ are
+      nonsingular).
+      Finally, for transitivity, assume that \( H_1=P_2H_2Q_2 \) and 
+      that \( H_2=P_3H_3Q_3 \).
+      Then substitution gives 
+      \( H_1=P_2(P_3H_3Q_3)Q_2=(P_2P_3)H_3(Q_3Q_2) \).
+      A product of nonsingular matrices is nonsingular (we've shown that
+      the product of invertible matrices is invertible;~in fact, we've shown
+      how to calculate the inverse) and so \( H_1 \) is therefore
+      matrix equivalent to \( H_3 \).  
+     \end{answer}
+  \recommended \item 
+    Show that a zero matrix is alone in its matrix equivalence
+    class.
+    Are there other matrices like that?
+    \begin{answer}
+      By \nearbytheorem{th:CanonFormForMatEquiv}, a zero matrix is alone 
+      in its class because it is the only \( \nbym{m}{n} \) of rank zero.
+      No other matrix is alone in its class; 
+      any nonzero scalar product of a matrix
+      has the same rank as that matrix.  
+    \end{answer}
+  \item 
+    What are the matrix equivalence classes of matrices of
+    transformations on \( \Re^1 \)?
+    \( \Re^3 \)?
+    \begin{answer}
+      There are two matrix-equivalence classes of \( \nbyn{1} \)
+      matrices\Dash those of rank zero and those of rank one.
+      The  \( \nbyn{3} \) matrices fall into four matrix equivalence
+      classes.
+    \end{answer}
+  \item 
+    How many matrix equivalence classes are there?
+    \begin{answer}
+      For \( \nbym{m}{n} \) matrices there are classes for each possible
+      rank: where \( k \)  is the minimum of \( m \) and \( n \) there are
+      classes for the matrices of rank \( 0 \), \( 1 \), \ldots, \( k \).
+      That's \( k+1 \) classes.  
+      (Of course, totaling over all sizes of matrices we get infinitely
+      many classes.)
+    \end{answer}
+  \item 
+    Are matrix equivalence classes closed under scalar
+    multiplication?
+    Addition?
+    \begin{answer}
+      They are closed under nonzero scalar multiplication, since
+      a nonzero scalar multiple of a matrix has the same rank as does the
+      matrix.
+      They are not closed under addition,
+      for instance, \( H+(-H) \) has rank zero.  
+    \end{answer}
+  \item 
+    Let \( \map{t}{\Re^n}{\Re^n} \) represented by
+    \( T \) with respect to \( \stdbasis_n,\stdbasis_n \).
+    \begin{exparts}
+      \partsitem Find $\rep{t}{B,B}$ in this specific case.
+        \begin{equation*}
+          T=\begin{pmatrix}
+            1  &1  \\
+            3  &-1
+          \end{pmatrix}
+          \qquad
+          B=\sequence{\colvec{1  \\ 2},
+                      \colvec{-1 \\ -1}}
+        \end{equation*}
+      \partsitem Describe $\rep{t}{B,B}$ in the general case where
+        \( B=\basis{\beta}{n} \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem We have
+          \begin{equation*}
+            \rep{\identity}{B,\stdbasis_2}=
+            \begin{pmatrix}
+              1  &-1  \\
+              2  &-1
+            \end{pmatrix}
+            \qquad
+            \rep{\identity}{\stdbasis_2,B}=\rep{\identity}{B,\stdbasis_2}^{-1}=
+            \begin{pmatrix}
+              1  &-1  \\
+              2  &-1
+            \end{pmatrix}^{-1}
+            =\begin{pmatrix}
+              -1  &1  \\
+              -2  &1 
+            \end{pmatrix}
+          \end{equation*}
+          and thus the answer is this.
+          \begin{equation*}
+            \rep{t}{B,B}
+            =
+            \begin{pmatrix}
+              1  &-1  \\
+              2  &-1
+            \end{pmatrix}
+            \begin{pmatrix}
+              1  &1  \\
+              3  &-1   
+            \end{pmatrix}
+            \begin{pmatrix}
+              -1  &1  \\
+              -2  &1 
+            \end{pmatrix}
+            =\begin{pmatrix}
+              -2  &0   \\
+              -5  &2 
+            \end{pmatrix}
+          \end{equation*}
+          As a quick check, we can take a vector at random
+          \begin{equation*}
+            \vec{v}=\colvec{4  \\  5}
+          \end{equation*}
+          giving
+          \begin{equation*}
+            \rep{\vec{v}}{\stdbasis_2}=\colvec{4 \\ 5}
+            \qquad
+            \begin{pmatrix}
+              1  &1  \\
+              3  &-1   
+            \end{pmatrix}
+            \colvec{4 \\ 5}
+            =\colvec{9 \\ 7}=t(\vec{v})
+          \end{equation*}
+          while the calculation with respect to $B,B$ 
+          \begin{equation*}
+            \rep{\vec{v}}{B}=\colvec{1 \\ -3}
+            \qquad
+            \begin{pmatrix}
+              -2  &0   \\
+              -5  &2 
+            \end{pmatrix}_{B,B}
+            \colvec{1 \\ -3}_B
+            =\colvec{-2 \\ -11}_B
+          \end{equation*}
+          yields the same result.
+          \begin{equation*}
+            -2\cdot\colvec{1 \\ 2}-11\cdot\colvec{-1 \\ -1}=\colvec{9 \\ 7}
+          \end{equation*}
+       \partsitem We have
+          \begin{equation*}
+            \begin{CD}
+              \Re^2_\wrt{\stdbasis_2}         @>t>T>     \Re^2_\wrt{\stdbasis_2}       \\
+              @V\scriptstyle\identity VV         @V\scriptstyle\identity VV \\
+              \Re^2_\wrt{B}        @>t>\hat{T}>  \Re^2_\wrt{B}
+            \end{CD}
+        \qquad 
+            \rep{t}{B,B}=\rep{\identity}{\stdbasis_2,B}
+                          \cdot T
+                          \cdot \rep{\identity}{B,\stdbasis_2}
+          \end{equation*}
+          and, as in the first item of this question
+          \begin{equation*}
+            \rep{\identity}{B,\stdbasis_2}
+            =\begin{pmat}{c|c|c}
+              \vec{\beta}_1 &\;\cdots\; &\vec{\beta}_n
+            \end{pmat}
+            \qquad
+            \rep{\identity}{\stdbasis_2,B}=\rep{\identity}{B,\stdbasis_2}^{-1}
+          \end{equation*}
+          so, writing $Q$ for the matrix whose columns are the basis vectors,
+          we have that $\rep{t}{B,B}=Q^{-1}TQ$.
+      \end{exparts}
+    \end{answer}
+  \item 
+    \begin{exparts}
+       \partsitem Let \( V \) have bases \( B_1 \) and \( B_2 \) and 
+         suppose that \( W \) has the basis \( D \).
+         Where \( \map{h}{V}{W} \), find the formula that computes
+         \( \rep{h}{B_2,D} \) from \( \rep{h}{B_1,D} \).
+       \partsitem Repeat the prior question with one basis 
+         for \( V \) and two bases for \( W \).
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem The adapted form of the arrow diagram is this.
+           \begin{equation*}
+             \begin{CD}
+               V_\wrt{B_1}                   @>h>H>        W_\wrt{D}       \\
+               @V\scriptstyle\identity VQV      @V\scriptstyle\identity VPV \\
+               V_\wrt{B_2}             @>h>\hat{H}>  W_\wrt{D}
+             \end{CD}
+           \end{equation*}
+           Since there is no need to change bases in 
+           \( W \) (or we can
+           say that the change of basis matrix $P$ is the identity), we have
+           \( \rep{h}{B_2,D}=\rep{h}{B_1,D}\cdot Q \) where
+           \( Q=\rep{\identity}{B_2,B_1} \).
+         \partsitem Here, this is the arrow diagram. 
+           \begin{equation*}
+             \begin{CD}
+               V_\wrt{B}                   @>h>H>   W_\wrt{D_1}       \\
+               @V\scriptstyle\identity VQV      @V\scriptstyle\identity VPV \\
+               V_\wrt{B}             @>h>\hat{H}>  W_\wrt{D_2}
+             \end{CD}
+           \end{equation*}
+           We have that \( \rep{h}{B,D_2}=P\cdot \rep{h}{B,D_1} \) where
+           \( P=\rep{\identity}{D_1,D_2} \).
+       \end{exparts}  
+      \end{answer}
+  \item 
+    \begin{exparts}
+      \partsitem If two matrices are matrix-equivalent and invertible,
+        must their
+        inverses be matrix-equivalent?
+      \partsitem If two matrices have matrix-equivalent inverses, must the two
+        be matrix-equivalent?
+      \partsitem If two matrices are square and matrix-equivalent, must their
+        squares be matrix-equivalent?
+      \partsitem If two matrices are square and have matrix-equivalent squares,
+        must they be matrix-equivalent?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Here is the arrow diagram, and a version of that diagram
+          for inverse functions.
+          \begin{equation*}
+           \begin{CD}
+             V_\wrt{B}                   @>h>H>      W_\wrt{D}       \\
+             @V\scriptstyle\identity VQV       @V\scriptstyle\identity VPV \\
+             V_\wrt{\hat{B}}             @>h>\hat{H}> W_\wrt{\hat{D}}
+            \end{CD}
+            \hspace*{4em}\qquad
+           \begin{CD}
+             V_\wrt{B}              @<h^{-1}<H^{-1}<    W_\wrt{D}       \\
+             @V\scriptstyle\identity VQV       @V\scriptstyle\identity VPV \\
+             V_\wrt{\hat{B}}        @<h^{-1}<\hat{H}^{-1}< W_\wrt{\hat{D}}
+            \end{CD}
+           \end{equation*}
+           Yes, the inverses of the matrices represent the 
+           inverses of the maps.
+           That is, we can move from the lower right to the lower left by
+           moving up, then left, then down.
+           In other words, where \( \hat{H}=PHQ \) (and  \( P,Q \) invertible)
+           and \( H,\hat{H} \) are invertible then
+           \( \hat{H}^{-1}=Q^{-1}H^{-1}P^{-1} \).
+        \partsitem Yes; this is the prior part repeated in different terms.
+        \partsitem No, we need another assumption:~if \( H \) represents 
+          \( h \) with respect to the same starting as ending bases \( B,B \), 
+          for some \( B \) then \( H^2 \) represents
+          \( \composed{h}{h} \).
+          As a specific example, 
+          these two matrices are both rank one and so they are
+          matrix equivalent
+          \begin{equation*}
+             \begin{pmatrix}
+               1  &0  \\
+               0  &0
+             \end{pmatrix}
+             \qquad
+             \begin{pmatrix}
+               0  &0  \\
+               1  &0
+             \end{pmatrix}
+          \end{equation*}
+          but the squares are not matrix equivalent\Dash the square of the 
+          first has rank one while the square of the second has rank zero.
+        \partsitem No.
+          These two are not matrix equivalent but have matrix equivalent
+          squares.
+          \begin{equation*}
+             \begin{pmatrix}
+               0  &0  \\
+               0  &0
+             \end{pmatrix}
+             \qquad
+             \begin{pmatrix}
+               0  &0  \\
+               1  &0
+             \end{pmatrix} 
+          \end{equation*}
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Square matrices are \definend{similar} if they represent the same
+    transformation, but each with respect to the same ending as starting
+    basis.
+    That is, \( \rep{t}{B_1,B_1} \) is similar to \( \rep{t}{B_2,B_2} \).
+    \begin{exparts}
+      \partsitem Give a  definition of matrix similarity like that of
+        \nearbydefinition{def:MatEquiv}.
+      \partsitem Prove that similar matrices are matrix equivalent.
+      \partsitem Show that similarity is an equivalence relation.
+      \partsitem Show that if \( T \) is similar to \( \hat{T} \) then
+        \( T^2 \) is similar to \( \hat{T}^2 \), the cubes are similar, etc.
+        \textit{Contrast with the prior exercise.}
+      \partsitem Prove that there are matrix equivalent matrices 
+        that are not similar.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The definition is suggested by the appropriate 
+          arrow diagram.
+          \begin{equation*}
+            \begin{CD}
+              V_\wrt{B_1}                   @>t>T>        V_\wrt{B_1}       \\
+              @V\scriptstyle\identity VV        @V\scriptstyle\identity VV \\
+              V_\wrt{B_2}             @>t>\hat{T}>  V_\wrt{B_2}
+            \end{CD}
+          \end{equation*}
+          Call matrices \( T, \hat{T} \) \definend{similar} if there
+          is a nonsingular matrix \( P \) such that
+          \( \hat{T}=P^{-1}TP \).
+        \item Take \( P^{-1} \) to be \( P \) and take \( P \) to be \( Q \).
+        \item \textit{This is as in \nearbyexercise{exer:MatEqIsEqRel}.}
+          Reflexivity is obvious: \( T=I^{-1}TI \).
+          Symmetry is also easy: \( \hat{T}=P^{-1}TP \) implies that 
+          \( T=P\hat{T}P^{-1} \) (multiply the first equation from the right
+          by $P^{-1}$ and from the left by $P$).
+          For transitivity, assume that \( T_1={P_2}^{-1}T_2P_2 \) and that 
+          \( T_2={P_3}^{-1}T_3P_3 \).
+          Then \( T_1={P_2}^{-1}({P_3}^{-1}T_3P_3)P_2
+                     =({P_2}^{-1}{P_3}^{-1})T_3(P_3P_2) \) and we are finished
+          on noting that \( P_3P_2 \) is an invertible matrix with inverse
+          \( {P_2}^{-1}{P_3}^{-1} \).
+        \partsitem Assume  that \( \hat{T}=P^{-1}TP \).
+          For the squares:
+          \( \hat{T}^2=(P^{-1}TP)(P^{-1}TP)
+                      =P^{-1}T(PP^{-1})TP=P^{-1}T^2P \).
+          Higher powers follow by induction.
+        \partsitem These two are matrix equivalent but their squares are not
+          matrix equivalent.
+          \begin{equation*}
+             \begin{pmatrix}
+               1  &0  \\
+               0  &0
+             \end{pmatrix}
+             \qquad
+             \begin{pmatrix}
+               0  &0  \\
+               1  &0
+             \end{pmatrix}
+          \end{equation*}
+          By the prior item, matrix similarity and matrix equivalence are thus
+          different.
+      \end{exparts}  
+   \end{answer}
+\index{matrix equivalence|)}
+\index{change of basis|)}
+\end{exercises}

@@ -1,0 +1,128 @@
+\documentclass[twoside]{book}
+%\usepackage[dvips,
+%                colorlinks=true,
+%                linkcolor=blue,citecolor=blue,filecolor=blue,pagecolor=blue,
+%                naturalnames=true,
+%                hypertexnames=false,
+%                hyperindex=true,
+%                pdftitle={Linear Algebra (answers to exercises)},
+%                pdfauthor={Jim Hefferon, Saint Michael's College, Vermont USA,
+%                           http://joshua.smcvt.edu/hefferon.html},
+%                pdfsubject={Undergraduate linear algebra},
+%                pdfkeywords={linear algebra, mathematics, textbook}]{hyperref}
+\usepackage[dvips]{dvidrv}
+\usepackage[no]{hrefout}
+% I like this font, but I can't expect folks to have it and dvipdfm doesn't
+% like its .tfm file.
+\usepackage{pbsifont}
+
+\usepackage[\dvidrv]{color,graphicx}
+\usepackage{answerjh,linalgjh}
+
+\includeonly{coverans,symlist}
+
+
+% CROSS REFERENCES
+% References in the answers that are hypered are not internal to the 
+% answer file; they need to link to the book file.
+%\newcommand{\bookname}{book.pdf}
+%\makeatletter
+%\ifhrefout
+%  \newcommand{\bookreference}[2]{% #1=ref type (`Definition', etc.), #2=ref
+%    \def\jhans@anchorname{% name like `theorem.1234'
+%     \expandafter\expandafter\expandafter\@fourthoffive\csname r@#2\endcsname}%
+%    \def\jhans@farref{\bookname\#\jhans@anchorname}% like `book.pdf#ans.1234'
+%    \def\jhans@reftext{%
+%     \expandafter\expandafter\expandafter\@firstoffive\csname r@#2\endcsname}%
+%   #1~\expandafter\href\expandafter{\jhans@farref}{\jhans@reftext}%
+%  }
+%  \renewcommand{\nearbydefinition}[1]{\bookreference{Definition}{#1}}
+%  \renewcommand{\nearbyfigure}[1]{\bookreference{Figure}{#1}}
+%  \renewcommand{\nearbylemma}[1]{\bookreference{Lemma}{#1}}
+%  \renewcommand{\nearbyexample}[1]{\bookreference{Example}{#1}}
+%  \renewcommand{\nearbycounterexample}[1]{\bookreference{Counterexample}{#1}}
+%  \renewcommand{\nearbytheorem}[1]{\bookreference{Theorem}{#1}}
+%  \renewcommand{\nearbycorollary}[1]{\bookreference{Corollary}{#1}}
+%  \renewcommand{\nearbyexercise}[1]{\bookreference{Exercise}{#1}}
+%  \renewcommand{\nearbyremark}[1]{\bookreference{Remark}{#1}}
+%  \renewcommand{\nearbynotice}[1]{\bookreference{Notice}{#1}}
+%  \renewcommand{\nearbynote}[1]{\bookreference{Note}{#1}}  
+%\fi
+%\makeatother
+
+
+% CHAPTER and SUBSECTION commands
+%\renewcommand{\chapter}{\secdef\chapcmda\chapcmdb}
+
+%\newcommand{\chapcmda}[2][]{%  
+%  \addcontentsline{toc}{chapter}{#1}%
+%  \chapheader{#1}}
+%\newcommand{\chapcmdb}[1]{\chapheader{#1}}
+
+%\newcommand{\chapheader}[1]{\end{answerlist}
+%\clearemptydoublepage\thispagestyle{empty} %
+%\vspace*{4ex}
+%{\centering{\LARGE\bfseries #1}}%
+%\vspace{-2ex plus1ex}%
+%\begin{answerlist}\item[]
+%}
+
+
+%\renewcommand{\subsection}{\secdef\anssubseccmda\anssubseccmdb}
+
+%\newcommand{\anssubseccmda}[2][?]{%
+%  %\end{answerlist}
+%  \addcontentsline{toc}{subsection}{#1}%
+%  \anssubsecheader{#2}}
+
+%\newcommand{\anssubseccmdb}[1]{\anssubsecheader{#1}}
+
+%\newcommand{\anssubsecheader}[1]{\end{answerlist}%
+%\vspace{4ex plus1ex minus.5ex}\pagebreak[3]\vspace*{1ex plus1ex minus.25ex}%
+%{\flushleft\large\bfseries #1}%
+%\nopagebreak\vspace{1ex plus .5ex minus.5ex}\nopagebreak\begin{answerlist}\item[]}
+
+%\makeatother
+
+%============ Allow the answer file to be set from the command line
+% with something like ``latex \def\answerfile{bookans}\input jhanswer''
+% or uncomment this: \def\answerfile{bookans}
+% and comment till the end (default is for all answers in a single file).
+\makeatletter
+\@ifundefined{ansfile}%
+  {\def\ansfile{\ans@fn}}%
+  {}
+\makeatother
+%=========== end 
+
+\begin{document}
+\include{coverans}\include{symlist}
+\setcounter{page}{1}\pagenumbering{arabic} 
+%\chapter*{Answers to Exercises}
+\thispagestyle{empty}
+\textit{These are answers to the exercises in \emph{Linear Algebra} by
+    J.~Hef{}feron.
+    Corrections or comments are very welcome, email to
+    jim\@joshua.smcvt.edu}
+
+\textit{An answer labeled here as, for instance,
+   One.II.3.4, matches the question numbered 4 
+   from the first chapter,
+   second section, and third subsection.
+   The Topics are numbered separately.}
+\vspace{.25in}
+\setcounter{page}{1}
+\thispagestyle{empty}
+\begin{answerlist}\item[]%
+\clearemptydoublepage\tableofcontents
+\input{\ansfile}
+\input bookans % for them all 
+%\input recans  % for the recommended ones only
+%\input otherans % for the non-recommended ones only
+\end{answerlist}
+\end{document}
+
+
+
+
+

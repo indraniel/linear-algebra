@@ -1,0 +1,978 @@
+%\documentclass{article}
+%\usepackage{verbatim}
+%
+%\begin{document}
+%\newcommand{\votepref}[1]{\overrightarrow{#1}}
+%\newcommand{\votepreflist}[3]{#1\,\votepref{DT}
+%                              +#2\,\votepref{TR}+#3\,\votepref{RS}}
+% \newcommand{\votepreflist}[3]{\colvec{#1 \\ #2 \\ #3}}
+% \newcommand{\votecycle}[4]{\psset{xunit=#4pt,yunit=#4pt,runit=#4pt} 
+%   \pspicture[.4](-7.25,-6)(7.25,5) %\psgrid(-1,-1)(1,1)
+%     \SpecialCoor
+%     \rput(3;90){\scriptsize $D$}
+%     \psarc{->}(0,0){3}{10}{70} %-rd->
+%        \rput[lb](3.3;20){\scriptsize $#1$} 
+%     \rput[B](3;210){\scriptsize $T$}
+%     \psarc{->}(0,0){3}{220}{320} %-tr->
+%        \rput[t](3.1;270){\scriptsize $#2$} 
+%     \rput[B](3;330){\scriptsize $R$}
+%     \psarc{->}(0,0){3}{110}{175} %-dt->
+%        \rput[rb](3.3;160){\scriptsize $#3$} 
+%   \endpspicture}
+% %save it to the answer file.
+% \begin{Filesave}{bookans}
+%   \newcommand{\votepreflist}[3]{\colvec{#1 \\ #2 \\ #3}}
+%   \newcommand{\votecycle}[4]{\psset{xunit=#4pt,yunit=#4pt,runit=#4pt} 
+%     \pspicture[.4](-7.25,-6)(7.25,5) %\psgrid(-1,-1)(1,1)
+%       \SpecialCoor
+%       \rput(3;90){\scriptsize $D$}
+%       \psarc{->}(0,0){3}{10}{70} %-rd->
+%          \rput[lb](3.3;20){\scriptsize $#1$} 
+%       \rput[B](3;210){\scriptsize $T$}
+%       \psarc{->}(0,0){3}{220}{320} %-tr->
+%          \rput[t](3.1;270){\scriptsize $#2$} 
+%       \rput[B](3;330){\scriptsize $R$}
+%       \psarc{->}(0,0){3}{110}{175} %-dt->
+%          \rput[rb](3.3;160){\scriptsize $#3$} 
+%     \endpspicture}
+%   \end{Filesave}
+
+%\newcommand{\votinggraphic}[1]{\hspace{.8em}\mathord{\raisebox{-.2in}[.3in][.2in]{\includegraphics{voting.#1}}}\hspace{.8em}}
+
+\topic{Voting Paradoxes}
+\index{voting paradoxes|(}
+%\emph{(Optional material from this chapter is discussed here,
+%but is not required to complete the exercises.)}
+
+Imagine that a  Political Science class studying the 
+American presidential process holds a mock election.
+Members of the class are asked to
+rank, from most preferred to least preferred,
+the nominees from the Democratic Party, the 
+Republican Party, and the Third Party, and this is the result
+($>$ means `is preferred to').
+\begin{center}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{r|l}
+    \multicolumn{1}{r|}{\begin{tabular}[b]{@{}r@{}}
+       \textit{preference order}
+    \end{tabular}}
+    &\multicolumn{1}{l}{{\renewcommand{\arraystretch}{1.0}
+      \begin{tabular}[b]{@{}l@{}}
+         \textit{number with}    \\
+         \textit{that preference}
+      \end{tabular}}}                \\ \hline
+    $\text{Democrat} > \text{Republican} > \text{Third}$ &5     \\
+    $\text{Democrat} > \text{Third} > \text{Republican}$ &4     \\
+    $\text{Republican} > \text{Democrat} > \text{Third}$ &2     \\
+    $\text{Republican} > \text{Third} > \text{Democrat}$ &8     \\
+    $\text{Third} > \text{Democrat} > \text{Republican}$ &8     \\
+    $\text{Third} > \text{Republican} > \text{Democrat}$ &2     \\ \hline
+    total                                                &29
+  \end{tabular}
+  \renewcommand{\arraystretch}{1}
+\end{center}
+What is the preference of the group as a whole?
+
+Overall,
+the group prefers the Democrat to the Republican by five votes; 
+seventeen voters ranked the Democrat above the Republican
+versus twelve the other way.
+And, overall, the group 
+prefers the Republican to the Third's nominee, 
+fifteen to fourteen.
+But, strangely enough, the group also 
+prefers the Third to the Democrat, eighteen to eleven.
+\begin{center}
+  \includegraphics{voting.1}
+%  \psset{xunit=10pt,yunit=10pt,runit=10pt} 
+%   \pspicture(-3.1,-3.5)(3,3.75) %\psgrid(-1,-1)(1,1)
+%     \SpecialCoor
+%     \rput(3;90){\small Democrat}
+%     \psarc{->}(0,0){3}{-10}{50}
+%        \rput[lb](3.1;20){\scriptsize $5$ voters} 
+%     \rput[B](3;210){\small Third}
+%     \psarc{->}(0,0){3}{220}{320}
+%        \rput[t](3.1;270){\scriptsize $1$ voter} 
+%     \rput[B](3;330){\small Republican}
+%     \psarc{->}(0,0){3}{130}{190}
+%        \rput[rb](3.1;160){\scriptsize $7$ voters} 
+%   \endpspicture
+\end{center}
+This is an example of a \definend{voting paradox}\index{voting paradox},
+specifically, a
+\definend{majority cycle}.\index{voting paradox!majority cycle}
+
+Voting paradoxes are studied in part because of their 
+implications for practical politics.
+For instance, the instructor can manipulate the
+class into choosing the Democrat as the overall winner 
+by first asking the class to choose between the Republican and
+the Third, 
+and then asking the class to choose between the winner of that contest, the
+Republican, and the Democrat.   
+By similar manipulations, 
+any of the other two candidates can be made to come out as the winner.
+(In this Topic we will stick to three-candidate elections, but
+similar results apply to larger elections.)
+
+Voting paradoxes are also studied simply because they are
+mathematically interesting.
+One interesting aspect is that
+the group's overall majority cycle occurs despite that  
+each single voters's preference list is 
+\definend{rational}\index{voting paradox!rational preference order}---in 
+a straight-line order.
+That is, the majority cycle seems to arise in the aggregate, 
+without being present in the elements of that aggregate, the preference lists.
+Recently, however, linear algebra has been used \cite{Zwicker} to argue that
+a tendency toward cyclic preference is actually present
+in each voter's list, and
+that it surfaces when there is more adding of the tendency
+than cancelling.
+
+For this argument,
+abbreviating the choices as $D$, $R$, and $T$,
+we can describe how
+a voter with preference order $D>R>T$ contributes to the above cycle.
+\begin{center}
+  \includegraphics{voting.2}
+%   \psset{xunit=4pt,yunit=4pt,runit=4pt} 
+%   \pspicture[.5](-9,-4.2)(9,4) %\psgrid(-10,-10)(10,10)
+%     \SpecialCoor
+%     \rput(3;90){\small $D$}
+%     \psarc{->}(0,0){3}{10}{70} %-rd->
+%        \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%     \rput[B](3;210){\small $T$}
+%     \psarc{->}(0,0){3}{220}{320} %-tr->
+%        \rput[t](3.1;270){\scriptsize $1$ voter} 
+%     \rput[B](3;330){\small $R$}
+%     \psarc{->}(0,0){3}{110}{175} %-dt->
+%        \rput[rb](3.3;160){\scriptsize $-1$ voter} 
+%   \endpspicture
+\end{center}
+(The negative sign is here because the arrow describes $T$ as 
+preferred to $D$, but this voter likes them the other way.)
+The descriptions for the other preference lists are in the table on 
+page~\pageref{table:Voting}.
+
+Now, to conduct the election we linearly combine these descriptions; 
+for instance, the Political Science mock election
+\begin{equation*}
+  % \psset{xunit=4pt,yunit=4pt,runit=4pt} 
+  5\cdot \votinggraphic{43}
+  % {\mathord{\raisebox{-.2in}{\includegraphics{voting.43}}}}
+  %\includegraphics{voting.43}
+%   \pspicture[.4](-10.5,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%     \SpecialCoor
+%     \rput(3;90){\small $D$}
+%     \psarc{->}(0,0){3}{10}{70} %-rd->
+%        \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%     \rput[B](3;210){\small $T$}
+%     \psarc{->}(0,0){3}{220}{320} %-tr->
+%        \rput[t](3.1;270){\scriptsize $1$ voter} 
+%     \rput[B](3;330){\small $R$}
+%     \psarc{->}(0,0){3}{110}{175} %-dt->
+%        \rput[rb](3.3;160){\scriptsize $-1$ voter} 
+%   \endpspicture
+  +4\cdot\votinggraphic{44}
+  % \includegraphics{voting.44}
+%   \pspicture[.4](-10,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%     \SpecialCoor
+%     \rput(3;90){\small $D$}
+%     \psarc{->}(0,0){3}{10}{70} %-rd->
+%        \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%     \rput[B](3;210){\small $T$}
+%     \psarc{->}(0,0){3}{220}{320} %-tr->
+%        \rput[t](3.1;270){\scriptsize $-1$ voter} 
+%     \rput[B](3;330){\small $R$}
+%     \psarc{->}(0,0){3}{110}{175} %-dt->
+%        \rput[rb](3.3;160){\scriptsize $-1$ voter} 
+%   \endpspicture
+  +\dots+2\cdot\votinggraphic{45}
+  % \includegraphics{voting.45}
+%   \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%     \SpecialCoor
+%     \rput(3;90){\small $D$}
+%     \psarc{->}(0,0){3}{10}{70} %-rd->
+%        \rput[lb](3.3;20){\scriptsize $-1$ voter} 
+%     \rput[B](3;210){\small $T$}
+%     \psarc{->}(0,0){3}{220}{320} %-tr->
+%        \rput[t](3.1;270){\scriptsize $-1$ voter} 
+%     \rput[B](3;330){\small $R$}
+%     \psarc{->}(0,0){3}{110}{175} %-dt->
+%        \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%   \endpspicture
+\tag*{}\end{equation*}
+yields the circular group preference shown earlier.
+
+Of course, taking linear combinations is linear algebra.
+The above cycle notation is suggestive but inconvienent, so we 
+temporarily switch to using column vectors by starting at the $D$ and
+taking the numbers from the cycle in counterclockwise order.   
+Thus, the mock election and a single $D>R>T$ vote are represented in this way. 
+\begin{equation*}
+  \votepreflist{7}{1}{5}
+  \quad\text{and}\quad
+  \votepreflist{-1}{1}{1}
+\tag*{}\end{equation*}
+We will 
+decompose vote vectors into two parts, one
+cyclic and the other acyclic.
+For the first part, 
+we say that a vector is \definend{purely cyclic} if it is in  
+this subspace of $\Re^3$. 
+\begin{equation*}
+  C
+  =\set{\votepreflist{k}{k}{k} \suchthat k \in\Re}
+  =\set{k\cdot\votepreflist{1}{1}{1} \suchthat k \in\Re}
+\end{equation*}
+For the second part, consider the subspace 
+(see \nearbyexercise{exer:PerpIsSubSp}) of vectors that are 
+perpendicular to all of the vectors in $C$.
+\begin{multline*}
+  C^\perp =\set{\votepreflist{c_1}{c_2}{c_3} \suchthat 
+                 \colvec{c_1 \\ c_2 \\ c_3}\dotprod\colvec{k \\ k \\ k} =0
+                 \text{\ for all $k\in\Re$}}             \\
+          =\set{\votepreflist{c_1}{c_2}{c_3} \suchthat 
+                 c_1+c_2+c_3=0}                                         
+          =\set{c_2\votepreflist{-1}{1}{0}
+                +c_3\votepreflist{-1}{0}{1} \suchthat  c_2,c_3\in\Re}
+\end{multline*}
+(Read that aloud as ``$C$~perp''.)
+So we are led to this basis for $\Re^3$.
+\begin{equation*}
+ \sequence{\votepreflist{1}{1}{1},
+             \votepreflist{-1}{1}{0},
+             \votepreflist{-1}{0}{1}}
+\tag*{}\end{equation*}
+We can represent votes with respect to this basis,
+and thereby decompose them into a cyclic part and an acyclic part.
+\textit{(Note for readers who have covered the optional section
+in this chapter:~that is, the space is the direct sum of $C$ and~$C^\perp$.)}
+
+For example, consider the $D>R>T$ voter discussed above.
+The representation in terms of the basis is easily found,
+\begin{eqnarray*}
+  \begin{linsys}{3}
+    c_1  &-  &c_2  &-  &c_3  &=  &-1 \\
+    c_1  &+  &c_2  &   &     &=  &1  \\
+    c_1  &   &     &+  &c_3  &=  &1  
+  \end{linsys}
+  &\grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+  \grstep{(-1/2)\rho_2+\rho_3}
+  &\begin{linsys}{3}
+    c_1  &-  &c_2  &-  &c_3      &=  &-1 \\
+         &   &2c_2 &+  &c_3      &=  &2  \\
+         &   &     &   &(3/2)c_3 &=  &1  
+  \end{linsys}
+\end{eqnarray*}
+so that $c_1=1/3$, $c_2=2/3$, and $c_3=2/3$.
+Then
+\begin{equation*}
+  \votepreflist{-1}{1}{1}
+  =\frac{1}{3}\cdot\votepreflist{1}{1}{1}
+    +\frac{2}{3}\cdot\votepreflist{-1}{1}{0}
+    +\frac{2}{3}\cdot\votepreflist{-1}{0}{1}
+  =\votepreflist{1/3}{1/3}{1/3}
+   +\votepreflist{-4/3}{2/3}{2/3}
+\tag*{}\end{equation*}
+gives the desired decomposition into a 
+cyclic part and and an acyclic part.
+\begin{equation*}
+  \votinggraphic{3}
+% \votecycle{1}{1}{-1}{4}
+=
+\votinggraphic{4}
+% \votecycle{1/3}{1/3}{1/3}{4}
++
+\votinggraphic{5}
+%\votecycle{2/3}{2/3}{-4/3}{4}
+\end{equation*}
+Thus, this $D>R>T$ voter's
+rational preference list can indeed be seen to have a cyclic part.
+
+The $T>R>D$ voter is opposite to the one just considered
+in that the `$>$' symbols are reversed. 
+This voter's decomposition 
+\begin{equation*}
+\votinggraphic{6}
+%\votecycle{-1}{-1}{1}{4}
+=
+\votinggraphic{7}
+%\votecycle{-1/3}{-1/3}{-1/3}{4}
++
+\votinggraphic{8}
+%\votecycle{-2/3}{-2/3}{4/3}{4}
+\end{equation*}
+shows that these opposite preferences have decompositions that are opposite.
+We say that the first voter has positive 
+\definend{spin}\index{spin}\index{voting paradoxes!spin}
+since the cycle part is with the direction we have chosen for the arrows, 
+while the second voter's spin is negative.
+
+The fact that that these opposite voters cancel each other is reflected in 
+the fact that their vote vectors add to zero.
+This suggests an alternate way to tally an election. 
+We could first cancel as many opposite preference lists as possible,
+and then determine the outcome by adding the remaining lists. 
+
+The rows of the table below contain the three pairs of 
+opposite preference lists.
+The columns group those pairs by spin.
+For instance, the first row contains the two voters just considered.
+\begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+    \textit{positive spin}
+    &\textit{negative spin}  \\ \hline
+    \begin{tabular}{l}
+      $\text{Democrat}>\text{Republican}>\text{Third}$                     \\
+      $\votinggraphic{9} % \votecycle{1}{1}{-1}{3}
+      =\votinggraphic{10} %\votecycle{1/3}{1/3}{1/3}{3}
+      +
+      \votinggraphic{11}$  %\votecycle{2/3}{2/3}{-4/3}{3}\;{}
+    \end{tabular}
+    &\begin{tabular}{l}
+      $\text{Third}>\text{Republican}>\text{Democrat}$                     \\
+      $\votinggraphic{12}  %\votecycle{-1}{-1}{1}{3}
+      =\votinggraphic{13}  %\votecycle{-1/3}{-1/3}{-1/3}{3}
+      +
+      \votinggraphic{14}$  %\votecycle{-2/3}{-2/3}{4/3}{3}\;{}
+    \end{tabular}                  \\ \hline
+    \begin{tabular}{l}
+      $\text{Republican}>\text{Third}>\text{Democrat}$                     \\
+      $\votinggraphic{15}  %\votecycle{-1}{1}{1}{3}
+      =\votinggraphic{16} %\votecycle{1/3}{1/3}{1/3}{3}
+      +
+      \votinggraphic{17}$  %\votecycle{-4/3}{2/3}{2/3}{3}\;{}
+    \end{tabular}
+    &\begin{tabular}{l}
+      $\text{Democrat}>\text{Third}>\text{Republican}$                     \\
+      $\votinggraphic{18}  %\votecycle{1}{-1}{-1}{3}
+      =\votinggraphic{19}  %\votecycle{-1/3}{-1/3}{-1/3}{3}
+      +
+      \votinggraphic{20}$  %\votecycle{4/3}{-2/3}{-2/3}{3}\;{}
+    \end{tabular}                  \\ \hline
+    \begin{tabular}{l}
+      $\text{Third}>\text{Democrat}>\text{Republican}$                     \\
+      $\votinggraphic{21}  %\votecycle{1}{-1}{1}{3}
+      =\votinggraphic{22}  %\votecycle{1/3}{1/3}{1/3}{3}
+      +
+      \votinggraphic{23}$  %\votecycle{2/3}{-4/3}{2/3}{3}\;{}
+    \end{tabular}
+    &\begin{tabular}{l}
+      $\text{Republican}>\text{Democrat}>\text{Third}$                     \\
+      $\votinggraphic{24}  %\votecycle{-1}{1}{-1}{3}
+      =\votinggraphic{25}  %\votecycle{-1/3}{-1/3}{-1/3}{3}
+      +
+      \votinggraphic{26}$  %\votecycle{-2/3}{4/3}{-2/3}{3}\;{}
+    \end{tabular}                  \\ \hline
+  \end{tabular}
+  \label{table:Voting}
+\end{center}
+If we conduct the election as just described then after the cancellation
+of as many opposite pairs of voters as possible, there will be left three
+sets of preference lists, one set from the first row, one set from the second
+row, and one set from the third row. 
+We will finish by proving that
+a voting paradox can happen only if
+the spins of these three sets are in the same direction.
+That is, for a voting paradox to occur, the three remaining sets must all come
+from the left of the table or all come from the right
+(see \nearbyexercise{exer:CancelPolSci}).
+This shows that there is some connection between the majority cycle and
+the decomposition that we are using---a voting paradox can happen only when the
+tendencies toward cyclic preference reinforce each other.
+
+For the proof, assume that
+opposite preference orders have been cancelled, and we are left with one set
+of preference lists from each of the three rows.
+Consider the sum of these three
+(here, the numbers $a$, $b$, and $c$ could be positive, negative, or zero).
+\begin{equation*}
+  \votinggraphic{27}  %\votecycle{a}{a}{-a}{4} 
+  +  
+  \votinggraphic{28}  %\votecycle{-b}{b}{b}{4} 
+  +  
+  \votinggraphic{29}  %\votecycle{c}{-c}{c}{4}  
+  =\hspace{.30in}
+  \votinggraphic{30}  %\votecycle{a-b+c}{a+b-c}{-a+b+c}{4}
+  \hspace{.30in}\hbox{}  
+\end{equation*}
+A voting paradox occurs when the three numbers on the right,
+$a-b+c$ and $a+b-c$ and $-a+b+c$, are all nonnegative or all nonpositive.
+On the left, at least two of the three numbers, $a$ and $b$ and $c$, 
+are both nonnegative or both nonpositive.
+We can assume that they are $a$ and $b$.
+That makes four cases:~the cycle is nonnegative and
+$a$ and $b$ are nonnegative, the cycle is
+nonpositive and $a$ and $b$ are nonpositive, etc.
+We will do only the first case, since the second is similar
+and the other two are also easy.
+
+So assume that the cycle is nonnegative and
+that $a$ and $b$ are nonnegative.
+The conditions $0\leq a-b+c$ and $0\leq -a+b+c$ add to give
+that $0\leq 2c$, which implies that $c$ is also nonnegative, as desired.
+That ends the proof.
+
+This result says only that having all three spin in the same direction is a 
+necessary condition for a majority cycle.
+It is not sufficient; see
+\nearbyexercise{exer:VoterCondNotSuff}.
+
+Voting theory and associated topics are the subject of current research.
+There are many intriguing results, most notably 
+the one produced by K.~Arrow \cite{Arrow}, who won the Nobel Prize in part for
+this work, showing that no voting system is entirely fair
+(for a reasonable definition of ``fair'').
+For more information, some good introductory articles are \cite{Gardner70}, 
+\cite{Gardner74}, \cite{Gardner80}, and \cite{NeimiRiker}.
+A quite readable recent book is \cite{Taylor}.
+The long list of cases from recent American political history given in 
+\cite{GamingVote} show that manipulation of these paradoxes is
+routine in practice (and the author proposes a solution).
+ 
+This Topic is largely drawn from \cite{Zwicker}.
+\emph{(Author's Note:~I would like to thank Professor~Zwicker 
+for his kind and illuminating discussions.)}
+
+\begin{exercises}
+  \item \label{IrrIndVote}
+    Here is a reasonable way in which a voter could have a cyclic preference.
+    Suppose that this voter ranks each candidate
+    on each of three criteria.
+    \begin{exparts}
+      \partsitem Draw up a table with the rows labelled `Democrat',
+         `Republican', and `Third', and the columns labelled
+         `character', `experience', and `policies'.
+         Inside each column, rank some 
+         candidate as most preferred, 
+         rank another as in the middle, and rank the remaining one
+         as least preferred.
+      \partsitem In this ranking, is the Democrat preferred to the Republican
+         in (at least) two out of three criteria, or vice versa?
+         Is the Republican preferred to the Third?
+      \partsitem  Does the table that was 
+         just constructed have a cyclic preference order?
+         If not, make one that does.
+    \end{exparts}
+    So it is possible for a voter to have a cyclic preference among candidates.
+    The paradox described above, however, is that even if each voter has a
+    straight-line preference list, 
+    a cyclic preference can still arise for the entire group. 
+    \begin{answer}
+      This is one example that yields a non-rational preference order for a 
+      single voter.
+      \begin{center}
+        \begin{tabular}{l|c|c|c|}
+             \multicolumn{1}{c}{\ }
+                  &\multicolumn{1}{c}{\textit{character}}
+                  &\multicolumn{1}{c}{\textit{experience}}
+                  &\multicolumn{1}{c}{\textit{policies}}   \\ 
+          \cline{2-4}
+         \textit{Democrat}   &most    &middle  &least   \\
+         \textit{Republican} &middle  &least   &most    \\
+         \textit{Third}      &least   &most    &middle  \\
+          \cline{2-4}
+        \end{tabular}
+      \end{center}
+      The Democrat is preferred to the Republican for character and
+      experience.
+      The Republican is preferred to the Third for character and policies.
+      And, the Third is preferred to the Democrat for experience and policies.
+    \end{answer}
+  \item \label{VoteCalcTable} 
+    Compute the values in the table of decompositions.
+    \begin{answer}
+      First, compare the $D>R>T$ decomposition that was done out in the Topic
+      with the decomposition of the opposite $T>R>D$ voter.
+      \begin{equation*}
+        \votepreflist{-1}{1}{1}
+          =\frac{1}{3}\cdot\votepreflist{1}{1}{1}
+           +\frac{2}{3}\cdot\votepreflist{-1}{1}{0}
+           +\frac{2}{3}\cdot\votepreflist{-1}{0}{1}
+        \quad\text{and}\quad
+        \votepreflist{1}{-1}{-1}
+          =d_1\cdot\votepreflist{1}{1}{1}
+           +d_2\cdot\votepreflist{-1}{1}{0}
+           +d_3\cdot\votepreflist{-1}{0}{1}
+      \tag*{}\end{equation*}
+      Obviously, the second is the negative of the first, and so
+      $d_1=-1/3$, $d_2=-2/3$, and $d_3=-2/3$.
+      This principle holds for any pair of opposite voters, and so we need only
+      do the computation for a voter from the second row, and a voter from the 
+      third row.
+      For a positive spin voter in the second row,
+      \begin{equation*}
+        \begin{linsys}{3}
+          c_1  &-  &c_2  &-  &c_3  &=  &1 \\
+          c_1  &+  &c_2  &   &     &=  &1  \\
+          c_1  &   &     &+  &c_3  &=  &-1  
+        \end{linsys}
+        \;\grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+        \grstep{(-1/2)\rho_2+\rho_3}
+        \;\begin{linsys}{3}
+          c_1  &-  &c_2  &-  &c_3      &=  &1 \\
+               &   &2c_2 &+  &c_3      &=  &0  \\
+               &   &     &   &(3/2)c_3 &=  &-2  
+        \end{linsys}
+      \tag*{}\end{equation*}
+      gives $c_3=-4/3$, $c_2=2/3$, and $c_1=1/3$.
+      For a positive spin voter in the third row,
+      \begin{equation*}
+        \begin{linsys}{3}
+          c_1  &-  &c_2  &-  &c_3  &=  &1 \\
+          c_1  &+  &c_2  &   &     &=  &-1  \\
+          c_1  &   &     &+  &c_3  &=  &1  
+        \end{linsys}
+        \;\grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+        \grstep{(-1/2)\rho_2+\rho_3}
+        \;\begin{linsys}{3}
+          c_1  &-  &c_2  &-  &c_3      &=  &1 \\
+               &   &2c_2 &+  &c_3      &=  &-2  \\
+               &   &     &   &(3/2)c_3 &=  &1  
+        \end{linsys}
+        \tag*{}\end{equation*}
+        gives $c_3=2/3$, $c_2=-4/3$, and $c_1=1/3$.
+      \end{answer}
+  \item \label{exer:CancelPolSci} 
+    Do the cancellations of opposite preference orders 
+    for the Political Science class's mock election.
+    Are all the remaining preferences from the left three rows of the
+    table or from the right?
+    \begin{answer}
+      The mock election corresponds to the table on 
+      page~\pageref{table:Voting} in the way shown in the first table,
+      and after cancellation the result is the second table.  
+      \begin{center}
+         \renewcommand{\arraystretch}{1.3}
+         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+           \textit{positive spin}
+           &\textit{negative spin}  \\ \hline
+           \begin{tabular}{l}
+             $D>R>T$        \\
+             5 voters
+           \end{tabular}
+          &\begin{tabular}{l}
+             $T>R>D$          \\
+             2 voters
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+             $R>T>D$           \\
+             8 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+             $D>T>R$             \\
+             4 voters
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+            $T>D>R$             \\
+            8 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+            $R>D>T$            \\
+            2 voters
+          \end{tabular}                  \\ \hline
+        \end{tabular}
+        \qquad
+         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+           \textit{positive spin}
+           &\textit{negative spin}  \\ \hline
+           \begin{tabular}{l}
+             $D>R>T$        \\
+             3 voters
+           \end{tabular}
+          &\begin{tabular}{l}
+             $T>R>D$          \\
+             --
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+             $R>T>D$           \\
+             4 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+             $D>T>R$             \\
+             --
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+            $T>D>R$             \\
+            6 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+            $R>D>T$            \\
+            --
+          \end{tabular}                  \\ \hline
+        \end{tabular}
+       \end{center}
+       All three come from the same side of the table (the left), 
+       as the result from this Topic says must happen.
+       Tallying the election can now proceed, using the cancelled numbers 
+       \begin{equation*}
+         % \psset{xunit=4pt,yunit=4pt,runit=4pt} 
+         3\cdot \votinggraphic{31}
+%          \pspicture[.4](-10.5,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $-1$ voter} 
+%          \endpspicture
+         +4\cdot\votinggraphic{32}
+%          \pspicture[.4](-10,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $-1$ voter} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%          \endpspicture
+         +6\cdot\votinggraphic{33}
+%          \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $-1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%          \endpspicture
+         = \votinggraphic{34}
+%          \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $5$ voters} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $7$ voters} 
+%          \endpspicture
+       \tag*{}\end{equation*}
+       to get the same outcome.
+    \end{answer}
+  \item \label{exer:VoterCondNotSuff} 
+    The necessary condition that is proved above---a
+    voting paradox can happen only if all three preference lists remaining
+    after cancellation have the same spin---is not also sufficient. 
+    \begin{exparts}
+      \partsitem Continuing the positive cycle case considered in the proof, 
+        use the two inequalities $0\leq a-b+c$ and $0\leq -a+b+c$
+        to show that $\absval{a-b}\leq c$.
+      \partsitem Also show that $c\leq a+b$, and hence that
+        $\absval{a-b}\leq c\leq a+b$. 
+      \partsitem Give an example of a vote where there is a majority cycle,
+        and addition of one more voter with the same spin causes the cycle to
+        go away.
+      \partsitem Can the opposite happen; can addition of one voter with 
+        a ``wrong'' spin cause a cycle to appear?
+      \partsitem Give a condition that is both necessary and sufficient
+        to get a majority cycle.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The two can be rewritten as $-c\leq a-b$ and $-c\leq b-a$.
+          Either $a-b$ or $b-a$ is nonpositive and so $-c\leq-\absval{a-b}$,
+          as required.
+        \partsitem This is immediate from the supposition that $0\leq a+b-c$.
+        \partsitem A trivial example starts with the zero-voter election and
+          adds any one voter.
+          A more interesting example is to take the Political Science mock
+          election and add two $T>D>R$ voters
+          (they can be added one at a time, to satisfy the
+          ``addition of one more voter'' criteria in the question).
+          Observe that the additional voters have positive spin, which is the
+          spin of the votes remaining after cancellation in the original mock
+          election.
+          This is the resulting table of voters, and next to it is 
+          the result of cancellation.
+      \begin{center}
+         \renewcommand{\arraystretch}{1.3}
+         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+           \textit{positive spin}
+           &\textit{negative spin}  \\ \hline
+           \begin{tabular}{l}
+             $D>R>T$        \\
+             5 voters
+           \end{tabular}
+          &\begin{tabular}{l}
+             $T>R>D$          \\
+             2 voters
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+             $R>T>D$           \\
+             8 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+             $D>T>R$             \\
+             4 voters
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+            $T>D>R$             \\
+            10 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+            $R>D>T$            \\
+            2 voters
+          \end{tabular}                  \\ \hline
+        \end{tabular}
+        \qquad
+         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+           \textit{positive spin}
+           &\textit{negative spin}  \\ \hline
+           \begin{tabular}{l}
+             $D>R>T$        \\
+             3 voters
+           \end{tabular}
+          &\begin{tabular}{l}
+             $T>R>D$          \\
+             --
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+             $R>T>D$           \\
+             4 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+             $D>T>R$             \\
+             --
+           \end{tabular}                  \\ \hline
+          \begin{tabular}{l}
+            $T>D>R$             \\
+            8 voters
+          \end{tabular}
+         &\begin{tabular}{l}
+            $R>D>T$            \\
+            --
+          \end{tabular}                  \\ \hline
+        \end{tabular}
+       \end{center}
+       The election, using the cancelled numbers, is this. 
+       \begin{equation*}
+         % \psset{xunit=4pt,yunit=4pt,runit=4pt} 
+         3\cdot\votinggraphic{35}
+%          \pspicture[.4](-10.5,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $-1$ voter} 
+%          \endpspicture
+         +4\cdot\votinggraphic{36}
+%          \pspicture[.4](-10,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $-1$ voter} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%          \endpspicture
+         +8\cdot\votinggraphic{37}
+%          \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $-1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%          \endpspicture
+         =\votinggraphic{38}
+%          \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%            \SpecialCoor
+%            \rput(3;90){\small $D$}
+%            \psarc{->}(0,0){3}{10}{70} %-rd->
+%               \rput[lb](3.3;20){\scriptsize $7$ voters} 
+%            \rput[B](3;210){\small $T$}
+%            \psarc{->}(0,0){3}{220}{320} %-tr->
+%               \rput[t](3.1;270){\scriptsize $-1$ voter} 
+%            \rput[B](3;330){\small $R$}
+%            \psarc{->}(0,0){3}{110}{175} %-dt->
+%               \rput[rb](3.3;160){\scriptsize $9$ voters} 
+%          \endpspicture
+       \tag*{}\end{equation*}
+       The majority cycle has indeed disappeared.
+      \partsitem One such condition is that, after cancellation,
+         all three be nonnegative or all three be nonpositive, 
+         and:~$\absval{c}<\absval{a+b}$ and $\absval{b}<\absval{a+c}$ 
+         and $\absval{a}<\absval{b+c}$.
+          This follows from this diagram.  
+         \begin{equation*}
+           \votinggraphic{27}  %\votecycle{a}{a}{-a}{4} 
+           +  
+           \votinggraphic{28}  %\votecycle{-b}{b}{b}{4} 
+           +  
+           \votinggraphic{29}  %\votecycle{c}{-c}{c}{4}  
+           =\hspace{.30in}
+           \votinggraphic{30}  %\votecycle{a-b+c}{a+b-c}{-a+b+c}{4}
+           \hspace{.30in}\hbox{}  
+         \end{equation*}
+%          \begin{center}
+%            \votecycle{a}{a}{-a}{4} 
+%            +  
+%            \votecycle{-b}{b}{b}{4} 
+%            +  
+%            \votecycle{c}{-c}{c}{4}  
+%            =\hspace{.30in}  
+%            \votecycle{a-b+c}{a+b-c}{-a+b+c}{4}\hspace{.30in}\hbox{}  
+%          \end{center}
+      \end{exparts}
+    \end{answer}
+\item A one-voter election cannot have a majority cycle because of the
+    requirement that we've imposed that the voter's list must be rational.
+    \begin{exparts}
+      \partsitem Show that a two-voter election may have a majority cycle.
+        (We consider the group preference a majority cycle if all three
+        group totals are nonnegative or if all three are nonpositive---that is,
+        we allow some zero's in the group preference.)
+      \partsitem Show that for any number of voters greater than one, there is
+        an election involving that many voters that results in a majority 
+        cycle.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem A two-voter election can have a majority cycle in two ways.
+          First, the two voters could be opposites,
+          resulting after cancellation in the trivial election (with the 
+          majority cycle of all zeroes).
+          Second, the two voters could have the same spin but come from
+          different rows, as here.
+          \begin{equation*}
+            % \psset{xunit=4pt,yunit=4pt,runit=4pt} 
+            1\cdot \votinggraphic{39}
+%             \pspicture[.4](-10.5,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%               \SpecialCoor
+%               \rput(3;90){\small $D$}
+%               \psarc{->}(0,0){3}{10}{70} %-rd->
+%                  \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%               \rput[B](3;210){\small $T$}
+%               \psarc{->}(0,0){3}{220}{320} %-tr->
+%                  \rput[t](3.1;270){\scriptsize $1$ voter} 
+%               \rput[B](3;330){\small $R$}
+%               \psarc{->}(0,0){3}{110}{175} %-dt->
+%                  \rput[rb](3.3;160){\scriptsize $-1$ voter} 
+%             \endpspicture
+            +1\cdot\votinggraphic{40}
+%             \pspicture[.4](-10,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%               \SpecialCoor
+%               \rput(3;90){\small $D$}
+%               \psarc{->}(0,0){3}{10}{70} %-rd->
+%                  \rput[lb](3.3;20){\scriptsize $-1$ voter} 
+%               \rput[B](3;210){\small $T$}
+%               \psarc{->}(0,0){3}{220}{320} %-tr->
+%                  \rput[t](3.1;270){\scriptsize $1$ voter} 
+%               \rput[B](3;330){\small $R$}
+%               \psarc{->}(0,0){3}{110}{175} %-dt->
+%                  \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%             \endpspicture
+            +0\cdot\votinggraphic{41}
+%             \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%               \SpecialCoor
+%               \rput(3;90){\small $D$}
+%               \psarc{->}(0,0){3}{10}{70} %-rd->
+%                  \rput[lb](3.3;20){\scriptsize $1$ voter} 
+%               \rput[B](3;210){\small $T$}
+%               \psarc{->}(0,0){3}{220}{320} %-tr->
+%                  \rput[t](3.1;270){\scriptsize $-1$ voter} 
+%               \rput[B](3;330){\small $R$}
+%               \psarc{->}(0,0){3}{110}{175} %-dt->
+%                  \rput[rb](3.3;160){\scriptsize $1$ voter} 
+%             \endpspicture
+            =\votinggraphic{42}
+%             \pspicture[.4](-9,-4.2)(10,4) %\psgrid(-10,-10)(10,10)
+%               \SpecialCoor
+%               \rput(3;90){\small $D$}
+%               \psarc{->}(0,0){3}{10}{70} %-rd->
+%                  \rput[lb](3.3;20){\scriptsize $0$ voters} 
+%               \rput[B](3;210){\small $T$}
+%               \psarc{->}(0,0){3}{220}{320} %-tr->
+%                  \rput[t](3.1;270){\scriptsize $2$ voters} 
+%               \rput[B](3;330){\small $R$}
+%               \psarc{->}(0,0){3}{110}{175} %-dt->
+%                  \rput[rb](3.3;160){\scriptsize $0$ voters} 
+%             \endpspicture
+          \tag*{}\end{equation*}
+        \partsitem There are two cases.
+          An even number of voters can split half and half into opposites,
+          e.g., half the voters are $D>R>T$ and half are $T>R>D$.
+          Then cancellation gives the trivial election.
+          If the number of voters is greater than one and odd (of the
+          form $2k+1$ with $k>0$) then using the cycle diagram from the proof,
+          \begin{equation*}
+            \votinggraphic{27}  %\votecycle{a}{a}{-a}{4} 
+            +  
+            \votinggraphic{28}  %\votecycle{-b}{b}{b}{4} 
+            +  
+            \votinggraphic{29}  %\votecycle{c}{-c}{c}{4}  
+            =\hspace{.30in}
+            \votinggraphic{30}  %\votecycle{a-b+c}{a+b-c}{-a+b+c}{4}
+            \hspace{.30in}\hbox{}  
+          \end{equation*}
+%          \begin{center}
+%            \votecycle{a}{a}{-a}{4} 
+%            +  
+%            \votecycle{-b}{b}{b}{4} 
+%            +  
+%            \votecycle{c}{-c}{c}{4}  
+%            =\hspace{.30in}  
+%            \votecycle{a-b+c}{a+b-c}{-a+b+c}{4}\hspace{.30in}\hbox{}  
+%          \end{center}
+          we can take $a=k$ and $b=k$ and $c=1$.
+          Because $k>0$, this is a majority cycle.
+       \end{exparts}
+    \end{answer}
+\item \label{exer:PerpIsSubSp} 
+    Let $U$ be a subspace of $\Re^3$.
+    Prove that the set 
+    $U^\perp=\set{\vec{v}\suchthat 
+              \text{$\vec{v}\dotprod\vec{u}=0$ for all $\vec{u}\in U$}}$
+    of vectors 
+    that are perpendicular to each vector in $U$ is also subspace of $\Re^3$.
+    Does this hold if $U$ is not a subspace?
+    \begin{answer}
+      It is nonempty because it contains the zero vector.
+      To see that it is closed under linear combinations of two of its
+      members, suppose that $\vec{v}_1$ and $\vec{v}_2$ are in $U^\perp$
+      and consider $c_1\vec{v}_1+c_2\vec{v}_2$.
+      For any $\vec{u}\in U$,
+      \begin{equation*}
+        (c_1\vec{v}_1+c_2\vec{v}_2)\dotprod\vec{u}
+        =c_1(\vec{v}_1\dotprod\vec{u})+c_2(\vec{v}_2\dotprod\vec{u})
+        =c_1\cdot 0+c_2\cdot 0=0         
+      \tag*{}\end{equation*}
+      and so $c_1\vec{v}_1+c_2\vec{v}_2\in U^\perp$.
+
+      This holds if $U$ is any subset, subspace or not.
+    \end{answer}
+\end{exercises}
+\index{voting paradoxes|)}
+\endinput
+
+
+

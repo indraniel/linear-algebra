@@ -1,0 +1,212 @@
+\topic{Geometry of Eigenvectors}
+\index{Some Geometry of Eigenvectors|(}
+--Refer to Topic on Geometry of Linear Transformations---
+
+The characterization of linear transformations in terms of the 
+elementary operations is nice in some ways (for instance, we can easly see that
+lines are mapped to lines because each of the operations of 
+projection, dilation, reflection, and skew maps lines to lines),
+but when a map is expressed as a composition of many small operations---no
+matter how simple---the description is less than ideal.
+We finish with another way, a somewhat more holistic way,
+of picturing the geometric effect of
+transformations of $\Re^2$.
+
+The pictures in that area give the action of the 
+map on just one or two members of the domain.
+Although we know that a transformation is described completely by its action
+on a basis, and so to describe a transformation of
+$\Re^2$ therefore, strictly speaking, 
+requires only a description of where it sends the two vectors
+from any basis, 
+those pictures seem not to convey much geometric intution.
+Can we make clear a linear map's geometry by putting in more 
+information, but not so much information that the picture gets confused?
+
+A transformation of $\Re^2$ sends lines through the origin to lines thru
+the origin.
+Thus, two points on a line $y=k_1x$ will both be sent to the line,
+say, $y=k_2x$.
+Consider two such points.
+One is a multiple of the other, so we can write them with the second one as 
+$r$ times the first, for some scalar $r$.
+\begin{equation*}
+  \colvec{x \\ k_1x}\quad\mbox{and}\quad\colvec{(rx) \\ k_1(rx)}
+\end{equation*}
+Compare their images.
+\begin{equation*}
+  \begin{pmatrix}
+    a  &c  \\
+    b  &d
+  \end{pmatrix}
+  \colvec{x \\ k_1x}
+  =
+  \colvec{ax+ck_1x \\ bx+dk_1x}
+  \qquad
+  \begin{pmatrix}
+    a  &c  \\
+    b  &d
+  \end{pmatrix}
+  \colvec{(rx) \\ k_1(rx)}
+  =
+  \colvec{a(rx)+ck_1(rx) \\ b(rx)+dk_1(rx)}
+\end{equation*}
+The second vector is $r$ times the first, and the image of the 
+second is $r$ times the image of the first.
+Not only does the transformation preserve the fact that the vectors are
+colinear, it also preserves the relative scale of the vectors.
+That is, a transformation treats the points on a line through the origin
+uniformily.
+To describe the effect of the map on the entire line, we need only describe
+its effect on a single non-zero point in that line.
+
+Since every
+point in the space is on some line through the origin,
+to understand the action of a linear transformation of 
+$\Re^2$, it is sufficient to pick one point from each line 
+through the origin (say the point that is on the upper half of the unit circle)
+and show how the map's effect on that set of points.
+
+Here is such a picture for a straightforward dilation.
+\begin{center}
+  \psset{xunit=8pt,yunit=8pt,linewidth=.4pt,arrowsize=.5pt 2.5,arrowinset=.1,
+         arrowlength=1.75}
+  \pspicture(-3,-1)(3,2)
+    \psaxes[labels=none,linecolor=weakgray,tickstyle=bottom,
+        ticks=all,ticksize=1.5pt]{<->}(0,0)(-2.75,-.75)(2.75,1.75)
+     \parametricplot[plotstyle=curve,linewidth=.6pt]%
+       {0}{180}{t cos t sin}
+  \endpspicture
+  \qquad\raisebox{12pt}{\begin{tabular}[t]{c}
+                         $\longrightarrow$ \\
+                         {\scriptsize
+                          $\colvec{x \\ y} \mapsto \colvec{2x \\ y}$}
+                       \end{tabular}}\qquad
+  \pspicture(-3,-1)(3,2)
+    \psaxes[labels=none,linecolor=weakgray,tickstyle=bottom,
+        ticks=all,ticksize=1.5pt]{<->}(0,0)(-2.75,-.75)(2.75,1.75)
+     \parametricplot[plotstyle=curve,linewidth=.6pt]%
+       {0}{180}{2 t cos mul t sin}
+  \endpspicture
+\end{center}
+Below, the same map is shown with the circle and its image superimposed.
+\begin{center}
+  \psset{xunit=12pt,yunit=12pt,linewidth=.4pt,arrowsize=.5pt 2.5,arrowinset=.1,
+         arrowlength=1.75}
+  \pspicture(-3,-1)(3,2)
+    \psaxes[labels=none,linecolor=weakgray,tickstyle=bottom,
+        ticks=all,ticksize=1.5pt]{<->}(0,0)(-2.75,-.75)(2.75,1.75)
+     \parametricplot[plotstyle=curve,linecolor=preimagegray,linewidth=.6pt]%
+       {0}{180}{t cos t sin}
+        \psline[linecolor=preimagegray]{->}(-1,0)(-2,0)
+        \psline[linecolor=preimagegray]{->}(-.707,.707)(-1.414,.707)
+        \psline[linecolor=preimagegray]{->}(.707,.707)(1.414,.707)
+        \psline[linecolor=preimagegray]{->}(1,0)(2,0)
+     \parametricplot[plotstyle=curve,linewidth=.6pt]%
+       {0}{180}{2 t cos mul t sin}
+  \endpspicture
+\end{center}
+Certainly the geometry here is more evident.
+For example, we can see that some lines through the origin are actually
+sent to themselves:~the $x$-axis is sent to the $x$-axis, 
+and the $y$-axis is sent to the $y$-axis. 
+
+This is the flip shown earlier,
+here with the circle and its image superimposed.
+\begin{center}
+  \psset{xunit=12pt,yunit=12pt,linewidth=.4pt,arrowsize=.5pt 2.5,arrowinset=.1,
+         arrowlength=1.75}
+  \pspicture(-3,-2)(3,2)
+    \psaxes[labels=none,linecolor=weakgray,tickstyle=bottom,
+        ticks=all,ticksize=1.5pt]{<->}(0,0)(-2.75,-1.75)(2.75,1.75)
+     \parametricplot[plotstyle=curve,linecolor=preimagegray,linewidth=.6pt]%
+       {0}{180}{t cos t sin}
+        \psline[linecolor=preimagegray]{->}(-1,0)(0,-1)
+        \psline[linecolor=preimagegray]{->}(-.707,.707)(.707,-.707)
+        \psline[linecolor=preimagegray]{->}(0,1)(1,0)
+%        \psline[linecolor=preimagegray]{->}(.707,.707)(.707,.707)
+        \psline[linecolor=preimagegray]{->}(1,0)(0,1)
+     \parametricplot[plotstyle=curve,linewidth=.6pt]%
+       {0}{180}{t sin t cos}
+  \endpspicture
+  \qquad
+  \raisebox{16pt}{$\colvec{x \\ y}\mapsto\colvec{y \\ x}$}
+\end{center}
+And this is the skew shown earlier.
+\begin{center}
+  \psset{xunit=12pt,yunit=12pt,linewidth=.4pt,arrowsize=.5pt 2.5,arrowinset=.1,
+         arrowlength=1.75}
+  \pspicture(-3,-2)(3,3)
+    \psaxes[labels=none,linecolor=axisgray,tickstyle=bottom,
+        ticks=all,ticksize=1.5pt]{<->}(0,0)(-2.75,-1.75)(2.75,2.75)
+     \parametricplot[plotstyle=curve,linecolor=preimagegray,linewidth=.6pt]%
+       {0}{180}{t cos t sin}
+        \psline[linecolor=preimagegray]{->}(-1,0)(-1,-2)
+        \psline[linecolor=preimagegray]{->}(-.707,.707)(-.707,-.707)
+%        \psline[linecolor=preimagegray]{->}(0,1)(0,1)
+        \psline[linecolor=preimagegray]{->}(.707,.707)(.707,2.121)
+        \psline[linecolor=preimagegray]{->}(1,0)(1,2)
+     \parametricplot[plotstyle=curve,linewidth=.6pt]%
+       {0}{180}{t cos 2 t cos mul t sin add}
+  \endpspicture
+  \qquad
+  \raisebox{14pt}{$\colvec{x \\ y}\mapsto\colvec{x \\ 2x+y}$}
+\end{center}
+Contrast the picture of this map's effect on the unit square
+with this one.
+
+Here is a somewhat more complicated map
+(the second coordinate function is the same as the map in the prior picture,
+but the first coordinate function is different).
+\begin{center}
+  \psset{xunit=12pt,yunit=12pt,linewidth=.4pt,arrowsize=.5pt 2.5,arrowinset=.1,
+         arrowlength=1.75}
+  \pspicture(-3,-2)(3,3)
+    \psaxes[labels=none,linecolor=axisgray,tickstyle=bottom,
+        ticks=all,ticksize=1.5pt]{<->}(0,0)(-2.75,-1.75)(2.75,2.75)
+     \parametricplot[plotstyle=curve,linecolor=preimagegray,linewidth=.6pt]%
+       {0}{180}{t cos t sin}
+        \psline[linecolor=preimagegray]{->}(-1,0)(-1,-2)
+        \psline[linecolor=preimagegray]{->}(-.707,.707)(0,-.707)
+        \psline[linecolor=preimagegray]{->}(0,1)(1,1)
+        \psline[linecolor=preimagegray]{->}(.707,.707)(1.414,2.121)
+        \psline[linecolor=preimagegray]{->}(1,0)(1,2)
+     \parametricplot[plotstyle=curve,linewidth=.6pt]%
+       {0}{180}{t cos t sin add 2 t cos mul t sin add}
+  \endpspicture
+  \qquad
+  \raisebox{14pt}{$\colvec{x \\ y}\mapsto\colvec{x+y \\ 2x+y}$}
+\end{center}
+Observe that some vectors are being both dilated and rotated through
+some angle
+\begin{equation*}
+  \colvec{x \\ 2x}\mapsto\colvec{x  \\ k_1x}
+\end{equation*}
+while others are just being dilated, not rotated at all. 
+\begin{equation*}
+  \colvec{x  \\ 3x}\mapsto\colvec{x  \\ 3x}
+\end{equation*}
+
+\begin{exercises}
+  \item Show the effect each matrix has on the top half of the unit circle.
+    \begin{exparts*}
+       \partsitem
+         $\begin{pmatrix}
+            1  &1    \\
+            2  &2
+          \end{pmatrix}$
+       \partsitem
+         $\begin{pmatrix}
+            2  &3    \\
+            1  &1
+          \end{pmatrix}$
+       \partsitem
+         $\begin{pmatrix}
+            2  &3    \\
+            1  &-1
+          \end{pmatrix}$
+     \end{exparts*}
+     Which vectors stay on the same line through the origin?
+\end{exercises}
+\index{Geometry of Eigenvectors|)}
+\end{input}

@@ -1,0 +1,169 @@
+%\documentclass{article}
+%\usepackage{verbatim}
+%
+%\begin{document}
+\topic{Speed of Gauss' Method}
+We are using Gauss' Method to solve the linear systems in this book
+because it is easy to understand, easily shown to give the right
+answers, and fast.
+It is fast in that, in all the by-hand calculations we have needed, 
+we have gotten the answers in only a few steps, taking only a few minutes.
+However,
+scientists and engineers who solve linear systems in practice must 
+have a method that is fast enough for large
+systems, with 1000 equations or 10,000 equations or even 100,000 equations.
+These systems are solved on a computer, so the speed of the
+machine helps, but nonetheless the speed of the method used is a major
+consideration, and is sometimes the factor limiting which problems
+can be solved. 
+
+The speed of an algorithm is usually measured by finding 
+how the time taken to solve problems grows as the size of
+the input data set grows. 
+That is, how much longer will the algorithm take if
+we increase the size of the input data by a
+factor of ten, say from a 1000-equation system to a 10,000-equation
+system, or from 10,000 to 100,000?
+Does the time taken grow ten times,
+or a hundred times, or a thousand times?
+Is the time taken by the algorithm proportional to the size of the data set, 
+or to the square of that size, or to the cube of that size, etc.? 
+
+Here is a fragment of Gauss' Method code, implemented in the computer
+language FORTRAN.
+The coefficients of the linear system are stored in the 
+$\nbyn{N}$ array \textit{A}, and the constants are stored in the 
+$\nbym{N}{1}$ array \textit{B}.
+For each \textit{ROW} between $1$ and $N$ this program
+has already found the leading entry $A(ROW,COL)$.
+Now it will combine rows.
+\begin{equation*}
+  -\text{\textit{LEINV}}\cdot \rho_{\text{\textit{ROW}}}
+      +\rho_{\text{\textit{i}}}
+\end{equation*}
+(This code fragment is for illustration only, and is incomplete.
+For example, see the later topic on the Accuracy of Gauss' Method.
+Nonetheless, this fragment will do for our purposes because
+analysis of finished versions, including all the tests
+and sub-cases, is messier but gives essentially the same result.)
+\begin{center}{\small
+\begin{verbatim}
+       LEINV=1./A(ROW,COL)
+       DO 10 I=ROW+1, N
+               DO 20 J=I, N
+                    A(I,J)=A(I,J)-LEINV*A(ROW,J)
+                  20 CONTINUE
+               B(J)=B(J)-LEINV*B(ROW)
+          10 CONTINUE
+\end{verbatim} 
+}\end{center}
+
+The outermost loop (not shown) runs through $N-1$ rows.
+For each of these rows, 
+the shown loops perform arithmetic on the entries
+in \textit{A} that are below and to the right of the leading entry
+(and also on the entries in \textit{B}, but to simplify the
+analysis we will not count those operations---see \nearbyexercise{}).
+We will assume the leading entry is found in the usual place, that is, that 
+$\text{\textit{COL}}=\text{\textit{ROW}}$
+(as above, analysis of the general case is messier but gives essentially
+the same result).
+That means there are $(N-\text{\textit{ROW}})^2$ entries to perform
+arithmetic on.
+On average, \textit{ROW} will be $N/2$.
+Thus we estimate the nested loops above will run 
+something like $(N/2)^2$ times,
+that is, will run in a time proportional to the square of the number
+of equations.
+Taking into account the outer loop that is not shown, we get
+the estimate that the running time of the algorithm
+is proportional to the cube of the number of equations.
+
+Algorithms that run in time directly proportional to the size of the 
+data set are fast, algorithms that run in time proportional to the
+square of the size of the data set are less fast, but typically quite
+usable, and algorithms that run in time proportional to the cube of
+the size of the data set are still reasonable in speed. 
+
+Speed estimates like these are a good way of understanding how quickly or
+slowly an algorithm can be expected to run on average.
+There are special cases, however, of systems on which the above 
+Gauss' method code is especially fast, so there may be factors
+about a problem that make it especially suitable for this kind of solution.
+
+In practice, the code found in computer algebra systems, or in the
+standard packages, implements a variant on Gauss' method, called 
+triangular factorization.
+To state this method requires the language of matrix algebra, which we will not
+see until Chapter Three.
+Nonetheless, the above code is conceptually quite close to that usually used
+in applications.
+
+There have been some theoretical speed-ups in the running time required
+to solve linear systems.
+Algorithms other than Gauss' method have been invented
+that take a time proportional not to the cube of the size of the
+data set, but instead to the (approximately) $2.7$ power
+(this is still under active research, so this exponent may
+come down somewhat over time).
+However, these theoretical improvements have not come into widespread
+use,
+in part because the new methods take a quite large data set before
+they overtake Gauss' method 
+(although they will outperform Gauss' method on very large sets, there
+is some startup overhead that keeps them from being faster on the
+systems that have, so far, been solved in practice).   
+
+
+
+\begin{exercises}
+  \item Computer systems allow the generation of random numbers
+    (of course, these are only pseudo-random, in that they are
+    generated by some algorithm, but the sequence of numbers that is
+    gotten passes a number of reasonable statistical tests for
+    apparent randomness).
+    \begin{exparts}
+      \partsitem Fill a $\nbyn{5}$ array with random numbers (say, in the
+        range $[0..1)$).
+        Apply Gauss' method to see if it is singular.
+        Repeat that experiment ten times.
+        Are singular matrices frequent or rare (in this sense)?
+      \partsitem Time the computer at solving ten $\nbyn{5}$
+        arrays of random numbers.
+        Find the average time.
+        (Notice that some systems can be found to be singular quite
+        quickly, for instance if the first row equals the second.
+        In the light of the first part, do you expect that 
+        singular systems play a
+        large role in your average?)
+      \partsitem Repeat the prior item for $\nbyn{15}$ arrays.
+      \partsitem Repeat the prior item for $\nbyn{25}$ arrays.
+      \partsitem Repeat the prior item for $\nbyn{35}$ arrays.
+      \partsitem Graph the input size versus the average time.
+    \end{exparts}
+  \item What $\nbyn{10}$ array can you invent that takes your computer
+    system the longest to reduce?
+    The shortest?
+  \item Write the rest of the FORTRAN program to do a
+    straightforward implementation of Gauss' method.
+    Compare the speed of your code to that used in a computer algebra
+    system.
+    Which is faster?
+    (Most computer algebra systems will apply some of the techniques
+    of matrix algebra that we will have later, in Chapter Three.)
+  \item Extend the code fragment to handle the case where the \textit{B} array
+    has more than one column.
+    That solves more than one system at a time (all with the same
+    matrix of coefficients \textit{A}). 
+  \item The FORTRAN language specification requires that arrays be
+    stored ``by column'', that is, the entire first column is stored
+    contiguously, then the second column, etc.
+    Does the code fragment given take advantage of this,
+    or can it be rewritten to make it faster (by taking advantage of
+    the fact that computer fetches are faster from contiguous locations)?
+  \item Estimate the running time of Gauss-Jordan reduction.
+    Test your estimate by implementing Gauss-Jordan reduction 
+    in a computer language, and running it on $\nbyn{5}$, $\nbyn{15}$,
+    and $\nbyn{25}$ matrices of random entries.
+\end{exercises}
+\endinput

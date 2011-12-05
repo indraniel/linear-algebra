@@ -1,0 +1,2748 @@
+% Chapter 3, Section 2 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-11
+\section{Homomorphisms}
+The definition of isomorphism has two conditions.
+In this section we will consider the second one,
+that the map must preserve the algebraic structure of the space.
+We will focus on this condition by studying maps that 
+are required only to preserve structure;
+that is, maps that are not required to be correspondences. 
+
+Experience shows that this kind of map is 
+tremendously useful in the study of vector spaces.
+For one thing, as we shall see in the second subsection below, 
+while isomorphisms describe how spaces are the same,
+these maps describe how spaces can be thought of as alike.
+
+
+
+
+
+
+
+
+\subsection{Definition}
+
+\begin{definition}  \label{def:Homo}
+A function between vector spaces \( \map{h}{V}{W} \) that 
+preserves\index{preserves structure}\index{structure! preservation} 
+the operations of addition
+\begin{center}
+  if \( \vec{v}_1,\vec{v}_2\in V \) then
+      \( h(\vec{v}_1+\vec{v}_2)=h(\vec{v}_1)+h(\vec{v}_2) \)
+\end{center}
+and scalar multiplication
+\begin{center}
+      if \( \vec{v}\in V \) and \( r\in\Re \) then
+      \( h(r\cdot\vec{v})=r\cdot h(\vec{v}) \)
+\end{center}
+is a \definend{homomorphism}\index{homomorphism}%
+\index{function!structure preserving!see{homomorphism}}%
+\index{vector space!homomorphism}\index{vector space!map}
+or \definend{linear map}\index{linear map!see{homomorphism}}.
+\end{definition}
+
+\begin{example}    \label{ex:RThreeHomoRTwoFirst}
+The projection\index{projection}
+map \( \map{\pi}{\Re^3}{\Re^2} \)
+\begin{equation*}
+   \colvec{x \\ y \\ z}
+    \mapsunder{\pi}
+   \colvec{x \\ y}
+\end{equation*}
+is a homomorphism.
+%The check is familiar from the prior section.
+It preserves addition
+\begin{equation*}
+  \pi(\colvec{x_1 \\ y_1 \\ z_1}\!+\!\colvec{x_2 \\ y_2 \\ z_2})
+  =
+  \pi(\colvec{x_1+x_2 \\ y_1+y_2 \\ z_1+z_2})
+  =
+  \colvec{x_1+x_2 \\ y_1+y_2}
+  =
+  \pi(\colvec{x_1 \\ y_1 \\ z_1})
+  +
+  \pi(\colvec{x_2 \\ y_2 \\ z_2})
+\end{equation*}
+and scalar multiplication.
+\begin{equation*}
+  \pi(r\cdot\colvec{x_1 \\ y_1 \\ z_1})
+  =
+  \pi(\colvec{rx_1 \\ ry_1 \\ rz_1})
+  =
+  \colvec{rx_1 \\ ry_1}
+  =
+  r\cdot\pi(\colvec{x_1 \\ y_1 \\ z_1})
+\end{equation*}
+This map is not an isomorphism since it is not one-to-one. 
+For instance, both $\zero$ and $\vec{e}_3$ in $\Re^3$ are mapped to
+the zero vector in $\Re^2$.
+\end{example}
+
+\begin{example} \label{exam:TwoMapsHomoNotIso}
+Of course, the domain and codomain 
+might be other than spaces of column vectors.
+Both of these are homomorphisms;
+the verifications are straightforward.
+\begin{enumerate}
+  \item \( \map{f_1}{\polyspace_2}{\polyspace_3} \) given by
+    \begin{equation*}
+      a_0+a_1x+a_2x^2 \;\mapsto\; a_0x+(a_1/2)x^2+(a_2/3)x^3 
+    \end{equation*}
+  \item \( \map{f_2}{M_{\nbyn{2}}}{\Re} \) given by
+    \begin{equation*}
+      \begin{pmatrix}
+        a  &b  \\
+        c  &d
+      \end{pmatrix}
+        \mapsto
+      a+d
+    \end{equation*}
+\end{enumerate}
+\end{example}
+
+\begin{example}
+Between any two spaces there is a \definend{zero homomorphism},%
+\index{zero homomorphism}\index{homomorphism!zero}\index{function!zero}
+mapping every vector in the domain to the zero vector in the codomain.
+\end{example}
+
+\begin{example}
+These two suggest why we use the term `linear map'.
+\begin{enumerate}
+  \item The map \( \map{g}{\Re^3}{\Re} \) given by
+    \begin{equation*}
+      \colvec{x \\ y \\ z}
+        \mapsunder{g}
+      3x+2y-4.5z
+    \end{equation*}
+    is linear (i.e., is a homomorphism).
+    In contrast, the map \( \map{\hat{g}}{\Re^3}{\Re} \) given by
+    \begin{equation*}
+      \colvec{x \\ y \\ z}
+        \mapsunder{\hat{g}}
+      3x+2y-4.5z+1
+    \end{equation*}
+    is not;~for instance,
+    \begin{equation*}
+      \hat{g}(\colvec{0 \\ 0 \\ 0}+\colvec{1 \\ 0 \\ 0})=4
+      \quad\text{while}\quad
+      \hat{g}(\colvec{0 \\ 0 \\ 0})
+      +\hat{g}(\colvec{1 \\ 0 \\ 0})=5
+    \end{equation*}
+    (to show that a map is not linear we need only produce one example of
+    a linear combination that is not preserved).
+  \item The first of these two maps 
+    \( \map{t_1,t_2}{\Re^3}{\Re^2} \)
+    is linear while the second is not.
+    \begin{equation*}
+      \colvec{x \\ y \\ z}
+        \mapsunder{t_1}
+      \colvec{5x-2y \\ x+y}
+      \quad\text{and}\quad
+      \colvec{x \\ y \\ z}
+        \mapsunder{t_2}
+      \colvec{5x-2y \\ xy}
+    \end{equation*} 
+    Finding an example that the second fails to preserve structure is easy.
+\end{enumerate}
+What distinguishes the homomorphisms is that the
+coordinate functions are linear combinations of the arguments.
+See also \nearbyexercise{exer:GrpahNotALine}.
+\end{example}
+
+Obviously, any isomorphism is a
+homomorphism\Dash an isomorphism is a 
+homomorphism that is also a correspondence.
+So, one way to think of the `homomorphism' idea 
+is that it is a generalization of `isomorphism',
+motivated by the observation that many of the properties of
+isomorphisms have only to do with the map's structure preservation property
+and not to do with it being a correspondence.
+As examples, these two results from the prior section
+do not use one-to-one-ness or onto-ness in their proof, 
+and therefore apply to any homomorphism.
+
+\begin{lemma}       \label{le:HomoSendsZeroToZero}
+A homomorphism sends a zero vector to a zero vector.
+\end{lemma}
+
+\begin{lemma}  \label{le:HomoPreserveLinCombo}
+Each of these is a necessary and sufficient condition for
+\( \map{f}{V}{W} \) to be a homomorphism.
+\begin{enumerate}
+  \item 
+      $f(c_1\cdot\vec{v}_1+c_2\cdot\vec{v}_2)
+      =c_1\cdot f(\vec{v}_1)+c_2\cdot f(\vec{v}_2)$
+      for any \( c_1,c_2\in\Re \) and \( \vec{v}_1,\vec{v}_2\in V \)
+  \item
+    $f(c_1\cdot\vec{v}_1+\dots+c_n\cdot\vec{v}_n)
+    =c_1\cdot f(\vec{v}_1)+\dots+c_n\cdot f(\vec{v}_n)$ 
+    for any \( c_1,\dots,c_n\in\Re \) and
+    \( \vec{v}_1,\ldots,\vec{v}_n\in V \)
+\end{enumerate}
+\end{lemma}
+Part~(1) is often used to check that 
+a function is linear.
+
+\begin{example}
+The map \( \map{f}{\Re^2}{\Re^4} \) given by
+\begin{equation*}
+  \colvec{x \\ y}
+    \mapsunder{f}
+  \colvec{x/2 \\ 0 \\ x+y \\ 3y}
+\end{equation*}
+satisfies (1) of the prior result
+\begin{equation*}
+  \colvec{r_1(x_1/2)+r_2(x_2/2) \\ 0 \\ 
+                 r_1(x_1+y_1)+r_2(x_2+y_2) \\ r_1(3y_1)+r_2(3y_2)}
+   =
+  r_1\colvec{x_1/2 \\ 0 \\ x_1+y_1 \\ 3y_1}
+   +
+  r_2\colvec{x_2/2 \\ 0 \\ x_2+y_2 \\ 3y_2}
+\end{equation*}
+and so it is a homomorphism.
+\end{example}
+
+However,
+some of the results that we have seen for isomorphisms fail to hold for
+homomorphisms in general.
+Consider the theorem that 
+an isomorphism between spaces gives a correspondence between their
+bases.
+Homomorphisms do not give any such correspondence;
+\nearbyexample{ex:RThreeHomoRTwoFirst} shows that there 
+is no such correspondence, and another example is 
+the zero map between any two nontrivial spaces. 
+Instead, for homomorphisms a weaker but still very useful result holds.
+
+\begin{theorem}
+\label{th:HomoDetActOnBasis}
+A homomorphism is determined by its action on a basis.
+That is, if
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+is a basis of a vector space \( V \) and
+\( \vec{w}_1,\dots,\vec{w}_n \) are (perhaps not distinct) elements of
+a vector space \( W \) then
+there exists a homomorphism from \( V \) to \( W \) sending
+\( \vec{\beta}_1 \) to \( \vec{w}_1 \), \ldots, and
+\( \vec{\beta}_n \) to \( \vec{w}_n \), and that homomorphism is unique.
+\end{theorem}
+
+\begin{proof}
+We will define the map by 
+associating $\vec{\beta}_1$ with $\vec{w}_1$, etc.,
+and then extending linearly to all of the domain.
+That is, where 
+\( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \), the map
+\( \map{h}{V}{W} \) is given by 
+$h(\vec{v})=c_1\vec{w}_1+\dots+c_n\vec{w}_n$.
+This is well-defined because, with respect to the basis,
+the representation of each domain vector \( \vec{v} \) is unique.
+
+This map is a homomorphism since it preserves linear combinations;
+where \( \vec{v_1}=c_1\vec{\beta}_1+\cdots+c_n\vec{\beta}_n \) and
+\( \vec{v_2}=d_1\vec{\beta}_1+\cdots+d_n\vec{\beta}_n \),
+we have this.
+\begin{align*}
+  h(r_1\vec{v}_1+r_2\vec{v}_2)
+  &=h((r_1c_1+r_2d_1)\vec{\beta}_1+\dots+(r_1c_n+r_2d_n)\vec{\beta}_n)  \\
+  &=(r_1c_1+r_2d_1)\vec{w}_1+\dots+(r_1c_n+r_2d_n)\vec{w}_n   \\
+  &=r_1h(\vec{v}_1)+r_2h(\vec{v}_2)
+\end{align*}
+
+And, this map is unique since if \( \map{\hat{h}}{V}{W} \) 
+is another homomorphism such that \( \hat{h}(\vec{\beta}_i)=\vec{w}_i \) 
+for each \( i \)
+then \( h \) and \( \hat{h} \) agree on all of the vectors in the domain. 
+\begin{align*}
+  \hat{h}(\vec{v})
+  &=\hat{h}(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)  \\
+  &=c_1\hat{h}(\vec{\beta}_1)+\dots+c_n\hat{h}(\vec{\beta}_n)  \\
+  &=c_1\vec{w}_1+\dots+c_n\vec{w}_n  \\
+  &=h(\vec{v})
+\end{align*}
+Thus, $h$ and $\hat{h}$ are the same map.
+\end{proof}
+
+\begin{example}
+This result says that we can construct a homomorphism 
+by fixing a basis for the 
+domain and specifying where the map sends those basis vectors.
+For instance, if we specify a map \( \map{h}{\Re^2}{\Re^2} \)
+that acts on the standard basis $\stdbasis_2$ in this way 
+\begin{equation*}
+  h(\colvec{1 \\ 0})=\colvec{-1 \\ 1}
+  \quad\text{and}\quad
+  h(\colvec{0 \\ 1})=\colvec{-4 \\ 4}
+\end{equation*}
+then the action of $h$ on any other member of the domain is also
+specified.
+For instance,
+the value of $h$ on this argument
+\begin{equation*}
+  h(\colvec{3 \\ -2})=h(3\cdot \colvec{1 \\ 0}-2\cdot \colvec{0 \\ 1})
+                      =3\cdot h(\colvec{1 \\ 0})-2\cdot h(\colvec{0 \\ 1})
+                      =\colvec{5 \\ -5}
+\end{equation*}
+is a direct consequence of the value of $h$ on the basis vectors.
+
+Later in this chapter we shall develop a scheme, using matrices,
+that is convienent for computations like this one.
+\end{example}
+
+Just as the isomorphisms of a space with itself are useful and interesting, 
+so too are the homomorphisms of a space with itself.
+
+\begin{definition}
+A linear map from a space into itself \( \map{t}{V}{V} \) is a
+{\em linear transformation}\index{linear transformation!see{transformation}}.
+\end{definition}
+
+\begin{remark}
+In this book we use `linear transformation' only in the case where 
+the codomain equals the domain, but it is widely used in other texts as a
+general synonym for `homomorphism'.
+\end{remark}
+
+\begin{example}
+The map on $\Re^2$ that projects all vectors down to the $x$-axis
+\begin{equation*}
+  \colvec{x \\ y}\mapsto\colvec{x \\ 0}
+\end{equation*}
+is a linear transformation.
+\end{example}
+
+\begin{example}
+The derivative map \( \map{d/dx}{\polyspace_n}{\polyspace_n} \)
+\begin{equation*}
+  a_0+a_1x+\cdots+a_nx^n
+    \mapsunder{d/dx}
+  a_1+2a_2x+3a_3x^2+\cdots+na_nx^{n-1}
+\end{equation*}
+is a linear transformation, as this result from calculus notes:
+\( d(c_1f+c_2g)/dx=c_1\,(df/dx)+c_2\,(dg/dx) \).
+\end{example}
+
+\begin{example} \label{ex:MatTransMapLinear}
+The matrix transpose map 
+\begin{equation*}
+  \begin{pmatrix}
+    a  &b  \\
+    c  &d
+  \end{pmatrix}
+  \;\mapsto\;
+  \begin{pmatrix}
+    a  &c  \\
+    b  &d
+  \end{pmatrix}
+\end{equation*}
+is a linear transformation of \( \matspace_{\nbyn{2}} \).
+Note that this transformation is one-to-one and onto, and so in fact it is 
+an automorphism.
+\end{example}
+
+We finish this subsection about maps by recalling that
+we can linearly combine maps.
+For instance, for these maps from \( \Re^2 \) to itself
+\begin{equation*}
+  \colvec{x \\ y}
+   \mapsunder{f}
+  \colvec{2x \\ 3x-2y}
+  \quad\text{and}\quad
+  \colvec{x \\ y}
+   \mapsunder{g}
+  \colvec{0 \\ 5x}
+\end{equation*}
+the linear combination \( 5f-2g \) is also a map from 
+$R^2$ to itself.
+\begin{equation*}
+  \colvec{x \\ y}
+   \mapsunder{5f-2g}
+  \colvec{10x \\ 5x-10y}
+\end{equation*}
+
+\begin{lemma} \label{le:SpLinFcns}
+For vector spaces \( V \) and \( W \),
+the set of linear functions from \( V \) to
+\( W \) is itself a vector space, a subspace of the space of all functions
+from \( V \) to \( W \).
+It is denoted \( \linmaps{V}{W} \).
+\end{lemma}
+
+\begin{proof}
+This set is non-empty because it contains the zero homomorphism.
+So to show that it is a subspace we need only check that it is 
+closed under linear combinations.
+Let \( \map{f,g}{V}{W} \) be linear. 
+Then their sum is linear
+\begin{align*}
+   (f+g)(c_1\vec{v}_1+c_2\vec{v}_2)
+   &=f(c_1\vec{v}_1+c_2\vec{v}_2) + 
+   g(c_1\vec{v}_1+c_2\vec{v}_2)       \\
+   &=c_1f(\vec{v}_1)+c_2f(\vec{v}_2)
+   +c_1g(\vec{v}_1)+c_2g(\vec{v}_2)   \\
+   &=c_1\bigl(f+g\bigr)(\vec{v}_1)+c_2\bigl(f+g\bigr)(\vec{v}_2)
+\end{align*}
+and any scalar multiple is also linear.
+\begin{align*}
+   (r\cdot f)(c_1\vec{v}_1+c_2\vec{v}_2)
+   &=r(c_1f(\vec{v}_1)+c_2f(\vec{v}_2))  \\
+   &=c_1(r\cdot f)(\vec{v}_1)+c_2(r\cdot f)(\vec{v}_2)
+\end{align*}
+Hence \( \linmaps{V}{W} \) is a subspace.
+\end{proof}
+
+We started this section by isolating the structure preservation property
+of isomorphisms.
+That is, we defined homomorphisms as a generalization of isomorphisms.
+Some of the properties that we studied for isomorphisms carried over unchanged,
+while others were adapted to this more general setting.
+
+It would be a mistake, though, to view this new notion of 
+homomorphism as derived from, or somehow secondary to,
+that of isomorphism.
+In the rest of this chapter we shall work mostly with homomorphisms,
+partly because any statement made about homomorphisms is automatically true 
+about isomorphisms, but more because, 
+while the isomorphism concept is perhaps more natural, 
+experience shows that the homomorphism concept 
+is actually more fruitful and more central to further progress.
+
+\begin{exercises}
+  \recommended \item
+    Decide if each \( \map{h}{\Re^3}{\Re^2} \) is linear.
+    \begin{exparts*}
+      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{x \\ x+y+z}  \)
+      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{0 \\ 0}  \)
+      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{1 \\ 1}  \)
+      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{2x+y \\ 3y-4z}  \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes.
+          The verification is straightforward.
+          \begin{align*}
+            h( c_1\cdot\colvec{x_1 \\ y_1 \\ z_1}
+               +c_2\cdot\colvec{x_2 \\ y_2 \\ z_2} )
+            &=h( \colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ c_1z_1+c_2z_2} ) \\
+            &=\colvec{c_1x_1+c_2x_2 \\ 
+                     c_1x_1+c_2x_2+c_1y_1+c_2y_2+c_1z_1+c_2z_2}          \\
+            &=c_1\cdot\colvec{x_1 \\ x_1+y_1+z_1}
+               +c_2\cdot\colvec{x_2 \\ c_2+y_2+z_2}                       \\  
+            &=c_1\cdot h(\colvec{x_1 \\ y_1 \\ z_1}) 
+               +c_2\cdot h(\colvec{x_2 \\ y_2 \\ z_2})
+          \end{align*}
+        \partsitem Yes.
+          The verification is easy.
+          \begin{align*}
+            h(c_1\cdot\colvec{x_1 \\ y_1 \\ z_1}
+              +c_2\cdot\colvec{x_2 \\ y_2 \\ z_2})
+            &=h( \colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ c_1z_1+c_2z_2} ) \\
+            &=\colvec{0 \\ 0}                                              \\
+            &=c_1\cdot h(\colvec{x_1 \\ y_1 \\ z_1}) 
+               +c_2\cdot h(\colvec{x_2 \\ y_2 \\ z_2})            
+          \end{align*}
+        \partsitem No.
+          An example of an addition that is not respected is this.
+          \begin{equation*}
+            h(\colvec{0 \\ 0 \\ 0}+\colvec{0 \\ 0 \\ 0})
+            =\colvec{1 \\ 1}
+            \neq h(\colvec{0 \\ 0 \\ 0})+h(\colvec{0 \\ 0 \\ 0})
+          \end{equation*}
+        \partsitem Yes.
+           The verification is straightforward.
+          \begin{align*}
+            h( c_1\cdot\colvec{x_1 \\ y_1 \\ z_1}
+               +c_2\cdot\colvec{x_2 \\ y_2 \\ z_2} )
+            &=h( \colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ c_1z_1+c_2z_2} ) \\
+            &=\colvec{2(c_1x_1+c_2x_2)+(c_1y_1+c_2y_2) \\ 
+                      3(c_1y_1+c_2y_2)-4(c_1z_1+c_2z_2)}          \\
+            &=c_1\cdot\colvec{2x_1+y_1 \\ 3y_1-4z_1}
+               +c_2\cdot\colvec{2x_2+y_2 \\ 3y_2-4z_2}            \\  
+            &=c_1\cdot h(\colvec{x_1 \\ y_1 \\ z_1}) 
+               +c_2\cdot h(\colvec{x_2 \\ y_2 \\ z_2})
+          \end{align*}
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Decide if each map \( \map{h}{\matspace_{\nbyn{2}}}{\Re} \) is linear.
+    \begin{exparts}
+      \partsitem \( h(\begin{pmatrix} a &b  \\ c &d \end{pmatrix})=a+d  \)
+      \partsitem \( h(\begin{pmatrix} a &b  \\ c &d \end{pmatrix})=ad-bc  \)
+      \partsitem \( h(\begin{pmatrix} a &b \\ c &d \end{pmatrix})=2a+3b+c-d  \)
+      \partsitem \( h(\begin{pmatrix} a &b  \\ c &d \end{pmatrix})=a^2+b^2  \)
+    \end{exparts}
+    \begin{answer} 
+      For each, we must either check that linear combinations
+      are preserved, or give an example of a linear combination that is 
+      not.
+      \begin{exparts*}
+        \partsitem Yes.
+           The check that it preserves combinations is routine.
+           \begin{align*}
+             h(r_1\cdot\begin{pmatrix}
+                 a_1  &b_1  \\
+                 c_1  &d_1
+               \end{pmatrix}
+              +r_2\cdot\begin{pmatrix}
+                 a_2  &b_2  \\
+                 c_2  &d_2
+               \end{pmatrix})
+              &=h(\begin{pmatrix}
+                 r_1a_1+r_2a_2  &r_1b_1+r_2b_2  \\
+                 r_1c_1+r_2c_2  &r_1d_1+r_2d_2
+               \end{pmatrix})                    \\
+              &=(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)    \\
+              &=r_1(a_1+d_1)+r_2(a_2+d_2)          \\
+              &=r_1\cdot h(\begin{pmatrix}
+                             a_1  &b_1  \\
+                             c_1  &d_1
+                            \end{pmatrix})
+                +r_2\cdot h(\begin{pmatrix}
+                             a_2  &b_2  \\
+                             c_2  &d_2
+                            \end{pmatrix})
+           \end{align*}
+        \partsitem No.
+          For instance, not preserved is multiplication by the scalar $2$.
+          \begin{equation*}
+            h(2\cdot\begin{pmatrix}
+                1  &0  \\
+                0  &1  
+              \end{pmatrix})
+            =h(\begin{pmatrix}
+                2  &0  \\
+                0  &2  
+              \end{pmatrix})
+            =4
+            \quad\text{while}\quad
+            2\cdot h(\begin{pmatrix}
+                1  &0  \\
+                0  &1  
+              \end{pmatrix})
+            =2\cdot 1=2
+          \end{equation*}
+        \partsitem Yes.
+           This is the check that it preserves combinations of two members of
+           the domain.
+           \begin{align*}
+             h(r_1\cdot\begin{pmatrix} a_1 &b_1 \\ c_1 &d_1 \end{pmatrix}
+               +r_2\cdot\begin{pmatrix} a_2 &b_2 \\ c_2 &d_2 \end{pmatrix})
+             &=h(\begin{pmatrix} 
+                   r_1a_1+r_2a_2 &r_1b_1+r_2b_2   \\ 
+                   r_1c_1+r_2c_2 &r_1d_1+r_2d_2 
+                 \end{pmatrix})                                 \\
+             &=2(r_1a_1+r_2a_2)+3(r_1b_1+r_2b_2)
+                    +(r_1c_1+r_2c_2)-(r_1d_1+r_2d_2)              \\
+             &=r_1(2a_1+3b_1+c_1-d_1)
+               +r_2(2a_2+3b_2+c_2-d_2)              \\
+             &=r_1\cdot h(\begin{pmatrix} a_1 &b_1 \\ c_1 &d_1 \end{pmatrix}
+               +r_2\cdot h(\begin{pmatrix} a_2 &b_2 \\ c_2 &d_2 \end{pmatrix})
+           \end{align*}
+        \partsitem No.
+          An example of a combination that is not preserved is this.
+          \begin{equation*}
+            h(\begin{pmatrix}
+              1  &0  \\
+              0  &0
+            \end{pmatrix}
+            +\begin{pmatrix}
+              1  &0  \\
+              0  &0
+            \end{pmatrix})
+           =h(\begin{pmatrix}
+              2  &0  \\
+              0  &0
+            \end{pmatrix})
+           =4
+           \quad\text{while}\quad
+            h(\begin{pmatrix}
+              1  &0  \\
+              0  &0
+            \end{pmatrix})
+            +h(\begin{pmatrix}
+              1  &0  \\
+              0  &0
+            \end{pmatrix})
+            =1+1
+            =2
+          \end{equation*}
+      \end{exparts*}   
+    \end{answer}
+  \recommended \item
+    Show that these two maps are homomorphisms.
+    \begin{exparts}
+      \partsitem \( \map{d/dx}{\polyspace_3}{\polyspace_2} \)
+        given by \( a_0+a_1x+a_2x^2+a_3x^3 \) maps to
+        \( a_1+2a_2x+3a_3x^2 \)
+      \partsitem \( \map{\int}{\polyspace_2}{\polyspace_3} \) given by
+        \( b_0+b_1x+b_2x^2 \) maps to \( b_0x+(b_1/2)x^2+(b_2/3)x^3 \)
+    \end{exparts}
+    Are these maps inverse to each other?
+    \begin{answer}
+      The check that each is a homomorphisms is routine.
+      Here is the check for the differentiation map.
+      \begin{multline*}
+        \frac{d}{dx}(r\cdot (a_0+a_1x+a_2x^2+a_3x^3)
+                    +s\cdot (b_0+b_1x+b_2x^2+b_3x^3))                 \\
+        \begin{aligned}
+           &=\frac{d}{dx}((ra_0+sb_0)+(ra_1+sb_1)x+(ra_2+sb_2)x^2
+                                                    +(ra_3+sb_3)x^3)  \\
+           &=(ra_1+sb_1)+2(ra_2+sb_2)x+3(ra_3+sb_3)x^2         \\
+           &=r\cdot (a_1+2a_2x+3a_3x^2)+s\cdot (b_1+2b_2x+3b_3x^2)         \\
+           &=r\cdot \frac{d}{dx}(a_0+a_1x+a_2x^2+a_3x^3)
+                    +s\cdot \frac{d}{dx} (b_0+b_1x+b_2x^2+b_3x^3)
+        \end{aligned}
+      \end{multline*}
+      (An alternate proof is to simply note that this is a 
+      property of differentiation that is familar from calculus.)
+
+      These two maps are not inverses as this composition 
+      does not act as the identity map on 
+      this element of the domain.
+      \begin{equation*}
+        1\in\polyspace_3\;\mapsunder{d/dx}\;
+        0\in\polyspace_2\;\mapsunder{\int}\;
+        0\in\polyspace_3
+      \end{equation*}   
+     \end{answer}
+  \item  
+    Is (perpendicular) projection from \( \Re^3 \) to the \( xz \)-plane
+    a homomorphism?
+    Projection to the \( yz \)-plane?
+    To the \( x \)-axis?
+    The \( y \)-axis?
+    The \( z \)-axis?
+    Projection to the origin?
+    \begin{answer}
+      Each of these projections is a homomorphism.
+      Projection to the $xz$-plane and to the $yz$-plane are these maps.
+      \begin{equation*}
+         \colvec{x \\ y \\ z}\mapsto\colvec{x \\ 0 \\ z}
+           \qquad
+         \colvec{x \\ y \\ z}\mapsto\colvec{0 \\ y \\ z}
+      \end{equation*}
+      Projection to the $x$-axis, to the $y$-axis, and to the $z$-axis are
+      these maps. 
+      \begin{equation*}
+         \colvec{x \\ y \\ z}\mapsto\colvec{x \\ 0 \\ 0}
+           \qquad
+         \colvec{x \\ y \\ z}\mapsto\colvec{0 \\ y \\ 0}
+           \qquad
+         \colvec{x \\ y \\ z}\mapsto\colvec{0 \\ 0 \\ z}
+      \end{equation*}
+      And projection to the origin is this map.
+      \begin{equation*}
+         \colvec{x \\ y \\ z}\mapsto\colvec{0 \\ 0 \\ 0}
+      \end{equation*}
+      Verification that each is a homomorphism is straightforward.
+      (The last one, of course, is the zero transformation on $\Re^3$.)  
+     \end{answer}
+  \item 
+    Show that, while the maps from \nearbyexample{exam:TwoMapsHomoNotIso}
+    preserve linear operations, they are not isomorphisms.
+    \begin{answer}
+      The first is not onto; for instance, there is no polynomial that is
+      sent the constant polynomial $p(x)=1$.
+      The second is not  one-to-one; both of these members of the domain
+      \begin{equation*}
+        \begin{pmatrix}
+          1  &0  \\
+          0  &0  
+        \end{pmatrix}
+        \quad\text{and}\quad
+        \begin{pmatrix}
+          0  &0  \\
+          0  &1  
+        \end{pmatrix}
+      \end{equation*}
+      are mapped to the same member of the codomain, $1\in\Re$.
+     \end{answer}
+  \item 
+    Is an identity map a linear transformation?
+    \begin{answer}
+      Yes;~in any space \( \text{id}(c\cdot \vec{v}+d\cdot \vec{w})
+      = c\cdot \vec{v}+d\cdot \vec{w}
+      = c\cdot\text{id}(\vec{v})+d\cdot\text{id}(\vec{w}) \).
+    \end{answer}
+  \recommended \item \label{exer:GrpahNotALine}
+    Stating that a function is `linear' is different than 
+    stating that its graph is a line.
+    \begin{exparts}
+      \partsitem The function \( \map{f_1}{\Re}{\Re} \) given by 
+        \( f_1(x)=2x-1 \) has a graph that is a line.
+        Show that it is not a linear function.
+      \partsitem The function \( \map{f_2}{\Re^2}{\Re} \) given by
+        \begin{equation*}
+          \colvec{x \\ y} \mapsto x+2y
+        \end{equation*}
+        does not have a graph that is a line.
+        Show that it is a linear function.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem This map does not preserve structure since
+           \( f(1+1)=3 \), while \( f(1)+f(1)=2 \).
+         \partsitem The check is routine.
+           \begin{align*}
+             f(r_1\cdot\colvec{x_1 \\ y_1}+r_2\cdot\colvec{x_2 \\ y_2})
+             &=f(\colvec{r_1x_1+r_2x_2 \\ r_1y_1+r_2y_2})               \\
+             &=(r_1x_1+r_2x_2)+2(r_1y_1+r_2y_2)                          \\
+             &=r_1\cdot (x_1+2y_1)+r_2\cdot (x_2+2y_2)                   \\
+             &=r_1\cdot f(\colvec{x_1 \\ y_1})+r_2\cdot f(\colvec{x_2 \\ y_2})
+           \end{align*}
+      \end{exparts}   
+     \end{answer}
+  \recommended \item 
+    Part of the definition of a linear function is that it respects
+    addition. 
+    Does a linear function respect subtraction?
+    \begin{answer}
+      Yes.
+      Where \( \map{h}{V}{W} \) is linear,
+      \( h(\vec{u}-\vec{v})
+         =h(\vec{u}+(-1)\cdot\vec{v})
+         =h(\vec{u})+(-1)\cdot h(\vec{v})
+         =h(\vec{u})-h(\vec{v}) \).
+    \end{answer}
+  \item 
+    Assume that \( h \) is a linear transformation of \( V \) and that
+    \( \sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n} \) is a basis of \( V \).
+    Prove each statement.
+    \begin{exparts}
+      \partsitem If \( h(\vec{\beta}_i)=\zero \) for each basis vector
+        then \( h \) is the zero map.
+      \partsitem If \( h(\vec{\beta}_i)=\vec{\beta}_i \) for each basis
+        vector then \( h \) is the identity map.
+      \partsitem If there is a scalar \( r \) such that
+        \( h(\vec{\beta}_i)=r\cdot\vec{\beta}_i \) for each
+        basis vector then \( h(\vec{v})=r\cdot\vec{v} \) for all vectors
+        in $V$.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+       \partsitem Let \( \vec{v}\in V \) be represented with respect to the 
+         basis as \( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \).
+         Then \( h(\vec{v})=h(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+                  =c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)
+                  =c_1\cdot\zero+\dots+c_n\cdot\zero
+                  =\zero \).
+       \partsitem This argument is similar to the prior one.
+         Let \( \vec{v}\in V \) be represented with respect to the 
+         basis as \( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \).
+         Then \( h(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+            =c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)
+            =c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n
+            =\vec{v} \).
+       \partsitem As above, only 
+         \( c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)
+            =c_1r\vec{\beta}_1+\dots+c_nr\vec{\beta}_n
+            =r(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+            =r\vec{v} \).
+      \end{exparts}  
+     \end{answer}
+  \recommended \item
+    Consider the vector space \( \Re^+ \) where vector addition
+    and scalar multiplication are not the ones inherited from $\Re$
+    but rather are these:
+    \( a+b \) is the product of \( a \) and \( b \), and \( r\cdot a \) is the
+    \( r \)-th power of \( a \).
+    (This was shown to be a vector space in an earlier exercise.)
+    Verify that the natural logarithm map \( \map{\ln}{\Re^+}{\Re} \) 
+    is a homomorphism between these two spaces.
+    Is it an isomorphism?
+    \begin{answer}
+      That it is a homomorphism follows from the familiar rules that
+      the logarithm of a product is the sum of the logarithms
+      $\ln(ab)=\ln(a)+\ln(b)$ 
+      and that the logarithm of a power is the multiple of the logarithm
+      $\ln(a^r)=r\ln(a)$.
+      This map is an isomorphism because it has an inverse, namely, 
+      the exponential map, so it is a correspondence,
+      and therefore it is an isomorphism.  
+     \end{answer}
+  \recommended \item 
+     Consider this transformation of \( \Re^2 \).
+     \begin{equation*}
+       \colvec{x \\ y} \mapsto \colvec{x/2 \\ y/3}
+     \end{equation*}
+     Find the image under this map of this ellipse.
+     \begin{equation*}
+       \set{\colvec{x \\ y} \suchthat (x^2/4)+(y^2/9)=1}
+     \end{equation*}
+     \begin{answer}
+       Where \( \hat{x}=x/2 \) and \( \hat{y}=y/3 \),
+       the image set is
+       \begin{equation*}
+         \set{\colvec{\hat{x} \\ \hat{y}} \suchthat
+           \frac{\displaystyle (2\hat{x})^2}{\displaystyle 4}
+           +\frac{\displaystyle (3\hat{y})^2}{\displaystyle 9}=1}
+         =\set{\colvec{\hat{x} \\ \hat{y}} \suchthat
+            \hat{x}^2+\hat{y}^2=1}
+       \end{equation*}
+       the unit circle in the \( \hat{x}\hat{y} \)-plane.
+     \end{answer}
+  \recommended \item
+    Imagine a rope wound around the earth's equator so that it fits snugly
+    (suppose that the earth is a sphere).
+    How much extra rope must be added to raise the circle to a constant
+    six feet off the ground?
+    \begin{answer}
+      The circumference function $r\mapsto 2\pi r$ is linear.  
+      Thus we have
+      $2\pi\cdot (r_{\text{earth}}+6)-
+         2\pi\cdot (r_{\text{earth}})=12\pi$.
+      Observe that
+      it takes the same amount of extra rope to raise the circle from tightly 
+      wound around a basketball to six feet above that basketball as it does
+      to raise it from tightly wound around the earth to six feet above the
+      earth.
+     \end{answer}
+  \recommended \item 
+    Verify that this map \( \map{h}{\Re^3}{\Re} \)
+    \begin{equation*}
+      \colvec{x \\ y \\ z}\;\mapsto\;
+      \colvec{x \\ y \\ z}\dotprod\colvec{3 \\ -1 \\ -1}=3x-y-z
+    \end{equation*}
+    is linear.
+    Generalize.
+    \begin{answer}
+      Verifying that it is linear is routine.
+      \begin{align*}
+        h(c_1\cdot \colvec{x_1 \\ y_1 \\ z_1}
+          +c_2\cdot \colvec{x_2 \\ y_2 \\ z_2})
+        &=h(\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ c_1z_1+c_2z_2})   \\
+        &=3(c_1x_1+c_2x_2)-(c_1y_1+c_2y_2)-(c_1z_1+c_2z_2)             \\
+        &=c_1\cdot (3x_1-y_1-z_1)+c_2\cdot (3x_2-y_2-z_2)             \\
+        &=c_1\cdot h(\colvec{x_1 \\ y_1 \\ z_1})
+          +c_2\cdot h(\colvec{x_2 \\ y_2 \\ z_2})
+      \end{align*}
+      The natural guess at a generalization 
+      is that for any fixed \( \vec{k}\in\Re^3 \)
+      the map \( \vec{v}\mapsto\vec{v}\dotprod\vec{k} \) is linear.
+      This statement is true.
+      It follows from properties of the dot product we have seen earlier:
+      \( (\vec{v}+\vec{u})\dotprod\vec{k}=\vec{v}\dotprod\vec{k}+
+         \vec{u}\dotprod\vec{k} \)
+      and \( (r\vec{v})\dotprod\vec{k}=r(\vec{v}\dotprod\vec{k}) \).
+      (The natural guess at a generalization of this generalization, 
+      that the map from \( \Re^n \)
+      to \( \Re \) whose action consists of taking the dot product of its
+      argument with a  fixed vector \( \vec{k}\in\Re^n \) is linear, 
+      is also true.) 
+    \end{answer}
+  \item \label{exer:HomoRONeMultByScalar}
+    Show that every homomorphism from \( \Re^1 \) to \( \Re^1 \) 
+    acts via multiplication by a scalar.
+    Conclude that every nontrivial linear transformation of \( \Re^1 \) is an
+    isomorphism.
+    Is that true for transformations of \( \Re^2 \)?
+    \( \Re^n \)?
+    \begin{answer}
+      Let \( \map{h}{\Re^1}{\Re^1} \) be linear.
+      A linear map is determined by its action on a basis, so fix the basis
+      \( \sequence{1} \)  for \( \Re^1 \).
+      For any \( r\in\Re^1 \) we have that \( h(r)=h(r\cdot 1)=r\cdot h(1) \)
+      and so \( h \) acts on any argument $r$ 
+      by multiplying it by the constant \( h(1) \).
+      If \( h(1) \) is not zero then the map is a correspondence\Dash its 
+      inverse is division by \( h(1) \)\Dash so any nontrivial transformation 
+      of $\Re^1$ is an isomorphism.
+
+      This projection map is an example that shows that not every
+      transformation of \( \Re^n \) acts via multiplication by a constant
+      when \( n>1 \), including when $n=2$.
+      \begin{equation*}
+        \colvec{x_1 \\ x_2 \\ \vdots \\ x_n}
+          \mapsto\colvec{x_1 \\ 0 \\ \vdots \\ 0}
+      \end{equation*}  
+    \end{answer}
+  \item 
+    %(This will be used in \nearbyexercise{exer:Cosets} below.)
+    \begin{exparts}
+      \partsitem Show that for any scalars \( a_{1,1},\dots, a_{m,n}  \) 
+        this map
+        \( \map{h}{\Re^n}{\Re^m} \) is a homomorphism.
+        \begin{equation*}
+          \colvec{x_1 \\ \vdots \\ x_n}
+            \mapsto
+          \colvec{a_{1,1}x_1+\dots+a_{1,n}x_n \\ 
+                       \vdots \\
+                       a_{m,1}x_1+\cdots+a_{m,n}x_n}
+        \end{equation*}
+      \partsitem   Show that for each $i$, the \( i \)-th derivative operator 
+        $d^i/dx^i$ is a linear transformation of \( \polyspace_n \).
+        Conclude that for any scalars \( c_k,\ldots, c_0 \) this map
+        is a linear transformation of that space.
+        \begin{equation*}
+          f\mapsto
+          \frac{d^k}{dx^k}f+c_{k-1}\frac{d^{k-1}}{dx^{k-1}}f
+             +\dots+
+          c_1\frac{d}{dx}f+c_0f
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Where \( c \) and \( d \) are scalars,
+          we have this.
+          \begin{align*}
+            h(c\cdot \colvec{x_1 \\ \vdots \\ x_n} 
+              +d\cdot \colvec{y_1 \\ \vdots \\ y_n})
+            &=h(\colvec{cx_1+dy_1 \\ \vdots \\ cx_n+dy_n})        \\
+            &=\colvec{a_{1,1}(cx_1+dy_1)+\dots+a_{1,n}(cx_n+dy_n) \\
+                         \vdots                                   \\
+                         a_{m,1}(cx_1+dy_1)+\dots+a_{m,n}(cx_n+dy_n)} \\
+            &=c\cdot\colvec{a_{1,1}x_1+\dots+a_{1,n}x_n \\ 
+                         \vdots                     \\ 
+                         a_{m,1}x_1+\dots+a_{m,n}x_n}
+            +d\cdot\colvec{a_{1,1}y_1+\dots+a_{1,n}y_n \\ 
+                         \vdots \\ 
+                         a_{m,1}y_1+\dots+a_{m,n}y_n} \\
+            &=c\cdot h(\colvec{x_1 \\ \vdots \\ x_n})
+              +d\cdot h(\colvec{y_1 \\ \vdots \\ y_n})
+          \end{align*}
+        \partsitem Each power $i$ of the derivative operator is linear 
+          because of these rules familiar from calculus.
+          \begin{equation*}
+            \frac{d^i}{dx^i}(\,f(x)+g(x)\,)=\frac{d^i}{dx^i}f(x)
+                                         +\frac{d^i}{dx^i}g(x)
+            \quad\text{and}\quad
+            \frac{d^i}{dx^i}\,r\cdot f(x)=r\cdot\frac{d^i}{dx^i}f(x)
+          \end{equation*}
+          Thus the given map is a linear transformation of \( \polyspace_n \)
+          because any linear combination of linear maps is also a linear map.
+      \end{exparts}  
+     \end{answer}
+  \item 
+    \nearbylemma{le:SpLinFcns} shows that a sum of linear functions is
+    linear and that a scalar multiple of a linear function is linear.
+    Show also that a composition of linear functions is linear.
+    \begin{answer}
+      (This argument has already appeared, as part of the proof that
+      isomorphism is an equivalence.)
+      Let $\map{f}{U}{V}$ and $\map{g}{V}{W}$ be linear.
+      For any $\vec{u}_1,\vec{u}_2\in U$ and scalars $c_1,c_2$ combinations 
+      are preserved.
+      \begin{multline*}
+        \composed{g}{f}(c_1\vec{u}_1+c_2\vec{u}_2)
+        =g(\,f(c_1\vec{u}_1+c_2\vec{u}_2)\,)          
+        =g(\,c_1f(\vec{u}_1)+c_2f(\vec{u}_2)\,)              \\          
+        =c_1\cdot g(f(\vec{u}_1))+c_2\cdot g(f(\vec{u}_2))          
+        =c_1\cdot \composed{g}{f}(\vec{u}_1)
+           +c_2\cdot \composed{g}{f}(\vec{u}_2)          
+      \end{multline*}
+    \end{answer}
+  \recommended \item
+    Where \( \map{f}{V}{W} \) is linear, suppose that
+    \( f(\vec{v}_1)=\vec{w}_1 \), \ldots, \( f(\vec{v}_n)=\vec{w}_n \)
+    for some vectors \( \vec{w}_1 \), \ldots, \( \vec{w}_n \) from \( W \).
+    \begin{exparts}
+      \partsitem If the set of \( \vec{w}\, \)'s is independent, must
+        the set of \( \vec{v}\, \)'s also be independent?
+      \partsitem If the set of \( \vec{v}\, \)'s is 
+        independent, must the
+        set of \( \vec{w}\, \)'s also be independent?
+      \partsitem If the set of \( \vec{w}\, \)'s spans \( W \), must the set of
+        \( \vec{v}\, \)'s span \( V \)?
+      \partsitem If the set of \( \vec{v}\, \)'s spans \( V \), must the set of
+        \( \vec{w}\, \)'s span \( W \)?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes.
+          The set of $\vec{w}\,$'s cannot be linearly independent if the
+          set of $\vec{v}\,$'s is linearly dependent because
+          any nontrivial relationship in the domain
+          \( \zero_V=c_1\vec{v}_1+\dots+c_n\vec{v}_n \)
+          would give a nontrivial relationship in the range
+          \( f(\zero_V)=\zero_W=f(c_1\vec{v}_1+\dots+c_n\vec{v}_n)
+             =c_1f(\vec{v}_1)+\dots+c_nf(\vec{v}_n)
+             =c_1\vec{w}+\dots+c_n\vec{w}_n \).
+        \partsitem Not necessarily.
+          For instance, the transformation of \( \Re^2 \) given by
+          \begin{equation*}
+            \colvec{x \\ y} \mapsto \colvec{x+y \\ x+y}
+          \end{equation*}
+          sends this linearly independent set in the domain 
+          to a linearly dependent image.
+          \begin{equation*}
+            \set{\vec{v}_1,\vec{v}_2}=\set{\colvec{1 \\ 0},\colvec{1 \\ 1}}
+            \;\mapsto\;
+            \set{\colvec{1 \\ 1},\colvec{2 \\ 2}}=\set{\vec{w}_1,\vec{w}_2}
+          \end{equation*}
+        \partsitem Not necessarily.
+          An example is the projection map 
+          \( \map{\pi}{\Re^3}{\Re^2} \)
+          \begin{equation*}
+            \colvec{x \\ y \\ z}\mapsto\colvec{x \\ y}
+          \end{equation*}
+          and this set that does not span the domain but 
+          maps to a set that does span the codomain.
+          \begin{equation*}
+            \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 1 \\ 0}}
+            \mapsunder{\pi}\set{\colvec{1 \\ 0},\colvec{0 \\ 1}}
+          \end{equation*}
+        \partsitem Not necessarily.
+          For instance, the injection map $\map{\iota}{\Re^2}{\Re^3}$ sends
+          the standard basis $\stdbasis_2$ for the domain to a set that 
+          does not span
+          the codomain. 
+          (\textit{Remark.}
+          However, the set of $\vec{w}$'s does span the range.
+          A proof is easy.)
+      \end{exparts}  
+     \end{answer}
+  \item  
+    Generalize \nearbyexample{ex:MatTransMapLinear}
+    by proving that the matrix transpose map is linear.
+    What is the domain and codomain?
+    \begin{answer}
+      Recall that the entry in row~$i$ and column~$j$ of the transpose of $M$
+      is the entry $m_{j,i}$ from row~$j$ and column~$i$ of $M$.
+      Now, the check is routine. 
+      \begin{align*}
+        \trans{[r\cdot\begin{pmatrix}
+                    &\vdots          \\
+             \cdots &a_{i,j} &\cdots \\
+                    &\vdots
+           \end{pmatrix}
+         +s\cdot\begin{pmatrix}
+                    &\vdots          \\
+             \cdots &b_{i,j} &\cdots \\
+                    &\vdots
+           \end{pmatrix}]}
+        &=\trans{\begin{pmatrix}
+                         &\vdots                    \\
+                  \cdots &ra_{i,j}+sb_{i,j} &\cdots \\
+                         &\vdots
+                \end{pmatrix}}                               \\
+        &=\begin{pmatrix}
+                   &\vdots                    \\
+            \cdots &ra_{j,i}+sb_{j,i} &\cdots \\
+                   &\vdots
+          \end{pmatrix}                               \\
+        &=r\cdot\begin{pmatrix}
+                   &\vdots          \\
+            \cdots &a_{j,i} &\cdots \\
+                   &\vdots
+          \end{pmatrix}
+         +s\cdot\begin{pmatrix}
+                   &\vdots          \\
+            \cdots &b_{j,i} &\cdots \\
+                   &\vdots
+          \end{pmatrix}                                \\
+        &=r\cdot\trans{\begin{pmatrix}
+                   &\vdots          \\
+            \cdots &a_{j,i} &\cdots \\
+                   &\vdots
+          \end{pmatrix} }
+         +s\cdot\trans{\begin{pmatrix}
+                   &\vdots          \\
+            \cdots &b_{j,i} &\cdots \\
+                   &\vdots
+          \end{pmatrix} }
+      \end{align*}
+      The domain is \( \matspace_{\nbym{m}{n}} \) 
+      while the codomain is \( \matspace_{\nbym{n}{m}} \).  
+     \end{answer}
+  \item 
+    \begin{exparts}
+     \partsitem Where \( \vec{u},\vec{v}\in \Re^n \), 
+        the line segment connecting them is defined to be the set
+        \( \ell=\set{t\cdot\vec{u}+(1-t)\cdot\vec{v}\suchthat t\in [0..1]} \).
+        Show that the image, under a homomorphism $h$, of the segment between
+        $\vec{u}$ and $\vec{v}$ is the segment between $h(\vec{u})$ and
+        $h(\vec{v})$.
+     \partsitem A subset of \( \Re^n \) is \definend{convex}\index{convex set} 
+       if, for any two points in
+       that set, the line segment joining them lies entirely in that set.
+       (The inside of a sphere is convex
+       while the skin of a sphere is not.)
+       Prove that linear maps from \( \Re^n \) to \( \Re^m \) preserve 
+       the property of set convexity.
+     \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem  For any homomorphism \( \map{h}{\Re^n}{\Re^m} \) we have
+          \begin{equation*}
+            h(\ell)
+            =\set{h(t\cdot\vec{u}+(1-t)\cdot\vec{v})\suchthat t\in [0..1]}
+            =\set{t\cdot h(\vec{u})+(1-t)\cdot h(\vec{v})\suchthat t\in [0..1]}
+          \end{equation*}
+          which is the line segment from $h(\vec{u})$ to $h(\vec{v})$.
+        \partsitem We must show that if a subset of the domain is convex then
+          its image, as a subset of the range, is also convex. 
+          Suppose that \( C\subseteq \Re^n \) is convex
+          and consider its image $h(C)$.
+          To show $h(C)$ is convex we must show that for any two of its 
+          members, $\vec{d}_1$ and $\vec{d}_2$, 
+          the line segment connecting them
+          \begin{equation*}
+            \ell=\set{t\cdot\vec{d}_1+(1-t)\cdot\vec{d}_2\suchthat t\in [0..1]}
+          \end{equation*}
+          is a subset of $h(C)$.
+
+          Fix any member $\hat{t}\cdot\vec{d}_1+(1-\hat{t})\cdot\vec{d}_2$
+          of that line segment.
+          Because the endpoints of $\ell$ are in the image of $C$, there are
+          members of $C$ that map to them, say $h(\vec{c}_1)=\vec{d}_1$
+          and $h(\vec{c}_2)=\vec{d}_2$.
+          Now, where $\hat{t}$ is the scalar that is fixed in the first
+          sentence of this paragraph, observe that
+          $h(\hat{t}\cdot\vec{c}_1+(1-\hat{t})\cdot\vec{c}_2)
+          =\hat{t}\cdot h(\vec{c}_1)+(1-\hat{t})\cdot h(\vec{c}_2)
+          =\hat{t}\cdot\vec{d}_1+(1-\hat{t})\cdot\vec{d}_2$
+          Thus, any member of $\ell$ is a member of $h(C)$, and so $h(C)$ is
+          convex.
+      \end{exparts}
+    \end{answer}
+  \recommended \item \label{exer:HomosPresLinStruc}
+    Let \( \map{h}{\Re^n}{\Re^m} \) be a homomorphism.
+    \begin{exparts}
+      \partsitem Show that the image under \( h \) of a line in 
+        \( \Re^n \) is a (possibly degenerate) line in \( \Re^m \).
+      \partsitem What happens to a \( k \)-dimensional linear surface?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem For \( \vec{v}_0,\vec{v}_1\in\Re^n \), the line through 
+          \( \vec{v}_0 \) with direction \( \vec{v}_1 \) is the set 
+          $\set{\vec{v}_0+t\cdot \vec{v}_1\suchthat t\in\Re}$.
+          The image under $h$ of that line
+          $\set{h(\vec{v}_0+t\cdot \vec{v}_1)\suchthat t\in\Re}
+             =\set{h(\vec{v}_0)+t\cdot h(\vec{v}_1)\suchthat t\in\Re}$
+          is the line through $h(\vec{v}_0)$ with direction $h(\vec{v}_1)$.
+          If \( h(\vec{v}_1) \) is the zero vector then this line is 
+          degenerate.
+        \partsitem A \( k \)-dimensional linear surface in \( \Re^n \) maps to
+          a (possibly degenerate) \( k \)-dimensional linear surface in
+          \( \Re^m \).
+          The proof is just like that the one for the line.
+      \end{exparts}  
+     \end{answer}
+  \item 
+    Prove that the restriction of a homomorphism to a subspace of its
+    domain is another homomorphism.
+    \begin{answer}
+      Suppose that \( \map{h}{V}{W} \) is a homomorphism and suppose
+      that \( S \) is a subspace of \( V \).
+      Consider the map \( \map{\hat{h}}{S}{W} \) defined by
+      \( \hat{h}(\vec{s})=h(\vec{s}) \).
+      (The only difference between $\hat{h}$ and $h$ is the difference in  
+      domain.)
+      Then this new map is linear: 
+      \( \hat{h}(c_1\cdot\vec{s}_1+c_2\cdot\vec{s}_2)=
+              h(c_1\vec{s}_1+c_2\vec{s}_2)=c_1h(\vec{s}_1)+c_2h(\vec{s}_2)=
+              c_1\cdot\hat{h}(\vec{s}_1)+c_2\cdot\hat{h}(\vec{s}_2) \).  
+    \end{answer}
+  \item 
+    Assume that \( \map{h}{V}{W} \) is linear.
+    \begin{exparts}
+      \partsitem Show that the \definend{rangespace} of this map 
+        \( \set{h(\vec{v})\suchthat \vec{v}\in V} \) is a subspace of 
+        the codomain \( W \).
+      \partsitem Show that the \definend{nullspace} of this map
+        \( \set{\vec{v}\in V\suchthat h(\vec{v})=\zero_W} \) 
+        is a subspace of the domain \( V \).
+      \partsitem Show that if \( U \) is a subspace of the domain \( V \) then
+        its image \( \set{h(\vec{u})\suchthat \vec{u}\in U} \) is a subspace 
+        of the codomain \( W \).
+        This generalizes the first item.
+      \partsitem Generalize the second item.
+    \end{exparts}
+    \begin{answer} This will appear as a lemma in the next subsection.
+      \begin{exparts}
+        \partsitem The range is nonempty because \( V \) is nonempty.
+          To finish we need to show that it is closed under combinations.
+          A combination of range vectors has the form,
+          where \( \vec{v}_1,\dots,\vec{v}_n\in V \),
+          \begin{equation*}
+            c_1\cdot h(\vec{v}_1)+\dots+c_n\cdot h(\vec{v}_n)
+            =
+            h(c_1\vec{v}_1)+\dots+h(c_n\vec{v}_n)
+            =
+            h(c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n),
+          \end{equation*}
+          which is itself in the range as
+          \( c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n \) is a member of
+          domain \( V \).
+          Therefore the range is a subspace.
+        \partsitem The nullspace is nonempty since it contains $\zero_V$, as
+          \( \zero_V \) maps to \( \zero_W \).
+          It is closed under linear combinations because, where
+          \( \vec{v}_1,\dots,\vec{v}_n\in V \) are elements 
+          of the inverse image set
+          \( \set{\vec{v}\in V\suchthat h(\vec{v})=\zero_W} \),
+          for \( c_1,\ldots,c_n\in\Re \)
+          \begin{equation*}
+            \zero_W=c_1\cdot h(\vec{v}_1)+\dots+c_n\cdot h(\vec{v}_n)
+            =h(c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n)
+          \end{equation*}
+          and so \( c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n \) is also in
+          the inverse image of \( \zero_W \).
+        \partsitem This image of \( U \) nonempty because \( U \) is nonempty.
+          For closure under combinations, 
+          where \( \vec{u}_1,\ldots,\vec{u}_n\in U \),
+          \begin{equation*}
+            c_1\cdot h(\vec{u}_1)+\dots+c_n\cdot h(\vec{u}_n)
+            =
+            h(c_1\cdot \vec{u}_1)+\dots+h(c_n\cdot \vec{u}_n)
+            =
+            h(c_1\cdot \vec{u}_1+\dots+c_n\cdot \vec{u}_n)
+          \end{equation*}
+          which is itself in \( h(U) \) as
+          \( c_1\cdot \vec{u}_1+\dots+c_n\cdot \vec{u}_n \) is in \( U \).
+          Thus this set is a subspace.
+        \partsitem The natural generalization is that the inverse image of a
+          subspace of is a subspace.
+
+          Suppose that \( X \) is a subspace of \( W \).
+          Note that \( \zero_W\in X \) so the set
+          \( \set{\vec{v}\in V \suchthat h(\vec{v})\in X} \) is not empty.
+          To show that this set is closed under combinations, let
+          \( \vec{v}_1,\dots,\vec{v}_n \) be elements of \( V \)
+          such that \( h(\vec{v}_1)=\vec{x}_1 \), \ldots,
+          \( h(\vec{v}_n)=\vec{x}_n \) and note that 
+          \begin{equation*}
+            h(c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n)
+            =c_1\cdot h(\vec{v}_1)+\dots+c_n\cdot h(\vec{v}_n)
+            =c_1\cdot \vec{x}_1+\dots+c_n\cdot \vec{x}_n
+          \end{equation*}
+          so a linear combination of elements of \( h^{-1}(X) \) is also in
+          \( h^{-1}(X) \).
+      \end{exparts}  
+     \end{answer}
+  \item 
+    Consider the set of isomorphisms from a vector space to itself.
+    Is this a subspace of the space \( \linmaps{V}{V} \)
+    of homomorphisms from the space to itself?
+    \begin{answer}
+      No; the set of isomorphisms does not contain the zero map
+      (unless the space is trivial).
+    \end{answer}
+  \item 
+   Does \nearbytheorem{th:HomoDetActOnBasis} need that
+   $\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$
+   is a basis? 
+   That is, can we still get a well-defined and unique homomorphism if we
+   drop either the condition that the set of $\vec{\beta}$'s 
+   be linearly independent, 
+   or the condition that it span the domain?
+   \begin{answer}
+     If $\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$ doesn't span the space
+     then the map needn't be unique.
+     For instance, if we try to define a map from $\Re^2$ to itself by 
+     specifying only that $\vec{e}_1$ is sent to itself, then 
+     there is more than
+     one homomorphism possible; both the identity map and the projection map 
+     onto the first component fit this condition.
+
+     If we drop the condition that 
+     $\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$
+     is linearly independent then we risk an inconsistent specification
+     (i.e, there could be no such map).
+     An example is if we consider 
+     $\sequence{\vec{e}_2,\vec{e}_1,2\vec{e}_1}$, and try 
+     to define a map from $\Re^2$ to itself that 
+     sends $\vec{e}_2$ to itself, and sends both
+     $\vec{e}_1$ and $2\vec{e}_1$ to $\vec{e}_1$.
+     No homomorphism can satisfy these three conditions. 
+   \end{answer}
+  \item 
+    Let \( V \) be a vector space and assume that 
+    the maps \( \map{f_1,f_2}{V}{\Re^1} \) are linear.
+    \begin{exparts}
+      \partsitem Define a map \( \map{F}{V}{\Re^2} \) whose component
+        functions are the given linear ones.
+        \begin{equation*}
+           \vec{v}\mapsto\colvec{f_1(\vec{v}) \\ f_2(\vec{v})}
+        \end{equation*}
+        Show that \( F \) is linear.
+      \partsitem Does the converse hold\Dash is any linear map from \( V \) to
+        \( \Re^2 \) made up of two linear component maps to \( \Re^1 \)?
+      \partsitem Generalize.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Briefly, the check of linearity is this.
+          \begin{equation*}
+            F(r_1\cdot \vec{v}_1+r_2\cdot \vec{v}_2)
+            =\colvec{f_1(r_1\vec{v}_1+r_2\vec{v}_2) \\ 
+                        f_2(r_1\vec{v}_1+r_2\vec{v}_2)}
+            =r_1\colvec{f_1(\vec{v}_1) \\ f_2(\vec{v}_1)}
+            +r_2\colvec{f_1(\vec{v}_2) \\ f_2(\vec{v}_2)}
+            =r_1\cdot F(\vec{v}_1)+r_2\cdot F(\vec{v}_2)
+          \end{equation*}
+        \partsitem Yes.
+          Let \( \map{\pi_1}{\Re^2}{\Re^1} \) and
+          \( \map{\pi_2}{\Re^2}{\Re^1} \) be the projections
+          \begin{equation*}
+            \colvec{x \\ y}\mapsunder{\pi_1} x
+              \quad\text{and}\quad
+            \colvec{x \\ y}\mapsunder{\pi_2} y
+          \end{equation*}
+          onto the two axes.
+          Now, where \( f_1(\vec{v})=\pi_1(F(\vec{v})) \) and
+          \( f_2(\vec{v})=\pi_2(F(\vec{v})) \) 
+          we have the desired component functions.
+          \begin{equation*}
+            F(\vec{v})=
+            \colvec{f_1(\vec{v}) \\ f_2(\vec{v})}
+          \end{equation*}
+          They are linear because they are the composition of linear functions,
+          and the fact that the compoistion of linear functions is linear
+          was shown as part of the proof that isomorphism is an equivalence
+          relation (alternatively, the check that they are linear is
+          straightforward). 
+        \partsitem In general, a map from a vector space \( V \) to an 
+          \( \Re^n \) is linear if and only if each of the component 
+          functions is linear.
+          The verification is as in the prior item.
+      \end{exparts}  
+     \end{answer}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Rangespace and Nullspace}
+Isomorphisms and homomorphisms both preserve structure.
+The difference is that homomorphisms needn't be onto and
+needn't be one-to-one.
+This means that homomorphisms are a more general kind of map,
+subject to fewer restrictions than isomorphisms.
+We will examine what can happen with a homomorphism
+that is prevented by the extra restrictions satisfied by an isomorphism. 
+
+We first consider the effect of dropping the onto requirement, 
+of not requiring as part of the definition that a homomorphism be
+onto its codomain.
+For instance, the injection map \( \map{\iota}{\Re^2}{\Re^3} \)
+\begin{equation*}
+  \colvec{x \\ y} \mapsto \colvec{x \\ y \\ 0}
+\end{equation*}
+is not an isomorphism because it is not onto.
+Of course, being a function,
+a homomorphism is onto some set, namely its range;
+the map $\iota$ is onto the $xy$-plane subset of \( \Re^3\).
+% The next result says that for any  range set is a vector space.
+
+\begin{lemma}   \label{le:RangeIsSubSp}
+Under a homomorphism, the image of
+any subspace of the domain is a subspace of the codomain.
+In particular, the image of the entire space,
+the range of the homomorphism, is a subspace of the codomain.
+\end{lemma}
+% add exercise that if h:V->W is a map then we can define +, * on W to make
+% h a homo?
+
+\begin{proof}
+Let $\map{h}{V}{W}$ be linear and let $S$ be a subspace of the domain 
+$V$.
+The image $h(S)$ is a subset of the codomain $W$.
+It is nonempty because $S$ is nonempty and
+thus to show that $h(S)$ is a subspace of  $W$
+we need only show that it is closed under linear combinations
+of two vectors.
+If $h(\vec{s}_1)$ and $h(\vec{s}_2)$ are members of $h(S)$ then
+$c_1\cdot h(\vec{s}_1)+c_2\cdot h(\vec{s}_2)
+  =
+  h(c_1\cdot \vec{s}_1)+h(c_2\cdot \vec{s}_2)
+  =
+  h(c_1\cdot \vec{s}_1+c_2\cdot \vec{s}_2)$
+is also a member of $h(S)$ because it is the image of
+\( c_1\cdot \vec{s}_1+c_2\cdot \vec{s}_2 \) from \( S \).
+\end{proof}
+
+\begin{definition}
+The \definend{rangespace}\index{rangespace}\index{homomorphism!rangespace}
+of a homomorphism \( \map{h}{V}{W} \) is
+\begin{equation*}
+  \rangespace{h}=\set{h(\vec{v})\suchthat \vec{v}\in V}
+\end{equation*}
+sometimes denoted \( h(V) \).
+The dimension of the rangespace is the map's
+\definend{rank}.\index{rank!of a homomorphism}
+\end{definition}
+\noindent 
+(We shall soon see the connection between the rank of a map and the rank of a 
+matrix.)
+
+\begin{example}  \label{ex:DerivMapRnge}
+Recall that the derivative map 
+\( \map{d/dx}{\polyspace_3}{\polyspace_3} \)
+given by \( a_0+a_1x+a_2x^2+a_3x^3 \mapsto a_1+2a_2x+3a_3x^2 \)
+is linear.
+The rangespace 
+\( \rangespace{d/dx} \) is the set of quadratic polynomials
+\( \set{r+sx+tx^2\suchthat r,s,t\in\Re } \).
+Thus, the rank of this map is three.
+\end{example}
+
+\begin{example}  \label{ex:MatToPolyRnge}
+With this homomorphism \( \map{h}{M_{\nbyn{2}}}{\polyspace_3} \)
+\begin{equation*}
+  \begin{pmatrix}
+    a  &b  \\
+    c  &d
+  \end{pmatrix}
+  \mapsto
+  (a+b+2d)+0x+cx^2+cx^3
+\end{equation*}
+an image vector in the range
+can have any constant term, must have an $x$ coefficient of zero,
+and must have the same coefficient of $x^2$ as of $x^3$.
+That is, the rangespace is
+\( \rangespace{h}=\set{r+0x+sx^2+sx^3\suchthat r,s\in\Re} \)
+and so the rank is two.
+\end{example}
+
+The prior result shows that, 
+in passing from the definition of isomorphism to the more
+general definition of homomorphism,  
+omitting the `onto' requirement doesn't make an essential difference.
+Any homomorphism is onto its rangespace.
+
+However, omitting the `one-to-one' condition does make a difference. 
+A homomorphism may have many elements
+of the domain that map to one element of the codomain.
+Below is a ``bean'' sketch of a many-to-one 
+map between sets.\appendrefs{many-to-one maps}\spacefactor=1000 %
+It shows three elements of the codomain that are each the image of
+many members of the domain.
+\begin{center}  
+  \includegraphics{ch3.5}  % bean to bean; many to one
+\end{center}
+Recall that for any function $\map{h}{V}{W}$, 
+the set of elements of $V$ that are mapped to \( \vec{w}\in W \)
+is the  \definend{inverse image\/}\index{inverse image}%
+\index{function! inverse image}   
+$h^{-1}(\vec{w})=\set{\vec{v}\in V\suchthat h(\vec{v})=\vec{w}}$.
+Above, the three sets of many elements on the left
+are inverse images.
+
+\begin{example}
+Consider the projection\index{projection}
+\( \map{\pi}{\Re^3}{\Re^2} \)
+\begin{equation*}
+   \colvec{x \\ y \\ z}
+    \mapsunder{\pi}
+   \colvec{x \\ y}
+\end{equation*}
+which is a homomorphism that is many-to-one.
+In this instance,
+an inverse image set is a vertical line of vectors
+in the domain.
+\begin{center}
+  \includegraphics{ch3.11}
+\end{center}
+\end{example}
+
+\begin{example} \label{ex:RTwoHomoREasyOneMap}
+This homomorphism $\map{h}{\Re^2}{\Re^1}$
+\begin{equation*}
+  \colvec{x \\ y}
+   \mapsunder{h}
+  x+y
+\end{equation*}
+is also many-to-one;
+for a fixed $w\in\Re^1$, 
+the inverse image $h^{-1}(w)$
+\begin{center}
+  \includegraphics{ch3.12}
+\end{center}
+is the set of plane vectors whose components add to $w$.
+\end{example}
+
+The above examples have only to do with the
+fact that we are considering functions,
+specifically, many-to-one functions.
+They show the inverse images 
+as sets of vectors that are 
+related to the image vector $\vec{w}$.
+But these are more than just arbitrary functions, they are
+homomorphisms; what do the two preservation
+conditions say about the relationships?
+
+In generalizing from isomorphisms to homomorphisms by 
+dropping the one-to-one condition,
+we lose the property that we've stated intuitively as: the 
+domain is ``the same as'' the range.
+That is, we lose that the domain
+corresponds perfectly to the range
+in a one-vector-by-one-vector way.
+%Now, domain no longer corresponds to the codomain; 
+%in the first example there is no
+%single vector in $\Re^3$ that matches with the vector shown in
+%$\Re^2$,
+%and in the second example there is no vector in the plane that
+%corresponds to $a$.
+What we shall keep, as the examples below illustrate,
+is that a homomorphism 
+describes a way in which
+the domain is ``like'', or ``analgous to'', the range.
+
+\begin{example}    \label{ex:RThreeHomoRTwo} %\label{exPicProj}
+We think of $\Re^3$ as being like $\Re^2$, except that vectors have an extra
+component. 
+That is, we think of the vector with components $x$, $y$, and~$z$ 
+as like the vector with components $x$ and~$y$.
+In defining the projection map $\pi$, we make precise which
+members of the domain we are thinking of as related to which members
+of the codomain.
+
+Understanding in what way the
+preservation conditions in the definition of homomorphism
+show that the domain elements are like the codomain elements 
+is easiest if we draw $\Re^2$ as the $xy$-plane inside of $\Re^3$.
+(Of course, $\Re^2$ is a set of two-tall vectors while the
+$xy$-plane is a set of three-tall vectors with a third component of
+zero, but there is an obvious correspondence.)
+Then,
+$\pi(\vec{v})$ is the ``shadow'' of $\vec{v}$ in the plane and
+the preservation of addition property says that
+%vectors in \( \Re^3 \) act like their shadows in the plane in that
+\begin{center}  \small
+  \begin{tabular}{@{}c@{}c@{}c@{}c@{}c@{}}
+    \includegraphics{ch3.1}
+    &&\includegraphics{ch3.2}
+    &&\includegraphics{ch3.3} \\[1.5ex]
+    {\small  $\colvec{x_1 \\ y_1 \\ z_1}$ above $\colvec{x_1 \\ y_1}$}
+    &{\small \ plus\ }
+    &{\small $\colvec{x_2 \\ y_2 \\ z_2}$ above $\colvec{x_2 \\ y_2}$}
+    &{\small \ equals\ }
+    &{\small $\colvec{x_1+y_1 \\ y_1+y_2 \\ z_1+z_2}$ 
+              above $\colvec{x_1+x_2 \\ y_1+y_2}$}
+  \end{tabular}
+\end{center}
+\noindent Briefly, the shadow of a sum 
+$\pi(\vec{v}_1+\vec{v}_2)$ equals the 
+sum of the shadows $\pi(\vec{v}_1)+\pi(\vec{v}_2)$.
+(Preservation of scalar multiplication has a similar interpretation.)
+
+Redrawing by
+separating the two spaces, moving the codomain $\Re^2$ to the right,
+gives an uglier picture but one that is more faithful to the
+``bean'' sketch.
+\begin{center}  \small
+  \includegraphics{ch3.4}
+\end{center}
+Again in this drawing, the vectors that map to $\vec{w}_1$ lie in the domain
+in a vertical line
+(only one such vector is shown, in gray).
+Call any such member of this inverse image %$\pi^{-1}(\vec{w}_1)$ 
+a ``$\vec{w}_1$~vector''.
+Similarly, there is a vertical line of ``$\vec{w}_2$~vectors'' and
+a vertical line of ``$\vec{w}_1+\vec{w}_2$~vectors''.
+Now, $\pi$ has the property that 
+if $\pi(\vec{v}_1)=\vec{w}_1$ and $\pi(\vec{v}_2)=\vec{w}_2$ 
+then $\pi(\vec{v}_1+\vec{v}_2)=\pi(\vec{v}_1)+\pi(\vec{v}_2)
+  =\vec{w}_1+\vec{w}_2$.
+This says that the vector classes add, in the sense that 
+any \( \vec{w}_1 \)~vector plus any
+\( \vec{w}_2 \)~vector 
+equals a \( \vec{w}_1+\vec{w}_2 \)~vector,
+(A similar statement holds about the classes under scalar multiplication.)
+
+Thus, although the two spaces $\Re^3$ and $\Re^2$ are not isomorphic,
+$\pi$ describes a way in which they are alike:~vectors 
+in $\Re^3$ add as do the associated vectors in $\Re^2$\Dash vectors 
+add as their shadows add. 
+\end{example}
+
+\begin{example}   \label{ex:RTwoHomoRHardOne}
+A homomorphism can be used to express
+an analogy between spaces that is more subtle than the prior one.
+For the map 
+\begin{equation*}
+  \colvec{x \\ y}
+   \mapsunder{h}
+  x+y
+\end{equation*}
+from \nearbyexample{ex:RTwoHomoREasyOneMap}
+fix two numbers $w_1, w_2$ in the range \( \Re \).
+A $\vec{v}_1$ that maps to $w_1$ has components that 
+add to $w_1$,
+that is, the inverse image $h^{-1}(w_1)$ is the set of vectors 
+with endpoint on the diagonal line $x+y=w_1$.
+Call these the ``$w_1$ vectors''.
+Similarly, we have the ``$w_2$ vectors'' and the  ``$w_1+w_2$ vectors''.  
+Then the addition preservation property says that
+\begin{center}  \small
+  \begin{tabular}{@{}ccccc@{}}
+    \includegraphics{ch3.6}
+    &&\includegraphics{ch3.7}
+    &&\includegraphics{ch3.8}  \\[1.5ex]
+    {\small a ``$w_1$ vector''}
+    &{\small plus}
+    &{\small a ``$w_2$ vector''}
+    &{\small equals}
+    &{\small a ``$w_1+w_2$ vector''.}
+  \end{tabular}
+\end{center}
+Restated, if a
+$w_1$~vector is added to a $w_2$~vector then the result 
+is mapped by $h$ to a $w_1+w_2$ vector.
+Briefly, the image of a sum is the sum of the images.
+Even more briefly, \( h(\vec{v}_1+\vec{v}_2)=h(\vec{v}_1)+h(\vec{v}_2) \).
+(The preservation of scalar multiplication condition has a
+similar restatement.)
+\end{example}
+
+\begin{example}   \label{ex:PicRThreeToRTwo}
+The inverse images can be structures other than lines.
+For the linear map \( \map{h}{\Re^3}{\Re^2} \)
+\begin{equation*}
+  \colvec{x \\ y \\ z}
+    \mapsto
+  \colvec{x \\ x}
+\end{equation*}
+the inverse image sets are planes $x=0$, $x=1$, etc.,
+perpendicular to the \( x \)-axis.
+\begin{center}  \small
+  \includegraphics{ch3.9}
+\end{center}
+\end{example}
+
+We won't describe how every homomorphism that we will use
+is an analogy because the formal
+sense that we make of ``alike in that~\ldots'' is 
+`a homomorphism exists such that~\ldots'.
+Nonetheless, the idea that a homomorphism between two spaces expresses how
+the domain's vectors fall into classes that act like
+the range's vectors is a good way to view homomorphisms.
+
+Another reason that we won't treat all of the homomorphisms that
+we see as above is that many vector spaces are hard to draw
+(e.g., a space of polynomials).
+However, there is nothing bad about gaining insights from those spaces
+that we are able to draw, 
+especially when those insights extend to all vector spaces.
+We derive two such insights from the three examples
+\ref{ex:RThreeHomoRTwo}, \ref{ex:RTwoHomoRHardOne}, 
+and~\ref{ex:PicRThreeToRTwo}.
+
+First, in all three examples, the inverse images are lines or planes, that is, 
+linear surfaces.
+In particular, the inverse image of the range's zero vector is a line or plane
+through the origin\Dash a subspace of the domain.
+
+\begin{lemma}  \label{le:NullspIsSubSp}
+For any homomorphism, the inverse image of a subspace of the range 
+is a subspace of the domain.
+In particular, the inverse image of the trivial subspace of the range
+is a subspace of the domain.
+\end{lemma}
+
+\begin{proof}
+Let $\map{h}{V}{W}$ be a homomorphism
+and let $S$ be a subspace of the rangespace $h$.
+Consider $h^{-1}(S)=\set{\vec{v}\in V\suchthat h(\vec{v})\in S}$, 
+the inverse image of the set $S$.
+It is nonempty because it contains $\zero_V$, since
+\( h(\zero_V)=\zero_W \), which is an element $S$, as $S$ is a subspace.
+To show that $h^{-1}(S)$ is closed under linear combinations, let
+\( \vec{v}_1 \) and \( \vec{v}_2 \) be elements,
+so that $h(\vec{v}_1)$ and $h(\vec{v}_2)$ are elements of $S$,
+and then $c_1\vec{v}_1+c_2\vec{v}_2$
+is also in the inverse image because
+$h(c_1\vec{v}_1+c_2\vec{v}_2)
+  =c_1h(\vec{v}_1)+c_2h(\vec{v}_2)$
+is a member of the subspace $S$. 
+\end{proof}
+
+\begin{definition}
+The \definend{nullspace}\index{homomorphism!nullspace}\index{nullspace}
+or \definend{kernel}\index{kernel} of a linear map
+\( \map{h}{V}{W} \) is the inverse image of $0_W$
+\begin{equation*}
+  \nullspace{h}=h^{-1}(\zero_W)=\set{\vec{v}\in V\suchthat h(\vec{v})=\zero_W}.
+\end{equation*}
+The dimension of the nullspace is the map's
+{\em nullity}\index{nullity}\index{homomorphism!nullity}.
+\end{definition}
+
+\begin{center}
+  \includegraphics{ch3.10}
+\end{center}
+
+\begin{example}
+The map from \nearbyexample{ex:DerivMapRnge} has this nullspace
+\( \nullspace{d/dx}=\set{a_0+0x+0x^2+0x^3\suchthat a_0\in\Re} \).
+\end{example}
+
+\begin{example}
+The map from \nearbyexample{ex:MatToPolyRnge}
+has this nullspace.
+\begin{equation*}
+   \nullspace{h}=\set{\begin{pmatrix}
+                         a  &b          \\
+                         0  &-(a+b)/2
+                      \end{pmatrix}\suchthat a,b\in\Re}
+\end{equation*}
+\end{example}
+
+Now for the second insight from the above pictures.
+In \nearbyexample{ex:RThreeHomoRTwo}, each of the vertical lines is squashed down 
+to a single point\Dash $\pi$, in passing from the domain to the range,
+takes all of these one-dimensional vertical lines and ``zeroes them out'', 
+leaving the range one dimension smaller than the domain.
+Similarly, in \nearbyexample{ex:RTwoHomoRHardOne}, the
+two-dimensional domain is mapped to a one-dimensional range by breaking 
+the domain into lines (here, they are diagonal lines), 
+and compressing each of those lines to a single member of the range.
+Finally, in \nearbyexample{ex:PicRThreeToRTwo},
+the domain breaks into planes which get
+``zeroed out'', and so the map starts with a three-dimensional domain
+but ends with a
+one-dimensional range\Dash this map ``subtracts'' two from the dimension. 
+(Notice that, in this third example, the codomain is
+two-dimensional but the range of the map is only one-dimensional, and it is
+the dimension of the range that is of interest.)
+
+\begin{theorem}
+\label{th:RankPlusNullEqDim}
+\index{rank!of a homomorphism}
+A linear map's rank plus its nullity equals the dimension of its domain.
+\end{theorem}
+
+\begin{proof}
+Let \( \map{h}{V}{W} \) be linear and
+let \( B_N=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_k} \)
+be a basis for the nullspace.
+Extend that to a basis
+\( B_V=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_k,
+       \vec{\beta}_{k+1},\dots,\vec{\beta}_n} \)
+for the entire domain.
+We shall show that
+\( B_R=\sequence{ h(\vec{\beta}_{k+1}),\dots,h(\vec{\beta}_n)} \)
+is a basis for the rangespace.
+Then counting the size of these bases gives the result.
+
+To see that \( B_R \) is linearly independent, 
+consider the equation
+\( c_{k+1}h(\vec{\beta}_{k+1})+\dots+c_nh(\vec{\beta}_n)=\zero_W \). 
+This gives that 
+\( h(c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n)=\zero_W \)
+and so \( c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n \)
+is in the nullspace of $h$.
+As \( B_N\) is a basis for this nullspace, there are scalars
+\( c_1,\dots,c_k\in\Re \) satisfying this relationship.
+\begin{equation*}
+   c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k
+   =
+   c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n
+\end{equation*}
+But \( B_V \) is a basis for \( V \) so each scalar equals zero.
+Therefore \( B_R \) is linearly independent.
+
+To show that \( B_R \) spans the rangespace,
+consider \( h(\vec{v})\in \rangespace{h} \) and
+write \( \vec{v} \) as a linear combination 
+$\vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n$
+of members of \( B_V \).
+This gives
+$h(\vec{v})=h(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+     =c_1h(\vec{\beta}_1)+\dots+c_kh(\vec{\beta}_k)
+     +c_{k+1}h(\vec{\beta}_{k+1})+\dots+c_nh(\vec{\beta}_n)$
+and since 
+$\vec{\beta}_1$, \ldots, $\vec{\beta}_k$ are in the nullspace, we have
+that 
+$h(\vec{v})=\zero+\dots+\zero
+     +c_{k+1}h(\vec{\beta}_{k+1})+\dots+c_nh(\vec{\beta}_n)$.
+Thus, $h(\vec{v})$ is a linear combination of members of \( B_R \),
+and so $B_R$ spans the space.
+\end{proof}
+
+\begin{example}
+Where \( \map{h}{\Re^3}{\Re^4} \) is
+\begin{equation*}
+  \colvec{x \\ y \\ z}
+    \mapsunder{h}
+  \colvec{x \\ 0 \\ y \\ 0}
+\end{equation*}
+the rangespace and nullspace are
+\begin{equation*}
+  \rangespace{h}=
+    \set{\colvec{a \\ 0 \\ b \\ 0}\suchthat a,b\in\Re }
+  \quad\text{and}\quad
+  \nullspace{h}=
+    \set{\colvec{0 \\ 0 \\ z}\suchthat z\in\Re }
+\end{equation*}
+and so the rank of $h$ is two while the nullity is one.
+\end{example}
+
+\begin{example}
+If \( \map{t}{\Re}{\Re} \) is the linear transformation \( x\mapsto -4x, \)
+then the range is \(  \rangespace{t}=\Re^1 \), and so 
+the rank of $t$ is one and the nullity is zero.
+\end{example}
+
+\begin{corollary}
+\label{cor:RankDecreases}
+The rank of a linear map is less than or equal to the dimension of the domain.
+Equality holds if and only if the nullity of the map is zero.
+\end{corollary}
+
+We  know 
+that an isomorphism exists between two spaces 
+if and only if their dimensions are equal.
+Here we see that for a homomorphism to exist,  
+the dimension of the range must be less than or equal to the 
+dimension of the domain.
+For instance, there is no homomorphism
+from \( \Re^2 \) onto \( \Re^3 \).
+There are many homomorphisms
+from \( \Re^2 \) into \( \Re^3 \), but none is onto all 
+of three-space.
+
+The rangespace of a linear map can be of dimension strictly less than 
+the dimension of the domain
+(\nearbyexample{ex:DerivMapRnge}'s derivative transformation on $\polyspace_3$
+has a domain of dimension four but a range of dimension three).
+Thus, under a homomorphism, 
+linearly independent sets in the domain
+may map to linearly dependent sets in the range
+(for instance, the derivative sends
+$\set{1,x,x^2,x^3}$ to $\set{0,1,2x,3x^2}$).
+That is, under a homomorphism, independence may be lost.
+In contrast, dependence stays.
+
+\begin{lemma}
+Under a linear map, the image of a linearly dependent set is linearly
+dependent.
+\end{lemma}
+
+\begin{proof}
+Suppose that \( c_1\vec{v}_1+\dots+c_n\vec{v}_n=\zero_V \),
+with some $c_i$ nonzero.
+Then, because
+\( h(c_1\vec{v}_1+\dots+c_n\vec{v}_n)=c_1h(\vec{v}_1)+\dots+c_nh(\vec{v}_n) \)
+and because \( h(\zero_V)=\zero_W \),
+we have that $c_1h(\vec{v}_1)+\dots+c_nh(\vec{v}_n)=\zero_W$ with some nonzero 
+$c_i$.
+\end{proof}
+
+When is independence not lost?
+One obvious sufficient condition is when the homomorphism is an isomorphism.
+This condition is also necessary; 
+see \nearbyexercise{exer:NonSingIffPreservLI}.
+We will finish this subsection comparing homomorphisms with isomorphisms 
+by observing that
+a one-to-one homomorphism is an isomorphism from its domain onto its range.
+
+\begin{definition}
+A linear map that is one-to-one is 
+{\em nonsingular}\index{homomorphism!nonsingular}%
+\index{nonsingular!homomorphism}.
+\end{definition}
+%\begin{remark}
+\noindent (In the next section we will see the connection
+between this use of `nonsingular' for maps and its familiar
+use for matrices.)
+
+\begin{example}
+This nonsingular homomorphism \( \map{\iota}{\Re^2}{\Re^3} \)
+\begin{equation*}
+  \colvec{x \\ y}
+    \mapsunder{\iota}
+  \colvec{x \\ y \\ 0}
+\end{equation*}
+gives the obvious correspondence between \( \Re^2 \) and the \( xy \)-plane
+inside of \( \Re^3 \).
+\end{example}
+
+The prior observation allows us to adapt some results about isomorphisms
+to this setting.
+
+\begin{theorem}
+\label{th:OOHomoEquivalence}
+In an \( n \)-dimensional vector space \( V \), these: 
+\begin{tfae}
+  \item \( h \) is nonsingular, that is, one-to-one
+  \item \( h \) has a linear inverse
+  \item \( \nullspace{h}=\set{\zero\,} \), that is, \( \nullity(h)=0 \)
+  \item \( \rank (h)=n \)
+  \item if \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+        is a basis for \( V \) then
+        \( \sequence{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)} \)
+        is a basis for \( \rangespace{h} \)
+\end{tfae}
+are equivalent
+statements about a linear map \( \map{h}{V}{W} \).
+\end{theorem}
+
+\begin{proof}
+We will first show that \( \text{(1)} \Longleftrightarrow \text{(2)} \).
+We will then show that
+\(
+  \text{(1)}\implies \text{(3)}\implies 
+  \text{(4)}\implies \text{(5)}\implies \text{(2)}
+\).
+
+For \( \text{(1)} \Longrightarrow \text{(2)} \),
+suppose that the linear map $h$ is one-to-one, and so has an inverse.
+The domain of that inverse is the range of $h$ and so a linear combination
+of  two members of that domain has the form $c_1h(\vec{v}_1)+c_2h(\vec{v}_2)$.
+On that combination, the inverse \( h^{-1} \) gives this.
+\begin{align*}
+  h^{-1}(c_1h(\vec{v}_1)+c_2h(\vec{v}_2))
+  &=h^{-1}(h(c_1\vec{v}_1+c_2\vec{v}_2))  \\
+  &=\composed{h^{-1}}{h}\,(c_1\vec{v}_1+c_2\vec{v}_2) \\
+  &=c_1\vec{v}_1+c_2\vec{v}_2 \\
+  &=c_1\composed{h^{-1}}{h}\,(\vec{v}_1)
+           +c_2\composed{h^{-1}}{h}\,(\vec{v}_2) \\
+  &=c_1\cdot h^{-1}(h(\vec{v}_1))+c_2\cdot h^{-1}(h(\vec{v}_2))
+\end{align*}
+Thus the inverse of a one-to-one linear map is automatically linear.
+But this also gives the \( \text{(2)} \Longrightarrow \text{(1)} \) 
+implication, because the inverse itself must be one-to-one.
+
+Of the remaining implications,
+\( \text{(1)}\implies \text{(3)} \) holds because any
+homomorphism maps \( \zero_V \) to \( \zero_W \), but a one-to-one map sends at
+most one member of \( V \) to \( \zero_W \).
+
+Next, \( \text{(3)} \implies \text{(4)} \) is true since rank
+plus nullity equals the dimension of the domain.
+
+For
+\( \text{(4)} \implies \text{(5)} \), to show that
+\( \sequence{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)} \)
+is a basis for the rangespace we need only show that it is a spanning set,
+because by assumption the range has dimension $n$.
+Consider $h(\vec{v})\in\rangespace{h}$.
+Expressing $\vec{v}$ as a linear combination of basis elements produces
+\( h(\vec{v})=h(\lincombo{c}{\vec{\beta}}) \),
+which gives that 
+\( h(\vec{v})=c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n) \),
+as desired.
+
+Finally, for the \( \text{(5)}\implies \text{(2)} \) implication, assume
+that \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+is a basis for \( V \) so that
+\( \sequence{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)} \)
+is a basis for \( \rangespace{h} \).
+Then every
+\( \vec{w}\in\rangespace{h} \) a the unique representation
+\( \vec{w}=c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n) \).
+Define a map from \( \rangespace{h} \) to $V$ by
+\begin{equation*}
+    \vec{w} \;\mapsto\; \lincombo{c}{\vec{\beta}}
+\end{equation*}
+(uniqueness of the representation makes this well-defined).
+Checking that it is linear and that
+it is the inverse of $h$ are easy.
+\end{proof}
+
+We've now seen that a linear map
+shows how the structure of the domain is like that of the range.
+Such a map can be thought to organize the domain space into
+inverse images of points in the range.
+In the special case that the map is one-to-one, each inverse image is a single
+point and the map is an isomorphism between the domain and the range.
+
+
+\begin{exercises}
+  \recommended \item 
+    Let \( \map{h}{\polyspace_3}{\polyspace_4} \) be
+    given by \( p(x)\mapsto x\cdot p(x) \).
+    Which of these are in the nullspace?
+    Which are in the rangespace?
+    \begin{exparts*}
+      \partsitem \( x^3 \)
+      \partsitem \( 0 \)
+      \partsitem \( 7 \)
+      \partsitem \( 12x-0.5x^3 \)
+      \partsitem \( 1+3x^2-x^3 \)
+    \end{exparts*}
+    \begin{answer}
+      First, to answer whether a polynomial is in the nullspace, 
+      we have to consider it as a member of the domain $\polyspace_3$.
+      To answer whether it is in the rangespace, we consider it as a member of
+      the codomain $\polyspace_4$.
+      That is, for $p(x)=x^4$, the question of whether it is in the rangespace
+      is sensible but the question of whether it is in the nullspace is not
+      because it is not even in the domain.
+      \begin{exparts}
+        \partsitem The polynomial $x^3\in\polyspace_3$ is not in the nullspace
+            because $h(x^3)=x^4$ is not the zero polynomial in $\polyspace_4$.
+            The polynomial $x^3\in\polyspace_4$ is in the rangespace because
+            $x^2\in\polyspace_3$ is mapped by $h$ to $x^3$.
+        \partsitem The answer to both questions is, ``Yes, because 
+            $h(0)=0$.''
+            The polynomial $0\in\polyspace_3$ is in the nullspace
+            because it is mapped by $h$ to the zero polynomial in 
+            $\polyspace_4$.
+            The polynomial $0\in\polyspace_4$ is in the rangespace because
+            it is the image, under $h$, of $0\in\polyspace_3$.
+        \partsitem The polynomial $7\in\polyspace_3$ is not in the nullspace
+            because $h(7)=7x$ is not the zero polynomial in $\polyspace_4$.
+            The polynomial $x^3\in\polyspace_4$ is not in the rangespace 
+            because there is no member of the domain that when multiplied 
+            by $x$ gives the constant polynomial $p(x)=7$.
+        \partsitem The polynomial $12x-0.5x^3\in\polyspace_3$ is not in the 
+            nullspace because $h(12x-0.5x^3)=12x^2-0.5x^4$.
+            The polynomial $12x-0.5x^3\in\polyspace_4$ is in the rangespace 
+            because it is the image of $12-0.5x^2$.
+        \partsitem The polynomial $1+3x^2-x^3\in\polyspace_3$ is not in the 
+            nullspace because $h(1+3x^2-x^3)=x+3x^3-x^4$.
+            The polynomial $1+3x^2-x^3\in\polyspace_4$ is not in the 
+            rangespace because of the constant term.
+      \end{exparts}
+    \end{answer}
+  \recommended \item
+    Find the nullspace, nullity, rangespace, and rank of each map.
+    \begin{exparts}
+      \partsitem \( \map{h}{\Re^2}{\polyspace_3} \) given by
+        \begin{equation*}
+          \colvec{a \\ b}\mapsto a+ax+ax^2
+        \end{equation*}
+      \partsitem \( \map{h}{\matspace_{\nbyn{2}}}{\Re} \) given by
+        \begin{equation*}
+          \begin{pmatrix}
+            a  &b  \\
+            c  &d
+          \end{pmatrix}
+          \mapsto a+d
+        \end{equation*}
+      \partsitem \( \map{h}{\matspace_{\nbyn{2}}}{\polyspace_2} \) given by
+        \begin{equation*}
+          \begin{pmatrix}
+            a  &b  \\
+            c  &d
+          \end{pmatrix}
+          \mapsto a+b+c+dx^2
+        \end{equation*}
+      \partsitem the zero map \( \map{Z}{\Re^3}{\Re^4} \)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The nullspace is
+          \begin{equation*}
+            \nullspace{h}
+              =\set{\colvec{a \\ b}\in\Re^2\suchthat 
+                                    a+ax+ax^2+0x^3=0+0x+0x^2+0x^3}
+              =\set{\colvec{0 \\ b}\suchthat b\in\Re}
+          \end{equation*}
+          while the rangespace is
+          \begin{equation*}
+            \rangespace{h}
+            =\set{a+ax+ax^2\in\polyspace_3\suchthat a,b\in\Re}
+            =\set{a\cdot(1+x+x^2)\suchthat a\in\Re}
+          \end{equation*}
+          and so the nullity is one and the rank is one.
+        \partsitem The nullspace is this.
+          \begin{equation*}
+            \nullspace{h}
+             =\set{\begin{pmatrix}
+                     a  &b  \\
+                     c  &d
+                   \end{pmatrix} \suchthat a+d=0}
+             =\set{\begin{pmatrix}
+                     -d  &b  \\
+                      c  &d
+                   \end{pmatrix} \suchthat b,c,d\in\Re }
+          \end{equation*}
+          The rangespace
+          \begin{equation*}
+            \rangespace{h}
+             \set{a+d\suchthat a,b,c,d\in\Re}
+          \end{equation*}
+          is all of $\Re$ (we can get any real number by
+          taking $d$ to be $0$ and taking $a$ to be the desired number).
+          Thus, the nullity is three and the rank is one.
+        \partsitem The nullspace is
+          \begin{equation*}
+            \nullspace{h}=\set{\begin{pmatrix}
+                                 a     &b  \\
+                                 c     &d
+                               \end{pmatrix} \suchthat 
+                                 \text{$a+b+c=0$ and $d=0$}}
+                         =\set{\begin{pmatrix}
+                                 -b-c  &b  \\
+                                  c    &0
+                               \end{pmatrix} \suchthat b,c\in\Re }
+          \end{equation*}
+          while the rangespace is 
+          $\rangespace{h}=\set{r+sx^2\suchthat r,s\in\Re}$.
+          Thus, the nullity is two and the rank is two.
+        \partsitem The nullspace is all of \( \Re^3 \) 
+          so the nullity is three.
+          The rangespace is the trivial subspace of \( \Re^4 \) so the rank
+          is zero.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    Find the nullity of each map.
+    \begin{exparts*}
+      \partsitem \( \map{h}{\Re^5}{\Re^8} \) of rank five
+      \partsitem \( \map{h}{\polyspace_3}{\polyspace_3} \) of rank one
+      \partsitem \( \map{h}{\Re^6}{\Re^3} \), an onto map
+      \partsitem \( \map{h}{\matspace_{\nbyn{3}}}{\matspace_{\nbyn{3}}} \),
+        onto
+    \end{exparts*}
+    \begin{answer}
+      For each, use the result 
+      that the rank plus the nullity equals the dimension of the domain.
+      \begin{exparts*}
+        \partsitem $0$
+        \partsitem $3$ 
+        \partsitem $3$
+        \partsitem $0$
+      \end{exparts*}
+    \end{answer}
+  \recommended \item 
+    What is the nullspace of the differentiation transformation
+    \( \map{d/dx}{\polyspace_n}{\polyspace_n} \)?
+    What is the nullspace of the second derivative, as a
+    transformation of \( \polyspace_n \)?
+    The \( k \)-th derivative?
+    \begin{answer}
+      Because
+      \begin{equation*}
+        \frac{d}{dx}\,(a_0+a_1x+\dots+a_nx^n)
+        =a_1+2a_2x+3a_3x^2+\dots+na_nx^{n-1}
+      \end{equation*}
+      we have this.
+      \begin{align*}
+        \nullspace{\frac{d}{dx}}
+        &=\set{a_0+\dots+a_nx^n\suchthat a_1+2a_2x+\dots+na_nx^{n-1}
+                                         =0+0x+\dots+0x^{n-1}}       \\
+        &=\set{a_0+\dots+a_nx^n\suchthat 
+               \text{$a_1=0$, and $a_2=0$, \ldots, $a_n=0$}}  \\
+        &=\set{a_0+0x+0x^2+\dots+0x^n\suchthat a_0\in\Re}
+      \end{align*}
+      In the same way, 
+      \begin{equation*}
+        \nullspace{\frac{d^k}{dx^k}}
+        =\set{a_0+a_1x+\dots+a_nx^n\suchthat a_0,\dots,a_{k-1}\in\Re}
+      \end{equation*}
+      for \( k\leq n \).  
+    \end{answer}
+  \item  \label{exer:CondTwoProjMap}
+    \nearbyexample{ex:RThreeHomoRTwo} restates the first condition in the
+    definition of homomorphism as `the shadow of a sum is the sum of the
+    shadows'.
+    Restate the second condition in the same style.
+    \begin{answer}
+      The shadow of a scalar multiple is the scalar multiple of the shadow.  
+    \end{answer}
+  \item 
+    For the homomorphism \( \map{h}{\polyspace_3}{\polyspace_3} \)
+    given by \( h(a_0+a_1x+a_2x^2+a_3x^3)=a_0+(a_0+a_1)x+(a_2+a_3)x^3 \)
+    find these.
+    \begin{exparts*}
+      \partsitem \( \nullspace{h} \)
+      \partsitem \( h^{-1}(2-x^3) \)
+      \partsitem \( h^{-1}(1+x^2) \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Setting $a_0+(a_0+a_1)x+(a_2+a_3)x^3=0+0x+0x^2+0x^3$
+           gives $a_0=0$ and $a_0+a_1=0$ and $a_2+a_3=0$, so the nullspace is
+           \( \set{-a_3x^2+a_3x^3\suchthat a_3\in\Re} \).
+        \partsitem Setting $a_0+(a_0+a_1)x+(a_2+a_3)x^3=2+0x+0x^2-x^3$
+           gives that $a_0=2$, and $a_1=-2$, and  $a_2+a_3=-1$.
+           Taking $a_3$ as a parameter, and renaming it $a_3=a$ gives
+           this set description
+           \( \set{2-2x+(-1-a)x^2+ax^3\suchthat a\in\Re}
+                =\set{(2-2x-x^2)+a\cdot(-x^2+x^3)\suchthat a\in\Re} \).
+        \partsitem This set is empty because the range of $h$ includes only
+           those polynomials with a $0x^2$ term.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    For the map \( \map{f}{\Re^2}{\Re} \) given by
+    \begin{equation*}
+       f(\colvec{x \\ y})=2x+y
+    \end{equation*}
+    sketch these inverse image sets:~\( f^{-1}(-3) \), \( f^{-1}(0) \), 
+    and \( f^{-1}(1) \).
+    \begin{answer}
+      All inverse images are lines with slope $-2$.    
+      \begin{center}
+        \includegraphics{ch3.74}
+     \end{center}
+    \end{answer}
+  \recommended \item 
+    Each of these transformations of \( \polyspace_3 \) is nonsingular.
+    Find the inverse function of each.
+    \begin{exparts}
+      \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_0+a_1x+2a_2x^2+3a_3x^3 \)
+      \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_0+a_2x+a_1x^2+a_3x^3 \)
+      \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_1+a_2x+a_3x^2+a_0x^3 \)
+      \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto
+              a_0+(a_0+a_1)x+(a_0+a_1+a_2)x^2+(a_0+a_1+a_2+a_3)x^3 \)
+    \end{exparts}
+    \begin{answer}
+      These are the inverses.
+      \begin{exparts}
+        \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto
+                        a_0+a_1x+(a_2/2)x^2+(a_3/3)x^3 \)
+        \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_0+a_2x+a_1x^2+a_3x^3 \)
+        \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_3+a_0x+a_1x^2+a_2x^3 \)
+        \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto
+                        a_0+(a_1-a_0)x+(a_2-a_1)x^2+(a_3-a_2)x^3 \)
+      \end{exparts} 
+      For instance, for the second one, the map given in the question sends
+      $0+1x+2x^2+3x^3\mapsto 0+2x+1x^2+3x^3$ and then the inverse above
+      sends $0+2x+1x^2+3x^3\mapsto 0+1x+2x^2+3x^3$.
+      So this map is actually self-inverse.
+     \end{answer}
+  \item 
+    Describe the nullspace and rangespace of a transformation
+    given by \( \vec{v}\mapsto 2\vec{v} \).
+    \begin{answer}
+       For any vector space $V$, the nullspace 
+       \begin{equation*}
+         \set{\vec{v}\in V\suchthat 2\vec{v}=\zero}
+       \end{equation*}
+       is trivial, while the rangespace 
+       \begin{equation*}
+         \set{\vec{w}\in V\suchthat 
+                 \text{$\vec{w}=2\vec{v}$ for some $\vec{v}\in V$}}
+       \end{equation*}
+       is all of \( V \), because every vector $\vec{w}$ is twice some 
+       other vector, specifically, it is twice $(1/2)\vec{w}$.
+       (Thus, this transformation is actually an automorphism.)  
+    \end{answer}
+  \item 
+    List all pairs \( (\text{rank}(h),\text{nullity}(h)) \) 
+    that are possible for linear maps from $\Re^5$ to $\Re^3$.
+    \begin{answer}
+      Because the rank plus the nullity equals the dimension of the domain 
+      (here, five), and the rank is at most three,
+      the possible pairs are:~\( (3,2) \), \( (2,3) \), 
+      \( (1,4) \), and~\( (0,5) \).
+      Coming up with linear maps that show that each pair is indeed
+      possible is easy.  
+    \end{answer}
+  \item 
+    Does the differentiation map
+    \( \map{d/dx}{\polyspace_n}{\polyspace_n} \) have an inverse?
+    \begin{answer}
+      No (unless \( \polyspace_n \) is trivial), because the two polynomials
+      \( f_0(x)=0 \) and \( f_1(x)=1 \) have the same derivative; a map must be
+      one-to-one to have an inverse.
+    \end{answer}
+  \recommended \item
+    Find the nullity of the map \( \map{h}{\polyspace_n}{\Re} \) given by
+    \begin{equation*}
+      a_0+a_1x+\dots+a_nx^n\mapsto\int_{x=0}^{x=1}a_0+a_1x+\dots+a_nx^n\,dx.
+    \end{equation*}
+    \begin{answer}
+      The nullspace is this.
+      \begin{multline*}
+        \set{a_0+a_1x+\dots+a_nx^n\suchthat
+                   a_0(1)+\frac{\displaystyle a_1}{\displaystyle 2}(1^2)
+                   +\dots
+                   +\frac{\displaystyle a_n}{\displaystyle n+1}(1^{n+1})=0} \\
+        =\set{a_0+a_1x+\dots+a_nx^n\suchthat
+                   a_0+(a_1/2)+\dots+(a_{n+1}/n+1)=0}
+      \end{multline*}
+      Thus the nullity is \( n \).  
+     \end{answer}
+  \item 
+    \begin{exparts}
+      \partsitem Prove that a homomorphism is onto if and only if its
+        rank equals the dimension of its codomain.
+      \partsitem Conclude that a homomorphism between vector spaces with 
+        the same dimension is one-to-one if and only if it is onto.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem One direction is obvious:~if the homomorphism 
+          is onto then its range is the codomain and so its
+          rank equals the dimension of its codomain.
+          For the other direction assume that the map's rank equals the
+          dimension of the codomain.
+          Then the map's range is a subspace of the codomain, and has
+          dimension equal to the dimension of the codomain.
+          Therefore, the map's range must equal the codomain, and the
+          map is onto. 
+          (The `therefore' is because
+          there is a linearly independent subset of the range that is
+          of size  equal to the dimension of the codomain,
+          but any such linearly independent subset of the codomain must be a 
+          basis for the codomain, and so the range equals the codomain.)
+        \partsitem By \nearbytheorem{th:OOHomoEquivalence}, 
+          a homomorphism is one-to-one if and only if its nullity is zero.
+          Because rank plus nullity equals the dimension of the domain,
+          it follows that a homomorphism is one-to-one if and only
+          if its rank equals the dimension of its domain.
+          But this domain and codomain have the same dimension,
+          so the map is one-to-one if and only if it is onto.  
+      \end{exparts}
+   \end{answer}
+  \item \label{exer:NonSingIffPreservLI} 
+    Show that a linear map is nonsingular if and only if it preserves 
+    linear independence.
+    \begin{answer}
+      We are proving that \( \map{h}{V}{W} \) is nonsingular if and only
+      if for every linearly independent subset \( S \) of \( V \) the subset
+      \( h(S)=\set{h(\vec{s})\suchthat \vec{s}\in S} \) of \( W \) is linearly
+      independent.
+
+      One half is easy\Dash by \nearbytheorem{th:OOHomoEquivalence}, 
+      if \( h \) is singular then its nullspace is
+      nontrivial (contains more than just the zero vector).
+      So, 
+      where \( \vec{v}\neq\zero_V \) is in that nullspace, the singleton set
+      \( \set{\vec{v\,}} \) is independent while its image
+      \( \set{h(\vec{v})}=\set{\zero_W} \) is not.
+
+      For the other half,
+      assume that \( h \) is nonsingular and so by
+      \nearbytheorem{th:OOHomoEquivalence} has a trivial nullspace.
+      Then for any \( \vec{v}_1,\dots,\vec{v}_n\in V \), the relation
+      \begin{equation*}
+        \zero_W=
+        c_1\cdot h(\vec{v}_1)+\dots+c_n\cdot h(\vec{v}_n)
+        =h(c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n)
+      \end{equation*}
+      implies the relation 
+      \( c_1\cdot \vec{v}_1+\dots+c_n\cdot \vec{v}_n=\zero_V \).
+      Hence, if a subset of \( V \) is independent then so is its image in
+      \( W \).  
+
+      \textit{Remark.}
+      The statement is that a linear map is nonsingular if and only if it
+      preserves independence for \emph{all} sets
+      (that is, if a set is independent then its image is also independent).
+      A singular map may well preserve some independent sets.
+      An example is this singular map from $\Re^3$ to $\Re^2$.
+      \begin{equation*}
+        \colvec{x \\ y \\ z}\mapsto\colvec{x+y+z \\ 0}
+      \end{equation*}
+      Linear independence is preserved for this set
+      \begin{equation*}
+        \set{\colvec{1 \\ 0 \\ 0}}\mapsto\set{\colvec{1 \\ 0}}
+      \end{equation*}
+      and (in a somewhat more tricky example) also for this set 
+      \begin{equation*}
+        \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 1 \\ 0}}
+        \mapsto\set{\colvec{1 \\ 0}}
+      \end{equation*}
+      (recall that in a set, repeated elements do not appear twice).
+      However, there are sets whose independence is not preserved under this
+      map; 
+      \begin{equation*}
+        \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 2 \\ 0}}
+        \mapsto\set{\colvec{1 \\ 0},\colvec{2 \\ 0}}
+      \end{equation*}
+      and so not all sets have independence preserved. 
+    \end{answer}
+  \item \label{exer:DimRngLessImpMapOnto}
+    \nearbycorollary{cor:RankDecreases} says that for there to be an onto
+    homomorphism from a vector space $V$ to a vector space $W$, it is 
+    necessary that the dimension of $W$ be less than or equal to the 
+    dimension of $V$.
+    Prove that this condition is also sufficient;
+    use \nearbytheorem{th:HomoDetActOnBasis} to show that
+    if the dimension of $W$ is 
+    less than or equal to the dimension of $V$,
+    then there is a homomorphism from $V$ to $W$ that is onto.
+    \begin{answer}
+      (We use the notation from \nearbytheorem{th:HomoDetActOnBasis}.)
+      Fix a basis $\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n}$ for $V$
+      and a basis 
+      $\sequence{\vec{w}_1,\ldots,\vec{w}_k}$ for $W$.
+      If the dimension $k$ of $W$ is less than or equal to the dimension $n$
+      of $V$ 
+      then the theorem gives a linear map from $V$ to $W$
+      determined in this way.
+      \begin{equation*}
+        \vec{\beta}_1\mapsto\vec{w}_1,\,\dots,\,\vec{\beta}_k\mapsto\vec{w}_k
+        \quad\text{and}\quad
+        \vec{\beta}_{k+1}\mapsto\vec{w}_k,
+           \,\dots,\,\vec{\beta}_n\mapsto\vec{w}_k
+      \end{equation*}
+      We need only to verify that this map is onto.
+
+      Any member of $W$ can be written as a linear combination of 
+      basis elements 
+      $c_1\cdot \vec{w}_1+\dots+c_k\cdot \vec{w}_k$.
+      This vector is the image, under the map described above, of 
+      $c_1\cdot \vec{\beta}_1+\dots+c_k\cdot \vec{\beta}_k
+      +0\cdot \vec{\beta}_{k+1}\dots+0\cdot \vec{\beta}_n$.
+      Thus the map is onto.
+    \end{answer}  
+  \recommended \item
+    Recall that the nullspace is a subset of the domain and the rangespace 
+    is a subset of the codomain. 
+    Are they necessarily distinct?
+    Is there a homomorphism that has a nontrivial intersection of its
+    nullspace and its rangespace?
+    \begin{answer}
+      Yes.
+      For the transformation of \( \Re^2 \) given by
+      \begin{equation*}
+        \colvec{x \\ y}\mapsunder{h}\colvec{0 \\ x}
+      \end{equation*}
+      we have this.
+      \begin{equation*}
+        \nullspace{h}=\set{\colvec{0 \\ y}\suchthat y\in\Re}
+        =\rangespace{h}
+      \end{equation*}
+      \textit{Remark.}
+      We will see more of this in the fifth chapter.   
+    \end{answer}
+  \item 
+        Prove that the 
+        image of a span equals the span of the images.
+        That is, where \( \map{h}{V}{W} \) is linear, 
+        prove that if \( S \) is a subset of 
+        \( V \)  then \( h(\spanof{S}) \) equals \( \spanof{h(S)} \).
+        This generalizes \nearbylemma{le:RangeIsSubSp}
+        since it shows that if \( U \) is any subspace of \( V \) then
+        its image \( \set{h(\vec{u})\suchthat \vec{u}\in U} \)
+        is a subspace of \( W \), because the span of the set $U$ is $U$.
+    \begin{answer}
+        This is a simple calculation.
+          \begin{align*}
+            h(\spanof{S})
+            &=\set{h(c_1\vec{s}_1+\dots+c_n\vec{s}_n)
+                 \suchthat \text{\( c_1,\dots,c_n\in\Re \)
+                                 and \( \vec{s}_1,\dots,\vec{s}_n\in S \)} } \\
+            &=\set{c_1h(\vec{s}_1)+\dots+c_nh(\vec{s}_n)
+                 \suchthat \text{\( c_1,\dots,c_n\in\Re \)
+                                 and \( \vec{s}_1,\dots,\vec{s}_n\in S \)} } \\
+            &=\spanof{h(S)}
+          \end{align*}   
+     \end{answer}
+  \recommended \item \label{exer:Cosets}   
+    \begin{exparts}
+    \partsitem Prove that for any linear map \( \map{h}{V}{W} \) and any
+      \( \vec{w}\in W \), the set \( h^{-1}(\vec{w}) \) has the form
+      \begin{equation*}
+        \set{\vec{v}+\vec{n}\suchthat \vec{n}\in\nullspace{h} }
+      \end{equation*}
+      for \( \vec{v}\in V \) with \( h(\vec{v})=\vec{w} \)
+      (if \( h \) is not onto then this set may be empty).
+      Such a set is a \definend{coset}\index{coset} of \( \nullspace{h} \)
+      and is denoted \( \vec{v}+\nullspace{h} \).
+    \partsitem Consider the map \( \map{t}{\Re^2}{\Re^2} \) given by
+      \begin{equation*}
+        \colvec{x \\ y}
+          \mapsunder{t}
+        \colvec{ax+by \\ cx+dy}
+      \end{equation*}
+      for some scalars $a$, $b$, $c$, and $d$.
+      Prove that \( t \) is linear.
+    \partsitem
+      Conclude from the prior two items that for any linear system of the form
+      \begin{equation*}
+        \begin{linsys}{2}
+          ax  &+  &by  &=  &e \\
+          cx  &+  &dy  &=  &f 
+        \end{linsys}
+      \end{equation*}
+      the solution set can be written
+      (the vectors are members of $\Re^2$)
+      \begin{equation*}
+        \set{\vec{p}+\vec{h}\suchthat
+             \text{\( \vec{h} \) satisfies the associated homogeneous system} }
+      \end{equation*}
+      where \( \vec{p} \) is a particular solution of that linear system
+      (if there is no particular solution then the above set
+      is empty).
+    \partsitem Show that this map
+      \( \map{h}{\Re^n}{\Re^m} \) is linear
+      \begin{equation*}
+        \colvec{x_1 \\ \vdots \\ x_n}
+          \mapsto
+        \colvec{a_{1,1}x_1+\dots+a_{1,n}x_n \\ 
+                     \vdots \\ 
+                     a_{m,1}x_1+\dots+a_{m,n}x_n}
+      \end{equation*}
+      for any scalars \( a_{1,1} \), \ldots, \( a_{m,n} \). 
+      Extend the conclusion made in the prior item.
+    \partsitem Show that the \( k \)-th derivative map is a linear 
+      transformation of
+      \( \polyspace_n \) for each \( k \).
+      Prove that this map
+      is a linear transformation of that space
+      \begin{equation*}
+        f\mapsto
+        \frac{d^k}{dx^k}f+c_{k-1}\frac{d^{k-1}}{dx^{k-1}}f
+           +\dots+
+        c_1\frac{d}{dx}f+c_0f
+      \end{equation*}
+      for any scalars \( c_k \), \ldots, \( c_0 \).
+      Draw a conclusion as above.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          We will show that the two sets are equal
+          $h^{-1}(\vec{w})
+            =\set{\vec{v}+\vec{n}\suchthat \vec{n}\in\nullspace{h} }$ 
+          by mutual inclusion.
+          For the 
+          $\set{\vec{v}+\vec{n}\suchthat \vec{n}\in\nullspace{h} }
+            \subseteq h^{-1}(\vec{w})$
+          direction, just note that 
+          $h(\vec{v}+\vec{n})=h(\vec{v})+h(\vec{n})$ equals
+          $\vec{w}$, and so any member of the first set is a member of the
+          second. 
+          For the 
+          $h^{-1}(\vec{w})
+            \subseteq\set{\vec{v}+\vec{n}\suchthat \vec{n}\in\nullspace{h} }$ 
+          direction, consider $\vec{u}\in h^{-1}(\vec{w})$.
+          Because \( h \) is linear, \( h(\vec{u})=h(\vec{v}) \)
+          implies that \( h(\vec{u}-\vec{v})=\zero \).
+          We can write \( \vec{u}-\vec{v} \) as \( \vec{n} \),
+          and then we have that
+          $\vec{u}\in\set{\vec{v}+\vec{n}\suchthat \vec{n}\in\nullspace{h} }$,
+          as desired, because $\vec{u}=\vec{v}+(\vec{u}-\vec{v})$.
+        \partsitem This check is routine.
+        \partsitem This is immediate.
+        \partsitem For the linearity check, briefly, 
+          where \( c,d \) are scalars and
+          \( \vec{x},\vec{y}\in\Re^n \) have components
+          \( x_1,\dots,x_n \) and \( y_1,\dots,y_n \),
+          we have this.
+          \begin{align*}
+            h(c\cdot \vec{x}+d\cdot \vec{y})
+            &=\colvec{a_{1,1}(cx_1+dy_1)+\dots+a_{1,n}(cx_n+dy_n) \\ 
+                         \vdots \\ 
+                         a_{m,1}(cx_1+dy_1)+\dots+a_{m,n}(cx_n+dy_n)}    \\
+            &=\colvec{a_{1,1}cx_1+\dots+a_{1,n}cx_n \\ 
+                         \vdots \\ 
+                         a_{m,1}cx_1+\dots+a_{m,n}cx_n}
+            +\colvec{a_{1,1}dy_1+\dots+a_{1,n}dy_n \\ 
+                         \vdots \\                           
+                         a_{m,1}dy_1+\dots+a_{m,n}dy_n}        \\
+            &=c\cdot h(\vec{x})+d\cdot h(\vec{y})
+          \end{align*}
+          The appropriate conclusion is that
+          \( \text{General}=\text{Particular}+\text{Homogeneous} \).
+        \partsitem Each power of the derivative is 
+          linear because of the rules
+          \begin{equation*}
+            \frac{d^k}{dx^k}(f(x)+g(x))=\frac{d^k}{dx^k}f(x)
+                                         +\frac{d^k}{dx^k}g(x)
+            \quad\text{and}\quad
+            \frac{d^k}{dx^k}rf(x)=r\frac{d^k}{dx^k}f(x)
+          \end{equation*}
+          from calculus.
+          Thus the given map is a linear transformation of the space because
+          any linear combination of linear maps is also a linear map
+          by \nearbylemma{le:SpLinFcns}.
+          The appropriate conclusion is 
+          \( \text{General}=\text{Particular}+\text{Homogeneous} \),
+          where the associated homogeneous differential 
+          equation has a constant of \( 0 \).
+      \end{exparts}  
+     \end{answer}
+  \item 
+    Prove that for any transformation \( \map{t}{V}{V} \) that is rank one, 
+    the map given by composing the operator with itself 
+    \( \map{\composed{t}{t}}{V}{V} \) satisfies
+    \( \composed{t}{t}=r\cdot t \) for some real number \( r \).
+    \begin{answer}
+      Because the rank of \( t \) is one, the rangespace of \( t \)
+      is a one-dimensional set.
+      Taking $\sequence{h(\vec{v})}$ as a basis (for some appropriate
+      $\vec{v}$), we have that for every $\vec{w}\in V$, the image 
+      $h(\vec{w})\in V$ is a multiple of this basis vector\Dash associated
+      with each $\vec{w}$ there is a scalar 
+      \( c_{\vec{w}} \)  
+      such that \( t(\vec{w})=c_{\vec{w}}t(\vec{v}) \).
+      Apply \( t \) to both sides of that equation 
+      and take \( r \) to be \( c_{t(\vec{v})} \)
+      \begin{equation*}
+        \composed{t}{t}(\vec{w})
+        =t(c_{\vec{w}}\cdot t(\vec{v}))
+        =c_{\vec{w}}\cdot\composed{t}{t}(\vec{v})
+        =c_{\vec{w}}\cdot c_{t(\vec{v})}\cdot t(\vec{v})
+        =c_{\vec{w}}\cdot r\cdot t(\vec{v})
+        =r\cdot c_{\vec{w}}\cdot t(\vec{v})
+        =r\cdot t(\vec{w})
+      \end{equation*}
+      to get the desired conclusion.  
+    \end{answer}
+  \item 
+    Let \( \map{h}{V}{\Re} \) be a homomorphism, but not the
+    zero homomorphism.
+    Prove that if \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) is a
+    basis for the nullspace and if \( \vec{v}\in V \) is not in the nullspace
+    then \( \sequence{\vec{v},\vec{\beta}_1,\dots,\vec{\beta}_n} \) is a
+    basis for the entire domain \( V \).
+    \begin{answer}
+      By assumption, \( h \) is not the zero map 
+      and so a vector \( \vec{v}\in V \) exists that is not in the nullspace.
+      Note that \( \sequence{h(\vec{v})} \) is a basis for \( \Re \), 
+      because it is a size-one linearly independent subset of \( \Re \).
+      Consequently \( h \) is onto, as for any \( r\in\Re \) we have
+      \( r=c\cdot h(\vec{v}) \) for some scalar \( c \), and so
+      \( r=h(c\vec{v}) \).
+
+      Thus the rank of \( h \) is one.
+      Because the nullity is given as $n$, the dimension of the domain of
+      \( h \), the vector space \( V \), is \( n+1 \).
+      We can finish by showing
+      \( \set{\vec{v},\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+      is linearly independent, as it is a size~$n+1$ subset of a 
+      dimension~$n+1$ space.
+      Because \( \set{\vec{\beta}_1,\dots,\vec{\beta}_n} \) is linearly
+      independent we need only show that 
+      \( \vec{v} \) is not a linear combination of the other vectors.
+      But \( c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n=\vec{v} \) would give
+      \( -\vec{v}+c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n=\zero \) and applying
+      \( h \) to both sides would give a contradiction.  
+    \end{answer}
+  \item 
+    Show that for any space \( V \) of dimension \( n \), the
+    \definend{dual space}\index{dual space}\index{vector space!dual}
+    \begin{equation*}
+      \linmaps{V}{\Re}=\set{\map{h}{V}{\Re}\suchthat \text{\( h \) is linear}}
+    \end{equation*}
+    is isomorphic to \( \Re^n \).
+    It is often denoted $V^\ast$.
+    Conclude that \( V^\ast\isomorphicto V \).
+    \begin{answer}
+      Fix a basis \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+      for \( V \).
+      We shall prove that this map
+      \begin{equation*}
+        h\mapsunder{\Phi}
+        \colvec{h(\vec{\beta}_1) \\ \vdots \\ h(\vec{\beta}_n)}
+      \end{equation*}
+      is an isomorphism from \( V^\ast \) to \( \Re^n \).
+
+      To see that $\Phi$ is one-to-one, assume that $h_1$ and $h_2$ are
+      members of $V^\ast$ such that $\Phi(h_1)=\Phi(h_2)$.
+      Then
+      \begin{equation*}
+        \colvec{h_1(\vec{\beta}_1) \\ \vdots \\ h_1(\vec{\beta}_n)}
+        =\colvec{h_2(\vec{\beta}_1) \\ \vdots \\ h_2(\vec{\beta}_n)}
+      \end{equation*}
+      and consequently, $h_1(\vec{\beta}_1)=h_2(\vec{\beta}_1)$, etc.
+      But a homomorphism is determined by its action on a basis, so 
+      \( h_1=h_2 \), and therefore \( \Phi \) is one-to-one.
+
+      To see that $\Phi$ is onto, consider
+      \begin{equation*}
+        \colvec{x_1 \\ \vdots \\ x_n}
+      \end{equation*}
+      for \( x_1,\ldots,x_n\in\Re \). 
+      This function $h$ from $V$ to $\Re$ 
+      \begin{equation*}
+        c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n
+        \mapsunder{h} c_1x_1+\dots+c_nx_n
+      \end{equation*}
+      is easily seen to be linear, and to be mapped by $\Phi$ to the 
+      given vector in $\Re^n$, so \( \Phi \) is onto.
+
+      The map \( \Phi \) also preserves structure:~where
+      \begin{align*}
+        c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n
+        &\mapsunder{h_1}
+        c_1h_1(\vec{\beta}_1)+\dots+c_nh_1(\vec{\beta}_n)    \\
+        c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n
+        &\mapsunder{h_2}
+        c_1h_2(\vec{\beta}_1)+\dots+c_nh_2(\vec{\beta}_n)
+      \end{align*}
+      we have
+      \begin{align*}
+        (r_1h_1+r_2h_2)(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+        &=
+        c_1(r_1h_1(\vec{\beta}_1)+r_2h_2(\vec{\beta}_1))
+          +\dots
+          +c_n(r_1h_1(\vec{\beta}_n)+r_2h_2(\vec{\beta}_n))    \\
+        &=
+        r_1(c_1h_1(\vec{\beta}_1)+\dots+c_nh_1(\vec{\beta}_n))
+          + r_2(c_1h_2(\vec{\beta}_1)+\dots+c_nh_2(\vec{\beta}_n))
+      \end{align*}
+      so \( \Phi(r_1h_1+r_2h_2)=r_1\Phi(h_1)+r_2\Phi(h_2) \).  
+    \end{answer}
+  \item 
+    Show that any linear map is the sum of maps of rank one.
+    \begin{answer}
+      Let \( \map{h}{V}{W} \) be linear and fix a basis
+      \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) for \( V \).
+      Consider these \( n \) maps from \( V \) to \( W \)
+      \begin{equation*}
+        h_1(\vec{v})=c_1\cdot h(\vec{\beta}_1),
+        \quad
+        h_2(\vec{v})=c_2\cdot h(\vec{\beta}_2),
+        \quad\ldots\quad,
+        h_n(\vec{v})=c_n\cdot h(\vec{\beta}_n)
+      \end{equation*}
+      for any \( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \).
+      Clearly \( h \) is the sum of the \( h_i \)'s.
+      We need only check that each \( h_i \) is linear:~where
+      \( \vec{u}=d_1\vec{\beta}_1+\dots+d_n\vec{\beta}_n \) we have
+      \( h_i(r\vec{v}+s\vec{u})=rc_i+sd_i=rh_i(\vec{v})+sh_i(\vec{u}) \).  
+    \end{answer}
+ \item 
+   Is `is homomorphic to' an equivalence relation?
+   (\textit{Hint:}~the difficulty is to decide on an appropriate meaning 
+   for the quoted phrase.)
+   \begin{answer}
+     Either yes (trivially) or no (nearly trivially).
+
+     If \( V \) `is homomorphic to' \( W \) is taken to mean there is a
+     homomorphism from \( V \) into (but not necessarily onto) \( W \),
+     then every space is homomorphic to every other space as a zero map always
+     exists.
+
+     If \( V \) `is homomorphic to' \( W \) is taken to mean there is an
+     onto homomorphism from \( V \) to \( W \) then the relation is not
+     an equivalence.
+     For instance, there is an onto
+     homomorphism from \( \Re^3 \) to \( \Re^2 \)
+     (projection is one) but no homomorphism from \( \Re^2 \) onto
+     \( \Re^3 \) by \nearbycorollary{cor:RankDecreases},
+     so the relation is not reflexive.\appendrefs{equivalence relations}  
+   \end{answer}
+  \item 
+    Show that the rangespaces and nullspaces of powers of linear maps
+    \( \map{t}{V}{V} \) form descending
+    \begin{equation*}
+      V\supseteq \rangespace{t}\supseteq\rangespace{t^2}\supseteq\ldots
+    \end{equation*}
+    and ascending
+    \begin{equation*}
+     \set{\vec{0}}\subseteq\nullspace{t}\subseteq\nullspace{t^2}\subseteq\ldots
+    \end{equation*}
+    chains.
+    Also show that if \( k \) is such that
+    \( \rangespace{t^k}=\rangespace{t^{k+1}} \)
+    then all following rangespaces are equal:
+    \( \rangespace{t^k}=\rangespace{t^{k+1}}=\rangespace{t^{k+2}}\ldots\, \).
+    Similarly, if \( \nullspace{t^k}=\nullspace{t^{k+1}} \)
+    then  
+    \( \nullspace{t^k}=\nullspace{t^{k+1}}=\nullspace{t^{k+2}}=\ldots\, \).
+    \begin{answer}
+      That they form the chains is obvious.
+      For the rest, we show here that
+      \( \rangespace{t^{j+1}}=\rangespace{t^{j}} \)
+      implies that
+      \( \rangespace{t^{j+2}}=\rangespace{t^{j+1}} \).
+      Induction then applies.
+
+      Assume that 
+      \( \rangespace{t^{j+1}}=\rangespace{t^{j}} \).
+      Then \( \map{t}{\rangespace{t^{j+1}}}{\rangespace{t^{j+2}}} \)
+      is the same map, with the same domain, as
+      \( \map{t}{\rangespace{t^{j}}}{\rangespace{t^{j+1}}} \).
+      Thus it has the same range:
+      \( \rangespace{t^{j+2}}=\rangespace{t^{j+1}} \).  
+    \end{answer}
+\end{exercises}

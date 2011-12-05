@@ -1,0 +1,84 @@
+\ProvidesPackage{dvidrv}[2001/05/23 Set the DVI driver name (JH)]
+% dvidrv.sty
+%  LaTeX file to help set the name of the dvi driver from the command line.
+%
+% BACKGROUND
+%   I want to use different dvi drivers on the same source file.
+% Some packages (e.g., graphics) must be told who they are outputting 
+% specials to.  Something like this. 
+%    > latex ``\def\dvidrv{dvips}\input myfile''
+% (tested under Linux with bash) means that myfile.tex can have calls 
+% like \usepackage[\dvidrv]{graphics} or \usepackage[\dvidrv]{hyperref}.
+%   This package gives \dvidrv a default definition, so you can have
+% \usepackage calls as above, but still leave the \def\dvidrv off of
+% the command line.
+%
+% USAGE
+%  With this in your source file
+%    \documentclass{article}
+%    \usepackage{dvidrv}
+% the package will:
+%  (1) if the command line is 
+%      > latex ``\def\dvidrv{dvipdfm}\input myfile''
+%    then \dvidrv will expand to `dvipdfm'.
+%  (3) if the command line is 
+%      > latex myfile
+%    then the package will try to grab the default dvi driver from 
+%    the graphics package's color.cfg.  If there is no such file then
+%    the default is set to `dvips'.
+% Also possible is to get a per-document default.  Call the package as
+%    \documentclass{article}
+%    \usepackage[dvipsone]{dvidrv}
+% in which case, absent (1) above we have
+%  (2) the package will set \dvidrv to `dvipsone'.
+%
+% HISTORY
+% 2001-May-23 Jim Hefferon jim@joshua.smcvt.edu Written.
+%               Donald Arseneau on ctt got me past an ExecuteOptions*
+%               point that I didn't understand.  (Thanks!)
+%
+\usepackage{ifpdf}
+
+% The INITIAL CODE part
+\def\dvidrv@fungle#1{\@ifundefined{dvidrv}% only take first driver named
+                       {\xdef\dvidrv{#1}\typeout{SETTING DVI DRIVER TO #1}
+}%
+                       {}}
+
+% The DECLARATION OF OPTIONS part
+\DeclareOption*{\dvidrv@fungle{\CurrentOption}}
+
+% The EXECUTION OF OPTIONS part
+\ProcessOptions\relax % grab any options off the options list for (2) above
+
+\ifpdf
+  \dvidrv@fungle{pdftex}%
+\else
+\@ifundefined{dvidrv}%
+  {\InputIfFileExists{color.cfg}{\typeout{COLOR.CFG EXISTS}}{\dvidrv@fungle{pdftex}}}%
+  {}
+\def\strip@def#1.def{#1}
+\typeout{THE DVI DRIVER IS \dvidrv}
+\@ifundefined{Gin@driver}{}{\typeout{DVI DRIVER FOUND}\dvidrv@fungle{\expandafter\strip@def\Gin@driver}}
+\fi
+
+%  {{\let\ExecuteOptions=\dvidrv@fungle % inside of a group
+%    \InputIfFileExists{color.cfg}{}{\dvidrv@fungle{dvipsk}}% default for (3)
+%   }% leave group; restore meaning of ExecuteOptions
+%  }%
+%  {}
+
+% The PACKAGE LOADING part
+
+% The MAIN CODE part
+\typeout{  The DVI driver is set to \dvidrv.}
+
+% ========test file==========
+%  This sets the driver to the graphicx package as described above.
+%\documentclass{article}
+%\usepackage[dvips]{dvidrv}
+%\usepackage[\dvidrv]{graphicx}
+%
+%\begin{document}
+%Hello. \dvidrv
+%\end{document}

@@ -1,0 +1,515 @@
+% Chapter 3, Topic _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\topic{Orthonormal Matrices}
+\index{orthonormal matrix|(}
+\index{matrix!orthonormal|(}
+In \emph{The Elements},\index{Euclid} Euclid considers two figures to be
+the same if they have the same size and shape.
+That is, the triangles below are not equal because they are not the same 
+set of points.
+But they are \definend{congruent}\index{congruent figures}\Dash essentially 
+indistinguishable
+for Euclid's purposes\Dash because we can imagine 
+picking the plane up,
+sliding it over and rotating it a bit,
+although not warping or stretching it,    
+and then putting it back down, to superimpose the first figure on
+the second.
+(Euclid never explicitly states this principle 
+but he uses it often \cite{Casey}.)
+\begin{center}
+  \includegraphics{ch3.61}
+\end{center}
+In modern terminology, ``picking the plane up~\ldots'' 
+means considering a
+map from the plane to itself. 
+Euclid has limited consideration to only certain 
+transformations of the plane, ones
+that may possibly slide or turn the plane but not bend or stretch it.
+Accordingly, we define a map $\map{f}{\Re^2}{\Re^2}$ to be 
+\definend{distance-preserving}\index{distance-preserving}%
+\index{map!distance-preserving} 
+or a \definend{rigid motion}\index{rigid motion} or an
+\definend{isometry},\index{isometry}
+if for all points $P_1,P_2\in\Re^2$,
+the distance from $f(P_1)$ to $f(P_2)$ equals the distance from
+$P_1$ to $P_2$. 
+We also define a plane \definend{figure}\index{plane figure} 
+to be a set of points in the plane
+and we say that two figures are 
+\definend{congruent}\index{congruent plane figures}%
+\index{plane figure!congruence} if there is a 
+distance-preserving map from the plane to itself that carries one figure 
+onto the other.
+
+Many statements from Euclidean geometry 
+follow easily from these definitions.
+Some are: (i)~collinearity is invariant under any distance-preserving map
+(that is, if $P_1$, $P_2$, and $P_3$ are collinear then so are
+$f(P_1)$, $f(P_2)$, and $f(P_3)$),
+(ii)~betweeness is invariant under any distance-preserving map
+(if $P_2$ is between $P_1$ and $P_3$ then so is
+$f(P_2)$ between $f(P_1)$ and $f(P_3)$),
+(iii)~the property of being a triangle is invariant under 
+any distance-preserving map 
+(if a figure is a triangle then the image of that figure is also a triangle),
+(iv)~and the property of being a circle is invariant under any
+distance-preserving map.
+In 1872, F.~Klein\index{Klein, F.} suggested that 
+Euclidean geometry can be characterized as the study of properties that
+are invariant under these maps.
+(This forms part of Klein's Erlanger\index{Erlanger Program} Program, 
+which proposes the organizing principle that each kind of 
+geometry\Dash Euclidean, projective, etc.\Dash can be described 
+as the study of the properties that are
+invariant under some group of transformations.
+The word `group' here means more than just `collection', 
+but that lies outside of our scope.)
+
+We can use linear algebra to characterize the distance-preserving maps
+of the plane.
+
+First,
+there are distance-preserving transformations of the plane that are not linear.
+The obvious example is this \emph{translation}.\index{translation}
+\begin{equation*}
+  \colvec{x \\ y}
+  \quad\mapsto\quad
+  \colvec{x \\ y}+\colvec{1 \\ 0}=\colvec{x+1 \\ y}
+\end{equation*}
+However, 
+this example turns out to be the only example, in the 
+sense that if $f$ is distance-preserving and sends $\zero$ to $\vec{v}_0$ 
+then the map $\vec{v}\mapsto f(\vec{v})-\vec{v}_0$ is linear.
+That will follow immediately from this statement:~a map $t$ that is 
+distance-preserving and sends $\zero$ to itself is linear.
+To prove this equivalent statement, let
+\begin{equation*}
+  t(\vec{e}_1)=\colvec{a \\ b}
+  \qquad
+  t(\vec{e}_2)=\colvec{c \\ d}
+\end{equation*}
+for some $a,b,c,d\in\Re$. 
+Then to show that $t$ is linear, we can show that 
+it can be represented by a matrix, that is, that $t$ acts in this way
+for all $x,y\in\Re$.
+\begin{equation*}
+  \vec{v}=\colvec{x  \\  y}
+  \mapsunder{t}
+  \colvec{ax+cy  \\  bx+dy}
+\tag*{\text{($*$)}}\end{equation*}
+Recall that if we fix three non-collinear points 
+then any point
+in the plane can be described by giving its distance from those three.
+So any point $\vec{v}$ in the domain is determined by its distance from
+the three fixed points $\zero$, $\vec{e}_1$, and $\vec{e}_2$. 
+Similarly, any point $t(\vec{v})$ 
+in the codomain is determined by its distance from
+the three fixed points $t(\zero)$, $t(\vec{e}_1)$, and $t(\vec{e}_2)$
+(these three are not collinear because, as mentioned above, 
+collinearity is invariant and
+$\zero$, $\vec{e}_1$, and $\vec{e}_2$ are not collinear).
+In fact, because $t$ is distance-preserving, we can say more:~for the 
+point $\vec{v}$ in the plane that is determined by being 
+the distance $d_0$ from $\zero$, 
+the distance $d_1$ from $\vec{e}_1$, and the distance $d_2$ from $\vec{e}_2$,  
+its image $t(\vec{v})$ must be the unique point in the codomain 
+that is determined by being $d_0$ from $t(\zero)$, 
+$d_1$ from $t(\vec{e}_1)$, 
+and $d_2$ from $t(\vec{e}_2)$.
+Because of the uniqueness, 
+checking that the action in ($*$) works in the 
+$d_0$, $d_1$, and $d_2$ cases
+\begin{equation*}
+  \dist(\colvec{x \\ y},\zero) 
+  =\dist(t(\colvec{x \\ y}),t(\zero))
+  =\dist(\colvec{ax+cy \\ bx+dy},\zero)
+\end{equation*}
+($t$ is assumed to send $\zero$ to itself)
+\begin{equation*}
+  \dist(\colvec{x \\ y},\vec{e}_1)
+  =\dist(t(\colvec{x \\ y}),t(\vec{e}_1))
+  =\dist(\colvec{ax+cy \\ bx+dy},\colvec{a \\ b})  
+\end{equation*}
+and
+\begin{equation*}
+  \dist(\colvec{x \\ y},\vec{e}_2)
+  =\dist(t(\colvec{x \\ y}),t(\vec{e}_2))
+  =\dist(\colvec{ax+cy \\ bx+dy},\colvec{c \\ d})
+\end{equation*}
+suffices to show that ($*$) describes $t$.
+Those checks are routine.
+
+Thus, any distance-preserving $\map{f}{\Re^2}{\Re^2}$ can be written
+$f(\vec{v})=t(\vec{v})+\vec{v}_0$ for some constant vector $\vec{v}_0$
+and linear map $t$ that is distance-preserving.
+
+Not every linear map is distance-preserving, for example, 
+$\vec{v}\mapsto 2\vec{v}$ does not preserve distances.
+But there is a neat characterization:~a linear transformation $t$ of the
+plane is distance-preserving if and only if both 
+$\norm{t(\vec{e}_1)}=\norm{t(\vec{e}_2)}=1$ 
+and $t(\vec{e}_1)$ is orthogonal to $t(\vec{e}_2)$.
+The `only if' half of that statement is easy\Dash because $t$ is 
+distance-preserving it must preserve the lengths of vectors, 
+and because $t$ is distance-preserving the Pythagorean theorem shows
+that it must preserve orthogonality.
+For the `if' half, it suffices to check that the map preserves lengths
+of vectors, because then for all
+$\vec{p}$ and $\vec{q}$ the distance between the two is preserved
+$\norm{t(\vec{p}-\vec{q}\,)}=\norm{t(\vec{p})-t(\vec{q}\,)}
+=\norm{\vec{p}-\vec{q}\,}$.
+For that check, let
+\begin{equation*}
+  \vec{v}=\colvec{x \\ y} 
+  \quad 
+  t(\vec{e}_1)=\colvec{a \\ b}
+  \quad
+  t(\vec{e}_2)=\colvec{c \\ d}
+\end{equation*}
+and, with the `if' assumptions that
+$a^2+b^2=c^2+d^2=1$ and $ac+bd=0$ we have this.
+\begin{align*}
+  \norm{t(\vec{v}\,)}^2
+  &= (ax+cy)^2+(bx+dy)^2  \\
+  &= a^2x^2+2acxy+c^2y^2+b^2x^2+2bdxy+d^2y^2 \\
+  &= x^2(a^2+b^2)+y^2(c^2+d^2)+2xy(ac+bd)  \\
+  &= x^2 + y^2 \\
+  &= \norm{\vec{v}\,}^2
+\end{align*}
+
+One thing that is neat
+about this characterization is that we can easily recognize
+matrices that represent such a map with respect to the standard bases.
+Those matrices have that when the columns are written as vectors then they
+are of length one and are mutually orthogonal.
+Such a matrix is called an 
+\definend{orthonormal matrix}\index{orthonormal matrix}%
+\index{matrix!orthonormal}
+or
+\definend{orthogonal matrix}\index{orthogonal matrix}\index{matrix!orthogonal}
+(the second term is commonly used to mean not just that the columns are
+orthogonal, but also that they have length one). 
+
+We can use this insight to
+delimit the geometric actions possible in
+distance-preserving maps.
+Because $\norm{t(\vec{v}\,)}=\norm{\vec{v}\,}$, any $\vec{v}$
+is mapped by $t$ to lie somewhere on the circle about the origin that has
+radius equal to the length of $\vec{v}$.
+In particular,
+$\vec{e}_1$ and $\vec{e}_2$ are mapped to the unit circle.
+What's more, %because of the orthogonality restriction,
+once we fix the unit vector $\vec{e}_1$ as mapped
+to the vector with components $a$ and $b$ then there are only two places  
+where $\vec{e}_2$ can be mapped if that image is to be perpendicular 
+to the first vector:~one
+where $\vec{e}_2$ maintains its position a quarter circle clockwise
+from $\vec{e}_1$
+\begin{center}
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.62}\end{tabular}
+  \qquad
+  $\rep{t}{\stdbasis_2,\stdbasis_2}=
+  \begin{pmatrix}
+    a  &-b  \\
+    b  &a
+  \end{pmatrix}$ 
+\end{center}
+and one where is is mapped a quarter circle counterclockwise.
+\begin{center}
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.63}\end{tabular}
+  \qquad
+  $\rep{t}{\stdbasis_2,\stdbasis_2}=
+  \begin{pmatrix}
+    a  &b  \\
+    b  &-a
+  \end{pmatrix}$
+\end{center}
+
+We can geometrically describe these two cases.
+Let $\theta$ be the angle between the $x$-axis and the image of $\vec{e}_1$,
+measured counterclockwise. 
+The first matrix above represents, with respect to the standard bases,
+a \definend{rotation}\index{rotation}\index{linear map!rotation} 
+of the plane by $\theta$ radians.
+\begin{center}
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.62}\end{tabular}
+  \qquad
+  $\colvec{x \\ y}
+  \mapsunder{t}
+  \colvec{x\cos\theta-y\sin\theta  \\ x\sin\theta+y\cos\theta}$ 
+\end{center}
+The second matrix above represents 
+a \definend{reflection}\index{reflection}\index{linear map!reflection} 
+of the plane through the line 
+bisecting the angle between $\vec{e}_1$ and $t(\vec{e}_1)$.
+\begin{center}
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.64}\end{tabular}
+  \qquad
+  $\colvec{x \\ y}\mapsunder{t}
+  \colvec{x\cos\theta+y\sin\theta  \\  x\sin\theta-y\cos\theta}$ 
+\end{center}
+(This picture shows $\vec{e}_1$ reflected up into the first 
+quadrant and $\vec{e}_2$ reflected down into the fourth quadrant.)
+
+Note again:  
+the angle between $\vec{e}_1$ and $\vec{e}_2$ runs counterclockwise,
+and in the first map above the angle from 
+$t(\vec{e}_1)$ to $t(\vec{e}_2)$ is also counterclockwise,
+so the orientation of the angle is preserved.
+But in the second map the orientation is reversed.
+A distance-preserving map is 
+\definend{direct}\index{direct map} if it 
+preserves orientations
+and \definend{opposite}\index{opposite map} 
+if it reverses orientation.
+
+So, we have characterized the Euclidean study of congruence:
+it considers, for plane figures, the properties that are invariant 
+under combinations of (i)~a rotation followed by a translation,
+or (ii)~a reflection followed by a translation
+(a reflection followed by a non-trivial 
+translation is a \definend{glide reflection}\index{reflection!glide}).
+
+Another idea, besides congruence of figures, encountered in 
+elementary geometry is
+that figures are \definend{similar}\index{similar triangles}\index{triangles!similar} 
+if they are congruent after a change of scale. 
+These two triangles are similar since the second is 
+the same shape as the first, but $3/2$-ths the size.
+\begin{center}
+  \includegraphics{ch3.65}
+\end{center}
+From the above work, we have that figures are similar if there
+is an orthonormal matrix $T$ such that the points $\vec{q}$ 
+on one are derived from
+the points $\vec{p}$ by 
+$\vec{q}=(kT)\vec{v}+\vec{p}_0$
+for some nonzero real number $k$ and constant vector $\vec{p}_0$.
+
+Although many of these ideas were first 
+explored by Euclid, mathematics is timeless and
+they are very much in use today. 
+One application of the maps studied above is in computer graphics.
+We can, for example, animate this top view of a cube 
+by putting together film frames of it rotating; that's a rigid motion. 
+\begin{center}
+  \begin{tabular}{ccc}
+    \includegraphics{ch3.66}
+    &\includegraphics{ch3.67}
+    &\includegraphics{ch3.68}                       \\
+    Frame 1      &Frame 2       &Frame 3       
+  \end{tabular}
+\end{center}
+We could also make the cube appear to be moving away from us by producing film
+frames of it shrinking, which gives us figures that are similar.
+\begin{center}
+  \begin{tabular}{ccc}
+    \includegraphics{ch3.69}
+    &\includegraphics{ch3.70}
+    &\includegraphics{ch3.71}                       \\
+    Frame 1:        &Frame 2:       &Frame 3:        
+  \end{tabular}
+\end{center}
+Computer graphics incorporates techniques
+from linear algebra in many other ways (see \nearbyexercise{exer:HomoCrds}).
+
+So the analysis above of distance-preserving maps
+is useful as well as interesting.
+A beautiful book that explores some of this area is \cite{Weyl}.
+More on groups, of transformations and otherwise, can be found in any book
+on Modern Algebra, for instance \cite{BirkhoffMaclane}.
+More on Klein and the Erlanger Program is in \cite{Yaglom}.
+ 
+
+\begin{exercises}
+  \item 
+    Decide if each of these is an orthonormal matrix.
+    \begin{exparts}
+      \partsitem $\begin{pmatrix}
+                    1/\sqrt{2} &-1/\sqrt{2}  \\
+                   -1/\sqrt{2} &-1/\sqrt{2}
+                  \end{pmatrix}$
+      \partsitem $\begin{pmatrix}
+                    1/\sqrt{3} &-1/\sqrt{3}  \\
+                   -1/\sqrt{3} &-1/\sqrt{3}
+                  \end{pmatrix}$
+      \partsitem $\begin{pmatrix}
+                    1/\sqrt{3} &-\sqrt{2}/\sqrt{3}  \\
+                   -\sqrt{2}/\sqrt{3} &-1/\sqrt{3}
+                  \end{pmatrix}$
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes.
+        \partsitem No, the columns do not have length one.
+        \partsitem Yes.
+      \end{exparts}
+    \end{answer}
+  \item 
+    Write down the formula for each of these distance-preserving maps.
+    \begin{exparts}  
+      \partsitem the map that rotates $\pi/6$ radians, and then
+        translates by $\vec{e}_2$
+      \partsitem the map that reflects about the line $y=2x$
+      \partsitem the map that reflects about $y=-2x$ and translates over $1$
+        and up $1$
+    \end{exparts}
+    \begin{answer}
+      Some of these are nonlinear, 
+      because they involve a nontrivial translation.
+      \begin{exparts}
+        \partsitem 
+          $\colvec{x \\ y}
+           \mapsto
+           \begin{pmatrix}
+             x\cdot\cos(\pi/6)-y\cdot\sin(\pi/6) \\
+             x\cdot\sin(\pi/6)+y\cdot\cos(\pi/6) 
+           \end{pmatrix}
+           +\colvec{0 \\ 1}
+           =\begin{pmatrix}
+             x\cdot(\sqrt{3}/2)-y\cdot(1/2)+0 \\
+             x\cdot(1/2)+y\cdot\cos(\sqrt{3}/2)+1 
+           \end{pmatrix}$
+        \partsitem The line $y=2x$ makes an angle of $\arctan(2/1)$
+          with the $x$-axis.
+          Thus $\sin\theta=2/\sqrt{5}$ and $\cos\theta=1/\sqrt{5}$.
+          \begin{equation*}
+          \colvec{x \\ y}
+           \mapsto
+           \begin{pmatrix}
+             x\cdot(1/\sqrt{5})-y\cdot(2/\sqrt{5}) \\
+             x\cdot(2/\sqrt{5})+y\cdot(1/\sqrt{5}) 
+           \end{pmatrix}
+           \end{equation*}
+        \partsitem           
+           $\colvec{x \\ y}
+           \mapsto
+           \begin{pmatrix}
+             x\cdot(1/\sqrt{5})-y\cdot(-2/\sqrt{5}) \\
+             x\cdot(-2/\sqrt{5})+y\cdot(1/\sqrt{5}) 
+           \end{pmatrix}
+           +\colvec{1 \\ 1}
+           =\begin{pmatrix}
+             x/\sqrt{5}+2y/\sqrt{5}+1 \\
+             -2x/\sqrt{5}+y/\sqrt{5}+1 
+           \end{pmatrix}$
+      \end{exparts}
+    \end{answer}
+  \item \label{exer:IsometryFacts}
+     \begin{exparts}
+       \partsitem The proof that a map that is distance-preserving and 
+         sends the zero vector to itself incidentally shows that
+         such a map is one-to-one and onto
+         (the point in the domain determined by $d_0$, $d_1$, and $d_2$
+         corresponds to the point in the codomain determined by those
+         three).
+         Therefore any distance-preserving map has an inverse.
+         Show that the inverse is also distance-preserving.
+       \partsitem Prove that congruence is an equivalence relation 
+         between plane figures.
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem Let $f$ be distance-preserving and consider $f^{-1}$.
+           Any two points in the codomain can be written as $f(P_1)$ and
+           $f(P_2)$.
+           Because $f$ is distance-preserving, the distance from $f(P_1)$
+           to $f(P_2)$ equals the distance from $P_1$ to $P_2$.
+           But this is exactly what is required for $f^{-1}$ to be
+           distance-preserving.
+         \partsitem Any plane figure $F$ is congruent to itself via the
+           identity map $\map{\identity}{\Re^2}{\Re^2}$, which is obviously
+           distance-preserving.
+           If $F_1$ is congruent to $F_2$ (via some $f$) then 
+           $F_2$ is congruent to $F_1$ via $f^{-1}$, which is 
+           distance-preserving by the prior item.
+           Finally, if $F_1$ is congruent to $F_2$ (via some $f$) and
+           $F_2$ is congruent to $F_3$ (via some $g$) then $F_1$ is
+           congruent to $F_3$ via $\composed{g}{f}$, which is easily checked
+           to be distance-preserving.
+       \end{exparts}
+     \end{answer}
+  \item \label{exer:HomoCrds}
+    In practice the matrix for the distance-preserving linear transformation
+    and the translation are often combined into one.
+    Check that these two computations yield the same
+    first two components.
+        \begin{equation*}
+           \begin{pmatrix}
+             a  &c  \\
+             b  &d
+           \end{pmatrix}
+           \colvec{x  \\ y}
+           +\colvec{e \\ f}
+           \qquad
+           \begin{pmatrix}
+             a  &c  &e \\
+             b  &d  &f \\
+             0  &0  &1
+           \end{pmatrix}
+           \colvec{x  \\ y \\ 1}
+        \end{equation*}
+    (These are 
+     \definend{homogeneous coordinates}\index{homogeneous coordinates};
+     see the Topic on Projective Geometry).
+     \begin{answer}
+       The first two components of each are $ax+cy+e$ and $bx+dy+f$.
+     \end{answer}
+  \item \label{exer:GeomInvDistPre}
+    \begin{exparts}
+     \partsitem Verify that the properties described 
+       in the second paragraph of this Topic as invariant
+       under distance-preserving maps are indeed so.
+     \partsitem Give two more properties that are of interest 
+       in Euclidean geometry from your experience in studying that
+       subject that are also invariant under distance-preserving maps.
+     \partsitem Give a property that is not of interest in Euclidean 
+       geometry and is not invariant under distance-preserving maps.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The Pythagorean Theorem gives that
+          three points are 
+          colinear if and only if
+          (for some ordering of them into $P_1$, $P_2$, and $P_3$),
+          $\dist(P_1,P_2)+\dist(P_2,P_3)=\dist(P_1,P_3)$.
+          Of course, where $f$ is distance-preserving, this holds
+          if and only if
+          $\dist(f(P_1),f(P_2))+\dist(f(P_2),f(P_3))=\dist(f(P_1),f(P_3))$,
+          which, again by Pythagoras, is true if and only if
+          $f(P_1)$, $f(P_2)$, and $f(P_3)$ are colinear.
+        
+          The argument for betweeness is similar (above, $P_2$ is 
+          between $P_1$ and $P_3$).
+
+          If the figure $F$ is a triangle then it is the union of three
+          line segments $P_1P_2$, $P_2P_3$, and $P_1P_3$.
+          The prior two paragraphs together show that the property of
+          being a line segment is invariant.
+          So $f(F)$ is the union of three line segments, and so is a 
+          triangle.
+
+          A circle $C$ centered at $P$ and of radius $r$ is the set of
+          all points $Q$ such that $\dist(P,Q)=r$.
+          Applying the distance-preserving map $f$ gives that the image
+          $f(C)$ is the set of all $f(Q)$ subject to the condition that
+          $\dist(P,Q)=r$.
+          Since $\dist(P,Q)=\dist(f(P),f(Q))$, the set $f(C)$ is also
+          a circle, with center $f(P)$ and radius $r$.
+        \partsitem Here are two that are easy to verify: (i)~the
+          property of being a right triangle, and (ii)~the property of
+          two lines being parallel.
+        \partsitem One that was mentioned in the section is the `sense' of
+          a figure.
+          A triangle whose vertices read clockwise as $P_1$, $P_2$, $P_3$
+          may, under a distance-preserving map, be sent to a triangle
+          read $P_1$, $P_2$, $P_3$ counterclockwise.
+      \end{exparts}
+    \end{answer}
+\end{exercises}
+\index{matrix!orthonormal|)}
+\index{orthonormal matrix|)}
+\endinput
+

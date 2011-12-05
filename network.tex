@@ -1,0 +1,560 @@
+% Chapter 1, Topic from _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-09
+\topic{Analyzing Networks}
+\index{networks|(}
+The diagram below shows some of a car's electrical network.
+The battery is on the left, drawn as stacked line segments. 
+The wires are drawn as lines, shown straight and with sharp right angles
+for neatness.
+Each light is a circle enclosing a loop.
+\begin{center}
+  \includegraphics{ch1.46}
+\end{center}
+The designer of such a network needs to answer questions like: 
+How much electricity flows 
+when both the hi-beam headlights and the brake lights are on?
+Below, we will use linear systems to analyze simpler versions of
+electrical networks. 
+
+For the analysis we need two facts about electricity 
+and two facts about electrical networks.
+
+The first fact about electricity is that a battery is like a pump:~it 
+provides a force impelling the electricity to flow through the 
+circuits connecting the battery's ends, if there are any such circuits.  
+We say that the battery provides a \definend{potential}\index{potential}
+to flow.
+Of course, this network accomplishes its function when, as the electricity  
+flows through a circuit, it goes through a light.
+For instance, when the driver steps on the brake then the switch makes contact
+and a circuit is formed on the left side of the
+diagram, and the electrical current flowing through that circuit will
+make the brake lights go on, warning drivers behind.
+
+The second electrical fact is that in some 
+kinds of network components 
+the amount of flow is proportional to the force provided by the battery.
+That is, for each such component there is a number,  
+it's \definend{resistance},\index{resistance}
+such that the potential is equal to the flow times the resistance.
+The units of measurement are: potential is described in \definend{volts},
+the rate of flow is in \definend{amperes},
+and resistance to the flow is in \definend{ohms}.
+These units are defined so that
+$\mbox{volts}=\mbox{amperes}\cdot\mbox{ohms}$.
+
+Components with this property,
+that the voltage-amperage response curve is a line through the origin,
+are called \definend{resistors}.\index{resistor}
+(Light bulbs such as the ones shown above are not this kind of component,
+because their ohmage changes as they heat up.)
+For example, if a resistor measures $2$~ohms 
+then wiring it to a $12$~volt battery 
+results in a flow of $6$~amperes.
+Conversely, if we have flow of electrical current of
+$2$~amperes through it then there must be 
+a $4$~volt potential difference  
+between it's ends. 
+This is the \definend{voltage drop}\index{voltage drop} across the 
+resistor.
+One way to think of a electrical circuits like the one above
+is that the battery provides a voltage rise while the other components 
+are voltage drops.
+
+The two facts that we need about networks are Kirchhoff's
+Laws.\index{Kirchhoff's Laws}\index{networks!Kirchhoff's Laws} 
+\begin{itemize}
+  \item[] \textit{Current Law.} For any point in a network, the flow in
+     equals the flow out.
+  \item[] \textit{Voltage Law.} Around any circuit the total drop equals 
+     the total rise.
+\end{itemize}
+In the above network there is only one voltage rise, at the battery, but
+some networks have more than one.
+
+For a start we can consider the network below.
+It has a battery that provides the potential to flow 
+and three resistors
+(resistors are drawn as zig-zags).
+When components are wired one after another, as here,
+they are said to be in \definend{series}.\index{circuits!series}
+\begin{center}
+  \includegraphics{ch1.35}
+\end{center}
+By Kirchhoff's Voltage Law, because the voltage rise is
+$20$~volts, the total voltage drop must also be $20$~volts.
+Since the resistance from start to finish is
+$10$~ohms (the resistance of the wires is negligible),
+we get that the current is $(20/10)=2$~amperes. 
+Now, by Kirchhoff's Current Law, there are $2$~amperes through
+each resistor.
+(And therefore the voltage drops are: 
+$4$~volts across the $2$~oh m resistor,
+$10$~volts across the $5$~ohm resistor, 
+and $6$~volts across the $3$~ohm resistor.)
+
+The prior network is so simple that we didn't use a linear system, but
+the next network is more complicated.
+In this one, the resistors are in \definend{parallel}.\index{circuits!parallel}
+This network is more like the car lighting diagram shown earlier.
+\begin{center}
+  \includegraphics{ch1.36}
+\end{center}
+We begin by labeling the branches, shown below.
+Let the current through the left branch of the parallel portion
+be $i_1$ and that through
+the right branch be $i_2$, and also
+let the current through the battery be $i_0$.
+(We are following Kirchoff's Current Law; for instance, all points in the 
+right branch have the same current, which we call $i_2$.
+Note that we don't need to know 
+the actual direction of flow\Dash if current flows in the direction 
+opposite to our arrow 
+then we will simply get a negative number in the solution.)
+\begin{center}
+  \includegraphics{ch1.37}
+\end{center}
+The Current Law, applied to the point in the upper right
+where the flow $i_0$ meets $i_1$ and $i_2$, gives that $i_0=i_1+i_2$. 
+Applied to the lower right it gives $i_1+i_2=i_0$.  
+In the circuit that loops out of the top of the battery, 
+down the left branch of the
+parallel portion, and back into the bottom of the battery, the voltage
+rise is $20$ while the voltage drop is $i_1\cdot 12$, so
+the Voltage Law gives that $12i_1=20$.
+Similarly, the circuit from the battery to the right branch and back to the
+battery gives that $8i_2=20$.
+And, in the circuit that simply loops around in 
+the left and right branches of the parallel portion 
+(arbitrarily taken clockwise), 
+there is a voltage rise of $0$ and a voltage drop of $8i_2-12i_1$
+so the Voltage Law gives that $8i_2-12i_1=0$.
+\begin{displaymath}
+  \begin{linsys}{3}
+   i_0&- &i_1    &-  &i_2   &=  &0 \\
+  -i_0&+ &i_1    &+  &i_2   &=  &0  \\
+      &  &12i_1  &   &      &=  &20  \\
+      &  &       &   &8i_2  &=  &20  \\
+      &  &-12i_1 &+  &8i_2  &=  &0  
+  \end{linsys}
+\end{displaymath}
+The solution
+is $i_0=25/6$, $i_1=5/3$, and $i_2=5/2$, all in amperes.
+(Incidentally, this illustrates that redundant equations do indeed arise in
+practice.) 
+
+Kirchhoff's laws can be used to
+establish the electrical properties of networks of great complexity.
+The next diagram shows
+five resistors, wired in 
+a \definend{series-parallel}\index{circuits!series-parallel} 
+way.
+\begin{center}
+  \includegraphics{ch1.38}
+\end{center}
+This network is a \definend{Wheatstone bridge}\index{Wheatstone bridge} 
+(see \nearbyexercise{exer:WheatstoneBr}).
+To analyze it, we can place the arrows in this way.
+\begin{center}
+  \includegraphics{ch1.39}
+\end{center}
+Kirchoff's Current Law, applied to the
+top node, the left node, the right node, and the bottom node gives
+these.
+\begin{align*}
+   i_0     &=  i_1+i_2  \\
+   i_1     &=  i_3+i_5  \\
+   i_2+i_5 &=  i_4      \\
+   i_3+i_4 &=  i_0
+\end{align*} 
+Kirchhoff's Voltage Law,
+applied to the inside loop (the $i_0$ to~$i_1$ to~$i_3$ to~$i_0$ loop), 
+the outside loop, 
+and the upper loop not involving the battery, gives these.  
+\begin{align*}
+      5i_1+10i_3  &= 10   \\
+      2i_2+4i_4   &= 10   \\
+      5i_1+50i_5-2i_2  &= 0     
+\end{align*} 
+Those suffice to determine the solution 
+$i_0=7/3$, $i_1=2/3$, $i_2=5/3$, 
+$i_3=2/3$, $i_4=5/3$, and $i_5=0$. 
+
+Networks of other kinds, not just electrical ones, can also be
+analyzed in this way.
+For instance, networks of streets are given in the exercises.
+ 
+\begin{exercises}
+  \item[] \textit{Many of the systems for these problems
+      are mostly easily solved on a computer.}
+  \item 
+    Calculate the amperages in each part of each network.
+    \begin{exparts}
+      \partsitem This is a simple network.
+          \begin{center}
+             \includegraphics{ch1.40}
+        \end{center}
+      \partsitem Compare this one with the parallel case discussed above.
+          \begin{center}
+             \includegraphics{ch1.41}
+        \end{center}
+      \partsitem This is a reasonably complicated network.
+          \begin{center}
+           \includegraphics{ch1.42}
+        \end{center}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The total resistance is $7$~ohms.
+          With a $9$~volt potential, the flow will be $9/7$~amperes.
+          Incidentally, the voltage drops will then be:~$27/7$~volts
+          across the $3$~ohm resistor, and $18/7$~volts across each of
+          the two $2$~ohm resistors.        
+        \partsitem One way to do this network is to note that the $2$~ohm
+          resistor on the left has a voltage drop across it of $9$~volts
+          (and hence the flow through it is $9/2$~amperes), and the 
+          remaining portion on the right also has a voltage drop of 
+          $9$~volts, and so is analyzed as in the prior item.
+
+          We can also use linear systems.
+          \begin{center}
+            \includegraphics{ch1.48}
+          \end{center}
+          Using the variables from the diagram we get a linear system
+          \begin{equation*}
+            \begin{linsys}{4}
+              i_0  &- &i_1  &- &i_2  &  &    &= &0  \\
+                   &  &i_1  &+ &i_2  &- &i_3 &= &0  \\
+                   &  &2i_1 &  &     &  &    &= &9  \\  
+                   &  &     &  &7i_2 &  &    &= &9       
+            \end{linsys}
+          \end{equation*}
+          which yields the unique solution $i_1=81/14$, $i_1=9/2$, $i_2=9/7$,
+          and $i_3=81/14$.
+
+          Of course, the first and second paragraphs yield the same answer.
+          Esentially, in the first paragraph we solved the linear system 
+          by a method less systematic than Gauss' method, solving for some
+          of the variables and then substituting.  
+        \partsitem
+          Using these variables
+          \begin{center}
+            \includegraphics{ch1.49}
+          \end{center}
+          one linear system that suffices to yield a unique solution is this.
+          \begin{equation*}
+            \begin{linsys}{7}
+              i_0  &- &i_1  &- &i_2  &  &    &  &    & &    & &    &= &0  \\
+                   &  &     &  &i_2  &- &i_3 &- &i_4 & &    & &    &= &0  \\
+                   &  &     &  &     &  &i_3 &+ &i_4 &-&i_5 & &    &= &0  \\  
+                   &  &i_1  &  &     &  &    &  &    &+&i_5 &-&i_6 &= &0  \\  
+                   &  &3i_1 &  &     &  &    &  &    & &    & &    &= &9  \\  
+                   &  &     &  &3i_2 &  &    &+ &2i_4&+&2i_5& &    &= &9  \\  
+                   &  &     &  &3i_2 &+ &9i_3&  &    &+&2i_5& &    &= &9  
+            \end{linsys}
+          \end{equation*}
+          (The last three equations come from the circuit involving
+            $i_0$-$i_1$-$i_6$, 
+            the circuit involving $i_0$-$i_2$-$i_4$-$i_5$-$i_6$, 
+            and the circuit with $i_0$-$i_2$-$i_3$-$i_5$-$i_6$.)
+           Octave gives
+            $i_0=4.35616$, $i_1=3.00000$, $i_2=1.35616$,
+            $i_3=0.24658$, $i_4=1.10959$, $i_5=1.35616$, $i_6=4.35616$.
+      \end{exparts}
+    \end{answer}
+  \item 
+    In the first network that we analyzed, with the three resistors  
+    in series, we just added to get
+    that they acted together like a single resistor of $10$~ohms.
+    We can do a similar thing for parallel circuits. 
+    In the second circuit analyzed,
+    \begin{center}
+      \includegraphics{ch1.36}
+    \end{center}
+    the electric current through the battery is $25/6$~amperes.
+    Thus, the parallel portion is 
+    \definend{equivalent}\index{resistance:equivalent}
+    to a single resistor of 
+    $20/(25/6)=4.8$~ohms. 
+    \begin{exparts}
+      \partsitem What is the equivalent resistance if we change
+         the $12$~ohm resistor to $5$~ohms?
+      \partsitem What is the equivalent resistance if the two are each
+         $8$~ohms?
+      \partsitem Find the formula for the equivalent resistance if
+         the two resistors in parallel are $r_1$~ohms and $r_2$~ohms.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          Using the variables from the earlier analysis,
+          \begin{displaymath}
+            \begin{linsys}{3}
+              i_0&- &i_1    &-  &i_2   &=  &0 \\
+             -i_0&+ &i_1    &+  &i_2   &=  &0  \\
+                 &  &5i_1   &   &      &=  &20  \\
+                 &  &       &   &8i_2  &=  &20  \\
+                 &  &-5i_1  &+  &8i_2  &=  &0  
+            \end{linsys}
+          \end{displaymath}
+          The current flowing in each branch is then
+          is $i_2=20/8=2.5$, $i_1=20/5=4$, and $i_0=13/2=6.5$, all in amperes.
+          Thus the parallel portion is acting like a single resistor
+          of size $20/(13/2)\approx 3.08$~ohms.
+        \partsitem 
+          A similar analysis gives that
+          is $i_2=i_1=20/8=4$ and $i_0=40/8=5$~ amperes.
+          The equivalent resistance is $20/5=4$~ohms.
+        \partsitem 
+          Another analysis like the prior ones gives 
+          is $i_2=20/r_2$, $i_1=20/r_1$, 
+          and $i_0=20(r_1+r_2)/(r_1r_2)$, all in amperes.
+          So the parallel portion is acting like a single resistor of
+          size $20/i_1=r_1r_2/(r_1+r_2)$~ohms.
+          (This equation is often stated as:~the equivalent 
+          resistance~$r$ satisfies $1/r=(1/r_1)+(1/r_2)$.)
+      \end{exparts}
+    \end{answer}
+  \item 
+    For the car dashboard example that opens this Topic, solve
+    for these amperages
+    (assume that all resistances are $2$~ohms).
+    \begin{exparts}
+     \partsitem If the driver is stepping on the brakes, so the
+       brake lights are on, and no other circuit is closed.
+     \partsitem If the hi-beam headlights and the brake lights are on.
+%      \partsitem If the hi-beam headlights, brake lights, 
+%        and dome light are all on.
+%        (Perhaps the driver, realizing that the dome light is on and so
+%        that the door must be open, has stepped on the brake!)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The circuit looks like this.
+          \begin{center}
+            \includegraphics{ch1.52}
+          \end{center}
+        \partsitem The circuit looks like this.
+          \begin{center}
+            \includegraphics{ch1.53}
+          \end{center}
+      \end{exparts}
+    \end{answer}
+\item \label{exer:WheatstoneBr} 
+   Show that, in this Wheatstone Bridge, 
+   \begin{center}
+     \includegraphics{ch1.47}
+   \end{center}
+   $r_2/r_1$ equals $r_4/r_3$ if and only if the current
+   flowing through $r_g$ is zero.
+   (The way that this device is used in practice is that an unknown
+   resistance at $r_4$ is compared to the other three 
+   $r_1$, $r_2$, and $r_3$.
+   At $r_g$ is placed a meter that shows the current.
+   The three resistances $r_1$, $r_2$, and $r_3$ are varied\Dash typically
+   they each have a calibrated knob\Dash until the 
+   current in the middle reads $0$,
+   and then the above equation gives the value of $r_4$.)
+   \begin{answer}
+     Not yet done.                             
+   \end{answer}
+   %  \item Prove Th\`evenin's Theorem.
+\item[]\textit{There are networks other than electrical ones, and 
+              we can ask how well Kirchoff's laws apply to them.
+              The remaining questions consider an extension to 
+              networks of streets.}
+\item 
+    Consider this traffic circle.
+    \begin{center}
+      \includegraphics{ch1.43}
+     \end{center}
+     This is the traffic volume, in units of cars per five minutes.    
+     \begin{center}
+       \begin{tabular}{r|lll}
+                            &\textit{North}  &\textit{Pier}  &\textit{Main}  \\
+         \hline
+         \textit{into}      &100             &150            &25      \\
+         \textit{out of}    &75              &150            &50       
+       \end{tabular}
+    \end{center}
+    We can set up equations to model how the traffic flows.   
+    \begin{exparts}
+      \partsitem 
+         Adapt Kirchoff's Current Law to this circumstance.
+         Is it a reasonable modelling assumption?
+      \partsitem 
+         Label the three between-road arcs in the circle with a variable.
+         Using the (adapted) Current Law,
+         for each of the three in-out intersections state an equation
+         describing the traffic flow at that node.
+      \partsitem 
+         Solve that system.
+      \partsitem
+         Interpret your solution.
+      \partsitem
+         Restate the Voltage Law for this circumstance.
+         How reasonable is it?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+           An adaptation is:~in any intersection the flow in equals the 
+           flow out.
+           It does seem reasonable in this case, unless cars are stuck at
+           an intersection for a long time.
+        \partsitem
+           We can label the flow in this way.
+           \begin{center}
+             \includegraphics{ch1.44}
+           \end{center}
+           Because $50$ cars leave via Main while $25$~cars enter, 
+           $i_1-25=i_2$.
+           Similarly Pier's in/out balance means that $i_2=i_3$ and
+           North gives $i_3+25=i_1$. 
+           We have this system.
+           \begin{equation*}
+             \begin{linsys}{3}
+               i_1  &-  &i_2  &   &     &=  &25  \\
+                        &i_2  &-  &i_3  &=  &0   \\
+              -i_1  &   &     &+  &i_3  &=  &-25
+             \end{linsys}
+           \end{equation*}
+        \partsitem 
+           The row operations $\rho_1+\rho_2$ and $rho_2+\rho_3$ lead
+           to the conclusion that there are infinitely many solutions.
+           With $i_3$ as the parameter,
+           \begin{equation*}
+             \set{\colvec{25+i_3  \\ i_3  \\i_3} \suchthat i_3\in\Re}
+           \end{equation*}
+           of course, since the problem is stated in number of cars, we
+           might restrict $i_3$ to be a natural number.
+        \partsitem
+           If we picture an initially-empty circle with the given input/output
+           behavior, we can superimpose a $z_3$-many cars circling endlessly
+           to get a new solution.
+        \partsitem
+           A suitable restatement might be:~the number of cars entering the 
+           circle must equal the number of cars leaving.
+           The reasonableness of this one is not as clear.
+           Over the five minute time period it could easily work out that
+           a half dozen more cars entered than left, 
+           although the into/out of table in the problem statement 
+           does have that this property is satisfied.
+           In any event it is of no help in getting a unique solution
+           since for that we need to know the number of cars circling
+           endlessly.
+      \end{exparts}
+    \end{answer}
+  \item 
+     This is a network of streets. 
+          \begin{center}
+            \includegraphics{ch1.44}
+             \end{center}
+         The hourly flow of cars into this network's
+         entrances, and out of its exits can be observed.
+          \begin{center}
+            \begin{tabular}{r|rrrrr}
+                 &\multicolumn{1}{c}{\textit{east Winooski}}  
+                 &\multicolumn{1}{c}{\textit{west Winooski}}  
+                 &\multicolumn{1}{c}{\textit{Willow}}  
+                 &\multicolumn{1}{c}{\textit{Jay}} 
+                 &\multicolumn{1}{c}{\textit{Shelburne}} \\ 
+                 \hline
+              \textit{into}      &80    &50    &65     &--    &40      \\
+              \textit{out of}    &30    &5     &70     &55    &75      
+            \end{tabular}
+          \end{center}
+          (Note that to reach Jay a
+          car must enter the network via some other road first, which is why
+          there is no `into Jay' entry in the table.
+          Note also that over a long period of time, 
+          the total in must approximately equal the total 
+          out, which is why both rows add to $235$~cars.)
+          Once inside the network, the traffic may flow in different
+          ways, perhaps filling Willow and leaving Jay 
+          mostly empty, or perhaps flowing in some other way.
+          Kirchhoff's Laws give the limits on that freedom.
+    \begin{exparts}
+       \partsitem Determine the restrictions on the flow inside this network 
+          of streets by setting
+          up a variable for each block, establishing the equations, 
+          and solving them.
+          Notice that some streets are one-way only.
+          (\textit{Hint:}~this will not yield a unique solution, since traffic
+          can flow through this network in various ways;
+          you should get at least one free variable.)
+       \partsitem Suppose that some construction is proposed for
+         Winooski Avenue East between Willow and Jay, 
+         so traffic on that block will be reduced.
+         What is the least amount of traffic flow that can be
+         allowed on that block without disrupting the  
+         hourly flow into and out of the network?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Here is a variable for each unknown block; each known
+          block has the flow shown.
+          \begin{center}
+            \includegraphics{ch1.51}          
+          \end{center}
+          We apply Kirchoff's principle that the flow into the intersection
+          of Willow and Shelburne must equal the flow out to get
+          $i_1+25=i_2+125$.
+          Doing the intersections from right to left and top to bottom
+          gives these equations.
+          \begin{equation*}
+            \begin{linsys}{7}
+              i_1 &- &i_2 &  &    &  &    &  &    &  &    &  &    &= &10  \\
+             -i_1 &  &    &+ &i_3 &  &    &  &    &  &    &  &    &= &15   \\
+                  &  &i_2 &  &    &+ &i_4 &  &    &  &    &  &    &= &5   \\
+                  &  &    &  &-i_3&- &i_4 &  &    &+ &i_6 &  &    &= &-50 \\
+                  &  &    &  &    &  &    &  &i_5 &  &    &- &i_7 &= &-10 \\
+                  &  &    &  &    &  &    &  &    &  &-i_6&+ &i_7 &= &30 
+            \end{linsys}
+          \end{equation*}
+          The row operation $\rho_1+\rho_2$ followed by $\rho_2+\rho_3$
+          then $\rho_3+\rho_4$ and $\rho_4+\rho_5$ and finally $\rho_5+\rho_6$
+          result in this system.
+          \begin{equation*}
+            \begin{linsys}{7}
+              i_1 &- &i_2 &  &    &  &    &  &    &  &    &  &    &= &10  \\
+                  &  &-i_2&+ &i_3 &  &    &  &    &  &    &  &    &= &25   \\
+                  &  &    &  &i_3 &+ &i_4 &- &i_5 &  &    &  &    &= &30  \\
+                  &  &    &  &    &  &    &  &-i_5&+ &i_6 &  &    &= &-20  \\
+                  &  &    &  &    &  &    &  &    &  &-i_6&+ &i_7 &= &-30 \\
+                  &  &    &  &    &  &    &  &    &  &    &  &0   &= &0   
+            \end{linsys}
+          \end{equation*}
+          Since the free variables are $i_4$ and $i_7$ we take them as 
+          parameters.
+          \begin{equation*}
+          \begin{split}
+            i_6  &=  i_7-30  \\
+            i_5  &=  i_6+20=(i_7-30)+20=i_7-10 \\
+            i_3  &=  -i_4+i_5+30=-i_4+(i_7-10)+30=-i_4+i_7+20 \\
+            i_2  &=  i_3-25=(-i_4+i_7+20)-25=-i_4+i_7-5 \\
+            i_1  &=  i_2+10=(-i_4+i_7-5)+10=-i_4+i_7+5
+          \end{split}
+          \tag{}\end{equation*}
+          Obviously $i_4$ and $i_7$ have to be positive, and in fact
+          the first equation shows that $i_7$ must be at least $30$.
+          If we start with $i_7$, then the $i_2$~equation shows that
+          $0\leq i_4\leq i_7-5$.
+        \partsitem We cannot take $i_7$ to be zero or else $i_6$ will
+          be negative (this would mean cars going the wrong way on the
+          one-way street Jay).
+          We can, however, take $i_7$ to be as small as $30$, and then 
+          there are many suitable $i_4$'s.
+          For instance, the solution
+          \begin{equation*}
+            (i_1,i_2,i_3,i_4,i_5,i_6,i_7)
+            =
+            (35,25,50,0,20,0,30)
+          \end{equation*}
+          results from choosing $i_4=0$.
+      \end{exparts}
+    \end{answer}
+\end{exercises}
+\index{networks|)}
+\endinput

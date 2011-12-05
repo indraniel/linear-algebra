@@ -1,0 +1,2473 @@
+% Chapter 3, Section 1 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-11
+\chapter{Maps Between Spaces}
+
+%\begin{comment}
+\section{Isomorphisms}
+\index{isomorphism|(}
+In the examples following the definition of a vector space
+we developed the intuition that some spaces are ``the same'' as others.
+For instance, the space of two-tall column vectors and
+the space of two-wide row vectors
+are not equal because their 
+elements\Dash column vectors and row vectors\Dash are 
+not equal, but we have 
+the idea that these spaces differ only in how their elements appear.
+We will now make this idea precise.
+
+This section illustrates a common aspect of a mathematical investigation.
+With the help of some examples, we've gotten an idea.
+We will next give a formal definition, and then
+we will produce some results backing our contention 
+that the definition captures the idea.
+We've seen this happen already, 
+for instance, in the first section of the Vector Space chapter.
+There, the study of linear systems
+led us to consider collections closed under linear combinations.
+We defined such a collection as a vector space, and
+we followed it with some supporting results.
+
+Of course, that definition wasn't an end point, 
+instead it led to new insights such as the idea of a basis.
+Here too, after producing a definition, and supporting it,
+we will get two surprises (pleasant ones).
+First, we will find that 
+the definition applies to some unforeseen, and interesting, cases.
+Second, the study of the definition will lead to new ideas.
+In this way, our investigation will build a momentum.
+
+
+
+
+
+
+
+
+
+
+\subsection{Def{}inition and Examples}
+We start with two examples
+that suggest the right definition. 
+
+\begin{example}  \label{exam:TwoWideIsoTwoTall}
+Consider the example mentioned above, the 
+space of two-wide row vectors and
+the space of two-tall column vectors.
+They are ``the same'' in that if we associate the vectors 
+that have the same components, e.g.,
+\begin{equation*}
+   \rowvec{1 &2} \quad\longleftrightarrow\quad \colvec{1 \\ 2}
+\end{equation*}
+then this correspondence preserves the operations, for instance this addition
+\begin{equation*}
+  \rowvec{1 &2}+\rowvec{3 &4}=\rowvec{4 &6}
+  \quad\longleftrightarrow\quad
+  \colvec{1 \\ 2}+\colvec{3 \\ 4}=\colvec{4 \\ 6}
+\end{equation*}
+and this scalar multiplication.
+\begin{equation*}
+  5\cdot\rowvec{1  &2}=\rowvec{5 &10}
+  \quad\longleftrightarrow\quad
+  5\cdot\colvec{1 \\ 2}=\colvec{5 \\ 10}
+\end{equation*}
+More generally stated, under the correspondence
+\begin{equation*}
+  \rowvec{a_0  &a_1}
+  \quad\longleftrightarrow\quad
+  \colvec{a_0 \\ a_1}
+\end{equation*} 
+both operations are preserved:
+\begin{equation*}
+  \rowvec{a_0  &a_1}+\rowvec{b_0  &b_1}=\rowvec{a_0+b_0 &a_1+b_1}
+  \hfill\longleftrightarrow\hfill
+  \colvec{a_0 \\ a_1}+\colvec{b_0  \\ b_1}=\colvec{a_0+b_0  \\ a_1+b_1}
+\end{equation*}
+and
+\begin{equation*}
+ r\cdot\rowvec{a_0 &a_1}=\rowvec{ra_0 &ra_1}
+  \quad\longleftrightarrow\quad
+ r\cdot\colvec{a_0  \\ a_1}=\colvec{ra_0  \\ ra_1}
+\end{equation*}
+(all of the variables are real numbers).
+\end{example}
+
+\begin{example} \label{exam:PolyTwoIsoRThree}  
+Another two spaces we can think of as ``the same'' are       
+\( \polyspace_2 \), the space of quadratic polynomials,  and \( \Re^3 \). 
+A natural correspondence is this.
+\begin{equation*}
+  a_0+a_1x+a_2x^2
+  \quad\longleftrightarrow\quad
+  \colvec{a_0 \\ a_1 \\ a_2}
+%  \qquad
+  \tag*{\mbox{(e.g., $1+2x+3x^2\,\longleftrightarrow\,\colvec{1 \\ 2 \\ 3}$)}}
+\end{equation*}
+The structure is preserved:~corresponding elements add in a corresponding way
+\begin{equation*}
+    \mbox{\begin{tabular}{r}
+        \( a_0+a_1x+a_2x^2 \)  \\
+     +\,\,\( b_0+b_1x+b_2x^2 \)  \\ \hline
+        \( (a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2 \)
+     \end{tabular} }
+    \quad\longleftrightarrow\quad
+    \colvec{a_0 \\ a_1 \\ a_2}
+    +\colvec{b_0 \\ b_1 \\ b_2}
+    =\colvec{a_0+b_0 \\ a_1+b_1 \\ a_2+b_2}
+\end{equation*}
+and scalar multiplication corresponds also.
+\begin{equation*}
+  r\cdot(a_0+a_1x+a_2x^2)=
+    (ra_0)+(ra_1)x+(ra_2)x^2
+  \quad\longleftrightarrow\quad
+  r\cdot\colvec{a_0 \\ a_1 \\ a_2}
+  =\colvec{ra_0 \\ ra_1 \\ ra_2}
+\end{equation*}
+\end{example}
+
+\begin{definition}
+\label{def:Isomorphism}
+An \definend{isomorphism}\index{isomorphism!definition}%
+\index{vector space!isomorphism}
+between two vector spaces $V$ and $W$
+is a map \( \map{f}{V}{W} \) that
+\begin{enumerate}
+  \item is a correspondence:\index{correspondence}
+     \( f \) is one-to-one and onto;\footnotemark % keep fn in minipage
+                   %\appendrefs{one-to-one and onto maps}
+  \item \definend{preserves structure:}\index{function!structure preserving}
+   if \( \vec{v}_1,\vec{v}_2\in V \) then
+   \begin{equation*}
+      f(\vec{v}_1+\vec{v}_2)=f(\vec{v}_1)+f(\vec{v}_2)
+   \end{equation*}
+   and if \( \vec{v}\in V \) and \( r\in\Re \) then
+   \begin{equation*}
+         f(r\vec{v})=r\,f(\vec{v})
+   \end{equation*}
+\end{enumerate}
+(we write \( V\isomorphicto W \), read ``\( V \) is isomorphic to \( W \)'',
+when such a map exists).
+\end{definition}\footnotetext{More information on one-to-one and onto maps 
+                              is in the appendix.}
+
+\noindent (``Morphism''\index{morphism} means map, 
+so ``isomorphism'' means a map expressing sameness.)
+
+\begin{example}  \label{ex:CheckMapIsIso}
+The vector space
+\(  G=\set{c_1\cos\theta+c_2\sin\theta\suchthat c_1,c_2\in\Re} \)
+of functions of \( \theta \) is isomorphic to the vector space
+\( \Re^2 \) under this map.
+\begin{equation*}
+  c_1\cos\theta+c_2\sin\theta\mapsunder{f}\colvec{c_1 \\ c_2}
+\end{equation*}
+We will check this by going through the conditions in the definition.
+
+We will first verify condition~(1), that the map is a 
+correspondence between the sets underlying the spaces.
+
+To establish that $f$ is one-to-one, 
+we must prove that \( f(\vec{a})=f(\vec{b}) \) only when \( \vec{a}=\vec{b} \).
+If
+\begin{equation*}
+   f(a_1\cos\theta+a_2\sin\theta)=f(b_1\cos\theta+b_2\sin\theta)
+\end{equation*}
+then, by the definition of $f$,
+\begin{equation*}
+  \colvec{a_1 \\ a_2}=\colvec{b_1 \\ b_2}
+\end{equation*}
+from which we can conclude that \( a_1=b_1 \) and \( a_2=b_2 \)
+because column vectors are equal only when they have equal components.
+We've proved that \( f(\vec{a})=f(\vec{b}) \) implies 
+that \( \vec{a}=\vec{b} \),
+which shows that \( f \) is one-to-one.
+
+To check that $f$ is
+onto we must check that any member of the codomain \( \Re^2 \)
+is the image of some member of the domain $G$.
+But that's clear\Dash any
+\begin{equation*}
+   \colvec{x \\ y}\in \Re^2
+\end{equation*}
+is the image under $f$ of \( x\cos\theta+y\sin\theta\in G \).
+
+Next we will verify condition~(2), that $f$ preserves structure. 
+
+This computation shows that \( f \) preserves addition.
+\begin{multline*}
+  f\bigl(\,(a_1\cos\theta+a_2\sin\theta)
+      +(b_1\cos\theta+b_2\sin\theta)\,\bigr)                     \\
+ \begin{aligned}
+  &=f\bigl(\,(a_1+b_1)\cos\theta+(a_2+b_2)\sin\theta\,\bigr)   \\
+  &=\colvec{a_1+b_1 \\ a_2+b_2}   \\
+  &=\colvec{a_1 \\ a_2}+\colvec{b_1 \\ b_2}   \\
+  &=f(a_1\cos\theta+a_2\sin\theta)+f(b_1\cos\theta+b_2\sin\theta)
+ \end{aligned}
+\end{multline*}
+A similar computation shows that $f$ preserves scalar multiplication.
+\begin{align*}
+  f\bigl(\,r\cdot(a_1\cos\theta+a_2\sin\theta)\,\bigr)
+  &=f(\,ra_1\cos\theta+ra_2\sin\theta\,)   \\
+  &=\colvec{ra_1 \\ ra_2}   \\
+  &=r\cdot\colvec{a_1 \\ a_2}   \\
+  &=r\cdot\, f(a_1\cos\theta+a_2\sin\theta)
+\end{align*}
+
+With that,
+conditions (1) and~(2) are verified, 
+so we know that $f$ is an isomorphism
+and we can say that the spaces are isomorphic $G\isomorphicto\Re^2$.
+\end{example}
+
+\begin{example} \label{ex:LinComboThreeIsoPTwo}
+Let \( V \) be the space 
+\( \set{c_1x+c_2y+c_3z\suchthat c_1,c_2,c_3\in\Re} \)
+of linear combinations of three variables $x$, $y$, and $z$, 
+under the natural addition and scalar multiplication operations. 
+Then $V$ is isomorphic to $\polyspace_2$, the space of quadratic 
+polynomials.
+
+To show this we will produce an isomorphism map.
+There is more than one possibility; for instance, here are four.
+\begin{center}
+  \begin{tabular}{c}
+    $c_1x+c_2y+c_3z$
+  \end{tabular}  \quad
+  \begin{tabular}{rl}
+      $\mapsunder{f_1}$    &$c_1+c_2x+c_3x^2$  \\
+      $\mapsunder{f_2}$    &$c_2+c_3x+c_1x^2$  \\
+      $\mapsunder{f_3}$    &$-c_1-c_2x-c_3x^2$  \\
+      $\mapsunder{f_4}$    &$c_1+(c_1+c_2)x+(c_1+c_3)x^2$
+  \end{tabular}
+\end{center}
+The first map is the more natural correspondence
+in that it just carries the coefficients over. 
+However, below
+we shall verify that the second one is an isomorphism,
+to underline that there are isomorphisms
+other than just the obvious one 
+(showing that $f_1$ is an isomorphism is 
+\nearbyexercise{exer:NatMapAlsoIso}).
+
+To show that $f_2$ is one-to-one, we will prove that if
+$f_2(c_1x+c_2y+c_3z)=f_2(d_1x+d_2y+d_3z)$
+then $c_1x+c_2y+c_3z=d_1x+d_2y+d_3z$.
+The assumption that $f_2(c_1x+c_2y+c_3z)=f_2(d_1x+d_2y+d_3z)$
+gives, by the definition of $f_2$, 
+that $c_2+c_3x+c_1x^2=d_2+d_3x+d_1x^2$.
+Equal polynomials have equal coefficients, so 
+$c_2=d_2$, $c_3=d_3$, and $c_1=d_1$.
+Thus $f_2(c_1x+c_2y+c_3z)=f_2(d_1x+d_2y+d_3z)$ implies that
+$c_1x+c_2y+c_3z=d_1x+d_2y+d_3z$ and therefore $f_2$ is one-to-one.
+
+The map $f_2$ is onto because any member $a+bx+cx^2$ of the codomain 
+is the image of some member of the domain,
+namely it is the image of $cx+ay+bz$.
+For instance, $2+3x-4x^2$ is $f_2(-4x+2y+3z)$.
+
+The computations for structure preservation are like those 
+in the prior example.
+This map preserves addition
+\begin{multline*}
+  f_2\bigl((c_1x+c_2y+c_3z)
+        +(d_1x+d_2y+d_3z)\bigr)       \\
+ \begin{aligned}
+  &=f_2\bigl((c_1+d_1)x+(c_2+d_2)y+(c_3+d_3)z\bigr)   \\
+  &=(c_2+d_2)+(c_3+d_3)x+(c_1+d_1)x^2   \\
+  &=(c_2+c_3x+c_1x^2)+(d_2+d_3x+d_1x^2)   \\
+  &=f_2(c_1x+c_2y+c_3z)+f_2(d_1x+d_2y+d_3z)
+ \end{aligned}
+\end{multline*}
+and scalar multiplication.
+\begin{align*}
+  f_2\bigl(r\cdot(c_1x+c_2y+c_3z)\bigr)
+  &=f_2(rc_1x+rc_2y+rc_3z)   \\
+  &=rc_2+rc_3x+rc_1x^2   \\
+  &=r\cdot(c_2+c_3x+c_1x^2)   \\
+  &=r\cdot\, f_2(c_1x+c_2y+c_3z)
+\end{align*}
+Thus $f_2$ is an isomorphism and we write $V\isomorphicto\polyspace_2$.
+\end{example}
+
+We are sometimes interested in an isomorphism of a space with itself,
+called an \definend{automorphism}\index{automorphism}%
+\index{isomorphism!of a space with itself}.
+An identity map is an automorphism.
+The next two examples show that there are others.
+
+\begin{example} \label{exam:RigidPlaneMapsAutos}
+A \definend{dilation}\index{dilation}\index{automorphism!dilation}
+map $\map{d_s}{\Re^2}{\Re^2}$ that multiplies all vectors by a nonzero
+scalar $s$ is an automorphism of $\Re^2$.
+\begin{center} \small
+  \includegraphics{ch3.14}                                
+\end{center}
+A \definend{rotation\/}\index{rotation (or turning)}%
+\index{automorphism!rotation}
+or \definend{turning map}\index{turning map} $\map{t_{\theta}}{\Re^2}{\Re^2}$
+that rotates all vectors through an angle $\theta$ is an automorphism.
+\begin{center} \small
+  \includegraphics{ch3.15}                                
+\end{center}
+A third type of automorphism of $\Re^2$ is a map 
+$\map{f_\ell}{\Re^2}{\Re^2}$ that \definend{flips}
+or \definend{reflects}\index{reflection (or flip) about a line}%
+\index{automorphism!reflection}
+all vectors over a line $\ell$ through the origin.
+\begin{center} \small
+  \includegraphics{ch3.16}                                
+\end{center}
+See \nearbyexercise{exer:RigidPlaneMapsAutos}.
+\end{example}
+
+\begin{example} \label{ex:OORThreeToFourLinCom}
+Consider the space $\polyspace_5$ of polynomials of degree $5$
+or less and the map $f$ that sends a polynomial $p(x)$ to $p(x-1)$.
+For instance, under this map $x^2\mapsto (x-1)^2=x^2-2x+1$
+and $x^3+2x\mapsto (x-1)^3+2(x-1)=x^3-3x^2+5x-3$.
+This map is an automorphism of this space;
+the check is \nearbyexercise{exer:PolyToPolyLinSubst}.
+
+This isomorphism of $\polyspace_5$ with itself does more than just tell us
+that the space is ``the same'' as itself.
+It gives us some insight into the space's structure.
+For instance, below is shown a family of parabolas, graphs of members of 
+$\polyspace_5$.
+Each has a vertex at $y=-1$, and  
+the left-most one has zeroes at $-2.25$ and $-1.75$, 
+the next one has zeroes at $-1.25$ and $-0.75$, etc.
+\begin{center}
+  \includegraphics{ch3.13}                                
+\end{center}
+Geometrically, the substitution of \( x-1 \) for \( x \) in any function's
+argument shifts its graph to the right by one.
+Thus, $f(p_0)=p_1$ and 
+$f$'s action is to shift all of the parabolas to the right by one.
+Notice that the picture before $f$ is applied is the same as the 
+picture after $f$ is applied, because while each parabola moves to the 
+right, another one comes in from the left to take its place.
+This also holds true for cubics, etc.
+So the automorphism $f$ gives us the insight that $P_5$  
+has a certain
+horizontal-homogeneity; this space looks the same near $x=1$ as near $x=0$. 
+\end{example}
+
+
+As described in the preamble to this section, we will next 
+produce some results supporting the
+contention that the definition of isomorphism above  
+captures our intuition of vector spaces being the same.
+
+Of course the definition itself is persuasive:~a vector space 
+consists of two components, a set and some structure, 
+and the definition simply requires
+that the sets correspond and that the structures correspond also.
+Also persuasive are the examples above.
+In particular, \nearbyexample{exam:TwoWideIsoTwoTall}, which
+gives an isomorphism between the space of two-wide row vectors and 
+the space of two-tall column vectors,
+dramatizes our intuition that isomorphic spaces are
+the same in all relevant respects.
+Sometimes people say, where \( V\isomorphicto W \), that ``\( W \) is just
+\( V \) painted green''\Dash any differences are merely cosmetic.
+
+Further support for the definition, in case it is needed, 
+is provided by the following results that, taken together, suggest that
+all the things of interest in a vector space
+correspond under an isomorphism.
+Since we studied vector spaces to study linear combinations,
+``of interest'' means ``pertaining to linear combinations''.
+Not of interest is the way that the vectors are presented
+typographically (or their color!\spacefactor1000).
+
+As an example, although the definition of isomorphism doesn't explicitly
+say that the zero vectors must correspond, 
+it is a consequence of that definition.
+
+\begin{lemma}       \label{le:IsoSendsZeroToZero}
+An isomorphism maps a zero vector to a zero vector.
+\end{lemma}
+
+\begin{proof}
+Where \( \map{f}{V}{W} \) is an isomorphism, fix any \( \vec{v}\in V \).
+Then \( f(\zero_V)=f(0\cdot\vec{v})=0\cdot f(\vec{v})=\zero_W \). 
+\end{proof}
+
+The definition of isomorphism requires that sums of two vectors correspond and
+that so do scalar multiples.
+We can extend that to say that all linear combinations correspond.
+
+\begin{lemma}       \label{le:PresStructIffPresCombos}
+For any map \( \map{f}{V}{W} \) between vector spaces
+these statements are equivalent.
+\begin{tfae}
+   \item \( f \) preserves structure\index{function!structure preserving}
+     \begin{equation*}
+        f(\vec{v}_1+\vec{v}_2)=f(\vec{v}_1)+f(\vec{v}_2)
+         \quad\text{and}\quad
+        f(c\vec{v})=c\,f(\vec{v})
+     \end{equation*}
+   \item \( f \) preserves linear combinations of two vectors
+     \begin{equation*}
+        f(c_1\vec{v}_1+c_2\vec{v}_2)=c_1f(\vec{v}_1)+c_2f(\vec{v}_2)
+     \end{equation*}
+   \item \( f \) preserves linear combinations of any finite number of 
+     vectors
+     \begin{equation*}
+        f(c_1\vec{v}_1+\dots+c_n\vec{v}_n)=
+           c_1f(\vec{v}_1)+\dots+c_nf(\vec{v}_n)
+     \end{equation*}
+\end{tfae}
+\end{lemma}
+
+\begin{proof}
+Since the implications \mbox{$\text{(3)}\!\implies\!\text{(2)}$} and 
+\mbox{$\text{(2)}\!\implies\!\text{(1)}$}
+are clear, we need only show that \mbox{$\text{(1)}\!\implies\!\text{(3)}$}.
+Assume statement~(1).
+We will prove statement~(3) by induction on the number of summands $n$.
+
+The one-summand base case, that
+\( f(c\vec{v}_1)=c\,f(\vec{v}_1) \), is covered by the assumption of
+statement~(1).
+
+For the inductive step assume that statement~(3) holds whenever 
+there are \( k \) or fewer summands, that is, whenever
+$n=1$, or $n=2$, \ldots, or $n=k$.
+Consider the $k+1$-summand case.
+The first half of (1) gives
+\begin{equation*}
+  f(c_1\vec{v}_1+\dots+c_k\vec{v}_k+c_{k+1}\vec{v}_{k+1})
+  =f(c_1\vec{v}_1+\dots+c_k\vec{v}_k)+f(c_{k+1}\vec{v}_{k+1})
+\end{equation*}
+by breaking the sum along the final `$+$'.
+Then the inductive hypothesis lets us break up the $k$-term sum.
+\begin{equation*}
+  =f(c_1\vec{v}_1)+\dots+f(c_k\vec{v}_k)+f(c_{k+1}\vec{v}_{k+1})
+\end{equation*}
+Finally, the second half of statement~(1) gives
+\begin{equation*}
+  =c_1\,f(\vec{v}_1)+\dots+c_k\,f(\vec{v}_k)+c_{k+1}\,f(\vec{v}_{k+1})
+\end{equation*}
+when applied $k+1$ times.
+\end{proof}
+
+In addition to adding to the intuition that the definition of isomorphism
+does indeed preserve the things of interest in a vector space, 
+that lemma's second item is an especially handy way of
+checking that a map preserves structure.
+
+We close with a summary.
+The material in this section augments the chapter on Vector Spaces.
+There, after giving the definition of a vector space, 
+we informally looked at what different things can happen.
+Here, we defined the relation 
+`\( \isomorphicto \)' between vector spaces and 
+we have argued that it
+is the right way to split the collection of vector spaces
+into cases because it preserves the features of interest in a vector
+space\Dash in particular, it preserves linear combinations.
+That is, we have now said precisely what we mean by `the same', 
+and by `different', and so we have precisely classified the vector spaces.
+
+
+\begin{exercises}
+  \recommended \item \label{exer:PThreeIsoRFour}
+   Verify, using \nearbyexample {ex:CheckMapIsIso} as a model,
+   that the two correspondences given before the definition 
+   are isomorphisms.
+   \begin{exparts*}
+      \partsitem \nearbyexample{exam:TwoWideIsoTwoTall}
+      \partsitem \nearbyexample{exam:PolyTwoIsoRThree}
+    \end{exparts*}
+    \begin{answer}
+     \begin{exparts}
+     \partsitem Call the map $f$. 
+       \begin{equation*}
+         \rowvec{a &b} \mapsunder{f} \colvec{a \\ b}
+       \end{equation*}
+       It is one-to-one because if $f$ sends two members of the domain to 
+       the same image, that is, if
+       $f\left(\rowvec{a &b}\right)=f\left(\rowvec{c &d}\right)$,
+       then the definition of $f$ gives that
+       \begin{equation*}
+          \colvec{a \\ b}=\colvec{c \\ d}
+       \end{equation*}
+       and since column vectors are equal only if they have equal components,
+       we have that $a=c$ and that $b=d$. 
+       Thus, if $f$ maps two row vectors from the domain to the same column
+       vector then the two row vectors are equal:
+       $\rowvec{a &b}=\rowvec{c &d}$.
+
+       To show that $f$ is onto we must show that any member of the codomain
+       $\Re^2$ is the image under $f$ of some row vector.
+       That's easy;
+       \begin{equation*}
+          \colvec{x \\ y} 
+       \end{equation*}
+       is $f\left(\rowvec{x &y}\right)$.
+
+       The computation for preservation of addition is this.
+       \begin{equation*}
+         f\left(\rowvec{a &b}+\rowvec{c &d}\right) 
+           = f\left(\rowvec{a+c &b+d}\right)           
+           = \colvec{a+c \\ b+d}           
+           = \colvec{a \\ b}+\colvec{c \\ d}         
+           = f\left(\rowvec{a &b}\right)+f\left(\rowvec{c &d}\right)
+       \end{equation*}
+       The computation for preservation of scalar multiplication is similar.
+       \begin{equation*}
+         f\left(r\cdot\rowvec{a &b}\right) 
+           = f\left(\rowvec{ra &rb}\right)          
+           = \colvec{ra \\ rb}          
+           = r\cdot\colvec{a \\ b}          
+           = r\cdot f\left(\rowvec{a &b}\right)
+       \end{equation*}
+     \partsitem Denote the map from \nearbyexample{exam:PolyTwoIsoRThree} by
+      $f$. 
+      To show that it is one-to-one,
+      assume that \( f(a_0+a_1x+a_2x^2)=f(b_0+b_1x+b_2x^2) \).
+      Then by the definition of the function, 
+      \begin{equation*}
+        \colvec{a_0 \\ a_1 \\ a_2}
+        =\colvec{b_0 \\ b_1 \\ b_2}
+      \end{equation*}
+      and so \( a_0=b_0 \) and \( a_1=b_1 \) and \( a_2=b_2 \).
+      Thus \( a_0+a_1x+a_2x^2=b_0+b_1x+b_2x^2 \), and consequently \( f \)
+      is one-to-one.
+
+      The function $f$ is onto because there is a polynomial sent to
+      \begin{equation*}
+        \colvec{a \\ b \\ c}
+      \end{equation*}
+      by \( f \), namely, \( a+bx+cx^2 \).
+
+      As for structure,
+      this shows that $f$ preserves addition
+      \begin{align*}
+        f\left(\,(a_0+a_1x+a_2x^2)+(b_0+b_1x+b_2x^2)\,\right)
+        &=f\left(\,(a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2\,\right)       \\
+        &=\colvec{a_0+b_0 \\ a_1+b_1 \\ a_2+b_2}                    \\
+        &=\colvec{a_0 \\ a_1 \\ a_2} +\colvec{b_0 \\ b_1 \\ b_2}   \\
+        &=f(a_0+a_1x+a_2x^2)+f(b_0+b_1x+b_2x^2)
+      \end{align*}
+      and this shows 
+      \begin{align*}
+        f(\,r(a_0+a_1x+a_2x^2)\,)
+        &=f(\,(ra_0)+(ra_1)x+(ra_2)x^2\,)    \\
+        &=\colvec{ra_0 \\ ra_1 \\ ra_2}     \\
+        &=r\cdot\colvec{a_0 \\ a_1 \\ a_2}     \\
+        &=r\,f(a_0+a_1x+a_2x^2)
+      \end{align*}   
+      that it preserves scalar multiplication. 
+    \end{exparts} 
+   \end{answer}
+  \recommended \item 
+    For the map
+    \( \map{f}{\polyspace_1}{\Re^2} \) given by
+    \begin{equation*}
+       a+bx\mapsunder{f}\colvec{a-b \\ b}
+    \end{equation*}
+    Find the image of each of these elements of the domain.
+    \begin{exparts*}
+      \partsitem \( 3-2x \)
+      \partsitem \( 2+2x \)
+      \partsitem \( x \)
+    \end{exparts*}
+    Show that this map is an isomorphism.
+    \begin{answer}
+       These are the images.
+       \begin{exparts*}
+        \partsitem \( \colvec{5 \\ -2} \)
+        \partsitem \( \colvec{0 \\ 2} \)
+        \partsitem \( \colvec{-1 \\ 1} \)
+      \end{exparts*}
+
+      To prove that $f$ is one-to-one, assume that it maps two linear
+      polynomials to the same image $f(a_1+b_1x)=f(a_2+b_2x)$.
+      Then
+      \begin{equation*}
+        \colvec{a_1-b_1 \\ b_1}=\colvec{a_2-b_2 \\ b_2}
+      \end{equation*}
+      and so, since column vectors are equal only when their components are
+      equal, $b_1=b_2$ and $a_1=a_2$.
+      That shows that the two linear polynomials are equal, and so $f$ is
+      one-to-one.
+
+      To show that $f$ is onto, note that this member of the codomain 
+      \begin{equation*}
+         \colvec{s \\ t}
+      \end{equation*}
+      is the image of this member of the domain $(s+t)+tx$.
+
+      To check that $f$ preserves structure,
+      we can use item~(2) of \nearbylemma{le:PresStructIffPresCombos}.
+      \begin{align*}
+        f\left(c_1\cdot (a_1+b_1x)+c_2\cdot (a_2+b_2x)\right)
+        &=f\left((c_1a_1+c_2a_2)+(c_1b_1+c_2b_2)x\right)                \\
+        &=\colvec{(c_1a_1+c_2a_2)-(c_1b_1+c_2b_2) \\ c_1b_1+c_2b_2}       \\  
+        &=c_1\cdot\colvec{a_1-b_1 \\ b_1}+c_2\cdot\colvec{a_2-b_2 \\ b_2}  \\
+        &=c_1\cdot f(a_1+b_1x)+c_2\cdot f(a_2+b_2x)
+      \end{align*}
+     \end{answer}
+  \item \label{exer:NatMapAlsoIso}
+    Show that the natural map $f_1$ from 
+    \nearbyexample{ex:LinComboThreeIsoPTwo} 
+    is an isomorphism.
+    \begin{answer}
+      To verify it is one-to-one, assume that
+       $f_1(c_1x+c_2y+c_3z)=f_1(d_1x+d_2y+d_3z)$.
+      Then $c_1+c_2x+c_3x^2=d_1+d_2x+d_3x^2$
+      by the definition of $f_1$.
+      Members of $\polyspace_2$ are equal only when they have the same
+      coefficients, so this implies that 
+      $c_1=d_1$ and $c_2=d_2$ and $c_3=d_3$.
+      Therefore $f_1(c_1x+c_2y+c_3z)=f_1(d_1x+d_2y+d_3z)$ implies that 
+      $c_1x+c_2y+c_3z=d_1x+d_2y+d_3z$, and so $f_1$ is one-to-one.
+
+      To verify that it is onto, consider an arbitrary member of the codomain
+      $a_1+a_2x+a_3x^2$ and observe that 
+      it is indeed the image of a member of the
+      domain, namely, it is $f_1(a_1x+a_2y+a_3z)$.
+      (For instance, $0+3x+6x^2=f_1(0x+3y+6z)$.)
+
+      The computation checking that $f_1$ preserves addition is this.
+      \begin{align*}
+        f_1\left(\,(c_1x+c_2y+c_3z)+(d_1x+d_2y+d_3z)\,\right)
+          &=f_1\left(\,(c_1+d_1)x+(c_2+d_2)y+(c_3+d_3)z\,\right)  \\
+          &=(c_1+d_1)+(c_2+d_2)x+(c_3+d_3)x^2  \\
+          &=(c_1+c_2x+c_3x^2)+(d_1+d_2x+d_3x^2)  \\
+          &=f_1(c_1x+c_2y+c_3z)+f_1(d_1x+d_2y+d_3z)
+      \end{align*}
+
+      The check that $f_1$ preserves scalar multiplication is this.
+      \begin{align*}
+        f_1(\,r\cdot (c_1x+c_2y+c_3z)\,)
+          &=f_1(\,(rc_1)x+(rc_2)y+(rc_3)z\,)  \\
+          &=(rc_1)+(rc_2)x+(rc_3)x^2  \\
+          &=r\cdot (c_1+c_2x+c_3x^2)  \\
+          &=r\cdot f_1(c_1x+c_2y+c_3z)
+      \end{align*}
+    \end{answer}
+  \recommended \item 
+   Decide whether each map is an isomorphism
+   (if it is an isomorphism then prove it and if it isn't then
+   state a condition that it fails to satisfy).
+    \begin{exparts}
+      \partsitem \( \map{f}{\matspace_{\nbyn{2}}}{\Re} \) given by
+        \begin{equation*}
+           \begin{pmatrix}
+             a  &b  \\
+             c  &d
+           \end{pmatrix}
+           \mapsto
+           ad-bc
+        \end{equation*}
+      \partsitem \( \map{f}{\matspace_{\nbyn{2}}}{\Re^4} \) given by
+        \begin{equation*}
+           \begin{pmatrix}
+             a  &b  \\
+             c  &d
+           \end{pmatrix}
+           \mapsto
+           \colvec{a+b+c+d \\ a+b+c \\ a+b \\ a}
+        \end{equation*}
+      \partsitem \( \map{f}{\matspace_{\nbyn{2}}}{\polyspace_3} \) given by
+        \begin{equation*}
+           \begin{pmatrix}
+             a  &b  \\
+             c  &d
+           \end{pmatrix}
+           \mapsto
+           c+(d+c)x+(b+a)x^2+ax^3
+        \end{equation*}
+      \partsitem \( \map{f}{\matspace_{\nbyn{2}}}{\polyspace_3} \) given by
+        \begin{equation*}
+           \begin{pmatrix}
+             a  &b  \\
+             c  &d
+           \end{pmatrix}
+           \mapsto
+           c+(d+c)x+(b+a+1)x^2+ax^3
+        \end{equation*}
+    \end{exparts}
+  \begin{answer}
+    \begin{exparts}
+      \partsitem No; this map is not one-to-one.
+        In particular, the matrix of all zeroes is mapped to the same
+        image as the matrix of all ones.
+      \partsitem Yes, this is an isomorphism.
+
+        It is one-to-one:
+        \begin{equation*}
+          \text{if }
+          f(\begin{pmatrix}
+              a_1  &b_1  \\
+              c_1  &d_1
+            \end{pmatrix})
+         =f(\begin{pmatrix}
+              a_2  &b_2  \\
+              c_2  &d_2
+            \end{pmatrix})
+          \text{ then }
+          \colvec{a_1+b_1+c_1+d_1 \\ a_1+b_1+c_1 \\ a_1+b_1 \\ a_1}
+          =\colvec{a_2+b_2+c_2+d_2 \\ a_2+b_2+c_2 \\ a_2+b_2 \\ a_2}
+        \end{equation*}
+        gives that \( a_1=a_2 \), and that \( b_1=b_2 \), 
+        and that \( c_1=c_2 \), and that \( d_1=d_2 \).
+
+        It is onto, since this shows
+        \begin{equation*}
+          \colvec{x \\ y \\ z \\ w}
+         =f(\begin{pmatrix}
+              w    &z-w  \\
+              y-z  &x-y
+            \end{pmatrix})
+        \end{equation*}
+        that any four-tall vector is the image of a $\nbyn{2}$~matrix.
+
+        Finally, it preserves combinations
+        \begin{align*}
+          f(\,r_1\cdot\begin{pmatrix}
+              a_1  &b_1  \\
+              c_1  &d_1
+            \end{pmatrix}
+            +r_2\cdot\begin{pmatrix}
+              a_2  &b_2  \\
+              c_2  &d_2
+            \end{pmatrix}\,)
+          &=f(\begin{pmatrix}
+              r_1a_1+r_2a_2  &r_1b_1+r_2b_2  \\
+              r_1c_1+r_2c_2  &r_1d_1+r_2d_2
+            \end{pmatrix})                            \\
+          &=\colvec{r_1a_1+\dots+r_2d_2 \\ r_1a_1+\dots+r_2c_2 \\ 
+                       r_1a_1+\dots+r_2b_2 \\ r_1a_1+r_2a_2}          \\
+          &=r_1\cdot\colvec{a_1+\dots+d_1 \\ a_1+\dots+c_1 \\ 
+                       a_1+b_1 \\ a_1}
+          +r_2\cdot\colvec{a_2+\dots+d_2 \\ a_2+\dots+c_2 \\ 
+                       a_2+b_2 \\ a_2}                         \\
+          &=r_1\cdot f(\begin{pmatrix}
+                  a_1  &b_1  \\
+                  c_1  &d_1
+            \end{pmatrix})
+          +r_2\cdot f(\begin{pmatrix}
+                  a_2  &b_2  \\
+                  c_2  &d_2
+            \end{pmatrix})
+        \end{align*}
+        and so item~(2) of \nearbylemma{le:PresStructIffPresCombos} shows that
+        it preserves structure. 
+      \partsitem Yes, it is an isomorphism.
+
+        To show that it is one-to-one, we suppose that two members of the
+        domain have the same image under $f$.
+        \begin{equation*}
+          f(\begin{pmatrix}
+              a_1  &b_1  \\
+              c_1  &d_1
+            \end{pmatrix})
+          =f(\begin{pmatrix}
+              a_2  &b_2  \\
+              c_2  &d_2
+            \end{pmatrix})
+        \end{equation*}
+        This gives, by the definition of $f$, that 
+        $c_1+(d_1+c_1)x+(b_1+a_1)x^2+a_1x^3
+          =c_2+(d_2+c_2)x+(b_2+a_2)x^2+a_2x^3$
+        and then the fact that polynomials are equal only when their
+        coefficients are equal gives a set of linear equations
+        \begin{align*}
+          c_1      &=  c_2      \\
+          d_1+c_1  &=  d_2+c_2  \\
+          b_1+a_1  &=  b_2+a_2  \\
+          a_1      &=  a_2
+        \end{align*}
+        that has only the solution $a_1=a_2$, $b_1=b_2$, $c_1=c_2$, and 
+        $d_1=d_2$.
+
+        To show that $f$ is onto, we note that $p+qx+rx^2+sx^3$ is the image
+        under $f$ of this matrix.
+        \begin{equation*}
+          \begin{pmatrix}
+            s  &r-s   \\
+            p  &q-p
+          \end{pmatrix}
+        \end{equation*}
+
+        We can check that $f$ preserves structure by using 
+        item~(2) of \nearbylemma{le:PresStructIffPresCombos}.
+        \begin{align*}
+          f(r_1\cdot\begin{pmatrix}
+              a_1  &b_1  \\
+              c_1  &d_1
+            \end{pmatrix}
+            +r_2\cdot\begin{pmatrix}
+              a_2  &b_2  \\
+              c_2  &d_2
+            \end{pmatrix})
+           &=
+           f(\begin{pmatrix}
+               r_1a_1+r_2a_2  &r_1b_1+r_2b_2  \\
+               r_1c_1+r_2c_2  &r_1d_1+r_2d_2
+             \end{pmatrix})                         \\
+           &=\begin{aligned}[t]
+               &(r_1c_1+r_2c_2)
+               +(r_1d_1+r_2d_2+r_1c_1+r_2c_2)x                 \\
+               &\mbox{}\quad +(r_1b_1+r_2b_2+r_1a_1+r_2a_2)x^2
+                 +(r_1a_1+r_2a_2)x^3
+             \end{aligned}                   \\
+           &=\begin{aligned}[t]
+                &r_1\cdot\left(c_1+(d_1+c_1)x+(b_1+a_1)x^2+a_1x^3\right) \\
+                &\mbox{}\quad +r_2\cdot\left(c_2+(d_2+c_2)x
+                            +(b_2+a_2)x^2+a_2x^3\right)
+              \end{aligned} \\
+           &=r_1\cdot f(\begin{pmatrix}
+              a_1  &b_1  \\
+              c_1  &d_1
+            \end{pmatrix})
+            +r_2\cdot f(\begin{pmatrix}
+              a_2  &b_2  \\
+              c_2  &d_2
+            \end{pmatrix})
+        \end{align*}
+      \partsitem No, this map does not preserve structure.
+        For instance, it does not send the matrix of all zeroes
+        to the zero polynomial.
+    \end{exparts}  
+   \end{answer}
+  \item 
+    Show that the map \( \map{f}{\Re^1}{\Re^1} \) 
+    given by \( f(x)=x^3 \) is  one-to-one and onto.
+    Is it an isomorphism?
+    \begin{answer}
+      It is one-to-one and onto, a correspondence,
+      because it has an inverse (namely, \( f^{-1}(x)=\sqrt[3]{x} \)).
+      However, it is not an isomorphism.
+      For instance, \( f(1)+f(1)\neq f(1+1) \).     
+    \end{answer}
+  \recommended \item 
+    Refer to \nearbyexample{exam:TwoWideIsoTwoTall}.
+    Produce two more isomorphisms 
+    (of course, you must also verify that they satisfy the conditions in the 
+    definition of isomorphism).
+    \begin{answer}
+     Many maps are possible.
+     Here are two.
+     \begin{equation*}
+       \rowvec{a &b}\mapsto\colvec{b \\ a}
+       \quad\text{and}\quad
+       \rowvec{a &b}\mapsto\colvec{2a \\ b}
+     \end{equation*} 
+     The verifications are straightforward adaptations of the others above.
+    \end{answer}
+  \item 
+    Refer to \nearbyexample{exam:PolyTwoIsoRThree}.
+    Produce two more isomorphisms
+    (and verify that they satisfy the conditions).
+    \begin{answer}
+      Here are two.
+      \begin{equation*}
+        a_0+a_1x+a_2x^2 \mapsto \colvec{a_1 \\ a_0 \\ a_2}
+        \quad\text{and}\quad
+        a_0+a_1x+a_2x^2 \mapsto \colvec{a_0+a_1 \\ a_1 \\ a_2}
+      \end{equation*}
+      Verification is straightforward (for the second, to show that it is onto,
+      note that 
+      \begin{equation*}
+        \colvec{s \\ t \\ u}
+      \end{equation*}
+      is the image of $(s-t)+tx+ux^2$).
+     \end{answer}
+  \recommended \item 
+     Show that, although \( \Re^2 \) is not itself a subspace of
+     \( \Re^3 \),
+     it is isomorphic to the \( xy \)-plane subspace of \( \Re^3 \).
+     \begin{answer}
+       The space $\Re^2$ is not a subspace of $\Re^3$ because it is not a 
+       subset of $\Re^3$.
+       The two-tall vectors in $\Re^2$ are not members of $\Re^3$.
+
+       The natural isomorphism \( \map{\iota}{\Re^2}{\Re^3} \)
+       (called the \definend{injection} map) is this.
+       \begin{equation*}
+         \colvec{x \\ y}
+           \mapsunder{\iota}
+         \colvec{x \\ y \\ 0}
+       \end{equation*}
+
+       This map is one-to-one because 
+       \begin{equation*}
+         f(\colvec{x_1 \\ y_1})=f(\colvec{x_2 \\ y_2})
+         \quad\text{implies}\quad
+         \colvec{x_1 \\ y_1 \\ 0}=\colvec{x_2 \\ y_2 \\ 0}
+       \end{equation*}
+       which in turn implies that $x_1=x_2$ and $y_1=y_2$, and therefore
+       the initial two two-tall vectors are equal.
+
+       Because
+       \begin{equation*}
+         \colvec{x \\ y \\ 0}
+         =f(\colvec{x \\ y})
+       \end{equation*}
+       this map is onto the $xy$-plane.
+
+       To show that this map preserves structure, we will use
+       item~(2) of \nearbylemma{le:PresStructIffPresCombos} and show 
+       \begin{multline*}
+         f(c_1\cdot \colvec{x_1 \\ y_1}+c_2\cdot \colvec{x_2 \\ y_2})
+          = f(\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2})  
+          =\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ 0}                     \\
+          =c_1\cdot \colvec{x_1 \\ y_1 \\ 0}+c_2\cdot \colvec{x_2 \\ y_2 \\ 0}
+          =c_1\cdot f(\colvec{x_1 \\ y_1})+c_2\cdot f(\colvec{x_2 \\ y_2})
+       \end{multline*}
+       that it preserves combinations of two vectors.
+     \end{answer}
+  \item 
+    Find two isomorphisms between \( \Re^{16} \) and
+    \( \matspace_{\nbyn{4}} \).
+     \begin{answer}
+        Here are two:
+        \begin{equation*}
+           \colvec{r_1 \\ r_2 \\ \vdots \\ r_{16}}
+              \mapsto
+           \begin{pmatrix}
+              r_1  &r_2  &\ldots  \\
+                   &              \\
+                   &     &\ldots  &r_{16}
+           \end{pmatrix}
+           \quad\text{and}\quad
+           \colvec{r_1 \\ r_2 \\ \vdots \\ r_{16}}
+              \mapsto
+           \begin{pmatrix}
+              r_1    &                    \\
+              r_2    &                    \\
+              \vdots &   &        &\vdots \\
+                   &     &        &r_{16}
+           \end{pmatrix}
+        \end{equation*}     
+        Verification that each is an isomorphism is easy.
+    \end{answer}
+  \recommended \item
+    For what \( k \) is \( \matspace_{\nbym{m}{n}} \) isomorphic to
+    \( \Re^{k} \)?
+     \begin{answer}
+        When $k$ is the product \( k=mn \), here is an isomorphism.
+        \begin{equation*}
+           \begin{pmatrix}
+              r_1  &r_2  &\ldots  \\
+                   &\vdots        \\
+                   &     &\ldots  &r_{m\cdot n}
+           \end{pmatrix}
+           \mapsto
+           \colvec{r_1 \\ r_2 \\ \vdots \\ r_{m\cdot n}}
+        \end{equation*}
+        Checking that this is an isomorphism is easy.
+      \end{answer}
+  \item 
+     For what \( k \) is \( \polyspace_k \) isomorphic to \( \Re^n \)?
+     \begin{answer}
+        If \( n\geq 1 \) then \( \polyspace_{n-1}\isomorphicto\Re^n \).
+        (If we take \( \polyspace_{-1} \) and \( \Re^0 \) to be trivial vector
+        spaces, then the relationship extends one dimension lower.)  
+        The natural isomorphism between them is this. 
+        \begin{equation*}
+          a_0+a_1x+\dots+a_{n-1}x^{n-1}
+          \mapsto\colvec{a_0 \\ a_1 \\ \vdots \\ a_{n-1}}
+        \end{equation*}
+        Checking that it is an isomorphism is straightforward.
+     \end{answer}
+  \item \label{exer:PolyToPolyLinSubst}
+    Prove that the map in \nearbyexample{ex:OORThreeToFourLinCom},
+    from \( \polyspace_5 \) to \( \polyspace_5 \) given by
+    \( p(x)\mapsto p(x-1) \), is a vector space isomorphism.
+    \begin{answer}
+      This is the map, expanded.
+      \begin{align*}
+        f(a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+a_5x^5)
+        &=\begin{aligned}[t]
+             &a_0+a_1(x-1)+a_2(x-1)^2+a_3(x-1)^3 \\
+             &\mbox{}\quad +a_4(x-1)^4+a_5(x-1)^5 
+          \end{aligned}                                          \\
+        &=\begin{aligned}[t]
+             &a_0+a_1(x-1)+a_2(x^2-2x+1)         \\
+             &\mbox{}\quad +a_3(x^3-3x^2+3x-1)   \\
+             &\mbox{}\quad +a_4(x^4-4x^3+6x^2-4x+1) \\
+             &\mbox{}\quad +a_5(x^5-5x^4+10x^3-10x^2+5x-1)
+           \end{aligned}   \\
+        &=\begin{aligned}[t]
+           &(a_0-a_1+a_2-a_3+a_4-a_5)  \\
+           &\mbox{}\quad +(a_1-2a_2+3a_3-4a_4+5a_5)x  \\
+           &\mbox{}\quad +(a_2-3a_3+6a_4-10a_5)x^2
+                        +(a_3-4a_4+10a_5)x^3         \\
+           &\mbox{}\quad +(a_4-5a_5)x^4
+                        +a_5x^5
+          \end{aligned}
+      \end{align*}
+      This map is a correspondence because it has an inverse, the map
+      \( p(x)\mapsto p(x+1) \).
+
+      To finish checking that it is an isomorphism, we apply  
+      item~(2) of \nearbylemma{le:PresStructIffPresCombos} and show 
+      that it preserves linear combinations of two polynomials.
+      Briefly, the check goes like this.
+      \begin{multline*}
+        f(c\cdot (a_0+a_1x+\dots +a_5x^5)+d\cdot (b_0+b_1x+\dots +b_5x^5))  \\
+         =\dots=
+         (ca_0-ca_1+ca_2-ca_3+ca_4-ca_5+db_0-db_1+db_2-db_3+db_4-db_5)
+          +\dots+(ca_5+db_5)x^5                                 \\
+         =\dots=
+         c\cdot f(a_0+a_1x+\dots +a_5x^5)+d\cdot f(b_0+b_1x+\dots +b_5x^5)
+      \end{multline*}
+    \end{answer}
+  \item  
+    Why, in \nearbylemma{le:IsoSendsZeroToZero}, must there be a
+    \( \vec{v}\in V \)?
+    That is, why must $V$ be nonempty?
+     \begin{answer}
+       No vector space has the empty set underlying it.   
+       We can take $\vec{v}$ to be the zero vector.      
+     \end{answer}
+  \item  
+     Are any two trivial spaces isomorphic?
+     \begin{answer}
+        Yes; where the two spaces are \( \set{\vec{a}} \) and
+        \( \set{\vec{b}} \),
+        the map sending \( \vec{a} \) to \( \vec{b} \) is clearly one-to-one
+        and onto, and also preserves what little structure there is.  
+      \end{answer}
+  \item 
+    In the proof of \nearbylemma{le:PresStructIffPresCombos},
+    what about the zero-summands case (that is, if $n$ is zero)?
+    \begin{answer}
+       A linear combination of $n=0$ vectors adds to the zero vector and so
+       \nearbylemma{le:IsoSendsZeroToZero}
+       shows that the three statements are equivalent in this case.
+    \end{answer}
+  \item 
+    Show that any isomorphism \( \map{f}{\polyspace_0}{\Re^1} \) has the
+    form \( a\mapsto ka \) for some nonzero real number \( k \).
+    \begin{answer}
+      Consider the basis \( \sequence{1} \) for \( \polyspace_0 \)
+      and let \( f(1)\in\Re \) be \( k \).
+      For any \( a\in\polyspace_0 \)
+      we have that 
+      \( f(a)=f(a\cdot 1)=af(1)=ak \) and so \( f \)'s action is multiplication
+      by \( k \).
+      Note that \( k\neq 0 \) or else the map is not one-to-one.
+      (Incidentally, any such map $a\mapsto ka$ is an isomorphism,
+      as is easy to check.)
+     \end{answer}
+  \recommended \item 
+    These prove that isomorphism is an equivalence relation.
+    \begin{exparts}
+      \partsitem Show that the identity map $\map{\mbox{id}}{V}{V}$ is an 
+        isomorphism.
+        Thus, any vector space is isomorphic to itself.
+      \partsitem Show that if $\map{f}{V}{W}$ is an isomorphism then
+        so is its inverse $\map{f^{-1}}{W}{V}$. 
+        Thus, if $V$ is isomorphic to $W$ then also $W$ is isomorphic to $V$.
+      \partsitem Show that a composition of isomorphisms is an isomorphism:
+        if $\map{f}{V}{W}$ is an isomorphism and $\map{g}{W}{U}$ is an
+        isomorphism then so also is $\map{\composed{g}{f}}{V}{U}$.
+        Thus, if $V$ is isomorphic to $W$ and $W$ is isomorphic to $U$,
+        then also $V$ is isomorphic to $U$.
+    \end{exparts}
+    \begin{answer}
+      In each item, following item~(2) of 
+      \nearbylemma{le:PresStructIffPresCombos}, we show that the map preserves
+      structure by showing that the it preserves linear combinations
+      of two members of the domain.
+      \begin{exparts}
+        \partsitem 
+          The identity map is clearly one-to-one and onto.
+          For linear combinations the check is easy.
+          \begin{equation*}
+            \mbox{id}(c_1\cdot \vec{v}_1+c_2\cdot \vec{v}_2)
+             =c_1\vec{v}_1+c_2\vec{v}_2
+             =c_1\cdot \mbox{id}(\vec{v}_1)+c_2\cdot \mbox{id}(\vec{v}_2)
+          \end{equation*}
+        \partsitem The inverse of a correspondence is also a correspondence
+          (as stated in the appendix), so we need only check that the 
+          inverse preserves linear combinations.
+          Assume that \( \vec{w}_1=f(\vec{v}_1) \) 
+          (so \( f^{-1}(\vec{w}_1)=\vec{v}_1 \)) 
+          and assume that \( \vec{w}_2=f(\vec{v}_2) \).
+          \begin{align*}
+            f^{-1}(c_1\cdot\vec{w}_1+c_2\cdot\vec{w}_2)
+              &=f^{-1}\bigl(\,c_1\cdot f(\vec{v}_1)
+                             +c_2\cdot f(\vec{v}_2)\,\bigr) \\
+              &=f^{-1}(\,f\bigl(c_1\vec{v}_1+c_2\vec{v}_2)\,\bigr)    \\
+              &=c_1\vec{v}_1+c_2\vec{v}_2                             \\ 
+              &=c_1\cdot f^{-1}(\vec{w}_1)+c_2\cdot f^{-1}(\vec{w}_2)    
+          \end{align*}
+        \partsitem The composition of two correspondences is a correspondence
+          (as stated in the appendix), so we need only check that the 
+          composition map preserves linear combinations.
+          \begin{align*}
+           \composed{g}{f}\,\bigl(c_1\cdot\vec{v}_1+c_2\cdot\vec{v}_2\bigr)
+             &=g\bigl(\,f(c_1\vec{v}_1+c_2\vec{v}_2)\,\bigr)        \\
+             &=g\bigl(\,c_1\cdot f(\vec{v}_1)+c_2\cdot f(\vec{v}_2)\,\bigr) \\ 
+             &=c_1\cdot g\bigl(f(\vec{v}_1))+c_2\cdot g(f(\vec{v}_2)\bigr)  \\
+             &=c_1\cdot\composed{g}{f}\,(\vec{v}_1)
+                  +c_2\cdot\composed{g}{f}\,(\vec{v}_2)
+          \end{align*}
+      \end{exparts}
+     \end{answer}
+  \item 
+    Suppose that \( \map{f}{V}{W} \) preserves structure.
+    Show that \( f \) is one-to-one if and only if the unique member of 
+    \( V \) mapped by \( f \) to \( \zero_W \) is \( \zero_V \).
+    \begin{answer}
+      One direction is easy:~by definition, if \( f \) is one-to-one 
+      then for any
+      \( \vec{w}\in W \) at most one \( \vec{v}\in V \) has
+      \( f(\vec{v}\,)=\vec{w} \), and so in particular, at most one member of
+      \( V \) is mapped to \( \zero_W \).
+      The proof of \nearbylemma{le:IsoSendsZeroToZero} does not use the
+      fact that the map is a correspondence and therefore 
+      shows that any structure-preserving map 
+      \( f \) sends \( \zero_V \) to \( \zero_W \).
+
+      For the other direction, assume that the only member of \( V \) 
+      that is mapped to \( \zero_W \) is \( \zero_V \).
+      To show that 
+      \( f \) is one-to-one assume that \( f(\vec{v}_1)=f(\vec{v}_2) \).
+      Then \( f(\vec{v}_1)-f(\vec{v}_2)=\zero_W \) and so
+      \( f(\vec{v}_1-\vec{v}_2)=\zero_W \).
+      Consequently \( \vec{v}_1-\vec{v}_2=\zero_V \), so
+      $\vec{v}_1=\vec{v}_2$, and so \( f \) is one-to-one.    
+    \end{answer}
+  \item 
+    Suppose that \( \map{f}{V}{W} \) is an isomorphism.
+    Prove that the set 
+    \( \set{\vec{v}_1,\dots,\vec{v}_k}\subseteq V \) is linearly
+    dependent if and only if the set of images
+    \( \set{f(\vec{v}_1),\dots,f(\vec{v}_k)}\subseteq W \)
+    is linearly dependent.
+    \begin{answer}
+      We will prove something stronger\Dash not only is the existence of a
+      dependence preserved by isomorphism, but each instance of a dependence is
+      preserved, that is,
+      \begin{multline*}
+        \vec{v}_i=c_1\vec{v}_1+\cdots+c_{i-1}\vec{v}_{i-1}
+                   +c_{i+1}\vec{v}_{i+1}+\cdots+c_k\vec{v}_k   \\
+        \iff
+        f(\vec{v}_i)=c_1f(\vec{v}_1)+\cdots+c_{i-1}f(\vec{v}_{i-1})
+                     +c_{i+1}f(\vec{v}_{i+1})+\cdots+c_kf(\vec{v}_k).
+      \end{multline*}
+      The \( \implies \) direction of this statement holds by item~(3) of
+      \nearbylemma{le:PresStructIffPresCombos}.
+      The \( \isimpliedby \) direction holds by regrouping
+      \begin{align*}
+         f(\vec{v}_i)
+           &=c_1f(\vec{v}_1)+\dots+c_{i-1}f(\vec{v}_{i-1})
+                     +c_{i+1}f(\vec{v}_{i+1})+\dots+c_kf(\vec{v}_k)  \\
+           &=f(c_1\vec{v}_1+\dots+c_{i-1}\vec{v}_{i-1}
+                     +c_{i+1}\vec{v}_{i+1}+\dots+c_k \vec{v}_k) 
+      \end{align*}
+      and applying the fact that $f$ is one-to-one, and so for the two
+      vectors $\vec{v}_i$ and 
+      $c_1\vec{v}_1+\dots+c_{i-1}\vec{v}_{i-1}
+              +c_{i+1}f\vec{v}_{i+1}+\dots+c_kf(\vec{v}_k$
+      to be mapped to the same image by $f$, they must be equal.
+    \end{answer}
+  \recommended \item \label{exer:RigidPlaneMapsAutos} 
+    Show that each type of map from \nearbyexample{exam:RigidPlaneMapsAutos}
+    is an automorphism.
+    \begin{exparts}
+      \partsitem Dilation $d_s$ by a nonzero scalar \( s \).
+      \partsitem Rotation $t_\theta$ through an angle \( \theta \).
+      \partsitem Reflection $f_\ell$ over a line through the origin.
+    \end{exparts}
+    \textit{Hint.}
+     For the second and third items, polar coordinates are useful.
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          This map is one-to-one because if \( d_s(\vec{v}_1)=d_s(\vec{v}_2) \)
+          then by definition of the map,
+          \( s\cdot\vec{v}_1=s\cdot\vec{v}_2 \) and so 
+          \( \vec{v}_1=\vec{v}_2 \), as \( s \) is nonzero.
+          This map is onto as any \( \vec{w}\in\Re^2 \) is the image of
+          \( \vec{v}=(1/s)\cdot\vec{w} \) (again, note that $s$ is nonzero).
+          (Another way to see that this map 
+          is a correspondence is to observe that it has
+          an inverse: the inverse of \( d_s \) is \( d_{1/s} \).)
+
+          To finish, note that this map preserves linear combinations
+          \begin{equation*}
+            d_s(c_1\cdot\vec{v}_1+c_2\cdot\vec{v}_2)
+            =s(c_1\vec{v}_1+c_2\vec{v}_2)
+            =c_1s\vec{v}_1+c_2s\vec{v}_2
+            =c_1\cdot d_s(\vec{v}_1)+c_2\cdot d_s(\vec{v}_2)
+          \end{equation*}
+          and therefore is an isomorphism.
+        \partsitem As in the prior item, we can show that the map $t_\theta$
+          is a correspondence by noting that it has an inverse, $t_{-\theta}$.
+
+          That the map preserves structure is  geometrically easy to see. 
+          For instance,
+          adding two vectors and then rotating them has the same effect as
+          rotating first and then adding. 
+          For an algebraic argument, consider polar coordinates:
+          the map \( t_\theta \) sends the vector with endpoint
+          \( (r,\phi) \) to the vector with endpoint
+          \( (r,\phi+\theta) \).
+          Then the familiar trigonometric formulas
+          $\cos(\phi+\theta)=\cos\phi\,\cos\theta-\sin\phi\,\sin\theta$
+          and 
+          $\sin(\phi+\theta)=\sin\phi\,\cos\theta+\cos\phi\,\sin\theta$
+          show how to express the map's action in the usual
+          rectangular coordinate system.
+          \begin{equation*}
+            \colvec{x \\ y}=\colvec{r\cos\phi \\ r\sin\phi}
+              \mapsunder{t_\theta}
+            \colvec{r\cos(\phi+\theta) \\ r\sin(\phi+\theta)}
+            =\colvec{x\cos\theta-y\sin\theta \\ x\sin\theta+y\cos\theta}
+          \end{equation*}
+          Now the calculation for preservation of addition
+          is routine.
+          \begin{equation*}
+            \colvec{x_1+x_2 \\ y_1+y_2}
+              \mapsunder{t_\theta}
+            \colvec{(x_1+x_2)\cos\theta-(y_1+y_2)\sin\theta \\ 
+                       (x_1+x_2)\sin\theta+(y_1+y_2)\cos\theta}
+            =\colvec{x_1\cos\theta-y_1\sin\theta \\ 
+                       x_1\sin\theta+y_1\cos\theta}
+            +\colvec{x_2\cos\theta-y_2\sin\theta \\ 
+                       x_2\sin\theta+y_2\cos\theta}
+          \end{equation*}
+          The calculation for preservation of scalar multiplication is similar.
+        \partsitem 
+          This map is a correspondence because it has an inverse (namely,
+          itself).
+
+          As in the last item, that the reflection map preserves
+          structure is geometrically easy to see:~adding vectors and then 
+          reflecting gives the same result as reflecting first and then
+          adding, for instance.
+          For an algebraic proof, suppose that the line $\ell$ has slope $k$
+          (the case of a line with undefined slope can be done as a separate,
+          but easy, case).
+          We can follow the hint and use
+          polar coordinates:~where the line \( \ell \) forms an angle of
+          \( \phi \) with the \( x \)-axis, the action of \( f_\ell \) is to
+          send the vector with endpoint \( (r\cos\theta,r\sin\theta) \) to 
+          the one with endpoint 
+          \( (r\cos(2\phi-\theta),r\sin(2\phi-\theta)) \).          
+          \begin{center}  \small
+            \includegraphics{ch3.72}
+          \end{center}
+          To convert to rectangular coordinates, we will use some trigonometric
+          formulas, as we  did in the prior item.
+          First observe that $\cos\phi$ and $\sin\phi$ can be determined
+          from the slope $k$ of the line.
+          This picture
+          \begin{center}  \small
+            \includegraphics{ch3.73}
+          \end{center}
+          gives that $\cos\phi=1/\sqrt{1+k^2}$ and $\sin\phi=k/\sqrt{1+k^2}$.
+          Now,
+          \begin{align*}
+            \cos(2\phi-\theta)
+              &=\cos(2\phi)\,\cos\theta+\sin(2\phi)\,\sin\theta        \\
+              &=\left(\cos^2\phi-\sin^2\phi\right)\,\cos\theta
+                 +\left(2\sin\phi\cos\phi\right)\,\sin\theta        \\
+              &=\left((\frac{1}{\sqrt{1+k^2}})^2
+                      -(\frac{k}{\sqrt{1+k^2}})^2\right)
+                   \,\cos\theta
+                 +\left(2\frac{k}{\sqrt{1+k^2}}\frac{1}{\sqrt{1+k^2}}\right)
+                   \,\sin\theta        \\
+              &=\left(\frac{1-k^2}{1+k^2}\right)\,\cos\theta
+                 +\left(\frac{2k}{1+k^2}\right)\,\sin\theta        
+          \end{align*}
+          and thus the first component of the image vector is this.
+          \begin{equation*}
+            r\cdot\cos(2\phi-\theta)=\frac{1-k^2}{1+k^2}\cdot x
+                                     +\frac{2k}{1+k^2}\cdot y
+          \end{equation*}
+          A similar calculation shows that the second component of the image
+          vector is this.
+          \begin{equation*}
+            r\cdot\sin(2\phi-\theta)=\frac{2k}{1+k^2}\cdot x
+                                     -\frac{1-k^2}{1+k^2}\cdot y
+          \end{equation*}
+          With this algebraic description of the action of $f_\ell$
+          \begin{equation*}
+            \colvec{x \\ y}
+             \mapsunder{f_\ell}
+            \colvec{(1-k^2/1+k^2)\cdot x
+                                     +(2k/1+k^2)\cdot y \\ 
+                   (2k/1+k^2)\cdot x
+                                     -(1-k^2/1+k^2)\cdot y}  
+          \end{equation*}
+          checking that it preserves structure is routine.
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Produce an automorphism of \( \polyspace_2 \) other than the
+    identity map, and other than a shift map $p(x)\mapsto p(x-k)$.
+    \begin{answer}
+       First, the map $p(x)\mapsto p(x+k)$ doesn't count
+       because it is a version of $p(x)\mapsto p(x-k)$.
+       Here is a correct answer (many others are also correct):
+       \( a_0+a_1x+a_2x^2 \mapsto a_2+a_0x+a_1x^2 \).
+       Verification that this is an isomorphism is straightforward.
+    \end{answer}
+  \item
+    \begin{exparts}
+      \partsitem Show that 
+        a function \( \map{f}{\Re^1}{\Re^1} \) is an automorphism
+        if and only if it has the form \( x\mapsto kx \) for some
+        \( k\neq 0 \).
+      \partsitem Let \( f \) be an automorphism of \( \Re^1 \) such that
+        \( f(3)=7 \).
+        Find \( f(-2) \).
+      \partsitem Show that a function \( \map{f}{\Re^2}{\Re^2} \) is
+        an automorphism if and only if it has the form
+        \begin{equation*}
+          \colvec{x \\ y}
+            \mapsto
+          \colvec{ax+by \\ cx+dy}
+        \end{equation*}
+        for some \( a,b,c,d\in\Re \) with \( ad-bc\neq 0 \).
+        \textit{Hint.}
+        Exercises in prior subsections have shown that 
+        \begin{equation*}
+          \colvec{b \\ d}\text{\ is not a multiple of\ }\colvec{a \\ c}
+        \end{equation*}
+        if and only if $ad-bc\neq 0$.
+      \partsitem Let \( f \) be an automorphism of \( \Re^2 \) with
+        \begin{equation*}
+          f(\colvec{1 \\ 3})=\colvec{2 \\ -1}
+           \quad\text{and}\quad
+          f(\colvec{1 \\ 4})=\colvec{0 \\ 1}.
+        \end{equation*}
+        Find
+        \begin{equation*}
+          f(\colvec{0 \\ -1}).
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem For the `only if' half, let \( \map{f}{\Re^1}{\Re^1} \) 
+          to be an isomorphism. 
+          Consider the basis \( \sequence{1}\subseteq\Re^1 \).
+          Designate \( f(1) \) by \( k \).
+          Then for any \( x \) we have that
+          \( f(x)=f(x\cdot 1)=x\cdot f(1)=xk \), and so $f$'s action is
+          multiplication by $k$.
+          To finish this half, just note that
+          \( k\neq 0 \) or else $f$ would not be one-to-one.
+
+          For the `if' half we only have to check that such a map is an 
+          isomorphism when $k\neq 0$.
+          To check that it is one-to-one, assume that \( f(x_1)=f(x_2) \) 
+          so that \( kx_1=kx_2 \) and
+          divide by the nonzero factor \( k \) to conclude that $x_1=x_2$.
+          To check that it is onto, note that any \( y\in\Re^1 \) 
+          is the image of \( x=y/k \) (again, $k\neq 0$).
+          Finally, to check that such a map preserves combinations of
+          two members of the domain,
+          we have this.
+          \begin{equation*}
+            f(c_1x_1+c_2x_2)
+            =k(c_1x_1+c_2x_2)
+            =c_1kx_1+c_2kx_2
+            =c_1f(x_1)+c_2f(x_2)
+          \end{equation*}
+        \partsitem By the prior item, $f$'s action is \( x\mapsto (7/3)x \).
+          Thus \( f(-2)=-14/3 \).
+        \partsitem For the `only if' half,
+          assume that \( \map{f}{\Re^2}{\Re^2} \) is an automorphism. 
+          Consider the standard basis \( \stdbasis_2 \) for \( \Re^2 \).
+          Let
+          \begin{equation*}
+            f(\vec{e}_1)=\colvec{a \\ c}
+            \quad\text{and}\quad
+            f(\vec{e}_2)=\colvec{b \\ d}.
+          \end{equation*}
+          Then the action of $f$ on any vector is determined by
+          by its action on the two basis vectors. 
+          \begin{equation*}
+            f(\colvec{x \\ y})
+            =f(x\cdot\vec{e}_1+y\cdot\vec{e}_2)
+            =x\cdot f(\vec{e}_1)+y\cdot f(\vec{e}_2)
+            =x\cdot\colvec{a \\ c}+y\cdot\colvec{b \\ d}
+            =\colvec{ax+by \\ cx+dy}
+          \end{equation*}
+          To finish this half,
+          note that if \( ad-bc=0 \), that is, 
+          if \( f(\vec{e}_2) \) is a multiple of \( f(\vec{e}_1) \),
+          then \( f \) is not one-to-one.
+
+          For `if' we must check that the map is an isomorphism,
+          under the condition that $ad-bc\neq 0$.
+          The structure-preservation check is easy; we will here show that 
+          \( f \) is a correspondence.
+          For the argument that the map is one-to-one, assume this.
+          \begin{equation*}
+            f(\colvec{x_1 \\ y_1})
+            =f(\colvec{x_2 \\ y_2})
+            \quad\text{and so}\quad
+            \colvec{ax_1+by_1 \\ cx_1+dy_1}
+            =\colvec{ax_2+by_2 \\ cx_2+dy_2}
+          \end{equation*}
+          Then, because \( ad-bc\neq 0 \), the resulting system
+          \begin{equation*}
+            \begin{linsys}{2}
+              a(x_1-x_2)  &+  &b(y_1-y_2)  &=  &0  \\
+              c(x_1-x_2)  &+  &d(y_1-y_2)  &=  &0  
+            \end{linsys}
+          \end{equation*}
+          has a unique solution, namely the trivial one
+          $x_1-x_2=0$ and $y_1-y_2=0$
+          (this follows from the hint).
+
+          The argument that this map is onto is closely related\Dash this system
+          \begin{equation*}
+            \begin{linsys}{2}
+              ax_1  &+  &by_1  &=  &x  \\
+              cx_1  &+  &dy_1  &=  &y  
+            \end{linsys}
+          \end{equation*}
+          has a solution for any \( x \) and \( y \) if and only if
+          this set
+          \begin{equation*}
+            \set{\colvec{a \\ c},
+                 \colvec{b \\ d} }
+          \end{equation*}
+          spans \( \Re^2 \), i.e., if and only if this set is 
+          a basis (because it is a two-element subset of $\Re^2$), 
+          i.e., if and only if \( ad-bc\neq 0 \).
+        \partsitem
+          \begin{equation*}
+            f(\colvec{0 \\ -1})=f(\colvec{1 \\ 3}-\colvec{1 \\ 4})
+            =f(\colvec{1 \\ 3})-f(\colvec{1 \\ 4})
+            =\colvec{2 \\ -1}-\colvec{0 \\ 1}
+            =\colvec{2 \\ -2}
+          \end{equation*}
+      \end{exparts}    
+    \end{answer}
+  \item 
+     Refer to \nearbylemma{le:IsoSendsZeroToZero} and
+     \nearbylemma{le:PresStructIffPresCombos}. 
+     Find two more things preserved by isomorphism.
+     \begin{answer}
+       There are many answers; two are linear independence and
+       subspaces.  
+
+       To show that if a set $\set{\vec{v}_1,\dots,\vec{v}_n}$ is linearly
+       independent then its image $\set{f(\vec{v}_1),\dots,f(\vec{v}_n)}$
+       is also linearly independent, consider a linear relationship
+       among members of the image set.
+       \begin{equation*}
+         0=c_1f(\vec{v}_1)+\dots+c_nf(\vec{v_n})
+          =f(c_1\vec{v}_1)+\dots+f(c_n\vec{v_n})
+          =f(c_1\vec{v}_1+\dots+c_n\vec{v_n})
+       \end{equation*}
+       Because this map is an isomorphism, it is one-to-one.
+       So $f$ maps only one vector from the domain to the zero vector in the
+       range, that is, $c_1\vec{v}_1+\dots+c_n\vec{v}_n$ equals the 
+       zero vector (in the domain, of course).
+       But, if $\set{\vec{v}_1,\dots,\vec{v}_n}$ is linearly
+       independent then all of the $c$'s are zero, and so 
+       $\set{f(\vec{v}_1),\dots,f(\vec{v}_n)}$ is linearly independent also.
+       (\textit{Remark.}
+       There is a small point about this argument that is worth mention.
+       In a set, repeats collapse, that is, strictly speaking, this is a
+       one-element set: $\set{\vec{v},\vec{v}}$, because the things
+       listed as in it are the same thing.
+       Observe, however, the use of the subscript~$n$ in the above argument.
+       In moving from the domain set $\set{\vec{v}_1,\dots,\vec{v}_n}$ to
+       the image set 
+       $\set{f(\vec{v}_1),\dots,f(\vec{v}_n)}$, there is no collapsing,
+       because the image set does not have repeats,
+       because the isomorphism $f$ is one-to-one.)
+
+       To show that if $\map{f}{V}{W}$ is an isomorphism and if 
+       $U$ is a subspace of the domain $V$ then the set of image vectors 
+       $f(U)=\set{\vec{w}\in W
+                 \suchthat\text{$\vec{w}=f(\vec{u})$ for some $\vec{u}\in U$}}$
+       is a subspace of $W$, we need only show that it is closed under linear
+       combinations of two of its members (it is nonempty because it contains
+       the image of the zero vector).
+       We have
+       \begin{equation*}
+         c_1\cdot f(\vec{u}_1)+c_2\cdot f(\vec{u}_2)
+        =f(c_1\vec{u}_1)+f(c_2\vec{u}_2)
+        =f(c_1\vec{u}_1+c_2\vec{u}_2)
+       \end{equation*}
+       and $c_1\vec{u}_1+c_2\vec{u}_2$ is a member of $U$ because of 
+       the closure of a subspace under combinations. 
+       Hence the combination of $f(\vec{u}_1)$ and $f(\vec{u}_2)$ is 
+       a member of $f(U)$.
+      \end{answer}
+  \item 
+    We show that isomorphisms can be tailored
+    to fit in that, sometimes, given vectors in the domain and in
+    the range we can produce an isomorphism associating those vectors.
+    \begin{exparts}
+      \partsitem Let \( B=\sequence{\vec{\beta}_1,\vec{\beta}_2,
+                   \vec{\beta}_3} \)
+        be a basis for \( \polyspace_2 \) so that
+        any \( \vec{p}\in\polyspace_2 \) has a unique representation
+        as \(
+        \vec{p}=c_1\vec{\beta}_1+c_2\vec{\beta}_2+c_3\vec{\beta}_3 \),
+        which we denote in this way.
+        \begin{equation*}
+          \rep{\vec{p}}{B}=\colvec{c_1 \\ c_2 \\ c_3}
+        \end{equation*}
+        Show that the $\rep{\cdot}{B}$ operation is a function from 
+        \( \polyspace_2 \) to \( \Re^3 \)
+        (this entails showing that with every domain vector
+        \( \vec{v}\in\polyspace_2 \)
+        there is an associated image vector in \( \Re^3 \), 
+        and further, that with every domain vector 
+        \( \vec{v}\in\polyspace_2 \) there is at most one associated 
+        image vector).
+      \partsitem Show that this $\rep{\cdot}{B}$ function 
+        is one-to-one and onto.
+      \partsitem Show that it preserves structure.
+      \partsitem Produce an isomorphism from \( \polyspace_2 \) to 
+        \( \Re^3 \) that fits these specifications.
+        \begin{equation*}
+          x+x^2\mapsto\colvec{1 \\ 0 \\ 0}
+          \quad\text{and}\quad
+          1-x\mapsto\colvec{0 \\ 1 \\ 0}
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The association
+          \begin{equation*}
+            \vec{p}=c_1\vec{\beta}_1+c_2\vec{\beta}_2+c_3\vec{\beta}_3
+            \mapsunder{\rep{\cdot}{B}}
+            \colvec{c_1 \\ c_2 \\ c_3}
+          \end{equation*}
+          is a function if every member $\vec{p}$ of the domain is associated
+          with at least one member of the codomain, and if every member
+          $\vec{p}$ of the
+          domain is associated with at most one member of the codomain.
+          The first condition
+          holds because the basis $B$ spans the domain\Dash every
+          $\vec{p}$ can be written as at least one linear combination of
+          $\vec{\beta}$'s.
+          The second condition holds because the basis $B$ is linearly
+          independent\Dash every member $\vec{p}$ 
+          of the domain can be written as
+          at most one linear combination of the $\vec{\beta}$'s.
+        \partsitem For the one-to-one argument,
+          if $\rep{\vec{p}}{B}=\rep{\vec{q}}{B}$, that is, if
+          \( \rep{p_1\vec{\beta}_1+p_2\vec{\beta}_2+p_3\vec{\beta}_3}{B}
+             =\rep{q_1\vec{\beta}_1+q_2\vec{\beta}_2+q_3\vec{\beta}_3}{B} \)
+          then
+          \begin{equation*}
+            \colvec{p_1 \\ p_2 \\ p_3}
+            =\colvec{q_1 \\ q_2 \\ q_3}
+          \end{equation*}
+          and so \( p_1=q_1 \) and \( p_2=q_2 \) and \( p_3=q_3 \),
+          which gives the conclusion that $\vec{p}=\vec{q}$.
+          Therefore this map is one-to-one.
+
+          For onto, we can just note that
+          \begin{equation*}
+            \colvec{a \\ b \\ c}
+          \end{equation*}
+          equals $\rep{a\vec{\beta}_1+b\vec{\beta}_2+c\vec{\beta}_3}{B}$, and
+          so any member of the codomain $\Re^3$ is the image of some
+          member of the domain $\polyspace_2$. 
+        \partsitem This map respects addition and scalar multiplication
+           because it respects combinations of two members of the domain
+           (that is, we are using item~(2) of 
+           \nearbylemma{le:PresStructIffPresCombos}):
+           where $\vec{p}=p_1\vec{\beta}_1+p_2\vec{\beta}_2+p_3\vec{\beta}_3$
+           and $\vec{q}=q_1\vec{\beta}_1+q_2\vec{\beta}_2+q_3\vec{\beta}_3$,
+           we have this.
+           \begin{align*}
+             \rep{c\cdot\vec{p}+d\cdot\vec{q}}{B}
+             &=\rep{\,(cp_1+dq_1)\vec{\beta}_1+(cp_2+dq_2)\vec{\beta}_2
+                  +(cp_3+dq_3)\vec{\beta}_3\,}{B}  \\
+             &=\colvec{cp_1+dq_1 \\ cp_2+dq_2 \\ cp_3+dq_3}  \\
+             &=c\cdot\colvec{p_1 \\ p_2 \\ p_3}  
+               +d\cdot\colvec{q_1 \\ q_2 \\ q_3}  \\
+             &=\rep{\vec{p}}{B}+\rep{\vec{q}}{B}
+           \end{align*}
+        \partsitem Use any basis \( B \) for $\polyspace_2$
+          whose first two members are \( x+x^2 \) and \( 1-x \), 
+          say \( B=\sequence{x+x^2,1-x,1} \).
+      \end{exparts}   
+    \end{answer}
+  \item 
+    Prove that a space is \( n \)-dimensional if and only if it is
+    isomorphic to \( \Re^n \).
+    \textit{Hint.} 
+    Fix a basis $B$ for the space and consider the 
+    map sending a vector over to its representation with respect to $B$.
+    \begin{answer}
+      See the next subsection.  
+    \end{answer}
+  \item 
+    \textit{(Requires the subsection on Combining Subspaces, 
+    which is optional.)} 
+    Let \( U \) and \( W \) be vector spaces.
+    Define a new vector space, consisting of the set
+    \( U\times W=\set{(\vec{u},\vec{w})  \suchthat  \vec{u}\in U\text{\ and\ }
+                                                   \vec{w}\in W}  \)
+    along with these operations.
+    \begin{equation*}
+      (\vec{u}_1,\vec{w}_1)+(\vec{u}_2,\vec{w}_2)=
+          (\vec{u}_1+\vec{u}_2,\vec{w}_1+\vec{w}_2)
+      \quad\text{and}\quad
+      r\cdot (\vec{u},\vec{w})=(r\vec{u},r\vec{w})
+    \end{equation*}
+    This is a vector space,
+    the \definend{external direct sum}\index{direct sum!external}%
+    \index{external direct sum} of \( U \) and \( W \).
+    \begin{exparts}
+      \partsitem Check that it is a vector space. 
+      \partsitem Find a basis for, and the dimension of,
+        the external direct sum \( \polyspace_2\times\Re^2 \).
+      \partsitem What is the relationship among
+        \( \dim(U) \), \( \dim(W) \), and \( \dim(U\times W) \)?
+      \partsitem Suppose that \( U \) and \( W \) are subspaces of a vector
+        space \( V \) such that \( V=U\directsum W \)
+        (in this case we say that $V$ is the 
+        \definend{internal direct sum}\index{direct sum!internal}%
+        \index{internal direct sum} of $U$ and $W$).
+        Show that the map \( \map{f}{U\times W}{V} \) given by
+        \begin{equation*}
+          (\vec{u},\vec{w})\mapsunder{f} \vec{u}+\vec{w}
+        \end{equation*}
+        is an isomorphism. 
+        Thus if the internal direct sum is defined
+        then the internal and external direct sums are isomorphic.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Most of the conditions in the definition of a
+          vector space are routine.
+          We here sketch the verification of part~(1) of that definition.
+
+          For closure of $U\times W$, note that because 
+          \( U \) and \( W \) are closed, we have that
+          $\vec{u}_1+\vec{u}_2\in U$ and $\vec{w}_1+\vec{w}_2\in W$
+          and so \( (\vec{u}_1+\vec{u}_2,\vec{w}_1+\vec{w}_2)\in U\times W \).
+          Commutativity of addition in \( U\times W \) follows from
+          commutativity of addition in \( U \) and \( W \).
+          \begin{equation*}
+             (\vec{u}_1,\vec{w}_1)+(\vec{u}_2,\vec{w}_2)=
+                 (\vec{u}_1+\vec{u}_2,\vec{w}_1+\vec{w}_2)
+                 =(\vec{u}_2+\vec{u}_1,\vec{w}_2+\vec{w}_1)
+             =(\vec{u}_2,\vec{w}_2)+(\vec{u}_1,\vec{w}_1)
+          \end{equation*}
+          The check for associativity of addition is similar.
+          The zero element is \( (\zero_U,\zero_W)\in U\times W \) 
+          and the additive inverse of
+          \( (\vec{u},\vec{w}) \) is \( (-\vec{u},-\vec{w}) \).
+
+          The checks for the second part of the definition of a vector space
+          are also straightforward.
+        \partsitem This is a basis
+          \begin{equation*}
+            \sequence{\, (1,\colvec{0 \\ 0}), (x,\colvec{0 \\ 0}),
+              (x^2,\colvec{0 \\ 0}), (1,\colvec{1 \\ 0}),
+              (1,\colvec{0 \\ 1}) \,}
+          \end{equation*}
+          because there is one and only one way to represent any
+          member of $\polyspace_2\times \Re^2$ with respect to this set; 
+          here is an example.
+          \begin{equation*}
+            (3+2x+x^2,\colvec{5 \\ 4})
+             =  
+              3\cdot(1,\colvec{0 \\ 0})
+              +2\cdot(x,\colvec{0 \\ 0})
+              +(x^2,\colvec{0 \\ 0}) 
+              +5\cdot(1,\colvec{1 \\ 0})
+              +4\cdot(1,\colvec{0 \\ 1}) 
+          \end{equation*}
+          The dimension of this space is five.
+        \partsitem We have \( \dim(U\times W)=\dim(U)+\dim(W) \) 
+          as this is a basis.
+          \begin{equation*}
+            \sequence{ (\vec{\mu}_1,\zero_W), \dots,
+              (\vec{\mu}_{\dim(U)},\zero_W), (\zero_U,\vec{\omega}_1),
+              \ldots,(\zero_U,\vec{\omega}_{\dim(W)}) }
+          \end{equation*}
+        \partsitem We know that if \( V=U\directsum W \) then each 
+          \( \vec{v}\in V \)
+          can be written as \( \vec{v}=\vec{u}+\vec{w} \) in one and only one
+          way.
+          This is just what we need to prove that 
+          the given function an isomorphism.
+
+          First, to show that \( f \) is one-to-one we can show that if
+          \( f\left((\vec{u}_1,\vec{w}_1)\right)
+                 =\left((\vec{u}_2,\vec{w}_2)\right) \), that is, if 
+          \( \vec{u}_1+\vec{w}_1=\vec{u}_2+\vec{w}_2 \) then
+          \( \vec{u}_1=\vec{u}_2 \) and \( \vec{w}_1=\vec{w}_2 \).
+          But the statement 
+          `each $\vec{v}$ is such a sum in only one way' is exactly what is
+          needed to make this conclusion.
+          Similarly, the argument that \( f \) is onto is completed by the
+          statement that 
+          `each $\vec{v}$ is such a sum in at least one way'.
+
+          This map also preserves linear combinations
+          \begin{align*}
+            f(\,c_1\cdot(\vec{u}_1,\vec{w}_1)+c_2\cdot (\vec{u}_2,\vec{w}_2)\,)
+            &=f(\,(c_1\vec{u}_1+c_2\vec{u}_2,c_1\vec{w}_1+c_2\vec{w}_2)\,) \\
+            &=c_1\vec{u}_1+c_2\vec{u}_2+c_1\vec{w}_1+c_2\vec{w}_2    \\
+            &=c_1\vec{u}_1+c_1\vec{w}_1+c_2\vec{u}_2+c_2\vec{w}_2    \\
+            &=c_1\cdot f(\,(\vec{u}_1,\vec{w}_1)\,)
+               +c_2\cdot f(\,(\vec{u}_2,\vec{w}_2)\,)
+          \end{align*}
+          and so it is an isomorphism.
+      \end{exparts}     
+    \end{answer}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+%\subsection{Real Spaces Represent\index{representative!of isomorphism classes}
+%   \protect$n\protect$--Spaces}
+\subsection{Dimension Characterizes Isomorphism}
+
+In the prior subsection, after stating the definition of an isomorphism,
+we gave some results supporting the intuition that such a map describes 
+spaces as ``the same''. 
+Here we will formalize this intuition.
+While two spaces that are isomorphic are not equal, we think of them
+as almost equal\Dash as equivalent.
+In this subsection 
+we shall show that the relationship `is isomorphic~to' is an equivalence
+relation.\appendrefs{equivalence relations and equivalence classes}
+
+\begin{theorem}
+\label{th:IsoEquivRel}
+Isomorphism\index{equivalence relation!isomorphism} is an equivalence
+relation between vector spaces.
+\end{theorem}
+
+\begin{proof}
+We must prove that this relation has the three properties of being
+symmetric, reflexive, and transitive.
+For each of the three we will use item~(2) of 
+\nearbylemma{le:PresStructIffPresCombos} and show that the map preserves
+structure by showing that it preserves linear combinations
+of two members of the domain.
+
+To check reflexivity, that any space is isomorphic to itself,
+consider the identity map.
+It is clearly one-to-one and onto.
+The calculation showing that it preserves linear combinations is easy.
+\begin{equation*}
+   \mbox{id}(c_1\cdot \vec{v}_1+c_2\cdot \vec{v}_2)
+   =c_1\vec{v}_1+c_2\vec{v}_2
+   =c_1\cdot \mbox{id}(\vec{v}_1)+c_2\cdot \mbox{id}(\vec{v}_2)
+\end{equation*}
+
+To check symmetry, that if $V$ is isomorphic to $W$ via some 
+map $\map{f}{V}{W}$ then there is an isomorphism going the other way, 
+consider the inverse map $\map{f^{-1}}{W}{V}$. 
+As stated in the appendix, such an inverse function exists and
+it is also a correspondence.
+Thus we have reduced the symmetry issue to checking that, because $f$ 
+preserves linear combinations, so also does $f^{-1}$.
+Assume that \( \vec{w}_1=f(\vec{v}_1) \) and \( \vec{w}_2=f(\vec{v}_2) \),
+i.e., that \( f^{-1}(\vec{w}_1)=\vec{v}_1 \) 
+and \( f^{-1}(\vec{w}_2)=\vec{v}_2 \).
+\begin{align*}
+  f^{-1}(c_1\cdot\vec{w}_1+c_2\cdot\vec{w}_2)
+    &=f^{-1}\bigl(\,c_1\cdot f(\vec{v}_1)
+                             +c_2\cdot f(\vec{v}_2)\,\bigr) \\
+    &=f^{-1}(\,f\bigl(c_1\vec{v}_1+c_2\vec{v}_2)\,\bigr)    \\
+    &=c_1\vec{v}_1+c_2\vec{v}_2                             \\ 
+    &=c_1\cdot f^{-1}(\vec{w}_1)+c_2\cdot f^{-1}(\vec{w}_2)     
+\end{align*}
+
+Finally, we must check transitivity, that if $V$ is isomorphic to $W$ via some
+map $f$ and if $W$ is isomorphic to $U$ via some map $g$ then also 
+$V$ is isomorphic to $U$.
+Consider the composition $\map{\composed{g}{f}}{V}{U}$.
+The appendix notes that 
+the composition of two correspondences is a correspondence, 
+so we need only check that the composition preserves linear combinations.
+\begin{align*}
+  \composed{g}{f}\,\bigl(c_1\cdot\vec{v}_1+c_2\cdot\vec{v}_2\bigr)
+     &=g\bigl(\,f(c_1\cdot \vec{v}_1+c_2\cdot\vec{v}_2)\,\bigr)        \\
+     &=g\bigl(\,c_1\cdot f(\vec{v}_1)+c_2\cdot f(\vec{v}_2)\,\bigr) \\ 
+     &=c_1\cdot g\bigl(f(\vec{v}_1))+c_2\cdot g(f(\vec{v}_2)\bigr)  \\
+     &=c_1\cdot(\composed{g}{f})\,(\vec{v}_1)
+                  +c_2\cdot(\composed{g}{f})\,(\vec{v}_2)
+\end{align*}
+Thus \( \map{\composed{g}{f}}{V}{U}\) is an isomorphism.
+\end{proof}
+
+As a consequence of that result, we know that the universe of vector spaces is
+partitioned into classes:\index{partitions!into isomorphism classes}
+every space is in one and only one isomorphism class.
+\begin{center} \small
+  \raisebox{.4in}{\begin{tabular}{l}
+                    All finite dimensional \\
+                    vector spaces:
+                  \end{tabular}}
+  \includegraphics{ch3.17}
+  \raisebox{.4in}{\begin{tabular}{l}
+                     $V\isomorphicto W$
+                  \end{tabular}}
+\end{center}
+
+\begin{theorem} \label{th:NDimSpaceIsoRN}
+Vector spaces are isomorphic if and only if they have the same dimension.
+\end{theorem}
+
+This follows from the next two lemmas.
+
+\begin{lemma}   \label{lem:IsoImpliesSameDim}
+If spaces are isomorphic then they have the same dimension.
+\end{lemma}
+
+\begin{proof}
+We shall show that an isomorphism of two spaces gives a correspondence 
+between their bases.
+That is, where \( \map{f}{V}{W} \) is an isomorphism and
+a basis for the domain $V$ is 
+\( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \),
+then the image set
+\( D=\sequence{f(\vec{\beta}_1),\dots,f(\vec{\beta}_n)} \)
+is a basis for the codomain \( W \).
+(The other half of the correspondence\Dash that  
+for any basis of $W$ the inverse image is a 
+basis for $V$\Dash follows on recalling that if $f$ is an isomorphism 
+then $f^{-1}$ is also an isomorphism, 
+and applying the prior sentence to $f^{-1}$.)
+
+To see that \( D \) spans \( W \), fix any \( \vec{w}\in W \),
+note that \( f \) is onto and so there is a \( \vec{v}\in V \) with
+\( \vec{w}=f(\vec{v}) \), and expand \( \vec{v} \) as a combination of
+basis vectors.
+\begin{equation*}
+  \vec{w}=f(\vec{v})
+  =f(v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n)  
+  =v_1\cdot f(\vec{\beta}_1)+\dots+v_n\cdot f(\vec{\beta}_n)
+\end{equation*}
+For linear independence of $D$, if
+\begin{equation*}
+  \zero_W
+  =c_1f(\vec{\beta}_1)+\dots+c_nf(\vec{\beta}_n)  
+  =f(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+\end{equation*}
+then, since \( f \) is one-to-one and so the only vector sent to 
+\( \zero_W \) is \( \zero_V \), we have that
+\( \zero_V=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \),
+implying that all of the \( c \)'s are zero.
+\end{proof}
+
+\begin{lemma} \label{lem:EqDimImpIso}
+If spaces have the same dimension then they are isomorphic. 
+\end{lemma}
+
+\begin{proof}
+To show that any two spaces of dimension~$n$ are isomorphic, 
+we can simply show that any one is isomorphic to $\Re^n$.
+Then we will have shown that they are isomorphic to each other, 
+by the transitivity of isomorphism 
+(which was established in \nearbytheorem{th:IsoEquivRel}).
+
+Let $V$ be \( n \)-dimensional.
+Fix a basis
+\( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) for the domain $V$.
+Consider the representation of the 
+members of that domain with respect to the basis as a function
+from $V$ to $\Re^n$ 
+\begin{equation*}
+   \vec{v}=v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n
+   \,\mapsunder{\text{\small Rep}_B}\,\colvec{v_1 \\ \vdots \\ v_n}
+\end{equation*}
+(it is well-defined\appendrefs{well-definedness}\spacefactor1000 since 
+every \( \vec{v} \) 
+has one and only one such representation\Dash see 
+\nearbyremark{not:WellDefFcns} 
+below).
+
+This function is one-to-one because if
+\begin{equation*}
+   \text{Rep}_B(u_1\vec{\beta}_1+\dots+u_n\vec{\beta}_n)
+     =\text{Rep}_B(v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n)
+\end{equation*}
+then
+\begin{equation*}
+  \colvec{u_1 \\ \vdots \\ u_n}
+    =
+  \colvec{v_1 \\ \vdots \\ v_n}
+\end{equation*}
+and so \( u_1=v_1 \), \ldots, $u_n=v_n$, and therefore the original arguments
+\( u_1\vec{\beta}_1+\dots+u_n\vec{\beta}_n \) and 
+\( v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n\) are equal.
+
+This function is onto; any \( n \)-tall vector
+\begin{equation*}
+   \vec{w}=\colvec{w_1 \\ \vdots \\ w_n}
+\end{equation*}
+is the image of some \( \vec{v}\in V \), namely
+\( \vec{w}=\rep{w_1\vec{\beta}_1+\dots+w_n\vec{\beta}_n}{B}  \).
+
+Finally, this function preserves structure.
+\begin{align*}
+  \rep{r\cdot\vec{u}+s\cdot\vec{v}}{B}
+  &=\rep{\,(ru_1+sv_1)\vec{\beta}_1+\dots+(ru_n+sv_n)\vec{\beta}_n\,}{B}  \\
+  &=\colvec{ru_1+sv_1 \\ \vdots \\ ru_n+sv_n}  \\
+  &=r\cdot\colvec{u_1 \\ \vdots \\ u_n}+s\cdot\colvec{v_1 \\ \vdots \\ v_n} \\
+  &=r\cdot\rep{\vec{u}}{B}+s\cdot\rep{\vec{v}}{B}
+\end{align*}
+Thus the $\mbox{Rep}_B$~function is an isomorphism and thus
+any $n$-dimensional space is isomorphic to the $n$-dimensional space $\Re^n$.
+Consequently, 
+any two spaces with the same dimension are isomorphic.
+\end{proof}
+
+\begin{remark} \label{not:WellDefFcns}
+The parenthetical comment in that proof
+about the role played by the `one and only one representation' result 
+requires some explanation.
+We need to show that (for a fixed $B$) 
+each vector in the domain is associated by 
+$\mbox{Rep}_B$ with one and only one vector in the codomain.
+
+A contrasting example, where an association doesn't have this property, 
+is illuminating.
+Consider this subset of \( \polyspace_2 \), which is not a basis.
+\begin{equation*}
+ A=\set{1+0x+0x^2,
+              0+1x+0x^2,
+              0+0x+1x^2,
+              1+1x+2x^2}
+\end{equation*}
+Call those four polynomials $\vec{\alpha}_1$, \ldots, $\vec{\alpha}_4$.
+If, mimicing above proof,
+we try to write the members of $\polyspace_2$ as 
+\( \vec{p}=c_1\vec{\alpha}_1+c_2\vec{\alpha}_2+
+             c_3\vec{\alpha}_3+c_4\vec{\alpha}_4 \),
+and associate $\vec{p}$ with the four-tall vector with components
+$c_1$, \ldots, $c_4$ then there is a problem. 
+For, consider \( \vec{p}(x)=1+x+x^2 \).
+The set $A$ spans the space $\polyspace_2$, 
+so there is at least one four-tall vector associated with $\vec{p}$.
+But $A$ is not linearly independent and so vectors do not have unique
+decompositions.
+In this case, both
+\begin{equation*}
+  \vec{p}(x)=1\vec{\alpha}_1+1\vec{\alpha}_2+1\vec{\alpha}_3+0\vec{\alpha}_4 
+  \quad\text{and}\quad
+  \vec{p}(x)=0\vec{\alpha}_1+0\vec{\alpha}_2-
+                1\vec{\alpha}_3+1\vec{\alpha}_4 
+\end{equation*}
+and so there is more than one four-tall vector associated with $\vec{p}$.
+\begin{equation*}
+  \colvec{1 \\ 1 \\ 1 \\ 0}
+  \quad\text{and}\quad
+  \colvec{0 \\ 0 \\ -1 \\ 1}
+\end{equation*}
+That is,
+with input $\vec{p}$ this association does not have a 
+well-defined (i.e., single) output value.
+
+Any map whose definition appears possibly ambiguous must be checked to 
+see that it is well-defined.
+For $\mbox{Rep}_B$ in the above proof 
+that check is \nearbyexercise{exer:FcnWellDef}.
+\end{remark}
+
+That ends the proof of \nearbytheorem{th:NDimSpaceIsoRN}.
+We say that the isomorphism classes are 
+\definend{characterized}\index{characterized}%
+\index{isomorphism!characterized by dimension} 
+by dimension because we can
+describe each class simply by giving the number that is the dimension of
+all of the spaces in that class.
+
+This subsection's results give us a collection of 
+representatives of the isomorphism 
+classes. % \appendrefs{equivalence class representatives}\spacefactor1000 %
+ 
+\begin{corollary}
+A finite-dimensional vector space is isomorphic to one and only one
+of the $\Re^n$.
+\end{corollary}
+
+The proofs above pack many ideas into a small space.
+Through the rest of this chapter
+we'll consider these ideas again, and fill them out.
+For a taste of this, we will expand here 
+on the proof of \nearbylemma{lem:EqDimImpIso}.
+
+\begin{example}
+The space $\matspace_{\nbyn{2}}$ of $\nbyn{2}$ matrices is isomorphic to 
+$\Re^4$.
+With this basis for the domain
+\begin{equation*}
+  B=\sequence{\begin{pmatrix}
+                1  &0  \\
+                0  &0
+              \end{pmatrix},
+              \begin{pmatrix}
+                0  &1  \\
+                0  &0
+              \end{pmatrix},
+              \begin{pmatrix}
+                0  &0  \\
+                1  &0
+              \end{pmatrix},
+              \begin{pmatrix}
+                0  &0  \\
+                0  &1
+              \end{pmatrix} }
+\end{equation*}
+the isomorphism given in the lemma, the representation map $f_1=\mbox{Rep}_B$,
+simply carries the entries over.
+\begin{equation*}
+  \begin{pmatrix}
+    a  &b  \\
+    c  &d
+  \end{pmatrix}
+  \mapsunder{f_1}
+  \colvec{a \\ b \\ c \\ d}
+\end{equation*}
+One way to think of the map $f_1$ is:~fix the basis $B$ for 
+the domain and the basis $\stdbasis_4$ for the codomain, and 
+associate $\vec{\beta}_1$ with $\vec{e}_1$, 
+and $\vec{\beta}_2$ with $\vec{e}_2$, etc.
+Then extend this association to all of the members of two spaces.
+\begin{equation*}
+  \begin{pmatrix}
+    a  &b  \\
+    c  &d
+  \end{pmatrix}
+  =a\vec{\beta}_1+b\vec{\beta}_2+c\vec{\beta}_3+d\vec{\beta}_4
+  \;\;\mapsunder{f_1}\;\;
+  a\vec{e}_1+b\vec{e}_2+c\vec{e}_3+d\vec{e}_4
+  =\colvec{a \\ b \\ c \\ d}
+\end{equation*}
+We say that the map has been 
+\definend{extended linearly}\index{map!extended linearly}
+from the bases to the spaces.
+
+We can do the same thing with different bases, 
+for instance, taking this basis for the domain.
+\begin{equation*}
+  A=\sequence{
+              \begin{pmatrix}
+                2  &0  \\
+                0  &0
+              \end{pmatrix},
+              \begin{pmatrix}
+                0  &2  \\
+                0  &0
+              \end{pmatrix},
+              \begin{pmatrix}
+                0  &0  \\
+                2  &0
+              \end{pmatrix},
+              \begin{pmatrix}
+                0  &0  \\
+                0  &2
+              \end{pmatrix} }
+\end{equation*}
+Associating corresponding members of $A$ and $\stdbasis_4$ and extending
+linearly
+\begin{multline*}
+  \begin{pmatrix}
+    a  &b  \\
+    c  &d
+  \end{pmatrix}
+  =(a/2)\vec{\alpha}_1+(b/2)\vec{\alpha}_2
+      +(c/2)\vec{\alpha}_3+(d/2)\vec{\alpha}_4          \\
+  \mapsunder{f_2}\;\;
+  (a/2)\vec{e}_1+(b/2)\vec{e}_2+(c/2)\vec{e}_3+(d/2)\vec{e}_4
+  =\colvec{a/2 \\ b/2 \\ c/2 \\ d/2}
+\end{multline*}
+gives rise to an isomorphism that is different than $f_1$.
+
+The prior map arose by changing the basis for the domain.
+We can also change the basis for the codomain.
+Starting with
+\begin{equation*}
+  B
+  \quad\text{and}\quad
+  D=\sequence{\colvec{1 \\ 0 \\ 0 \\ 0},
+                \colvec{0 \\ 1 \\ 0 \\ 0},
+                \colvec{0 \\ 0 \\ 0 \\ 1},
+                \colvec{0 \\ 0 \\ 1 \\ 0}}
+\end{equation*}
+associating $\vec{\beta}_1$ with $\vec{\delta}_1$, etc., and then
+linearly extending that correspondence to all of the two spaces
+\begin{equation*}
+  \begin{pmatrix}
+     a  &b  \\
+     c  &d  
+   \end{pmatrix}
+  =a\vec{\beta}_1+b\vec{\beta}_2+c\vec{\beta}_3+d\vec{\beta}_4
+  \;\;\mapsunder{f_3}\;\;
+  a\vec{\delta}_1+b\vec{\delta}_2+c\vec{\delta}_3+d\vec{\delta}_4
+  =\colvec{a \\ b \\ d \\ c}
+\end{equation*}
+gives still another isomorphism.
+
+So there is a connection between the maps between spaces 
+and bases for those  spaces. 
+Later sections will explore that connection.
+\end{example}
+
+We will close this section with a summary.
+
+Recall that in the first chapter 
+we defined two matrices as row equivalent if they can be derived 
+from each other by elementary row operations (this
+was the meaning of same-ness that was of interest there).
+We showed that is an equivalence relation and so 
+the collection of matrices is partitioned into classes, 
+where all the matrices that are 
+row equivalent fall together into a single class.
+Then, for insight into which matrices are 
+in each class, we gave representatives for the 
+classes,
+the reduced echelon form matrices.
+
+In this section, except that the appropriate notion of same-ness 
+here is vector space isomorphism, we have followed much the same outline.
+First we defined isomorphism, saw some examples,
+and established some properties.
+Then we showed that it is an equivalence relation, and 
+now we have a set of class representatives, 
+the real vector spaces $\Re^1$, $\Re^2$, etc.
+\begin{center}
+  \raisebox{.4in}{\begin{tabular}{l}
+                    All finite dimensional \\
+                    vector spaces:
+                  \end{tabular}}
+  \includegraphics{ch3.18}
+  \raisebox{.4in}{\begin{tabular}{l}
+                    One representative \\ per class
+                  \end{tabular}}
+\end{center}
+As before, the list of representatives helps us to understand the partition.
+It is simply a classification of spaces by dimension.
+
+In the second chapter,
+with the definition of vector spaces, we seemed to have opened up our studies
+to many examples of new structures besides the familiar $\Re^n$'s.
+We now know that isn't the case.
+Any finite-dimensional vector space is actually
+``the same'' as a real space.
+We are thus considering exactly the structures that we need to consider.
+
+The rest of the chapter fills out
+the work in this section.
+In particular, in the next section we
+will consider maps that preserve structure, but are not necessarily
+correspondences.
+
+
+
+
+\begin{exercises}
+  \recommended \item 
+    Decide if the spaces are isomorphic.
+    \begin{exparts*}
+       \partsitem \( \Re^2 \),~\( \Re^4 \)
+       \partsitem \( \polyspace_5 \),~\( \Re^5 \)
+       \partsitem \( \matspace_{\nbym{2}{3}} \),~\( \Re^6 \)
+       \partsitem \( \polyspace_5 \),~\( \matspace_{\nbym{2}{3}} \)
+       \partsitem \( \matspace_{\nbym{2}{k}} \),~\( \C^k \)
+    \end{exparts*}
+    \begin{answer}
+       Each pair of spaces is isomorphic if and only if the two have the 
+       same dimension.
+       We can, when there is an isomorphism, state
+       a map, but it isn't strictly necessary.
+       \begin{exparts}
+         \partsitem No, they have different dimensions.
+         \partsitem No, they have different dimensions.
+         \partsitem Yes, they have the same dimension. 
+           One isomorphism is this.
+           \begin{equation*}
+             \begin{pmatrix}
+               a  &b  &c  \\
+               d  &e  &f
+             \end{pmatrix}
+             \mapsto
+             \colvec{a \\ \vdots \\ f}
+           \end{equation*}
+         \partsitem Yes, they have the same dimension.
+           This is an isomorphism.
+           \begin{equation*}
+             a+bx+\cdots+fx^5
+             \mapsto
+             \begin{pmatrix}
+               a  &b  &c  \\
+               d  &e  &f
+             \end{pmatrix}
+           \end{equation*}
+         \partsitem Yes, both have dimension \( 2k \).      
+      \end{exparts}    
+    \end{answer}
+  \recommended \item 
+    Consider the isomorphism
+    \( \map{\rep{\cdot}{B}}{\polyspace_1}{\Re^2} \) 
+    where \( B=\sequence{1,1+x} \).
+    Find the image of each of these elements of the domain.
+    \begin{exparts*}
+      \partsitem \( 3-2x \);
+      \partsitem \( 2+2x \);
+      \partsitem \( x \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem \( \rep{3-2x}{B}=\colvec{5 \\ -2} \)
+        \partsitem \( \colvec{0 \\ 2} \)
+        \partsitem \( \colvec{-1 \\ 1} \)
+      \end{exparts*}  
+     \end{answer}
+  \recommended \item
+    Show that if \( m\neq n \) then \( \Re^m\not\isomorphicto\Re^n \).
+     \begin{answer}
+       They have different dimensions.  
+     \end{answer}
+  \recommended \item
+    Is \( \matspace_{\nbym{m}{n}}\isomorphicto\matspace_{\nbym{n}{m}} \)?
+    \begin{answer}
+      Yes, both are \( mn \)-dimensional.  
+    \end{answer}
+  \recommended \item
+    Are any two planes through the origin in \( \Re^3 \) isomorphic?
+    \begin{answer}
+      Yes, any two (nondegenerate) planes are both two-dimensional 
+      vector spaces.
+    \end{answer}
+  \item 
+     Find a set of equivalence class representatives other than the
+     set of \( \Re^n \)'s.
+     \begin{answer}
+        There are many answers, one is the set of \( \polyspace_k \)
+        (taking \( \polyspace_{-1} \) to be the trivial vector space).  
+     \end{answer}
+  \item 
+    True or false:~between any \( n \)-dimensional space and \( \Re^n \)
+    there is exactly one isomorphism.
+    \begin{answer}
+      False  (except when \( n=0 \)).
+      For instance,
+      if \( \map{f}{V}{\Re^n} \) is an isomorphism then multiplying by any
+      nonzero scalar, gives another, different, isomorphism.
+      (Between trivial spaces the isomorphisms are unique; the only map
+      possible is $\zero_V\mapsto 0_W$.)  
+    \end{answer}
+  \item 
+    Can a vector space be isomorphic to one of its (proper) subspaces?
+    \begin{answer}
+      No.
+      A proper subspace has a strictly lower dimension than it's superspace;
+      if $U$ is a proper subspace of $V$ then any linearly independent subset 
+      of $U$ must have fewer than $\dim(V)$ members or else that set would
+      be a basis for $V$, and $U$ wouldn't be proper.  
+    \end{answer}
+  \recommended \item 
+    This subsection shows that for any isomorphism, the inverse map is
+    also an isomorphism.
+    This subsection also shows that for a fixed basis \( B \) of an
+    \( n \)-dimensional vector space \( V \), the map
+    \( \map{\text{Rep}_B}{V}{\Re^n} \) is an isomorphism.
+    Find the inverse of this map.
+    \begin{answer}
+      Where \( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n} \), the
+      inverse is this.
+      \begin{equation*}
+        \colvec{c_1 \\ \vdots \\ c_n}
+        \mapsto c_1\vec{\beta}_1+\cdots+c_n\vec{\beta}_n
+      \end{equation*}  
+    \end{answer}
+  \recommended \item 
+    Prove these facts about matrices.
+    \begin{exparts}
+      \partsitem The row space of a matrix is isomorphic to the 
+        column space of its transpose.
+      \partsitem The row space of a matrix is isomorphic to its column space.
+    \end{exparts}
+    \begin{answer}
+      All three spaces have dimension equal to the rank of the matrix.
+    \end{answer}
+  \item \label{exer:FcnWellDef}
+    Show that the function from \nearbytheorem{th:NDimSpaceIsoRN}
+    is well-defined.
+     \begin{answer}
+        We must show that if \( \vec{a}=\vec{b} \) then
+        \( f(\vec{a})=f(\vec{b}) \).
+        So suppose that 
+        $a_1\vec{\beta}_1+\dots+a_n\vec{\beta}_n
+           =b_1\vec{\beta}_1+\dots+b_n\vec{\beta}_n$.
+        Each vector in a vector space (here, the domain space)
+        has a unique representation as a linear combination
+        of basis vectors, so we can conclude that \( a_1=b_1 \), \ldots,
+        \(a_n=b_n \). 
+        Thus,
+        \begin{equation*}
+          f(\vec{a})
+          =\colvec{a_1 \\ \vdots \\ a_n}=\colvec{b_1 \\ \vdots \\ b_n}
+          =f(\vec{b})          
+        \end{equation*}
+        and so the function is well-defined.
+     \end{answer}
+  \item 
+     Is the proof of \nearbytheorem{th:NDimSpaceIsoRN} valid when \( n=0 \)?
+     \begin{answer}
+       Yes, because a zero-dimensional space is a trivial space.
+     \end{answer}
+  \item 
+    For each, decide if it is a set of isomorphism class representatives.
+    \begin{exparts*}
+      \partsitem \( \set{\C^k \suchthat k\in\N} \)
+      \partsitem $\set{\polyspace_k\suchthat k\in \set{-1,0,1,\ldots}}$
+      \partsitem \( \set{\matspace_{\nbym{m}{n}}\suchthat 
+                   m,n\in\N} \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem No, this collection has no spaces of odd dimension.
+        \partsitem Yes, because $\polyspace_{k}\isomorphicto\Re^{k+1}$.
+        \partsitem No, for instance,
+          \( \matspace_{\nbym{2}{3}}\isomorphicto\matspace_{\nbym{3}{2}} \).
+      \end{exparts}  
+    \end{answer}
+  \item
+    Let \( f \) be a correspondence between vector spaces \( V \) and \( W \)
+    (that is, a map that is one-to-one and onto).
+    Show that the spaces \( V \) and \( W \) are isomorphic via \( f \)
+    if and only if there are bases \( B\subset V \)
+    and \( D\subset W \) such that corresponding vectors have the same
+    coordinates:
+    \( \rep{\vec{v}}{B}=\rep{f(\vec{v})}{D} \).
+    \begin{answer}
+       One direction is easy:~if the two are isomorphic via \( f \)
+       then for any basis \( B\subseteq V \),
+       the set \( D=f(B) \) is also a basis (this is shown in
+       \nearbylemma{lem:IsoImpliesSameDim}).
+       The check that corresponding vectors have the same coordinates:
+       \( f(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+          =c_1f(\vec{\beta}_1)+\dots+c_nf(\vec{\beta}_n)
+          =c_1\vec{\delta}_1+\dots+c_n\vec{\delta}_n   \)
+       is routine.
+
+       For the other half, assume that there are bases such that corresponding
+       vectors have the same coordinates with respect to those bases.
+       Because \( f \) is a correspondence, to show that it is an isomorphism,
+       we need only show that it preserves structure.
+       Because \( \rep{\vec{v}\,}{B}=\rep{f(\vec{v}\,)}{D} \), the
+       map \( f \) preserves structure if and only if
+       representations preserve addition:
+       \( \rep{\vec{v}_1+\vec{v}_2}{B}=\rep{\vec{v}_1}{B}+\rep{\vec{v}_2}{B} \)
+       and scalar multiplication: 
+       \( \rep{r\cdot\vec{v}\,}{B}=r\cdot\rep{\vec{v}\,}{B} \)
+       The addition calculation is this:
+       \( (c_1+d_1)\vec{\beta}_1+\dots+(c_n+d_n)\vec{\beta}_n
+          =c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n
+          +d_1\vec{\beta}_1+\dots+d_n\vec{\beta}_n \),
+       and the scalar multiplication calculation is similar.
+     \end{answer}
+  \item 
+    Consider the isomorphism \( \map{\text{Rep}_B}{\polyspace_3}{\Re^4} \).
+    \begin{exparts}
+      \partsitem Vectors in a real space are orthogonal if and only if
+        their dot product is zero.
+        Give a definition of orthogonality for polynomials.
+      \partsitem The derivative of a member of \( \polyspace_3 \) is in
+        \( \polyspace_3 \).
+        Give a definition of the derivative of a vector in \( \Re^4 \).
+    \end{exparts}
+    \begin{answer}
+       \begin{exparts}
+        \partsitem Pulling the definition back from 
+          \( \Re^4 \) to \( \polyspace_3 \)
+          gives that \( a_0+a_1x+a_2x^2+a_3x^3 \) is orthogonal to
+          \( b_0+b_1x+b_2x^2+b_3x^3 \) if and only if
+          \( a_0b_0+a_1b_1+a_2b_2+a_3b_3=0 \).
+        \partsitem A natural definition is this.
+          \begin{equation*}
+            D(\colvec{a_0 \\ a_1 \\ a_2 \\ a_3})=
+              \colvec{a_1 \\ 2a_2 \\ 3a_3 \\ 0}
+          \end{equation*}
+      \end{exparts}   
+    \end{answer}
+  \recommended \item
+    Does every correspondence between bases, when extended to the 
+    spaces, give an isomorphism?
+    \begin{answer}
+      Yes.
+
+      Assume that \( V \) is a vector space with basis
+      \( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n} \) and that \( W \)
+      is another vector space such that the map \( \map{f}{B}{W} \) is
+      a correspondence.
+      Consider the extension \( \map{\hat{f}}{V}{W} \) of \( f \).
+      \begin{equation*}
+        \hat{f}(c_1\vec{\beta}_1+\cdots+c_n\vec{\beta}_n)=
+        c_1f(\vec{\beta}_1)+\cdots+c_nf(\vec{\beta}_n).
+      \end{equation*}
+      The map \( \hat{f} \) is an isomorphism.
+
+      First, \( \hat{f} \) is well-defined because every member of \( V \)
+      has one and only one representation as a linear combination of elements
+      of \( B \).
+
+      Second, \( \hat{f} \) is one-to-one because every member of \( W \) has
+      only one representation as a linear combination of elements of
+      \( \sequence{f(\vec{\beta}_1),\dots,f(\vec{\beta}_n)} \).
+      That map \( \hat{f} \) is onto because every member of \( W \) has at
+      least one representation as a linear combination of members of
+      \( \sequence{f(\vec{\beta}_1),\dots,f(\vec{\beta}_n)} \).
+
+      Finally, preservation of structure is routine to check.
+      For instance, here is the preservation of addition calculation.
+      \begin{align*}
+        \hat{f}(\,(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)+
+                  (d_1\vec{\beta}_1+\dots+d_n\vec{\beta}_n)\,)
+        &=\hat{f}(\,(c_1+d_1)\vec{\beta}_1+\dots+(c_n+d_n)\vec{\beta}_n\,) \\
+        &=(c_1+d_1)f(\vec{\beta}_1)+\dots+(c_n+d_n)f(\vec{\beta}_n) \\
+        &=c_1f(\vec{\beta}_1)+\dots+c_nf(\vec{\beta}_n)
+          +d_1f(\vec{\beta}_1)+\dots+d_nf(\vec{\beta}_n) \\
+        &=\hat{f}(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)+
+          +\hat{f}(d_1\vec{\beta}_1+\dots+d_n\vec{\beta}_n).
+      \end{align*}
+      Preservation of scalar multiplication is similar.   
+    \end{answer}
+  \item 
+    \textit{(Requires the subsection on Combining Subspaces,
+    which is optional.)}
+    Suppose that \( V=V_1\directsum V_2 \) and that 
+    \( V \) is isomorphic to the space \( U \) under the map \( f \).
+    Show that \( U=f(V_1)\directsum f(U_2) \).
+    \begin{answer}
+      Because \( V_1\intersection V_2=\set{\zero_V} \) and \( f \) is
+      one-to-one we have that \( f(V_1)\intersection f(V_2)=\set{\zero_U} \).
+      To finish, count the dimensions:
+      \( \dim(U)=\dim(V)=\dim(V_1)+\dim(V_2)=\dim(f(V_1))+\dim(f(V_2)) \),
+      as required.  
+    \end{answer}
+  \item Show that this is not a well-defined function from the rational numbers
+    to the integers: with each fraction, associate the value of its numerator.
+    \begin{answer}
+      Rational numbers have many representations, e.g.,
+      \( 1/2=3/6 \), and the numerators can vary among
+      representations.
+    \end{answer}
+\index{isomorphism|)}
+\end{exercises}

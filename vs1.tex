@@ -1,0 +1,3205 @@
+% Chapter 2, Section 1 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-10
+\chapter{Vector Spaces}
+The first chapter began by introducing Gauss' method and finished with a fair
+understanding, keyed on the Linear Combination Lemma, 
+of how it finds the solution set of a linear system.
+Gauss' method systematically takes linear combinations of the rows.
+With that insight, we now move to a general study of linear 
+combinations.
+
+We need a setting for this study.
+At times in the first chapter, we've combined vectors from $\Re^2$, 
+at other times vectors from $\Re^3$,
+and at other times vectors from even higher-dimensional spaces. 
+Thus, our first impulse might be 
+to work in $\Re^n$, leaving $n$ unspecified.
+This would have the advantage that any of the results 
+would hold for $\Re^2$ and for $\Re^3$ and for many other spaces,
+simultaneously.
+
+But, if having the results apply to many spaces at once is
+advantageous then sticking only to $\Re^n$'s is overly restrictive. 
+We'd like the results to also apply to combinations of row vectors,
+as in the final section of the first chapter.
+We've even seen some spaces that are not just a collection of all of the
+same-sized column vectors or row vectors.
+For instance, we've seen a solution
+set of a homogeneous system that is a plane, inside of $\Re^3$.
+This solution set is a closed system in the sense that 
+a linear combination of these solutions is also a solution. 
+But it is not just a collection of all of the three-tall column vectors; 
+only some of them are in this solution set.
+
+We want the results about linear combinations to apply anywhere that linear
+combinations are sensible. 
+We shall call any such set a \definend{vector space}.
+Our results, instead of being phrased as
+``Whenever we have a collection in which we can sensibly take linear 
+combinations \ldots'', will be stated as
+``In any vector space \ldots''.
+
+Such a statement describes at once what
+happens in many spaces.
+The step up in abstraction from studying a single space at a time 
+to studying a class of spaces can be hard to make.
+To understand its advantages, consider this analogy.
+Imagine that the government made laws one person at a time:
+``Leslie Jones can't jay walk.''
+That would be a bad idea; 
+statements have the virtue of economy when they apply to many cases at once.
+Or, suppose that they ruled, ``Kim Ke must stop when passing 
+the scene of an accident.''
+Contrast that with, ``Any doctor must stop when passing 
+the scene of an accident.''
+More general statements, in some ways, are clearer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Definition of Vector Space}
+\index{vector space|(}
+We shall study structures with two operations,
+an addition and a scalar multiplication, that are subject to some
+simple conditions.
+We will reflect more on the conditions later,
+but on first reading notice how reasonable they are.
+For instance, surely any operation that can be called an addition
+(e.g., column vector addition, row vector addition, or
+real number addition) will satisfy conditions (1) through~(5) below.
+
+
+
+
+\subsection{Definition and Examples}
+
+\begin{definition}
+\label{def:VecSpace}
+A \definend{vector space}\index{vector space!definition}
+(over \( \Re \)) consists of a set \( V \) along with
+two operations `+' and `\( \cdot \)' subject to these conditions.
+
+Where \( \vec{v},\vec{w}\in V \), 
+(1)~their \definend{vector sum}\index{vector!sum}\index{sum!vector}%
+     \index{addition!vector}
+     \( \vec{v}+\vec{w} \) is an element of \( V \).
+If \( \vec{u},\vec{v},\vec{w}\in V \) then 
+(2)~\( \vec{v}+\vec{w}=\vec{w}+\vec{v} \) and 
+(3)~\( (\vec{v}+\vec{w})+\vec{u}=\vec{v}+(\vec{w}+\vec{u}) \).
+(4)~There is a \definend{zero vector}\index{zero vector}%
+         \index{vector!zero}
+    \( \zero\in V \) such that
+    \( \vec{v}+\zero=\vec{v}\, \) for all \( \vec{v}\in V\).
+(5)~Each \( \vec{v}\in V \) has an
+    \definend{additive inverse}\index{additive inverse}%
+    \index{inverse!additive}
+    \( \vec{w}\in V \) such that \( \vec{w}+\vec{v}=\zero \).
+
+If \( r,s \) are \definend{scalars\/},\index{scalar}
+members of \( \Re \),
+and \( \vec{v},\vec{w}\in V \) then 
+(6)~each
+\definend{scalar multiple}\index{scalar multiple!vector}%
+     \index{vector!scalar multiple}
+     \( r\cdot\vec{v} \) is in \( V \).
+If \( r,s\in\Re \) and \( \vec{v},\vec{w}\in V \) then
+(7)~\( (r+s)\cdot\vec{v}=r\cdot\vec{v}+s\cdot\vec{v} \), 
+and (8)~\( r\cdot(\vec{v}+\vec{w})
+               =r\cdot\vec{v}+r\cdot\vec{w} \),
+and (9)~\( (rs)\cdot\vec{v} =r\cdot(s\cdot\vec{v}) \),
+and (10)~\( 1\cdot\vec{v}=\vec{v} \).
+\end{definition}
+% \begin{definition}
+% \label{def:VecSpace}
+% A \definend{vector space}\index{vector space!definition}
+% (over \( \Re \)) consists of a set \( V \) along with
+% two operations `+' and `\( \cdot \)' such that
+% \begin{enumerate}
+%   \item if \( \vec{v},\vec{w}\in V \) then their
+%     \definend{vector sum}\index{vector!sum}\index{sum!vector}%
+%      \index{addition!vector}
+%      \( \vec{v}+\vec{w} \) is in \( V \) and
+%      \begin{itemize}
+%        \item \( \vec{v}+\vec{w}=\vec{w}+\vec{v} \)
+%        \item \( (\vec{v}+\vec{w})+\vec{u}
+%              =\vec{v}+(\vec{w}+\vec{u}) \) (where \( \vec{u}\in V \))
+%        \item there is a \definend{zero vector}\index{zero vector}%
+%          \index{vector!zero}
+%          \( \zero\in V \) such that
+%               \( \vec{v}+\zero=\vec{v}\, \) for all \( \vec{v}\in V\)
+%        \item each \( \vec{v}\in V \) has an
+%          \definend{additive inverse}\index{additive inverse}%
+%           \index{inverse!additive}
+%               \( \vec{w}\in V \) such that \( \vec{w}+\vec{v}=\zero \)
+%      \end{itemize}
+%   \item if \( r,s \) are \definend{scalars\/}\index{scalar}
+%      (members of \( \Re \))
+%      and \( \vec{v},\vec{w}\in V \) then each
+%      \definend{scalar multiple}\index{scalar multiple!vector}%
+%      \index{vector!scalar multiple}
+%      \( r\cdot\vec{v} \) is in \( V \) and
+%      \begin{itemize}
+%        \item \( (r+s)\cdot\vec{v}=r\cdot\vec{v}+s\cdot\vec{v} \)
+%        \item \( r\cdot(\vec{v}+\vec{w})
+%                =r\cdot\vec{v}+r\cdot\vec{w} \)
+%        \item \( (rs)\cdot\vec{v} =r\cdot(s\cdot\vec{v}) \)
+%        \item \( 1\cdot\vec{v}=\vec{v} \).
+%      \end{itemize}
+% \end{enumerate}
+% \end{definition}
+
+\begin{remark}
+Because it involves two kinds of addition and two kinds of multiplication, 
+that definition may seem confused.
+For instance, in condition~(7)
+`\( (r+s)\cdot\vec{v}=r\cdot\vec{v}+s\cdot\vec{v}\, \)',
+the first `+' is the real number addition operator
+while the `+' to the right of
+the equals sign represents vector addition in the structure \( V \).
+These expressions aren't ambiguous because, e.g.,
+\( r \) and \( s \)
+are real numbers so `\( r+s \)' can only mean real number addition.
+\end{remark}
+
+The best way to go through the examples below is to
+check all ten conditions in the definition.
+That check is written out at length in the first example.
+Use it as a model for the others.
+Especially important are the first 
+condition~`\( \vec{v}+\vec{w} \) is in \( V \)' and
+the sixth condition `\( r\cdot\vec{v} \) is in \( V \)'.
+These are the \definend{closure}\index{vector space!closure}
+conditions.
+They specify that the addition and scalar multiplication operations
+are always sensible\Dash they are defined for every pair of vectors, 
+and every scalar and vector,
+and the result of the operation is a member of the set
+(see \nearbyexample{PlaneThruOriginSubsp}). 
+
+\begin{example}  \label{ex:RealVecSpaces}
+The set
+\( \Re^2 \) is a vector space if the operations `\( + \)' and `\( \cdot \)'
+have their usual meaning.
+\begin{equation*}
+  \colvec{x_1 \\ x_2}
+  +
+  \colvec{y_1 \\ y_2}
+  =
+  \colvec{x_1+y_1 \\ x_2+y_2}
+  \qquad
+  r\cdot
+  \colvec{x_1 \\ x_2}
+  =
+  \colvec{rx_1 \\ rx_2}
+\end{equation*}
+We shall check all of the conditions.
+
+There are five conditions in item~(1).
+For (1), closure of addition, note that for any \( v_1,v_2,w_1,w_2\in\Re \)
+the result of the sum
+\begin{equation*}
+  \colvec{v_1 \\ v_2}
+  +\colvec{w_1 \\ w_2}
+  =\colvec{v_1+w_1 \\ v_2+w_2}
+\end{equation*}
+is a column array with two real entries, and so is in \( \Re^2 \).
+For (2), that addition of vectors commutes, 
+take all entries to be real numbers and compute
+\begin{equation*}
+  \colvec{v_1 \\ v_2}
+  +\colvec{w_1 \\ w_2}
+  =\colvec{v_1+w_1 \\ v_2+w_2}
+  =\colvec{w_1+v_1 \\ w_2+v_2}
+  =\colvec{w_1 \\ w_2}
+  +\colvec{v_1 \\ v_2}
+\end{equation*}
+(the second equality follows from the fact that the components of the
+vectors are real numbers, and the addition of real numbers is commutative).
+Condition~(3), associativity of vector addition, is similar.
+\begin{align*}
+  (\colvec{v_1 \\ v_2}
+  +\colvec{w_1 \\ w_2})
+  +\colvec{u_1 \\ u_2}
+  &=\colvec{(v_1+w_1)+u_1 \\ (v_2+w_2)+u_2}  \\
+  &=\colvec{v_1+(w_1+u_1) \\ v_2+(w_2+u_2)}  \\
+  &=\colvec{v_1 \\ v_2}
+  +(\colvec{w_1 \\ w_2}
+  +\colvec{u_1 \\ u_2})
+\end{align*}
+For the fourth condition we must produce a zero element\Dash the
+vector of zeroes is it.
+\begin{equation*}
+  \colvec{v_1 \\ v_2}
+  +\colvec{0 \\ 0}
+  =\colvec{v_1 \\ v_2}
+\end{equation*}
+For (5), to produce an additive inverse, note that for any $v_1,v_2\in\Re$
+we have
+\begin{equation*}
+  \colvec{-v_1 \\ -v_2}
+  +\colvec{v_1 \\ v_2}
+  =\colvec{0 \\ 0}
+\end{equation*}
+so the first vector is the desired additive inverse of the second.
+
+The checks for the five conditions having to do with scalar multiplication
+are just as routine.
+For (6), closure under scalar multiplication,
+where $r, v_1, v_2 \in \Re$,
+\begin{equation*}
+  r\cdot\colvec{v_1 \\ v_2}
+  =\colvec{rv_1 \\ rv_2}
+\end{equation*}
+is a column array with two real entries, and so is in \( \Re^2 \).
+Next, this checks (7).
+\begin{equation*}
+  (r+s)\cdot\colvec{v_1 \\ v_2}
+  =\colvec{(r+s)v_1 \\ (r+s)v_2}
+  =\colvec{rv_1+sv_1 \\ rv_2+sv_2}
+  =r\cdot\colvec{v_1 \\ v_2}+s\cdot\colvec{v_1 \\ v_2}
+\end{equation*}
+For (8), 
+that scalar multiplication distributes from the left over
+vector addition, we have this.
+\begin{equation*}
+  r\cdot(\colvec{v_1 \\ v_2}+\colvec{w_1 \\ w_2})
+  =\colvec{r(v_1+w_1) \\ r(v_2+w_2)}
+  =\colvec{rv_1+rw_1 \\ rv_2+rw_2}
+  =r\cdot\colvec{v_1 \\ v_2}+r\cdot\colvec{w_1 \\ w_2}
+\end{equation*}
+The ninth
+\begin{equation*}
+  (rs)\cdot\colvec{v_1 \\ v_2}
+  =\colvec{(rs)v_1 \\ (rs)v_2}
+  =\colvec{r(sv_1) \\ r(sv_2)}
+  =r\cdot(s\cdot\colvec{v_1 \\ v_2})
+\end{equation*}
+and tenth conditions are also straightforward.
+\begin{equation*}
+  1\cdot\colvec{v_1 \\ v_2}
+  =\colvec{1v_1 \\ 1v_2}
+  =\colvec{v_1 \\ v_2}
+\end{equation*}
+\end{example}
+
+In a similar way, 
+each \( \Re^n \) is a vector space with the usual operations of vector addition
+and scalar multiplication.
+(In \( \Re^1 \), we usually do not write the members as
+column vectors, i.e., we usually do not write `\( (\pi) \)'.
+Instead we just write `\( \pi \)'.)
+
+\begin{example}  \label{PlaneThruOriginSubsp}
+This subset of \( \Re^3 \) that is a plane through the origin
+\begin{equation*}
+  P=\set{ \colvec{x \\ y \\ z}  \suchthat x+y+z=0}
+\end{equation*}
+is a vector space if `+' and `\(\cdot\)' are interpreted in this way.
+\begin{equation*}
+  \colvec{x_1 \\ y_1 \\ z_1}
+  +
+  \colvec{x_2 \\ y_2 \\ z_2}
+  =
+  \colvec{x_1+x_2 \\ y_1+y_2 \\ z_1+z_2}
+  \qquad
+  r\cdot
+  \colvec{x \\ y \\ z}
+  =
+  \colvec{rx \\ ry \\ rz}
+\end{equation*}
+The addition and scalar multiplication operations here
+are just the ones of \( \Re^3 \), reused on its subset $P$.
+We say that \( P \) \definend{inherits\/}\index{inherited operations} 
+these operations from \( \Re^3 \).
+This example of an addition in $P$
+\begin{equation*}
+   \colvec{1 \\ 1 \\ -2}+\colvec{-1 \\ 0 \\ 1}=\colvec{0 \\ 1 \\ -1}
+\end{equation*}
+illustrates that $P$ is closed under addition.
+We've added two vectors from $P$\Dash that is, with the property that the sum 
+of their three entries is zero\Dash and the result is a vector also in $P$.
+Of course, this example of closure is not a proof of closure.
+To prove that $P$ is closed under addition, take two elements of $P$ 
+\begin{equation*}
+  \colvec{x_1 \\ y_1 \\ z_1} \quad \colvec{x_2 \\ y_2 \\ z_2} 
+\end{equation*} 
+(membership in $P$ means that $x_1+y_1+z_1=0$ and $x_2+y_2+z_2=0$), 
+and observe that their sum
+\begin{equation*}
+  \colvec{x_1+x_2 \\ y_1+y_2 \\ z_1+z_2}
+\end{equation*} 
+is also in $P$ since its entries add
+$(x_1+x_2)+(y_1+y_2)+(z_1+z_2)=(x_1+y_1+z_1)+(x_2+y_2+z_2)$ to $0$.
+To show that \( P \) is closed under scalar multiplication, start with
+a vector from $P$
+\begin{equation*}
+  \colvec{x \\ y \\ z}
+\end{equation*}
+(so that \( x+y+z=0 \)) and then for \( r\in\Re \)
+observe that the scalar multiple
+\begin{equation*}
+  r\cdot\colvec{x \\ y \\ z}
+  =
+  \colvec{rx \\ ry \\ rz}
+\end{equation*}
+satisfies that \( rx+ry+rz=r(x+y+z)=0 \).
+Thus the two closure conditions are satisfied.
+Verification of the other conditions in the definition of a vector space
+are just as straightforward.
+\end{example}
+
+\begin{example} \label{ex:ColsIntEntNotVS}
+\nearbyexample{ex:RealVecSpaces} shows that the set of all two-tall vectors
+with real entries is a vector space. 
+\nearbyexample{PlaneThruOriginSubsp} gives a subset of an $\Re^n$ that is also
+a vector space.
+In contrast with those two, consider the set
+of two-tall columns with entries that are integers
+(under the obvious operations).
+This is a subset of a vector space, but it is not itself a vector space.
+The reason is that this set is not closed under scalar multiplication, 
+that is, it does not satisfy condition~(6). 
+Here is a column with integer entries, and a scalar, 
+such that the outcome of the operation 
+\begin{equation*}
+  0.5
+  \cdot
+  \colvec{4 \\ 3}
+  =
+  \colvec{2 \\ 1.5}
+\end{equation*}
+is not a member of the set, since its entries are not all integers.
+\end{example}
+
+\begin{example}  \label{ex:TrivSbspReFour}
+The singleton set
+\begin{equation*}
+  \{ \colvec{0 \\ 0 \\ 0 \\ 0} \}
+\end{equation*}
+is a vector space under the operations 
+\begin{equation*}
+  \colvec{0 \\ 0 \\ 0 \\ 0}
+  +
+  \colvec{0 \\ 0 \\ 0 \\ 0}
+  =
+  \colvec{0 \\ 0 \\ 0 \\ 0}
+  \qquad
+  r\cdot
+  \colvec{0 \\ 0 \\ 0 \\ 0}
+  =
+  \colvec{0 \\ 0 \\ 0 \\ 0}
+\end{equation*}
+that it inherits from \( \Re^4 \).
+\end{example}
+
+A vector space must have at least one element, its zero vector.
+Thus a one-element vector space is the smallest one possible.
+
+\begin{definition}
+A one-element vector space is a \definend{trivial}\index{vector space!trivial}%
+\index{trivial space}
+space.
+\end{definition}
+
+Warning!
+The examples so far involve sets of column vectors with the usual operations.
+But vector spaces need not be collections of column vectors, or even of row
+vectors.
+Below are some other types of vector spaces.
+The term `vector space' does not mean `collection of columns of reals'.
+It means something more like 
+`collection in which any linear combination is sensible'.
+
+\begin{example} \label{ex:PolySpaceThree}
+Consider
+\( \polyspace_3=\set{a_0+a_1x+a_2x^2+a_3x^3\suchthat a_0,\ldots,a_3\in\Re} \),
+the set of polynomials of degree three or less
+(in this book, we'll take constant polynomials, 
+including the zero polynomial, to be of degree zero).
+It is a vector space under the operations
+\begin{multline*}
+   (a_0+a_1x+a_2x^2+a_3x^3)+(b_0+b_1x+b_2x^2+b_3x^3)  \\
+     =(a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2+(a_3+b_3)x^3
+\end{multline*}
+and
+\begin{equation*}
+   r\cdot(a_0+a_1x+a_2x^2+a_3x^3)=
+     (ra_0)+(ra_1)x+(ra_2)x^2+(ra_3)x^3
+\end{equation*}
+(the verification is easy).
+This vector space is worthy of attention because
+these are the polynomial operations familiar from high school algebra.
+For instance,
+$
+  3\cdot(1-2x+3x^2-4x^3)-2\cdot(2-3x+x^2-(1/2)x^3)=-1+7x^2-11x^3$.
+
+Although this space is not a subset of any \( \Re^n \),
+there is a sense in which we can think of $\polyspace_3$ as ``the same'' as  
+\( \Re^4 \).
+If we identify these two spaces's elements in this way 
+\begin{equation*}
+  a_0+a_1x+a_2x^2+a_3x^3
+  \quad\text{corresponds to}\quad
+  \colvec{a_0 \\ a_1 \\ a_2 \\ a_3}
+\end{equation*}
+then the operations also correspond.
+Here is an example of corresponding additions.
+\begin{equation*}
+  \mbox{\begin{tabular}{lr}
+       &\(1-2x+0x^2+1x^3\) \\
+     + &\(2+3x+7x^2-4x^3\) \\ \hline
+       &\(3+1x+7x^2-3x^3\)
+  \end{tabular}  }
+  \quad\text{corresponds to}\quad
+  \colvec{1 \\ -2 \\ 0 \\ 1}
+  +
+  \colvec{2 \\ 3 \\ 7 \\ -4}
+  =
+  \colvec{3 \\ 1 \\ 7 \\ -3}
+\end{equation*}
+Things we are thinking of as ``the same'' add to ``the same'' sum.
+Chapter Three makes precise this idea of vector space correspondence.
+For now we shall just leave it as an intuition.
+\end{example}
+
+\begin{example} \label{ex:MatSpaceTwoByTwo}
+The set \( \matspace_{\nbym{2}{2}} \) of \( \nbym{2}{2} \) matrices with
+real number entries is a vector space under the natural 
+entry-by-entry operations.
+\begin{equation*}
+  \begin{pmatrix}
+    a  &b \\
+    c  &d
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    w  &x \\
+    y  &z
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    a+w  &b+x \\
+    c+y  &d+z
+  \end{pmatrix}
+  \qquad
+  r\cdot
+  \begin{pmatrix}
+    a  &b \\
+    c  &d
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    ra  &rb \\
+    rc  &rd
+  \end{pmatrix}
+\end{equation*}
+As in the prior example, we can think of this space as
+``the same'' as \( \Re^4 \).
+\end{example}
+
+\begin{example}   \label{ex:FcnsNToRIsVecSp}
+The set \( \set{f\suchthat \map{f}{\N}{\Re} } \) of all
+real-valued functions of one natural number variable is a vector space
+under the operations
+\begin{equation*}
+  (f_1+f_2)\,(n)=f_1(n)+f_2(n)
+  \qquad
+  (r\cdot f)\,(n)=r\,f(n)
+\end{equation*}
+so that if, for example, \( f_1(n)=n^2+2\sin(n) \) and
+\( f_2(n)=-\sin(n)+0.5 \)
+then \( (f_1+2f_2)\,(n)=n^2+1 \).
+
+We can view this space
+as a generalization of \nearbyexample{ex:RealVecSpaces}\Dash instead of 
+$2$-tall vectors, these functions are like infinitely-tall
+vectors.
+\begin{equation*}
+  \text{
+    \begin{tabular}{c|c}
+      \( n \)      &\( f(n)=n^2+1 \)  \\ \hline
+      \( 0      \) &\( 1      \)    \\
+      \( 1      \) &\( 2      \)    \\
+      \( 2      \) &\( 5      \)    \\
+      $3$          &$10$            \\
+      \( \vdots \) &\( \vdots \)    \\
+    \end{tabular} }
+    \quad\text{corresponds to}\quad
+    \colvec{
+           1           \\
+           2           \\
+           5           \\
+           10          \\
+           \vdots      }
+\end{equation*}
+Addition and scalar multiplication are component-wise, 
+as in \nearbyexample{ex:RealVecSpaces}.
+(We can formalize ``infinitely-tall'' by saying that it means an infinite
+sequence, or that it means a function from $\N$ to $\Re$.)
+\end{example}
+
+\begin{example}
+The set of polynomials with real coefficients
+\begin{equation*}
+ \set{ a_0+a_1x+\cdots+a_nx^n\suchthat n\in\N
+    \text{ and } a_0,\ldots,a_n\in\Re} 
+\end{equation*}
+makes a vector space when given the natural `$+$' 
+\begin{multline*}
+  (a_0+a_1x+\cdots+a_nx^n)+(b_0+b_1x+\cdots+b_nx^n)  \\
+     =(a_0+b_0)+(a_1+b_1)x+\cdots +(a_n+b_n)x^n
+\end{multline*}
+and `$\cdot$'.
+\begin{equation*}
+  r\cdot (a_0+a_1x+\ldots a_nx^n)
+   =
+  (ra_0)+(ra_1)x+\ldots (ra_n)x^n
+\end{equation*}
+This space differs from the space $\polyspace_3$ of
+\nearbyexample{ex:PolySpaceThree}.
+This space contains not just degree~three polynomials, 
+but degree~thirty polynomials and
+degree three~hundred polynomials, too.
+Each individual polynomial of course is of a finite degree, 
+but the set has no single bound on the degree of all of its members.
+
+This example, like the prior one,  
+can be thought of in terms of infinite-tuples.
+For instance, we can think of \( 1+3x+5x^2 \) as corresponding to
+\( (1,3,5,0,0,\ldots) \).
+However, this space differs from the one in
+\nearbyexample{ex:FcnsNToRIsVecSp}.
+Here, each member of the set has a finite degree, that is,
+under the correspondence there is no element from this space 
+matching \( (1,2,5,10,\,\ldots\,) \).
+Vectors in this space correspond to infinite-tuples
+that end in zeroes.
+\end{example}
+
+\begin{example}  \label{ex:RealValuedFcns}
+The set
+\( \set{f\suchthat \map{f}{\Re}{\Re} } \)
+of all real-valued functions of one real variable
+is a vector space under these.
+\begin{equation*}
+  (f_1+f_2)\,(x)=f_1(x)+f_2(x)
+  \qquad
+  (r\cdot f)\,(x)=r\,f(x)
+\end{equation*}
+The difference between this and \nearbyexample{ex:FcnsNToRIsVecSp} is the
+domain of the functions.
+\end{example}
+
+\begin{example}\label{ex:ACos+BSin}
+The set
+\( F=\{ a\cos\theta+b\sin\theta \suchthat a,b\in\Re\} \)
+of real-valued functions of the real variable \( \theta \)
+is a vector space under the operations
+%\nearbyexample{ex:RealValuedFcns}:
+\begin{equation*}
+  (a_1\cos\theta+b_1\sin\theta)+(a_2\cos\theta+b_2\sin\theta)
+    =(a_1+a_2)\cos\theta+(b_1+b_2)\sin\theta
+\end{equation*}
+and
+\begin{equation*}
+  r\cdot (a\cos\theta+b\sin\theta)
+   =(ra)\cos\theta+(rb)\sin\theta
+\end{equation*}
+inherited from the space in the prior example.
+(We can think of \( F \) as ``the same'' as \( \Re^2 \)
+in that $a\cos\theta+b\sin\theta$ corresponds to the vector with
+components $a$ and $b$.)
+\end{example}
+
+\begin{example}
+The set
+\begin{equation*}
+  \set{\map{f}{\Re}{\Re}\suchthat \dfrac{d^2f}{dx^2}+f=0}
+\end{equation*}
+is a vector space under the, by now natural, interpretation.
+\begin{equation*}
+  (f+g)\,(x)=f(x)+g(x)
+  \qquad
+  (r\cdot f)\,(x)=r\,f(x)
+\end{equation*}
+In particular, notice that closure is a consequence
+\begin{equation*}
+   \frac{d^2(f+g)}{dx^2}+(f+g)
+   =(\frac{d^2f}{dx^2}+f)+(\frac{d^2g}{dx^2}+g)
+\end{equation*}
+and
+\begin{equation*}
+   \frac{d^2(rf)}{dx^2}+(rf)
+   =r(\frac{d^2 f}{dx^2}+f)
+\end{equation*}
+of basic Calculus.
+This turns out to equal the space from the prior example\Dash functions
+satisfying this differential equation have the form
+$a\cos\theta+b\sin\theta$\Dash but this description 
+suggests an extension to solutions sets of other
+differential equations.
+\end{example}
+
+\begin{example}
+The set of solutions of a homogeneous linear system in \( n \) variables
+is a vector space under the operations inherited from \( \Re^n \).
+For example, for closure under addition 
+consider a typical equation in that system
+$c_1x_1+\cdots+c_nx_n=0$ and suppose that both these vectors
+\begin{equation*}
+   \vec{v}=\colvec{v_1 \\ \vdots \\ v_n}
+   \qquad
+   \vec{w}=\colvec{w_1 \\ \vdots \\ w_n}
+\end{equation*}
+satisfy the equation. 
+Then their sum
+\( \vec{v}+\vec{w}\/ \) also satisfies that equation:
+\(
+  c_1(v_1+w_1)+\cdots+c_n(v_n+w_n)
+  =(c_1v_1+\cdots+c_nv_n)+(c_1w_1+\cdots+c_nw_n)
+  =0
+\).
+The checks of the other vector space conditions are just as routine.
+\end{example}
+
+As we've done in those equations, 
+we often omit the multiplication symbol `\( \cdot \)'. 
+We can distinguish the multiplication in
+`\( c_1v_1 \)' from that in `\( r\vec{v}\, \)' since if both 
+multiplicands are real numbers then
+real-real multiplication must be meant, while if one is a vector then 
+scalar-vector multiplication must be meant.
+
+The prior example has brought us full circle since it is one of
+our motivating examples.
+
+\begin{remark}
+Now, with some feel for the kinds of structures that satisfy the definition
+of a vector space, we can reflect on that definition.
+For example, why specify in the definition the condition that 
+\( 1\cdot\vec{v}=\vec{v} \) but not a condition that \( 0\cdot\vec{v}=\zero \)?
+
+One answer is that this is just a definition\Dash it gives the rules of the
+game from here on, and if you don't like it, put the book down and
+walk away.
+
+Another answer is perhaps more satisfying.
+People in this area have worked hard to develop the
+right balance of power and generality.
+This definition has been shaped so that it contains the conditions
+needed to prove all of the interesting and
+important properties of spaces of linear combinations.
+As we proceed, we shall derive all of the properties natural to collections of
+linear combinations from the conditions given in the definition.
+
+The next result is an example.
+We do not need to include these properties in the definition of vector space
+because they follow from the properties already listed there.
+\end{remark}
+
+\begin{lemma}
+In any vector space \( V \), 
+for any \( \vec{v}\in V \) and \( r\in\Re \), we have
+(1)~\( 0\cdot\vec{v}=\zero \), and
+(2)~\( (-1\cdot\vec{v})+\vec{v}=\zero \), and 
+(3)~\( r\cdot\zero=\zero \).
+\end{lemma}
+
+\begin{proof}
+For (1), note that 
+\( \vec{v}=(1+0)\cdot\vec{v}=\vec{v}+(0\cdot\vec{v}) \).
+Add to both sides the additive inverse of \( \vec{v} \),
+the vector \( \vec{w} \) such that \( \vec{w}+\vec{v}=\zero \).
+\begin{align*}
+  \vec{w}+\vec{v}
+  &=\vec{w}+\vec{v}+0\cdot\vec{v}  \\
+  \zero
+  &=\zero+0\cdot\vec{v}                   \\
+  \zero
+  &=0\cdot\vec{v}
+\end{align*}
+
+The second item is easy:
+\(  (-1\cdot\vec{v})+\vec{v}=(-1+1)\cdot\vec{v}=0\cdot\vec{v}=\zero \)
+shows that we can write `\( -\vec{v}\, \)' for the additive inverse
+of \( \vec{v} \) without worrying about possible confusion with
+\( (-1)\cdot\vec{v} \).
+
+For (3), this
+\( r\cdot\zero
+  =
+  r\cdot(0\cdot\zero)
+  =
+  (r\cdot 0)\cdot\zero
+  =
+  \zero \)
+will do.
+\end{proof}
+
+We finish with a recap.
+
+Our study in Chapter One of Gaussian reduction
+led us to consider collections of linear combinations.
+So in this chapter we have defined a vector space to be a 
+structure in which we can form such combinations,
+expressions of the form \( c_1\cdot\vec{v}_1+\dots+c_n\cdot\vec{v}_n \)
+(subject to simple conditions on the addition and scalar
+multiplication operations).
+In a phrase: vector spaces are
+the right context in which to study linearity.
+
+Finally, a comment.
+From the fact that it forms a whole chapter, and especially because that 
+chapter is the first one, a reader could come to think that the study of linear
+systems is our purpose.
+The truth is, we will not so much use vector spaces in
+the study  of linear systems as we will instead have linear systems 
+start us on the study of vector spaces.
+The wide variety of examples from this subsection shows that the study of
+vector spaces is interesting and important in its own right, aside from
+how it helps us understand linear systems.
+Linear systems won't go away.
+But from now on our primary objects of study will be vector spaces.
+
+\begin{exercises}
+  \item 
+    Name the zero vector for each of these vector spaces.
+    \begin{exparts}
+      \partsitem The space of degree three polynomials under the natural
+        operations
+      \partsitem The space of \( \nbym{2}{4} \) matrices
+      \partsitem The space
+        \( \set{\map{f}{[0..1]}{\Re}\suchthat f\text{ is continuous}} \)
+      \partsitem The space of real-valued functions of one natural 
+        number variable
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem \( 0+0x+0x^2+0x^3 \)
+        \partsitem \( \begin{pmatrix}
+                   0  &0  &0  &0  \\
+                   0  &0  &0  &0
+                 \end{pmatrix} \)
+        \partsitem The constant function \( f(x)=0 \)
+        \partsitem The constant function \( f(n)=0 \)
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Find the additive inverse, in the vector space,
+    of the vector.
+    \begin{exparts}
+      \partsitem In \( \polyspace_3 \), the vector \( -3-2x+x^2 \).
+      \partsitem In the space \( \nbyn{2} \),
+        \begin{equation*}
+          \begin{pmatrix}
+            1  &-1  \\
+            0  &3
+          \end{pmatrix}.
+        \end{equation*}
+     \partsitem In \( \set{ae^x+be^{-x}\suchthat a,b\in\Re} \), the space 
+       of functions of the real variable \( x \) under the natural operations,
+       the vector \( 3e^x-2e^{-x} \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem \( 3+2x-x^2 \)
+        \partsitem \( \begin{pmatrix}
+                   -1  &+1  \\
+                    0  &-3
+                 \end{pmatrix} \)
+        \partsitem \( -3e^x+2e^{-x} \)
+      \end{exparts*}  
+    \end{answer}
+  \recommended \item 
+    Show that each of these is a vector space.
+    \begin{exparts}
+      \partsitem The set of linear polynomials
+        \( \polyspace_1=\set{a_0+a_1x\suchthat a_0,a_1\in\Re} \) under the
+        usual polynomial addition and scalar multiplication operations.
+      \partsitem The set of \( \nbyn{2} \) matrices with real entries under
+        the usual matrix operations.
+      \partsitem The set of three-component row vectors with their usual
+        operations.
+      \partsitem The set
+        \begin{equation*}
+          L=\set{\colvec{x \\ y \\ z \\ w}\in\Re^4\suchthat x+y-z+w=0}
+        \end{equation*}
+        under the operations inherited from $\Re^4$.
+    \end{exparts}
+    \begin{answer}
+      Most of the conditions are easy to check; use
+      \nearbyexample{ex:RealVecSpaces} as a guide.
+      Here are some comments.
+      \begin{exparts}
+        \partsitem This is just like \nearbyexample{ex:RealVecSpaces}; the zero
+          element is \( 0+0x \).
+        \partsitem The zero element of this space is the $\nbyn{2}$ 
+          matrix of zeroes.
+        \partsitem The zero element is the vector of zeroes.
+        \partsitem Closure of addition involves noting that the sum
+          \begin{equation*}
+            \colvec{x_1 \\ y_1 \\ z_1 \\ w_1}
+            +\colvec{x_2 \\ y_2 \\ z_2 \\ w_2}
+            =
+            \colvec{x_1+x_2 \\ y_1+y_2 \\ z_1+z_2 \\ w_1+w_2}
+          \end{equation*}
+          is in \( L \) because
+          \( (x_1+x_2)+(y_1+y_2)-(z_1+z_2)+(w_1+w_2)
+          =(x_1+y_1-z_1+w_1)+(x_2+y_2-z_2+w_2)=0+0 \).
+          Closure of scalar multiplication is similar.
+          Note that the zero element, the vector of zeroes, is in $L$.
+     \end{exparts}  
+     \end{answer}
+  \recommended \item \label{exer:NotVectorSpaces}
+    Show that each of these is not a vector space.
+    (\textit{Hint.}  Start by listing two members of each set.)     
+    \begin{exparts}
+      \partsitem Under the operations inherited from \( \Re^3 \), this set
+        \begin{equation*}
+          \set{\colvec{x \\ y \\ z}\in\Re^3\suchthat x+y+z=1}
+        \end{equation*}
+      \partsitem Under the operations inherited from \( \Re^3 \), this set
+        \begin{equation*}
+          \set{\colvec{x \\ y \\ z}\in\Re^3\suchthat x^2+y^2+z^2=1}
+        \end{equation*}
+      \partsitem Under the usual matrix operations,
+        \begin{equation*}
+          \set{\begin{pmatrix}
+                 a  &1  \\
+                 b  &c
+               \end{pmatrix} \suchthat a,b,c\in\Re}
+        \end{equation*}
+      \partsitem Under the usual polynomial operations,
+        \begin{equation*}
+          \set{a_0+a_1x+a_2x^2\suchthat a_0,a_1,a_2\in\Re^+}
+        \end{equation*}
+        where $\Re^+$ is the set of reals greater than zero
+      \partsitem Under the inherited operations,
+        \begin{equation*}
+          \set{\colvec{x \\ y}\in\Re^2\suchthat
+               \text{\( x+3y=4 \) and \( 2x-y=3 \) and \( 6x+4y=10 \)} }
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      In each item the set is called \( Q \).
+      For some items, there are other correct ways to show that $Q$ is not
+      a vector space.
+      \begin{exparts}
+        \partsitem It is not closed under addition; it fails to meet
+          condition~(1).
+          \begin{equation*}
+            \colvec{1 \\ 0 \\ 0},
+            \colvec{0 \\ 1 \\ 0}\in Q
+            \qquad
+            \colvec{1 \\ 1 \\ 0}\not\in Q
+          \end{equation*}
+        \partsitem It is not closed under addition.
+          \begin{equation*}
+            \colvec{1 \\ 0 \\ 0},
+            \colvec{0 \\ 1 \\ 0}\in Q
+            \qquad
+            \colvec{1 \\ 1 \\ 0}\not\in Q
+          \end{equation*}
+        \partsitem It is not closed under addition.
+          \begin{equation*}
+            \begin{pmatrix}
+              0  &1  \\
+              0  &0
+            \end{pmatrix},
+            \,
+            \begin{pmatrix}
+              1  &1  \\
+              0  &0
+            \end{pmatrix}\in Q
+            \qquad
+            \begin{pmatrix}
+              1  &2  \\
+              0  &0
+            \end{pmatrix}\not\in Q
+          \end{equation*}
+        \partsitem It is not closed under scalar multiplication.
+          \begin{equation*}
+            1+1x+1x^2\in Q
+            \qquad
+            -1\cdot(1+1x+1x^2)\not\in Q
+          \end{equation*}
+        \item It is empty, violating condition~(4).
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Define addition and scalar multiplication operations to 
+    make the complex numbers a vector space over \( \Re \).
+    \begin{answer}
+      The usual operations
+      \( (v_0+v_1i)+(w_0+w_1i)=(v_0+w_0)+(v_1+w_1)i \) and
+      \( r(v_0+v_1i)=(rv_0)+(rv_1)i \) suffice.
+      The check is easy.  
+    \end{answer}
+  \recommended \item
+    Is the set of rational numbers a vector space over \( \Re \) under the
+    usual addition and scalar multiplication operations?
+    \begin{answer}
+       No, it is not closed under scalar multiplication since, e.g., 
+       \( \pi\cdot (1) \) is not a rational number. 
+    \end{answer}
+  \item 
+    Show that 
+    the set of linear combinations of the variables \( x,y,z \) is
+    a vector space under the natural addition and scalar multiplication
+    operations.
+    \begin{answer}
+      The natural operations are
+      \( (v_1x+v_2y+v_3z)+(w_1x+w_2y+w_3z)=(v_1+w_1)x+(v_2+w_2)y+(v_3+w_3)z \)
+      and \( r\cdot(v_1x+v_2y+v_3z)=(rv_1)x+(rv_2)y+(rv_3)z \).
+      The check that this is a vector space is easy; use
+      \nearbyexample{ex:RealVecSpaces} as a guide.  
+    \end{answer}
+  \item 
+    Prove that 
+    this is not a vector space: the set of two-tall column vectors
+    with real entries subject to these operations.
+    \begin{equation*}
+      \colvec{x_1 \\ y_1}
+      +\colvec{x_2 \\ y_2}
+      =\colvec{x_1-x_2 \\ y_1-y_2}
+      \qquad
+      r\cdot\colvec{x \\ y}
+      =\colvec{rx \\ ry}
+    \end{equation*}
+    \begin{answer}
+      The `\( + \)' operation is not commutative (that is, condition~(2) is 
+      not met); producing two members of the
+      set witnessing this assertion is easy.
+    \end{answer}
+  \item 
+    Prove or disprove that \( \Re^3 \) is a vector space under these
+    operations.
+    \begin{exparts}
+      \partsitem \( 
+               \colvec{x_1 \\ y_1 \\ z_1}
+               +\colvec{x_2 \\ y_2 \\ z_2}
+               =\colvec{0 \\ 0 \\ 0}
+               \quad\text{and}\quad
+               r\colvec{x \\ y \\ z}
+               =\colvec{rx \\ ry \\ rz} \) 
+      \partsitem \( 
+               \colvec{x_1 \\ y_1 \\ z_1}
+               +\colvec{x_2 \\ y_2 \\ z_2}
+               =\colvec{0 \\ 0 \\ 0}   
+               \quad\text{and}\quad
+               r\colvec{x \\ y \\ z}
+               =\colvec{0 \\ 0 \\ 0} \)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem It is not a vector space.
+          \begin{equation*}
+            (1+1)\cdot\colvec{1 \\ 0 \\ 0}\neq
+            \colvec{1 \\ 0 \\ 0}
+            +\colvec{1 \\ 0 \\ 0}
+          \end{equation*}
+        \partsitem It is not a vector space.
+          \begin{equation*}
+            1\cdot\colvec{1 \\ 0 \\ 0}\neq\colvec{1 \\ 0 \\ 0}
+          \end{equation*}
+      \end{exparts}   
+    \end{answer}
+  \recommended \item
+    For each, decide if it is a vector space;
+    the intended operations are the natural ones.
+    \begin{exparts}
+      \partsitem The \definend{diagonal} \( \nbyn{2} \) matrices
+        \begin{equation*}
+          \set{\begin{pmatrix}
+            a  &0  \\
+            0  &b
+          \end{pmatrix}\suchthat a,b\in\Re}
+        \end{equation*}
+      \partsitem This set of \( \nbyn{2} \) matrices
+        \begin{equation*}
+          \set{\begin{pmatrix}
+            x    &x+y  \\
+            x+y  &y
+          \end{pmatrix}\suchthat x,y\in\Re}
+        \end{equation*}
+      \partsitem This set
+        \begin{equation*}
+          \set{\colvec{x \\ y \\ z \\ w}\in\Re^4
+               \suchthat x+y+w=1}
+        \end{equation*}
+      \partsitem The set of functions
+        \( \set{\map{f}{\Re}{\Re}\suchthat df/dx+2f=0} \)
+      \partsitem The set of functions
+        \( \set{\map{f}{\Re}{\Re}\suchthat df/dx+2f=1} \)
+    \end{exparts}
+    \begin{answer}
+      For each ``yes'' answer, you must give a check of all the 
+      conditions given in the
+      definition of a vector space.
+      For each ``no'' answer, give a specific example of the failure 
+      of one of the
+      conditions.
+      \begin{exparts}
+        \partsitem Yes.
+        \partsitem Yes.
+        \partsitem No, this set is not closed under the natural addition
+          operation.
+          The vector of all $1/4$'s is a member of this set 
+          but when added to itself the result, the 
+          vector of all $1/2$'s, is a nonmember.
+        \partsitem Yes.
+        \partsitem No, \( f(x)=e^{-2x}+(1/2) \) is in the set but 
+           \( 2\cdot f \) is not (that is, condition~(6) fails).
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Prove or disprove that this is a vector space: the real-valued functions
+    \( f \) of one real variable such that \( f(7)=0 \).
+    \begin{answer}
+      It is a vector space.
+      Most conditions of the definition of vector space are routine; we here
+      check only closure.
+      For addition,
+      \( (f_1+f_2)\,(7)=f_1(7)+f_2(7)=0+0=0 \).
+      For scalar multiplication,
+      \( (r\cdot f)\,(7)=rf(7)=r0=0 \).  
+    \end{answer}
+  \recommended \item
+    Show that the set \( \Re^+ \) of positive reals
+    is a vector space when `\( x+y \)' is interpreted to mean
+    the product of \( x \) and \( y \) (so that \( 2+3 \) is \( 6 \)),
+    and `\( r\cdot x \)' is interpreted as the \( r \)-th power of \( x \).
+    \begin{answer}
+      We check \nearbydefinition{def:VecSpace}.
+
+      First, closure under `\( + \)'
+      holds because the product of two positive reals is
+      a positive real.
+      The second condition is satisfied because real multiplication commutes.
+      Similarly, as real multiplication associates, the third checks.
+      For the fourth condition, observe that multiplying a number by
+      \( 1\in\Re^+ \) won't change the number.
+      Fifth, any positive real has a reciprocal that is a positive real.
+
+      The sixth, closure under `\( \cdot \)', 
+      holds because any power of a positive real is a
+      positive real.
+      The seventh condition is just the rule that \( v^{r+s} \) equals
+      the product of \( v^r \) and \( v^s \).
+      The eight condition says that \( (vw)^r=v^rw^r \).
+      The ninth condition asserts that \( (v^r)^s=v^{rs} \).
+      The final condition says that \( v^1=v \).  
+    \end{answer}
+  \item 
+      Is \( \set{(x,y)\suchthat x,y\in\Re} \) a vector space under
+      these operations?
+      \begin{exparts}
+        \partsitem \( (x_1,y_1)+(x_2,y_2)=(x_1+x_2,y_1+y_2) \)
+        and \( r\cdot (x,y)=(rx,y) \)
+        \partsitem \( (x_1,y_1)+(x_2,y_2)=(x_1+x_2,y_1+y_2) \)
+        and \( r\cdot (x,y)=(rx,0) \)
+      \end{exparts}
+      \begin{answer}
+        \begin{exparts}
+           \partsitem No: \( 1\cdot(0,1)+1\cdot(0,1)\neq (1+1)\cdot(0,1) \).
+           \partsitem No; the same calculation as the prior answer shows
+              a contition in the definition of a vector space that is 
+              violated. 
+              Another example of a violation of the conditions for a 
+              vector space is that \( 1\cdot (0,1)\neq (0,1) \). 
+        \end{exparts}  
+      \end{answer}
+  \item 
+    Prove or disprove that 
+    this is a vector space: the set of polynomials of
+    degree greater than or equal to two, along with the zero polynomial.
+    \begin{answer}
+      It is not a vector space since it is not closed under addition, as
+      \( (x^2)+(1+x-x^2) \) is not in the set.  
+    \end{answer}
+  \item 
+    At this point ``the same'' is only an
+    intuition, but nonetheless for each vector space identify the
+    \( k \) for which the space is ``the same'' as \( \Re^k \).
+    \begin{exparts}
+      \partsitem The \( \nbym{2}{3} \) matrices under the usual operations
+      \partsitem The \( \nbym{n}{m} \) matrices (under their usual operations)
+      \partsitem This set of \( \nbyn{2} \) matrices
+        \begin{equation*}
+          \set{\begin{pmatrix}
+            a  &0  \\
+            b  &c
+          \end{pmatrix} \suchthat a,b,c\in\Re}
+        \end{equation*}
+      \partsitem This set of \( \nbyn{2} \) matrices
+        \begin{equation*}
+          \set{\begin{pmatrix}
+            a  &0  \\
+            b  &c
+          \end{pmatrix} \suchthat a+b+c=0}
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem \( 6 \)
+        \partsitem \( nm \)
+        \partsitem \( 3 \)
+        \partsitem To see that the answer is \( 2 \), rewrite it as
+        \begin{equation*}
+          \set{\begin{pmatrix}
+            a  &0  \\
+            b  &-a-b
+          \end{pmatrix} \suchthat a,b\in\Re}
+        \end{equation*}
+        so that there are two parameters.
+      \end{exparts}  
+     \end{answer}
+  \recommended \item 
+    Using \( \vec{+} \) to represent vector addition
+    and \( \,\vec{\cdot}\, \) for scalar multiplication,
+    restate the definition of vector space.
+    \begin{answer}
+      {
+      \def\plus{\mathbin{\vec{+}}}
+      \def\tim{\mathbin{\vec{\cdot}}}
+        A \definend{vector space}\index{vector space!definition}
+        (over \( \Re \)) consists of a set \( V \) along with
+        two operations `\( \plus \)' and `\( \tim \)' subject to these 
+        conditions.
+        Where \( \vec{v},\vec{w}\in V \), 
+        (1)~their \definend{vector sum}
+          \( \vec{v}\plus\vec{w} \) is an element of \( V \).
+        If \( \vec{u},\vec{v},\vec{w}\in V \) then 
+        (2)~\( \vec{v}\plus\vec{w}=\vec{w}\plus\vec{v} \) and 
+        (3)~\( (\vec{v}\plus\vec{w})\plus\vec{u}
+                 =\vec{v}\plus(\vec{w}\plus\vec{u}) \).
+        (4)~There is a \definend{zero vector}
+          \( \zero\in V \) such that
+          \( \vec{v}\plus\zero=\vec{v}\, \) for all \( \vec{v}\in V\).
+        (5)~Each \( \vec{v}\in V \) has an
+          \definend{additive inverse}
+          \( \vec{w}\in V \) such that \( \vec{w}\plus\vec{v}=\zero \).
+        If \( r,s \) are \definend{scalars\/},
+        that is, members of \( \Re \)),
+        and \( \vec{v},\vec{w}\in V \) then 
+        (6)~each
+           \definend{scalar multiple}
+           \( r\cdot\vec{v} \) is in \( V \).
+        If \( r,s\in\Re \) and \( \vec{v},\vec{w}\in V \) then
+        (7)~\( (r+ s)\cdot\vec{v}=r\cdot\vec{v}\plus s\cdot\vec{v} \), 
+        and (8)~\( r\tim (\vec{v}+\vec{w})
+           =r\tim\vec{v}+r\tim\vec{w} \),
+        and (9)~\( (rs)\tim \vec{v} =r\tim (s\tim\vec{v}) \),
+        and (10)~\( 1\tim \vec{v}=\vec{v} \).
+     }
+    \end{answer}
+  \recommended \item 
+    Prove these.
+    \begin{exparts}
+      \partsitem Any vector is the additive inverse of the additive inverse of
+        itself.
+      \partsitem Vector addition left-cancels:~if 
+        \( \vec{v},\vec{s},\vec{t}\in V \)
+        then \( \vec{v}+\vec{s}=\vec{v}+\vec{t}\, \) implies
+        that \( \vec{s}=\vec{t} \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Let \( V \) be a vector space, 
+          assume that \( \vec{v}\in V \), and
+          assume that \( \vec{w}\in V \) is the additive inverse of $\vec{v}$
+          so that \( \vec{w}+\vec{v}=\zero \).
+          Because addition is commutative,
+          \( \zero=\vec{w}+\vec{v}=\vec{v}+\vec{w} \),
+          so therefore \( \vec{v} \) is also 
+          the additive inverse of \( \vec{w} \).
+        \partsitem Let \( V \) be a vector space and suppose
+          \( \vec{v},\vec{s},\vec{t}\in V \).
+          The additive inverse of \( \vec{v} \) is \( -\vec{v} \) so
+          \( \vec{v}+\vec{s}=\vec{v}+\vec{t} \) gives that
+          \( -\vec{v}+\vec{v}+\vec{s}=-\vec{v}+\vec{v}+\vec{t} \),
+          which says that \( \zero+\vec{s}=\zero+\vec{t} \) and so
+          \( \vec{s}=\vec{t} \).
+      \end{exparts}  
+     \end{answer}
+  \item 
+    The definition of vector spaces does not explicitly say that
+    \( \zero+\vec{v}=\vec{v} \) 
+    (it instead says that \( \vec{v}+\zero=\vec{v} \)).
+    Show that it must nonetheless hold in any vector space.
+    \begin{answer}
+      Addition is commutative, so in any vector space,
+      for any vector \( \vec{v} \) we have that
+      \( \vec{v}=\vec{v}+\zero=\zero+\vec{v} \).  
+    \end{answer}
+  \recommended \item
+    Prove or disprove that 
+    this is a vector space: the set of all matrices, under
+    the usual operations.
+    \begin{answer}
+      It is not a vector space since addition of two matrices of unequal
+      sizes is not defined, and thus the set fails to satisfy the closure
+      condition.
+    \end{answer}
+  \item 
+    In a vector space every element has an additive inverse.
+    Can some elements have two or more?
+    \begin{answer}
+      Each element of a vector space has one and only one additive
+      inverse.
+
+      For, let \( V \) be a vector space and suppose that \( \vec{v}\in V \).
+      If \( \vec{w}_1,\vec{w}_2\in V \) are both additive inverses of
+      \( \vec{v} \) then consider \( \vec{w}_1+\vec{v}+\vec{w}_2 \).
+      On the one hand, we have that it equals $\vec{w}_1+(\vec{v}+\vec{w}_2)=
+      \vec{w}_1+\zero=\vec{w}_1$.
+      On the other hand we have that it equals $(\vec{w}_1+\vec{v})+\vec{w}_2=
+      \zero+\vec{w}_2=\vec{w}_2$.
+      Therefore, $\vec{w}_1=\vec{w}_2$.
+    \end{answer}
+  \item 
+    \begin{exparts}
+      \partsitem Prove that every point, line, or plane thru the origin in 
+         \( \Re^3 \) is a vector space under the inherited operations.
+      \partsitem What if it doesn't contain the origin?
+    \end{exparts}
+    \begin{answer}
+     \begin{exparts}
+      \partsitem Every such set has the form
+        \( \set{r\cdot\vec{v}+s\cdot\vec{w}\suchthat r,s\in\Re} \)
+        where either or both of \( \vec{v},\vec{w} \) may be \( \zero \).
+        With the inherited operations, closure of addition
+        \( (r_1\vec{v}+s_1\vec{w})+(r_2\vec{v}+s_2\vec{w})
+           =(r_1+r_2)\vec{v}+(s_1+s_2)\vec{w} \)
+        and scalar multiplication
+        \( c(r\vec{v}+s\vec{w})=(cr)\vec{v}+(cs)\vec{w} \)
+        are easy.
+        The other conditions are also routine.
+      \partsitem No such set can be a vector space under the inherited
+        operations because it does not have a zero element.
+     \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    Using the idea of a vector space we can easily reprove that
+    the solution set of a homogeneous linear system has either 
+    one element or infinitely many elements. 
+    Assume that \( \vec{v}\in V \) is not \( \zero \).
+    \begin{exparts}
+      \partsitem Prove that \( r\cdot\vec{v}=\zero \) if and only if \( r=0 \).
+      \partsitem Prove that \( r_1\cdot\vec{v}=r_2\cdot\vec{v} \) if
+      and only if \( r_1=r_2 \).
+      \partsitem Prove that any nontrivial vector space is infinite.
+      \partsitem Use the fact that a nonempty solution set of a homogeneous
+        linear system is a vector space to draw the conclusion.
+    \end{exparts}
+    \begin{answer}
+      Assume that \( \vec{v}\in V \) is not \( \zero \).
+      \begin{exparts}
+        \partsitem One direction of the if and only if is clear:~if $r=0$
+          then $r\cdot\vec{v}=\zero$.
+          For the other way, let \( r \) be a nonzero scalar.
+          If \( r\vec{v}=\zero \) then
+          \( (1/r)\cdot r\vec{v}=(1/r)\cdot \zero \) shows that
+          $\vec{v}=\zero$,  contrary to the assumption.
+        \partsitem Where \( r_1,r_2 \) are scalars, 
+          \( r_1\vec{v}=r_2\vec{v}\, \)
+          holds if and only if \( (r_1-r_2)\vec{v}=\zero \).
+          By the prior item, then \( r_1-r_2=0 \).
+        \partsitem A nontrivial space has a vector 
+          \( \vec{v}\neq\zero \).
+          Consider the set \( \set{k\cdot\vec{v}\suchthat k\in\Re} \).
+          By the prior item this set is infinite.
+        \partsitem The solution set is either trivial, or nontrivial.
+          In the second case, it is infinite.   
+     \end{exparts}  
+    \end{answer}
+  \item 
+    Is this a vector space under the natural operations: the real-valued
+    functions of one real variable that are differentiable?
+    \begin{answer}
+      Yes.
+      A theorem of first semester calculus says that a sum of differentiable
+      functions is differentiable and that
+      \( (f+g)^\prime=f^\prime+g^\prime \), and that 
+      a multiple of a differentiable
+      function is differentiable and that \( (r\cdot f)^\prime=r\,f^\prime \). 
+    \end{answer}
+  \item 
+    A \definend{vector space over the complex numbers}%
+    \index{vector space!complex scalars}%
+    \index{complex numbers!vector space over}
+    $\C$ has the same definition
+    as a vector space over the reals except that scalars are drawn from
+    \( \C \) instead of from \( \Re \).
+    Show that each of these is a vector space over the complex numbers.
+    (Recall how complex numbers add and multiply:
+    \( (a_0+a_1i)+(b_0+b_1i)=(a_0+b_0)+(a_1+b_1)i \) and
+    \( (a_0+a_1i)(b_0+b_1i)=(a_0b_0-a_1b_1)+(a_0b_1+a_1b_0)i \).)
+    \begin{exparts}
+      \partsitem The set of degree~two polynomials with complex 
+         coefficients
+      \partsitem This set
+        \begin{equation*}
+          \set{\begin{pmatrix}
+                 0  &a  \\
+                 b  &0
+               \end{pmatrix}\suchthat a,b\in\C\text{\ and\ }
+                               a+b=0+0i }
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      The check is routine.
+      Note that `\( 1 \)' is \( 1+0i \) and the zero elements are these.
+      \begin{exparts}
+        \partsitem \( (0+0i)+(0+0i)x+(0+0i)x^2 \)
+        \partsitem \( \begin{pmatrix}
+                   0+0i  &0+0i  \\
+                   0+0i  &0+0i
+                 \end{pmatrix} \)
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Name a property shared by all of the \( \Re^n \)'s 
+    but not listed as a
+    requirement for a vector space.
+    \begin{answer}
+      Notably absent from the definition of a vector space is a distance
+      measure.  
+    \end{answer}
+  \recommended \item 
+    \begin{exparts}
+      \partsitem Prove that a sum of four vectors
+        \( \vec{v}_1,\ldots,\vec{v}_4\in V \) can be associated in any way
+        without changing the result.
+        \begin{align*}
+          ((\vec{v}_1+\vec{v}_2)+\vec{v}_3)+\vec{v}_4
+          &=(\vec{v}_1+(\vec{v}_2+\vec{v}_3))+\vec{v}_4  \\
+          &=(\vec{v}_1+\vec{v}_2)+(\vec{v}_3+\vec{v}_4)  \\
+          &=\vec{v}_1+((\vec{v}_2+\vec{v}_3)+\vec{v}_4)  \\
+          &=\vec{v}_1+(\vec{v}_2+(\vec{v}_3+\vec{v}_4))
+        \end{align*}
+        This allows us to simply write
+        `\( \vec{v}_1+\vec{v}_2+\vec{v}_3+\vec{v}_4 \)'
+        without ambiguity.
+      \partsitem Prove that any two ways of associating a sum of any number of
+        vectors give the same sum.
+        (\textit{Hint.}  Use induction on the number of vectors.)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem A small rearrangement does the trick.
+          \begin{align*}
+            (\vec{v}_1+(\vec{v}_2+\vec{v}_3))+\vec{v}_4
+            &=((\vec{v}_1+\vec{v}_2)+\vec{v}_3)+\vec{v}_4  \\
+            &=(\vec{v}_1+\vec{v}_2)+(\vec{v}_3+\vec{v}_4)  \\
+            &=\vec{v}_1+(\vec{v}_2+(\vec{v}_3+\vec{v}_4))  \\
+            &=\vec{v}_1+((\vec{v}_2+\vec{v}_3)+\vec{v}_4)
+          \end{align*}
+          Each equality above follows from the associativity of three vectors
+          that is given as a condition in the definition of a vector space.
+          For instance, the second `$=$' applies the rule
+          $(\vec{w}_1+\vec{w}_2)+\vec{w}_3=\vec{w}_1+(\vec{w}_2+\vec{w}_3)$
+          by taking $\vec{w}_1$ to be $\vec{v}_1+\vec{v}_2$, 
+          taking $\vec{w}_2$ to be $\vec{v}_3$, 
+          and taking $\vec{w}_3$ to be $\vec{v}_4$. 
+        \partsitem The base case for induction is the three vector case.
+          This case
+          \( \vec{v}_1+(\vec{v}_2+\vec{v}_3)
+          =(\vec{v}_1+\vec{v}_2)+\vec{v}_3 \) is required of any triple of
+          vectors by the definition of a vector space.
+
+          For the inductive step, assume that any two sums of three vectors,
+          any two sums of four vectors,
+          \ldots, any two sums of $k$ vectors 
+          are equal no matter how the sums are parenthesized.
+          We will show that any sum of \( k+1 \) vectors equals this one
+          \( ((\cdots((\vec{v}_1+\vec{v}_2)+\vec{v}_3)+\cdots)+\vec{v}_k)
+              +\vec{v}_{k+1} \).
+
+          Any parenthesized sum has an outermost `\( + \)'.
+          Assume that it lies between \( \vec{v}_m \) and \( \vec{v}_{m+1} \)
+          so the sum looks like this.
+          \begin{equation*}
+            (\cdots\,\vec{v}_1\cdots\vec{v}_m\,\cdots)
+           +(\cdots\,\vec{v}_{m+1}\cdots\vec{v}_{k+1}\,\cdots)
+          \end{equation*}
+          The second half involves fewer than $k+1$ additions, so
+          by the inductive hypothesis we can re-parenthesize it
+          so that it reads left to right from the inside out, and in 
+          particular, so that its outermost `$+$' occurs right before 
+          $\vec{v}_{k+1}$.
+          \begin{equation*}
+            =(\cdots\,\vec{v}_1\,\cdots\,\vec{v}_m\,\cdots)
+             +((\cdots(\vec{v}_{m+1}+\vec{v}_{m+2})+\cdots+\vec{v}_{k})
+                 +\vec{v}_{k+1})
+          \end{equation*}
+          Apply the associativity of the sum of three things
+          \begin{equation*}
+            =((\,\cdots\, \vec{v}_1\,\cdots\,\vec{v}_m\,\cdots\,)
+             +(\,\cdots\,(\vec{v}_{m+1}+\vec{v}_{m+2})+\cdots\,\vec{v}_k))
+             +\vec{v}_{k+1}
+          \end{equation*}
+          and finish by applying the inductive hypothesis inside these 
+          outermost parenthesis.
+      \end{exparts}  
+    \end{answer}
+  \item \nearbyexample{ex:ColsIntEntNotVS} gives a subset of $\Re^2$
+   that is not a vector space, under the obvious operations, because
+   while it is closed under addition, it is not closed under scalar
+   multiplication.
+   Consider the set of vectors in the plane whose components have the 
+   same sign or are~$0$.
+   Show that this set is closed under scalar multiplication but not 
+   addition.
+   \begin{answer}
+     Let $\vec{v}$ be a member of $\Re^2$ with components $v_1$ and $v_2$.
+     We can abbreviate the condition that both components have the same
+     sign or are~$0$ by $v_1v_2\geq 0$.
+
+     To show the set is closed under scalar multiplication, observe that
+     the components of $r\vec{v}$ satisfy $(rv_1)(rv_2)=r^2(v_1v_2)$
+     and $r^2\geq 0$ so $r^2v_1v_2\geq 0$.
+
+     To show the set is not closed under addition we need only produce one
+     example.  
+     The vector with components $-1$ and~$0$, when added to the vector
+     with components $0$ and~$1$ makes a vector with mixed-sign components
+     of $-1$ and~$1$.
+   \end{answer}
+  \item 
+    For any vector space, a subset that is itself a vector space
+    under the inherited operations
+    (e.g., a plane through the origin inside of \( \Re^3 \))
+    is a \definend{subspace}.
+    \begin{exparts}
+      \partsitem Show that \( \set{a_0+a_1x+a_2x^2\suchthat a_0+a_1+a_2=0} \)
+        is a subspace of the vector space of degree~two polynomials.
+      \partsitem Show that this is a subspace of the \( \nbyn{2} \) matrices.
+        \begin{equation*}
+          \set{\begin{pmatrix}
+                 a  &b  \\
+                 c  &0
+               \end{pmatrix} \suchthat a+b=0}
+        \end{equation*}
+      \partsitem Show that a nonempty subset \( S \) of a real vector
+        space is a
+        subspace if and only if it is closed under linear combinations of
+        pairs of vectors: whenever \( c_1,c_2\in\Re \) and
+        \( \vec{s}_1,\vec{s}_2\in S \) then the combination
+        \( c_1\vec{v}_1+c_2\vec{v}_2 \) is in \( S \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem We outline the check of the conditions from
+          \nearbydefinition{def:VecSpace}.
+
+          Additive closure holds because if \( a_0+a_1+a_2=0 \)
+          and \( b_0+b_1+b_2=0 \) then
+          \begin{equation*}
+            (a_0+a_1x+a_2x^2)+(b_0+b_1x+b_2x^2)=
+            (a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2
+          \end{equation*}
+          is in the set since
+          \( (a_0+b_0)+(a_1+b_1)+(a_2+b_2)=(a_0+a_1+a_2)+(b_0+b_1+b_2) \)
+          is zero.
+          The second through fifth conditions are easy.
+
+          Closure under scalar multiplication holds because
+          if \( a_0+a_1+a_2=0 \) then
+          \begin{equation*}
+            r\cdot(a_0+a_1x+a_2x^2)=
+            (ra_0)+(ra_1)x+(ra_2)x^2
+          \end{equation*}
+          is in the set as \( ra_0+ra_1+ra_2=r(a_0+a_1+a_2) \) is zero.
+          The remaining conditions here are also easy.
+        \partsitem This is similar to the prior answer.
+        \partsitem Call the vector space \( V \).
+          We have two implications: left to right, if \( S \) is a subspace
+          then it is closed under linear combinations of pairs of vectors and,
+          right to left, if a nonempty subset is closed under linear
+          combinations of pairs of vectors then it is a subspace.
+          The left to right implication is easy; we here sketch the
+          other one by
+          assuming \( S \) is nonempty and closed, and checking the conditions
+          of \nearbydefinition{def:VecSpace}.
+
+          First, to show closure under addition, if
+          \( \vec{s}_1,\vec{s}_2\in S \) then \( \vec{s}_1+\vec{s}_2\in S \)
+          as \( \vec{s}_1+\vec{s}_2=1\cdot\vec{s}_1+1\cdot\vec{s}_2 \).
+          Second, for any \( \vec{s}_1,\vec{s}_2\in S \), because addition
+          is inherited from \( V \), the sum \( \vec{s}_1+\vec{s}_2 \)
+          in \( S \) equals the sum \( \vec{s}_1+\vec{s}_2 \)
+          in \( V \) and that equals the sum \( \vec{s}_2+\vec{s}_1 \) in
+          \( V \) and that in turn equals the sum \( \vec{s}_2+\vec{s}_1 \) in
+          \( S \).
+          The argument for the third condition is similar to that for the
+          second.
+          For the fourth, suppose that 
+          \( \vec{s} \) is in the nonempty set \( S \)
+          and note that \( 0\cdot\vec{s}=\zero\in S \); showing that 
+          the \( \zero \) of
+          \( V \) acts under the inherited operations as the additive identity
+          of \( S \) is easy.
+          The fifth condition is satisfied because for any \( \vec{s}\in S \)
+          closure under linear combinations shows that the vector
+          \( 0\cdot\zero+(-1)\cdot\vec{s} \) is in \( S \); showing 
+          that it is the
+          additive inverse of \( \vec{s} \) under the inherited operations is
+          routine.
+
+          The proofs for the remaining conditions are similar.
+      \end{exparts}  
+    \end{answer}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+\subsection{Subspaces and Spanning Sets}
+\index{subspace|(}
+One of the examples that led us to introduce the idea of a vector space was
+the solution set of a homogeneous system.
+For instance, we've seen in \nearbyexample{PlaneThruOriginSubsp}
+such a space that is a planar subset of $\Re^3$. 
+There, the vector space $\Re^3$ contains inside it another
+vector space, the plane.
+
+\begin{definition}
+For any vector space,
+a \definend{subspace}\index{vector space!subspace}\index{subspace!definition} 
+is a subset that is itself a vector space,
+under the inherited operations.
+\end{definition}
+
+\begin{example}  \label{ex:PlaneSubspRThree}
+The plane from the prior subsection,
+\begin{equation*}
+  P=\set{\colvec{x \\ y \\ z}\suchthat x+y+z=0}
+\end{equation*}
+is a subspace of \( \Re^3 \).
+As specified in the definition, 
+the operations are the ones that are inherited from the larger space, that is,
+vectors add in $P$ as they add in $\Re^3$
+\begin{equation*}
+   \colvec{x_1 \\ y_1 \\ z_1}+\colvec{x_2 \\ y_2 \\ z_2}
+   =\colvec{x_1+x_2 \\ y_1+y_2 \\ z_1+z_2}
+\end{equation*}
+and scalar multiplication is also the same as it is in $\Re^3$.
+To show that $P$ is a subspace, we need only note that it is a subset and then
+verify that it is a space.
+Checking that $P$ satisfies the conditions in the definition of a 
+vector space is routine.
+For instance, for closure under addition, just note that if
+the summands satisfy that
+$x_1+y_1+z_1=0$ and $x_2+y_2+z_2=0$ then the sum satisfies that
+$(x_1+x_2)+(y_1+y_2)+(z_1+z_2)=(x_1+y_1+z_1)+(x_2+y_2+z_2)=0$.
+\end{example}
+
+\begin{example}   \label{ex:SubspacesRTwo}
+The \( x \)-axis in \( \Re^2 \) 
+is a subspace where
+the addition and scalar multiplication operations are 
+the inherited ones.
+\begin{equation*}
+  \colvec{x_1 \\ 0}
+    +
+  \colvec{x_2 \\ 0}
+    =
+  \colvec{x_1+x_2 \\ 0}
+  \qquad
+  r\cdot\colvec{x \\ 0}
+  =\colvec{rx \\ 0}
+\end{equation*}
+As above, to verify that this is a subspace, we simply note that it is a
+subset and then check that it satisfies
+the conditions in definition of a vector space.
+For instance, the two closure conditions are 
+satisfied: (1)~adding two vectors with a second component of zero results
+in a vector with a second component of zero, and (2)~multiplying a 
+scalar times a vector with a second component of zero 
+results in a vector with a second component of zero.
+\end{example}
+
+\begin{example}
+Another subspace of $\Re^2$ is 
+\begin{equation*}
+  \set{\colvec{0 \\ 0}}
+\end{equation*}
+its trivial subspace.
+\end{example}
+
+Any vector space has a trivial subspace \( \set{\zero\,} \).
+At the opposite extreme, any vector space has itself for a subspace.
+These two are the \definend{improper}\index{subspace!improper}%
+\index{improper subspace} subspaces.
+Other subspaces are \definend{proper}\index{subspace!proper}%
+\index{proper subspace}. 
+
+\begin{example} \label{ex:OperNotInherit}
+The condition in the definition requiring that the 
+addition and scalar multiplication operations
+must be the ones inherited from the larger space is important.
+Consider the subset \( \set{1} \) of the vector space \( \Re^1 \).
+Under the operations $1+1=1$ and  $r\cdot 1=1$
+that set is a vector space, specifically, a trivial space.
+But it is not a subspace of \( \Re^1 \) because those aren't the
+inherited operations, since of course \( \Re^1 \) has \( 1+1=2 \).
+\end{example}
+
+\begin{example}  \label{ex:LinSubspPolyThree}
+All kinds of vector spaces, not just $\Re^n$'s, have subspaces.
+The vector space of cubic polynomials
+\( \set{a+bx+cx^2+dx^3\suchthat a,b,c,d\in\Re} \) 
+has a subspace comprised of all linear polynomials
+\( \set{m+nx\suchthat m,n\in\Re} \).
+\end{example}
+
+\begin{example}
+Another example of a subspace not taken from an $\Re^n$ is 
+one from the examples following the definition of a vector space.
+The space of all real-valued functions of one real variable 
+$\map{f}{\Re}{\Re}$ has a subspace of functions satisfying
+the restriction $(d^2\,f/dx^2)+f=0$.
+\end{example}
+
+\begin{example}  \label{cex:RPlusNotSubSp}
+Being vector spaces themselves, subspaces must satisfy the closure
+conditions.
+The set \( \Re^+ \) is not a subspace of the vector space \( \Re^1 \)
+because with the inherited operations it is not closed under scalar
+multiplication: if \( \vec{v}=1 \) then \( -1\cdot\vec{v}\not\in\Re^+ \).
+\end{example}
+
+The next result says that \nearbyexample{cex:RPlusNotSubSp} is prototypical. 
+The only way that a subset can fail to be a subspace 
+(if it is nonempty and the inherited operations are used)
+is if it isn't closed.
+
+\begin{lemma}     \label{th:SubspIffClosed} \index{subspace!closed}
+For a nonempty subset \( S \) of a vector space, under the inherited 
+operations, the following are equivalent 
+statements.\appendrefs{equivalence of statements}   %\spacefactor=1000
+\begin{tfae}
+  \item \( S \) is a subspace of that vector space
+  \item \( S \) is closed under linear combinations of pairs of vectors:
+    for any vectors \( \vec{s}_1,\vec{s}_2\in S \) and scalars \( r_1,r_2 \)
+    the vector \( r_1\vec{s}_1+r_2\vec{s}_2 \) is in \( S \)
+  \item \( S \) is closed under linear combinations of any number of vectors:
+    for any vectors \( \vec{s}_1,\ldots,\vec{s}_n\in S \) and scalars
+    \( r_1, \ldots,r_n \)
+    the vector \( r_1\vec{s}_1+\cdots+r_n\vec{s}_n \) is in \( S \).
+\end{tfae}
+\end{lemma}
+Briefly, the way that a subset gets to be a 
+subspace is by being closed under linear combinations.
+
+\begin{proof}
+`The following are equivalent' means that each pair of 
+statements are equivalent.
+\begin{equation*}
+  (1)\!\iff\!(2)
+  \qquad
+  (2)\!\iff\!(3)
+  \qquad
+  (3)\!\iff\!(1)
+\end{equation*}
+We will show this equivalence by establishing that
+\( (1)\implies (3)\implies (2)\implies (1)\).
+This strategy is suggested by noticing that
+\( (1)\implies (3) \) and \( (3)\implies (2) \) are easy and so we need only
+argue the single implication \( (2)\implies (1) \).
+
+For that argument, assume that \( S \) is a nonempty subset of a vector space
+$V$ and that $S$ is closed under combinations of pairs of vectors.
+We will show that $S$ is a vector space by checking the conditions.
+
+The first item in the vector space definition has five conditions.
+First, for closure under addition, if
+\( \vec{s}_1,\vec{s}_2\in S \) then \( \vec{s}_1+\vec{s}_2\in S \),
+as \( \vec{s}_1+\vec{s}_2=1\cdot\vec{s}_1+1\cdot\vec{s}_2 \).
+Second, for any \( \vec{s}_1,\vec{s}_2\in S \), because addition
+is inherited from \( V \), the sum \( \vec{s}_1+\vec{s}_2 \)
+in \( S \) equals the sum \( \vec{s}_1+\vec{s}_2 \)
+in \( V \), and that equals the sum \( \vec{s}_2+\vec{s}_1 \) in
+\( V \) (because $V$ is a vector space, its addition is commutative), 
+and that in turn equals the sum \( \vec{s}_2+\vec{s}_1 \) in \( S \).
+The argument for the third condition is similar to that for the second.
+For the fourth, consider the zero vector of \( V \) and note that 
+closure of $S$ under linear combinations of pairs of vectors gives that 
+(where \( \vec{s} \) is any member of the nonempty set \( S \))
+\( 0\cdot\vec{s}+0\cdot\vec{s}=\zero \) is in $S$;
+showing that \( \zero \) acts under the inherited operations as the additive
+identity of \( S \) is easy.
+The fifth condition is satisfied because for any \( \vec{s}\in S \),
+closure under linear combinations shows that the vector
+\( 0\cdot\zero+(-1)\cdot\vec{s} \) is in \( S \); showing that it is the
+additive inverse of \( \vec{s} \) under the inherited operations is
+routine.
+
+The checks for item~(2) are similar and are saved for
+\nearbyexercise{exer:SubspIffClosed}.
+\end{proof}
+
+We usually show that a subset is a subspace with \( (2)\implies (1) \).
+
+\begin{remark}
+At the start of this chapter we introduced vector spaces as collections in
+which linear combinations are ``sensible''.
+The above result speaks to this.
+
+The vector space definition has ten conditions but eight of them\Dash the
+conditions not about closure\Dash simply ensure that referring to the
+operations as an `addition' and a `scalar multiplication' is sensible.
+The proof above checks that these eight
+are inherited from the
+surrounding vector space provided that the nonempty set $S$ satisfies
+\nearbytheorem{th:SubspIffClosed}'s statement~(2) 
+(e.g., commutativity of addition in $S$ follows right from
+commutativity of addition in $V$).
+So, in this context, this meaning of ``sensible'' is automatically
+satisfied.
+
+In assuring us that this first meaning of the word is met, the result draws
+our attention to the second meaning of ``sensible''.
+It has to do with the two remaining conditions, the closure conditions.
+Above, the two separate closure conditions inherent in statement~(1) are
+combined in statement~(2) into the single condition of closure under all
+linear combinations of two vectors, which is then extended in statement~(3) to
+closure under combinations of any number of vectors.
+The latter two statements say that we can always make sense of 
+an expression like
+$r_1\vec{s}_1+r_2\vec{s}_2$, without restrictions on the $r$'s\Dash such 
+expressions are ``sensible'' in that the vector described is defined 
+and is in the set $S$.
+
+This second meaning suggests that a good way to think of
+a vector space is as a collection of unrestricted linear combinations.
+The next two examples take some spaces and describe them in this way.
+That is, in these examples we parametrize, just as we did in Chapter One 
+to describe the solution set of a homogeneous linear system.
+\end{remark}
+
+\begin{example}
+This subset of $\Re^3$
+\begin{equation*}
+  S=\set{\colvec{x \\ y \\ z}\suchthat x-2y+z=0}
+\end{equation*}
+is a subspace under the usual addition and scalar multiplication
+operations of column vectors (the check that it is nonempty and closed under
+linear combinations of two vectors is just like the one in 
+\nearbyexample{ex:PlaneSubspRThree}).
+To parametrize, we can take $x-2y+z=0$ to be a one-equation linear system and 
+expressing the leading
+variable in terms of the free variables $x=2y-z$.
+\begin{equation*}
+     S
+     =\set{\colvec{2y-z \\ y \\ z}\suchthat y,z\in\Re}
+     =\set{y\colvec{2 \\ 1 \\ 0}+z\colvec{-1 \\ 0 \\ 1}\suchthat y,z\in\Re}
+\end{equation*}
+Now the subspace is described as the collection of unrestricted 
+linear combinations of those two vectors.
+Of course, in either description, this is a plane through the origin.
+\end{example}
+
+\begin{example} \label{ex:ParamSubspace}
+This is a subspace of the \( \nbyn{2} \) matrices
+\begin{equation*}
+  L=\set{\begin{pmatrix}
+         a  &0  \\
+         b  &c
+       \end{pmatrix}
+       \suchthat a+b+c=0}
+\end{equation*}
+(checking that it is nonempty and closed under linear combinations is easy).
+To parametrize, express the condition as $a=-b-c$.
+\begin{equation*}
+  L
+  =\set{\begin{pmatrix}
+         -b-c  &0  \\
+         b     &c
+       \end{pmatrix}
+       \suchthat b,c\in\Re}
+  =\set{b\begin{pmatrix}
+         -1    &0  \\
+         1     &0
+       \end{pmatrix}
+       +c\begin{pmatrix}
+         -1    &0  \\
+         0     &1
+       \end{pmatrix}
+       \suchthat b,c\in\Re}
+\end{equation*}
+As above, we've described the subspace as a collection of unrestricted linear
+combinations (by coincidence, also of two elements).
+\end{example}
+
+Parametrization is an easy technique, but it is important.
+We shall use it often.
+
+\begin{definition}
+The \definend{span\/}\index{span}\index{sets!span of}\index{closure} (or
+\definend{linear closure}) of a nonempty subset \( S \) of a
+vector space is the set of all linear combinations of vectors from \( S \).
+\begin{equation*}
+  \spanof{S} =\{ c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            \suchthat c_1,\ldots, c_n\in\Re
+            \text{\ and\ } \vec{s}_1,\ldots,\vec{s}_n\in S \}
+\end{equation*}
+The span of the empty subset of a vector space is the trivial subspace.
+\end{definition}
+\noindent No notation for the span is completely standard.
+The square brackets used here are common, but so are
+`$\mbox{span}(S)$' and `$\mbox{sp}(S)$'.
+
+\begin{remark}
+In Chapter One, after we showed that the solution
+set of a homogeneous linear system can be written as 
+$\set{c_1\vec{\beta}_1+\cdots+c_k\vec{\beta}_k\suchthat
+  c_1,\ldots,c_k\in\Re}$,
+we described that as the set `generated' by the $\smash{\vec{\beta}}$'s.
+We now have the technical term; we call that the `span' of the set
+$\set{\vec{\beta}_1,\ldots,\vec{\beta}_k}$.
+
+Recall also the discussion of the ``tricky point'' in that proof. 
+The span of the empty set is defined to be the set \( \set{\zero} \) because
+we follow the convention that a linear combination of no vectors sums to
+\( \zero \).
+Besides, defining the empty set's span to be the trivial subspace 
+is a convienence in that it keeps results
+like the next one from having annoying exceptional cases.
+\end{remark}
+
+\begin{lemma}   \label{le:SpanIsASubsp}
+In a vector space, the span of any subset is a subspace.
+\end{lemma}
+
+\begin{proof}
+Call the subset \( S \).
+If \( S \) is empty then by definition its span is the trivial
+subspace.
+If \( S\) is not empty then by \nearbylemma{th:SubspIffClosed} we need
+only check that the span \( \spanof{S} \) is closed under linear combinations.
+For a pair of vectors from that span,
+\( \vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n \) and
+\( \vec{w}=c_{n+1}\vec{s}_{n+1}+\cdots+c_m\vec{s}_m \),
+a linear combination
+\begin{multline*}
+  p\cdot(c_1\vec{s}_1+\cdots+c_n\vec{s}_n)+
+       r\cdot(c_{n+1}\vec{s}_{n+1}+\cdots+c_m\vec{s}_m)  \\
+  =
+  pc_1\vec{s}_1+\cdots+pc_n\vec{s}_n
+    +rc_{n+1}\vec{s}_{n+1}+\cdots+rc_m\vec{s}_m
+\end{multline*}
+(\( p \), \( r \) scalars)
+is a linear combination of elements of \( S \) 
+and so is in \( \spanof{S} \)
+(possibly some of the $\vec{s}_i$'s from $\vec{v}$ equal some 
+of the $\vec{s}_j$'s from $\vec{w}$, but it does not matter).
+\end{proof}
+
+The converse of the lemma
+holds: any subspace is the span of some set, because 
+a subspace is obviously the span of the set of its members.
+Thus a subset of a vector space is a subspace if and only if it is a span.
+This fits the intuition 
+that a good way to think of a vector space is as
+a collection in which linear combinations are sensible.
+
+Taken together, \nearbylemma{th:SubspIffClosed} and
+\nearbylemma{le:SpanIsASubsp} show that the span of a subset $S$ of a
+vector space is the smallest subspace containing all the members of $S$.
+
+\begin{example}   \label{ex:SpanSingVec}
+In any vector space \( V \), for any vector \( \vec{v} \), the set
+\( \set{r\cdot\vec{v} \suchthat r\in\Re} \) is a subspace of \( V \).
+For instance, for any vector \( \vec{v}\in\Re^3 \),
+the line through the origin containing that vector,
+\( \set{k\vec{v}\suchthat k\in\Re } \) is a subspace of \( \Re^3 \).
+This is true even when $\vec{v}$ is the zero vector, in which case 
+the subspace is the degenerate line, the trivial subspace.
+\end{example}
+
+\begin{example}
+The span of this set
+is all of $\Re^2$.
+\begin{equation*}
+  \set{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+\end{equation*}
+To check this we must show that any member of $\Re^2$ is a linear combination
+of these two vectors.
+So we ask:~for which
+vectors (with real components $x$ and $y$) 
+are there scalars $c_1$ and $c_2$ such that this holds?
+\begin{equation*}
+   c_1\colvec{1 \\ 1}+c_2\colvec{1 \\ -1}=\colvec{x \\ y}
+\end{equation*} 
+Gauss' method 
+\begin{eqnarray*}
+  \begin{linsys}{2}
+    c_1  &+  &c_2  &=  &x  \\
+    c_1  &-  &c_2  &=  &y
+  \end{linsys}
+  &\grstep{-\rho_1+\rho_2}
+  &\begin{linsys}{2}
+    c_1  &+  &c_2    &=  &x\hfill  \\
+         &   &-2c_2  &=  &-x+y
+  \end{linsys}
+\end{eqnarray*}
+with back substitution gives $c_2=(x-y)/2$ and $c_1=(x+y)/2$.
+These two equations show that for any $x$ and $y$ that we start with, there 
+are appropriate coefficients $c_1$ and $c_2$ making the above vector equation
+true.
+For instance, for $x=1$ and $y=2$ the coefficients $c_2=-1/2$ and
+$c_1=3/2$ will do.
+That is, any vector in $\Re^2$ can be written as a linear combination of the 
+two given vectors.
+\end{example}
+
+Since spans are subspaces, and we know that a
+good way to understand a subspace is
+to parametrize its description, we can try to understand a set's span in 
+that way.
+
+\begin{example}
+Consider, in \( \polyspace_2 \), 
+the span of the set \( \set{3x-x^2, 2x} \).
+By the definition of span, it is the set of unrestricted linear
+combinations of the two $\set{c_1(3x-x^2)+c_2(2x)\suchthat c_1,c_2\in\Re}$.
+Clearly polynomials in this span must have a constant term of zero.
+Is that necessary condition also sufficient?
+
+We are asking:~for which members $a_2x^2+a_1x+a_0$ 
+of $\polyspace_2$ are there $c_1$ and $c_2$ such that
+$a_2x^2+a_1x+a_0=c_1(3x-x^2)+c_2(2x)$? 
+Since polynomials are equal if and only if their coefficients are equal,
+we are looking for conditions on $a_2$, $a_1$, and $a_0$ satisfying these.
+\begin{equation*}
+  \begin{linsys}{2}
+    -c_1  &   &     &=  &a_2   \\
+    3c_1  &+  &2c_2 &=  &a_1   \\
+          &   &0    &=  &a_0                                   
+  \end{linsys}
+\end{equation*} 
+Gauss' method gives that 
+$c_1=-a_2$, $c_2=(3/2)a_2+(1/2)a_1$, and $0=a_0$.
+Thus the only condition on polynomials in the span
+is the condition that we knew of\Dash as long as $a_0=0$,
+we can give appropriate coefficients $c_1$ and $c_2$
+to describe the polynomial $a_0+a_1x+a_2x^2$ as in the span.
+For instance, for the polynomial $0-4x+3x^2$, the coefficients
+$c_1=-3$ and $c_2=5/2$ will do.
+So the span of the given set is 
+$\set{a_1x+a_2x^2\suchthat a_1,a_2\in\Re}$. 
+
+This shows, incidentally, that
+the set \( \set{x,x^2} \) also spans this subspace.
+A space can have more than one spanning set.
+Two other sets spanning this subspace are
+\( \set{x,x^2,-x+2x^2} \) and
+\( \set{x,x+x^2,x+2x^2,\ldots\,} \).
+(Naturally, we usually prefer to work with spanning sets that have only
+a few members.)
+\end{example}
+
+\begin{example}  \label{ex:SubspRThree}
+These are the subspaces of \( \Re^3 \) that we now know of, the 
+trivial subspace, the lines through the origin,
+the planes through the origin, and the whole space
+(of course, the picture shows only a few of the infinitely many subspaces). 
+In the next section we will prove that $\Re^3$ has no other
+type of subspaces, so in fact this picture shows them all.
+\begin{center}
+  \setlength{\unitlength}{4pt}
+  \begin{picture}(75,38)(0,-2) %subspaces of R-three
+      \thinlines
+      \put(45,31){\makebox(0,0)[bl]{
+                        \tiny \( %\Re^3=
+                                   \set{x\colvec{1 \\ 0 \\ 0}
+                                              +y\colvec{0 \\ 1 \\ 0}
+                                              +z\colvec{0 \\ 0 \\ 1}} \)} }
+    %Next the dimension two subspaces
+      \put(43,29){\line(-4,-1){25} } % connects R3 to 2,a
+      %set 2,a:
+      \put(0,20){\makebox(0,0)[l]{\tiny\( \set{x\colvec{1 \\ 0 \\ 0}
+                                                 +y\colvec{0 \\ 1 \\ 0} }\) }}
+      \put(48,29){\line(-3,-1){15} } % connects R3 to 2,b
+      %set 2,b:
+      \put(20,20){\makebox(0,0)[l]{\tiny\( \set{x\colvec{1 \\ 0 \\ 0}
+                                                 +z\colvec{0 \\ 0 \\ 1} }\) }}
+      \put(53,28){\line(-1,-1){4} } % connects R3 to 2,c
+      %set 2,c:
+      \put(40,20){\makebox(0,0)[l]{\tiny\( \set{x\colvec{1 \\ 1 \\ 0}
+                                                 +z\colvec{0 \\ 0 \\ 1} }\) }}
+      \put(60,20){\makebox(0,0)[l]{\ldots} }
+    %Next the dimension one subspaces
+      \put(8,17){\line(-1,-4){1} } % connects 2,a to 1,a
+      \put(21,17){\line(-3,-1){12} } % connects 2,c to 1,a
+      %set 1,a:
+      \put(0,10){\makebox(0,0)[l]{\tiny\( \set{x\colvec{1 \\ 0 \\ 0}} \)} }
+      \put(9.5,17){\line(1,-2){2} } % connects 2,a to 1,b
+      %set 1,b:
+      \put(10,10){\makebox(0,0)[l]{\tiny\( \set{y\colvec{0 \\ 1 \\ 0}} \)} }
+      \put(11,17){\line(2,-1){10} } % connects 2,b to 1,c
+      %set 1,c:
+      \put(20,10){\makebox(0,0)[l]{\tiny\( \set{y\colvec{2 \\ 1 \\ 0}} \)} }
+      \put(41,17){\line(-1,-1){3.25} } %connects 2,c to 1,d
+      %set 1,d:
+      \put(30,10){\makebox(0,0)[l]{\tiny\( \set{y\colvec{1 \\ 1 \\ 1}} \)} }
+      \put(41,10){\makebox(0,0)[l]{\ldots} }
+    %Finally, the trivial subspace.
+      \put(9,7.5){\line(4,-1){30} } %connects 1,a to trivial
+      \put(18.3,7.9){\line(3,-1){20} } %connects 1,b to trivial
+      \put(28,7.5){\line(2,-1){11} } %connects 1,c to trivial
+      \put(37,7){\line(1,-1){4} } %connects 1,d to trivial
+      \put(45,0){\makebox(0,0){\tiny\( \set{\colvec{0 \\ 0 \\ 0} } \)} }
+  \end{picture}
+\end{center}
+The subsets are described as spans of sets, using a minimal number of members,
+and are shown connected to their supersets.
+Note that these subspaces fall naturally into levels\Dash planes on one level, 
+lines on another,
+etc.\Dash according to how many vectors are in a minimal-sized
+spanning set.
+\end{example}
+
+So far in this chapter we have seen that to study the
+properties of linear combinations, the right setting is a
+collection that is closed under these combinations.
+In the first subsection we introduced such collections, vector spaces,
+and we saw a great variety of examples.
+In this subsection we saw still
+more spaces, ones that happen to be subspaces of others.
+In all of the variety we've seen a commonality.
+\nearbyexample{ex:SubspRThree} above 
+brings it out:~vector spaces and subspaces are best understood as a span, 
+and especially as a span of a small number of vectors.
+The next section studies spanning sets that are minimal.
+
+
+
+
+
+\begin{exercises}
+  \recommended \item
+    Which of these subsets of the vector space of \( \nbyn{2} \) matrices
+    are subspaces under the inherited operations?
+    For each one that is a subspace, parametrize its description.
+    For each that is not, give a condition that fails.
+    \begin{exparts}
+      \partsitem \( \set{\begin{pmatrix}
+                      a  &0  \\
+                      0  &b
+                    \end{pmatrix}  \suchthat a,b\in\Re}  \)
+      \partsitem \( \set{\begin{pmatrix}
+                      a  &0  \\
+                      0  &b
+                    \end{pmatrix}  \suchthat a+b=0} \)
+      \partsitem \( \set{\begin{pmatrix}
+                      a  &0  \\
+                      0  &b
+                    \end{pmatrix}  \suchthat a+b=5} \)
+      \partsitem \( \set{\begin{pmatrix}
+                      a  &c  \\
+                      0  &b
+                    \end{pmatrix}  \suchthat a+b=0, c\in\Re} \)
+    \end{exparts}
+    \begin{answer}
+      By \nearbylemma{th:SubspIffClosed}, to see if each
+      subset of $\matspace_{\nbyn{2}}$ is a subspace, we need only
+      check if it is nonempty and closed.
+      \begin{exparts}
+        \partsitem Yes, it is easily checked to be nonempty and closed.
+          This is a parametrization.
+          \begin{equation*}
+            \set{a\begin{pmatrix}
+                    1  &0  \\
+                    0  &0
+                  \end{pmatrix}
+                 +b\begin{pmatrix}
+                    0  &0  \\
+                    0  &1  
+                   \end{pmatrix}
+                 \suchthat a,b\in\Re}
+          \end{equation*}
+          By the way, the parametrization also shows that it is a subspace,
+          it is given as the span of the two-matrix set,
+          and any span is a subspace.
+        \partsitem Yes; it is easily checked to be nonempty and closed.
+         Alternatively, as mentioned in the prior answer, the existence
+         of a parametrization shows that it is a subspace.
+         For the parametrization, 
+         the condition $a+b=0$ can be rewritten as $a=-b$.
+         Then we have this.
+          \begin{equation*}
+            \set{\begin{pmatrix}
+                    -b  &0  \\
+                    0   &b
+                  \end{pmatrix}
+                 \suchthat b\in\Re}
+            =\set{b\begin{pmatrix}
+                    -1  &0  \\
+                    0   &1
+                  \end{pmatrix}
+                 \suchthat b\in\Re}
+          \end{equation*}
+        \partsitem No.
+          It is not closed under addition.
+          For instance, 
+          \begin{equation*}
+            \begin{pmatrix}
+              5  &0  \\
+              0  &0
+            \end{pmatrix}
+            +\begin{pmatrix}
+              5  &0  \\
+              0  &0
+            \end{pmatrix}
+            =\begin{pmatrix}
+              10  &0  \\
+              0  &0
+            \end{pmatrix}
+          \end{equation*}
+          is not in the set.
+          (This set is also not closed under scalar multiplication,
+          for instance, it does not contain the zero matrix.)
+        \partsitem Yes.
+          \begin{equation*}
+            \set{b\begin{pmatrix}
+                    -1  &0  \\
+                    0   &1
+                  \end{pmatrix}
+                 +c\begin{pmatrix}
+                    0  &1  \\
+                    0  &0  
+                   \end{pmatrix}
+                 \suchthat b,c\in\Re}
+          \end{equation*}
+      \end{exparts}  
+     \end{answer}
+  \recommended \item 
+    Is this a subspace of \( \polyspace_2 \):
+    \( \set{a_0+a_1x+a_2x^2\suchthat a_0+2a_1+a_2=4} \)?
+    If it is then parametrize its description.
+    \begin{answer}
+      No, it is not closed.
+      In particular, it is not closed under scalar multiplication because it
+      does not contain the zero polynomial.  
+    \end{answer}
+  \recommended \item 
+    Decide if the vector lies in the span of the set, inside of the
+    space.
+    \begin{exparts}
+      \partsitem \( \colvec{2 \\ 0 \\ 1} \),
+        \( \set{\colvec{1 \\ 0 \\ 0},
+                \colvec{0 \\ 0 \\ 1}  } \),
+        in \( \Re^3 \)
+      \partsitem \( x-x^3 \),
+        \( \set{x^2,2x+x^2,x+x^3} \),
+        in \( \polyspace_3 \)
+      \partsitem \( \begin{pmatrix}
+                 0  &1  \\
+                 4  &2
+               \end{pmatrix}  \),
+        \( \set{\begin{pmatrix}
+                  1  &0  \\
+                  1  &1
+                \end{pmatrix},
+                \begin{pmatrix}
+                  2  &0  \\
+                  2  &3
+                \end{pmatrix}  } \),
+        in \( \matspace_{\nbyn{2}} \)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem Yes, solving the linear system arising from
+           \begin{equation*}
+             r_1\colvec{1 \\ 0 \\ 0}+r_2\colvec{0 \\ 0 \\ 1}
+               =\colvec{2 \\ 0 \\ 1}
+           \end{equation*}
+           gives \( r_1=2 \) and \( r_2=1 \).
+         \partsitem Yes; the linear system arising from
+           \( r_1(x^2)+r_2(2x+x^2)+r_3(x+x^3)=x-x^3 \)
+           \begin{equation*}
+             \begin{linsys}{3}
+                   &  &2r_2 &+ &r_3 &= &1  \\
+               r_1 &+ &r_2  &  &    &= &0  \\
+                   &  &     &  &r_3 &= &-1   
+             \end{linsys}
+           \end{equation*}
+           gives that \( -1(x^2)+1(2x+x^2)-1(x+x^3)=x-x^3 \).
+        \partsitem No; any combination of the two given matrices has a zero
+           in the upper right.
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Which of these are members of the span
+    \( \spanof{\set{\cos^2x,\sin^2x} } \)
+    in the vector space of real-valued functions of one real variable?
+    \begin{exparts*}
+      \partsitem \( f(x)=1 \)
+      \partsitem \( f(x)=3+x^2 \)
+      \partsitem \( f(x)=\sin x \)
+      \partsitem \( f(x)=\cos (2x) \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes; it is in that span since 
+          \( 1\cdot\cos^2x+1\cdot\sin^2x=f(x) \).
+        \partsitem No, since \( r_1\cos^2x+r_2\sin^2x=3+x^2 \) has no scalar
+          solutions that work for all \( x \).
+          For instance, setting $x$ to be $0$ and $\pi$ gives the two
+          equations $r_1\cdot 1+r_2\cdot 0=3$ and 
+          $r_1\cdot 1+r_2\cdot 0=3+\pi^2$, which are not consistent with each
+          other. 
+        \partsitem No; consider what happens on setting $x$ to be $\pi/2$ and
+          $3\pi/2$.
+        \partsitem Yes, \( \cos (2x)=1\cdot\cos^2(x)-1\cdot\sin^2(x) \).
+      \end{exparts}  
+     \end{answer}
+  \recommended \item 
+    Which of these sets spans \( \Re^3 \)?
+    That is, which of these sets has the property that any three-tall
+    vector can be expressed as a suitable linear combination of the
+    set's elements?
+    \begin{exparts*}
+      \partsitem \( \set{ \colvec{1 \\ 0 \\ 0},
+               \colvec{0 \\ 2 \\ 0},
+               \colvec{0 \\ 0 \\ 3}  } \)
+      \partsitem \( \set{ \colvec{2 \\ 0 \\ 1},
+               \colvec{1 \\ 1 \\ 0},
+               \colvec{0 \\ 0 \\ 1}  } \)
+      \partsitem \( \set{ \colvec{1 \\ 1 \\ 0},
+               \colvec{3 \\ 0 \\ 0}  } \)
+      \partsitem \( \set{ \colvec{1 \\ 0 \\ 1},
+               \colvec{3 \\ 1 \\ 0},
+               \colvec{-1 \\ 0 \\ 0},
+               \colvec{2 \\ 1 \\ 5}  } \)
+      \partsitem \( \set{ \colvec{2 \\ 1 \\ 1},
+               \colvec{3 \\ 0 \\ 1},
+               \colvec{5 \\ 1 \\ 2},
+               \colvec{6 \\ 0 \\ 2}  } \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem Yes, for any \( x,y,z\in\Re \) this equation
+           \begin{equation*}
+              r_1\colvec{1 \\ 0 \\ 0}
+              +r_2\colvec{0 \\ 2 \\ 0}
+              +r_3\colvec{0 \\ 0 \\ 3}
+              =\colvec{x \\ y \\ z}
+           \end{equation*}
+           has the solution \( r_1=x \), \( r_2=y/2 \), and
+           \( r_3=z/3 \).
+         \partsitem Yes, the equation
+           \begin{equation*}
+             r_1\colvec{2 \\ 0 \\ 1}
+             +r_2\colvec{1 \\ 1 \\ 0}
+             +r_3\colvec{0 \\ 0 \\ 1}
+             =\colvec{x \\ y \\ z}
+           \end{equation*}
+           gives rise to this 
+           \begin{equation*}
+             \begin{linsys}{3}
+               2r_1 &+  &r_2  &  &    &=  &x \\
+                    &   &r_2  &  &    &=  &y \\
+                r_1 &   &     &+ &r_3 &=  &z \\
+             \end{linsys}
+             \;\grstep{-(1/2)\rho_1+\rho_3}\;\;\grstep{(1/2)\rho_2+\rho_3}\;
+             \begin{linsys}{3}
+               2r_1 &+  &r_2  &  &    &=  &x\hfill\hbox{} \\
+                    &   &r_2  &  &    &=  &y\hfill\hbox{} \\
+                    &   &     &  &r_3 &=  &-(1/2)x+(1/2)y+z \\
+             \end{linsys}
+           \end{equation*}
+           so that, given any $x$, $y$, and $z$, we can compute that
+           \( r_3=(-1/2)x+(1/2)y+z \), \( r_2=y \), and
+           \( r_1=(1/2)x-(1/2)y \).
+        \partsitem No.
+           In particular, the vector
+           \begin{equation*}
+             \colvec{0 \\ 0 \\ 1}
+           \end{equation*}
+           cannot be gotten as a linear combination since the two given
+           vectors both have a third component of zero.
+       \partsitem Yes.
+         The equation
+         \begin{equation*}
+           r_1\colvec{1 \\ 0 \\ 1}
+           +r_2\colvec{3 \\ 1 \\ 0}
+           +r_3\colvec{-1\\ 0 \\ 0}
+           +r_4\colvec{2 \\ 1 \\ 5}
+           =\colvec{x \\ y \\ z}
+         \end{equation*}
+         leads to this reduction.
+         \begin{equation*}
+           \begin{amatrix}{4}
+             1  &3  &-1  &2  &x  \\
+             0  &1  &0   &1  &y  \\
+             1  &0  &0   &5  &z  
+           \end{amatrix}
+           \grstep{-\rho_1+\rho_3}\;\grstep{3\rho_2+\rho_3}
+           \begin{amatrix}{4}
+             1  &3  &-1  &2  &x\hfill\hbox{} \\
+             0  &1  &0   &1  &y\hfill\hbox{}  \\
+             0  &0  &1   &6  &-x+3y+z
+           \end{amatrix}
+         \end{equation*}
+         We have infinitely many solutions.
+         We can, for example, set $r_4$ to be zero and solve for
+         $r_3$, $r_2$, and $r_1$ in terms of $x$, $y$, and $z$ by the usual
+         methods of back-substitution.
+       \partsitem No.
+         The equation
+         \begin{equation*}
+           r_1\colvec{2 \\ 1 \\ 1}
+           +r_2\colvec{3 \\ 0 \\ 1}
+           +r_3\colvec{5 \\ 1 \\ 2}
+           +r_4\colvec{6 \\ 0 \\ 2}
+           =\colvec{x \\ y \\ z}
+         \end{equation*}
+         leads to this reduction.
+         \begin{equation*}
+           \begin{amatrix}{4}
+             2  &3  &5   &6  &x  \\
+             1  &0  &1   &0  &y  \\
+             1  &1  &2   &2  &z  
+           \end{amatrix}
+           \grstep[-(1/2)\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
+          \;\grstep{-(1/3)\rho_2+\rho_3}
+           \begin{amatrix}{4}
+             2  &3     &5     &6  &x\hfill\hbox{} \\
+             0  &-3/2  &-3/2  &-3 &-(1/2)x+y\hfill\hbox{}  \\
+             0  &0     &0     &0  &-(1/3)x-(1/3)y+z
+           \end{amatrix}
+         \end{equation*}
+         This shows that not every three-tall vector can be so expressed.
+         Only the vectors satisfying the restriction that
+         $-(1/3)x-(1/3)y+z=0$ are in the span.
+         (To see that any such vector is indeed expressible, 
+         take $r_3$ and $r_4$
+         to be zero and solve for $r_1$ and $r_2$ in terms of $x$, $y$, and
+         $z$ by back-substitution.)
+      \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    Parametrize each subspace's description.
+    Then express each subspace as a span.
+    \begin{exparts}
+      \partsitem  The subset \( \set{\rowvec{a &b &c}\suchthat a-c=0}   \)
+        of the three-wide row vectors
+      \partsitem This subset of \( \matspace_{\nbyn{2}} \)
+        \begin{equation*}
+          \set{\begin{pmatrix}
+                 a  &b  \\
+                 c  &d
+               \end{pmatrix}  \suchthat a+d=0}
+        \end{equation*}
+      \partsitem This subset of \( \matspace_{\nbyn{2}} \)
+        \begin{equation*}
+          \set{\begin{pmatrix}
+                 a  &b  \\
+                 c  &d
+               \end{pmatrix}  \suchthat \text{\( 2a-c-d=0 \) 
+                                                 and \( a+3b=0 \)} }
+        \end{equation*}
+      \partsitem The subset \( \set{a+bx+cx^3\suchthat a-2b+c=0} \) of
+        \( \polyspace_3 \)
+      \partsitem The subset of \( \polyspace_2 \) of quadratic polynomials 
+        \( p \) such that \( p(7)=0 \)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem \( \set{\rowvec{c &b &c}\suchthat b,c\in\Re}
+                      =\set{b\rowvec{0 &1 &0}+c\rowvec{1 &0 &1}
+                        \suchthat b,c\in\Re} \)
+           The obvious choice for the set that spans is 
+           $\set{\rowvec{0 &1 &0},\rowvec{1 &0 &1}}$.
+        \partsitem \( \set{\begin{pmatrix}
+                       -d &b  \\
+                       c  &d
+                      \end{pmatrix} \suchthat b,c,d\in\Re}
+                     =\set{b\begin{pmatrix}
+                       0  &1  \\
+                       0  &0
+                      \end{pmatrix}
+                     +c\begin{pmatrix}
+                       0  &0  \\
+                       1  &0
+                      \end{pmatrix}
+                     +d\begin{pmatrix}
+                       -1  &0  \\
+                       0  &1
+                      \end{pmatrix}  \suchthat b,c,d\in\Re} \)
+            One set that spans this space consists of those three matrices. 
+        \partsitem The system
+          \begin{equation*}
+            \begin{linsys}{4}
+              a  &+  &3b  &   &   &  &  &=  &0  \\
+             2a  &   &    &   &-c &- &d &=  &0  
+            \end{linsys}
+          \end{equation*}
+          gives \( b=-(c+d)/6 \) and \( a=(c+d)/2 \).
+          So one description is this.
+          \begin{equation*}
+            \set{c\begin{pmatrix}
+                       1/2  &-1/6  \\
+                       1    &0
+                      \end{pmatrix}
+                     +d\begin{pmatrix}
+                       1/2  &-1/6  \\
+                       0    &1
+                      \end{pmatrix}  \suchthat c,d\in\Re}
+           \end{equation*}
+          That shows that a set spanning this subspace consists of those
+          two matrices.
+        \partsitem The $a=2b-c$ gives
+           \( \set{(2b-c)+bx+cx^3 \suchthat b,c\in\Re}
+           =\set{b(2+x)+c(-1+x^3) \suchthat b,c\in\Re}  \).
+           So the subspace is the span of the set $\set{2+x, -1+x^3}$.
+        \partsitem The set
+          \( \set{a+bx+cx^2\suchthat a+7b+49c=0} \)
+          parametrized as
+          \( \set{b(-7+x)+c(-49+x^2)\suchthat b,c\in\Re} \)
+          has the spanning set $\set{-7+x,-49+x^2}$.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    Find a set to span the given subspace of the given space.
+    (\textit{Hint.}   Parametrize each.)
+    \begin{exparts}
+      \partsitem  the \( xz \)-plane in \( \Re^3 \)
+      \partsitem \( \set{\colvec{x \\ y \\ z}\suchthat 3x+2y+z=0} \)
+            in \( \Re^3 \)
+      \partsitem \( \set{\colvec{x \\ y \\ z \\ w}\suchthat
+                       2x+y+w=0 \text{\ and\ } y+2z=0} \)
+            in \( \Re^4 \)
+      \partsitem \( \set{a_0+a_1x+a_2x^2+a_3x^3\suchthat
+                        a_0+a_1=0 \text{\ and\ } a_2-a_3=0} \)
+            in \( \polyspace_3 \)
+      \partsitem The set \( \polyspace_4 \) in the space \( \polyspace_4 \)
+      \partsitem \( \matspace_{\nbyn{2}} \) in \( \matspace_{\nbyn{2}} \)
+    \end{exparts}
+    \begin{answer}
+      Each answer given is only one out of many possible.
+      \begin{exparts}
+        \partsitem We can parametrize in this way 
+          \begin{equation*}
+             \set{\colvec{x \\ 0 \\ z}\suchthat x,z\in\Re}
+             =\set{x\colvec{1 \\ 0 \\ 0}
+                  +z\colvec{0 \\ 0 \\ 1}\suchthat x,z\in\Re}
+          \end{equation*}
+          giving this for a spanning set.
+          \begin{equation*}
+             \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 0 \\ 1}} 
+          \end{equation*}
+        \item Parametrize it with
+          \( \set{y\colvec{-2/3 \\ 1 \\ 0}+z\colvec{-1/3 \\ 0 \\ 1}
+                 \suchthat y,z\in\Re } \)
+          to get
+          \( \set{\colvec{-2/3 \\ 1 \\ 0},\colvec{-1/3 \\ 0 \\ 1} } \).
+        \partsitem \( \set{\colvec{1 \\ -2 \\ 1 \\ 0},
+                      \colvec{-1/2 \\ 0 \\ 0 \\ 1} } \)
+        \partsitem Parametrize the description as
+          \( \set{-a_1+a_1x+a_3x^2+a_3x^3\suchthat a_1,a_3\in\Re } \)
+          to get \( \set{-1+x,x^2+x^3}. \)
+        \partsitem \( \set{1,x,x^2,x^3,x^4} \)
+        \partsitem \( \set{ \begin{pmatrix}
+                   1  &0  \\
+                   0  &0
+                 \end{pmatrix},
+                 \begin{pmatrix}
+                   0  &1  \\
+                   0  &0
+                 \end{pmatrix},
+                 \begin{pmatrix}
+                   0  &0  \\
+                   1  &0
+                 \end{pmatrix},
+                 \begin{pmatrix}
+                   0  &0  \\
+                   0  &1
+                 \end{pmatrix} } \)
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Is \( \Re^2 \) a subspace of \( \Re^3 \)?
+    \begin{answer}
+      Technically, no.
+      Subspaces of \( \Re^3 \) are sets of three-tall vectors, while
+      \( \Re^2 \) is a set of two-tall vectors.
+      Clearly though, \( \Re^2 \) is ``just like'' this subspace of 
+      \( \Re^3 \).
+      \begin{equation*}
+        \set{\colvec{x \\ y \\ 0}\suchthat x,y\in\Re}
+      \end{equation*}  
+    \end{answer}
+  \recommended \item 
+    Decide if each is a subspace of the vector space of real-valued
+    functions of one real variable.
+    \begin{exparts}
+      \partsitem The 
+        \definend{even}\index{function!even}\index{even functions} functions
+        \( \set{\map{f}{\Re}{\Re} \suchthat f(-x)=f(x) \text{ for all } x} \).
+        For example, two members of this set are $f_1(x)=x^2$ 
+        and $f_2(x)=\cos (x)$.
+      \partsitem The \definend{odd}\index{function!odd}\index{odd functions}
+        functions
+        \( \set{\map{f}{\Re}{\Re} \suchthat f(-x)=-f(x) \text{ for all } x} \).
+        Two members are $f_3(x)=x^3$ and $f_4(x)=\sin(x)$.
+    \end{exparts}
+    \begin{answer}
+      Of course, the addition and scalar multiplication operations are the
+      ones inherited from the enclosing space.
+      \begin{exparts}
+        \partsitem This is a subspace.
+          It is not empty as it contains at least the two example functions
+          given.
+          It is closed because if \( f_1,f_2 \) are even and
+          \( c_1,c_2 \) are scalars then we have this.
+          \begin{equation*}
+            (c_1f_1+c_2f_2)\,(-x)
+            =c_1\,f_1(-x)+c_2\,f_2(-x)
+            =c_1\,f_1(x)+c_2\,f_2(x)
+            =(c_1f_1+c_2f_2)\,(x)
+          \end{equation*}
+        \partsitem This is also a subspace; the check is similar to
+          the prior one.
+      \end{exparts}  
+    \end{answer}
+  \item 
+    \nearbyexample{ex:SpanSingVec} says that for any vector $\vec{v}$ 
+    that is an element of 
+    a vector space $V$, the set $\set{r\cdot\vec{v}\suchthat r\in\Re}$
+    is a subspace of $V$.
+    (This is of course, simply the span\index{span!of a singleton} 
+    of the singleton set $\set{\vec{v}}$.)
+    Must any such subspace be a proper subspace, or can it be improper?
+    \begin{answer}
+      It can be improper.
+      If \( \vec{v}=\zero \) then this is a trivial subspace.
+      At the opposite extreme,
+      if the vector space is \( \Re^1 \) and \( \vec{v}\neq\zero\, \)
+      then the subspace is all of $\Re^1$.  
+    \end{answer}
+  \item 
+    An example following the definition of a vector space shows that the
+    solution set of a homogeneous linear system is a vector space.
+    In the terminology of this subsection, it is a subspace of $\Re^n$ where
+    the system has $n$ variables.
+    What about a non-homogeneous linear system; do its solutions form a 
+    subspace (under the inherited operations)?
+    \begin{answer}
+      No, such a set is not closed.
+      For one thing, it does not contain the zero vector.  
+    \end{answer}
+  \item 
+    \nearbyexample{ex:SubspRThree} shows that 
+    $\Re^3$ has infinitely many subspaces.
+    Does every nontrivial space have infinitely many subspaces?
+    \begin{answer}
+      No.
+      The only subspaces of \( \Re^1 \) are the space itself and its 
+      trivial subspace.
+      Any subspace $S$ of $\Re$ that contains a nonzero member $\vec{v}$ 
+      must contain the set of all of its scalar multiples 
+      $\set{r\cdot\vec{v}\suchthat r\in\Re}$. 
+      But this set is all of $\Re$.  
+    \end{answer}
+  \item \label{exer:SubspIffClosed}
+    Finish the proof of \nearbylemma{th:SubspIffClosed}.
+    \begin{answer}
+      Item~(1) is checked in the text.
+
+      Item~(2) has five conditions.
+      First, for closure, if \( c\in\Re \) and \( \vec{s}\in S \) then
+      \( c\cdot\vec{s}\in S \) as 
+      \( c\cdot\vec{s}=c\cdot\vec{s}+0\cdot\zero \).
+      Second, because the operations in \( S \) are inherited from \( V \),
+      for \( c,d\in\Re \) and \( \vec{s}\in S \), the scalar product
+      \( (c+d)\cdot\vec{s}\, \) in \( S \) equals the product
+      \( (c+d)\cdot\vec{s}\, \) in \( V \), and that equals
+      \( c\cdot\vec{s}+d\cdot\vec{s}\, \) in \( V \), which equals
+      \( c\cdot\vec{s}+d\cdot\vec{s}\, \) in \( S \).
+
+      The check for the third, fourth, and fifth conditions are similar to the
+      second conditions's check just given.  
+    \end{answer}
+  \item 
+    Show that each vector space has only one trivial subspace.
+    \begin{answer}
+      An exercise in the prior subsection shows that every vector space
+      has only one zero vector (that is, there is only one vector that is the
+      additive identity element of the space).
+      But a trivial space has only one element and that element must be this
+      (unique) zero vector.
+    \end{answer}
+  \recommended \item 
+    Show that for any subset \( S \) of a vector space,
+    the span of the span equals the span 
+    \( \spanof{ \spanof{S} }=\spanof{S} \).
+    (\textit{Hint.} 
+    Members of $\spanof{S}$ are linear combinations of members of $S$.
+    Members of $\spanof{\spanof{S}}$ are linear combinations of 
+    linear combinations of members of $S$.)
+    \begin{answer}
+      As the hint suggests, the basic reason is the Linear Combination Lemma
+      from the first chapter.
+      For the full proof, we will show mutual containment between the two sets.
+
+      The first containment \( \spanof{ \spanof{S} }\supseteq\spanof{S}  \)
+      is an instance of the more general, and obvious, fact that for any 
+      subset \( T \) of a vector space, \( \spanof{T}\supseteq T \).
+
+      For the other containment, 
+      that \( \spanof{ \spanof{S} }\subseteq\spanof{S} \),
+      take $m$ vectors from \( \spanof{S} \), namely
+      \( c_{1,1}\vec{s}_{1,1}+\cdots+c_{1,n_1}\vec{s}_{1,n_1} \), \ldots,
+      \( c_{1,m}\vec{s}_{1,m}+\cdots+c_{1,n_m}\vec{s}_{1,n_m} \),
+      and note that any linear combination of those
+      \begin{equation*}
+         r_1(c_{1,1}\vec{s}_{1,1}+\cdots+c_{1,n_1}\vec{s}_{1,n_1})+\cdots
+        +r_m(c_{1,m}\vec{s}_{1,m}+\cdots+c_{1,n_m}\vec{s}_{1,n_m})
+      \end{equation*}
+      is a linear combination of elements of \( S \)
+      \begin{equation*}
+        = (r_1c_{1,1})\vec{s}_{1,1}+\cdots+(r_1c_{1,n_1})\vec{s}_{1,n_1}+\cdots
+        +(r_mc_{1,m})\vec{s}_{1,m}+\cdots+(r_mc_{1,n_m})\vec{s}_{1,n_m}
+      \end{equation*}
+      and so is in \( \spanof{S} \).  
+      That is, simply recall that a linear combination of linear combinations
+      (of members of $S$)
+      is a linear combination (again of members of $S$).
+    \end{answer}
+  \item 
+    All of the subspaces that we've seen use zero in their 
+    description in some way.
+    For example, the subspace in \nearbyexample{ex:SubspacesRTwo} consists of
+    all the vectors from $\Re^2$ with a second component of zero.
+    In contrast,
+    the collection of vectors from $\Re^2$ with a second component of one
+    does not form a subspace (it is not closed under scalar multiplication).
+    Another example is \nearbyexample{ex:PlaneSubspRThree}, where the condition
+    on the vectors is that the three components add to zero.
+    If the condition were that the three components add to one then it would 
+    not be a subspace (again, it would fail to be closed).
+    This exercise shows that a reliance on zero is not strictly necessary.
+    Consider the set 
+    \begin{equation*}
+       \set{\colvec{x \\ y \\ z}\suchthat x+y+z=1}
+    \end{equation*}
+    under these operations.
+    \begin{equation*}
+       \colvec{x_1 \\ y_1 \\ z_1}+\colvec{x_2 \\ y_2 \\ z_2}
+       =\colvec{x_1+x_2-1 \\ y_1+y_2 \\ z_1+z_2}
+       \qquad
+       r\colvec{x \\ y \\ z}=\colvec{rx-r+1 \\ ry \\ rz}
+    \end{equation*}
+    \begin{exparts}
+      \partsitem Show that it is not a subspace of $\Re^3$.
+         (\textit{Hint.}   See \nearbyexample{ex:OperNotInherit}).
+      \partsitem Show that it is a vector space.         
+         Note that by the prior item,
+         \nearbylemma{th:SubspIffClosed} can not apply.  
+      \partsitem Show that any subspace of $\Re^3$ must pass through the origin,
+         and so any subspace of $\Re^3$ must involve zero in its description.
+         Does the converse hold?  
+          Does any subset of $\Re^3$ that contains the origin become a
+          subspace when given the inherited operations?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem It is not a subspace because these are not the inherited 
+           operations.  
+           For one thing, in this space,
+           \begin{equation*}
+             0\cdot\colvec{x \\ y \\ z}=\colvec{1 \\ 0 \\ 0}
+           \end{equation*}
+           while this does not, of course, hold in $\Re^3$.
+         \partsitem We can combine the argument showing closure under
+           addition with the argument showing closure under 
+           scalar multiplication into one single argument
+           showing closure under linear combinations of two vectors.
+           If $r_1,r_2,x_1,x_2,y_1,y_2,z_1,z_2$ are in $\Re$ then      
+           \begin{equation*}
+              r_1\colvec{x_1 \\ y_1 \\ z_1}
+              +r_2\colvec{x_2 \\ y_2 \\ z_2}
+              =\colvec{r_1x_1-r_1+1 \\ r_1y_1 \\ r_1z_1}
+               +\colvec{r_2x_2-r_2+1 \\ r_2y_2 \\ r_2z_2}
+            =\colvec{r_1x_1-r_1+r_2x_2-r_2+1 \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2}
+           \end{equation*} 
+           (note that the definition of addition in this space is that
+           the first
+           components combine as $(r_1x_1-r_1+1)+(r_2x_2-r_2+1)-1$,
+           so the first component of the last vector does not say
+           `$\hbox{}+2$').
+           Adding the three components of the last vector gives
+           $r_1(x_1-1+y_1+z_1)+r_2(x_2-1+y_2+z_2)+1=r_1\cdot0+r_2\cdot0+1=1$.
+
+           Most of the other checks of the conditions are easy (although the
+           oddness of the operations keeps them from being routine).
+           Commutativity of addition goes like this.
+           \begin{equation*}
+             \colvec{x_1 \\ y_1 \\ z_1}+\colvec{x_2 \\ y_2 \\ z_2}
+             =\colvec{x_1+x_2-1 \\ y_1+y_2 \\ z_1+z_2}
+             =\colvec{x_2+x_1-1 \\ y_2+y_1 \\ z_2+z_1}
+             =\colvec{x_2 \\ y_2 \\ z_2}+\colvec{x_1 \\ y_1 \\ z_1}
+           \end{equation*}
+           Associativity of addition has
+           \begin{equation*}
+             (\colvec{x_1 \\ y_1 \\ z_1}+\colvec{x_2 \\ y_2 \\ z_2})
+              +\colvec{x_3 \\ y_3 \\ z_3}
+             =\colvec{(x_1+x_2-1)+x_3-1 \\ (y_1+y_2)+y_3 \\ (z_1+z_2)+z_3}
+           \end{equation*}
+           while
+           \begin{equation*}
+             \colvec{x_1 \\ y_1 \\ z_1}
+             +(\colvec{x_2 \\ y_2 \\ z_2}+\colvec{x_3 \\ y_3 \\ z_3})
+             =\colvec{x_1+(x_2+x_3-1)-1 \\ y_1+(y_2+y_3) \\ z_1+(z_2+z_3)}
+           \end{equation*}
+           and they are equal.
+           The identity element with respect to this addition operation 
+           works this way
+           \begin{equation*}
+             \colvec{x \\ y \\ z}+\colvec{1 \\ 0 \\ 0}
+             =\colvec{x+1-1 \\ y+0 \\ z+0}
+             =\colvec{x \\ y \\ z}
+           \end{equation*}
+           and the additive inverse is similar.
+           \begin{equation*}
+             \colvec{x \\ y \\ z}+\colvec{-x+2 \\ -y \\ -z}
+             =\colvec{x+(-x+2)-1 \\ y-y \\ z-z}
+             =\colvec{1 \\ 0 \\ 0}
+           \end{equation*}
+
+           The conditions on scalar multiplication are also easy.
+           For the first condition,
+           \begin{equation*}
+             (r+s)\colvec{x \\ y \\ z}
+             =\colvec{(r+s)x-(r+s)+1 \\ (r+s)y \\ (r+s)z}
+           \end{equation*}
+           while
+           \begin{equation*}
+             r\colvec{x \\ y \\ z}+s\colvec{x \\ y \\ z}
+             =\colvec{rx-r+1 \\ ry \\ rz}+\colvec{sx-s+1 \\ sy \\ sz}
+             =\colvec{(rx-r+1)+(sx-s+1)-1 \\ ry+sy \\ rz+sz}
+           \end{equation*}
+           and the two are equal.
+           The second condition compares
+           \begin{equation*}
+             r\cdot(\colvec{x_1 \\ y_1 \\ z_1}+\colvec{x_2 \\ y_2 \\ z_2})
+             =r\cdot\colvec{x_1+x_2-1 \\ y_1+y_2 \\ z_1+z_2}
+             =\colvec{r(x_1+x_2-1)-r+1 \\ r(y_1+y_2) \\ r(z_1+z_2)}
+           \end{equation*}
+           with
+           \begin{equation*}
+             r\colvec{x_1 \\ y_1 \\ z_1}+r\colvec{x_2 \\ y_2 \\ z_2}
+             =\colvec{rx_1-r+1 \\ ry_1 \\ rz_1}
+                     +\colvec{rx_2-r+1 \\ ry_2 \\ rz_2}
+             =\colvec{(rx_1-r+1)+(rx_2-r+1)-1 \\ ry_1+ry_2 \\ rz_1+rz_2}
+           \end{equation*}
+           and they are equal.
+           For the third condition,
+           \begin{equation*}
+             (rs)\colvec{x \\ y \\ z}
+             =\colvec{rsx-rs+1 \\ rsy \\ rsz}
+           \end{equation*}
+           while
+           \begin{equation*}
+             r(s\colvec{x \\ y \\ z})
+             =r(\colvec{sx-s+1 \\ sy \\ sz})
+             =\colvec{r(sx-s+1)-r+1 \\ rsy \\ rsz}
+           \end{equation*}
+           and the two are equal.
+           For scalar multiplication by $1$ we have this.
+           \begin{equation*}
+             1\cdot\colvec{x \\ y \\ z}
+             =\colvec{1x-1+1 \\ 1y \\ 1z}
+             =\colvec{x \\ y \\ z}
+           \end{equation*}
+           Thus all the conditions on a vector space are met by these two
+           operations.
+
+           \textit{Remark.}
+           A way to understand this vector space is to think of it as 
+           the plane in $\Re^3$
+           \begin{equation*}
+             P=\set{\colvec{x \\ y \\ z}\suchthat x+y+z=0}
+           \end{equation*}
+           displaced away from the origin by $1$ along the $x$-axis.
+           Then addition becomes:~to add two members of this space, 
+           \begin{equation*}
+             \colvec{x_1 \\ y_1 \\ z_1},\;\colvec{x_2 \\ y_2 \\ z_2}
+           \end{equation*}
+           (such that $x_1+y_1+z_1=1$ and $x_2+y_2+z_2=1$)
+           move them back by $1$ to place them in $P$ and
+           add as usual,
+           \begin{equation*}
+             \colvec{x_1-1 \\ y_1 \\ z_1}+\colvec{x_2-1 \\ y_2 \\ z_2}
+             =\colvec{x_1+x_2-2 \\ y_1+y_2 \\ z_1+z_2}
+             \qquad\text{(in $P$)}
+           \end{equation*}
+           and then move the result back out by $1$ along the $x$-axis.
+           \begin{equation*}
+             \colvec{x_1+x_2-1 \\ y_1+y_2 \\ z_1+z_2}.
+           \end{equation*}
+           Scalar multiplication is similar.
+         \partsitem For the subspace to be closed under the inherited scalar 
+           multiplication, where $\vec{v}$ is a member of that subspace,
+           \begin{equation*}
+             0\cdot\vec{v}=\colvec{0 \\ 0 \\ 0}
+           \end{equation*}
+           must also be a member.
+
+           The converse does not hold.
+           Here is a subset of $\Re^3$ that contains the origin 
+           \begin{equation*}
+             \set{\colvec{0 \\ 0 \\ 0},\colvec{1 \\ 0 \\ 0}}
+           \end{equation*}
+           (this subset has only two elements) but is not a subspace.
+      \end{exparts}
+    \end{answer}
+  \item 
+    We can give a justification for the convention that the sum of 
+    zero-many vectors equals the zero vector.
+    Consider this sum of three vectors $\vec{v}_1+\vec{v}_2+\vec{v}_3$.
+    \begin{exparts}
+      \partsitem What is the difference between this sum of three vectors 
+        and the sum of the first two of these three?
+      \partsitem What is the difference between the prior sum and the sum 
+        of just the first one vector?
+      \partsitem What should be the difference between the prior sum of 
+        one vector and the sum of no vectors?
+      \partsitem So what should be the definition of the sum of no vectors?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \item $(\vec{v}_1+\vec{v}_2+\vec{v}_3)-(\vec{v}_1+\vec{v}_2)
+                 =\vec{v}_3$
+        \item $(\vec{v}_1+\vec{v}_2)-(\vec{v}_1)
+                 =\vec{v}_2$
+        \item Surely, $\vec{v}_1$.
+        \item Taking the one-long sum and subtracting gives
+          ($\vec{v}_1)-\vec{v}_1=\zero$.
+      \end{exparts}
+    \end{answer}
+  \item 
+    Is a space determined by its subspaces?
+    That is, if two vector spaces have the same subspaces, must the
+    two be equal?
+    \begin{answer}
+      Yes; any space is a subspace of itself, so each space contains the
+      other.  
+    \end{answer}
+  \item 
+     \begin{exparts}
+      \partsitem Give a set that is closed under scalar multiplication
+        but not addition.
+      \partsitem Give a set closed under addition but not scalar
+        multiplication.
+      \partsitem Give a set closed under neither.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The union of the \( x \)-axis and the \( y \)-axis
+          in \( \Re^2 \) is one.
+        \partsitem The set of integers, as a subset of \( \Re^1 \), is one.
+        \partsitem The subset \( \set{\vec{v}} \) of \( \Re^2 \) is one,
+          where $\vec{v}$ is any nonzero vector.
+      \end{exparts}  
+     \end{answer}
+  \item 
+    Show that the span of a set of vectors does not depend on the order in
+    which the vectors are listed in that set.
+    \begin{answer}
+      Because vector space addition is commutative, a reordering of
+      summands leaves a linear combination unchanged.  
+    \end{answer}
+  \item  
+    Which trivial subspace is the span of the empty set?
+    Is it
+    \begin{equation*}
+      \set{\colvec{0 \\ 0 \\ 0}}\subseteq \Re^3,
+      \quad\text{or}\quad
+      \set{0+0x}\subseteq \polyspace_1,
+    \end{equation*}
+    or some other subspace?
+    \begin{answer}
+      We always consider that span in the context of an enclosing space.  
+    \end{answer}
+  \item   
+    Show that if a  vector is in the span of a set then adding that
+    vector to the set won't make the span any bigger.
+    Is that also `only if'?
+    \begin{answer}
+      It is both `if' and `only if'.
+ 
+      For `if',
+      let \( S \) be a subset of a vector space \( V \) and assume
+      \( \vec{v}\in S \) satisfies
+      \( \vec{v}=c_1\vec{s}_1+\dots+c_n\vec{s}_n \) where
+      \( c_1,\ldots,c_n \) are scalars and
+      \( \vec{s}_1,\ldots,\vec{s}_n\in S \).
+      We must show that \( \spanof{S\union\set{\vec{v}} }=\spanof{S} \).
+
+      Containment one way,
+      \( \spanof{S}\subseteq\spanof{S\union\set{\vec{v}} } \) is obvious.
+      For the other direction,
+      \( \spanof{S\union\set{\vec{v}} }\subseteq\spanof{S} \), note that if a
+      vector is in the set on the left then it has the form
+      \( d_0\vec{v}+d_1\vec{t}_1+\dots+d_m\vec{t}_m \) where the \( d \)'s are
+      scalars and the \( \vec{t}\, \)'s are in \( S \).
+      Rewrite that as
+      \( d_0(c_1\vec{s}_1+\dots+c_n\vec{s}_n)
+      +d_1\vec{t}_1+\cdots+d_m\vec{t}_m \) and note that 
+      the result is a member of the span of \( S \).
+
+      The `only if' is clearly true\Dash adding \( \vec{v} \) 
+      enlarges the span to
+      include at least \( \vec{v} \).
+    \end{answer}
+  \recommended \item
+    Subspaces are subsets and so we naturally consider how `is a subspace of'
+    interacts with the usual set operations.
+    \begin{exparts}
+      \partsitem If \( A,B \) are subspaces of a vector space, must
+        their interesction
+        \( A\intersection B \) be a subspace?
+        Always?  Sometimes?  Never?
+      \partsitem Must the union \( A\union B \) be a subspace?
+      \partsitem If \( A \) is a subspace, must
+        its complement be a subspace?
+    \end{exparts}
+    (\textit{Hint.}   Try some test subspaces from 
+    \nearbyexample{ex:SubspRThree}.)
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Always.
+
+          Assume that \( A,B \) are subspaces of \( V \).
+          Note that 
+          their intersection is not empty as both contain the zero vector.
+          If \( \vec{w},\vec{s}\in A\intersection B \) and \( r,s \) are
+          scalars then \( r\vec{v}+s\vec{w}\in A \) because
+          each vector is in \( A \) and so a linear combination is in \( A \),
+          and \(r\vec{v}+s\vec{w}\in B \) for the same reason.
+          Thus the intersection is closed.
+          Now \nearbylemma{th:SubspIffClosed} applies.
+        \partsitem Sometimes (more precisely, only if \( A\subseteq B \) or
+          \( B\subseteq A \)).
+
+          To see the answer is not `always', take \( V \) to be \( \Re^3 \),
+          take \( A \) to be the $x$-axis, and \( B \) to be the
+          \( y \)-axis.
+          Note that
+          \begin{equation*}
+            \colvec{1 \\ 0}\in A \text{ and }\colvec{0 \\ 1}\in B
+            \quad\text{but}\quad
+            \colvec{1 \\ 0}+\colvec{0 \\ 1}\not\in A\union B
+          \end{equation*}
+          as the sum is in neither \( A \) nor \( B \).
+
+          The answer is not `never' because if \( A\subseteq B \) or
+          \( B\subseteq A \) then clearly \( A\union B \) is a subspace.
+
+          To show that \( A\union B \) is a subspace only if one
+          subspace contains the other, we assume that \( A\not\subseteq B \)
+          and \( B\not\subseteq A \) and prove that 
+          the union is not a subspace.
+          The assumption that \( A \) is not a subset of \( B \) means that 
+          there is an \( \vec{a}\in A \) with \( \vec{a}\not\in B \).
+          The other assumption gives a \( \vec{b}\in B \) with
+          \( \vec{b}\not\in A \).
+          Consider \( \vec{a}+\vec{b} \).
+          Note that sum is not an element of \( A \) or else
+          \( (\vec{a}+\vec{b})-\vec{a} \) would be in \( A \), which it is not.
+          Similarly the sum is not an element of \( B \).
+          Hence the sum is not an element of \( A\union B \), and so the union
+          is not a subspace.
+        \partsitem Never.
+          As \( A \) is a subspace, it contains the zero vector, and therefore
+          the set that is $A$'s complement does not.
+          Without the zero vector, the complement cannot be a vector space.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    Does the span of a set depend on the enclosing space?
+    That is, if \( W \) is a subspace of \( V \) and \( S \) is a subset of
+    \( W \) (and so also a subset of \( V \)), might the span of \( S \) in
+    \( W \) differ from the span of \( S \) in \( V \)?
+    \begin{answer}
+      The span of a set does not depend on the enclosing space.
+      A linear combination of vectors from \( S \) gives the same sum
+      whether we regard the operations as those of \( W \) or as those of
+      \( V \), because the operations of \( W \) are inherited from \(  V \).  
+    \end{answer}
+  \item 
+    Is the relation `is a subspace of' transitive?
+    That is, if $V$ is a subspace of $W$ and $W$ is a subspace of
+    $X$, must $V$ be a subspace of $X$? 
+    \begin{answer}
+      It is;
+      apply \nearbylemma{th:SubspIffClosed}.
+      (You must consider the following.
+      Suppose \( B \) is a subspace of a vector space \( V \) and suppose
+      \( A\subseteq B\subseteq V \) is a subspace.
+      From which space does \( A \) inherit its operations?
+      The answer is that it doesn't matter\Dash \( A \) will inherit the
+      same operations in either case.)  
+    \end{answer}
+  \recommended \item
+    Because `span of' is an operation on sets we naturally consider
+    how it interacts with the usual set operations.
+    \begin{exparts}
+      \partsitem If \( S\subseteq T \) are subsets of a vector space, is
+        \( \spanof{S}\subseteq\spanof{T} \)?
+        Always?  Sometimes?  Never?
+      \partsitem If \( S,T \) are subsets of a vector space, is
+        \( \spanof{S\union T}=\spanof{S}\union\spanof{T} \)?
+      \partsitem If \( S,T \) are subsets of a vector space, is
+        \( \spanof{S\intersection T}=\spanof{S}\intersection\spanof{T} \)?
+      \partsitem Is the span of the complement equal to the complement of
+        the span?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem Always;
+           if \( S\subseteq T \) then a linear combination of elements of
+           \( S \) is also a linear combination of elements of \( T \).
+         \partsitem Sometimes (more precisely, if and only if 
+           \( S\subseteq T \) or \( T\subseteq S \)).
+
+           The answer is not `always' as is shown by this example from
+           \( \Re^3 \)
+           \begin{equation*}
+             S=\set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 1 \\ 0}},\quad
+             T=\set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 0 \\ 1}}
+           \end{equation*}
+           because of this.
+           \begin{equation*}
+             \colvec{1 \\ 1 \\ 1}\in\spanof{S\union T}
+             \qquad
+             \colvec{1 \\ 1 \\ 1}\not\in\spanof{S}\union \spanof{T}
+           \end{equation*}
+
+           The answer is not `never' because if either set contains the other
+           then equality is clear.
+           We can
+           characterize equality as happening only when either set contains
+           the other by assuming \( S\not\subseteq T \) (implying the
+           existence of a vector \( \vec{s}\in S \) with 
+           \( \vec{s}\not\in T \))
+           and \( T\not\subseteq S \) (giving a \( \vec{t}\in T \) with
+           \( \vec{t}\not\in S \)), noting
+           \( \vec{s}+\vec{t}\in\spanof{S\union T} \),
+           and showing that 
+           \( \vec{s}+\vec{t}\not\in\spanof{S}\union\spanof{T} \).
+         \partsitem Sometimes.
+
+           Clearly
+           \( \spanof{S\intersection T}
+             \subseteq\spanof{S}\intersection\spanof{T} \)
+           because any linear combination of vectors from 
+           \( S\intersection T \)
+           is a combination of vectors from \( S \) and also a combination of
+           vectors from \( T \).
+
+           Containment the other way does not always hold.
+           For instance, in \( \Re^2 \), take
+           \begin{equation*}
+             S=\set{\colvec{1 \\ 0},\colvec{0 \\ 1}},\quad
+             T=\set{\colvec{2 \\ 0}}
+           \end{equation*}
+           so that \( \spanof{S}\intersection\spanof{T} \) is the \( x \)-axis
+           but \( \spanof{S\intersection T}  \) is the trivial subspace.
+
+           Characterizing exactly when equality holds is tough.
+           Clearly equality holds if either set contains the other, but that is
+           not `only if' by this example in \( \Re^3 \).
+           \begin{equation*}
+             S=\set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 1 \\ 0}},
+             \quad
+             T=\set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 0 \\ 1}}
+           \end{equation*}
+        \partsitem Never, as the span of the complement is a subspace, while
+          the complement of the span is not (it does not contain the zero 
+          vector).
+      \end{exparts}  
+     \end{answer}
+  \item 
+    Reprove \nearbylemma{le:SpanIsASubsp} without doing the
+    empty set separately.
+    \begin{answer}
+      Call the subset \( S \).
+      By \nearbylemma{th:SubspIffClosed},
+      we need to check that 
+      \( \spanof{S} \) is closed under linear combinations.
+      If \( c_1\vec{s}_1+\dots+c_n\vec{s}_n,
+        c_{n+1}\vec{s}_{n+1}+\dots+c_m\vec{s}_m\in\spanof{S} \) then
+      for any \( p,r\in\Re \) we have
+      \begin{equation*}
+        p\cdot(c_1\vec{s}_1+\cdots+c_n\vec{s}_n)+
+             r\cdot(c_{n+1}\vec{s}_{n+1}+\cdots+c_m\vec{s}_m)
+        =
+        pc_1\vec{s}_1+\cdots+pc_n\vec{s}_n
+          +rc_{n+1}\vec{s}_{n+1}+\cdots+rc_m\vec{s}_m
+      \end{equation*}
+      which is an element of \( \spanof{S} \).
+      (\textit{Remark.}
+      If the set $S$ is empty, then that
+      `if \ldots\ then \ldots' statement is vacuously true.)  
+    \end{answer}
+  \item Find a structure that is closed under linear combinations, 
+    and yet is not a vector space.
+    (\textit{Remark.} 
+    This is a bit of a trick question.)
+    \begin{answer}
+      For this to happen, one of the conditions giving the sensibleness of the
+      addition and scalar multiplication operations must be violated.
+      Consider \( \Re^2 \) with these operations.
+      \begin{equation*}
+        \colvec{x_1 \\ y_1}
+        +\colvec{x_2 \\ y_2}
+        =\colvec{0 \\ 0}
+        \qquad
+        r\colvec{x \\ y}
+        =\colvec{0 \\ 0}
+      \end{equation*}
+      The set $\Re^2$ is closed under these operations. 
+      But it is not a vector space.
+      \begin{equation*}
+        1\cdot\colvec{1 \\ 1}
+        \neq\colvec{1 \\ 1}
+      \end{equation*}  
+    \end{answer}
+\index{subspace|)}
+\index{vector space|)}
+\end{exercises}

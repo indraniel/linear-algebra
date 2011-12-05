@@ -1,0 +1,414 @@
+% Chapter 1, Topic from _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-09
+\topic{Accuracy of Computations}
+\index{accuracy! of Gauss' method|(}
+\index{Gauss' method! accuracy|(}
+Gauss' method lends itself nicely to computerization.
+The code below illustrates.
+It operates on an $\nbyn{n}$ matrix \texttt{a}, 
+doing row combinations using the first row, then
+the second row, etc.
+\begin{indented}
+\small
+\begin{verbatim}
+for(row=1;row<=n-1;row++){
+  for(row_below=row+1;row_below<=n;row_below++){
+    multiplier=a[row_below,row]/a[row,row];
+    for(col=row; col<=n; col++){
+      a[row_below,col]-=multiplier*a[row,col];
+    }
+  }
+}
+\end{verbatim}
+\end{indented}
+(This code is in the C~language.\index{C language}
+%For readers unfamiliar with this concise language, 
+Here is a brief translation.
+The loop construct  
+\texttt{for(row=1;row<=n-1;row++)\char`\{$\cdots$\char`\}}
+sets \texttt{row} to $1$ and then iterates while
+\texttt{row} is less than or equal to $n-1$, each time through
+incrementing the variable \texttt{row} by one with the `\texttt{++}' operation.
+The other non-obvious construct is that the `\texttt{-=}' in the innermost
+loop amounts to the
+$\text{\texttt{a[row\_below,col]}}=
+           -\text{\texttt{multiplier}}*\text{\texttt{a[row,col]}}
+           +\text{\texttt{a[row\_below,col]}}$
+operation.)
+
+While this code provides a quick take on how Gauss' method can be
+mechanized, it is not ready to use.
+It is naive in many ways.
+The most glaring way is that it assumes that 
+a nonzero number is always found in 
+the $\text{\texttt{row}},\text{\texttt{row}}$ position.
+To make it practical, 
+one way in which this code needs to be reworked is to cover
+the case where finding a zero in that location leads to a row swap, or to the
+conclusion that the matrix is singular.
+
+Adding some \texttt{if $\cdots$} statements to cover those cases is not hard,
+but we will instead consider some more subtle ways in which the code is naive.
+There are pitfalls arising from the computer's reliance on finite-precision
+floating point arithmetic.
+
+For example, we have seen above that we must handle as a separate case a
+system that is singular.
+But systems that are nearly singular also require care.
+Consider this one.
+\begin{equation*}
+   \begin{linsys}{2}
+                   x &+ &2y &= &3\hfill\hbox{}  \\
+     1.000\,000\,01x &+ &2y &= &3.000\,000\,01
+   \end{linsys}
+\end{equation*}
+By eye we get the solution $x=1$ and $y=1$.
+But a computer has more trouble.
+A computer that represents real numbers to eight significant places (as is
+common, usually called 
+\definend{single precision}\index{single precision}) will represent the second
+equation internally as $1.000\,000\,0x+2y=3.000\,000\,0$, losing the
+digits in the ninth place.
+Instead of reporting the correct solution, this computer will report something
+that is not even close\Dash this computer thinks that the system is singular
+because the two equations are represented internally as equal.
+
+For some intuition about how the computer could come up with 
+something that far
+off, we can graph the system.
+\begin{center}
+  \includegraphics{ch1.33}
+  %\includegraphics{ppivot1.eps}
+\end{center}
+At the scale of this graph, the two lines cannot be resolved apart.
+This system is nearly singular in the sense that
+the two lines are nearly the same line.
+Near-singularity gives this system the property that a small change in the
+system can cause a large change in its solution; for instance, changing the 
+$3.000\,000\,01$ to $3.000\,000\,03$ changes the intersection point
+from $(1,1)$ to $(3,0)$.
+This system changes radically depending on a ninth digit, which explains why
+the eight-place computer has trouble.
+A problem that is very sensitive to inaccuracy or uncertainties in
+the input values is \definend{ill-conditioned}.\index{ill-conditioned}
+
+The above example gives one way in which a system can be
+difficult to solve on a computer.
+It has the advantage that the picture of nearly-equal lines gives a memorable 
+insight into one way that numerical difficulties can arise.
+Unfortunately this insight isn't very useful when we wish
+to solve some large system.
+We cannot, typically, hope to understand the geometry of an arbitrary large
+system.
+In addition, there are ways that a computer's results may be
+unreliable other than that the angle between some
+of the linear surfaces is quite small.
+
+For an example, consider the system below, from \cite{Hamming}.
+\begin{equation*}
+  \begin{linsys}{2}
+     0.001x  &+  &y  &=  &1  \\
+          x  &-  &y  &=  &0
+  \end{linsys}
+\tag*{($*$)}\end{equation*}
+The second equation
+gives $x=y$, so $x=y=1/1.001$ and 
+thus both variables have values that are just less than $1$.
+A computer using two digits represents the system internally in this way
+(we will do this example in two-digit floating point 
+arithmetic, but a similar one with eight digits is easy to invent).
+\begin{equation*}
+  \begin{linsys}{2}
+    (1.0\times 10^{-2})x  &+  &(1.0\times 10^{0})y  &=  &1.0\times 10^{0}  \\
+    (1.0\times 10^{0})x   &-  &(1.0\times 10^{0})y  &=  &0.0\times 10^{0}
+  \end{linsys}
+\end{equation*}
+The computer's row reduction step $-1000\rho_1+\rho_2$ produces 
+a second equation $-1001y=-999$, which the computer rounds to two places as 
+$(-1.0\times 10^{3})y=-1.0\times 10^{3}$.
+Then the computer decides from the second equation that $y=1$ 
+and from the first equation that $x=0$.
+This $y$ value is fairly good, but the $x$ is quite 
+bad.\index{accuracy!rounding error}
+Thus, another cause of 
+unreliable output is a mixture of floating point arithmetic
+and a reliance on using leading entries that are small. 
+
+An experienced programmer may respond that we should go to
+\definend{double precision}\index{double precision} %
+where sixteen significant digits are retained.
+This will indeed solve many problems.
+However, there are some difficulties with it as a general approach.
+For one thing, double precision takes longer than single
+precision (on a '486 chip, multiplication takes eleven ticks in single 
+precision but fourteen in double precision \cite{MicroProgRef}) and has twice
+the memory requirements.
+So attempting to do all calculations in 
+double precision is just not practical.
+And besides, the above systems can obviously be tweaked to give the
+same trouble in the seventeenth digit, so double precision
+won't fix all problems.
+What we need is a strategy to minimize the numerical
+trouble arising from solving systems on a computer,
+and some guidance as to how far the reported 
+solutions can be trusted. 
+
+Mathematicians have made a careful study of how to get the most
+reliable results. 
+A basic improvement on the naive code above 
+is to not simply take the entry
+in the $\text{\textit{row}},\text{\textit{row}}$
+position to determine the factor to use for the row combination,
+but rather to look at all of the entries in the \textit{row}
+column below the \textit{row} row, 
+and take the one that is most likely to give reliable results
+(e.g., take one that is not too small).
+This strategy is called \definend{partial pivoting}.%
+\index{partial pivoting}\index{pivoting!full} 
+
+For example, to solve the troublesome system ($*$) above,
+we start by looking at both equations for a best entry to use, 
+and taking the $1$ in
+the second equation as more likely to give good results.
+Then, the combination step of $-.001\rho_2+\rho_1$ gives a first equation of 
+$1.001y=1$, which the computer will represent as 
+$(1.0\times 10^{0})y=1.0\times 10^{0}$, leading to the conclusion that 
+$y=1$ and, after back-substitution, $x=1$, 
+both of which are close to right.  
+The code from above can be adapted to this purpose.
+\begin{indented}
+\small
+\begin{verbatim}
+for(row=1;row<=n-1;row++){
+/* find the largest entry in this column (in row max) */
+  max=row;
+  for(row_below=row+1;row_below<=n;row_below++){
+    if (abs(a[row_below,row]) > abs(a[max,row]));
+      max = row_below;
+  }
+/* swap rows to move that best entry up */
+  for(col=row;col<=n;col++){
+    temp=a[row,col];
+    a[row,col]=a[max,col];
+    a[max,col]=temp;
+  }
+/* proceed as before */
+  for(row_below=row+1;row_below<=n;row_below++){
+    multiplier=a[row_below,row]/a[row,row];
+     for(col=row;col<=n;col++){
+       a[row_below,col]-=multiplier*a[row,col];
+    }
+  }
+}
+\end{verbatim}
+\end{indented}
+
+A full analysis of the best way to implement Gauss' method 
+is outside the scope of the book (see \cite{Wilkinson65}),
+but the method recommended by most experts 
+is a variation on the code above that first finds the best entry
+among the candidates, and then scales it to a number that is less
+likely to give trouble.
+This is 
+\definend{scaled partial pivoting}.\index{scaled partial pivoting}\index{pivoting!partial!scaled}
+
+In addition to returning a result that is likely to be reliable,
+most well-done code will return a number, called the 
+\definend{conditioning number}%
+\index{conditioning number}\index{matrix!conditioning number}
+that describes the factor by which uncertainties in the input numbers
+could be magnified to become inaccuracies in the results returned 
+(see \cite{Rice}).
+
+The lesson of this discussion is that
+just because Gauss' method always works in theory, and just
+because computer code correctly implements that method,
+doesn't mean that the answer is reliable.
+In practice, always use a package
+where experts have worked hard to counter what can go wrong.
+
+\begin{exercises}
+  \item 
+    Using two decimal places, add $253$ and $2/3$.
+    \begin{answer}
+      Sceintific notation is convienent to express the two-place restriction.
+      We have $.25\times 10^{2}+.67\times 10^{0}=.25\times 10^{2}$.
+      The $2/3$ has no apparent effect.
+    \end{answer}
+  \item 
+    This intersect-the-lines problem contrasts with the example
+    discussed above.
+    \begin{center}
+      \begin{tabular}{@{}c@{}}
+        %\includegraphics{ppivot2.eps}
+        \includegraphics{ch1.34}
+      \end{tabular}
+      \qquad
+      $\displaystyle \begin{linsys}{2}
+            x &+ &2y &= &3  \\
+            3x &- &2y &= &1
+      \end{linsys}$
+    \end{center}
+    Illustrate that in this system 
+    some small change in the numbers will produce only a
+    small change in the solution by changing the constant in the
+    bottom equation to $1.008$ and solving.
+    Compare it to the solution of the unchanged system.
+    \begin{answer}
+      The reduction
+      \begin{equation*}
+        \grstep{-3\rho_1+\rho_2}
+        \begin{linsys}{2}
+          x  &+  &2y  &=  &3  \\
+             &   &-8  &=  &-7.992
+        \end{linsys}
+      \end{equation*}
+      gives a solution of \( (x,y)=(1.002,0.999) \).
+    \end{answer}
+  \item 
+    Solve this system by hand (\cite{Rice}).
+    \begin{equation*}
+      \begin{linsys}{2}
+        0.000\,3x  &+  &1.556y  &=  &1.569 \\
+        0.345\,4x  &-  &2.346y  &=  &1.018
+      \end{linsys}
+    \end{equation*}
+    \begin{exparts*}
+      \partsitem Solve it accurately, by hand.
+      \partsitem Solve it by
+         rounding at each step to four significant digits. 
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The fully accurate solution is that $x=10$ and $y=0$.
+        \partsitem The four-digit conclusion is quite different.
+          \begin{equation*}
+            \grstep{-(.3454/.0003)\rho_1+\rho_2}
+            \begin{amatrix}{2}
+              .0003  &1.556  &1.569  \\
+              0      &1789   &-1805
+            \end{amatrix}
+            \Longrightarrow
+            x=10460,\,y=-1.009
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
+  \item 
+    Rounding inside the computer often has an effect on the result.
+    Assume that your machine has eight significant digits.
+    \begin{exparts}
+      \partsitem Show that the machine will compute 
+         $(2/3)+((2/3)-(1/3))$ as unequal to $((2/3)+(2/3))-(1/3)$.
+         Thus, computer arithmetic is not associative.
+      \partsitem Compare the computer's version of $(1/3)x+y=0$
+        and $(2/3)x+2y=0$.
+        Is twice the first equation the same as the second?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem For the first one, first, $(2/3)-(1/3)$ is 
+          $.666\,666\,67-.333\,333\,33=.333\,333\,34$
+          and so 
+          $(2/3)+((2/3)-(1/3))=.666\,666\,67+.333\,333\,34=1.000\,000\,0$.
+          For the other one, first 
+          $((2/3)+(2/3))=.666\,666\,67+.666\,666\,67=1.333\,333\,3$
+          and so 
+          $((2/3)+(2/3))-(1/3)=1.333\,333\,3-.333\,333\,33=.999\,999\,97$.
+        \partsitem The first equation is 
+          $.333\,333\,33\cdot x+1.000\,000\,0\cdot y=0$
+          while the second is 
+          $.666\,666\,67\cdot x+2.000\,000\,0\cdot y=0$.
+      \end{exparts}
+    \end{answer}
+  \item 
+    Ill-conditioning is not only dependent on the matrix of
+    coefficients.
+    This example \cite{Hamming} shows that it can arise from an
+    interaction between the left and right sides of the system.
+    Let $\varepsilon$ be a small real.
+    \begin{equation*}
+      \begin{linsys}{3}
+        3x  &+  &2y           &+  &z            &=  &6\hfill   \\
+        2x  &+  &2\varepsilon y  &+  &2\varepsilon z  
+                                          &=  &2+4\varepsilon\hfill \\
+         x  &+  &2\varepsilon y  &-  &\varepsilon z   
+                                          &=  &1+\varepsilon\hfill
+      \end{linsys}
+    \end{equation*}
+    \begin{exparts}
+      \partsitem Solve the system by hand.
+        Notice that the $\varepsilon$'s divide out only because there is
+        an exact cancelation of the integer parts on the right side
+        as well as on the left. 
+      \partsitem Solve the system by hand, rounding to two decimal
+        places, and with $\varepsilon=0.001$.
+%      \partsitem If you have access to a computer package for solving
+%        linear systems, see if you can find an $\varepsilon$ small enough
+%        to get your package to give incorrect results.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem This calculation
+          \begin{eqnarray*}
+            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}\;
+            &\begin{amatrix}{3}
+              3  &2                   &1                   &6               \\
+              0  &-(4/3)+2\varepsilon &-(2/3)+2\varepsilon &-2+4\varepsilon \\
+              0  &-(2/3)+2\varepsilon &-(1/3)-\varepsilon  &-1+\varepsilon 
+            \end{amatrix}                                                    \\
+            &\grstep{-(1/2)\rho_2+\rho_3}\;
+            &\begin{amatrix}{3}
+              3  &2                   &1                   &6               \\
+              0  &-(4/3)+2\varepsilon &-(2/3)+2\varepsilon &-2+4\varepsilon \\
+              0  &\varepsilon         &-2\varepsilon       &-\varepsilon 
+            \end{amatrix}
+          \end{eqnarray*}
+          gives a third equation of $y-2z=-1$.
+          Substituting into the second equation gives 
+          $((-10/3)+6\varepsilon)\cdot z=(-10/3)+6\varepsilon$ 
+          so $z=1$ and thus $y=1$.
+          With those, the first equation says that $x=1$. 
+        \partsitem The solution with two digits kept 
+          \begin{multline*}
+            \begin{amatrix}{3}
+              .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1} 
+                 &.60\times 10^{1}        \\
+              .10\times 10^{1}  &.20\times 10^{-3} &.20\times 10^{-3} 
+                 &.20\times 10^{1}        \\
+              .30\times 10^{1}  &.20\times 10^{-3}  &-.10\times 10^{-3} 
+                 &.10\times 10^{1}        
+            \end{amatrix}                                           \\
+            \begin{aligned}
+            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}\;
+            \begin{amatrix}{3}
+              .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1} 
+                 &.60\times 10^{1}        \\
+              0                 &-.13\times 10^{1} &-.67\times 10^{0} 
+                 &-.20\times 10^{1}        \\
+              0                 &-.67\times 10^{0}  &-.33\times 10^{0} 
+                 &-.10\times 10^{1}        
+            \end{amatrix}                                          \\
+            &\grstep{-(.67/1.3)\rho_2+\rho_3}\;
+            \begin{amatrix}{3}
+              .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1} 
+                 &.60\times 10^{1}        \\
+              0                 &-.13\times 10^{1} &-.67\times 10^{0} 
+                 &-.20\times 10^{1}        \\
+              0                 &0                  &.15\times 10^{-2} 
+                 &.31\times 10^{-2}        
+            \end{amatrix}
+            \end{aligned}
+          \end{multline*}
+          comes out to be $z=2.1$, $y=2.6$, and $x=-.43$.
+      \end{exparts}
+    \end{answer}
+\end{exercises}
+\index{accuracy! of Gauss' method|)}
+\index{Gauss' method! accuracy|)}
+
+\endinput
+
+
+
+

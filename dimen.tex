@@ -1,0 +1,747 @@
+% Chapter 2, Topic _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-11
+\topic{Dimensional Analysis}
+``You can't add apples and oranges,'' the old saying goes.
+It reflects our experience that in applications the quantities
+have units and keeping track of those units is worthwhile.
+Everyone has done calculations such as this one 
+that use the units as a check.
+\begin{equation*}
+  60\,\frac{\text{sec}}{\text{min}}
+  \cdot 60\,\frac{\text{min}}{\text{hr}}
+  \cdot 24\,\frac{\text{hr}}{\text{day}}
+  \cdot 365\,\frac{\text{day}}{\text{year}}
+  = 31\,536\,000\,\frac{\text{sec}}{\text{year}}
+\end{equation*}
+However, the idea of including the units can be taken beyond bookkeeping.
+It can be used to draw conclusions
+about what relationships are possible among the physical quantities.
+
+To start, consider the physics equation:
+$\text{distance}=16\cdot(\text{time})^2$.
+If the distance is in feet and the time is in seconds then this is a 
+true statement about falling bodies.
+However it is not correct in other unit systems; 
+for instance, it is not correct in
+the meter-second system.
+We can fix that by making the $16$ a \emph{dimensional constant}.
+\begin{equation*}
+  \text{dist}=16\,\frac{\text{ft}}{\text{sec}^2}\cdot (\text{time})^2
+\end{equation*}  
+For instance, the above equation holds in the yard-second system.   
+\begin{equation*}
+  \text{distance in yards}=16\,\frac{(1/3)\,\text{yd}}{\text{sec}^2}
+                    \cdot (\text{time in sec})^2
+                   =\frac{16}{3}\,\frac{\text{yd}}{\text{sec}^2}
+                    \cdot (\text{time in sec})^2
+\end{equation*}
+So our first point is that
+by ``including the units'' we mean that we are restricting our attention
+to equations that use dimensional constants. 
+%Such an equation, using dimensional constants, is \definend{complete}.
+
+By using dimensional constants,
+we can be vague about units   
+and say only that all quantities are measured in combinations
+of some units of length $L$, mass $M$, and time $T$.
+We shall refer to these three
+as \definend{dimensions}\index{dimension!physical}
+(these are the only three
+dimensions that we shall need in this Topic).
+For instance, velocity 
+could be measured in $\text{feet}/\text{second}$
+or $\text{fathoms}/\text{hour}$, but in all events it involves
+some unit of length divided by some unit of time
+so the \definend{dimensional formula} of velocity is $L/T$.
+Similarly, the dimensional formula of density is $M/L^3$.
+We shall prefer using negative exponents over  
+the fraction bars and we shall include the dimensions with a
+zero exponent, that is, we shall write the dimensional formula of
+velocity as $L^1M^0T^{-1}$ and that of density
+as $L^{-3}M^1T^0$.
+
+In this context, ``You can't add apples to oranges'' becomes
+the advice to check that all of an equation's terms have 
+the same dimensional formula.
+An example is this version of the falling body equation:~$d-gt^2=0$. 
+The dimensional formula of the $d$ term is $L^1M^0T^0$. 
+For the other term, the dimensional formula of $g$ is $L^1M^0T^{-2}$ 
+($g$ is the dimensional constant given above as $16\,\text{ft}/\text{sec}^2$) 
+and the dimensional formula of $t$ is $L^0M^0T^1$, so that of  
+the entire $gt^2$ term is
+$L^1M^0T^{-2}(L^0M^0T^1)^2=L^1M^0T^0$. 
+Thus the two terms have the same dimensional formula.
+An equation with this property is \definend{dimensionally homogeneous}.
+
+Quantities with dimensional formula $L^0M^0T^0$ are \definend{dimensionless}.
+For example, we measure an angle by taking
+the ratio of the subtended arc to the radius
+\begin{center}
+  \includegraphics{ch2.22}
+\end{center}
+which is the ratio of a length to a length $L^1M^0T^0/L^1M^0T^0$ and
+thus angles have the dimensional formula $L^0M^0T^0$.
+%(Of course, to measure the angle in degrees instead we would 
+%multiply by a scalar, which would leave the dimensional formula unchanged.)
+
+The classic example of using the units for more than bookkeeping, using them 
+to draw conclusions, considers the formula for the period of a pendulum.
+\begin{equation*}
+  p=\text{--some expression involving the length of the string, etc.--}
+\end{equation*}
+The period is in units of time $L^0M^0T^1$.
+So the quantities on the 
+other side of the equation must have dimensional formulas that combine 
+in such a way that their $L$'s and $M$'s cancel and only a 
+single $T$ remains.
+The table on page~\pageref{table:Dimen} has the quantities that
+an experienced investigator would consider possibly relevant. 
+The only dimensional formulas involving $L$ are for
+the length of the string and the acceleration due to gravity.
+For the $L$'s of these two to cancel, when they appear 
+in the equation they must be in ratio,
+e.g., as $(\ell/g)^2$, or as $\cos(\ell/g)$, 
+or as $(\ell/g)^{-1}$.
+Therefore the period is a function of $\ell/g$. 
+
+This is a remarkable result:~with a pencil and paper analysis,
+before we ever took out the pendulum and made measurements,
+we have determined something about the relationship
+among the quantities. 
+
+To do dimensional analysis systematically, we need to know two things
+(arguments for these are in \cite{Bridgman}, Chapter~II and~IV).
+The first is that each equation relating physical 
+quantities that we shall see involves a sum of terms, 
+where each term has the form
+\begin{equation*}
+  m_1^{p_1}m_2^{p_2}\cdots m_k^{p_k}
+\end{equation*}
+for numbers $m_1$, \ldots, $m_k$ that measure the quantities.
+
+For the second, observe that an easy way to construct a dimensionally
+homogeneous expression is by taking a product of dimensionless quantities
+or by adding such dimensionless terms.
+Buckingham's Theorem states that any
+complete relationship among quantities with 
+dimensional formulas can be algebraically manipulated into a form where
+there is some function $f$ such that
+\begin{equation*}
+  f(\Pi_1,\ldots,\Pi_n)=0
+\end{equation*}
+for a complete set $\set{\Pi_1,\ldots,\Pi_n}$ of dimensionless products.
+(The first example below describes what makes a set of dimensionless 
+products `complete'.)
+We usually want to express one of the quantities, $m_1$ for instance,
+in terms of the others, 
+and for that we will assume that the above equality can be rewritten 
+\begin{equation*}
+  m_1=m_2^{-p_2}\cdots m_k^{-p_k}\cdot \hat{f}(\Pi_2,\ldots,\Pi_n)
+\end{equation*}
+where $\Pi_1=m_1m_2^{p_2}\cdots m_k^{p_k}$ is dimensionless
+and the products $\Pi_2$, \ldots, $\Pi_n$ don't involve $m_1$
+(as with $f$, here $\hat{f}$ is just some function, this time 
+of $n-1$ arguments).
+Thus, to do dimensional analysis we should
+find which dimensionless products are possible.
+%For that we will use vector spaces.
+
+For example, consider 
+again the formula for a pendulum's period.
+\begin{center}
+  \begin{tabular}{c}
+    \includegraphics{ch2.23}
+  \end{tabular}
+ \qquad\quad
+ \label{table:Dimen}
+  \begin{tabular}{r|l} 
+    \multicolumn{1}{r}{\textit{quantity}}
+    &\multicolumn{1}{l}{\begin{tabular}[b]{@{}l} 
+                           \textit{dimensional} \\ 
+                           \textit{formula}
+                         \end{tabular}}                   \\ \hline
+    period $p$                      &$L^0M^0T^1$          \\
+    length of string $\ell$         &$L^1M^0T^0$          \\
+    mass of bob $m$                 &$L^0M^1T^0$          \\
+    acceleration due to gravity $g$ &$L^1M^0T^{-2}$    \\
+    arc of swing $\theta$           &$L^0M^0T^0$         
+  \end{tabular}
+\end{center} 
+By the first fact cited above, we expect the formula to 
+have (possibly sums of terms of) the form
+$p^{p_1}\ell^{p_2}m^{p_3}g^{p_4}\theta^{p_5}$.
+To use the second fact, to find which combinations of the 
+powers~$p_1$, \ldots, $p_5$ 
+yield dimensionless products, consider this equation.
+\begin{equation*}
+  (L^0M^0T^1)^{p_1}(L^1M^0T^0)^{p_2}(L^0M^1T^0)^{p_3}
+     (L^1M^0T^{-2})^{p_4}(L^0M^0T^0)^{p_5}
+  =L^0M^0T^0 
+\end{equation*}
+It gives three conditions on the powers. 
+\begin{equation*}
+  \begin{linsys}{5}
+       &\   &p_2  &\   &    &+  &p_4   &  &  &=  &0  \\
+       &    &     &    &p_3 &   &      &  &  &=  &0  \\
+    p_1&    &     &    &    &-  &2p_4  &  &  &=  &0  
+  \end{linsys}  
+\end{equation*}
+Note that $p_3$ is $0$ and so the mass of the bob does not affect the period.
+Gaussian reduction and parametrization of that system gives this 
+\begin{equation*}
+  \set{\colvec{p_1 \\ p_2 \\ p_3 \\ p_4 \\ p_5}=
+       \colvec{1 \\  -1/2  \\  0  \\  1/2  \\  0}p_1+
+       \colvec{0   \\  0   \\  0  \\  0  \\  1}p_5
+       \suchthat p_1,p_5\in\Re}
+\end{equation*}
+(we've taken $p_1$ as one of the parameters in order to express
+the period in terms of the other quantities).
+
+Here is the linear algebra.
+The set of dimensionless products 
+contains all terms $p^{p_1}\ell^{p_2}m^{p_3}a^{p_4}\theta^{p_5}$ subject
+to the conditions above.
+This set forms a vector space under the 
+`$+$' operation of multiplying two such products 
+and the `$\cdot$' operation of raising 
+such a product to the power of the scalar
+(see \nearbyexercise{exer:DimLessProdsVecSp}).
+The term `complete set of dimensionless products' 
+in Buckingham's Theorem means a basis for this vector space.
+
+We can get a basis 
+by first taking $p_1=1$, $p_5=0$ and then $p_1=0$, $p_5=1$.
+The associated dimensionless 
+products are $\Pi_1=p\ell^{-1/2}g^{1/2}$ and $\Pi_2=\theta$.
+Because the set $\set{\Pi_1,\Pi_2}$ is complete, 
+Buckingham's Theorem says that
+\begin{equation*}
+  p = \ell^{1/2}g^{-1/2}\cdot\hat{f}(\theta) 
+    = \sqrt{\ell/g}\cdot\hat{f}(\theta)
+\end{equation*}
+where $\hat{f}$ is a function that we cannot determine from this analysis
+(a first year physics text will show by other means 
+that for small angles it is approximately the constant
+function $\hat{f}(\theta)=2\pi$).
+
+Thus, analysis of the relationships that are possible between the
+quantities with the given dimensional formulas 
+has produced a fair amount of information:~a pendulum's period does not 
+depend on the mass of the bob, 
+and it rises with the square root of the length of the string.
+
+For the next example we try to determine the period of revolution of
+two bodies in space orbiting each other under mutual gravitational attraction.
+An experienced investigator could expect that these are the relevant 
+quantities.
+\begin{center}
+  \begin{tabular}{@{}c@{}}
+    \includegraphics{ch2.24}
+  \end{tabular}
+  \qquad\quad
+  \begin{tabular}{r|l} 
+    \multicolumn{1}{r}{\textit{quantity}}
+    &\multicolumn{1}{l}{\begin{tabular}[b]{@{}l@{}} 
+                          \textit{dimensional} \\ 
+                          \textit{formula}
+                         \end{tabular}} \\ \hline
+    period $p$       &$L^0M^0T^1$         \\
+    mean    separation $r$  &$L^1M^0T^0$          \\
+    first mass $m_1$          &$L^0M^1T^0$          \\
+    second mass $m_2$         &$L^0M^1T^0$          \\
+    grav.\ constant $G$     &$L^3M^{-1}T^{-2}$   
+  \end{tabular}
+\end{center} 
+%(\cite{Bridgman} discusses why the investigator needs experience).
+To get the complete set of dimensionless products we consider the
+equation 
+\begin{equation*}
+  (L^0M^0T^1)^{p_1}(L^1M^0T^0)^{p_2}(L^0M^1T^0)^{p_3}(L^0M^1T^0)^{p_4}
+        (L^3M^{-1}T^{-2})^{p_5}=L^0M^0T^0
+\end{equation*}
+which results in a system
+\begin{equation*}
+  \begin{linsys}{5}
+          &  &p_2  &   &     &   &      &+  &3p_5 &=  &0  \\
+          &  &     &   &p_3  &+  &p_4   &-  &p_5  &=  &0  \\
+      p_1 &  &     &   &     &   &      &-  &2p_5 &=  &0  
+  \end{linsys}
+\end{equation*}
+with this solution.
+\begin{equation*}
+  \set{\colvec{1 \\ -3/2  \\ 1/2 \\ 0 \\ 1/2}p_1
+       +\colvec{0 \\ 0    \\  -1 \\ 1 \\ 0}p_4
+    \suchthat p_1,p_4\in\Re}
+\end{equation*}
+
+As earlier, 
+the linear algebra here is that
+the set of dimensionless products of these quantities forms a vector space,
+and we want to produce a basis for that space, 
+a `complete' set of dimensionless products.
+One such set, gotten from setting $p_1=1$ and $p_4=0$, 
+and also setting $p_1=0$ and $p_4=1$ is
+$\set{\Pi_1=pr^{-3/2}m_1^{1/2}G^{1/2},\,\Pi_2=m_1^{-1}m_2}$.
+With that, Buckingham's Theorem says that
+any complete relationship among these quantities is stateable this form.
+\begin{equation*}
+  p = r^{3/2}m_1^{-1/2}G^{-1/2}\cdot\hat{f}(m_1^{-1}m_2)  
+    = \frac{r^{3/2}}{\sqrt{Gm_1}}\cdot\hat{f}(m_2/m_1)
+\end{equation*}
+
+\textit{Remark.}
+An important application of the prior formula is
+when $m_1$ is the mass of the sun and $m_2$ is the mass  
+of a planet.
+Because $m_1$ is very much greater than $m_2$, 
+the argument to $\hat{f}$ is approximately $0$, 
+and we can wonder whether
+this part of the formula remains approximately constant as $m_2$ varies.
+One way to see that it does is this.
+The sun is so much larger than the planet
+that the mutual rotation is approximately about the sun's center.
+If we vary the planet's mass $m_2$ by a factor of $x$ 
+(e.g., Venus's mass is
+$x=0.815$ times Earth's mass),
+then the force of attraction is multiplied by $x$,
+and $x$ times the force acting on $x$ times the mass gives, since $F=ma$, 
+the same acceleration, about the same center (approximately).
+Hence,
+the orbit will be the same and so its period will be the same, 
+and thus the right side of the above equation also remains unchanged 
+(approximately).
+Therefore,
+$\hat{f}(m_2/m_1)$ is approximately constant as $m_2$ varies.
+This is Kepler's Third Law:~the square of the
+period of a planet is proportional to the cube of the mean radius of its orbit
+about the sun.
+
+The final example was one of the first explicit applications of
+dimensional analysis.
+Lord Raleigh considered the speed of a wave in deep water and
+suggested these as the relevant quantities.
+\begin{center}
+  \begin{tabular}{r|l} 
+    \multicolumn{1}{r}{\textit{quantity}}
+    &\multicolumn{1}{l}{\begin{tabular}[b]{@{}l} 
+                          \textit{dimensional} \\ 
+                          \textit{formula}
+                         \end{tabular}} \\ \hline
+    velocity of the wave $v$           &$L^1M^0T^{-1}$         \\
+    density of the water $d$           &$L^{-3}M^1T^0$         \\
+    acceleration due to gravity $g$    &$L^1M^0T^{-2}$         \\
+    wavelength $\lambda$               &$L^1M^0T^0$           
+  \end{tabular}
+\end{center} 
+The equation
+\begin{equation*}
+  (L^1M^0T^{-1})^{p_1}(L^{-3}M^1T^0)^{p_2}
+      (L^1M^0T^{-2})^{p_3}(L^1M^0T^0)^{p_4}=L^0M^0T^0
+\end{equation*}
+gives this system
+\begin{equation*}
+  \begin{linsys}{4}
+    p_1  &-  &3p_2 &+  &p_3  &+  &p_4  &=  &0  \\
+         &   &p_2  &   &     &   &     &=  &0  \\
+    -p_1 &   &     &-  &2p_3 &   &     &=  &0  
+  \end{linsys}
+\end{equation*}
+with this solution space
+\begin{equation*}
+  \set{\colvec{1 \\ 0 \\ -1/2  \\ -1/2}p_1
+       \suchthat p_1\in \Re}
+\end{equation*}
+(as in the pendulum example, one of the quantities $d$ turns out not to be 
+involved in the relationship).
+There is one dimensionless product, $\Pi_1=vg^{-1/2}\lambda^{-1/2}$, 
+and so $v$ is $\sqrt{\lambda g}$ times a constant
+($\hat{f}$ is constant since it is a function of no arguments).
+
+As the three examples above show, dimensional analysis 
+can bring us far toward expressing the relationship among the quantities. 
+For further reading,
+the classic reference is \cite{Bridgman}---this brief book is delightful.
+Another source is \cite{Giordano83}.
+A description of dimensional analysis's place in
+modeling is in \cite{Giordano82}.
+
+\begin{exercises}
+  \item 
+    Consider a projectile, launched with initial velocity $v_0$, at an angle
+    $\theta$.
+    An investigation of this motion might start with the
+    guess that these are the relevant quantities.
+    \cite{deMestre}
+    \begin{center}
+      \begin{tabular}{r|l} 
+        \multicolumn{1}{r}{\textit{quantity}}
+        &\multicolumn{1}{l}{\begin{tabular}[b]{@{}l} 
+                               \textit{dimensional} \\ 
+                               \textit{formula}
+                             \end{tabular}} \\ \hline
+        horizontal position $x$         &$L^1M^0T^0$         \\
+        vertical position $y$           &$L^1M^0T^0$         \\
+        initial speed $v_0$             &$L^1M^0T^{-1}$      \\
+        angle of launch $\theta$        &$L^0M^0T^0$         \\         
+        acceleration due to gravity $g$ &$L^1M^0T^{-2}$      \\
+        time $t$                        &$L^0M^0T^1$          
+      \end{tabular}
+    \end{center} 
+    \begin{exparts}
+      \partsitem Show that $\set{gt/v_0,gx/v_0^2,gy/v_0^2,\theta}$ 
+        is a complete set of dimensionless products.
+        (\textit{Hint.}
+        This can be done by finding the appropriate free variables 
+        in the linear system that arises, but there is a shortcut that
+        uses the properties of a basis.)
+      \partsitem These two equations of motion for projectiles are familiar:
+        $x=v_0\cos(\theta) t$ and $y=v_0\sin(\theta) t- (g/2)t^2$.
+        Manipulate each to rewrite it as a relationship among 
+        the dimensionless products of the prior item.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem This relationship
+          \begin{equation*}
+            (L^1M^0T^0)^{p_1}(L^1M^0T^0)^{p_2}(L^1M^0T^{-1})^{p_3}
+             (L^0M^0T^0)^{p_4}(L^1M^0T^{-2})^{p_5}(L^0M^0T^1)^{p_6}=L^0M^0T^0
+          \end{equation*}
+          gives rise to this linear system
+          \begin{equation*}
+            \begin{linsys}{6}
+              p_1  &+  &p_2  &+  &p_3  &\   &\   &+  &p_5  &   &    &=  &0  \\
+                   &   &     &   &     &    &    &   &     &   &0   &=  &0  \\
+                   &   &     &   &-p_3 &    &    &-  &2p_5 &+  &p_6 &=  &0  
+            \end{linsys}
+          \end{equation*}
+          (note that there is no restriction on $p_4$).
+          The natural parametrization uses the free variables to give
+          $p_3=-2p_5+p_6$ and $p_1=-p_2+p_5-p_6$.
+          The resulting description of the solution set
+          \begin{equation*}
+            \set{\colvec{p_1 \\ p_2 \\ p_3 \\ p_4 \\ p_5 \\ p_6}
+                =p_2\colvec{-1 \\ 1 \\ 0 \\ 0  \\ 0 \\ 0} 
+                +p_4\colvec{0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0} 
+                +p_5\colvec{1 \\ 0 \\ -2 \\ 0 \\ 1 \\ 0} 
+                +p_6\colvec{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 1} 
+                \suchthat p_2, p_4, p_5, p_6\in\Re  }
+          \end{equation*}
+          gives $\set{y/x,\theta,xt/{v_0}^2,v_0t/x}$ 
+          as a complete set of dimensionless products
+          (recall that ``complete'' in this context does not mean 
+          that there are no other dimensionless products;
+          it simply means that the set is a basis).
+          This is, however, not the set of dimensionless products that
+          the question asks for.
+
+          There are two ways to proceed.
+          The first is to fiddle with the choice of parameters, hoping to
+          hit on the right set.
+          For that, we can do the prior paragraph in reverse.
+          Converting the given dimensionless products $gt/v_0$,
+          $gx/v_0^2$, $gy/v_0^2$, and $\theta$
+          into vectors gives this description (note the \textit{?}'s where the
+          parameters will go).
+          \begin{equation*}
+            \set{\colvec{p_1 \\ p_2 \\ p_3 \\ p_4 \\ p_5 \\ p_6}
+                =\underline{\ \text{\textit{?}}\ }
+                      \colvec{0  \\ 0 \\ -1 \\ 0  \\ 1 \\ 1} 
+                +\underline{\ \text{\textit{?}}\ }
+                   \colvec{1 \\ 0 \\ -2 \\ 0 \\ 1 \\ 0} 
+                +\underline{\ \text{\textit{?}}\ }
+                   \colvec{0 \\ 1 \\ -2 \\ 0 \\ 1 \\ 0} 
+                +p_4\colvec{0  \\ 0 \\ 0 \\ 1 \\ 0 \\ 0} 
+                \suchthat p_2, p_4, p_5, p_6\in\Re  }
+          \end{equation*}
+          The $p_4$ is already in place.
+          Examining the rows shows that we can also put in place $p_6$, $p_1$,
+          and $p_2$.
+
+          The second way to proceed, following the hint, is to note that
+          the given set is of size four in a four-dimensional vector space
+          and so we need only show that it is linearly independent.
+          That is easily done by inspection, by considering the
+          sixth, first, second, and fourth components of the vectors.
+        \item The first equation can be rewritten
+          \begin{equation*}
+            \frac{gx}{{v_0}^2}=\frac{gt}{v_0}\cos\theta
+          \end{equation*}
+          so that Buckingham's function is 
+          $f_1(\Pi_1,\Pi_2,\Pi_3,\Pi_4)=\Pi_2-\Pi_1\cos(\Pi_4)$.
+          The second equation can be rewritten
+          \begin{equation*}
+            \frac{gy}{{v_0}^2}=\frac{gt}{v_0}\sin\theta
+              -\frac{1}{2}\left(\frac{gt}{v_0}\right)^2
+          \end{equation*}
+          and Buckingham's function here is 
+          $f_2(\Pi_1,\Pi_2,\Pi_3,\Pi_4)
+             =\Pi_3-\Pi_1\sin(\Pi_4)+(1/2){\Pi_1}^2$.
+      \end{exparts}
+    \end{answer}
+  \item \cite{Einstein1911}
+    conjectured that the infrared characteristic frequencies of a solid
+    may be determined by the same forces between atoms as determine
+    the solid's ordanary elastic behavior.
+    The relevant quantities are 
+    \begin{center}
+      \begin{tabular}{r|l} 
+        \multicolumn{1}{r}{\textit{quantity}}
+        &\multicolumn{1}{l}{\begin{tabular}[b]{@{}l} 
+                              \textit{dimensional} \\ 
+                              \textit{formula}
+                             \end{tabular}} \\ \hline
+        characteristic frequency $\nu$       &$L^0M^0T^{-1}$         \\
+        compressibility $k$                  &$L^1M^{-1}T^2$          \\
+        number of atoms per cubic cm $N$     &$L^{-3}M^0T^0$          \\
+        mass of an atom $m$                  &$L^0M^1T^0$         
+      \end{tabular}
+    \end{center} 
+    Show that there is one dimensionless product.
+    Conclude that, in any complete relationship among quantities
+    with these dimensional formulas, $k$ is a constant times 
+    $\nu^{-2}N^{-1/3}m^{-1}$. 
+    This conclusion played an important role in the early study of
+    quantum phenomena.
+    \begin{answer}
+      We consider
+      \begin{equation*}
+        (L^0M^0T^{-1})^{p_1}(L^1M^{-1}T^2)^{p_2}
+          (L^{-3}M^0T^0)^{p_3}(L^0M^1T^0)^{p_4}=(L^0M^0T^0)
+      \end{equation*}
+      which gives these relations among the powers.
+      \begin{equation*}
+        \begin{linsys}{4}
+               &    &p_2   &-  &3p_3  &   &    &=  &0  \\
+               &    &-p_2  &   &      &+  &p_4 &=  &0  \\
+         -p_1  &+   &2p_2  &   &      &   &    &=  &0  
+        \end{linsys}
+        \;\grstep{\rho_1\leftrightarrow\rho_3}
+        \;\grstep{\rho_2+\rho_3}\;
+        \begin{linsys}{4}
+         -p_1  &+   &2p_2  &   &      &   &    &=  &0  \\
+               &    &-p_2  &   &      &+  &p_4 &=  &0  \\
+               &    &      &\  &-3p_3 &+  &p_4 &=  &0  
+        \end{linsys}
+      \end{equation*}
+      This is the solution space
+      (because we wish to express $k$ as a function of the other quantities,
+      $p_2$ is taken as the parameter).
+      \begin{equation*}
+        \set{\colvec{2 \\ 1 \\ 1/3 \\ 1}p_2
+             \suchthat p_2\in\Re}
+      \end{equation*}
+      Thus, $\Pi_1=\nu^2kN^{1/3}m$ is the dimensionless combination,
+      and we have that $k$ equals 
+      $\nu^{-2}N^{-1/3}m^{-1}$ times a constant
+      (the function $\hat{f}$ is constant since it has no arguments). 
+    \end{answer}
+  \item 
+    The torque produced by an engine
+    has dimensional formula $L^2M^1T^{-2}$.
+    We may first guess that it depends on 
+    the engine's rotation rate (with dimensional formula
+    $L^0M^0T^{-1}$), and the volume of air displaced (with dimensional
+    formula $L^3M^0T^0$).
+    \cite{Giordano83}
+    \begin{exparts}
+      \partsitem Try to find a complete set of dimensionless products.
+        What goes wrong?
+      \partsitem Adjust the guess by adding the density of the air
+        (with dimensional formula $L^{-3}M^1T^0$).
+        Now find a complete set of dimensionless products.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Setting
+          \begin{equation*}
+            (L^2M^1T^{-2})^{p_1}(L^0M^0T^{-1})^{p_2}(L^{3}M^0T^0)^{p_3}
+              =(L^0M^0T^0)
+          \end{equation*}
+          gives this
+          \begin{equation*}
+            \begin{linsys}{3}
+              2p_1  &   &    &+  &3p_3  &=  &0  \\
+              p_1   &   &    &   &      &=  &0  \\
+              -2p_1 &-  &p_2 &   &      &=  &0  
+            \end{linsys}
+          \end{equation*}
+          which implies that $p_1=p_2=p_3=0$.
+          That is, among quantities with these dimensional formulas, the only
+          dimensionless product is the trivial one.
+        \partsitem Setting
+          \begin{equation*}
+            (L^2M^1T^{-2})^{p_1}(L^0M^0T^{-1})^{p_2}(L^{3}M^0T^0)^{p_3}
+              (L^{-3}M^1T^0)^{p_4}=(L^0M^0T^0)
+          \end{equation*}
+          gives this.
+          \begin{equation*}
+            \begin{linsys}{4}
+              2p_1  &   &    &+  &3p_3  &-  &3p_4 &=  &0  \\
+              p_1   &   &    &   &      &+  &p_4  &=  &0  \\
+              -2p_1 &-  &p_2 &   &      &   &     &=  &0  
+            \end{linsys}
+            \;\grstep[\rho_1+\rho_3]{(-1/2)\rho_1+\rho_2}
+            \;\grstep{\rho_2\leftrightarrow\rho_3}
+            \begin{linsys}{4}
+              2p_1  &   &      &+  &3p_3       &-   &3p_4      &=  &0  \\
+                    &   &-p_2  &+  &3p_3       &-   &3p_4      &=  &0  \\
+                    &\  &      &   &(-3/2)p_3  &+   &(5/2)p_4  &=  &0  
+            \end{linsys}
+          \end{equation*}
+          Taking $p_1$ as parameter to express the torque gives this
+          description of the solution set.
+          \begin{equation*}
+            \set{\colvec{1 \\ -2 \\ -5/3 \\ -1}p_1
+                 \suchthat p_1\in\Re}
+          \end{equation*}
+          Denoting the torque by $\tau$, the rotation rate by $r$, the volume
+          of air by $V$, and the density of air by $d$ we have that
+          $\Pi_1=\tau r^{-2} V^{-5/3} d^{-1}$, and so
+          the torque is $r^2V^{5/3}d$ times a constant.
+      \end{exparts}
+    \end{answer}
+  \item 
+    Dominoes falling make a wave. 
+    We may conjecture that the wave speed $v$ depends on the
+    the spacing $d$ between the dominoes,
+    the height $h$ of each domino, 
+    and the acceleration due to gravity $g$.
+    \cite{Tilley} 
+    \begin{exparts}
+      \partsitem Find the dimensional formula for each of the four quantities.
+      \partsitem Show that $\set{\Pi_1=h/d,\Pi_2=dg/v^2}$ 
+        is a complete set of dimensionless products.
+      \partsitem Show that if $h/d$ is fixed then
+        the propagation speed is proportional to the square root
+        of $d$.
+    \end{exparts}
+    \begin{answer}
+          \begin{exparts}
+            \partsitem These are the dimensional formulas.
+              \begin{center}
+                \begin{tabular}{r|l} 
+                  \multicolumn{1}{r}{\textit{quantity}}
+                    &\multicolumn{1}{l}{\begin{tabular}[b]{@{}l} 
+                                           \textit{dimensional} \\ 
+                                           \textit{formula}
+                                       \end{tabular}} \\ \hline
+                        speed of the wave $v$               &$L^1M^0T^{-1}$ \\
+                        separation of the dominoes $d$      &$L^1M^0T^0$   \\
+                        height of the dominoes $h$          &$L^1M^0T^0$ \\
+                        acceleration due to gravity $g$    &$L^1M^0T^{-2}$ 
+                \end{tabular}
+              \end{center}     
+            \partsitem The relationship
+              \begin{equation*}
+                (L^1M^0T^{-1})^{p_1}(L^1M^0T^0)^{p_2}(L^1M^0T^0)^{p_3}
+                  (L^1M^0T^{-2})^{p_4}=(L^0M^0T^0)
+              \end{equation*}
+              gives this linear system.
+              \begin{equation*}
+                \begin{linsys}{4}
+                  p_1  &+  &p_2  &+  &p_3  &+  &p_4  &=  &0  \\
+                       &   &     &   &     &   &0    &=  &0  \\
+                 -p_1  &   &     &   &     &-  &2p_4 &=  &0  
+                \end{linsys}
+                \;\grstep{\rho_1+\rho_4}\;
+                \begin{linsys}{4}
+                  p_1  &+  &p_2  &+  &p_3  &+  &p_4  &=  &0  \\
+                       &   &p_2  &+  &p_3  &-  &p_4  &=  &0  
+                \end{linsys}
+              \end{equation*}
+              Taking $p_3$ and $p_4$ as parameters, the
+              solution set is described in this way.
+              \begin{equation*}
+                \set{\colvec{0 \\ -1 \\ 1 \\ 0}p_3
+                     +\colvec{-2 \\ 1 \\ 0 \\ 1}p_4
+                     \suchthat p_3,p_4\in\Re}
+              \end{equation*}
+              That gives $\set{\Pi_1=h/d,\Pi_2=dg/v^2}$ as a complete set.
+            \partsitem Buckingham's Theorem says that 
+              $v^2=dg\cdot\hat{f}(h/d)$, and so, since $g$ is a constant,
+              if $h/d$ is fixed then $v$ is proportional to $\sqrt{d\,}$.
+          \end{exparts}
+        \end{answer}
+   \item \label{exer:DimLessProdsVecSp}
+      Prove that the dimensionless products form a vector space
+      under the $\vec{+}$ operation of multiplying two such products 
+      and the $\vec{\cdot}$ operation of raising 
+      such the product to the power of the scalar.
+      (The vector arrows are a precaution against confusion.)
+      That is, prove that, for any particular homogeneous system,
+      this set of products of powers of $m_1$, \ldots, $m_k$
+      \begin{equation*}
+        \set{m_1^{p_1}\dots m_k^{p_k}
+             \suchthat 
+              \text{$p_1$, \ldots, $p_k$ satisfy the system}}
+      \end{equation*}
+      is a vector space under:
+      \begin{equation*}
+        m_1^{p_1}\dots m_k^{p_k}
+        \vec{+}
+        m_1^{q_1}\dots m_k^{q_k}
+        =
+        m_1^{p_1+q_1}\dots m_k^{p_k+q_k}
+      \end{equation*}
+      and
+      \begin{equation*}
+        r\vec{\cdot} (m_1^{p_1}\dots m_k^{p_k})
+        =
+        m_1^{rp_1}\dots m_k^{rp_k}
+      \end{equation*}
+      (assume that all variables represent real numbers).
+      \begin{answer}
+        Checking the conditions in the definition of a vector space is 
+        routine.
+      \end{answer}
+%  \item Buckingham's Theorem says there exists a complete set such that
+%    the relationship can be stated in that way.
+%    Why do we not have to worry that the particular complete set
+%    we have produced might not be the right one?
+%    (\textit{Hint.} 
+%    Consider the prior exercise.)
+%    \begin{answer}
+%      Any `complete' set (any basis for the vector space under consideration)
+%      can be expressed in terms of any other one.
+%      So any function that is correct when given the members of a particular
+%      complete set as arguments can
+%      be rewritten to be correct for the  members of any other complete set.
+%    \end{answer}
+  \item \label{exer:AppsAndOranges}
+    The advice about apples and oranges is not right.
+    Consider the familiar equations for a circle $C=2\pi r$ and $A=\pi r^2$.
+    \begin{exparts}
+      \partsitem Check that $C$ and $A$ have different dimensional formulas.
+      \partsitem Produce an equation that is not
+        dimensionally homogeneous (i.e., 
+        it adds apples and oranges) but is nonetheless true of any circle.
+      \partsitem The prior item asks for an equation that is complete but
+        not dimensionally homogeneous.
+        Produce an equation that is dimensionally homogeneous but not complete.
+    \end{exparts}
+    (Just because the old saying isn't strictly right, doesn't 
+    keep it from being a useful strategy.
+    Dimensional homogeneity is often used as a check on the plausibility of 
+    equations used in models.
+    For an argument that any complete equation can easily be made 
+     dimensionally homogeneous, see \cite{Bridgman}, Chapter~I, 
+     especially page~15.)
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The dimensional formula of the circumference is $L$,
+          that is, $L^1M^0T^0$.
+          The dimensional formula of the area is $L^2$.
+        \partsitem One is $C+A=2\pi r + \pi r^2$.
+        \partsitem One example is this formula relating the  
+           the length of arc subtended by an angle to the radius and the
+           angle measure in radians:~$\ell-r\theta=0$.
+           Both terms in that formula have dimensional
+           formula $L^1$.
+           The relationship holds for some
+           unit systems (inches and radians, for instance) but not for all
+           unit systems (inches and degrees, for instance).  
+      \end{exparts}
+    \end{answer}
+\end{exercises}
+\endinput

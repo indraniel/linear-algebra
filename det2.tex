@@ -1,0 +1,1048 @@
+% Chapter 4, Section 2 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\section{Geometry of Determinants}
+The prior section develops the determinant algebraically, by
+considering what formulas satisfy certain properties.
+This section complements that with a geometric approach.
+One advantage of this approach is that, while 
+we have so far only considered whether or not a determinant is zero,
+here we shall give a meaning to the value of that determinant.
+(The prior section handles determinants as functions of the
+rows, but in this section columns are more convenient.
+The final result of the prior section says that we can make the switch.)
+
+
+
+
+
+
+
+
+
+
+\subsection{Determinants as Size Functions}
+This parallelogram picture
+\begin{center}
+  \includegraphics{ch4.30}
+\end{center}
+is familiar from the construction of the sum of the two vectors.
+One way to compute the area that it encloses is to draw this rectangle
+and subtract the area of each subregion.
+\begin{center}
+  \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.31}\hfil\hbox{}}
+  \quad
+  \parbox{3.0in}{
+    \hbox{}\hfil
+    $\begin{array}{l}
+       \text{area of parallelogram}                    \\
+         \hbox{}\quad \hbox{}
+            =\text{area of rectangle}
+                -\text{area of $A$}-\text{area of $B$} \\
+         \hbox{}\qquad \hbox{}
+            -\cdots-\text{area of $F$}                   \\
+         \hbox{}\quad \hbox{}
+            =(x_1+x_2)(y_1+y_2)-x_2y_1-x_1y_1/2        \\
+         \hbox{}\qquad \hbox{}
+            -x_2y_2/2-x_2y_2/2-x_1y_1/2-x_2y_1         \\
+         \hbox{}\quad \hbox{}
+            =x_1y_2-x_2y_1        
+    \end{array}$
+    \hfil\hbox{}}
+\end{center}
+The fact that the area equals the value of the determinant
+\begin{equation*}
+  \begin{vmatrix}
+    x_1  &x_2  \\
+    y_1  &y_2
+  \end{vmatrix}
+  =x_1y_2-x_2y_1
+\end{equation*}
+is no coincidence.
+The properties in the definition of determinants 
+make reasonable postulates for a function 
+that measures the size of the region
+enclosed by the vectors in the matrix.\index{size}
+
+For instance, this shows    
+the effect of multiplying one of the box-defining vectors by
+a scalar (the scalar used is $k=1.4$).
+\begin{center}
+  \includegraphics{ch4.32}
+  \qquad
+  \includegraphics{ch4.33}
+\end{center}
+The region formed by $k\vec{v}$ and~$\vec{w}$
+is bigger, by a factor of \( k \),
+than the shaded region enclosed by $\vec{v}$ and~$\vec{w}$.
+That is,
+\( \size (k\vec{v},\vec{w})=k\cdot\size (\vec{v},\vec{w}) \) and
+in general we expect of the size measure that
+$\size (\dots,k\vec{v},\dots)=k\cdot\size (\dots,\vec{v},\dots)$.
+Of course, this postulate is already familiar as 
+one of the properties in the defintion of determinants.
+
+Another property of determinants is that
+they are unaffected by combining rows.
+Here are before-combining and 
+after-combining boxes (the scalar used is $k=0.35$). 
+\begin{center}
+  \includegraphics{ch4.34}
+  \qquad
+  \includegraphics{ch4.35}
+\end{center}   
+Although the region on the right, the box formed by $v$ and 
+$k\vec{v}+\vec{w}$, is
+more slanted than the shaded region, the two have the
+same base and the same height and hence the same area.
+This illustrates that
+\( \size (\vec{v},k\vec{v}+\vec{w})=\size (\vec{v},\vec{w}) \).
+Generalized, 
+$\size (\dots,\vec{v},\dots,\vec{w},\dots)
+=\size (\dots,\vec{v},\dots,k\vec{v}+\vec{w},\dots)$,
+which is a restatement of the determinant postulate.
+
+Of course, this picture
+\begin{center}
+  \includegraphics{ch4.36}
+\end{center}
+shows that \( \size (\vec{e}_1,\vec{e}_2)=1 \), 
+and we naturally extend that to any number of dimensions
+$\size(\vec{e}_1,\dots,\vec{e}_n)=1$,
+which is a restatement of the property that the determinant of
+the identity matrix is one.
+
+With that, because property~(2) of determinants is 
+redundant (as remarked right after the definition), 
+we have that all of the properties of determinants are reasonable
+to expect of a function that gives the size of boxes.
+We can now cite the work done in the prior section to show
+that the determinant exists and is unique to be 
+assured that these postulates are consistent and sufficient
+(that is, we do not need any more postulates).
+So we've got an intuitive
+justification to interpret \( \det(\vec{v}_1,\dots,\vec{v}_n) \) as the
+size of the box formed by the vectors.
+(\textit{Comment.}
+  An even more basic approach, which also leads to the definition
+  below, is in \cite{Weston59}.)
+
+\begin{example} \label{ex:VolParPiped}
+The volume of this parallelepiped, which can be found by the usual
+formula from high school geometry, is $12$.
+\begin{center}
+   \parbox{2in}{\hbox{}\hfil\includegraphics{ch4.39}\hfil\hbox{}}  
+  \quad
+  $\begin{vmatrix}
+     2 &0 &-1\\
+     0 &3 &0 \\
+     2 &1 &1
+  \end{vmatrix}=12$
+\end{center}
+\end{example}
+
+\begin{remark}
+Although property~(2) of the definition of
+determinants is redundant, it raises an important point.
+Consider these two.
+\begin{center}
+  \begin{tabular}{c@{\hspace*{6em}}c}
+    \includegraphics{ch4.37}  
+      &\includegraphics{ch4.38}  \\
+    $\begin{vmatrix}
+        4  &1   \\
+        2  &3
+      \end{vmatrix}=10$
+      &$\begin{vmatrix}
+          1  &4   \\
+          3  &2
+        \end{vmatrix}=-10$
+  \end{tabular}
+\end{center}
+The only difference between them is in the order in which the vectors 
+are taken.
+If we take $\vec{u}$ first and then go to $\vec{v}$,
+follow the counterclockwise arc shown,
+then the sign is positive.
+Following a clockwise arc gives a negative sign.
+The sign returned by the size function reflects the 
+\definend{orientation}\index{box!orientation}\index{orientation} 
+or \definend{sense}\index{box!sense}\index{sense} of the box.
+We see the same thing if we picture the effect of scalar multiplication
+by a negative scalar.
+
+Although it is both interesting and important, we don't need the idea of
+orientation for the development below and so we will pass it by.
+(See \nearbyexercise{exer:BasisOrient}.)
+\end{remark}
+
+\begin{definition}
+In $\Re^n$
+the \definend{box}\index{box}
+(or \definend{parallelepiped}\index{parallelepiped})
+formed by 
+\( \sequence{\vec{v}_1,\dots,\vec{v}_n} \) 
+includes all of the set
+\( \set{t_1\vec{v}_1+\dots+t_n\vec{v}_n
+      \suchthat t_1,\ldots,t_n\in [0..1]} \).
+The \definend{volume}\index{volume}\index{box!volume}
+of a box is the absolute value of the determinant of
+the matrix with those vectors as columns.
+\end{definition}
+
+\begin{example}
+Volume, because it is an absolute value,
+does not depend on the order in which the vectors are given.
+The volume of the parallelepiped in \nearbyexercise{ex:VolParPiped},
+can also be computed as the absolute value of this determinant. 
+\begin{equation*}
+  \begin{vmatrix}
+     0  &2 &0 \\
+     3  &0 &3 \\
+     1  &2 &1
+  \end{vmatrix}=-12  
+\end{equation*}
+\end{example}
+
+The definition of volume gives a geometric interpretation to
+something in the space, boxes made from vectors.
+The next result relates the geometry to the functions that operate on
+spaces. 
+
+\begin{theorem}
+\label{th:MatChVolByDetMat}
+\index{size}\index{transformation!size change}
+A transformation \( \map{t}{\Re^n}{\Re^n} \) changes the size of all boxes
+by the same factor, namely the size of the image of a box
+$\deter{t(S)}$ is $\deter{T}$ times the size of the box $\deter{S}$,
+where $T$ is the matrix
+representing $t$ with respect to the standard basis.
+That is, for all $\nbyn{n}$ matrices, the determinant of a product is the
+product of the determinants $\deter{TS}=\deter{T}\cdot\deter{S}$.
+\end{theorem}
+
+The two sentences state the same idea, first in map terms and then
+in matrix terms. 
+Although we tend to prefer a map point of view,
+the second sentence, the matrix version, is more convienent for the proof
+and is also the way that we shall use this result later.
+(Alternate proofs are given as 
+\nearbyexercise{exer:DetProdEqProdDetsFcn} and
+\nearbyexercise{exer:DetProdEqProdDetsPerms}.)
+
+\begin{proof}
+The two statements are equivalent because
+$\deter{t(S)}=\deter{TS}$, as both give the size of the box that is the
+image of the unit box $\stdbasis_n$ under the composition $\composed{t}{s}$
+(where $s$ is the map represented by $S$ with respect to the standard basis).
+
+First consider the case that $\deter{T}=0$.
+A matrix has a zero determinant if and only if it is not invertible.
+Observe that if \( TS \) is invertible, so that there
+is an $M$ such that \( (TS)M=I \), then
+the associative property of matrix multiplication 
+\( T(SM)=I \) shows that \( T \) is also invertible  (with inverse $SM$).
+Therefore, if \( T \) is not invertible then neither is \( TS \) \Dash 
+if $\deter{T}=0$ then $\deter{TS}=0$,
+and the result holds in this case.
+
+Now consider the case that $\deter{T}\neq 0$, that $T$ is nonsingular. 
+Recall that any nonsingular matrix can be factored into a product 
+of elementary matrices, so that $TS=E_1E_2\cdots E_rS$.
+In the rest of this argument, 
+we will verify that if $E$ is an elementary matrix then
+\( \deter{ES}=\deter{E}\cdot\deter{S} \). 
+The result will follow because then 
+$\deter{TS}=\deter{E_1\cdots E_rS}=\deter{E_1}\cdots\deter{E_r}\cdot\deter{S}
+  =\deter{E_1\cdots E_r}\cdot\deter{S}=\deter{T}\cdot\deter{S}$.
+
+If the elementary matrix $E$ is $M_i(k)$ 
+then $M_i(k)S$ equals $S$ except that row~$i$ has been multiplied by $k$.
+The third property of determinant functions
+then gives that $\deter{M_i(k)S}=k\cdot\deter{S}$.
+But $\deter{M_i(k)}=k$, again by the third property because
+$M_i(k)$ is derived from the identity by multiplication of row~$i$ by
+$k$, and so \( \deter{ES}=\deter{E}\cdot\deter{S} \) holds for
+$E=M_i(k)$.
+The $E=P_{i,j}=-1$ and $E=C_{i,j}(k)$ checks are similar.
+\end{proof}
+
+
+\begin{example}
+Application of the map $t$ represented with respect to the standard  
+bases by
+\begin{equation*}
+  \begin{pmatrix}
+    1  &1  \\
+   -2  &0
+  \end{pmatrix}
+\end{equation*}
+will double sizes of boxes, e.g., from this
+\begin{center}
+    \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.40}\hfil\hbox{}}  
+    \quad
+    $\begin{vmatrix}
+      2  &1  \\
+      1  &2
+    \end{vmatrix}=3$
+\end{center}
+to this
+\begin{center}
+    \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.41}\hfil\hbox{}}  
+    \quad
+    $\begin{vmatrix}
+        3  &3  \\
+       -4  &-2
+     \end{vmatrix}=6$
+\end{center}
+\end{example}
+
+
+\begin{corollary}
+If a matrix is invertible then the determinant of its inverse is the
+inverse of its determinant $\deter{T^{-1}}=1/\deter{T}$.
+\end{corollary}
+
+\begin{proof}
+$1=\deter{I}=\deter{TT^{-1}}=\deter{T}\cdot\deter{T^{-1}}$  
+\end{proof}
+
+Recall that determinants are not additive homomorphisms, 
+$\det(A+B)$ need not equal $\det(A)+\det(B)$.
+The above theorem says, in contrast, that determinants are
+multiplicative homomorphisms:
+$\det(AB)$ does equal $\det(A)\cdot \det(B)$.
+
+
+\begin{exercises}
+  \item 
+    Find the volume of the region formed.
+    \begin{exparts}
+      \partsitem $\sequence{\colvec{1 \\ 3},\colvec{-1 \\ 4}}$
+      \partsitem $\sequence{\colvec{2 \\ 1 \\ 0},\colvec{3 \\ -2 \\ 4},
+                              \colvec{8 \\ -3 \\ 8}}$
+      \partsitem $\sequence{\colvec{1 \\ 2 \\ 0 \\ 1},
+                             \colvec{2 \\ 2 \\ 2 \\ 2},
+                             \colvec{-1 \\ 3 \\ 0 \\ 5},
+                             \colvec{0 \\ 1 \\ 0 \\ 7}}$
+    \end{exparts}
+    \begin{answer}
+      For each, find the determinant and take the absolute value.
+      \begin{exparts*}
+        \partsitem $7$
+        \partsitem $0$
+        \partsitem $58$
+      \end{exparts*}
+    \end{answer}
+  \recommended \item 
+    Is
+    \begin{equation*}
+      \colvec{4 \\ 1 \\ 2}
+    \end{equation*}
+    inside of the box formed by these three?
+    \begin{equation*}
+      \colvec{3 \\ 3 \\ 1}
+      \quad
+      \colvec{2 \\ 6 \\ 1}
+      \quad
+      \colvec{1 \\ 0 \\ 5}
+    \end{equation*}
+    \begin{answer}
+      Solving
+      \begin{equation*}
+        c_1\colvec{3 \\ 3 \\ 1}
+        +c_2\colvec{2 \\ 6 \\ 1}
+        +c_3\colvec{1 \\ 0 \\ 5}
+        =\colvec{4 \\ 1 \\ 2}
+      \end{equation*}
+      gives the unique solution
+      \( c_3=11/57 \), \( c_2=-40/57 \) and \( c_1=99/57 \).
+      Because \( c_1>1 \), the vector is not in the box.  
+    \end{answer}
+  \recommended \item 
+    Find the volume of this region.
+    \begin{center}
+      \includegraphics{ch4.42}  
+    \end{center}
+    \begin{answer}
+      Move the parallelepiped to start at the origin,
+      so that it becomes the box formed by 
+      \begin{equation*}
+        \sequence{
+          \colvec{3 \\ 0},
+          \colvec{2 \\ 1}
+        }      
+      \end{equation*}
+      and now the absolute value of this determinant is 
+      easily computed as $3$.
+      \begin{equation*}
+        \begin{vmatrix}
+          3  &2  \\
+          0  &1
+        \end{vmatrix}=3
+      \end{equation*}
+     \end{answer}
+  \recommended \item 
+    Suppose that \( \deter{A}=3 \).
+    By what factor do these change volumes?
+    \begin{exparts*}
+      \partsitem \( A \)
+      \partsitem \( A^2 \)
+      \partsitem \( A^{-2} \)
+    \end{exparts*}
+    \begin{answer}
+     \begin{exparts*}
+        \partsitem \( 3 \)
+        \partsitem \( 9 \)
+        \partsitem $1/9$
+      \end{exparts*}  
+    \end{answer}
+  \recommended \item 
+    By what factor does each transformation change the size of
+    boxes?
+    \begin{exparts*}
+      \partsitem $\colvec{x \\ y}\mapsto\colvec{2x \\ 3y}$
+      \partsitem $\colvec{x \\ y}\mapsto\colvec{3x-y \\ -2x+y}$
+      \partsitem $\colvec{x \\ y \\ z}\mapsto\colvec{x-y \\ x+y+z \\ y-2z}$
+    \end{exparts*}
+    \begin{answer}
+      Express each transformation with respect to the standard bases
+      and find the determinant. 
+      \begin{exparts*}
+        \partsitem $6$
+        \partsitem $-1$
+        \partsitem $-5$
+      \end{exparts*}
+    \end{answer}
+  \item 
+    What is the area of the image of the rectangle
+    \( [2..4]\times [2..5] \) under the action of
+    this matrix?
+    \begin{equation*}
+       \begin{pmatrix}
+         2  &3  \\
+         4  &-1
+       \end{pmatrix}
+    \end{equation*}
+    \begin{answer}
+      The starting area is \( 6 \) and the matrix changes sizes by
+      \( -14 \).
+      Thus the area of the image is \( 84 \).  
+    \end{answer}
+  \item
+     If \( \map{t}{\Re^3}{\Re^3} \) changes volumes by a factor of \( 7 \)
+     and \( \map{s}{\Re^3}{\Re^3} \) changes volumes by a factor of \( 3/2 \)
+     then by what factor will their composition changes volumes?
+     \begin{answer}
+        By a factor of \( 21/2 \).
+     \end{answer}
+  \item 
+    In what way does the definition of a box differ from the
+    defintion of a span?
+    \begin{answer}
+      For a box we take a sequence of vectors (as described
+      in the remark, the order in which the vectors are taken matters),
+      while for a span we take a set of vectors.
+      Also, for a box subset of $\Re^n$ there must be $n$ vectors; 
+      of course for a span there can be any number of vectors.
+      Finally, for a box the coefficients $t_1$,~\ldots, $t_n$
+      are restricted to the interval $[0..1]$, while for a 
+      span the coefficients are free to range over all of $\Re$. 
+    \end{answer}
+  \recommended \item 
+    Why doesn't this picture contradict
+    \nearbytheorem{th:MatChVolByDetMat}?
+    \begin{center}
+      \begin{tabular}{ccc}
+        \includegraphics{ch4.43}
+        &\raisebox{12pt}{\( \grstep{\bigl(\begin{smallmatrix}
+                                        2  &1 \\
+                                        0  &1
+                                     \end{smallmatrix}\bigr)} \)}
+        &\includegraphics{ch4.44}                                 \\
+        area is $2$
+        &determinant is $2$
+        &area is $5$
+      \end{tabular}
+    \end{center}
+    \begin{answer}
+      That picture is drawn to mislead.
+      The picture on the left is not the box formed by two vectors.
+      If we slide it to the origin then it becomes the box formed by
+      this sequence.
+      \begin{equation*}
+        \sequence{
+          \colvec{0 \\ 1},
+          \colvec{2 \\ 0}
+       }
+      \end{equation*}
+      Then the image under the action of the matrix is the box formed
+      by this sequence.
+      \begin{equation*}
+        \sequence{
+          \colvec{1 \\ 1},
+          \colvec{4 \\ 0}
+         }
+      \end{equation*}
+      which has an area of $4$.
+     \end{answer}
+  \recommended \item 
+    Does \( \deter{TS}=\deter{ST} \)?
+    \( \deter{T(SP)}=\deter{(TS)P} \)?
+    \begin{answer}
+      Yes to both.
+      For instance, the first is \( \deter{TS}=\deter{T}\cdot\deter{S}=
+                     \deter{S}\cdot\deter{T}=\deter{ST} \).  
+    \end{answer}
+  \item 
+   \begin{exparts}
+     \partsitem Suppose that \( \deter{A}=3 \) and that \( \deter{B}=2 \).
+        Find \( \deter{A^2\cdot \trans{B}\cdot B^{-2}\cdot \trans{A} } \).
+     \partsitem Assume that \( \deter{A}=0 \).
+        Prove that \( \deter{6A^3+5A^2+2A}=0 \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem If it is defined then it is 
+           \( (3^2)\cdot (2)\cdot (2^{-2})\cdot (3) \).
+        \partsitem \( \deter{6A^3+5A^2+2A}=\deter{A}\cdot\deter{6A^2+5A+2I} \).
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Let \( T \) be the matrix representing (with respect to the standard
+    bases) the map that rotates plane vectors counterclockwise thru
+    \( \theta \) radians.
+    By what factor does \( T \) change sizes?
+    \begin{answer}
+       \(\begin{vmatrix}
+                \cos\theta  &-\sin\theta  \\
+                \sin\theta  &\cos\theta
+              \end{vmatrix}=1 \)  
+    \end{answer}
+  \recommended \item
+    Must a transformation \( \map{t}{\Re^2}{\Re^2} \) that preserves areas
+    also preserve lengths?
+    \begin{answer}
+      No, for instance the determinant of 
+      \begin{equation*}
+        T=\begin{pmatrix}
+          2  &0  \\
+          0  &1/2
+        \end{pmatrix}
+      \end{equation*}
+      is \( 1 \) so it preserves areas, but the vector \( T\vec{e}_1 \)
+      has length \( 2 \).  
+    \end{answer}
+  \recommended \item
+    What is the volume of a parallelepiped in \( \Re^3 \) bounded by a
+    linearly dependent set?
+    \begin{answer}
+       It is zero.  
+    \end{answer}
+  \recommended \item
+    Find the area of the triangle in \( \Re^3 \) with endpoints
+    \( (1,2,1) \), \( (3,-1,4) \), and \( (2,2,2) \).
+    (Area, not volume.
+    The triangle defines a plane\Dash what is the area of the triangle in that
+    plane?)
+    \begin{answer}
+      Two of the three sides of the triangle are formed by these vectors.
+      \begin{equation*}
+        \colvec{2 \\ 2 \\ 2}-\colvec{1 \\ 2 \\ 1}=\colvec{1 \\ 0 \\ 1}
+        \qquad
+        \colvec{3 \\ -1 \\ 4}-\colvec{1 \\ 2 \\ 1}=\colvec{2 \\ -3 \\ 3}
+      \end{equation*}
+      One way to find the area of this triangle is to produce a length-one
+      vector orthogonal to these two.
+      From these two relations
+      \begin{equation*}
+        \colvec{1 \\ 0 \\ 1}
+        \cdot\colvec{x \\ y \\ z}
+        =\colvec{0 \\ 0 \\ 0}
+        \qquad
+        \colvec{2 \\ -3 \\ 3}
+        \cdot\colvec{x \\ y \\ z}
+        =\colvec{0 \\ 0 \\ 0}
+      \end{equation*}
+      we get a system
+      \begin{equation*}
+        \begin{linsys}{3}
+          x  &   &   &+  &z  &=  &0  \\
+         2x  &-  &3y &+  &3z &=  &0  
+        \end{linsys}
+        \;\grstep{-2\rho_1+\rho_2}\;
+        \begin{linsys}{3}
+          x  &   &   &+  &z  &=  &0  \\
+             &   &-3y&+  &z  &=  &0  
+        \end{linsys}
+      \end{equation*}
+      with this solution set.
+      \begin{equation*}
+        \set{\colvec{-1 \\ 1/3 \\ 1}z\suchthat z\in\Re},
+      \end{equation*}
+      A solution of length one is this.
+      \begin{equation*}
+        \frac{1}{\sqrt{19/9}}\colvec{-1 \\ 1/3 \\ 1}
+      \end{equation*}
+      Thus the area of the triangle is the absolute value of
+      this determinant.
+      \begin{equation*}
+        \begin{vmatrix}
+             1  &2   &-3/\sqrt{19}   \\
+             0  &-3  &1/\sqrt{19}   \\
+             1  &3   &3/\sqrt{19}
+        \end{vmatrix}
+        =-12/\sqrt{19}
+      \end{equation*} 
+    \end{answer}
+  \recommended \item \label{exer:DetProdEqProdDetsFcn}
+    An alternate proof of \nearbytheorem{th:MatChVolByDetMat} uses 
+    the definition of determinant functions.
+    \begin{exparts}
+      \partsitem Note that the vectors forming
+        $S$ make a linearly dependent set if and only if 
+        $\deter{S}=0$, and check that the result holds in this case.
+      \partsitem For the $\deter{S}\neq 0$ case, to show that  
+        $\deter{TS}/\deter{S}=\deter{T}$ for all transformations, consider
+        the function
+        \( \map{d}{\matspace_{\nbyn{n}}}{\Re} \) given by
+        \( T\mapsto \deter{TS}/\deter{S} \).
+        Show that $d$ has the first property of a determinant.
+      \partsitem Show that $d$ has the remaining three properties of
+        a determinant function.
+      \partsitem Conclude that $\deter{TS}=\deter{T}\cdot\deter{S}$. 
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Because the image of a linearly dependent set is 
+          linearly dependent,
+          if the vectors forming $S$ make a linearly dependent set, 
+          so that $\deter{S}=0$,
+          then the vectors forming $t(S)$ make a linearly dependent set,
+          so that $\deter{TS}=0$, and in this case the equation holds.
+        \partsitem We must check that if
+          $T\smash[b]{\grstep{k\rho_i+\rho_j}}\hat{T}$ then 
+          $d(T)=\deter{TS}/\deter{S}=\deter{\hat{T}S}/\deter{S}=d(\hat{T})$.
+          We can do this by checking that combining rows first and
+          then multiplying to get \( \hat{T}S \) gives the same result as
+          multiplying first to get \( TS \) and then combining
+          (because the determinant \( \deter{TS} \) is unaffected by the
+          combining rows 
+          so we'll then have that \( \deter{\hat{T}S}=\deter{TS} \) and
+          hence that \( d(\hat{T})=d(T) \)).
+          This check runs:~after adding 
+          \( k \) times row~\( i \) of \( TS \) to
+          row~$j$ of \( TS \), the \( j,p \) entry is
+          \( (kt_{i,1}+t_{j,1})s_{1,p}+\dots+(kt_{i,r}+t_{j,r})s_{r,p} \),
+          which is the \( j,p \) entry of \( \hat{T}S \).
+        \partsitem For the second property, we need only check that swapping
+          $T\smash[b]{\grstep{\rho_i\swap\rho_j}}\hat{T}$
+          and then multiplying to get \( \hat{T}S \) gives the same result as
+          multiplying \( T \) by \( S \) first and then swapping 
+          (because,
+          as the determinant \( \deter{TS} \) changes sign on
+          the row swap, we'll then have \( \deter{\hat{T}S}=-\deter{TS} \),
+          and so \( d(\hat{T})=-d(T) \)). 
+          This ckeck runs just like the one for the first property.
+
+          For the third property, we need only show that performing
+          $T\smash[b]{\grstep{k\rho_i}}\hat{T}$ 
+          and then computing \( \hat{T}S \) gives the same result as
+          first computing \( TS \) and then performing the scalar 
+          multiplication
+          (as the determinant \( \deter{TS} \) is rescaled by \( k \), 
+          we'll have \( \deter{\hat{T}S}=k\deter{TS} \) and
+          so \( d(\hat{T})=k\,d(T) \)).
+          Here too, the argument runs just as above.
+
+          The fourth property, that if $T$ is $I$ then the result is $1$, 
+          is obvious.
+        \partsitem Determinant functions are unique, so
+          \( \deter{TS}/\deter{S}=d(T)=\deter{T} \),
+          and so $\deter{TS}=\deter{T}\deter{S}$.
+      \end{exparts}
+    \end{answer}
+%  \item  
+%    Use the fact that
+%    \( \deter{TS}=\deter{T}\,\deter{S} \)
+%    to prove that if \( \phi \) and \( \sigma \) are \( n \)-permutations
+%    then \( \sgn(\phi\sigma)=\sgn(\phi)\sgn(\sigma) \).
+%    \cite{HoffmanKunze}
+%    \begin{answer}
+%       Take \( T=P_\phi \) and \( S=P_\sigma \).
+%      Note that \( TS=P_{\phi\sigma} \) and so
+%      \( \deter{P_{\phi\sigma}}=\deter{P_\phi}\cdot\deter{P_\sigma} \).  
+%    \end{answer}
+  \item 
+    Give a non-identity matrix with the property that
+    \( \trans{A}=A^{-1} \).
+    Show that if \( \trans{A}=A^{-1} \) then \( \deter{A}=\pm 1 \).
+    Does the converse hold?
+    \begin{answer}
+      Any permutation matrix has the property that the transpose of the
+      matrix is its inverse.
+
+      For the implication, we know that \( \deter{\trans{A}}=\deter{A} \).
+      Then \( 1=\deter{A\cdot A^{-1}}=\deter{A\cdot\trans{A}}
+               =\deter{A}\cdot\deter{\trans{A}}=\deter{A}^2 \).
+
+      The converse does not hold; here is an example.
+      \begin{equation*}
+        \begin{pmatrix}
+          3  &1  \\
+          2  &1
+        \end{pmatrix}
+      \end{equation*}
+    \end{answer}
+  \item 
+    The algebraic 
+    property of determinants that factoring a scalar out of a single
+    row will multiply the determinant by that scalar shows that 
+    where \( H \) is
+    \( \nbyn{3} \), the determinant of \( cH \) is \( c^3 \) times the
+    determinant of \( H \).
+    Explain this geometrically, that is, 
+    using \nearbytheorem{th:MatChVolByDetMat}.
+    (The observation that increasing the linear size of a three-dimensional
+    object by a factor of $c$ will increase its volume by a factor of 
+    $c^3$ (while only increasing its surface area by an amount proportional 
+    to a factor of 
+    $c^2$) is the \definend{Square-cube law}~\cite{Wikipedia}.)
+    \begin{answer}
+      Where the sides of the box are \( c \) times longer, the box
+      has \( c^3 \) times as many cubic units of volume.  
+    \end{answer}
+  \recommended \item 
+    Matrices $H$ and $G$ are said to be 
+    \definend{similar}\index{similar}\index{matrix!similar} 
+    if there is a nonsingular matrix $P$ such that $H=P^{-1}GP$
+    (we will study this relation in Chapter Five).
+    Show that similar matrices have the same determinant.
+    \begin{answer}
+      If \( H=P^{-1}GP \)
+      then \( \deter{H}=\deter{P^{-1}}\deter{G}\deter{P}
+        =\deter{P^{-1}}\deter{P}\deter{G}=\deter{P^{-1}P}\deter{G}
+        =\deter{G} \).  
+    \end{answer}
+  \item  \label{exer:BasisOrient}
+    We usually represent vectors in \( \Re^2 \) with respect to the
+    standard basis so vectors in the first quadrant have both coordinates
+    positive.
+    \begin{center}
+      \parbox{.75in}{\hbox{}\hfil\includegraphics{ch4.45}\hfil\hbox{}}
+      \qquad
+      \( \rep{\vec{v}}{\stdbasis_2}=\colvec{+3 \\ +2} \)
+    \end{center}
+    Moving counterclockwise around the origin, we cycle thru four regions:
+    {\scriptsize
+    \begin{equation*}
+       \cdots
+       \;\longrightarrow\colvec{+ \\ +}
+       \;\longrightarrow\colvec{- \\ +}
+       \;\longrightarrow\colvec{- \\ -}
+       \;\longrightarrow\colvec{+ \\ -}
+       \;\longrightarrow\cdots\,.
+    \end{equation*} }
+    Using this basis
+    \begin{center}
+      \( B=\sequence{\colvec{0 \\ 1},\colvec{-1 \\ 0}} \)
+      \qquad
+      \parbox{.75in}{\hbox{}\hfil\includegraphics{ch4.46}\hfil\hbox{}}
+    \end{center}
+    gives the same counterclockwise cycle.
+    We say these two bases have the same \emph{orientation}.\index{orientation}
+    \begin{exparts}
+      \partsitem Why do they give the same cycle?
+      \partsitem What other configurations of unit vectors on the axes give the
+        same cycle?
+      \partsitem Find the determinants of the matrices formed from 
+        those (ordered) bases.
+      \partsitem What other counterclockwise cycles are possible, 
+        and what are the
+        associated determinants?
+      \partsitem What happens in \( \Re^1 \)?
+      \partsitem What happens in \( \Re^3 \)?
+    \end{exparts}
+    A fascinating general-audience
+    discussion of orientations is in \cite{Gardner}.
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The new basis is the old basis rotated by \( \pi/4 \).
+        \partsitem 
+          $
+             \sequence{\colvec{-1 \\ 0},
+                       \colvec{0 \\ -1}}
+          $, $
+             \sequence{\colvec{0 \\ -1},
+                       \colvec{1 \\ 0}}
+          $
+        \partsitem In each case the determinant is \( +1 \) 
+          (these bases are said to
+          have \definend{positive orientation}).
+        \partsitem Because only one sign can change at a time, the only other
+          cycle possible is
+          \begin{equation*}
+             \cdots
+             \;\longrightarrow\colvec{+ \\ +}
+             \;\longrightarrow\colvec{+ \\ -}
+             \;\longrightarrow\colvec{- \\ -}
+             \;\longrightarrow\colvec{- \\ +}
+             \;\longrightarrow\cdots\,.
+          \end{equation*}
+          Here each associated determinant is \( -1 \)
+          (such bases are said to have a \definend{negative orientation}).
+        \partsitem There is one positively oriented basis \( \sequence{(1)} \)
+          and one negatively oriented basis \( \sequence{(-1)} \).
+        \partsitem There are \( 48 \) bases (\( 6 \) half-axis choices are
+          possible for the first unit vector, \( 4 \) for the second, and
+          \( 2 \) for the last).
+          Half are positively oriented like the standard basis on the left 
+          below,
+          and half are negatively oriented like the one on the right
+         \begin{center}
+           \includegraphics{ch4.47}
+           \hspace*{4em}
+           \includegraphics{ch4.48}
+          \end{center}
+          In \( \Re^3 \) positive orientation is sometimes called 
+          `right hand orientation' because if a person's right hand is placed
+          with the fingers curling
+          from \( \vec{e}_1 \) to \( \vec{e}_2 \) then the 
+          thumb will point with \( \vec{e}_3 \).
+      \end{exparts}  
+    \end{answer}
+%  \item 
+%    A region of \( \Re^n \) is \definend{convex}\index{convex region} 
+%    if for any two points
+%    connecting that region, the line segment joining them lies entirely
+%    inside the region (the inside of a sphere is convex, while the skin of a
+%    sphere or a horseshoe is not).
+%    Prove that boxes are convex.
+%    \begin{answer}
+%      Let \( \vec{p}=p_1\vec{v}_1+\dots +p_n\vec{v}_n \) and
+%      \( \vec{q}=q_1\vec{v}_1+\dots +q_n\vec{v}_n \) be two vectors from a box
+%      so that \( p_1,\dots,\,p_n,q_1,\dots,\,q_n\in [0..1] \).
+%      The line segment between them is this.
+%      \begin{equation*}
+%        \set{t\cdot\vec{p}+(1-t)\cdot\vec{q}
+%              \suchthat t\in [0..1]}
+%        =\set{(tp_1+(1-t)q_1)\cdot\vec{v}_1+\dots+(tp_n+(1-t)q_n)\cdot\vec{v}_n
+%              \suchthat t\in [0..1] }
+%      \end{equation*}
+%      Showing that each member of that set is in the box is routine.  
+%    \end{answer}
+  \item \label{exer:DetProdEqProdDetsPerms}
+    \textit{This question uses material from 
+      the optional Determinant Functions Exist subsection.}
+    Prove \nearbytheorem{th:MatChVolByDetMat} by using the 
+    permutation expansion formula for the determinant.
+    \begin{answer}
+      We will compare \( \det(\vec{s}_1,\dots,\vec{s}_n) \) with
+      \( \det(t(\vec{s}_1),\dots,t(\vec{s}_n)) \) to show that the second
+      differs from the first by a factor of $\deter{T}$.
+      We represent the \( \vec{s}\, \)'s with respect to the standard bases
+      \begin{equation*}
+        \rep{\vec{s}_i}{\stdbasis_n}=
+           \colvec{s_{1,i} \\ s_{2,i} \\ \vdots \\ s_{n,i}}
+      \end{equation*}
+      and then we represent the map application with 
+      matrix-vector multiplication
+      \begin{align*}
+        \rep{\,t(\vec{s}_i)\,}{\stdbasis_n}
+         &=\generalmatrix{t}{n}{n}
+           \colvec{s_{1,j} \\ s_{2,j} \\ \vdots \\ s_{n,j}}     \\
+         &=s_{1,j}\colvec{t_{1,1} \\ t_{2,1} \\ \vdots \\ t_{n,1}}
+          +s_{2,j}\colvec{t_{1,2} \\ t_{2,2} \\ \vdots \\ t_{n,2}}
+          +\dots
+          +s_{n,j}\colvec{t_{1,n} \\ t_{2,n} \\ \vdots \\ t_{n,n}} \\
+         &=s_{1,j}\vec{t}_1+s_{2,j}\vec{t}_2+\dots+s_{n,j}\vec{t}_n
+      \end{align*}
+      where \( \vec{t}_i \) is column~$i$ of \( T \).
+      Then $\det(t(\vec{s}_1),\,\dots,\,t(\vec{s}_n))$ equals
+      $
+        \det(s_{1,1}\vec{t}_1\!+\!s_{2,1}\vec{t}_2\!
+                +\!\dots\!+\!s_{n,1}\vec{t}_n,\,
+             \dots,\,
+             s_{1,n}\vec{t}_1\!+\!s_{2,n}\vec{t}_2
+                \!+\!\dots\!+\!s_{n,n}\vec{t}_n)
+     $.
+
+     As in the derivation of the permutation expansion formula, we
+     apply multilinearity, 
+     first splitting along the sum in the first argument
+     \begin{equation*}
+         \det(s_{1,1}\vec{t}_1,\,
+            \dots,\,
+            s_{1,n}\vec{t}_1+s_{2,n}\vec{t}_2+\dots+s_{n,n}\vec{t}_n) 
+        +\cdots{}                                             
+        +\det(s_{n,1}\vec{t}_n,\,
+           \ldots,\,
+            s_{1,n}\vec{t}_1+s_{2,n}\vec{t}_2+\dots+s_{n,n}\vec{t}_n)
+     \end{equation*}
+     and then splitting each of those $n$ summands along the sums 
+     in the second arguments, etc.
+     We end with, as in the derivation of the permutation expansion, 
+     \( n^n \) summand determinants, each of the form
+     $\det(s_{i_1,1}\vec{t}_{i_1},s_{i_2,2}\vec{t}_{i_2},
+            \,\dots,\,
+            s_{i_n,n}\vec{t}_{i_n})$.
+     Factor out each of the $s_{i,j}$'s
+     $=
+       s_{i_1,1}s_{i_2,2}\dots s_{i_n,n}
+        \cdot\det(\vec{t}_{i_1},\vec{t}_{i_2},
+       \,\dots,\,
+       \vec{t}_{i_n})
+      $.
+
+      As in the permutation expansion derivation,
+      whenever two of the indices in $i_1$, \ldots, $i_n$ are equal 
+      then the determinant
+      has two equal arguments, and evaluates to $0$. 
+      So we need only consider the cases where $i_1$, \ldots, $i_n$ form a
+      permutation of the numbers $1$, \ldots, $n$.
+      We thus have
+      \begin{equation*}
+        \det(t(\vec{s}_1),\dots,t(\vec{s}_n))=
+          \sum_{\text{permutations\ } \phi}
+            s_{\phi(1),1}\dots s_{\phi(n),n}
+            \det(\vec{t}_{\phi(1)},\dots,\vec{t}_{\phi(n)}).
+      \end{equation*}
+      Swap the columns in $\det(\vec{t}_{\phi(1)},\ldots,\vec{t}_{\phi(n)})$
+      to get the matrix \( T \) back, which changes the sign by a factor of 
+      $\sgn{\phi}$,
+      and then factor out the determinant of $T$.
+      \begin{equation*}
+        =\sum_\phi
+          s_{\phi(1),1}\dots s_{\phi(n),n}
+            \det(\vec{t}_1,\dots,\vec{t}_n)\cdot\sgn{\phi}
+        =\det(T)\sum_\phi
+          s_{\phi(1),1}\dots s_{\phi(n),n}\cdot\sgn{\phi}.
+      \end{equation*}
+      As in the proof that the determinant of a matrix 
+      equals the determinant 
+      of its transpose, we commute the $s$'s so they are listed by ascending
+      row number instead of by ascending column number
+      (and we substitute $\sgn(\phi^{-1})$ for $\sgn(\phi)$).
+      \begin{equation*}
+        =\det(T)\sum_\phi
+          s_{1,\phi^{-1}(1)}\dots s_{n,\phi^{-1}(n)}\cdot\sgn{\phi^{-1}}  
+        =\det(T)\det(\vec{s}_1,\vec{s}_2,\dots,\vec{s}_n)
+      \end{equation*}
+    \end{answer}
+%  \item 
+%    Suppose that \( \map{f}{\matspace_{\nbyn{n}}}{\Re} \) is a non-constant
+%    function with the property that \( f(GH)=f(G)f(H) \).
+%    \begin{exparts}
+%      \partsitem Show that \( f \) sends the identity to \( 1 \).
+%      \partsitem Show that \( f \) maps the elementary matrix 
+%        \( C_{i,j}(k) \) to \( 1 \)
+%        (this matrix results from performing \( k\rho_i+\rho_j \) to the
+%        identity).
+%      \partsitem Show that 
+%        \( f \) maps a row swap matrix to \( +1 \) or \( -1 \).
+%    \end{exparts}
+%    \begin{answer}
+%      \begin{exparts}
+%        \partsitem We have \( f(IH)=f(I)f(H) \) and \( f(IH)=f(H) \).
+%        \partsitem
+%        \partsitem A row swap matrix has the property that when 
+%          done twice it equals
+%          the identity.
+%          But \( f(R)f(R)=f(RR)=f(I)=1 \) implies that \( f(R)=\pm 1 \).
+%      \end{exparts} 
+%     \end{answer}
+  \recommended \item
+    \begin{exparts}
+      \partsitem Show that this gives 
+        the equation of a line in \( \Re^2 \) thru
+        \( (x_2,y_2) \) and \( (x_3,y_3) \).
+        \begin{equation*}
+          \begin{vmatrix}
+            x    &x_2 &x_3  \\
+            y    &y_2 &y_3  \\
+            1    &1   &1
+          \end{vmatrix}=0
+        \end{equation*}
+      \partsitem \cite{Monthly55p249}
+        Prove that the area of a triangle with vertices \( (x_1,y_1) \),
+        \( (x_2,y_2) \), and \( (x_3,y_3) \) is
+        \begin{equation*}
+          \frac{1}{2}
+          \begin{vmatrix}
+            x_1  &x_2 &x_3  \\
+            y_1  &y_2 &y_3  \\
+            1    &1   &1
+          \end{vmatrix}.
+        \end{equation*}
+      \partsitem \cite{MathMag73p286}
+        Prove that the area of a triangle with vertices at \( (x_1,y_1) \),
+        \( (x_2,y_2) \), and \( (x_3,y_3) \) whose coordinates are integers
+        has an area of \( N \) or \( N/2 \) for some positive integer \( N \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem An algebraic check is easy.
+        \begin{equation*}
+          0
+          =xy_2+x_2y_3+x_3y-x_3y_2-xy_3-x_2y 
+          =x\cdot (y_2-y_3)+y\cdot (x_3-x_2)+x_2y_3-x_3y_2 
+        \end{equation*}
+        simplifies to the familiar form
+        \begin{equation*}
+          y=x\cdot (x_3-x_2)/(y_3-y_2)+(x_2y_3-x_3y_2)/(y_3-y_2)
+        \end{equation*}
+        (the $y_3-y_2=0$ case is easily handled).
+
+        For geometric insight, this 
+        picture shows that the box formed by the three vectors.
+        Note that all 
+        three vectors end in the $z=1$ plane.
+        Below the two vectors on the right is the line through
+        $(x_2,y_2)$ and $(x_3,y_3)$.
+        \begin{center}
+          \includegraphics{ch4.49}
+        \end{center}
+        The box will 
+        have a nonzero volume unless the triangle formed by the ends of the
+        three is degenerate.
+        That only happens (assuming that $(x_2,y_3)\neq (x_3,y_3)$)
+        if  $(x,y)$ lies on the line through the other two. 
+       \partsitem \answerasgiven %
+        The altitude through $(x_1,y_1)$ of a triangle with vertices
+        $(x_1,y_1)$ $(x_2,y_2)$ and $(x_3,y_3)$ is found in the usual
+        way from the normal form of the above:
+        \begin{equation*}
+          \frac{1}{\sqrt{(x_2-x_3)^2+(y_2-y_3)^2}}
+          \begin{vmatrix}
+            x_1  &x_2  &x_3  \\
+            y_1  &y_2  &y_3  \\
+            1    &1    &1
+          \end{vmatrix}.
+        \end{equation*}
+        Another step shows the area of the triangle to be
+        \begin{equation*}
+          \frac{1}{2}
+          \begin{vmatrix}
+            x_1  &x_2  &x_3  \\
+            y_1  &y_2  &y_3  \\
+            1    &1    &1
+          \end{vmatrix}.
+        \end{equation*}
+        This exposition reveals the \textit{modus operandi} more clearly
+        than the usual proof of showing a collection of terms to be identitical
+        with the determinant.
+       \partsitem  \answerasgiven %
+        Let
+        \begin{equation*}
+          D=
+          \begin{vmatrix}
+            x_1  &x_2  &x_3  \\
+            y_1  &y_2  &y_3  \\
+            1    &1    &1
+          \end{vmatrix}
+        \end{equation*}
+        then the area of the triangle is $(1/2)\deter{D}$.
+        Now if the coordinates are all integers, then $D$ is an integer.
+      \end{exparts}
+    \end{answer}
+\end{exercises}

@@ -1,0 +1,3512 @@
+% Chapter 3, Section 6 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\section{Projection}
+\index{projection}
+\noindent\textit{This section is optional;
+     only the last two sections of Chapter Five require this material.}
+
+We have described the projection \( \pi \) from $\Re^3$ into its
+\( xy \)~plane subspace as a `shadow map'.
+This shows why,
+but it also shows that some shadows fall upward.
+\begin{center}  \small
+  \raisebox{20.8163bp}{\includegraphics{ch3.25}}
+  \hspace*{4em}
+  \raisebox{0bp}{\includegraphics{ch3.26}}
+\end{center}
+So perhaps a better description is:~the projection of $\vec{v}$
+is the $\vec{p}$ in the plane with the property that 
+someone standing on $\vec{p}$ and looking straight up or down sees
+$\vec{v}$.
+In this section we will generalize this to other projections,
+both orthogonal (i.e., `straight up and down') and nonorthogonal.
+
+
+
+
+
+
+
+
+
+\subsectionoptional{Orthogonal Projection Into a Line}
+We first consider orthogonal projection into a line.
+To orthogonally project a vector \( \vec{v} \) into a line $\ell$,
+darken a point on the line if someone on that line and
+looking straight up or down (from that person's point of view)
+sees \( \vec{v} \).
+\begin{center}  \small
+  \includegraphics{ch3.28}
+\end{center}
+The picture shows someone who has walked out on the line 
+until the tip of $\vec{v}$ is straight overhead.
+That is, where the line is described as the span of some nonzero
+vector $\ell=\set{c\cdot\vec{s}\suchthat c\in\Re}$,
+the person has walked out to find the coefficient $c_{\vec{p}}\,$
+with the property that $\vec{v}-c_{\vec{p}}\cdot\vec{s}\,$ is orthogonal
+to $c_{\vec{p}}\cdot\vec{s}$.
+\begin{center}  \small
+  \includegraphics{ch3.29}
+\end{center}
+We can solve for this coefficient by noting that because 
+$\vec{v}-c_{\vec{p}}\vec{s}\,$ is orthogonal to a scalar multiple 
+of $\vec{s}\,$ it must be orthogonal to $\vec{s}\,$ itself,
+and then the consequent fact that the dot product
+$(\vec{v}-c_{\vec{p}}\vec{s})\dotprod \vec{s}\,$ is zero gives that
+$c_{\vec{p}}=\vec{v}\dotprod \vec{s}/\vec{s}\dotprod \vec{s}$.
+
+\begin{definition}
+\label{def:ProjIntoLine}
+The \definend{orthogonal projection of \( \vec{v} \) into the line
+spanned by a nonzero \( \vec{s}\, \)}\index{projection!orthogonal}%
+\index{projection!into a line} is this vector.
+\begin{equation*}
+  \proj{\vec{v}}{\spanof{\vec{s}\,}}=
+  \frac{ \vec{v}\dotprod\vec{s} }{ \vec{s}\dotprod\vec{s} }\cdot\vec{s}
+\end{equation*}
+\end{definition}
+
+\noindent \nearbyexercise{exer:LineProjFormIndOfVec} checks that the 
+outcome of the calculation depends only on the line and not on which vector 
+\( \vec{s}\, \) happens to be used to describe that line.
+
+\begin{remark}
+The wording of that definition says `spanned by \( \vec{s}\, \)'
+instead the more formal `the span of the set \( \set{\vec{s}\,} \)'.
+This casual first phrase is common.
+\end{remark}
+
+\begin{example}
+To orthogonally project
+the vector $\binom{2}{3}$ into the line \( y=2x \),
+we first pick a direction vector for the line.
+For instance, 
+\begin{equation*}
+  \vec{s}=\colvec{1 \\ 2}
+\end{equation*}
+will do.
+Then the calculation is routine.
+\begin{center}  \small
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.30}\end{tabular}
+  \hspace*{6em}
+  $\frac{ \colvec{2 \\ 3}\dotprod\colvec{1 \\ 2} }{% 
+          \colvec{1 \\ 2}\dotprod\colvec{1 \\ 2} }
+     \cdot\colvec{1 \\ 2}
+    ={\displaystyle \frac{8}{5}}\cdot\colvec{1 \\ 2}=\colvec{8/5 \\ 16/5}$
+\end{center}
+\end{example}
+
+\begin{example}
+In \( \Re^3 \), the orthogonal projection of a general vector
+\begin{equation*}
+  \colvec{x \\ y \\ z}
+\end{equation*}
+into the \( y \)-axis is
+\begin{equation*}
+  \frac{ \colvec{x \\ y \\ z}\dotprod\colvec{0 \\ 1 \\ 0} }{
+         \colvec{0 \\ 1 \\ 0}\dotprod\colvec{0 \\ 1 \\ 0} }
+          \cdot\colvec{0 \\ 1 \\ 0}=\colvec{0 \\ y \\ 0}
+\end{equation*}
+which matches our intuitive expectation.
+\end{example}
+
+The picture above with the stick figure walking out on the line until 
+$\vec{v}$'s tip is overhead is one way to think of the orthogonal projection of
+a vector into a line.
+We finish this subsection with two other ways.
+
+
+\begin{example} \label{exam:RailCar}
+A railroad car left on an east-west track without its brake is pushed by
+a wind blowing toward the northeast at fifteen miles per hour;
+what speed will the car reach?
+\begin{center}  \small
+  \includegraphics{ch3.31}
+\end{center}
+For the wind we use a vector of length $15$ that points toward
+the northeast.
+\begin{equation*}
+  \vec{v}=\colvec{15\sqrt{1/2} \\ 15\sqrt{1/2}}
+\end{equation*}
+The car can only be affected by the part of the wind blowing in the
+east-west direction\Dash the part of $\vec{v}$ in the direction
+of the $x$-axis is this (the picture has the same perspective as the
+railroad car picture above).
+\begin{center}
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.32}\end{tabular}
+  \qquad
+  $\displaystyle \vec{p}=\colvec{15\sqrt{1/2} \\ 0}$
+\end{center}
+So the car will reach a velocity of 
+\( 15\sqrt{1/2} \) miles per hour toward the east.
+\end{example}
+
+Thus, another way to think
+of the picture that precedes the definition is that it shows
+$\vec{v}$ as decomposed into two parts, the part with the line (here, the part
+with the tracks, $\vec{p}$), 
+and the part that is orthogonal to the line
+(shown here lying on the north-south axis).
+These two are ``not interacting'' or ``independent'', 
+in the sense that the east-west car is not at all affected by the
+north-south part of the wind (see \nearbyexercise{exer:PerpAreInd}).
+So the orthogonal projection of \( \vec{v} \) 
+into the line spanned by \( \vec{s}\, \) can be thought of as 
+the part of \( \vec{v}\, \) that lies in the direction of \( \vec{s} \).
+
+Finally, another useful way to think of the orthogonal projection 
+is to have the person stand not on the line, but on the vector that is to be
+projected to the line.
+This person has a rope over the line and pulls it tight, 
+naturally making the rope orthogonal to the line.
+\begin{center}  \small
+  \includegraphics{ch3.33}
+\end{center}
+That is, we can think of the projection \( \vec{p}\, \) as being the vector 
+in the line that is closest to \( \vec{v} \)
+(see \nearbyexercise{exer:ProjMinimizesDist}). 
+
+\begin{example}
+A submarine is tracking a ship moving along the line \( y=3x+2 \).
+Torpedo range is one-half mile.
+Can the sub stay where it is, at the origin on the chart below, 
+or must it move to reach a place where the ship will pass within range?
+\begin{center}  \small
+  \includegraphics{ch3.34}
+\end{center} 
+The formula for projection
+into a line does not immediately apply because the line doesn't pass through
+the origin, and so isn't the span of any $\vec{s}$.
+To adjust for this, we start by shifting the entire map down two units.
+Now the line is $y=3x$, which is a subspace, and we can project to get
+the point $\vec{p}$ of closest approach, the point on the 
+line through the origin closest to 
+\begin{equation*}
+  \vec{v}=\colvec{0 \\ -2}
+\end{equation*}
+the sub's shifted position.
+\begin{equation*}
+  \vec{p}=\frac{\colvec{0 \\ -2}\dotprod\colvec{1 \\ 3}}{
+                \colvec{1 \\ 3}\dotprod\colvec{1 \\ 3}}
+          \cdot \colvec{1 \\ 3}=\colvec{-3/5 \\ -9/5}
+\end{equation*}
+The distance between  $\vec{v}$ and $\vec{p}$ is approximately 
+\( 0.63 \)~miles and so the sub must move to get in range.
+\end{example}
+
+This subsection has developed a natural projection map: orthogonal projection
+into a line.
+As suggested by the examples, it is often called for in applications.
+The next subsection shows how the definition of orthogonal
+projection into a line gives us a way to calculate especially convienent bases
+for vector spaces, again something that is common in applications.
+The final subsection completely generalizes projection, orthogonal or not, 
+into any subspace at all.
+
+\begin{exercises}
+  \recommended \item
+    Project the first vector orthogonally
+    into the line spanned by the second vector.
+    \begin{exparts*}
+      \partsitem \mbox{\( \colvec{2 \\ 1} \), \( \colvec{3 \\ -2} \)}
+      \partsitem \mbox{\( \colvec{2 \\ 1} \), \( 
+            \colvec{3 \\ 0} \)}
+      \partsitem \mbox{\( \colvec{1 \\ 1 \\ 4} \), \( 
+         \colvec{1 \\ 2 \\ -1} \)}
+      \partsitem \mbox{\( \colvec{1 \\ 1 \\ 4} \), \( 
+         \colvec{3 \\ 3 \\ 12} \)}
+    \end{exparts*}
+    \begin{answer}
+       Each is a straightforward application of the formula from 
+       \nearbydefinition{def:ProjIntoLine}.
+       \begin{exparts*}
+        \partsitem 
+          $\displaystyle \frac{\colvec{2 \\ 1}\dotprod\colvec{3 \\ -2}}{%
+                               \colvec{3 \\ -2}\dotprod\colvec{3 \\ -2}}
+             \cdot\colvec{3 \\ -2}
+           =\frac{4}{13}
+             \cdot\colvec{3 \\ -2}
+           =\colvec{12/13 \\ -8/13}$
+        \partsitem 
+          $\displaystyle \frac{\colvec{2 \\ 1}\dotprod\colvec{3 \\ 0}}{%
+                               \colvec{3 \\ 0}\dotprod\colvec{3 \\ 0}}
+             \cdot\colvec{3 \\ 0}
+           =\frac{2}{3}
+             \cdot\colvec{3 \\ 0}
+           =\colvec{2 \\ 0}$
+        \partsitem 
+          $\displaystyle 
+             \frac{\colvec{1 \\ 1 \\ 4}\dotprod\colvec{1 \\ 2 \\ -1}}{%
+                   \colvec{1 \\ 2 \\ -1}\dotprod\colvec{1 \\ 2 \\ -1}}
+             \cdot\colvec{1 \\ 2 \\ -1}
+           =\frac{-1}{6}
+             \cdot\colvec{1 \\ 2 \\ -1}
+           =\colvec{-1/6 \\ -1/3 \\ 1/6}$
+        \partsitem 
+          $\displaystyle 
+             \frac{\colvec{1 \\ 1 \\ 4}\dotprod\colvec{3 \\ 3 \\ 12}}{%
+                   \colvec{3 \\ 3 \\ 12}\dotprod\colvec{3 \\ 3 \\ 12}}
+             \cdot\colvec{3 \\ 3 \\ 12}
+           =\frac{1}{3}
+             \cdot\colvec{3 \\ 3 \\ 12}
+           =\colvec{1 \\ 1 \\ 4}$
+      \end{exparts*}  
+    \end{answer}
+  \recommended \item 
+    Project the vector orthogonally into the line.
+    \begin{exparts*}
+      \partsitem 
+       $\colvec{2 \\ -1 \\ 4},~\set{c\colvec{-3 \\ 1 \\ -3}\suchthat c\in\Re}$
+      \partsitem $\colvec{-1 \\ -1}$,~the line $y=3x$
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          $\displaystyle
+             \frac{\colvec{2 \\ -1 \\ 4}\dotprod\colvec{-3 \\ 1 \\ -3}}{%
+                   \colvec{-3 \\ 1 \\ -3}\dotprod\colvec{-3 \\ 1 \\ -3}}
+             \cdot\colvec{-3 \\ 1 \\ -3}
+           =\frac{-19}{19}\cdot\colvec{-3 \\ 1 \\ -3}
+           =\colvec{3 \\ -1 \\ 3}$
+         \partsitem Writing the line as 
+           $\set{c\cdot \colvec{1 \\ 3}\suchthat c\in\Re}$
+           gives this projection.
+           \begin{equation*}
+             \frac{\colvec{-1 \\ -1}\dotprod\colvec{1 \\ 3}}{%
+                   \colvec{1 \\ 3}\dotprod\colvec{1 \\ 3}}
+              \cdot\colvec{1 \\ 3}
+             =\frac{-4}{10}\cdot\colvec{1 \\ 3}
+             =\colvec{-2/5 \\ -6/5}
+           \end{equation*}
+      \end{exparts}
+    \end{answer}
+  \item 
+    Although the development of \nearbydefinition{def:ProjIntoLine} 
+    is guided by the pictures, we are not restricted to spaces that 
+    we can draw.
+    In $\Re^4$ project this vector into this line.
+    \begin{equation*}
+      \vec{v}=\colvec{1 \\ 2 \\ 1 \\ 3}
+      \qquad
+      \ell=\set{c\cdot\colvec{-1 \\ 1 \\ -1 \\ 1}\suchthat c\in\Re}
+    \end{equation*}
+    \begin{answer}
+      $\displaystyle 
+         \frac{\colvec{1 \\ 2 \\ 1 \\ 3}\dotprod\colvec{-1 \\ 1 \\ -1 \\ 1}}{%
+               \colvec{-1 \\ 1 \\ -1 \\ 1}\dotprod\colvec{-1 \\ 1 \\ -1 \\ 1}}
+         \cdot\colvec{-1 \\ 1 \\ -1 \\ 1}
+       =\frac{3}{4}
+         \cdot\colvec{-1 \\ 1 \\ -1 \\ 1}
+       =\colvec{-3/4 \\ 3/4 \\ -3/4 \\ 3/4}$ 
+    \end{answer}
+  \recommended \item 
+    \nearbydefinition{def:ProjIntoLine} uses two vectors $\vec{s}$ and
+    $\vec{v}$.
+    Consider the transformation of $\Re^2$ resulting from fixing
+    \begin{equation*}
+      \vec{s}=\colvec{3 \\ 1}
+    \end{equation*}
+    and projecting $\vec{v}$ into the line that is the span of $\vec{s}$.
+    Apply it to these vectors.
+    \begin{exparts*}
+      \partsitem $\colvec{1 \\ 2}$
+      \partsitem $\colvec{0 \\ 4}$ 
+    \end{exparts*}
+    Show that in general the projection tranformation is this.
+    \begin{equation*}
+      \colvec{x_1 \\ x_2}
+      \mapsto
+      \colvec{(x_1+3x_2)/10 \\ (3x_1+9x_2)/10}
+    \end{equation*}
+    Express the action of this transformation with a matrix.
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem $\displaystyle
+          \frac{\colvec{1 \\ 2}\dotprod\colvec{3 \\ 1}}{%
+                 \colvec{3 \\ 1}\dotprod\colvec{3 \\ 1}}
+          \cdot \colvec{3 \\ 1}
+          =\frac{1}{2}\cdot\colvec{3 \\ 1}
+          =\colvec{3/2 \\ 1/2}$
+        \partsitem $\displaystyle
+          \frac{\colvec{0 \\ 4}\dotprod\colvec{3 \\ 1}}{%
+                 \colvec{3 \\ 1}\dotprod\colvec{3 \\ 1}}
+          \cdot \colvec{3 \\ 1}
+          =\frac{2}{5}\cdot\colvec{3 \\ 1}
+          =\colvec{6/5 \\ 2/5}$
+      \end{exparts*}
+      \noindent In general the projection is this.
+      \begin{equation*}
+          \frac{\colvec{x_1 \\ x_2}\dotprod\colvec{3 \\ 1}}{%
+                 \colvec{3 \\ 1}\dotprod\colvec{3 \\ 1}}
+          \cdot \colvec{3 \\ 1}
+          =\frac{3x_1+x_2}{10}\cdot\colvec{3 \\ 1}
+          =\colvec{(9x_1+3x_2)/10 \\ (3x_1+x_2)/10}
+      \end{equation*}
+      The appropriate matrix is this.
+      \begin{equation*}
+        \begin{pmatrix}
+          9/10  &3/10  \\
+          3/10  &1/10
+        \end{pmatrix}
+      \end{equation*}  
+     \end{answer}
+  \item \label{exer:PerpAreInd}
+    \nearbyexample{exam:RailCar} suggests that projection breaks $\vec{v}$ into
+    two parts, $\proj{\vec{v}\,}{\spanof{\vec{s}\,}}$ and 
+    $\vec{v}-\proj{\vec{v}\,}{\spanof{\vec{s}\,}}$, that are 
+    ``not interacting''.
+    Recall that the two are orthogonal.
+    Show that any two nonzero orthogonal vectors make up a linearly
+    independent set.
+    \begin{answer}
+      Suppose that $\vec{v}_1$ and $\vec{v}_2$ are nonzero and orthogonal.
+      Consider the linear relationship
+      $c_1\vec{v}_1+c_2\vec{v}_2=\zero$.
+      Take the dot product of both sides 
+      of the equation with $\vec{v}_1$ to get that
+      \begin{equation*}
+        \vec{v}_1\dotprod(c_1\vec{v}_1+c_2\vec{v}_2)
+        =c_1\cdot(\vec{v}_1\dotprod\vec{v}_1)
+           +c_2\cdot(\vec{v}_1\dotprod\vec{v}_2)
+        =c_1\cdot (\vec{v}_1\dotprod\vec{v}_1)+c_2\cdot 0
+        =c_1\cdot (\vec{v}_1\dotprod\vec{v}_1)
+      \end{equation*}
+      is equal to $\vec{v}_1\dotprod\zero=\zero$.
+      With the assumption that $\vec{v}_1$ is nonzero, this gives that
+      $c_1$ is zero.
+      Showing that $c_2$ is zero is similar.
+    \end{answer}
+  \item    
+    \begin{exparts}
+      \partsitem What is the orthogonal projection of \( \vec{v} \) 
+        into a line if \( \vec{v} \) is a member of that line?
+      \partsitem Show that 
+        if $\vec{v}$ is not a member of the line
+        then the set 
+        $\set{\vec{v},\vec{v}-\proj{\vec{v}\,}{\spanof{\vec{s}\,}}}$
+        is linearly independent.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+       \partsitem If the vector $\vec{v}\,$ is in the line then the
+         orthogonal projection is \( \vec{v} \).
+         To verify this
+         by calculation, note that since $\vec{v}\,$ is in the line
+         we have that \( \vec{v}=c_{\vec{v}}\cdot\vec{s}\, \) for some scalar
+         $c_{\vec{v}}$.
+         \begin{equation*}
+           \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}\cdot\vec{s}
+           =\frac{c_{\vec{v}}\cdot \vec{s}\dotprod\vec{s}}{%
+                         \vec{s}\dotprod\vec{s}}\cdot\vec{s}
+           =c_{\vec{v}}\cdot\frac{\vec{s}\dotprod\vec{s}}{%
+                                  \vec{s}\dotprod\vec{s}}\cdot\vec{s}
+           =c_{\vec{v}}\cdot 1 \cdot\vec{s}
+           =\vec{v}
+         \end{equation*}
+          (\textit{Remark}.
+          If we assume that $\vec{v}\,$ is nonzero then the above is
+          simplified on taking $\vec{s}\,$ to be $\vec{v}$.)
+       \partsitem Write $c_{\vec{p}}\vec{s}\,$ for the projection
+         $\proj{\vec{v}}{\spanof{\vec{s}\,}}$. 
+         Note that, by the assumption that $\vec{v}$ is not in the line,
+         both $\vec{v}$ and $\vec{v}-c_{\vec{p}}\vec{s}\,$ are nonzero.
+         Note also that if $c_{\vec{p}}\,$ is zero then we are actually 
+         considering the one-element set $\set{\vec{v}\,}$, 
+         and with $\vec{v}$ nonzero, this set 
+         is necessarily linearly independent.
+         Therefore, we are left considering the case that
+         $c_{\vec{p}}$ is nonzero.
+
+         Setting up a linear relationship
+         \begin{equation*}
+           a_1(\vec{v})+a_2(\vec{v}-c_{\vec{p}}\vec{s})=\zero
+         \end{equation*}
+         leads to the equation 
+         $(a_1+a_2)\cdot\vec{v}=a_2c_{\vec{p}}\cdot\vec{s}$.
+         Because $\vec{v}\,$ isn't in the line, the scalars 
+         $a_1+a_2$ and $a_2 c_{\vec{p}}$ must both be zero.
+         The $c_{\vec{p}}=0$ case is handled above, so 
+         the remaining case is that $a_2=0$, and 
+         this gives that $a_1=0$ also.
+         Hence the set is linearly independent.
+     \end{exparts}
+    \end{answer}
+  \item 
+    \nearbydefinition{def:ProjIntoLine} requires that $\vec{s}\,$ be
+    nonzero.
+    Why?
+    What is the right definition of the orthogonal projection 
+    of a vector into the (degenerate) line spanned by the zero vector?
+    \begin{answer}
+      If $\vec{s}\,$ is the zero vector then the expression
+          \begin{equation*}
+            \proj{\vec{v}}{\spanof{\vec{s}\,}}=
+            \frac{ \vec{v}\dotprod\vec{s} }{%
+                    \vec{s}\dotprod\vec{s} }\cdot\vec{s}
+          \end{equation*}
+      contains a division by zero, and so is undefined.
+      As for the right definition,
+      for the projection to lie in the span of the zero vector, it 
+      must be defined to be \( \zero \). 
+    \end{answer}
+  \item 
+    Are all vectors the projection of some other vector into some line?
+    \begin{answer}
+      Any vector in \( \Re^n \) is the projection of some other into a
+      line, provided that the dimension \( n \) is greater than one.
+      (Clearly, any vector is the projection of itself
+      into a line containing itself; the question is to 
+      produce some vector other 
+      than $\vec{v}$ that projects to \( \vec{v} \).)
+
+      Suppose that \( \vec{v}\in\Re^n \) with \( n>1 \).
+      If \( \vec{v}\neq\zero \) then we consider the line
+      \( \ell=\set{c\vec{v}\suchthat c\in\Re} \) and if \( \vec{v}=\zero \)
+      we take \( \ell \) to be any (nondegenerate) line at all
+      (actually, we needn't distinguish between these two cases\Dash see
+      the prior exercise).
+      Let \( v_1,\dots,v_n \) be the components of \( \vec{v} \);
+      since \( n>1 \), there are at least two.
+      If some \( v_i \) is zero then the vector \( \vec{w}=\vec{e}_i \) is
+      perpendicular to \( \vec{v} \).
+      If none of the components is zero then
+      the vector \( \vec{w}\, \) whose components are
+      \( v_2,-v_1,0,\dots ,0 \) is perpendicular to \( \vec{v} \).
+      In either case, observe that \( \vec{v}+\vec{w} \) does not equal
+      \( \vec{v} \), and that \( \vec{v} \) is the projection of
+      \( \vec{v}+\vec{w} \) into \( \ell \).
+      \begin{equation*}
+        \frac{ (\vec{v}+\vec{w})\dotprod\vec{v} }{ 
+               \vec{v}\dotprod\vec{v} }\cdot\vec{v}
+        =\bigl(\frac{ \vec{v}\dotprod\vec{v} }{ 
+                     \vec{v}\dotprod\vec{v} }+
+               \frac{ \vec{w}\dotprod\vec{v} }{ \
+                      \vec{v}\dotprod\vec{v} }\bigr)\cdot\vec{v}
+        =\frac{ \vec{v}\dotprod\vec{v} }{ \vec{v}\dotprod\vec{v} }\cdot\vec{v}
+        =\vec{v}
+      \end{equation*}
+
+      We can dispose of the remaining $n=0$ and $n=1$ cases.
+      The dimension \( n=0 \) case is the trivial vector space, here
+      there is only one vector and so it cannot be expressed as the projection
+      of a different vector.
+      In the dimension $n=1$ case there is only one (nondegenerate) line,
+      and every vector is in it, hence every vector is the projection only
+      of itself.
+    \end{answer}
+  \recommended \item 
+    Show that the projection of \( \vec{v}\, \) into the line spanned by
+    \( \vec{s}\, \) has length equal to the absolute value of the number
+    \( \vec{v}\dotprod\vec{s}\, \) divided by the length of the vector
+    \( \vec{s}\, \).
+    \begin{answer}
+      The proof is simply a calculation.
+      \begin{equation*}
+        \norm{\frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}
+              \cdot\vec{s}\, }
+        =
+        \absval{\frac{\vec{v}\dotprod\vec{s}}{
+                      \vec{s}\dotprod\vec{s}}}\cdot \norm{\vec{s}\, }
+        =
+        \frac{\absval{\vec{v}\dotprod\vec{s}\,}}{
+                      \norm{\vec{s}\,}^2}\cdot\norm{\vec{s}\,}
+        =
+        \frac{\absval{\vec{v}\dotprod\vec{s}\,}}{\norm{\vec{s}\,}}
+      \end{equation*} 
+    \end{answer}
+  \item
+    Find the formula for the distance from a point to a line.
+    \begin{answer}
+      Because the projection of \( \vec{v} \) into the line spanned by
+      \( \vec{s} \) is
+      \begin{equation*}
+        \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}\cdot\vec{s}
+      \end{equation*}
+      the distance squared from the point to the line is this
+      (a vector dotted with itself $\vec{w}\dotprod\vec{w}$
+      is written $\vec{w}^2$).
+      \begin{align*}
+        \norm{\vec{v}-
+                \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}
+                \cdot\vec{s}\, }^2
+        &=\vec{v}\dotprod\vec{v}
+        -\vec{v}\dotprod(
+              \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}\cdot\vec{s}
+           )
+        -(
+              \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}
+               \cdot\vec{s}\,
+         )\dotprod\vec{v}
+        +(\frac{\vec{v}\dotprod\vec{s}}{
+                \vec{s}\dotprod\vec{s}}\cdot\vec{s}\,)^2     \\   
+        &=\vec{v}\dotprod\vec{v}
+        -2\cdot(\frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}})
+           \cdot\vec{v}\dotprod\vec{s}
+        +(\frac{\vec{v}\dotprod\vec{s}}{
+                \vec{s}\dotprod\vec{s}})\cdot\vec{s}\dotprod\vec{s}  \\
+        &=\frac{(\vec{v}\dotprod\vec{v}\,)\cdot(\vec{s}\dotprod\vec{s}\,)
+                 -2\cdot(\vec{v}\dotprod\vec{s}\,)^2
+                 +(\vec{v}\dotprod\vec{s}\,)^2}{%
+               \vec{s}\dotprod\vec{s}}                               \\     
+        &=\frac{(\vec{v}\dotprod\vec{v}\,)(\vec{s}\dotprod\vec{s}\,)
+                -(\vec{v}\dotprod\vec{s}\,)^2}{\vec{s}\dotprod\vec{s}}
+      \end{align*}  
+    \end{answer}
+  \item \label{exer:ProjMinimizesDist}
+    Find the scalar \( c \) such that \( (cs_1,cs_2) \)
+    is a minimum distance from the point \( (v_1,v_2) \)
+    by using calculus (i.e., consider the distance function, set the
+    first derivative equal to zero, and solve). 
+    Generalize to \( \Re^n \).
+    \begin{answer}
+      Because square root is a strictly increasing function, we can
+      minimize \( d(c)=(cs_1-v_1)^2+(cs_2-v_2)^2 \) instead of the square root
+      of \( d \).
+      The derivative is 
+      $dd/dc=2(cs_1-v_1)\cdot s_1 +2(cs_2-v_2)\cdot s_2$.
+      Setting it equal to zero 
+      $2(cs_1-v_1)\cdot s_1 +2(cs_2-v_2)\cdot s_2
+        =c\cdot(2s_1^2+2s_2^2)-(v_1s_1+v_2s_2)=0$
+      gives the only critical point.
+      \begin{equation*}
+        c=\frac{v_1s_1+v_2s_2}{{s_1}^2+{s_2}^2}
+         =\frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}
+      \end{equation*}
+      Now the second derivative with respect to $c$
+      \begin{equation*}
+        \frac{d^2\,d}{dc^2}=2{s_1}^2+2{s_2}^2
+      \end{equation*}
+      is strictly positive (as long as neither  \( s_1 \) nor \( s_2 \) 
+      is zero, in which case the question is trivial) 
+      and so the critical point is a minimum. 
+
+      The generalization to $\Re^n$ is straightforward.
+      Consider $d_n(c)=(cs_1-v_1)^2+\dots+(cs_n-v_n)^2$, take the derivative,
+      etc. 
+    \end{answer}
+  \recommended \item
+    Prove that the orthogonal projection of a vector into a line is shorter
+    than the vector.
+    \begin{answer}
+      The Cauchy-Schwartz inequality 
+      $\absval{\vec{v}\dotprod\vec{s}\,}
+         \leq\norm{\vec{v}\,}\cdot\norm{\vec{s}\,}$ 
+      gives that this fraction
+      \begin{equation*}
+        \norm{\frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}
+              \cdot\vec{s}\, }
+        =\absval{\frac{\vec{v}\dotprod\vec{s}}{
+                       \vec{s}\dotprod\vec{s}}}
+         \cdot\norm{\vec{s}\, }
+        =
+        \frac{\absval{\vec{v}\dotprod\vec{s}\,}}{
+              \norm{\vec{s}\,}^2}\cdot\norm{\vec{s}\,}
+        =
+        \frac{\absval{\vec{v}\dotprod\vec{s}\,}}{\norm{\vec{s}\,}}
+      \end{equation*}
+      when divided by \( \norm{\vec{v}\,} \) is less than or equal to one.
+      That is, \( \norm{\vec{v}\,} \) is larger than or equal to the fraction.
+    \end{answer}
+  \recommended \item  \label{exer:LineProjFormIndOfVec}
+    Show that the definition of orthogonal projection into a line 
+    does not depend
+    on the spanning vector:~if \( \vec{s} \) is a nonzero multiple
+    of \( \vec{q} \) then
+    \( (\vec{v}\dotprod\vec{s}/\vec{s}\dotprod\vec{s}\,)\cdot\vec{s} \) equals
+    \( (\vec{v}\dotprod\vec{q}/\vec{q}\dotprod\vec{q}\,)\cdot\vec{q} \).
+    \begin{answer}
+       Write \( c\vec{s} \) for \( \vec{q} \), and
+       calculate:
+       \( (\vec{v}\dotprod c\vec{s}/c\vec{s}\dotprod c\vec{s}\,)\cdot c\vec{s}=
+          (\vec{v}\dotprod \vec{s}/\vec{s}\dotprod \vec{s}\,)\cdot \vec{s} \).
+    \end{answer}
+  \recommended \item
+    Consider the function mapping to plane to itself that takes 
+    a vector to its projection into the line \( y=x \).
+    These two each show that the map is linear, the first one in a way that
+    is bound to the coordinates (that is, it fixes a basis and then computes)
+    and the second in a way that is more conceptual.
+    \begin{exparts} 
+      \partsitem Produce a matrix that describes the function's action.
+      \partsitem Show also that this map can be obtained by first rotating 
+         everything in the plane \( \pi/4 \)~radians  clockwise, 
+        then projecting into the \( x \)-axis,
+        and then rotating \( \pi/4 \)~radians counterclockwise.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Fixing
+          \begin{equation*}
+            \vec{s}=\colvec{1 \\ 1}
+          \end{equation*}
+          as the vector whose span is the line, the formula gives this
+          action,
+          \begin{equation*}
+            \colvec{x \\ y}
+             \mapsto
+            \frac{\colvec{x \\ y}\dotprod\colvec{1 \\ 1}}{%
+                  \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}\cdot\colvec{1 \\ 1}
+            =\frac{x+y}{2}\cdot\colvec{1 \\ 1}
+            =\colvec{(x+y)/2 \\ (x+y)/2}
+          \end{equation*} 
+          which is the effect of this matrix.
+          \begin{equation*}
+            \begin{pmatrix}
+              1/2  &1/2  \\
+              1/2  &1/2
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem Rotating the entire plane $\pi/4$~radians clockwise
+          brings the $y=x$~line to lie on the $x$-axis.
+          Now projecting and then rotating back has the desired effect.
+      \end{exparts}
+    \end{answer}
+  \item 
+    For \( \vec{a},\vec{b}\in\Re^n \) let \( \vec{v}_1 \) be the
+    projection of \( \vec{a} \) into the line spanned by \( \vec{b} \), let
+    \( \vec{v}_2 \) be the projection of \( \vec{v}_1 \) into the line spanned
+    by \( \vec{a} \), let \( \vec{v}_3 \) be the projection of \( \vec{v}_2 \)
+    into the line spanned by \( \vec{b} \), etc., 
+    back and forth between the spans of $\vec{a}$ and $\vec{b}$.
+    That is, $\vec{v}_{i+1}$ is the projection of $\vec{v}_i$ into the
+    span of $\vec{a}$ if $i+1$ is even, and  
+    into the span of $\vec{b}$ if $i+1$ is odd.
+    Must that sequence of vectors eventually settle down\Dash must
+    there be a sufficiently large~$i$ such that 
+    \( \vec{v}_{i+2} \) equals \( \vec{v}_{i} \) 
+    and \( \vec{v}_{i+3} \) equals \( \vec{v}_{i+1} \)?
+    If so, what is the earliest such~$i$?
+    \begin{answer}
+      The sequence need not settle down.
+      With
+      \begin{equation*}
+        \vec{a}=\colvec{1 \\ 0}
+        \qquad
+        \vec{b}=\colvec{1 \\ 1}
+      \end{equation*}
+      the projections are these.
+      \begin{equation*}
+        \vec{v}_1=\colvec{1/2 \\ 1/2},
+        \quad
+        \vec{v}_2=\colvec{1/2 \\ 0},
+        \quad
+        \vec{v}_3=\colvec{1/4 \\ 1/4},
+        \quad
+        \ldots
+      \end{equation*}
+      This sequence doesn't repeat.
+      \begin{center}  \small
+        \includegraphics{ch3.82}
+      \end{center}
+      \end{answer}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsectionoptional{Gram-Schmidt Orthogonalization}
+\index{Gram-Schmidt process|(}
+\noindent\textit{This subsection is optional.
+     It requires material from the prior, also optional, subsection.
+     The work done here will only be needed in the final two sections
+     of Chapter Five.}
+
+The prior subsection suggests 
+that projecting into the line spanned by \( \vec{s} \)
+decomposes a vector $\vec{v}$ into two parts
+\begin{center}  \small
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.35}\end{tabular}
+   \qquad
+   $\displaystyle \vec{v}=\proj{\vec{v}}{\spanof{\vec{s}\,}}
+             \,+\,\left(\vec{v}-\proj{\vec{v}}{\spanof{\vec{s}\,}}\right)$
+\end{center}
+that are orthogonal and so are ``not interacting''.
+We will now develop that suggestion.
+
+\begin{definition}
+Vectors \( \vec{v}_1,\dots,\vec{v}_k\in\Re^n \) are
+\definend{mutually orthogonal\/}\index{orthogonal!mutually}
+when any two are orthogonal:~if \( i\neq j \) then
+the dot product \( \vec{v}_i\dotprod\vec{v}_j \) is zero.
+\end{definition}
+
+\begin{theorem} \label{th:OrthoIsInd}
+If the vectors in a set \( \set{\vec{v}_1,\dots,\vec{v}_k}\subset\Re^n \)
+are mutually orthogonal and nonzero then that set is linearly
+independent.
+\end{theorem}
+
+\begin{proof}
+Consider a linear relationship
+\( c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k=\zero \).
+If $i\in [1..k]$ then taking the dot product of \( \vec{v}_i \)  
+with both sides of the equation
+\begin{align*}
+   \vec{v}_i\dotprod (c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k)
+   &=\vec{v}_i\dotprod\zero   \\
+   c_i\cdot(\vec{v}_i\dotprod\vec{v}_i)
+   &=0
+\end{align*}
+shows, since \( \vec{v}_i \) is nonzero, that \( c_i \) is zero. 
+\end{proof}
+
+\begin{corollary}
+\label{cor:OrthAndBigEnoughIsBasis}
+If the vectors in a size~\( k \) subset of a
+$k$~dimensional space are mutually orthogonal
+and nonzero then that set is a basis for the space.
+\end{corollary}
+
+\begin{proof}
+Any linearly independent size~\( k \) subset of a
+$k$~dimensional space is a basis. 
+\end{proof}
+
+Of course, the converse of \nearbycorollary{cor:OrthAndBigEnoughIsBasis} 
+does not hold\Dash not every basis of every subspace
+of $\Re^n$ is made of mutually orthogonal vectors.
+However, we can get the partial converse
+that for every subspace of $\Re^n$ there is at least one basis
+consisting of mutually orthogonal vectors.
+
+\begin{example}
+The members $\vec{\beta}_1$ and $\vec{\beta}_2$ of this basis for $\Re^2$
+are not orthogonal.
+\begin{center}  \small
+  $\displaystyle 
+      B=\sequence{
+            \colvec{4 \\ 2},
+            \colvec{1 \\ 3} }$
+  \qquad %\hspace*{3em}
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.36}\end{tabular}
+\end{center}
+However, we can derive from $B$
+a new basis for the same space that does have mutually orthogonal members.
+For the first member of the new basis we simply use $\vec{\beta}_1$.
+\begin{equation*}
+  \vec{\kappa}_1=\colvec{4 \\ 2}
+\end{equation*}
+For the second member of the new basis,  
+we take away from $\vec{\beta}_2$ its part in the direction of
+$\vec{\kappa}_1$, 
+\begin{center}  \small
+   $\displaystyle \vec{\kappa}_2=\colvec{1 \\ 3}
+    -\proj{\colvec{1 \\ 3}}{\scriptstyle\spanof{\vec{\kappa}_1}}
+    =\colvec{1 \\ 3}-\colvec{2 \\ 1}=\colvec{-1 \\ 2}$
+   \qquad
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.37}\end{tabular}
+\end{center} 
+which leaves the part, $\vec{\kappa}_2$ pictured above,
+of $\vec{\beta}_2$ that is orthogonal to $\vec{\kappa}_1$
+(it is orthogonal by the definition of the projection into the span of 
+$\vec{\kappa}_1$).
+Note that, by the corollary, $\set{\vec{\kappa}_1,\vec{\kappa}_2}$ 
+is a basis for $\Re^2$.
+\end{example}
+
+\begin{definition}
+An \definend{orthogonal basis\/}%
+\index{orthogonal!basis}\index{basis!orthogonal}
+for a vector space is a basis of mutually orthogonal vectors.
+\end{definition}
+
+The next result gives a way to produce an orthogonal basis 
+from any given starting basis.
+We first see an example.
+
+\begin{example} \label{ex:OrthoBasisForReThree}
+To turn this basis for \( \Re^3 \)
+\begin{equation*}
+  \sequence{
+           \colvec{1 \\ 1 \\ 1},
+           \colvec{0 \\ 2 \\ 0},
+           \colvec{1 \\ 0 \\ 3}
+            }
+\end{equation*}
+into an orthogonal basis, we take the first vector as it is given.
+\begin{equation*}
+   \vec{\kappa}_1=\colvec{1 \\ 1 \\ 1}
+\end{equation*}
+We get \( \vec{\kappa}_2 \) by starting with the given second vector 
+$\vec{\beta}_2$ and
+subtracting away the part of it in the direction of \( \vec{\kappa}_1 \).
+\begin{equation*}
+   \vec{\kappa}_2=\colvec{0 \\ 2 \\ 0}
+                   -\proj{\colvec{0 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
+                 =\colvec{0 \\ 2 \\ 0}-\colvec{2/3 \\ 2/3 \\ 2/3}
+                 =\colvec{-2/3 \\ 4/3 \\ -2/3}
+\end{equation*}
+Finally, we get $\vec{\kappa}_3$  
+by taking the third given vector and subtracting the part of it
+in the direction of \( \vec{\kappa}_1 \), and also the part 
+of it in the direction of \( \vec{\kappa}_2 \).
+\begin{equation*}
+   \vec{\kappa}_3=\colvec{1 \\ 0 \\ 3}
+                   -\proj{\colvec{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_1}}
+                   -\proj{\colvec{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_2}}
+                 =\colvec{-1 \\ 0 \\ 1}
+\end{equation*}
+Again the corollary gives that 
+\begin{equation*}
+  \sequence{
+           \colvec{1 \\ 1 \\ 1},
+           \colvec{-2/3 \\ 4/3 \\ -2/3},
+           \colvec{-1 \\ 0 \\ 1}
+           }
+\end{equation*}
+is a basis for the space.
+\end{example}
+
+The next result verifies that
+the process used in those examples works with any basis for any 
+subspace of an $\Re^n$ 
+(we are restricted to $\Re^n$ only because we have not  given a 
+definition of orthogonality for other vector spaces).
+
+\begin{theorem}[Gram-Schmidt orthogonalization]
+\index{orthogonalization}\index{basis!orthogonalization}
+\label{th:GramSchmidt}
+If \( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \)
+is a basis for a subspace of \( \Re^n \) then, where
+\begin{align*}
+  \vec{\kappa}_1
+  &=\vec{\beta}_1    \\
+  \vec{\kappa}_2
+  &=\vec{\beta}_2-\proj{\vec{\beta}_2}{\spanof{\vec{\kappa}_1}}    \\
+  \vec{\kappa}_3
+  &=\vec{\beta}_3
+  -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}
+  -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}}    \\
+  &\alignedvdots           \\
+  \vec{\kappa}_k
+  &=\vec{\beta}_k
+  -\proj{\vec{\beta}_k}{\spanof{\vec{\kappa}_1}}-\cdots
+  -\proj{\vec{\beta}_k}{\spanof{\vec{\kappa}_{k-1}}}
+\end{align*}
+the \( \vec{\kappa}\, \)'s form an orthogonal basis for the
+same subspace.
+\end{theorem}
+
+\begin{proof}
+We will use induction to check that each \( \vec{\kappa}_i \) is nonzero,
+is in the span of $\sequence{\vec{\beta}_1,\ldots\vec{\beta}_i}$
+and is orthogonal to all preceding vectors:
+\( \vec{\kappa}_1\dotprod\vec{\kappa}_i= \cdots
+   =\vec{\kappa}_{i-1}\dotprod\vec{\kappa}_{i}=0 \).
+With those, and with
+\nearbycorollary{cor:OrthAndBigEnoughIsBasis}, we will have that
+\( \sequence{\vec{\kappa}_1,\ldots\vec{\kappa}_k} \) 
+is a basis for the same space as
+\( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \).
+
+We shall cover the cases up to \( i=3 \), which give the
+sense of the argument.
+Completing the details is \nearbyexercise{exer:GramSchmidt}.
+
+The \( i=1 \) case is trivial\Dash setting \( \vec{\kappa}_1 \) equal to 
+\( \vec{\beta}_1 \) 
+makes it a nonzero vector since $\vec{\beta}_1$ is a member of a basis, 
+it is obviously in the desired span,
+and the `orthogonal to all preceding vectors' condition is vacuously met.
+
+For the \( i=2 \) case, expand the definition of $\vec{\kappa}_2$.
+\begin{equation*}
+  \vec{\kappa}_2=\vec{\beta}_2
+      -\proj{\vec{\beta}_2}{\spanof{\vec{\kappa}_1}}=
+  \vec{\beta}_2
+  -\frac{\vec{\beta}_2\dotprod\vec{\kappa}_1}{
+         \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+   \cdot\vec{\kappa}_1
+  =
+  \vec{\beta}_2
+  -\frac{\vec{\beta}_2\dotprod\vec{\kappa}_1}{
+         \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+   \cdot\vec{\beta}_1
+\end{equation*}
+This expansion shows that $\vec{\kappa}_2$ is nonzero or else this
+would be a non-trivial linear dependence among the \( \vec{\beta} \)'s
+(it is nontrivial because the coefficient of $\vec{\beta}_2$ is $1$)
+and also shows that 
+$\vec{\kappa}_2$ is in the desired span.
+Finally, $\vec{\kappa}_2$ is orthogonal to the only preceding vector
+\begin{equation*}
+   \vec{\kappa}_1\dotprod\vec{\kappa}_2=
+   \vec{\kappa}_1\dotprod(\vec{\beta}_2
+      -\proj{\vec{\beta}_2}{\spanof{\vec{\kappa}_1}})=0
+\end{equation*}
+because this projection is orthogonal.
+
+The \( i=3 \) case is the same as the $i=2$ case except for one detail.
+As in the $i=2$ case, expanding the definition 
+\begin{align*}
+  \vec{\kappa}_3
+  &=\vec{\beta}_3
+  -\frac{\vec{\beta}_3\dotprod\vec{\kappa}_1}{
+         \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+   \cdot\vec{\kappa}_1
+  -\frac{\vec{\beta}_3\dotprod\vec{\kappa}_2}{
+         \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+   \cdot\vec{\kappa}_2  \\
+  &=\vec{\beta}_3
+  -\frac{\vec{\beta}_3\dotprod\vec{\kappa}_1}{
+         \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+   \cdot\vec{\beta}_1
+  -\frac{\vec{\beta}_3\dotprod\vec{\kappa}_2}{
+         \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+  \cdot\bigl(\vec{\beta}_2
+  -\frac{\vec{\beta}_2\dotprod\vec{\kappa}_1}{
+         \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+   \cdot\vec{\beta}_1\bigr)
+\end{align*}
+shows that $\vec{\kappa}_3$ is nonzero and is in the span.
+A calculation shows that 
+$\vec{\kappa}_3$ is orthogonal to the preceding vector $\vec{\kappa}_1$.
+\begin{align*}
+   \vec{\kappa}_1\dotprod\vec{\kappa}_3
+   &=\vec{\kappa}_1\dotprod\bigl(\vec{\beta}_3
+      -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}
+      -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}}\bigr) \\
+   &=\vec{\kappa}_1\dotprod\bigl(\vec{\beta}_3
+          -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}\bigr)
+    -\vec{\kappa}_1\dotprod\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}} \\
+   &=0
+\end{align*}
+(Here's the difference from the $i=2$ case\Dash the second line has 
+two kinds of terms.
+The first term is zero because this projection is orthogonal, as in the
+$i=2$ case.
+The second term is zero because \( \vec{\kappa}_1 \) is orthogonal
+to \( \vec{\kappa}_2 \) and so is orthogonal to any vector
+in the line spanned by \( \vec{\kappa}_2 \).)
+The check that $\vec{\kappa}_3$ is also 
+orthogonal to the other preceding vector $\vec{\kappa}_2$ is similar.
+\end{proof}
+
+Beyond having the vectors in the basis be orthogonal, we can do more; 
+we can arrange for each vector to have length one by dividing
+each by its own length 
+(we can \definend{normalize}\index{normalize} the lengths).
+
+\begin{example}
+Normalizing the length of each vector in the orthogonal basis of
+\nearbyexample{ex:OrthoBasisForReThree}
+produces this \definend{orthonormal basis}.\index{basis!orthonormal}%
+\index{orthonormal basis}
+\begin{equation*}
+  \sequence{
+           \colvec{1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}},
+           \colvec{-1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}},
+           \colvec{-1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}}
+           }
+\end{equation*}
+\end{example}
+
+\noindent Besides its intuitive appeal, and its analogy with the 
+standard basis $\stdbasis_n$ for $\Re^n$, an orthonormal basis also simplifies
+some computations.
+See \nearbyexercise{exer:OrthoRepEasy}, for example.
+
+
+
+
+\begin{exercises}
+  \item 
+    Perform the Gram-Schmidt process on each of these bases
+    for $\Re^2$.
+    \begin{exparts*}
+      \partsitem \( \sequence{
+                         \colvec{1 \\ 1},
+                         \colvec{2 \\ 1}
+                         }  \)
+      \partsitem \( \sequence{
+                         \colvec{0 \\ 1},
+                         \colvec{-1 \\ 3}
+                         }  \)
+      \partsitem \( \sequence{
+                         \colvec{0 \\ 1},
+                         \colvec{-1 \\ 0}
+                         }  \)
+    \end{exparts*}
+    Then turn those orthogonal bases into orthonormal bases.
+    \begin{answer}
+      \begin{exparts}
+       \partsitem 
+        \begin{align*}
+          \vec{\kappa}_1 &= \colvec{1 \\ 1}           \\
+          \vec{\kappa}_2
+            &=
+            \colvec{2 \\ 1}
+            -\proj{\colvec{2 \\ 1}}{\spanof{\vec{\kappa}_1}}  
+            =
+            \colvec{2 \\ 1}
+            -\frac{\colvec{2 \\ 1}\dotprod\colvec{1 \\ 1}}{%
+                    \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}
+            \cdot\colvec{1 \\ 1}                                
+            =
+            \colvec{2 \\ 1}
+            -\frac{3}{2}
+            \cdot\colvec{1 \\ 1}                                
+            =\colvec{1/2 \\ -1/2}
+        \end{align*}
+       \partsitem 
+        \begin{align*}
+          \vec{\kappa}_1 &= \colvec{0 \\ 1}           \\
+          \vec{\kappa}_2
+            &=
+            \colvec{-1 \\ 3}
+            -\proj{\colvec{-1 \\ 3}}{\spanof{\vec{\kappa}_1}}  
+            =
+            \colvec{-1 \\ 3}
+            -\frac{\colvec{-1 \\ 3}\dotprod\colvec{0 \\ 1}}{%
+                    \colvec{0 \\ 1}\dotprod\colvec{0 \\ 1}}
+            \cdot\colvec{0 \\ 1}                                
+            =
+            \colvec{-1 \\ 3}
+            -\frac{3}{1}
+            \cdot\colvec{0 \\ 1}                              
+            =\colvec{-1 \\ 0}
+        \end{align*}
+       \partsitem 
+        \begin{align*}
+          \vec{\kappa}_1 &= \colvec{0 \\ 1}           \\
+          \vec{\kappa}_2
+            &=
+            \colvec{-1 \\ 0}
+            -\proj{\colvec{-1 \\ 0}}{\spanof{\vec{\kappa}_1}}  
+            =
+            \colvec{-1 \\ 0}
+            -\frac{\colvec{-1 \\ 0}\dotprod\colvec{0 \\ 1}}{%
+                    \colvec{0 \\ 1}\dotprod\colvec{0 \\ 1}}
+            \cdot\colvec{0 \\ 1}                                
+            =
+            \colvec{-1 \\ 0}
+            -\frac{0}{1}
+            \cdot\colvec{0 \\ 1}                                
+            =\colvec{-1 \\ 0}
+        \end{align*}
+      \end{exparts}
+      The corresponding orthonormal bases for the three parts of this
+      question are these.
+      \begin{equation*}
+        \sequence{
+              \colvec{1/\sqrt{2} \\ 1/\sqrt{2}},
+              \colvec{\sqrt{2}/2 \\ -\sqrt{2}/2}
+              }
+        \qquad
+        \sequence{
+              \colvec{0 \\ 1},
+              \colvec{-1 \\ 0}
+              }
+        \qquad
+        \sequence{
+              \colvec{0 \\ 1},
+              \colvec{-1 \\ 0}
+              }
+      \end{equation*}
+    \end{answer}
+  \recommended \item 
+    Perform the Gram-Schmidt process on each of these bases
+    for $\Re^3$.
+    \begin{exparts*}
+      \partsitem \( \sequence{
+                         \colvec{2 \\ 2 \\ 2},
+                         \colvec{1 \\ 0 \\ -1},
+                         \colvec{0 \\ 3 \\ 1}
+                         }  \)
+      \partsitem \( \sequence{
+                         \colvec{1 \\ -1 \\ 0},
+                         \colvec{0 \\ 1 \\ 0},
+                         \colvec{2 \\ 3 \\ 1}
+                         }  \)
+    \end{exparts*}
+    Then turn those orthogonal bases into orthonormal bases.
+    \begin{answer} 
+      \begin{exparts}
+       \partsitem 
+        \begin{align*}
+          \vec{\kappa}_1 &= \colvec{2 \\ 2 \\ 2}           \\
+          \vec{\kappa}_2
+            &=
+            \colvec{1 \\ 0 \\ -1}
+            -\proj{\colvec{1 \\ 0 \\ -1}}{\spanof{\vec{\kappa}_1}}  
+            =
+            \colvec{1 \\ 0 \\ -1}
+            -\frac{\colvec{1 \\ 0 \\ -1}\dotprod\colvec{2 \\ 2 \\ 2}}{%
+                    \colvec{2 \\ 2 \\ 2}\dotprod\colvec{2 \\ 2 \\ 2}}
+            \cdot\colvec{2 \\ 2 \\ 2}                                
+            =
+            \colvec{1 \\ 0 \\ -1}
+            -\frac{0}{12}
+            \cdot\colvec{2 \\ 2 \\ 2}                                
+            =\colvec{1 \\ 0 \\ -1}                              \\
+          \vec{\kappa}_3
+            &=
+            \colvec{0 \\ 3 \\ 1}
+            -\proj{\colvec{0 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_1}}  
+            -\proj{\colvec{0 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_2}}  
+            =
+            \colvec{0 \\ 3 \\ 1}
+            -\frac{\colvec{0 \\ 3 \\ 1}\dotprod\colvec{2 \\ 2 \\ 2}}{%
+                    \colvec{2 \\ 2 \\ 2}\dotprod\colvec{2 \\ 2 \\ 2}}
+            \cdot\colvec{2 \\ 2 \\ 2}                                
+            -\frac{\colvec{0 \\ 3 \\ 1}\dotprod\colvec{1 \\ 0 \\ -1}}{%
+                    \colvec{1 \\ 0 \\ -1}\dotprod\colvec{1 \\ 0 \\ -1}}
+            \cdot\colvec{1 \\ 0 \\ -1}                                   \\
+            &\hbox{}\quad=
+            \colvec{0 \\ 3 \\ 1}
+            -\frac{8}{12}
+            \cdot\colvec{2 \\ 2 \\ 2}                                
+            -\frac{-1}{2}
+            \cdot\colvec{1 \\ 0 \\ -1}                              
+            =\colvec{-5/6 \\ 5/3 \\ -5/6}
+        \end{align*}
+       \partsitem 
+        \begin{align*}
+          \vec{\kappa}_1 &= \colvec{1 \\ -1 \\ 0}           \\
+          \vec{\kappa}_2
+            &=
+            \colvec{0 \\ 1 \\ 0}
+            -\proj{\colvec{0 \\ 1 \\ 0}}{\spanof{\vec{\kappa}_1}}  
+            =
+            \colvec{0 \\ 1 \\ 0}
+            -\frac{\colvec{0 \\ 1 \\ 0}\dotprod\colvec{1 \\ -1 \\ 0}}{%
+                    \colvec{1 \\ -1 \\ 0}\dotprod\colvec{1 \\ -1 \\ 0}}
+            \cdot\colvec{1 \\ -1 \\ 0}                                
+            =
+            \colvec{0 \\ 1 \\ 0}
+            -\frac{-1}{2}
+            \cdot\colvec{1 \\ -1 \\ 0}                                
+            =\colvec{1/2 \\ 1/2 \\ 0}                                  \\
+          \vec{\kappa}_3
+            &=
+            \colvec{2 \\ 3 \\ 1}
+            -\proj{\colvec{2 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_1}}  
+            -\proj{\colvec{2 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_2}}       \\ 
+            &=
+            \colvec{2 \\ 3 \\ 1}
+            -\frac{\colvec{2 \\ 3 \\ 1}\dotprod\colvec{1 \\ -1 \\ 0}}{%
+                    \colvec{1 \\ -1 \\ 0}\dotprod\colvec{1 \\ -1 \\ 0}}
+            \cdot\colvec{1 \\ -1 \\ 0}                                
+            -\frac{\colvec{2 \\ 3 \\ 1}\dotprod\colvec{1/2 \\ 1/2 \\ 0}}{%
+                    \colvec{1/2 \\ 1/2 \\ 0}\dotprod\colvec{1/2 \\ 1/2 \\ 0}}
+            \cdot\colvec{1/2 \\ 1/2 \\ 0}                   \\
+            &\hbox{}\quad=
+            \colvec{2 \\ 3 \\ 1}
+            -\frac{-1}{2}
+            \cdot\colvec{1 \\ -1 \\ 0}                                
+            -\frac{5/2}{1/2}
+            \cdot\colvec{1/2 \\ 1/2 \\ 0} 
+            =\colvec{0 \\ 0 \\ 1}
+        \end{align*}
+      \end{exparts}
+      The corresponding orthonormal bases for the two parts of this
+      question are these.
+      \begin{equation*}
+        \sequence{
+              \colvec{1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}},
+              \colvec{1/\sqrt{2} \\ 0 \\ -1/\sqrt{2}},
+              \colvec{-1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}}
+              }
+        \qquad
+        \sequence{
+              \colvec{1/\sqrt{2} \\ -1/\sqrt{2} \\ 0},
+              \colvec{1/\sqrt{2} \\ 1/\sqrt{2} \\ 0}
+              \colvec{0 \\ 0 \\ 1}
+              }
+      \end{equation*}
+    \end{answer}
+   \recommended \item 
+       Find an orthonormal basis for this subspace of $\Re^3$:~the
+       plane $x-y+z=0$.
+       \begin{answer}
+         The given space can be parametrized in this way.
+         \begin{equation*}
+           \set{\colvec{x \\ y \\ z} \suchthat x=y-z}
+           =\set{\colvec{1 \\ 1 \\ 0}\cdot y+\colvec{-1 \\ 0 \\ 1}\cdot z 
+                     \suchthat y,z\in\Re}
+         \end{equation*}
+         So we take the basis
+         \begin{equation*}
+           \sequence{\colvec{1 \\ 1 \\ 0},
+                     \colvec{-1 \\ 0 \\ 1}}
+         \end{equation*}
+         apply the Gram-Schmidt process
+         \begin{align*}
+           \vec{\kappa}_1 &= \colvec{1 \\ 1 \\ 0}             \\
+           \vec{\kappa}_2
+           &=
+           \colvec{-1 \\ 0 \\ 1}-\proj{\colvec{-1 \\ 0 \\ 1}}{%
+                                        \spanof{\vec{\kappa}_1}} 
+           =
+           \colvec{-1 \\ 0 \\ 1}
+            -\frac{\colvec{-1 \\ 0 \\ 1}\dotprod\colvec{1 \\ 1 \\ 0}}{%
+                    \colvec{1 \\ 1 \\ 0}\dotprod\colvec{1 \\ 1 \\ 0}}
+              \cdot\colvec{1 \\ 1 \\ 0}                             
+           =
+           \colvec{-1 \\ 0 \\ 1}
+            -\frac{-1}{2}\cdot\colvec{1 \\ 1 \\ 0}                  
+           =\colvec{-1/2 \\ 1/2 \\ 1}
+         \end{align*}
+         and then normalize.
+         \begin{equation*}
+           \sequence{
+                    \colvec{1/\sqrt{2} \\ 1/\sqrt{2} \\ 0},
+                    \colvec{-1/\sqrt{6} \\ 1/\sqrt{6} \\ 2/\sqrt{6}}
+                    }
+         \end{equation*}
+       \end{answer}
+   \item 
+     Find an orthonormal basis for this subspace of $\Re^4$.
+     \begin{equation*}
+       \set{\colvec{x \\ y \\ z \\ w}\suchthat x-y-z+w=0\text{\ and\ }x+z=0}
+     \end{equation*}
+     \begin{answer}
+       Reducing the linear system
+       \begin{equation*}
+         \begin{linsys}{4}
+           x  &-  &y  &-  &z  &+  &w  &=  &0  \\
+           x  &   &   &+  &z  &   &   &=  &0
+         \end{linsys}
+         \;\grstep{-\rho_1+\rho_2}\;
+         \begin{linsys}{4}
+           x  &-  &y  &-  &z  &+  &w  &=  &0  \\
+              &   &y  &+  &2z &-  &w  &=  &0
+         \end{linsys}
+       \end{equation*}
+       and parametrizing gives this description of the subspace.
+       \begin{equation*}
+         \set{\colvec{-1 \\ -2 \\ 1 \\ 0}\cdot z
+              +\colvec{0 \\ 1 \\ 0 \\ 1}\cdot w
+              \suchthat z,w\in\Re}
+       \end{equation*}
+       So we take the basis,
+       \begin{equation*}
+         \sequence{
+                  \colvec{-1 \\ -2 \\ 1 \\ 0},
+                  \colvec{0 \\ 1 \\ 0 \\ 1}
+                  }
+       \end{equation*}
+       go through the Gram-Schmidt process
+       \begin{align*}
+         \vec{\kappa}_1 &= \colvec{-1 \\ -2 \\ 1 \\ 0}   \\
+         \vec{\kappa}_2
+          &=
+          \colvec{0 \\ 1 \\ 0 \\ 1}
+          -\proj{\colvec{0 \\ 1 \\ 0 \\ 1}}{\spanof{\vec{\kappa}_1}}   
+          =
+          \colvec{0 \\ 1 \\ 0 \\ 1}
+         -\frac{\colvec{0 \\ 1 \\ 0 \\ 1}\dotprod\colvec{-1 \\ -2 \\ 1 \\ 0}}{%
+             \colvec{-1 \\ -2 \\ 1 \\ 0}\dotprod\colvec{-1 \\ -2 \\ 1 \\ 0}} 
+          \cdot\colvec{-1 \\ -2 \\ 1 \\ 0}           
+          =
+          \colvec{0 \\ 1 \\ 0 \\ 1}
+         -\frac{-2}{6} 
+          \cdot\colvec{-1 \\ -2 \\ 1 \\ 0}  
+          =\colvec{-1/3 \\ 1/3 \\ 1/3 \\ 1}
+       \end{align*}
+       and finish by normalizing.
+       \begin{equation*}
+         \sequence{
+               \colvec{-1/\sqrt{6} \\ -2/\sqrt{6} \\ 1/\sqrt{6} \\ 0},
+               \colvec{-\sqrt{3}/6 \\ \sqrt{3}/6 \\ \sqrt{3}/6 \\ \sqrt{3}/2}
+                  }
+       \end{equation*}
+     \end{answer}
+  \item 
+     Show that any linearly independent subset of \( \Re^n \) can be
+     orthogonalized without changing its span.
+     \begin{answer} 
+       A linearly independent subset of $\Re^n$ is a basis for its 
+       own span.
+       Apply \nearbytheorem{th:GramSchmidt}.
+
+       \textit{Remark}.
+       Here's why the phrase `linearly independent' is in the question.
+       Dropping the phrase would require us to worry about two things.
+       The first thing to worry about is that
+       when we do the Gram-Schmidt process on a linearly dependent 
+       set then we get some zero vectors.
+       For instance, with
+       \begin{equation*}
+         S=\set{\colvec{1 \\ 2},\colvec{3 \\ 6}}
+       \end{equation*}
+       we would get this.
+       \begin{equation*}
+         \vec{\kappa}_1   =   \colvec{1 \\ 2}
+         \qquad 
+         \vec{\kappa}_2
+           =
+           \colvec{3 \\ 6}-\proj{\colvec{3 \\ 6}}{\spanof{\vec{\kappa}_1}} 
+           =
+           \colvec{0 \\ 0}
+       \end{equation*}
+       This first thing is not so bad because
+       the zero vector is by definition orthogonal to every other vector,
+       so we could accept this situation 
+       as yielding an orthogonal set (although
+       it of course can't be normalized), or we just could modify the
+       Gram-Schmidt procedure to throw out any zero vectors.
+       The second thing to worry about if we drop the phrase 
+       `linearly independent' from the question is that the set might
+       be infinite.
+       Of course, any subspace of the finite-dimensional $\Re^n$
+       must also be finite-dimensional so only finitely many of its
+       members are linearly independent, but nonetheless,
+       a ``process'' that examines the vectors in an infinite set one at a
+       time would at least require some more elaboration in this question. 
+       A linearly independent subset of $\Re^n$ is automatically
+       finite\Dash in fact, of
+       size~$n$ or less\Dash so the `linearly independent' 
+       phrase obviates these concerns.
+     \end{answer}
+%   \item What happens if we try to apply the Gram-Schmidt process to
+%     a finite set that is not a basis?
+%     \begin{answer}
+%       If that set is not linearly independent, then we get a zero vector.
+%       Otherwise (if our set is linearly independent but does not span the
+%       space), we are doing Gram-Schmidt on a set that is a basis for a
+%       subspace and so we get an orthogonal basis for a subspace.  
+%     \end{answer}
+   \recommended \item
+     What happens if we apply the Gram-Schmidt process to 
+     a basis that is already orthogonal?
+     \begin{answer}
+       The process leaves the basis unchanged.  
+     \end{answer}
+  \item 
+     Let $\sequence{\vec{\kappa}_1,\dots,\vec{\kappa}_k}$
+     be a set of mutually orthogonal vectors in $\Re^n$.
+     \begin{exparts}
+       \partsitem Prove that for any $\vec{v}$ in the space, the vector
+         $\vec{v}-(\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+           +\dots+\proj{\vec{v}\,}{\spanof{\vec{v}_k}})$
+         is orthogonal to each of $\vec{\kappa}_1$, \ldots, $\vec{\kappa}_k$.
+       \partsitem Illustrate the prior item in $\Re^3$ by using $\vec{e}_1$ as
+         $\vec{\kappa}_1$, using $\vec{e}_2$ as $\vec{\kappa}_2$, and
+         taking $\vec{v}$ to have components $1$, $2$, and $3$.
+       \partsitem Show that $\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+         +\dots+\proj{\vec{v}\,}{\spanof{\vec{v}_k}}$ is the vector in the
+         span of the set of $\vec{\kappa}$'s that is closest to $\vec{v}$.
+         \textit{Hint}.  To the illustration done for the prior part,
+         add a vector $d_1\vec{\kappa}_1+d_2\vec{\kappa}_2$
+         and apply the Pythagorean Theorem to the resulting triangle.
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem The argument is as in the $i=3$ case of the proof
+           of \nearbytheorem{th:GramSchmidt}.
+           The dot product
+           \begin{equation*}
+             \vec{\kappa}_i\dotprod
+             \left(\vec{v}-\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+               -\dots-\proj{\vec{v}\,}{\spanof{\vec{v}_k}}\right)
+           \end{equation*}
+           can be written as the sum of terms of the form
+           $-\vec{\kappa}_i\dotprod\proj{\vec{v}\,}{\spanof{\vec{\kappa}_j}}$ 
+           with $j\neq i$, 
+           and the term 
+           $\vec{\kappa}_i\dotprod(\vec{v}-
+                                 \proj{\vec{v}\,}{\spanof{\vec{\kappa}_i}})$.
+           The first kind of term equals zero because the $\vec{\kappa}$'s
+           are mutually orthogonal.
+           The other term is zero because this projection is orthogonal
+           (that is, the projection definition makes it zero:
+           $\vec{\kappa}_i\dotprod(\vec{v}
+               -\proj{\vec{v}\,}{\spanof{\vec{\kappa}_i}})
+            =\vec{\kappa}_i\dotprod\vec{v}-
+              \vec{\kappa}_i\dotprod
+               \left((\vec{v}\dotprod\vec{\kappa}_i)/(%
+                      \vec{\kappa}_i\dotprod\vec{\kappa}_i)\right)
+                   \cdot\vec{\kappa}_i$
+           equals, after all of the cancellation is done, zero).
+         \partsitem The vector $\vec{v}$ is shown in black and the
+           vector $\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                    +\proj{\vec{v}\,}{\spanof{\vec{v}_2}}
+                   =1\cdot\vec{e}_1+2\cdot\vec{e}_2$ is in gray.
+           \begin{center}  \small
+             \includegraphics{ch3.83}
+              \end{center}
+              The vector
+              $\vec{v}-(\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                    +\proj{\vec{v}\,}{\spanof{\vec{v}_2}})$
+              lies on the dotted line connecting the black vector to the 
+              gray one, that is, it is orthogonal to the $xy$-plane.
+          \partsitem This diagram is gotten by following the hint.
+           \begin{center}  \small
+             \includegraphics{ch3.84}
+            \end{center}
+            The dashed triangle has a right angle where 
+            the gray vector $1\cdot\vec{e}_1+2\cdot\vec{e}_2$
+            meets the vertical dashed line
+            $\vec{v}-(1\cdot\vec{e}_1+2\cdot\vec{e}_2)$; this is what was
+            proved in the first item of this question.
+            The Pythagorean theorem then gives that the hypoteneuse\Dash the
+            segment from $\vec{v}$ to any other vector\Dash is longer than
+            the vertical dashed line.
+       
+            More formally, writing  $\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                 +\dots+\proj{\vec{v}\,}{\spanof{\vec{v}_k}}$ as
+            $c_1\cdot\vec{\kappa}_1+\dots+c_k\cdot\vec{\kappa}_k$, 
+            consider any other vector in the span
+            $d_1\cdot\vec{\kappa}_1+\dots+d_k\cdot\vec{\kappa}_k$. 
+            Note that
+            \begin{multline*}
+              \vec{v}-(d_1\cdot\vec{\kappa}_1+\dots+d_k\cdot\vec{\kappa}_k)  \\
+              =
+              \bigl(\vec{v}
+                    -(c_1\cdot\vec{\kappa}_1+\dots+c_k\cdot\vec{\kappa}_k)
+              \bigr)
+              +\bigl((c_1\cdot\vec{\kappa}_1+\dots+c_k\cdot\vec{\kappa}_k)
+                     -(d_1\cdot\vec{\kappa}_1+\dots+d_k\cdot\vec{\kappa}_k)
+               \bigr)
+            \end{multline*}
+            and that
+            \begin{equation*}
+              \bigl(\vec{v}
+                 -(c_1\cdot\vec{\kappa}_1+\dots+c_k\cdot\vec{\kappa}_k)
+              \bigr)
+              \dotprod
+              \bigl((c_1\cdot\vec{\kappa}_1+\dots+c_k\cdot\vec{\kappa}_k)
+                     -(d_1\cdot\vec{\kappa}_1+\dots+d_k\cdot\vec{\kappa}_k)
+              \bigr)
+              =0
+            \end{equation*}
+            (because the first item shows the $\vec{v}
+                 -(c_1\cdot\vec{\kappa}_1+\dots+c_k\cdot\vec{\kappa}_k)$
+            is orthogonal to each $\vec{\kappa}$ and so it is orthogonal 
+            to this linear combination of the $\vec{\kappa}$'s).
+            Now apply the Pythagorean Theorem (i.e., the Triangle Inequality).
+       \end{exparts}
+     \end{answer}
+   \item 
+     Find a vector in \( \Re^3 \) that is orthogonal to both of these.
+     \begin{equation*}
+       \colvec{1 \\ 5 \\ -1}
+       \qquad
+       \colvec{2 \\ 2 \\ 0}
+     \end{equation*}
+     \begin{answer} 
+       One way to proceed is to find a third vector so that the three together
+       make a basis for $\Re^3$, e.g.,
+       \begin{equation*}
+         \vec{\beta}_3=\colvec{1 \\ 0 \\ 0}  
+       \end{equation*} 
+       (the second vector is not dependent on the third because it has a
+       nonzero second component, and the first is not dependent on the second
+       and third because of its nonzero third component),
+       and then apply the Gram-Schmidt process.
+       \begin{align*}
+         \vec{\kappa}_1 &= \colvec{1 \\ 5 \\ -1}  \\
+         \vec{\kappa}_2
+           &=
+           \colvec{2 \\ 2 \\ 0}
+           -\proj{\colvec{2 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
+           =\colvec{2 \\ 2 \\ 0}
+           -\frac{\colvec{2 \\ 2 \\ 0}\dotprod\colvec{1 \\ 5 \\ -1}}{%
+                  \colvec{1 \\ 5 \\ -1}\dotprod\colvec{1 \\ 5 \\ -1}}
+            \cdot\colvec{1 \\ 5 \\ -1}                               \\
+           &\hbox{}\quad=
+           \colvec{2 \\ 2 \\ 0}
+           -\frac{12}{27}\cdot\colvec{1 \\ 5 \\ -1}
+           =\colvec{14/9 \\ -2/9 \\ 4/9}                        \\
+        \vec{\kappa}_3    
+           &=  
+           \colvec{1 \\ 0 \\ 0}
+             -\proj{\colvec{1 \\ 0 \\ 0}}{\spanof{\vec{\kappa}_1}}
+             -\proj{\colvec{1 \\ 0 \\ 0}}{\spanof{\vec{\kappa}_2}}       \\
+           &\hbox{}\quad=
+           \colvec{1 \\ 0 \\ 0}
+           -\frac{\colvec{1 \\ 0 \\ 0}\dotprod\colvec{1 \\ 5 \\ -1}}{%
+                    \colvec{1 \\ 5 \\ -1}\dotprod\colvec{1 \\ 5 \\ -1}}
+             \cdot\colvec{1 \\ 5 \\ -1}
+           -\frac{\colvec{1 \\ 0 \\ 0}\dotprod\colvec{14/9 \\ -2/9 \\  4/9}}{%
+            \colvec{14/9 \\ -2/9 \\ 4/9}\dotprod\colvec{14/9 \\ -2/9 \\ 4/9}}
+            \cdot\colvec{14/9 \\ -2/9 \\ 4/9}              \\
+         &\hbox{}\quad=
+         \colvec{1 \\ 0 \\ 0}
+           -\frac{1}{27}\cdot\colvec{1 \\ 5 \\ -1}
+           -\frac{7}{12}\cdot\colvec{14/9 \\ -2/9 \\ 4/9}
+         =\colvec{1/18 \\ -1/18  \\ -4/18}
+       \end{align*}
+       The result $\vec{\kappa}_3$ is orthogonal to both $\vec{\kappa}_1$
+       and $\vec{\kappa}_2$.
+       It is therefore orthogonal to every vector in the span
+       of the set $\set{\vec{\kappa}_1,\vec{\kappa}_2}$,
+       including the two vectors given in the question.
+     \end{answer}
+  \recommended \item \label{exer:OrthoRepEasy} 
+    One advantage of orthogonal bases is that they simplify finding the
+    representation of a vector with respect to that basis.
+    \begin{exparts}
+      \partsitem For this vector and this non-orthogonal basis for $\Re^2$
+        \begin{equation*}
+          \vec{v}=\colvec{2 \\ 3}
+          \qquad
+          B=\sequence{\colvec{1 \\ 1},
+                    \colvec{1 \\ 0}}
+        \end{equation*}
+        first represent the vector with respect to the basis. 
+        Then project the vector into the span of each basis vector
+        $\spanof{\smash{\vec{\beta}_1}}$ and $\spanof{\smash{\vec{\beta}_2}}$.
+      \partsitem With this orthogonal basis for $\Re^2$
+        \begin{equation*}
+          K=\sequence{\colvec{1 \\ 1},
+                    \colvec{1 \\ -1}}
+        \end{equation*}
+        represent the same vector $\vec{v}$ with respect to the basis. 
+        Then project the vector into the span of each basis vector.
+        Note that the coefficients in the representation and the projection
+        are the same.
+      \partsitem Let
+        $K=\sequence{\vec{\kappa}_1,\ldots,\vec{\kappa}_k}$
+        be an orthogonal basis for some subspace of $\Re^n$.
+        Prove that for any $\vec{v}$ in the subspace,
+        the $i$-th component of the representation $\rep{\vec{v}\,}{K}$
+        is the scalar coefficient $(\vec{v}\dotprod\vec{\kappa}_i)/
+               (\vec{\kappa}_i\dotprod\vec{\kappa}_i)$
+        from $\proj{\vec{v}\,}{\spanof{\vec{\kappa}_i}}$.
+      \partsitem Prove that 
+        $\vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                   +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_k}}$.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The representation can be done by eye.
+          \begin{equation*}
+            \colvec{2 \\ 3}=3\cdot\colvec{1 \\ 1}+(-1)\cdot\colvec{1 \\ 0}
+            \qquad
+            \rep{\vec{v}\,}{B}=\colvec{3 \\ -1}_B
+          \end{equation*}
+          The two projections are also easy.
+          \begin{equation*}
+            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_1}}
+            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ 1}}{%
+                   \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}
+              \cdot\colvec{1 \\ 1}
+            =\frac{5}{2}\cdot\colvec{1 \\ 1}
+            \qquad
+            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_2}}
+            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ 0}}{%
+                   \colvec{1 \\ 0}\dotprod\colvec{1 \\ 0}}
+              \cdot\colvec{1 \\ 0}
+            =\frac{2}{1}\cdot\colvec{1 \\ 0}
+          \end{equation*}
+        \partsitem As above, the representation can be done by eye
+          \begin{equation*}
+            \colvec{2 \\ 3}=(5/2)\cdot\colvec{1 \\ 1}
+                             +(-1/2)\cdot\colvec{1 \\ -1}
+          \end{equation*}
+          and the two projections are easy.
+          \begin{equation*}
+            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_1}}
+            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ 1}}{%
+                   \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}
+              \cdot\colvec{1 \\ 1}
+            =\frac{5}{2}\cdot\colvec{1 \\ 1}
+            \qquad
+            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_2}}
+            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ -1}}{%
+                   \colvec{1 \\ -1}\dotprod\colvec{1 \\ -1}}
+              \cdot\colvec{1 \\ -1}
+            =\frac{-1}{2}\cdot\colvec{1 \\ -1}
+          \end{equation*}
+          Note the recurrence of the $5/2$ and the $-1/2$.
+        \partsitem Represent $\vec{v}$ with respect to the basis
+          \begin{equation*}
+            \rep{\vec{v}\,}{K}=\colvec{r_1 \\ \vdots \\ r_k}
+          \end{equation*}
+          so that
+          $\vec{v}=r_1\vec{\kappa}_1+\dots+r_k\vec{\kappa}_k$.
+          To determine $r_i$,
+          take the dot product of both sides with $\vec{\kappa}_i$.
+          \begin{equation*}
+            \vec{v}\dotprod\vec{\kappa}_i
+               =\left(r_1\vec{\kappa}_1+\dots+r_k\vec{\kappa}_k\right)
+                 \dotprod\vec{\kappa}_i
+               =r_1\cdot 0+\dots+r_i\cdot(\vec{\kappa}_i\dotprod\vec{\kappa}_i)
+                    +\dots+r_k\cdot 0
+          \end{equation*}
+          Solving for $r_i$ yields the desired coefficient.
+        \partsitem This is a restatement of the prior item.
+      \end{exparts}
+    \end{answer}
+  \item 
+     \textit{Bessel's Inequality}. 
+     Consider these orthonormal sets
+     \begin{equation*}
+          B_1=\set{\vec{e}_1}
+          \quad
+          B_2=\set{\vec{e}_1,\vec{e}_2}
+          \quad
+          B_3=\set{\vec{e}_1,\vec{e}_2,\vec{e}_3}
+          \quad
+          B_4=\set{\vec{e}_1,\vec{e}_2,\vec{e}_3,\vec{e}_4}
+     \end{equation*}
+     along with the vector $\vec{v}\in\Re^4$ whose components are
+     $4$, $3$, $2$, and $1$.
+    \begin{exparts}
+      \partsitem 
+        Find the coefficient $c_1$ for the projection of $\vec{v}$ into
+        the span of the vector in $B_1$.
+        Check that $\norm{\vec{v}\,}^2\geq \absval{c_1}^2$.
+      \partsitem 
+        Find the  coefficients $c_1$ and $c_2$ for the projection of $\vec{v}$
+        into the spans of the two vectors in $B_2$.
+        Check that $\norm{\vec{v}\,}^2\geq \absval{c_1}^2+\absval{c_2}^2$.
+      \partsitem Find $c_1$, $c_2$, and $c_3$ associated with the vectors in 
+        $B_3$, and $c_1$, $c_2$, $c_3$, and $c_4$ for the vectors in $B_4$. 
+        Check that 
+        $\norm{\vec{v}\,}^2\geq \absval{c_1}^2+\dots+\absval{c_3}^2$ and
+        that
+        $\norm{\vec{v}\,}^2\geq \absval{c_1}^2+\dots+\absval{c_4}^2$.
+    \end{exparts}
+    Show that this holds in general:~where 
+    $\set{\vec{\kappa}_1,\ldots,\vec{\kappa}_k}$
+    is an orthonormal set and $c_i$ is coefficient of
+    the projection of a vector $\vec{v}$ from the space
+    then 
+    $\norm{\vec{v}\,}^2\geq \absval{c_1}^2+\dots+\absval{c_k}^2$.
+    \textit{Hint}.~~One way is to look at the inequality 
+      $0\leq\norm{\vec{v}-(c_1\vec{\kappa}_1+\dots+c_k\vec{\kappa}_k)}^2$
+      and expand the $c$'s.
+    \begin{answer}
+      First, $\norm{\vec{v}\,}^2=4^2+3^2+2^2+1^2=50$.
+      \begin{exparts*}
+        \partsitem $c_1=4$
+        \partsitem $c_1=4$, $c_2=3$
+        \partsitem $c_1=4$, $c_2=3$, $c_3=2$, $c_4=1$
+      \end{exparts*}
+      For the proof, we will do only the $k=2$ case 
+      because the completely general case is messier but no more enlightening.
+      We follow the hint
+      (recall that for any vector $\vec{w}$ we have 
+      $\norm{\vec{w}\,}^2=\vec{w}\dotprod\vec{w}$).
+      \begin{align*}
+        0
+         &\leq
+         \left(\vec{v}-\bigl(\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                          \cdot\vec{\kappa}_1
+                         +\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+                          \cdot\vec{\kappa}_2
+                       \bigr)
+         \right)
+         \dotprod
+         \left(\vec{v}-\bigl(\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                          \cdot\vec{\kappa}_1
+                         +\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+                          \cdot\vec{\kappa}_2
+                       \bigr)
+         \right)                                                       \\
+         &=\begin{aligned}[t]
+            &\vec{v}\dotprod\vec{v}
+             -2\cdot\vec{v}
+              \dotprod\left(\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                          \cdot\vec{\kappa}_1
+                       +\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+                          \cdot\vec{\kappa}_2\right)               \\
+            &+\left(\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                          \cdot\vec{\kappa}_1
+                       +\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+                          \cdot\vec{\kappa}_2\right)
+           \dotprod
+           \left(\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                          \cdot\vec{\kappa}_1
+                       +\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+                          \cdot\vec{\kappa}_2\right)               
+          \end{aligned}                                              \\
+         &=
+          \vec{v}\dotprod\vec{v}
+          -2\cdot
+             \left(\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                          \cdot(\vec{v}\dotprod\vec{\kappa}_1)
+                       +\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+                          \cdot(\vec{v}\dotprod\vec{\kappa}_2)\right)
+          +\left((\frac{\vec{v}\dotprod\vec{\kappa}_1}{%
+                              \vec{\kappa}_1\dotprod\vec{\kappa}_1})^2
+                          \cdot(\vec{\kappa}_1\dotprod\vec{\kappa}_1)
+                       +(\frac{\vec{v}\dotprod\vec{\kappa}_2}{%
+                              \vec{\kappa}_2\dotprod\vec{\kappa}_2})^2
+                          \cdot(\vec{\kappa}_2\dotprod\vec{\kappa}_2)\right)
+      \end{align*}
+      (The two mixed terms in the third part of the third line are zero because
+      $\vec{\kappa}_1$ and $\vec{\kappa}_2$ are orthogonal.)
+      The result now follows on gathering like terms and on recognizing that
+      $\vec{\kappa}_1\dotprod\vec{\kappa}_1=1$ and           
+      $\vec{\kappa}_2\dotprod\vec{\kappa}_2=1$ because these vectors are
+      given as members of an orthonormal set.           
+    \end{answer}
+  \item
+    Prove or disprove:~every vector in \( \Re^n \) is in some orthogonal
+    basis.
+    \begin{answer}
+      It is true, except for the zero vector.
+      Every vector in \( \Re^n \) except the zero vector is in a basis, and
+      that basis can be orthogonalized.
+     \end{answer}
+  \item 
+    Show that the columns of an \( \nbyn{n} \) matrix form an orthonormal
+    set if and only if the inverse of the matrix is its transpose.
+    Produce such a matrix.
+    \begin{answer} 
+      The $\nbyn{3}$ case gives the idea.
+      The set 
+      \begin{equation*}
+        \set{\colvec{a \\ d \\ g},\colvec{b \\ e \\ h},\colvec{c \\ f \\ i}}
+      \end{equation*}
+      is orthonormal if and only if these nine conditions all hold
+      \begin{equation*}
+        \begin{array}{ccc}
+          \rowvec{a &d &g}\dotprod\colvec{a \\ d \\ g}=1
+            &\rowvec{a &d &g}\dotprod\colvec{b \\ e \\ h}=0
+            &\rowvec{a &d &g}\dotprod\colvec{c \\ f \\ i}=0    \\
+          \rowvec{b &e &h}\dotprod\colvec{a \\ d \\ g}=0
+            &\rowvec{b &e &h}\dotprod\colvec{b \\ e \\ h}=1
+            &\rowvec{b &e &h}\dotprod\colvec{c \\ f \\ i}=0    \\
+          \rowvec{c &f &i}\dotprod\colvec{a \\ d \\ g}=0
+            &\rowvec{c &f &i}\dotprod\colvec{b \\ e \\ h}=0
+            &\rowvec{c &f &i}\dotprod\colvec{c \\ f \\ i}=1    
+        \end{array}
+      \end{equation*}
+      (the three conditions in the lower left are redundant but nonetheless 
+      correct).
+      Those, in turn, hold if and only if 
+      \begin{equation*}
+        \begin{pmatrix}
+          a &d &g \\
+          b &e &h \\
+          c &f &i
+        \end{pmatrix}
+        \begin{pmatrix}
+          a &b &c  \\
+          d &e &f  \\
+          g &h &i
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+          1 &0 &0  \\
+          0 &1 &0  \\
+          0 &0 &1
+        \end{pmatrix}
+      \end{equation*}
+      as required.
+
+      This is an example, the inverse of this matrix is its transpose.
+      \begin{equation*}
+        \begin{pmatrix}
+          1/\sqrt{2}  &1/\sqrt{2}  &0  \\
+         -1/\sqrt{2}  &1/\sqrt{2}  &0  \\
+          0           &0           &1
+        \end{pmatrix}
+      \end{equation*}
+    \end{answer}
+  \item 
+    Does the proof of \nearbytheorem{th:OrthoIsInd} fail to consider the
+    possibility that the set of vectors is empty (i.e., that $k=0$)?
+    \begin{answer}
+      If the set is empty then the summation on the left side is the
+      linear combination of the empty set of vectors, 
+      which by definition adds to the zero vector. 
+      In the second sentence, there is not such $i$, so the 
+      `if \ldots then \ldots' implication is vacuously true.
+    \end{answer}
+  \item 
+    \nearbytheorem{th:GramSchmidt} describes a change of basis 
+    from any basis \( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_k} \)
+    to one that is orthogonal 
+    \( K=\sequence{\vec{\kappa}_1,\ldots,\vec{\kappa}_k} \).
+    Consider the change of basis matrix $\rep{\identity}{B,K}$. 
+    \begin{exparts}
+      \partsitem Prove that the matrix $\rep{\identity}{K,B}$
+        changing bases in the direction opposite to that of the theorem 
+        has an upper triangular shape\Dash all
+        of its entries below the main diagonal are zeros.
+      \partsitem Prove that the inverse of an upper triangular matrix is 
+        also upper triangular (if the matrix is invertible, that is).
+        This shows that the matrix $\rep{\identity}{B,K}$  changing bases 
+        in the direction described in the theorem is upper triangular.
+    \end{exparts}
+    \begin{answer} 
+      \begin{exparts}
+        \partsitem Part of the induction argument proving 
+          \nearbytheorem{th:GramSchmidt} checks that 
+          $\vec{\kappa}_i$ is in the span of 
+          $\sequence{\vec{\beta}_1,\dots,\vec{\beta}_i}$.
+          (The $i=3$ case in the proof illustrates.)
+          Thus, in the change of basis matrix $\rep{\identity}{K,B}$, 
+          the $i$-th column $\rep{\vec{\kappa}_i}{B}$
+          has components $i+1$ through $k$ that are zero.
+        \partsitem One way to see this is to recall the computational
+          procedure that we use to find the inverse.
+          We write the matrix, write the identity matrix next to
+          it, and then we do Gauss-Jordan reduction.
+          If the matrix starts out upper triangular then the Gauss-Jordan
+          reduction involves only the Jordan half and these steps,
+          when performed on the identity, will result in an upper triangular
+          inverse matrix.
+      \end{exparts}
+    \end{answer}
+ \item \label{exer:GramSchmidt} 
+    Complete the induction argument in the proof of  
+    \nearbytheorem{th:GramSchmidt}.
+    \begin{answer}
+      For the inductive step, we assume that for all $j$ in~$[1..i]$, 
+      these three conditions are true of each $\vec{\kappa}_j$:
+      (i)~each $\vec{\kappa}_j$ is nonzero, 
+      (ii)~each $\vec{\kappa}_j$ is a linear combination of 
+         the vectors $\vec{\beta}_1,\dots,\vec{\beta}_j$,
+      and (iii)~each $\vec{\kappa}_j$ is orthogonal to all of the 
+         $\vec{\kappa}_m$'s prior to it (that is, with $m<j$).
+      With those inductive hypotheses, consider $\vec{\kappa}_{i+1}$.
+      \begin{align*}
+        \vec{\kappa}_{i+1}
+         &=
+        \vec{\beta}_{i+1}
+          -\proj{\beta_{i+1}}{\spanof{\vec{\kappa}_1}}
+          -\proj{\beta_{i+1}}{\spanof{\vec{\kappa}_2}}
+          -\dots
+          -\proj{\beta_{i+1}}{\spanof{\vec{\kappa}_i}}  \\
+         &=
+        \vec{\beta}_{i+1}
+          -\frac{\beta_{i+1}\dotprod\vec{\kappa}_1}{%
+                  \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+              \cdot\vec{\kappa}_1
+          -\frac{\beta_{i+1}\dotprod\vec{\kappa}_2}{%
+                  \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+              \cdot\vec{\kappa}_2
+          -\dots
+          -\frac{\beta_{i+1}\dotprod\vec{\kappa}_i}{%
+                  \vec{\kappa}_i\dotprod\vec{\kappa}_i}
+              \cdot\vec{\kappa}_i
+       \end{align*}
+       By the inductive assumption~(ii) we can expand each $\vec{\kappa}_j$
+       into a linear combination of $\vec{\beta}_1,\ldots,\vec{\beta}_j$
+       \begin{multline*}
+         =
+        \vec{\beta}_{i+1}
+          -\frac{\vec{\beta}_{i+1}\dotprod\vec{\kappa}_1}{%
+                  \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+              \cdot\vec{\beta}_1                          \\
+          \mbox{}-\frac{\vec{\beta}_{i+1}\dotprod\vec{\kappa}_2}{%
+                  \vec{\kappa}_2\dotprod\vec{\kappa}_2}
+              \cdot
+                 \left(\text{
+                   linear combination of $\vec{\beta}_1,\vec{\beta}_2$}
+                 \right)
+          -\dots
+          -\frac{\vec{\beta}_{i+1}\dotprod\vec{\kappa}_i}{%
+                  \vec{\kappa}_i\dotprod\vec{\kappa}_i}
+              \cdot
+                 \left(\text{
+                   linear combination of $\vec{\beta}_1,\dots,\vec{\beta}_i$}
+                 \right)
+       \end{multline*}
+       The fractions are scalars so this is a linear combination
+       of linear combinations of $\vec{\beta}_1,\dots,\vec{\beta}_{i+1}$.
+       It is therefore just a 
+       linear combination of $\vec{\beta}_1,\dots,\vec{\beta}_{i+1}$.
+       Now, (i)~it cannot sum to the zero vector because the equation would
+       then describe a nontrivial linear relationship among the $\vec{\beta}$'s
+       that are given as members of a basis
+       (the relationship is nontrivial because the coefficient of 
+       $\vec{\beta}_{i+1}$ is $1$).
+       Also, (ii)~the equation gives $\vec{\kappa}_{i+1}$ as a combination of 
+       $\vec{\beta}_1,\dots,\vec{\beta}_{i+1}$.
+       Finally, for~(iii), consider $\vec{\kappa}_j\dotprod\vec{\kappa}_{i+1}$;
+       as in the $i=3$ case, the dot product of $\vec{\kappa}_j$ with 
+       $\vec{\kappa}_{i+1}=\vec{\beta}_{i+1}
+          -\proj{\vec{\beta}_{i+1}}{\spanof{\vec{\kappa}_1}}
+          -\dots
+          -\proj{\vec{\beta}_{i+1}}{\spanof{\vec{\kappa}_i}}$
+        can be rewritten to give two kinds of terms,
+       $\vec{\kappa}_j\dotprod
+           \left(\vec{\beta}_{i+1}
+                  -\proj{\vec{\beta}_{i+1}}{\spanof{\vec{\kappa}_j}}
+           \right)$
+       (which is zero because the projection is orthogonal)
+       and 
+       $\vec{\kappa}_j\dotprod
+               \proj{\vec{\beta}_{i+1}}{\spanof{\vec{\kappa}_m}}$
+       with $m\neq j$ and $m<i+1$ 
+       (which is zero because by the hypothesis~(iii)  
+       the vectors $\vec{\kappa}_j$ and $\vec{\kappa}_m$ are orthogonal).
+     \end{answer}
+\index{Gram-Schmidt process|)}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsectionoptional{Projection Into a Subspace}
+\noindent\textit{This subsection, like the others in this section,
+     is optional.
+     It also requires material from the 
+     optional earlier subsection on Combining Subspaces.}
+
+The prior subsections
+project a vector into a line by decomposing it into two parts:~the
+part in the line $\proj{\vec{v}\,}{\spanof{\vec{s}\,}}$ 
+and the rest $\vec{v}-\proj{\vec{v}\,}{\spanof{\vec{s}\,}}$.
+To generalize projection to arbitrary subspaces, we follow this idea.
+
+\begin{definition}
+\label{def:ProjIntoMAlongN}
+For any direct sum \( V=M\directsum N \) and any \( \vec{v}\in V \),
+the \definend{projection of \( \vec{v} \) into \( M \) along \( N \)}%
+\index{projection!into a subspace}\index{projection!along a subspace}
+is
+\begin{equation*}
+  \proj{\vec{v}\,}{M,N}=\vec{m}
+\end{equation*}
+where \( \vec{v}=\vec{m}+\vec{n} \) with \( \vec{m}\in M,\,\vec{n}\in N \).
+\end{definition}
+
+This definition doesn't involve a sense of 
+`orthogonal' so we can apply it to spaces other than subspaces of 
+an $\Re^n$.
+(Definitions of orthogonality for other spaces are perfectly possible, but we 
+haven't seen any in this book.)
+
+\begin{example} \label{ex:OrthProjOne}
+The space \( \matspace_{\nbyn{2}} \) of $\nbyn{2}$ matrices is the
+direct sum of these two.
+\begin{equation*}
+   M=\set{\begin{pmatrix}
+              a  &b  \\
+              0  &0
+            \end{pmatrix} \suchthat a,b\in\Re }
+  \qquad
+   N=\set{\begin{pmatrix}
+              0  &0  \\
+              c  &d
+            \end{pmatrix} \suchthat c,d\in\Re }
+\end{equation*}
+To project
+\begin{equation*}
+  A=\begin{pmatrix}
+          3  &1  \\
+          0  &4
+  \end{pmatrix}
+\end{equation*}
+into $M$ along $N$, we first fix bases for the two subspaces.
+\begin{equation*}
+  B_{M}=\sequence{
+    \begin{pmatrix}
+      1  &0  \\
+      0  &0      
+    \end{pmatrix},
+    \begin{pmatrix}
+      0  &1  \\
+      0  &0
+    \end{pmatrix}
+                   }
+  \qquad
+  B_{N}=\sequence{
+    \begin{pmatrix}
+      0  &0  \\
+      1  &0      
+    \end{pmatrix},
+    \begin{pmatrix}
+      0  &0  \\
+      0  &1
+    \end{pmatrix}
+                   }
+\end{equation*}
+The concatenation of these
+\begin{equation*}
+  B=\cat{B_{M}}{B_{N}}=\sequence{
+    \begin{pmatrix}
+      1  &0  \\
+      0  &0      
+    \end{pmatrix},
+    \begin{pmatrix}
+      0  &1  \\
+      0  &0
+    \end{pmatrix},
+    \begin{pmatrix}
+      0  &0  \\
+      1  &0      
+    \end{pmatrix},
+    \begin{pmatrix}
+      0  &0  \\
+      0  &1
+    \end{pmatrix}
+                   }
+\end{equation*}
+is a basis for the entire space, because the space is the direct sum, 
+so we can use it to represent $A$.
+\begin{equation*}
+  \begin{pmatrix}
+          3  &1  \\
+          0  &4
+  \end{pmatrix}=
+    3\cdot\begin{pmatrix}
+      1  &0  \\
+      0  &0      
+    \end{pmatrix}
+    +1\cdot\begin{pmatrix}
+      0  &1  \\
+      0  &0
+    \end{pmatrix}
+    +0\cdot\begin{pmatrix}
+      0  &0  \\
+      1  &0      
+    \end{pmatrix}
+    +4\cdot\begin{pmatrix}
+      0  &0  \\
+      0  &1
+    \end{pmatrix}
+\end{equation*}
+Now the projection of $A$ into $M$ along $N$ is found by keeping the 
+$M$ part of this sum and dropping the $N$ part.
+\begin{equation*}
+  \proj{\begin{pmatrix}
+          3  &1  \\
+          0  &4
+  \end{pmatrix} }{M,N}
+  =
+    3\cdot\begin{pmatrix}
+      1  &0  \\
+      0  &0      
+    \end{pmatrix}
+    +1\cdot\begin{pmatrix}
+      0  &1  \\
+      0  &0
+    \end{pmatrix}
+    =\begin{pmatrix}
+      3  &1  \\
+      0  &0      
+    \end{pmatrix}
+\end{equation*}
+\end{example}
+
+\begin{example}  \label{ex:ProjIntoMAlongNGener}
+Both subscripts on $\proj{\vec{v}\,}{M,N}$ are significant.
+The first subscript $M$ matters because the result of
+the projection is an $\vec{m}\in M$, and changing this subspace would
+change the possible results.
+For an example showing that the second subscript matters,  
+fix this plane subspace of $\Re^3$ and its basis 
+\begin{equation*}
+  M=\set{\colvec{x \\ y \\ z}\suchthat y-2z=0}
+  \qquad
+  B_M=\sequence{
+                \colvec{1 \\ 0 \\ 0},
+                \colvec{0 \\ 2 \\ 1} }
+\end{equation*}
+and compare the projections along two different subspaces. 
+\begin{equation*}
+  N=\set{k\colvec{0 \\ 0 \\ 1}\suchthat k\in\Re}
+  \qquad
+  \hat{N}=\set{k\colvec{0 \\ 1 \\ -2}\suchthat k\in\Re}
+\end{equation*}
+(Verification that \( \Re^3=M\directsum N \) and 
+\( \Re^3=M\directsum \hat{N} \) is routine.)
+We will check that these projections are different by checking that
+they have different effects on this vector.
+\begin{equation*}
+  \vec{v}=\colvec{2 \\ 2 \\ 5}
+\end{equation*}
+
+For the first one we find a basis for $N$
+\begin{equation*}
+  B_N=\sequence{
+                \colvec{0 \\ 0 \\ 1} }
+\end{equation*}
+and represent $\vec{v}$ with respect to the concatenation $\cat{B_M}{B_N}$. 
+\begin{equation*}
+  \colvec{2 \\ 2 \\ 5}=
+  2\cdot\colvec{1 \\ 0 \\ 0}+
+  1\cdot\colvec{0 \\ 2 \\ 1}+
+  4\cdot\colvec{0 \\ 0 \\ 1}
+\end{equation*}
+The projection of $\vec{v}$ into $M$ along $N$ is found by
+keeping the $M$ part and dropping the $N$ part. 
+\begin{equation*}
+  \proj{\vec{v}\,}{M,N}
+  =2\cdot\colvec{1 \\ 0 \\ 0}+
+  1\cdot\colvec{0 \\ 2 \\ 1}
+  =\colvec{2 \\ 2 \\ 1}
+\end{equation*}
+
+For the other subspace $\hat{N}$, this basis is natural. 
+\begin{equation*}
+  B_{\hat{N}}=\sequence{
+                \colvec{0 \\ 1 \\ -2} }
+\end{equation*}
+Representing $\vec{v}$ with respect to the concatenation  
+\begin{equation*}
+  \colvec{2 \\ 2 \\ 5}=
+  2\cdot\colvec{1 \\ 0 \\ 0}
+  +(9/5)\cdot\colvec{0 \\ 2 \\ 1}
+  -(8/5)\cdot\colvec{0 \\ 1 \\ -2}
+\end{equation*}
+and then keeping only the $M$ part gives this. 
+\begin{equation*}
+  \proj{\vec{v}\,}{M,\hat{N}}
+  =
+  2\cdot\colvec{1 \\ 0 \\ 0}
+  +(9/5)\cdot\colvec{0 \\ 2 \\ 1}
+  =\colvec{2 \\ 18/5 \\ 9/5}
+\end{equation*}
+Therefore projection along different subspaces may yield different results.
+
+These pictures compare the two maps.
+Both show that the projection is indeed `into' the plane and
+`along' the line.
+\begin{center}  \small
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.38}\end{tabular}
+  \qquad
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.39}\end{tabular}
+\end{center}
+Notice that the projection along $N$ is not orthogonal\Dash there are
+members of the plane $M$ that are not orthogonal to the dotted line.
+But the projection along $\hat{N}$ is orthogonal. 
+\end{example}
+
+A natural question is:~what is the relationship between the projection 
+operation defined above, and the operation of orthogonal projection
+into a line? 
+The second picture above suggests the answer\Dash orthogonal projection into
+a line is a special case of the projection defined above; it is just 
+projection along a subspace perpendicular to the line.
+\begin{center}  \small
+  \includegraphics{ch3.40}
+\end{center}
+In addition to pointing out that projection along a subspace is a 
+generalization, this scheme shows how to define orthogonal projection into
+any subspace of $\Re^n$, of any dimension. 
+
+\begin{definition} \label{def:OrthComp}
+The \definend{orthogonal complement\/}\index{orthogonal!complement}%
+\index{complementary subspaces!orthogonal}\index{perp}
+of a subspace \( M \) of $\Re^n$ is
+\begin{equation*}
+  M^\perp=\set{\vec{v}\in\Re^n\suchthat
+                 \vec{v} \text{ is perpendicular to all vectors in }M}
+\end{equation*}
+(read ``\( M \) perp'').
+The 
+\definend{orthogonal projection}\index{orthogonal!projection}%
+\index{projection!orthogonal} \( \proj{\vec{v}\,}{M} \) 
+of a vector is its projection into $M$ along \( M^\perp \).
+\end{definition}
+
+
+\begin{example} \label{ex:OrthoCompOne}
+In \( \Re^3 \), to find the orthogonal complement of the plane
+\begin{equation*}
+   P=\set{\colvec{x \\ y \\ z}\suchthat 3x+2y-z=0 }
+\end{equation*}
+we start with a basis for \( P \).
+\begin{equation*}
+   B=\sequence{\colvec{1 \\ 0 \\ 3},
+               \colvec{0 \\ 1 \\ 2} }
+\end{equation*}
+Any \( \vec{v} \) perpendicular to every vector in $B$
+is perpendicular to every vector in the span of $B$
+(the proof of this assertion is \nearbyexercise{exer:PerpOnBasisImplPerp}).
+Therefore, the subspace $P^\perp$ consists of the vectors that satisfy
+these two conditions.
+\begin{equation*}
+  \colvec{1 \\ 0 \\ 3}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
+  \qquad
+  \colvec{0 \\ 1 \\ 2}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
+\end{equation*}
+We can express those conditions more compactly as a linear system.
+\begin{equation*}
+  P^\perp=\set{\colvec{v_1 \\ v_2 \\ v_3}\suchthat \begin{pmatrix}
+                                                      1  &0  &3  \\
+                                                      0  &1  &2
+                                                    \end{pmatrix}
+                                                    \colvec{v_1 \\ v_2 \\ v_3}
+                                                    =\colvec{0 \\ 0} }
+\end{equation*}
+We are thus left with finding the nullspace of the map represented 
+by the matrix, that is, with 
+calculating the solution set of a homogeneous linear system.
+\begin{equation*}
+  P^\perp
+  =\set{\colvec{v_1 \\ v_2 \\ v_3}\suchthat \;\begin{linsys}{3}
+                                              v_1 &  &    &+ &3v_3 &= &0 \\
+                                                  &  &v_2 &+ &2v_3 &= &0
+                                            \end{linsys}\; }
+  =\set{k\colvec{-3 \\ -2 \\ 1}\suchthat k\in\Re}
+\end{equation*}
+Instead of the term orthogonal complement,
+in some contexts this is called the line \definend{normal}\index{normal} %
+to the plane.
+\end{example}
+
+\begin{example} \label{ex:OrthoCompTwo}
+Where \( M \) is the \( xy \)-plane subspace of \( \Re^3 \),
+what is \( M^\perp \)?
+A common first reaction is that \( M^\perp \) is the \( yz \)-plane, but
+that's not right.
+Some vectors from the \( yz \)-plane are not perpendicular to every
+vector in the \( xy \)-plane.
+\begin{center}  \small
+    {\small $\colvec{1 \\ 1 \\ 0} \not\perp \colvec{0 \\ 3 \\ 2}$}
+   \quad
+  \begin{tabular}{@{}c@{}}\includegraphics{ch3.41}\end{tabular}
+   \quad
+   {\small $\displaystyle 
+       \theta=\arccos(\frac{1\cdot 0+1\cdot 3+0\cdot 2}{
+                            \sqrt{2}\cdot\sqrt{13}})
+    \approx\text{$0.94$~rad}$}
+\end{center}
+Instead \( M^\perp \) is the \( z \)-axis, since proceeding as in the
+prior example and taking the natural basis for the $xy$-plane gives this.
+\begin{equation*}
+  M^\perp
+  =
+  \set{\colvec{x \\ y \\ z}\suchthat \begin{pmatrix}
+                                         1  &0  &0  \\
+                                         0  &1  &0
+                                       \end{pmatrix}
+                                       \colvec{x \\ y \\ z}=
+                                       \colvec{0 \\ 0} \;}
+  =
+  \set{\colvec{x \\ y \\ z}\suchthat x=0 \text{\ and\ }y=0  }
+\end{equation*}
+\end{example}
+
+The two examples that we've seen since \nearbydefinition{def:OrthComp}
+illustrate the first sentence in that definition.
+The next result justifies the second sentence.
+
+\begin{lemma} \label{le:OrthoProjWellDefd}
+Let $M$ be a subspace of $\Re^n$.
+The orthogonal complement of $M$ is also a subspace.
+The space is the direct sum of the two \( \Re^n=M\directsum M^\perp \).
+And, for any $\vec{v}\in\Re^n$,
+the vector $\vec{v}-\proj{\vec{v}\,}{M}$ is perpendicular to every
+vector in $M$. 
+\end{lemma}
+
+\begin{proof}
+First, the orthogonal complement $M^\perp$ is a subspace of $\Re^n$ because,
+as noted in the prior two examples, it is a nullspace.
+ 
+Next, we can 
+start with  any basis \( B_M=\sequence{\vec{\mu}_1,\dots,\vec{\mu}_k} \) 
+for \( M \) and expand it to a basis
+%\( B=\sequence{\vec{\mu}_1,\dots,\vec{\mu}_k,
+%   \vec{\nu}_1,\dots,\vec{\nu}_{n-k} } \)
+for the entire space.
+Apply the Gram-Schmidt process to get an orthogonal basis
+\( K=\sequence{\vec{\kappa}_1,\dots,\vec{\kappa}_n} \) for \( \Re^n \).
+This $K$ is the concatenation of two bases 
+\( \sequence{\vec{\kappa}_1,\dots,\vec{\kappa}_k} \) 
+(with the same number of members as $B_M$) and
+\( \sequence{\vec{\kappa}_{k+1},\dots,\vec{\kappa}_n} \).
+The first is a basis for $M$, so if we show that the second is a
+basis for \( M^\perp \) then we will have that
+the entire space is the direct sum of the two subspaces. 
+
+\nearbyexercise{exer:OrthoRepEasy} from the prior subsection 
+proves this about any orthogonal basis:~each vector $\vec{v}$ 
+in the space is the sum of its orthogonal projections
+onto the lines spanned by the basis vectors.
+\begin{equation*}
+  \vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+           +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}
+\tag*{($*$)}\end{equation*}
+To check this, represent the vector
+$\vec{v}=r_1\vec{\kappa}_1+\dots+r_n\vec{\kappa}_n$,
+apply $\vec{\kappa}_i$ to both sides
+$
+   \vec{v}\dotprod\vec{\kappa}_i
+      =\left(r_1\vec{\kappa}_1+\dots+r_n\vec{\kappa}_n\right)
+          \dotprod\vec{\kappa}_i
+      =r_1\cdot 0+\dots+r_i\cdot(\vec{\kappa}_i\dotprod\vec{\kappa}_i)
+            +\dots+r_n\cdot 0
+$,
+and solve to get
+$r_i=(\vec{v}\dotprod\vec{\kappa}_i)/(\vec{\kappa}_i\dotprod\vec{\kappa}_i)$,
+as desired.
+
+Since obviously any member of the span of
+\( \sequence{\vec{\kappa}_{k+1},\dots,\vec{\kappa}_n} \)
+is orthogonal to any vector in $M$, to show that this is a basis for $M^\perp$
+we need only show the other 
+containment\Dash that any $\vec{w}\in M^\perp$ is in
+the span of this basis.
+The prior paragraph does this.
+On projections into basis vectors from $M$, any $\vec{w}\in M^\perp$ gives
+$\proj{\vec{w}\,}{\spanof{\vec{\kappa}_1}}=\zero,
+\dots,\,\proj{\vec{w}\,}{\spanof{\vec{\kappa}_k}}=\zero$
+and therefore ($*$) gives that $\vec{w}$ is a linear combination of 
+\( \vec{\kappa}_{k+1},\dots,\vec{\kappa}_n \).
+Thus this is a basis for $M^\perp$ and
+$\Re^n$ is the direct sum of the two.
+
+The final sentence is proved in much the same way.
+Write $\vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+           +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}$.
+Then $\proj{\vec{v}\,}{M}$ is gotten by keeping only the $M$ part and
+dropping the $M^\perp$ part
+$\proj{\vec{v}\,}{M}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_{k+1}}}
+                       +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_k}}$.
+Therefore $\vec{v}-\proj{\vec{v}\,}{M}$ consists of a linear combination
+of elements of $M^\perp$ and so is perpendicular to every vector in $M$.
+\end{proof}
+
+We can find the orthogonal projection into a subspace by 
+following the steps of the proof, but the next result gives a 
+formula.
+
+\begin{theorem} \label{th:OrthProjMat}
+Let $\vec{v}$ be a vector in $\Re^n$ and 
+let \( M \) be a subspace of \( \Re^n \) with basis
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_k} \). 
+If \( A \) is the matrix whose columns are the \( \vec{\beta} \)'s
+then $\proj{\vec{v}\,}{M}=c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$
+where the coefficients $c_i$ are the entries of the vector
+$(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
+That is, 
+$\proj{\vec{v}\,}{M}=A(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
+\end{theorem}
+
+\begin{proof}
+The vector \( \proj{\vec{v}}{M} \) is a member of \( M \) and so it is a
+linear combination of basis vectors
+\( c_1\cdot\vec{\beta}_1+\dots+c_k\cdot\vec{\beta}_k \).
+Since $A$'s columns are the $\vec{\beta}$'s, that can be expressed 
+as:~there is a \( \vec{c}\in\Re^k \) such that
+\( \proj{\vec{v}\,}{M}=A\vec{c} \)
+(this is expressed compactly with matrix
+multiplication as in
+\nearbyexample{ex:OrthoCompOne} and~\ref{ex:OrthoCompTwo}).
+Because \( \vec{v}-\proj{\vec{v}\,}{M} \) is perpendicular to each member
+of the basis, we have this (again, expressed compactly).
+\begin{equation*}
+  \zero
+  =\trans{A}\bigl( \vec{v}-A\vec{c} \bigr) 
+  =\trans{A}\vec{v}-\trans{A}A\vec{c}
+\end{equation*}
+Solving for \( \vec{c} \) (showing that \( \trans{A}A \) is invertible is an
+exercise)
+\begin{equation*}
+  \vec{c}=\bigl( \trans{A}A\bigr)^{-1}\trans{A}\cdot\vec{v}
+\end{equation*}
+gives the formula for the projection matrix as 
+$\proj{\vec{v}\,}{M}=A\cdot\vec{c}$.
+\end{proof}
+
+\begin{example}
+To orthogonally project this vector into this subspace
+\begin{equation*}
+  \vec{v}=\colvec{1 \\ -1 \\ 1}
+  \qquad
+  P=\set{\colvec{x \\ y \\ z}\suchthat x+z=0}
+\end{equation*}
+first make a matrix whose columns are a basis for the subspace
+\begin{equation*}
+  A=\begin{pmatrix}
+      0  &1  \\
+      1  &0  \\
+      0  &-1
+    \end{pmatrix}
+\end{equation*}
+and then compute.
+\begin{align*}
+  A\bigl(\trans{A}A\bigr)^{-1}\trans{A}
+  &=\begin{pmatrix}
+      0  &1  \\
+      1  &0  \\
+      0  &-1
+    \end{pmatrix}
+    \begin{pmatrix}
+      1    &0  \\
+      0    &1/2
+    \end{pmatrix}
+    \begin{pmatrix}
+      0   &1  &0  \\
+      1   &0  &-1 
+    \end{pmatrix}             \\
+    &=
+    \begin{pmatrix}
+      1/2     &0  &-1/2  \\
+      0     &1    &0   \\
+      -1/2  &0    &1/2
+    \end{pmatrix}
+\end{align*}
+With the matrix, calculating the orthogonal projection of any vector into $P$
+is easy.
+\begin{equation*}
+  \proj{\vec{v}}{P}=
+    \begin{pmatrix}
+      1/2     &0  &-1/2  \\
+      0     &1    &0   \\
+      -1/2  &0    &1/2
+    \end{pmatrix}
+    \colvec{1 \\ -1 \\ 1}
+    =\colvec{0 \\ -1 \\ 0}
+\end{equation*}
+Note, as a check, that this result is indeed in $P$.
+\end{example}
+
+\begin{exercises}
+  \recommended \item
+    Project the vectors into \( M \) along \( N \).
+     \begin{exparts}
+       \partsitem \( \colvec{3 \\ -2},\quad
+                M=\set{\colvec{x \\ y}\suchthat x+y=0},\quad
+                N=\set{\colvec{x \\ y}\suchthat -x-2y=0} \)
+       \partsitem \( \colvec{1 \\ 2},\quad
+                M=\set{\colvec{x \\ y}\suchthat x-y=0},\quad
+                N=\set{\colvec{x \\ y}\suchthat 2x+y=0} \)
+       \partsitem \( \colvec{3 \\ 0 \\ 1},\quad
+                M=\set{\colvec{x \\ y \\ z}\suchthat x+y=0},\quad
+                N=\set{c\cdot\colvec{1 \\ 0 \\ 1}\suchthat c\in\Re} \)
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem When bases for the subspaces
+           \begin{equation*}
+             B_M=\sequence{\colvec{1 \\ -1}}
+             \qquad
+             B_N=\sequence{\colvec{2 \\ -1}}
+           \end{equation*}
+           are concatenated 
+           \begin{equation*}
+             B=\cat{B_M}{B_N}=\sequence{\colvec{1 \\ -1},
+                                        \colvec{2 \\ -1}}
+           \end{equation*}
+           and the given vector is represented
+           \begin{equation*}
+             \colvec{3 \\ -2}=1\cdot\colvec{1 \\ -1}+1\cdot\colvec{2 \\ -1}
+           \end{equation*}
+           then the answer comes from retaining the $M$~part and dropping the 
+           $N$~part.
+           \begin{equation*}
+             \proj{\colvec{3 \\ -2}}{M,N}
+             =\colvec{1 \\ -1}
+           \end{equation*}
+         \partsitem When the bases
+           \begin{equation*}
+             B_M=\sequence{\colvec{1 \\ 1}}
+             \qquad
+             B_N\sequence{\colvec{1 \\ -2}}
+           \end{equation*}
+           are concatenated, and the vector is represented,
+           \begin{equation*}
+             \colvec{1 \\ 2}
+               =(4/3)\cdot\colvec{1 \\ 1}
+                -(1/3)\cdot\colvec{1 \\ -2}
+           \end{equation*}
+           then retaining only the $M$~part gives this answer.
+           \begin{equation*}
+             \proj{\colvec{1 \\ 2}}{M,N}=\colvec{4/3 \\ 4/3}
+           \end{equation*}
+         \partsitem With these bases
+           \begin{equation*}
+             B_M=\sequence{\colvec{1 \\ -1 \\ 0},
+                           \colvec{0 \\ 0 \\ 1}}
+             \qquad
+             B_N=\sequence{\colvec{1 \\ 0 \\ 1}}
+           \end{equation*}
+           the representation with respect to the concatenation is this.
+           \begin{equation*}
+             \colvec{3 \\ 0 \\ 1}
+               =0\cdot\colvec{1 \\ -1 \\ 0}
+                -2\cdot\colvec{0 \\ 0 \\ 1}
+                +3\cdot\colvec{1 \\ 0 \\ 1}
+           \end{equation*}
+           and so the projection is this.
+           \begin{equation*}
+             \proj{\colvec{3 \\ 0 \\ 1}}{M,N}=\colvec{0 \\ 0 \\ -2}
+           \end{equation*}
+       \end{exparts}
+     \end{answer}
+\recommended \item 
+     Find \( M^\perp \).
+     \begin{exparts*}
+       \partsitem \( M=\set{\colvec{x \\ y}\suchthat x+y=0 } \)
+       \partsitem \( M=\set{\colvec{x \\ y}\suchthat -2x+3y=0 } \)
+       \partsitem \( M=\set{\colvec{x \\ y}\suchthat x-y=0 } \)
+       \partsitem \( M=\set{\zero\,} \)
+       \partsitem \( M=\set{\colvec{x \\ y}\suchthat x=0 } \)
+       \partsitem \( M=\set{\colvec{x \\ y \\ z}\suchthat -x+3y+z=0 } \)
+       \partsitem \( M=\set{\colvec{x \\ y \\ z}\suchthat 
+                          \text{$x=0$ and $y+z=0$} } \)
+     \end{exparts*}
+     \begin{answer}
+       As in \nearbyexample{ex:OrthoCompOne}, we can simplify the calculation
+       by just finding the space of vectors perpendicular to all the the
+       vectors in  $M$'s basis.
+       \begin{exparts}
+         \partsitem Parametrizing to get
+           \begin{equation*}
+             M=\set{c\cdot\colvec{-1 \\ 1}\suchthat c\in\Re}
+           \end{equation*}
+           gives that 
+           \begin{equation*}
+             M^\perp
+              \set{\colvec{u \\ v}
+                   \suchthat 
+                      0=\colvec{u \\ v}\dotprod\colvec{-1 \\ 1}}
+              =\set{\colvec{u \\ v}\suchthat 0=-u+v}
+           \end{equation*}
+           Parametrizing the one-equation linear system gives this 
+           description.
+           \begin{equation*}
+             M^\perp=\set{k\cdot\colvec{1 \\ 1}\suchthat k\in\Re}
+           \end{equation*}
+         \partsitem As in the answer to the prior part, $M$ can be described as
+           a span
+           \begin{equation*}
+             M=\set{c\cdot\colvec{3/2 \\ 1}\suchthat c\in\Re}
+             \qquad
+             B_M=\sequence{\colvec{3/2 \\ 1}}
+           \end{equation*}
+           and then $M^\perp$ is the set of vectors perpendicular to the 
+           one vector in this basis.
+           \begin{equation*}
+             M^\perp
+             =\set{\colvec{u \\ v}\suchthat (3/2)\cdot u+1\cdot v=0}
+             =\set{k\cdot\colvec{-2/3 \\ 1}\suchthat k\in\Re}
+           \end{equation*}
+         \partsitem Parametrizing the linear requirement in the description
+            of $M$ gives this basis.
+            \begin{equation*}
+              M=\set{c\cdot\colvec{1 \\ 1}\suchthat c\in\Re}
+              \qquad
+              B_M=\sequence{\colvec{1 \\ 1}}
+            \end{equation*}
+            Now, $M^\perp$ is the set of vectors perpendicular to (the one
+            vector in) $B_M$.
+            \begin{equation*}
+              M^\perp
+              =\set{\colvec{u \\ v}\suchthat u+v=0}
+              =\set{k\cdot\colvec{-1 \\ 1}\suchthat k\in\Re}
+            \end{equation*}
+            (By the way, this answer checks with the first item in this 
+            question.)
+          \partsitem Every vector in the space is perpendicular to the zero
+            vector so $M^\perp=\Re^n$.
+          \partsitem The appropriate description and basis for $M$ are routine.
+            \begin{equation*}
+              M=\set{y\cdot\colvec{0 \\ 1}\suchthat y\in\Re}
+              \qquad
+              B_M=\sequence{\colvec{0 \\ 1}}
+            \end{equation*}
+            Then
+            \begin{equation*}
+              M^\perp
+              =\set{\colvec{u \\ v}\suchthat 0\cdot u+1\cdot v=0}
+              =\set{k\cdot\colvec{1 \\ 0}\suchthat k\in\Re}
+            \end{equation*}
+            and so $(\text{$y$-axis})^\perp=\text{$x$-axis}$.
+          \partsitem The description of $M$ is easy to find by parametrizing.
+            \begin{equation*}
+              M=\set{c\cdot\colvec{3 \\ 1 \\ 0}
+                     +d\cdot\colvec{1 \\ 0 \\ 1}\suchthat c,d\in\Re}
+              \qquad
+              B_M=\sequence{\colvec{3 \\ 1 \\ 0},\colvec{1 \\ 0 \\ 1}}
+            \end{equation*}
+            Finding $M^\perp$ here just requires solving a linear system
+            with two equations
+            \begin{equation*}
+              \begin{linsys}{3}
+                3u  &+  &v  &   &   &=  &0  \\
+                 u  &   &   &+  &w  &=  &0
+              \end{linsys}
+              \;\grstep{-(1/3)\rho_1+\rho_2}\;
+              \begin{linsys}{3}
+                3u  &+  &v         &   &   &=  &0  \\
+                    &   &-(1/3)v   &+  &w  &=  &0
+              \end{linsys}
+            \end{equation*}
+            and parametrizing.
+            \begin{equation*}
+              M^\perp
+              =\set{k\cdot\colvec{-1 \\ 3 \\ 1}\suchthat k\in\Re}
+            \end{equation*}
+          \partsitem Here, $M$ is one-dimensional
+            \begin{equation*}
+              M=\set{c\cdot\colvec{0 \\ -1 \\ 1}\suchthat c\in\Re}
+              \qquad
+              B_M=\sequence{\colvec{0 \\ -1 \\ 1}}
+            \end{equation*}
+            and as a result, $M^\perp$ is two-dimensional.
+            \begin{equation*}
+              M^\perp
+              =\set{\colvec{u \\ v \\ w}
+                     \suchthat 0\cdot u-1\cdot v+1\cdot w=0}
+              =\set{j\cdot\colvec{1 \\ 0 \\ 0}
+                    +k\cdot\colvec{0 \\ 1 \\ 1}\suchthat j,k\in\Re}
+            \end{equation*}
+       \end{exparts}
+     \end{answer}
+  \item 
+    This subsection shows how to project orthogonally in two ways,
+    the method of \nearbyexample{ex:OrthProjOne} 
+    and~\ref{ex:ProjIntoMAlongNGener}, and the method of 
+    \nearbytheorem{th:OrthProjMat}.
+    To compare them, 
+    consider the plane $P$ specified by $3x+2y-z=0$ in $\Re^3$.
+    \begin{exparts}
+      \partsitem Find a basis for $P$.
+      \partsitem Find $P^\perp$ and a basis for $P^\perp$. 
+      \partsitem Represent this vector with respect to the concatenation
+        of the two bases from the prior item.
+        \begin{equation*}
+          \vec{v}=\colvec{1 \\ 1 \\ 2}
+        \end{equation*}
+      \partsitem Find the orthogonal projection of $\vec{v}$ into $P$
+        by keeping only the $P$ part from the prior item.
+      \partsitem Check that against the result from applying
+        \nearbytheorem{th:OrthProjMat}.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Parametrizing the equation leads to this basis for
+          $P$.
+          \begin{equation*}
+            B_P=\sequence{\colvec{1 \\ 0 \\ 3},
+                          \colvec{0 \\ 1 \\ 2} }
+          \end{equation*}
+        \partsitem Because $\Re^3$ is three-dimensional 
+          and $P$ is two-dimensional, the complement $P^\perp$ must be
+          a line.
+          Anyway, the calculation as in \nearbyexample{ex:OrthoCompOne}
+          \begin{equation*}
+            P^\perp=\set{\colvec{x \\ y \\ z}
+                         \suchthat
+                         \begin{pmatrix}
+                           1  &0 &3  \\
+                           0  &1 &2
+                         \end{pmatrix}
+                         \colvec{x \\ y \\ z}
+                         =\colvec{0 \\ 0}\;}
+          \end{equation*}
+          gives this basis for $P^\perp$.
+          \begin{equation*}
+            B_{P^\perp}=\sequence{\colvec{3 \\ 2 \\ -1} }
+          \end{equation*}
+        \partsitem $ \displaystyle       
+             \colvec{1 \\ 1 \\ 2}=
+             (5/14)\cdot\colvec{1 \\ 0 \\ 3}+
+             (8/14)\cdot\colvec{0 \\ 1 \\ 2}+
+             (3/14)\cdot\colvec{3 \\ 2 \\ -1}$
+        \partsitem $\proj{\colvec{1 \\ 1 \\ 2}}{P}
+          =\colvec{5/14 \\ 8/14 \\ 31/14}$
+        \partsitem The matrix of the projection
+          \begin{align*}
+            \begin{pmatrix}
+              1  &0 \\
+              0  &1 \\
+              3  &2
+            \end{pmatrix}
+            \bigl(
+              \begin{pmatrix}
+                1  &0  &3 \\
+                0  &1  &2 
+              \end{pmatrix}
+              \begin{pmatrix}
+                1  &0 \\
+                0  &1 \\
+                3  &2
+              \end{pmatrix}
+            \bigr)^{-1}
+            \begin{pmatrix}
+              1  &0  &3 \\
+              0  &1  &2 
+            \end{pmatrix}
+            &=
+            \begin{pmatrix}
+              1  &0 \\
+              0  &1 \\
+              3  &2
+            \end{pmatrix}
+              \begin{pmatrix}
+                10  &6  \\
+                6   &5
+              \end{pmatrix}^{-1}
+            \begin{pmatrix}
+              1  &0  &3 \\
+              0  &1  &2 
+            \end{pmatrix}                                     \\
+            &=
+            \frac{1}{14}
+            \begin{pmatrix}
+              5  &-6 &3  \\
+             -6  &10 &2  \\
+              3  &2  &13
+            \end{pmatrix}
+          \end{align*}
+          when applied to the vector, yields the expected result.
+          \begin{equation*}
+            \frac{1}{14}
+            \begin{pmatrix}
+              5  &-6 &3  \\
+             -6  &10 &2  \\
+              3  &2  &13
+            \end{pmatrix}
+            \colvec{1 \\ 1 \\ 2}
+            =\colvec{5/14 \\ 8/14 \\ 31/14}
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
+  \recommended \item 
+    We have three ways to find the orthogonal projection of a 
+    vector into a line, the \nearbydefinition{def:ProjIntoLine} way from
+    the first subsection of this section, the  
+    \nearbyexample{ex:OrthProjOne}  and~\ref{ex:ProjIntoMAlongNGener}   
+    way of representing 
+    the vector with respect to a basis for the space and then keeping the
+    $M$~part, and the way of \nearbytheorem{th:OrthProjMat}.
+    For these cases, do all three ways.
+     \begin{exparts}
+       \partsitem \( \vec{v}=\colvec{1 \\ -3},\quad
+                M=\set{\colvec{x \\ y}\suchthat x+y=0} \)
+       \partsitem \( \vec{v}=\colvec{0 \\ 1 \\ 2},\quad
+                M=\set{\colvec{x \\ y \\ z}
+                        \suchthat \text{$x+z=0$ and $y=0$}} \)
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem Parametrizing gives this.
+           \begin{equation*}
+             M=\set{c\cdot\colvec{-1 \\ 1}\suchthat c\in\Re}
+           \end{equation*}
+           
+           For the first way, we take the vector spanning the line $M$ to be
+           \begin{equation*}
+             \vec{s}=\colvec{-1 \\ 1}
+           \end{equation*}
+           and the \nearbydefinition{def:ProjIntoLine} formula gives this.
+           \begin{equation*}
+             \proj{\colvec{1 \\ -3}}{\spanof{\vec{s}\,}}
+              =\frac{\colvec{1 \\ -3}\dotprod\colvec{-1 \\ 1}}{
+                     \colvec{-1 \\ 1}\dotprod\colvec{-1 \\ 1}}
+                \cdot\colvec{-1 \\ 1}
+              =\frac{-4}{2}
+                \cdot\colvec{-1 \\ 1}
+              =\colvec{2 \\ -2}
+           \end{equation*}
+
+           For the second way, we fix
+           \begin{equation*}
+             B_M=\sequence{\colvec{-1 \\ 1}}
+           \end{equation*}
+           and so
+           (as in \nearbyexample{ex:OrthoCompOne} and~\ref{ex:OrthoCompTwo}, 
+           we can just find the vectors perpendicular to all of the members 
+           of the basis)
+           \begin{equation*}
+             M^\perp
+             =\set{\colvec{u \\ v}\suchthat -1\cdot u+1\cdot v=0}
+             =\set{k\cdot\colvec{1 \\ 1}\suchthat k\in\Re}
+             \qquad
+             B_{M^\perp}=\sequence{\colvec{1 \\ 1}}
+           \end{equation*}
+           and representing the vector with respect to the concatenation
+           gives this.
+           \begin{equation*}
+             \colvec{1 \\ -3}=-2\cdot\colvec{-1 \\ 1}-1\cdot\colvec{1 \\ 1}
+           \end{equation*}
+           Keeping the $M$~part yields the answer.
+           \begin{equation*}
+             \proj{\colvec{1 \\ -3}}{M,M^\perp}=\colvec{2 \\ -2}
+           \end{equation*}
+
+           The third part is also a simple calculation
+           (there is a $\nbyn{1}$ matrix in the middle,
+           and the inverse of it is also $\nbyn{1}$)
+           \begin{multline*}
+             A\left(\trans{A}A\right)^{-1}\trans{A}
+             =
+             \begin{pmatrix}
+               -1 \\ 1
+             \end{pmatrix}
+             \left(
+               \begin{pmatrix}
+                 -1  &1
+               \end{pmatrix}
+               \begin{pmatrix}
+                 -1  \\
+                  1
+               \end{pmatrix}
+             \right)^{-1}
+             \begin{pmatrix}
+               -1  &1
+             \end{pmatrix}
+             =
+             \begin{pmatrix}
+               -1 \\ 1
+             \end{pmatrix}
+               \begin{pmatrix}
+                 2
+               \end{pmatrix}^{-1}
+             \begin{pmatrix}
+               -1  &1
+             \end{pmatrix}               \\
+             =
+             \begin{pmatrix}
+               -1 \\ 1
+             \end{pmatrix}
+               \begin{pmatrix}
+                 1/2
+               \end{pmatrix}
+             \begin{pmatrix}
+               -1  &1
+             \end{pmatrix}               
+             =
+             \begin{pmatrix}
+               -1 \\ 1
+             \end{pmatrix}
+             \begin{pmatrix}
+               -1/2  &1/2
+             \end{pmatrix}               
+             =
+             \begin{pmatrix}
+               1/2  &-1/2  \\
+              -1/2  &1/2  
+             \end{pmatrix}
+           \end{multline*}
+           which of course gives the same answer.
+           \begin{equation*}
+             \proj{\colvec{1 \\ -3}}{M}
+             =
+             \begin{pmatrix}
+               1/2  &-1/2  \\
+              -1/2  &1/2  
+             \end{pmatrix}
+             \colvec{1 \\ -3}
+             =\colvec{2 \\ -2}
+           \end{equation*}
+         \partsitem Parametrization gives this.
+           \begin{equation*}
+             M=\set{c\cdot\colvec{-1 \\ 0 \\ 1}\suchthat c\in\Re}
+           \end{equation*}
+           With that, the formula for the first way gives this.
+           \begin{equation*}
+             \frac{\colvec{0 \\ 1 \\ 2}\dotprod\colvec{-1 \\ 0 \\ 1}}{
+                   \colvec{-1 \\ 0 \\ 1}\dotprod\colvec{-1 \\ 0 \\ 1}}
+               \cdot\colvec{-1 \\ 0 \\ 1}
+             =\frac{2}{2}
+               \cdot\colvec{-1 \\ 0 \\ 1}
+             =\colvec{-1 \\ 0 \\ 1}
+           \end{equation*}
+           To proceed by the second method we find $M^\perp$,
+           \begin{equation*}
+             M^\perp
+             =\set{\colvec{u \\ v \\ w}\suchthat -u+w=0}
+             =\set{j\cdot\colvec{1 \\ 0 \\ 1}
+                   +k\cdot\colvec{0 \\ 1 \\ 0}\suchthat j,k\in\Re}
+           \end{equation*}
+           find the representation of the given vector with respect to the
+           concatenation of the bases $B_M$ and $B_{M^\perp}$
+           \begin{equation*}
+             \colvec{0 \\ 1 \\ 2}
+              =1\cdot\colvec{-1 \\ 0 \\ 1}
+               +1\cdot\colvec{1 \\ 0 \\ 1}
+               +1\cdot\colvec{0 \\ 1 \\ 0}
+           \end{equation*}
+           and retain only the $M$~part.
+           \begin{equation*}
+             \proj{\colvec{0 \\ 1 \\ 2}}{M}=1\cdot\colvec{-1 \\ 0 \\ 1}
+                       =\colvec{-1 \\ 0 \\ 1}
+           \end{equation*}
+           Finally, for the third method, the matrix calculation
+           \begin{multline*}
+             A\left(\trans{A}A\right)^{-1}\trans{A}
+             =
+             \begin{pmatrix}
+               -1 \\ 0  \\  1
+             \end{pmatrix}
+             \bigl(
+               \begin{pmatrix}
+                 -1  &0  &1
+               \end{pmatrix}
+               \begin{pmatrix}
+                 -1  \\
+                  0  \\
+                  1
+               \end{pmatrix}
+             \bigr)^{-1}
+             \begin{pmatrix}
+               -1  &0  &1
+             \end{pmatrix}
+             =
+             \begin{pmatrix}
+               -1 \\ 0  \\  1
+             \end{pmatrix}
+               \begin{pmatrix}
+                 2
+               \end{pmatrix}^{-1}
+             \begin{pmatrix}
+               -1  &0  &1
+             \end{pmatrix}              \\
+             =
+             \begin{pmatrix}
+               -1 \\ 0  \\  1
+             \end{pmatrix}
+               \begin{pmatrix}
+                 1/2
+               \end{pmatrix}
+             \begin{pmatrix}
+               -1  &0  &1
+             \end{pmatrix}
+             =
+             \begin{pmatrix}
+               -1 \\ 0  \\  1
+             \end{pmatrix}
+             \begin{pmatrix}
+               -1/2  &0  &1/2
+             \end{pmatrix}
+             =
+             \begin{pmatrix}
+               1/2  &0  &-1/2  \\
+               0    &0  &0     \\
+              -1/2  &0  &1/2
+             \end{pmatrix}
+           \end{multline*}
+           followed by matrix-vector multiplication
+           \begin{equation*}
+             \proj{\colvec{0 \\ 1 \\ 2}}{M}
+             \begin{pmatrix}
+               1/2  &0  &-1/2  \\
+               0    &0  &0     \\
+              -1/2  &0  &1/2
+             \end{pmatrix}
+             \colvec{0 \\ 1 \\ 2}
+             =\colvec{-1 \\ 0 \\ 1}
+           \end{equation*}
+           gives the answer.
+       \end{exparts}
+     \end{answer}
+  \item 
+    Check that the operation of \nearbydefinition{def:ProjIntoMAlongN}
+    is well-defined.  
+    That is, in \nearbyexample{ex:OrthProjOne} 
+    and~\ref{ex:ProjIntoMAlongNGener}, 
+    doesn't the answer depend on the choice of bases?
+    \begin{answer}
+      No, a decomposition of vectors $\vec{v}=\vec{m}+\vec{n}$ into
+      $\vec{m}\in M$ and $\vec{n}\in N$ does not depend on the bases
+      chosen for the subspaces\Dash 
+      this was shown in the Direct Sum subsection.
+    \end{answer}
+  \item 
+    What is the orthogonal projection into the trivial subspace?
+    \begin{answer}
+      The orthogonal projection of a vector into a subspace is a member of
+      that subspace.
+      Since a trivial subspace has only one member, $\zero$, the projection of 
+      any vector must equal $\zero$.
+    \end{answer}
+  \item 
+    What is the projection of \( \vec{v} \) into \( M \) along \( N \)
+    if \( \vec{v}\in M \)?
+    \begin{answer}
+      The projection into $M$ along
+      $N$ of a $\vec{v}\in M$ is $\vec{v}$.
+      Decomposing
+      $\vec{v}=\vec{m}+\vec{n}$ gives $\vec{m}=\vec{v}$ and $\vec{n}=\zero$,
+      and dropping the $N$~part but retaining the $M$~part results in a 
+      projection of $\vec{m}=\vec{v}$. 
+    \end{answer}
+  \item
+    Show that if \( M\subseteq\Re^n \) is a subspace with orthonormal basis
+    \( \basis{\kappa}{n} \) then
+    the orthogonal projection of \( \vec{v} \) into \( M \) is this.
+    \begin{equation*}
+      (\vec{v}\dotprod\vec{\kappa}_1)\cdot\vec{\kappa}_1+
+      \dots+
+      (\vec{v}\dotprod\vec{\kappa}_n)\cdot\vec{\kappa}_n
+    \end{equation*}
+    \begin{answer}
+      The proof of \nearbylemma{le:OrthoProjWellDefd} shows that
+      each vector $\vec{v}\in\Re^n$ 
+      is the sum of its orthogonal projections
+      onto the lines spanned by the basis vectors.
+      \begin{equation*}
+        \vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                 +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}
+               =\frac{\vec{v}\dotprod\vec{\kappa}_1}{
+                      \vec{\kappa}_1\dotprod\vec{\kappa}_1}
+                   \cdot\vec{\kappa}_1
+               +\dots
+               +\frac{\vec{v}\dotprod\vec{\kappa}_n}{
+                      \vec{\kappa}_n\dotprod\vec{\kappa}_n}
+                   \cdot\vec{\kappa}_n
+      \end{equation*}
+      Since the basis is orthonormal, the bottom of each fraction has 
+      $\vec{\kappa}_i\dotprod\vec{\kappa}_i=1$.
+    \end{answer}
+  \recommended \item
+    Prove that the map \( \map{p}{V}{V} \) is the projection into \( M \)
+    along \( N \) if and only if the map 
+    \( \identity-p \) is the projection into \( N \) along \( M \).
+    (Recall the definition of the difference of two 
+    maps:~$(\identity-p)\,(\vec{v})=\identity(\vec{v})-p(\vec{v})
+     =\vec{v}-p(\vec{v})$.)
+     \begin{answer}
+       If $V=M\directsum N$ then every vector can be decomposed uniquely as
+       $\vec{v}=\vec{m}+\vec{n}$.
+       For all $\vec{v}$ the map $p$ gives $p(\vec{v})=\vec{m}$ if and only
+       if $\vec{v}-p(\vec{v})=\vec{n}$, as required.
+     \end{answer}
+  \recommended \item \label{exer:PerpOnBasisImplPerp} 
+    Show that if a vector is perpendicular to every vector in a set then
+    it is perpendicular to every vector in the span of that set.
+    \begin{answer}
+      Let $\vec{v}$ be perpendicular to every $\vec{w}\in S$.
+      Then 
+      $\vec{v}\dotprod(c_1\vec{w}_1+\dots+c_n\vec{w}_n)
+       =\vec{v}\dotprod(c_1\vec{w}_1)
+          +\dots+\vec{v}\dotprod (c_n\dotprod\vec{w}_n)
+       =c_1(\vec{v}\dotprod\vec{w}_1)
+          +\dots+c_n(\vec{v}\dotprod\vec{w}_n)
+       =c_1\cdot 0+\dots+c_n\cdot 0=0$.
+    \end{answer}
+  \item
+    True or false:~the intersection of a subspace and its orthogonal
+    complement is trivial.
+    \begin{answer}
+      True; the only vector orthogonal to itself is the zero vector.
+    \end{answer}
+  \item 
+    Show that the dimensions of orthogonal complements add to the 
+    dimension of the entire space.
+    \begin{answer}
+      This is immediate from the statement in 
+      \nearbylemma{le:OrthoProjWellDefd} that the space is the direct sum 
+      of the two.
+    \end{answer}
+  \recommended \item
+    Suppose that \( \vec{v}_1,\vec{v}_2\in\Re^n \) are such that for all
+    complements \( M,N\subseteq\Re^n \), the projections of \( \vec{v}_1 \)
+    and \( \vec{v}_2 \) into \( M \) along \( N \) are equal.
+    Must \( \vec{v}_1 \) equal \( \vec{v}_2 \)?
+    (If so, what if we relax the condition to:~all
+     orthogonal projections of the two are equal?)
+    \begin{answer}
+      The two must be equal, even only under the seemingly weaker
+      condition that they yield the same result on all orthogonal projections.
+      Consider the subspace $M$ spanned by the set 
+      $\set{\vec{v}_1,\vec{v}_2}$.
+      Since each is in $M$, the orthogonal projection of $\vec{v}_1$ into 
+      $M$ is $\vec{v}_1$ and the orthogonal projection of $\vec{v}_2$ into
+      $M$ is $\vec{v}_2$.
+      For their projections into $M$ to be equal, they must be equal.
+    \end{answer}
+  \recommended \item \label{exer:AlgOfPerps}
+    Let \( M,N \) be subspaces of \( \Re^n \).
+    The perp operator acts on subspaces; we can ask how it interacts
+    with other such operations.
+    \begin{exparts}
+      \partsitem Show that two perps cancel: \( (M^\perp)^\perp=M \).
+      \partsitem %Schaums p331 #114
+        Prove that \( M\subseteq N \) implies
+           that \( N^\perp\subseteq M^\perp \).
+      \partsitem Show that \( (M+N)^\perp=M^\perp\intersection N^\perp \).
+      %\partsitem Show that \( (M\intersection N)^\perp=M^\perp +N^\perp \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          We will show that the sets are mutually inclusive,
+          $M\subseteq (M^\perp)^\perp$ and $(M^\perp)^\perp \subseteq M$.
+          For the first, 
+          if $\vec{m}\in M$ then by the definition of the perp operation,
+          $\vec{m}$ is perpendicular to every $\vec{v}\in M^\perp$,
+          and therefore (again by the definition of the perp operation)
+          $\vec{m}\in (M^\perp)^\perp$.
+          For the other direction, consider $\vec{v}\in (M^\perp)^\perp$.
+          \nearbylemma{le:OrthoProjWellDefd}'s proof shows that  
+          $\Re^n=M\directsum M^\perp$ and that
+          we can give an orthogonal basis for the space 
+          $\sequence{\vec{\kappa}_1,\dots,\vec{\kappa}_k,
+                        \vec{\kappa}_{k+1},\dots,\vec{\kappa}_n}$
+          such that the first half
+          $\sequence{\vec{\kappa}_1,\dots,\vec{\kappa}_k}$ is a basis for
+          $M$ and the second half is a basis for $M^\perp$.
+          The proof also checks that
+          each vector in the space is the sum of its orthogonal projections 
+          onto the lines spanned by these basis vectors.
+          \begin{equation*}
+             \vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                          +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}
+          \end{equation*}
+          Because $\vec{v}\in (M^\perp)^\perp$, it is perpendicular to 
+          every vector in $M^\perp$, and so the projections in 
+          the second half are all zero. 
+          Thus $\vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
+                          +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_k}}$,
+          which is a linear combination of vectors from $M$, and 
+          so $\vec{v}\in M$.
+          (\textit{Remark}.
+           Here is a slicker way to do the second half:~write the space
+           both as $M\directsum M^\perp$ and as 
+           $M^\perp\directsum (M^\perp)^\perp$.
+           Because the first half showed that $M\subseteq (M^\perp)^\perp$
+           and the prior sentence shows that the dimension of the two
+           subspaces $M$ and $(M^\perp)^\perp$ are equal, we can conclude
+           that $M$ equals $(M^\perp)^\perp$.)
+        \partsitem Because $M\subseteq N$, any $\vec{v}$ that is perpendicular
+           to every vector in $N$ is also perpendicular to every vector in 
+           $M$.
+           But that sentence simply says that $N^\perp\subseteq M^\perp$.
+        \partsitem We will again show that the sets are equal by mutual 
+           inclusion.
+           The first direction is easy; any $\vec{v}$ perpendicular to
+           every vector in 
+           $M+N=\set{\vec{m}+\vec{n}\suchthat \vec{m}\in M,\, \vec{n}\in N}$
+           is perpendicular to every vector of the form $\vec{m}+\zero$
+           (that is, every vector in $M$) and every vector of the form
+           $\zero+\vec{n}$ (every vector in $N$), and so 
+           $(M+N)^\perp\subseteq M^\perp\intersection N^\perp$. 
+           The second direction is also routine; any vector 
+           $\vec{v}\in M^\perp\intersection N^\perp$ 
+           is perpendicular to any vector of the form $c\vec{m}+d\vec{n}$
+           because 
+           $\vec{v}\dotprod (c\vec{m}+d\vec{n})
+             =c\cdot(\vec{v}\dotprod\vec{m})+d\cdot(\vec{v}\dotprod\vec{n})
+             =c\cdot 0+d\cdot 0
+             =0$.
+      \end{exparts}
+    \end{answer}
+  \recommended \item 
+    The material in this subsection allows us to express a geometric 
+    relationship that we have not yet seen  between the rangespace and the 
+    nullspace of a linear map.
+    \begin{exparts}
+      \partsitem Represent $\map{f}{\Re^3}{\Re}$ given by 
+        \begin{equation*}
+          \colvec{v_1 \\ v_2 \\ v_3}
+          \mapsto
+          1v_1+2v_2+ 3v_3
+        \end{equation*}
+        with respect to the standard bases and show that
+        \begin{equation*}
+          \colvec{1 \\ 2 \\ 3}
+        \end{equation*}
+        is a member of the perp of the nullspace.
+        Prove that  $\nullspace{f}^\perp$ is equal to the span of this 
+        vector.
+      \partsitem Generalize that to apply to any $\map{f}{\Re^n}{\Re}$.
+      \partsitem Represent $\map{f}{\Re^3}{\Re^2}$ 
+        \begin{equation*}
+          \colvec{v_1 \\ v_2 \\ v_3}
+          \mapsto
+          \colvec{1v_1+2v_2+ 3v_3 \\
+                  4v_1+5v_2+ 6v_3}   
+        \end{equation*}
+        with respect to the standard bases and show that
+        \begin{equation*}
+          \colvec{1 \\ 2 \\ 3},
+          \;\colvec{4 \\ 5 \\ 6}
+        \end{equation*}
+        are both members of the perp of the nullspace.
+        Prove that $\nullspace{f}^\perp$ is the span of these two.
+        (\textit{Hint}.  
+         See the third item of \nearbyexercise{exer:AlgOfPerps}.)
+      \partsitem Generalize that to apply to any $\map{f}{\Re^n}{\Re^m}$.
+    \end{exparts}
+    This, and related results, is called the 
+    \definend{Fundamental Theorem of Linear Algebra}%
+    \index{Fundamental Theorem!of Linear Algebra}
+    in \cite{Strang93}.
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The representation of
+          \begin{equation*}
+            \colvec{v_1 \\ v_2 \\ v_3}
+            \mapsunder{f}
+            1v_1+2v_2+ 3v_3    
+          \end{equation*}
+          is this.
+          \begin{equation*}
+            \rep{f}{\stdbasis_3,\stdbasis_1}
+            =\begin{pmatrix}
+               1  &2  &3
+             \end{pmatrix}
+          \end{equation*}
+          By the definition of $f$
+          \begin{equation*}
+            \nullspace{f}
+            =\set{\colvec{v_1 \\ v_2 \\ v_3}
+                  \suchthat 1v_1+2v_2+3v_3=0}
+            =\set{\colvec{v_1 \\ v_2 \\ v_3}
+                  \suchthat 
+                   \colvec{1 \\ 2 \\ 3}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0}
+          \end{equation*}
+          and this second description exactly says this.
+          \begin{equation*}
+            \nullspace{f}^\perp
+            =\spanof{\set{\colvec{1 \\ 2 \\ 3}}}
+          \end{equation*}
+        \partsitem The generalization is that for any $\map{f}{\Re^n}{\Re}$
+           there is a vector $\vec{h}$ so that
+           \begin{equation*}
+             \colvec{v_1 \\ \vdots \\ v_n}
+             \mapsunder{f}
+             h_1v_1+\dots+h_nv_n
+           \end{equation*}
+           and $\vec{h}\in\nullspace{f}^\perp$.
+           We can prove this by, as in the prior item, 
+           representing $f$ with
+           respect to the standard bases and taking $\vec{h}$ to be the
+           column vector gotten by transposing the one row of that 
+           matrix representation. 
+         \partsitem Of course, 
+           \begin{equation*}
+             \rep{f}{\stdbasis_3,\stdbasis_2}
+             =
+             \begin{pmatrix}
+               1  &2  &3  \\
+               4  &5  &6
+             \end{pmatrix}
+           \end{equation*}
+           and so the nullspace is this set.
+           \begin{equation*}
+             \nullspace{f}
+             \set{\colvec{v_1 \\ v_2 \\ v_3}
+                  \suchthat
+                   \;\begin{pmatrix}
+                     1  &2  &3  \\
+                     4  &5  &6
+                   \end{pmatrix}
+                   \colvec{v_1 \\ v_2 \\ v_3}
+                   =\colvec{0  \\ 0}\;}
+           \end{equation*}
+           That description makes clear that
+           \begin{equation*}
+             \colvec{1 \\ 2 \\ 3},
+              \,\colvec{4 \\ 5 \\ 6}\in\nullspace{f}^\perp
+           \end{equation*}
+           and since $\nullspace{f}^\perp$ is a subspace of $\Re^n$,
+           the span of the two vectors is a subspace of the perp of 
+           the nullspace.
+           To see that this containment is an equality, take
+           \begin{equation*}
+             M=\spanof{\set{\colvec{1 \\ 2 \\ 3}}}
+             \qquad
+             N=\spanof{\set{\colvec{4 \\ 5 \\ 6}}}
+           \end{equation*}
+           in the third item of \nearbyexercise{exer:AlgOfPerps}, as suggested
+           in the hint.
+        \partsitem As above, generalizing from the specific case is easy:~for 
+           any $\map{f}{\Re^n}{\Re^m}$
+           the matrix $H$ representing the map with respect to the standard
+           bases describes the action
+           \begin{equation*}
+             \colvec{v_1 \\ \vdots \\ v_n}
+             \mapsunder{f}
+             \colvec{h_{1,1}v_1+h_{1,2}v_2+\dots+h_{1,n}v_n \\
+                     \vdots                                 \\
+                     h_{m,1}v_1+h_{m,2}v_2+\dots+h_{m,n}v_n}
+           \end{equation*}
+           and the description of the nullspace gives that
+           on transposing the $m$~rows of $H$
+           \begin{equation*}
+             \vec{h}_1=\colvec{h_{1,1} \\ h_{1,2} \\ \vdots \\ h_{1,n}},
+              \dots
+             \vec{h}_m=\colvec{h_{m,1} \\ h_{m,2} \\ \vdots \\ h_{m,n}}
+           \end{equation*}
+           we have $\nullspace{f}^\perp
+                    =\spanof{\set{\vec{h}_1,\dots,\vec{h}_m}}$.
+           (In \cite{Strang93}, this space is described as the 
+           transpose of the row space of $H$.)
+      \end{exparts}
+    \end{answer}
+  \item
+    Define a \definend{projection\/}\index{projection} 
+    to be a linear transformation
+    \( \map{t}{V}{V} \) with the property that 
+    repeating the projection does nothing more than does the projection
+    alone:~\( (\composed{t}{t})\,(\vec{v})=t(\vec{v}) \) 
+    for all \( \vec{v}\in V \).
+    \begin{exparts}
+      \partsitem Show that orthogonal projection into a line has that property.
+      \partsitem Show that projection along a subspace has that property.
+      \partsitem Show that for any such $t$
+        there is a basis \( B=\basis{\beta}{n} \) for \( V \) such that
+        \begin{equation*}
+          t(\vec{\beta}_i)=
+          \begin{cases}
+                  \vec{\beta}_i  &i=1,2,\dots,\,r  \\
+                  \zero          &i=r+1,r+2,\dots,\,n
+                \end{cases}
+        \end{equation*}
+        where \( r \) is the rank of \( t \).
+      \item Conclude that every projection is a projection along a subspace.
+      \item Also conclude that every projection has a representation
+        \begin{equation*}
+          \rep{t}{B,B}=
+          \begin{pmat}{c|c}
+            I   &Z  \\ \hline
+            Z   &Z
+          \end{pmat}
+        \end{equation*}
+        in block partial-identity form.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem First note that if a vector $\vec{v}$ is already in the 
+          line then the orthogonal projection gives $\vec{v}$ itself.
+          One way to verify this is to apply the 
+          formula for projection into the line spanned by a vector $\vec{s}$,
+          namely $(\vec{v}\dotprod\vec{s}/\vec{s}\dotprod\vec{s})\cdot\vec{s}$.
+          Taking the line as
+          $\set{k\cdot\vec{v}\suchthat k\in\Re}$
+          (the $\vec{v}=\zero$ case is separate but easy) gives
+          $(\vec{v}\dotprod\vec{v}/\vec{v}\dotprod\vec{v})\cdot\vec{v}$,
+          which simplifies to $\vec{v}$, as required.
+ 
+          Now, that answers the question because after once projecting into
+          the line, the result $\proj{\vec{v}}{\ell}$ is in that line.
+          The prior paragraph says that projecting into the same line again 
+          will have no effect.  
+        \partsitem The argument here is similar to the one in the prior item.
+          With $V=M\directsum N$, the projection of $\vec{v}=\vec{m}+\vec{n}$
+          is $\proj{\vec{v}\,}{M,N}=\vec{m}$.
+          Now repeating the projection will give $\proj{\vec{m}}{M,N}=\vec{m}$,
+          as required, because the decomposition of a member of $M$ into the
+          sum of a member of $M$ and a member of $N$ is 
+          $\vec{m}=\vec{m}+\zero$.
+          Thus, projecting twice into $M$ along $N$ has the same effect as 
+          projecting once.
+        \partsitem As suggested by the prior items, the condition
+          gives that $t$ leaves vectors in the rangespace unchanged,
+          and hints that we should take 
+          $\vec{\beta}_1$, \ldots, $\vec{\beta}_r$
+          to be basis vectors for the range, that is, that we should take
+          the range space of $t$ for $M$ (so that $\dim(M)=r$).
+          As for the complement, we write $N$ for the nullspace of $t$
+          and we will show that $V=M\directsum N$.
+
+          To show this, we can show that their intersection
+          is trivial $M\intersection N=\set{\zero}$ and that they sum to 
+          the entire space $M+N=V$.
+          For the first, if a vector $\vec{m}$ is in the rangespace
+          then there is a $\vec{v}\in V$ with $t(\vec{v})=\vec{m}$,
+          and the condition on $t$ gives that 
+          $t(\vec{m})=(\composed{t}{t})\,(\vec{v})=t(\vec{v})=\vec{m}$, while
+          if that same vector is also in the nullspace then $t(\vec{m})=\zero$
+          and so the intersection of the rangespace and nullspace is trivial.
+          For the second, to write an arbitrary $\vec{v}$ as the sum of
+          a vector from the rangespace and a vector from the nullspace,
+          the fact that the condition $t(\vec{v})=t(t(\vec{v}))$ can be 
+          rewritten as $t(\vec{v}-t(\vec{v}))=\zero$ suggests taking
+          $\vec{v}=t(\vec{v})+(\vec{v}-t(\vec{v}))$.
+  
+          So we are finished on taking a basis 
+          $B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$ for $V$ where
+          $\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_r}$ is a basis for 
+          the rangespace $M$ and 
+          $\sequence{\vec{\beta}_{r+1},\ldots,\vec{\beta}_n}$ is a 
+          basis for the nullspace $N$.
+        \partsitem Every projection (as defined in this exercise) is 
+          a projection into its rangespace and along its nullspace.
+        \partsitem This also follows immediately from the third item.
+      \end{exparts}
+    \end{answer}
+%  \item 
+%    Show that projection into a plane followed by projection from the plane
+%    to a line in the plane equals the single operation of projection into the
+%    line.
+%  \item 
+%    Assume that \( V \) decomposes as \( M_1\directsum N_1 \) and also as
+%    \( M_2\directsum N_2 \).
+%    Let the function \( p_1 \) 
+%    be the  projection into \( M_1 \) along \( N_1 \) and let
+%    \( p_2 \) be the projection into \( M_2 \) along \( N_2 \).
+%    Prove that if \( \composed{p_1}{p_2} \) and \( \composed{p_2}{p_1} \) are
+%    both the zero map then \( p_1+p_2 \) projects into \( M_1+M_2 \) along
+%    \( N_1\intersection N_2 \).
+%  \item 
+%    Why does the definition of projection into \( M \) along \( N \)
+%    require that the subspaces be complements?
+%    Can we relax that requirement and just have
+%    \( N \intersection M=\set{\zero} \) (but not have the span of
+%    \( N\union M \) be the whole space)?
+%    Describe the projection of \( \vec{v} \) into \( M \) along \( N \)
+%    if \( M=N \).
+%    What if \( M\intersection N \) is nontrivial?
+%    What if it is trivial?
+%  \item 
+%    \begin{exparts}
+%      \partsitem Show that if the columns of a matrix \( A \) form a linearly
+%        independent set then \( \trans{A}A \) is invertible.
+%      \partsitem Show that if the columns of \( A \) are mutually 
+%        orthogonal and
+%        nonzero then \( \trans{A}A \) is the identity matrix.
+%    \end{exparts}
+  \item 
+    A square matrix is \definend{symmetric\/}%\index{symmetric!matrix}%
+    \index{matrix!symmetric} 
+    if each \( i,j \) entry equals the
+    \( j,i \) entry (i.e., if the matrix equals its transpose).
+    Show that the projection matrix \( A(\trans{A}A)^{-1}\trans{A} \) 
+    is symmetric. 
+    \cite{Strang}
+    \textit{Hint}.  Find properties of transposes by looking in the index
+      under `transpose'.
+    \begin{answer}
+      For any matrix $M$ we have that $\trans{(M^{-1})}=(\trans{M})^{-1}$,
+      and for any two matrices $M$, $N$ we have that 
+      $\trans{MN}=\trans{N}\trans{M}$ (provided, of course, 
+      that the inverse and product are defined).
+      Applying these two gives that the matrix equals its transpose.
+      \begin{multline*}
+         \trans{\bigl(A(\trans{A}A)^{-1}\trans{A}\bigr)}
+         =(\trans{\trans{A}})
+           (\trans{\bigl((\trans{A}A)^{-1}\bigr)})
+           (\trans{A})                               \\
+         =(\trans{\trans{A}})
+           ( \bigl(\trans{(\trans{A}A)}\bigr)^{-1} )
+           (\trans{A})                    
+         =A
+           (\trans{A}\trans{\trans{A}})^{-1}
+           \trans{A}
+         =A
+           (\trans{A}A)^{-1}
+           \trans{A}
+      \end{multline*}
+    \end{answer}
+\end{exercises}

@@ -1,0 +1,191 @@
+% Chapter 2, Topic _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-11
+\topic{Fields}
+\index{field|(}
+Linear combinations involving only fractions or only integers are much
+easier for computations than combinations involving real numbers,
+because computing with irrational numbers is awkward.
+Could other number systems, like the rationals or the integers, work in the
+place of \( \Re \) in the definition of a vector space?
+
+Yes and no.
+If we take ``work'' to mean that the results of this chapter
+remain true
+then an analysis of which properties of the reals we have
+used in this chapter gives the following list of conditions an algebraic system
+needs in order to ``work'' in the place of $\Re$.
+
+\begin{shadebox}
+\begin{trivlist}
+\item[\hskip \labelsep{\bf Definition.}]
+A \definend{field\/}\index{field!definition} is a set 
+\( \F \) with two operations
+`\( + \)'
+and `\( \cdot \)' such that
+\begin{enumerate}
+   \item for any \( a,b\in\F \) the result of \( a+b \) is in \( \F \) and
+      \begin{itemize}
+         \item \( a+b=b+a \)
+         \item if \( c\in\F \) then \( a+(b+c)=(a+b)+c \)
+      \end{itemize}
+   \item for any \( a,b\in\F \) the result of \( a\cdot b \) is in \( \F \) and
+      \begin{itemize}
+         \item \( a\cdot b=b\cdot a \)
+         \item if \( c\in\F \) then \( a\cdot (b\cdot c)=(a\cdot b)\cdot c \)
+      \end{itemize}
+   \item if \( a,b,c\in\F \) then \( a\cdot (b+c)=a\cdot b+a\cdot c \)
+   \item there is an element \( 0\in\F \) such that
+      \begin{itemize}
+         \item if \( a\in\F \) then \( a+0=a \)
+         \item for each \( a\in\F \) there is an element \( -a\in\F \)
+                such that \( (-a)+a=0 \)
+      \end{itemize}
+   \item there is an element \( 1\in\F \) such that
+      \begin{itemize}
+         \item if \( a\in\F \) then \( a\cdot 1=a \)
+         \item for each element \( a\neq 0 \) of \( \F \)
+                there is an element \( a^{-1}\in\F \)
+                such that \( a^{-1}\cdot a=1 \).
+      \end{itemize}
+\end{enumerate}
+\end{trivlist}
+\end{shadebox}
+
+The number system consisting of the set of real numbers along with the usual
+addition and multiplication operation is a field, naturally.
+Another field is the set of rational numbers with its usual addition
+and multiplication operations.
+An example of an algebraic structure that is not a field is
+the integer number system---it fails the final condition.
+
+Some examples are surprising.
+The set \( \set{0,1} \) under these operations:
+\begin{center}
+  \begin{tabular}{c|cc}
+    \( + \) &\( 0 \) &\( 1 \) \\
+    \hline
+    \( 0 \) &\( 0 \) &\( 1 \) \\
+    \( 1 \) &\( 1 \) &\( 0 \)
+  \end{tabular}
+  \qquad
+  \begin{tabular}{c|cc}
+    \( \cdot \) &\( 0 \) &\( 1 \) \\
+     \hline
+       \( 0 \)  &\( 0 \) &\( 0 \)  \\
+       \( 1 \)  &\( 0 \) &\( 1 \)
+  \end{tabular}
+\end{center}
+is a field (see \nearbyexercise{exer:BinField}).
+
+We could develop Linear Algebra as the theory of
+vector spaces with scalars from an arbitrary field, 
+instead of sticking to taking the scalars only from \( \Re \).
+In that case, 
+almost all of the statements in this book would carry over by replacing
+`\( \Re \)' with `\( \F \)', and thus by
+taking coefficients, vector entries,
+and matrix entries to be elements of \( \F \)
+(``almost'' because statements involving distances or angles
+are exceptions).
+Here are some examples; each applies to a vector space \( V \)
+over a field \( \F \).
+\begin{itemize}
+  %\makebox[\parindent]{\ \hfil\ }
+  \item[$*$] For any \( \vec{v}\in V \) and \( a\in\F \),
+  (i)~\( 0\cdot\vec{v}=\zero \),
+  and (ii)~\( -1\cdot\vec{v}+\vec{v}=\zero \),
+  and (iii)~\( a\cdot\vec{0}=\vec{0} \).
+
+  \item[$*$] The span (the set of linear combinations) of a subset of \( V \)
+  is a subspace of \( V \).
+
+  \item[$*$] Any subset of a linearly independent set is also 
+     linearly independent.
+
+  \item[$*$] In a finite-dimensional vector space, 
+    any two bases have the same number of elements.
+\end{itemize}
+(Even statements that don't explicitly mention \( \F \) use
+field properties in their proof.)
+
+We won't develop vector spaces in this more general setting because
+the additional abstraction can be a distraction.
+The ideas we want to bring out already appear when we stick to the reals.
+
+The only exception is in Chapter Five.
+In that chapter we must factor polynomials,
+so we will switch to considering vector spaces over the
+field of complex numbers.
+We will discuss this more, including a brief review of complex arithmetic,
+when we get there.
+
+\begin{exercises}
+  \item 
+    Show that the real numbers form a field.
+    \begin{answer}
+      These checks are all routine; most consist only of remarking that 
+      property is so familiar that it does not need to be proved.
+    \end{answer}
+  \item 
+    Prove that these are fields.
+    \begin{exparts*}
+       \partsitem The rational numbers $\Q$
+       \partsitem The complex numbers  $\C$
+    \end{exparts*}
+    \begin{answer}
+      For both of these structures, these checks are all routine.
+      As with the prior question, most of the checks consist only of remarking
+      that property is so familiar that it does not need to be proved.
+    \end{answer}
+  \item 
+     Give an example that shows that the integer number system
+     is not a field.
+     \begin{answer}
+       There is no multiplicative inverse for $2$ so the integers do not
+       satisfy condition~(5).
+     \end{answer}
+  \item \label{exer:BinField} 
+     Consider the set $\set{0,1}$ subject to the operations given above.
+     Show that it is a field.
+     \begin{answer}
+       These checks can be done by listing all of the possibilities.
+       For instance, to verify the commutativity of addition, that $a+b=b+a$,
+       we can easily check it for all possible pairs $a$, $b$, because there
+       are only four such pairs.  
+       Similarly, for associativity, there are only eight triples $a$, $b$,
+       $c$, and so the check is not too long.
+       (There are other ways to do the checks, in particular, a reader may 
+       recognize these operations as arithmetic `mod~$2$'.)
+     \end{answer}
+  \item 
+     Give suitable operations to make the set $\set{0,1,2}$
+     a field.     
+     \begin{answer}
+       These will do.
+       \begin{center}
+          \begin{tabular}{c|ccc}
+             \( + \) &\( 0 \) &\( 1 \) &$2$ \\
+             \hline
+             \( 0 \) &\( 0 \) &\( 1 \) &$2$ \\
+             \( 1 \) &\( 1 \) &\( 2 \) &$0$ \\
+             $2$     &$2$     &$0$     &$1$
+          \end{tabular}
+          \qquad
+          \begin{tabular}{c|ccc}
+            \( \cdot \) &\( 0 \) &\( 1 \) &$2$ \\
+            \hline
+            \( 0 \)  &\( 0 \) &\( 0 \) &$0$ \\
+            \( 1 \)  &\( 0 \) &\( 1 \) &$2$ \\
+            $2$      &$0$     &$2$     &$1$
+          \end{tabular}
+       \end{center}
+       As in the prior item, the check that they satisfy the conditions can 
+       be done by listing all of the cases, although this way of checking is
+       somewhat long (making use of commutativity is helpful in 
+       shortening the work).
+     \end{answer}
+\end{exercises}
+\index{field|)}
+%\include{la}
+%\end{document}

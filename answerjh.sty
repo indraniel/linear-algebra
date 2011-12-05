@@ -1,0 +1,243 @@
+% answerjh.sty 2001-May-23
+\typeout{2001-May-23 Document Style `answerjh'.  Jim Hefferon}
+\RequirePackage[single,nowrite]{bookans} %!!! no write !!! else ereases answers
+\RequirePackage{linalgjh,bookjh}
+
+
+% PAGE DIMENSIONS
+\usepackage{vmargin}
+\setmarginsrb{1in}{1in}{1in}{1in}%
+              {12pt}{4pt}{0pt}{0pt}
+
+
+% HEADERS and FOOTERS
+\RequirePackage{fancyhdr}
+
+\pagestyle{fancyplain}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\textit{Answers to Exercises}}}
+\chead[\fancyplain{}{}]{\fancyplain{}{}}
+\rhead[\fancyplain{}{\textit{Linear Algebra, by Hef{}feron}}]{%
+                                             \fancyplain{}{\thepage}}
+\lfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\cfoot[\fancyplain{\thepage}{}]{\fancyplain{}{}}
+\rfoot[\fancyplain{}{}]{\fancyplain{}{}}
+%\setlength{\footrulewidth}{0pt}
+\setlength{\headwidth}{\textwidth}
+
+
+
+%\renewcommand{\p@theorem}{\relax}
+% jh; stuff I often use
+
+% Changed to support new kind of enumeration environment jh 90-7-10
+\def\labelenumi{(\arabic{enumi})}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumii{\(\bullet\)}
+\def\theenumii{\alph{enumii}}
+\def\p@enumii{\theenumi}
+\def\labelenumiii{(\roman{enumiii})}
+\def\theenumiii{\roman{enumiii}}
+\def\p@enumiii{\theenumi(\theenumii)}
+\def\labelenumiv{\bf --}
+\def\theenumiv{\Alph{enumiv}}
+\def\p@enumiv{\p@enumiii\theenumiii}
+
+\def\labelitemi{$\bullet$}
+\def\labelitemii{\bf --}
+\def\labelitemiii{$\ast$}
+\def\labelitemiv{$\cdot$}
+
+
+% ANSWERLIST
+%  Answers are set inside this list.
+\newcounter{answerlistcounter}
+\newcommand{\answerlabel}[1]{{\bfseries #1}}
+\newenvironment{answerlist}{%
+    \begin{list}{\relax
+                }{\usecounter{answerlistcounter}
+                  \renewcommand{\makelabel}{\answerlabel}
+                  \setlength{\leftmargin}{1em}
+                  \setlength{\rightmargin}{0em}
+                  \setlength{\parsep}{\parskip}
+                  \setlength{\itemsep}{.7ex plus .25ex minus .15ex}
+                  \setlength{\itemindent}{0em}
+                  \setlength{\listparindent}{\parindent}
+                  \setlength{\topsep}{0ex plus 5pt}
+                  \setlength{\partopsep}{0ex plus 5pt}
+                  \setlength{\labelsep}{1em}
+                  \setlength{\labelwidth}{0em}
+                  \setlength{\abovedisplayskip}{3pt plus2pt minus3pt}%
+                  \setlength{\belowdisplayskip}{\abovedisplayskip}
+                  \setlength{\abovedisplayshortskip}{0pt plus2pt}%
+                  \setlength{\belowdisplayshortskip}{3pt plus2pt minus3pt}
+                 }
+  }{\end{list}%
+   }
+% An \item in the answerlist is made by \begin{ans}{One.II.3.4} .. \end{ans}
+% They were put there by answer.sty on LaTeX-ing the book.
+\ifhrefout
+  \renewenvironment{ans}[1]{\item[\hyperref{book.pdf}{exercise}{#1}{#1}\hypertarget{ans.#1}{}]}{%
+  }
+\else
+  \renewenvironment{ans}[1]{\item[#1]}{%
+  }
+\fi
+
+
+
+% \answerspacer 
+% \answerdivider
+%  Visual candy put into answer files to separate answers from different
+% sections and chapters.
+%\newcommand{\answerspacer}{\relax}
+%\newcommand{\answerdivider}{\vspace{5ex plus 2ex minus 1ex}\hbox to \textwidth{\rule{0in}{.25in}
+%                                  \leaders\hbox to 1em{\hss.\hss}\hfill}}
+
+
+
+%=======================================
+% Disclaimer that the answer is as in the published source for the question.
+\newcommand{\answerasgiven}{%
+  \textit{This is how the answer was given in the cited source. }}
+
+
+
+%--------exparts and exparts*
+% For exercises with sub-parts.  The *-ed version prints them across:
+% (a) xxx  (b) yyy  (c) zzz ..
+% while the un-*-ed version prints them down:
+% (a) xxx
+% (b) yyy 
+% Use this way:
+% \begin{exparts}
+%  \partitem        % not just \item so works in *-ed version.
+% \end{exparts}
+% Remark: I don't think I can use, say, paralist.  I *don't* want:
+%     (a) Yes.  (b) No; the reason is that we cannot
+%     find any counterexample  (c) Yes. 
+% and I lack the TeX skills to automate the job of selecting the
+% *-ed or un-*-ed version depending.
+%
+\renewenvironment{exparts}{%
+\def\partsitem{\item\relax}%
+\begin{expartslist}%
+}{%
+\end{expartslist}}
+%
+\renewenvironment{exparts*}{%
+\def\partsitem{\penalty-400\hskip1.25em\relax\hbox{%
+\refstepcounter{expartscount}\textbf{(\alph{expartscount})}\hspace*{.5em}}\nobreak}
+\begin{expartslist}
+\setlength{\itemindent}{-1.25em}
+\rightskip=0pt plus7em\spaceskip=.3333em\xspaceskip=.5em\relax%
+\item[]}{%
+\end{expartslist}}
+%
+\renewenvironment{expartslist}{%
+\begin{list}{\textbf{(\alph{expartscount})}}{
+  \usecounter{expartscount}
+  \setlength{\leftmargin}{1em}
+  \setlength{\rightmargin}{0em}
+  \setlength{\listparindent}{\parindent}
+  \setlength{\itemindent}{0em}
+  \setlength{\labelsep}{.4em}
+  \setlength{\labelwidth}{0em}
+  \setlength{\topsep}{0ex}
+  \setlength{\parskip}{0ex}
+  \setlength{\partopsep}{0ex}
+  \setlength{\parsep}{0ex}
+  \setlength{\itemsep}{0ex}
+  }%
+}{%
+\end{list}}
+%
+%...........end: exparts and exparts*
+
+
+
+%\renewcommand{\thechapter}{\Englishnumber{\value{chapter}}}
+\renewcommand{\thesection}{\thechapter.\Roman{section}}
+\renewcommand{\chaptermark}[1]{% docs in fancyheadings.
+  \markboth{\chaptername~\thechapter. #1}{}}
+\renewcommand{\sectionmark}[1]{%
+  \markright{Section~\Roman{section}. #1}}
+%\renewcommand{\thesubsection}{\arabic{subsection}}
+%end headings
+
+%\renewcommand{\subsection}{\@startsection%
+%    {subsection}{2}{0em}{10ex plus1ex minus1ex}{1em}%
+%    {\raggedright\large\bfseries}}
+%  Format the answer label.
+  \renewcommand{\ansparams}{{\Currentlabel}}
+
+% CROSS REFERENCES
+% References in the answers that are hypered are not internal to the 
+% answer file; they need to link to the book file.
+\newcommand{\bookname}{book.pdf}
+%\makeatletter
+\ifhrefout
+  \newcommand{\bookreference}[2]{% #1=ref type (`Definition', etc.), #2=ref
+    \def\jhans@anchorname{% name like `theorem.1234'
+     \expandafter\expandafter\expandafter\@fourthoffive\csname r@#2\endcsname}%
+    \def\jhans@farref{\bookname\#\jhans@anchorname}% like `book.pdf#ans.1234'
+    \def\jhans@reftext{%
+     \expandafter\expandafter\expandafter\@firstoffive\csname r@#2\endcsname}%
+   #1~\expandafter\href\expandafter{\jhans@farref}{\jhans@reftext}%
+  }
+  \renewcommand{\nearbydefinition}[1]{\bookreference{Definition}{#1}}
+  \renewcommand{\nearbyfigure}[1]{\bookreference{Figure}{#1}}
+  \renewcommand{\nearbylemma}[1]{\bookreference{Lemma}{#1}}
+  \renewcommand{\nearbyexample}[1]{\bookreference{Example}{#1}}
+  \renewcommand{\nearbycounterexample}[1]{\bookreference{Counterexample}{#1}}
+  \renewcommand{\nearbytheorem}[1]{\bookreference{Theorem}{#1}}
+  \renewcommand{\nearbycorollary}[1]{\bookreference{Corollary}{#1}}
+  \renewcommand{\nearbyexercise}[1]{\bookreference{Exercise}{#1}}
+  \renewcommand{\nearbyremark}[1]{\bookreference{Remark}{#1}}
+  \renewcommand{\nearbynotice}[1]{\bookreference{Notice}{#1}}
+  \renewcommand{\nearbynote}[1]{\bookreference{Note}{#1}}  
+\fi
+
+
+
+
+% PAGE LAYOUT
+%
+% CHAPTER and SUBSECTION commands
+\renewcommand{\chapter}{\secdef\chapcmda\chapcmdb}
+
+\newcommand{\chapcmda}[2][]{%  
+  \addcontentsline{toc}{chapter}{#1}%
+  \chapheader{#1}}
+\newcommand{\chapcmdb}[1]{\chapheader{#1}}
+
+\newcommand{\chapheader}[1]{\end{answerlist}
+\clearemptydoublepage\thispagestyle{empty} %
+\vspace*{4ex}
+{\centering{\LARGE\bfseries #1}}%
+\vspace{-2ex plus1ex}%
+\begin{answerlist}\item[]
+}
+
+\renewcommand{\section}{\@startsection%
+    {section}{1}{0em}{-12ex plus1ex minus2ex}{1em}%
+    {\raggedright\Large\bfseries}}
+
+\renewcommand{\subsection}{\secdef\anssubseccmda\anssubseccmdb}
+
+\newcommand{\anssubseccmda}[2][?]{%
+  %\end{answerlist}
+  \addcontentsline{toc}{subsection}{#1}%
+  \anssubsecheader{#2}}
+
+\newcommand{\anssubseccmdb}[1]{\anssubsecheader{#1}}
+
+\newcommand{\anssubsecheader}[1]{\end{answerlist}%
+\vspace{4ex plus1ex minus.5ex}\pagebreak[3]\vspace*{1ex plus1ex minus.25ex}%
+{\flushleft\large\bfseries #1}%
+\nopagebreak\vspace{1ex plus .5ex minus.5ex}\nopagebreak\begin{answerlist}\item[]}
+
+%end PAGE LAYOUT
+
+% Resolve References
+\input{book.aux}
+\endinput

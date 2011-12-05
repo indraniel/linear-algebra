@@ -1,0 +1,3906 @@
+% Chapter 4, Section 4 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\section{Jordan Form}
+\index{Jordan form|(}
+\noindent\textit{This section uses material from three optional
+subsections:~Direct Sum, Determinants Exist, and
+Other Formulas for the Determinant.}
+
+The chapter on linear maps shows that every $\map{h}{V}{W}$ can
+be represented by a partial-identity matrix with respect to some
+bases $B\subset V$ and $D\subset W$. 
+This chapter revisits this issue in the special case that the map is a
+linear transformation $\map{t}{V}{V}$.
+Of course, the general result still applies 
+but with the codomain and domain equal
+we naturally ask about having the two bases also be equal.
+That is, we want a canonical form to represent transformations
+as $\rep{t}{B,B}$.
+
+After a brief review section, we began 
+by noting that a block partial identity form matrix 
+is not always obtainable in this $B,B$ case.
+We therefore considered the natural generalization, diagonal matrices, and
+showed that if its eigenvalues are distinct then
+a map or matrix can be diagonalized.
+But we also gave an example of a matrix that cannot be diagonalized and
+in the section prior to this one we developed that example.
+We showed that 
+a linear map is nilpotent\Dash if we take higher and higher powers of the
+map or matrix then we eventually get the zero map or matrix\Dash if and only 
+if there is a basis on which it acts via disjoint strings.
+That led to a canonical form for nilpotent matrices.
+
+Now, this section concludes the chapter.
+We will show that the two cases we've studied are exhaustive 
+in that for any linear transformation there is
+a basis such that the matrix representation $\rep{t}{B,B}$ is the sum of a 
+diagonal matrix and a nilpotent matrix in its canonical form.
+
+
+
+
+
+
+
+
+
+\subsectionoptional{Polynomials of Maps and Matrices}
+\index{polynomial!of map, matrix}
+Recall that the set of square matrices
+is a vector space under entry-by-entry addition and scalar multiplication and
+that 
+%the unit matrices\Dash all entries are zero except
+%for a single entry, which is one\Dash form a basis, so 
+this space 
+\( \matspace_{\nbyn{n}} \) has dimension \( n^2 \).
+Thus, for any \( \nbyn{n} \) matrix $T$ the
+\( n^2+1 \)-member set \( \set{I,T,T^2,\dots,T^{n^2} } \) is linearly
+dependent and so there are scalars \( c_0,\dots,c_{n^2} \) such that
+$c_{n^2}T^{n^2}+\dots+c_1T+c_0I$
+is the zero matrix.
+
+\begin{remark}
+This observation is small but important.
+It says that every transformation exhibits a 
+generalized nilpotency:~the powers
+of a square matrix cannot climb forever without a ``repeat''.
+\end{remark}
+
+\begin{example}  \label{ex:PolySendRotMatToZ}
+Rotation of plane vectors \( \pi/6 \)~radians counterclockwise is represented
+with respect to the standard basis by
+\begin{equation*}
+  T=
+  \begin{pmatrix}
+     \sqrt{3}/2  &-1/2  \\
+     1/2         &\sqrt{3}/2
+  \end{pmatrix}
+\end{equation*}
+and verifying that \( 0T^4+0T^3+1T^2-2T-1I \) equals the zero matrix is easy.
+\end{example}
+
+\begin{definition}
+For any polynomial \( f(x)=c_nx^n+\dots+c_1x+c_0 \),
+where \( t \) is a linear transformation then \( f(t) \) is the
+transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on the same space and
+where \( T \) is a square matrix then \( f(T) \) is
+the matrix \( c_nT^n+\dots+c_1T+c_0I \).
+\end{definition}
+
+\begin{remark}
+If, for instance, \( f(x)=x-3 \), then most authors
+write in the identity matrix:~\( f(T)=T-3I \).
+But most authors don't write in the identity map:~\( f(t)=t-3 \).
+In this book we shall also observe this convention.
+\end{remark}
+
+Of course, if \( T=\rep{t}{B,B} \) then \( f(T)=\rep{f(t)}{B,B} \),
+which follows from the relationships \( T^j=\rep{t^j}{B,B} \),
+and \( cT=\rep{ct}{B,B} \), and \( T_1+T_2 =\rep{t_1+t_2}{B,B} \).
+
+As \nearbyexample{ex:PolySendRotMatToZ} shows, there may be polynomials of
+degree smaller than $n^2$ that zero the map or matrix.
+
+\begin{definition}
+The \definend{minimal polynomial}\index{polynomial!minimal}%
+\index{minimal polynomial}
+\( m(x) \) of a transformation \( t \)\index{transformation!minimal polynomial}
+or a square matrix \( T \)\index{matrix!minimal polynomial} is the
+polynomial of least degree and with leading coefficient \( 1 \)
+such that \( m(t) \) is the zero map or \( m(T) \) is the zero matrix.
+\end{definition}
+
+A minimal polynomial always exists by the observation opening this subsection.
+A minimal polynomial is unique by the
+`with leading coefficient \( 1 \)' clause.
+This is because if there are two polynomials 
+\( m(x) \) and \( \hat{m}(x) \) that are both of the 
+minimal degree to make the
+map or matrix zero (and thus are of equal degree), and both have
+leading \( 1 \)'s, then their difference \( m(x)-\hat{m}(x) \)
+has a smaller degree than either and still sends the map or matrix
+to zero.
+Thus \( m(x)-\hat{m}(x) \) is the zero polynomial 
+and the two are equal.
+(The leading coefficient requirement also prevents a minimal
+polynomial from being the zero polynomial.)
+
+\begin{example}  \label{ex:MinPolyForRotMat}
+We can see that \( m(x)=x^2-2x-1 \) is minimal for the matrix of
+\nearbyexample{ex:PolySendRotMatToZ} by computing the powers of $T$
+up to the power $n^2=4$.
+\begin{equation*}
+   T^2=
+   \begin{pmatrix}
+      1/2         &-\sqrt{3}/2  \\
+      \sqrt{3}/2  &1/2
+   \end{pmatrix} 
+   \quad
+   T^3=
+   \begin{pmatrix}
+      0           &-1           \\
+      1           &0
+   \end{pmatrix}
+   \quad
+   T^4=
+   \begin{pmatrix}
+      -1/2        &-\sqrt{3}/2  \\
+      \sqrt{3}/2  &-1/2
+   \end{pmatrix}
+\end{equation*}
+Next, put \( c_4T^4+c_3T^3+c_2T^2+c_1T+c_0I \) equal to the zero matrix
+\begin{equation*}
+  \begin{linsys}{5}
+     -(1/2)c_4  &  &             &+ &(1/2)c_2
+         &+ &(\sqrt{3}/2)c_1  &+  &c_0  &=  &0      \\
+     -(\sqrt{3}/2)c_4  &- &c_3 &- &(\sqrt{3}/2)c_2
+         &- &(1/2)c_1  &   &          &=  &0        \\
+      (\sqrt{3}/2)c_4  &+ &c_3 &+ &(\sqrt{3}/2)c_2
+         &+ &(1/2)c_1  &   &            &=  &0      \\
+     -(1/2)c_4  &  &             &+ &(1/2)c_2
+         &+ &(\sqrt{3}/2)c_1  &+  &c_0  &=  &0
+   \end{linsys}
+\end{equation*}
+and use Gauss' method.
+\begin{equation*}
+  \begin{linsys}{5}
+     c_4  &  &             &- &c_2
+         &- &\sqrt{3}c_1  &-  &2c_0  &=  &0      \\
+                           &  &c_3 &+ &\sqrt{3}c_2
+         &+ &2c_1  &+  &\sqrt{3}c_0 &=  &0
+   \end{linsys} 
+\end{equation*}
+Setting \( c_4 \), \( c_3 \), and \( c_2 \) to zero forces \( c_1 \) and
+\( c_0 \) to also come out as zero.
+To get a leading one, the most we can do is to set \( c_4 \) and \( c_3 \) to
+zero.
+Thus the minimal polynomial is quadratic.
+\end{example}
+
+Using the method of that example to find the minimal polynomial of a
+\( \nbyn{3} \) matrix would mean doing Gaussian reduction on
+a system with nine equations in ten unknowns.
+We shall develop an alternative.
+To begin, note that we can break a polynomial of a map or a matrix into
+its components.
+(For this lemma, recall that we are using complex numbers in this chapter
+so all polynomials break completely into linear factors.)
+
+\begin{lemma} \label{le:PolyMapsFactor}
+Suppose that the polynomial \( f(x)=c_nx^n+\dots+c_1x+c_0 \) factors as
+\( k(x-\lambda_1)^{q_1}\cdots(x-\lambda_\ell)^{q_\ell} \).
+If \( t \) is a linear transformation then these two are equal maps. 
+\begin{equation*}
+  c_nt^n+\dots+c_1t+c_0
+  =
+  k\cdot\composed{\composed{(t-\lambda_1)^{q_1}}{\cdots}}{
+      (t-\lambda_\ell)^{q_\ell}} 
+\end{equation*}
+Consequently, if \( T \) is a square matrix then \( f(T) \) and
+\( k\cdot(T-\lambda_1I)^{q_1}\cdots(T-\lambda_\ell I)^{q_\ell} \) 
+are equal matrices.
+\end{lemma}
+
+\begin{proof}
+This argument is by induction on the degree of the polynomial.
+The cases where the polynomial is of
+degree \( 0 \) and \( 1 \) are clear.
+The full induction argument is \nearbyexercise{le:PolyMapsFactor}
+but the degree~two case gives its sense.
+
+A quadratic polynomial factors into two
+linear terms \( f(x)=k(x-\lambda_1)\cdot(x-\lambda_2)
+                    =k(x^2+(\lambda_1+\lambda_2)x+\lambda_1\lambda_2) \)
+(the roots $\lambda_1$ and $\lambda_2$ might be equal).
+We can check that substituting \( t \) 
+for \( x \) in the factored and
+unfactored versions gives the same map.
+\begin{align*}
+   \bigl(k\cdot\composed{(t-\lambda_1)}{(t-\lambda_2)}\bigr)\>(\vec{v})
+   &=\bigl(k\cdot(t-\lambda_1)\bigr)\,(t(\vec{v})-\lambda_2\vec{v})    \\
+   &=k\cdot\bigl(t(t(\vec{v}))-t(\lambda_2\vec{v})
+      -\lambda_1 t(\vec{v})-\lambda_1\lambda_2\vec{v}\bigr)    \\
+   &=k\cdot \bigl(\composed{t}{t}\,(\vec{v})-(\lambda_1+\lambda_2)t(\vec{v})
+          +\lambda_1\lambda_2\vec{v}\bigr)                    \\
+   &=k\cdot(t^2-(\lambda_1+\lambda_2)t+\lambda_1\lambda_2)\>(\vec{v})
+\end{align*}
+The third equality holds because the scalar $\lambda_2$  comes out of the
+second term, as \( t \) is linear.
+\end{proof}
+
+In particular, if a minimial polynomial $m(x)$ for a transformation $t$ 
+factors as
+$m(x)=(x-\lambda_1)^{q_1}\cdots (x-\lambda_\ell)^{q_\ell}$
+then 
+\( m(t)=\composed{\composed{(t-\lambda_1)^{q_1}}{\cdots}}{
+      (t-\lambda_\ell)^{q_\ell}} \) 
+is the zero map. 
+Since \( m(t) \) sends every vector to zero, at least
+one of the maps \( t-\lambda_i \)  sends some
+nonzero vectors to zero.
+So, too, in the matrix case\Dash if $m$ is minimal for $T$ then
+\( m(T)=(T-\lambda_1I)^{q_1}\cdots (T-\lambda_\ell I)^{q_\ell} \)
+is the zero matrix and at least one of the matrices $T-\lambda_iI$
+sends some nonzero vectors to zero. 
+Rewording both cases:~at least some of the \( \lambda_i \) are eigenvalues.
+(See \nearbyexercise{exer:SomeRootsMinPolyAreEigs}.)
+
+Recall how we have earlier found eigenvalues.
+We have looked for $\lambda$ such that $T\vec{v}=\lambda\vec{v}$ by considering
+the equation $\zero=T\vec{v}-x\vec{v}=(T-xI)\vec{v}$
+and computing the determinant of the matrix $T-xI$.
+That determinant is a polynomial in $x$, 
+the characteristic polynomial, 
+whose roots are the eigenvalues.
+The major result of this subsection, the next result, is that 
+there is a connection between this characteristic polynomial
+and the minimal polynomial.
+This results expands on the prior paragraph's insight that some roots of the
+minimal polynomial are eigenvalues by asserting that
+every root of the minimal polynomial is an eigenvalue and further
+that every eigenvalue is a root of the minimal polynomial 
+(this is because it says `$1\leq q_i$' and 
+not just `$0\leq q_i$').
+
+\begin{theorem}[Cayley-Hamilton]
+\label{th:CayHam}
+\index{Cayley-Hamilton theorem}
+\hspace*{0em plus2em}
+If the characteristic polynomial of a transformation or square matrix
+factors into
+\begin{equation*}
+  k\cdot (x-\lambda_1)^{p_1}(x-\lambda_2)^{p_2}\cdots(x-\lambda_\ell)^{p_\ell}
+\end{equation*}
+then its minimal polynomial factors into
+\begin{equation*}
+  (x-\lambda_1)^{q_1}(x-\lambda_2)^{q_2}\cdots(x-\lambda_\ell)^{q_\ell}
+\end{equation*}
+where \( 1\leq q_i \leq p_i \) for each \( i \) between \( 1 \) and \( \ell \).
+\end{theorem}
+
+\noindent The proof takes up the next three lemmas.
+Although they are stated only in matrix terms, they apply equally
+well to maps.
+We give the matrix version only because it is convenient for the first proof.
+
+The first result is the key\Dash some authors call it the Cayley-Hamilton
+Theorem and call \nearbytheorem{th:CayHam} above a corollary.
+For the proof, observe that
+a matrix of polynomials can be thought of as a polynomial with
+matrix coefficients.
+\begin{equation*}
+   \begin{pmatrix}
+     2x^2+3x-1  &x^2+2    \\
+     3x^2+4x+1  &4x^2+x+1
+   \end{pmatrix}
+ = \begin{pmatrix}
+    2  &1  \\
+    3  &4
+  \end{pmatrix}x^2
+ + \begin{pmatrix}
+    3  &0  \\
+    4  &1
+  \end{pmatrix}x
+ + \begin{pmatrix}
+   -1  &2  \\
+    1  &1
+  \end{pmatrix}
+\end{equation*}
+
+\begin{lemma}   \label{le:MatSatItsCharPoly}
+If \( T \) is a square matrix with characteristic polynomial \( c(x) \)
+then \( c(T) \) is the zero matrix.
+\end{lemma}
+
+\begin{proof}
+Let \( C \) be \( T-xI \),
+the matrix whose determinant is the characteristic polynomial
+\( c(x)=c_nx^n+\dots+c_1x+c_0 \).
+\begin{equation*}
+  C=\begin{pmatrix}
+    t_{1,1}-x        &t_{1,2}   &\ldots        \\
+    t_{2,1}          &t_{2,2}-x               \\
+    \vdots           &          &\ddots       \\
+                     &          &       &t_{n,n}-x
+  \end{pmatrix}
+\end{equation*}
+Recall that the product of the adjoint of a matrix with the matrix itself is
+the determinant of that matrix times the identity.
+\begin{equation*}
+  c(x)\cdot I
+  =\adj (C)C
+  =\adj (C)(T-xI)
+  =\adj (C)T- \adj(C)\cdot x
+\tag*{($*$)}\end{equation*}
+The entries of \( \adj (C) \) are polynomials, each of degree
+at most \( n-1 \) since the minors of a matrix drop a row and column.
+Rewrite it, as suggested above, as
+\( \adj (C)=C_{n-1}x^{n-1}+\dots+C_1x+C_0 \)
+where each \( C_i \) is a matrix of scalars.
+The left and right ends of equation~($*$) above give this.
+\begin{align*}
+  c_nIx^n+c_{n-1}Ix^{n-1}+\dots+c_1Ix+c_0I
+  &=(C_{n-1}T)x^{n-1}+\dots+(C_1T)x+C_0T  \\
+  &\quad\hbox{}-C_{n-1}x^n-C_{n-2}x^{n-1}-\dots-C_0x
+\end{align*}
+Equate the coefficients of \( x^n \), the coefficients of $x^{n-1}$, etc.
+\begin{align*}
+  c_nI
+  &=-C_{n-1}    \\
+  c_{n-1}I
+  &=-C_{n-2}+C_{n-1}T    \\
+  &\alignedvdots             \\
+  c_{1}I
+  &=-C_{0}+C_{1}T    \\
+  c_{0}I
+  &=C_{0}T
+\end{align*}
+Multiply (from the right) both sides of the first equation by \( T^n \), 
+both sides of the second equation by \( T^{n-1} \), etc.
+Add.
+The result on the left is 
+\( c_nT^n+c_{n-1}T^{n-1}+\dots+c_0I \), and the result on the right is
+the zero matrix.
+\end{proof}
+
+We sometimes refer to that lemma by saying that a
+matrix or map \definend{satisfies} its characteristic polynomial.
+
+\begin{lemma}
+Where \( f(x) \) is a polynomial, if \( f(T) \) is the zero matrix 
+then \( f(x) \) is divisible by the minimal polynomial of \( T \).
+That is, any polynomial satisfied by \( T \) is divisable by
+\( T \)'s minimal polynomial.
+\end{lemma}
+
+\begin{proof}
+Let \( m(x) \) be minimal for \( T \).
+The Division Theorem for Polynomials gives
+\( f(x)=q(x)m(x)+r(x) \)
+where the degree of \( r \) is strictly less than the degree of \( m \).
+Plugging \( T \) in shows that \( r(T) \) is the zero matrix,
+because $T$ satisfies both $f$ and $m$.
+That contradicts the minimality of \( m \) unless \( r \)
+is the zero polynomial.
+\end{proof}
+
+Combining the prior two lemmas gives that the minimal polynomial 
+divides the characteristic polynomial. 
+Thus,
+any root of the minimal polynomial is also a root of the characteristic
+polynomial. 
+That is, so far we have that if 
+\( m(x)=(x-\lambda_1)^{q_1}\dots(x-\lambda_i)^{q_i} \) then
+\( c(x) \) must has the form
+\( (x-\lambda_1)^{p_1}\dots(x-\lambda_i)^{p_i}
+     (x-\lambda_{i+1})^{p_{i+1}}\dots(x-\lambda_\ell)^{p_\ell} \) where
+each \( q_j \) is less than or equal to \( p_j \).
+The proof of the Cayley-Hamilton Theorem is finished by showing that 
+in fact the characteristic polynomial has no extra roots
+$\lambda_{i+1}$, etc.
+
+\begin{lemma}
+Each linear factor of the characteristic polynomial of a square matrix
+is also a linear factor of the minimal polynomial.
+\end{lemma}
+
+\begin{proof}
+Let \( T \) be a square matrix with minimal polynomial \( m(x) \) and 
+assume that \( x-\lambda \) is a factor of the characteristic polynomial of 
+\( T \), that is, assume that \( \lambda \) is an eigenvalue of \( T \).
+We must show that $x-\lambda$ is a factor of $m$, that is, that 
+$m(\lambda)=0$.
+
+In general,
+where \( \lambda \) is associated with the eigenvector \( \vec{v} \),
+for any polynomial function \( f(x) \), application of the matrix \( f(T) \)
+to \( \vec{v} \) equals the result of multiplying \( \vec{v} \) by the scalar
+\( f(\lambda) \).
+(For instance, if $T$ has eigenvalue $\lambda$ associated with the 
+eigenvector $\vec{v}$ and $f(x)=x^2+2x+3$ then
+\( (T^2+2T+3)\,(\vec{v})=T^2(\vec{v})+2T(\vec{v})+3\vec{v}=
+  \lambda^2\cdot\vec{v}+2\lambda\cdot\vec{v}+3\cdot\vec{v}=
+  (\lambda^2+2\lambda+3)\cdot\vec{v} \).)
+Now, as \( m(T) \) is the zero matrix,
+\( \zero=m(T)(\vec{v})=m(\lambda)\cdot\vec{v} \) and
+therefore \( m(\lambda)=0 \).
+\end{proof}
+
+\begin{example} \label{ex:MinPolyUsingCH}
+We can use the Cayley-Hamilton Theorem to help find the minimal polynomial of
+this matrix.
+\begin{equation*}
+   T=
+   \begin{pmatrix}
+      2  &0  &0  &1  \\
+      1  &2  &0  &2  \\
+      0  &0  &2  &-1 \\
+      0  &0  &0  &1
+   \end{pmatrix}
+\end{equation*}
+First, its characteristic polynomial \( c(x)=(x-1)(x-2)^3 \)
+can be found with the usual determinant.
+Now, the Cayley-Hamilton Theorem says that 
+\( T \)'s minimal polynomial is either
+\( (x-1)(x-2) \) or
+\( (x-1)(x-2)^2 \) or
+\( (x-1)(x-2)^3 \).
+We can decide among the choices just by computing:
+\begin{equation*}
+   (T-1I)(T-2I)=\!
+   \begin{pmatrix}
+      1  &0  &0  &1  \\
+      1  &1  &0  &2  \\
+      0  &0  &1  &-1 \\
+      0  &0  &0  &0
+   \end{pmatrix}
+   \begin{pmatrix}
+      0  &0  &0  &1  \\
+      1  &0  &0  &2  \\
+      0  &0  &0  &-1 \\
+      0  &0  &0  &-1
+   \end{pmatrix}
+   =
+   \begin{pmatrix}
+      0  &0  &0  &0  \\
+      1  &0  &0  &1  \\
+      0  &0  &0  &0  \\
+      0  &0  &0  &0
+   \end{pmatrix}
+\end{equation*}
+and
+\begin{equation*}
+   (T-1I)(T-2I)^2=
+   \begin{pmatrix}
+      0  &0  &0  &0  \\
+      1  &0  &0  &1  \\
+      0  &0  &0  &0  \\
+      0  &0  &0  &0
+   \end{pmatrix}
+   \begin{pmatrix}
+      0  &0  &0  &1  \\
+      1  &0  &0  &2  \\
+      0  &0  &0  &-1 \\
+      0  &0  &0  &-1
+   \end{pmatrix}
+   =
+   \begin{pmatrix}
+      0  &0  &0  &0  \\
+      0  &0  &0  &0  \\
+      0  &0  &0  &0  \\
+      0  &0  &0  &0
+   \end{pmatrix}
+\end{equation*}
+and so \( m(x)=(x-1)(x-2)^2 \).
+\end{example}
+
+
+
+\begin{exercises}
+  \recommended \item 
+    What are the possible minimal polynomials if a matrix has
+    the given characteristic polynomial?
+    \begin{exparts*}
+      \partsitem $8\cdot (x-3)^4$
+      \partsitem $(1/3)\cdot (x+1)^3(x-4)$
+      \partsitem $-1\cdot (x-2)^2(x-5)^2$
+      \partsitem  \( 5\cdot(x+3)^2(x-1)(x-2)^2 \)
+    \end{exparts*}
+    What is the degree of each possibility?
+    \begin{answer}
+      For each, 
+      the minimal polynomial must have a leading coefficient of $1$
+      and \nearbytheorem{th:CayHam}, the Cayley-Hamilton Theorem, says that
+      the minimal polynomial must contain the same linear factors
+      as the characteristic polynomial, although possibly of lower degree
+      but not of zero degree.
+      \begin{exparts}
+        \partsitem The possibilities are 
+          $m_1(x)=x-3$, $m_2(x)=(x-3)^2$, $m_3(x)=(x-3)^3$,
+          and $m_4(x)=(x-3)^4$.
+          Note that the $8$ has been dropped because a minimal
+          polynomial must have a leading coefficient of one.
+          The first is a degree one polynomial, the second is degree two,
+          the third is degree three, and the fourth is degree four.
+        \partsitem The possibilities are $m_1(x)=(x+1)(x-4)$,
+          $m_2(x)=(x+1)^2(x-4)$, and $m_3(x)=(x+1)^3(x-4)$.
+          The first is a quadratic polynomial, that is, it has degree two.
+          The second has degree three, and the third has degree four.
+        \partsitem We have $m_1(x)=(x-2)(x-5)$, $m_2(x)=(x-2)^2(x-5)$,
+          $m_3(x)=(x-2)(x-5)^2$, and $m_4(x)=(x-2)^2(x-5)^2$.
+          They are polynomials of degree two, three, three, and four.
+        \partsitem The possiblities are \( m_1(x)=(x+3)(x-1)(x-2) \),
+          \( m_2(x)=(x+3)^2(x-1)(x-2) \),
+          \( m_3(x)=(x+3)(x-1)(x-2)^2 \),
+          and \( m_4(x)=(x+3)^2(x-1)(x-2)^2 \).
+          The degree of $m_1$ is three, the degree of $m_2$ is four,
+          the degree of $m_3$ is four, and the degree of $m_4$ is five.
+      \end{exparts}
+    \end{answer}
+  \recommended \item 
+    Find the minimal polynomial of each matrix.
+    \begin{exparts*}
+       \partsitem \( \begin{pmatrix}
+                   3  &0  &0  \\
+                   1  &3  &0  \\
+                   0  &0  &4
+                \end{pmatrix} \)
+       \partsitem \( \begin{pmatrix}
+                   3  &0  &0  \\
+                   1  &3  &0  \\
+                   0  &0  &3
+                \end{pmatrix} \)
+       \partsitem \( \begin{pmatrix}
+                   3  &0  &0  \\
+                   1  &3  &0  \\
+                   0  &1  &3
+                \end{pmatrix} \)
+       \partsitem \( \begin{pmatrix}
+                   2  &0  &1  \\
+                   0  &6  &2  \\
+                   0  &0  &2
+                \end{pmatrix} \)
+       \partsitem \( \begin{pmatrix}
+                   2  &2  &1  \\
+                   0  &6  &2  \\
+                   0  &0  &2
+                \end{pmatrix} \)
+       \partsitem \( \begin{pmatrix}
+                   -1 &4  &0  &0  &0  \\
+                    0 &3  &0  &0  &0  \\
+                    0 &-4 &-1 &0  &0  \\
+                    3 &-9 &-4 &2  &-1 \\
+                    1 &5  &4  &1  &4
+                \end{pmatrix} \)
+    \end{exparts*}
+    \begin{answer}
+      In each case we will use the method of \nearbyexample{ex:MinPolyUsingCH}.
+      \begin{exparts}
+       \partsitem Because $T$ is triangular, $T-xI$ is also triangular
+         \begin{equation*}
+           T-xI=
+           \begin{pmatrix}
+             3-x  &0    &0   \\
+             1    &3-x  &0   \\
+             0    &0    &4-x
+           \end{pmatrix}
+         \end{equation*}
+         the characteristic polynomial is
+         easy $c(x)=\deter{T-xI}=(3-x)^2(4-x)=-1\cdot (x-3)^2(x-4)$.
+         There are only two possibilities for the minimal polynomial,
+         $m_1(x)=(x-3)(x-4)$ and $m_2(x)=(x-3)^2(x-4)$.
+         (Note that the characteristic polynomial has a negative sign
+         but the minimal polynomial does not since it must
+         have a leading coefficient of one).
+         Because $m_1(T)$ is not the zero matrix
+         \begin{equation*}
+           (T-3I)(T-4I)
+           =
+           \begin{pmatrix}
+             0  &0  &0  \\
+             1  &0  &0  \\
+             0  &0  &1
+           \end{pmatrix}
+           \begin{pmatrix}
+             -1  &0  &0  \\
+              1  &-1 &0  \\
+              0  &0  &0
+           \end{pmatrix}
+           =
+           \begin{pmatrix}
+             0  &0  &0  \\
+            -1  &0  &0  \\
+             0  &0  &0
+           \end{pmatrix}
+         \end{equation*}
+         the minimal polynomial is $m(x)=m_2(x)$.
+         \begin{equation*}
+           (T-3I)^2(T-4I)
+           =(T-3I)\cdot\bigl((T-3I)(T-4I)\bigr)
+           =
+           \begin{pmatrix}
+             0  &0  &0  \\
+             1  &0  &0  \\
+             0  &0  &1
+           \end{pmatrix}
+           \begin{pmatrix}
+              0  &0  &0  \\
+             -1  &0  &0  \\
+              0  &0  &0
+           \end{pmatrix}
+           =
+           \begin{pmatrix}
+             0  &0  &0  \\
+             0  &0  &0  \\
+             0  &0  &0
+           \end{pmatrix}
+         \end{equation*}
+       \partsitem As in the prior item, the fact that the matrix is 
+        triangular makes computation of the characteristic polynomial
+        easy.
+        \begin{equation*}
+          c(x)=\deter{T-xI}
+              =
+              \begin{vmatrix}
+                3-x  &0   &0   \\
+                1    &3-x &0   \\
+                0    &0   &3-x
+              \end{vmatrix}
+              =(3-x)^3=-1\cdot (x-3)^3
+        \end{equation*}
+        There are three possibilities for the minimal polynomial
+        $m_1(x)=(x-3)$, $m_2(x)=(x-3)^2$, and $m_3(x)=(x-3)^3$.
+        We settle the question by computing $m_1(T)$
+        \begin{equation*}
+          T-3I=
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &0  &0
+          \end{pmatrix}
+        \end{equation*}
+        and $m_2(T)$.
+        \begin{equation*}
+          (T-3I)^2=
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &0  &0
+          \end{pmatrix}
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &0  &0
+          \end{pmatrix}
+          =          
+          \begin{pmatrix}
+            0  &0  &0  \\
+            0  &0  &0  \\
+            0  &0  &0
+          \end{pmatrix}
+        \end{equation*}
+        Because $m_2(T)$ is the zero matrix, $m_2(x)$ is the minimal
+        polynomial.
+       \partsitem Again, the matrix is triangular.
+        \begin{equation*}
+          c(x)=\deter{T-xI}
+              =
+              \begin{vmatrix}
+                3-x  &0   &0   \\
+                1    &3-x &0   \\
+                0    &1   &3-x
+              \end{vmatrix}
+              =(3-x)^3=-1\cdot (x-3)^3
+        \end{equation*}
+        Again, there are three possibilities for the minimal polynomial
+        $m_1(x)=(x-3)$, $m_2(x)=(x-3)^2$, and $m_3(x)=(x-3)^3$.
+        We compute $m_1(T)$
+        \begin{equation*}
+          T-3I=
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &1  &0
+          \end{pmatrix}
+        \end{equation*}
+        and $m_2(T)$
+        \begin{equation*}
+          (T-3I)^2=
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &1  &0
+          \end{pmatrix}
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &1  &0
+          \end{pmatrix}
+          =          
+          \begin{pmatrix}
+            0  &0  &0  \\
+            0  &0  &0  \\
+            1  &0  &0
+          \end{pmatrix}
+        \end{equation*}
+        and $m_3(T)$.
+        \begin{equation*}
+          (T-3I)^3
+          =(T-3I)^2(T-3I)
+          =
+          \begin{pmatrix}
+            0  &0  &0  \\
+            0  &0  &0  \\
+            1  &0  &0
+          \end{pmatrix}
+          \begin{pmatrix}
+            0  &0  &0  \\
+            1  &0  &0  \\
+            0  &1  &0
+          \end{pmatrix}
+          =          
+          \begin{pmatrix}
+            0  &0  &0  \\
+            0  &0  &0  \\
+            0  &0  &0
+          \end{pmatrix}
+        \end{equation*}
+        Therefore, the minimal polynomial is $m(x)=m_3(x)=(x-3)^3$.
+       \partsitem This case is also triangular, here upper triangular.
+         \begin{equation*}
+           c(x)=\deter{T-xI}=
+           \begin{vmatrix}
+             2-x  &0   &1     \\
+             0    &6-x &2     \\
+             0    &0   &2-x
+           \end{vmatrix}
+           =(2-x)^2(6-x)=-(x-2)^2(x-6)
+         \end{equation*}
+         There are two possibilities for the minimal polynomial,
+         $m_1(x)=(x-2)(x-6)$ and $m_2(x)=(x-2)^2(x-6)$.
+         Computation shows that the minimal polynomial isn't $m_1(x)$.
+         \begin{equation*}
+           (T-2I)(T-6I)=
+           \begin{pmatrix}
+             0  &0  &1  \\
+             0  &4  &2  \\
+             0  &0  &0  
+           \end{pmatrix}
+           \begin{pmatrix}
+             -4  &0  &1  \\
+              0  &0  &2  \\
+              0  &0  &-4
+           \end{pmatrix}
+           =
+           \begin{pmatrix}
+             0  &0  &-4  \\
+             0  &0  &0   \\
+             0  &0  &0
+           \end{pmatrix}
+         \end{equation*}
+         It therefore must be that $m(x)=m_2(x)=(x-2)^2(x-6)$. 
+         Here is a verification.
+         \begin{equation*}
+           (T-2I)^2(T-6I)=(T-2I)\cdot\bigl((T-2I)(T-6I)\bigr)=
+           \begin{pmatrix}
+             0  &0  &1  \\
+             0  &4  &2  \\
+             0  &0  &0  
+           \end{pmatrix}
+           \begin{pmatrix}
+              0  &0  &-4   \\
+              0  &0  &0   \\
+              0  &0  &0
+           \end{pmatrix}
+           =
+           \begin{pmatrix}
+             0  &0  &0  \\
+             0  &0  &0   \\
+             0  &0  &0
+           \end{pmatrix}
+         \end{equation*}
+       \partsitem The characteristic polynomial is 
+         \begin{equation*}
+           c(x)=\deter{T-xI}=
+           \begin{vmatrix}
+             2-x  &2   &1     \\
+             0    &6-x &2     \\
+             0    &0   &2-x
+           \end{vmatrix}
+           =(2-x)^2(6-x)=-(x-2)^2(x-6)
+         \end{equation*}
+         and there are two possibilities for the minimal polynomial,
+         $m_1(x)=(x-2)(x-6)$ and $m_2(x)=(x-2)^2(x-6)$.
+         Checking the first one
+         \begin{equation*}
+           (T-2I)(T-6I)=
+           \begin{pmatrix}
+             0  &2  &1  \\
+             0  &4  &2  \\
+             0  &0  &0  
+           \end{pmatrix}
+           \begin{pmatrix}
+             -4  &2  &1  \\
+              0  &0  &2  \\
+              0  &0  &-4
+           \end{pmatrix}
+           =
+           \begin{pmatrix}
+             0  &0  &0  \\
+             0  &0  &0   \\
+             0  &0  &0
+           \end{pmatrix}
+         \end{equation*}
+         shows that the minimal polynomial is
+         $m(x)=m_1(x)=(x-2)(x-6)$.
+       \partsitem The characteristic polynomial is this.
+         \begin{equation*}
+           c(x)=\deter{T-xI}=
+           \begin{vmatrix} 
+              -1-x &4    &0    &0    &0    \\
+               0   &3-x  &0    &0    &0    \\
+               0   &-4   &-1-x &0    &0    \\
+               3   &-9   &-4   &2-x  &-1   \\
+               1   &5    &4    &1    &4-x
+           \end{vmatrix}     
+           =(x-3)^3(x+1)^2
+         \end{equation*}
+         There are a number of possibilities for the minimal polynomial,
+         listed here by ascending degree:
+         $m_1(x)=(x-3)(x+1)$, $m_1(x)=(x-3)^2(x+1)$, $m_1(x)=(x-3)(x+1)^2$, 
+         $m_1(x)=(x-3)^3(x+1)$, $m_1(x)=(x-3)^2(x+1)^2$, 
+         and $m_1(x)=(x-3)^3(x+1)^2$. 
+         The first one doesn't pan out
+         \begin{align*}
+           (T-3I)(T+1I)
+           &=
+           \begin{pmatrix} 
+              -4   &4    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &-4   &-4   &0    &0    \\
+               3   &-9   &-4   &-1   &-1   \\
+               1   &5    &4    &1    &1  
+           \end{pmatrix}     
+           \begin{pmatrix} 
+               0   &4    &0    &0    &0    \\
+               0   &4    &0    &0    &0    \\
+               0   &-4   &0    &0    &0    \\
+               3   &-9   &-4   &3    &-1   \\
+               1   &5    &4    &1    &5  
+           \end{pmatrix}                           \\     
+           &=
+           \begin{pmatrix} 
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+              -4   &-4   &0    &-4   &-4   \\
+               4   &4    &0    &4    &4  
+           \end{pmatrix}           
+         \end{align*}
+         but the second one does.
+         \begin{multline*}
+           (T-3I)^2(T+1I)=(T-3I)\bigl((T-3I)(T+1I)\bigr) \\
+           \begin{aligned}
+           &=
+           \begin{pmatrix} 
+              -4   &4    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &-4   &-4   &0    &0    \\
+               3   &-9   &-4   &-1   &-1   \\
+               1   &5    &4    &1    &1  
+           \end{pmatrix}     
+           \begin{pmatrix} 
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+              -4   &-4   &0    &-4   &-4   \\
+               4   &4    &0    &4    &4  
+           \end{pmatrix}                          \\          
+           &=
+           \begin{pmatrix} 
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0    \\
+               0   &0    &0    &0    &0  
+           \end{pmatrix}  
+           \end{aligned}         
+         \end{multline*}
+         The minimal polynomial is \( m(x)=(x-3)^2(x+1) \).
+      \end{exparts} 
+    \end{answer}
+   \item 
+     Find the minimal polynomial of this matrix.
+     \begin{equation*}
+        \begin{pmatrix}
+           0  &1  &0  \\
+           0  &0  &1  \\
+           1  &0  &0
+        \end{pmatrix}
+     \end{equation*}
+     \begin{answer}
+       Its characteristic polynomial has complex roots.
+       \begin{equation*}
+          \begin{vmatrix}
+                   -x  &1  &0  \\
+                    0  &-x &1  \\
+                    1  &0  &-x
+          \end{vmatrix}
+          =(1-x)\cdot (x-(-\frac{1}{2}+\frac{\sqrt{3}}{2}i))
+                \cdot (x-(-\frac{1}{2}-\frac{\sqrt{3}}{2}i))
+       \end{equation*}
+       As the roots are distinct, the characteristic polynomial equals the
+       minimal polynomial. 
+     \end{answer}
+  \recommended \item 
+     What is the minimal polynomial of the differentiation
+     operator $d/dx$ on \( \polyspace_n \)?
+     \begin{answer}
+       We know that $\polyspace_n$ is a dimension $n+1$ space and that
+       the differentiation operator is
+       nilpotent of index~$n+1$ (for instance, taking $n=3$, 
+       $\polyspace_3=\set{c_3x^3+c_2x^2+c_1x+c_0\suchthat c_3,\ldots,c_0\in\C}$
+       and the fourth derivative of a cubic is the zero polynomial).  
+       Represent this operator using the canonical 
+       form for nilpotent transformations.
+       \begin{equation*}
+         \begin{pmatrix}
+           0  &0  &0  &\ldots &  &0  \\
+           1  &0  &0  &       &  &0  \\
+           0  &1  &0  &       &  &   \\
+              &   &\ddots            \\
+           0  &0  &0  &       &1 &0 
+         \end{pmatrix}
+       \end{equation*}
+       This is an $\nbyn{(n+1)}$ matrix with an easy 
+       characteristic polynomial,
+       $c(x)=x^{n+1}$.
+       (\textit{Remark:} this matrix is $\rep{d/dx}{B,B}$ where
+        $B=\sequence{x^n,nx^{n-1},n(n-1)x^{n-2},\ldots,n!}$.)
+       To find the minimal polynomial as in \nearbyexample{ex:MinPolyUsingCH}
+       we consider the powers of $T-0I=T$.
+       But, of course, the first power of $T$ that is the zero matrix is 
+       the power $n+1$.
+       So the minimal polynomial is also \( x^{n+1} \).
+     \end{answer}
+  \recommended \item 
+    Find the minimal polynomial of matrices of this form
+    \begin{equation*}
+      \begin{pmatrix}
+        \lambda  &0        &0          &\ldots  &        &0  \\
+        1        &\lambda  &0          &        &        &0  \\
+        0        &1        &\lambda                          \\
+                 &         &           &\ddots                \\
+                 &         &           &        &\lambda &0   \\
+        0        &0        &\ldots     &        &1       &\lambda
+      \end{pmatrix}
+    \end{equation*}
+    where the scalar $\lambda$ is fixed (i.e., is not a variable).
+    \begin{answer}
+      Call the matrix $T$ and suppose that it is \( \nbyn{n} \).
+      Because $T$ is triangular, and so $T-xI$ is triangular,
+      the characteristic polynomial is $c(x)=(x-\lambda)^n$.
+      To see that the minimal polynomial is the same, consider
+      $T-\lambda I$.
+      \begin{equation*}
+        \begin{pmatrix}
+          0        &0        &0          &\ldots  &0  \\
+          1        &0        &0          &\ldots  &0  \\
+          0        &1        &0                       \\
+                   &         &\ddots                  \\
+          0        &0        &\ldots     &1       &0      
+        \end{pmatrix}
+      \end{equation*}
+      Recognize it as the canonical form for a transformation that is 
+      nilpotent of degree~$n$; the power $(T-\lambda I)^j$ is zero first
+      when $j$ is $n$.
+    \end{answer}
+  \item 
+    What is the minimal polynomial of the transformation of
+    \( \polyspace_n \) that sends \( p(x) \) to \( p(x+1) \)?
+    \begin{answer}
+      The $n=3$ case provides a hint.
+      A natural basis for $\polyspace_3$ is  
+      $B=\sequence{1,x,x^2,x^3}$.
+      The action of the transformation is
+      \begin{equation*}
+        1\mapsto 1
+        \quad
+        x\mapsto x+1
+        \quad
+        x^2\mapsto x^2+2x+1
+        \quad
+        x^3\mapsto x^3+3x^2+3x+1
+      \end{equation*}
+      and so the representation $\rep{t}{B,B}$ is this upper triangular matrix.
+      \begin{equation*}
+        \begin{pmatrix}
+          1  &1  &1  &1  \\
+          0  &1  &2  &3  \\
+          0  &0  &1  &3  \\
+          0  &0  &0  &1
+        \end{pmatrix}
+      \end{equation*}
+      Because it is triangular, the fact that the characteristic polynomial is
+      $c(x)=(x-1)^4$ is clear.
+      For the minimal polynomial, the candidates are $m_1(x)=(x-1)$,
+      \begin{equation*}
+        T-1I=
+        \begin{pmatrix}
+          0  &1  &1  &1  \\
+          0  &0  &2  &3  \\
+          0  &0  &0  &3  \\
+          0  &0  &0  &0
+        \end{pmatrix}
+      \end{equation*}
+      $m_2(x)=(x-1)^2$, 
+      \begin{equation*}
+        (T-1I)^2=
+        \begin{pmatrix}
+          0  &0  &2  &6  \\
+          0  &0  &0  &6  \\
+          0  &0  &0  &0  \\
+          0  &0  &0  &0
+        \end{pmatrix}
+      \end{equation*}
+      $m_3(x)=(x-1)^3$,
+      \begin{equation*}
+        (T-1I)^3=
+        \begin{pmatrix}
+          0  &0  &0  &6  \\
+          0  &0  &0  &0  \\
+          0  &0  &0  &0  \\
+          0  &0  &0  &0
+        \end{pmatrix}
+      \end{equation*}
+      and $m_4(x)=(x-1)^4$.
+      Because $m_1$, $m_2$, and $m_3$ are not right, $m_4$ must be right,
+      as is easily verified.
+      
+      In the case of a general $n$, the representation is an upper
+      triangular matrix with ones on the diagonal.
+      Thus the characteristic polynomial is $c(x)=(x-1)^{n+1}$.
+      One way to verify that the minimal polynomial equals the 
+      characteristic polynomial is argue something like this:
+      say that an upper triangular matrix is $0$-upper triangular if
+      there are nonzero entries on the diagonal, that it is $1$-upper 
+      triangular if the diagonal contains only zeroes and there are nonzero
+      entries just above the diagonal, etc.
+      As the above example illustrates, an induction argument will 
+      show that, where $T$ has only nonnegative entries, 
+      $T^j$ is $j$-upper triangular.
+      That argument is left to the reader.
+    \end{answer}
+   \item 
+     What is the minimal polynomial of
+     the map \( \map{\pi}{\C^3}{\C^3} \)
+     projecting onto the first two coordinates?
+      \begin{answer}
+        The map twice is the same as the map once:~$\composed{\pi}{\pi}=\pi$,
+        that is, $\pi^2=\pi$ and so the minimal polynomial is of degree
+        at most two since \( m(x)=x^2-x \) will do.
+        The fact that no linear polynomial will do follows from applying
+        the maps on the left and right side of 
+        $c_1\cdot \pi+c_0\cdot \identity=z$ (where $z$ is the zero map)
+        to these two vectors.
+        \begin{equation*}
+          \colvec{0 \\ 0 \\ 1}
+          \qquad
+          \colvec{1 \\ 0 \\ 0}
+        \end{equation*}
+        Thus the minimal polynomial is $m$.
+      \end{answer}
+   \item 
+     Find a \( \nbyn{3} \) matrix whose minimal
+     polynomial is \( x^2 \).
+     \begin{answer}
+        This is one answer.
+        \begin{equation*}
+            \begin{pmatrix}
+              0  &0  &0  \\
+              1  &0  &0  \\
+              0  &0  &0
+            \end{pmatrix}
+        \end{equation*} 
+      \end{answer}
+  \item 
+     What is wrong with this claimed proof of
+     \nearbylemma{le:MatSatItsCharPoly}:
+      ``if \( c(x)=\deter{T-xI} \) then \( c(T)=\deter{T-TI}=0 \)''?
+     \cite{Cullen}
+     \begin{answer}
+       The \( x \) must be a scalar, not a matrix.
+     \end{answer}
+  \item 
+    Verify \nearbylemma{le:MatSatItsCharPoly} for \( \nbyn{2} \)
+    matrices by direct calculation.
+    \begin{answer}
+      The characteristic polynomial of
+      \begin{equation*}
+         T=\begin{pmatrix}
+              a  &b  \\
+              c  &d
+           \end{pmatrix}
+      \end{equation*}
+      is \( (a-x)(d-x)-bc=x^2-(a+d)x+(ad-bc) \).
+      Substitute
+      \begin{multline*}
+         \begin{pmatrix}
+              a  &b  \\
+              c  &d
+         \end{pmatrix}^2
+         -
+         (a+d)\begin{pmatrix}
+            a  &b  \\
+            c  &d
+         \end{pmatrix}
+         +
+         (ad-bc)\begin{pmatrix}
+            1  &0  \\
+            0  &1
+         \end{pmatrix}                            \\
+         =                     
+         \begin{pmatrix}
+            a^2+bc  &ab+bd  \\
+            ac+cd   &bc+d^2
+         \end{pmatrix}
+         -
+         \begin{pmatrix}
+            a^2+ad  &ab+bd   \\
+            ac+cd   &ad+d^2
+         \end{pmatrix}
+         +
+         \begin{pmatrix}
+            ad-bc  &0      \\
+            0      &ad-bc
+         \end{pmatrix}
+      \end{multline*}
+      and just check each entry sum to see that the result is the zero matrix.
+    \end{answer}
+  \recommended \item
+    Prove that the minimal polynomial of an \( \nbyn{n} \) matrix has
+    degree at most \( n \) (not \( n^2 \) as might be guessed from this
+    subsection's opening).
+    Verify that this maximum, \( n \), can happen.
+    \begin{answer}
+      By the Cayley-Hamilton theorem the degree of the minimal polynomial is
+      less than or equal to the degree of the characteristic polynomial,
+      \( n \).
+      \nearbyexample{ex:MinPolyForRotMat} shows that \( n \) can happen.
+    \end{answer}
+   \recommended \item 
+     The only eigenvalue of a nilpotent map is zero.
+     Show that the converse statement holds.
+     \begin{answer}
+       Suppose that \( t \)'s only eigenvalue is zero.
+       Then the characteristic polynomial of \( t \) is \( x^n \).
+       Because \( t \) satisfies its characteristic polynomial, it is
+       a nilpotent map. 
+     \end{answer}
+   \item 
+       What is the minimal polynomial of a zero map or matrix?
+       Of an identity map or matrix?
+       \begin{answer}
+         A minimal polynomial must have leading coefficient $1$, 
+         and so if the minimal polynomial of a map or matrix were to 
+         be a degree zero polynomial then it would be $m(x)=1$.
+         But the identity map or matrix equals the zero map or matrix
+         only on a trivial vector space.
+
+         So in the nontrivial case the minimal polynomial must be of degree
+         at least one.
+         A zero map or matrix has minimal polynomial \( m(x)=x \), and an
+         identity map or matrix has minimal polynomial \( m(x)=x-1 \). 
+       \end{answer}
+  \recommended \item 
+     Interpret the minimal polynomial of 
+     \nearbyexample{ex:PolySendRotMatToZ} geometrically.
+     \begin{answer}
+       The polynomial can be read geometrically to say ``a \( \degs{60} \)
+       rotation minus two rotations of \( \degs{30} \) equals the
+       identity.''
+     \end{answer}
+   \item 
+     What is the minimal polynomial of a diagonal matrix?
+     \begin{answer}
+       For a diagonal matrix
+       \begin{equation*}
+          T=
+          \begin{pmatrix}
+             t_{1,1}   &0        \\
+             0         &t_{2,2}  \\
+                       &        &\ddots  \\
+                       &        &      &t_{n,n}
+          \end{pmatrix}
+       \end{equation*}
+       the characteristic polynomial is 
+       $(t_{1,1}-x)(t_{2,2}-x)\cdots (t_{n,n}-x)$.     
+       Of course, some of those factors may be repeated, e.g., the matrix might
+       have $t_{1,1}=t_{2,2}$.
+       For instance, the characteristic polynomial of
+       \begin{equation*}
+          D=
+          \begin{pmatrix}
+             3 &0 &0  \\
+             0 &3 &0  \\
+             0 &0 &1
+          \end{pmatrix}
+       \end{equation*}
+       is \( (3-x)^2(1-x)=-1\cdot (x-3)^2(x-1) \). 
+
+       To form the minimal polynomial, 
+       take the terms \( x-t_{i,i} \), throw out repeats, 
+       and multiply them together.
+       For instance, the minimal polynomial of $D$
+       is \( (x-3)(x-1) \).
+       To check this, note first that \nearbytheorem{th:CayHam}, 
+       the Cayley-Hamilton theorem, requires that each linear factor in the
+       characteristic polynomial appears at least once in the minimal
+       polynomial.
+       One way to check the other direction\Dash that in the case of
+       a diagonal matrix, 
+       each linear factor need appear at most once\Dash is to
+       use a matrix argument.
+       A diagonal matrix, multiplying from the left, rescales rows by
+       the entry on the diagonal.
+       But in a product $(T-t_{1,1}I)\cdots\hbox{}$, even without any repeat
+       factors, every row is zero in at least one of the factors. 
+
+       For instance, in the product 
+       \begin{equation*}
+         (D-3I)(D-1I)=(D-3I)(D-1I)I=
+         \begin{pmatrix}
+           0  &0  &0  \\
+           0  &0  &0  \\
+           0  &0  &-2        
+         \end{pmatrix}
+         \begin{pmatrix}
+           2  &0  &0  \\
+           0  &2  &0  \\
+           0  &0  &0
+         \end{pmatrix}
+         \begin{pmatrix}
+           1  &0  &0  \\
+           0  &1  &0  \\
+           0  &0  &1
+         \end{pmatrix}
+       \end{equation*}
+       because the first and second rows of the first matrix $D-3I$ are
+       zero, the entire product will have a first row and second
+       row that are zero.
+       And because the third row of the middle matrix $D-1I$ is zero,
+       the entire product has a third row of zero.
+    \end{answer}
+  \recommended \item 
+    A \definend{projection}\index{projection}%
+    \index{transformation!projection} 
+    is any transformation \( t \) such that \( t^2=t \).
+    (For instance, the transformation of the plane $\Re^2$ projecting
+    each vector onto its first coordinate will, if done twice,
+    result in the same value as if it is done just once.)
+    What is the minimal polynomial of a projection?
+    \begin{answer}
+      This subsection starts with the observation that the powers of 
+      a linear transformation cannot climb forever without a ``repeat'',
+      that is, that for some power~$n$ there is a linear relationship
+      $c_n\cdot t^n+\dots+c_1\cdot t+c_0\cdot \identity=z$ where $z$ is the
+      zero transformation.
+      The definition of projection is that for such a map
+      one linear relationship is quadratic, $t^2-t=z$.
+      To finish, we need only consider whether this relationship might not
+      be minimal, that is, are there projections for which the 
+      minimal polynomial is constant or linear?
+
+      For the minimal polynomial to be constant, the map would have to
+      satisfy that $c_0\cdot\identity=z$, where $c_0=1$ since the leading
+      coefficient of a minimal polynomial is $1$.
+      This is only satisfied by the zero transformation on a trivial space.
+      This is indeed a projection, but not a very interesting one.
+
+      For the minimal polynomial of a transformation to be linear would give 
+      $c_1\cdot t+c_0\cdot\identity=z$ where $c_1=1$.
+      This equation gives $t=-c_0\cdot \identity$.
+      Coupling it with the requirement that $t^2=t$ gives
+      $t^2=(-c_0)^2\cdot\identity=-c_0\cdot\identity$, which gives that
+      $c_0=0$ and $t$ is the zero transformation or that $c_0=1$ and
+      $t$ is the identity.       
+
+      Thus, except in the cases where the projection is a zero map or an
+      identity map, the minimal polynomial is $m(x)=x^2-x$. 
+    \end{answer}
+  \item \label{exer:SomeRootsMinPolyAreEigs}
+    \textit{The first two items of this question are review.}
+    \begin{exparts}
+      \partsitem Prove that the composition of one-to-one maps is
+        one-to-one.
+      \partsitem Prove that if a linear map is not one-to-one then
+        at least one nonzero vector from the domain is sent to the 
+        zero vector in the codomain.
+      \partsitem Verify the statement, excerpted here, that
+         preceeds \nearbytheorem{th:CayHam}.
+         \begin{quotation}
+           \noindent \ldots if a minimial polynomial $m(x)$ for a 
+           transformation $t$ factors as
+           $m(x)=(x-\lambda_1)^{q_1}\cdots (x-\lambda_\ell)^{q_\ell}$
+           then 
+           \( m(t)=\composed{\composed{(t-\lambda_1)^{q_1}}{\cdots}}{
+                                       (t-\lambda_\ell)^{q_\ell}} \) 
+           is the zero map. 
+           Since \( m(t) \) sends every vector to zero, at least
+           one of the maps \( t-\lambda_i \)  sends some
+           nonzero vectors to zero.
+           \ldots
+           Rewording \ldots:~at least some of the 
+           \( \lambda_i \) are eigenvalues.
+        \end{quotation}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+       \partsitem \textit{This is a property of functions in general,
+          not just of linear functions.}
+          Suppose that $f$ and $g$ are one-to-one functions such that
+          $\composed{f}{g}$ is defined.
+          Let $\composed{f}{g}(x_1)=\composed{f}{g}(x_2)$, so that
+          $f(g(x_1))=f(g(x_2))$.
+          Because $f$ is one-to-one this implies that $g(x_1)=g(x_2)$.
+          Because $g$ is also one-to-one, this in turn implies that
+          $x_1=x_2$.
+          Thus, in summary, $\composed{f}{g}(x_1)=\composed{f}{g}(x_2)$
+          implies that $x_1=x_2$ and so $\composed{f}{g}$ is one-to-one.
+        \partsitem If the linear map $h$ 
+          is not one-to-one then there are unequal
+          vectors $\vec{v}_1$, $\vec{v}_2$ that map to the same value
+          $h(\vec{v}_1)=h(\vec{v}_2)$.
+          Because $h$ is linear, we have
+          $\zero=h(\vec{v}_1)-h(\vec{v}_2)=h(\vec{v}_1-\vec{v}_2)$
+          and so $\vec{v}_1-\vec{v}_2$ is a nonzero vector from the domain
+          that is mapped by $h$ to the zero vector of the codomain  
+          ($\vec{v}_1-\vec{v}_2$
+          does not equal the zero vector of the domain because $\vec{v}_1$
+          does not equal $\vec{v}_2$).
+        \partsitem The minimal polynomial 
+          $m(t)$ sends every vector in the domain to 
+          zero and so it is not one-to-one (except in a trivial space, which 
+          we ignore).
+          By the first item of this question, 
+          since the composition $m(t)$ is not one-to-one, 
+          at least one of the components $t-\lambda_i$ is not one-to-one.
+          By the second item, $t-\lambda_i$ has a nontrivial nullspace.
+          Because $(t-\lambda_i)(\vec{v})=\zero$ holds if and only if
+          $t(\vec{v})=\lambda_i\cdot\vec{v}$, the prior sentence gives that
+          $\lambda_i$ is an eigenvalue (recall that the definition of
+          eigenvalue requires that the relationship hold for at least one
+          nonzero $\vec{v}$).
+      \end{exparts}
+    \end{answer}
+  \item 
+    True or false:~for a transformation on an
+    \( n \) dimensional space, if the minimal polynomial has degree \( n \) 
+    then the map is diagonalizable.
+    \begin{answer}
+      This is false.
+      The natural example of a non-diagonalizable transformation works here.
+      Consider the transformation of $\C^2$ represented with respect to
+      the standard basis by this matrix.
+      \begin{equation*}
+        N=
+        \begin{pmatrix}
+          0  &1  \\
+          0  &0
+        \end{pmatrix}
+      \end{equation*}
+      The characteristic polynomial is $c(x)=x^2$. 
+      Thus the minimal polynomial is either $m_1(x)=x$ or $m_2(x)=x^2$.
+      The first is not right since $N-0\cdot I$ is not the zero matrix,
+      thus in this example the minimal polynomial has degree equal to the 
+      dimension of the underlying space, and, as mentioned,
+      we know this matrix is not diagonalizable because it is nilpotent. 
+    \end{answer}
+   \item 
+     Let $f(x)$ be a polynomial.
+     Prove that if $A$ and $B$ are similar matrices then $f(A)$ is 
+     similar to $f(B)$.
+     \begin{exparts}
+       \partsitem Now show that similar matrices have the same characteristic
+         polynomial.
+       \partsitem Show that similar matrices have the same minimal polynomial.
+       \partsitem Decide if these are similar.
+          \begin{equation*}
+            \begin{pmatrix}
+              1  &3  \\
+              2  &3
+            \end{pmatrix}
+            \qquad
+            \begin{pmatrix}
+              4  &-1 \\
+              1  &1
+            \end{pmatrix}
+          \end{equation*}
+     \end{exparts}
+     \begin{answer}
+       Let \( A \) and \( B \) be similar \( A=PBP^{-1} \).
+       From the facts that 
+       \begin{multline*}
+           A^n=(PBP^{-1})^n=(PBP^{-1})(PBP^{-1})\cdots(PBP^{-1})   \\
+                           =PB(P^{-1}P)B(P^{-1}P)\cdots (P^{-1}P)BP^{-1}
+                           =PB^nP^{-1}
+       \end{multline*}
+       and $c\cdot A=c\cdot(PBP^{-1})=P(c\cdot B)P^{-1}$ follows 
+       the required fact that for any polynomial function $f$ we have 
+       \( f(A)=P\,f(B)\,P^{-1} \).
+       For instance, if $f(x)=x^2+2x+3$ then
+       \begin{multline*}
+         A^2+2A+3I=(PBP^{-1})^2+2\cdot PBP^{-1}+3\cdot I           \\
+                  =(PBP^{-1})(PBP^{-1})+P(2B)P^{-1}+3\cdot PP^{-1}
+                  =P(B^2+2B+3I)P^{-1}
+       \end{multline*}
+       shows that $f(A)$ is similar to $f(B)$.
+       \begin{exparts}
+         \partsitem Taking $f$ to be a linear polynomial we have that
+           $A-xI$ is similar to $B-xI$.
+           Similar matrices have equal determinants (since 
+           $\deter{A}=\deter{PBP^{-1}}
+               =\deter{P}\cdot\deter{B}\cdot\deter{P^{-1}}
+               =1\cdot\deter{B}\cdot 1=\deter{B}$).
+           Thus the characteristic polynomials are equal. 
+         \partsitem 
+           As \( P \) and \( P^{-1} \) are invertible, \( f(A) \) is the
+           zero matrix when, and only when, \( f(B) \) is the zero matrix.
+         \partsitem They cannot be similar since they don't have the same
+           characteristic polynomial.
+           The characteristic polynomial of the first one is 
+           $x^2-4x-3$ while the characteristic polynomial of the 
+           second is $x^2-5x+5$.
+       \end{exparts}  
+     \end{answer}
+   \item 
+    \begin{exparts}
+     \partsitem Show that a matrix is invertible if and only if 
+       the constant term
+       in its minimal polynomial is not $0$.
+     \partsitem Show that if a square matrix \( T \) is not invertible     
+       then there is
+       a nonzero matrix \( S \) such that \( ST \) and \( TS \) both equal the
+       zero matrix.
+     \end{exparts}
+     \begin{answer}
+      Suppose that \( m(x)=x^n+m_{n-1}x^{n-1}+\dots+m_1x+m_0 \)
+      is minimal for \( T \).
+      \begin{exparts}
+       \partsitem 
+         For the `if' argument, 
+         because \( T^n+\dots+m_1T+m_0I \) is the zero matrix we
+         have that \( I=(T^n+\dots+m_1T)/(-m_0)=
+         T\cdot (T^{n-1}+\dots+m_1I)/(-m_0) \) and so 
+         the matrix $(-1/m_0)\cdot (T^{n-1}+\dots+m_1I)$ is the inverse of $T$.
+         For `only if', suppose that \( m_0=0 \) 
+         (we put the \( n=1 \) case aside but it is easy) so that
+         \( T^n+\dots+m_1T=(T^{n-1}+\dots+m_1I)T \) is the zero matrix.
+         Note that \( T^{n-1}+\dots+m_1I \) is not the zero matrix because
+         the degree of the minimal polynomial is \( n \).
+         If \( T^{-1} \) exists then multiplying both
+         \( (T^{n-1}+\dots+m_1I)T \) and the zero matrix from the right 
+         by $T^{-1}$ gives a contradiction.
+       \partsitem If \( T \) is not invertible then the constant term in its
+         minimal polynomial is zero.
+         Thus,
+         \begin{equation*}
+            T^n+\dots+m_1T=(T^{n-1}+\dots+m_1I)T=T(T^{n-1}+\dots+m_1I)
+         \end{equation*}
+         is the zero matrix.
+       \end{exparts} 
+     \end{answer}
+   \recommended \item \label{exer:PolyMapsFactor}
+      \begin{exparts}
+        \partsitem Finish the proof of \nearbylemma{le:PolyMapsFactor}.
+        \partsitem Give an example to show that the result does not hold
+          if $t$ is not linear.
+      \end{exparts}
+      \begin{answer}
+        \begin{exparts}
+          \partsitem
+            For the inductive step, assume that \nearbylemma{le:PolyMapsFactor}
+            is true for polynomials
+            of degree \( i,\ldots,k-1 \) and consider a polynomial \( f(x) \)
+            of degree \( k \). 
+            Factor $f(x)=k(x-\lambda_1)^{q_1}\cdots(x-\lambda_\ell)^{q_\ell}$
+            and let
+            \( k(x-\lambda_1)^{q_1-1}\cdots(x-\lambda_\ell)^{q_\ell} \)
+            be \( c_{n-1}x^{n-1}+\cdots+c_1x+c_0 \).
+            Substitute:
+            \begin{align*}
+               k\composed{\composed{(t-\lambda_1)^{q_1}}{\cdots}}{
+                                            (t-\lambda_\ell)^{q_\ell}}(\vec{v})
+               &=
+               \composed{(t-\lambda_1)}{
+                  \composed{\composed{(t-\lambda_1)^{q_1}}{\cdots}}{
+                  (t-\lambda_\ell)^{q_\ell}} }
+                          (\vec{v})    \\
+               &=
+               (t-\lambda_1)\,(c_{n-1}t^{n-1}(\vec{v})+\cdots+c_0\vec{v}) \\
+               &=
+               f(t)(\vec{v})
+            \end{align*}
+           (the second equality follows from the inductive hypothesis and 
+           the third from the linearity of \( t \)).
+         \partsitem One example is to consider the squaring map
+            $\map{s}{\Re}{\Re}$ given by $s(x)=x^2$.
+            It is nonlinear.
+            The action defined by the polynomial $f(t)=t^2-1$ 
+            changes $s$ to $f(s)=s^2-1$, which is this map.
+            \begin{equation*} 
+              x\mapsunder{s^2-1} \composed{s}{s}(x)-1=x^4-1
+            \end{equation*}
+            Observe that this map differs from the map
+            $\composed{(s-1)}{(s+1)}$; for instance, the first map takes
+            $x=5$ to $624$ while the second one takes $x=5$ to $675$.
+       \end{exparts} 
+     \end{answer}
+%  \item
+%    Give an example of two \( \nbyn{4} \) matrices that have the 
+%    same characteristic polynomial and the same minimal polynomial but
+%    nonetheless are not similar.
+%    \begin{answer}
+%      These two have the same characteristic polynomial,
+%      $c_S(x)=c_T(x)=(x-2)^4$.
+%      \begin{equation*}
+%        S=
+%        \begin{pmatrix}
+%          2  &0  &0  &0  \\
+%          1  &2  &0  &0  \\
+%          0  &0  &2  &0  \\
+%          0  &0  &0  &2
+%        \end{pmatrix}
+%        \qquad
+%        T=
+%        \begin{pmatrix}
+%          2  &0  &0  &0  \\
+%          1  &2  &0  &0  \\
+%          0  &0  &2  &0  \\
+%          0  &0  &1  &2
+%        \end{pmatrix}
+%      \end{equation*}
+%      For each of the two
+%      the candidates for the minimal polynomial are 
+%      $m_1(x)=(x-2)$, $m_2(x)=(x-2)^2$, $m_3(x)=(x-2)^3$, and 
+%      $m_4(x)=(x-2)^4$.
+%      We have 
+%      \begin{equation*}
+%        S-2I=
+%        \begin{pmatrix}
+%          0  &0  &0  &0  \\
+%          1  &0  &0  &0  \\
+%          0  &0  &0  &0  \\
+%          0  &0  &0  &0
+%        \end{pmatrix}
+%        \qquad
+%        T-2I=
+%        \begin{pmatrix}
+%          0  &0  &0  &0  \\
+%          1  &0  &0  &0  \\
+%          0  &0  &0  &0  \\
+%          0  &0  &1  &0
+%        \end{pmatrix}
+%      \end{equation*}
+%      and
+%      \begin{equation*}
+%        (S-2I)^2=
+%        \begin{pmatrix}
+%          0  &0  &0  &0  \\
+%          0  &0  &0  &0  \\
+%          0  &0  &0  &0  \\
+%          0  &0  &0  &0
+%        \end{pmatrix}
+%        =
+%        (T-2I)^2
+%      \end{equation*}
+%      and so the minimal polynomial for each is $m_2$.
+%    \end{answer}
+  \item
+    Any transformation or square matrix has a minimal polynomial.
+    Does the converse hold?
+    \begin{answer}
+      Yes.
+      Expand down the last column to check that
+      \( x^n+m_{n-1}x^{n-1}+\dots+m_1x+m_0 \) is plus or minus the
+      determinant of this.
+      \begin{equation*}
+         \begin{pmatrix}
+            -x  &0  &0  &      &    &m_0    \\
+             0  &1-x&0  &      &    &m_1    \\
+             0  &0  &1-x&      &    &m_2    \\
+                &   &   &\ddots             \\
+                &   &   &      &1-x &m_{n-1}
+         \end{pmatrix}
+      \end{equation*} 
+     \end{answer}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+\subsectionoptional{Jordan Canonical Form}
+This subsection moves from the canonical form for nilpotent matrices to
+the one for all matrices.
+
+We have shown that if a map is nilpotent then all of its eigenvalues are zero.
+We can now prove the converse.
+
+\begin{lemma}
+  A linear transformation whose only eigenvalue is zero is nilpotent.
+\end{lemma}
+
+\begin{proof}
+If a transformation \( t \) on an
+\( n \)-dimensional space has only the single eigenvalue of zero 
+then its characteristic polynomial is \( x^n \). 
+The Cayley-Hamilton Theorem says that a map satisfies its
+characteristic polynimial so \( t^n \) is the zero map.
+Thus $t$ is nilpotent.
+\end{proof}
+
+We have a canonical form for nilpotent matrices, 
+that is, for each matrix whose single eigenvalue is zero:~each 
+such matrix is similar to one that is all
+zeroes except for blocks of subdiagonal ones.
+(To make this representation unique we can fix some arrangement of
+the blocks, say, from longest to shortest.)
+We next extend this to all single-eigenvalue matrices.
+
+Observe that if \( t \)'s only eigenvalue is \( \lambda \) then 
+\( t-\lambda \)'s only eigenvalue is \( 0 \) because
+\( t(\vec{v})=\lambda\vec{v} \) if and 
+only if \( (t-\lambda)\,(\vec{v})=0\cdot\vec{v} \).
+The natural way to extend the results for nilpotent matrices is to
+represent $t-\lambda$ in the canonical form $N$, and try to use that
+to get a simple representation $T$ for $t$.  
+The next result says that this try works.
+
+\begin{lemma}   \label{le:SimRespAddScalar}
+If the matrices \( T-\lambda I \) and \( N \) are similar 
+then \( T \) and \( N+\lambda I \) are also similar,
+via the same change of basis matrices.
+\end{lemma}
+
+\begin{proof}
+With \( N=P(T-\lambda I)P^{-1}=PTP^{-1}-P(\lambda I)P^{-1} \)
+we have $N=PTP^{-1}-PP^{-1}(\lambda I)$
+since the diagonal matrix \( \lambda I \) commutes with anything, 
+and so \( N=PTP^{-1}-\lambda I \).
+Therefore \( N+\lambda I=PTP^{-1} \), as required.
+\end{proof}
+
+\begin{example}   \label{ex:SingJordBlock}
+The characteristic polynomial of
+\begin{equation*}
+  T=\begin{pmatrix}
+      2  &-1  \\
+      1  &4
+    \end{pmatrix}
+\end{equation*}
+is \( (x-3)^2 \) and so \( T \) has only the single eigenvalue \( 3 \).
+Thus for 
+\begin{equation*}
+  T-3I=\begin{pmatrix}
+     -1  &-1  \\
+      1  &1
+    \end{pmatrix}
+\end{equation*}
+the only eigenvalue is \( 0 \), and \( T-3I \) is nilpotent.
+The null spaces are routine to find; to ease this computation we take 
+$T$ to represent the transformation $\map{t}{\C^2}{\C^2}$ with respect to
+the standard basis (we shall maintain this convention
+for the rest of the chapter). 
+\begin{equation*}
+   \nullspace{t-3}=\set{\colvec{-y \\ y}\suchthat y\in\C}
+   \qquad
+   \nullspace{(t-3)^2}=\C^2
+\end{equation*}
+The dimensions of these null spaces
+show that the action of an associated map $t-3$ on a string basis is
+$\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.
+Thus, the canonical form for $t-3$
+with one choice for a string basis is
+\begin{equation*}
+  \rep{t-3}{B,B}
+  =N
+  =\begin{pmatrix}
+      0  &0   \\
+      1  &0
+    \end{pmatrix}
+  \qquad
+  B=\sequence{\colvec{1 \\ 1},\colvec{-2 \\ 2}}
+\end{equation*}
+and by \nearbylemma{le:SimRespAddScalar}, \( T \) is similar to
+this matrix.
+\begin{equation*}
+  \rep{B,B}{t}=
+  N+3I=
+  \begin{pmatrix}
+     3  &0  \\
+     1  &3
+  \end{pmatrix}
+\end{equation*}
+
+We can produce the similarity computation.
+Recall from the Nilpotence section how to find the change of
+basis matrices $P$ and $P^{-1}$ to express \( N \) as \( P(T-3I)P^{-1} \).
+The similarity diagram
+\begin{equation*}
+  \begin{CD}
+    \C^2_\wrt{\stdbasis_2}      @>t-3>T-3I>      \C^2_\wrt{\stdbasis_2}     \\
+    @V\scriptstyle\identity V\scriptstyle PV  
+                                 @V\scriptstyle\identity V\scriptstyle PV \\
+    C^2_\wrt{B}                 @>t-3>N>         \C^2_\wrt{B}
+  \end{CD}
+\end{equation*}
+describes that to move from the lower left to the upper left we multiply by
+\begin{equation*}
+  P^{-1}=\bigl(\rep{\identity}{\stdbasis_2,B}\bigr)^{-1}
+    =\rep{\identity}{B,\stdbasis_2}
+    =\begin{pmatrix}
+        1  &-2  \\
+        1  &2
+     \end{pmatrix}
+\end{equation*}
+and to move from the upper right to the lower right we multiply by
+this matrix.
+\begin{equation*}
+  P=\begin{pmatrix}
+      1  &-2  \\
+      1  &2
+     \end{pmatrix}^{-1}
+   =\begin{pmatrix}
+      1/2  &1/2  \\
+      -1/4 &1/4
+   \end{pmatrix}
+\end{equation*}
+So the similarity is expressed by
+\begin{equation*}
+  \begin{pmatrix}
+     3  &0  \\
+     1  &3
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+      1/2  &1/2  \\
+      -1/4 &1/4
+   \end{pmatrix}
+   \begin{pmatrix}
+      2  &-1  \\
+      1  &4
+    \end{pmatrix}
+    \begin{pmatrix}
+        1  &-2  \\
+        1  &2
+     \end{pmatrix}
+\end{equation*}
+which is easily checked.
+\end{example}
+
+\begin{example}
+This matrix has characteristic polynomial \( (x-4)^4 \) 
+\begin{equation*}
+  T=
+  \begin{pmatrix}
+    4  &1  &0  &-1  \\
+    0  &3  &0  &1   \\
+    0  &0  &4  &0   \\
+    1  &0  &0  &5
+   \end{pmatrix}
+\end{equation*}
+and so has the single eigenvalue $4$.
+The nullities of $t-4$ are:~
+the null space of $t-4$ has dimension two, the null space of $(t-4)^2$
+has dimension three, and the null space of $(t-4)^3$ has dimension four.
+Thus, $t-4$ has the action on a string basis of
+$\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero$ and
+$\vec{\beta}_4\mapsto\zero$.
+This gives the canonical form $N$ for $t-4$, which in turn gives the
+form for \( t \).
+\begin{equation*}
+  N+4I=
+  \begin{pmatrix}
+    4  &0  &0  &0   \\
+    1  &4  &0  &0   \\
+    0  &1  &4  &0   \\
+    0  &0  &0  &4
+   \end{pmatrix}
+\end{equation*}
+\end{example}
+
+An array that is all zeroes, except for some number $\lambda$
+down the diagonal and blocks of subdiagonal ones, is a 
+\definend{Jordan block}.\index{Jordan block}
+We have shown that Jordan block matrices are
+canonical representatives of the similarity classes of single-eigenvalue
+matrices.
+
+\begin{example}
+The \( \nbyn{3} \) matrices whose only eigenvalue is \( 1/2 \) separate into
+three similarity classes.
+The three classes have these canonical representatives.
+\begin{equation*}
+  \begin{pmatrix}
+     1/2  &0    &0  \\
+     0    &1/2  &0  \\
+     0    &0    &1/2
+   \end{pmatrix}
+   \qquad 
+   \begin{pmatrix}
+     1/2  &0    &0  \\
+     1    &1/2  &0  \\
+     0    &0    &1/2
+   \end{pmatrix}
+   \qquad 
+   \begin{pmatrix}
+     1/2  &0    &0  \\
+     1    &1/2  &0  \\
+     0    &1    &1/2
+   \end{pmatrix}
+\end{equation*}
+In particular, this matrix
+\begin{equation*}
+   \begin{pmatrix}
+     1/2  &0    &0    \\
+     0    &1/2  &0    \\
+     0    &1    &1/2
+   \end{pmatrix}
+\end{equation*}
+belongs to the similarity class represented by the middle one, because we have
+adopted the convention of ordering the blocks of subdiagonal ones from the 
+longest block to the shortest.
+\end{example}
+
+We will now finish the program of this chapter by extending this work to 
+cover maps and matrices with multiple eigenvalues.
+The best possibility for general maps and matrices would be
+if we could break them into a part involving 
+their first eigenvalue \( \lambda_1 \) 
+(which we represent using its Jordan block),
+a part with \( \lambda_2 \), etc.
+
+This ideal is in fact what happens.
+For any transformation \( \map{t}{V}{V} \),
+we shall break the space \( V \) into the direct sum of a part on which
+\( t-\lambda_1 \) is nilpotent, plus a part on which \( t-\lambda_2 \)
+is nilpotent, etc.
+More precisely, we shall take three steps to get to this section's major
+theorem and the third step shows that
+\( V=\gennullspace{t-\lambda_1}\directsum\cdots\directsum
+       \gennullspace{t-\lambda_\ell} \)
+where \( \lambda_1,\ldots,\lambda_\ell \) are \( t \)'s eigenvalues.
+
+Suppose that \( \map{t}{V}{V} \) is a linear transformation.
+Note that the restriction\appendrefs{restrictions of functions} %
+of \( t \) to a subspace \( M \) need not be a linear transformation on \( M \)
+because there may be an \( \vec{m}\in M \)
+with \( t(\vec{m})\not\in M \).
+To ensure that the restriction of a transformation 
+to a `part' of a space is a transformation on the partwe need the next 
+condition. 
+
+\begin{definition} \label{def:invariant}
+Let \( \map{t}{V}{V} \) be a transformation.
+A subspace \( M \) is \definend{$t$ invariant\/}%
+\index{invariant subspace!definition}\index{subspace!invariant}
+if whenever \( \vec{m}\in M \) then \( t(\vec{m})\in M \)
+(shorter: \( t(M)\subseteq M \)).
+\end{definition}
+ 
+Two examples are that
+the generalized null space $\gennullspace{t}$ and the generalized range space
+$\genrangespace{t}$ of any transformation $t$ are invariant.
+For the generalized null space, if $\vec{v}\in\gennullspace{t}$ then
+$t^n(\vec{v})=\zero$ where $n$ is the dimension of the underlying space
+and so $t(\vec{v})\in\gennullspace{t}$ because
+$t^n(\,t(\vec{v})\,)$ is zero also.
+For the generalized range space, if $\vec{v}\in\genrangespace{t}$ then
+$\vec{v}=t^n(\vec{w})$ for some $\vec{w}$ and then 
+$t(\vec{v})=t^{n+1}(\vec{w})=t^n(\,t(\vec{w})\,)$ 
+shows that $t(\vec{v})$ is also a member of $\genrangespace{t}$.
+
+Thus the spaces $\gennullspace{t-\lambda_i}$ and $\genrangespace{t-\lambda_i}$
+are $t-\lambda_i$~invariant.
+Observe also that $t-\lambda_i$ is nilpotent on 
+$\gennullspace{t-\lambda_i}$ because, simply, 
+if $\vec{v}$ has the property that
+some power of $t-\lambda_i$ maps it to zero\Dash that is, if it is in the 
+generalized null space\Dash then some power of $t-\lambda_i$ maps
+it to zero.
+The generalized null space $\gennullspace{t-\lambda_i}$ is a `part' of
+the space on which the action of $t-\lambda_i$ is easy to understand.
+
+The next result is the first of our three steps.
+It establishes that \( t-\lambda_j \) leaves
+\( t-\lambda_i \)'s part unchanged.
+
+\begin{lemma} \label{le:tInvIfftMinLambdaInv}
+A subspace is \( t \) invariant if and only if 
+it is \( t-\lambda \) invariant for any scalar \( \lambda \).
+In particular, 
+where \( \lambda_i \) is an eigenvalue of  a linear transformation
+\( t \), then for any other eigenvalue $\lambda_j$,
+the spaces \( \gennullspace{t-\lambda_i} \) 
+and \( \genrangespace{t-\lambda_i} \)
+are \( t-\lambda_j \) invariant.
+\end{lemma}
+
+\begin{proof}
+For the first sentence we check the two implications of the
+`if and only if' separately.
+One of them is easy: if the subspace is $t-\lambda$ invariant for 
+any $\lambda$ then taking $\lambda=0$ shows that it is $t$ invariant.
+For the other implication suppose that the subspace is $t$ invariant,
+so that if $\vec{m}\in M$ then $t(\vec{m})\in M$, and let $\lambda$ be 
+any scalar.
+The subspace $M$ is closed under linear combinations and so if 
+$t(\vec{m})\in M$ then $t(\vec{m})-\lambda\vec{m}\in M$.
+Thus if $\vec{m}\in M$ then $(t-\lambda)\,(\vec{m})\in M$, as required.
+
+The second sentence follows straight from the first.
+Because the
+two spaces are $t-\lambda_i$~invariant, they are 
+therefore \( t \)~invariant.
+From this, applying the first sentence again, we
+conclude that they are also \( t-\lambda_j \) invariant.
+\end{proof}
+
+The second step of the three that we will take to prove this
+section's major result makes use of an additional property of 
+\( \gennullspace{t-\lambda_i} \) and
+\( \genrangespace{t-\lambda_i} \), that they are complementary.
+Recall that if a space is the direct sum of two others 
+\( V=\mathscr{N}\directsum \mathscr{R} \) 
+then any vector \( \vec{v} \) in the space breaks into
+two parts \( \vec{v}=\vec{n}+\vec{r} \) where \( \vec{n}\in \mathscr{N} \) and
+\( \vec{r}\in \mathscr{R} \), and recall also 
+that if \( B_{\mathscr{N}} \) and \( B_{\mathscr{R}} \) are bases for
+\( \mathscr{N} \) and \( \mathscr{R} \) then the concatenation
+\( \cat{B_{\mathscr{N}}}{B_{\mathscr{R}}} \) is linearly independent (and
+so the two parts of \( \vec{v} \) do not ``overlap'').
+The next result says that for any subspaces
+\( \mathscr{N} \) and \( \mathscr{R} \) that are complementary 
+as well as \( t \)~invariant,
+the action
+of \( t \) on \( \vec{v} \) breaks into the ``non-overlapping'' actions of
+\( t \) on \( \vec{n} \) and on \( \vec{r} \).
+
+\begin{lemma} \label{le:InvCompSubspSplitTrans}
+Let \( \map{t}{V}{V} \) be a transformation and let \( \mathscr{N} \) and 
+\( \mathscr{R} \) be
+\( t \) invariant complementary subspaces of \( V \).
+Then \( t \) can be represented by a matrix with
+blocks of square submatrices $T_1$ and $T_2$
+\begin{equation*}
+  \begin{pmat}{c|c}
+      T_1   &Z_2  \\  \cline{1-2}
+      Z_1 &T_2
+   \end{pmat}
+   \begin{array}{ll}
+     \} \text{$\dim(\mathscr{N})$-many rows}  \\
+     \} \text{$\dim(\mathscr{R})$-many rows}
+   \end{array}
+\end{equation*}
+where \( Z_1 \) and \( Z_2 \) are blocks of zeroes.
+\end{lemma}
+
+\begin{proof}
+Since the two subspaces are complementary, the concatenation of a basis
+for \( \mathscr{N} \) and a basis for \( \mathscr{R} \) makes a basis
+\( B=\sequence{\vec{\nu}_1,\dots,\vec{\nu}_p,
+        \vec{\mu}_1,\ldots,\vec{\mu}_q}  \)
+for \( V \).
+We shall show that the matrix
+\begin{equation*}
+  \rep{t}{B,B}=
+  \begin{pmat}{c|@{\hspace*{1em}}c@{\hspace*{1em}}|c}
+     \vdots                   &        &\vdots     \\
+     \rep{t(\vec{\nu}_1)}{B}  &\cdots  &\rep{t(\vec{\mu}_q)}{B}  \\
+     \vdots                   &        &\vdots     \\
+  \end{pmat}
+\end{equation*}
+has the desired form.
+
+Any vector \( \vec{v}\in V \) is in \( \mathscr{N} \) 
+if and only if its final \( q \)
+components are zeroes when it is represented with respect to \( B \).
+As \( \mathscr{N} \) is \( t \)~invariant, each of the vectors
+\( \rep{t(\vec{\nu}_1)}{B} \),
+\ldots, \( \rep{t(\vec{\nu}_p)}{B} \) has that form.
+Hence the lower left of \( \rep{t}{B,B} \) is all zeroes.
+
+The argument for the upper right is similar.
+\end{proof}
+
+To see that \( t \) has been decomposed into its action on the parts, observe
+that the restrictions of \( t \) to the subspaces \( \mathscr{N} \) 
+and~\( \mathscr{R} \) 
+are represented,
+with respect to the obvious bases, 
+by the matrices \( T_1 \) and \( T_2 \).
+So, with subspaces that are invariant and complementary, 
+we can split the problem of examining
+a linear transformation into two lower-dimensional subproblems.
+The next result illustrates this decomposition into blocks.
+
+\begin{lemma} \label{le:DetIsProdOfSubDets}
+If $T$ is a matrices with square submatrices $T_1$ and $T_2$
+\begin{equation*}
+  T=
+  \begin{pmat}{c|c}
+      T_1   &Z_2  \\  \cline{1-2}
+      Z_1   &T_2
+   \end{pmat}
+\end{equation*}
+where the \( Z \)'s are blocks of zeroes,
+then \( \deter{T}=\deter{T_1}\cdot\deter{T_2} \).
+\end{lemma}
+
+\begin{proof}
+Suppose that \( T \) is \( \nbyn{n} \),
+that \( T_1 \) is \( \nbyn{p} \),
+and that \( T_2 \) is \( \nbyn{q} \).
+In the permutation formula for the determinant
+\begin{equation*}
+  \deter{T}=
+  \sum_{\text{\scriptsize permutations\ }\phi}
+          t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}\sgn(\phi)
+\end{equation*}
+each term comes from a rearrangement of the column numbers
+\( 1,\dots,n \) into a new order \( \phi(1),\dots,\phi(n) \).
+The upper right block $Z_2$ is all zeroes, so if a
+\( \phi \) has at least one of \( p+1,\dots,n \) among its first
+\( p \) column numbers \( \phi(1),\dots,\phi(p) \) then the term arising
+from \( \phi \) is zero,
+e.g., if \( \phi(1)=n \) then
+\( t_{1,\phi(1)}t_{2,\phi(2)}\dots t_{n,\phi(n)}
+   =0\cdot t_{2,\phi(2)}\dots t_{n,\phi(n)}=0 \).
+
+So the above formula reduces to a sum over all permutations with 
+two halves:~any significant $\phi$ is the composition of a $\phi_1$ that
+rearranges only \( 1,\dots,p \) 
+and a $\phi_2$ that rearranges only \( p+1,\dots,p+q \).
+Now, the distributive law 
+(and the fact that the signum of a composition is the product
+of the signums) gives that this
+\begin{multline*}
+   \deter{T_1}\cdot\deter{T_2}=
+   \bigg(\sum_{\begin{subarray}{c}
+                \text{\scriptsize perms\ }\phi_1 \\
+                \text{\scriptsize of\ } 1,\dots,p
+               \end{subarray}}
+       \!\!\! t_{1,\phi_1(1)}\cdots t_{p,\phi_1(p)}\sgn(\phi_1) \bigg)  \\
+   \cdot
+   \bigg(\sum_{\begin{subarray}{c}
+                \text{\scriptsize perms\ }\phi_2 \\
+                \text{\scriptsize of\ } p+1,\dots,p+q
+               \end{subarray}}
+       \!\!\! t_{p+1,\phi_2(p+1)}\cdots t_{p+q,\phi_2(p+q)}\sgn(\phi_2) 
+        \bigg)
+\end{multline*}
+equals
+  $\deter{T}=
+  \sum_{\text{\scriptsize significant\ }\phi}
+          t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}\sgn(\phi)$.
+\end{proof}
+
+\begin{example}
+\begin{equation*}
+    \begin{vmatrix}
+       2  &0  &0  &0  \\
+       1  &2  &0  &0  \\
+       0  &0  &3  &0  \\
+       0  &0  &0  &3
+    \end{vmatrix}
+   =\begin{vmatrix}
+       2  &0  \\
+       1  &2
+    \end{vmatrix}
+    \cdot
+    \begin{vmatrix}
+       3  &0  \\
+       0  &3
+    \end{vmatrix}
+   =36
+\end{equation*}
+\end{example}
+
+From \nearbylemma{le:DetIsProdOfSubDets} we conclude that
+if two subspaces 
+are complementary and \( t \)~invariant then
+\( t \) is nonsingular if and only if its 
+restrictions %\appendrefs{restrictions}
+to both subspaces are nonsingular.
+
+Now for the promised third, final, step to the main result.
+
+\begin{lemma}
+If a linear transformation \( \map{t}{V}{V} \) has the 
+characteristic polynomial
+\( (x-\lambda_1)^{p_1}\dots(x-\lambda_\ell)^{p_\ell} \) then
+(1)~\( V=\gennullspace{t-\lambda_1}\directsum\cdots
+             \directsum\gennullspace{t-\lambda_\ell} \) 
+and
+(2)~\( \dim(\gennullspace{t-\lambda_i})=p_i  \).
+\end{lemma}
+
+\begin{proof}
+Because \( \dim (V) \) is the degree \( p_1+\cdots+p_\ell \) of the
+characteristic polynomial, to establish statement~(1) we need only show that 
+statement~(2) holds and that
+\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
+is trivial whenever \( i\neq j \).
+
+For the latter, by \nearbylemma{le:tInvIfftMinLambdaInv},
+both \( \gennullspace{t-\lambda_i} \) and 
+\( \gennullspace{t-\lambda_j} \) are \( t \)~invariant.
+Notice that an intersection of \( t \) invariant subspaces is \( t \)
+invariant and so the restriction of \( t \) to
+\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
+is a linear transformation.
+But both \( t-\lambda_i \) and \( t-\lambda_j \) are nilpotent on this subspace
+and so if \( t \) has any eigenvalues on the intersection 
+then its ``only'' eigenvalue is both
+\( \lambda_i \) and \( \lambda_j \).
+That cannot be, so this restriction has no eigenvalues:
+\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
+is trivial
+(\nearbylemma{le:MapNonTrivSpHasEigen} shows that 
+the only transformation without any eigenvalues is on the trivial space).
+
+To prove statement~(2), fix the index \( i \).
+Decompose \( V \) as 
+\( \gennullspace{t-\lambda_i}\directsum\genrangespace{t-\lambda_i} \)
+%with basis $B=\cat{B_\mathscr{N}}{B_\mathscr{R}}$
+and apply \nearbylemma{le:InvCompSubspSplitTrans}.
+\begin{equation*}
+  T=
+%  \rep{t}{B,B}=
+  \begin{pmat}{c|c}
+      T_1   &Z_2  \\  \cline{1-2}
+      Z_1   &T_2
+   \end{pmat}
+   \begin{array}{ll}
+     \} \text{$\dim(\,\gennullspace{t-\lambda_i}\,)$-many rows}  \\
+     \} \text{$\dim(\,\genrangespace{t-\lambda_i}\,)$-many rows}
+   \end{array}
+\end{equation*}
+By \nearbylemma{le:DetIsProdOfSubDets},
+\( \deter{T-xI}=\deter{T_1-xI}\cdot\deter{T_2-xI} \).
+By the uniqueness clause of the Fundamental Theorem of Arithmetic,
+the determinants of the blocks have the same factors as the
+characteristic polynomial
+\( \deter{T_1-xI}=(x-\lambda_1)^{q_1}\dots(x-\lambda_\ell)^{q_\ell} \)
+and
+\( \deter{T_2-xI}=(x-\lambda_1)^{r_1}\dots(x-\lambda_\ell)^{r_\ell} \),
+and the sum of the powers of these factors is the power of the factor
+in the characteristic polynomial:
+\( q_1+r_1=p_1 \), \dots, \( q_\ell+r_\ell=p_\ell \).
+Statement~(2) will be proved if we will show that $q_i=p_i$ and that
+$q_j=0$ for all $j\neq i$, because then the degree of 
+the polynomial $\deter{T_1-xI}$\Dash which equals the dimension of the
+generalized null space\Dash is as required.
+
+For that, first,
+as the restriction of \( t-\lambda_i \) to \( \gennullspace{t-\lambda_i} \)
+is nilpotent on that space,
+the only eigenvalue of \( t \) on it is \( \lambda_i \).
+Thus the characteristic equation of \( t \) on
+\( \gennullspace{t-\lambda_i} \) is
+\( \deter{T_1-xI}=(x-\lambda_i)^{q_i} \).
+And thus $q_j=0$ for all $j\neq i$.
+
+Now consider the restriction of \( t \) to \( \genrangespace{t-\lambda_i} \).
+By Note~II.\ref{note:RestONeToOne}, the map
+\( t-\lambda_i \) is nonsingular on
+\( \genrangespace{t-\lambda_i} \) and so \( \lambda_i \) is not an
+eigenvalue of \( t \) on that subspace.
+Therefore, \( x-\lambda_i \) is not a factor of \( \deter{T_2-xI} \),
+and so \( q_i=p_i \).
+\end{proof}
+
+Our major result just
+translates those steps into matrix terms.
+
+\begin{theorem}
+\index{Jordan form!represents similarity classes}\index{similar!canonical form}
+\index{canonical form!for similarity}\index{transformation!Jordan form for}
+Any square matrix is similar to one in \definend{Jordan form}
+\begin{equation*}
+  \begin{pmatrix}
+    J_{\lambda_1}  &     &\text{\textit{--zeroes--}}                 \\
+         &J_{\lambda_2}                                              \\
+         &     &\ddots                                     \\
+         &     &                           &J_{\lambda_{\ell-1}}     \\
+         &     &\text{\textit{--zeroes--}} &  &J_{\lambda_{\ell}}
+  \end{pmatrix}
+\end{equation*}
+where each \( J_{\lambda} \) is the Jordan block associated with the
+eigenvalue $\lambda$ of the original matrix (that is, is all zeroes except for
+\( \lambda \)'s down the diagonal and some subdiagonal ones).
+\end{theorem}
+
+\begin{proof}
+Given an \( \nbyn{n} \) matrix \( T \), consider the linear map
+\( \map{t}{\C^n}{\C^n} \) that it represents
+with respect to the standard bases.
+Use the prior lemma to write
+\( \C^n=\gennullspace{t-\lambda_1}\directsum\cdots
+        \directsum\gennullspace{t-\lambda_\ell} \)
+where \( \lambda_1,\ldots,\lambda_\ell \) are the eigenvalues of \( t \).
+Because each \( \gennullspace{t-\lambda_i} \)  is \( t \) invariant,
+\nearbylemma{le:InvCompSubspSplitTrans} and the prior lemma show
+that \( t \) is represented by a matrix that is all zeroes except for square
+blocks along the diagonal.
+To make those blocks into Jordan blocks, pick each \( B_{\lambda_i} \)
+to be a string basis for the action of \( t-\lambda_i \) on
+\( \gennullspace{t-\lambda_i} \). 
+\end{proof}
+
+Jordan form is a canonical form for similarity classes of square
+matrices,\index{representative!of similarity classes}
+provided that we make it unique by arranging the
+Jordan blocks from least eigenvalue to greatest and then
+arranging the subdiagonal $1$ blocks inside each Jordan block from 
+longest to shortest.
+
+\begin{example} \label{ex:FirstJordForm}
+This matrix 
+has the characteristic polynomial \( (x-2)^2(x-6) \).
+\begin{equation*}
+   T=
+   \begin{pmatrix}
+     2  &0  &1  \\
+     0  &6  &2  \\
+     0  &0  &2
+   \end{pmatrix}
+\end{equation*}
+We will handle the eigenvalues $2$ and $6$ separately.
+
+Computation of the powers, and the null spaces and nullities, 
+of $T-2I$ is routine.
+(Recall from \nearbyexample{ex:SingJordBlock} the convention
+of taking $T$ to represent a transformation, here $\map{t}{\C^3}{\C^3}$,
+with respect to the standard basis.)
+\begin{center}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{r|ccc}
+    \textit{power} \( p \)  &\( (T-2I)^p \) &\( \nullspace{(t-2)^p}  \) 
+      &\textit{nullity}                                            \\  \hline
+    \( 1 \)
+    &\( \begin{pmatrix}
+          0  &0  &1  \\
+          0  &4  &2  \\
+          0  &0  &0
+        \end{pmatrix} \)
+    &\( \set{\colvec{x \\ 0 \\ 0}\suchthat x\in\C}  \)  
+    &$1$                                                   \\
+    \( 2 \)
+    &\( \begin{pmatrix}
+          0  &0  &0  \\
+          0  &16 &8  \\
+          0  &0  &0
+        \end{pmatrix} \)
+    &\( \set{\colvec{x \\ -z/2 \\  z}\suchthat x,z\in\C}  \) 
+    &$2$                                                   \\
+    \( 3 \)
+    &\( \begin{pmatrix}
+          0  &0  &0  \\
+          0  &64 &32 \\
+          0  &0  &0
+        \end{pmatrix} \)
+    &\textit{--same--}
+    &\textit{---}
+  \end{tabular}
+\end{center}
+So the generalized null space $\gennullspace{t-2}$ has dimension two.
+We've noted that the restriction of $t-2$ is nilpotent on this subspace.
+From the way that the nullities grow we know that the action
+of $t-2$ on a string basis
+$\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.  
+Thus the restriction can be represented in the canonical form 
+\begin{equation*}
+  N_2=
+  \begin{pmatrix}
+    0  &0  \\
+    1  &0  
+  \end{pmatrix}
+  =\rep{t-2}{B,B}
+  \qquad
+   B_2=\sequence{\colvec{1 \\ 1 \\ -2},
+                 \colvec{-2 \\ 0 \\ 0}}  
+\end{equation*}
+where many choices of basis are possible.
+Consequently, the action of the restriction of $t$ to 
+$\gennullspace{t-2}$ is represented by this matrix.
+\begin{equation*}
+  J_2=N_2+2I=\rep{t}{B_2,B_2}=
+  \begin{pmatrix}
+    2  &0  \\
+    1  &2
+  \end{pmatrix}
+\end{equation*}
+
+The second eigenvalue's computations are easier.
+Because the power of $x-6$ in the characteristic polynomial is one,
+the restriction of $t-6$ to $\gennullspace{t-6}$
+must be nilpotent of index one.
+Its action on a string basis must be $\vec{\beta}_3\mapsto\zero$ and
+since it is the zero map, its canonical form $N_6$ 
+is the $\nbyn{1}$ zero matrix.
+Consequently, the canonical form $J_6$ for the action of $t$ on 
+$\gennullspace{t-6}$ is the $\nbyn{1}$ matrix with the single entry $6$.
+For the basis we can use any nonzero vector from the generalized null space.  
+\begin{equation*}
+   B_6=\sequence{\colvec{0 \\ 1 \\ 0}}
+\end{equation*}
+
+Taken together, these two give that
+the Jordan form of \( T \) is
+\begin{equation*}
+   \rep{t}{B,B}=
+   \begin{pmatrix}
+      2  &0  &0  \\
+      1  &2  &0  \\
+      0  &0  &6
+   \end{pmatrix}
+\end{equation*}
+where \( B \) is the concatenation of $B_2$ and $B_6$.
+\end{example}
+
+\begin{example}  \label{SecJordanForm}
+Contrast the prior example with
+\begin{equation*}
+   T=
+   \begin{pmatrix}
+     2  &2  &1  \\
+     0  &6  &2  \\
+     0  &0  &2
+   \end{pmatrix}
+\end{equation*}
+which has the same characteristic polynomial \( (x-2)^2(x-6) \).
+
+While the characteristic polynomial is the same, 
+\begin{center}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{r|ccc}
+    \textit{power} \( p \)  &\( (T-2I)^p \)  &\( \nullspace{(t-2)^p}  \) 
+                    &\textit{nullity}                      \\  \hline
+    \( 1 \)
+    &\( \begin{pmatrix}
+          0  &2  &1  \\
+          0  &4  &2  \\
+          0  &0  &0
+        \end{pmatrix} \)
+    &\( \set{\colvec{x \\ -z/2 \\ z}\suchthat x,z\in\C}  \) 
+    &$2$ \\
+    \( 2 \)
+    &\( \begin{pmatrix}
+          0  &8  &4  \\
+          0  &16 &8  \\
+          0  &0  &0
+        \end{pmatrix} \)
+    &\textit{--same--}
+    &\textit{---}
+  \end{tabular}
+\end{center}
+here the action of $t-2$ is stable after only one application\Dash the 
+restriction of
+of $t-2$ to $\gennullspace{t-2}$ is nilpotent of index only one. 
+(So the contrast with the prior example is that while 
+the characteristic polynomial tells us to look at the 
+action of the $t-2$ on its generalized null space, the characteristic
+polynomial does not describe completely its action and we 
+must do some computations to find, in this example, that  
+the minimal polynomial is \( (x-2)(x-6) \).)
+The restriction of $t-2$ to the generalized null space acts on a string
+basis as $\vec{\beta}_1\mapsto\zero$ and $\vec{\beta}_2\mapsto\zero$,
+and we get this Jordan block associated with the eigenvalue~$2$.
+\begin{equation*}
+  J_2=
+  \begin{pmatrix}
+    2  &0  \\
+    0  &2  
+  \end{pmatrix}
+\end{equation*}
+
+For the other eigenvalue, the arguments for the second eigenvalue of
+the prior example apply again.
+The restriction of $t-6$ to $\gennullspace{t-6}$ is nilpotent of 
+index one (it can't be of index less than one, and since $x-6$ is a 
+factor of the characteristic polynomial to the power one it can't
+be of index more than one either). 
+Thus $t-6$'s canonical form $N_6$ is the $\nbyn{1}$ zero matrix,
+and the associated Jordan block $J_6$ is the $\nbyn{1}$ matrix with entry $6$.
+ 
+%\begin{center}
+%  \renewcommand{\arraystretch}{1.25}
+%  \begin{tabular}{c|cc}
+%    \textit{power} \( p \)  &\( (T-6I)^p \)  &\( \nullspace{(t-6)^p}  \)  
+%        &\textit{nullity} \\                                     \hline
+%    \( 1 \)
+%    &\( \begin{pmatrix}
+%         -4  &3  &1  \\
+%          0  &0  &2  \\
+%          0  &0  &-4
+%        \end{pmatrix} \)
+%%\( \set{\colvec{x \\ (4/3)x \\ 0}\suchthat x\in\C}  \) 
+%    &$1$                                                     \\
+%    \( 2 \)
+%    &\( \begin{pmatrix}
+%         16  &-12&-2 \\
+%          0  &0  &-8 \\
+%          0  &0  &16
+%        \end{pmatrix} \)
+%    &\textit{--same--}
+%    &\textit{---}
+%  \end{tabular}
+%\end{center}
+Therefore, \( T \) is diagonalizable.
+\begin{equation*}
+  \rep{t}{B,B}=
+  \begin{pmatrix}
+    2  &0  &0  \\
+    0  &2  &0  \\
+    0  &0  &6
+  \end{pmatrix}
+  \qquad
+  B=\cat{B_2}{B_6}
+   =\sequence{\colvec{1 \\ 0 \\ 0},
+              \colvec{0 \\ 1 \\ -2},
+              \colvec{3 \\ 4 \\ 0}}
+\end{equation*}
+(Checking that the third vector in $B$ is in the nullspace of $t-6$ is
+routine.)
+\end{example}
+
+\begin{example} \label{ThirdJordanForm}
+A bit of computing with
+\begin{equation*}
+   T=
+   \begin{pmatrix}
+     -1  &4  &0  &0  &0  \\
+      0  &3  &0  &0  &0  \\
+      0  &-4 &-1 &0  &0  \\
+      3  &-9 &-4 &2  &-1 \\
+      1  &5  &4  &1  &4
+   \end{pmatrix}
+\end{equation*}
+shows that its characteristic polynomial
+is \( (x-3)^3(x+1)^2 \).
+This table
+\begin{center}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}r|c@{}c@{}c@{}}
+    \textit{power} \( p \)  &\( (T-3I)^p \)  &\( \nullspace{(t-3)^p}  \)
+             &\textit{nullity}   \\  \hline
+    \( 1 \)
+    &\(\begin{pmatrix}
+         -4  &4  &0  &0  &0  \\
+          0  &0  &0  &0  &0  \\
+          0  &-4 &-4 &0  &0  \\
+          3  &-9 &-4 &-1 &-1 \\
+          1  &5  &4  &1  &1
+       \end{pmatrix}  \)
+    &\( \set{\colvec{-(u+v)/2 \\
+                     -(u+v)/2 \\
+                      (u+v)/2 \\
+                       u      \\
+                       v}\suchthat u,v\in\C}  \) 
+    &$2$                                            \\
+    \( 2 \)
+    &\(\begin{pmatrix}
+         16  &-16&0  &0  &0  \\
+          0  &0  &0  &0  &0  \\
+          0  &16 &16 &0  &0  \\
+        -16  &32 &16 &0  &0  \\
+          0  &-16&-16&0  &0
+       \end{pmatrix}  \)
+    &\( \set{\colvec{ -z      \\
+                      -z      \\
+                       z      \\
+                       u      \\
+                       v}\suchthat z,u,v\in\C}  \) 
+    &$3$                                              \\
+    \( 3 \)
+    &\(\begin{pmatrix}
+        -64  &64   &0   &0   &0  \\
+          0  &0    &0   &0   &0  \\
+          0  &-64  &-64 &0   &0  \\
+         64  &-128 &-64 &0   &0  \\
+          0  &64   &64  &0   &0
+       \end{pmatrix}  \)
+    &\textit{--same--}
+    &\textit{---}
+  \end{tabular}
+\end{center}
+shows that the restriction of $t-3$ to $\gennullspace{t-3}$ acts on a 
+string basis via the two strings
+$\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$
+and
+$\vec{\beta}_3\mapsto\zero$.
+
+A similar calculation for the other eigenvalue
+\begin{center}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{r|ccc}
+    \textit{power} \( p \)  &\( (T+1I)^p \)  &\( \nullspace{(t+1)^p}  \) 
+         &\textit{nullity}  \\  \hline
+    \( 1 \)
+    &\(\begin{pmatrix}
+          0  &4  &0  &0  &0  \\
+          0  &4  &0  &0  &0  \\
+          0  &-4 &0  &0  &0  \\
+          3  &-9 &-4 &3  &-1 \\
+          1  &5  &4  &1  &5
+       \end{pmatrix}  \)
+    &\( \set{\colvec{-(u+v)   \\
+                       0      \\
+                      -v      \\
+                       u      \\
+                       v}\suchthat u,v\in\C}  \)  
+    &$2$                                              \\
+    \( 2 \)
+    &\(\begin{pmatrix}
+          0  &16 &0  &0  &0  \\
+          0  &16 &0  &0  &0  \\
+          0  &-16&0  &0  &0  \\
+          8  &-40&-16&8  &-8 \\
+          8  &24 &16 &8  &24
+       \end{pmatrix}  \)
+    &\textit{--same--}
+    &\textit{---}
+  \end{tabular}
+\end{center}
+shows that the restriction of $t+1$ to its generalized null space
+acts on a string basis via the two separate strings
+$\vec{\beta}_4\mapsto\zero$ and $\vec{\beta}_5\mapsto\zero$.
+
+Therefore
+\( T \) is similar to this Jordan form matrix.
+\begin{equation*}
+   \begin{pmatrix}
+     -1  &0  &0  &0  &0  \\
+      0  &-1 &0  &0  &0  \\    
+      0  &0  &3  &0  &0  \\
+      0  &0  &1  &3  &0  \\
+      0  &0  &0  &0  &3  
+   \end{pmatrix}
+\end{equation*}
+\end{example}
+
+
+We close with the statement that the subjects considered earlier in this
+Chapter are indeed, in this sense, exhaustive.
+
+\begin{corollary}
+Every square matrix is similar to the sum of a diagonal matrix and a nilpotent
+matrix.
+\end{corollary}
+
+
+
+
+
+\begin{exercises}
+  \item 
+    Do the check for \nearbyexample{ex:SingJordBlock}.
+    \begin{answer}
+      We are required to check that
+      \begin{equation*}
+         \begin{pmatrix}
+           3  &0  \\
+           1  &3
+         \end{pmatrix}
+         =
+         N+3I=PTP^{-1}
+         =
+         \begin{pmatrix}
+           1/2  &1/2  \\
+          -1/4 &1/4
+         \end{pmatrix}
+         \begin{pmatrix}
+           2  &-1  \\
+           1  &4
+         \end{pmatrix}
+         \begin{pmatrix}
+           1  &-2  \\
+           1  &2
+         \end{pmatrix}
+      \end{equation*}
+      That calculation is easy.
+    \end{answer}
+  \item 
+    Each matrix is in Jordan form.
+    State its characteristic polynomial and its minimal polynomial.
+    \begin{exparts*}
+      \partsitem 
+        $\begin{pmatrix}
+           3  &0  \\
+           1  &3        
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           -1  &0  \\
+            0  &-1 
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           2  &0  &0  \\
+           1  &2  &0  \\
+           0  &0  &-1/2
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           3  &0  &0  \\
+           1  &3  &0  \\
+           0  &1  &3  \\ 
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           3  &0  &0  &0  \\
+           1  &3  &0  &0  \\
+           0  &0  &3  &0  \\
+           0  &0  &1  &3 
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           4  &0  &0  &0  \\
+           1  &4  &0  &0  \\
+           0  &0  &-4 &0  \\
+           0  &0  &1  &-4
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           5  &0  &0  \\
+           0  &2  &0  \\
+           0  &0  &3  
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           5  &0  &0  &0  \\
+           0  &2  &0  &0  \\
+           0  &0  &2  &0  \\
+           0  &0  &0  &3 
+         \end{pmatrix}$
+      \partsitem 
+        $\begin{pmatrix}
+           5  &0  &0  &0  \\
+           0  &2  &0  &0  \\
+           0  &1  &2  &0  \\
+           0  &0  &0  &3 
+         \end{pmatrix}$
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The characteristic polynomial is $c(x)=(x-3)^2$ and
+          the minimal polynomial is the same.
+        \partsitem The characteristic polynomial is $c(x)=(x+1)^2$.
+          The minimal polynomial is $m(x)=x+1$.
+        \partsitem The characteristic polynomial is 
+          $c(x)=(x+(1/2))(x-2)^2$ and
+          the minimal polynomial is the same.
+        \partsitem The characteristic polynomial is $c(x)=(x-3)^3$
+          The minimal polynomial is the same.
+        \partsitem The characteristic polynomial is $c(x)=(x-3)^4$.
+          The minimal polynomial is $m(x)=(x-3)^2$.
+        \partsitem The characteristic polynomial is $c(x)=(x+4)^2(x-4)^2$ and
+          the minimal polynomial is the same.
+        \partsitem The characteristic polynomial is 
+          $c(x)=(x-2)^2(x-3)(x-5)$ and
+          the minimal polynomial is $m(x)=(x-2)(x-3)(x-5)$.
+        \partsitem The characteristic polynomial is 
+          $c(x)=(x-2)^2(x-3)(x-5)$ and
+          the minimal polynomial is the same.
+      \end{exparts}
+    \end{answer}
+  \recommended \item
+    Find the Jordan form from the given data.
+    \begin{exparts}
+       \partsitem The matrix 
+         \( T \) is \( \nbyn{5} \) with the single eigenvalue $3$.
+         The nullities of the powers are:
+         \( T-3I \) has nullity two, \( (T-3I)^2 \) has nullity three,
+         \( (T-3I)^3 \) has nullity four, and \( (T-3I)^4 \) has nullity
+         five.
+       \partsitem The matrix \( S \) is \( \nbyn{5} \) with two eigenvalues.
+         For the eigenvalue $2$ the nullities are:
+         \( S-2I \) has nullity two, and \( (S-2I)^2 \) has nullity four.
+         For the eigenvalue $-1$ the nullities are:
+         \( S+1I \) has nullity one.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem The transformation $t-3$ is nilpotent 
+          (that is, $\gennullspace{t-3}$ is the entire space)
+          and it acts on a string basis via two strings, 
+          $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\vec{\beta}_3
+            \mapsto\vec{\beta}_4\mapsto\zero$
+          and $\vec{\beta}_5\mapsto\zero$.
+          Consequently, $t-3$ can be represented in this canonical form.
+          \begin{equation*}
+            N_3=
+            \begin{pmatrix}
+               0  &0  &0  &0  &0  \\
+               1  &0  &0  &0  &0  \\
+               0  &1  &0  &0  &0  \\
+               0  &0  &1  &0  &0  \\
+               0  &0  &0  &0  &0
+             \end{pmatrix}
+          \end{equation*}
+          and therefore $T$ is similar to this this canonical form matrix.
+          \begin{equation*}
+           J_3=N_3+3I=
+           \begin{pmatrix}
+               3  &0  &0  &0  &0  \\
+               1  &3  &0  &0  &0  \\
+               0  &1  &3  &0  &0  \\
+               0  &0  &1  &3  &0  \\
+               0  &0  &0  &0  &3
+             \end{pmatrix}
+         \end{equation*} 
+         \partsitem The restriction of the transformation $s+1$ is nilpotent
+          on the subspace $\gennullspace{s+1}$, and the action on a 
+          string basis is given as $\vec{\beta}_1\mapsto\zero$.  
+          The restriction of the transformation $s-2$ is nilpotent
+          on the subspace $\gennullspace{s-2}$, having the action on a 
+          string basis of $\vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero$
+          and $\vec{\beta}_4\mapsto\vec{\beta}_5\mapsto\zero$.        
+          Consequently the Jordan form is this
+          \begin{equation*}
+            \begin{pmatrix}
+              -1  &0  &0  &0  &0  \\
+               0  &2  &0  &0  &0  \\
+               0  &1  &2  &0  &0  \\
+               0  &0  &0  &2  &0  \\
+               0  &0  &0  &1  &2
+             \end{pmatrix} 
+          \end{equation*}
+          (note that the blocks are arranged with the least eigenvalue first).
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Find the change of basis matrices for each example. 
+    \begin{exparts*}
+      \partsitem \nearbyexample{ex:FirstJordForm}
+      \partsitem \nearbyexample{SecJordanForm}
+      \partsitem \nearbyexample{ThirdJordanForm}
+    \end{exparts*}
+    \begin{answer}
+      For each, because many choices of basis are possible, many other 
+      answers are possible.
+      Of course, the calculation to check if an answer gives that $PTP^{-1}$
+      is in Jordan form is the arbiter of what's correct.
+      \begin{exparts}
+        \partsitem Here is the arrow diagram.
+          \begin{equation*}
+            \begin{CD}
+              \C^3_\wrt{\stdbasis_3}      @>t>T>    \C^3_\wrt{\stdbasis_3}   \\
+                @V\scriptstyle\identity V\scriptstyle PV  
+                                    @V\scriptstyle\identity V\scriptstyle PV \\
+              \C^3_\wrt{B}                 @>t>J>         \C^3_\wrt{B}
+            \end{CD}
+          \end{equation*}
+          The matrix to move from the lower left to the upper left is this. 
+          \begin{equation*}
+            P^{-1}=\bigl(\rep{\identity}{\stdbasis_3,B}\bigr)^{-1}
+                  =\rep{\identity}{B,\stdbasis_3}   
+                  =\begin{pmatrix}
+                     1  &-2   &0 \\
+                     1  &0   &1 \\
+                    -2  &0   &0
+                   \end{pmatrix}
+          \end{equation*}
+          The matrix $P$ to move from the upper right to the lower
+          right is the inverse of $P^{-1}$.
+        \partsitem We want this matrix and its inverse.
+          \begin{equation*}
+            P^{-1}=
+            \begin{pmatrix}
+              1  &0  &3  \\
+              0  &1  &4  \\
+              0  &-2 &0
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem The concatenation of these bases for the 
+          generalized null spaces will do for the basis for the
+          entire space.
+          \begin{equation*}
+             B_{-1}=\sequence{\colvec{-1\\ 0 \\  0 \\ 1 \\ 0},
+                 \colvec{-1\\ 0 \\ -1 \\ 0 \\ 1}}
+            \qquad
+             B_3=\sequence{\colvec{1 \\ 1 \\ -1 \\ 0 \\ 0},
+                 \colvec{0 \\ 0 \\  0 \\-2 \\ 2},
+                 \colvec{-1\\-1 \\  1 \\ 2 \\ 0}}
+          \end{equation*}
+          The change of basis matrices are this one and its inverse.
+          \begin{equation*}
+            P^{-1}=
+            \begin{pmatrix}
+              -1  &-1  &1  &0  &-1  \\
+              0   &0   &1  &0  &-1  \\
+              0   &-1  &-1 &0  &1   \\
+              1   &0   &0  &-2 &2   \\
+              0   &1   &0  &2  &0   \\
+            \end{pmatrix}
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
+  \recommended \item 
+    Find the Jordan form and a Jordan basis for each matrix.
+    \begin{exparts}
+      \partsitem 
+        \(
+        \begin{pmatrix}
+          -10  &4  \\
+          -25  &10
+        \end{pmatrix} \)
+      \partsitem 
+        \(
+        \begin{pmatrix}
+           5   &-4 \\
+           9   &-7
+        \end{pmatrix} \)
+      \partsitem 
+        \(
+        \begin{pmatrix}
+           4   &0    &0  \\
+           2   &1    &3  \\
+           5   &0    &4
+        \end{pmatrix} \)
+      \partsitem 
+        \(
+        \begin{pmatrix}
+           5   &4    &3  \\
+          -1   &0    &-3 \\
+           1   &-2   &1
+        \end{pmatrix} \)
+      \partsitem
+        \(
+        \begin{pmatrix}
+           9   &7    &3  \\
+          -9   &-7   &-4 \\
+           4   &4    &4
+        \end{pmatrix} \)
+      \partsitem 
+        \(
+        \begin{pmatrix}
+           2   &2    &-1 \\
+          -1   &-1   &1  \\
+          -1   &-2   &2
+        \end{pmatrix} \)
+      \partsitem 
+        \(
+        \begin{pmatrix}
+           7   &1    &2   &2 \\
+           1   &4    &-1  &-1\\
+          -2   &1    &5   &-1\\
+           1   &1    &2   &8
+        \end{pmatrix} \)
+    \end{exparts}
+    \begin{answer}
+      The general procedure is to factor the characteristic polynomial 
+      $c(x)=(x-\lambda_1)^{p_1}(x-\lambda_2)^{p_2}\cdots $ 
+      to get the eigenvalues $\lambda_1$, $\lambda_2$, etc. 
+      Then, for each $\lambda_i$ we find a 
+      string basis for the action of the transformation $t-\lambda_i$
+      when restricted to $\gennullspace{t-\lambda_i}$,
+      by computing the powers of the matrix $T-\lambda_iI$ and finding
+      the associated null spaces, until these null spaces settle down
+      (do not change), at which point we have the generalized null space.
+      The dimensions of those null spaces (the nullities) tell us the
+      action of $t-\lambda_i$ on a string basis for the generalized
+      null space, and so we can write the pattern of subdiagonal ones
+      to have $N_{\lambda_i}$.
+      From this matrix, the Jordan block $J_{\lambda_i}$ associated
+      with $\lambda_i$ is immediate $J_{\lambda_i}=N_{\lambda_i}+\lambda_iI$.
+      Finally, after we have done this for each eigenvalue, we put them
+      together into the canonical form.
+      \begin{exparts}
+        \partsitem The characteristic polynomial of this matrix
+           is $c(x)=(-10-x)(10-x)+100=x^2$, 
+           so it has only the single eigenvalue $\lambda=0$.
+           \begin{center}
+             \renewcommand{\arraystretch}{1.25}
+             \begin{tabular}{r|ccc}
+                \textit{power}~$p$ &$(T+0\cdot I)^p$ &$\nullspace{(t-0)^p}$
+                    &\textit{nullity}                   \\ 
+                \hline
+                $1$  
+                &$\begin{pmatrix}
+                  -10  &4  \\ 
+                  -25  &10
+                \end{pmatrix}$
+                &$\set{\colvec{2y/5 \\ y}\suchthat
+                                     y\in\C}$
+                &$1$                                       \\
+                $2$  
+                &$\begin{pmatrix}
+                    0  &0  \\ 
+                    0  &0
+                \end{pmatrix}$
+                &$\C^2$
+                &$2$
+             \end{tabular}
+           \end{center}
+           (Thus, this transformation is nilpotent: 
+           $\gennullspace{t-0}$ is the entire space).
+           From the nullities we know that $t$'s
+           action on a string basis is 
+           $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.
+           This is the canonical form matrix for the action of $t-0$ on
+           $\gennullspace{t-0}=\C^2$
+           \begin{equation*}
+             N_0=
+             \begin{pmatrix}
+               0  &0  \\
+               1  &0
+            \end{pmatrix}
+           \end{equation*}
+           and this is the Jordan form of the matrix.
+           \begin{equation*}
+             J_0=N_0+0\cdot I=
+             \begin{pmatrix}
+               0  &0  \\
+               1  &0
+            \end{pmatrix}
+           \end{equation*}
+           Note that if a matrix is nilpotent then its canonical form
+           equals its Jordan form.
+
+           We can find such a string basis using the techniques of the 
+           prior section.
+           \begin{equation*}
+                 B=\sequence{\colvec{1 \\ 0},
+                             \colvec{-10 \\ -25}}
+           \end{equation*}
+           The first basis vector has been taken so that it is in
+           the null space of $t^2$ but is not in the null space of $t$.
+           The second basis vector is the image of the first under $t$.
+        \partsitem The characteristic polynomial of this matrix
+           is \( c(x)=(x+1)^2 \), so it is a single-eigenvalue matrix.
+           (That is, the generalized null space of $t+1$ is the entire
+           space.) 
+           We have
+           \begin{equation*}
+             \nullspace{t+1}=\set{\colvec{2y/3 \\ y}\suchthat
+                                     y\in\C} 
+             \qquad
+             \nullspace{(t+1)^2}=\C^2 
+           \end{equation*}
+           and so the action of $t+1$ on
+           an associated string basis is 
+           $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.
+           Thus, 
+           \begin{equation*}
+             N_{-1}
+             =
+             \begin{pmatrix}
+                0  &0  \\
+                1  &0 
+             \end{pmatrix}
+           \end{equation*}
+           the Jordan form of T is
+           \begin{equation*}
+             J_{-1}=N_{-1}+-1\cdot I
+             =
+             \begin{pmatrix}
+               -1  &0  \\
+                1  &-1
+             \end{pmatrix}
+           \end{equation*}
+           and choosing vectors from the above null spaces gives
+           this string basis (many other choices are possible).
+           \begin{equation*}
+             B=\sequence{\colvec{1 \\ 0},
+                         \colvec{6 \\ 9}}
+           \end{equation*}
+        \partsitem The characteristic polynomial 
+            \( c(x)=(1-x)(4-x)^2=-1\cdot (x-1)(x-4)^2 \) has two roots
+            and they are the eigenvalues $\lambda_1=1$ and $\lambda_2=4$.
+
+            We handle the two eigenvalues separately.
+            For $\lambda_1$, the calculation of the powers of $T-1I$
+            yields
+            \begin{equation*}
+              \nullspace{t-1}=\set{\colvec{0 \\ y \\ 0}
+                                      \suchthat y\in\C}
+            \end{equation*}
+            and the null space of $(t-1)^2$ is the same.
+            Thus this set is the generalized null space 
+            $\gennullspace{t-1}$.
+            The nullities show that the action of the restriction of $t-1$ 
+            to the generalized null space on a string basis
+            is  $\vec{\beta}_1\mapsto\zero$.
+
+            A similar calculation for $\lambda_2=4$ gives these null spaces.
+            \begin{equation*}
+              \nullspace{t-4}=\set{\colvec{0 \\ z \\ z}
+                                      \suchthat z\in\C}
+              \qquad
+              \nullspace{(t-4)^2}=\set{\colvec{y-z \\ y \\ z}
+                                          \suchthat y,z\in\C}
+            \end{equation*}
+            (The null space of $(t-4)^3$ is the same, as it must be because
+            the power of the term associated with $\lambda_2=4$ in the
+            characteristic polynomial is two, and so the restriction of
+            $t-2$ to the generalized null space $\gennullspace{t-2}$
+            is nilpotent of index at most two\Dash it takes at most
+            two applications of $t-2$ for the null space to settle down.)
+            The pattern of how the nullities rise tells us that
+             the action of $t-4$ on an associated string basis 
+            for $\gennullspace{t-4}$ is 
+            $\vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero$.
+
+            Putting the information for the two eigenvalues 
+            together gives the Jordan form of the transformation $t$.
+            \begin{equation*}
+              \begin{pmatrix}
+                1  &0  &0  \\
+                0  &4  &0  \\
+                0  &1  &4
+              \end{pmatrix}
+            \end{equation*}
+            We can take elements of the nullspaces to get an appropriate
+            basis.
+            \begin{equation*}
+              B=\cat{B_{1}}{B_4}=
+               \sequence{\colvec{0 \\ 1 \\ 0},
+                          \colvec{1 \\ 0 \\ 1},
+                          \colvec{0 \\ 5 \\ 5}}
+            \end{equation*}
+        \partsitem The characteristic polynomial is 
+            \( c(x)=(-2-x)(4-x)^2=-1\cdot (x+2)(x-4)^2 \).
+
+            For the eigenvalue $\lambda_{-2}$, calculation of the
+            powers of $T+2I$ yields this.
+            \begin{equation*}
+              \nullspace{t+2}=\set{\colvec{z \\ z \\ z}
+                                      \suchthat z\in\C}
+            \end{equation*}
+            The null space of $(t+2)^2$ is the same, and so 
+            this is the generalized null space $\gennullspace{t+2}$.
+            Thus the action of the restriction of $t+2$ to 
+            $\gennullspace{t+2}$ on an associated
+            string basis is $\vec{\beta}_1\mapsto\zero$.
+
+            For $\lambda_2=4$, 
+            computing the powers of $T-4I$ yields 
+            \begin{equation*}
+              \nullspace{t-4}=\set{\colvec{z \\ -z \\ z}
+                                      \suchthat z\in\C} 
+              \qquad
+              \nullspace{(t-4)^2}=\set{\colvec{x \\ -z \\ z}
+                                           \suchthat x,z\in\C}
+            \end{equation*}
+            and so the action of $t-4$ on a string basis for 
+            $\gennullspace{t-4}$ is
+            $\vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero$.
+
+            Therefore the Jordan form is  
+            \begin{equation*}
+              \begin{pmatrix}
+                -2  &0  &0  \\
+                 0  &4  &0  \\
+                 0  &1  &4
+              \end{pmatrix}
+            \end{equation*}
+            and a suitable basis is this.
+            \begin{equation*}
+              B=\cat{B_{-2}}{B_4}=
+                \sequence{\colvec{1 \\ 1 \\ 1},
+                          \colvec{0 \\ -1 \\ 1},
+                          \colvec{-1 \\ 1 \\ -1}}
+            \end{equation*}
+        \partsitem The characteristic polynomial of this
+            matrix is \( c(x)=(2-x)^3=-1\cdot (x-2)^3 \).
+            This matrix has only a single eigenvalue, $\lambda=2$.
+            By finding the powers of $T-2I$ we have  
+            \begin{equation*}
+              \nullspace{t-2}=\set{\colvec{-y \\ y \\ 0}
+                                      \suchthat y\in\C} 
+              \qquad
+              \nullspace{(t-2)^2}=\set{\colvec{-y-(1/2)z \\ y \\ z}
+                                          \suchthat y,z\in\C} 
+              \qquad
+              \nullspace{(t-2)^3}=\C^3
+            \end{equation*}
+            and so 
+            the action of $t-2$ on an
+            associated string basis is
+            $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto
+                   \vec{\beta}_3\mapsto\zero$.
+            The Jordan form is this
+            \begin{equation*}
+                  \begin{pmatrix}
+                    2  &0  &0  \\
+                    1  &2  &0  \\
+                    0  &1  &2
+                  \end{pmatrix}
+            \end{equation*}
+            and one choice of basis is this.
+            \begin{equation*}
+              B=\sequence{\colvec{0 \\ 1 \\ 0},
+                          \colvec{7 \\ -9 \\ 4},
+                          \colvec{-2 \\ 2 \\ 0}}
+            \end{equation*}
+        \partsitem The characteristic polynomial
+            \( c(x)=(1-x)^3=-(x-1)^3 \) has only a single root,
+            so the matrix has only a single eigenvalue $\lambda=1$.
+            Finding the powers of $T-1I$ 
+            and calculating the null spaces
+            \begin{equation*}
+               \nullspace{t-1}=\set{\colvec{-2y+z \\ y \\ z}
+                                      \suchthat y,z\in\C} 
+               \qquad
+               \nullspace{(t-1)^2}=\C^3 
+            \end{equation*}
+            shows that the action of the nilpotent map $t-1$ on a string
+            basis is
+            $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$ and
+            $\vec{\beta}_3\mapsto\zero$.
+            Therefore the Jordan form is
+            \begin{equation*}
+                  J=
+                  \begin{pmatrix}
+                    1  &0  &0  \\
+                    1  &1  &0  \\
+                    0  &0  &1
+                  \end{pmatrix}
+            \end{equation*}
+            and an appropriate basis (a string basis associated with
+            $t-1$) is this.
+            \begin{equation*}
+              B=\sequence{\colvec{0 \\ 1 \\ 0},
+                          \colvec{2 \\ -2 \\ -2},
+                          \colvec{1 \\ 0 \\ 1}}
+            \end{equation*}
+        \partsitem The characteristic polynomial is a bit large for by-hand
+            calculation, but just manageable 
+            \( c(x)=x^4-24x^3+216x^2-864x+1296=(x-6)^4 \).
+            This is a single-eigenvalue map, so
+            the transformation $t-6$ is nilpotent.
+            The null spaces
+            \begin{equation*}
+               \nullspace{t-6}=\set{\colvec{-z-w \\ -z-w \\ z \\ w}
+                                      \suchthat z,w\in\C} 
+               \quad
+               \nullspace{(t-6)^2}=\set{\colvec{x \\ -z-w \\ z \\ w}
+                                      \suchthat x,z,w\in\C} 
+               \quad
+               \nullspace{(t-6)^3}=\C^4 
+            \end{equation*}
+            and the nullities
+            show that the action of $t-6$ on a string basis is
+            $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto
+                   \vec{\beta}_3\mapsto\zero$ and
+            $\vec{\beta}_4\mapsto\zero$.
+            The Jordan form is
+            \begin{equation*}
+              \begin{pmatrix}
+                6  &0  &0  &0  \\
+                1  &6  &0  &0  \\
+                0  &1  &6  &0  \\
+                0  &0  &0  &6  \\
+              \end{pmatrix}
+            \end{equation*}
+            and finding a suitable string basis is routine.
+            \begin{equation*}
+              B=\sequence{\colvec{0 \\ 0 \\ 0 \\ 1},
+                          \colvec{2 \\ -1 \\ -1 \\ 2},
+                          \colvec{3 \\ 3 \\ -6 \\ 3},
+                          \colvec{-1 \\ -1 \\ 1 \\ 0}}
+            \end{equation*}
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Find all possible Jordan forms of a transformation with characteristic
+    polynomial \( (x-1)^2(x+2)^2  \).
+    \begin{answer}
+      There are two eigenvalues, $\lambda_1=-2$ and $\lambda_2=1$.
+      The restriction of $t+2$ to 
+      $\gennullspace{t+2}$ could have either of these actions 
+      on an associated string basis.
+      \begin{equation*}
+        \vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero
+        \qquad
+        \begin{array}[t]{l}
+          \vec{\beta}_1\mapsto\zero  \\
+          \vec{\beta}_2\mapsto\zero 
+        \end{array}
+      \end{equation*}
+      The restriction of $t-1$ to 
+      $\gennullspace{t-1}$ could have either of these actions 
+      on an associated string basis.
+      \begin{equation*}
+        \vec{\beta}_3\mapsto\vec{\beta}_4\mapsto\zero
+        \qquad
+        \begin{array}[t]{l}
+          \vec{\beta}_3\mapsto\zero  \\
+          \vec{\beta}_4\mapsto\zero 
+        \end{array}
+      \end{equation*}
+      In combination, that makes four possible Jordan forms,
+      the two first actions, the second and first, the first and second, and
+      the two second actions.
+      \begin{equation*}
+        \begin{pmatrix}
+          -2  &0  &0  &0  \\
+           1  &-2 &0  &0  \\
+           0  &0  &1  &0  \\
+           0  &0  &1  &1
+        \end{pmatrix}
+        \quad
+        \begin{pmatrix}
+          -2  &0  &0  &0  \\
+           0  &-2 &0  &0  \\
+           0  &0  &1  &0  \\
+           0  &0  &1  &1
+        \end{pmatrix}
+        \quad
+        \begin{pmatrix}
+          -2  &0  &0  &0  \\
+           1  &-2 &0  &0  \\
+           0  &0  &1  &0  \\
+           0  &0  &0  &1
+        \end{pmatrix}
+        \quad
+        \begin{pmatrix}
+          -2  &0  &0  &0  \\
+           0  &-2 &0  &0  \\
+           0  &0  &1  &0  \\
+           0  &0  &0  &1
+        \end{pmatrix}
+     \end{equation*}  
+    \end{answer}
+  \item 
+    Find all possible Jordan forms of a transformation with characteristic
+    polynomial \( (x-1)^3(x+2) \).
+    \begin{answer}
+     The restriction of $t+2$ to 
+     $\gennullspace{t+2}$ can have only the action
+     $\vec{\beta}_1\mapsto\zero$.
+     The restriction of $t-1$ to $\gennullspace{t-1}$ could have any
+     of these three actions on an associated string basis. 
+     \begin{equation*}
+        \vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\vec{\beta}_4\mapsto\zero
+        \qquad
+        \begin{array}[t]{l}
+          \vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero  \\
+          \vec{\beta}_4\mapsto\zero 
+        \end{array}
+        \qquad
+        \begin{array}[t]{l}
+          \vec{\beta}_2\mapsto\zero  \\
+          \vec{\beta}_3\mapsto\zero  \\
+          \vec{\beta}_4\mapsto\zero 
+        \end{array}
+     \end{equation*}
+     Taken together there are three possible Jordan forms,
+     the one arising from the first action by $t-1$ (along with the only
+     action from $t+2$), the one arising from the second action, and
+     the one arising from the third action.
+     \begin{equation*}
+       \begin{pmatrix}
+         -2  &0  &0  &0  \\
+          0  &1  &0  &0  \\
+          0  &1  &1  &0  \\
+          0  &0  &1  &1
+       \end{pmatrix}
+       \quad
+       \begin{pmatrix}
+         -2  &0  &0  &0  \\
+          0  &1  &0  &0  \\
+          0  &1  &1  &0  \\
+          0  &0  &0  &1
+       \end{pmatrix}
+       \quad
+       \begin{pmatrix}
+         -2  &0  &0  &0  \\
+          0  &1  &0  &0  \\
+          0  &0  &1  &0  \\
+          0  &0  &0  &1
+       \end{pmatrix}
+     \end{equation*}
+    \end{answer}
+  \recommended \item
+    Find all possible Jordan forms of a transformation with characteristic
+    polynomial \( (x-2)^3(x+1) \) and minimal polynomial \( (x-2)^2(x+1) \).
+    \begin{answer}
+      The action of $t+1$ on a string basis for $\gennullspace{t+1}$
+      must be $\vec{\beta}_1\mapsto\zero$. 
+      Because of the power of \( x-2 \) in the minimal polynomial, a
+      string basis for $t-2$ has length two and so
+      the action of \( t-2 \) on \( \gennullspace{t-2} \)
+      must be of this form.
+      \begin{equation*}
+        \begin{array}[t]{l}
+          \vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero  \\
+          \vec{\beta}_4\mapsto\zero 
+        \end{array}        
+      \end{equation*}
+      Therefore there is only one Jordan form that is possible.
+      \begin{equation*}
+          \begin{pmatrix}
+            -1  &0  &0  &0  \\
+             0  &2  &0  &0  \\
+             0  &1  &2  &0  \\
+             0  &0  &0  &2
+          \end{pmatrix}
+       \end{equation*}
+     \end{answer}
+  \item 
+    Find all possible Jordan forms of a transformation with characteristic
+    polynomial \( (x-2)^4(x+1) \) and minimal polynomial \( (x-2)^2(x+1) \).
+    \begin{answer}
+      There are two possible Jordan forms.
+      The action of $t+1$ on a string basis for $\gennullspace{t+1}$
+      must be $\vec{\beta}_1\mapsto\zero$.
+      There are two actions for $t-2$ on a string basis for
+      $\gennullspace{t-2}$ that are possible with this characteristic 
+      polynomial and minimal polynomial.
+      \begin{equation*}
+        \begin{array}[t]{l}
+          \vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero  \\
+          \vec{\beta}_4\mapsto\vec{\beta}_5\mapsto\zero  
+        \end{array}        
+        \qquad
+        \begin{array}[t]{l}
+          \vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero  \\
+          \vec{\beta}_4\mapsto\zero                      \\
+          \vec{\beta}_5\mapsto\zero                      
+        \end{array}        
+      \end{equation*}
+      The resulting Jordan form matrics are these. 
+      \begin{equation*}
+        \begin{pmatrix}
+          -1  &0  &0  &0  &0  \\
+           0  &2  &0  &0  &0  \\
+           0  &1  &2  &0  &0  \\
+           0  &0  &0  &2  &0  \\
+           0  &0  &0  &1  &2
+        \end{pmatrix}
+        \qquad
+        \begin{pmatrix}
+          -1  &0  &0  &0  &0  \\
+           0  &2  &0  &0  &0  \\
+           0  &1  &2  &0  &0  \\
+           0  &0  &0  &2  &0  \\
+           0  &0  &0  &0  &2
+        \end{pmatrix}
+     \end{equation*}  
+    \end{answer}
+  \recommended \item Diagonalize these.
+    \begin{exparts*}
+       \partsitem \( \begin{pmatrix}
+                  1  &1  \\
+                  0  &0
+                \end{pmatrix}  \)
+       \partsitem \( \begin{pmatrix}
+                  0  &1  \\
+                  1  &0
+                \end{pmatrix}  \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The characteristic polynomial is \( c(x)=x(x-1) \).
+          For $\lambda_1=0$ we have
+          \begin{equation*}
+            \nullspace{t-0}=\set{\colvec{-y \\ y}
+                                 \suchthat y\in\C }  
+          \end{equation*} 
+          (of course, the null space of $t^2$ is the same).
+          For $\lambda_2=1$,
+          \begin{equation*}
+            \nullspace{t-1}=\set{\colvec{x \\ 0}
+                                     \suchthat x\in\C }  
+          \end{equation*}
+          (and the null space of $(t-1)^2$ is the same).
+          We can take this basis
+          \begin{equation*}
+            B=\sequence{\colvec{1 \\ -1},\colvec{1 \\ 0}}
+          \end{equation*}
+          to get the diagonalization.
+          \begin{equation*}
+            \begin{pmatrix}
+              1  &1  \\
+             -1  &0
+            \end{pmatrix}^{-1}
+            \begin{pmatrix}
+              1  &1  \\
+              0  &0
+            \end{pmatrix}
+            \begin{pmatrix}
+              1  &1  \\
+             -1  &0
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+              0  &0  \\
+              0  &1
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem The characteristic polynomial is 
+          \( c(x)=x^2-1=(x+1)(x-1) \).
+          For $\lambda_1=-1$,
+          \begin{equation*}
+            \nullspace{t+1}=\set{\colvec{-y \\ y}
+                                    \suchthat y\in\C } 
+          \end{equation*}
+          and the null space of $(t+1)^2$ is the same.
+          For $\lambda_2=1$ 
+          \begin{equation*}
+            \nullspace{t-1}=\set{\colvec{y \\ y}
+                                    \suchthat y\in\C } 
+          \end{equation*}
+          and the null space of $(t-1)^2$ is the same.
+          We can take this basis
+          \begin{equation*}
+            B=\sequence{\colvec{1 \\ -1},\colvec{1 \\ 1}}
+          \end{equation*}
+          to get a diagonalization.
+          \begin{equation*}
+            \begin{pmatrix}
+              1  &1  \\
+              1  &-1
+            \end{pmatrix}^{-1}
+            \begin{pmatrix}
+              0  &1  \\
+              1  &0
+            \end{pmatrix}
+            \begin{pmatrix}
+              1   &1  \\
+              -1  &1
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+              -1  &0  \\
+              0   &1
+            \end{pmatrix}
+          \end{equation*}
+      \end{exparts}  
+     \end{answer}
+  \recommended \item 
+    Find the Jordan matrix representing the differentiation
+    operator on \( \polyspace_3 \).
+    \begin{answer}
+      The transformation $\map{d/dx}{\polyspace_3}{\polyspace_3}$ 
+      is nilpotent.
+      Its action on \( B=\sequence{x^3,3x^2,6x,6} \)
+      is $x^3\mapsto 3x^2\mapsto 6x\mapsto 6\mapsto 0$.
+      Its Jordan form is its canonical form as a nilpotent matrix.
+      \begin{equation*}
+         J=
+         \begin{pmatrix}
+           0  &0  &0  &0  \\
+           1  &0  &0  &0  \\
+           0  &1  &0  &0  \\
+           0  &0  &1  &0
+         \end{pmatrix}
+      \end{equation*}
+    \end{answer}
+   \recommended \item 
+      Decide if these two are similar.
+      \begin{equation*}
+         \begin{pmatrix}
+            1  &-1 \\
+            4  &-3 \\
+         \end{pmatrix}
+         \qquad
+         \begin{pmatrix}
+           -1  &0  \\
+            1  &-1 \\
+         \end{pmatrix}
+      \end{equation*}
+      \begin{answer}
+        Yes.
+        Each has the characteristic polynomial $(x+1)^2$.
+        Calculations of the powers of $T_1+1\cdot I$ and 
+        $T_2+1\cdot I$ gives these two.
+        \begin{equation*}
+          \nullspace{t_1+1}=\set{\colvec{y/2 \\ y} \suchthat y\in\C}
+          \qquad
+          \nullspace{t_2+1}=\set{\colvec{0 \\ y} \suchthat y\in\C}
+        \end{equation*}
+        (Of course, for each the null space of the square is 
+        the entire space.)
+        The way that the nullities rise shows that each is  
+        similar to this Jordan form matrix
+        \begin{equation*}
+           \begin{pmatrix}
+             -1  &0  \\
+              1  &-1 \\
+           \end{pmatrix}
+        \end{equation*}
+        and they are therefore similar to each other.  
+      \end{answer}
+  \item 
+     Find the Jordan form of this matrix.
+     \begin{equation*}
+        \begin{pmatrix}
+           0  &-1  \\
+           1  &0
+        \end{pmatrix}
+     \end{equation*}
+     Also give a Jordan basis.
+     \begin{answer}
+       Its characteristic polynomial is
+       \( c(x)=x^2+1 \) which has complex roots
+       \( x^2+1=(x+i)(x-i) \).
+       Because the roots are distinct,
+       the matrix is diagonalizable and its Jordan form is that
+       diagonal matrix. 
+       \begin{equation*}
+         \begin{pmatrix}
+           -i  &0  \\
+            0  &i
+         \end{pmatrix}
+       \end{equation*}  
+       To find an associated basis we compute the null spaces.
+       \begin{equation*}
+         \nullspace{t+i}=\set{\colvec{-iy \\ y}
+                                        \suchthat y\in\C} 
+         \qquad
+         \nullspace{t-i}=\set{\colvec{iy \\ y}
+                                        \suchthat y\in\C} 
+       \end{equation*}
+       For instance, 
+       \begin{equation*}
+         T+i\cdot I=
+         \begin{pmatrix}
+           i  &-1  \\
+           1  &i
+         \end{pmatrix}
+       \end{equation*}
+       and so we get a description of the null space of $t+i$ by solving
+       this linear system.
+       \begin{equation*}
+         \begin{linsys}{2}
+           ix  &-  &y  &=  &0  \\
+            x  &+  &iy &=  &0
+         \end{linsys}
+         \;\grstep{i\rho_1+\rho_2}\;
+         \begin{linsys}{2}
+           ix  &-  &y  &=  &0  \\
+               &   &0  &=  &0
+         \end{linsys}
+       \end{equation*}
+       (To change the relation $ix=y$ so that the leading variable $x$ is
+       expressed in terms of the free variable $y$, we can multiply both
+       sides by $-i$.)
+
+       As a result, one such basis is this.
+       \begin{equation*}
+         B=\sequence{\colvec{-i \\ 1},
+                     \colvec{i \\ 1}}
+       \end{equation*}  
+     \end{answer}
+  \item 
+    How many similarity classes are there for \( \nbyn{3} \) matrices
+    whose only eigenvalues are \( -3 \) and \( 4 \)?
+    \begin{answer}
+     We can count the possible classes by counting the possible
+     canonical representatives, that is, the possible Jordan form matrices.
+     The characteristic polynomial must be either $c_1(x)=(x+3)^2(x-4)$
+     or $c_2(x)=(x+3)(x-4)^2$.
+     In the $c_1$ case there are two possible actions 
+     of $t+3$ on a string basis for $\gennullspace{t+3}$.
+     \begin{equation*}
+       \vec{\beta}_1\mapsto\vec{\beta}_2\mapsto \zero
+       \qquad
+       \begin{array}[t]{l}
+         \vec{\beta}_1\mapsto\zero \\
+         \vec{\beta}_2\mapsto\zero 
+       \end{array}
+     \end{equation*}
+     There are two associated Jordan form matrices.
+     \begin{equation*}
+        \begin{pmatrix}
+          -3  &0  &0  \\
+           1  &-3 &0  \\
+           0  &0  &4
+        \end{pmatrix}
+        \qquad
+        \begin{pmatrix}
+          -3  &0  &0  \\
+           0  &-3 &0  \\
+           0  &0  &4
+        \end{pmatrix}
+      \end{equation*}
+      Similarly there are two Jordan form matrices that could arise
+      out of $c_2$.
+      \begin{equation*}
+        \begin{pmatrix}
+          -3  &0  &0  \\
+           0  &4  &0  \\
+           0  &1  &4
+        \end{pmatrix}
+        \qquad
+        \begin{pmatrix}
+          -3  &0  &0  \\
+           0  &4  &0  \\
+           0  &0  &4
+        \end{pmatrix}
+     \end{equation*}  
+     So in total there are four possible Jordan forms.
+    \end{answer}
+  \recommended \item
+    Prove that a matrix is diagonalizable if and only if its minimal
+    polynomial has only linear factors.
+    \begin{answer}
+       Jordan form is unique.
+       A diagonal matrix is in Jordan form.
+       Thus the Jordan form of a diagonalizable matrix is its diagonalization.
+       If the minimal polynomial has factors to some power higher than one
+       then the Jordan form has subdiagonal \( 1 \)'s, and so is not
+       diagonal.  
+     \end{answer}
+  \item 
+    Give an example of a linear transformation on a vector
+    space that has no non-trivial invariant subspaces.
+    \begin{answer}
+      One example is the transformation of \( \C \) that
+       sends \( x \) to \( -x \).  
+     \end{answer}
+  \item 
+    Show that a subspace is \( t-\lambda_1 \) invariant if and only if
+    it is \( t-\lambda_2 \) invariant.
+    \begin{answer}
+      Apply \nearbylemma{le:tInvIfftMinLambdaInv} twice;
+      the subspace is $t-\lambda_1$~invariant if and only if it is 
+      $t$~invariant, which in turn holds if and only if it is 
+      $t-\lambda_2$~invariant.  
+    \end{answer}
+  \item 
+     Prove or disprove: two \( \nbyn{n} \) matrices are
+     similar if and only if they have the same characteristic and
+     minimal polynomials.
+     \begin{answer}
+       False; these two $\nbyn{4}$ matrices each have $c(x)=(x-3)^4$
+       and $m(x)=(x-3)^2$.
+       \begin{equation*}
+          \begin{pmatrix}
+             3  &0  &0  &0  \\
+             1  &3  &0  &0  \\
+             0  &0  &3  &0  \\
+             0  &0  &1  &3
+          \end{pmatrix}
+          \quad
+          \begin{pmatrix}
+             3  &0  &0  &0  \\
+             1  &3  &0  &0  \\
+             0  &0  &3  &0  \\
+             0  &0  &0  &3
+          \end{pmatrix}
+       \end{equation*} 
+     \end{answer}
+  \item 
+    The \definend{trace}\index{trace}\index{matrix!trace} 
+    of a square matrix is the sum of its diagonal entries.
+    \begin{exparts}
+       \partsitem Find the formula for the characteristic polynomial of
+         a $\nbyn{2}$ matrix.
+       \partsitem Show that 
+         trace is invariant under similarity, and so we can sensibly
+         speak of the `trace of a map'.\index{linear map!trace}
+         (\textit{Hint:}  see the prior item.)
+       \partsitem Is trace invariant under matrix equivalence?
+       \partsitem Show that the trace of a map is the sum of its eigenvalues
+         (counting multiplicities).
+       \partsitem Show that the trace of a nilpotent map is zero.
+         Does the converse hold?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem The characteristic polynomial is this. 
+           \begin{equation*}
+             \begin{vmatrix}
+               a-x  &b  \\
+               c  &d-x
+             \end{vmatrix}
+             =(a-x)(d-x)-bc=ad-(a+d)x+x^2-bc
+             =x^2-(a+d)x+(ad-bc)
+           \end{equation*}
+           Note that the determinant appears as the constant term.
+         \partsitem Recall that the characteristic polynomial
+            \( \deter{T-xI} \) is invariant under similarity.
+            Use the permutation expansion formula to show that the trace
+            is the negative of the coefficient of \( x^{n-1} \).
+         \partsitem No, there are matrices $T$ and $S$ that are
+            equivalent $S=PTQ$ (for some nonsingular $P$ and $Q$)
+            but that have different traces.
+            An easy example is this.
+            \begin{equation*}
+               PTQ=
+               \begin{pmatrix}
+                  2  &0  \\
+                  0  &1
+               \end{pmatrix}
+               \begin{pmatrix}
+                  1  &0  \\
+                  0  &1
+               \end{pmatrix}
+               \begin{pmatrix}
+                  1  &0  \\
+                  0  &1
+               \end{pmatrix}
+               =
+               \begin{pmatrix}
+                  2  &0  \\
+                  0  &1
+               \end{pmatrix}
+            \end{equation*}
+            Even easier examples using $\nbyn{1}$ matrices are possible.
+         \partsitem Put the matrix in Jordan form.
+            By the first item, the trace is unchanged.
+         \partsitem The first part is easy; use the third item.
+            The converse does not hold:~this matrix
+            \begin{equation*}
+               \begin{pmatrix}
+                  1  &0  \\
+                  0  &-1
+               \end{pmatrix}
+            \end{equation*}
+            has a trace of zero but is not nilpotent.
+       \end{exparts}  
+     \end{answer}
+  \item 
+    To use \nearbydefinition{def:invariant} to check whether a subspace
+    is $t$~invariant, we seemingly have to check all of the infinitely many
+    vectors in a (nontrivial) subspace to see if they satisfy the condition.
+    Prove that a subspace is \( t \)~invariant if and only if its subbasis
+    has the property that for all of its elements, $t(\vec{\beta})$ is in 
+    the subspace.
+    \begin{answer}
+      Suppose that \( B_M \) is a basis for a subspace \( M \) of some vector
+      space.
+      Implication one way is clear; if \( M \) is \( t \) invariant then
+      in particular, if \( \vec{m}\in B_M \) then \( t(\vec{m})\in M \).
+      For the other implication, let
+      \( B_M=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_q} \) and note that
+      \( t(\vec{m})=t(m_1\vec{\beta}_1+\dots+m_q\vec{\beta}_q)
+                   =m_1t(\vec{\beta}_1)+\dots+m_qt(\vec{\beta}_q) \)
+      is in \( M \) as any subspace is closed under linear
+      combinations. 
+    \end{answer}
+  \recommended \item 
+    Is \( t \) invariance preserved under intersection?
+    Under union?
+    Complementation?
+    Sums of subspaces?
+    \begin{answer}
+      Yes, the intersection 
+      of $t$ invariant subspaces is $t$~invariant.
+      Assume that \( M \) and \( N \) are \( t \) invariant.
+      If \( \vec{v}\in M\intersection N \) then \( t(\vec{v})\in M \)
+      by the invariance of \( M \) and \( t(\vec{v})\in N \) by the
+      invariance of \( N \).
+
+      Of course, the union of two subspaces need not be a subspace
+      (remember that the $x$-\hbox{} and $y$-axes are subspaces of the plane
+      $\Re^2$ but the union of the two axes fails to be closed
+      under vector addition, for instance it does not contain
+      $\vec{e}_1+\vec{e}_2$.)
+      However, the union of invariant subsets is an invariant subset; if
+      \( \vec{v}\in M\union N \) then \( \vec{v}\in M \) or \( \vec{v}\in N \)
+      so \( t(\vec{v})\in M \) or \( t(\vec{v})\in N \).
+
+      No, the complement of an invariant subspace need not be invariant.
+      Consider the subspace
+      \begin{equation*}
+        \set{\colvec{x \\ 0}\suchthat x\in\C}
+      \end{equation*}
+      of \( \C^2 \) under the zero transformation.
+
+      Yes, the sum of two invariant subspaces is invariant.
+      The check is easy.  
+    \end{answer}
+  \item 
+     Give a way to order the Jordan blocks if some of the eigenvalues
+     are complex numbers.
+     That is, suggest a reasonable ordering for the complex numbers.
+     \begin{answer}
+       One such ordering is the \definend{dictionary ordering}.
+       Order by the real component first, then by the coefficient of \( i \).
+       For instance, \( 3+2i<4+1i \) but \( 4+1i<4+2i \).  
+     \end{answer}
+  \item
+    Let \( \polyspace_j(\Re) \) be the vector space over
+    the reals of degree \( j \) polynomials.
+    Show that if \( j\le k \) then \( \polyspace_j(\Re) \) is an invariant
+    subspace of \( \polyspace_k(\Re) \) under the differentiation operator.
+    In \( \polyspace_7(\Re) \), does any of \( \polyspace_0(\Re) \),
+    \ldots, \( \polyspace_6(\Re) \) have an invariant complement?
+    \begin{answer}
+     The first half is easy\Dash the derivative of any real polynomial is
+      a real polynomial of lower degree.
+      The answer to the second half is `no'; any complement of
+      \( \polyspace_j(\Re) \) must include a polynomial of degree \( j+1 \),
+      and the derivative of that polynomial is in \( \polyspace_j(\Re)\).  
+     \end{answer}
+  \item
+    In \( \polyspace_n(\Re) \), the vector space (over the
+    reals) of degree \( n \) polynomials,
+    \begin{equation*}
+      \mathcal{E}=
+      \set{p(x)\in\polyspace_n(\Re)\suchthat p(-x)=p(x) \text{\ for all\ }x}
+    \end{equation*}
+    and
+    \begin{equation*}
+      \mathcal{O}=
+      \set{p(x)\in\polyspace_n(\Re)\suchthat p(-x)=-p(x) \text{\ for all\ }x}
+    \end{equation*}
+    are the \definend{even}\index{even polynomials}\index{polynomial!even} 
+    and the \definend{odd}\index{even polynomials}\index{polynomial!even}
+     polynomials; \( p(x)=x^2 \) is
+    even while \( p(x)=x^3 \) is odd.
+    Show that they are subspaces.
+    Are they complementary?
+    Are they invariant under the differentiation transformation?
+    \begin{answer}
+      For the first half, show that each is a subspace and then observe
+      that any polynomial can be uniquely
+       written as the sum of even-powered and odd-powered terms (the
+       zero polynomial is both).
+       The answer to the second half is `no': \( x^2 \) is even while
+       \( 2x \) is odd.  
+     \end{answer}
+  \item 
+    \nearbylemma{le:InvCompSubspSplitTrans} says that if \( M \) and
+    \( N \) are
+    invariant complements then \( t \) has a representation in the given
+    block form (with respect to the same ending as starting basis, of course).
+    Does the implication reverse?
+    \begin{answer}
+      Yes.
+      If \( \rep{t}{B,B} \) has the given block form, take \( B_M \) to
+      be the first \( j \) vectors of \( B \), where \( J \) is the
+      \( \nbyn{j} \) upper left submatrix.
+      Take \( B_N \) to be the remaining \( k \) vectors in \( B \).
+      Let \( M \) and \( N \) be the spans of \( B_M \) and \( B_N \).
+      Clearly \( M \) and \( N \) are complementary.
+      To see \( M \) is invariant (\( N \) works the same way), represent
+      any \( \vec{m}\in M \) with respect to \( B \), note the last
+      \( k \) components are zeroes, and multiply by the given block
+      matrix.
+      The final \( k \) components of the result are zeroes, so that
+      result is again in \( M \). 
+     \end{answer}
+   \item 
+     A matrix \( S \) is the \definend{square root}\index{square root}
+     of another \( T \) if \( S^2=T \).
+     Show that any nonsingular matrix has a square root.
+     \begin{answer}
+         Put the matrix in Jordan form.
+         By non-singularity, there are no zero eigenvalues on the diagonal.
+         Ape this example:
+          \begin{equation*}
+             \begin{pmatrix}
+                9  &0  &0 \\
+                1  &9  &0 \\
+                0  &0  &4
+             \end{pmatrix}
+             =
+             \begin{pmatrix}
+                3  &0  &0 \\
+               1/6 &3  &0 \\
+                0  &0  &2
+             \end{pmatrix}^2
+          \end{equation*}
+         to construct a square root.
+         Show that it holds up under similarity: if \( S^2=T \) then
+         \( (PSP^{-1})(PSP^{-1})=PTP^{-1} \). 
+    \end{answer}
+\index{Jordan form|)}
+\end{exercises}

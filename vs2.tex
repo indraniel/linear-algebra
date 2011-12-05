@@ -1,0 +1,1753 @@
+% Chapter 2, Section 2 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-10
+\section{Linear Independence}
+The prior section shows that a vector space can be 
+understood as an unrestricted linear combination of some of its elements\Dash 
+that is, as a span.
+For example, the space of linear polynomials $\set{a+bx\suchthat a,b\in\Re}$ 
+is spanned by the set $\set{1,x}$.
+The prior section also showed that a space can have many sets that span it.
+The space of linear polynomials is also spanned by 
+$\set{1,2x}$ and $\set{1,x,2x}$.
+
+At the end of that section we described some spanning sets as `minimal',
+but we never precisely defined that word.
+We could take `minimal' to mean one of two things.
+We could mean that a spanning set is minimal if it 
+contains the smallest number of members of any set with the same span.
+With this meaning $\set{1,x,2x}$ is not minimal because it has 
+one member more than the other two.
+Or we could mean that a spanning set is minimal when it has no elements 
+that can be removed without changing the span.
+Under this meaning $\set{1,x,2x}$ is not minimal because 
+removing the \( 2x \) and getting \( \set{1,x} \) leaves the
+span unchanged.
+
+The first sense of minimality appears to be a global requirement, 
+in that to check if a spanning set is minimal 
+we seemingly must look at all the spanning sets of 
+a subspace and find one with the least number of elements. 
+The second sense of minimality is local in
+that we need to look only at the set under discussion and consider the
+span with and without various elements.
+For instance, using the second sense,
+we could compare the span of $\set{1,x,2x}$ 
+with the span of $\set{1,x}$ and
+note that the $2x$ is a ``repeat'' in that its removal doesn't shrink the span.
+
+In this section we will use the second sense of `minimal spanning set'
+because of this technical convenience.
+However, the most important result of this book is that the two senses 
+coincide; we will prove that in the section after this one.
+
+
+
+
+
+
+
+
+
+\subsection{Definition and Examples}
+We first characterize when a vector can be
+removed from a set without changing the span of that set.
+For that, note that if a vector $\vec{v}$ is not a member of a set $S$ 
+then the union $S\union\set{\vec{v}}$ 
+and the set $S$ differ only in that
+the former contains $\vec{v}$.
+
+\begin{lemma}  \label{le:VecInSpanIffSpanUnchByAddVec}
+Where \( S \) is a subset of a vector space $V$,
+\begin{equation*}
+  \spanof{S}=\spanof{S\union\set{\vec{v}}}
+  \quad\text{if and only if}\quad
+  \vec{v}\in\spanof{S}
+\end{equation*}
+for any $\vec{v}\in V$.
+\end{lemma}
+
+\begin{proof}
+The left to right implication is easy.
+If $\spanof{S}=\spanof{S\union\set{\vec{v}}}$
+then, since \( \vec{v}\in\spanof{S\union\set{\vec{v}}} \),
+the equality of the two sets gives that \( \vec{v}\in\spanof{S} \).
+
+For the right to left implication assume that \( \vec{v}\in \spanof{S} \) to
+show that \( \spanof{S}=\spanof{S\union\set{\vec{v}}} \) by mutual inclusion.
+The inclusion \( \spanof{S}\subseteq\spanof{S\union\set{\vec{v}}} \) is
+obvious.
+For the other inclusion \( \spanof{S}\supseteq\spanof{S\union\set{\vec{v}}} \),
+write an element of \( \spanof{S\union\set{\vec{v}}} \) as
+\( d_0\vec{v}+d_1\vec{s}_1+\dots+d_m\vec{s}_m \)
+and substitute \( \vec{v} \)'s expansion
+as a linear combination of members of the same set
+\( d_0(c_0\vec{t}_0+\dots+c_k\vec{t}_k)+d_1\vec{s}_1+\dots+d_m\vec{s}_m \).
+This is a linear combination of linear combinations and so 
+distributing \( d_0 \) results in
+a linear combination of vectors from \( S \).
+Hence each member of $\spanof{S\union\set{\vec{v}}}$ is also 
+a member of $\spanof{S}$.
+\end{proof}
+
+\begin{example}
+In \( \Re^3 \), where
+\begin{equation*}
+  \vec{v}_1=\colvec{1 \\ 0 \\ 0}\quad
+  \vec{v}_2=\colvec{0 \\ 1 \\ 0}\quad
+  \vec{v}_3=\colvec{2 \\ 1 \\ 0}
+\end{equation*}
+the spans \( \spanof{\set{\vec{v}_1,\vec{v}_2}} \) and
+\( \spanof{\set{\vec{v}_1,\vec{v}_2,\vec{v}_3}} \) are equal since
+\( \vec{v}_3 \) is in the span \( \spanof{\set{\vec{v}_1,\vec{v}_2}} \).
+\end{example}
+
+The lemma says that if we have a spanning set 
+then we can remove a $\vec{v}$ to get a new set $S$ 
+with the same span if and only if
+$\vec{v}$ is a linear combination of vectors from $S$.
+Thus, under the second sense described above, a spanning set is minimal
+if and only if it contains
+no vectors that are linear combinations of the others in that set.
+We have a term for this important property.
+
+\begin{definition}
+\label{def:LinInd}
+A subset of a vector space is
+\definend{linearly independent}\index{linearly independent}%
+\index{sets!dependent, independent}
+if none of its elements is a linear combination of the others.
+Otherwise it is \definend{linearly dependent}\index{linearly dependent}.
+\end{definition}
+
+Here is an important observation:
+although this way of writing one vector as a combination of the others
+\begin{equation*}
+   \vec{s}_0=\lincombo{c}{\vec{s}}
+\end{equation*}
+visually sets \( \vec{s}_0 \) off from the other vectors, algebraically
+there is nothing special in that equation about \( \vec{s}_0 \).
+For any \( \vec{s}_i \) with a coefficient $c_i$ that is nonzero,
+we can rewrite the relationship to set off \( \vec{s}_i \).
+\begin{equation*}
+   \vec{s}_i=(1/c_i)\vec{s}_0+(-c_1/c_i)\vec{s}_1
+              +\dots+(-c_n/c_i)\vec{s}_n
+\end{equation*}
+When we don't want to single out any vector by writing it alone on
+one side of the equation we will instead say that
+\( \vec{s}_0,\vec{s}_1,\dots,\vec{s}_n \) are in a
+\definend{linear relationship}\index{linear relationship}%
+\index{relationship!linear} 
+and write the relationship
+with all of the vectors on the same side.
+The next result rephrases the linear independence definition in this style.
+It gives what is usually the easiest way to compute whether
+a finite set is dependent or independent.
+
+\begin{lemma}   \label{le:LDIffANonTrivLinRel}
+A subset \( S \) of a vector space is linearly independent if and only if for
+any distinct \( \vec{s}_1,\dots,\vec{s}_n\in S \) the only linear
+relationship among those vectors
+\begin{equation*}
+   c_1\vec{s}_1+\dots+c_n\vec{s}_n=\zero
+   \qquad c_1,\dots,c_n\in\Re
+\end{equation*}
+is the trivial one: \( c_1=0,\dots,\,c_n=0 \).
+\end{lemma}
+
+\begin{proof}
+This is a direct consequence of the observation above.
+
+If the set \( S \) is linearly independent then no vector
+$\vec{s}_i$ can be written 
+as a linear combination of the other vectors from $S$
+so there is no linear relationship where some of the $\vec{s}\,$'s have 
+nonzero coefficients.
+If \( S \) is not linearly independent then some \( \vec{s}_i \) is a linear
+combination 
+$\vec{s}_i=c_1\vec{s}_1+\dots+c_{i-1}\vec{s}_{i-1}
+    +c_{i+1}\vec{s}_{i+1}+\dots+c_n\vec{s}_n$
+of other vectors from \( S \), and subtracting $\vec{s}_i$ from both sides
+of that equation gives a linear relationship
+involving a nonzero coefficient, 
+namely the \( -1 \) in front of \( \vec{s}_i \).
+\end{proof}
+
+\begin{example}  \label{ex:StaticsLIAndLD}
+In the vector space of two-wide row vectors, the two-element set
+\( \set{ \rowvec{40 &15},\rowvec{-50 &25}} \) is linearly independent.
+To check this, set
+\begin{equation*}
+  c_1\cdot\rowvec{40 &15}+c_2\cdot\rowvec{-50 &25}=\rowvec{0 &0}
+\end{equation*}
+and solving the resulting system
+\begin{equation*}
+  \begin{linsys}{2}
+    40c_1  &-  &50c_2  &=  &0  \\
+    15c_1  &+  &25c_2  &=  &0  
+   \end{linsys}
+  \;\grstep{-(15/40)\rho_1+\rho_2}\;
+  \begin{linsys}{2}
+     40c_1  &- &50c_2       &=  &0  \\
+            &  &(175/4)c_2  &=  &0  
+   \end{linsys}
+\end{equation*}
+shows that both \( c_1 \) and \( c_2 \) are zero. 
+So the only linear relationship between the two given row vectors
+is the trivial relationship.
+
+In the same vector space,
+\( \set{ \rowvec{40 &15},\rowvec{20 &7.5}} \) is linearly dependent since
+we can satisfy
+\begin{equation*}
+  c_1\rowvec{40 &15}+c_2\cdot\rowvec{20 &7.5}=\rowvec{0 &0}
+\end{equation*}
+with \( c_1=1 \) and \( c_2=-2 \).
+\end{example}
+
+\begin{remark}  \label{rem:StaticsLIAndLD}
+Recall the Statics example that began this book.
+We first set the unknown-mass objects at \( 40 \)~cm and \( 15 \)~cm and
+got a balance,
+and then we set the objects at \( -50 \)~cm and \( 25 \)~cm and got a balance.
+With those two pieces of information we could compute values of the unknown
+masses.
+Had we instead first set the unknown-mass objects at \( 40 \)~cm and 
+\( 15 \)~cm, and then at
+\( 20 \)~cm and \( 7.5 \)~cm, we would not have been able to compute the values
+of the unknown masses (try it).
+Intuitively, 
+the problem is that the \( \rowvec{20 &7.5} \) information is a ``repeat'' 
+of the
+$\rowvec{40 &15}$ information\Dash that is, $\rowvec{20 &7.5}$ is in the 
+span of the set $\set{\rowvec{40 &15}}$\Dash and so we would be trying to 
+solve a two-unknowns problem with what is essentially one piece of information.
+\end{remark}
+
+\begin{example}
+The set \( \set{1+x,1-x} \) is linearly independent in \( \polyspace_2 \), the
+space of quadratic polynomials with real coefficients, because
+\begin{equation*}
+   0+0x+0x^2
+   =
+   c_1(1+x)+c_2(1-x)
+   =
+   (c_1+c_2)+(c_1-c_2)x+0x^2
+\end{equation*}
+gives 
+\begin{eqnarray*}
+  \begin{linsys}{2}
+    c_1  &+  &c_2  &=  &0  \\
+    c_1  &-  &c_2  &=  &0  
+   \end{linsys}
+  &\grstep{-\rho_1+\rho_2}
+  &\begin{linsys}{2}
+     c_1  &+  &c_2  &=  &0  \\
+          &   &2c_2 &=  &0
+  \end{linsys}
+\end{eqnarray*}
+since polynomials are equal only if their coefficients are equal.
+Thus, the only linear relationship between these two members of
+$\polyspace_2$ is the trivial one.
+\end{example}
+
+\begin{example}
+In \( \Re^3 \), where
+\begin{equation*}
+   \vec{v}_1=\colvec{3 \\ 4 \\ 5}
+   \quad
+   \vec{v}_2=\colvec{2 \\ 9 \\ 2}
+   \quad
+   \vec{v}_3=\colvec{4 \\ 18 \\ 4}
+\end{equation*}
+the set \( S=\set{\vec{v}_1,\vec{v}_2,\vec{v}_3} \)
+is linearly dependent because this is a relationship
+\begin{equation*}
+  0\cdot\vec{v}_1
+  +2\cdot\vec{v}_2
+  -1\cdot\vec{v}_3
+  =\zero
+\end{equation*}
+where not all of the scalars are zero (the fact that some 
+of the scalars are zero doesn't matter).
+\end{example}
+
+\begin{remark}  \label{rem:WhyLIIsNonTrivLinRel}
+That example illustrates why, 
+although \nearbydefinition{def:LinInd} is a clearer
+statement of what independence is,
+\nearbylemma{le:LDIffANonTrivLinRel} is more useful for
+computations.
+Working straight from the definition, someone trying to compute whether $S$
+is linearly independent would start by setting
+\( \vec{v}_1=c_2\vec{v}_2+c_3\vec{v}_3 \)
+and concluding that there are no such $c_2$ and $c_3$.
+But knowing that the first vector is not
+dependent on the other two is not enough.
+This person would have to go on to try
+\( \vec{v}_2=c_1\vec{v}_1+c_3\vec{v}_3 \) 
+to find the dependence $c_1=0$, \( c_3=1/2 \).
+\nearbylemma{le:LDIffANonTrivLinRel} 
+gets the same conclusion with only one computation.
+\end{remark}
+
+\begin{example} \label{ex:EmSetLI}
+The empty subset\index{sets!empty} of a vector space is linearly independent.
+There is no nontrivial linear relationship among its members as it has
+no members.
+\end{example}
+
+\begin{example} \label{ex:SetWithZeroVecLD}
+In any vector space, any subset containing the zero vector is linearly 
+dependent.
+For example, in the space $\polyspace_2$ of quadratic polynomials, 
+consider the subset $\set{1+x,x+x^2,0}$.
+
+One way to see that this subset is linearly 
+dependent is to use \nearbylemma{le:LDIffANonTrivLinRel}:~we have  
+$0\cdot\vec{v}_1+0\cdot\vec{v}_2+1\cdot\zero=\zero$, and this is a nontrivial
+relationship as not all of the coefficients are zero.
+Another way to see that this subset is
+linearly dependent is to go straight to \nearbydefinition{def:LinInd}:~we
+can express the third member of the subset
+as a linear combination of the 
+first two, namely, $c_1\vec{v}_1+c_2\vec{v}_2=\zero$ is 
+satisfied by taking $c_1=0$ and $c_2=0$
+(in contrast to the lemma, the definition allows all of the coefficients to 
+be zero).
+
+(There is subtler way to see that this subset is dependent.
+The zero vector is equal to the trivial sum, 
+the sum of the empty set.
+So a set containing the zero vector has an element that
+can be written as a combination of a set of other vectors from the 
+set, specifically,
+the zero vector can be written as a combination of the empty set.)
+\end{example}
+
+The above examples, especially \nearbyexample{ex:StaticsLIAndLD},
+underline the discussion that begins this section.
+The next result 
+says that given a finite set,
+we can produce a linearly independent subset
+by discarding what \nearbyremark{rem:StaticsLIAndLD}
+calls ``repeats''.
+
+
+\begin{theorem}
+\label{th:AlwaysAnLDSubset}
+In a vector space,
+any finite subset has a linearly independent subset with the same span.
+\end{theorem}
+
+\begin{proof}
+If the set  \( S=\set{ \vec{s}_1,\dots,\vec{s}_n} \) is linearly independent
+then $S$ itself satisfies the statement, so 
+assume that it is linearly dependent.
+
+By the definition of dependence,
+there is a vector \( \vec{s}_i \) that is a linear combination of
+the others.
+Call that vector \( \vec{v}_1 \).
+Discard it\Dash
+define the set \( S_1=S-\set{\vec{v}_1} \).
+By \nearbylemma{le:VecInSpanIffSpanUnchByAddVec}, the span does not
+shrink \( \spanof{S_1}=\spanof{S} \).
+
+Now, if \( S_1 \) is linearly independent then we are finished.
+Otherwise iterate the prior paragraph: 
+take a vector $\vec{v}_2$ 
+that is a linear combination of
+other members of $S_1$ and discard it
+to derive \( S_2=S_1-\set{\vec{v}_2} \)
+such that \( \spanof{S_2}=\spanof{S_1} \).
+Repeat this until a linearly independent set $S_j$ appears;
+one must appear eventually because \( S \) is finite
+and the empty set is linearly independent.
+(Formally, this argument uses
+induction on $n$, the number of elements in the starting set.
+\nearbyexercise{exer:FillIndDetProofSetHasLISub} asks for the details.)
+\end{proof}
+
+\begin{example}  \label{ex:ShrinkSetSameSpan}
+This set spans \( \Re^3 \) (the check of this is easy).
+\begin{equation*}
+  S=\set{\colvec{1 \\ 0 \\ 0},
+     \colvec{0 \\ 2 \\ 0},
+     \colvec{1 \\ 2 \\ 0},
+     \colvec{0 \\ -1 \\ 1},
+     \colvec{3 \\ 3 \\ 0}  }
+\end{equation*}
+Looking for a linear relationship
+\begin{equation*}
+  c_1\colvec{1 \\ 0 \\ 0}
+  +c_2\colvec{0 \\ 2 \\ 0}
+  +c_3\colvec{1 \\ 2 \\ 0}
+  +c_4\colvec{0 \\ -1 \\ 1}
+  +c_5\colvec{3 \\ 3 \\ 0}
+  =\colvec{0 \\ 0 \\ 0}\qquad\tag{$*$}
+\end{equation*}
+gives a system 
+\begin{equation*}
+  \begin{linsys}{5}
+     c_1  &   &      &+  &c_3   &+  &    &+  &3c_5 &= &0  \\
+          &   &2c_2  &+  &2c_3  &-  &c_4 &+  &3c_5 &= &0  \\
+          &   &      &   &     &   &c_4  &+  &     &= &0  
+\end{linsys}
+\end{equation*}
+with leading variables $c_1$, $c_2$, and $c_4$ and
+free variables $c_3$ and $c_5$.
+We can paramatrize the solution set in this way.
+\begin{equation*}
+  \set{\colvec{c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5}=
+     c_3\colvec{-1 \\ -1 \\ 1 \\ 0 \\ 0}
+     +c_5\colvec{-3 \\ -3/2 \\ 0 \\ 0 \\ 1}
+     \suchthat c_3,c_5\in\Re }
+\end{equation*}
+So $S$ is linearly dependent.
+
+To find something to discard, consider the vectors associated with the
+free variables $c_3$ and $c_5$.
+Setting \( c_3=0 \) and \( c_5=1 \)
+shows that 
+that $c_1=-3$, $c_2=-3/2$, $c_3=0$, $c_4=0$, and $c_5=1$ is a linear
+dependence in equation~($*$) above, that is,
+$c_5$'s vector is a linear combination of the first two.
+\nearbylemma{le:VecInSpanIffSpanUnchByAddVec} says that 
+discarding this fifth vector
+\begin{equation*}
+  S_1=\set{\colvec{1 \\ 0 \\ 0},
+     \colvec{0 \\ 2 \\ 0},
+     \colvec{1 \\ 2 \\ 0},
+     \colvec{0 \\ -1 \\ 1}  }
+\end{equation*}
+leaves the span unchanged $\spanof{S_1}=\spanof{S}$.
+
+Similarly, setting \( c_3=1 \) and \( c_5=0 \)
+gives a linear dependence in equation~($*$) above.
+Since $c_5=0$ this is a relationship among the first four vectors,
+the members of $S_1$.
+Thus we can discard $c_3$'s vector from $S_1$ to get
+\begin{equation*}
+  S_2=\set{\colvec{1 \\ 0 \\ 0},
+     \colvec{0 \\ 2 \\ 0},
+     \colvec{0 \\ -1 \\ 1}  }
+\end{equation*}
+with the same span as $S_1$, and therefore the same span as $S$, 
+but with one difference.
+We can easily check that $S_2$ is linearly independent  
+and so discarding any of its elements will shrink the span.
+\end{example}
+
+That example makes clear the general method: 
+given a finite set of vectors, we first
+write the system to find a linear dependence.
+Then discarding any vectors 
+associated with the free variables of that system will leave the span
+unchanged. 
+
+\nearbytheorem{th:AlwaysAnLDSubset} describes producing a linearly 
+independent set by shrinking, that is, by taking subsets. 
+We finish this subsection by considering
+how linear independence and dependence, which are properties of sets, interact
+with the subset relation between sets.
+
+\begin{lemma}  \label{le:SubsetPreserveLI}
+Any subset of a linearly independent set is also linearly independent.
+Any superset of a linearly dependent set is also linearly dependent.
+\end{lemma}
+
+\begin{proof}
+This is clear.
+\end{proof}
+
+Restated, independence is preserved by subset 
+and dependence is preserved by superset.
+
+Those are two of the four possible cases of interaction that we can consider.
+The third case, whether linear dependence is preserved by the subset operation,
+is covered by \nearbyexample{ex:ShrinkSetSameSpan}, which gives
+a linearly dependent set $S$ with a subset $S_1$ 
+that is linearly dependent and another subset $S_2$
+that is linearly independent.
+
+That leaves one case, whether linear independence is preserved by superset.
+The next example shows what can happen.
+
+\begin{example} \label{ex:LinindSetsAndSuper}
+In each of these three paragraphs
+the subset $S$ is linearly independent.
+
+For the set
+\begin{equation*}
+  S
+   =\set{\colvec{1 \\ 0 \\ 0}}
+\end{equation*}
+the span \( \spanof{S} \) is the \( x \)~axis.
+Here are two supersets of $S$, one linearly dependent and the other linearly
+independent.
+\begin{center}
+     dependent:
+     \( \set{
+         \colvec{1 \\ 0 \\ 0},
+         \colvec{-3 \\ 0 \\ 0}} \)      
+     \qquad
+     independent:
+     \( \set{
+         \colvec{1 \\ 0 \\ 0},
+         \colvec{0 \\ 1 \\ 0}} \)      
+\end{center}
+Checking the dependence or independence of these sets is easy.
+
+For
+\begin{equation*}
+  S
+   =\set{\colvec{1 \\ 0 \\ 0},
+          \colvec{0 \\ 1 \\ 0}
+                 }
+\end{equation*}
+the span \( \spanof{S} \) is the \( xy \)~plane.
+These are two supersets.
+\begin{center}
+     dependent:
+     \( \set{
+         \colvec{1 \\ 0 \\ 0},
+         \colvec{0 \\ 1 \\ 0},
+         \colvec{3 \\ -2 \\ 0} } \)       
+     \qquad
+     independent:
+     \( \set{
+         \colvec{1 \\ 0 \\ 0},
+         \colvec{0 \\ 1 \\ 0},
+         \colvec{0 \\ 0 \\ 1} } \)    
+\end{center}
+
+If
+\begin{equation*}
+   S =\set{\colvec{1 \\ 0 \\ 0},
+          \colvec{0 \\ 1 \\ 0},
+          \colvec{0 \\ 0 \\ 1}        } 
+\end{equation*}
+then \( \spanof{S}=\Re^3 \).
+A linearly dependent superset is 
+\begin{center}
+     dependent:
+     \( \set{
+         \colvec{1 \\ 0 \\ 0},
+         \colvec{0 \\ 1 \\ 0},
+         \colvec{0 \\ 0 \\ 1},
+         \colvec{2 \\ -1 \\ 3} } \)     
+\end{center}
+but there are no linearly independent supersets of $S$.
+The reason is that for any vector that we would add to make a
+superset, the linear dependence equation
+\begin{equation*}
+  \colvec{x \\ y \\ z}
+  =c_1\colvec{1 \\ 0 \\ 0}
+   +c_2\colvec{0 \\ 1 \\ 0}
+   +c_3\colvec{0 \\ 0 \\ 1}
+\end{equation*}
+has a solution $c_1=x$, $c_2=y$, and $c_3=z$.
+\end{example}
+
+So, in general, a linearly independent set 
+may have a superset that is dependent.
+And, in general, a  
+linearly independent set may  have a superset that is independent.
+We can characterize when the superset is one and when it is the other.
+
+\begin{lemma} \label{le:SUnionXiLIIffXiNotInSpan}
+Where \( S \) is a linearly independent subset of a vector space \( V \),
+\begin{equation*}
+  S\union\set{\vec{v}}\text{\ is linearly dependent}
+  \quad\text{if and only if}\quad
+  \vec{v}\in\spanof{S}
+\end{equation*}
+for any \( \vec{v}\in V \) with \( \vec{v}\not\in S \).
+\end{lemma}
+
+\begin{proof}
+One implication is clear: if \( \vec{v}\in\spanof{S} \) then
+\( \vec{v}=\lincombo{c}{\vec{s}} \) where each \( \vec{s}_i\in S \) and
+\( c_i\in\Re \), and so \( \zero=\lincombo{c}{\vec{s}}+(-1)\vec{v} \)
+is a nontrivial linear relationship among elements of
+\( S\union\set{\vec{v}} \).
+
+The other implication requires the assumption that \( S \) is linearly
+independent.
+With \( S\union\set{\vec{v}} \) linearly dependent, there is a
+nontrivial linear relationship \( c_0\vec{v}+\lincombo{c}{\vec{s}}=\zero \)
+and independence of $S$ then implies that \( c_0\neq 0 \), 
+or else that would be a nontrivial
+relationship among members of \( S \).
+Now rewriting this equation as
+\( \vec{v}=-(c_1/c_0)\vec{s}_1-\dots-(c_n/c_0)\vec{s}_n \) shows
+that \( \vec{v}\in\spanof{S} \).
+\end{proof}
+
+\noindent
+(Compare this result with \nearbylemma{le:VecInSpanIffSpanUnchByAddVec}.
+Both say, roughly, that $\vec{v}$ is a ``repeat'' if it is in the
+span of $S$.
+However, note the additional hypothesis here of linear independence.)
+
+\begin{corollary}
+\label{cor:LDMeansLC}
+A subset \( S=\set{\vec{s}_1,\dots,\vec{s}_n} \) of a vector space
+is linearly dependent if and only if some \( \vec{s_i} \)
+is a linear combination of the vectors 
+\( \vec{s}_1 \), \ldots, \( \vec{s}_{i-1} \)
+listed before it.
+\end{corollary}
+
+\begin{proof}
+Consider \( S_0=\set{} \), \( S_1=\set{\vec{s_1}} \),
+\( S_2=\set{\vec{s}_1,\vec{s}_2 } \), etc.
+Some index \( i\geq 1 \) is the first one with
+\( S_{i-1}\union\set{\vec{s}_i } \)
+linearly dependent, and there \( \vec{s}_i\in\spanof{ S_{i-1} } \).
+\end{proof}
+
+\nearbylemma{le:SUnionXiLIIffXiNotInSpan} can be restated
+in terms of independence instead of dependence:
+if \( S \) is linearly independent and \( \vec{v}\not\in S \) then
+the set \( S\union\set{\vec{v}} \)
+is also linearly independent if and only if \( \vec{v}\not\in\spanof{S}. \)
+Applying \nearbylemma{le:VecInSpanIffSpanUnchByAddVec},
+we conclude that
+if \( S \) is linearly independent and \( \vec{v}\not\in S \)
+then \( S\union\set{\vec{v}} \) is also
+linearly independent if and only if
+\( \spanof{S\union\set{\vec{v}}}\neq\spanof{S} \).
+Briefly,
+when passing from $S$ to a superset $S_1$,
+to preserve linear independence we must expand the span
+$\spanof{S_1}\supset\spanof{S}$.
+
+\nearbyexample{ex:LinindSetsAndSuper} shows that some 
+linearly independent sets are maximal\Dash have as many elements as 
+possible\Dash in
+that they have no supersets that are linearly independent.
+By the prior paragraph, 
+a linearly independent sets is maximal if and only if it
+spans the 
+entire space, because then no vector exists that is not already in the span.
+
+This table summarizes the interaction between the properties of independence
+and dependence and the relations of subset and superset.
+\medskip
+\begin{center}
+  \begin{tabular}[b]{r|c|c|}
+                        \multicolumn{1}{c}{}
+                        &\multicolumn{1}{c}{\( S_1\subset S \)}
+                        &\multicolumn{1}{c}{\( S_1\supset S \)}      \\
+     \cline{2-3}
+          \textit{$S$ independent} 
+              &\( S_1 \) must be independent   &\( S_1 \) may be either\\
+     \cline{2-3}
+          \textit{$S$ dependent} 
+              &\( S_1 \) may be either &\( S_1 \) must be dependent    \\
+     \cline{2-3}
+   \end{tabular}
+\end{center}
+\medskip
+In developing this table we've uncovered an
+intimate relationship between linear independence and span.
+Complementing the fact that
+a spanning set is minimal if and only if it is linearly independent,
+a linearly independent set is maximal if and only if it spans the space.
+
+In summary,
+we have introduced the definition of linear independence to 
+formalize the idea of the minimality of a spanning set.
+We have developed some properties of this idea.
+The most important is \nearbylemma{le:SUnionXiLIIffXiNotInSpan}, which 
+tells us that a linearly independent set is maximal when it spans the space.
+
+
+\begin{exercises}
+  \recommended \item
+    Decide whether each subset of \( \Re^3 \) is linearly dependent or
+    linearly independent. 
+    \begin{exparts}
+      \partsitem \( \set{\colvec{1 \\ -3 \\ 5},
+                    \colvec{2 \\ 2 \\ 4},
+                    \colvec{4 \\ -4 \\ 14} }  \)
+      \partsitem \( \set{\colvec{1 \\ 7 \\ 7},
+                    \colvec{2 \\ 7 \\ 7},
+                    \colvec{3 \\ 7 \\ 7} }  \)
+      \partsitem \( \set{\colvec{0 \\ 0 \\ -1},
+                    \colvec{1 \\ 0 \\ 4} }  \)
+      \partsitem \( \set{\colvec{9 \\ 9 \\ 0},
+                    \colvec{2 \\ 0 \\ 1},
+                    \colvec{3 \\ 5 \\ -4},
+                    \colvec{12 \\ 12 \\ -1} }  \)
+    \end{exparts}
+    \begin{answer}
+      For each of these, when the subset is independent it must be proved, and
+      when the subset is dependent an example of a dependence must be given.
+      \begin{exparts}
+        \partsitem It is dependent.
+          Considering
+          \begin{equation*}
+             c_1\colvec{1 \\ -3 \\ 5}
+             +c_2\colvec{2 \\ 2 \\ 4}
+             +c_3\colvec{4 \\ -4 \\ 14}
+             =\colvec{0 \\ 0 \\ 0}
+          \end{equation*}
+          gives rise to this linear system.
+          \begin{equation*}
+            \begin{linsys}{3}
+              c_1  &+  &2c_2  &+  &4c_3  &=  &0  \\
+              -3c_1&+  &2c_2  &-  &4c_3  &=  &0  \\
+              5c_1 &+  &4c_2  &+  &14c_3 &=  &0  
+            \end{linsys}
+          \end{equation*}
+          Gauss' method 
+          \begin{equation*}
+            \begin{amatrix}{3}
+              1  &2  &4  &0  \\
+              -3 &2  &-4 &0  \\
+              5  &4  &14 &0
+            \end{amatrix}
+            \grstep[-5\rho_1+\rho_3]{3\rho_1+\rho_2}
+            \;\grstep{(3/4)\rho_2+\rho_3}            
+            \begin{amatrix}{3}
+              1  &2  &4  &0  \\
+              0  &8  &8  &0  \\
+              0  &0  &0  &0
+            \end{amatrix}
+          \end{equation*}
+          yields a free variable, so there are infinitely many solutions.
+          For an example of a particular dependence we can set $c_3$ to be,
+          say, $1$.  Then we get
+          \( c_2=-1 \) and \( c_1=-2 \).
+        \partsitem It is dependent.
+          The linear system that arises here
+          \begin{equation*}
+            \begin{amatrix}{3}
+              1  &2  &3  &0  \\
+              7  &7  &7  &0  \\
+              7  &7  &7  &0
+            \end{amatrix}
+            \;\grstep[-7\rho_1+\rho_3]{-7\rho_1+\rho_2}
+            \;\grstep{-\rho_2+\rho_3}\;
+            \begin{amatrix}{3}
+              1  &2  &3   &0  \\
+              0  &-7 &-14 &0  \\
+              0  &0  &0   &0
+            \end{amatrix}
+          \end{equation*}
+          has infinitely many solutions.
+          We can get a particular solution by taking $c_3$ to be, say,
+          $1$, and back-substituting to get the resulting $c_2$ and $c_1$.
+        \partsitem It is linearly independent.
+          The system
+          \begin{equation*}
+            \begin{amatrix}{2}
+              0  &1  &0  \\
+              0  &0  &0  \\
+              -1 &4  &0
+            \end{amatrix}
+            \;\grstep{\rho_1\leftrightarrow\rho_2}
+            \;\grstep{\rho_3\leftrightarrow\rho_1}\;
+            \begin{amatrix}{2}
+              -1 &4  &0  \\
+              0  &1  &0  \\
+              0  &0  &0  
+            \end{amatrix}
+          \end{equation*}
+          has only the solution $c_1=0$ and $c_2=0$.
+          (We could also have gotten the answer by inspection\Dash the second
+          vector is obviously not a multiple of the first, and vice versa.)
+        \partsitem It is linearly dependent.
+          The linear system
+          \begin{equation*}
+            \begin{amatrix}{4}
+              9  &2  &3  &12  &0  \\
+              9  &0  &5  &12  &0  \\
+              0  &1  &-4 &-1  &0
+            \end{amatrix}
+          \end{equation*}
+          has more unknowns than equations, and so Gauss' method
+          must end with at least one variable free (there can't be a 
+          contradictory equation because the system is homogeneous, and so
+          has at least the solution of all zeroes).
+          To exhibit a combination, we can do the reduction 
+          \begin{equation*}
+            \grstep{-\rho_1+\rho_2}
+            \;\grstep{(1/2)\rho_2+\rho_3}\;
+            \begin{amatrix}{4}
+              9  &2  &3  &12  &0  \\
+              0  &-2 &2  &0   &0  \\
+              0  &0  &-3 &-1  &0
+            \end{amatrix}
+          \end{equation*}
+          and take, say,  $c_4=1$.
+          Then we have that $c_3=-1/3$, $c_2=-1/3$, and $c_1=-31/27$.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item 
+    Which of these subsets of \( \polyspace_3 \) are
+    linearly dependent and which are independent?
+    \begin{exparts}
+      \partsitem \( \set{3-x+9x^2,5-6x+3x^2,1+1x-5x^2} \)
+      \partsitem \( \set{-x^2,1+4x^2} \)
+      \partsitem \( \set{2+x+7x^2,3-x+2x^2,4-3x^2} \)
+      \partsitem \( \set{8+3x+3x^2,x+2x^2,2+2x+2x^2,8-2x+5x^2} \)
+    \end{exparts}
+    \begin{answer}
+      In the cases of independence, that must be proved.
+      Otherwise, a specific dependence must be produced.
+      (Of course, dependences other than the ones exhibited here are possible.)
+      \begin{exparts}
+        \partsitem This set is independent.
+          Setting up the relation
+          \( c_1(3-x+9x^2)+c_2(5-6x+3x^2)+c_3(1+1x-5x^2)=0+0x+0x^2 \)
+          gives a linear system 
+          \begin{equation*}
+            \begin{amatrix}{3}
+              3  &5  &1  &0  \\
+              -1 &-6 &1  &0  \\
+              9  &3  &-5 &0  
+            \end{amatrix}
+            \;\grstep[-3\rho_1+\rho_3]{(1/3)\rho_1+\rho_2}
+            \;\grstep{3\rho_2}
+            \;\grstep{-(12/13)\rho_2+\rho_3}\;
+            \begin{amatrix}{3}
+              3  &5   &1        &0  \\
+              0  &-13 &4        &0  \\
+              0  &0   &-128/13  &0  
+            \end{amatrix}
+          \end{equation*}
+          with only one solution: \( c_1=0 \), \( c_2=0 \), and \( c_3=0 \).
+        \partsitem This set is independent.
+           We can see this by inspection, straight from the definition
+           of linear independence.
+           Obviously neither is a multiple of the other.
+        \partsitem This set is linearly independent.
+           The linear system reduces in this way
+           \begin{equation*}
+             \begin{amatrix}{3}
+               2  &3  &4  &0  \\
+               1  &-1 &0  &0  \\
+               7  &2  &-3 &0  
+             \end{amatrix}
+             \;\grstep[-(7/2)\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
+             \;\grstep{-(17/5)\rho_2+\rho_3}\;
+             \begin{amatrix}{3}
+               2  &3    &4      &0  \\
+               0  &-5/2 &-2     &0  \\
+               0  &0    &-51/5  &0  
+             \end{amatrix}
+           \end{equation*}
+           to show that there is only the solution $c_1=0$, 
+           $c_2=0$, and $c_3=0$.
+        \partsitem This set is linearly dependent.
+           The linear system
+           \begin{equation*}
+             \begin{amatrix}{4}
+               8  &0  &2  &8  &0  \\ 
+               3  &1  &2  &-2 &0  \\
+               3  &2  &2  &5  &0
+             \end{amatrix}
+           \end{equation*}
+           must, after reduction, end with at least one variable free
+           (there are more variables than equations, and there is no
+           possibility of a contradictory equation because the system is
+           homogeneous).
+           We can take the free variables as parameters to describe the
+           solution set.
+           We can then set the parameter to a nonzero value to get a
+           nontrivial linear relation. 
+      \end{exparts}  
+     \end{answer}
+  \recommended \item
+    Prove that each set \( \set{f,g} \) is linearly independent in the
+    vector space of all functions from \( \Re^+ \) to \( \Re \).
+    \begin{exparts}
+      \partsitem \( f(x)=x \) and \( g(x)=1/x \)
+      \partsitem \( f(x)=\cos(x) \) and \( g(x)=\sin(x) \)
+      \partsitem \( f(x)=e^x \) and \( g(x)=\ln(x) \)
+    \end{exparts}
+    \begin{answer}
+      Let $Z$ be the zero function $Z(x)=0$, which is the additive identity in
+      the vector space under discussion.
+      \begin{exparts}
+        \partsitem This set is linearly independent.  
+          Consider \( c_1\cdot f(x)+c_2\cdot g(x)=Z(x) \).
+          Plugging in \( x=1 \) and \( x=2 \) gives a linear system 
+          \begin{equation*}
+            \begin{linsys}{2}
+              c_1\cdot 1  &+  &c_2\cdot 1     &=  &0  \\
+              c_1\cdot 2  &+  &c_2\cdot (1/2) &=  &0
+            \end{linsys}
+          \end{equation*}
+          with the unique solution \( c_1=0 \), \( c_2=0 \).
+        \partsitem This set is linearly independent.  
+          Consider \( c_1\cdot f(x)+c_2\cdot g(x)=Z(x) \) and 
+          plug in \( x=0 \) and \( x=\pi/2 \) to get 
+          \begin{equation*}
+            \begin{linsys}{2}
+              c_1\cdot 1  &+  &c_2\cdot 0     &=  &0  \\
+              c_1\cdot 0  &+  &c_2\cdot 1     &=  &0
+            \end{linsys}
+          \end{equation*}
+          which obviously gives that \( c_1=0 \), \( c_2=0 \).
+        \partsitem This set is also linearly independent.  
+          Considering \( c_1\cdot f(x)+c_2\cdot g(x)=Z(x) \) and 
+          plugging in \( x=1 \) and \( x=e \) 
+          \begin{equation*}
+            \begin{linsys}{2}
+              c_1\cdot e    &+  &c_2\cdot 0     &=  &0  \\
+              c_1\cdot e^e  &+  &c_2\cdot 1     &=  &0
+            \end{linsys}
+          \end{equation*}
+          gives that \( c_1=0 \) and \( c_2=0 \).
+      \end{exparts}  
+     \end{answer}
+  \recommended \item 
+    Which of these subsets of the space of real-valued functions
+    of one real variable is linearly dependent and which is linearly
+    independent?
+    (Note that we have abbreviated some constant functions;~e.g., 
+     in the first item, 
+     the `$2$' stands for the constant function $f(x)=2$.)
+    \begin{exparts*}
+      \partsitem \( \set{2,4\sin^2(x),\cos^2(x)} \)
+      \partsitem \( \set{1,\sin(x),\sin(2x)} \)
+      \partsitem \( \set{x,\cos(x)} \)
+      \partsitem \( \set{(1+x)^2,x^2+2x,3} \)
+      \partsitem \( \set{\cos(2x),\sin^2(x),\cos^2(x)} \)
+      \partsitem \( \set{0,x,x^2} \)
+    \end{exparts*}
+    \begin{answer}
+      In each case, that the set is independent must be proved, and that it is
+      dependent must be shown by exihibiting a specific dependence.
+      \begin{exparts}
+        \partsitem This set is dependent.
+          The familiar relation $\sin^2(x)+\cos^2(x)=1$ shows that
+          $2=c_1\cdot(4\sin^2(x))+c_2\cdot(\cos^2(x))$ is satisfied by
+          $c_1=1/2$ and $c_2=2$.
+        \partsitem This set is independent.
+          Consider the relationship
+          $c_1\cdot 1+c_2\cdot\sin(x)+c_3\cdot\sin(2x)=0$
+          (that `$0$' is the zero function).
+          Taking $x=0$, $x=\pi/2$ and $x=\pi/4$ gives this system.
+          \begin{equation*}
+            \begin{linsys}{3}
+               c_1  &   &                &   &      &=  &0  \\
+               c_1  &+  &c_2             &   &      &=  &0  \\
+               c_1  &+  &(\sqrt{2}/2)c_2 &+  &c_3   &=  &0  
+            \end{linsys}
+          \end{equation*}
+          whose only solution is 
+          $c_1=0$, $c_2=0$, and $c_3=0$. 
+        \partsitem By inspection, this set is independent.
+          Any dependence $\cos(x)=c\cdot x$ is not possible since the cosine
+          function is not a multiple of the identity function
+          (we are applying \nearbycorollary{cor:LDMeansLC}).
+        \partsitem By inspection, we spot that there is a dependence.
+          Because $(1+x)^2=x^2+2x+1$, we get that
+          $c_1\cdot(1+x)^2+c_2\cdot(x^2+2x)=3$ is satisfied by 
+          $c_1=3$ and $c_2=-3$.
+        \partsitem This set is dependent.
+          The easiest way to see that is to recall the triginometric
+          relationship $\cos^2(x)-\sin^2(x)=\cos(2x)$.
+          (\textit{Remark.} 
+          A person who doesn't recall this, and tries some $x$'s,
+          simply never gets a system leading to a unique solution, and
+          never gets to conclude that the set is independent.
+          Of course, this person might wonder if they simply never tried the
+          right set of $x$'s, but a few tries will lead most people to 
+          look instead for a dependence.)
+        \partsitem This set is dependent, because it contains the 
+          zero object in the vector space, the zero polynomial.
+      \end{exparts}  
+     \end{answer}
+  \item 
+    Does the equation \( \sin^2(x)/\cos^2(x)=\tan^2(x) \) show that
+    this set of functions
+    \( \set{\sin^2(x),\cos^2(x),\tan^2(x)} \) is a linearly dependent
+    subset of the set of all real-valued functions with domain
+    the interval \( (-\pi/2..\pi/2) \) of real numbers between 
+    \( -\pi/2 \) and \( \pi/2) \)?
+    \begin{answer}
+      No, that equation is not a linear relationship.
+      In fact this set is independent, as the system arising from taking
+      \( x \) to be \( 0 \), \( \pi/6 \) and \( \pi/4 \) shows.  
+    \end{answer}
+  \item  
+    Why does \nearbylemma{le:LDIffANonTrivLinRel} say ``distinct''?
+    \begin{answer}
+      To emphasize that the equation 
+      \( 1\cdot\vec{s}+(-1)\cdot\vec{s}=\zero \)
+      does not make the set dependent.
+    \end{answer}
+  \recommended \item
+    Show that the nonzero rows of an echelon form matrix form a linearly
+    independent set.
+    \begin{answer}
+      We have already showed this: the Linear Combination
+      Lemma and its corollary state that in an echelon form matrix, 
+      no nonzero row is a linear combination of the others.  
+    \end{answer}
+  \recommended \item
+     \begin{exparts}
+       \partsitem Show that if the set \( \set{\vec{u},\vec{v},\vec{w}} \)
+          is linearly independent set then so is the set
+          \( \set{\vec{u},\vec{u}+\vec{v},\vec{u}+\vec{v}+\vec{w}} \).
+       \partsitem  What is the relationship between the linear independence
+         or dependence of the set \( \set{\vec{u},\vec{v},\vec{w}} \) and the
+         independence or dependence of
+         \( \set{\vec{u}-\vec{v},\vec{v}-\vec{w},\vec{w}-\vec{u}} \)?
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem Assume that the set 
+           \( \set{\vec{u},\vec{v},\vec{w}} \) is linearly 
+           independent, so that any relationship
+           $d_0\vec{u}+d_1\vec{v}+d_2\vec{w}=\zero$ leads to the conclusion 
+           that $d_0=0$, $d_1=0$, and $d_2=0$.
+
+           Consider the relationship
+           \( c_1(\vec{u})+c_2(\vec{u}+\vec{v})+c_3(\vec{u}+\vec{v}+\vec{w})
+           =\zero \).
+           Rewrite it to get
+           \( (c_1+c_2+c_3)\vec{u}+(c_2+c_3)\vec{v}+(c_3)\vec{w}=\zero \).
+           Taking $d_0$ to be $c_1+c_2+c_3$, taking $d_1$ to be $c_2+c_3$, 
+           and taking $d_2$ to be $c_3$ we have this system.
+           \begin{equation*}
+             \begin{linsys}{3}
+               c_1  &+  &c_2  &+  &c_3  &=  &0  \\
+                    &   &c_2  &+  &c_3  &=  &0  \\
+                    &   &     &   &c_3  &=  &0
+             \end{linsys}
+           \end{equation*}
+           Conclusion:~the $c$'s are all zero, and so the set is linearly
+           independent.
+        \partsitem The second set is dependent
+           \begin{equation*}
+             1\cdot(\vec{u}-\vec{v})
+             +1\cdot(\vec{v}-\vec{w})
+             +1\cdot(\vec{w}-\vec{u})
+             =\zero
+           \end{equation*}
+           whether or not the first set is independent.
+      \end{exparts}
+    \end{answer}
+  \item 
+    \nearbyexample{ex:EmSetLI} shows that the empty set is 
+    linearly independent.   
+    \begin{exparts}
+      \partsitem When is a one-element set linearly independent?
+      \partsitem How about a set with two elements?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem A singleton set $\set{\vec{v}}$ is linearly independent 
+          if and only if $\vec{v}\neq\zero$.
+          For the `if' direction, with $\vec{v}\neq\zero$, 
+          we can apply \nearbylemma{le:LDIffANonTrivLinRel} by considering 
+          the relationship
+          \( c\cdot\vec{v}=\zero \) and noting that the only solution
+          is the trivial one:~$c=0$.
+          For the `only~if' direction, just recall that 
+          \nearbyexample{ex:SetWithZeroVecLD}
+          shows that $\set{\zero}$ is linearly dependent, and so if the set
+          $\set{\vec{v}}$ is linearly independent then $\vec{v}\neq\zero$. 
+
+          (\textit{Remark.} 
+          Another answer is to say that this is the special case of
+          \nearbylemma{le:SUnionXiLIIffXiNotInSpan} where \( S=\emptyset \).)
+        \partsitem A set with two elements is linearly independent 
+          if and only if neither member is a  multiple of the other 
+          (note that if one is the zero vector then it is a multiple of the
+          other, so this case is covered).
+          This is an equivalent statement:~a set is linearly dependent if and
+          only if one element is a multiple of the other.
+
+          The proof is easy.
+          A set $\set{\vec{v}_1,\vec{v}_2}$ is linearly dependent if and only
+          if there is a relationship $c_1\vec{v}_1+c_2\vec{v}_2=\zero$ 
+          with either $c_1\neq 0$ or $c_2\neq 0$ (or both).
+          That holds if and only if $\vec{v}_1=(-c_2/c_1)\vec{v}_2$
+          or $\vec{v}_2=(-c_1/c_2)\vec{v}_1$ (or both).
+       \end{exparts}   
+     \end{answer}
+  \item  
+    In any vector space \( V \), the empty set is linearly independent.
+    What about all of \( V \)?
+    \begin{answer}
+      This set is linearly dependent set because it contains the zero vector.  
+    \end{answer}
+  \item 
+    Show that if \( \set{\vec{x},\vec{y},\vec{z}} \) is linearly
+    independent then so are all of its proper 
+    subsets:~\( \set{\vec{x},\vec{y}} \),
+    \( \set{\vec{x},\vec{z}} \), \( \set{\vec{y},\vec{z}} \),
+    \( \set{\vec{x}} \),\( \set{\vec{y}} \), \( \set{\vec{z}} \),
+    and \( \set{} \).
+    Is that `only if' also?
+    \begin{answer}
+      The `if' half is given by \nearbylemma{le:SubsetPreserveLI}.
+      The converse (the `only if' statement) does not hold. 
+      An example is to consider the vector space \( \Re^2 \) and
+      these vectors.
+      \begin{equation*}
+         \vec{x}=\colvec{1 \\ 0},\quad
+         \vec{y}=\colvec{0 \\ 1},\quad
+         \vec{z}=\colvec{1 \\ 1}
+      \end{equation*} 
+    \end{answer}
+  \item 
+    \begin{exparts}
+      \partsitem Show that this 
+        \begin{equation*}
+          S=\set{\colvec{1 \\ 1 \\ 0},\colvec{-1 \\ 2 \\ 0}}
+        \end{equation*}
+        is a linearly independent subset of \( \Re^3 \).
+      \partsitem Show that
+        \begin{equation*}
+          \colvec{3 \\ 2 \\ 0}
+        \end{equation*}
+        is in the span of $S$ by finding \( c_1 \) and \( c_2 \) 
+        giving a linear relationship.
+        \begin{equation*}
+          c_1\colvec{1 \\ 1 \\ 0}
+          +c_2\colvec{-1 \\ 2 \\ 0}
+          =\colvec{3 \\ 2 \\ 0}
+        \end{equation*}
+        Show that the pair \( c_1,c_2 \) is unique.
+      \partsitem Assume that \( S \) is a subset of a vector space and that
+        \( \vec{v} \) is in \( \spanof{S} \), so that \( \vec{v} \) is a
+        linear combination of vectors from \( S \).
+        Prove that if \( S \) is linearly independent then a linear combination
+        of vectors from \( S \) adding to \( \vec{v} \)
+        is unique (that is, unique up to reordering
+        and adding or taking away terms of the form \( 0\cdot\vec{s} \)).
+        Thus \( S \) as a spanning set is minimal in this strong sense:
+        each vector in \( \spanof{S} \) is ``hit'' a minimum number of
+        times\Dash only once.
+      \partsitem
+        Prove that it can happen when \( S \) is not linearly 
+        independent that distinct linear combinations sum to the same vector.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The linear system arising from
+          \begin{equation*}
+            c_1\colvec{1 \\ 1 \\ 0}
+            +c_2\colvec{-1 \\ 2 \\ 0}
+            =\colvec{0 \\ 0 \\ 0}
+          \end{equation*}
+          has the unique solution \( c_1=0 \) and \( c_2=0 \).
+        \partsitem The linear system arising from
+          \begin{equation*}
+            c_1\colvec{1 \\ 1 \\ 0}
+            +c_2\colvec{-1 \\ 2 \\ 0}
+            =\colvec{3 \\ 2 \\ 0}
+          \end{equation*}
+          has the unique solution \( c_1=8/3 \) and \( c_2=-1/3 \).
+        \partsitem Suppose that \( S \) is linearly independent.
+          Suppose that we have both $\vec{v}=c_1\vec{s}_1+\dots+c_n\vec{s}_n$
+          and $\vec{v}=d_1\vec{t}_1+\dots+d_m\vec{t}_m$
+          (where the vectors are members of $S$).
+          Now, 
+          \begin{equation*}
+            c_1\vec{s}_1+\dots+c_n\vec{s}_n
+            =\vec{v}
+            =d_1\vec{t}_1+\dots+d_m\vec{t}_m
+          \end{equation*}
+          can be rewritten in this way.
+          \begin{equation*}
+            c_1\vec{s}_1+\dots+c_n\vec{s}_n
+            -d_1\vec{t}_1-\dots-d_m\vec{t}_m
+            =\zero
+          \end{equation*}
+          Possibly some of the $\vec{s}\,$'s equal some of the $\vec{t}\,$'s;
+          we can combine the associated coefficients 
+          (i.e., if $\vec{s}_i=\vec{t}_j$ then
+          $\cdots+c_i\vec{s}_i+\dots-d_j\vec{t}_j-\cdots$ can be rewritten
+          as $\cdots+(c_i-d_j)\vec{s}_i+\cdots$).
+          That equation is a linear relationship among  
+          distinct (after the combining is done) members of the set $S$.
+          We've assumed that $S$ is linearly independent, so all of the 
+          coefficients are zero.
+          If $i$ is such that $\vec{s}_i$ does not equal any $\vec{t}_j$
+          then $c_i$ is zero.
+          If $j$ is such that $\vec{t}_j$ does not equal any $\vec{s}_i$
+          then $d_j$ is zero.
+          In the final case, we have that $c_i-d_j=0$ and so $c_i=d_j$.  
+
+          Therefore, the original two sums are the same, except perhaps for
+          some $0\cdot\vec{s}_i$ or $0\cdot\vec{t}_j$ terms that we can
+          neglect.
+        \partsitem
+          This set is not linearly independent:
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0},\colvec{2 \\ 0}}\subset\Re^2
+          \end{equation*}
+          and these two linear combinations give the same result
+          \begin{equation*}
+            \colvec{0 \\ 0}=2\cdot\colvec{1 \\ 0}-1\cdot\colvec{2 \\ 0}
+                            =4\cdot\colvec{1 \\ 0}-2\cdot\colvec{2 \\ 0}
+          \end{equation*}
+          Thus, a linearly dependent set might have indistinct sums.
+
+          In fact, this stronger statement holds:~if a set is linearly 
+          dependent then it must have the property that there are two 
+          distinct linear combinations that sum to the same vector.
+          Briefly, where \( c_1\vec{s}_1+\dots+c_n\vec{s}_n=\zero \) then
+          multiplying both sides of the relationship by two gives another 
+          relationship.
+          If the first relationship is nontrivial then the second is also.
+      \end{exparts}  
+    \end{answer}
+  \item  \label{exer:PolyZeroFcnOnlyIfZeroPol}
+     Prove that a polynomial gives rise to the zero function if and only if
+     it is the zero polynomial.
+     (\textit{Comment.}
+     This question is not a Linear Algebra matter, but we often use the result.
+     A polynomial gives rise to a function in the obvious 
+     way:~$x\mapsto c_nx^n+\dots+c_1x+c_0$.)
+     \begin{answer}
+       In this `if and only if' statement, the `if' half is clear\Dash if 
+       the polynomial is the zero polynomial then the function that arises 
+       from the action of the polynomial must be the zero 
+       function $x\mapsto 0$. 
+       For `only if' we write $p(x)=c_nx^n+\dots+c_0$. 
+       Plugging in zero $p(0)=0$ gives that $c_0=0$.
+       Taking the derivative and plugging in zero $p^\prime(0)=0$ gives 
+       that $c_1=0$.
+       Similarly we get that each $c_i$ is zero, and $p$ is the zero 
+       polynomial.
+     \end{answer}
+  \item
+    Return to Section 1.2 and redefine point, line, plane,
+    and other linear surfaces to avoid degenerate cases.
+    \begin{answer}
+      The work in this section suggests that an \( n \)-dimensional
+      non-degenerate linear surface should be defined as the span of a linearly
+      independent set of \( n \) vectors.  
+    \end{answer}
+  \item 
+    \begin{exparts}  
+      \partsitem Show that any set of four vectors in \( \Re^2 \) is 
+         linearly dependent.
+      \partsitem Is this true for any set of five?
+         Any set of three?
+      \partsitem What is the most number of elements that a 
+         linearly independent subset of $\Re^2$ can have?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem For any $a_{1,1}$, \ldots, $a_{2,4}$,
+          \begin{equation*}
+            c_1\colvec{a_{1,1} \\ a_{2,1}}
+            +c_2\colvec{a_{1,2} \\ a_{2,2}}
+            +c_3\colvec{a_{1,3} \\ a_{2,3}}
+            +c_4\colvec{a_{1,4} \\ a_{2,4}}
+            =\colvec{0 \\ 0}
+          \end{equation*}
+          yields a linear system
+          \begin{equation*}
+             \begin{linsys}{4}
+              a_{1,1}c_1 &+ &a_{1,2}c_2 &+ &a_{1,3}c_3 &+ &a_{1,4}c_4 &= &0  \\
+              a_{2,1}c_1 &+ &a_{2,2}c_2 &+ &a_{2,3}c_3 &+ &a_{2,4}c_4 &= &0  
+             \end{linsys}
+          \end{equation*}
+        that has infinitely many solutions (Gauss' method leaves at least
+        two variables free).
+        Hence there are nontrivial linear relationships among the given
+        members of $\Re^2$.
+      \partsitem Any set five vectors is a superset of a set of four vectors,
+        and so is linearly dependent.
+
+        With three vectors from $\Re^2$, the argument from the prior item 
+        still applies, with the slight change that Gauss' method now only 
+        leaves at least one variable free (but that still gives infintely many
+        solutions).
+      \partsitem The prior item shows that no three-element subset of $\Re^2$
+        is independent.
+        We know that there are two-element subsets of $\Re^2$ that are 
+        independent\Dash one is
+        \begin{equation*}
+          \set{\colvec{1  \\ 0},\colvec{0  \\ 1}}
+        \end{equation*} 
+        and so the answer is two.
+     \end{exparts}  
+    \end{answer}
+  \recommended \item
+    Is there a set of four vectors in \( \Re^3 \), any three of which
+    form a linearly independent set?
+    \begin{answer}
+      Yes; here is one.
+      \begin{equation*}
+         \set{\colvec{1 \\ 0 \\ 0},
+              \colvec{0 \\ 1 \\ 0},
+              \colvec{0 \\ 0 \\ 1},
+              \colvec{1 \\ 1 \\ 1} }
+      \end{equation*}  
+    \end{answer}
+  \item  
+    Must every linearly dependent set have a subset that is dependent and
+    a subset that is independent?
+    \begin{answer}
+      Yes.
+      The two improper subsets, the entire set and the empty subset, serve as
+      examples.  
+    \end{answer}
+  \item  
+    In \( \Re^4 \), what is the biggest linearly independent
+    set you can find?
+    The smallest?
+    The biggest linearly dependent set?
+    The smallest?
+    (`Biggest' and `smallest' mean that there are no supersets or subsets 
+    with the same property.)
+    \begin{answer} 
+      In \( \Re^4 \) the biggest linearly independent set has
+      four vectors.
+      There are many examples of such sets, this is one.
+      \begin{equation*}
+        \set{\colvec{1 \\ 0 \\ 0 \\ 0},
+             \colvec{0 \\ 1 \\ 0 \\ 0},
+             \colvec{0 \\ 0 \\ 1 \\ 0},
+             \colvec{0 \\ 0 \\ 0 \\ 1}  }
+      \end{equation*}
+      To see that no set with five or more vectors can be independent, set up
+      \begin{equation*}
+             c_1\colvec{a_{1,1} \\ a_{2,1} \\ a_{3,1} \\ a_{4,1}}
+            +c_2\colvec{a_{1,2} \\ a_{2,2} \\ a_{3,2} \\ a_{4,2}}
+            +c_3\colvec{a_{1,3} \\ a_{2,3} \\ a_{3,3} \\ a_{4,3}}
+            +c_4\colvec{a_{1,4} \\ a_{2,4} \\ a_{3,4} \\ a_{4,4}}
+            +c_5\colvec{a_{1,5} \\ a_{2,5} \\ a_{3,5} \\ a_{4,5}}
+             =\colvec{0 \\ 0 \\ 0 \\ 0}
+      \end{equation*}
+      and note that the resulting linear system 
+      \begin{equation*}
+        \begin{linsys}{5}
+          a_{1,1}c_1 &+ &a_{1,2}c_2 &+ &a_{1,3}c_3 
+              &+ &a_{1,4}c_4 &+ &a_{1,5}c_5 &=  &0   \\
+          a_{2,1}c_1 &+ &a_{2,2}c_2 &+ &a_{2,3}c_3 
+              &+ &a_{2,4}c_4 &+ &a_{2,5}c_5 &=  &0   \\
+          a_{3,1}c_1 &+ &a_{3,2}c_2 &+ &a_{3,3}c_3 
+              &+ &a_{3,4}c_4 &+ &a_{3,5}c_5 &=  &0   \\
+          a_{4,1}c_1 &+ &a_{4,2}c_2 &+ &a_{4,3}c_3 
+              &+ &a_{4,4}c_4 &+ &a_{4,5}c_5 &=  &0     
+        \end{linsys}
+      \end{equation*}
+      has four equations and five unknowns, 
+      so Gauss' method must end with at least one \( c \) variable free,
+      so there are infinitely many solutions,
+      and so the above linear relationship among the four-tall vectors has
+      more solutions than just the trivial solution.
+
+      The smallest linearly independent set is the empty set.
+
+      The biggest linearly dependent set is \( \Re^4 \).
+      The smallest is \( \set{\zero} \).  
+    \end{answer}
+  \recommended \item 
+    Linear independence and linear dependence are properties of sets.
+    We can thus naturally ask how those properties act with respect to
+    the familiar elementary set relations and operations.  
+    In this body of this subsection we have covered the subset and superset
+    relations.
+    We can also consider the operations of intersection, complementation, 
+    and union.
+    \begin{exparts}
+       \partsitem How does linear independence relate to intersection:~can
+         an intersection of linearly independent sets be independent?
+         Must it be?
+       \partsitem How does linear independence relate to complementation?
+       \partsitem Show that
+          the union of two linearly independent sets need not be
+          linearly independent.
+       \partsitem Characterize when the union of two linearly independent sets
+          is linearly independent, in terms of the intersection of the span
+          of each.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The intersection of two linearly independent sets
+          $S\intersection T$ must be linearly
+          independent as it is a subset of the linearly independent set $S$
+          (as well as the linearly independent set $T$ also, of course).
+        \partsitem The complement of a linearly independent set is linearly
+          dependent as it contains the zero vector.
+        \partsitem We must produce an example.
+          One, in \( \Re^2 \), is
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}}
+            \quad\text{and}\quad
+            T=\set{\colvec{2 \\ 0}}
+          \end{equation*}
+          since the linear dependence of \( S_1\union S_2 \) is easily seen.
+        \partsitem The union of two linearly independent sets $S\union T$
+          is linearly independent if and only if their spans have a trivial 
+          intersection $\spanof{S}\intersection \spanof{T}=\set{\zero}$.
+          To prove that, assume that \( S \) and \( T \) are linearly 
+          independent subsets of some vector space.
+
+          For the `only if' direction, assume that the intersection of
+          the spans is trivial 
+          \( \spanof{S}\intersection \spanof{T}=\set{\zero} \).
+          Consider the set $S\union T$.
+          Any linear relationship 
+          $c_1\vec{s}_1+\dots+c_n\vec{s}_n
+            +d_1\vec{t}_1+\dots+d_m\vec{t}_m=\zero$
+          gives
+          $c_1\vec{s}_1+\dots+c_n\vec{s}_n=
+            -d_1\vec{t}_1-\dots-d_m\vec{t}_m$.
+          The left side of that equation sums to a vector in $\spanof{S}$, and
+          the right side is a vector in $\spanof{T}$.
+          Therefore, since the intersection of the spans is trivial, both
+          sides equal the zero vector.
+          Because $S$ is linearly independent, all of the $c$'s are zero.
+          Because $T$ is linearly independent, all of the $d$'s are zero.
+          Thus, the original linear relationship among members of 
+          $S\union T$ only holds if all of the coefficients are zero.
+          That shows that $S\union T$ is linearly independent.
+
+          For the `if' half we can make the same argument in reverse.
+          If the union $S\union T$ is linearly independent, that is, 
+          if the only solution to          
+          $c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            +d_1\vec{t}_1+\cdots+d_m\vec{t}_m
+            =\zero$
+          is the trivial solution $c_1=0$, \ldots, $d_m=0$, 
+          then any vector $\vec{v}$ in the intersection of the spans
+          $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            =-d_1\vec{t}_1-\cdots=d_m\vec{t}_m$
+          must be the zero vector because each scalar is zero.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item \label{exer:FillIndDetProofSetHasLISub}
+    For \nearbytheorem{th:AlwaysAnLDSubset},
+    \begin{exparts}
+       \partsitem fill in the induction for the proof;
+       \partsitem give an alternate proof that starts with the empty
+         set and builds
+         a sequence of linearly independent subsets of the given finite set
+         until one appears with the same span as the given set.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+         \partsitem We do induction on the number of vectors in the finite set
+           \( S \).
+
+           The base case is that $S$ has no elements.
+           In this case $S$ is linearly independent and there is nothing to 
+           check\Dash a subset of $S$ that has the same span as $S$ is $S$
+           itself.
+
+           For the inductive step assume that the theorem is true for all 
+           sets of size $n=0$, $n=1$, \ldots, $n=k$ 
+           in order to prove that it holds when \( S \) has $n=k+1$ elements.
+           If the $k+1$-element set \( S=\set{\vec{s}_0,\dots,\vec{s}_{k}} \) 
+           is linearly independent then the theorem is trivial,
+           so assume that it is dependent.
+           By \nearbycorollary{cor:LDMeansLC} there is an \( \vec{s}_i \)
+           that is a linear combination of other vectors in \( S \).
+           Define \( S_1=S-\set{\vec{s}_i} \) and note that 
+           \( S_1 \) has the same span as \( S \) by
+           \nearbylemma{le:VecInSpanIffSpanUnchByAddVec}.
+           The set \( S_1 \) has \( k \) elements and 
+           so the inductive hypothesis
+           applies to give that it has a linearly independent subset with the 
+           same span.
+           That subset of \( S_1 \) is the desired subset of \( S \).
+         \partsitem Here is a sketch of the argument.
+           The induction argument details have been left out.
+
+           If the finite set \( S \) is empty then there is nothing to prove.
+           If \( S=\set{\zero} \) then the empty subset will do.
+
+           Otherwise, take some nonzero vector \( \vec{s}_1\in S \)
+           and define \( S_1=\set{\vec{s}_1} \).
+           If \( \spanof{S_1}=\spanof{S} \) then
+           this proof is finished by noting that \( S_1 \) is linearly
+           independent.
+
+           If not, then there is a nonzero
+           vector \( \vec{s}_2\in S-\spanof{S_1} \)
+           (if every \( \vec{s}\in S \) is in \( \spanof{S_1} \) then
+           \( \spanof{S_1}=\spanof{S} \)).
+           Define \( S_2=S_1\union\set{\vec{s}_2} \).
+           If \( \spanof{S_2}=\spanof{S} \) then
+           this proof is finished by using \nearbytheorem{cor:LDMeansLC}
+           to show that \( S_2 \) is linearly independent.
+
+           Repeat the last paragraph until a set with a big enough
+           span appears.
+           That must eventually happen
+           because \( S \) is finite, and
+           \( \spanof{S} \) will be reached at worst when every vector from
+           \( S \) has been used.
+      \end{exparts}  
+    \end{answer}
+  \item 
+     With a little calculation we can get formulas to determine whether or
+     not a set of vectors is linearly independent. 
+     \begin{exparts}
+       \partsitem Show that this subset of \( \Re^2 \)
+         \begin{equation*}
+           \set{\colvec{a \\ c},\colvec{b \\ d}}
+         \end{equation*}
+         is linearly independent if and only if \( ad-bc\neq 0 \).
+       \partsitem Show that this subset of \( \Re^3 \)
+         \begin{equation*}
+           \set{\colvec{a \\ d \\ g},
+                \colvec{b \\ e \\ h},
+                \colvec{c \\ f \\ i}  }
+         \end{equation*}
+         is linearly independent iff
+         \( aei+bfg+cdh-hfa-idb-gec \neq 0 \).
+       \partsitem When is this subset of \( \Re^3 \)
+         \begin{equation*}
+           \set{\colvec{a \\ d \\ g},
+                \colvec{b \\ e \\ h} }
+         \end{equation*}
+         linearly independent?
+       \partsitem This is an opinion question:~for
+         a set of four vectors from \( \Re^4 \),
+         must there be a formula involving the sixteen entries 
+         that determines independence of the set?
+         (You needn't produce such a formula, just decide if one exists.)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          Assuming first that \( a\neq 0 \),
+          \begin{equation*}
+            x\colvec{a \\ c}
+            +y\colvec{b \\ d}
+            =\colvec{0 \\ 0}
+          \end{equation*}
+          gives
+          \begin{equation*}
+            \begin{linsys}{2}
+               ax  &+  &by &=  &0  \\
+               cx  &+  &dy &=  &0  
+            \end{linsys}
+            \;\grstep{-(c/a)\rho_1+\rho_2}\;
+            \begin{linsys}{2}
+               ax  &+  &by           &=  &0  \\
+                   &   &(-(c/a)b+d)y &=  &0  
+             \end{linsys}
+          \end{equation*}
+          which has a solution if and only if
+          \( 0\neq-(c/a)b+d=(-cb+ad)/d \)
+          (we've assumed in this case that \( a\neq 0 \), and so 
+          back substitution yields a unique solution).
+
+          The \( a=0 \) case is also not hard\Dash break it into the 
+          \( c\neq 0 \) and \( c=0 \) subcases and 
+          note that in these cases \( ad-bc=0\cdot d-bc \).
+
+          \textit{Comment.}
+          An earlier exercise showed that a two-vector set is linearly
+          dependent if and only if either vector is a scalar multiple of the
+          other.
+          That can also be used to make the calculation.
+        \partsitem The equation
+          \begin{equation*}
+            c_1\colvec{a \\ d \\ g}
+            +c_2\colvec{b \\ e \\ h}
+            +c_3\colvec{c \\ f \\ i}
+            =\colvec{0 \\ 0 \\ 0}
+          \end{equation*}
+         gives rise to a homogeneous linear system.
+         We proceed by writing it in matrix form and applying Gauss' method.
+
+         We first reduce the matrix to upper-triangular.
+         Assume that \( a\neq 0 \).
+         \begin{eqnarray*}
+           \grstep{(1/a)\rho_1}
+           \begin{amatrix}{3}
+              1   &b/a   &c/a  &0 \\
+              d   &e     &f    &0 \\
+              g   &h     &i    &0
+            \end{amatrix}                                            
+           &\grstep[-g\rho_1+\rho_3]{-d\rho_1+\rho_2}
+           &\begin{amatrix}{3}
+              1   &b/a           &c/a        &0   \\
+              0   &(ae-bd)/a     &(af-cd)/a  &0   \\
+              0   &(ah-bg)/a     &(ai-cg)/a  &0
+            \end{amatrix}                                            \\
+           &\grstep{(a/(ae-bd))\rho_2}
+           &\begin{amatrix}{3}
+              1   &b/a           &c/a             &0  \\
+              0   &1             &(af-cd)/(ae-bd) &0  \\
+              0   &(ah-bg)/a     &(ai-cg)/a       &0
+            \end{amatrix}
+         \end{eqnarray*}
+         (where we've assumed for the moment that \( ae-bd\neq 0 \) in order
+         to do the row reduction step).
+         Then, under the assumptions, we get this.
+         \begin{eqnarray*}
+           &\grstep{((ah-bg)/a)\rho_2+\rho_3}
+           &\begin{amatrix}{3}
+              1   &\frac{b}{a}   &\frac{c}{a}                           &0 \\
+              0   &1             &\frac{af-cd}{ae-bd}                   &0 \\
+              0   &0             &\frac{aei+bgf+cdh-hfa-idb-gec}{ae-bd} &0
+            \end{amatrix}
+         \end{eqnarray*}
+         shows that the original system is nonsingular
+         if and only if the \( 3,3 \) entry is nonzero.
+         This fraction is defined because of the \( ae-bd\neq 0 \) assumption,
+         and it will equal zero if and only if its numerator equals zero. 
+
+         We next worry about the assumptions.
+         First, if \( a\neq 0 \) but \( ae-bd=0 \) then we swap
+         \begin{eqnarray*}
+           \begin{amatrix}{3}
+              1   &b/a           &c/a        &0   \\
+              0   &0             &(af-cd)/a  &0   \\
+              0   &(ah-bg)/a     &(ai-cg)/a  &0
+            \end{amatrix}                               
+           &\grstep{\rho_2\leftrightarrow\rho_3}
+           &\begin{amatrix}{3}
+              1   &b/a           &c/a        &0   \\
+              0   &(ah-bg)/a     &(ai-cg)/a  &0   \\
+              0   &0             &(af-cd)/a  &0
+            \end{amatrix}
+         \end{eqnarray*}
+         and conclude that the system is nonsingular if and only if either
+         \( ah-bg=0 \) or \( af-cd=0 \).
+         That's the same as asking that their product be zero:
+         \begin{align*}
+            ahaf-ahcd-bgaf+bgcd
+            &=0                   \\
+            ahaf-ahcd-bgaf+aegc
+            &=0                   \\
+            a(haf-hcd-bgf+egc)
+            &=0
+         \end{align*}
+         (in going from the first line to the second we've applied the
+         case assumption that $ae-bd=0$ by substituting $ae$ for $bd$).
+         Since we are assuming that \( a\neq 0 \), 
+         we have that \( haf-hcd-bgf+egc=0 \).
+         With $ae-bd=0$ we can rewrite this to fit the form we need:~in
+         this \( a\neq 0 \) and \( ae-bd=0 \) case, the given system
+         is nonsingular when
+         \( haf-hcd-bgf+egc-i(ae-bd)=0 \), as required.
+
+         The remaining cases have the same character.
+         Do the \( a=0 \) but \( d\neq 0 \) case and the \( a=0 \) and
+         \( d=0 \) but \( g\neq 0 \) case by first swapping rows and
+         then going on as above.
+         The \( a=0 \), \( d=0 \), and \( g=0 \) case is easy\Dash a set with a
+         zero vector is linearly dependent, and the formula comes out
+         to equal zero.
+       \partsitem It is linearly dependent if and only if either vector is a
+         multiple of the other.
+         That is, it is not independent iff
+         \begin{equation*}
+           \colvec{a \\ d \\ g}=r\cdot\colvec{b \\ e \\ h}
+           \quad\text{or}\quad
+           \colvec{b \\ e \\ h}=s\cdot\colvec{a \\ d \\ g}
+         \end{equation*}
+         (or both) for some scalars $r$ and $s$.
+         Eliminating $r$ and $s$ in order to restate this condition only in
+         terms of the given letters $a$, $b$, $d$, $e$, $g$, $h$, we have that 
+         it is not independent\Dash it is dependent\Dash iff
+         \( ae-bd=ah-gb=dh-ge \).
+       \partsitem Dependence or independence is a function of the
+         indices, so there
+         is indeed a formula (although at first glance a person might think
+         the formula involves cases: ``if the first component of the first
+         vector is zero then \ldots'', this guess turns out not to be 
+         correct).
+      \end{exparts}  
+    \end{answer}
+  \recommended \item  
+    \begin{exparts}
+      \partsitem Prove that a set of two perpendicular 
+        nonzero vectors from
+        \( \Re^n \) is linearly independent when \( n>1 \).
+      \partsitem What if \( n=1 \)?
+        \( n=0 \)?
+      \partsitem Generalize to more than two vectors.
+    \end{exparts}
+    \begin{answer}
+      Recall that two vectors from \( \Re^n \) are perpendicular if and
+      only if their dot product is zero.
+      \begin{exparts}
+         \partsitem Assume that \( \vec{v} \) and \( \vec{w} \) are
+           perpendicular nonzero vectors in $\Re^n$, with \( n>1 \).
+           With the linear relationship \( c\vec{v}+d\vec{w}=\zero \), 
+           apply \( \vec{v} \) to both
+           sides to conclude that \( c\cdot\norm{\vec{v}}^2+d\cdot 0=0 \).
+           Because \( \vec{v}\neq\zero \) we have that \( c=0 \).
+           A similar application of \( \vec{w} \) shows that \( d=0 \).
+         \partsitem Two vectors in \( \Re^1 \) are perpendicular if and only if
+           at least one of them is zero.
+
+           We define \( \Re^0 \) to be a trivial space, and so both $\vec{v}$
+           and $\vec{w}$ are the zero vector.
+         \partsitem The right generalization is to look at a set
+           \( \set{\vec{v}_1,\dots,\vec{v}_n}\subseteq\Re^k \) of vectors
+           that are \definend{mutually orthogonal} 
+           (also called \definend{pairwise perpendicular}):~if
+           \( i\neq j \) then \( \vec{v}_i \) is perpendicular to
+           \( \vec{v}_j \).
+           Mimicing the proof of the first item above shows that such a set of
+           nonzero vectors is linearly independent.
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Consider the set of functions from the open interval $(-1..1)$ 
+    to $\Re$.
+    \begin{exparts}
+      \partsitem Show that 
+         this set is a vector space under the usual operations.
+      \partsitem Recall the formula for the sum of an infinite geometric 
+         series: 
+         \( 1+x+x^2+\cdots=1/(1-x) \) for all \( x\in(-1..1) \).
+         Why does this not express a dependence inside of
+         the set $\set{g(x)=1/(1-x),f_0(x)=1,f_1(x)=x,f_2(x)=x^2,\ldots}$
+         (in the vector space that we are considering)?
+         (\textit{Hint.}
+         Review the definition of linear combination.)
+      \partsitem Show that the set in the prior item is linearly independent.
+    \end{exparts}
+    This shows that some vector spaces exist with linearly independent subsets
+    that are infinite.
+    \begin{answer}
+      \begin{exparts}
+        \partsitem This check is routine.
+        \partsitem The summation is infinite (has infinitely many summands).
+          The definition of linear combination involves only finite sums.
+        \partsitem No nontrivial finite sum of members of 
+           \( \set{g,f_0,f_1,\ldots} \) adds to the zero object:~assume that
+           \begin{equation*}
+              c_0\cdot (1/(1-x))+c_1\cdot 1+\dots+c_n\cdot x^n=0
+           \end{equation*}
+           (any finite sum uses a highest power, here \( n \)).
+           Multiply both sides by \( 1-x \) to conclude that each coefficient 
+           is zero, because a polynomial describes the zero function only when 
+           it is the zero polynomial.
+      \end{exparts}
+     \end{answer}
+  \item 
+    Show that, where \( S \) is a subspace of \( V \), if a subset $T$ of
+    \( S \) is linearly independent in \( S \) then $T$ is also linearly
+    independent in \( V \).
+    Is that `only if'?
+    \begin{answer}
+      It is both `if' and `only if'.
+
+      Let \( T \) be a subset of the subspace \( S \) of the vector space
+      \( V \).
+      The assertion that any linear relationship 
+      $c_1\vec{t}_1+\dots+c_n\vec{t}_n=\zero$ among members of \( T \)
+      must be the trivial relationship $c_1=0$, \ldots, $c_n=0$
+      is a statement that 
+      holds in \( S \) if and only if it holds in \( V \),
+      because the subspace \( S \) inherits its addition and 
+      scalar multiplication operations from \( V \).  
+    \end{answer}
+\end{exercises}

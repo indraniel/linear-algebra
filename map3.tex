@@ -1,0 +1,2809 @@
+% Chapter 3, Section 3 _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-12
+\section{Computing Linear Maps}
+The prior section shows that
+a linear map is determined by its action on a basis.
+In fact, the equation
+\begin{equation*}
+  h(\vec{v})
+  =h(c_1\cdot\vec{\beta}_1+\dots+c_n\cdot\vec{\beta}_n)
+  =c_1\cdot h(\vec{\beta}_1)+\dots +c_n\cdot h(\vec{\beta}_n)
+\tag*{}\end{equation*}
+shows that, if we know the value of the map on the vectors in a basis, then we
+can compute the value of the map on any vector $\vec{v}$ at all.
+We just need to  
+find the $c$'s to express $\vec{v}$ with respect to the basis.
+
+This section gives the scheme
+that computes, from the representation of a vector in the domain 
+$\rep{\vec{v}}{B}$,
+the representation of that vector's image in the codomain 
+$\rep{h(\vec{v})}{D}$,
+using the representations of 
+\( h(\vec{\beta}_1) \), \ldots, \( h(\vec{\beta}_n) \).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Representing Linear Maps with Matrices}
+\index{homomorphism!matrix representing|(}
+\begin{example}  \label{ex:TypLinMapRepByMat}
+Consider a map $h$ with domain $\Re^2$ and codomain $\Re^3$, fixing 
+\begin{equation*}
+   B=\sequence{
+               \colvec{2 \\ 0},
+               \colvec{1 \\ 4}}
+   \quad\text{and}\quad
+   D=\sequence{
+               \colvec{1 \\ 0 \\ 0},
+               \colvec{0 \\ -2 \\ 0},
+               \colvec{1 \\ 0 \\ 1}}
+\end{equation*}
+as the bases for these spaces, that is determined by this action
+on the vectors in the domain's basis.
+\begin{equation*}
+  \colvec{2 \\ 0}
+    \mapsunder{h}
+  \colvec{1 \\ 1 \\ 1}
+  \qquad
+  \colvec{1 \\ 4}
+    \mapsunder{h}
+  \colvec{1 \\ 2 \\ 0}
+\end{equation*}
+To compute the action of this map on any vector at all from the domain,
+we first express $h(\vec{\beta}_1)$ and $h(\vec{\beta}_2)$
+with respect to the codomain's basis:
+\begin{equation*}
+  \colvec{1 \\ 1 \\ 1}=
+         0\colvec{1 \\ 0 \\ 0}
+         -\frac{1}{2}\colvec{0 \\ -2 \\ 0}
+         +1\colvec{1 \\ 0 \\ 1}
+  \quad\text{so}\quad
+   \rep{ h(\vec{\beta}_1) }{D}=\colvec{0 \\ -1/2 \\ 1}_D           
+\end{equation*}
+and
+\begin{equation*}
+  \colvec{1 \\ 2 \\ 0}=
+        1\colvec{1 \\ 0 \\ 0}
+        -1\colvec{0 \\ -2 \\ 0}
+        +0\colvec{1 \\ 0 \\ 1}
+  \quad\text{so}\quad
+  \rep{ h(\vec{\beta}_2) }{D}=\colvec{1 \\ -1 \\ 0}_D
+\end{equation*}
+(these are easy to check).
+Then, as described in the preamble, for any member $\vec{v}$ of the domain,
+we can express the image $h(\vec{v})$ in terms of the $h(\vec{\beta})$'s.
+\begin{align*}
+  h(\vec{v})
+  &=h(c_1\cdot \colvec{2 \\ 0}+c_2\cdot \colvec{1 \\ 4})   \\
+  &=c_1\cdot h(\colvec{2 \\ 0})+c_2\cdot h(\colvec{1 \\ 4}) \\
+  &=c_1\cdot (
+        0\colvec{1 \\ 0 \\ 0}
+        \!-\frac{1}{2}\colvec{0 \\ -2 \\ 0}
+        \!+1\colvec{1 \\ 0 \\ 1}\!  )
+  +c_2\cdot (
+        1\colvec{1 \\ 0 \\ 0}
+        \!-1\colvec{0 \\ -2 \\ 0}
+        \!+0\colvec{1 \\ 0 \\ 1}\!  )      \\
+  &=(0c_1+1c_2)\cdot \colvec{1 \\ 0 \\ 0}
+   +(-\frac{1}{2}c_1-1c_2)\cdot \colvec{0 \\ -2 \\ 0}
+   +(1c_1+0c_2)\cdot \colvec{1 \\ 0 \\ 1}
+\end{align*}
+Thus,
+\begin{center}
+  with $\rep{\vec{v}}{B}=\colvec{c_1 \\ c_2}$
+  then $\rep{\,h(\vec{v})\,}{D}
+  =\colvec{0c_1+1c_2 \\ -(1/2)c_1-1c_2 \\ 1c_1+0c_2}$.
+\end{center}
+For instance, 
+\begin{center}
+  with $\rep{\colvec{4 \\ 8}}{B}=\colvec{1 \\ 2}_B$
+  then 
+  $\rep{\,h(\colvec{4 \\ 8})\,}{D}
+   =\colvec{2 \\ -5/2 \\ 1}$.
+\end{center}
+\end{example}
+
+We will express computations like the one above with a matrix notation.
+\begin{equation*}
+    \begin{pmatrix}
+      0             &1  \\
+      -1/2          &-1  \\
+      1             &0
+    \end{pmatrix}_{B,D}
+  \colvec{c_1 \\ c_2}_B
+  =
+  \colvec{0c_1+1c_2 \\ (-1/2)c_1-1c_2 \\ 1c_1+0c_2}_D
+\end{equation*}
+In the middle is the argument $\vec{v}$ to the map, 
+represented with respect to the domain's basis $B$
+by a column vector with components $c_1$ and $c_2$.
+On the right is the value $h(\vec{v})$ of the map on that argument,
+represented with respect to the codomain's basis $D$
+by a column vector with components $0c_1+1c_2$, etc.
+The matrix on the left is the new thing.
+It consists of the coefficients from the vector on the right,
+$0$ and $1$ from the first row, $-1/2$ and $-1$ from the
+second row, and $1$ and $0$ from the third row.
+
+This notation simply breaks the parts from the right, 
+the coefficients and the $c$'s, out separately on the left, into a vector that
+represents the map's argument and a matrix that we will take to
+represent the map itself.
+
+\begin{definition} \label{def:MatRepMap}
+Suppose that \( V \) and \( W \) are vector spaces of dimensions \( n \) and
+\( m \) with bases \( B \) and \( D \),
+and that \( \map{h}{V}{W} \) is a linear map.
+If
+\begin{equation*}
+  \rep{h( \vec{\beta}_1 )}{D}
+  =
+  \colvec{h_{1,1} \\ h_{2,1} \\ \vdots \\ h_{m,1}}_D
+  \;\ldots\;
+  \rep{h( \vec{\beta}_n )}{D}
+  =
+  \colvec{h_{1,n} \\ h_{2,n} \\ \vdots \\ h_{m,n}}_D
+\end{equation*}
+then 
+\begin{equation*}
+  \rep{h}{B,D}=\generalmatrix{h}{n}{m}_{B,D}
+\end{equation*}
+is the \definend{matrix representation of \( h \) with respect to \( B, D \)}.%
+\index{representation!of a matrix}\index{matrix!representation}%
+\index{homomorphism!matrix representing}
+\end{definition}
+
+Briefly, the vectors
+representing the $h(\vec{\beta})$'s are adjoined to 
+make the matrix representing the map. 
+\begin{equation*}
+  \rep{h}{B,D}=
+  \left(\begin{array}{c|@{\hspace{1.5em}}c@{\hspace{1.5em}}|c}
+     \vdots                         &       &\vdots    \\
+     \rep{\,h(\vec{\beta}_1)\,}{D}  &\cdots &\rep{\,h(\vec{\beta}_n)\,}{D}  \\
+     \vdots                         &       &\vdots
+  \end{array}\right)
+\end{equation*}
+Observe that the number of columns~$n$ of the matrix is the 
+dimension of the domain of the map 
+and the number of rows~$m$ is the dimension of the codomain.
+
+\begin{example}  \label{ex:PolyOneToRThree}
+If \( \map{h}{\Re^3}{\polyspace_1} \) is given by
+\begin{equation*}
+  \colvec{a_1 \\ a_2 \\ a_3}
+     \mapsunder{h}
+   (2a_1+a_2)+(-a_3)x
+\end{equation*}
+then where
+\begin{equation*}
+  B=
+  \sequence{\colvec{0 \\ 0 \\ 1},
+            \colvec{0 \\ 2 \\ 0},
+            \colvec{2 \\ 0 \\ 0} }
+  \quad\text{and}\quad
+  D=
+  \sequence{1+x,-1+x}
+\end{equation*}
+the action of \( h \) on \( B \) is given by
+\begin{equation*}
+  \colvec{0 \\ 0 \\ 1}\mapsunder{h}-x
+  \qquad \colvec{0 \\ 2 \\ 0}\mapsunder{h}2
+  \qquad \colvec{2 \\ 0 \\ 0}\mapsunder{h}4
+\end{equation*}
+and a simple calculation gives
+\begin{equation*}
+  \rep{-x}{D}=\colvec{-1/2 \\ -1/2}_D
+  \quad \rep{2}{D}=\colvec{1 \\ -1}_D 
+  \quad \rep{4}{D}=\colvec{2 \\ -2}_D 
+\end{equation*}
+showing that this is the matrix representing $h$ with respect to the bases.
+\begin{equation*}
+  \rep{h}{B,D}
+   =
+   \begin{pmatrix}
+     -1/2  &1   &2  \\
+     -1/2  &-1  &-2
+   \end{pmatrix}_{B,D}
+\end{equation*}
+\end{example}
+
+We will use lower case letters for a map, 
+upper case for the matrix,
+and lower case again for the entries of the matrix.
+Thus for the map \( h \), the matrix representing it is \( H \), with
+entries \( h_{i,j} \).
+
+\begin{theorem} \label{th:MatMultRepsFuncAppl}
+Assume that \( V \) and \( W \) are vector spaces
+of dimensions \( n \) and \( m \)
+with bases \( B \) and \( D \),
+and that \( \map{h}{V}{W} \) is a linear map.
+If \( h \) is represented by
+\begin{equation*}
+  \rep{h}{B,D}=\generalmatrix{h}{n}{m}_{B,D}
+\end{equation*}
+and \( \vec{v}\in V \) is represented by
+\begin{equation*}
+  \rep{\vec{v}}{B}=\colvec{c_1 \\ c_2 \\ \vdots \\ c_n}_B
+\end{equation*}
+then the representation of the image of $\vec{v}$ is this.
+\begin{equation*}
+  \rep{\, h(\vec{v}) \,}{D}
+  =
+  \colvec{h_{1,1}c_1+h_{1,2}c_2+\dots+h_{1,n}c_n \\
+          h_{2,1}c_1+h_{2,2}c_2+\dots+h_{2,n}c_n \\
+          \vdots \\
+          h_{m,1}c_1+h_{m,2}c_2+\dots+h_{m,n}c_n}_D
+\end{equation*}
+\end{theorem}
+
+\begin{proof}
+This formalizes \nearbyexample{ex:TypLinMapRepByMat}; 
+see \nearbyexercise{exer:MatVecMultRepLinMap}.
+\end{proof}
+
+\begin{definition}
+\label{def:MatrixVecProd}
+The \definend{matrix-vector product}\index{multiplication!matrix-vector}%
+\index{matrix!matrix-vector product}
+of a \( \nbym{m}{n} \) matrix and a
+\( \nbym{n}{1} \) vector is this.
+\begin{equation*}
+  \generalmatrix{a}{n}{m}
+  \colvec{c_1 \\ \vdots \\ c_n}
+  =
+  \colvec{a_{1,1}c_1+a_{1,2}c_2+\dots+a_{1,n}c_n \\
+             a_{2,1}c_1+a_{2,2}c_2+\dots+a_{2,n}c_n \\
+             \vdots \\ 
+             a_{m,1}c_1+a_{m,2}c_2+\dots+a_{m,n}c_n}
+\end{equation*}
+\end{definition}
+
+The point of \nearbydefinition{def:MatRepMap} is to generalize
+\nearbyexample{ex:TypLinMapRepByMat}.
+That is, the point of the definition is 
+\nearbytheorem{th:MatMultRepsFuncAppl}: 
+the product of the matrix $\rep{h}{B,D}$ and the vector $\rep{\vec{v}}{B}$ 
+is the vector $\rep{h(\vec{v})}{D}$.
+Briefly, 
+application of a linear map is represented by the matrix-vector product 
+of the map's representative and the vector's representative.
+
+\begin{example}
+With the matrix from \nearbyexample{ex:PolyOneToRThree}
+we can calculate where that map sends this vector.
+\begin{equation*}
+  \vec{v}=\colvec{4 \\ 1 \\ 0}
+\end{equation*}
+This vector is represented, with respect to the domain basis $B$, by
+\begin{equation*}
+  \rep{\vec{v}}{B}=\colvec{0 \\ 1/2 \\ 2}_B
+\end{equation*}
+and so this is the representation of the value $h(\vec{v})$ with respect to
+the codomain basis $D$.
+\begin{align*}
+  \rep{h(\vec{v})}{D}
+  &=\begin{pmatrix}
+      -1/2  &1   &2  \\
+      -1/2  &-1  &-2
+    \end{pmatrix}_{B,D}
+    \colvec{0 \\ 1/2 \\ 2}_B                            \\
+  &=\colvec{(-1/2)\cdot 0+1\cdot (1/2) + 2\cdot 2 \\ 
+          (-1/2)\cdot 0-1\cdot (1/2) - 2\cdot 2}_D
+  =\colvec{9/2 \\ -9/2}_D
+\end{align*}
+To find $h(\vec{v})$ itself, not its representation,
+take $(9/2)(1+x)-(9/2)(-1+x)=9$.
+\end{example}
+
+\begin{example}
+Let \( \map{\pi}{\Re^3}{\Re^2} \) be projection onto the \( xy \)-plane.
+To give a matrix representing this map, we first fix bases.
+\begin{equation*}
+  B=\sequence{
+              \colvec{1 \\ 0 \\ 0},
+              \colvec{1 \\ 1 \\ 0},
+              \colvec{-1 \\ 0 \\ 1} }
+  \qquad
+  D=\sequence{
+              \colvec{2 \\ 1},
+              \colvec{1 \\ 1} }
+\end{equation*}
+For each vector in the domain's basis, we find its image under the map. 
+\begin{equation*}
+  \colvec{1 \\ 0 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
+  \quad
+  \colvec{1 \\ 1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 1}
+  \quad
+  \colvec{-1 \\ 0 \\ 1}\mapsunder{\pi}\colvec{-1 \\ 0}
+\end{equation*}
+Then we find the representation of each image with respect to the codomain's
+basis 
+\begin{equation*}
+  \rep{\colvec{1 \\ 0}}{D}=\colvec{1 \\ -1}
+  \quad
+  \rep{\colvec{1 \\ 1}}{D}=\colvec{0 \\ 1}
+  \quad
+  \rep{\colvec{-1 \\ 0}}{D}=\colvec{-1 \\ 1}
+\end{equation*}
+(these are easily checked).
+Finally, adjoining these representations gives the matrix representing 
+\( \pi \) with respect to \( B,D \).
+\begin{equation*}
+    \rep{\pi}{B,D}
+    =\begin{pmatrix}
+      1  &0  &-1  \\
+      -1 &1  &1
+    \end{pmatrix}_{B,D}
+\end{equation*}
+We can illustrate \nearbytheorem{th:MatMultRepsFuncAppl} by computing
+the matrix-vector product representing the following statement 
+about the projection map.
+\begin{equation*}
+  \pi(
+     \colvec{2 \\ 2 \\ 1}
+     )=\colvec{2 \\ 2}
+\end{equation*}
+Representing this vector from the domain
+with respect to the domain's basis
+\begin{equation*}
+   \rep{\colvec{2 \\ 2 \\ 1}}{B}=
+        \colvec{1 \\ 2 \\ 1}_B
+\end{equation*}
+gives this matrix-vector product.
+\begin{equation*}
+   \rep{ \,\pi(\colvec{2 \\ 1 \\ 1})\,}{D}=
+      \begin{pmatrix}
+        1  &0  &-1  \\
+        -1 &1  &1
+      \end{pmatrix}_{B,D}
+   \colvec{1 \\ 2 \\ 1}_B
+   =
+   \colvec{0 \\ 2}_D
+\end{equation*}
+Expanding this representation into a linear combination of vectors from
+\( D \) 
+\begin{equation*}
+   0\cdot\colvec{2 \\ 1}
+   +2\cdot\colvec{1 \\ 1}
+   =
+   \colvec{2 \\ 2}
+\end{equation*}
+checks that the map's action is indeed
+reflected in the operation of the matrix.
+(We will sometimes compress these three displayed equations into one 
+\begin{equation*}
+  \colvec{2 \\ 2 \\ 1}=\colvec{1 \\ 2 \\ 1}_B
+    \;\overset{h}{\underset{H}{\longmapsto}}\;
+  \colvec{0 \\ 2}_D=\colvec{2 \\ 2}    
+\end{equation*}
+in the course of a calculation.)
+\end{example}
+
+We now have two ways to compute the effect of projection,
+the straightforward formula that drops each three-tall vector's third component
+to make a two-tall vector, 
+and the above formula that uses representations and matrix-vector 
+multiplication.
+Compared to the first way, the second way might seem complicated.
+However, it has advantages.
+The next example shows that giving a formula for some maps is 
+simplified by this new scheme.  
+
+\begin{example} \label{exam:RepsOfRigidPlaneMaps}
+To represent a  \definend{rotation}\index{rotation (or turning)!represented}
+map $\map{t_{\theta}}{\Re^2}{\Re^2}$ that 
+turns all vectors in the plane counterclockwise through an angle $\theta$
+\begin{center}  \small
+  \includegraphics{ch3.15}
+\end{center}
+we start by fixing bases.
+Using $\stdbasis_2$ both as a domain basis and as a codomain basis is natural,
+Now, we find the image under the map of each
+vector in the domain's basis.
+\begin{equation*}
+  \colvec{1 \\ 0}\mapsunder{t_\theta}\colvec{\cos\theta \\ \sin\theta}
+  \qquad
+  \colvec{0 \\ 1}\mapsunder{t_\theta}\colvec{-\sin\theta \\ \cos\theta}
+\end{equation*}
+Then we represent these images with respect to the codomain's basis.
+Because this basis is $\stdbasis_2$, vectors are represented by themselves.
+Finally, adjoining the representations gives the matrix representing the map.
+\begin{equation*}
+  \rep{t_\theta}{\stdbasis_2,\stdbasis_2}
+  =
+  \begin{pmatrix}
+    \cos\theta  &-\sin\theta \\
+    \sin\theta  &\cos\theta
+  \end{pmatrix}
+\end{equation*}
+The advantage of this scheme is that just by knowing how to
+represent the image of the two basis vectors, 
+we get a formula that tells us the image of any vector at 
+all; here a vector rotated by $\theta=\pi/6$.
+\begin{equation*}
+  \colvec{3  \\ -2}\;\mapsunder{t_{\pi/6}}\;
+  \begin{pmatrix}
+    \sqrt{3}/2  &-1/2  \\
+     1/2        &\sqrt{3}/2
+  \end{pmatrix}
+  \colvec{3  \\ -2}
+  \approx
+  \colvec{3.598 \\ -0.232}  
+\end{equation*}
+(Again, we are using the fact that, with respect to $\stdbasis_2$, 
+vectors represent themselves.)
+\end{example}
+
+We have already seen the addition and scalar multiplication
+operations of matrices and  
+the dot product operation of vectors. 
+Matrix-vector multiplication is a new operation in the arithmetic of 
+vectors and matrices.
+Nothing in \nearbydefinition{def:MatrixVecProd} requires us to view
+it in terms of representations.
+We can get some insight into this operation 
+by turning away from  what is being represented, and instead focusing on
+how the entries combine.
+
+\begin{example}
+In the definition
+the width of the matrix equals the height of the vector.
+Hence, the first product below is defined while the second is not. 
+\begin{equation*}
+    \begin{pmatrix}
+      1  &0  &0  \\
+      4  &3  &1
+    \end{pmatrix}
+  \colvec{1 \\ 0 \\ 2}
+  =
+  \colvec{1 \\ 6}
+  \qquad
+    \begin{pmatrix}
+      1  &0  &0  \\
+      4  &3  &1
+    \end{pmatrix}
+  \colvec{1 \\ 0}
+\end{equation*}
+One reason that this product is not defined is purely formal:~the
+definition requires that the sizes match, and these sizes don't match.
+Behind the formality, though, 
+is a reason why we will leave it undefined\Dash the
+matrix represents a map with a three-dimensional domain while the 
+vector represents a member of a two-dimensional space.
+\end{example}
+
+A good way to view a matrix-vector product is
+as the dot products of the rows of the matrix with the column vector.
+\begin{equation*}
+    \begin{pmatrix}
+               &\vdots                         \\
+      a_{i,1}  &a_{i,2}  &\ldots   &a_{i,n}    \\
+               &\vdots
+    \end{pmatrix}
+  \colvec{c_1 \\ c_2 \\ \vdots \\ c_n}
+  =
+  \colvec{\vdots \\ a_{i,1}c_1+a_{i,2}c_2+\ldots+a_{i,n}c_n \\ \vdots}
+\end{equation*}
+Looked at in this row-by-row way,
+this new operation generalizes dot product.
+
+Matrix-vector product can also be viewed column-by-column.
+\begin{align*}
+           \generalmatrix{h}{n}{m}
+           \colvec{c_1 \\ c_2 \\ \vdots \\ c_n}
+  &=\colvec{h_{1,1}c_1+h_{1,2}c_2+\dots+h_{1,n}c_n \\
+               h_{2,1}c_1+h_{2,2}c_2+\dots+h_{2,n}c_n \\
+               \vdots \\
+               h_{m,1}c_1+h_{m,2}c_2+\dots+h_{m,n}c_n}    \\
+  &=c_1\colvec{h_{1,1} \\ h_{2,1} \\ \vdots \\ h_{m,1}}
+%   +c_2\colvec{h_{1,2} \\ h_{2,2} \\ \vdots \\ h_{m,2}}
+   +\dots
+   +c_n\colvec{h_{1,n} \\ h_{2,n} \\ \vdots \\ h_{m,n}}
+\end{align*}
+
+\begin{example}
+\begin{equation*}
+    \begin{pmatrix}
+      1  &0  &-1  \\
+      2  &0  &3
+    \end{pmatrix}
+  \colvec{2 \\ -1 \\ 1}
+  =
+  2\colvec{1 \\ 2}
+  -1\colvec{0 \\ 0}
+  +1\colvec{-1 \\ 3}
+  =
+  \colvec{1 \\ 7}
+\end{equation*}
+\end{example}
+
+The result has the
+columns of the matrix weighted by the entries of the vector.
+This way of looking at it
+brings us back to the objective stated at the start of this section, to compute
+\( h(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n) \)
+as
+\( c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n) \).
+
+We began this section
+by noting that the equality of these two enables us to compute the action 
+of $h$ on any
+argument knowing only $h(\vec{\beta}_1)$, \ldots, $h(\vec{\beta}_n)$.
+We have developed this into a scheme to
+compute the action of the map by taking 
+the matrix-vector product of the matrix representing the 
+map and the vector representing the argument.
+In this way, any linear map is represented with respect to some bases
+by a matrix.
+In the next subsection, we will show the converse, that any matrix represents
+a linear map.
+
+
+\begin{exercises}
+  \recommended \item  
+    Multiply the matrix
+    \begin{equation*}
+      \begin{pmatrix}
+        1  &3  &1  \\
+        0  &-1 &2  \\
+        1  &1  &0
+      \end{pmatrix}
+    \end{equation*}
+    by each vector (or state ``not defined'').
+    \begin{exparts*}
+      \partsitem \( \colvec{2 \\ 1 \\ 0} \)
+      \partsitem \( \colvec{-2 \\ -2} \)
+      \partsitem \( \colvec{0 \\ 0 \\ 0} \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem \(
+           \colvec{1\cdot 2+3\cdot 1+1\cdot 0         \\
+                        0\cdot 2+(-1)\cdot 1+2\cdot 0 \\
+                        1\cdot 2+1\cdot 1+0\cdot 0}
+           =\colvec{5 \\ -1 \\ 3}   \)
+        \partsitem Not defined.
+        \partsitem \(  \colvec{0 \\ 0 \\ 0}  \)
+      \end{exparts*}  
+    \end{answer}
+  \item 
+    Perform, if possible, each matrix-vector multiplication.
+    \begin{exparts*}
+      \partsitem $\begin{pmatrix}
+                    2  &1  \\
+                    3  &-1/2
+                  \end{pmatrix}
+                  \colvec{4  \\ 2}$
+      \partsitem $\begin{pmatrix}
+                    1  &1  &0 \\
+                    -2 &1  &0
+                  \end{pmatrix}
+                  \colvec{1 \\ 3 \\ 1}$
+      \partsitem $\begin{pmatrix}
+                    1  &1  \\
+                    -2  &1
+                  \end{pmatrix}
+                  \colvec{1 \\ 3 \\ 1}$
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem $\colvec{2\cdot 4 +1\cdot 2 \\
+                            3\cdot 4-(1/2)\cdot 2}
+                   =\colvec{10 \\ 11}$
+        \partsitem $\colvec{4 \\ 1}$
+        \partsitem Not defined.
+      \end{exparts*}
+    \end{answer}
+  \recommended \item  
+    Solve this matrix equation.
+    \begin{equation*}
+      \begin{pmatrix}
+        2  &1  &1  \\
+        0  &1  &3  \\
+        1  &-1 &2
+      \end{pmatrix}
+      \colvec{x \\ y \\ z}
+      =\colvec{8 \\ 4 \\ 4}
+    \end{equation*}
+    \begin{answer}
+      Matrix-vector multiplication gives rise to a linear system.
+      \begin{equation*}
+        \begin{linsys}{3}
+          2x  &+  &y  &+  &z  &=  &8  \\
+              &   &y  &+  &3z &=  &4  \\
+           x  &-  &y  &+  &2z &=  &4 
+        \end{linsys}
+      \end{equation*}
+      Gaussian reduction shows that \( z=1 \), \( y=1 \), and \( x=3 \).  
+    \end{answer}
+  \recommended \item 
+    For a homomorphism from \( \polyspace_2 \) to \( \polyspace_3 \) that sends
+    \begin{equation*}
+      1\mapsto 1+x,
+      \quad
+      x\mapsto 1+2x,
+      \quad\text{and}\quad
+      x^2\mapsto x-x^3
+    \end{equation*}
+    where does \( 1-3x+2x^2 \) go?
+    \begin{answer}
+      Here are two ways to get the answer.
+
+      First, obviously $1-3x+2x^2=1\cdot 1-3\cdot x+2\cdot x^2$, and so we can
+      apply the general property of preservation of combinations to get
+      $h(1-3x+2x^2)
+       =h(1\cdot 1-3\cdot x+2\cdot x^2) 
+       =1\cdot h(1)-3\cdot h(x)+2\cdot h(x^2) 
+       =1\cdot (1+x)-3\cdot (1+2x)+2\cdot (x-x^3) 
+       =-2-3x-2x^3$.
+
+      The other way uses the computation scheme developed in this subsection.
+      Because we know where these elements of the space go, we consider
+      this basis \( B=\sequence{1,x,x^2} \) for the domain.
+      Arbitrarily, we can take \( D=\sequence{1,x,x^2,x^3} \)
+      as a basis for the codomain.
+      With those choices, we have that
+      \begin{equation*}
+        \rep{h}{B,D}
+        =\begin{pmatrix}
+           1   &1  &0  \\
+           1   &2  &1  \\
+           0   &0  &0  \\
+           0   &0  &-1
+         \end{pmatrix}_{B,D}
+      \end{equation*}
+      and, as
+      \begin{equation*}
+        \rep{1-3x+2x^2}{B}=\colvec{1 \\ -3 \\ 2}_B
+      \end{equation*}
+      the matrix-vector multiplication calculation gives this.
+      \begin{equation*}
+        \rep{h(1-3x+2x^2)}{D}=
+         \begin{pmatrix}
+           1   &1  &0  \\
+           1   &2  &1  \\
+           0   &0  &0  \\
+           0   &0  &-1
+         \end{pmatrix}_{B,D}
+         \colvec{1 \\ -3 \\ 2}_B
+         =\colvec{-2 \\ -3 \\ 0 \\ -2}_D
+      \end{equation*}
+      Thus, \( h(1-3x+2x^2)
+              =-2\cdot 1-3\cdot x+0\cdot x^2-2\cdot x^3
+              =-2-3x-2x^3 \),
+      as above.  
+    \end{answer}
+  \recommended \item  
+    Assume that \( \map{h}{\Re^2}{\Re^3} \) is determined by 
+    this action.
+    \begin{equation*}
+      \colvec{1 \\ 0}\mapsto\colvec{2 \\ 2 \\ 0}
+      \qquad
+      \colvec{0 \\ 1}\mapsto\colvec{0 \\ 1 \\ -1}
+    \end{equation*}
+    Using the standard bases, find
+    \begin{exparts}
+      \partsitem the matrix representing this map;
+      \partsitem a general formula for \( h(\vec{v}) \).
+    \end{exparts}
+    \begin{answer}
+      Again, as recalled in the subsection, 
+      with respect to $\stdbasis_i$, a column vector represents itself.
+      \begin{exparts}
+        \partsitem To represent \( h \) with respect 
+          to \( \stdbasis_2,\stdbasis_3 \) we take 
+          the images of the basis vectors from the domain,
+          and represent them with respect to the basis for the codomain.
+          \begin{equation*}
+            \rep{\,h(\vec{e}_1)\,}{\stdbasis_3}
+            =\rep{\colvec{2 \\ 2 \\ 0}}{\stdbasis_3}
+            =\colvec{2 \\ 2 \\ 0}
+            \qquad
+            \rep{\,h(\vec{e}_2)\,}{\stdbasis_3}
+            =\rep{\colvec{0 \\ 1 \\ -1}}{\stdbasis_3}
+            =\colvec{0 \\ 1 \\ -1}
+          \end{equation*}
+          These are adjoined to make the matrix.
+          \begin{equation*}
+            \rep{h}{\stdbasis_2,\stdbasis_3}=
+            \begin{pmatrix}
+              2  &0  \\
+              2  &1  \\
+              0  &-1
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem For any \( \vec{v} \) in the domain \( \Re^2 \),
+          \begin{equation*}
+            \rep{\vec{v}}{\stdbasis_2}
+            =\rep{\colvec{v_1 \\ v_2}}{\stdbasis_2}
+            =\colvec{v_1 \\ v_2}
+          \end{equation*}
+          and so
+          \begin{equation*}
+            \rep{\,h(\vec{v})\,}{\stdbasis_3}
+            =\begin{pmatrix}
+              2  &0  \\
+              2  &1  \\
+              0  &-1
+            \end{pmatrix}
+            \colvec{v_1 \\ v_2}
+            =\colvec{2v_1 \\ 2v_1+v_2 \\ -v_2}
+          \end{equation*}
+          is the desired representation.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item  
+    Let \( \map{d/dx}{\polyspace_3}{\polyspace_3} \) be the derivative
+    transformation.
+    \begin{exparts}
+      \partsitem Represent \( d/dx \) with respect to \( B,B \) where
+        \( B=\sequence{1,x,x^2,x^3} \).
+      \partsitem Represent \( d/dx \) with respect to \( B,D \) where
+        \( D=\sequence{1,2x,3x^2,4x^3} \).
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem 
+        We must first find the image of each vector from the domain's basis,
+        and then represent that image with respect to the codomain's basis.
+        \begin{equation*}
+          \rep{\frac{d\,1}{dx}}{B}=\colvec{0 \\ 0 \\ 0 \\ 0}
+          \quad
+          \rep{\frac{d\,x}{dx}}{B}=\colvec{1 \\ 0 \\ 0 \\ 0}
+          \quad
+          \rep{\frac{d\,x^2}{dx}}{B}=\colvec{0 \\ 2 \\ 0 \\ 0}
+          \quad
+          \rep{\frac{d\,x^3}{dx}}{B}=\colvec{0 \\ 0 \\ 3 \\ 0}
+        \end{equation*}
+        Those representations are then adjoined to make the matrix
+        representing the map.
+        \begin{equation*}
+          \rep{\frac{d}{dx}}{B,B}=
+          \begin{pmatrix}
+            0  &1  &0  &0  \\
+            0  &0  &2  &0  \\
+            0  &0  &0  &3  \\
+            0  &0  &0  &0 
+          \end{pmatrix}  
+        \end{equation*}
+        \partsitem Proceeding as in the prior item, we represent the images
+          of the domain's basis vectors
+        \begin{equation*}
+          \rep{\frac{d\,1}{dx}}{B}=\colvec{0 \\ 0 \\ 0 \\ 0}
+          \quad
+          \rep{\frac{d\,x}{dx}}{B}=\colvec{1 \\ 0 \\ 0 \\ 0}
+          \quad
+          \rep{\frac{d\,x^2}{dx}}{B}=\colvec{0 \\ 1 \\ 0 \\ 0}
+          \quad
+          \rep{\frac{d\,x^3}{dx}}{B}=\colvec{0 \\ 0 \\ 1 \\ 0}
+        \end{equation*}
+        and adjoin to make the matrix.
+        \begin{equation*}
+          \rep{\frac{d}{dx}}{B,D}=
+          \begin{pmatrix}
+            0  &1  &0  &0  \\
+            0  &0  &1  &0  \\
+            0  &0  &0  &1  \\
+            0  &0  &0  &0
+          \end{pmatrix}  
+        \end{equation*}
+      \end{exparts*}  
+    \end{answer}
+  \recommended \item 
+    Represent each linear map with respect to each pair of bases.
+    \begin{exparts}
+      \partsitem \( \map{d/dx}{\polyspace_n}{\polyspace_n} \) with respect to
+        \( B,B \) where \( B=\sequence{1,x,\dots,x^n} \), given by
+        \begin{equation*}
+            a_0+a_1x+a_2x^2+\dots+a_nx^n
+            \mapsto
+            a_1+2a_2x+\dots+na_nx^{n-1}
+        \end{equation*}
+      \partsitem \( \map{\int}{\polyspace_n}{\polyspace_{n+1}} \) 
+        with respect to
+        \( B_n,B_{n+1} \) where \( B_i=\sequence{1,x,\dots,x^i} \), given by
+        \begin{equation*}
+            a_0+a_1x+a_2x^2+\dots+a_nx^n
+            \mapsto
+            a_0x+\frac{a_1}{2}x^2+\dots+\frac{a_n}{n+1}x^{n+1}
+        \end{equation*}
+      \partsitem \( \map{\int^1_0}{\polyspace_n}{\Re} \) with respect to
+        \( B,\stdbasis_1 \) where \( B=\sequence{1,x,\dots,x^n} \)
+        and \( \stdbasis_1=\sequence{1} \), given by
+        \begin{equation*}
+            a_0+a_1x+a_2x^2+\dots+a_nx^n
+            \mapsto
+            a_0+\frac{a_1}{2}+\dots+\frac{a_n}{n+1}
+        \end{equation*}
+      \partsitem \( \map{\text{eval}_3}{\polyspace_n}{\Re} \) with respect to
+        \( B,\stdbasis_1 \) where \( B=\sequence{1,x,\dots,x^n} \)
+        and \( \stdbasis_1=\sequence{1} \), given by
+        \begin{equation*}
+            a_0+a_1x+a_2x^2+\dots+a_nx^n
+            \mapsto
+            a_0+a_1\cdot 3+a_2\cdot 3^2+\dots+a_n\cdot 3^n
+        \end{equation*}
+      \partsitem \( \map{\text{slide}_{-1}}{\polyspace_n}{\polyspace_n} \) 
+        with respect
+        to \( B,B \) where \( B=\sequence{1,x,\ldots,x^n} \), given by
+        \begin{equation*}
+            a_0+a_1x+a_2x^2+\dots+a_nx^n
+            \mapsto
+            a_0+a_1\cdot (x+1)+\dots+a_n\cdot (x+1)^n
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      For each, we must find the image of each of the domain's basis vectors,
+      represent each image with respect to the codomain's basis,
+      and then adjoin those representations to get the matrix.
+      \begin{exparts}
+        \partsitem The basis vectors from the domain have these images
+          \begin{equation*}
+            1\mapsto 0  
+            \quad x\mapsto 1  
+            \quad x^2\mapsto 2x  
+            \quad \ldots
+          \end{equation*}
+          and these images are represented with respect to the codomain's
+          basis in this way.
+          \begin{equation*}
+            \rep{0}{B}=\colvec{0 \\ 0 \\ 0 \\ \vdots \\ \  \\  \ }
+            \quad
+            \rep{1}{B}=\colvec{1 \\ 0 \\ 0 \\ \vdots \\ \  \\ \ }
+            \quad
+            \rep{2x}{B}=\colvec{0 \\ 2 \\ 0 \\ \vdots \\ \  \\ \ }
+            \quad\ldots\quad
+            \rep{nx^{n-1}}{B}=\colvec{0 \\ 0 \\ 0 \\ \vdots \\ n \\ 0}
+          \end{equation*}
+          The matrix
+          \begin{equation*}
+            \rep{\frac{d}{dx}}{B,B}
+            =\begin{pmatrix}
+              0  &1  &0  &\ldots  &0  \\
+              0  &0  &2  &\ldots  &0  \\
+                 &\vdots             \\
+              0  &0  &0  &\ldots  &n  \\
+              0  &0  &0  &\ldots  &0
+            \end{pmatrix}
+          \end{equation*}
+          has $n+1$ rows and columns.
+       \partsitem Once the images under this map of the domain's basis
+          vectors are determined
+          \begin{equation*}
+            1\mapsto x 
+            \quad x\mapsto x^2/2  
+            \quad x^2\mapsto x^3/3 
+            \quad \ldots
+          \end{equation*}
+          then they can be represented with respect to the codomain's basis
+          \begin{equation*}
+            \rep{x}{B_{n+1}}=\colvec{0 \\ 1 \\ 0 \\ \vdots \\ \ }
+            \quad
+            \rep{x^2/2}{B_{n+1}}=\colvec{0 \\ 0 \\ 1/2 \\ \vdots \\ \ }
+            \quad\ldots\quad
+            \rep{x^{n+1}/(n+1)}{B_{n+1}}
+                     =\colvec{0 \\ 0 \\ 0 \\ \vdots \\ 1/(n+1)}
+          \end{equation*}
+          and put together to make the matrix.
+          \begin{equation*}
+            \rep{\int}{B_{n},B_{n+1}}
+            =\begin{pmatrix}
+              0  &0  &\ldots  &0      &0  \\
+              1  &0  &\ldots  &0      &0  \\
+              0  &1/2&\ldots  &0      &0  \\
+                 &\vdots                  \\
+              0  &0  &\ldots  &0      &1/(n+1)
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem The images of the basis vectors of the domain are
+          \begin{equation*} 
+            1\mapsto 1 
+            \quad x\mapsto 1/2 
+            \quad x^2\mapsto 1/3 
+            \quad \ldots
+          \end{equation*}
+          and they are represented with respect to the codomain's basis as
+          \begin{equation*}
+            \rep{1}{\stdbasis_1}=1
+            \quad \rep{1/2}{\stdbasis_1}=1/2
+            \quad \ldots
+          \end{equation*}
+          so the matrix is 
+          \begin{equation*}
+            \rep{\int}{B,\stdbasis_1}
+            =\begin{pmatrix}
+              1  &1/2 &\cdots  &1/n    &1/(n+1)
+            \end{pmatrix}
+          \end{equation*}
+          (this is an $\nbym{1}{(n+1)}$ matrix).
+        \partsitem Here, the images of the domain's basis vectors are
+          \begin{equation*}  
+            1\mapsto 1 
+            \quad x\mapsto 3 
+            \quad x^2\mapsto 9
+            \quad \ldots 
+          \end{equation*}
+          and they are represented in the codomain as
+          \begin{equation*}
+            \rep{1}{\stdbasis_1}=1
+            \quad\rep{3}{\stdbasis_1}=3
+            \quad\rep{9}{\stdbasis_1}=9
+            \quad \ldots 
+          \end{equation*}
+          and so the matrix is this.
+          \begin{equation*}
+            \rep{\int_0^1}{B,\stdbasis_1}
+            =\begin{pmatrix}
+              1  &3   &9  &\cdots  &3^n
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem The images of the basis vectors from the domain are
+          \begin{equation*} 
+          1\mapsto 1 
+          \quad x\mapsto x+1=1+x  
+          \quad x^2\mapsto (x+1)^2=1+2x+x^2  
+          \quad x^3\mapsto (x+1)^3=1+3x+3x^2+x^3  
+          \quad \ldots 
+          \end{equation*}
+          which are represented as 
+          \begin{equation*}
+            \rep{1}{B}=\colvec{1 \\ 0 \\ 0 \\ 0 \\ \vdots \\ 0}
+            \quad
+            \rep{1+x}{B}=\colvec{1 \\ 1 \\ 0 \\ 0 \\ \vdots \\ 0}
+            \quad
+            \rep{1+2x+x^2}{B}=\colvec{1 \\ 2 \\ 1 \\ 0 \\ \vdots \\ 0}
+            \quad\ldots
+          \end{equation*}
+          The resulting matrix
+          \begin{equation*}
+            \renewcommand{\arraystretch}{1.2}
+            \rep{\int}{B,B}
+            =\begin{pmatrix}
+              1  &1   &1  &1  &\ldots  &1           \\
+              0  &1   &2  &3  &\ldots  &\binom{n}{2}  \\
+              0  &0   &1  &3  &\ldots  &\binom{n}{3}  \\
+                 &\vdots                        \\
+              0  &0   &0  &   &\ldots  &1
+            \end{pmatrix}
+          \end{equation*}
+          is \definend{Pascal's triangle}\index{Pascal's triangle}
+          (recall that $\binom{n}{r}$ is the number of ways to choose $r$
+          things, without order and without repetition,
+          from a set of size $n$). 
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Represent the identity map on any nontrivial
+    space with respect to \( B,B \), where \( B \) is any basis.
+    \begin{answer}
+      Where the space is \( n \)-dimensional,
+      \begin{equation*}
+        \rep{\text{id}}{B,B}=
+        \begin{pmatrix}
+          1  &0  \ldots  &0  \\
+          0  &1  \ldots  &0  \\
+             &\vdots         \\
+          0  &0  \ldots  &1
+        \end{pmatrix}_{B,B}
+      \end{equation*}
+      is the $\nbyn{n}$ identity matrix.  
+    \end{answer}
+  \item 
+    Represent, with respect to the natural basis, 
+    the transpose transformation on the space 
+    \( \matspace_{\nbyn{2}} \) of $\nbyn{2}$ matrices.
+    \begin{answer}
+      Taking this as the natural basis
+      \begin{equation*}
+        B=\sequence{\vec{\beta}_1,\vec{\beta}_2,\vec{\beta}_3,\vec{\beta}_4}
+         =\sequence{
+            \begin{pmatrix}
+              1  &0  \\
+              0  &0
+            \end{pmatrix},
+            \begin{pmatrix}
+              0  &1  \\
+              0  &0
+            \end{pmatrix},
+            \begin{pmatrix}
+              0  &0  \\
+              1  &0
+            \end{pmatrix},
+            \begin{pmatrix}
+              0  &0  \\
+              0  &1
+            \end{pmatrix}   }
+      \end{equation*}
+      the transpose map acts in this way
+      \begin{equation*}
+        \vec{\beta}_1\mapsto\vec{\beta}_1 
+        \quad \vec{\beta}_2\mapsto\vec{\beta}_3 
+        \quad \vec{\beta}_3\mapsto\vec{\beta}_2 
+        \quad \vec{\beta}_4\mapsto\vec{\beta}_4  
+      \end{equation*}
+      so that representing the images with respect to the codomain's
+      basis and adjoining those column vectors together gives this.
+      \begin{equation*}
+        \rep{\text{trans}}{B,B}=
+        \begin{pmatrix}
+          1  &0  &0  &0  \\
+          0  &0  &1  &0  \\
+          0  &1  &0  &0  \\
+          0  &0  &0  &1
+        \end{pmatrix}_{B,B}
+      \end{equation*}   
+     \end{answer}
+  \item 
+     Assume that 
+     \( B=\sequence{\vec{\beta}_1,\vec{\beta}_2,\vec{\beta}_3,\vec{\beta}_4} \)
+     is a basis for a vector space.
+     Represent with respect to \( B,B \) the transformation that is determined
+     by each.
+     \begin{exparts}
+       \partsitem \( \vec{\beta}_1\mapsto\vec{\beta}_2 \),
+         \( \vec{\beta}_2\mapsto\vec{\beta}_3 \),
+         \( \vec{\beta}_3\mapsto\vec{\beta}_4 \),
+         \( \vec{\beta}_4\mapsto\zero \)
+       \partsitem \( \vec{\beta}_1\mapsto\vec{\beta}_2 \),
+         \( \vec{\beta}_2\mapsto\zero \),
+         \( \vec{\beta}_3\mapsto\vec{\beta}_4 \),
+         \( \vec{\beta}_4\mapsto\zero \)
+       \partsitem \( \vec{\beta}_1\mapsto\vec{\beta}_2 \),
+         \( \vec{\beta}_2\mapsto\vec{\beta}_3 \),
+         \( \vec{\beta}_3\mapsto\zero \),
+         \( \vec{\beta}_4\mapsto\zero \)
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem With respect to the basis of the codomain, the images of
+           the members of the basis of the domain are represented as
+           \begin{equation*}
+             \rep{\vec{\beta}_2}{B}=\colvec{0 \\ 1 \\ 0 \\ 0}
+             \quad
+             \rep{\vec{\beta}_3}{B}=\colvec{0 \\ 0 \\ 1 \\ 0}
+             \quad
+             \rep{\vec{\beta}_4}{B}=\colvec{0 \\ 0 \\ 0 \\ 1}
+             \quad
+             \rep{\zero}{B}=\colvec{0 \\ 0 \\ 0 \\ 0}
+           \end{equation*}
+           and consequently, the matrix representing the transformation is 
+           this.
+           \begin{equation*}
+             \begin{pmatrix}
+                   0  &0  &0  &0  \\
+                   1  &0  &0  &0  \\
+                   0  &1  &0  &0  \\
+                   0  &0  &1  &0
+                 \end{pmatrix}  
+         \end{equation*}
+         \partsitem 
+              $\begin{pmatrix}
+                   0  &0  &0  &0  \\
+                   1  &0  &0  &0  \\
+                   0  &0  &0  &0  \\
+                   0  &0  &1  &0
+                 \end{pmatrix}$
+         \partsitem 
+               $\begin{pmatrix}
+                   0  &0  &0  &0  \\
+                   1  &0  &0  &0  \\
+                   0  &1  &0  &0  \\
+                   0  &0  &0  &0
+                 \end{pmatrix}$
+       \end{exparts}  
+     \end{answer}
+  \item
+    \nearbyexample{exam:RepsOfRigidPlaneMaps} shows how to represent
+    the rotation transformation of the plane with respect to the 
+    standard basis.
+    Express these other transformations also with respect to the standard
+    basis.
+    \begin{exparts}
+      \partsitem the \definend{dilation} map $d_s$, which multiplies 
+        all vectors by the same scalar $s$\index{dilation!representing}
+      \partsitem the \definend{reflection} map $f_\ell$, which reflects all
+        all vectors across a line $\ell$ through the origin
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The picture of $\map{d_s}{\Re^2}{\Re^2}$ is this.
+          \begin{center}  \small
+            \includegraphics{ch3.75}
+          \end{center}
+         This map's effect on the vectors in the standard basis for the domain 
+         is 
+         \begin{equation*} 
+            \colvec{1 \\ 0}\mapsunder{d_s}\colvec{s \\ 0}
+            \qquad
+            \colvec{0 \\ 1}\mapsunder{d_s}\colvec{0 \\ s}
+         \end{equation*}
+         and those images are represented with respect to the 
+         codomain's basis (again, the standard basis) by themselves.
+         \begin{equation*} 
+           \rep{\colvec{s \\ 0}}{\stdbasis_2}=\colvec{s \\ 0}
+           \qquad
+           \rep{\colvec{0 \\ s}}{\stdbasis_2}=\colvec{0 \\ s}
+         \end{equation*}
+         Thus the representation of the dilation map is this.
+         \begin{equation*}
+           \rep{d_s}{\stdbasis_2,\stdbasis_2}
+           =\begin{pmatrix}
+              s  &0  \\
+              0  &s
+           \end{pmatrix}
+        \end{equation*}
+      \partsitem The picture of $\map{f_\ell}{\Re^2}{\Re^2}$ is this.
+         \begin{center}  \small
+           \includegraphics{ch3.76}
+        \end{center}
+       Some calculation (see Exercise~I.\ref{exer:RigidPlaneMapsAutos})
+       shows that when the line has slope $k$ 
+       \begin{equation*}
+         \colvec{1 \\ 0}
+             \mapsunder{f_\ell}\colvec{(1-k^2)/(1+k^2) \\ 2k/(1+k^2)}
+         \qquad
+         \colvec{0 \\ 1}
+             \mapsunder{f_\ell}\colvec{2k/(1+k^2) \\ -(1-k^2)/(1+k^2)}
+       \end{equation*}
+       (the case of a line with undefined slope is separate but easy) 
+       and so the matrix representing reflection is this.
+       \begin{equation*}
+         \rep{f_\ell}{\stdbasis_2,\stdbasis_2}
+         =\frac{1}{1+k^2}\cdot\begin{pmatrix}
+            1-k^2  &2k  \\
+            2k     &-(1-k^2)
+         \end{pmatrix}
+       \end{equation*}
+      \end{exparts}  
+    \end{answer}
+  \recommended \item  
+    Consider a linear transformation of \( \Re^2 \) determined
+    by these two.
+    \begin{equation*}
+      \colvec{1 \\ 1}\mapsto\colvec{2 \\ 0}
+      \qquad
+      \colvec{1 \\ 0}\mapsto\colvec{-1 \\ 0}
+    \end{equation*}
+    \begin{exparts}
+      \partsitem Represent this transformation with respect to the standard
+        bases.
+      \partsitem Where does the transformation send this vector?
+        \begin{equation*}
+          \colvec{0 \\ 5}
+        \end{equation*}
+      \partsitem Represent this transformation with respect to these bases.
+        \begin{equation*}
+          B=\sequence{\colvec{1 \\ -1},\colvec{1 \\ 1}}
+          \qquad
+          D=\sequence{\colvec{2 \\ 2},\colvec{-1 \\ 1}}
+        \end{equation*}
+      \partsitem Using \( B \) from the prior item, 
+        represent the transformation with respect to \( B,B \).
+    \end{exparts}
+    \begin{answer}
+      Call the map \( \map{t}{\Re^2}{\Re^2} \).
+      \begin{exparts}
+        \partsitem To represent this map with respect to the standard bases, we
+          must find, and then represent, the images of the vectors $\vec{e}_1$
+          and $\vec{e}_2$ from the domain's basis.
+          The image of $\vec{e}_1$ is given.
+
+          One way to find the image of $\vec{e}_2$ is by 
+          eye\Dash we can see this.
+          \begin{equation*}
+            \colvec{1 \\ 1}-\colvec{1 \\ 0}=\colvec{0 \\ 1}
+            \;\mapsunder{t}\;
+            \colvec{2 \\ 0}-\colvec{-1 \\ 0}=\colvec{3 \\ 0}
+          \end{equation*}
+
+          A more systemmatic way to find the image of $\vec{e}_2$ is to
+          use the given information to represent the transformation, and then 
+          use that representation to determine the image.  
+          Taking this for a basis,
+          \begin{equation*}
+            C=\sequence{\colvec{1 \\ 1},\colvec{1 \\ 0}}
+          \end{equation*}
+          the given information says this.
+          \begin{equation*}
+            \rep{t}{C,\stdbasis_2}
+            \begin{pmatrix}
+              2  &-1  \\
+              0  &0
+            \end{pmatrix}
+          \end{equation*}
+          As
+          \begin{equation*}
+            \rep{\vec{e}_2}{C}=\colvec{1 \\ -1}_C
+          \end{equation*}
+          we have that
+          \begin{equation*}
+            \rep{t(\vec{e}_2)}{\stdbasis_2}
+            =\begin{pmatrix}
+               2  &-1  \\
+               0  &0
+             \end{pmatrix}_{C,\stdbasis_2}
+            \colvec{1 \\ -1}_C
+            =\colvec{3 \\ 0}_{\stdbasis_2}
+          \end{equation*}
+          and consequently we know that $t(\vec{e}_2)=3\cdot\vec{e}_1$
+          (since, with respect to the standard basis, this vector is 
+          represented by itself).
+          Therefore, this is the representation of $t$ with respect to
+          $\stdbasis_2,\stdbasis_2$.
+          \begin{equation*}
+            \rep{t}{\stdbasis_2,\stdbasis_2}
+            =\begin{pmatrix}
+               -1 &3   \\
+               0  &0
+             \end{pmatrix}_{\stdbasis_2,\stdbasis_2}
+          \end{equation*}
+        \partsitem To use the matrix developed in the prior item, note that
+          \begin{equation*}
+            \rep{\colvec{0 \\ 5}}{\stdbasis_2}=\colvec{0 \\ 5}_{\stdbasis_2}
+          \end{equation*}
+          and so we have this is the representation, with respect to the 
+          codomain's basis, of the image of the given vector.
+          \begin{equation*}
+            \rep{t(\colvec{0 \\ 5})}{\stdbasis_2}
+            =\begin{pmatrix}
+              -1  &3   \\
+               0  &0
+             \end{pmatrix}_{\stdbasis_2,\stdbasis_2}
+            \colvec{0 \\ 5}_{\stdbasis_2}
+            =\colvec{15 \\ 0}_{\stdbasis_2}
+          \end{equation*}
+          Because the codomain's basis is the standard one, and so vectors
+          in the codomain are represented by themselves, we have this.
+          \begin{equation*}
+            t(\colvec{0 \\ 5})
+            =\colvec{15 \\ 0}
+          \end{equation*}
+        \partsitem We first find the image of each member of \( B \), and then
+          represent those images with respect to \( D \).
+          For the first step, we can use the matrix developed earlier.
+          \begin{equation*}
+            \rep{\colvec{1 \\-1}}{\stdbasis_2}
+            =\begin{pmatrix}
+              -1  &3   \\
+               0  &0
+             \end{pmatrix}_{\stdbasis_2,\stdbasis_2}
+            \colvec{1 \\ -1}_{\stdbasis_2}
+            =\colvec{-4 \\ 0}_{\stdbasis_2}
+            \quad\text{so}\quad
+            t(\colvec{1 \\ -1})=\colvec{-4 \\ 0}
+          \end{equation*}
+          Actually, for the second member of $B$ there is no need to apply the
+          matrix because the problem statement gives its image.
+          \begin{equation*}
+            t(\colvec{1 \\ 1})=\colvec{2 \\ 0}
+          \end{equation*}
+          Now representing those images with respect to $D$ is routine.
+          \begin{equation*}
+            \rep{\colvec{-4 \\ 0}}{D}=\colvec{-1 \\ 2}_D
+            \quad\text{and}\quad
+            \rep{\colvec{2 \\ 0}}{D}=\colvec{1/2 \\ -1}_D
+          \end{equation*}
+          Thus, the matrix is this.
+          \begin{equation*}
+            \rep{t}{B,D}=
+            \begin{pmatrix}
+              -1  &1/2  \\
+               2  &-1
+            \end{pmatrix}_{B,D}
+          \end{equation*}
+        \partsitem We know the images of the members of the domain's basis
+          from the prior item.
+          \begin{equation*}
+             t(\colvec{1 \\ -1})=\colvec{-4 \\ 0}
+             \qquad
+             t(\colvec{1 \\ 1})=\colvec{2 \\ 0}
+          \end{equation*}
+          We can  compute the representation of those images with respect to
+          the codomain's basis.
+          \begin{equation*}
+             \rep{\colvec{-4 \\ 0}}{B}=\colvec{-2 \\ -2}_B
+             \quad\text{and}\quad
+             \rep{\colvec{2 \\ 0}}{B}=\colvec{1 \\ 1}_B
+          \end{equation*}
+          Thus this is the matrix.
+          \begin{equation*}
+            \rep{t}{B,B}=
+            \begin{pmatrix}
+              -2  &1  \\
+              -2  &1
+            \end{pmatrix}_{B,B}
+          \end{equation*}
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Suppose that \( \map{h}{V}{W} \) is nonsingular so that 
+    by \nearbytheorem{th:OOHomoEquivalence}, for any basis
+    \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n}\subset V \) the image
+    \( h(B)=\sequence{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)} \)
+    is a basis for \( W \).
+    \begin{exparts}
+      \partsitem Represent the map $h$ with respect to $B,h(B)$.
+      \partsitem For a member $\vec{v}$ of the domain, where
+        the representation of $\vec{v}$ has components $c_1$, \ldots, $c_n$,
+        represent the image vector \( h(\vec{v}) \) with respect to 
+        the image basis $h(B)$.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The images of the members of the domain's basis are
+          \begin{equation*}
+            \vec{\beta}_1\mapsto h(\vec{\beta}_1)
+            \quad 
+            \vec{\beta}_2\mapsto h(\vec{\beta}_2)
+            \quad\ldots\quad 
+            \vec{\beta}_n\mapsto h(\vec{\beta}_n)
+          \end{equation*}
+          and those images are represented with respect to the codomain's
+          basis in this way.
+          \begin{equation*}
+            \rep{\,h(\vec{\beta}_1)\,}{h(B)}=\colvec{1 \\ 0 \\ \vdots \\ 0}
+            \quad
+            \rep{\,h(\vec{\beta}_2)\,}{h(B)}=\colvec{0 \\ 1 \\ \vdots \\ 0}
+            \quad\ldots\quad
+            \rep{\,h(\vec{\beta}_n)\,}{h(B)}=\colvec{0 \\ 0 \\ \vdots \\ 1}
+          \end{equation*}
+          Hence, the matrix is the identity.
+          \begin{equation*}
+            \rep{h}{B,h(B)}
+            =\begin{pmatrix}
+               1  &0  &\ldots  &0  \\
+               0  &1  &        &0  \\
+                  &   &\ddots      \\
+               0  &0  &        &1 
+            \end{pmatrix}
+          \end{equation*}
+        \partsitem Using the matrix in the prior item, 
+          the representation is this.
+          \begin{equation*}
+            \rep{\,h(\vec{v})\,}{h(B)}
+             =\colvec{c_1 \\ \vdots \\ c_n}_{h(B)}
+          \end{equation*}
+        \end{exparts}  
+     \end{answer}
+  \item 
+    Give a formula for the product of a matrix and \( \vec{e}_i \), the
+    column vector that is all zeroes except for a single one in the \( i \)-th
+    position.
+    \begin{answer}
+      The product
+      \begin{equation*}
+        \begin{pmatrix}
+          h_{1,1} &\ldots  &h_{1,i} &\ldots &h_{1,n}  \\
+          h_{2,1} &\ldots  &h_{2,i} &\ldots &h_{2,n}  \\
+                  &\vdots                             \\
+          h_{m,1} &\ldots  &h_{m,i} &\ldots &h_{1,n}
+        \end{pmatrix}
+        \colvec{0 \\ \vdots \\ 1 \\ \vdots \\ 0}
+        =
+        \colvec{h_{1,i} \\ h_{2,i} \\ \vdots \\ h_{m,i}}
+      \end{equation*}
+      gives the \( i \)-th column of the matrix.  
+    \end{answer}
+  \recommended \item 
+    For each vector space of functions of one real variable,
+    represent the derivative transformation with respect to \( B,B \).
+    \begin{exparts}
+      \partsitem \( \set{a\cos x+b\sin x \suchthat a,b\in\Re} \),
+         \( B=\sequence{\cos x,\sin x} \)
+      \partsitem \( \set{ae^x+be^{2x} \suchthat a,b\in\Re} \),
+         \( B=\sequence{e^x,e^{2x}} \)
+      \partsitem \( \set{a+bx+ce^x+dxe^{x} \suchthat a,b,c,d\in\Re} \),
+         \( B=\sequence{1,x,e^x,xe^{x}} \)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The images of the basis vectors for the domain are
+         \( \cos x\mapsunder{d/dx}-\sin x \) and
+          \( \sin x\mapsunder{d/dx}\cos x \).
+          Representing those with respect to the codomain's basis (again, $B$)
+          and adjoining the representations gives this matrix.
+          \begin{equation*}
+            \rep{\frac{d}{dx}}{B,B}=
+            \begin{pmatrix}
+                0  &1  \\
+               -1  &0
+            \end{pmatrix}_{B,B}
+          \end{equation*}
+        \partsitem The images of the vectors in the domain's basis are 
+          \( e^x\mapsunder{d/dx}e^x \) and
+          \( e^{2x}\mapsunder{d/dx}2e^{2x} \).
+          Representing with respect to the codomain's basis and adjoining
+          gives this matrix.
+          \begin{equation*}
+            \rep{\frac{d}{dx}}{B,B}=
+            \begin{pmatrix}
+                1  &0  \\
+                0  &2
+            \end{pmatrix}_{B,B}
+          \end{equation*}
+        \partsitem The images of the members of the domain's basis are 
+          \( 1\mapsunder{d/dx}0 \), 
+          \( x\mapsunder{d/dx}1 \),
+          \( e^{x}\mapsunder{d/dx}e^{x} \), and
+          \( xe^{x}\mapsunder{d/dx}e^x+xe^x \).
+          Representing these images with respect to $B$ and adjoining
+          gives this matrix.
+          \begin{equation*}
+            \rep{\frac{d}{dx}}{B,B}=
+            \begin{pmatrix}
+                0  &1  &0  &0 \\
+                0  &0  &0  &0 \\
+                0  &0  &1  &1 \\
+                0  &0  &0  &1
+            \end{pmatrix}_{B,B}
+          \end{equation*}
+      \end{exparts}  
+    \end{answer}
+  \item 
+    Find the range of the linear transformation of \( \Re^2 \) represented
+    with respect to the standard bases by each matrix.
+    \begin{exparts*}
+      \partsitem $\begin{pmatrix}
+            1  &0 \\
+            0  &0
+          \end{pmatrix}$
+      \partsitem $\begin{pmatrix}
+          0  &0  \\
+          3  &2  
+        \end{pmatrix}$
+      \partsitem a matrix of the form 
+        $\begin{pmatrix}
+            a   &b  \\
+            2a  &2b
+          \end{pmatrix}$
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem It is the set of vectors of the codomain represented with
+          respect to the codomain's basis in this way.
+          \begin{equation*}
+            \set{
+              \begin{pmatrix}
+                1  &0  \\
+                0  &0
+              \end{pmatrix}
+              \colvec{x  \\ y}
+              \suchthat x,y\in\Re}
+            =\set{\colvec{x  \\ 0}
+                  \suchthat x,y\in\Re}
+          \end{equation*}
+          As the codomain's basis is $\stdbasis_2$, 
+          and so each vector is represented
+          by itself, the range of this transformation is the $x$-axis.
+        \partsitem It is the set of vectors of the codomain represented
+          in this way.
+          \begin{equation*}
+            \set{
+              \begin{pmatrix}
+                0  &0  \\
+                3  &2
+              \end{pmatrix}
+              \colvec{x  \\ y}
+              \suchthat x,y\in\Re}
+            =\set{\colvec{0  \\ 3x+2y}
+                  \suchthat x,y\in\Re}
+          \end{equation*}
+          With respect to $\stdbasis_2$ vectors represent 
+          themselves so this range
+          is the $y$~axis.
+        \partsitem The set of vectors represented with 
+          respect to $\stdbasis_2$ as
+          \begin{equation*}
+            \set{
+              \begin{pmatrix}
+                a   &b  \\
+                2a  &2b
+              \end{pmatrix}
+              \colvec{x  \\ y}
+              \suchthat x,y\in\Re}
+            =\set{\colvec{ax+by  \\ 2ax+2by}
+                  \suchthat x,y\in\Re}
+            =\set{(ax+by)\cdot\colvec{1  \\ 2}
+                  \suchthat x,y\in\Re}
+          \end{equation*}
+          is the line $y=2x$, provided either $a$ or $b$ is not zero, and
+          is the set consisting of just the origin if both are zero.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item  
+    Can one matrix represent two different linear maps?
+    That is, can \( \rep{h}{B,D}=\rep{\hat{h}}{\hat{B},\hat{D}} \)?
+    \begin{answer}
+      Yes, for two reasons.
+
+      First, the two maps $h$ and $\hat{h}$ need not have the same domain
+      and codomain.
+      For instance,
+      \begin{equation*}
+        \begin{pmatrix}
+          1  &2  \\
+          3  &4
+        \end{pmatrix}
+      \end{equation*}
+      represents a map \( \map{h}{\Re^2}{\Re^2} \) with respect to the standard
+      bases that sends
+      \begin{equation*}
+        \colvec{1 \\ 0}\mapsto\colvec{1 \\ 3}
+        \quad\text{and}\quad
+        \colvec{0 \\ 1}\mapsto\colvec{2 \\ 4}
+      \end{equation*}
+      and also represents a
+      \( \map{\hat{h}}{\polyspace_1}{\Re^2} \) with respect to
+      \( \sequence{1,x} \) and \( \stdbasis_2 \) that acts in this way.
+      \begin{equation*}
+        1\mapsto\colvec{1 \\ 3}
+        \quad\text{and}\quad
+        x\mapsto\colvec{2 \\ 4}
+      \end{equation*}
+
+      The second reason is that, even if the domain and
+      codomain of \( h \) and \( \hat{h} \) coincide, different bases produce
+      different maps.
+      An example is the $\nbyn{2}$ identity matrix
+      \begin{equation*}
+        I=\begin{pmatrix}
+          1  &0  \\
+          0  &1
+        \end{pmatrix}
+      \end{equation*}
+      which represents the identity map on $\Re^2$ with respect to
+      $\stdbasis_2,\stdbasis_2$.
+      However, with respect to $\stdbasis_2$ for the domain but the basis 
+      $D=\sequence{\vec{e}_2,\vec{e}_1}$ for the codomain,
+      the same matrix $I$ represents the map that swaps the first and second
+      components 
+      \begin{equation*}
+        \colvec{x \\ y}\mapsto\colvec{y \\ x}
+      \end{equation*}
+      (that is, reflection about the line $y=x$).
+    \end{answer}
+  \item \label{exer:MatVecMultRepLinMap} 
+    Prove \nearbytheorem{th:MatMultRepsFuncAppl}.
+    \begin{answer}
+      We mimic \nearbyexample{ex:TypLinMapRepByMat}, just replacing the 
+      numbers with letters.
+
+      Write \( B \) as \( \sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n} \)
+      and  \( D \) as \( \sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \).
+      By definition of representation of a map with respect to bases,
+      the assumption that
+      \begin{equation*}
+        \rep{h}{B,D}
+        =\begin{pmatrix}
+           h_{1,1} &\ldots  &h_{1,n}  \\
+           \vdots  &        &\vdots   \\
+           h_{m,1} &\ldots  &h_{m,n}
+         \end{pmatrix}
+      \end{equation*}
+      means that
+      $h(\vec{\beta}_i)=h_{i,1}\vec{\delta}_1+\dots+h_{i,n}\vec{\delta}_n$.
+      And, by the definition of the representation of a vector with respect to
+      a basis, the assumption that
+      \begin{equation*}
+        \rep{\vec{v}}{B}=\colvec{c_1 \\ \vdots \\ c_n}
+      \end{equation*}
+      means that \( \vec{v}=c_1\vec{\beta}_1+\cdots+c_n\vec{\beta}_n \).
+      Substituting gives
+      \begin{align*}
+        h(\vec{v})
+        &=h(c_1\cdot\vec{\beta}_1+\dots+c_n\cdot\vec{\beta}_n)      \\
+        &=c_1\cdot h(\vec{\beta}_1)+\dots+c_n\cdot \vec{\beta}_n    \\
+        &=c_1\cdot (h_{1,1}\vec{\delta}_1+\dots+h_{m,1}\vec{\delta}_m) 
+        +\dots                                         
+        +c_n\cdot (h_{1,n}\vec{\delta}_1+\dots+h_{m,n}\vec{\delta}_m) \\
+        &=(h_{1,1}c_1+\dots+h_{1,n}c_n)\cdot\vec{\delta}_1    
+        +\cdots                                
+        +(h_{m,1}c_1+\dots+h_{m,n}c_n)\cdot\vec{\delta}_m
+      \end{align*}
+      and so $h(\vec{v})$ is represented as required.   
+    \end{answer}
+  \recommended \item  
+    \nearbyexample{exam:RepsOfRigidPlaneMaps} shows how to represent 
+    rotation of all vectors in the plane through an angle
+    \( \theta \) about the origin,
+    with respect to the standard bases.
+    \begin{exparts}
+      \partsitem Rotation of all vectors in three-space through an angle
+        \( \theta \) about the \( x \)-axis is a transformation of $\Re^3$.
+        Represent it with respect to the standard bases.
+        Arrange the rotation so that 
+        to someone whose feet are at the origin and
+        whose head is at \( (1,0,0) \), the movement appears clockwise.
+      \partsitem Repeat the prior item, only rotate about the \( y \)-axis 
+        instead.
+        (Put the person's head at $\vec{e}_2$.)
+      \partsitem Repeat, about the \( z \)-axis.
+      \partsitem Extend the prior item to \( \Re^4 \).
+        (\textit{Hint:} 
+        `rotate about the \( z \)-axis' can be restated as `rotate parallel
+        to the \( xy \)-plane'.)
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The picture is this.
+          \begin{center}  \small
+            \includegraphics{ch3.77}
+         \end{center}
+         The images of the vectors from the domain's basis 
+         \begin{equation*}
+           \colvec{1 \\ 0 \\ 0}\mapsto\colvec{1 \\ 0 \\ 0}
+           \qquad
+           \colvec{0 \\ 1 \\ 0}\mapsto\colvec{0 \\ \cos\theta \\ -\sin\theta}
+           \qquad
+           \colvec{0 \\ 0 \\ 1}\mapsto\colvec{0 \\ \sin\theta \\ \cos\theta}
+         \end{equation*}
+         are represented with respect to the codomain's basis
+         (again, $\stdbasis_3$) by themselves, 
+         so adjoining the representations to
+         make the matrix gives this.
+         \begin{equation*}
+            \rep{r_\theta}{\stdbasis_3,\stdbasis_3}=
+            \begin{pmatrix}
+              1  &0       &0                \\
+              0  &\cos\theta   &\sin\theta   \\
+              0  &-\sin\theta  &\cos\theta
+            \end{pmatrix}                  
+         \end{equation*}
+       \partsitem The picture is similar to the one in the prior answer. 
+         The images of the vectors from the domain's basis 
+         \begin{equation*}
+           \colvec{1 \\ 0 \\ 0}\mapsto\colvec{\cos\theta \\ 0 \\ \sin\theta}
+           \qquad
+           \colvec{0 \\ 1 \\ 0}\mapsto\colvec{0 \\ 1 \\ 0}
+           \qquad
+           \colvec{0 \\ 0 \\ 1}\mapsto\colvec{-\sin\theta \\ 0 \\ \cos\theta}
+         \end{equation*}
+         are represented with respect to the codomain's basis $\stdbasis_3$
+         by themselves, so this is the matrix.
+         \begin{equation*}
+            \begin{pmatrix}
+              \cos\theta  &0       &-\sin\theta   \\
+              0           &1       &0             \\
+              \sin\theta  &0       &\cos\theta
+            \end{pmatrix}                  
+         \end{equation*}
+       \partsitem To a person standing up, with the vertical $z$-axis,
+         a rotation of the $xy$-plane that is clockwise proceeds from
+         the positive $y$-axis to the positive $x$-axis.
+         That is, it rotates opposite to the direction in  
+         \nearbyexample{exam:RepsOfRigidPlaneMaps}.
+         The images of the vectors from the domain's basis 
+         \begin{equation*}
+           \colvec{1 \\ 0 \\ 0}\mapsto\colvec{\cos\theta \\ -\sin\theta \\ 0}
+           \qquad
+           \colvec{0 \\ 1 \\ 0}\mapsto\colvec{\sin\theta \\ \cos\theta \\ 0}
+           \qquad
+           \colvec{0 \\ 0 \\ 1}\mapsto\colvec{0 \\ 0 \\ 1}
+         \end{equation*}
+         are represented with respect to $\stdbasis_3$
+         by themselves, so the matrix is this.
+         \begin{equation*}
+            \begin{pmatrix}
+              \cos\theta    &\sin\theta  &0   \\
+              -\sin\theta   &\cos\theta  &0    \\
+              0             &0           &1
+            \end{pmatrix}                  
+         \end{equation*}
+        \partsitem 
+            $\begin{pmatrix}
+              \cos\theta  &\sin\theta &0 &0 \\
+              -\sin\theta  &\cos\theta  &0 &0 \\
+              0           &0           &1 &0 \\
+              0           &0           &0 &1
+            \end{pmatrix}$
+      \end{exparts}   
+    \end{answer}
+  \item (Schur's Triangularization Lemma)\index{Triangularization}%
+    \index{matrix!triangular}
+    \begin{exparts}
+      \partsitem Let \( U \) be a subspace of \( V \) and fix bases
+        \( B_U\subseteq B_V \).
+        What is the relationship between the representation of a vector
+        from \( U \) with
+        respect to \( B_U \) and the representation of that vector
+        (viewed as a member of \( V \)) with
+        respect to \( B_V \)?
+      \partsitem What about maps?
+      \partsitem Fix a basis 
+        \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
+        for \( V \) and observe that the spans
+        \begin{equation*}
+          \spanof{\set{\zero}}=\set{\zero}\subset\spanof{\set{\vec{\beta}_1}}
+                        \subset\spanof{\set{\vec{\beta}_1,\vec{\beta}_2}}
+               \subset \quad\cdots\quad 
+               \subset\spanof{B}=V
+        \end{equation*}
+        form a strictly increasing chain of subspaces.
+        Show that for any linear map \( \map{h}{V}{W} \) there is a chain
+        \( W_0=\set{\zero}\subseteq W_1\subseteq \dots \subseteq W_m =W \) of
+        subspaces of \( W \) such that 
+        \begin{equation*}
+          h(\spanof{\set{\vec{\beta}_1,\dots,\vec{\beta}_i}})\subset W_i
+        \end{equation*}
+        for each \( i \).
+      \partsitem Conclude that for every linear map 
+        \( \map{h}{V}{W} \) there are
+        bases \( B,D \) so the matrix representing \( h \) with respect to
+        \( B,D \) is upper-triangular
+        (that is, each entry \( h_{i,j} \) with \( i>j \) is zero).
+      \item Is an upper-triangular representation unique?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          Write \( B_U \) as 
+          \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_k} \) and
+          then $B_V$ as \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_k,
+                            \vec{\beta}_{k+1},\dots,\vec{\beta}_n} \).
+          If 
+          \begin{equation*}
+            \rep{\vec{v}}{B_U}=\colvec{c_1 \\ \vdots \\ c_k}
+            \qquad\text{so that\ }
+            \vec{v}=c_1\cdot\vec{\beta}_1+\cdots+c_k\cdot\vec{\beta}_k
+          \end{equation*}
+          then, 
+          \begin{equation*}
+            \rep{\vec{v}}{B_V}=\colvec{c_1 \\ \vdots\\ c_k \\ 0 \\ \vdots \\ 0}
+          \end{equation*}
+          because $\vec{v}=c_1\cdot\vec{\beta}_1+\dots+c_k\cdot\vec{\beta}_k
+                    +0\cdot\vec{\beta}_{k+1}+\dots+0\cdot\vec{\beta}_n$.
+        \partsitem
+          We must first decide what the question means.
+          Compare \( \map{h}{V}{W} \) with its restriction to the subspace
+          \( \map{\restrictionmap{h}{U}}{U}{W} \).
+          The rangespace of the restriction is a subspace of \( W \), so fix a
+          basis \( D_{h(U)} \) for this rangespace and extend it to a basis 
+          \( D_V \) for \( W \).
+          We want the relationship between these two.
+          \begin{equation*}
+            \rep{h}{B_V,D_V}
+            \quad\text{and}\quad
+            \rep{\restrictionmap{h}{U}}{B_U,D_{h(U)}}
+          \end{equation*}
+          The answer falls right out of the prior item:~if
+          \begin{equation*}
+            \rep{\restrictionmap{h}{U}}{B_U,D_{h(U)}}
+             =\begin{pmatrix}
+                h_{1,1}  &\ldots  &h_{1,k}  \\
+                \vdots   &        &\vdots   \\
+                h_{p,1}  &\ldots  &h_{p,k}
+              \end{pmatrix}
+          \end{equation*}
+          then the extension is represented in this way.
+          \begin{equation*}
+            \rep{h}{B_V,D_V}
+             =\begin{pmatrix}
+                h_{1,1}  &\ldots  &h_{1,k}  &h_{1,k+1}  &\ldots  &h_{1,n}  \\
+                \vdots   &        &         &           &        &\vdots   \\
+                h_{p,1}  &\ldots  &h_{p,k}  &h_{p,k+1}  &\ldots  &h_{p,n}  \\
+                0        &\ldots  &0        &h_{p+1,k+1}&\ldots  &h_{p+1,n}  \\
+                \vdots   &        &         &           &        &\vdots   \\
+                0        &\ldots  &0        &h_{m,k+1}  &\ldots  &h_{m,n}
+              \end{pmatrix}
+          \end{equation*}
+        \partsitem Take \( W_i \) to be the span of
+          \( \set{h(\vec{\beta}_1),\dots,h(\vec{\beta}_i)} \).
+        \partsitem Apply the answer from the second item to the third item.
+        \partsitem No.
+          For instance \( \map{\pi_x}{\Re^2}{\Re^2} \), projection onto
+          the \( x \)~axis, is represented by these two upper-triangular
+          matrices 
+          \begin{equation*}
+             \rep{\pi_x}{\stdbasis_2,\stdbasis_2}=
+             \begin{pmatrix}
+               1  &0  \\
+               0  &0
+             \end{pmatrix}
+             \quad\text{and}\quad
+             \rep{\pi_x}{C,\stdbasis_2}=
+             \begin{pmatrix}
+               0  &1  \\
+               0  &0
+             \end{pmatrix}
+          \end{equation*}
+          where \( C=\sequence{\vec{e}_2,\vec{e}_1} \).
+      \end{exparts}  
+    \end{answer}
+\index{homomorphism!matrix representing|)}
+\end{exercises}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsectionoptional{Any Matrix Represents a Linear Map}
+
+The prior subsection shows that
+the action of a linear map $h$ is described by a matrix $H$,
+with respect to appropriate bases, in this way.
+\begin{equation*}
+ \vec{v}=\colvec{v_1 \\ \vdots \\ v_n}_B
+  \;\overset{h}{\underset{H}{\longmapsto}}\;
+  \colvec{h_{1,1}v_1+\dots+h_{1,n}v_n \\ 
+                     \vdots                      \\
+                     h_{m,1}v_1+\dots+h_{m,n}v_n}_D
+  =h(\vec{v})
+\end{equation*}
+In this subsection, we will show the converse, that
+each matrix represents a linear map.
+
+Recall that, in the definition of the matrix representation of a linear map,
+the number of columns of the matrix is the dimension of the map's
+domain and the number of rows of the matrix is the dimension of the 
+map's codomain.
+Thus, for instance,
+a \( \nbym{2}{3} \) matrix cannot represent a map from \( \Re^5 \) to
+\( \Re^4 \).
+The next result says that, beyond this restriction on the dimensions, 
+there are no other limitations:~the
+\( \nbym{2}{3} \) matrix represents a map from any
+three-dimensional space to any two-dimensional space. 
+
+\begin{theorem}
+\label{th:MatIsLinMap}\index{homomorphism!matrix representing}
+Any matrix represents a homomorphism between vector spaces of
+appropriate dimensions, with respect to any pair of bases.
+\end{theorem}
+
+\begin{proof}
+For the matrix
+\begin{equation*}
+  H=\generalmatrix{h}{n}{m}
+\end{equation*}
+fix any \( n \)-dimensional domain space $V$ and  any
+\( m \)-dimensional codomain space $W$.
+Also fix bases
+\( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and
+\( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \) for those spaces.
+Define a function \( \map{h}{V}{W} \) by:~where $\vec{v}$ in the domain
+is represented as 
+\begin{equation*}
+  \rep{\vec{v}}{B}
+    =\colvec{v_1 \\ \vdots \\ v_n}_B
+\end{equation*}
+then its image \( h(\vec{v}) \) is the member the codomain represented by
+\begin{equation*}
+  \rep{\,h(\vec{v})\,}{D}
+    =\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n \\ \vdots \\ 
+                   h_{m,1}v_1+\dots+h_{m,n}v_n}_D
+\end{equation*}
+that is,
+$h(\vec{v})=h(v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n)$ is defined to be 
+$(h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
+  +\dots+
+  (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
+(This is well-defined by the uniqueness of the representation  
+\( \rep{\vec{v}}{B} \).)
+
+Observe that \( h \) has simply been defined to make it the map that is
+represented with respect to \( B,D \) by the matrix \( H \).
+So to finish, we need only check that \( h \) is linear.
+If $\vec{v}, \vec{u}\in V$ are such that
+\begin{equation*}
+  \rep{\vec{v}}{B}=\colvec{v_1 \\ \vdots \\ v_n}
+    \quad\text{and}\quad
+  \rep{\vec{u}}{B}=\colvec{u_1 \\ \vdots \\ u_n}
+\end{equation*}
+and \( c,d\in\Re \) then the calculation
+\begin{align*}
+  h(c\vec{v}+d\vec{u})
+  &=\bigl(h_{1,1}(cv_1+du_1)+\dots+
+          h_{1,n}(cv_n+du_n)\bigr)\cdot\vec{\delta}_1+  \\
+  & \hbox{}\quad\cdots+\bigl(h_{m,1}(cv_1+du_1)+\dots
+         +h_{m,n}(cv_n+du_n)\bigr)\cdot\vec{\delta}_m  \\
+  &=c\cdot h(\vec{v})+d\cdot h(\vec{u})
+\end{align*}
+provides this verification.
+\end{proof}
+
+\begin{example} \label{ex:CngBasesChgMap}
+Which map the matrix represents depends on which bases are used.
+If
+\begin{equation*}
+  H=
+  \begin{pmatrix}
+    1  &0  \\
+    0  &0
+  \end{pmatrix},
+  \quad
+  B_1=D_1=\sequence{\colvec{1 \\ 0},\colvec{0 \\ 1} },
+  \quad\text{and}\quad
+  B_2=D_2=\sequence{\colvec{0 \\ 1},\colvec{1 \\ 0} },
+\end{equation*}
+then \( \map{h_1}{\Re^2}{\Re^2} \) represented by \( H \)
+with respect to \( B_1,D_1 \) maps
+\begin{equation*}
+  \colvec{c_1 \\ c_2}
+  =\colvec{c_1 \\ c_2}_{B_1}
+  \quad
+  \mapsto
+  \quad
+  \colvec{c_1 \\ 0}_{D_1}
+  =
+  \colvec{c_1 \\ 0}
+\end{equation*}
+while \( \map{h_2}{\Re^2}{\Re^2} \) represented by \( H \)
+with respect to \( B_2,D_2 \) is this map.
+\begin{equation*}
+  \colvec{c_1 \\ c_2}
+  =\colvec{c_2 \\ c_1}_{B_2}
+  \quad
+  \mapsto
+  \quad
+  \colvec{c_2 \\ 0}_{D_2}
+  =
+  \colvec{0 \\ c_2}
+\end{equation*}
+These two are different.
+The first is projection onto the \( x \)~axis, while the second 
+is projection onto the $y$~axis.
+\end{example}
+
+So not only is any linear map described by a
+matrix but any matrix describes a linear map.
+This means that we can, when convenient, 
+handle linear maps entirely as matrices,
+simply doing the computations, without
+have to worry that a matrix of interest does not represent 
+a linear map on some pair of spaces of interest.
+(In practice, when we are working with a matrix but no spaces or bases have
+been specified, we will often take the
+domain and codomain to be $\Re^n$ and $\Re^m$ and use the standard
+bases.
+In this case, because the
+representation is transparent\Dash the representation with respect to the
+standard basis of $\vec{v}$ is $\vec{v}$\Dash the
+column space of the matrix equals the range of the map.
+Consequently,
+the column space of \( H \) is often denoted by \( \rangespace{H} \).) 
+
+With the theorem, we have characterized linear maps as
+those maps that act in this matrix way.
+Each linear map is described by a matrix and each matrix describes a 
+linear map.
+We finish this section by illustrating how a matrix can be used to tell things
+about its maps.
+
+\begin{theorem} \label{th:RankMatEqRankMap}
+\index{rank}\index{homomorphism!rank}\index{matrix!rank}
+The rank of a matrix equals the rank of any map that it represents.
+\end{theorem}
+
+\begin{proof}
+Suppose that the matrix \( H \) is \( \nbym{m}{n} \). 
+Fix domain and codomain spaces $V$ and $W$ of dimension $n$ and~$m$, with
+bases \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and \( D \).
+Then \( H \) represents some linear map $h$ between those spaces with respect 
+to these bases whose rangespace
+\begin{align*}
+  \set{h(\vec{v})\suchthat \vec{v}\in V}
+  &=\set{h(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)  
+           \suchthat c_1,\dots,c_n\in\Re}                    \\
+  &=\set{c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)
+            \suchthat c_1,\dots,c_n\in\Re}
+\end{align*}
+is the span $\spanof{\set{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)}}$.
+The rank of $h$ is the dimension of this rangespace.
+
+The rank of the matrix is its column rank (or its row rank; the two are equal).
+This is the dimension of the column space of the matrix, which is the span of
+the set of column vectors 
+$\spanof{\set{\rep{h(\vec{\beta}_1)}{D},\dots,\rep{h(\vec{\beta}_n)}{D}}}$.
+
+To see that the two spans have the same dimension, recall that a
+representation with respect to a basis gives an isomorphism 
+$\map{\mbox{Rep}_D}{W}{\Re^m}$.
+Under this isomorphism, there is a linear relationship among members of the
+rangespace if and only if the same relationship holds in the
+column space, e.g,
+$\zero=c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)$ if and only if
+$\zero=c_1\rep{h(\vec{\beta}_1)}{D}+\dots+c_n\rep{h(\vec{\beta}_n)}{D}$.
+Hence, a subset of the rangespace is linearly independent if and only if the
+corresponding subset of the column space is linearly independent.
+This means that the size of the largest linearly independent subset of the
+rangespace equals the size of the largest linearly independent subset of the
+column space, and so the two spaces have the same dimension.
+\end{proof}
+
+\begin{example}
+Any map represented by
+\begin{equation*}
+    \begin{pmatrix}
+      1  &2  &2  \\
+      1  &2  &1  \\
+      0  &0  &3  \\
+      0  &0  &2
+    \end{pmatrix}
+\end{equation*}
+must, by definition, be from a three-dimensional domain
+to a four-dimensional codomain.
+In addition, because the rank of this matrix is two 
+(we can spot this by eye or get it with Gauss' method),
+any map represented by this matrix has a two-dimensional rangespace.
+\end{example}
+
+\begin{corollary} \label{cor:MatDescsMap}
+Let $h$ be a linear map represented by a matrix $H$.
+Then $h$ is onto if and only if the rank of $H$ equals the number 
+of its rows, 
+and $h$ is one-to-one if and only if the rank of $H$ equals the number of
+its columns.
+\end{corollary}
+
+\begin{proof}
+For the first half, the dimension of the rangespace of $h$ is the rank of $h$,
+which equals the rank of $H$ by the theorem.
+Since the dimension of the codomain of $h$ is the number of rows in $H$,
+if the rank of $H$ equals the number of rows, then the dimension of the
+rangespace equals the dimension of the codomain.
+But a subspace with the same dimension as its superspace must equal
+that superspace
+(a basis for the rangespace is a linearly independent subset of the codomain,
+whose size is equal to the dimension of the codomain, and so this set is 
+a basis for the codomain).
+
+For the second half, 
+a linear map is one-to-one if and only if it is an isomorphism
+between its domain and its range, that is, if and only if its domain has the
+same dimension as its range.
+But the number of columns in $h$ is the dimension of $h$'s domain, and
+by the theorem the rank of $H$ equals the dimension of 
+$h$'s range.
+\end{proof}
+
+The above results end any confusion caused by our use of the
+word `rank' to mean apparently different things when applied to matrices and
+when applied to maps.
+We can also justify the dual use of `nonsingular'.
+We've defined a matrix to be nonsingular if it is square and is
+the matrix of coefficients of a linear system with a unique solution,
+and we've defined a linear map to be nonsingular if it is one-to-one.
+
+\begin{corollary} \label{cor:NonsingMatIffNonsingMap}
+\index{homomorphism!nonsingular}\index{matrix!nonsingular}
+\index{nonsingular}
+A square matrix represents nonsingular maps if and only if it is a nonsingular
+matrix.
+Thus, a matrix represents an isomorphism if and only if it is square and
+nonsingular. 
+\end{corollary}
+
+\begin{proof}
+Immediate from the prior result.
+\end{proof}
+
+\begin{example}
+Any map from \( \Re^2 \) to \( \polyspace_1 \) represented 
+with respect to any pair of bases by
+\begin{equation*}
+  \begin{pmatrix}
+     1  &2  \\
+     0  &3  
+  \end{pmatrix}
+\end{equation*}
+is nonsingular because this matrix has rank two.
+\end{example}
+
+\begin{example} \label{ex:NonSMatHasNonSMap}
+Any map \( \map{g}{V}{W} \) represented by
+\begin{equation*}
+  \begin{pmatrix}
+    1  &2  \\
+    3  &6
+  \end{pmatrix}
+\end{equation*}
+is not nonsingular because this matrix is not nonsingular.
+\end{example}
+
+We've now seen that the relationship between maps and 
+matrices goes both ways:~for a particular pair of bases, 
+any linear map is represented by a
+matrix and any matrix describes a linear map.
+That is, by fixing spaces and bases we get
+a correspondence between maps and matrices.
+In the rest of this chapter we will explore this correspondence.
+For instance, we've defined for linear maps the operations of addition 
+and scalar multiplication and we shall see what the corresponding matrix 
+operations are.
+We shall also see the matrix operation that represent the map operation
+of composition.
+And, we shall see how to find the matrix that represents a map's inverse.
+
+
+\begin{exercises}
+  \recommended \item  
+    Decide if the vector is in the column space of the matrix.
+    \begin{exparts*}
+      \partsitem \( \begin{pmatrix}
+                   2  &1  \\
+                   2  &5
+                 \end{pmatrix} \),~\( \colvec{1 \\ -3}  \)
+      \partsitem \( \begin{pmatrix}
+                   4  &-8 \\
+                   2  &-4
+                 \end{pmatrix} \),~\( \colvec{0 \\ 1}  \)
+      \partsitem \( \begin{pmatrix}
+                   1  &-1  &1  \\
+                   1  &1   &-1 \\
+                  -1  &-1  &1
+                \end{pmatrix} \),~\( \colvec{2 \\ 0 \\ 0}  \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes;
+          we are asking if there are scalars \( c_1 \) and \( c_2 \) such that
+          \begin{equation*}
+            c_1\colvec{2 \\ 2}+c_2\colvec{1 \\ 5}=\colvec{1 \\ -3}
+          \end{equation*}
+          which gives rise to a linear system
+          \begin{equation*}
+            \begin{linsys}{2}
+              2c_1  &+  &c_2  &=  &1  \\
+              2c_1  &+  &5c_2 &=  &-3
+            \end{linsys}
+            \;\grstep{-\rho_1+\rho_2}\;
+            \begin{linsys}{2}
+              2c_1  &+  &c_2  &=  &1  \\
+                    &   &4c_2 &=  &-4
+            \end{linsys}
+          \end{equation*}
+          and Gauss' method produces \( c_2=-1 \) and \( c_1=1 \). 
+          That is, there is indeed such a pair of scalars and so the vector
+          is indeed in the column space of the matrix.
+        \partsitem No;
+          we are asking if there are scalars $c_1$ and $c_2$
+          such that 
+          \begin{equation*}
+            c_1\colvec{4 \\ 2}+c_2\colvec{-8 \\ -4}=\colvec{0 \\ 1}
+          \end{equation*}
+          and one way to proceed is to consider the resulting linear system
+          \begin{equation*}
+            \begin{linsys}{2}
+              4c_1  &-  &8c_2  &=  &0  \\
+              2c_1  &-  &4c_2  &=  &1
+            \end{linsys}
+          \end{equation*}
+          that is easily seen to have no solution.
+          Another way to proceed is to note
+          that any linear combination of the columns on the left
+          has a second component half as big as its first component, 
+          but the  vector on the right does not meet that criterion.
+        \partsitem Yes; we can simply observe that the vector
+          is the first column minus the second.
+          Or, failing that, setting up the relationship among the columns 
+          \begin{equation*}
+            c_1\colvec{1 \\ 1 \\ -1}
+             +c_2\colvec{-1 \\ 1 \\ -1}
+             +c_3\colvec{1 \\ -1 \\ 1}
+             =\colvec{2 \\ 0 \\ 0}
+          \end{equation*}
+          and considering the resulting linear system
+          \begin{equation*}
+            \begin{linsys}{3}
+              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
+              c_1  &+  &c_2  &-  &c_3  &=  &0  \\
+             -c_1  &-  &c_2  &+  &c_3  &=  &0    
+            \end{linsys}
+            \;\grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+            \begin{linsys}{3}
+              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
+                   &   &2c_2 &-  &2c_3 &=  &-2  \\
+                   &   &-2c_2&+  &2c_3 &=  &2    
+            \end{linsys}
+            \;\grstep{\rho_2+\rho_3}\;
+            \begin{linsys}{3}
+              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
+                   &   &2c_2 &-  &2c_3 &=  &-2  \\
+                   &   &     &   &0    &=  &0    
+            \end{linsys}
+          \end{equation*}
+          gives the additional information (beyond that there is at least one
+          solution) that there are infinitely many solutions.
+          Parametizing gives $c_2=-1+c_3$ and $c_1=1$, and so taking $c_3$ to 
+          be zero gives a particular solution of $c_1=1$, $c_2=-1$, and
+          $c_3=0$ (which is, of course, the observation made at the start).
+      \end{exparts}  
+    \end{answer}
+ \recommended \item 
+   Decide if each vector lies in the range of the map from \( \Re^3 \)
+   to \( \Re^2 \) represented with respect to the standard bases by the matrix.
+   \begin{exparts*}
+     \partsitem \( \begin{pmatrix}
+                1  &1  &3  \\
+                0  &1  &4
+              \end{pmatrix}  \),~\( \colvec{1 \\ 3} \)
+     \partsitem \( \begin{pmatrix}
+                2  &0  &3  \\
+                4  &0  &6
+              \end{pmatrix}  \),~\( \colvec{1 \\ 1} \)
+   \end{exparts*}
+   \begin{answer} 
+     As described in the subsection, with respect to the standard bases,
+     representations are transparent,
+     and so, for instance, the first matrix describes this map.
+     \begin{equation*}
+       \colvec{1 \\ 0 \\ 0}=\colvec{1 \\ 0 \\ 0}_{\stdbasis_3}
+          \!\mapsto\colvec{1 \\ 0}_{\stdbasis_2}=\colvec{1 \\ 0}
+       \qquad
+       %\colvec{0 \\ 1 \\ 0}=\colvec{0 \\ 1 \\ 0}_{\stdbasis_3}
+       %   \!\mapsto\colvec{1 \\ 1}_{\stdbasis_2}=\colvec{1 \\ 1}
+       \colvec{0 \\ 1 \\ 0}
+          \!\mapsto\colvec{1 \\ 1}
+       \qquad
+       %\colvec{0 \\ 0 \\ 1}=\colvec{0 \\ 0 \\ 1}_{\stdbasis_3}
+       %   \!\mapsto\colvec{3 \\ 4}_{\stdbasis_2}=\colvec{3 \\ 4}
+       \colvec{0 \\ 0 \\ 1}
+          \!\mapsto\colvec{3 \\ 4}
+     \end{equation*}
+     So, for this first one, we are asking whether thare are scalars such that
+     \begin{equation*}
+       c_1\colvec{1 \\ 0}+c_2\colvec{1 \\ 1}+c_3\colvec{3 \\ 4}=\colvec{1 \\ 3}
+     \end{equation*}
+     that is, whether the vector is in the column space of the matrix.
+     \begin{exparts}
+       \partsitem Yes.
+         We can get this conclusion by setting up the resulting linear system
+         and applying Gauss' method, as usual.
+         Another way to get it is to note by inspection of the equation of
+         columns that taking $c_3=3/4$, and $c_1=-5/4$, and $c_2=0$ will do.  
+         Still a third way to get this conclusion is to note that the rank
+         of the matrix is two, which equals the dimension of the
+         codomain, and so the map is onto\Dash the range is all of $\Re^2$ and
+         in particular includes the given vector.
+       \partsitem No; note that all of the columns in the matrix have a second
+         component that is twice the first, while the vector does not.
+         Alternatively, the column space of the matrix is 
+         \begin{equation*}
+           \set{c_1\colvec{2 \\ 4}
+                +c_2\colvec{0 \\ 0}
+                +c_3\colvec{3 \\ 6} \suchthat c_1,c_2,c_3\in\Re}
+           =\set{c\colvec{1 \\ 2}\suchthat c\in\Re}
+         \end{equation*}
+         (which is the fact already noted, but was arrived at by calculation 
+         rather than inspiration), and the given vector is not in this set.
+     \end{exparts}  
+    \end{answer}
+  \recommended \item  
+    Consider this matrix, representing a transformation of $\Re^2$, 
+    and these bases for that space.
+    \begin{equation*}
+      \frac{1}{2}\cdot
+      \begin{pmatrix}
+        1  &1  \\
+        -1 &1
+      \end{pmatrix}
+      \qquad
+      B=\sequence{\colvec{0 \\ 1},\colvec{1 \\ 0}}
+      \quad 
+      D=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+    \end{equation*}
+    \begin{exparts}
+      \partsitem To what vector in the codomain 
+        is the first member of $B$ mapped? 
+      \partsitem The second member?
+      \partsitem Where is a general vector from the domain (a vector with 
+        components $x$ and $y$) mapped? 
+        That is, what transformation of \( \Re^2 \) is represented with 
+        respect to \( B,D \) by this matrix?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The first member of the basis
+          \begin{equation*}
+            \colvec{0 \\ 1}=\colvec{1 \\ 0}_B
+          \end{equation*}
+          is mapped to 
+          \begin{equation*}
+            \colvec{1/2 \\ -1/2}_D
+          \end{equation*}
+          which is this member of the codomain.
+          \begin{equation*}
+            \frac{1}{2}\cdot\colvec{1 \\ 1}
+              -\frac{1}{2}\cdot\colvec{1 \\ -1}
+              =\colvec{0 \\ 1}
+          \end{equation*}
+        \partsitem The second member of the basis is mapped
+          \begin{equation*}
+            \colvec{1 \\ 0}=\colvec{0 \\ 1}_B
+            \mapsto
+            \colvec{(1/2 \\ 1/2}_D 
+          \end{equation*}
+          to this member of the codomain.
+          \begin{equation*}
+            \frac{1}{2}\cdot\colvec{1 \\ 1}
+              +\frac{1}{2}\cdot\colvec{1 \\ -1}
+              =\colvec{1 \\ 0}
+          \end{equation*}
+        \partsitem Because the map that the matrix represents is the identity
+          map on the basis, it must be the identity on all members of the 
+          domain.
+          We can come to the same conclusion in another way by considering
+          \begin{equation*}
+            \colvec{x \\ y}=\colvec{y \\ x}_B
+          \end{equation*}
+          which is mapped to
+          \begin{equation*}
+            \colvec{(x+y)/2 \\ (x-y)/2}_D
+          \end{equation*}
+          which represents this member of $\Re^2$. 
+          \begin{equation*}
+            \frac{x+y}{2}\cdot\colvec{1 \\ 1}
+              +\frac{x-y}{2}\cdot\colvec{1 \\ -1}
+            =\colvec{x \\ y}
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
+  \item 
+    What transformation of
+    \( F=\set{a\cos\theta+b\sin\theta\suchthat a,b\in\Re} \)
+    is represented with respect to
+    \( B=\sequence{\cos\theta-\sin\theta,\sin\theta} \) and
+    \( D=\sequence{\cos\theta+\sin\theta,\cos\theta} \) by this matrix?
+    \begin{equation*}
+      \begin{pmatrix}
+          0  &0  \\
+          1  &0
+      \end{pmatrix}
+    \end{equation*}
+    \begin{answer}
+      A general member of the domain, represented with respect to the
+      domain's basis as
+      \begin{equation*}
+        a\cos\theta+b\sin\theta=\colvec{a \\ a+b}_B
+      \end{equation*}
+      is mapped to 
+      \begin{equation*}
+        \colvec{0 \\ a}_D
+          \quad\text{representing}\quad
+        0\cdot(\cos\theta+\sin\theta)+a\cdot(\cos\theta)
+      \end{equation*}
+      and so the linear map represented by the matrix with respect to these
+      bases 
+      \begin{equation*}
+        a\cos\theta+b\sin\theta  
+            \mapsto
+        a\cos\theta
+      \end{equation*}
+      is projection onto the first component.  
+    \end{answer}
+  \recommended \item  
+     Decide if $1+2x$ is in the range of the map from $\Re^3$ to 
+     $\polyspace_2$ represented with respect to $\stdbasis_3$ and 
+     $\sequence{1,1+x^2,x}$ by this matrix.
+     \begin{equation*}
+       \begin{pmatrix}
+         1  &3  &0  \\
+         0  &1  &0  \\
+         1  &0  &1
+       \end{pmatrix}
+     \end{equation*}
+     \begin{answer}
+       Denote the given basis of
+       $\polyspace_2$
+       by $B$.
+       Then application of the linear map is represented by matrix-vector 
+       multiplication.
+       Thus, the first vector in $\stdbasis_3$ is mapped to the element
+       of $\polyspace_2$ represented with respect to $B$ by
+       \begin{equation*}
+       \begin{pmatrix}
+         1  &3  &0  \\
+         0  &1  &0  \\
+         1  &0  &1
+       \end{pmatrix}
+       \colvec{1 \\ 0 \\ 0}
+       =
+       \colvec{1 \\ 0 \\ 1}  
+       \end{equation*}
+       and that element is $1+x$.
+       The other two images of basis vectors are calculated similarly.
+       \begin{equation*}
+         \begin{pmatrix}
+           1  &3  &0  \\
+           0  &1  &0  \\
+           1  &0  &1
+         \end{pmatrix}
+         \colvec{0 \\ 1 \\ 0}
+         =
+         \colvec{3 \\ 1 \\ 0}=\rep{4+x^2}{B}
+         \quad
+         \begin{pmatrix}
+           1  &3  &0  \\
+           0  &1  &0  \\
+           1  &0  &1
+         \end{pmatrix}
+         \colvec{0 \\ 0 \\ 1}
+         =
+         \colvec{0 \\ 0 \\ 1}=\rep{x}{B}
+       \end{equation*}
+       So the range of $h$ is the span of three polynomials 
+       $1+x$, $4+x^2$, and $x$. 
+       We can thus decide if $1+2x$ is in the range of the map by 
+       looking for scalars $c_1$, $c_2$, and $c_3$ such that
+       \begin{equation*}
+         c_1\cdot(1)+c_2\cdot(1+x^2)+c_3\cdot(x)=1+2x
+       \end{equation*}
+       and obviously $c_1=1$, $c_2=0$, and $c_3=1$ suffice.
+       Thus it is in the range, and in fact it is the image of
+       this vector. 
+       \begin{equation*}
+         1\cdot\colvec{1 \\ 0 \\ 0}+0\cdot\colvec{0 \\ 1 \\ 0}
+             +1\cdot\colvec{0 \\ 0 \\ 1}
+       \end{equation*}
+     \end{answer}
+  \item 
+    \nearbyexample{ex:NonSMatHasNonSMap} gives a matrix that is
+    nonsingular, and is therefore associated with maps that are nonsingular.
+    \begin{exparts}
+      \partsitem Find the set of column vectors representing the members of
+        the nullspace of any map represented by this matrix.
+      \partsitem Find the nullity of any such map.
+      \partsitem Find the set of column vectors representing the members of
+        the rangespace of any map represented by this matrix.
+      \partsitem Find the rank of any such map.
+      \partsitem Check that rank plus nullity equals the dimension of the
+        domain.
+    \end{exparts}
+    \begin{answer}
+      Let the matrix be $G$, and suppose that it rperesents $\map{g}{V}{W}$ 
+      with respect to bases $B$ and $D$.
+      Because $G$ has two columns, $V$ is two-dimensional.
+      Because $G$ has two rows, $W$ is two-dimensional.
+      The action of $g$ on a general member of the domain is this.
+      \begin{equation*}
+        \colvec{x \\ y}_B 
+         \;\mapsto\; 
+        \colvec{x+2y \\ 3x+6y}_D
+      \end{equation*}
+      \begin{exparts}
+        \partsitem The only representation of the zero vector in the codomain
+           is 
+           \begin{equation*}
+             \rep{\zero}{D}=\colvec{0 \\ 0}_D
+           \end{equation*}
+           and so the set of representations of members of the nullspace is
+           this.
+           \begin{equation*}
+             \set{\colvec{x \\ y}_B\suchthat \text{$x+2y=0$ and $3x+6y=0$}}
+             =\set{y\cdot\colvec{-1/2 \\ 1}_D\suchthat y\in\Re}
+           \end{equation*}
+         \partsitem The representation map $\map{\mbox{Rep}_D}{W}{\Re^2}$
+           and its inverse
+           are isomorphisms, and so preserve the dimension of subspaces.
+           The subspace of $\Re^2$ that is in the prior item is
+           one-dimensional.
+           Therefore, the image of that subspace under the inverse of the
+           representation map\Dash the nullspace of $G$, 
+           is also one-dimensional.
+         \partsitem The set of representations of members of the rangespace is
+           this.
+           \begin{equation*}
+             \set{\colvec{x+2y \\ 3x+6y}_D\suchthat x,y\in\Re}
+             =\set{k\cdot\colvec{1 \\ 3}_D\suchthat k\in\Re}
+           \end{equation*}
+         \partsitem Of course, \nearbytheorem{th:RankMatEqRankMap} gives that
+           the rank of the map equals the rank of the matrix, which is one.
+           Alternatively, the same argument that was used above for the 
+           nullspace gives here that the dimension of the rangespace is one.
+         \partsitem One plus one equals two. 
+      \end{exparts}
+    \end{answer}
+  \recommended \item  
+    Because
+    the rank of a matrix equals the rank of any map it represents, if
+    one matrix represents two different maps 
+    \( H=\rep{h}{B,D}=\rep{\hat{h}}{\hat{B},\hat{D}} \) 
+    (where \( \map{h,\hat{h}}{V}{W} \))
+    then the dimension of the rangespace of
+    \( h \) equals the dimension of the rangespace of \( \hat{h} \).
+    Must these equal-dimensioned rangespaces actually be the same?
+    \begin{answer}
+      No, the rangespaces may differ.
+      \nearbyexample{ex:CngBasesChgMap} shows this.
+    \end{answer}
+  \recommended \item 
+    Let \( V \) be an \( n \)-dimensional space with bases \( B \) and
+    \( D \).
+    Consider a map that sends, for \( \vec{v}\in V\), 
+    the column vector representing \( \vec{v} \) with
+    respect to \( B \) to the column vector representing \( \vec{v} \) with
+    respect to \( D \).
+    Show that map is a linear transformation of \( \Re^n \).
+    \begin{answer}
+      Recall that the represention map
+      \begin{equation*}
+        V\mapsunder{\text{Rep}_{B}}\Re^n
+      \end{equation*}
+      is an isomorphism.
+      Thus, its inverse map $\map{\mbox{Rep}_B^{-1}}{\Re^n}{V}$
+      is also an isomorphism.
+      The desired transformation of $\Re^n$ is then this composition.
+      \begin{equation*}
+        \Re^n\mapsunder{\text{Rep}_{B}^{-1}}
+        V\mapsunder{\text{Rep}_{D}}\Re^n
+      \end{equation*}
+      Because a composition of isomorphisms is also an isomorphism, 
+      this map $\composed{\mbox{Rep}_{D}}{\mbox{Rep}_{B}^{-1}}$
+      is an isomorphism.
+    \end{answer}
+  \item 
+    \nearbyexample{ex:CngBasesChgMap} shows that changing the pair of
+    bases can change the map that a matrix
+    represents, even though the domain and codomain remain the same.
+    Could the map ever not change?
+    Is there a matrix \( H \), vector spaces \( V \) and \( W \), and
+    associated pairs of bases \( B_1,D_1 \) and \( B_2,D_2 \) (with
+    \( B_1\neq B_2 \) or \( D_1\neq D_2 \) or both) 
+    such that the map represented
+    by \( H \) with respect to \( B_1,D_1 \) equals the map represented
+    by \( H \) with respect to \( B_2,D_2 \)?
+    \begin{answer}
+      Yes.
+      Consider
+      \begin{equation*}
+        H=\begin{pmatrix}
+            1  &0  \\
+            0  &1
+          \end{pmatrix}
+      \end{equation*}
+      representing a map from \( \Re^2 \) to \( \Re^2 \).
+      With respect to the standard bases 
+      \( B_1=\stdbasis_2, D_1=\stdbasis_2 \) this matrix
+      represents the identity map.
+      With respect to
+      \begin{equation*}
+        B_2=D_2=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+      \end{equation*}
+      this matrix again represents the identity.
+      In fact, as long as the starting and ending bases 
+      are equal\Dash as long as
+      \( B_i=D_i \)\Dash then the map represented by $H$ is the identity.
+    \end{answer}
+  \recommended \item 
+    A square matrix is a 
+    \definend{diagonal}\index{matrix!diagonal}\index{diagonal matrix} %
+    matrix if it is all zeroes
+    except possibly for the entries on its upper-left to lower-right
+    diagonal\Dash its \( 1,1 \) entry, its \( 2,2 \) entry, etc.
+    Show that a linear map is an isomorphism if there are bases such that,
+    with respect to those bases, the map is represented by a diagonal matrix 
+    with no zeroes on the diagonal.
+    \begin{answer}
+      This is immediate from \nearbycorollary{cor:NonsingMatIffNonsingMap}.
+    \end{answer}
+  \item 
+    Describe geometrically the action on \( \Re^2 \) of
+    the map represented with respect to the standard 
+    bases $\stdbasis_2,\stdbasis_2$ by this matrix.
+    \begin{equation*}
+      \begin{pmatrix}
+        3  &0  \\
+        0  &2
+      \end{pmatrix}
+    \end{equation*}
+    Do the same for these.
+    \begin{equation*}
+      \begin{pmatrix}
+        1  &0  \\
+        0  &0
+      \end{pmatrix}
+      \quad
+      \begin{pmatrix}
+        0  &1  \\
+        1  &0
+      \end{pmatrix}
+      \quad
+      \begin{pmatrix}
+        1  &3  \\
+        0  &1
+      \end{pmatrix}
+    \end{equation*}
+    \begin{answer}
+      The first map 
+      \begin{equation*}
+        \colvec{x \\ y}=\colvec{x \\ y}_{\stdbasis_2}
+        \mapsto
+        \colvec{3x \\ 2y}_{\stdbasis_2}=\colvec{3x \\ 2y}
+      \end{equation*}
+      stretches vectors by a factor of three in the
+      \( x \)~direction and by a factor of two in the \( y \)~direction.
+      The second map
+      \begin{equation*}
+        \colvec{x \\ y}=\colvec{x \\ y}_{\stdbasis_2}
+        \mapsto
+        \colvec{x \\ 0}_{\stdbasis_2}=\colvec{x \\ 0}
+      \end{equation*}
+      projects vectors onto the \( x \)~axis.
+      The third 
+      \begin{equation*}
+        \colvec{x \\ y}=\colvec{x \\ y}_{\stdbasis_2}
+        \mapsto
+        \colvec{y \\ x}_{\stdbasis_2}=\colvec{y \\ x}
+      \end{equation*}
+      interchanges first and second components
+      (that is, it is a reflection about the line \( y=x \)).
+      The last 
+      \begin{equation*}
+        \colvec{x \\ y}=\colvec{x \\ y}_{\stdbasis_2}
+        \mapsto
+        \colvec{x+3y \\ y}_{\stdbasis_2}=\colvec{x+3y \\ y}
+      \end{equation*}
+      stretches vectors parallel to the \( y \)~axis, by an amount
+      equal to three times their distance from that axis 
+      (this is a \definend{skew}.)  
+     \end{answer}
+  \item 
+     The fact that for any linear map the rank plus the nullity
+     equals the dimension of the domain shows that a necessary
+     condition for the existence of a homomorphism between two spaces, onto
+     the second space, is that there be no gain in dimension.
+     That is, where $\map{h}{V}{W}$ is onto, the dimension of $W$ must
+     be less than or equal to the dimension of $V$.
+     \begin{exparts}
+       \partsitem Show that this (strong) converse holds: 
+          no gain in dimension implies that 
+          there is a homomorphism and, further, 
+          any matrix with the correct size and correct rank 
+          represents such a map.
+       \partsitem Are there bases for $\Re^3$ such that
+          this matrix
+          \begin{equation*}
+            H=\begin{pmatrix}
+                1  &0  &0 \\
+                2  &0  &0 \\
+                0  &1  &0 
+              \end{pmatrix}
+          \end{equation*}
+          represents a map from $\Re^3$ to $\Re^3$ whose range is
+          the $xy$~plane subspace of $\Re^3$?
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem  This is immediate from
+           \nearbytheorem{th:RankMatEqRankMap}.
+         \partsitem Yes.
+            This is immediate from the prior item.
+
+            To give a specific example, we can 
+            start with $\stdbasis_3$ as the basis for the domain, and then
+            we require a basis $D$ for the codomain $\Re^3$.
+            The matrix $H$ gives the action of the map as this
+            \begin{equation*}
+              \colvec{1 \\ 0 \\ 0}=\colvec{1 \\ 0 \\ 0}_{\stdbasis_3}
+                 \mapsto\colvec{1 \\ 2 \\ 0}_D
+              \quad       
+              \colvec{0 \\ 1 \\ 0}=\colvec{0 \\ 1 \\ 0}_{\stdbasis_3}
+                 \mapsto\colvec{0 \\ 0 \\ 1}_D
+              \quad       
+              \colvec{0 \\ 0 \\ 1}=\colvec{0 \\ 0 \\ 1}_{\stdbasis_3}
+                 \mapsto\colvec{0 \\ 0 \\ 0}_D
+            \end{equation*}
+            and there is no harm in finding a basis $D$ so that
+            \begin{equation*}
+              \rep{\colvec{1 \\ 0 \\ 0}}{D}=\colvec{1 \\ 2 \\ 0}_D
+              \quad\mbox{and}\quad       
+              \rep{\colvec{0 \\ 1 \\ 0}}{D}=\colvec{0 \\ 0 \\ 1}_D
+            \end{equation*}
+            that is, so that the map represented by $H$ with respect to
+            $\stdbasis_3,D$ is projection down onto the $xy$~plane.
+            The second condition gives that the third member of $D$
+            is $\vec{e}_2$.
+            The first condition gives that the first member of $D$ plus twice
+            the second equals $\vec{e}_1$, and so this basis will do.
+            \begin{equation*}
+              D=\sequence{\colvec{0 \\ -1 \\ 0},
+                          \colvec{1/2 \\ 1/2 \\ 0},
+                          \colvec{0 \\ 1 \\ 0}}
+            \end{equation*}
+       \end{exparts} 
+     \end{answer}
+  \item 
+    Let \( V \) be an \( n \)-dimensional space and suppose
+    that \( \vec{x}\in\Re^n \).
+    Fix a basis \( B \) for \( V \) and consider the map
+    \( \map{h_{\vec{x}}}{V}{\Re} \) given 
+    $\vec{v}\mapsto\vec{x}\dotprod\rep{\vec{v}}{B}$ by the dot product.
+    \begin{exparts}
+      \partsitem Show that this map is linear.
+      \partsitem Show that for any linear map \( \map{g}{V}{\Re} \) there is 
+        an \( \vec{x}\in\Re^n \) such that \( g=h_{\vec{x}} \).
+      \partsitem In the prior item we fixed the basis and varied the 
+        \( \vec{x} \) to get all possible linear maps.
+        Can we get all possible linear maps by fixing an \( \vec{x} \) and
+        varying the basis?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Recall that the representation map
+          $\map{\mbox{Rep}_{B}}{V}{\Re^n}$ is linear (it is actually
+          an isomorphism, but we do not need that it is one-to-one or onto
+          here).
+          Considering the column vector $x$ to be a $\nbym{n}{1}$ matrix
+          gives that the map from $\Re^n$ to $\Re$ that takes a column vector
+          to its dot product with $\vec{x}$ is linear (this is a matrix-vector
+          product and so \nearbytheorem{th:MatIsLinMap} applies).
+          Thus the map under consideration $h_{\vec{x}}$ is linear because 
+          it is the composistion of two linear maps.
+          \begin{equation*}
+            \vec{v}\mapsto \rep{\vec{v}}{B}
+                   \mapsto \vec{x}\cdot\rep{\vec{v}}{B}     
+          \end{equation*}
+       \partsitem Any linear map $\map{g}{V}{\Re}$ is represented by some
+          matrix
+          \begin{equation*}
+            \begin{pmatrix}
+              g_1  &g_2 &\cdots &g_n
+            \end{pmatrix}
+          \end{equation*}
+          (the matrix has $n$ columns because $V$ is $n$-dimensional and it
+          has only one row because $\Re$ is one-dimensional).
+          Then taking $\vec{x}$ to be the column vector that is the transpose
+          of this matrix
+          \begin{equation*}
+            \vec{x}=\colvec{g_1 \\ \vdots \\ g_n}
+          \end{equation*}
+          has the desired action.
+          \begin{equation*}
+            \vec{v}=\colvec{v_1 \\ \vdots \\ v_n}
+             \mapsto
+            \colvec{g_1 \\ \vdots \\ g_n}\dotprod\colvec{v_1 \\ \vdots \\ v_n}
+            =g_1v_1+\dots+g_nv_n
+          \end{equation*}
+        \partsitem No.
+          If \( \vec{x} \) has any nonzero entries then \( h_{\vec{x}} \)
+          cannot be the zero map (and if \( \vec{x} \) is the zero vector
+          then \( h_{\vec{x}} \) can only be the zero map).
+      \end{exparts}  
+    \end{answer}
+  \item
+    Let \( V,W,X \) be vector spaces with bases \( B,C,D \).
+    \begin{exparts}
+      \partsitem Suppose that \( \map{h}{V}{W} \) 
+        is represented with respect to \( B,C \) by the matrix \( H \).
+        Give the matrix representing the scalar multiple
+        \( rh \) (where \( r\in\Re \)) with
+        respect to \( B,C \) by expressing it in terms of \( H \).
+      \partsitem Suppose that \( \map{h,g}{V}{W} \) are represented with 
+        respect to \( B,C \) by \( H \) and \( G \).
+        Give the matrix representing \( h+g \) with
+        respect to \( B,C \) by expressing it in terms of \( H \) and \( G \).
+      \partsitem Suppose that \( \map{h}{V}{W} \) is represented 
+        with respect to \( B,C \) by \( H \) and
+        \( \map{g}{W}{X} \) is represented with respect to
+        \( C,D \) by \( G \).
+        Give the matrix representing \( \composed{g}{h} \) with
+        respect to \( B,D \) by expressing it in terms of \( H \) and \( G \).
+    \end{exparts}
+    \begin{answer}
+       See the following section.
+    \end{answer}
+\end{exercises}
