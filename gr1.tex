@@ -2854,6 +2854,71 @@ We will be sure of what can and cannot happen in a reduction.
     \end{exparts}  
    \end{answer}
   \puzzle \item 
+    This  puzzle  is  from  a  Russian   web-site
+    \texttt{http://www.arbuz.uz/},  and  there are many solutions
+    to it, but mine uses  linear  algebra  and  is  very
+    naive.   There's   a   planet  inhabited  by  arbuzoids
+   (watermeloners, if to  translate  from  Russian). 
+   Those creatures are found in three colors: red, green and blue.  
+   There  are  $13$~ red
+   arbuzoids,  $15$~blue  ones, and $17$~green. When
+   two differently coloured arbuzoids meet,  they
+   both change to the third color.
+
+   The  question  is, can it ever happen that all
+   of them assume the same color?
+    \cite{Shepelev}
+    \begin{answer}
+       \answerasgiven
+       My solution was to define the numbers  of  arbuzoids
+       as $3$-dimentional vectors, and express all possible
+       elementary transitions as such vectors, too:
+       \begin{center}
+         \begin{tabular}{rr}
+           R: &$13$  \\
+           G: &$15$  \\
+           B: &$17$
+         \end{tabular}
+         \qquad
+         Operations:
+         $\colvec{-1 \\ -1 \\ 2}$, 
+         $\colvec{-1 \\ 2 \\ -1}$, 
+         and 
+         $\colvec{2 \\ -1 \\ -1}$
+       \end{center}
+       Now, it is enough to check whether the  solution  to
+       one  of  the  following  systems of linear equations
+       exists:
+       \begin{equation*}
+         \colvec{13 \\ 15 \\ 17}
+         +x\colvec{-1 \\ -1  \\ 2}
+         +y\colvec{-1 \\ 2 \\ -1}
+         +\colvec{2 \\ -1 \\ -1}
+         =\colvec{0 \\ 0 \\ 45}
+         \qquad
+         \text{(or $\colvec{0 \\ 45 \\ 0}$ or $\colvec{45 \\ 0 \\ 0}$)}
+       \end{equation*}
+       Solving this system
+       \begin{eqnarray*}
+         \begin{amatrix}{4}
+          -1  &-1 &2  &-13  \\
+          -1  &2  &-1 &-15  \\
+           2  &-1 &-1 &28
+         \end{amatrix}
+         &\grstep[2\rho_1+\rho_3]{-\rho_1+\rho_2}
+         &\grstep{\rho_2+\rho_3}
+         &\begin{amatrix}{4}
+          -1  &-1 &2  &-13  \\
+           0  &3  &-3 &-2  \\
+           0  &0  &0  &0
+         \end{amatrix}
+       \end{eqnarray*}
+       gives $y+2/3=z$ so if the number of transformations $z$ is an integer
+       then $y$ is not.
+       The other two systems give similar conclusions, so there is no
+       integer solution.
+    \end{answer}
+  \puzzle \item 
     \begin{exparts}
       \partsitem Solve the system of equations.
         \begin{equation*}
