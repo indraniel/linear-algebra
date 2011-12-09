@@ -4,16 +4,14 @@
 \section{Reduced Echelon Form}
 After developing the mechanics of Gauss' method, 
 we observed that it can be done in more than one way.
-One example is that we sometimes have to swap rows and there can be more than
-one row to choose from.
-Another example is that from this matrix 
+One example is that from this matrix 
 \begin{equation*}
     \begin{pmatrix}
        2  &2  \\
        4  &3
     \end{pmatrix}
 \end{equation*}
-Gauss' method could derive any of these echelon form matrices.
+we could derive any of these three echelon form matrices.
 \begin{equation*}
     \begin{pmatrix}
        2  &2  \\
@@ -38,13 +36,14 @@ from $-2\rho_1+\rho_2$ followed by $2\rho_2+\rho_1$
 echelon form so the second one is extra work 
 but it is nonetheless a legal row operation).
 
-The fact that the echelon form outcome of Gauss' method 
+The fact that echelon form 
 is not unique leaves us with some questions.
-Will any two echelon form versions of a system have the same number of
+Will any two echelon form versions of a linear system have the same number of
 free variables?
-Will they in fact have exactly the same variables free?
+If yes, 
+will the two have exactly the same variables free?
 In this section we will answer both questions ``yes''.
-We will do more than answer the questions.
+We will do more than answer those questions.
 We will give a way to decide if one linear system 
 can be derived from another by row operations.
 The answers to the two questions will follow from this larger result.
@@ -56,9 +55,9 @@ The answers to the two questions will follow from this larger result.
 
 
 
-\subsection{Gauss-Jordan Reduction}
+\subsection{Gauss-Jordan Reduction}%
 Gaussian elimination coupled with back-substitution
-solves linear systems, but it's not the only method possible.
+solves linear systems but it is not the only method possible.
 Here is an extension of Gauss' method that has some advantages.
 
 \begin{example}
@@ -70,7 +69,7 @@ To solve
     x  &   &   &-  &z   &=  &-1  
   \end{linsys}
 \end{equation*}
-we can start by going to echelon form as usual.
+we can start as usual by going to echelon form.
 \begin{equation*}
   \grstep{-\rho_1+\rho_3}
     \begin{amatrix}{3}
@@ -120,8 +119,9 @@ one to column three while the combination operations in the third stage proceed
 from column three to column one.
 
 \begin{example}
-We often combine the operations of the middle stage into a single step,
-even though they are operations on different rows.
+The middle stage operations that 
+turn the leading entries into \( 1 \)'s
+don't interact, so we can combine them into a single step.
 \begin{eqnarray*}
     \begin{amatrix}{2}
        2   &1   &7   \\
@@ -161,7 +161,7 @@ one and is the only nonzero entry in its column.
 \noindent
 The disadvantage of using Gauss-Jordan reduction to solve a system is that
 the additional row operations mean additional arithmetic.
-The advantage is that the solution set can just be read off.
+The advantage is that we can just read off the solution set.
 
 In any echelon form, plain or reduced, we can read off 
 when a system has an empty
@@ -1363,6 +1363,89 @@ That argument,
 and the contradiction that finishes this proof, is saved for 
 \nearbyexercise{ex:EchFormNoLinCombo}.
 \end{proof}
+
+\begin{theorem}
+\label{th:ReducedEchelonFormIsUnique}
+Each matrix is row equivalent to a unique reduced echelon form matrix.
+\end{theorem}
+
+\begin{proof}
+Fix a number of rows \( m \).
+We will proceed by induction on the number of columns \( n \).
+
+The base case is that the matrix has \( n=1 \) column.
+If this is the zero matrix then its unique echelon form is the zero matrix. 
+If instead it has any nonzero entries then when the matrix is brought to 
+reduced echelon form, it must have at least one nonzero entry, so it has a
+\( 1 \), in the first row. 
+In either case, its reduced echelon form is unique.
+
+For the inductive step we assume that \( n>1 \) and that all \( m \)~row
+matrices with fewer than \( n \) columns have a unique reduced echelon form.
+Consider a \( \nbym{m}{n} \) matrix \( A \), and suppose that 
+\( B \) and \( C \) are two reduced echelon form matrices derived from \( A \).
+We will show that these two cannot be unequal.
+
+Let \( \hat{A} \) be the matrix consisting of the first \( n-1 \) columns of
+\( A \).
+Observe that any sequence of row operations that bring \( A \) to reduced 
+echelon form will also bring \( \hat{A} \) to reduced echelon form.
+By the inductive hypothesis the reduced echelon form of \( \hat{A} \)
+is unique, so if \( B \) and \( C \) differ then the difference must 
+occur in their \( n \)-th columns.
+
+We finish by showing that the two cannot differ only in that column.
+Consider a homogeneous system of equations for which \( A \) is the
+matrix of coefficients.  
+\begin{equation*}
+  \begin{linsys}{4}
+    a_{1,1}x_1  &+  &a_{1,2}x_2  &+  &\cdots  &+  &a_{1,n}x_n  &=  &0  \\
+    a_{2,1}x_1  &+  &a_{2,2}x_2  &+  &\cdots  &+  &a_{2,n}x_n  &=  &0  \\
+               &\vdots  \\
+    a_{m,1}x_1  &+  &a_{m,2}x_2  &+  &\cdots  &+  &a_{m,n}x_n  &=  &0  
+  \end{linsys}
+  \tag{$*$}
+\end{equation*}
+By the first theorem of this chapter the set of solution to that system
+is the same as the set of solution to this system
+\begin{equation*}
+  \begin{linsys}{4}
+    b_{1,1}x_1  &+  &b_{1,2}x_2  &+  &\cdots  &+  &b_{1,n}x_n  &=  &0  \\
+    b_{2,1}x_1  &+  &b_{2,2}x_2  &+  &\cdots  &+  &b_{2,n}x_n  &=  &0  \\
+               &\vdots  \\
+    b_{m,1}x_1  &+  &b_{m,2}x_2  &+  &\cdots  &+  &b_{m,n}x_n  &=  &0  
+  \end{linsys}
+  \tag{$**$}
+\end{equation*}
+and the set of solutions to this one.
+\begin{equation*}
+  \quad
+  \begin{linsys}{4}
+    c_{1,1}x_1  &+  &c_{1,2}x_2  &+  &\cdots  &+  &c_{1,n}x_n  &=  &0  \\
+    c_{2,1}x_1  &+  &c_{2,2}x_2  &+  &\cdots  &+  &c_{2,n}x_n  &=  &0  \\
+               &\vdots  \\
+    c_{m,1}x_1  &+  &c_{m,2}x_2  &+  &\cdots  &+  &c_{m,n}x_n  &=  &0  
+  \end{linsys}
+  \tag{$\mathord{*}\mathord{*}\mathord{*}$}
+\end{equation*}
+Suppose that \( B  \) and \( C \) differ in column~\( n \), in row~\( i \).
+Subtract row~\( i \) of ($\mathord{*}\mathord{*}\mathord{*}$) from 
+row~\( i \) of ($**$).
+Since \( B \) and \( C \) agree on their first \( n-1\)~columns the 
+result is the equation 
+\( (b_{i,n}-c_{i,n})\cdot x_n=0 \).
+Because \( b_{i,n}\neq c_{i,n} \) we conclude that $x_n=0$.
+This means that in both ($**$) and ($\mathord{*}\mathord{*}\mathord{*}$)
+the \( n \)-th column contains a leading \( 1 \), or else 
+the variable \( x_n \) would be free.
+That gives a contradiction, because with the first \( n-1 \)~columns of
+\( B \) and \( C \) equal, the leading \( 1 \)'s in the 
+\( n \)-th column must be in the same row,
+and so \( B \) would equal \( C \).
+\end{proof}
+
+
+%================= existing text
 
 We can now prove that each matrix is row equivalent to one and only one
 reduced echelon form matrix.
