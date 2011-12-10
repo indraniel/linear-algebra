@@ -65,9 +65,9 @@ Consider this one.
 \end{equation*}
 By eye we get the solution $x=1$ and $y=1$.
 But a computer has more trouble.
-A computer that represents real numbers to eight significant places (as is
-common, usually called 
-\definend{single precision}\index{single precision}) will represent the second
+If it represents real numbers to eight significant places, called 
+\definend{single precision}\index{single precision}, 
+then it will represent the second
 equation internally as $1.000\,000\,0x+2y=3.000\,000\,0$, losing the
 digits in the ninth place.
 Instead of reporting the correct solution, this computer will report something
@@ -81,7 +81,7 @@ off, we can graph the system.
   \includegraphics{ch1.33}
   %\includegraphics{ppivot1.eps}
 \end{center}
-At the scale of this graph, the two lines cannot be resolved apart.
+At the scale we've used to draw this graph, we cannon tell the two lines apart.
 This system is nearly singular in the sense that
 the two lines are nearly the same line.
 Near-singularity gives this system the property that a small change in the
@@ -140,12 +140,8 @@ An experienced programmer may respond that we should go to
 where sixteen significant digits are retained.
 This will indeed solve many problems.
 However, there are some difficulties with it as a general approach.
-For one thing, double precision takes longer than single
-precision (on a '486 chip, multiplication takes eleven ticks in single 
-precision but fourteen in double precision \cite{MicroProgRef}) and has twice
+For one thing, double precision has twice
 the memory requirements.
-So attempting to do all calculations in 
-double precision is just not practical.
 And besides, the above systems can obviously be tweaked to give the
 same trouble in the seventeenth digit, so double precision
 won't fix all problems.
@@ -161,7 +157,7 @@ is to not simply take the entry
 in the $\text{\textit{row}},\text{\textit{row}}$
 position to determine the factor to use for the row combination,
 but rather to look at all of the entries in the \textit{row}
-column below the \textit{row} row, 
+column below the $\text{\textit{row}},\text{\textit{row}}$ entry, 
 and take the one that is most likely to give reliable results
 (e.g., take one that is not too small).
 This strategy is called \definend{partial pivoting}.%
