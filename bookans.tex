@@ -5453,7 +5453,7 @@
              +c_3\colvec{4 \\ -4 \\ 14}
              =\colvec{0 \\ 0 \\ 0}
           \end{equation*}
-          gives rise to this linear system.
+          gives this linear system.
           \begin{equation*}
             \begin{linsys}{3}
               c_1  &+  &2c_2  &+  &4c_3  &=  &0  \\
@@ -5995,55 +5995,102 @@
           (as well as the linearly independent set $T$ also, of course).
         \partsitem The complement of a linearly independent set is linearly
           dependent as it contains the zero vector.
+        \partsitem A simple example in \( \Re^2 \) is these two sets.
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}}
+            \qquad
+            T=\set{\colvec{0 \\ 1}}
+          \end{equation*}
+          A somewhat subtler example, again in \( \Re^2 \), is these two.
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}}
+            \qquad
+            T=\set{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
+          \end{equation*}
         \partsitem We must produce an example.
           One, in \( \Re^2 \), is
           \begin{equation*}
             S=\set{\colvec{1 \\ 0}}
-            \quad\text{and}\quad
+            \qquad
             T=\set{\colvec{2 \\ 0}}
           \end{equation*}
-          since the linear dependence of \( S_1\union S_2 \) is easily seen.
+          since the linear dependence of \( S_1\union S_2 \) is easy to see.
+      \end{exparts}
+    
+\end{ans}
+\begin{ans}{Two.II.1.37}
+      \begin{exparts}
+        \partsitem \nearbylemma{le:LDIffANonTrivLinRel}
+          requires that the vectors
+          $\vec{s}_1,\ldots,\vec{s}_n,\vec{t}_1,\ldots,\vec{t}_m$
+          be distinct.
+          But we could have that the union $S\cup T$ is linearly
+          independent with some $\vec{s}_i$ equal to some $\vec{t}_j$.
+        \partsitem One example in \( \Re^2 \) is these two.
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}}
+            \qquad
+            T=\set{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
+          \end{equation*}
+        \partsitem
+          An example from \( \Re^2 \) is these sets.
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
+            \qquad
+            T=\set{\colvec{1 \\ 0}, \colvec{1 \\ 1}}
+          \end{equation*}
         \partsitem The union of two linearly independent sets $S\union T$
-          is linearly independent if and only if their spans have a trivial
-          intersection $\spanof{S}\intersection \spanof{T}=\set{\zero}$.
+          is linearly independent if and only if their spans of \( S \)
+          and \( T-(S\cap T)\) have a trivial intersection
+          $\spanof{S}\intersection \spanof{T-(S\cap T)}=\set{\zero}$.
           To prove that, assume that \( S \) and \( T \) are linearly
           independent subsets of some vector space.
 
           For the `only if' direction, assume that the intersection of
           the spans is trivial
-          \( \spanof{S}\intersection \spanof{T}=\set{\zero} \).
-          Consider the set $S\union T$.
-          Any linear relationship
+          \( \spanof{S}\intersection \spanof{T-(S\cap T)}=\set{\zero} \).
+          Consider the set $S\union (T-(S\cap T))=S\union T$ and
+          consider the linear relationship
           $c_1\vec{s}_1+\dots+c_n\vec{s}_n
-            +d_1\vec{t}_1+\dots+d_m\vec{t}_m=\zero$
-          gives
+            +d_1\vec{t}_1+\dots+d_m\vec{t}_m=\zero$.
+          Subtracting gives
           $c_1\vec{s}_1+\dots+c_n\vec{s}_n=
             -d_1\vec{t}_1-\dots-d_m\vec{t}_m$.
           The left side of that equation sums to a vector in $\spanof{S}$, and
-          the right side is a vector in $\spanof{T}$.
+          the right side is a vector in $\spanof{T-(S\cap T)}$.
           Therefore, since the intersection of the spans is trivial, both
           sides equal the zero vector.
           Because $S$ is linearly independent, all of the $c$'s are zero.
-          Because $T$ is linearly independent, all of the $d$'s are zero.
+          Because $T$ is linearly independent so also is
+          $T-(S\cap T)$ linearly independent,
+          and therefore all of the $d$'s are zero.
           Thus, the original linear relationship among members of
           $S\union T$ only holds if all of the coefficients are zero.
-          That shows that $S\union T$ is linearly independent.
+          Hence, $S\union T$ is linearly independent.
 
           For the `if' half we can make the same argument in reverse.
-          If the union $S\union T$ is linearly independent, that is,
-          if the only solution to
+          Suppose that the union $S\union T$ is linearly independent.
+          Consider a linear relationship among members of
+          $S$ and $T-(S\cap T)$.
           $c_1\vec{s}_1+\cdots+c_n\vec{s}_n
             +d_1\vec{t}_1+\cdots+d_m\vec{t}_m
             =\zero$
-          is the trivial solution $c_1=0$, \ldots, $d_m=0$,
-          then any vector $\vec{v}$ in the intersection of the spans
+          Note that no $\vec{s}_i$ is equal to a $\vec{t}_j$
+          so that is a combination of distinct vectors, as required by
+          \nearbylemma{le:LDIffANonTrivLinRel}.
+          So the only solution
+          is the trivial one $c_1=0$, \ldots, $d_m=0$.
+          Since any vector $\vec{v}$
+          in the intersection of the spans
+          $\spanof{S}\intersection \spanof{T-(S\cap T)}$
+          can be written
           $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n
-            =-d_1\vec{t}_1-\cdots=d_m\vec{t}_m$
-          must be the zero vector because each scalar is zero.
+            =-d_1\vec{t}_1-\cdots-d_m\vec{t}_m$,
+          it must be the zero vector because each scalar is zero.
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Two.II.1.37}
+\begin{ans}{Two.II.1.38}
       \begin{exparts}
          \partsitem We do induction on the number of vectors in the finite set
            \( S \).
@@ -6099,7 +6146,7 @@
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Two.II.1.38}
+\begin{ans}{Two.II.1.39}
       \begin{exparts}
         \partsitem
           Assuming first that \( a\neq 0 \),
@@ -6246,7 +6293,7 @@
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Two.II.1.39}
+\begin{ans}{Two.II.1.40}
       Recall that two vectors from \( \Re^n \) are perpendicular if and
       only if their dot product is zero.
       \begin{exparts}
@@ -6273,7 +6320,7 @@
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Two.II.1.40}
+\begin{ans}{Two.II.1.41}
       \begin{exparts}
         \partsitem This check is routine.
         \partsitem The summation is infinite (has infinitely many summands).
@@ -6290,7 +6337,7 @@
       \end{exparts}
      
 \end{ans}
-\begin{ans}{Two.II.1.41}
+\begin{ans}{Two.II.1.42}
       It is both `if' and `only if'.
 
       Let \( T \) be a subset of the subspace \( S \) of the vector space
@@ -13337,6 +13384,11 @@
          1\cdot\colvec{1 \\ 0 \\ 0}+0\cdot\colvec{0 \\ 1 \\ 0}
              +1\cdot\colvec{0 \\ 0 \\ 1}
        \end{equation*}
+
+       \textit{Comment.}
+       A more slick argument is to note that the matrix is nonsingular,
+       so it has rank~$3$, so the codomain has dimension~$4$,
+       and thus every polynomial is the image of some vector.
      
 \end{ans}
 \begin{ans}{Three.III.2.14}

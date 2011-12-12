@@ -130,7 +130,8 @@ there is nothing special in that equation about \( \vec{s}_0 \).
 For any \( \vec{s}_i \) with a coefficient $c_i$ that is nonzero,
 we can rewrite the relationship to set off \( \vec{s}_i \).
 \begin{equation*}
-   \vec{s}_i=(1/c_i)\vec{s}_0+(-c_1/c_i)\vec{s}_1
+   \vec{s}_i=(1/c_i)\vec{s}_0+\dots
+              +(-c_{i-1}/c_i)\vec{s}_{i-1}+(-c_{i+1}/c_i)\vec{s}_{i+1}
               +\dots+(-c_n/c_i)\vec{s}_n
 \end{equation*}
 When we don't want to single out any vector by writing it alone on
@@ -145,9 +146,9 @@ It gives what is usually the easiest way to compute whether
 a finite set is dependent or independent.
 
 \begin{lemma}   \label{le:LDIffANonTrivLinRel}
-A subset \( S \) of a vector space is linearly independent if and only if for
-any distinct \( \vec{s}_1,\dots,\vec{s}_n\in S \) the only linear
-relationship among those vectors
+A subset \( S \) of a vector space is linearly independent if and only if 
+among distinct \( \vec{s}_1,\dots,\vec{s}_n\in S \) 
+the only linear relationship 
 \begin{equation*}
    c_1\vec{s}_1+\dots+c_n\vec{s}_n=\zero
    \qquad c_1,\dots,c_n\in\Re
@@ -634,18 +635,18 @@ entire space, because then no vector exists that is not already in the span.
 This table summarizes the interaction between the properties of independence
 and dependence and the relations of subset and superset.
 \medskip
-\begin{center}
-  \begin{tabular}[b]{r|c|c|}
+\begin{center} \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}[b]{r|cc} 
                         \multicolumn{1}{c}{}
                         &\multicolumn{1}{c}{\( S_1\subset S \)}
                         &\multicolumn{1}{c}{\( S_1\supset S \)}      \\
-     \cline{2-3}
+     \cline{2-3}\rule{0em}{12pt} % make box a bit taller
           \textit{$S$ independent} 
               &\( S_1 \) must be independent   &\( S_1 \) may be either\\
-     \cline{2-3}
+     % \cline{2-3}\noalign{\smallskip}
           \textit{$S$ dependent} 
               &\( S_1 \) may be either &\( S_1 \) must be dependent    \\
-     \cline{2-3}
+     % \cline{2-3}
    \end{tabular}
 \end{center}
 \medskip
@@ -693,7 +694,7 @@ tells us that a linearly independent set is maximal when it spans the space.
              +c_3\colvec{4 \\ -4 \\ 14}
              =\colvec{0 \\ 0 \\ 0}
           \end{equation*}
-          gives rise to this linear system.
+          gives this linear system.
           \begin{equation*}
             \begin{linsys}{3}
               c_1  &+  &2c_2  &+  &4c_3  &=  &0  \\
@@ -1207,7 +1208,7 @@ tells us that a linearly independent set is maximal when it spans the space.
      it is the zero polynomial.
      (\textit{Comment.}
      This question is not a Linear Algebra matter, but we often use the result.
-     A polynomial gives rise to a function in the obvious 
+     A polynomial gives rise to a function in the natural 
      way:~$x\mapsto c_nx^n+\dots+c_1x+c_0$.)
      \begin{answer}
        In this `if and only if' statement, the `if' half is clear\Dash if 
@@ -1360,17 +1361,11 @@ tells us that a linearly independent set is maximal when it spans the space.
          an intersection of linearly independent sets be independent?
          Must it be?
        \partsitem How does linear independence relate to complementation?
-       \partstiem Show that the union of two linearly independent sets
+       \partsitem Show that the union of two linearly independent sets
           can be linearly independent.
        \partsitem Show that
           the union of two linearly independent sets need not be
           linearly independent.
-       \partstiem Find linearly independent sets \( S \) and \( T \)
-          so that the union of \( S-(S\cap T)\) and \( T-(S\cap T) \)
-          is linearly independent, but the union \( S\cup T \) is
-          not linearly independent.
-       % \partsitem Characterize when the union of two linearly independent sets
-       %    is linearly independent, in terms of the intersection of the spans.
     \end{exparts}
     \begin{answer}
       \begin{exparts}
@@ -1380,22 +1375,71 @@ tells us that a linearly independent set is maximal when it spans the space.
           (as well as the linearly independent set $T$ also, of course).
         \partsitem The complement of a linearly independent set is linearly
           dependent as it contains the zero vector.
-        \partsitem In \( \Re^2 \) these two
+        \partsitem A simple example in \( \Re^2 \) is these two sets.
           \begin{equation*}
             S=\set{\colvec{1 \\ 0}}
-            \quad\text{and}\quad
+            \qquad
+            T=\set{\colvec{0 \\ 1}}          
+          \end{equation*}
+          A somewhat subtler example, again in \( \Re^2 \), is these two.
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}}
+            \qquad
             T=\set{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
           \end{equation*}
-          are linearly independent, and the union \( S\cup T=T \) is
-          linearly independent.
         \partsitem We must produce an example.
           One, in \( \Re^2 \), is
           \begin{equation*}
             S=\set{\colvec{1 \\ 0}}
-            \quad\text{and}\quad
+            \qquad
             T=\set{\colvec{2 \\ 0}}
           \end{equation*}
           since the linear dependence of \( S_1\union S_2 \) is easy to see.
+      \end{exparts}
+    \end{answer}
+  \item \textit{Continued from prior exercise.} 
+    What is the interaction between the property of linear independence
+    and the operation of union?
+    \begin{exparts}
+       \partsitem We might conjecture that the union $S\union T$ of 
+          linearly independent sets 
+          is linearly independent if and only if their spans have a trivial 
+          intersection $\spanof{S}\intersection \spanof{T}=\set{\zero}$.
+          What is wrong with this argument for the `if' direction
+          of that conjecture? 
+          ``If the union $S\union T$ is linearly independent then
+          the only solution to          
+          $c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            +d_1\vec{t}_1+\cdots+d_m\vec{t}_m
+            =\zero$
+          is the trivial one $c_1=0$, \ldots, $d_m=0$. 
+          So any member of the intersection of the spans
+          must be the zero vector because in 
+          $c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            =d_1\vec{t}_1+\cdots+d_m\vec{t}_m$
+          each scalar is zero.''
+       \partsitem Give an example showing that the conjecture is false.
+       \partsitem Find linearly independent sets \( S \) and \( T \)
+          so that the union of \( S-(S\cap T)\) and \( T-(S\cap T) \)
+          is linearly independent, but the union \( S\cup T \) is
+          not linearly independent.
+       \partsitem Characterize when the union of two linearly independent sets
+          is linearly independent, in terms of the intersection of spans.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem \nearbylemma{le:LDIffANonTrivLinRel} 
+          requires that the vectors 
+          $\vec{s}_1,\ldots,\vec{s}_n,\vec{t}_1,\ldots,\vec{t}_m$
+          be distinct. 
+          But we could have that the union $S\cup T$ is linearly 
+          independent with some $\vec{s}_i$ equal to some $\vec{t}_j$.
+        \partsitem One example in \( \Re^2 \) is these two.
+          \begin{equation*}
+            S=\set{\colvec{1 \\ 0}}
+            \qquad
+            T=\set{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
+          \end{equation*}
         \partsitem 
           An example from \( \Re^2 \) is these sets.
           \begin{equation*}
@@ -1403,6 +1447,54 @@ tells us that a linearly independent set is maximal when it spans the space.
             \qquad
             T=\set{\colvec{1 \\ 0}, \colvec{1 \\ 1}}
           \end{equation*}
+        \partsitem The union of two linearly independent sets $S\union T$
+          is linearly independent if and only if their spans of \( S \) 
+          and \( T-(S\cap T)\) have a trivial intersection 
+          $\spanof{S}\intersection \spanof{T-(S\cap T)}=\set{\zero}$.
+          To prove that, assume that \( S \) and \( T \) are linearly 
+          independent subsets of some vector space.
+
+          For the `only if' direction, assume that the intersection of
+          the spans is trivial 
+          \( \spanof{S}\intersection \spanof{T-(S\cap T)}=\set{\zero} \).
+          Consider the set $S\union (T-(S\cap T))=S\union T$ and
+          consider the linear relationship 
+          $c_1\vec{s}_1+\dots+c_n\vec{s}_n
+            +d_1\vec{t}_1+\dots+d_m\vec{t}_m=\zero$.
+          Subtracting gives
+          $c_1\vec{s}_1+\dots+c_n\vec{s}_n=
+            -d_1\vec{t}_1-\dots-d_m\vec{t}_m$.
+          The left side of that equation sums to a vector in $\spanof{S}$, and
+          the right side is a vector in $\spanof{T-(S\cap T)}$.
+          Therefore, since the intersection of the spans is trivial, both
+          sides equal the zero vector.
+          Because $S$ is linearly independent, all of the $c$'s are zero.
+          Because $T$ is linearly independent so also is  
+          $T-(S\cap T)$ linearly independent, 
+          and therefore all of the $d$'s are zero.
+          Thus, the original linear relationship among members of 
+          $S\union T$ only holds if all of the coefficients are zero.
+          Hence, $S\union T$ is linearly independent.
+
+          For the `if' half we can make the same argument in reverse.
+          Suppose that the union $S\union T$ is linearly independent.
+          Consider a linear relationship among members of 
+          $S$ and $T-(S\cap T)$.        
+          $c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            +d_1\vec{t}_1+\cdots+d_m\vec{t}_m
+            =\zero$
+          Note that no $\vec{s}_i$ is equal to a $\vec{t}_j$
+          so that is a combination of distinct vectors, as required by 
+          \nearbylemma{le:LDIffANonTrivLinRel}.
+          So the only solution 
+          is the trivial one $c_1=0$, \ldots, $d_m=0$. 
+          Since any vector $\vec{v}$ 
+          in the intersection of the spans
+          $\spanof{S}\intersection \spanof{T-(S\cap T)}$ 
+          can be written 
+          $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n
+            =-d_1\vec{t}_1-\cdots-d_m\vec{t}_m$,
+          it must be the zero vector because each scalar is zero.
       \end{exparts}  
     \end{answer}
   \recommended \item \label{exer:FillIndDetProofSetHasLISub}
