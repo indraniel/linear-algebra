@@ -1756,6 +1756,92 @@ Not every vector in each is orthogonal to all vectors in the other.
       as desired.  
     \end{answer}
   \puzzle \item 
+    Astrologers claim to be able to recognize trends in personality and 
+    fortune that depend on an individual’s birthday by somehow incorporating 
+    the position of the stars $2000$~years ago in the Hellenistic period.  
+    Suppose that instead of star-gazers coming up with stuff, math teachers 
+    who like linear algebra (we’ll call them vectologers) had come up with 
+    a similar system as follows:~Consider your birthday as a vector of 
+    $\rowvec{\text{month} &\text{day}}$.  
+    For instance, I was born on July~$12$ so my vector would be 
+    $\rowvec{7  &12}$.  
+    Vectologers have made the rule that how well individuals get along 
+    with each other depends on the angle between vectors.  
+    The smaller the angle, the more harmonious the relationship.
+    \cite{Cleary}
+    \begin{exparts}
+      \item Compute the angle between your vector and mine, 
+        expressing the answer in radians.
+      \item Would you get along better with me, 
+        or with a professor born on September~$19$?
+      \item For maximum harmony in a relationship, 
+        when should the other person be born? 
+      \item Is there a person with whom you have a ``worst case'' relationship,
+        i.e., your vector and theirs are orthogonal?  
+        If so, what are the birthdate(s) for such people?  
+        If not, explain why not.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \item For instance, a birthday of October~$12$ gives this.
+          \begin{equation*}
+            \theta
+            =
+            \arccos(\,\frac{\colvec{7 \\ 12}\dotprod\colvec{10 \\ 12}}{
+                  \norm{\colvec{7 \\ 12}\,}\cdot\norm{\colvec{10 \\ 12}\,} }\,)
+            =arccos(\frac{214}{\sqrt(244)\sqrt(193)})
+            \approx 0.17
+          \end{equation*}
+        \item Applying the same equation to $\rowvec{9 &19}$ gives
+           about $0.09$~radians.
+        \item The angle will measure $0$~radians if the other person is 
+           born on the same day.
+        \item We want to maximize this.
+          \begin{equation*}
+            \theta
+            =
+            \arccos(\,\frac{\colvec{7 \\ 12}\dotprod\colvec{m \\ d}}{
+                  \norm{\colvec{7 \\ 12}\,}\cdot\norm{\colvec{m \\ d}\,} }\,)
+          \end{equation*}
+          Of course, we cannot take $m$ or $d$ negative and so we cannot
+          get a vector orthogonal to the given one.
+          This Python program finds the largest angle.
+          \begin{verbatim}
+  import math
+  days={1:31,  # Jan
+        2:29, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+  BDAY=(7,12)
+  max_res=0
+  max_res_date=(-1,-1)
+  for month in range(1,13):
+      for day in range(1,days[month]+1):
+          num=BDAY[0]*month+BDAY[1]*day
+          denom=math.sqrt(BDAY[0]**2+BDAY[1]**2)*math.sqrt(month**2+day**2)
+          if denom>0:
+              res=math.acos(min(num*1.0/denom,1))
+              if res>max_res:
+                  max_res=res
+                  max_res_date=(month,day)
+  print "For ",str(BDAY),"the worst case is",str(res),"radians on date",str(max_res_date)
+  print "  That is ",180*res/math.pi,"degrees"
+          \end{verbatim}
+          The result is 
+          \begin{verbatim}
+  For  (7, 12) the worst case is 0.158740790753 radians on date (12, 1)
+    That is  9.0951773467 degrees
+\end{verbatim}
+          We can get Sage to plot the angle for all the dates with this command
+\begin{verbatim}
+  sage: plot3d(lambda x, y: math.acos((x*7+y*12)/(math.sqrt(7**2+12**2)*math.sqrt(x**2+y**2))),
+                                                                 (1,12),(1,31))
+\end{verbatim}
+          The result looks like this.
+          \begin{center}
+            \includegraphics[height=2in]{rcbday.jpg}
+          \end{center}
+      \end{exparts}
+    \end{answer}
+  \puzzle \item 
     A ship is sailing with speed and direction \( \vec{v}_1 \); the wind blows
     apparently (judging by the vane on the mast) in the direction of a vector
     \( \vec{a} \); on changing the direction and speed of the ship from
