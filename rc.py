@@ -10,8 +10,9 @@ for month in range(1,13):
         denom=math.sqrt(BDAY[0]**2+BDAY[1]**2)*math.sqrt(month**2+day**2)
         if denom>0:
             res=math.acos(min(num*1.0/denom,1))
+            print "day:",str(month),str(day)," angle:",str(res)
             if res>max_res:
                 max_res=res
                 max_res_date=(month,day)
-print "For ",str(BDAY),"the worst case is",str(res),"radians on date",str(max_res_date)
-print "  That is ",180*res/math.pi,"degrees"
+print "For ",str(BDAY),"the worst case is",str(max_res),"radians on date",str(max_res_date)
+print "  That is ",180*max_res/math.pi,"degrees"

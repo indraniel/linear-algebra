@@ -3283,6 +3283,103 @@ endfig;
 
 
 
+
+beginfig(54); % Rick Cleary's birthday vectorology problem
+  numeric u;  %scaling factor
+  numeric v;  %vertical scaling factor
+  numeric w;  %horizontal scaling factor
+
+  u:=.15in; v:=u; w:=u;
+  linecap:=butt;  
+
+  pickup pencircle scaled line_width_light;
+  draw (-0.2w,0v)--(13w,0v);
+  draw (0w,-0.2v)--(0w,32v);
+  path month_tic , day_tic, day_mark;
+  month_tic=(0w,0v)--(0w,-.1v);
+  day_tic=(0w,0v)--(-.1w,0v);
+  day_mark=fullcircle scaled .03in;  % Used to mark each day in the calendar
+  % Draw line bisecting angel between (12,1) and (1,31)
+  numeric bisecting_angle;
+  path bisecting_line;
+  bisecting_angle=.5[angle(12w,1v),angle(1w,31v)];
+  z0=whatever[(0w,0v),(cosd(bisecting_angle)*w,sind(bisecting_angle)*v)]=whatever[(12w,1v),(12w,31v)];  % where bisecting line and right side of graph intersect
+  bisecting_line=(0w,0v)--z0;
+  draw bisecting_line dashed evenly scaled 2;
+  % Draw RC's Birthday
+  drawarrow (0w,0v)--(7w,12v) withcolor .9[white,black];
+  % Draw calendar
+  for day=1 upto 31:
+    draw day_tic shifted (0w,day*v);
+    endfor
+    label.lft(btex \small $10$ etex,(0w,10v));
+    label.lft(btex \small $20$ etex,(0w,20v));
+    label.lft(btex \small $30$ etex,(0w,30v));
+  draw month_tic shifted (1w,0v);  % Jan
+    label.bot(btex \small J etex,(1w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (1w,day*v);
+      endfor
+  draw month_tic shifted (2w,0v);  % Feb
+    label.bot(btex \small F etex,(2w,0v));
+    for day=1 upto 29:
+      draw day_mark shifted (2w,day*v);
+      endfor
+  draw month_tic shifted (3w,0v);  % Mar
+    label.bot(btex \small M etex,(3w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (3w,day*v);
+      endfor
+  draw month_tic shifted (4w,0v);  % Apr
+    label.bot(btex \small A etex,(4w,0v));
+    for day=1 upto 30:
+      draw day_mark shifted (4w,day*v);
+      endfor
+  draw month_tic shifted (5w,0v);  % May 
+    label.bot(btex \small M etex,(5w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (5w,day*v);
+      endfor
+  draw month_tic shifted (6w,0v);  % Jun
+    label.bot(btex \small J etex,(6w,0v));
+    for day=1 upto 30:
+      draw day_mark shifted (6w,day*v);
+      endfor
+  draw month_tic shifted (7w,0v);  % Jul
+    label.bot(btex \small J etex,(7w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (7w,day*v);
+      endfor
+  draw month_tic shifted (8w,0v);  % Aug
+    label.bot(btex \small A etex,(8w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (8w,day*v);
+      endfor
+  draw month_tic shifted (9w,0v);  % Sep
+    label.bot(btex \small S etex,(9w,0v));
+    for day=1 upto 30:
+      draw day_mark shifted (9w,day*v);
+      endfor
+  draw month_tic shifted (10w,0v);  % Oct
+    label.bot(btex \small O etex,(10w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (10w,day*v);
+      endfor
+  draw month_tic shifted (11w,0v);  % Nov
+    label.bot(btex \small N etex,(11w,0v));
+    for day=1 upto 30:
+      draw day_mark shifted (11w,day*v);
+      endfor
+  draw month_tic shifted (12w,0v);  % Dec
+    label.bot(btex \small D etex,(12w,0v));
+    for day=1 upto 31:
+      draw day_mark shifted (12w,day*v);
+      endfor
+endfig;
+
+
+
+
 end
 
 

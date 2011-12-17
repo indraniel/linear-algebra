@@ -1758,7 +1758,7 @@ Not every vector in each is orthogonal to all vectors in the other.
   \puzzle \item 
     Astrologers claim to be able to recognize trends in personality and 
     fortune that depend on an individual’s birthday by somehow incorporating 
-    the position of the stars $2000$~years ago in the Hellenistic period.  
+    where the stars were $2000$~years ago, during the Hellenistic period.  
     Suppose that instead of star-gazers coming up with stuff, math teachers 
     who like linear algebra (we’ll call them vectologers) had come up with 
     a similar system as follows:~Consider your birthday as a vector of 
@@ -1789,13 +1789,24 @@ Not every vector in each is orthogonal to all vectors in the other.
             =
             \arccos(\,\frac{\colvec{7 \\ 12}\dotprod\colvec{10 \\ 12}}{
                   \norm{\colvec{7 \\ 12}\,}\cdot\norm{\colvec{10 \\ 12}\,} }\,)
-            =arccos(\frac{214}{\sqrt(244)\sqrt(193)})
-            \approx 0.17
+            =\arccos(\frac{214}{\sqrt{244}\sqrt{193}})
+            \approx \text{$0.17$~rad}
           \end{equation*}
         \item Applying the same equation to $\rowvec{9 &19}$ gives
            about $0.09$~radians.
         \item The angle will measure $0$~radians if the other person is 
            born on the same day.
+
+          We can get Sage to plot the angle for other dates.
+          This example shows the relationship of all dates with July~12.
+\begin{verbatim}
+  sage: plot3d(lambda x, y: math.acos((x*7+y*12)/(math.sqrt(7**2+12**2)*math.sqrt(x**2+y**2))),
+                                                                 (1,12),(1,31))
+\end{verbatim}
+          The result looks like this.
+          \begin{center}
+            \includegraphics[height=2in]{rcbday.jpg}
+          \end{center}
         \item We want to maximize this.
           \begin{equation*}
             \theta
@@ -1805,7 +1816,7 @@ Not every vector in each is orthogonal to all vectors in the other.
           \end{equation*}
           Of course, we cannot take $m$ or $d$ negative and so we cannot
           get a vector orthogonal to the given one.
-          This Python program finds the largest angle.
+          This Python script finds the largest angle by brute force.
           \begin{verbatim}
   import math
   days={1:31,  # Jan
@@ -1819,25 +1830,30 @@ Not every vector in each is orthogonal to all vectors in the other.
           denom=math.sqrt(BDAY[0]**2+BDAY[1]**2)*math.sqrt(month**2+day**2)
           if denom>0:
               res=math.acos(min(num*1.0/denom,1))
+              print "day:",str(month),str(day)," angle:",str(res)
               if res>max_res:
                   max_res=res
                   max_res_date=(month,day)
-  print "For ",str(BDAY),"the worst case is",str(res),"radians on date",str(max_res_date)
-  print "  That is ",180*res/math.pi,"degrees"
+  print "For ",str(BDAY),"the worst case is",str(max_res),"radians on date",str(max_res_date)
+  print "  That is ",180*max_res/math.pi,"degrees"
           \end{verbatim}
           The result is 
           \begin{verbatim}
-  For  (7, 12) the worst case is 0.158740790753 radians on date (12, 1)
-    That is  9.0951773467 degrees
+  For  (7, 12) the worst case is 0.95958064648 radians on date (12, 1)
+    That is  54.9799211457 degrees
 \end{verbatim}
-          We can get Sage to plot the angle for all the dates with this command
-\begin{verbatim}
-  sage: plot3d(lambda x, y: math.acos((x*7+y*12)/(math.sqrt(7**2+12**2)*math.sqrt(x**2+y**2))),
-                                                                 (1,12),(1,31))
-\end{verbatim}
-          The result looks like this.
+
+          A more conceptual approach is to consider the relation of all points 
+          $(\text{month},\text{day})$ to the point $(7,12)$.
+          The picture below
+          makes clear that the answer is either Dec~$1$ or Jan~$31$, depending
+          on which is further from the birthdate. 
+          The dashed line bisects the angle between the line from the
+          origin to Dec~$1$, and the line from the origin to Jan~$31$.
+          Birthdays above the line are furthest from Dec~$1$ and 
+          birthdays below the line are furthest from Jan~$31$.
           \begin{center}
-            \includegraphics[height=2in]{rcbday.jpg}
+            \includegraphics{ch1.54}
           \end{center}
       \end{exparts}
     \end{answer}
