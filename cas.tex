@@ -27,12 +27,24 @@ For example, in the Topic on Networks, we need to solve this.
 It can be done by hand, but it would take a while and be error-prone.
 Using a computer is better.
 
-We illustrate by solving that system under Maple
-(for another system, a user's manual would obviously detail the exact syntax 
-needed).
-The array of coefficients can be entered in this way
-\begin{indented}{\small
-\begin{verbatim}
+We illustrate by solving that system under Sage.
+\begin{lstlisting}
+sage: var('i0,i1,i2,i3,i4,i5,i6')
+(i0, i1, i2, i3, i4, i5, i6)
+sage: network_system=[i0-i1-i2==0, i1-i3-i5==0, 
+....:       i2-i4+i5==0,, i3+i4-i6==0, 5*i1+10*i3==10,
+....:       2*i2+4*i4==10, 5*i1-2*i2+50*i5==0]
+sage: solve(network_system, i0,i1,i2,i3,i4,i5,i6)     
+[[i0 == (7/3), i1 == (2/3), i2 == (5/3), i3 == (2/3), 
+      i4 == (5/3), i5 == 0, i6 == (7/3)]] 
+\end{lstlisting}
+Magic.
+
+Here is the same system solved under Maple.
+We enter the array of coefficients 
+and the vector of constants,
+and then we get the solution.
+\begin{lstlisting}
 > A:=array( [[1,-1,-1,0,0,0,0],
              [0,1,0,-1,0,-1,0],
              [0,0,1,0,-1,1,0],
@@ -40,27 +52,15 @@ The array of coefficients can be entered in this way
              [0,5,0,10,0,0,0],
              [0,0,2,0,4,0,0],
              [0,5,-2,0,0,50,0]] );
-\end{verbatim}
-}\end{indented}
-(putting the rows on separate lines is not necessary, 
-but is done for clarity).
-The vector of constants is entered similarly.
-\begin{indented}{\small
-\begin{verbatim}
 > u:=array( [0,0,0,0,10,10,0] );
-\end{verbatim}
-}\end{indented}
-Then the system is solved, like magic.
-\begin{indented}{\small
-\begin{verbatim}
 > linsolve(A,u);
       7  2  5  2  5     7
     [ -, -, -, -, -, 0, - ]
       3  3  3  3  3     3
-\end{verbatim}
-}\end{indented}
-Systems with infinitely many solutions are solved in the same
-way\Dash the computer simply returns a parametrization.
+\end{lstlisting}
+
+Systems with infinitely many solutions are entered in the same
+way but for the solution the computer will return a parametrization.
 
 
 
