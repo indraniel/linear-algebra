@@ -18,12 +18,11 @@ experimentation with a meter stick produces these two balances.
   \qquad
   \includegraphics{ch1.2}
 \end{center}
-We know that the moment of each object is its mass times its distance 
-from the balance point. 
-We also know that for the masses to balance we must have that
+For the masses to balance we must have that
 the sum of moments on the left equals the sum of moments on
-the right.
-That gives us a system of two equations.
+the right, where the moment of an object is its mass times its distance 
+from the balance point. 
+That gives a system of two equations.
 \begin{align*}
     40h+15c  &= 100  \\
     25c      &= 50+50h
@@ -35,7 +34,7 @@ We can mix, under controlled conditions, toluene $\hbox{C}_7\hbox{H}_8$ and
 nitric acid $\hbox{H}\hbox{N}\hbox{O}_3$ to produce
 trinitrotoluene $\hbox{C}_7\hbox{H}_5\hbox{O}_6\hbox{N}_3$
 along with the byproduct water
-(conditions have to be controlled very well\Dash trinitrotoluene 
+(conditions have to be very well controlled\Dash trinitrotoluene 
 is better known as TNT).
 In what proportion should we mix them?
 The number of atoms of each element present before the reaction
@@ -54,8 +53,8 @@ this system.
       3y      &= 6z+1w
 \end{align*}
 
-Finishing each of these examples requires solving a system of equations.
-In each system, the equations involve only the first power of the variables.
+Both examples come down to solving a system of equations.
+In each system, the equations involve only the first power of each variable.
 This chapter shows how to solve any such system.
 
 
@@ -129,7 +128,7 @@ Finding the set of all solutions is
 \definend{solving}\index{system of linear equations!solving} 
 the system.
 We don't need 
-guesswork or good luck, 
+guesswork or good luck; 
 there is an algorithm that always works.
 This algorithm is called 
 \definend{Gauss' method}\index{Gauss' method}%
@@ -158,7 +157,7 @@ we transform it, step by step, until it is in a form that
 we can easily solve.
 
 The first transformation
-is to rewrite the system by interchanging the first and third row.
+rewrites the system by interchanging the first and third row.
 \begin{eqnarray*}
   \quad
   &\grstep{ \text{swap row 1 with row 3} }
@@ -168,7 +167,7 @@ is to rewrite the system by interchanging the first and third row.
                        &   &      &   &3x_3  &=  &9  
     \end{linsys}                                         
 \end{eqnarray*}
-The second transformation is to rescale the first row by multiplying
+The second transformation rescales the first row by multiplying
 both sides of the equation by $3$.
 \begin{eqnarray*}
 \quad
@@ -179,7 +178,7 @@ both sides of the equation by $3$.
             &   &      &   &3x_3  &=  &9  
    \end{linsys}                                          
 \end{eqnarray*}
-The third transformation is the only nontrivial one.
+The third transformation is the only nontrivial one in this example.
 We mentally multiply both sides of the first row by \( -1 \),
 mentally add that to the second row,
 and write the result in as the new second row.
@@ -191,8 +190,8 @@ and write the result in as the new second row.
             &   &      &   &3x_3  &=  &9  
    \end{linsys}
 \end{eqnarray*}
-The point of this sucession of steps is that system is now in
-a form where we can easily find the value of each variable.
+The point of these steps is that we've brought the system to a
+form where we can easily find the value of each variable.
 The bottom equation shows that \( x_3=3 \).
 Substituting $3$ for \( x_3 \) in the middle equation shows that \( x_2=1 \).
 Substituting those two into the top equation
@@ -205,7 +204,6 @@ Most of this subsection and the next one consists of examples
 of solving linear systems by Gauss' method.
 We will use it throughout the book.
 It is fast and easy.
-
 But before we do those examples we will first show that
 this method is also safe in that it never loses solutions or 
 picks up extraneous solutions.
@@ -225,20 +223,22 @@ If a linear system is changed to another by one of these operations
 then the two systems have the same set of solutions.
 \end{theorem}
 
-Each of those three operations has a restriction.
+Each of the three Gauss' method operations has a restriction.
 Multiplying a row by \( 0 \) is not allowed because obviously that
 can change the solution set of the system.
 Similarly, adding a multiple of a row to itself is not allowed because
 adding \( -1 \) times the row to itself has the effect of multiplying the row
 by \( 0 \).
 Finally, swapping a row with itself is disallowed
-to make some results in the fourth chapter easier to state and remember.
+to make some results in the fourth chapter easier to state and remember,
+and also because it's pointless.
 
 \begin{proof}
-We will cover the equation swap operation here and save the other two
-cases for \nearbyexercise{ex:ProveGaussMethod}.
+We will cover the equation swap operation here. 
+The other two
+cases are \nearbyexercise{ex:ProveGaussMethod}.
 
-Consider this swap of row~$i$ with row~$j$.
+Consider the swap of row~$i$ with row~$j$.
 {\renewcommand{\arraystretch}{.75}
 \begin{equation*}
   \begin{linsys}{4}
@@ -261,17 +261,17 @@ Consider this swap of row~$i$ with row~$j$.
     a_{m,1}x_1  &+  &a_{m,2}x_2 &+  &\cdots  &&a_{m,n}x_n  &=  &d_m  
   \end{linsys}
 \end{equation*} }% end change of arraystretch
-The \( n \)-tuple \( (s_1,\ldots\,,s_n) \)
+The tuple \( (s_1,\ldots\,,s_n) \)
 satisfies the system before the swap 
 if and only if substituting the values for the
-variables, , the $s$'s for the $x$'s, gives true statements:
+variables, the $s$'s for the $x$'s, gives a conjunction of true statements:
 $a_{1,1}s_1+a_{1,2}s_2+\cdots+a_{1,n}s_n=d_1$
 and \ldots\ 
 $a_{i,1}s_1+a_{i,2}s_2+\cdots+a_{i,n}s_n=d_i$
 and \ldots\  $a_{j,1}s_1+a_{j,2}s_2+\cdots+a_{j,n}s_n=d_j$
 and \ldots\  $a_{m,1}s_1+a_{m,2}s_2+\cdots+a_{m,n}s_n=d_m$.
 
-In a sentence consisting of statements joined with `and' we can
+In a list of statements joined with `and' we can  
 rearrange the order of the statements. 
 Thus
 this requirement is met if and only if
@@ -307,12 +307,12 @@ abbreviate `row \(i\)' by `\( \rho_i \)'.
 For instance, we will denote a row combination operation by 
 \( k\rho_i+\rho_j \), 
 with the row that is changed written second.
-We will also, to save writing, 
-often list addition steps together when they use the same $\rho_i$.
+To save writing we will 
+often combine addition steps when they use the same $\rho_i$; see the
+next example.
 
 \begin{example}
-Gauss' method is to 
-systemmatically apply those row operations to solve a system.
+Gauss' method systemmatically applies the row operations to solve a system.
 Here is a typical case.
 \begin{equation*}
   \begin{linsys}{3}
@@ -321,16 +321,14 @@ Here is a typical case.
     x  &-  &2y &-  &z  &=  &3  
   \end{linsys}
 \end{equation*}
-To start we use the first row to 
+We begin by using the first row to 
 eliminate the $2x$ in the second row and the $x$ in the third.
 To get rid of the $2x$, we mentally multiply the entire first row by $-2$, 
 add that to the
 second row, and write the result in as the new second row.
-To get rid of the $x$, we multiply the first row by
+To eliminate the $x$ leading the third row, we multiply the first row by
 $-1$, add that to the third row, and write the result in as the
 new third row.
-(Using one entry to clear out the rest of a column is
-called \definend{pivoting}\index{pivoting} on that entry.)
 \begin{eqnarray*}
   &\grstep[-\rho_1 +\rho_3]{-2\rho_1 +\rho_2}
   &\begin{linsys}{3}
@@ -339,7 +337,7 @@ called \definend{pivoting}\index{pivoting} on that entry.)
         &   &-3y&-  &z  &=  &3  
   \end{linsys}   
 \end{eqnarray*}
-In this version of the system, the last two equations involve only two unknowns.
+% In this version of the system, the last two equations involve only two unknowns.
 To finish we transform the second system into a third system, where the
 last equation involves only one unknown. 
 We use 
@@ -352,7 +350,8 @@ the second row to eliminate $y$ from the third row.
         &   &   &   &-4z&=  &0
    \end{linsys}
 \end{eqnarray*}
-Now the third row shows that \( z=0 \).
+Now the system's solution is easy to find.
+The third row shows that \( z=0 \).
 Substitute that back\index{Gauss' method!back-substitution}%
 \index{back-substitution}
 into the second row to get \( y=-1 \) and
@@ -401,7 +400,7 @@ The reduction
 shows that \( z=3 \), \( y=-1 \), and \( x=7 \).
 \end{example}
 
-As these examples illustrate, the point of Gauss' method 
+As illustrated above, the point of Gauss' method 
 is to use the elementary reduction
 operations to set up back-substitution.
 
@@ -417,10 +416,10 @@ is to the right of the leading variable in the row above it
 \end{definition}
 
 \begin{example} 
-The only operation needed in the example above is row combination.
-Here is a linear system that requires the operation of swapping equations
-to get it in echelon form. 
-After the first combination
+The prior three examples only used the operation of row combination.
+This linear system requires the swap operation
+to get it into echelon form because 
+after the first combination
 \begin{eqnarray*}
    \begin{linsys}{4}
                 x  &-  &y  &   &   &   &   &=  &0  \\
@@ -438,8 +437,7 @@ After the first combination
 \end{eqnarray*}
 the second equation has no leading $y$.
 To get one, 
-we look lower down in the system for a row that has a leading $y$ and 
-swap it in.
+we put in place a lower-down row that has a leading $y$.
 \begin{eqnarray*}
    &\grstep{\rho_2 \leftrightarrow\rho_3}
    &\begin{linsys}{4}
@@ -449,9 +447,9 @@ swap it in.
          &   &   &   &2z &+  &w  &=  &5  
     \end{linsys}    
 \end{eqnarray*}
-(Had there been more than one row below the second with a leading $y$
+(Had there been more than one suitable row below the second
 then we could have swapped in any one.)
-The rest of Gauss' method goes as before.
+With that, Gauss' method proceeds as before.
 \begin{eqnarray*}
    &\grstep{-2\rho_3 +\rho_4}
    &\begin{linsys}{4}
@@ -464,20 +462,20 @@ The rest of Gauss' method goes as before.
 Back-substitution gives \( w=1 \), \( z=2 \) , \( y=-1 \), and \( x=-1 \).
 \end{example}
 
-Strictly speaking, the operation of rescaling rows is 
-not needed to solve linear systems.  
-We have included it because we will use it 
+The row rescaling operation is 
+not needed, strictly speaking, to solve linear systems.  
+It is included here because we will use it 
 later in this chapter as part of a variation on Gauss' method, 
 the Gauss-Jordan method.
 
 All of the systems seen so far have the same number of equations as unknowns.
 All of them have a solution, and for all of them there is only one solution.
-We finish this subsection by seeing for contrast
+We finish this subsection by seeing
 some other things that can happen.
 
 \begin{example} \label{ex:MoreEqsThanUnks}
-Linear systems need not have the same number of equations as unknowns.
 This system 
+has more equations than variables.
 \begin{equation*}
     \begin{linsys}{2}
       x  &+  &3y  &=  &1  \\
@@ -485,7 +483,6 @@ This system
      2x  &+  &2y  &=  &-2 
     \end{linsys}  
 \end{equation*}
-has more equations than variables.
 Gauss' method helps us understand this system also, since this
   \begin{eqnarray*}
     &\grstep[-2\rho_1 +\rho_3]{-2\rho_1 +\rho_2}
@@ -509,7 +506,6 @@ gives that \( y=1 \) and \( x=-2 \).
 The `\( 0=0 \)' reflects the redundancy.
 \end{example}
 
-That example's system has more equations than variables.
 Gauss' method is also useful on systems with more variables than equations.
 Many examples are in the next subsection.
 
@@ -581,10 +577,11 @@ In this system
    2x  &+  &2y  &=  &8  
   \end{linsys}
 \end{equation*}
-any pair of numbers satisfying the first equation automatically
+any pair of real numbers $(s_1,s_2)$ satisfying the first equation also
 satisfies the second.
 The solution set \( \{ (x,y)\suchthat x+y=4 \} \) is infinite; some
 of its members are~$(0,4)$, $(-1,5)$, and $(2.5,1.5)$.
+
 The result of applying Gauss' method here contrasts with the prior example
 because we do not get a contradictory equation.
 \begin{eqnarray*}
@@ -596,8 +593,8 @@ because we do not get a contradictory equation.
 \end{eqnarray*}
 \end{example}
 
-Don't be fooled by the `\( 0=0 \)' equation in that example.
-It is not the signal that a system has many solutions.
+Don't be fooled by the final system in that example.
+A `$0=0$' equation does not signal that a system has many solutions.
 
 \begin{example}  \label{ex:NoZerosInfManySols}
 The absence of a `\( 0=0 \)' does not keep a system from having
@@ -609,18 +606,18 @@ This system is in echelon form
         &   &y  &+  &z  &=  &0  
    \end{linsys}
 \end{equation*}
-has no `$0=0$', and yet has infinitely many solutions.
-(For instance, each of these is a solution:~$(0,1,-1)$, 
+has no `$0=0$', but has infinitely many solutions.
+Some solutions are:~$(0,1,-1)$, 
 $(0,1/2,-1/2)$, $(0,0,0)$, and $(0,-\pi,\pi)$.
 There are infinitely many solutions because
 any triple whose first component is $0$ and whose second component is the 
-negative of the third is a solution.)
+negative of the third is a solution.
 
 Nor does the presence of a `\( 0=0 \)' mean that the system must have 
 many solutions.
 \nearbyexample{ex:MoreEqsThanUnks} shows that.
 So does this system, which does not have 
-many solutions\Dash in fact it has none\Dash despite that 
+any solutions at all despite that 
 when it is brought to echelon form it has a `$0=0$' row.
 \begin{eqnarray*}
   \begin{linsys}{3}
@@ -658,17 +655,19 @@ and each variable is a leading variable in its
 row, then the system has a unique solution and we find it by
 back substitution.
 Finally, if we reach echelon form without a contradictory equation,
-and there is not a unique solution
-(at least one variable is not a leading variable) then the system has many
-solutions.
+and there is not a unique solution\Dash
+that is, at least one variable is not a leading variable\Dash
+then the system has many solutions.
 
-The next subsection deals with the third case\Dash 
-we will see how to describe the
-solution set of a system with many solutions.
+The next subsection deals with the third case.
+We will see that such a system must have infinitely many solutions
+and we will see how to describe the
+solution set.
+
 
 \medskip
 \noindent\textbf{Note}\hspace*{.4em}
-\textit{For all exercises in this book,
+\textit{For all exercises,
 you must justify your answer.
 For instance, if a question asks whether a system has a solution then you
 must justify a yes response by producing the solution and must justify 
@@ -943,11 +942,11 @@ a no response by showing that no solution exists.}
       Note that no \( \alpha \) satisfies that requirement.  
       \end{answer}
   \recommended \item 
+    \cite{Anton}
     What conditions must the constants, the $b$'s,
     satisfy so that each of these systems has a solution?
     \textit{Hint.} 
     Apply Gauss' method and see what happens to the right side.
-    \cite{Anton}
     \begin{exparts*}
       \partsitem  \(
         \begin{linsys}[t]{2}
@@ -1060,29 +1059,63 @@ a no response by showing that no solution exists.}
       \end{eqnarray*}
       shows that the solution is \( f(x)=1x^2-2x+3 \).  
       \end{answer}
+  \item After \nearbytheorem{th:GaussMethod} we note that multiplying a 
+   row by~$0$ is not allowed because that could change a solution set. 
+   Give an example of a system with solution set~$S_0$ where after 
+   multiplying a row by~$0$ the new system has a solution set~$S_1$
+   and $S_0$ is a proper subset of $S_1$.
+   Give an example where $S_0=S_1$. 
+   \begin{answer}
+     Here $S_0=\set{(1,1)}$
+     \begin{equation*}
+         \begin{linsys}{2}
+            x  &+  &y  &=  &2  \\
+            x  &-  &y  &=  &0
+          \end{linsys}               
+         \;\grstep{0\rho_2}\;
+         \begin{linsys}{2}
+            x  &+  &y  &=  &2  \\
+               &   &0  &=  &0
+          \end{linsys}               
+     \end{equation*}
+     while $S_1$ is a proper superset because it
+     contains at least two points: $(1,1)$ and~$(2,0)$.
+     In this example the solution set does not change.  
+     \begin{equation*}
+         \begin{linsys}{2}
+            x  &+  &y  &=  &2  \\
+           2x  &+  &2y &=  &4
+          \end{linsys}               
+         \;\grstep{0\rho_2}\;
+         \begin{linsys}{2}
+            x  &+  &y  &=  &2  \\
+               &   &0  &=  &0
+          \end{linsys}               
+     \end{equation*}
+   \end{answer}
   \item 
     Gauss' method works by combining the equations in a system to make new
     equations.
     \begin{exparts}
-      \partsitem Can the equation \( 3x-2y=5 \) be derived, by a sequence of
-        Gaussian reduction steps, from the equations in this system?
+      \partsitem Can the equation \( 3x-2y=5 \) be derived by a sequence of
+        Gaussian reduction steps from the equations in this system?
         \begin{equation*}
           \begin{linsys}{2}
              x  &+  &y  &=  &1  \\
             4x  &-  &y  &=  &6
           \end{linsys}
         \end{equation*}
-      \partsitem Can the equation \( 5x-3y=2 \) be derived, by a sequence of
-        Gaussian reduction steps, from the equations in this system?
+      \partsitem Can the equation \( 5x-3y=2 \) be derived by a sequence of
+        Gaussian reduction steps from the equations in this system?
         \begin{equation*}
           \begin{linsys}{2}
             2x  &+  &2y &=  &5  \\
             3x  &+  &y  &=  &4
           \end{linsys}
         \end{equation*}
-      \partsitem Can the equation \( 6x-9y+5z=-2 \) be derived, 
+      \partsitem Can the equation \( 6x-9y+5z=-2 \) be derived 
         by a sequence of
-        Gaussian reduction steps, from the equations in the system?
+        Gaussian reduction steps from the equations in the system?
         \begin{equation*}
           \begin{linsys}{3}
             2x  &+  &y  &-  &z  &=  &4  \\
@@ -1441,10 +1474,10 @@ a no response by showing that no solution exists.}
        \end{equation*}
     \end{answer}
   \puzzle \item  
+    \cite{Anton}
     A box holding pennies, nickels and dimes contains
     thirteen coins with a total value of \( 83 \) cents.
     How many coins of each type are in the box?
-    \cite{Anton}
     \begin{answer}
       Let \( p \), \( n \), and \( d \) be the number of
       pennies, nickels, and dimes.
@@ -1468,6 +1501,7 @@ a no response by showing that no solution exists.}
       is the only solution using natural numbers.  
     \end{answer}
   \puzzle \item 
+    \cite{ContestProb1955no38}
     Four positive integers are given.
     Select any three of the integers, find their arithmetic average,
     and add this result to the fourth integer.
@@ -1480,7 +1514,6 @@ a no response by showing that no solution exists.}
       \partsitem 29
       \partsitem 17
     \end{exparts*}
-    \cite{ContestProb1955no38}
     \begin{answer}
       Solving the system 
       \begin{equation*}
@@ -1495,11 +1528,11 @@ a no response by showing that no solution exists.}
       Thus the second item, 21, is the correct answer.
      \end{answer}
   \puzzle \recommended \item  
+      \cite{Monthly35p47}
       Laugh at this:  \( \mbox{AHAHA}+\mbox{TEHE}=\mbox{TEHAW} \).
       It resulted from substituting a code letter for each digit of a simple
       example in addition, and it is required to identify the letters
       and prove the solution unique.
-      \cite{Monthly35p47}
       \begin{answer}
         \answerasgiven
         A comparison of the units and hundreds columns of this
@@ -1520,6 +1553,7 @@ a no response by showing that no solution exists.}
         was \( 47474+5272=52746 \).  
       \end{answer}
   \puzzle \item 
+     \cite{Wohascum2}
      The Wohascum County Board of Commissioners, which has 20 members, 
      recently had to elect a President.
      There were three candidates ($A$, $B$, and $C$); on each ballot
@@ -1535,7 +1569,6 @@ a no response by showing that no solution exists.}
      The Board has not yet recovered from the resulting confusion.
      Given that every possible order of $A$, $B$, $C$ appeared on at least 
      one ballot, how many members voted for $B$ as their first choice?
-     \cite{Wohascum2}
      \begin{answer}
        \answerasgiven
        Eight commissioners voted for $B$.
@@ -1580,6 +1613,7 @@ a no response by showing that no solution exists.}
        uncommon when individual choices are pooled.
      \end{answer}
   \puzzle \item   
+     \cite{Monthly63p93}
     ``This system
      of \( n \) linear equations with
      \( n \) unknowns,'' said the Great Mathematician, ``has a curious
@@ -1600,7 +1634,6 @@ a no response by showing that no solution exists.}
      ``Good heavens!'' cried the Poor Nut, ``I am baffled.''
 
      Are you?
-     \cite{Monthly63p93}
      \begin{answer}
        \answerasgiven
        \textit{We have not used ``dependent'' yet; 
