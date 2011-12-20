@@ -665,7 +665,7 @@ and we will see how to describe the
 solution set.
 
 
-\medskip
+\smallskip
 \noindent\textbf{Note}\hspace*{.4em}
 \textit{For all exercises,
 you must justify your answer.
@@ -1664,7 +1664,7 @@ a no response by showing that no solution exists.}
 \subsection{Describing the Solution Set}
 A linear system with a unique solution has a solution set with one element.
 A linear system with no solution has a solution set that is empty.
-In these cases the solution set is easy to describe.
+% In these cases the solution set is easy to describe.
 Solution sets are a challenge to describe only when they contain many elements.
 
 \begin{example}
@@ -1696,43 +1696,30 @@ Thus the solution set
 $\set{(x,y,z)\suchthat\text{$2x+z=3$ and $x-y-z=1$ and $3x-y=4$}}$
 can also be described as
 $\set{(x,y,z)\suchthat\text{$2x+z=3$ and $-y-3z/2=-1/2$}}$.
-However, this second description is not much of an improvement.
-It has two equations instead of three, 
-but it still involves some hard-to-understand interaction among the variables.
+However, this second description is not optimal.
+It has two equations instead of three 
+but it still has some hard to understand interaction among the variables.
 
-To get a description that is free of any such interaction, we take the 
-variable that does not lead any equation, $z$, and use it to describe
+To improve the description, use the 
+variable that does not lead any equation, $z$, to describe
 the variables that do lead, $x$ and $y$.
 The second equation gives
 $y=(1/2)-(3/2)z$ 
 and the first equation gives
 $x=(3/2)-(1/2)z$.
-Thus, the solution set can be described as   
-$ %\begin{equation*}
+Thus the solution set can be described as   
+\begin{equation*}
   \set{ (x,y,z)=
        ((3/2)-(1/2)z,(1/2)-(3/2)z,z)\suchthat z\in\Re}
-$. %\end{equation*}
+  \tag{$*$}
+\end{equation*}
 For instance, $(1/2,-5/2,2)$ is a solution because taking $z=2$ gives
 a first component of $1/2$ and a second component of $-5/2$.
-
-The advantage of this description over the ones above is that 
-the only variable appearing, 
-$z$, is unrestricted\Dash it can be any real number.
 \end{example}
 
-\begin{definition}
-The non-leading variables in an echelon-form linear system are
-\definend{free variables}.
-\index{echelon form!free variable}\index{free variable}
-\end{definition}
-
-In the echelon form system derived in the above example,
-$x$ and $y$ are leading variables and 
-\( z \) is free.
-
 \begin{example}   \label{ex:Parametrize2}
-A linear system can end with more than one variable free.
-This row reduction
+Reduction of a linear system can end with more than one variable free.
+On this system Gauss' method
 \begin{eqnarray*}
    \begin{linsys}{4}
                x  &+  &y   &+  &z   &-  &w   &=  &1  \\
@@ -1755,28 +1742,34 @@ This row reduction
         &   &    &   &    &   &0   &=  &0  
    \end{linsys}
 \end{eqnarray*}
-ends with  \( x \) and \( y \) leading, and with both \( z \) and \( w \) free.
-To get the description that we prefer we will start at the bottom.
-We first express $y$ in terms of the free variables
-$z$ and $w$ with $y=-1+z-w$.
-Next, moving up to the top equation,
-substituting for $y$ in the first equation 
-$x+(-1+z-w)+z-w=1$ and solving for $x$ yields $x=2-2z+2w$.
-Thus,
-the solution set is \( \set{2-2z+2w,-1+z-w,z,w)\suchthat z,w\in\Re} \).
-
-We prefer this description because 
-the only variables that appear, $z$ and $w$, are unrestricted.
-This makes the job of deciding which four-tuples are system solutions 
-into an easy one. 
-For instance, taking 
-$z=1$ and $w=2$ gives the solution $(4,-2,1,2)$.
-In contrast, $(3,-2,1,2)$ is not a solution, since the first component
-of any solution must be $2$ minus twice the third component plus
-twice the fourth.
+leaves  \( x \) and \( y \) leading, and both \( z \) and \( w \) free.
+To get the description that we prefer we work from the bottom.
+We first express the leading variable $y$ in terms of
+$z$ and $w$, with $y=-1+z-w$.
+Moving up to the top equation,
+substituting for $y$ gives
+$x+(-1+z-w)+z-w=1$ and solving for $x$ leaves $x=2-2z+2w$.
+The solution set 
+\begin{equation*}
+   \set{(2-2z+2w,-1+z-w,z,w)\suchthat z,w\in\Re}
+  \tag{**}
+\end{equation*}
+has the leading variables in terms of the others.
 \end{example}
 
+The advantage of the descriptions ($*$) and ($**$) 
+it is that the variables $z$ or $z$ and~$w$ 
+can be any real number.
+This makes the job of deciding which tuples are in the solution set 
+into an easy one.
+For instance, in the prior example taking 
+$z=1$ and $w=2$ gives the solution $(4,-2,1,2)$.
+In contrast, $(3,-2,1,2)$ is not a solution since the first component
+of any solution must be $2$ minus twice the third component plus
+twice the fourth.
+
 \begin{example}    \label{ex:Parametrize1}
+The leading variables need not be the first ones.
 After this reduction
 \begin{eqnarray*}
   \begin{linsys}{4}
@@ -1800,8 +1793,8 @@ After this reduction
          &   &    &   &    &   &0   &=  &0  
    \end{linsys}
 \end{eqnarray*}
-$x$ and $z$ lead, \( y \) and \( w \) are free.
-The solution set is
+$x$ and $z$ lead.
+The solution set, described with the non-leading variables, is
 $\set{ (y,y,2-3w,w)\suchthat y,w\in\Re }$.
 For instance, \( (1,1,2,0) \) satisfies the system\Dash take 
 $y=1$ and $w=0$.
@@ -1809,24 +1802,33 @@ The four-tuple \( (1,0,5,4) \) is not a solution
 since its first coordinate does not equal its second.
 \end{example}
 
-We refer to a variable used to describe a family of solutions
-as a \definend{parameter}\index{parameter} and
-we say that the set above is \definend{parametrized\/} with $y$ and $w$.
+\begin{definition}
+In and echelon form linear system the variables that are not leading
+variables are   
+\definend{free}.\index{echelon form!free variable}\index{free variable}
+\end{definition}
+
+A variable used to describe a family of solutions
+is a \definend{parameter}\index{parameter} and
+we say that the solution set in the prior example 
+is \definend{parametrized\/}\index{parametrized} 
+with $y$ and $w$.
+
 (The terms `parameter' and `free variable' do not mean the same thing.
-Above, $y$ and $w$ are free because in the echelon form system they
-do not lead any row. 
-They are parameters because they are used in the solution set description.
-We could have instead parametrized with $y$ and $z$ by
-rewriting the second equation as $w=2/3-(1/3)z$. 
-In that case, the free variables are still $y$ and $w$, but the parameters 
-are $y$ and $z$.
-Notice that we could not have parametrized with $x$ and $y$, so there is 
-sometimes a restriction on the choice of parameters.
-The terms `parameter' and `free' are related because, as we shall show later
-in this chapter, the solution set of a system can always 
-be parametrized with the free variables. 
-Consequently, we shall parametrize all of our descriptions 
-in this way.)
+In the prior example
+$y$ and~$w$ are free because in the echelon form system they
+do not lead while
+they are parameters because of how 
+they are used in the solution set description.
+Had we instead 
+rewritten the second equation as $w=2/3-(1/3)z$ then
+the free variables would still be $y$ and~$w$ but the parameters 
+would be $y$ and~$z$.)
+
+In the rest of this book 
+we will solve linear systems by bringing them to
+echelon form and then using the free variables as parameters in
+the description of the solution set.
 
 \begin{example}
 This is another system with infinitely many solutions.
@@ -1851,18 +1853,18 @@ This is another system with infinitely many solutions.
 \end{eqnarray*}
 The leading variables are \( x \), \( y \), and \( w \).
 The variable \( z \) is free.
-(Notice here that, although there are infinitely many 
-solutions, the value of one of the variables is fixed\Dash $w=-1$.)
-Write \( w \) in terms of \( z \) with \( w=-1+0z \).
+Notice that, although there are infinitely many 
+solutions, the value of the variable $w$ is fixed at $-1$.
+To parametrize, write \( w \) in terms of \( z \) with \( w=-1+0z \).
 Then \( y=(1/4)z \).
-To express $x$ in terms of $z$, substitute for \( y \) into the first 
+Substitute for \( y \) in the first 
 equation to get \( x=1-(1/2)z \).
 The solution set is $\set{(1-(1/2)z,(1/4)z,z,-1)\suchthat z\in\Re}$.
 \end{example}
 
-We finish this subsection by developing the notation for linear systems 
-and their solution sets that
-we shall use in the rest of this book.
+We finish this subsection by developing a streamlined 
+notation for linear systems 
+and their solution sets.
 
 \begin{definition}
 An \( \nbym{m}{n} \) \definend{matrix}\index{matrix}
@@ -1873,10 +1875,8 @@ Each number in the matrix is an
 \definend{entry}\index{matrix!entry}\index{entry}.
 \end{definition}
 
-\noindent Matrices are usually named by upper case roman letters, e.g.~\( A \).
-Each entry is denoted by the corresponding lower-case letter,
-e.g.~$a_{i,j}$
-is the number in  row~$i$ and column~$j$ of the array.
+\noindent Matrices are usually named by upper case roman letters such as 
+\( A \).
 For instance,
 \begin{equation*}
   A=
@@ -1885,16 +1885,19 @@ For instance,
     3  &4    &-7
   \end{pmatrix}
 \end{equation*}
-has two rows and three columns, and so
+has $2$~rows and $3$~columns and so
 is a \( \nbym{2}{3} \) matrix.
 (Read that as ``two-by-three'';
-the number of rows is always stated first.)
+the number of rows always comes first.)
+Entries are named by the corresponding lower-case letter
+so that $a_{i,j}$
+is the number in row~$i$ and column~$j$ of the array.
 The entry in the second row and first column is \( a_{2,1}=3 \).
 Note that the order of the subscripts matters: 
 $a_{1,2}\neq a_{2,1}$ since \( a_{1,2}=2.2 \). 
-(The parentheses around the array 
-are a typographic device so that when 
-two matrices are side by side
+(The parentheses around the array
+are so that when 
+two matrices are adjacent then
 we can tell where one ends and the other starts.)
 
 Matrices occur throughout this book.
@@ -1948,12 +1951,12 @@ $x+2y=4$ so the solution set is
 \( \set{(4-2z,z,z)\suchthat z\in\Re} \).
 One advantage of the new notation is that 
 the clerical load of Gauss' method\Dash the copying of variables, the
-writing of $+$'s and $=$'s, etc.\Dash is lighter. 
+writing of $+$'s and $=$'s\Dash is lighter. 
 \end{example}
 
-We will also use the array notation
+We will also use the matrix notation
 to clarify the descriptions of solution sets.
-A description like
+The description
 $\set{(2-2z+2w,-1+z-w,z,w)\suchthat z,w\in\Re}$ 
 from \nearbyexample{ex:Parametrize2} is hard to read.
 We will rewrite it to group all the
@@ -2665,7 +2668,7 @@ We will be sure of what can and cannot happen in a reduction.
     \begin{exparts}  
       \item Use the information above to formulate two linear equations 
         with three unknowns and solve it.
-     \item Solution to the system are choices that the farmer can make.  
+     \item Solutions to the system are choices that the farmer can make.  
         Write down two reasonable solutions.
      \item Suppose that in the fall when the crops mature, the farmer 
         can bring in revenue of \$$100$ per acre for corn, 
