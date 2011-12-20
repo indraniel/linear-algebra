@@ -1752,13 +1752,13 @@ $x+(-1+z-w)+z-w=1$ and solving for $x$ leaves $x=2-2z+2w$.
 The solution set 
 \begin{equation*}
    \set{(2-2z+2w,-1+z-w,z,w)\suchthat z,w\in\Re}
-  \tag{**}
+  \tag{$**$}
 \end{equation*}
 has the leading variables in terms of the others.
 \end{example}
 
 The advantage of the descriptions ($*$) and ($**$) 
-it is that the variables $z$ or $z$ and~$w$ 
+it is that the variables 
 can be any real number.
 This makes the job of deciding which tuples are in the solution set 
 into an easy one.
@@ -1803,8 +1803,8 @@ since its first coordinate does not equal its second.
 \end{example}
 
 \begin{definition}
-In and echelon form linear system the variables that are not leading
-variables are   
+In an echelon form linear system the variables that are not leading
+are   
 \definend{free}.\index{echelon form!free variable}\index{free variable}
 \end{definition}
 
@@ -1862,6 +1862,11 @@ equation to get \( x=1-(1/2)z \).
 The solution set is $\set{(1-(1/2)z,(1/4)z,z,-1)\suchthat z\in\Re}$.
 \end{example}
 
+Parametrizing solution sets shows that systems with 
+free variables have infinitely many solutions.
+In the prior example, $z$ takes on all real number values, each associated with
+an element of the solution set, and so there are infinitely many such elements.
+
 We finish this subsection by developing a streamlined 
 notation for linear systems 
 and their solution sets.
@@ -1875,7 +1880,7 @@ Each number in the matrix is an
 \definend{entry}\index{matrix!entry}\index{entry}.
 \end{definition}
 
-\noindent Matrices are usually named by upper case roman letters such as 
+Matrices are usually named by upper case roman letters such as 
 \( A \).
 For instance,
 \begin{equation*}
@@ -1887,8 +1892,8 @@ For instance,
 \end{equation*}
 has $2$~rows and $3$~columns and so
 is a \( \nbym{2}{3} \) matrix.
-(Read that as ``two-by-three'';
-the number of rows always comes first.)
+(read that aloud as ``two-by-three'');
+the number of rows is always first.
 Entries are named by the corresponding lower-case letter
 so that $a_{i,j}$
 is the number in row~$i$ and column~$j$ of the array.
@@ -1898,7 +1903,7 @@ $a_{1,2}\neq a_{2,1}$ since \( a_{1,2}=2.2 \).
 (The parentheses around the array
 are so that when 
 two matrices are adjacent then
-we can tell where one ends and the other starts.)
+we can tell where one ends and the next one begins.)
 
 Matrices occur throughout this book.
 We shall use 
@@ -1924,9 +1929,11 @@ with this matrix.
 \end{equation*}
 The vertical bar just reminds a reader of the difference between the 
 coefficients on the systems's left hand side and the constants on the right.
-When a bar is used to divide a matrix into parts, we call it an
+With a bar, this is an
 \definend{augmented\/}\index{matrix!augmented}\index{augmented matrix} matrix.
-In this notation, Gauss' method goes this way.
+In this notation 
+the clerical load of Gauss' method\Dash the copying of variables, the
+writing of $+$'s and $=$'s\Dash is lighter. 
 \begin{equation*}
     \begin{amatrix}{3}
       1  &2  &0  &4  \\
@@ -1949,9 +1956,6 @@ In this notation, Gauss' method goes this way.
 The second row stands for $y-z=0$ and the first row stands for
 $x+2y=4$ so the solution set is
 \( \set{(4-2z,z,z)\suchthat z\in\Re} \).
-One advantage of the new notation is that 
-the clerical load of Gauss' method\Dash the copying of variables, the
-writing of $+$'s and $=$'s\Dash is lighter. 
 \end{example}
 
 We will also use the matrix notation
@@ -1963,7 +1967,7 @@ We will rewrite it to group all the
 constants together, all the
 coefficients of \( z \) together, and all the coefficients of \( w \)
 together.
-We will write them vertically, in one-column wide matrices.
+We will write them vertically, in one-column matrices.
 \begin{equation*}
   \set{\colvec{2 \\ -1 \\ 0 \\ 0}
        +\colvec{-2 \\ 1 \\ 1 \\ 0}\cdot z
@@ -2021,7 +2025,7 @@ We need to define these operations.
 
 \begin{definition}
 The \definend{vector sum}\index{vector!sum}\index{sum!vector} of
-\( \vec{u} \) and \( \vec{v} \) is this.
+\( \vec{u} \) and \( \vec{v} \) is the vector of the sums.
 \begin{equation*}
   \vec{u}+\vec{v}=
   \colvec{u_1 \\ \vdots \\ u_n}
@@ -2032,15 +2036,16 @@ The \definend{vector sum}\index{vector!sum}\index{sum!vector} of
 \end{equation*}
 \end{definition}
 
-Note that the vectors have to have the same number of entries for 
+Note that the vectors must have the same number of entries for 
 the addition to be defined.
 This entry-by-entry addition works for any pair of matrices, not just vectors, 
-provided that they have the same number of rows and columns.\index{matrix!sum}\index{sum!matrix}
+provided that they have the same number of rows and 
+columns.\index{matrix!sum}\index{sum!matrix}
 
 \begin{definition}
 The \definend{scalar multiplication\/}\index{vector!scalar multiple}%
 \index{scalar multiple!vector} of the real number
-\( r \) and the vector \( \vec{v} \) is this.
+\( r \) and the vector \( \vec{v} \) is the vector of the multiples.
 \begin{equation*}
   r\cdot\vec{v}=
   r\cdot\colvec{v_1 \\ \vdots \\ v_n}
@@ -2049,12 +2054,11 @@ The \definend{scalar multiplication\/}\index{vector!scalar multiple}%
 \end{equation*}
 \end{definition}
 
-As with the addition operation, this entry-by-entry scalar multiplication
-operation
-extends beyond vectors to any 
+As with the addition operation, the entry-by-entry scalar multiplication
+operation extends beyond just vectors to any 
 matrix.\index{matrix!scalar multiplication}\index{scalar multiplication!matrix}
 
-Scalar multiplication can be written in either order: \( r\cdot\vec{v} \) or
+We write scalar multiplication in either order, as \( r\cdot\vec{v} \) or
 \( \vec{v}\cdot r \), or without the `$\cdot$' symbol:~$r\vec{v}$.
 (Do not refer to scalar multiplication 
 as `scalar product' because that name is used for a different operation.)
@@ -2079,7 +2083,7 @@ Notice that the definitions of vector addition and scalar multiplication agree
 where they overlap, for instance, \( \vec{v} +\vec{v} = 2\vec{v} \).
 
 With the notation defined, we can now solve systems in the way 
-that we will use throughout this book.
+that we will use from now on.
 
 \begin{example} \label{ex:ManyParamsInfManySolsSystem}
 This system
@@ -2120,17 +2124,10 @@ We write that in vector form.
        \colvec{1/2 \\ -1 \\ 1/2 \\ 0 \\ 1}u
        \suchthat w,u\in\Re}
 \end{equation*}
-Note again how well vector notation sets off 
+Note how well vector notation sets off 
 the coefficients of each parameter.
 For instance, the third row of the vector form shows plainly that if \( u \) is
 held fixed then \( z \) increases three times as fast as \( w \).
-
-That format also shows plainly that there are infinitely many solutions.
-For example, we can fix $u$ as $0$, let $w$ range over the real numbers,
-and consider the first component $x$.
-We get infinitely many first components and hence
-infinitely many solutions.
-
 Another thing shown plainly is that setting both \( w \) and \( u \) to zero
 gives that this vector
 \begin{equation*}
@@ -2175,54 +2172,57 @@ to a one-parameter solution set.
        +\colvec{-1/3 \\ 2/3 \\ 1}z
        \suchthat z\in\Re}
 \end{equation*}
-%As above, the vector not associated with the parameter
-%\begin{equation*}
-%   \colvec{1 \\ 0 \\ 0}
-%\end{equation*}
-%is a solution of the system.
+As in the prior example, the vector not associated with the parameter
+\begin{equation*}
+   \colvec{1 \\ 0 \\ 0}
+\end{equation*}
+is a particular solution of the system.
 \end{example}
 
 Before the exercises, we pause to point out some things that we have yet to do.
 
-The first two subsections have been on the mechanics of Gauss' method.
-Except for one result, \nearbytheorem{th:GaussMethod}\Dash without which 
-developing the method doesn't make
-sense since it says that the method gives the right answers\Dash we 
+Our first two subsections have been on the mechanics of Gauss' method.
+Except for one result, \nearbytheorem{th:GaussMethod}\Dash which 
+we needed because
+it says that the method gives the right answers\Dash we 
 have not stopped to consider any of the interesting questions
 that arise.
 
-For example, can we always describe solution sets as above, with
+For example, can we prove that we can 
+always describe solution sets as above, with
 a particular solution vector added to an unrestricted linear combination of 
 some other vectors?
-The solution sets we described with unrestricted parameters were easily
-seen to have infinitely many solutions
+We've noted that the solution sets we described in this way 
+have infinitely many solutions,
 so an answer to this question
-could tell us something about the size of solution sets.
-An answer to that question could also help us picture the solution
+could tell us about the size of solution sets.
+An answer to this question could also help us picture the solution
 sets, in $\Re^2$, or in $\Re^3$, etc.
 
 Many questions arise from the observation that Gauss' method can be done in 
 more than one way (for instance, when swapping rows, we may have a choice of 
-which row to swap with).
+more than one row).
 \nearbytheorem{th:GaussMethod} says that we must get the same solution set
 no matter how we proceed, but
 if we do Gauss' method in two different ways
-must we get the same number of free variables both times,
-so that any two solution set descriptions have the same number of parameters?
+must we get the same number of free variables both times?
 Must those be the same variables (e.g., is it impossible to
 solve a problem
-one way and get $y$ and $w$ free or solve it another way and get $y$ and
+one way to get $y$ and $w$ free, and solve it another way to get $y$ and
 $z$ free)?
 
-In the rest of this chapter we answer these questions.
+In the rest of this chapter we will answer these questions.
 The answer to each is `yes'.
-The first question is answered in the last subsection of this section.
-In the second section we give a geometric description of solution sets.
-In the final section of this chapter we tackle the last set of questions. 
+The first question, about the description of solution sets, 
+is answered in the last subsection of this section.
+After that, in the chapter's second section, 
+we will describe the geometry of solution sets.
+In this chapter's final section we will tackle the last set of questions,
+about the parameters. 
 Consequently, by the end of the first chapter we will not only have a 
 solid grounding in the practice of Gauss' method, 
 we will also have a solid grounding in the theory.
-We will be sure of what can and cannot happen in a reduction.
+We will know exactly what can and cannot happen in a reduction.
 
 \begin{exercises}
   \recommended \item  
@@ -2945,6 +2945,7 @@ We will be sure of what can and cannot happen in a reduction.
     \end{exparts}  
    \end{answer}
   \puzzle \item 
+    \cite{Shepelev}
     This  puzzle  is  from  a  Russian   web-site
     \texttt{http://www.arbuz.uz/},  and  there are many solutions
     to it, but mine uses  linear  algebra  and  is  very
@@ -2958,7 +2959,6 @@ We will be sure of what can and cannot happen in a reduction.
 
    The  question  is, can it ever happen that all
    of them assume the same color?
-    \cite{Shepelev}
     \begin{answer}
        \answerasgiven
        My solution was to define the numbers  of  arbuzoids
@@ -3010,6 +3010,7 @@ We will be sure of what can and cannot happen in a reduction.
        solution.
     \end{answer}
   \puzzle \item 
+    \cite{USSROlympiad174}
     \begin{exparts}
       \partsitem Solve the system of equations.
         \begin{equation*}
@@ -3028,7 +3029,6 @@ We will be sure of what can and cannot happen in a reduction.
           \end{linsys}
         \end{equation*}
     \end{exparts}
-    \cite{USSROlympiad174}
     \begin{answer}
        \answerasgiven
        \begin{exparts}
@@ -3091,6 +3091,7 @@ We will be sure of what can and cannot happen in a reduction.
       \end{exparts}
     \end{answer}
   \puzzle \item 
+    \cite{MathMag52p48}
     In air a gold-sur\-faced sphere weighs \( 7588 \)
     grams.
     It is known that it may contain one or more of the metals aluminum,
@@ -3110,7 +3111,6 @@ We will be sure of what can and cannot happen in a reduction.
          Silver    &\( 10.8 \)
        \end{tabular}
     \end{center}
-    \cite{MathMag52p48}
     \begin{answer}
       \answerasgiven
       Let \( u \), \( v \), \( x \), \( y \), \( z \) be the volumes in
