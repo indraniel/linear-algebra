@@ -81,10 +81,13 @@
                     #1_{#3,1} &#1_{#3,2} &\ldots  &#1_{#3,#2}
                   \end{array}
                \right)  }
-% with mathtools we can have column entries right flushed
+% With mathtools we can have column entries right flushed
+% There is an optional argument \begin{mat}[c] .. \end{mat} for
+% centered columns.  Perhaps the rule is that numbers are better 
+% right-flushed but if there are any letters it is better centered?
 \newenvironment{mat}[1][r]{\begin{pmatrix*}[#1]}{\end{pmatrix*}}
-\newenvironment{amat}[1]{%
-  \left(\begin{array}{@{}*{#1}{r}|r@{}}
+\newenvironment{amat}[2][r]{%
+  \left(\begin{array}{@{}*{#2}{r}|r@{}}
 }{%
   \end{array}\right)
 }
@@ -95,7 +98,10 @@
 %------------colvec and rowvec
 % Column vector and row vector.  Usage:
 %  \colvec{1  \\ 2 \\ 3 \\ 4} and \rowvec{1  &2  &3}
-\newcommand{\colvec}[1]{\begin{mat} #1 \end{mat}}
+% Colvec takes an optional argument \colvec[c]{x_1 \\ 0}.  Perhaps 
+% digits look better right aligned, but if there are any letters it
+% needs to be centered?
+\newcommand{\colvec}[2][r]{\begin{mat}[#1] #2 \end{mat}}
 \newcommand{\rowvec}[1]{\begin{mat} #1 \end{mat}}
 
 

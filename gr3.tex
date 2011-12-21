@@ -1208,7 +1208,7 @@ the matching lower-case greek letter names the rows.
     \begin{mat}
       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_1$\ $\cdots$}  \\[.5ex]
       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_2$\ $\cdots$}  \\[.5ex]
-      \vdots{\makebox[2.25cm]{$\cdots$\ $\beta_1$\ $\cdots$}}      \\[.5ex]
+      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\beta_1$\ $\cdots$}}   \\[.5ex]
       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_m$\ $\cdots$}  
     \end{mat}
 \end{equation*}
@@ -1249,7 +1249,7 @@ In the base step, that
 zero reduction operations suffice, the two matrices are equal and each 
 row of $B$ is obviously a combination of
 $A$'s rows: $\vec{\beta}_i
-  =0\cdot\vec{\alpha}_1+\dots+1\cdot\vec{\alpha}_i+\dots+0\cdot\vec{\alpha}_m$.
+  =0\cdot\vec{\alpha}_1+\cdots+1\cdot\vec{\alpha}_i+\cdots+0\cdot\vec{\alpha}_m$.
 
 For the inductive step, assume the inductive hypothesis:~with $t\geq 0$,
 if a matrix can be derived from \( A \) in \( t \) or fewer operations 
@@ -1375,8 +1375,8 @@ Let $R$ be in echelon form.
 Suppose, to obtain a contradiction, that some nonzero row is a linear
 combination of the others.
 \begin{equation*}
-   \rho_i=c_1\rho_1+\ldots+c_{i-1}\rho_{i-1}+
-               c_{i+1}\rho_{i+1}+\ldots+c_m\rho_m
+   \rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
+               c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
 \end{equation*}
 We will first use induction to show that the coefficients 
 $c_1$, \ldots, $c_{i-1}$ associated with rows above $\rho_i$ are all zero.
@@ -1388,15 +1388,15 @@ is to show that the first coefficient $c_1$ is zero.
 Let the first row's leading entry be in column number \( \ell_1 \) 
 and consider the equation of entries in that column.
 \begin{equation*}
-   \rho_{i,\ell_1}=c_1\rho_{1,\ell_1}+\ldots+c_{i-1}\rho_{i-1,\ell_1}
-               +c_{i+1}\rho_{i+1,\ell_1}+\ldots+c_m\rho_{m,\ell_1}
+   \rho_{i,\ell_1}=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\rho_{i-1,\ell_1}
+               +c_{i+1}\rho_{i+1,\ell_1}+\cdots+c_m\rho_{m,\ell_1}
 \end{equation*}
 The matrix is in echelon form so the entries 
 $\rho_{2,\ell_1}$, \ldots, $\rho_{m,\ell_1}$, including
 $\rho_{i,\ell_1}$, are all zero. 
 \begin{equation*}
-   0=c_1\rho_{1,\ell_1}+\dots+c_{i-1}\cdot 0
-               +c_{i+1}\cdot 0+\dots+c_m\cdot 0
+   0=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\cdot 0
+               +c_{i+1}\cdot 0+\cdots+c_m\cdot 0
 \end{equation*}
 Because the entry $\rho_{1,\ell_1}$ is nonzero as it leads its row,
 the coefficient $c_1$ must be zero.  
@@ -1448,7 +1448,7 @@ matrix of coefficients.
   \begin{linsys}{4}
     a_{1,1}x_1  &+  &a_{1,2}x_2  &+  &\cdots  &+  &a_{1,n}x_n  &=  &0  \\
     a_{2,1}x_1  &+  &a_{2,2}x_2  &+  &\cdots  &+  &a_{2,n}x_n  &=  &0  \\
-               &\vdotswithin{a_{1,2}x_2}  \\
+              &&&&&&&\vdotswithin{=}  \\
     a_{m,1}x_1  &+  &a_{m,2}x_2  &+  &\cdots  &+  &a_{m,n}x_n  &=  &0  
   \end{linsys}
   \tag{$*$}
@@ -1459,7 +1459,7 @@ is the same as the set of solution to this system
   \begin{linsys}{4}
     b_{1,1}x_1  &+  &b_{1,2}x_2  &+  &\cdots  &+  &b_{1,n}x_n  &=  &0  \\
     b_{2,1}x_1  &+  &b_{2,2}x_2  &+  &\cdots  &+  &b_{2,n}x_n  &=  &0  \\
-               &\vdotswithin{b_{1,2}x_2}  \\
+               &&&&&&&\vdotswithin{=}  \\
     b_{m,1}x_1  &+  &b_{m,2}x_2  &+  &\cdots  &+  &b_{m,n}x_n  &=  &0  
   \end{linsys}
   \tag{$**$}
@@ -1470,7 +1470,7 @@ and to this one.
   \begin{linsys}{4}
     c_{1,1}x_1  &+  &c_{1,2}x_2  &+  &\cdots  &+  &c_{1,n}x_n  &=  &0  \\
     c_{2,1}x_1  &+  &c_{2,2}x_2  &+  &\cdots  &+  &c_{2,n}x_n  &=  &0  \\
-               &\vdotswithin{c_{1,2}x_2}  \\
+               &&&&&&&\vdotswithin{=}  \\
     c_{m,1}x_1  &+  &c_{m,2}x_2  &+  &\cdots  &+  &c_{m,n}x_n  &=  &0  
   \end{linsys}
   \tag{$\mathord{*}\mathord{*}\mathord{*}$}
@@ -1506,7 +1506,7 @@ another way and get $y$ and $w$ free, or solve it one way and get two free
 variables while solving it another way yields three. 
 
 
-% %================= existing text
+% %================= old text
 
 % We can now prove that each matrix is row equivalent to one and only one
 % reduced echelon form matrix.
