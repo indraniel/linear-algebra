@@ -1185,38 +1185,38 @@ beginfig(28) % equiv relation; some row-equiv mats shown double-arrowed
   %input arrow
   z0=(.8w,0v);
   boxit.a0(btex \strut{\scriptsize $\displaystyle
-                 \begin{pmatrix}
+                 \begin{mat}
 		   1  &0  \\
 		   0  &1 
-		 \end{pmatrix}$} etex);
+		 \end{mat}$} etex);
   a0.c=z0;
   z1=(0w,.4v);
   boxit.a1(btex {\scriptsize $\displaystyle
-                 \begin{pmatrix}
+                 \begin{mat}
 		   2  &2  \\
 		   4  &3 
-		 \end{pmatrix}$} etex);
+		 \end{mat}$} etex);
   a1.c=z1;	       
   z2=(.55w,.9v);
   boxit.a2(btex {\scriptsize $\displaystyle
-                 \begin{pmatrix}
+                 \begin{mat}
 		   2  &0  \\
 		   0  &-1
-		 \end{pmatrix}$} etex);
+		 \end{mat}$} etex);
   a2.c=z2;
   z3=(1.35w,.75v);
   boxit.a3(btex {\scriptsize $\displaystyle
-                 \begin{pmatrix}
+                 \begin{mat}
 		   1  &1  \\
 		   0  &-1
-		 \end{pmatrix}$} etex);
+		 \end{mat}$} etex);
   a3.c=z3;
   z4=(1.5w,.25v);
   boxit.a4(btex {\scriptsize $\displaystyle
-                 \begin{pmatrix}
+                 \begin{mat}
 		   2  &2  \\
 		   0  &-1
-		 \end{pmatrix}$} etex);
+		 \end{mat}$} etex);
   a4.c=z4;
   % draw them w/o enclosing box shown
   drawunboxed(a0,a1,a2,a3,a4);

@@ -6,27 +6,27 @@ After developing the mechanics of Gauss' method,
 we observed that it can be done in more than one way.
 One example is that from this matrix 
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
        2  &2  \\
        4  &3
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 we could derive any of these three echelon form matrices.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
        2  &2  \\
        0  &-1
-    \end{pmatrix}
+    \end{mat}
     \qquad
-    \begin{pmatrix}
+    \begin{mat}
        1  &1  \\
        0  &-1
-    \end{pmatrix}
+    \end{mat}
     \qquad
-    \begin{pmatrix}
+    \begin{mat}
        2  &0  \\
        0  &-1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 The first results from $-2\rho_1+\rho_2$.
 The second comes from following $(1/2)\rho_1$ with $-4\rho_1+\rho_2$.
@@ -72,44 +72,44 @@ To solve
 we can start as usual by going to echelon form.
 \begin{equation*}
   \grstep{-\rho_1+\rho_3}
-    \begin{amatrix}{3}
+    \begin{amat}{3}
        1  &1  &-2 &-2  \\
        0  &1  &3  &7   \\
        0  &-1 &1  &1
-    \end{amatrix}
+    \end{amat}
   \grstep{\rho_2+\rho_3}
-    \begin{amatrix}{3}
+    \begin{amat}{3}
        1  &1  &-2 &-2  \\
        0  &1  &3  &7   \\
        0  &0  &4  &8
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 We can keep going to a second stage
 by making the leading entries into ones
 \begin{equation*}
     \grstep{(1/4)\rho_3}
-    \begin{amatrix}{3}
+    \begin{amat}{3}
        1  &1  &-2 &-2  \\
        0  &1  &3  &7   \\
        0  &0  &1  &2
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 and then to a third stage that uses the leading entries 
 to eliminate all of the other entries in each column 
 by combining upwards.
 \begin{equation*}
   \grstep[2\rho_3+\rho_1]{-3\rho_3+\rho_2}
-    \begin{amatrix}{3}
+    \begin{amat}{3}
        1  &1  &0  &2   \\
        0  &1  &0  &1   \\
        0  &0  &1  &2
-    \end{amatrix}
+    \end{amat}
   \grstep{-\rho_2+\rho_1}
-    \begin{amatrix}{3}
+    \begin{amat}{3}
        1  &0  &0  &1   \\
        0  &1  &0  &1   \\
        0  &0  &1  &2
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 The answer is \( x=1 \), \( y=1 \), and \( z=2 \).
 \end{example}
@@ -125,25 +125,25 @@ The middle stage operations that
 turn the leading entries into \( 1 \)'s
 don't interact, so we can combine them into a single step.
 \begin{eqnarray*}
-    \begin{amatrix}{2}
+    \begin{amat}{2}
        2   &1   &7   \\
        4   &-2  &6
-    \end{amatrix}
+    \end{amat}
   &\grstep{-2\rho_1+\rho_2}
-  &\begin{amatrix}{2}
+  &\begin{amat}{2}
        2   &1   &7   \\
        0   &-4  &-8
-    \end{amatrix}                                   \\
+    \end{amat}                                   \\
   &\grstep[(-1/4)\rho_2]{(1/2)\rho_1}
-  &\begin{amatrix}{2}
+  &\begin{amat}{2}
        1   &1/2   &7/2   \\
        0   &1     &2
-    \end{amatrix}                                    \\
+    \end{amat}                                    \\
   &\grstep{-(1/2)\rho_2+\rho_1}
-  &\begin{amatrix}{2}
+  &\begin{amat}{2}
        1   &0   &5/2   \\
        0   &1   &2
-    \end{amatrix}
+    \end{amat}
 \end{eqnarray*}
 The answer is $x=5/2$ and $y=2$.
 \end{example}
@@ -187,25 +187,25 @@ parametrization can also be read off of the reduced echelon form.
 Consider, for example, this system that is shown brought to echelon form and
 then to reduced echelon form.
 \begin{multline*}
-  \begin{amatrix}{4}
+  \begin{amat}{4}
      2  &6  &1  &2  &5  \\
      0  &3  &1  &4  &1  \\
      0  &3  &1  &2  &5
-  \end{amatrix}
+  \end{amat}
   \grstep{-\rho_2+\rho_3}
-  \begin{amatrix}{4}
+  \begin{amat}{4}
      2  &6  &1  &2  &5  \\
      0  &3  &1  &4  &1  \\
      0  &0  &0  &-2 &4
-  \end{amatrix}                                        \\
+  \end{amat}                                        \\
   \grstep[(1/3)\rho_2 \\ -(1/2)\rho_3]{(1/2)\rho_1}
   \;\grstep[-\rho_3+\rho_1]{(4/3)\rho_3+\rho_2}
   \;\grstep{-3\rho_2+\rho_1}
-  \begin{amatrix}{4}
+  \begin{amat}{4}
      1  &0  &-1/2  &0  &-9/2  \\
      0  &1  &1/3   &0  &3  \\
      0  &0  &0     &1  &-2
-  \end{amatrix}
+  \end{amat}
 \end{multline*}
 Starting with the middle matrix, the echelon form version, 
 back substitution produces $-2x_4=4$ so that $x_4=-2$,
@@ -250,11 +250,11 @@ For instance,
     x_2 &=3-x_3
   \end{aligned}
   \quad\Longleftrightarrow\quad
-  \begin{amatrix}{3}
+  \begin{amat}{3}
     1  &0  &2  &4  \\
     0  &1  &1  &3  \\
     0  &0  &0  &0
-  \end{amatrix}
+  \end{amat}
 \end{equation*}
 (to move from left to right we also need to know how many equations are
 in the system).
@@ -328,10 +328,10 @@ The three echelon form matrices from the start of this section, and
 the matrix they were derived from, all give this reduced echelon form
 matrix.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     1  &0  \\
     0  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 We think of these matrices as related to each other.
 The next result speaks to this relationship.
@@ -479,106 +479,106 @@ or not they come to the same reduced echelon form.
        These answers show only the Gauss-Jordan reduction.
        With it, describing the solution set is easy. 
        \begin{exparts}
-         \partsitem $\begin{amatrix}{2}
+         \partsitem $\begin{amat}{2}
                1  &1  &2  \\
                1  &-1 &0
-             \end{amatrix}
+             \end{amat}
              \grstep{-\rho_1+\rho_2}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                1  &1  &2  \\
                0  &-2 &-2
-             \end{amatrix}                         
+             \end{amat}                         
              \grstep{-(1/2)\rho_2}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                1  &1  &2  \\
                0  &1  &1
-             \end{amatrix}                         
+             \end{amat}                         
              \grstep{-\rho_2+\rho_1}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                1  &0  &1  \\
                0  &1  &1
-             \end{amatrix}$
+             \end{amat}$
          \partsitem $
-             \begin{amatrix}{3}
+             \begin{amat}{3}
                1  &0  &-1  &4  \\
                2  &2  &0   &1
-             \end{amatrix}
+             \end{amat}
              \grstep{-2\rho_1+\rho_2}
-             \begin{amatrix}{3}
+             \begin{amat}{3}
                1  &0  &-1  &4  \\
                0  &2  &2   &-7
-             \end{amatrix}                    
+             \end{amat}                    
              \grstep{(1/2)\rho_2}
-             \begin{amatrix}{3}
+             \begin{amat}{3}
                1  &0  &-1  &4  \\
                0  &1  &1   &-7/2
-             \end{amatrix}$
+             \end{amat}$
          \partsitem 
            \begin{equation*}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                3  &-2  &1  \\
                6  &1   &1/2
-             \end{amatrix}
+             \end{amat}
              \grstep{-2\rho_1+\rho_2}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                3  &-2  &1  \\
                0  &5   &-3/2
-             \end{amatrix}                       
+             \end{amat}                       
              \grstep[(1/5)\rho_2]{(1/3)\rho_1}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                1  &-2/3&1/3 \\
                0  &1   &-3/10
-             \end{amatrix}                       
+             \end{amat}                       
              \grstep{(2/3)\rho_2+\rho_1}
-             \begin{amatrix}{2}
+             \begin{amat}{2}
                1  &0   &2/15 \\
                0  &1   &-3/10
-             \end{amatrix}
+             \end{amat}
           \end{equation*}
         \partsitem A row swap here makes the arithmetic easier.
          \begin{multline*}
-          \begin{amatrix}{3}
+          \begin{amat}{3}
             2  &-1  &0  &-1  \\
             1  &3   &-1 &5   \\
             0  &1   &2  &5
-          \end{amatrix}
+          \end{amat}
           \grstep{-(1/2)\rho_1+\rho_2}
-          \begin{amatrix}{3}
+          \begin{amat}{3}
             2  &-1  &0  &-1   \\
             0  &7/2 &-1 &11/2 \\
             0  &1   &2  &5
-          \end{amatrix}                     
+          \end{amat}                     
           \grstep{\rho_2\leftrightarrow\rho_3}
-          \begin{amatrix}{3}
+          \begin{amat}{3}
             2  &-1  &0  &-1   \\
             0  &1   &2  &5    \\
             0  &7/2 &-1 &11/2
-          \end{amatrix}                   \\                 
+          \end{amat}                   \\                 
           \begin{aligned}
             &\grstep{-(7/2)\rho_2+\rho_3}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               2  &-1  &0  &-1   \\
               0  &1   &2  &5    \\
               0  &0   &-8 &-12
-            \end{amatrix}                     
+            \end{amat}                     
             \grstep[-(1/8)\rho_2]{(1/2)\rho_1}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               1  &-1/2&0  &-1/2 \\
               0  &1   &2  &5    \\
               0  &0   &1  &3/2
-            \end{amatrix}                     \\                     
+            \end{amat}                     \\                     
             &\grstep{-2\rho_3+\rho_2}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               1  &-1/2&0  &-1/2 \\
               0  &1   &0  &2    \\
               0  &0   &1  &3/2
-            \end{amatrix}                     
+            \end{amat}                     
             \grstep{(1/2)\rho_2+\rho_1}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               1  &0   &0  &1/2  \\
               0  &1   &0  &2    \\
               0  &0   &1  &3/2
-            \end{amatrix}
+            \end{amat}
           \end{aligned}
         \end{multline*}
        \end{exparts}  
@@ -586,127 +586,127 @@ or not they come to the same reduced echelon form.
   \recommended \item 
     Find the reduced echelon form of each matrix.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}
           2  &1  \\
           1  &3
-        \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+        \end{mat}  \)
+      \partsitem \( \begin{mat}
           1  &3  &1  \\
           2  &0  &4  \\
          -1  &-3 &-3
-        \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+        \end{mat}  \)
+      \partsitem \( \begin{mat}
           1  &0  &3  &1  &2  \\
           1  &4  &2  &1  &5  \\
           3  &4  &8  &1  &2
-        \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+        \end{mat}  \)
+      \partsitem \( \begin{mat}
           0  &1  &3  &2  \\
           0  &0  &5  &6  \\
           1  &5  &1  &5
-        \end{pmatrix}  \)
+        \end{mat}  \)
     \end{exparts*}
     \begin{answer}
       Use Gauss-Jordan reduction.
       \begin{exparts}
         \partsitem $
             \grstep{-(1/2)\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               2  &1  \\
               0  &5/2
-            \end{pmatrix}
+            \end{mat}
             \grstep[(2/5)\rho_2]{(1/2)\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &1/2\\
               0  &1
-            \end{pmatrix}                      
+            \end{mat}                      
             \grstep{-(1/2)\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  \\
               0  &1
-            \end{pmatrix}$
+            \end{mat}$
         \partsitem $
             \grstep[\rho_1+\rho_3]{-2\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &3  &1  \\
               0  &-6 &2  \\
               0  &0  &-2
-            \end{pmatrix}
+            \end{mat}
             \grstep[-(1/2)\rho_3]{-(1/6)\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &3  &1     \\
               0  &1  &-1/3  \\
               0  &0  &1
-            \end{pmatrix}                  
+            \end{mat}                  
             \grstep[-\rho_3+\rho_1]{(1/3)\rho_3+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &3  &0     \\
               0  &1  &0     \\
               0  &0  &1
-            \end{pmatrix}                  
+            \end{mat}                  
             \grstep{-3\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &0     \\
               0  &1  &0     \\
               0  &0  &1
-            \end{pmatrix}$
+            \end{mat}$
         \partsitem \ \begin{multline*}
             \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &3  &1  &2  \\
               0  &4  &-1 &0  &3  \\
               0  &4  &-1 &-2 &-4
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_2+\rho_3}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &3  &1  &2  \\
               0  &4  &-1 &0  &3  \\
               0  &0  &0  &-2 &-7
-            \end{pmatrix}                           \\
+            \end{mat}                           \\
             \grstep[-(1/2)\rho_3]{(1/4)\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &3    &1  &2  \\
               0  &1  &-1/4 &0  &3/4  \\
               0  &0  &0    &1  &7/2
-            \end{pmatrix}                           
+            \end{mat}                           
             \grstep{-\rho_3+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &3    &0  &-3/2  \\
               0  &1  &-1/4 &0  &3/4     \\
               0  &0  &0    &1  &7/2
-            \end{pmatrix}
+            \end{mat}
           \end{multline*}
         \partsitem \ \begin{multline*}
             \grstep{\rho_1\leftrightarrow\rho_3}
-            \begin{pmatrix}
+            \begin{mat}
               1  &5  &1  &5  \\
               0  &0  &5  &6  \\
               0  &1  &3  &2
-            \end{pmatrix}
+            \end{mat}
             \grstep{\rho_2\leftrightarrow\rho_3}
-            \begin{pmatrix}
+            \begin{mat}
               1  &5  &1  &5  \\
               0  &1  &3  &2  \\
               0  &0  &5  &6
-            \end{pmatrix}                  
+            \end{mat}                  
             \grstep{(1/5)\rho_3}
-            \begin{pmatrix}
+            \begin{mat}
               1  &5  &1  &5  \\
               0  &1  &3  &2  \\
               0  &0  &1  &6/5
-            \end{pmatrix}                  \\
+            \end{mat}                  \\
             \grstep[-\rho_3+\rho_1]{-3\rho_3+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &5  &0  &19/5  \\
               0  &1  &0  &-8/5  \\
               0  &0  &1  &6/5
-            \end{pmatrix}                  
+            \end{mat}                  
             \grstep{-5\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &0  &59/5  \\
               0  &1  &0  &-8/5  \\
               0  &0  &1  &6/5
-            \end{pmatrix}
+            \end{mat}
           \end{multline*}
       \end{exparts}  
     \end{answer}
@@ -742,15 +742,15 @@ or not they come to the same reduced echelon form.
       \partsitem The ``Jordan'' half goes this way.
         \begin{equation*}
           \grstep[-(1/3)\rho_2]{(1/2)\rho_1}
-          \begin{amatrix}{3}
+          \begin{amat}{3}
             1  &1/2 &-1/2 &1/2  \\
             0  &1   &-2/3 &-1/3
-          \end{amatrix}
+          \end{amat}
           \grstep{-(1/2)\rho_2+\rho_1}
-          \begin{amatrix}{3}
+          \begin{amat}{3}
             1  &0   &-1/6 &2/3  \\
             0  &1   &-2/3 &-1/3
-          \end{amatrix}
+          \end{amat}
         \end{equation*}
         The solution set is this
         \begin{equation*}
@@ -761,11 +761,11 @@ or not they come to the same reduced echelon form.
       \partsitem The second half is
         \begin{equation*}
           \grstep{\rho_3+\rho_2}
-          \begin{amatrix}{4}
+          \begin{amat}{4}
             1  &0  &-1  &0  &1 \\
             0  &1  &2   &0  &3 \\
             0  &0  &0   &1  &0
-          \end{amatrix}
+          \end{amat}
         \end{equation*}
         so the solution is this.
         \begin{equation*}
@@ -776,12 +776,12 @@ or not they come to the same reduced echelon form.
       \partsitem This Jordan half
         \begin{equation*}
           \grstep{\rho_2+\rho_1}
-          \begin{amatrix}{4}
+          \begin{amat}{4}
             1  &0  &1   &1  &0 \\
             0  &1  &0   &1  &0 \\
             0  &0  &0   &0  &0 \\
             0  &0  &0   &0  &0
-          \end{amatrix}
+          \end{amat}
         \end{equation*}
         gives 
         \begin{equation*}
@@ -794,15 +794,15 @@ or not they come to the same reduced echelon form.
       \partsitem The ``Jordan'' half
         \begin{equation*}
           \grstep{-(1/7)\rho_2}
-          \begin{amatrix}{5}
+          \begin{amat}{5}
             1  &2  &3   &1   &-1   &1  \\
             0  &1  &8/7 &2/7 &-4/7 &0
-          \end{amatrix}
+          \end{amat}
           \grstep{-2\rho_2+\rho_1}
-          \begin{amatrix}{5}
+          \begin{amat}{5}
             1  &0  &5/7 &3/7 &1/7  &1  \\
             0  &1  &8/7 &2/7 &-4/7 &0
-          \end{amatrix}
+          \end{amat}
         \end{equation*}
         ends with this solution set.
         \begin{equation*}
@@ -817,35 +817,35 @@ or not they come to the same reduced echelon form.
   \item 
     Give two distinct echelon form versions of this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
         2  &1  &1  &3  \\
         6  &4  &1  &2  \\
         1  &5  &1  &5
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       Routine Gauss' method gives one:
       \begin{equation*}
         \grstep[-(1/2)\rho_1+\rho_3]{-3\rho_1+\rho_2}
-        \begin{pmatrix}
+        \begin{mat}
           2  &1  &1  &3  \\
           0  &1  &-2 &-7 \\
           0  &9/2&1/2&7/2
-        \end{pmatrix}
+        \end{mat}
         \grstep{-(9/2)\rho_2+\rho_3}
-        \begin{pmatrix}
+        \begin{mat}
           2  &1  &1    &3  \\
           0  &1  &-2   &-7 \\
           0  &0  &19/2 &35
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and any cosmetic change, like multiplying the bottom row by \( 2 \),
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           2  &1  &1    &3  \\
           0  &1  &-2   &-7 \\
           0  &0  &19   &70
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       gives another.  
     \end{answer}
@@ -864,108 +864,108 @@ or not they come to the same reduced echelon form.
       In particular, they includes the cases $a=0$ and $b=0$.
       \begin{exparts}
         \partsitem 
-          $\begin{pmatrix}
+          $\begin{mat}
             0  &0  \\
             0  &0
-          \end{pmatrix}$,
-          $\begin{pmatrix}
+          \end{mat}$,
+          $\begin{mat}
             1  &a  \\
             0  &0
-          \end{pmatrix}$, 
-          $\begin{pmatrix}
+          \end{mat}$, 
+          $\begin{mat}
             0  &1  \\
             0  &0
-          \end{pmatrix}$, 
-          $\begin{pmatrix}
+          \end{mat}$, 
+          $\begin{mat}
             1  &0  \\
             0  &1
-          \end{pmatrix}$
+          \end{mat}$
         \partsitem
-          $\begin{pmatrix}
+          $\begin{mat}
                0  &0  &0  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &a  &b  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                0  &1  &a  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                0  &0  &1  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &0  &a  \\
                0  &1  &b
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &a  &0  \\
                0  &0  &1
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                0  &1  &0  \\
                0  &0  &1
-             \end{pmatrix}$
+             \end{mat}$
         \partsitem
-          $\begin{pmatrix}
+          $\begin{mat}
                0  &0  \\
                0  &0  \\
                0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &a  \\
                0  &0  \\
                0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                0  &1  \\
                0  &0  \\
                0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &0  \\
                0  &1  \\
                0  &0
-             \end{pmatrix}$
+             \end{mat}$
         \partsitem
-          $\begin{pmatrix}
+          $\begin{mat}
                0  &0  &0  \\
                0  &0  &0  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &a  &b  \\
                0  &0  &0  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                0  &1  &a  \\
                0  &0  &0  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                0  &0  &1  \\
                0  &0  &0  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &0  &a  \\
                0  &1  &b  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &a  &0  \\
                0  &0  &1  \\
                0  &0  &0
-             \end{pmatrix}$,
-          $\begin{pmatrix}
+             \end{mat}$,
+          $\begin{mat}
                1  &0  &0  \\
                0  &1  &0  \\
                0  &0  &1
-             \end{pmatrix}$
+             \end{mat}$
       \end{exparts}  
     \end{answer}
   \recommended \item  
@@ -977,16 +977,16 @@ or not they come to the same reduced echelon form.
       matrix that is all \( 0 \)'s
       except for \( 1 \)'s down the upper-left to lower-right diagonal, e.g.,
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            1  &0  \\
            0  &1  \\
-         \end{pmatrix},
+         \end{mat},
          \quad\text{or}\quad
-         \begin{pmatrix}
+         \begin{mat}
            1  &0  &0  \\
            0  &1  &0  \\
            0  &0  &1
-         \end{pmatrix},
+         \end{mat},
          \quad\text{etc.}
       \end{equation*}  
     \end{answer}
@@ -1064,47 +1064,47 @@ or not they come to the same reduced echelon form.
         change $A$.
       \partsitem For instance,
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}
             1  &2  \\
             3  &4  
-          \end{pmatrix}
+          \end{mat}
           \grstep{-\rho_1+\rho_1}
-          \begin{pmatrix}
+          \begin{mat}
             0  &0  \\
             3  &4  
-          \end{pmatrix}
+          \end{mat}
           \grstep{\rho_1+\rho_1}
-          \begin{pmatrix}
+          \begin{mat}
             0  &0  \\
             3  &4  
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         leaves the matrix changed.
       \partsitem If $i\neq j$ then
         \begin{eqnarray*}
-          \begin{pmatrix}
-            \vdots                     \\
+          \begin{mat}
+            \vdotswithin{a_{i,1}}                     \\
             a_{i,1}  &\cdots  &a_{i,n}  \\
-            \vdots                     \\
+            \vdotswithin{a_{i,1}}                     \\
             a_{j,1}  &\cdots  &a_{j,n}  \\
-            \vdots                     
-          \end{pmatrix}
+            \vdotswithin{a_{i,1}}                     
+          \end{mat}
           &\grstep{k\rho_i+\rho_j}
-          &\begin{pmatrix}
-            \vdots                                      \\
+          &\begin{mat}
+            \vdotswithin{a_{i,1}}                                      \\
             a_{i,1}           &\cdots  &a_{i,n}          \\
-            \vdots                                      \\
+            \vdotswithin{a_{i,1}}                                      \\
             ka_{i,1}+a_{j,1}  &\cdots  &ka_{i,n}+a_{j,n}  \\
-            \vdots                     
-          \end{pmatrix}                                        \\
+            \vdotswithin{a_{i,1}}                     
+          \end{mat}                                        \\
           &\grstep{-k\rho_i+\rho_j}
-          &\begin{pmatrix}
-            \vdots                                      \\
+          &\begin{mat}
+            \vdotswithin{a_{i,1}}                                      \\
             a_{i,1}           &\cdots  &a_{i,n}          \\
-            \vdots                                      \\
+            \vdotswithin{a_{i,1}}                                      \\
             -ka_{i,1}+ka_{i,1}+a_{j,1}  &\cdots &-ka_{i,n}+ka_{i,n}+a_{j,n} \\
-            \vdots                     
-          \end{pmatrix}
+            \vdotswithin{a_{i,1}}                     
+          \end{mat}
         \end{eqnarray*}
         does indeed give $A$ back.
         (Of course, if $i=j$ then the third matrix would have entries of the 
@@ -1197,28 +1197,20 @@ that, where a matrix is named with an upper case roman letter,
 the matching lower-case greek letter names the rows.
 \begin{equation*}
   A=
-    \begin{pmatrix}
-%      \colorbox{lightergray}{\makebox[2.25cm]{$\alpha_1$}}   \\[.5ex]
-%      \colorbox{lightergray}{\makebox[2.25cm]{$\alpha_2$}}  \\[.5ex]
-%      \vdots                                                     \\[.5ex]
-%      \colorbox{lightergray}{\makebox[2.25cm]{$\alpha_m$}}  
+    \begin{mat}
       \makebox[2.25cm]{$\cdots$\ $\alpha_1$\ $\cdots$}   \\[.5ex]
       \makebox[2.25cm]{$\cdots$\ $\alpha_2$\ $\cdots$}   \\[.5ex]
-      \vdots                                                     \\[.5ex]
+      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\alpha_1$\ $\cdots$}}                  \\[.5ex]
       \makebox[2.25cm]{$\cdots$\ $\alpha_m$\ $\cdots$}   
-    \end{pmatrix}
+    \end{mat}
   \qquad
   B=
-    \begin{pmatrix}
-%      \colorbox{lightergray}{\makebox[2.25cm]{$\smash[b]{\beta}_1$}}  \\[.5ex]
-%      \colorbox{lightergray}{\makebox[2.25cm]{$\smash[b]{\beta}_2$}}  \\[.5ex]
-%      \vdots                                                    \\[.5ex]
-%      \colorbox{lightergray}{\makebox[2.25cm]{$\smash[b]{\beta}_m$}}  
+    \begin{mat}
       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_1$\ $\cdots$}  \\[.5ex]
       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_2$\ $\cdots$}  \\[.5ex]
-      \vdots                                                    \\[.5ex]
+      \vdots{\makebox[2.25cm]{$\cdots$\ $\beta_1$\ $\cdots$}}      \\[.5ex]
       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_m$\ $\cdots$}  
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 
 \begin{corollary} \label{cor:RowsOfEqMatsLinCombos}
@@ -1287,25 +1279,25 @@ so the proposition follows.
 \begin{example}
 In the reduction
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
        0  &2  \\
        1  &1
-     \end{pmatrix}
+     \end{mat}
     \grstep{\rho_1\leftrightarrow\rho_2}
-    \begin{pmatrix}
+    \begin{mat}
        1  &1  \\
        0  &2
-     \end{pmatrix}                  
+     \end{mat}                  
     \grstep{(1/2)\rho_2}
-    \begin{pmatrix}
+    \begin{mat}
        1  &1  \\
        0  &1
-     \end{pmatrix}                   
+     \end{mat}                   
     \grstep{-\rho_2+\rho_1}
-    \begin{pmatrix}
+    \begin{mat}
        1  &0  \\
        0  &1
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 call the matrices \( A \), \( D \), \( G \), and \( B \).
 The methods of the proof show that there are three sets of linear
@@ -1336,12 +1328,12 @@ The answer, of course, is that echelon form is suitable for back substitution,
 because we have isolated the variables.
 For instance, in this matrix
 \begin{equation*}
-  R=\begin{pmatrix}
+  R=\begin{mat}
     2  &3  &7  &8  &0  &0  \\
     0  &0  &1  &5  &1  &1  \\
     0  &0  &0  &3  &3  &0  \\
     0  &0  &0  &0  &2  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 $x_1$ has been removed from $x_5$'s equation.
 That is, Gauss' method has made $x_5$'s row independent of $x_1$'s row.
@@ -1456,7 +1448,7 @@ matrix of coefficients.
   \begin{linsys}{4}
     a_{1,1}x_1  &+  &a_{1,2}x_2  &+  &\cdots  &+  &a_{1,n}x_n  &=  &0  \\
     a_{2,1}x_1  &+  &a_{2,2}x_2  &+  &\cdots  &+  &a_{2,n}x_n  &=  &0  \\
-               &\vdots  \\
+               &\vdotswithin{a_{1,2}x_2}  \\
     a_{m,1}x_1  &+  &a_{m,2}x_2  &+  &\cdots  &+  &a_{m,n}x_n  &=  &0  
   \end{linsys}
   \tag{$*$}
@@ -1467,7 +1459,7 @@ is the same as the set of solution to this system
   \begin{linsys}{4}
     b_{1,1}x_1  &+  &b_{1,2}x_2  &+  &\cdots  &+  &b_{1,n}x_n  &=  &0  \\
     b_{2,1}x_1  &+  &b_{2,2}x_2  &+  &\cdots  &+  &b_{2,n}x_n  &=  &0  \\
-               &\vdots  \\
+               &\vdotswithin{b_{1,2}x_2}  \\
     b_{m,1}x_1  &+  &b_{m,2}x_2  &+  &\cdots  &+  &b_{m,n}x_n  &=  &0  
   \end{linsys}
   \tag{$**$}
@@ -1478,7 +1470,7 @@ and to this one.
   \begin{linsys}{4}
     c_{1,1}x_1  &+  &c_{1,2}x_2  &+  &\cdots  &+  &c_{1,n}x_n  &=  &0  \\
     c_{2,1}x_1  &+  &c_{2,2}x_2  &+  &\cdots  &+  &c_{2,n}x_n  &=  &0  \\
-               &\vdots  \\
+               &\vdotswithin{c_{1,2}x_2}  \\
     c_{m,1}x_1  &+  &c_{m,2}x_2  &+  &\cdots  &+  &c_{m,n}x_n  &=  &0  
   \end{linsys}
   \tag{$\mathord{*}\mathord{*}\mathord{*}$}
@@ -1712,38 +1704,38 @@ by seeing if Gauss-Jordan reduction produces the same
 reduced echelon form result.
 Thus, these are not row equivalent
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     1  &-3  \\
    -2  &6
-  \end{pmatrix}
+  \end{mat}
   \qquad
-  \begin{pmatrix}
+  \begin{mat}
     1  &-3  \\
    -2  &5
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 because their reduced echelon forms are not equal.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     1  &-3  \\
     0  &0
-  \end{pmatrix}
+  \end{mat}
   \qquad
-  \begin{pmatrix}
+  \begin{mat}
     1  &0   \\
     0  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 \end{example}
 
 \begin{example}
 Any nonsingular \( \nbyn{3} \) matrix Gauss-Jordan reduces to this.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
       1  &0  &0 \\
       0  &1  &0 \\
       0  &0  &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -1753,32 +1745,32 @@ reduced echelon form matrices.
 Any $\nbyn{2}$ matrix lies in one of these:~the class of matrices
 row equivalent to this,
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
      0  &0  \\
      0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 the infinitely many classes of matrices row equivalent to one of this type
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
      1  &a  \\
      0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 where \( a\in\Re \) (including $a=0$),
 the class of matrices row equivalent to this,
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
      0  &1  \\
      0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 and the class of matrices row equivalent to this
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
      1  &0  \\
      0  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 (this is the class of nonsingular $\nbyn{2}$ matrices).
 \end{example}
@@ -1790,53 +1782,53 @@ and the class of matrices row equivalent to this
     Decide if the matrices are row equivalent.
     \begin{exparts*}
        \partsitem \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &2  \\
              4  &8
-           \end{pmatrix}, 
-           \begin{pmatrix}
+           \end{mat}, 
+           \begin{mat}
              0  &1  \\
              1  &2
-           \end{pmatrix} \)
+           \end{mat} \)
        \partsitem \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &0  &2  \\
              3  &-1 &1  \\
              5  &-1 &5
-           \end{pmatrix},  
-           \begin{pmatrix}
+           \end{mat},  
+           \begin{mat}
              1  &0  &2  \\
              0  &2  &10 \\
              2  &0  &4
-           \end{pmatrix} \)
+           \end{mat} \)
        \partsitem \(
-           \begin{pmatrix}
+           \begin{mat}
              2  &1  &-1 \\
              1  &1  &0  \\
              4  &3  &-1
-           \end{pmatrix},  
-           \begin{pmatrix}
+           \end{mat},  
+           \begin{mat}
              1  &0  &2  \\
              0  &2  &10 \\
-           \end{pmatrix} \)
+           \end{mat} \)
        \partsitem \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &1  &1  \\
             -1  &2  &2
-           \end{pmatrix},  
-           \begin{pmatrix}
+           \end{mat},  
+           \begin{mat}
              0  &3  &-1 \\
              2  &2  &5
-           \end{pmatrix} \)
+           \end{mat} \)
        \partsitem \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &1  &1  \\
              0  &0  &3
-           \end{pmatrix},  
-           \begin{pmatrix}
+           \end{mat},  
+           \begin{mat}
              0  &1  &2  \\
              1  &-1 &1
-           \end{pmatrix} \)
+           \end{mat} \)
     \end{exparts*}
     \begin{answer}
       Bring each to reduced echelon form and compare.
@@ -1844,61 +1836,61 @@ and the class of matrices row equivalent to this
         \partsitem The first gives
           \begin{equation*}
             \grstep{-4\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &2  \\
               0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           while the second gives
           \begin{equation*}
             \grstep{\rho_1\leftrightarrow\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &2  \\
               0  &1
-            \end{pmatrix}
+            \end{mat}
             \grstep{-2\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  \\
               0  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           The two reduced echelon form matrices are not identical, and so the
           original matrices are not row equivalent.
         \partsitem The first is this.
           \begin{equation*}
             \grstep[-5\rho_1+\rho_3]{-3\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &2  \\
               0  &-1 &-5 \\
               0  &-1 &-5
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_2+\rho_3}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &2  \\
               0  &-1 &-5 \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &2  \\
               0  &1  &5  \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           The second is this.
           \begin{equation*}
             \grstep{-2\rho_1+\rho_3}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &2  \\
               0  &2  &10 \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
             \grstep{(1/2)\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &2  \\
               0  &1  &5  \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           These two are row equivalent.
         \partsitem These two are not row equivalent because they have different
@@ -1906,65 +1898,65 @@ and the class of matrices row equivalent to this
         \partsitem The first,
           \begin{equation*}
             \grstep{\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &1  &1  \\
               0  &3  &3
-            \end{pmatrix}
+            \end{mat}
             \grstep{(1/3)\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &1  &1  \\
               0  &1  &1
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &0  \\
               0  &1  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and the second.
           \begin{equation*}
             \grstep{\rho_1\leftrightarrow\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               2  &2  &5  \\
               0  &3  &-1
-            \end{pmatrix}
+            \end{mat}
             \grstep[(1/3)\rho_2]{(1/2)\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &1  &5/2 \\
               0  &1  &-1/3
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &17/6 \\
               0  &1  &-1/3
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           These are not row equivalent.
         \partsitem Here the first is
           \begin{equation*}
             \grstep{(1/3)\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &1  &1  \\
               0  &0  &1
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &1  &0  \\
               0  &0  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           while this is the second.
           \begin{equation*}
             \grstep{\rho_1\leftrightarrow\rho_2}
-            \begin{pmatrix}
+            \begin{mat}
               1  &-1 &1  \\
               0  &1  &2
-            \end{pmatrix}
+            \end{mat}
             \grstep{\rho_2+\rho_1}
-            \begin{pmatrix}
+            \begin{mat}
               1  &0  &3  \\
               0  &1  &2
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           These are not row equivalent.
        \end{exparts}  
@@ -1978,42 +1970,42 @@ and the class of matrices row equivalent to this
 
        Second, the matrices that reduce to 
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            1  &a  \\
            0  &0
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        have the form
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            b  &ba \\
            c  &ca
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        (where \( a,b,c\in\Re \), and \(b\) and \(c\) are not both zero).  
 
        Next, the matrices that reduce to 
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            0  &1  \\
            0  &0
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        have the form
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            0  &a \\
            0  &b
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        (where \( a,b\in\Re \), and not both are zero).  
 
        Finally, the matrices that reduce to 
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            1  &0  \\
            0  &1
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        are the nonsingular matrices.
        That's because a linear system for which this is the matrix of
@@ -2027,44 +2019,44 @@ and the class of matrices row equivalent to this
     these.
     \begin{exparts*}
        \partsitem  \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &0  \\
              0  &0
-           \end{pmatrix}  \)
+           \end{mat}  \)
        \partsitem  \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &2      \\
              2  &4
-           \end{pmatrix} \)
+           \end{mat} \)
        \partsitem \(
-           \begin{pmatrix}
+           \begin{mat}
              1  &1      \\
              1  &3
-           \end{pmatrix} \)
+           \end{mat} \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem They have the form
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               a  &0  \\
               b  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           where \( a,b\in\Re \).
         \partsitem They have this form (for \( a,b\in\Re \)).
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
              1a  &2a \\
              1b  &2b
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem They have the form
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               a  &b  \\
               c  &d
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           (for \( a,b,c,d\in\Re \)) where \( ad-bc\neq 0 \).
           (This is the formula that determines when a \( \nbyn{2} \) matrix
@@ -2077,10 +2069,10 @@ and the class of matrices row equivalent to this
        Infinitely many.
        For instance, in 
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            1  &k  \\
            0  &0
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        each $k\in\Re$ gives a different class.  
     \end{answer}
@@ -2111,15 +2103,15 @@ and the class of matrices row equivalent to this
     \begin{answer}
       Here are two.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           1  &1  &0  \\
           0  &0  &1
-        \end{pmatrix}
+        \end{mat}
         \quad\text{and}\quad
-        \begin{pmatrix}
+        \begin{mat}
           1  &0  &0  \\
           0  &0  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}  
      \end{answer}
   \recommended \item 
@@ -2132,27 +2124,27 @@ and the class of matrices row equivalent to this
       form, namely the matrix with all \( 0 \)'s except for \( 1 \)'s down
       the diagonal.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           1  &0  &       &0  \\
           0  &1  &       &0  \\
              &   &\ddots &   \\
           0  &0  &       &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
 
       Two same-sized singular matrices need not be row equivalent.
       For example, these two \( \nbyn{2} \) singular matrices
       are not row equivalent.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           1  &1  \\
           0  &0
-        \end{pmatrix}
+        \end{mat}
         \quad\text{and}\quad
-        \begin{pmatrix}
+        \begin{mat}
           1  &0  \\
           0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}  
     \end{answer}
   \recommended \item 
@@ -2396,23 +2388,23 @@ and the class of matrices row equivalent to this
      Fortunately, $s+c+d$ is a linear combination of $4s+c+10d$ and $3s+c+7d$.
      Calling the unknown price $p$, we have this reduction.
      \begin{equation*}
-       \begin{amatrix}{3}
+       \begin{amat}{3}
          4  &1  &10  &8.45 \\
          3  &1  &7   &6.30 \\
          1  &1  &1   &p
-       \end{amatrix}
+       \end{amat}
        \grstep[-(1/4)\rho_1+\rho_3]{-(3/4)\rho_1+\rho_2}
-       \begin{amatrix}{3}
+       \begin{amat}{3}
          4  &1    &10     &8.45      \\
          0  &1/4  &-1/2   &-0.037\,5 \\
          0  &3/4  &-3/2   &p-2.112\,5
-       \end{amatrix}
+       \end{amat}
        \grstep{-3\rho_2+\rho_3}
-       \begin{amatrix}{3}
+       \begin{amat}{3}
          4  &1    &10     &8.45      \\
          0  &1/4  &-1/2   &-0.037\,5 \\
          0  &0    &0      &p-2.00
-       \end{amatrix}
+       \end{amat}
      \end{equation*}
      The price paid is \$$2.00$.
    \end{answer}
@@ -2428,15 +2420,15 @@ and the class of matrices row equivalent to this
   %    would not hold.
   %    That is, where
   %    \begin{equation*}
-  %      \begin{pmatrix}
+  %      \begin{mat}
   %        1  &3  \\
   %        2  &1
-  %      \end{pmatrix}
+  %      \end{mat}
   %      \grstep{0\rho_2}
-  %      \begin{pmatrix}
+  %      \begin{mat}
   %        1  &3  \\
   %        0  &0
-  %      \end{pmatrix}
+  %      \end{mat}
   %    \end{equation*}
   %    all the rows of the second matrix can be expressed as linear combinations
   %    of the rows of the first, but the converse does not hold.
@@ -2464,15 +2456,15 @@ and the class of matrices row equivalent to this
           \end{equation*}
           For a less wise-guy-ish answer, solve the system:
           \begin{equation*}
-            \begin{amatrix}{2}
+            \begin{amat}{2}
               3  &-1  &8  \\
               2  &1   &3
-            \end{amatrix}
+            \end{amat}
             \grstep{-(2/3)\rho_1+\rho_2}
-            \begin{amatrix}{2}
+            \begin{amat}{2}
               3  &-1  &8    \\
               0  &5/3 &-7/3
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           gives \( y=-7/5 \) and \( x=11/5 \).
           Now any equation not satisfied by \( (-7/5,11/5) \) will do,
@@ -2506,11 +2498,11 @@ and the class of matrices row equivalent to this
   \recommended \item 
     In this matrix
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
         1  &2  &3  \\
         3  &0  &3  \\
         1  &4  &5
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     the first and second columns add to the third.
     \begin{exparts}
@@ -2524,11 +2516,11 @@ and the class of matrices row equivalent to this
           as are the three possible rescalings.
           One of the six possible row combinations is \( k\rho_1+\rho_2 \):
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               1           &2           &3  \\
               k\cdot 1+3  &k\cdot 2+0  &k\cdot 3+3  \\
               1           &4           &5
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and again the first and second columns add to the third.
           The other five combinations are similar.

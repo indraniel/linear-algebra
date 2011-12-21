@@ -9,7 +9,8 @@
 % input all the math packages
 \RequirePackage{mathrsfs}
 % AMS math 
-\RequirePackage[reqno]{amsmath}
+% \RequirePackage[reqno]{amsmath}
+\RequirePackage[reqno,disallowspaces]{mathtools}  % imports amsmath
 \RequirePackage{amsfonts} %for Y&Y BSR AMS fonts
 \RequirePackage{amssymb}
 \RequirePackage[text]{amsthm}
@@ -68,7 +69,7 @@
 
 
 %-------------misc matrices
-\newenvironment{mat}{\left(\begin{array}}{\end{array}\right)}
+% \newenvironment{mat}{\left(\begin{array}}{\end{array}\right)}
 \newenvironment{detmat}{\left|\begin{array}}{\end{array}\right|}
 \newcommand{\deter}[1]{ \mathchoice{\left|#1\right|}{|#1|}{|#1|}{|#1|} }
 \newcommand{\generalmatrix}[3]{ %arg1: low-case letter, arg2: rows, arg3: cols 
@@ -80,13 +81,22 @@
                     #1_{#3,1} &#1_{#3,2} &\ldots  &#1_{#3,#2}
                   \end{array}
                \right)  }
+% with mathtools we can have column entries right flushed
+\newenvironment{mat}[1][r]{\begin{pmatrix*}[#1]}{\end{pmatrix*}}
+\newenvironment{amat}[1]{%
+  \left(\begin{array}{@{}*{#1}{r}|r@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand\vdotswithin[1]{% Taken from mathtools.dtx because my TL is not 2011
+  {\mathmakebox[\widthof{\ensuremath{{}#1{}}}][c]{{\vdots}}}}
 
 
 %------------colvec and rowvec
 % Column vector and row vector.  Usage:
 %  \colvec{1  \\ 2 \\ 3 \\ 4} and \rowvec{1  &2  &3}
-\newcommand{\colvec}[1]{\begin{pmatrix} #1 \end{pmatrix}}
-\newcommand{\rowvec}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\newcommand{\colvec}[1]{\begin{mat} #1 \end{mat}}
+\newcommand{\rowvec}[1]{\begin{mat} #1 \end{mat}}
 
 
 %-------------making aligned columns
