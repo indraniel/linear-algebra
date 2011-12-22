@@ -3201,11 +3201,6 @@ is the vector of all zeros.)
 A zero-element solution set fits the pattern because there is no 
 particular solution and so there are no sums of that form.
 
-% This subsection proves what the prior paragraph outlines: 
-% every solution set can be written as 
-% a vector that is a particular solution 
-% of the system added to an unrestricted combination of other vectors.
-
 \begin{theorem} \label{th:GenEqPartPlusHomo}
 Any linear system's 
 solution set can be described as 
@@ -3226,7 +3221,7 @@ We shall prove the theorem in two corresponding parts, with two lemmas.
 
 We will focus first on the unrestricted combination.
 For that we consider systems that have the vector of zeroes
-as a particular solution, 
+as a particular solution
 so that we can shorten $\vec{p}+c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$
 to $c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$.
 
@@ -3252,8 +3247,8 @@ zeros.
     2x  &-  &y   &=  0  
   \end{linsys}
 \end{equation*}
-Our interest in the homogeneous system associated with a linear system
-can be understood by comparing the reduction of the system
+Our interest in this comes from 
+comparing the reduction of the original system
 \begin{eqnarray*}
   \begin{linsys}{2}
     3x  &+  &4y  &=  3  \\
@@ -3296,8 +3291,8 @@ denoted \( \zero \).
 
 \noindent There are many different zero vectors, e.g., the
 one-tall zero vector, the two-tall zero vector, etc.
-Nonetheless, people often refer to ``the'' zero vector, expecting 
-that the size of the one being discussed will be clear from the context.
+Nonetheless we will usually say ``the'' zero vector, expecting 
+that the size will be clear from the context.
 
 \begin{example} \label{ex:HomoZeroOnlySol}
 Some homogeneous systems have the zero vector as their only solution.
@@ -3355,7 +3350,7 @@ from the first page of this book.
                    &   &   &   &    &   &0  &=  &0  
    \end{linsys}
 \end{eqnarray*}
-The solution set:
+The solution set
 \begin{equation*}
   \set{\colvec[r]{1/3 \\ 1 \\ 1/3 \\ 1}w \suchthat w\in\Re}
 \end{equation*}
@@ -3364,9 +3359,9 @@ has many vectors besides the zero vector
 make sense only when \( w \) is a nonnegative multiple of $3$).
 \end{example}
 
-We now have the terminology to prove the two parts of 
-\nearbytheorem{th:GenEqPartPlusHomo}.
-The first lemma deals with unrestricted combinations.
+% We now have the terminology to prove the two parts of 
+% \nearbytheorem{th:GenEqPartPlusHomo}.
+% The first lemma deals with unrestricted combinations.
 
 \begin{lemma}
 \label{le:HomoSltnSpanVecs}
@@ -3380,9 +3375,7 @@ where $k$ is the
 number of free variables in an echelon form version of the system.
 \end{lemma}
 
-Before the proof, we will recall the back substitution calculations 
-that were done in the prior subsection.
-%Here is a typical example.
+Before the proof, recall how back substitution happens.
 Imagine that we have brought a system to this echelon form.
 \begin{equation*}
   \begin{linsys}{4}
@@ -3391,99 +3384,102 @@ Imagine that we have brought a system to this echelon form.
         &   &    &   &   &   &-w &=  &0  
   \end{linsys}
 \end{equation*}
-We next perform back-substitution to 
-express each variable in terms of the free variable $z$.
-Working from the bottom up, we get first that \( w \) is \( 0\cdot z \), 
-next that \( y \) is \( (1/3)\cdot z \), and then
-substituting those two into the top equation
+% We next perform back-substitution to 
+% express each variable in terms of the free variable $z$.
+Working from the bottom, we first get that \( w \) is \( 0\cdot z \), 
+then that \( y \) is \( (1/3)\cdot z \), and then
+substituting those two back into the top equation
 \( x+2((1/3)z)-z+2(0)=0 \) gives \( x=(1/3)\cdot z \).
 So, back substitution gives a parametrization of the solution set by
 starting at the bottom equation and using the free variables as the
 parameters to work row-by-row to the top.
 The proof below follows this pattern.
  
-\textit{Comment:} That is, 
-this proof just does a verification of the bookkeeping 
-in back substitution to show that we haven't overlooked any obscure cases
-where this procedure fails, say, by leading to a division by zero.
-So this argument, while quite detailed, doesn't give us any new insights.
+That is, 
+this proof simply checks the bookkeeping  
+to show that back substitution can't fail,
+say, by leading to a division by zero.
+So the argument below, while detailed, doesn't give us any new insights.
 Nevertheless, we have written it out for two reasons.
-The first reason is that we need the result\Dash the
-computational procedure that we employ must be verified to work as promised.
-
-The second reason is that the row-by-row nature of
-back substitution leads to a proof that uses the technique of
+One is that we need to be sure that the
+computational procedure works.
+The other is that the row-by-row nature of
+back substitution leads naturally to a proof by
 mathematical induction.\appendrefs{mathematical induction}%
 \index{mathematical induction}\index{proof techniques!induction}%
 \index{induction}%
-This is an important, and non-obvious, proof technique that we shall
-use a number of times in this book.
-Doing an induction argument here gives us a chance to 
-see one in a setting where the proof material is easy to follow, 
-and so the technique can be studied.
-Readers who are unfamiliar with induction arguments should
-be sure to master this one and the ones later in
-this chapter before going on to the second chapter.
+This is an important and non-obvious proof style that we shall
+use a number of times.
+% Doing an induction argument here gives us a chance to 
+% see one in a setting where the proof material straightforward 
+% and so we can highlight the technique.
 
-\begin{proof}
-First use Gauss' method to reduce the homogeneous system to echelon form.
-We will show that each leading variable can be expressed in terms of
-free variables.
-That will finish the argument because then 
-we can use those free variables as the parameters.
-That is, the $\vec{\beta}$'s are the vectors of coefficients of the
-free variables (as in \nearbyexample{ex:SolnChemProb},
-where the solution is
-$x=(1/3)w$,  $y=w$, $z=(1/3)w$, and $w=w$). 
-
-We will proceed by mathematical induction, which has two steps.
-The base step of the argument will be to focus on the
-bottom-most non-`\( 0=0 \)' equation and 
-write its leading variable in terms of the free variables.
-The inductive step of the argument will be to
+Mathematical induction has two steps, a base step and
+an inductive step.
+In the base step here will focus only on the
+bottom-most non-`\( 0=0 \)' equation, and show that we can  
+write its leading variable in terms of its other variables.
+Then the inductive step will be to
 argue that if we can express the leading variables from the
-bottom \( t \) rows in terms of free variables, then
+bottom-most \( t \) rows in terms of the free variables then
 we can express the leading variable of the next row up\Dash the \( t+1 \)-th
-row up from the bottom\Dash in terms of free variables.
-With those two steps, the theorem will be proved
-because by the base step it is true for the bottom equation, 
+row from the bottom\Dash in terms of the free variables.
+Those two steps together prove the theorem 
+because by the base step the theorem is true for the bottom equation, 
 and by the inductive step the fact that it is true for the bottom
 equation shows that 
 it is true for the next one up, and then another application of
-the inductive step implies it is true for the third equation up,
+the inductive step implies that it is true for the third equation up,
 etc.
 
+\begin{proof}
+Apply Gauss' method to get to echelon form.
+We may get some `\( 0=0 \)' equations that we can drop 
+from the system
+(if the entire
+system consists of such equations then the theorem is trivially true)
+but
+because the system is homogeneous we cannot get any contradictory equations.
+We will argue by induction 
+that each leading variable can be expressed in terms of
+free variables.
+That will prove the result because 
+we can use those free variables as the parameters,
+so the $\vec{\beta}$'s are the vectors of coefficients of the
+free variables 
+(as in \nearbyexample{ex:SolnChemProb}). 
+
 For the base step, consider the bottom-most
-non-`\( 0=0 \)' equation
-(the case where all the equations are `$0=0$' is trivial).
-We call that the $m$-th row:
+equation.
+Call it equation~$m$
 \begin{equation*}
   a_{m,\ell_m}x_{\ell_m}+a_{m,\ell_m+1}x_{\ell_m+1}+\cdots+a_{m,n}x_n=0
 \end{equation*}
 where \( a_{m,\ell_m}\neq 0 \).
-(The notation here has `$\ell$' stand for `leading', 
-so $a_{m,\ell_m}$ means ``the coefficient
-from the row~$m$ of the variable leading row~$m$''.)
+(The `$\ell$' stands for `leading' 
+so that $a_{m,\ell_m}$ means ``the coefficient
+from the row~$m$ of the variable leading row~$m$.'')
 Either there are variables in this equation other than the leading one
 $x_{\ell_m}$ or else there are not.
 If there are other variables $x_{\ell_{m}+1}$, etc., then they must be
-free variables because this is the bottom non-`$0=0$' row. 
-Move them to the right and divide by $a_{m,\ell_m}$
+free variables of the system because this is the bottom row. 
+Move these to the right and divide by $a_{m,\ell_m}$
 \begin{equation*}
   x_{\ell_m}
   =(-a_{m,\ell_m+1}/a_{m,\ell_m})x_{\ell_m+1}+\cdots+(-a_{m,n}/a_{m,\ell_m})x_n
 \end{equation*}
-to express this leading variable in terms of free variables.
+to express the leading variable in terms of the free variables.
 If there are no free variables in this equation 
 then \( x_{\ell_m}=0 \) (see the
-``tricky point'' noted following this proof).
+``tricky point'' following this proof).
 
-For the inductive step, we assume
+For the inductive step we assume
 that for the \( m \)-th equation,
 and for the \text{\( (m-1) \)-th}
-equation, \ldots, and for the \text{\( (m-t) \)-th} equation, we can
-express the leading variable in terms of free variables
-(where \( 0\leq t<m \)).
+equation, \ldots, up to and including the \text{\( (m-t) \)-th} equation
+(where \( 0\leq t<m \)), 
+we can
+express the leading variable in terms of free variables.
 To prove that the same is true for the next equation up, 
 the \( (m-(t+1)) \)-th equation, we take each variable that leads
 in a lower-down equation \( x_{\ell_m},\ldots,x_{\ell_{m-t}} \) and substitute
@@ -3494,9 +3490,9 @@ The result has the form
     \text{sums of multiples of free variables}=0
 \end{equation*}
 where \( a_{m-(t+1),\ell_{m-(t+1)}}\neq 0 \).
-We move the free variables to
-the right-hand side and divide by
-\( a_{m-(t+1),\ell_{m-(t+1)}} \), to end with
+Move the free variables to
+the right-hand side (again see the ``tricky point'') and divide by
+\( a_{m-(t+1),\ell_{m-(t+1)}} \) to end with
 \( x_{\ell_{m-(t+1)}} \) expressed in terms of free variables.
 
 Because we have shown both the base step and the inductive step, by the
@@ -3556,9 +3552,8 @@ homogeneous system since for each equation index \( i \),
 \end{equation*}
 where \( p_j \) and \( s_j \) are the \( j \)-th components of
 \( \vec{p} \) and \( \vec{s} \).
-We can write \( \vec{s}-\vec{p} \) as \( \vec{h} \),
-where \( \vec{h} \) solves the associated homogeneous system, to 
-express \( \vec{s} \) in the required \( \vec{p}+\vec{h} \) form.
+Express \( \vec{s} \) in the required \( \vec{p}+\vec{h} \) form
+by writing \( \vec{s}-\vec{p} \) as \( \vec{h} \).
 
 For set inclusion the other way, take a vector of the form $\vec{p}+\vec{h}$,
 where \( \vec{p} \) solves the system and \( \vec{h} \) solves the
@@ -3573,10 +3568,12 @@ for any equation index $i$,
   &=d_i
   \end{split}
 \end{equation*}
-where \( h_j \) is the \( j \)-th component of \( \vec{h} \).
+where \( p_j \) and \( h_j \) are the \( j \)-th components of 
+\( \vec{p} \) and \( \vec{h} \).
 \end{proof}
+
 The two lemmas above together establish \nearbytheorem{th:GenEqPartPlusHomo}.
-We remember that theorem with the slogan 
+We remember that theorem with the slogan, 
 ``\( \text{General} = \text{Particular} + \text{Homogeneous} \)''.
 
 \begin{example} \label{ex:IllusGenEqPartHomo}
@@ -3607,7 +3604,7 @@ shows that the general solution is a singleton set.
 \begin{equation*}
   \set{\colvec[r]{1 \\ 0 \\ 0} }
 \end{equation*}
-That single vector is, of course, a particular solution.
+That single vector is obviously a particular solution.
 The associated homogeneous system reduces via the same row operations 
 \begin{eqnarray*}
   \begin{linsys}{3}
@@ -3627,8 +3624,8 @@ to also give a singleton set.
 \begin{equation*}
   \set{\colvec[r]{0 \\ 0 \\ 0} }
 \end{equation*}
-As the theorem states, and as discussed at the start of this
-subsection, in this single-solution case the general solution results 
+So, as discussed at the start of this subsection, 
+in this single-solution case the general solution results 
 from taking the particular solution and adding to it the unique solution
 of the associated homogeneous system.
 \end{example}
@@ -3636,7 +3633,7 @@ of the associated homogeneous system.
 \begin{example}
 Also discussed at the start of this subsection is that the case where
 the
-general solution set is empty fits the
+general solution set is empty also fits the
 `$\text{General}=\text{Particular}+\text{Homogeneous}$' pattern.
 This system illustrates.
 Gauss' method
@@ -3655,7 +3652,8 @@ Gauss' method
 \end{eqnarray*}
 shows that it has no solutions because the final two equations
 are in conflict.
-The associated homogeneous system, of course, has a solution.
+The associated homogeneous system has a solution, because all 
+homogeneous systems have at least one solution.
 \begin{eqnarray*}
   \begin{linsys}{4}
     x  &   &  &+  &z  &+ &w  &=  &0   \\
@@ -3670,7 +3668,7 @@ The associated homogeneous system, of course, has a solution.
        &   &  &   &   &  &0  &=  &0         
   \end{linsys}
 \end{eqnarray*}
-In fact, the solution set of the homogeneous system is infinite. 
+In fact the solution set of this homogeneous system is infinite. 
 \begin{equation*}
   \set{\colvec[r]{-1 \\ -2 \\ 1 \\ 0}z+\colvec[r]{-1 \\ -1 \\ 0 \\ 1}w
          \suchthat z,w\in\Re}
@@ -3693,7 +3691,7 @@ First, notice a homogeneous system with
 at least one  non-\( \zero \) solution $\vec{v}$ has infinitely many
 solutions because the set of multiples $s\vec{v}$
 is infinite\Dash if $s\neq 1$ then $s\vec{v}-\vec{v}=(s-1)\vec{v}$ is
-easily seen to be non-$\zero$, and so $s\vec{v}\neq \vec{v}$.
+non-$\zero$ and so $s\vec{v}\neq \vec{v}$.
 
 Now, apply \nearbylemma{th:GenEqPartHomo} to conclude that a solution set
 \begin{equation*}
@@ -3711,7 +3709,7 @@ This table summarizes the factors affecting the size of a
 general solution.
 
 \medskip
-\begin{center}
+\begin{center} 
 \begin{tabular}{r@{}c}
   &\hspace*{2.5em}\begin{tabular}{c} 
       \textit{number of solutions of the} \\[-.5ex]
@@ -3728,40 +3726,38 @@ general solution.
          &\textit{one}    &\textit{infinitely many}                    \\ 
      \cline{2-3}
      \textit{yes}    
-        &\rule{0ex}{16pt}\begin{tabular}{c} unique \\[-.5ex] solution \end{tabular}
-        &\begin{tabular}{c} infinitely many \\[-.5ex] solutions \end{tabular}
+        &\rule{0ex}{16pt}\begin{tabular}{@{}c@{}} unique \\[-.5ex] solution \end{tabular}
+        &\begin{tabular}{@{}c@{}} infinitely many \\[-.5ex] solutions \end{tabular}
          \\ % \hline  
      \textit{no}    
-        &\begin{tabular}{c} no \\[-.5ex] solutions \end{tabular}
-        &\begin{tabular}{c} no \\[-.5ex] solutions \end{tabular} 
+        &\begin{tabular}{@{}c@{}} no \\[-.5ex] solutions \end{tabular}
+        &\begin{tabular}{@{}c@{}} no \\[-.5ex] solutions \end{tabular} 
          \\ % \hline
    \end{tabular}
 \end{tabular}
 \end{center}
 \medskip
 
-The factor on the top of the table is the simpler one.
+The dimension on the top of the table is the simpler one.
 When we perform Gauss' method on a linear system, ignoring the
 constants on the right side and so paying attention only
 to the coefficients on the left-hand side,
 we either end with every variable leading some row or else 
 we find that some variable does not lead a row, that is,
-that some variable is free. 
-(Of course, ``ignoring the constants on the right'' is formalized by
-considering the associated homogeneous system.
-We are simply putting aside for the moment the possibility of a 
-contradictory equation.)
+we find that some variable is free. 
+(We formalize ``ignoring the constants on the right'' by
+considering the associated homogeneous system.)
 
-A nice insight into the factor on the top of this table at
-work comes from considering the case of
-a system having the same number of equations as variables. 
-This system will have a solution, and the solution will be unique, if and only
-if it reduces to an echelon form system where every variable leads its row,
+Especially interesting examples of this are
+systems with the same number of equations as variables. 
+Such a system will have a solution, and that solution will be unique, 
+if and only it
+reduces to an echelon form system where every variable leads its row,
 which will happen if and only if
 the associated homogeneous system has a unique solution.
-Thus, the question of uniqueness of solution is especially
-interesting when the system has the same number of
-equations as variables.
+% Thus, the question of uniqueness of solution is especially
+% interesting when the system has the same number of
+% equations as variables.
 
 \begin{definition}
 A square matrix is \definend{nonsingular}\index{nonsingular!matrix}
@@ -3774,7 +3770,6 @@ that is,
 if it is the matrix of coefficients of a homogeneous system with 
 infinitely many solutions.
 \end{definition}
-
 The word singular means ``departing from general expectation''
 and here expresses that we could expect that systems with the same number
 of equations as unknowns will typically have a unique solution.
@@ -3845,7 +3840,7 @@ while the second has infinitely many solutions.
   \end{linsys}
 \end{equation*}  
 We have made the distinction in the definition because a system
-(with the same number of equations as variables)
+with the same number of equations as variables
 behaves in one of two ways, depending on whether its matrix of coefficients
 is nonsingular or singular.
 A system where the matrix of coefficients is nonsingular 
@@ -3873,15 +3868,16 @@ has either no solutions or else has infinitely many, as with these.
   \end{linsys}
 \end{equation*} 
 Thus, `singular' can be thought of as connoting 
-``troublesome'', or at least ``not ideal''.
+``troublesome,'' or at least ``not ideal''.
 \end{example}
 
-The above table has two factors.
-We have already considered the factor along the top:~we can tell
-which column a given linear system goes in
+The above table has two dimensions.
+We have considered the one on top:~we can tell
+into which column a given linear system goes
 solely by considering the system's left-hand side\Dash the 
 constants on the right-hand side play no role in this factor.
-The table's other factor, 
+
+The table's other dimension, 
 determining whether a particular solution exists, is tougher.
 Consider these two
 \begin{equation*}
@@ -3896,11 +3892,11 @@ Consider these two
   \end{linsys}
 \end{equation*}
 with the same left sides but different right sides.
-Obviously, the first has a solution while the second does not, so
+The first has a solution while the second does not, so
 here the constants on the right side decide if the system has a solution.
 We could conjecture that the left side of a linear system determines
 the number of solutions while the right side determines if solutions
-exist, but that guess is not correct.
+exist but that guess is not correct.
 Compare these two systems
 \begin{equation*}
   \begin{linsys}[b]{2}
