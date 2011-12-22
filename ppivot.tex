@@ -22,31 +22,32 @@ for(row=1;row<=n-1;row++){
 This is in the C~language.\index{C language}
 The loop 
 \lstinline!for(row=1;row<=n-1;row++){ .. }!
-sets \texttt{row} to $1$ and then iterates while
+initializes \texttt{row} at $1$ and then iterates while
 \texttt{row} is less than or equal to $n-1$, each time through
-incrementing the variable \lstinline!row! by one with the 
+incrementing \lstinline!row! by one with the 
 \lstinline!++! operation.
-The other non-obvious construct is that the `\texttt{-=}' in the innermost
+The other non-obvious language 
+construct is that the `\texttt{-=}' in the innermost
 loop amounts to the
 $\text{\lstinline!a[row\_below,col]!}=
            -\text{\lstinline!multiplier!}\cdot\text{\lstinline!a[row,col]!}
            +\text{\lstinline!a[row\_below,col]!}$
 operation.
 
-While this code provides a quick take on how Gauss' method can be
-mechanized, it is naive in many ways.
-In particular, it assumes that 
-the $\text{\lstinline!row!},\text{\lstinline!row!}$ position contains
-a nonzero entry.
-To make it practical, 
-one way that this code needs to be reworked is to cover
-the case where finding a zero in that location leads to a row swap, or to the
+This code provides a quick take on how Gauss' method can be
+mechanized but it is naive, in many ways.
+For one thing, it assumes that 
+the entry in the
+$\text{\lstinline!row!},\text{\lstinline!row!}$ position is nonzero.
+One way that the code needs additional development to make it practical
+is to cover
+the case where finding a zero in that location leads to a row swap or to the
 conclusion that the matrix is singular.
 
 Adding some \lstinline!if! statements to cover those cases is not hard,
-but we will instead consider some more subtle ways in which the code is naive.
-There are pitfalls arising from the computer's reliance on finite-precision
-floating point arithmetic.
+but we will instead consider some other ways in which the code is naive.
+It is prone to pitfalls arising from the computer's reliance on 
+finite-precision floating point arithmetic.
 
 For example, we have seen above that we must handle as a separate case a
 system that is singular.
@@ -58,7 +59,7 @@ Consider this one.
      1.000\,000\,01x &+ &2y &= &3.000\,000\,01
    \end{linsys}
 \end{equation*}
-By eye we get the solution $x=1$ and $y=1$.
+We can easily spot the solution $x=1$, $y=1$.
 But a computer has more trouble.
 If it represents real numbers to eight significant places, called 
 \definend{single precision}\index{single precision}, 
@@ -71,13 +72,12 @@ because the two equations are represented internally as equal.
 
 For some intuition about how the computer could come up with 
 something that far
-off, we can graph the system.
+off, we graph the system.
 \begin{center}
   \includegraphics{ch1.33}
   %\includegraphics{ppivot1.eps}
 \end{center}
-At the scale that 
-we've used to draw this graph, we cannon tell the two lines apart.
+At the scale that this graph is drawn, we cannon tell the two lines apart.
 This system is nearly singular in the sense that
 the two lines are nearly the same line.
 Near-singularity gives this system the property that a small change in the
@@ -85,13 +85,13 @@ system can cause a large change in its solution; for instance, changing the
 $3.000\,000\,01$ to $3.000\,000\,03$ changes the intersection point
 from $(1,1)$ to $(3,0)$.
 This system changes radically depending on a ninth digit, which explains why
-the eight-place computer has trouble.
+an eight-place computer has trouble.
 A problem that is very sensitive to inaccuracy or uncertainties in
 the input values is \definend{ill-conditioned}.\index{ill-conditioned}
 
 The above example gives one way in which a system can be
-difficult to solve on a computer.
-It has the advantage that the picture of nearly-equal lines gives a memorable 
+difficult to solve on a computer and
+it has the advantage that the picture of nearly-equal lines gives a memorable 
 insight into one way that numerical difficulties can arise.
 Unfortunately this insight isn't very useful when we wish
 to solve some large system.
@@ -113,7 +113,7 @@ gives $x=y$, so $x=y=1/1.001$ and
 thus both variables have values that are just less than $1$.
 A computer using two digits represents the system internally in this way
 (we will do this example in two-digit floating point 
-arithmetic, but a similar one with eight digits is easy to invent).
+arithmetic, but inventing a similar one with eight digits is easy).
 \begin{equation*}
   \begin{linsys}{2}
     (1.0\times 10^{-2})x  &+  &(1.0\times 10^{0})y  &=  &1.0\times 10^{0}  \\
@@ -131,29 +131,26 @@ Thus, another cause of
 unreliable output is a mixture of floating point arithmetic
 and a reliance on using leading entries that are small. 
 
-An experienced programmer may respond that we should go to
+An experienced programmer may respond by going to
 \definend{double precision}\index{double precision} %
-where sixteen significant digits are retained.
+that retains sixteen significant digits.
 This will indeed solve many problems.
-However, there are some difficulties with it as a general approach.
-For one thing, double precision has twice
-the memory requirements.
-And besides, the above systems can obviously be tweaked to give the
+However, double precision has twice
+the memory requirements
+and besides, the above systems can obviously be tweaked to give the
 same trouble in the seventeenth digit, so double precision
-won't fix all problems.
-What we need is a strategy to minimize the numerical
-trouble arising from solving systems on a computer,
-and some guidance as to how far the reported 
+isn't a panacea.
+We need is a strategy to minimize the numerical
+trouble arising from solving systems on a computer
+as well as some guidance as to how far the reported 
 solutions can be trusted. 
 
-Mathematicians have made a careful study of how to get the most
-reliable results. 
 A basic improvement on the naive code above 
 is to not simply take the entry
 in the $\text{\textit{row}},\text{\textit{row}}$
 position to determine the factor to use for the row combination,
 but rather to look at all of the entries in the \textit{row}
-column below the $\text{\textit{row}},\text{\textit{row}}$ entry, 
+column below the $\text{\textit{row}},\text{\textit{row}}$ entry
 and take the one that is most likely to give reliable results
 (e.g., take one that is not too small).
 This strategy is called \definend{partial pivoting}.%
@@ -168,7 +165,7 @@ $1.001y=1$, which the computer will represent as
 $(1.0\times 10^{0})y=1.0\times 10^{0}$, leading to the conclusion that 
 $y=1$ and, after back-substitution, $x=1$, 
 both of which are close to right.  
-The code from above can be adapted to this purpose.
+We can adapt the code from above to this purpose.
 \begin{lstlisting}
 for(row=1;row<=n-1;row++){
 /* find the largest entry in this column (in row max) */
@@ -196,21 +193,21 @@ for(row=1;row<=n-1;row++){
 A full analysis of the best way to implement Gauss' method 
 is outside the scope of the book (see \cite{Wilkinson65}),
 but the method recommended by most experts 
-is a variation on the code above that first finds the best entry
-among the candidates, and then scales it to a number that is less
+first finds the best entry
+among the candidates and then scales it to a number that is less
 likely to give trouble.
 This is 
 \definend{scaled partial pivoting}.\index{scaled partial pivoting}\index{pivoting!partial!scaled}
 
 In addition to returning a result that is likely to be reliable,
-most well-done code will return a number, called the 
+most well-done code will return a number, the 
 \definend{conditioning number}%
 \index{conditioning number}\index{matrix!conditioning number}
 that describes the factor by which uncertainties in the input numbers
 could be magnified to become inaccuracies in the results returned 
 (see \cite{Rice}).
 
-The lesson of this discussion is that
+The lesson is that,
 just because Gauss' method always works in theory, and just
 because computer code correctly implements that method,
 doesn't mean that the answer is reliable.
