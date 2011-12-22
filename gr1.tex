@@ -3557,8 +3557,8 @@ by writing \( \vec{s}-\vec{p} \) as \( \vec{h} \).
 
 For set inclusion the other way, take a vector of the form $\vec{p}+\vec{h}$,
 where \( \vec{p} \) solves the system and \( \vec{h} \) solves the
-associated homogeneous system, and note that it solves the given system:
-for any equation index $i$, 
+associated homogeneous system, and note that $\vec{p}+\vec{h}$ 
+solves the given system: for any equation index $i$, 
 \begin{equation*}
   \begin{split}
   a_{i,1}(p_1+h_1)+\cdots+a_{i,n}(p_n+h_n)
@@ -3613,7 +3613,7 @@ The associated homogeneous system reduces via the same row operations
        &   &y   &-  &3z &=  &0
   \end{linsys}
   &\grstep{-2\rho_1+\rho_2}
-  \;\grstep{\rho_2\leftrightarrow\rho_3} 
+  \;\;\grstep{\rho_2\leftrightarrow\rho_3} 
   &\begin{linsys}{3}
       x  &+  &2y  &-  &z  &=  &0  \\      
          &   &y   &-  &3z &=  &0  \\
@@ -3661,7 +3661,7 @@ homogeneous systems have at least one solution.
     x  &+  &y &+  &3z &+ &2w &=  &0   
   \end{linsys}
   &\grstep[-\rho_1+\rho_3]{-2\rho_1+\rho_2}
-  \;\grstep{\rho_2+\rho_3}
+  \;\;\grstep{\rho_2+\rho_3}
   &\begin{linsys}{4}
     x  &   &  &+  &z  &+ &w  &=  &0   \\
        &   &-y&-  &2z &- &w  &=  &0   \\
@@ -3675,7 +3675,7 @@ In fact the solution set of this homogeneous system is infinite.
 \end{equation*}
 However, because no particular solution of the original system exists, the
 general solution set is empty\Dash there are no vectors of the form
-$\vec{p}+\vec{h}$ because there are no $\vec{p}\,$'s.
+$\vec{p}+\vec{h}$ because there are no $\vec{p}\:$'s.
 \end{example}
 
 \begin{corollary}
@@ -3685,13 +3685,15 @@ have infinitely many elements.
 
 \begin{proof}
 We've seen examples of all three happening so we need only prove
-that those are the only possibilities.
+that there are no other possibilities.
 
 First, notice a homogeneous system with
 at least one  non-\( \zero \) solution $\vec{v}$ has infinitely many
 solutions because the set of multiples $s\vec{v}$
-is infinite\Dash if $s\neq 1$ then $s\vec{v}-\vec{v}=(s-1)\vec{v}$ is
-non-$\zero$ and so $s\vec{v}\neq \vec{v}$.
+is infinite\Dash if $s\neq 1$ then $s\vec{v}\neq\vec{v}$ because
+$s\vec{v}-\vec{v}=(s-1)\vec{v}$ is
+non-$\zero$, since any non-$0$ component of $\vec{v}$ when 
+rescaled by the factor $s-1$ will give a non-$0$ value.
 
 Now, apply \nearbylemma{th:GenEqPartHomo} to conclude that a solution set
 \begin{equation*}
@@ -3748,16 +3750,14 @@ we find that some variable is free.
 (We formalize ``ignoring the constants on the right'' by
 considering the associated homogeneous system.)
 
-Especially interesting examples of this are
-systems with the same number of equations as variables. 
+A notable special case is
+systems having the same number of equations as unknowns. 
 Such a system will have a solution, and that solution will be unique, 
-if and only it
-reduces to an echelon form system where every variable leads its row,
+if and only if it
+reduces to an echelon form system where every variable leads its row
+(since there are the same number of variables as rows),
 which will happen if and only if
 the associated homogeneous system has a unique solution.
-% Thus, the question of uniqueness of solution is especially
-% interesting when the system has the same number of
-% equations as variables.
 
 \begin{definition}
 A square matrix is \definend{nonsingular}\index{nonsingular!matrix}
@@ -3770,48 +3770,6 @@ that is,
 if it is the matrix of coefficients of a homogeneous system with 
 infinitely many solutions.
 \end{definition}
-The word singular means ``departing from general expectation''
-and here expresses that we could expect that systems with the same number
-of equations as unknowns will typically have a unique solution.
-(That `singular' applies to systems having more than one solution 
-is ironic, but it is the standard term.)
-
-\begin{example}
-The systems from \nearbyexample{ex:FirstExHomoSys},
-\nearbyexample{ex:HomoZeroOnlySol},
-and \nearbyexample{ex:IllusGenEqPartHomo}
-each have an associated homogeneous system with a unique solution.
-Thus these matrices are nonsingular.
-\begin{equation*}
-  \begin{mat}[r]
-    3  &4  \\
-    2  &-1
-  \end{mat}
-  \qquad
-  \begin{mat}[r]
-    3  &2   &1  \\
-    6  &-4  &0  \\
-    0  &1   &1
-  \end{mat}
-  \qquad
-  \begin{mat}[r]
-    1  &2  &-1 \\
-    2  &4  &0  \\
-    0  &1  &-3
-  \end{mat}
-\end{equation*}
-The Chemistry problem from \nearbyexample{ex:SolnChemProb} 
-is a homogeneous system with more than one solution so its matrix
-is singular. 
-\begin{equation*}
-  \begin{mat}[r]
-    7  &0  &-7 &0  \\
-    8  &1  &-5 &-2 \\
-    0  &1  &-3 &0  \\
-    0  &3  &-6 &-1
-  \end{mat}
-\end{equation*}
-\end{example}
 
 \begin{example}
 The first of these matrices is nonsingular while the second is singular
@@ -3867,8 +3825,51 @@ has either no solutions or else has infinitely many, as with these.
    3x  &+  &6y  &=   &3
   \end{linsys}
 \end{equation*} 
-Thus, `singular' can be thought of as connoting 
-``troublesome,'' or at least ``not ideal''.
+\end{example}
+
+The word singular means ``departing from general expectation''
+(people often, naively, expect that systems 
+with the same number of variables as equations will have a unique solution).
+Thus, it can be thought of as connoting 
+``troublesome,'' or at least ``not ideal.''
+(That `singular' applies those systems that do not have one solution 
+is ironic, but it is the standard term.)
+
+\begin{example}
+The systems from \nearbyexample{ex:FirstExHomoSys},
+\nearbyexample{ex:HomoZeroOnlySol},
+and \nearbyexample{ex:IllusGenEqPartHomo}
+each have an associated homogeneous system with a unique solution.
+Thus these matrices are nonsingular.
+\begin{equation*}
+  \begin{mat}[r]
+    3  &4  \\
+    2  &-1
+  \end{mat}
+  \qquad
+  \begin{mat}[r]
+    3  &2   &1  \\
+    6  &-4  &0  \\
+    0  &1   &1
+  \end{mat}
+  \qquad
+  \begin{mat}[r]
+    1  &2  &-1 \\
+    2  &4  &0  \\
+    0  &1  &-3
+  \end{mat}
+\end{equation*}
+The Chemistry problem from \nearbyexample{ex:SolnChemProb} 
+is a homogeneous system with more than one solution so its matrix
+is singular. 
+\begin{equation*}
+  \begin{mat}[r]
+    7  &0  &-7 &0  \\
+    8  &1  &-5 &-2 \\
+    0  &1  &-3 &0  \\
+    0  &3  &-6 &-1
+  \end{mat}
+\end{equation*}
 \end{example}
 
 The above table has two dimensions.
@@ -4439,13 +4440,12 @@ of Gauss' method itself in the rest of this chapter.
       (at most) one element.)
      \end{answer}
   \item 
-    To tell the whole truth, there is another tricky point to the
+    In the
     proof of
-    \nearbylemma{le:HomoSltnSpanVecs}.
-    What happens if there are no non-`\( 0=0 \)' equations?
-    (There aren't any more tricky points after this one.)
+    \nearbylemma{le:HomoSltnSpanVecs},
+    what happens if there are no non-`\( 0=0 \)' equations?
     \begin{answer}
-      In this case the solution set is all of \( \Re^n \), and can be
+      In this case the solution set is all of \( \Re^n \) and can be
       expressed in the required form
       \begin{equation*}
         \set{c_1\colvec[r]{1 \\ 0 \\ \vdotswithin{1} \\ 0}
@@ -4463,7 +4463,7 @@ of Gauss' method itself in the rest of this chapter.
       \partsitem \( 3\vec{s} \)
       \partsitem \( k\vec{s}+m\vec{t} \) for \( k,m\in\Re \)
     \end{exparts*}
-    What's wrong with: ``These three show that if a homogeneous
+    What's wrong with this argument: ``These three show that if a homogeneous
     system has one solution then it has many solutions\Dash any multiple of 
     a solution is another solution, and any sum of solutions is a solution
     also\Dash so there are no
