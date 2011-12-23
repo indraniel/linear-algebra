@@ -6,24 +6,24 @@ After developing the mechanics of Gauss' method,
 we observed that it can be done in more than one way.
 One example is that from this matrix 
 \begin{equation*}
-    \begin{mat}
+    \begin{mat}[r]
        2  &2  \\
        4  &3
     \end{mat}
 \end{equation*}
 we could derive any of these three echelon form matrices.
 \begin{equation*}
-    \begin{mat}
+    \begin{mat}[r]
        2  &2  \\
        0  &-1
     \end{mat}
     \qquad
-    \begin{mat}
+    \begin{mat}[r]
        1  &1  \\
        0  &-1
     \end{mat}
     \qquad
-    \begin{mat}
+    \begin{mat}[r]
        2  &0  \\
        0  &-1
     \end{mat}
@@ -37,16 +37,16 @@ echelon form so the second one is extra work
 but it is nonetheless a legal row operation).
 
 The fact that echelon form 
-is not unique leaves us with some questions.
+is not unique raises questions.
 Will any two echelon form versions of a linear system have the same number of
 free variables?
 If yes, 
-will the two have exactly the same variables free?
-In this section we will answer both questions ``yes''.
-We will do more than answer those questions.
-We will give a way to decide if one linear system 
+will the two have exactly the same free variables?
+In this section we will 
+give a way to decide if one linear system 
 can be derived from another by row operations.
-The answers to the two questions will follow from this larger result.
+The answers to both questions, both ``yes,''
+will follow from this.
 
 
 
@@ -60,7 +60,7 @@ Gaussian elimination coupled with back-substitution
 solves linear systems but it is not the only method possible.
 Here is an extension of Gauss' method that has some advantages.
 
-\begin{example}
+\begin{example} \label{exm:GJRedReadOffSol}
 To solve
 \begin{equation*}
   \begin{linsys}{3}
@@ -72,23 +72,23 @@ To solve
 we can start as usual by going to echelon form.
 \begin{equation*}
   \grstep{-\rho_1+\rho_3}
-    \begin{amat}{3}
+    \begin{amat}[r]{3}
        1  &1  &-2 &-2  \\
        0  &1  &3  &7   \\
        0  &-1 &1  &1
     \end{amat}
   \grstep{\rho_2+\rho_3}
-    \begin{amat}{3}
+    \begin{amat}[r]{3}
        1  &1  &-2 &-2  \\
        0  &1  &3  &7   \\
        0  &0  &4  &8
     \end{amat}
 \end{equation*}
 We can keep going to a second stage
-by making the leading entries into ones
+by making the leading entries into \( 1 \)'s
 \begin{equation*}
     \grstep{(1/4)\rho_3}
-    \begin{amat}{3}
+    \begin{amat}[r]{3}
        1  &1  &-2 &-2  \\
        0  &1  &3  &7   \\
        0  &0  &1  &2
@@ -99,13 +99,13 @@ to eliminate all of the other entries in each column
 by combining upwards.
 \begin{equation*}
   \grstep[2\rho_3+\rho_1]{-3\rho_3+\rho_2}
-    \begin{amat}{3}
+    \begin{amat}[r]{3}
        1  &1  &0  &2   \\
        0  &1  &0  &1   \\
        0  &0  &1  &2
     \end{amat}
   \grstep{-\rho_2+\rho_1}
-    \begin{amat}{3}
+    \begin{amat}[r]{3}
        1  &0  &0  &1   \\
        0  &1  &0  &1   \\
        0  &0  &1  &2
@@ -116,31 +116,31 @@ The answer is \( x=1 \), \( y=1 \), and \( z=2 \).
 Using one entry to clear out the rest of a column is
 called \definend{pivoting}\index{pivoting} on that entry.
 
-Note that the row combination operations in the first stage proceed from column
-one to column three while the combination operations in the third stage proceed 
-from column three to column one.
+Note that the row combination operations in the first stage move left to right,
+from column one to column three, 
+while the combination operations in the third stage move right to left.
 
-\begin{example}
+\begin{example}  \label{exm:GJRedReadOffSolTwo}
 The middle stage operations that 
 turn the leading entries into \( 1 \)'s
-don't interact, so we can combine them into a single step.
+don't interact, so we can combine multiple ones into a single step.
 \begin{eqnarray*}
-    \begin{amat}{2}
+    \begin{amat}[r]{2}
        2   &1   &7   \\
        4   &-2  &6
     \end{amat}
   &\grstep{-2\rho_1+\rho_2}
-  &\begin{amat}{2}
+  &\begin{amat}[r]{2}
        2   &1   &7   \\
        0   &-4  &-8
     \end{amat}                                   \\
   &\grstep[(-1/4)\rho_2]{(1/2)\rho_1}
-  &\begin{amat}{2}
+  &\begin{amat}[r]{2}
        1   &1/2   &7/2   \\
        0   &1     &2
     \end{amat}                                    \\
   &\grstep{-(1/2)\rho_2+\rho_1}
-  &\begin{amat}{2}
+  &\begin{amat}[r]{2}
        1   &0   &5/2   \\
        0   &1   &2
     \end{amat}
@@ -150,11 +150,11 @@ The answer is $x=5/2$ and $y=2$.
 
 This extension of Gauss' method is 
 \definend{Gauss-Jordan reduction}.\index{linear equation!solution of!Gauss-Jordan}\index{Gauss-Jordan}\index{Gauss' method!Gauss-Jordan}
-It goes past echelon form to a more refined, more specialized,
-matrix form.
+% It goes past echelon form to a more refined, more specialized,
+% matrix form.
 
 \begin{definition}\label{def:RedEchForm}
-A matrix is in
+A matrix or linear system is in
 \definend{reduced echelon form\/}\index{echelon form!reduced}\index{reduced echelon form}
 if, in addition to being in echelon form, each leading entry is a
 one and is the only nonzero entry in its column.
@@ -166,175 +166,73 @@ is the additional arithmetic.
 The benefit is that we can just read off the solution set
 from the reduced echelon form.
 
-In any echelon form, plain or reduced, we can read off 
-when a system has an empty
+In any echelon form, reduced or not, we can read off 
+when the system has an empty
 solution set because there is a contradictory equation.
-We can also read off 
-when a system has a one-element solution set because there is no
+We can read off 
+when the system has a one-element solution set because there is no
 contradiction and every
 variable is the leading variable in some row.
-And, we can read off when a system has an infinite solution set because 
+And, we can read off when the system has an infinite solution set because 
 there is no contradiction and at least one variable is free.
 
-In reduced echelon form we can read off not just what kind of 
-solution set the system has, but also its description.
-Whether or not the echelon form is reduced,
-we have no trouble describing the solution set when it is empty, of course.
-The two examples above show that when the system has a single solution then
-the solution can be read off from the right-hand column.
-In the case when the solution set is infinite, its
-parametrization can also be read off of the reduced echelon form.
-Consider, for example, this system that is shown brought to echelon form and
-then to reduced echelon form.
+If the echelon form is reduced then we can read off not just the size of the  
+solution set but also its description.
+We have no trouble describing the solution set when it is empty, of course.
+\nearbyexample{exm:GJRedReadOffSol} and~\ref{exm:GJRedReadOffSolTwo} 
+show how in a single element solution set case the single element is
+in the column of constants.
+The next example shows how to read the parametrization
+of an infinite solution set from reduced echelon form.
+
+\begin{example}
 \begin{multline*}
-  \begin{amat}{4}
+  \begin{amat}[r]{4}
      2  &6  &1  &2  &5  \\
      0  &3  &1  &4  &1  \\
      0  &3  &1  &2  &5
   \end{amat}
   \grstep{-\rho_2+\rho_3}
-  \begin{amat}{4}
+  \begin{amat}[r]{4}
      2  &6  &1  &2  &5  \\
      0  &3  &1  &4  &1  \\
      0  &0  &0  &-2 &4
   \end{amat}                                        \\
   \grstep[(1/3)\rho_2 \\ -(1/2)\rho_3]{(1/2)\rho_1}
-  \;\grstep[-\rho_3+\rho_1]{(4/3)\rho_3+\rho_2}
-  \;\grstep{-3\rho_2+\rho_1}
-  \begin{amat}{4}
+  \;\;\grstep[-\rho_3+\rho_1]{(4/3)\rho_3+\rho_2}
+  \;\;\grstep{-3\rho_2+\rho_1}
+  \begin{amat}[r]{4}
      1  &0  &-1/2  &0  &-9/2  \\
      0  &1  &1/3   &0  &3  \\
      0  &0  &0     &1  &-2
   \end{amat}
 \end{multline*}
-Starting with the middle matrix, the echelon form version, 
-back substitution produces $-2x_4=4$ so that $x_4=-2$,
-then another back substitution gives
-$3x_2+x_3+4(-2)=1$ implying that $x_2=3-(1/3)x_3$, 
-and then the final back substitution gives
-$2x_1+6(3-(1/3)x_3)+x_3+2(-2)=5$ implying that $x_1=-(9/2)+(1/2)x_3$.
-Thus the solution set is this.
+As a linear system this is 
+\begin{equation*}
+  \begin{linsys}{4}
+     x_1  &&     &-&1/2x_3  &&   &= &-9/2  \\
+          &&x_2  &+&1/3x_3  &&   &= &3  \\
+          &&     &&        &{}\hspace{.5em}{}&x_4 &= &-2    
+  \end{linsys}
+\end{equation*}
+so a solution set description is this.
 \begin{equation*}  
   S=\set{\colvec{x_1 \\ x_2 \\ x_3 \\ x_4}
-                        =\colvec{-9/2 \\ 3 \\ 0 \\ -2}
-                         +\colvec{1/2 \\ -1/3 \\ 1 \\ 0}x_3
+                        =\colvec[r]{-9/2 \\ 3 \\ 0 \\ -2}
+                         +\colvec[r]{1/2 \\ -1/3 \\ 1 \\ 0}x_3
                         \suchthat x_3\in\Re}
 \end{equation*}
-Now, considering the final matrix, the reduced echelon form version, note that
-adjusting the parametrization by moving the $x_3$ terms to the other side
-does indeed give the description of this infinite solution set.
+\end{example}
 
-Part of the reason that this works is straightforward.
-While a set can have many parametrizations that describe it, e.g.,
-both of these also describe the above set $S$
-(take $t$ to be $x_3/6$ and $s$ to be $x_3-1$) 
-\begin{equation*}
-  \set{\colvec{-9/2 \\ 3 \\ 0 \\ -2}
-                         +\colvec{3 \\ -2 \\ 6 \\ 0}t
-                        \suchthat t\in\Re}
-  \qquad
-  \set{\colvec{-4 \\ 8/3 \\ 1 \\ -2}
-                         +\colvec{1/2 \\ -1/3 \\ 1 \\ 0}s
-                        \suchthat s\in\Re}
-\end{equation*} 
-nonetheless we have in this book stuck to a convention of
-parametrizing using the unmodified free variables (that is, 
-$x_3=x_3$ instead of $x_3=6t$).
-We can easily see that
-a reduced echelon form version of a system is equivalent to
-a parametrization in terms of unmodified free variables.
-For instance,
-\begin{equation*}
-  \begin{aligned}
-    x_1 &=4-2x_3 \\
-    x_2 &=3-x_3
-  \end{aligned}
-  \quad\Longleftrightarrow\quad
-  \begin{amat}{3}
-    1  &0  &2  &4  \\
-    0  &1  &1  &3  \\
-    0  &0  &0  &0
-  \end{amat}
-\end{equation*}
-(to move from left to right we also need to know how many equations are
-in the system).
-So, the convention of parametrizing with the free variables by solving
-each equation for its leading variable and then eliminating that leading
-variable from every other equation is exactly equivalent to the reduced
-echelon form conditions that each leading entry must be a one and must be the
-only nonzero entry in its column.
-
-Not as straightforward is the other 
-part of the reason that the reduced echelon form version allows us to
-read off the parametrization that we would have gotten had we stopped at
-echelon form and then done back substitution.
-The prior paragraph shows that reduced echelon form corresponds to some
-parametrization, but why the same parametrization?
-A solution set can be parametrized in many ways, and Gauss' method
-or the Gauss-Jordan method can be done in many ways, so a first guess
-might be that we could derive many different reduced echelon form
-versions of the same starting system and many different parametrizations.
-But we never do.
-Experience shows that starting with the same system and  proceeding with row
-operations in many different ways always yields the same reduced echelon form
-and the same parametrization (using the unmodified free variables).
-
-In the rest 
-of this section we will show that the reduced echelon form version
-of a matrix is unique.
-It follows that the parametrization of a linear system
-in terms of its unmodified free variables is unique
-because two different ones would give two different reduced echelon forms.
-
-We shall use this result, and the ones that lead up to it, in the rest of
-the book but perhaps a restatement in a way that makes it seem more 
-immediately useful may be encouraging.
-Imagine that we solve a linear system, parametrize, and check in the back of
-the book for the answer.
-But the parametrization there appears different.
-Have we made a mistake, or could these be different-looking
-descriptions of the same set, as with the three descriptions above of $S$?
-The prior paragraph notes that
-we will show here   
-that different-looking parametrizations (using the unmodified free
-variables) describe genuinely different sets. 
-
-Here is an informal argument that the reduced 
-echelon form version of a matrix is unique.
-Consider again the example that started this section of a matrix that
-reduces to three different echelon form matrices.
-The first matrix of the three is the natural echelon form version.
-The second matrix is the same as 
-the first except that a row has been halved.
-The third matrix, too, is just a cosmetic variant of the first. 
-The definition of reduced echelon form outlaws this kind of fooling around.
-In reduced echelon form,
-halving a row is not possible because that would
-change the row's leading entry away from one, and
-neither is combining rows possible, because then a leading entry would no
-longer be alone in its column.
-
-This informal justification is not a proof;
-the argument shows that no two different reduced echelon form matrices
-are related by a single row operation step, but the argument does not
-ruled out the possibility that two different reduced echelon form
-matrices could be related by multiple steps.
-Before we go to the proof, we finish this subsection by 
-rephrasing our work in a terminology that will be enlightening.
-
-Many different matrices yield the same reduced echelon
-form matrix.
-The three echelon form matrices from the start of this section, and
-the matrix they were derived from, all give this reduced echelon form
-matrix.
-\begin{equation*}
-  \begin{mat}
-    1  &0  \\
-    0  &1
-  \end{mat}
-\end{equation*}
-We think of these matrices as related to each other.
-The next result speaks to this relationship.
+Thus echelon form isn't some kind of one best form for systems.
+Other forms, such as reduced echelon form,  have advantages and
+disadvantages.
+Instead of picturing linear systems (and the associated matrices) 
+as things we operate on, 
+always directed toward the goal of echelon form, we can think of 
+them as interrelated when
+we can get from one to another by row operations.
+The rest of this subsection develops this relationship.
 
 \begin{lemma} \label{le:RowOpsRev}
 Elementary row operations are reversible.
@@ -367,15 +265,15 @@ is undone by subtracting the same multiple of row \( i \) from row \( j \).
 See \nearbyexercise{exer:INotJMakesRowOpsRev}.)
 \end{proof}
 
-This lemma suggests that `reduces to' is misleading\Dash where
+Again, the point of view that we are developing, buttressed now by this lemma,
+is that the term `reduces to' is misleading:~where
 \( A\longrightarrow B \), we shouldn't think of \( B \) as
 ``after'' \( A \) or ``simpler than'' $A$.
 Instead we should think of them as interreducible or interrelated.
 Below is a picture of the idea.
 The matrices from the start of this section and their
 reduced echelon form version are shown in a cluster.
-They are all interreducible;
-these relationships are shown also. 
+They are all interreducible. 
 \begin{center}  
   \includegraphics{ch1.28}
 \end{center}
@@ -407,7 +305,7 @@ then also \( B \) reduces to \( A \) by reversing those operations.
 
 For transitivity, suppose that \( A \) reduces to \( B \) and
 that \( B \) reduces to \( C \).
-Linking the reduction steps from $A \rightarrow\cdots\rightarrow B$
+Following the reduction steps from $A \rightarrow\cdots\rightarrow B$
 with those from  $B \rightarrow\cdots\rightarrow C$ 
 gives a reduction from \( A \) to \( C \).
 \end{proof}
@@ -429,12 +327,11 @@ The collection of matrices has been partitioned into
   \includegraphics{ch1.27}
 \end{center}
 \noindent One of the classes in this partition is the
-cluster of matrices shown above,
+cluster of matrices from the start of this section that is shown above,
 expanded to include all of the nonsingular $\nbyn{2}$ matrices. 
 
 The next subsection proves that the reduced echelon form of a matrix is 
-unique; that 
-every matrix reduces to one and only one reduced echelon form matrix.
+unique.
 Rephrased in terms of the row-equivalence relationship, 
 we shall prove that every matrix is 
 row equivalent to one and only one reduced echelon form matrix.
@@ -442,12 +339,6 @@ In terms of the partition what we shall prove is:~every
 equivalence class contains one and only one reduced echelon form matrix.
 So each reduced echelon form matrix serves as a representative of its 
 class.
-
-After that proof we shall, 
-as mentioned in the introduction to this section, have a
-way to decide if one matrix can be derived from another by row reduction.
-We just apply the Gauss-Jordan procedure to both and see whether
-or not they come to the same reduced echelon form.
 
 \begin{exercises}
    \recommended \item 
@@ -479,102 +370,102 @@ or not they come to the same reduced echelon form.
        These answers show only the Gauss-Jordan reduction.
        With it, describing the solution set is easy. 
        \begin{exparts}
-         \partsitem $\begin{amat}{2}
+         \partsitem $\begin{amat}[r]{2}
                1  &1  &2  \\
                1  &-1 &0
              \end{amat}
              \grstep{-\rho_1+\rho_2}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                1  &1  &2  \\
                0  &-2 &-2
              \end{amat}                         
              \grstep{-(1/2)\rho_2}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                1  &1  &2  \\
                0  &1  &1
              \end{amat}                         
              \grstep{-\rho_2+\rho_1}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                1  &0  &1  \\
                0  &1  &1
              \end{amat}$
          \partsitem $
-             \begin{amat}{3}
+             \begin{amat}[r]{3}
                1  &0  &-1  &4  \\
                2  &2  &0   &1
              \end{amat}
              \grstep{-2\rho_1+\rho_2}
-             \begin{amat}{3}
+             \begin{amat}[r]{3}
                1  &0  &-1  &4  \\
                0  &2  &2   &-7
              \end{amat}                    
              \grstep{(1/2)\rho_2}
-             \begin{amat}{3}
+             \begin{amat}[r]{3}
                1  &0  &-1  &4  \\
                0  &1  &1   &-7/2
              \end{amat}$
          \partsitem 
            \begin{equation*}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                3  &-2  &1  \\
                6  &1   &1/2
              \end{amat}
              \grstep{-2\rho_1+\rho_2}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                3  &-2  &1  \\
                0  &5   &-3/2
              \end{amat}                       
              \grstep[(1/5)\rho_2]{(1/3)\rho_1}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                1  &-2/3&1/3 \\
                0  &1   &-3/10
              \end{amat}                       
              \grstep{(2/3)\rho_2+\rho_1}
-             \begin{amat}{2}
+             \begin{amat}[r]{2}
                1  &0   &2/15 \\
                0  &1   &-3/10
              \end{amat}
           \end{equation*}
         \partsitem A row swap here makes the arithmetic easier.
          \begin{multline*}
-          \begin{amat}{3}
+          \begin{amat}[r]{3}
             2  &-1  &0  &-1  \\
             1  &3   &-1 &5   \\
             0  &1   &2  &5
           \end{amat}
           \grstep{-(1/2)\rho_1+\rho_2}
-          \begin{amat}{3}
+          \begin{amat}[r]{3}
             2  &-1  &0  &-1   \\
             0  &7/2 &-1 &11/2 \\
             0  &1   &2  &5
           \end{amat}                     
           \grstep{\rho_2\leftrightarrow\rho_3}
-          \begin{amat}{3}
+          \begin{amat}[r]{3}
             2  &-1  &0  &-1   \\
             0  &1   &2  &5    \\
             0  &7/2 &-1 &11/2
           \end{amat}                   \\                 
           \begin{aligned}
             &\grstep{-(7/2)\rho_2+\rho_3}
-            \begin{amat}{3}
+            \begin{amat}[r]{3}
               2  &-1  &0  &-1   \\
               0  &1   &2  &5    \\
               0  &0   &-8 &-12
             \end{amat}                     
             \grstep[-(1/8)\rho_2]{(1/2)\rho_1}
-            \begin{amat}{3}
+            \begin{amat}[r]{3}
               1  &-1/2&0  &-1/2 \\
               0  &1   &2  &5    \\
               0  &0   &1  &3/2
             \end{amat}                     \\                     
             &\grstep{-2\rho_3+\rho_2}
-            \begin{amat}{3}
+            \begin{amat}[r]{3}
               1  &-1/2&0  &-1/2 \\
               0  &1   &0  &2    \\
               0  &0   &1  &3/2
             \end{amat}                     
             \grstep{(1/2)\rho_2+\rho_1}
-            \begin{amat}{3}
+            \begin{amat}[r]{3}
               1  &0   &0  &1/2  \\
               0  &1   &0  &2    \\
               0  &0   &1  &3/2
@@ -586,21 +477,21 @@ or not they come to the same reduced echelon form.
   \recommended \item 
     Find the reduced echelon form of each matrix.
     \begin{exparts*}
-      \partsitem \( \begin{mat}
+      \partsitem \( \begin{mat}[r]
           2  &1  \\
           1  &3
         \end{mat}  \)
-      \partsitem \( \begin{mat}
+      \partsitem \( \begin{mat}[r]
           1  &3  &1  \\
           2  &0  &4  \\
          -1  &-3 &-3
         \end{mat}  \)
-      \partsitem \( \begin{mat}
+      \partsitem \( \begin{mat}[r]
           1  &0  &3  &1  &2  \\
           1  &4  &2  &1  &5  \\
           3  &4  &8  &1  &2
         \end{mat}  \)
-      \partsitem \( \begin{mat}
+      \partsitem \( \begin{mat}[r]
           0  &1  &3  &2  \\
           0  &0  &5  &6  \\
           1  &5  &1  &5
@@ -611,66 +502,66 @@ or not they come to the same reduced echelon form.
       \begin{exparts}
         \partsitem $
             \grstep{-(1/2)\rho_1+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               2  &1  \\
               0  &5/2
             \end{mat}
             \grstep[(2/5)\rho_2]{(1/2)\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &1/2\\
               0  &1
             \end{mat}                      
             \grstep{-(1/2)\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  \\
               0  &1
             \end{mat}$
         \partsitem $
             \grstep[\rho_1+\rho_3]{-2\rho_1+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &3  &1  \\
               0  &-6 &2  \\
               0  &0  &-2
             \end{mat}
             \grstep[-(1/2)\rho_3]{-(1/6)\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &3  &1     \\
               0  &1  &-1/3  \\
               0  &0  &1
             \end{mat}                  
             \grstep[-\rho_3+\rho_1]{(1/3)\rho_3+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &3  &0     \\
               0  &1  &0     \\
               0  &0  &1
             \end{mat}                  
             \grstep{-3\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &0     \\
               0  &1  &0     \\
               0  &0  &1
             \end{mat}$
         \partsitem \ \begin{multline*}
             \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &3  &1  &2  \\
               0  &4  &-1 &0  &3  \\
               0  &4  &-1 &-2 &-4
             \end{mat}
             \grstep{-\rho_2+\rho_3}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &3  &1  &2  \\
               0  &4  &-1 &0  &3  \\
               0  &0  &0  &-2 &-7
             \end{mat}                           \\
             \grstep[-(1/2)\rho_3]{(1/4)\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &3    &1  &2  \\
               0  &1  &-1/4 &0  &3/4  \\
               0  &0  &0    &1  &7/2
             \end{mat}                           
             \grstep{-\rho_3+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &3    &0  &-3/2  \\
               0  &1  &-1/4 &0  &3/4     \\
               0  &0  &0    &1  &7/2
@@ -678,31 +569,31 @@ or not they come to the same reduced echelon form.
           \end{multline*}
         \partsitem \ \begin{multline*}
             \grstep{\rho_1\leftrightarrow\rho_3}
-            \begin{mat}
+            \begin{mat}[r]
               1  &5  &1  &5  \\
               0  &0  &5  &6  \\
               0  &1  &3  &2
             \end{mat}
             \grstep{\rho_2\leftrightarrow\rho_3}
-            \begin{mat}
+            \begin{mat}[r]
               1  &5  &1  &5  \\
               0  &1  &3  &2  \\
               0  &0  &5  &6
             \end{mat}                  
             \grstep{(1/5)\rho_3}
-            \begin{mat}
+            \begin{mat}[r]
               1  &5  &1  &5  \\
               0  &1  &3  &2  \\
               0  &0  &1  &6/5
             \end{mat}                  \\
             \grstep[-\rho_3+\rho_1]{-3\rho_3+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &5  &0  &19/5  \\
               0  &1  &0  &-8/5  \\
               0  &0  &1  &6/5
             \end{mat}                  
             \grstep{-5\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &0  &59/5  \\
               0  &1  &0  &-8/5  \\
               0  &0  &1  &6/5
@@ -742,26 +633,26 @@ or not they come to the same reduced echelon form.
       \partsitem The ``Jordan'' half goes this way.
         \begin{equation*}
           \grstep[-(1/3)\rho_2]{(1/2)\rho_1}
-          \begin{amat}{3}
+          \begin{amat}[r]{3}
             1  &1/2 &-1/2 &1/2  \\
             0  &1   &-2/3 &-1/3
           \end{amat}
           \grstep{-(1/2)\rho_2+\rho_1}
-          \begin{amat}{3}
+          \begin{amat}[r]{3}
             1  &0   &-1/6 &2/3  \\
             0  &1   &-2/3 &-1/3
           \end{amat}
         \end{equation*}
         The solution set is this
         \begin{equation*}
-          \set{\colvec{2/3 \\ -1/3 \\ 0}
-               +\colvec{1/6 \\ 2/3 \\ 1}z
+          \set{\colvec[r]{2/3 \\ -1/3 \\ 0}
+               +\colvec[r]{1/6 \\ 2/3 \\ 1}z
               \suchthat z\in\Re}
         \end{equation*}
       \partsitem The second half is
         \begin{equation*}
           \grstep{\rho_3+\rho_2}
-          \begin{amat}{4}
+          \begin{amat}[r]{4}
             1  &0  &-1  &0  &1 \\
             0  &1  &2   &0  &3 \\
             0  &0  &0   &1  &0
@@ -769,14 +660,14 @@ or not they come to the same reduced echelon form.
         \end{equation*}
         so the solution is this.
         \begin{equation*}
-          \set{\colvec{1 \\ 3 \\ 0 \\ 0}
-               +\colvec{1 \\ -2 \\ 1 \\ 0}z
+          \set{\colvec[r]{1 \\ 3 \\ 0 \\ 0}
+               +\colvec[r]{1 \\ -2 \\ 1 \\ 0}z
               \suchthat z\in\Re}
         \end{equation*}
       \partsitem This Jordan half
         \begin{equation*}
           \grstep{\rho_2+\rho_1}
-          \begin{amat}{4}
+          \begin{amat}[r]{4}
             1  &0  &1   &1  &0 \\
             0  &1  &0   &1  &0 \\
             0  &0  &0   &0  &0 \\
@@ -785,31 +676,31 @@ or not they come to the same reduced echelon form.
         \end{equation*}
         gives 
         \begin{equation*}
-          \set{\colvec{0 \\ 0 \\ 0 \\ 0}
-               +\colvec{-1 \\ 0 \\ 1 \\ 0}z
-               +\colvec{-1 \\ -1 \\ 0 \\ 1}w
+          \set{\colvec[r]{0 \\ 0 \\ 0 \\ 0}
+               +\colvec[r]{-1 \\ 0 \\ 1 \\ 0}z
+               +\colvec[r]{-1 \\ -1 \\ 0 \\ 1}w
               \suchthat z,w\in\Re}
         \end{equation*}
         (of course, the zero vector could be omitted from the description).
       \partsitem The ``Jordan'' half
         \begin{equation*}
           \grstep{-(1/7)\rho_2}
-          \begin{amat}{5}
+          \begin{amat}[r]{5}
             1  &2  &3   &1   &-1   &1  \\
             0  &1  &8/7 &2/7 &-4/7 &0
           \end{amat}
           \grstep{-2\rho_2+\rho_1}
-          \begin{amat}{5}
+          \begin{amat}[r]{5}
             1  &0  &5/7 &3/7 &1/7  &1  \\
             0  &1  &8/7 &2/7 &-4/7 &0
           \end{amat}
         \end{equation*}
         ends with this solution set.
         \begin{equation*}
-          \set{\colvec{1 \\ 0 \\ 0 \\ 0 \\ 0}
-               +\colvec{-5/7 \\ -8/7 \\ 1 \\ 0 \\ 0}c
-               +\colvec{-3/7 \\ -2/7 \\ 0 \\ 1 \\ 0}d
-               +\colvec{-1/7 \\ 4/7 \\ 0 \\ 0 \\ 1}e
+          \set{\colvec[r]{1 \\ 0 \\ 0 \\ 0 \\ 0}
+               +\colvec[r]{-5/7 \\ -8/7 \\ 1 \\ 0 \\ 0}c
+               +\colvec[r]{-3/7 \\ -2/7 \\ 0 \\ 1 \\ 0}d
+               +\colvec[r]{-1/7 \\ 4/7 \\ 0 \\ 0 \\ 1}e
               \suchthat c,d,e\in\Re}
         \end{equation*}
     \end{exparts}
@@ -817,7 +708,7 @@ or not they come to the same reduced echelon form.
   \item 
     Give two distinct echelon form versions of this matrix.
     \begin{equation*}
-      \begin{mat}
+      \begin{mat}[r]
         2  &1  &1  &3  \\
         6  &4  &1  &2  \\
         1  &5  &1  &5
@@ -827,13 +718,13 @@ or not they come to the same reduced echelon form.
       Routine Gauss' method gives one:
       \begin{equation*}
         \grstep[-(1/2)\rho_1+\rho_3]{-3\rho_1+\rho_2}
-        \begin{mat}
+        \begin{mat}[r]
           2  &1  &1  &3  \\
           0  &1  &-2 &-7 \\
           0  &9/2&1/2&7/2
         \end{mat}
         \grstep{-(9/2)\rho_2+\rho_3}
-        \begin{mat}
+        \begin{mat}[r]
           2  &1  &1    &3  \\
           0  &1  &-2   &-7 \\
           0  &0  &19/2 &35
@@ -841,7 +732,7 @@ or not they come to the same reduced echelon form.
       \end{equation*}
       and any cosmetic change, like multiplying the bottom row by \( 2 \),
       \begin{equation*}
-        \begin{mat}
+        \begin{mat}[r]
           2  &1  &1    &3  \\
           0  &1  &-2   &-7 \\
           0  &0  &19   &70
@@ -864,104 +755,104 @@ or not they come to the same reduced echelon form.
       In particular, they includes the cases $a=0$ and $b=0$.
       \begin{exparts}
         \partsitem 
-          $\begin{mat}
+          $\begin{mat}[r]
             0  &0  \\
             0  &0
           \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
             1  &a  \\
             0  &0
           \end{mat}$, 
-          $\begin{mat}
+          $\begin{mat}[r]
             0  &1  \\
             0  &0
           \end{mat}$, 
-          $\begin{mat}
+          $\begin{mat}[r]
             1  &0  \\
             0  &1
           \end{mat}$
         \partsitem
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &0  &0  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &a  &b  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &1  &a  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &0  &1  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &0  &a  \\
                0  &1  &b
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &a  &0  \\
                0  &0  &1
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &1  &0  \\
                0  &0  &1
              \end{mat}$
         \partsitem
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &0  \\
                0  &0  \\
                0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &a  \\
                0  &0  \\
                0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &1  \\
                0  &0  \\
                0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &0  \\
                0  &1  \\
                0  &0
              \end{mat}$
         \partsitem
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &0  &0  \\
                0  &0  &0  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &a  &b  \\
                0  &0  &0  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &1  &a  \\
                0  &0  &0  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                0  &0  &1  \\
                0  &0  &0  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &0  &a  \\
                0  &1  &b  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &a  &0  \\
                0  &0  &1  \\
                0  &0  &0
              \end{mat}$,
-          $\begin{mat}
+          $\begin{mat}[r]
                1  &0  &0  \\
                0  &1  &0  \\
                0  &0  &1
@@ -977,12 +868,12 @@ or not they come to the same reduced echelon form.
       matrix that is all \( 0 \)'s
       except for \( 1 \)'s down the upper-left to lower-right diagonal, e.g.,
       \begin{equation*}
-         \begin{mat}
+         \begin{mat}[r]
            1  &0  \\
            0  &1  \\
          \end{mat},
          \quad\text{or}\quad
-         \begin{mat}
+         \begin{mat}[r]
            1  &0  &0  \\
            0  &1  &0  \\
            0  &0  &1
@@ -1064,17 +955,17 @@ or not they come to the same reduced echelon form.
         change $A$.
       \partsitem For instance,
         \begin{equation*}
-          \begin{mat}
+          \begin{mat}[r]
             1  &2  \\
             3  &4  
           \end{mat}
           \grstep{-\rho_1+\rho_1}
-          \begin{mat}
+          \begin{mat}[r]
             0  &0  \\
             3  &4  
           \end{mat}
           \grstep{\rho_1+\rho_1}
-          \begin{mat}
+          \begin{mat}[r]
             0  &0  \\
             3  &4  
           \end{mat}
@@ -1132,7 +1023,7 @@ or not they come to the same reduced echelon form.
 
 
 
-\subsection{Row Equivalence}
+\subsection{The Linear Combination Lemma}
 We will close this section and this chapter by proving 
 that every matrix is row equivalent to one
 and only one reduced echelon form matrix.
@@ -1153,6 +1044,35 @@ matrices breaks into the row equivalence classes.
 When we finish the proof here, we will have a way to understand each of those
 classes\Dash its matrices can be thought of as derived by row operations from the
 unique reduced echelon form matrix in that class.
+
+Put in more operational terms,
+after that proof we will (as promised in this section's opening) have a
+way to decide if one matrix can be derived from another by row reduction.
+We apply the Gauss-Jordan procedure to both and see whether
+or not they come to the same reduced echelon form.
+
+% Here is an informal argument that the reduced 
+% echelon form version of a matrix is unique.
+% Consider again the example that started this section of a matrix that
+% reduces to three different echelon form matrices.
+% The first matrix of the three is the natural echelon form version.
+% The second matrix is the same as 
+% the first except that a row has been halved.
+% The third matrix, too, is just a cosmetic variant of the first. 
+% The definition of reduced echelon form outlaws this kind of fooling around.
+% In reduced echelon form,
+% halving a row is not possible because that would
+% change the row's leading entry away from one, and
+% neither is combining rows possible, because then a leading entry would no
+% longer be alone in its column.
+
+% This informal justification is not a proof;
+% the argument shows that no two different reduced echelon form matrices
+% are related by a single row operation step, but the argument does not
+% ruled out the possibility that two different reduced echelon form
+% matrices could be related by multiple steps.
+% Before we go to the proof, we finish this subsection by 
+% rephrasing our work in a terminology that will be enlightening.
 
 To understand how row operations act to transform one matrix into another,
 we consider the effect that they have on the parts of a matrix.
@@ -1218,26 +1138,20 @@ Where one matrix reduces to another, each row of the second
 is a linear combination of the rows of the first.
 \end{corollary}
 
-The proof below of this lemma
-uses induction.
-Before we proceed, here is an outline of the argument
-(readers unfamiliar with induction may want to compare this argument with the
-one used in the 
-`$\text{General}=\text{Particular}+\text{Homogeneous}$' 
-proof).\appendrefs{mathematical induction} %\spacefactor=1000 
-
-First, for the base step of the argument, we
+The proof 
+uses induction.\appendrefs{mathematical induction}\spacefactor=1000 %
+Before we proceed, here is an outline of the argument.
+For the base step of the argument, we
 will verify that the proposition is true when reduction 
 can be done in zero row operations.
-Second, for the inductive step, we will 
+For the inductive step, we will 
 argue that if being able to reduce the first matrix to the second in some
 number $t\geq 0$ of operations implies that each row of the second is a linear
 combination of the rows of the first, then being able to reduce the first to
 the second in $t+1$ operations implies the same thing.
-
-Together, this base step and induction step prove the result because  
-by the inductive step the fact that it is true in the zero operations case
-(that's shown in the base step)
+Together, these prove the result because  
+the base step shows that it is true in the zero operations case,
+and then the inductive step
 implies that it is true in the one operation case, and then the inductive step
 applied again gives that it is therefore true in the two operations case, etc.
 
@@ -1252,49 +1166,49 @@ $A$'s rows: $\vec{\beta}_i
   =0\cdot\vec{\alpha}_1+\cdots+1\cdot\vec{\alpha}_i+\cdots+0\cdot\vec{\alpha}_m$.
 
 For the inductive step, assume the inductive hypothesis:~with $t\geq 0$,
-if a matrix can be derived from \( A \) in \( t \) or fewer operations 
-then its rows are linear combinations of the $A$'s rows.
-Consider a $B$ that takes $t+1$ operations.
+if \( B \) can be derived from \( A \) in \( t \) or fewer operations 
+then \( B\)'s rows are linear combinations of $A$'s rows.
+Suppose that reducing from \( A \) to \( B \) requires $t+1$ operations.
 Because there are more than zero operations, 
 there must be a next-to-last matrix $G$  
 so that $A\longrightarrow\cdots\longrightarrow G\longrightarrow B$.
 This \( G \) is only $t$ operations away from \( A \) and so the inductive
-hypothesis applies to it, that is, each row of \( G \)
+hypothesis applies to it. 
+That is, each row of \( G \)
 is a linear combination of the rows of \( A \).
 
-If the last operation, the one from \( G \) to \( B \), is a row swap then
-the rows of $B$ are just the rows of $G$ reordered and thus each row of $B$
+If the operation taking \( G \) to \( B \) is a row swap then
+the rows of $B$ are just the rows of $G$ reordered, and thus each row of $B$
 is also a linear combination of the rows of $A$.
-The other two possibilities for this last operation, that it multiplies a 
+The other two possibilities for this operation, that it multiplies a 
 row by a scalar and that it adds a multiple of one row to another, both result
 in the rows of $B$ being linear combinations of the rows of $G$.
 But therefore, by the Linear Combination Lemma, each row of $B$ is a linear
 combination of the rows of $A$.
 
-
-With that, we have both the base step and the inductive step, and 
-so the proposition follows.
+With both a base step and an inductive step,  
+the proposition follows by the principle of mathematical induction.
 \end{proof}
 
 \begin{example}
 In the reduction
 \begin{equation*}
-    \begin{mat}
+    \begin{mat}[r]
        0  &2  \\
        1  &1
      \end{mat}
     \grstep{\rho_1\leftrightarrow\rho_2}
-    \begin{mat}
+    \begin{mat}[r]
        1  &1  \\
        0  &2
      \end{mat}                  
     \grstep{(1/2)\rho_2}
-    \begin{mat}
+    \begin{mat}[r]
        1  &1  \\
        0  &1
      \end{mat}                   
     \grstep{-\rho_2+\rho_1}
-    \begin{mat}
+    \begin{mat}[r]
        1  &0  \\
        0  &1
      \end{mat}
@@ -1328,7 +1242,7 @@ The answer, of course, is that echelon form is suitable for back substitution,
 because we have isolated the variables.
 For instance, in this matrix
 \begin{equation*}
-  R=\begin{mat}
+  R=\begin{mat}[r]
     2  &3  &7  &8  &0  &0  \\
     0  &0  &1  &5  &1  &1  \\
     0  &0  &0  &3  &3  &0  \\
@@ -1362,23 +1276,52 @@ equation of entries in that column $3=8c_1+5c_2+0c_4$, along with $c_1=0$ and
 $c_2=0$, gives an impossibility.
 
 The following result shows that this effect always holds.
-It shows that what Gauss' linear elimination method eliminates is linear
+It shows that exactly
+what Gauss' linear elimination method eliminates is linear
 relationships among the rows.
 
 \begin{lemma}      \label{le:EchFormNoLinCombo}
 In an echelon form matrix,
-no nonzero row is a linear combination of the other rows.
+no nonzero row is a linear combination of the other nonzero rows.
 \end{lemma}
 
 \begin{proof}
 Let $R$ be in echelon form.
-Suppose, to obtain a contradiction, that some nonzero row is a linear
-combination of the others.
+If we have one non-\( \vec{0} \) row written as a combination
+of the others
 \begin{equation*}
    \rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
                c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
 \end{equation*}
-We will first use induction to show that the coefficients 
+then we can rewrite it as
+\begin{equation*}
+   \vec{0}=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+c_i\rho_i+
+               c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
+  \tag{*}
+\end{equation*}
+where $c_i=-1$.
+We shall use this second equation.
+We shall also use our convention that $\ell_i$ is the column number of 
+the leading entry in row~$i$.
+
+We will use induction on the row index~$i$
+to show that all of the coefficients~$c_i$ are $0$.
+
+The base case is the first row~$i=1$.
+Equation~($*$) defines an equation among the column $\ell_1$ entries of the 
+rows. 
+\begin{equation*}
+  0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_m}
+\end{equation*}
+Because the matrix is in echelon form
+every row after the first has a zero in that column so 
+$r_{2,\ell_1}=\cdots=r_{m,\ell_m}=0$.
+Thus $c_1=0$, because $r_{1,\ell_1}\neq 0$ since it is the leading entry
+in the row.
+
+
+
+to show that the coefficients 
 $c_1$, \ldots, $c_{i-1}$ associated with rows above $\rho_i$ are all zero.
 The contradiction will come from consideration of $\rho_i$ and the rows below
 it.
@@ -1411,6 +1354,52 @@ and the contradiction that finishes this proof, is saved for
 \nearbyexercise{ex:EchFormNoLinCombo}.
 \end{proof}
 
+% \begin{lemma}      \label{le:EchFormNoLinCombo}
+% In an echelon form matrix,
+% no nonzero row is a linear combination of the other rows.
+% \end{lemma}
+
+% \begin{proof}
+% Let $R$ be in echelon form.
+% Suppose, to obtain a contradiction, that some nonzero row is a linear
+% combination of the others.
+% \begin{equation*}
+%    \rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
+%                c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
+% \end{equation*}
+% We will first use induction to show that the coefficients 
+% $c_1$, \ldots, $c_{i-1}$ associated with rows above $\rho_i$ are all zero.
+% The contradiction will come from consideration of $\rho_i$ and the rows below
+% it.
+
+% The base step of the induction argument 
+% is to show that the first coefficient $c_1$ is zero.
+% Let the first row's leading entry be in column number \( \ell_1 \) 
+% and consider the equation of entries in that column.
+% \begin{equation*}
+%    \rho_{i,\ell_1}=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\rho_{i-1,\ell_1}
+%                +c_{i+1}\rho_{i+1,\ell_1}+\cdots+c_m\rho_{m,\ell_1}
+% \end{equation*}
+% The matrix is in echelon form so the entries 
+% $\rho_{2,\ell_1}$, \ldots, $\rho_{m,\ell_1}$, including
+% $\rho_{i,\ell_1}$, are all zero. 
+% \begin{equation*}
+%    0=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\cdot 0
+%                +c_{i+1}\cdot 0+\cdots+c_m\cdot 0
+% \end{equation*}
+% Because the entry $\rho_{1,\ell_1}$ is nonzero as it leads its row,
+% the coefficient $c_1$ must be zero.  
+
+% The inductive step is to show that 
+% for each row index $k$ between $1$ and $i-2$,
+% if the coefficient $c_1$ and the 
+% coefficients $c_2$, \ldots, $c_{k}$ are all zero 
+% then $c_{k+1}$ is also zero.
+% That argument,
+% and the contradiction that finishes this proof, is saved for 
+% \nearbyexercise{ex:EchFormNoLinCombo}.
+% \end{proof}
+
 \begin{theorem}
 \label{th:ReducedEchelonFormIsUnique}
 Each matrix is row equivalent to a unique reduced echelon form matrix.
@@ -1429,19 +1418,24 @@ In either case, its reduced echelon form is unique.
 
 For the inductive step we assume that \( n>1 \) and that all \( m \)~row
 matrices with fewer than \( n \) columns have a unique reduced echelon form.
-Consider a \( \nbym{m}{n} \) matrix \( A \), and suppose that 
+Consider a \( \nbym{m}{n} \) matrix \( A \) and suppose that 
 \( B \) and \( C \) are two reduced echelon form matrices derived from \( A \).
 We will show that these two must be equal.
 
 Let \( \hat{A} \) be the matrix consisting of the first \( n-1 \) columns of
 \( A \).
-Observe that any sequence of row operations that bring \( A \) to reduced 
+Observe that 
+% if an $n$~column matrix is in reduced echelon form then any initial
+% set of its columns is also in reduced echelon form, so \( \hat{A} \)
+% is in reduced echelon form. 
+any sequence of row operations that bring \( A \) to reduced 
 echelon form will also bring \( \hat{A} \) to reduced echelon form.
-By the inductive hypothesis the reduced echelon form of \( \hat{A} \)
+By the inductive hypothesis this reduced echelon form of \( \hat{A} \)
 is unique, so if \( B \) and \( C \) differ then the difference must 
 occur in their \( n \)-th columns.
 
-We finish by showing that the two cannot differ in only that column.
+We finish the inductive step, and the argument,
+by showing that the two cannot differ only in that column.
 Consider a homogeneous system of equations for which \( A \) is the
 matrix of coefficients.  
 \begin{equation*}
@@ -1453,8 +1447,10 @@ matrix of coefficients.
   \end{linsys}
   \tag{$*$}
 \end{equation*}
-By the first theorem of this chapter the set of solution to that system
-is the same as the set of solution to this system
+By \nearbytheorem{th:GaussMethod}
+%the first theorem of this chapter 
+the set of solutions to that system
+is the same as the set of solutions to this system
 \begin{equation*}
   \begin{linsys}{4}
     b_{1,1}x_1  &+  &b_{1,2}x_2  &+  &\cdots  &+  &b_{1,n}x_n  &=  &0  \\
@@ -1704,24 +1700,24 @@ by seeing if Gauss-Jordan reduction produces the same
 reduced echelon form result.
 Thus, these are not row equivalent
 \begin{equation*}
-  \begin{mat}
+  \begin{mat}[r]
     1  &-3  \\
    -2  &6
   \end{mat}
   \qquad
-  \begin{mat}
+  \begin{mat}[r]
     1  &-3  \\
    -2  &5
   \end{mat}
 \end{equation*}
 because their reduced echelon forms are not equal.
 \begin{equation*}
-  \begin{mat}
+  \begin{mat}[r]
     1  &-3  \\
     0  &0
   \end{mat}
   \qquad
-  \begin{mat}
+  \begin{mat}[r]
     1  &0   \\
     0  &1
   \end{mat}
@@ -1731,7 +1727,7 @@ because their reduced echelon forms are not equal.
 \begin{example}
 Any nonsingular \( \nbyn{3} \) matrix Gauss-Jordan reduces to this.
 \begin{equation*}
-    \begin{mat}
+    \begin{mat}[r]
       1  &0  &0 \\
       0  &1  &0 \\
       0  &0  &1
@@ -1745,7 +1741,7 @@ reduced echelon form matrices.
 Any $\nbyn{2}$ matrix lies in one of these:~the class of matrices
 row equivalent to this,
 \begin{equation*}
-  \begin{mat}
+  \begin{mat}[r]
      0  &0  \\
      0  &0
   \end{mat}
@@ -1760,14 +1756,14 @@ the infinitely many classes of matrices row equivalent to one of this type
 where \( a\in\Re \) (including $a=0$),
 the class of matrices row equivalent to this,
 \begin{equation*}
-  \begin{mat}
+  \begin{mat}[r]
      0  &1  \\
      0  &0
   \end{mat}
 \end{equation*}
 and the class of matrices row equivalent to this
 \begin{equation*}
-  \begin{mat}
+  \begin{mat}[r]
      1  &0  \\
      0  &1
   \end{mat}
@@ -1782,50 +1778,50 @@ and the class of matrices row equivalent to this
     Decide if the matrices are row equivalent.
     \begin{exparts*}
        \partsitem \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &2  \\
              4  &8
            \end{mat}, 
-           \begin{mat}
+           \begin{mat}[r]
              0  &1  \\
              1  &2
            \end{mat} \)
        \partsitem \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &0  &2  \\
              3  &-1 &1  \\
              5  &-1 &5
            \end{mat},  
-           \begin{mat}
+           \begin{mat}[r]
              1  &0  &2  \\
              0  &2  &10 \\
              2  &0  &4
            \end{mat} \)
        \partsitem \(
-           \begin{mat}
+           \begin{mat}[r]
              2  &1  &-1 \\
              1  &1  &0  \\
              4  &3  &-1
            \end{mat},  
-           \begin{mat}
+           \begin{mat}[r]
              1  &0  &2  \\
              0  &2  &10 \\
            \end{mat} \)
        \partsitem \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &1  &1  \\
             -1  &2  &2
            \end{mat},  
-           \begin{mat}
+           \begin{mat}[r]
              0  &3  &-1 \\
              2  &2  &5
            \end{mat} \)
        \partsitem \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &1  &1  \\
              0  &0  &3
            \end{mat},  
-           \begin{mat}
+           \begin{mat}[r]
              0  &1  &2  \\
              1  &-1 &1
            \end{mat} \)
@@ -1836,7 +1832,7 @@ and the class of matrices row equivalent to this
         \partsitem The first gives
           \begin{equation*}
             \grstep{-4\rho_1+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &2  \\
               0  &0
             \end{mat}
@@ -1844,12 +1840,12 @@ and the class of matrices row equivalent to this
           while the second gives
           \begin{equation*}
             \grstep{\rho_1\leftrightarrow\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &2  \\
               0  &1
             \end{mat}
             \grstep{-2\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  \\
               0  &1
             \end{mat}
@@ -1859,19 +1855,19 @@ and the class of matrices row equivalent to this
         \partsitem The first is this.
           \begin{equation*}
             \grstep[-5\rho_1+\rho_3]{-3\rho_1+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &2  \\
               0  &-1 &-5 \\
               0  &-1 &-5
             \end{mat}
             \grstep{-\rho_2+\rho_3}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &2  \\
               0  &-1 &-5 \\
               0  &0  &0
             \end{mat}
             \grstep{-\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &2  \\
               0  &1  &5  \\
               0  &0  &0
@@ -1880,13 +1876,13 @@ and the class of matrices row equivalent to this
           The second is this.
           \begin{equation*}
             \grstep{-2\rho_1+\rho_3}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &2  \\
               0  &2  &10 \\
               0  &0  &0
             \end{mat}
             \grstep{(1/2)\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &2  \\
               0  &1  &5  \\
               0  &0  &0
@@ -1898,17 +1894,17 @@ and the class of matrices row equivalent to this
         \partsitem The first,
           \begin{equation*}
             \grstep{\rho_1+\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &1  &1  \\
               0  &3  &3
             \end{mat}
             \grstep{(1/3)\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &1  &1  \\
               0  &1  &1
             \end{mat}
             \grstep{-\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &0  \\
               0  &1  &1
             \end{mat}
@@ -1916,17 +1912,17 @@ and the class of matrices row equivalent to this
           and the second.
           \begin{equation*}
             \grstep{\rho_1\leftrightarrow\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               2  &2  &5  \\
               0  &3  &-1
             \end{mat}
             \grstep[(1/3)\rho_2]{(1/2)\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &1  &5/2 \\
               0  &1  &-1/3
             \end{mat}
             \grstep{-\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &17/6 \\
               0  &1  &-1/3
             \end{mat}
@@ -1935,12 +1931,12 @@ and the class of matrices row equivalent to this
         \partsitem Here the first is
           \begin{equation*}
             \grstep{(1/3)\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &1  &1  \\
               0  &0  &1
             \end{mat}
             \grstep{-\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &1  &0  \\
               0  &0  &1
             \end{mat}
@@ -1948,12 +1944,12 @@ and the class of matrices row equivalent to this
           while this is the second.
           \begin{equation*}
             \grstep{\rho_1\leftrightarrow\rho_2}
-            \begin{mat}
+            \begin{mat}[r]
               1  &-1 &1  \\
               0  &1  &2
             \end{mat}
             \grstep{\rho_2+\rho_1}
-            \begin{mat}
+            \begin{mat}[r]
               1  &0  &3  \\
               0  &1  &2
             \end{mat}
@@ -1986,7 +1982,7 @@ and the class of matrices row equivalent to this
 
        Next, the matrices that reduce to 
        \begin{equation*}
-         \begin{mat}
+         \begin{mat}[r]
            0  &1  \\
            0  &0
          \end{mat}
@@ -2002,7 +1998,7 @@ and the class of matrices row equivalent to this
 
        Finally, the matrices that reduce to 
        \begin{equation*}
-         \begin{mat}
+         \begin{mat}[r]
            1  &0  \\
            0  &1
          \end{mat}
@@ -2019,17 +2015,17 @@ and the class of matrices row equivalent to this
     these.
     \begin{exparts*}
        \partsitem  \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &0  \\
              0  &0
            \end{mat}  \)
        \partsitem  \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &2      \\
              2  &4
            \end{mat} \)
        \partsitem \(
-           \begin{mat}
+           \begin{mat}[r]
              1  &1      \\
              1  &3
            \end{mat} \)
@@ -2103,12 +2099,12 @@ and the class of matrices row equivalent to this
     \begin{answer}
       Here are two.
       \begin{equation*}
-        \begin{mat}
+        \begin{mat}[r]
           1  &1  &0  \\
           0  &0  &1
         \end{mat}
         \quad\text{and}\quad
-        \begin{mat}
+        \begin{mat}[r]
           1  &0  &0  \\
           0  &0  &1
         \end{mat}
@@ -2136,12 +2132,12 @@ and the class of matrices row equivalent to this
       For example, these two \( \nbyn{2} \) singular matrices
       are not row equivalent.
       \begin{equation*}
-        \begin{mat}
+        \begin{mat}[r]
           1  &1  \\
           0  &0
         \end{mat}
         \quad\text{and}\quad
-        \begin{mat}
+        \begin{mat}[r]
           1  &0  \\
           0  &0
         \end{mat}
@@ -2225,61 +2221,61 @@ and the class of matrices row equivalent to this
         \partsitem 
           In the equation 
           \begin{equation*}
-            \rho_i=c_1\rho_1+c_2\rho_2+\ldots+c_{i-1}\rho_{i-1}+
-                     c_{i+1}\rho_{i+1}+\ldots+c_m\rho_m
+            \rho_i=c_1\rho_1+c_2\rho_2+\cdots+c_{i-1}\rho_{i-1}+
+                     c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
           \end{equation*}
           we already know that $c_1=0$.
           Let $\ell_2$ be the column number of the leading entry of the
           second row. 
           Consider the prior equation on entries in that column.
           \begin{equation*}
-             \rho_{i,\ell_1}=c_2\rho_{2,\ell_2}+\ldots+c_{i-1}\rho_{i-1,\ell_2}
-                             +c_{i+1}\rho_{i+1,\ell_2}+\ldots+c_m\rho_{m,\ell_2}
+             \rho_{i,\ell_1}=c_2\rho_{2,\ell_2}+\cdots+c_{i-1}\rho_{i-1,\ell_2}
+                             +c_{i+1}\rho_{i+1,\ell_2}+\cdots+c_m\rho_{m,\ell_2}
           \end{equation*}
           Because $\ell_2$ is the column of the leading entry in the second
           row, $\rho_{i,\ell_2}=0$ for $i>2$.  
           Thus the equation reduces to  
           \begin{equation*}
-             0=c_2\rho_{2,\ell_2}+0+\ldots+0
+             0=c_2\rho_{2,\ell_2}+0+\cdots+0
           \end{equation*}
           and since $\rho_{2,\ell_2}$ is not $0$ we have that $c_2=0$.
         \partsitem 
           In the equation 
           \begin{equation*}
-            \rho_i=c_1\rho_1+c_2\rho_2+\ldots+c_{i-1}\rho_{i-1}+
-                     c_{i+1}\rho_{i+1}+\ldots+c_m\rho_m
+            \rho_i=c_1\rho_1+c_2\rho_2+\cdots+c_{i-1}\rho_{i-1}+
+                     c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
           \end{equation*}
-          we already know that $0=c_1=c_2=\dots =c_n$.
+          we already know that $0=c_1=c_2=\cdots =c_n$.
           Let $\ell_{n+1}$ be the column number of the leading entry of
           row~$n+1$. 
           Consider the above equation on entries in that column.
           \begin{equation*}
-             \rho_{i,\ell_{n+1}}=c_{n+1}\rho_{n+1,\ell_{n+1}}+\ldots
+             \rho_{i,\ell_{n+1}}=c_{n+1}\rho_{n+1,\ell_{n+1}}+\cdots
                              +c_{i-1}\rho_{i-1,\ell_{n+1}}
                              +c_{i+1}\rho_{i+1,\ell_{n+1}}
-                             +\dots+c_m\rho_{m,\ell_{n+1}}
+                             +\cdots+c_m\rho_{m,\ell_{n+1}}
           \end{equation*}
           Because $\ell_{n+1}$ is the column of the leading entry in the
           row $n+1$, we have that $\rho_{j,\ell_{n+1}}=0$ for $j>{n+1}$.  
           Thus the equation reduces to  
           \begin{equation*}
-             0=c_{n+1}\rho_{n+1,\ell_{n+1}}+0+\ldots+0
+             0=c_{n+1}\rho_{n+1,\ell_{n+1}}+0+\cdots+0
           \end{equation*}
           and since $\rho_{n+1,\ell_{n+1}}$ is not $0$ we have that $c_{n+1}=0$.
         \partsitem 
           From the prior item in this exercise we know that in the equation 
           \begin{equation*}
-            \rho_i=c_1\rho_1+c_2\rho_2+\ldots+c_{i-1}\rho_{i-1}+
-                     c_{i+1}\rho_{i+1}+\ldots+c_m\rho_m
+            \rho_i=c_1\rho_1+c_2\rho_2+\cdots+c_{i-1}\rho_{i-1}+
+                     c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
           \end{equation*}
-          we already know that $0=c_1=c_2=\dots =c_{i-1}$.
+          we already know that $0=c_1=c_2=\cdots =c_{i-1}$.
 
           Let $\ell_{i}$ be the column number of the leading entry of
           row~$i$. 
           Rewrite the above equation on entries in that column.
           \begin{equation*}
              \rho_{i,\ell_{i}}=c_{i+1}\rho_{i+1,\ell_{i}}
-                             +\dots+c_m\rho_{m,\ell_{i}}
+                             +\cdots+c_m\rho_{m,\ell_{i}}
           \end{equation*}
           Because $\ell_{i}$ is the column of the leading entry in the
           row $i$, we have that $\rho_{j,\ell_{i}}=0$ for $j>i$.
@@ -2420,12 +2416,12 @@ and the class of matrices row equivalent to this
   %    would not hold.
   %    That is, where
   %    \begin{equation*}
-  %      \begin{mat}
+  %      \begin{mat}[r]
   %        1  &3  \\
   %        2  &1
   %      \end{mat}
   %      \grstep{0\rho_2}
-  %      \begin{mat}
+  %      \begin{mat}[r]
   %        1  &3  \\
   %        0  &0
   %      \end{mat}
@@ -2456,12 +2452,12 @@ and the class of matrices row equivalent to this
           \end{equation*}
           For a less wise-guy-ish answer, solve the system:
           \begin{equation*}
-            \begin{amat}{2}
+            \begin{amat}[r]{2}
               3  &-1  &8  \\
               2  &1   &3
             \end{amat}
             \grstep{-(2/3)\rho_1+\rho_2}
-            \begin{amat}{2}
+            \begin{amat}[r]{2}
               3  &-1  &8    \\
               0  &5/3 &-7/3
             \end{amat}
@@ -2498,7 +2494,7 @@ and the class of matrices row equivalent to this
   \recommended \item 
     In this matrix
     \begin{equation*}
-      \begin{mat}
+      \begin{mat}[r]
         1  &2  &3  \\
         3  &0  &3  \\
         1  &4  &5
