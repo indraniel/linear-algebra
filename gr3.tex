@@ -1141,7 +1141,7 @@ is a linear combination of the rows of the first.
 The proof 
 uses induction.\appendrefs{mathematical induction}\spacefactor=1000 %
 Before we proceed, here is an outline of the argument.
-For the base step of the argument, we
+For the base step, we
 will verify that the proposition is true when reduction 
 can be done in zero row operations.
 For the inductive step, we will 
@@ -1153,12 +1153,11 @@ Together, these prove the result because
 the base step shows that it is true in the zero operations case,
 and then the inductive step
 implies that it is true in the one operation case, and then the inductive step
-applied again gives that it is therefore true in the two operations case, etc.
+applied again gives that it is therefore true for two operations, etc.
 
 \begin{proof}
 We proceed by induction on the minimum number of row operations that take a
 first matrix $A$ to a second one $B$.
-
 In the base step, that
 zero reduction operations suffice, the two matrices are equal and each 
 row of $B$ is obviously a combination of
@@ -1252,32 +1251,31 @@ For instance, in this matrix
 $x_1$ has been removed from $x_5$'s equation.
 That is, Gauss' method has made $x_5$'s row independent of $x_1$'s row.
 
-Independence of a collection of row vectors, or of any kind of vectors, 
-will be precisely defined and explored in the next chapter.
-But a first take on it is that we can show that, say, the third row above
-is not comprised of the other rows, that
-$\rho_3\neq c_1\rho_1+c_2\rho_2+c_4\rho_4$.
-For, suppose that there are scalars $c_1$, $c_2$, and $c_4$ such that this
-relationship holds.
-\begin{align*}
-  \rowvec{0  &0  &0  &3  &3  &0}
-  &=c_1\rowvec{2 &3 &7 &8 &0 &0}             \\
-  &\quad\hbox{}+c_2\rowvec{0 &0 &1 &5 &1 &1} \\
-  &\quad\hbox{}+c_4\rowvec{0 &0 &0 &0 &2 &1}
-\end{align*}
-The first row's leading entry is in the first column and narrowing our
-consideration of the above relationship to consideration only of the entries
-from the first column $0=2c_1+0c_2+0c_4$ gives that $c_1=0$.
-The second row's leading entry is in the third column and the equation of
-entries in that column $0=7c_1+1c_2+0c_4$, along with the knowledge that
-$c_1=0$, gives that $c_2=0$.
-Now, to finish, the third row's leading entry is in the fourth column and the
-equation of entries in that column $3=8c_1+5c_2+0c_4$, along with $c_1=0$ and
-$c_2=0$, gives an impossibility.
+% Independence of a collection of row vectors, or of any kind of vectors, 
+% will be precisely defined and explored in the next chapter.
+% But a first take on it is that we can show that, say, the third row above
+% is not comprised of the other rows, that
+% $\rho_3\neq c_1\rho_1+c_2\rho_2+c_4\rho_4$.
+% For, suppose that there are scalars $c_1$, $c_2$, and $c_4$ such that this
+% relationship holds.
+% \begin{align*}
+%   \rowvec{0  &0  &0  &3  &3  &0}
+%   &=c_1\rowvec{2 &3 &7 &8 &0 &0}             \\
+%   &\quad\hbox{}+c_2\rowvec{0 &0 &1 &5 &1 &1} \\
+%   &\quad\hbox{}+c_4\rowvec{0 &0 &0 &0 &2 &1}
+% \end{align*}
+% The first row's leading entry is in the first column and narrowing our
+% consideration of the above relationship to consideration only of the entries
+% from the first column $0=2c_1+0c_2+0c_4$ gives that $c_1=0$.
+% The second row's leading entry is in the third column and the equation of
+% entries in that column $0=7c_1+1c_2+0c_4$, along with the knowledge that
+% $c_1=0$, gives that $c_2=0$.
+% Now, to finish, the third row's leading entry is in the fourth column and the
+% equation of entries in that column $3=8c_1+5c_2+0c_4$, along with $c_1=0$ and
+% $c_2=0$, gives an impossibility.
 
-The following result shows that this effect always holds.
-It shows that exactly
-what Gauss' linear elimination method eliminates is linear
+The following result makes this precise.
+What Gauss' linear elimination method eliminates is linear
 relationships among the rows.
 
 \begin{lemma}      \label{le:EchFormNoLinCombo}
@@ -1287,118 +1285,48 @@ no nonzero row is a linear combination of the other nonzero rows.
 
 \begin{proof}
 Let $R$ be in echelon form.
-If we have one non-\( \vec{0} \) row written as a combination
+If we have a non-\( \vec{0} \) row written as a combination
 of the others
-\begin{equation*}
-   \rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
-               c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
-\end{equation*}
-then we can rewrite it as
+$\rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
+               c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m$
+then we can rewrite the equation as
 \begin{equation*}
    \vec{0}=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+c_i\rho_i+
                c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
-  \tag{*}
+  \tag{$*$}
 \end{equation*}
 where $c_i=-1$.
-We shall use this second equation.
-We shall also use our convention that $\ell_i$ is the column number of 
-the leading entry in row~$i$.
-
 We will use induction on the row index~$i$
-to show that all of the coefficients~$c_i$ are $0$.
+to show that all of the coefficients~$c_i$ in that equation are~$0$.
 
 The base case is the first row~$i=1$.
-Equation~($*$) defines an equation among the column $\ell_1$ entries of the 
-rows. 
+Equation~($*$) defines an equation among the column $\ell_1$ entries of those 
+rows
+(recall our notation that $\ell_i$ is the column number of 
+the leading entry in row~$i$).
 \begin{equation*}
-  0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_m}
+  0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_1}
 \end{equation*}
-Because the matrix is in echelon form
-every row after the first has a zero in that column so 
-$r_{2,\ell_1}=\cdots=r_{m,\ell_m}=0$.
-Thus $c_1=0$, because $r_{1,\ell_1}\neq 0$ since it is the leading entry
-in the row.
+The matrix is in echelon form so
+every row after the first has a zero in that column, and thus  
+$r_{2,\ell_1}=\cdots=r_{m,\ell_1}=0$.
+We conclude that $c_1=0$ because as the leading entry
+in the row, $r_{1,\ell_1}\neq 0$.
 
-
-
-to show that the coefficients 
-$c_1$, \ldots, $c_{i-1}$ associated with rows above $\rho_i$ are all zero.
-The contradiction will come from consideration of $\rho_i$ and the rows below
-it.
-
-The base step of the induction argument 
-is to show that the first coefficient $c_1$ is zero.
-Let the first row's leading entry be in column number \( \ell_1 \) 
-and consider the equation of entries in that column.
+The inductive step is to prove the implication:~if 
+for each row index $k\in\set{1,\ldots,i}$ the coefficient $c_k$ is $0$
+then $c_{i+1}$ is also $0$. 
+Consider the entries from column~$\ell_{i+1}$ in equation~($*$). 
 \begin{equation*}
-   \rho_{i,\ell_1}=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\rho_{i-1,\ell_1}
-               +c_{i+1}\rho_{i+1,\ell_1}+\cdots+c_m\rho_{m,\ell_1}
+  0=c_1r_{1,\ell_1}+\cdots+c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}
 \end{equation*}
-The matrix is in echelon form so the entries 
-$\rho_{2,\ell_1}$, \ldots, $\rho_{m,\ell_1}$, including
-$\rho_{i,\ell_1}$, are all zero. 
-\begin{equation*}
-   0=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\cdot 0
-               +c_{i+1}\cdot 0+\cdots+c_m\cdot 0
-\end{equation*}
-Because the entry $\rho_{1,\ell_1}$ is nonzero as it leads its row,
-the coefficient $c_1$ must be zero.  
-
-The inductive step is to show that 
-for each row index $k$ between $1$ and $i-2$,
-if the coefficient $c_1$ and the 
-coefficients $c_2$, \ldots, $c_{k}$ are all zero 
-then $c_{k+1}$ is also zero.
-That argument,
-and the contradiction that finishes this proof, is saved for 
-\nearbyexercise{ex:EchFormNoLinCombo}.
+By the inductive hypothesis the coefficients $c_1$, \ldots $c_i$ are
+all $0$ so the equation reduces to 
+$0=c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}$.
+As in the base case we next note that the matrix is in echelon form
+so $r_{i+2,\ell_{i+1}}=\cdots=r_{m,\ell_{i+1}}=0$, and 
+thus $c_{i+1}=0$ because $r_{i+1,\ell_{i+1}}\neq 0$ as it is the row's leading entry.
 \end{proof}
-
-% \begin{lemma}      \label{le:EchFormNoLinCombo}
-% In an echelon form matrix,
-% no nonzero row is a linear combination of the other rows.
-% \end{lemma}
-
-% \begin{proof}
-% Let $R$ be in echelon form.
-% Suppose, to obtain a contradiction, that some nonzero row is a linear
-% combination of the others.
-% \begin{equation*}
-%    \rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
-%                c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
-% \end{equation*}
-% We will first use induction to show that the coefficients 
-% $c_1$, \ldots, $c_{i-1}$ associated with rows above $\rho_i$ are all zero.
-% The contradiction will come from consideration of $\rho_i$ and the rows below
-% it.
-
-% The base step of the induction argument 
-% is to show that the first coefficient $c_1$ is zero.
-% Let the first row's leading entry be in column number \( \ell_1 \) 
-% and consider the equation of entries in that column.
-% \begin{equation*}
-%    \rho_{i,\ell_1}=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\rho_{i-1,\ell_1}
-%                +c_{i+1}\rho_{i+1,\ell_1}+\cdots+c_m\rho_{m,\ell_1}
-% \end{equation*}
-% The matrix is in echelon form so the entries 
-% $\rho_{2,\ell_1}$, \ldots, $\rho_{m,\ell_1}$, including
-% $\rho_{i,\ell_1}$, are all zero. 
-% \begin{equation*}
-%    0=c_1\rho_{1,\ell_1}+\cdots+c_{i-1}\cdot 0
-%                +c_{i+1}\cdot 0+\cdots+c_m\cdot 0
-% \end{equation*}
-% Because the entry $\rho_{1,\ell_1}$ is nonzero as it leads its row,
-% the coefficient $c_1$ must be zero.  
-
-% The inductive step is to show that 
-% for each row index $k$ between $1$ and $i-2$,
-% if the coefficient $c_1$ and the 
-% coefficients $c_2$, \ldots, $c_{k}$ are all zero 
-% then $c_{k+1}$ is also zero.
-% That argument,
-% and the contradiction that finishes this proof, is saved for 
-% \nearbyexercise{ex:EchFormNoLinCombo}.
-% \end{proof}
 
 \begin{theorem}
 \label{th:ReducedEchelonFormIsUnique}
@@ -1487,7 +1415,7 @@ That's a contradiction, because with the first \( n-1 \)~columns of
 So \( B=C \).
 \end{proof}
 
-That result answers the two questions that we posed in the intrudcution
+That result answers the two questions that we posed in the introduction
 to this chapter: do any two echelon form versions of a linear system 
 have the same number of free variables, and if so are they
 exactly the same variables?
@@ -1498,176 +1426,9 @@ Thus both questions are answered ``yes.''
 There is no linear system and no combination of row operations such
 that, say, we could solve the system 
 one way and get $y$ and $z$ free but solve it
-another way and get $y$ and $w$ free, or solve it one way and get two free
-variables while solving it another way yields three. 
+another way and get $y$ and $w$ free.
 
-
-% %================= old text
-
-% We can now prove that each matrix is row equivalent to one and only one
-% reduced echelon form matrix.
-% We will find it convenient to break the first half of the argument off as a
-% preliminary lemma.
-% For one thing, it holds for any echelon form whatever, not just
-% reduced echelon form.
-
-% \begin{lemma}  \label{le:EquivMatsSameForm}
-% If two echelon form matrices are row equivalent then the leading entries in
-% their first rows lie in the same column.
-% The same is true of all the nonzero rows\Dash the leading entries in their 
-% second rows lie in the same column, etc.
-% \end{lemma}
-
-% For the proof we rephrase the result in more technical terms. 
-% Define the \definend{form}\index{form}\index{matrix:form}
-% of an $\nbym{m}{n}$~matrix to be the sequence
-% $\langle \ell_1,\ell_2,\ldots\,,\ell_m \rangle$
-% where $\ell_i$ is the column number of the leading entry in row~$i$
-% and $\ell_i=\infty$ if there is no leading entry in that row.
-% The lemma says that if two echelon form matrices are row equivalent
-% then their forms are equal sequences.
-
-% \begin{proof}
-% Let \( B \) and \( D \) be echelon form matrices that are row equivalent.
-% Because they are row equivalent they must be the same size, say
-% $\nbym{m}{n}$.
-% Let the column number of the leading entry in row $i$ of $B$ be $\ell_i$ and
-% let the column number of the leading entry in row $j$ of $D$ be $k_j$.
-% We will show that $\ell_1=k_1$, that $\ell_2=k_2$, etc., by induction.
-
-% This induction argument relies on the fact that the matrices are row
-% equivalent, because the Linear Combination Lemma and its corollary therefore
-% give that each row of \( B \) is a linear combination of the rows of \( D \)
-% and vice versa:
-% \begin{equation*}
-%   \beta_i=s_{i,1}\delta_1+s_{i,2}\delta_2+\dots+s_{i,m}\delta_m
-%   \quad\text{and}\quad
-%   \delta_j=t_{j,1}\beta_1+t_{j,2}\beta_2+\dots+t_{j,m}\beta_m
-% \end{equation*}
-% where the $s$'s and $t$'s are scalars.
-
-% The base step of the induction is to verify the lemma for the 
-% first rows of the matrices, that is, to verify that $\ell_1=k_1$.
-% If either row is a zero row then every entry in the matrix is a zero since it
-% is in echelon form, and therefore both matrices consist solely of zero entries 
-% (by \nearbycorollary{cor:RowsOfEqMatsLinCombos}), and so both
-% $\ell_1$ and $k_1$ are $\infty$.
-% For the case where neither $\beta_1$ nor $\delta_1$ is a zero row,  
-% consider the $i=1$ instance of the linear relationship above.
-% \begin{align*}
-%   \beta_1 &=s_{1,1}\delta_1+s_{1,2}\delta_2+\dots+s_{1,m}\delta_m  \\
-%   \rowvec{0 &\cdots &b_{1,\ell_1} &\cdots &}
-%           &=s_{1,1}\rowvec{0 &\cdots &d_{1,k_1} &\cdots &}   \\
-%           &\quad\hbox{}+s_{1,2}\rowvec{0 &\cdots &0         &\cdots &}   \\
-%           &\quad \alignedvdots                                    \\
-%           &\quad\hbox{}+s_{1,m}\rowvec{0 &\cdots &0         &\cdots &}  
-% \end{align*}
-% First, note that $\ell_1<k_1$ is impossible:~in the columns of $D$ to the left
-% of column $k_1$ the entries are all zeroes 
-% (as $d_{1,k_1}$ leads the first row) and
-% so if $\ell_1<k_1$ then the equation of entries from column~$\ell_1$ would be 
-% $b_{1,\ell_1}=s_{1,1}\cdot 0+\dots+s_{1,m}\cdot 0$,
-% but $b_{1,\ell_1}$ isn't zero since it leads its row and so this is
-% an impossibility.
-% Next, a symmetric argument
-% shows that $k_1<\ell_1$ also is impossible.
-% Thus the $\ell_1=k_1$ base case holds.
-
-% The inductive step is to show that 
-% if $\ell_1=k_1$, and
-% $\ell_2=k_2$, \ldots, and $\ell_r=k_r$, then also $\ell_{r+1}=k_{r+1}$
-% (for $r$ in the interval $1\,..\,m-1$).
-% This argument is saved for \nearbyexercise{ex:RowEqEchFormAreSameShape}. 
-% \end{proof}
-
-% That lemma answers two of the questions that we have posed: (i)~any
-% two echelon form versions of a matrix have the same free variables,
-% and consequently, and (ii)~any two echelon form versions have the same number 
-% of free variables.
-% There is no linear system and no combination of row operations such
-% that, say, we could solve the system 
-% one way and get $y$ and $z$ free but solve it
-% another way and get $y$ and $w$ free, or solve it one way and get two free
-% variables while solving it another way yields three. 
-
-% We finish now by specializing to the case of reduced echelon form matrices.
-
-% \begin{theorem}
-% \label{th:ReducedEchelonFormIsUnique}
-% Each matrix is row equivalent to a unique reduced echelon form matrix.
-% \end{theorem}
-
-% \begin{proof}
-% Clearly any matrix is row equivalent to at least 
-% one reduced echelon form matrix, via Gauss-Jordan reduction.
-% For the other half, that any matrix is equivalent to at most one 
-% reduced echelon form matrix, we will show that
-% if a matrix Gauss-Jordan reduces to each of two others then those
-% two are equal.
-
-% Suppose that a matrix is row equivalent to two reduced echelon form matrices
-% \( B \) and \( D \), which are therefore row equivalent to each other.
-% The Linear Combination Lemma and its corollary allow us to
-% write the rows of one, say \( B \), as a linear combination 
-% of the rows of the other
-% $\beta_i=c_{i,1}\delta_1+\cdots+c_{i,m}\delta_m$.
-% The preliminary result, \nearbylemma{le:EquivMatsSameForm}, says that
-% in the two matrices, the same collection of rows are nonzero.
-% Thus, if $\beta_1$ through $\beta_r$ are the nonzero rows of $B$ then 
-% the nonzero rows of $D$ are $\delta_1$ through $\delta_r$.
-% Zero rows don't contribute to the sum so we can rewrite the relationship
-% to include just the nonzero rows.
-% \begin{equation*}
-%    \beta_i =c_{i,1}\delta_1+\dots+c_{i,r}\delta_r        
-% \tag*{($*$)}\end{equation*}
-
-% The preliminary result also says that for  
-% each row \( j \) between $1$ and $r$, the leading entries 
-% of the $j$-th row of $B$ and $D$ appear in the same column, 
-% denoted \( \ell_j \).
-% Rewriting the above relationship to focus on the entries in the
-% $\ell_j$-th column 
-% \begin{align*}
-%    \rowvec{ &\cdots &b_{i,\ell_j} &\cdots &}
-%        &=c_{i,1}\rowvec{ &\cdots &d_{1,\ell_j} &\cdots &} \\
-%        &\quad\hbox{}+c_{i,2}\rowvec{ &\cdots 
-%             &d_{2,\ell_j} &\cdots &}                             \\
-%        &\quad\alignedvdots                                              \\
-%        &\quad\hbox{}+c_{i,r}\rowvec{ &\cdots 
-%             &d_{r,\ell_j} &\cdots &}
-% \end{align*}
-% gives this set of equations for $i=1$ up to $i=r$.
-% \begin{align*}
-%    b_{1,\ell_j} &=c_{1,1}d_{1,\ell_j}
-%                      +\cdots+c_{1,j}d_{j,\ell_j}+\cdots
-%                      +c_{1,r}d_{r,\ell_j}                 \\
-%                 &\alignedvdots                            \\
-%    b_{j,\ell_j} &=c_{j,1}d_{1,\ell_j}
-%                      +\cdots+c_{j,j}d_{j,\ell_j}+\cdots
-%                      +c_{j,r}d_{r,\ell_j}                 \\
-%                 &\alignedvdots                            \\
-%    b_{r,\ell_j} &=c_{r,1}d_{1,\ell_j}
-%                      +\cdots+c_{r,j}d_{j,\ell_j}+\cdots
-%                      +c_{r,r}d_{r,\ell_j}
-% \end{align*}
-% Since \(D\) is in reduced echelon form,
-% all of the \( d \)'s in column $\ell_j$ are zero except 
-% for \( d_{j,\ell_j} \), which is $1$.
-% Thus each equation above simplifies to
-% $b_{i,\ell_j}=c_{i,j}d_{j,\ell_j}=c_{i,j}\cdot 1$.
-% But $B$ is also in reduced echelon form and so all of the $b$'s 
-% in column $\ell_j$ are zero
-% except for $b_{j,\ell_j}$, which is $1$.
-% Therefore, each $c_{i,j}$ is zero, except that 
-% \( c_{1,1}=1 \), and $c_{2,2}=1$, \ldots, and $c_{r,r}=1$.
- 
-% We have shown that the only nonzero coefficient
-% in the linear combination labelled ($*$) is \( c_{j,j}  \), which is \( 1 \).
-% Therefore $\beta_j=\delta_j$.
-% Because this holds for all nonzero rows, $B=D$. 
-% \end{proof}
-
-We end with a recap.
+We end this section with a recap.
 In Gauss' method we start with a matrix and then
 derive a sequence of other matrices.
 We defined two matrices to be related if one can be derived from the other.
@@ -2205,159 +1966,6 @@ and the class of matrices row equivalent to this
              (That is, we are arguing here by induction.)             
          \end{exparts}
       \end{answer}
-  \recommended \item \label{ex:EchFormNoLinCombo} 
-    Finish the proof of \nearbylemma{le:EchFormNoLinCombo}.
-    \begin{exparts}
-      \partsitem First illustrate the inductive step by showing 
-         that $c_2=0$.
-      \partsitem Do the full inductive step: where \( 1\leq n<i-1 \),
-        assume that \( c_k=0 \)  for $1<k< n$
-        and deduce that
-        \( c_{n+1}=0 \) also.
-      \partsitem Find the contradiction.
-    \end{exparts}
-    \begin{answer}
-      \begin{exparts} 
-        \partsitem 
-          In the equation 
-          \begin{equation*}
-            \rho_i=c_1\rho_1+c_2\rho_2+\cdots+c_{i-1}\rho_{i-1}+
-                     c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
-          \end{equation*}
-          we already know that $c_1=0$.
-          Let $\ell_2$ be the column number of the leading entry of the
-          second row. 
-          Consider the prior equation on entries in that column.
-          \begin{equation*}
-             \rho_{i,\ell_1}=c_2\rho_{2,\ell_2}+\cdots+c_{i-1}\rho_{i-1,\ell_2}
-                             +c_{i+1}\rho_{i+1,\ell_2}+\cdots+c_m\rho_{m,\ell_2}
-          \end{equation*}
-          Because $\ell_2$ is the column of the leading entry in the second
-          row, $\rho_{i,\ell_2}=0$ for $i>2$.  
-          Thus the equation reduces to  
-          \begin{equation*}
-             0=c_2\rho_{2,\ell_2}+0+\cdots+0
-          \end{equation*}
-          and since $\rho_{2,\ell_2}$ is not $0$ we have that $c_2=0$.
-        \partsitem 
-          In the equation 
-          \begin{equation*}
-            \rho_i=c_1\rho_1+c_2\rho_2+\cdots+c_{i-1}\rho_{i-1}+
-                     c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
-          \end{equation*}
-          we already know that $0=c_1=c_2=\cdots =c_n$.
-          Let $\ell_{n+1}$ be the column number of the leading entry of
-          row~$n+1$. 
-          Consider the above equation on entries in that column.
-          \begin{equation*}
-             \rho_{i,\ell_{n+1}}=c_{n+1}\rho_{n+1,\ell_{n+1}}+\cdots
-                             +c_{i-1}\rho_{i-1,\ell_{n+1}}
-                             +c_{i+1}\rho_{i+1,\ell_{n+1}}
-                             +\cdots+c_m\rho_{m,\ell_{n+1}}
-          \end{equation*}
-          Because $\ell_{n+1}$ is the column of the leading entry in the
-          row $n+1$, we have that $\rho_{j,\ell_{n+1}}=0$ for $j>{n+1}$.  
-          Thus the equation reduces to  
-          \begin{equation*}
-             0=c_{n+1}\rho_{n+1,\ell_{n+1}}+0+\cdots+0
-          \end{equation*}
-          and since $\rho_{n+1,\ell_{n+1}}$ is not $0$ we have that $c_{n+1}=0$.
-        \partsitem 
-          From the prior item in this exercise we know that in the equation 
-          \begin{equation*}
-            \rho_i=c_1\rho_1+c_2\rho_2+\cdots+c_{i-1}\rho_{i-1}+
-                     c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
-          \end{equation*}
-          we already know that $0=c_1=c_2=\cdots =c_{i-1}$.
-
-          Let $\ell_{i}$ be the column number of the leading entry of
-          row~$i$. 
-          Rewrite the above equation on entries in that column.
-          \begin{equation*}
-             \rho_{i,\ell_{i}}=c_{i+1}\rho_{i+1,\ell_{i}}
-                             +\cdots+c_m\rho_{m,\ell_{i}}
-          \end{equation*}
-          Because $\ell_{i}$ is the column of the leading entry in the
-          row $i$, we have that $\rho_{j,\ell_{i}}=0$ for $j>i$.
-          That makes the right side of the equation sum to $0$, but the
-          left side is not $0$ since it is the leading entry of the row. 
-          That's the contradiction. 
-      \end{exparts}  
-    \end{answer}
-  % \item \label{ex:RowEqEchFormAreSameShape}
-  %   Finish the induction argument in \nearbylemma{le:EquivMatsSameForm}.
-  %   \begin{exparts}
-  %     \partsitem State the inductive hypothesis, 
-  %        Also state what must be shown to follow from that hypothesis.
-  %     \partsitem Check that the inductive hypothesis implies that
-  %        in the relationship 
-  %        $\beta_{r+1}=s_{r+1,1}\delta_1+s_{r+2,2}\delta_2
-  %            +\dots+s_{r+1,m}\delta_m$ 
-  %        the coefficients $s_{r+1,1},\,\ldots\,,s_{r+1,r}$
-  %        are each zero.
-  %     \partsitem Finish the inductive step by arguing, as in the base
-  %        case, that $\ell_{r+1}<k_{r+1}$ and $k_{r+1}<\ell_{r+1}$
-  %        are impossible.
-  %   \end{exparts}
-  %   \begin{answer}
-  %     \begin{exparts}
-  %       \partsitem The inductive step is to show that if 
-  %         the statement holds on rows $1$ through~$r$ then it also holds on 
-  %         row~$r+1$.       
-  %         That is, we assume that $\ell_1=k_1$, and
-  %         $\ell_2=k_2$, \ldots, and $\ell_r=k_r$, 
-  %         and we will show that $\ell_{r+1}=k_{r+1}$ also holds
-  %         (for $r$ in $1\;..\;m-1$).
-  %       \partsitem
-  %         \nearbylemma{cor:RowsOfEqMatsLinCombos} gives the
-  %         relationship  
-  %         $\beta_{r+1}=s_{r+1,1}\delta_1+s_{r+2,2}\delta_2
-  %            +\dots+s_{r+1,m}\delta_m$ 
-  %         between rows.
-
-  %         Inside of those row vectors, consider the relationship between
-  %         the entries in the column $\ell_1=k_1$.
-  %         Because by the induction hypothesis this is a row greater than the 
-  %         first $r+1>1$, the row $\beta_{r+1}$ has a zero in entry $\ell_1$
-  %         (the matrix $B$ is in echelon form). 
-  %         But the row $\delta_1$
-  %         has a nonzero entry in column $k_1$; by definition of 
-  %         $k_1$ it is the leading entry in the first row of $D$.
-  %         Thus, in that column, the above relationship among rows resolves
-  %         to this equation among numbers: $0=s_{r+1,1}\cdot d_{1,k_1}$,
-  %         with $d_{1,k_1}\neq 0$.
-  %         Therefore $s_{r+1,1}=0$.
-
-  %         With $s_{r+1,1}=0$, a similar argument shows that 
-  %         $s_{r+1,2}=0$.
-  %         With those two, another turn gives that $s_{r+1,3}=0$.
-  %         That is, inside of the larger induction argument used to 
-  %         prove the entire lemma, here is an subargument by induction
-  %         that shows $s_{r+1,j}=0$ for all $j$ in $1\,..\,r$.
-  %         (We won't write out the details since it is just like
-  %         the induction done in \nearbyexercise{ex:EchFormNoLinCombo}.)     
-  %       \partsitem 
-  %         Note that the prior item of this exercise shows that the relationship
-  %         between rows
-  %         $\beta_{r+1}=s_{r+1,1}\delta_1+s_{r+2,2}\delta_2
-  %            +\dots+s_{r+1,m}\delta_m$
-  %         reduces to  
-  %         $\beta_{r+1}=s_{r+1,r+1}\delta_{r+1}+\dots+s_{r+1,m}\delta_m$.
-  %         Consider the column $\ell_{r+1}$ entries in this equation.
-  %         By definition of $k_{r+1}$ as the column number of the leading
-  %         entry of $\delta_{r+1}$, the entries in this column of the other rows 
-  %         $\delta_{r+2}\;\;\delta_{m}$ are zeros.
-  %         Now if $\ell_{r+1}<k_{r+1}$
-  %         then the equation of entries from 
-  %         column~$\ell_{k+1}$ would be 
-  %         $b_{r+1,\ell_{r+1}}=s_{r+1,1}\cdot 0+\dots+s_{r+1,m}\cdot 0$,
-  %         which is impossible as $b_{r+1,\ell_{r+1}}$ isn't zero as it leads
-  %         its row.
-
-  %         A symmetric argument
-  %         shows that $k_{r+1}<\ell_{r+1}$ also is impossible.
-  %     \end{exparts}
-  %   \end{answer}
   % \item 
   %   Why, in the proof of \nearbytheorem{th:ReducedEchelonFormIsUnique},
   %   do we bother to restrict to the nonzero rows?
@@ -2370,6 +1978,7 @@ and the class of matrices row equivalent to this
   %      so the statement would not be true.
   %   \end{answer}
   \recommended \item 
+   \cite{Trono}
    Three truck drivers went into a roadside cafe.
    One truck driver purchased four sandwiches, a cup of coffee, and ten 
    doughnuts for \$$8.45$.
@@ -2377,7 +1986,6 @@ and the class of matrices row equivalent to this
    doughnuts for \$$6.30$.
    What did the third truck driver pay for a sandwich, a cup of coffee, and 
    a doughnut?
-   \cite{Trono}
    \begin{answer}
      We know that $4s+c+10d=8.45$ and that $3s+c+7d=6.30$, and we'd like to
      know what $s+c+d$ is.
@@ -2483,9 +2091,9 @@ and the class of matrices row equivalent to this
      \end{enumerate}  
     \end{answer}
   \item 
+    \cite{HoffmanKunze}
     Extend the definition of row equivalence to linear systems.
     Under your definition, do equivalent systems have the same solution set?
-    \cite{HoffmanKunze}
     \begin{answer}
       Define linear systems to be equivalent if their augmented
       matrices are row equivalent.
