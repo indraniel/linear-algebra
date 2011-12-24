@@ -1289,15 +1289,19 @@ If we have a non-\( \vec{0} \) row written as a combination
 of the others
 $\rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
                c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m$
-then we can rewrite the equation as
+then we can rewrite that as
 \begin{equation*}
    \vec{0}=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+c_i\rho_i+
                c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
   \tag{$*$}
 \end{equation*}
-where $c_i=-1$.
-We will use induction on the row index~$i$
-to show that all of the coefficients~$c_i$ in that equation are~$0$.
+where not all the coefficients are zero; specifically, $c_i=-1$.
+The converse holds also:~given equation~($*$) where some $c_i\neq 0$ then we 
+could express $\rho_i$ as a combination of the other rows by 
+moving $c_i\rho_i$ to the left side and dividing by $c_i$.
+Therefore, we will have proved the theorem if we
+show that in~($*$) all of the coefficients are~$0$.
+For that, we use induction on the row index~$i$.
 
 The base case is the first row~$i=1$.
 Equation~($*$) defines an equation among the column $\ell_1$ entries of those 
@@ -1308,9 +1312,9 @@ the leading entry in row~$i$).
   0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_1}
 \end{equation*}
 The matrix is in echelon form so
-every row after the first has a zero in that column, and thus  
+every row after the first has a zero in that column 
 $r_{2,\ell_1}=\cdots=r_{m,\ell_1}=0$.
-We conclude that $c_1=0$ because as the leading entry
+Thus $c_1=0$ because, as the leading entry
 in the row, $r_{1,\ell_1}\neq 0$.
 
 The inductive step is to prove the implication:~if 
@@ -1318,14 +1322,14 @@ for each row index $k\in\set{1,\ldots,i}$ the coefficient $c_k$ is $0$
 then $c_{i+1}$ is also $0$. 
 Consider the entries from column~$\ell_{i+1}$ in equation~($*$). 
 \begin{equation*}
-  0=c_1r_{1,\ell_1}+\cdots+c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}
+  0=c_1r_{1,\ell_{i+1}}+\cdots+c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}
 \end{equation*}
 By the inductive hypothesis the coefficients $c_1$, \ldots $c_i$ are
 all $0$ so the equation reduces to 
 $0=c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}$.
-As in the base case we next note that the matrix is in echelon form
-so $r_{i+2,\ell_{i+1}}=\cdots=r_{m,\ell_{i+1}}=0$, and 
-thus $c_{i+1}=0$ because $r_{i+1,\ell_{i+1}}\neq 0$ as it is the row's leading entry.
+The matrix is in echelon form
+so $r_{i+2,\ell_{i+1}}=\cdots=r_{m,\ell_{i+1}}=0$ and $r_{i+1,\ell_{i+1}}\neq 0$.
+Thus $c_{i+1}=0$.
 \end{proof}
 
 \begin{theorem}
