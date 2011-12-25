@@ -3,8 +3,8 @@
 %  2001-Jun-10
 \section{Linear Independence}
 The prior section shows that a vector space can be 
-understood as an unrestricted linear combination of some of its elements\Dash 
-that is, as a span.
+understood as a span, 
+as an unrestricted linear combination of some of its elements.
 For example, the space of linear polynomials $\set{a+bx\suchthat a,b\in\Re}$ 
 is spanned by the set $\set{1,x}$.
 The prior section also showed that a space can have many sets that span it.
@@ -13,7 +13,7 @@ $\set{1,2x}$ and $\set{1,x,2x}$.
 
 At the end of that section we described some spanning sets as `minimal',
 but we never precisely defined that word.
-We could take `minimal' to mean one of two things.
+We could mean one of two things.
 We could mean that a spanning set is minimal if it 
 contains the smallest number of members of any set with the same span.
 With this meaning $\set{1,x,2x}$ is not minimal because it has 
@@ -39,7 +39,7 @@ note that the $2x$ is a ``repeat'' in that its removal doesn't shrink the span.
 In this section we will use the second sense of `minimal spanning set'
 because of this technical convenience.
 However, the most important result of this book is that the two senses 
-coincide; we will prove that in the section after this one.
+coincide; we will prove that in the next section.
 
 
 
@@ -52,19 +52,17 @@ coincide; we will prove that in the section after this one.
 \subsection{Definition and Examples}
 We first characterize when a vector can be
 removed from a set without changing the span of that set.
-For that, note that if a vector $\vec{v}$ is not a member of a set $S$ 
-then the union $S\union\set{\vec{v}}$ 
-and the set $S$ differ only in that
-the former contains $\vec{v}$.
+% For that, note that if a vector $\vec{v}$ is not a member of a set $S$ 
+% then the union $S\union\set{\vec{v}}$ 
+% and the set $S$ differ only in that
+% the former contains $\vec{v}$.
 
 \begin{lemma}  \label{le:VecInSpanIffSpanUnchByAddVec}
-Where \( S \) is a subset of a vector space $V$,
-\begin{equation*}
-  \spanof{S}=\spanof{S\union\set{\vec{v}}}
-  \quad\text{if and only if}\quad
-  \vec{v}\in\spanof{S}
-\end{equation*}
-for any $\vec{v}\in V$.
+If \( S \) is a subset of a vector space $V$  and 
+$\vec{v}\in V$ then
+$\spanof{S}=\spanof{S\union\set{\vec{v}}}$
+if and only if
+$\vec{v}\in\spanof{S}$.
 \end{lemma}
 
 \begin{proof}
@@ -74,10 +72,11 @@ then, since \( \vec{v}\in\spanof{S\union\set{\vec{v}}} \),
 the equality of the two sets gives that \( \vec{v}\in\spanof{S} \).
 
 For the right to left implication assume that \( \vec{v}\in \spanof{S} \) to
-show that \( \spanof{S}=\spanof{S\union\set{\vec{v}}} \) by mutual inclusion.
+show that \( \spanof{S}=\spanof{S\union\set{\vec{v}}} \) by 
+mutual set inclusion.
 The inclusion \( \spanof{S}\subseteq\spanof{S\union\set{\vec{v}}} \) is
 obvious.
-For the other inclusion \( \spanof{S}\supseteq\spanof{S\union\set{\vec{v}}} \),
+For \( \spanof{S}\supseteq\spanof{S\union\set{\vec{v}}} \),
 write an element of \( \spanof{S\union\set{\vec{v}}} \) as
 \( d_0\vec{v}+d_1\vec{s}_1+\dots+d_m\vec{s}_m \)
 and substitute \( \vec{v} \)'s expansion
@@ -106,10 +105,10 @@ The lemma says that if we have a spanning set
 then we can remove a $\vec{v}$ to get a new set $S$ 
 with the same span if and only if
 $\vec{v}$ is a linear combination of vectors from $S$.
-Thus, under the second sense described above, a spanning set is minimal
+Thus, under the second sense described in this section's opening, 
+a spanning set is minimal
 if and only if it contains
 no vectors that are linear combinations of the others in that set.
-We have a term for this important property.
 
 \begin{definition}
 \label{def:LinInd}
@@ -126,8 +125,8 @@ although this way of writing one vector as a combination of the others
    \vec{s}_0=\lincombo{c}{\vec{s}}
 \end{equation*}
 visually sets \( \vec{s}_0 \) off from the other vectors, algebraically
-there is nothing special in that equation about \( \vec{s}_0 \).
-For any \( \vec{s}_i \) with a coefficient $c_i$ that is nonzero,
+there is nothing special about it in that equation.
+For any \( \vec{s}_i \) with a coefficient $c_i$ that is non-$0$
 we can rewrite the relationship to set off \( \vec{s}_i \).
 \begin{equation*}
    \vec{s}_i=(1/c_i)\vec{s}_0+\dots
@@ -153,25 +152,26 @@ the only linear relationship
    c_1\vec{s}_1+\dots+c_n\vec{s}_n=\zero
    \qquad c_1,\dots,c_n\in\Re
 \end{equation*}
-is the trivial one: \( c_1=0,\dots,\,c_n=0 \).
+is the trivial one \( c_1=0,\dots,\,c_n=0 \).
 \end{lemma}
 
 \begin{proof}
-This is a direct consequence of the observation above.
-
+% This is a direct consequence of the observation above.
 If the set \( S \) is linearly independent then no vector
-$\vec{s}_i$ can be written 
-as a linear combination of the other vectors from $S$
+$\vec{s}_i$ 
+is a linear combination of other vectors from $S$
 so there is no linear relationship where some of the $\vec{s}\,$'s have 
 nonzero coefficients.
+
 If \( S \) is not linearly independent then some \( \vec{s}_i \) is a linear
 combination 
 $\vec{s}_i=c_1\vec{s}_1+\dots+c_{i-1}\vec{s}_{i-1}
     +c_{i+1}\vec{s}_{i+1}+\dots+c_n\vec{s}_n$
-of other vectors from \( S \), and subtracting $\vec{s}_i$ from both sides
-of that equation gives a linear relationship
-involving a nonzero coefficient, 
-namely the \( -1 \) in front of \( \vec{s}_i \).
+of other vectors from \( S \). 
+Subtracting $\vec{s}_i$ from both sides
+gives a relationship
+involving a nonzero coefficient,
+the \( -1 \) in front of \( \vec{s}_i \).
 \end{proof}
 
 \begin{example}  \label{ex:StaticsLIAndLD}
@@ -216,7 +216,7 @@ masses.
 Had we instead first set the unknown-mass objects at \( 40 \)~cm and 
 \( 15 \)~cm, and then at
 \( 20 \)~cm and \( 7.5 \)~cm, we would not have been able to compute the values
-of the unknown masses (try it).
+of the unknown masses.
 Intuitively, 
 the problem is that the \( \rowvec{20 &7.5} \) information is a ``repeat'' 
 of the
@@ -250,6 +250,22 @@ gives
 since polynomials are equal only if their coefficients are equal.
 Thus, the only linear relationship between these two members of
 $\polyspace_2$ is the trivial one.
+\end{example}
+
+\begin{example}
+The rows of this matrix
+\begin{equation*}
+  A=
+  \begin{mat}[r]
+    2  &3  &1  &0  \\
+    0  &-1 &0  &-2 \\
+    0  &0  &0  &1
+  \end{mat}
+\end{equation*}
+form a linearly independent set.
+This is easy to check but we know already that it is true:
+at the end of the first chapter, in Lemma~One.III.\ref{le:EchFormNoLinCombo},
+we showed that the rows of any echelon form matrix are linearly independent.
 \end{example}
 
 \begin{example}
@@ -317,13 +333,13 @@ satisfied by taking $c_1=0$ and $c_2=0$
 (in contrast to the lemma, the definition allows all of the coefficients to 
 be zero).
 
-(There is subtler way to see that this subset is dependent.
+There is subtler way to see that this subset is dependent.
 The zero vector is equal to the trivial sum, 
 the sum of the empty set.
 So a set containing the zero vector has an element that
 can be written as a combination of a set of other vectors from the 
 set, specifically,
-the zero vector can be written as a combination of the empty set.)
+the zero vector can be written as a combination of the empty set.
 \end{example}
 
 The above examples, especially \nearbyexample{ex:StaticsLIAndLD},
@@ -332,7 +348,7 @@ The next result
 says that given a finite set,
 we can produce a linearly independent subset
 by discarding what \nearbyremark{rem:StaticsLIAndLD}
-calls ``repeats''.
+calls ``repeats.''
 
 
 \begin{theorem}
@@ -350,7 +366,7 @@ By the definition of dependence,
 there is a vector \( \vec{s}_i \) that is a linear combination of
 the others.
 Call that vector \( \vec{v}_1 \).
-Discard it\Dash
+Discard it:
 define the set \( S_1=S-\set{\vec{v}_1} \).
 By \nearbylemma{le:VecInSpanIffSpanUnchByAddVec}, the span does not
 shrink \( \spanof{S_1}=\spanof{S} \).
@@ -407,9 +423,8 @@ Paramatrizing the solution set
 \end{equation*}
 shows that there are nontrivial solutions to equation~($*$).
 For instance, setting \( c_3=0 \) and \( c_5=1 \)
-gives that $c_1=-3$, $c_2=-3/2$, $c_3=0$, $c_4=0$, and $c_5=1$ is a linear
-dependence;
-$c_5$'s vector is a linear combination of the first two.
+gives that $c_1=-3$, $c_2=-3/2$, and $c_4=0$, and so the fifth
+vector is a linear combination of the first two.
 
 Because of that,
 \nearbylemma{le:VecInSpanIffSpanUnchByAddVec} says that 
@@ -463,7 +478,7 @@ This is clear.
 Restated, independence is preserved by subset 
 and dependence is preserved by superset.
 
-Those are two of the four possible cases of interaction that we can consider.
+Those are two of the four possible cases.
 The third case, whether linear dependence is preserved by the subset operation,
 is covered by \nearbyexample{ex:ShrinkSetSameSpan}, which gives
 a linearly dependent set $S$ with a subset $S_1$ 
@@ -482,7 +497,7 @@ For the set
   S
    =\set{\colvec{1 \\ 0 \\ 0}}
 \end{equation*}
-the span \( \spanof{S} \) is the \( x \)~axis.
+the span \( \spanof{S} \) is the \( x \)-axis.
 Here are two supersets of $S$, one linearly dependent and the other linearly
 independent.
 \begin{center}
@@ -505,7 +520,7 @@ For
           \colvec{0 \\ 1 \\ 0}
                  }
 \end{equation*}
-the span \( \spanof{S} \) is the \( xy \)~plane.
+the span \( \spanof{S} \) is the \( xy \)-plane.
 These are two supersets.
 \begin{center}
      dependent:
@@ -556,31 +571,30 @@ linearly independent set may  have a superset that is independent.
 We can characterize when the superset is one and when it is the other.
 
 \begin{lemma} \label{le:SUnionXiLIIffXiNotInSpan}
-Where \( S \) is a linearly independent subset of a vector space \( V \),
-\begin{equation*}
-  S\union\set{\vec{v}}\text{\ is linearly dependent}
-  \quad\text{if and only if}\quad
-  \vec{v}\in\spanof{S}
-\end{equation*}
-for any \( \vec{v}\in V \) with \( \vec{v}\not\in S \).
+If \( S \) is a linearly independent subset of a vector space \( V \) then
+for any \( \vec{v}\in V \) with \( \vec{v}\not\in S \), the set
+$S\union\set{\vec{v}}$ is linearly dependent
+if and only if
+$\vec{v}\in\spanof{S}$.
 \end{lemma}
 
 \begin{proof}
-One implication is clear: if \( \vec{v}\in\spanof{S} \) then
+The right-to-left implication is clear: if \( \vec{v}\in\spanof{S} \) then
 \( \vec{v}=\lincombo{c}{\vec{s}} \) where each \( \vec{s}_i\in S \) and
-\( c_i\in\Re \), and so \( \zero=\lincombo{c}{\vec{s}}+(-1)\vec{v} \)
+\( c_i\in\Re \), and so \( \zero=(-1)\vec{v}+\lincombo{c}{\vec{s}} \)
 is a nontrivial linear relationship among elements of
 \( S\union\set{\vec{v}} \).
 
 The other implication requires the assumption that \( S \) is linearly
 independent.
-With \( S\union\set{\vec{v}} \) linearly dependent, there is a
-nontrivial linear relationship \( c_0\vec{v}+\lincombo{c}{\vec{s}}=\zero \)
-and independence of $S$ then implies that \( c_0\neq 0 \), 
-or else that would be a nontrivial
-relationship among members of \( S \).
-Now rewriting this equation as
-\( \vec{v}=-(c_1/c_0)\vec{s}_1-\dots-(c_n/c_0)\vec{s}_n \) shows
+Suppose that
+\( S\union\set{\vec{v}} \) is linearly dependent.
+Then there is a
+nontrivial \( c_0\vec{v}+\lincombo{c}{\vec{s}}=\zero \),
+and independence of $S$ then implies that \( c_0\neq 0 \) 
+or else it would be a nontrivial relationship among members of \( S \).
+Rewrite this equation as
+\( \vec{v}=-(c_1/c_0)\vec{s}_1-\dots-(c_n/c_0)\vec{s}_n \) to get
 that \( \vec{v}\in\spanof{S} \).
 \end{proof}
 
@@ -704,18 +718,18 @@ tells us that a linearly independent set is maximal when it spans the space.
           \end{equation*}
           Gauss' method 
           \begin{equation*}
-            \begin{amatrix}{3}
+            \begin{amat}[r]{3}
               1  &2  &4  &0  \\
               -3 &2  &-4 &0  \\
               5  &4  &14 &0
-            \end{amatrix}
+            \end{amat}
             \grstep[-5\rho_1+\rho_3]{3\rho_1+\rho_2}
             \;\grstep{(3/4)\rho_2+\rho_3}            
-            \begin{amatrix}{3}
+            \begin{amat}[r]{3}
               1  &2  &4  &0  \\
               0  &8  &8  &0  \\
               0  &0  &0  &0
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           yields a free variable, so there are infinitely many solutions.
           For an example of a particular dependence we can set $c_3$ to be,
@@ -724,18 +738,18 @@ tells us that a linearly independent set is maximal when it spans the space.
         \partsitem It is dependent.
           The linear system that arises here
           \begin{equation*}
-            \begin{amatrix}{3}
+            \begin{amat}[r]{3}
               1  &2  &3  &0  \\
               7  &7  &7  &0  \\
               7  &7  &7  &0
-            \end{amatrix}
+            \end{amat}
             \;\grstep[-7\rho_1+\rho_3]{-7\rho_1+\rho_2}
             \;\grstep{-\rho_2+\rho_3}\;
-            \begin{amatrix}{3}
+            \begin{amat}[r]{3}
               1  &2  &3   &0  \\
               0  &-7 &-14 &0  \\
               0  &0  &0   &0
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           has infinitely many solutions.
           We can get a particular solution by taking $c_3$ to be, say,
@@ -743,18 +757,18 @@ tells us that a linearly independent set is maximal when it spans the space.
         \partsitem It is linearly independent.
           The system
           \begin{equation*}
-            \begin{amatrix}{2}
+            \begin{amat}[r]{2}
               0  &1  &0  \\
               0  &0  &0  \\
               -1 &4  &0
-            \end{amatrix}
+            \end{amat}
             \;\grstep{\rho_1\leftrightarrow\rho_2}
             \;\grstep{\rho_3\leftrightarrow\rho_1}\;
-            \begin{amatrix}{2}
+            \begin{amat}{2}
               -1 &4  &0  \\
               0  &1  &0  \\
               0  &0  &0  
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           has only the solution $c_1=0$ and $c_2=0$.
           (We could also have gotten the answer by inspection\Dash the second
@@ -762,11 +776,11 @@ tells us that a linearly independent set is maximal when it spans the space.
         \partsitem It is linearly dependent.
           The linear system
           \begin{equation*}
-            \begin{amatrix}{4}
+            \begin{amat}[r]{4}
               9  &2  &3  &12  &0  \\
               9  &0  &5  &12  &0  \\
               0  &1  &-4 &-1  &0
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           has more unknowns than equations, and so Gauss' method
           must end with at least one variable free (there can't be a 
@@ -776,11 +790,11 @@ tells us that a linearly independent set is maximal when it spans the space.
           \begin{equation*}
             \grstep{-\rho_1+\rho_2}
             \;\grstep{(1/2)\rho_2+\rho_3}\;
-            \begin{amatrix}{4}
+            \begin{amat}[r]{4}
               9  &2  &3  &12  &0  \\
               0  &-2 &2  &0   &0  \\
               0  &0  &-3 &-1  &0
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           and take, say,  $c_4=1$.
           Then we have that $c_3=-1/3$, $c_2=-1/3$, and $c_1=-31/27$.
@@ -805,19 +819,19 @@ tells us that a linearly independent set is maximal when it spans the space.
           \( c_1(3-x+9x^2)+c_2(5-6x+3x^2)+c_3(1+1x-5x^2)=0+0x+0x^2 \)
           gives a linear system 
           \begin{equation*}
-            \begin{amatrix}{3}
+            \begin{amat}[r]{3}
               3  &5  &1  &0  \\
               -1 &-6 &1  &0  \\
               9  &3  &-5 &0  
-            \end{amatrix}
+            \end{amat}
             \;\grstep[-3\rho_1+\rho_3]{(1/3)\rho_1+\rho_2}
             \;\grstep{3\rho_2}
             \;\grstep{-(12/13)\rho_2+\rho_3}\;
-            \begin{amatrix}{3}
+            \begin{amat}[r]{3}
               3  &5   &1        &0  \\
               0  &-13 &4        &0  \\
               0  &0   &-128/13  &0  
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           with only one solution: \( c_1=0 \), \( c_2=0 \), and \( c_3=0 \).
         \partsitem This set is independent.
@@ -827,29 +841,29 @@ tells us that a linearly independent set is maximal when it spans the space.
         \partsitem This set is linearly independent.
            The linear system reduces in this way
            \begin{equation*}
-             \begin{amatrix}{3}
+             \begin{amat}[r]{3}
                2  &3  &4  &0  \\
                1  &-1 &0  &0  \\
                7  &2  &-3 &0  
-             \end{amatrix}
+             \end{amat}
              \;\grstep[-(7/2)\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
              \;\grstep{-(17/5)\rho_2+\rho_3}\;
-             \begin{amatrix}{3}
+             \begin{amat}[r]{3}
                2  &3    &4      &0  \\
                0  &-5/2 &-2     &0  \\
                0  &0    &-51/5  &0  
-             \end{amatrix}
+             \end{amat}
            \end{equation*}
            to show that there is only the solution $c_1=0$, 
            $c_2=0$, and $c_3=0$.
         \partsitem This set is linearly dependent.
            The linear system
            \begin{equation*}
-             \begin{amatrix}{4}
+             \begin{amat}[r]{4}
                8  &0  &2  &8  &0  \\ 
                3  &1  &2  &-2 &0  \\
                3  &2  &2  &5  &0
-             \end{amatrix}
+             \end{amat}
            \end{equation*}
            must, after reduction, end with at least one variable free
            (there are more variables than equations, and there is no
@@ -1639,34 +1653,34 @@ tells us that a linearly independent set is maximal when it spans the space.
          Assume that \( a\neq 0 \).
          \begin{eqnarray*}
            \grstep{(1/a)\rho_1}
-           \begin{amatrix}{3}
+           \begin{amat}{3}
               1   &b/a   &c/a  &0 \\
               d   &e     &f    &0 \\
               g   &h     &i    &0
-            \end{amatrix}                                            
+            \end{amat}                                            
            &\grstep[-g\rho_1+\rho_3]{-d\rho_1+\rho_2}
-           &\begin{amatrix}{3}
+           &\begin{amat}{3}
               1   &b/a           &c/a        &0   \\
               0   &(ae-bd)/a     &(af-cd)/a  &0   \\
               0   &(ah-bg)/a     &(ai-cg)/a  &0
-            \end{amatrix}                                            \\
+            \end{amat}                                            \\
            &\grstep{(a/(ae-bd))\rho_2}
-           &\begin{amatrix}{3}
+           &\begin{amat}{3}
               1   &b/a           &c/a             &0  \\
               0   &1             &(af-cd)/(ae-bd) &0  \\
               0   &(ah-bg)/a     &(ai-cg)/a       &0
-            \end{amatrix}
+            \end{amat}
          \end{eqnarray*}
          (where we've assumed for the moment that \( ae-bd\neq 0 \) in order
          to do the row reduction step).
          Then, under the assumptions, we get this.
          \begin{eqnarray*}
            &\grstep{((ah-bg)/a)\rho_2+\rho_3}
-           &\begin{amatrix}{3}
+           &\begin{amat}{3}
               1   &\frac{b}{a}   &\frac{c}{a}                           &0 \\
               0   &1             &\frac{af-cd}{ae-bd}                   &0 \\
               0   &0             &\frac{aei+bgf+cdh-hfa-idb-gec}{ae-bd} &0
-            \end{amatrix}
+            \end{amat}
          \end{eqnarray*}
          shows that the original system is nonsingular
          if and only if the \( 3,3 \) entry is nonzero.
@@ -1676,17 +1690,17 @@ tells us that a linearly independent set is maximal when it spans the space.
          We next worry about the assumptions.
          First, if \( a\neq 0 \) but \( ae-bd=0 \) then we swap
          \begin{eqnarray*}
-           \begin{amatrix}{3}
+           \begin{amat}{3}
               1   &b/a           &c/a        &0   \\
               0   &0             &(af-cd)/a  &0   \\
               0   &(ah-bg)/a     &(ai-cg)/a  &0
-            \end{amatrix}                               
+            \end{amat}                               
            &\grstep{\rho_2\leftrightarrow\rho_3}
-           &\begin{amatrix}{3}
+           &\begin{amat}{3}
               1   &b/a           &c/a        &0   \\
               0   &(ah-bg)/a     &(ai-cg)/a  &0   \\
               0   &0             &(af-cd)/a  &0
-            \end{amatrix}
+            \end{amat}
          \end{eqnarray*}
          and conclude that the system is nonsingular if and only if either
          \( ah-bg=0 \) or \( af-cd=0 \).
