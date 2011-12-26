@@ -15,7 +15,7 @@ In this section we will name this idea and study its properties.
 
 
 \subsection{Basis}
-\begin{definition}
+\begin{definition} \label{def:basis}
 A \definend{basis}\index{basis!definition}\index{vector space!basis} 
 for a vector
 space is a sequence of vectors that form a set that is linearly independent 
@@ -25,10 +25,12 @@ and that spans the space.
 We denote a basis with angle brackets
 \( \sequence{\vec{\beta}_1,\vec{\beta}_2,\ldots} \)
 to signify that this collection is a 
-sequence\appendrefs{sequences}\spacefactor=1000\Dash the 
+sequence,\appendrefs{sequences}\spacefactor=1000 meaning that the 
 order of the elements is significant.
-(The requirement that a basis be ordered will be needed, for
-instance, in \nearbydefinition{def:RepresentingVectors}.)
+Bases are different if they contain the same elements but in different
+orders.
+% (The requirement that a basis be ordered will be needed, for
+% instance, in \nearbydefinition{def:RepresentingVectors}.)
 
 \begin{example}  \label{ex:FstBasisRTwo}
 This is a basis for \( \Re^2 \).
@@ -96,7 +98,7 @@ and $\vec{e}_2$, and they refer to
 \( \Re^3 \)'s standard basis vectors
 \( \vec{\imath} \), \( \vec{\jmath} \), and \( \vec{k} \)
 instead of $\vec{e}_1$, $\vec{e}_2$, and $\vec{e}_3$.)
-Note that the symbol `\( \vec{e}_1 \)' means something different in a
+Note that \( \vec{e}_1 \) means something different in a
 discussion of \( \Re^3 \) than it means in a discussion of \( \Re^2 \).
 
 \begin{example}  \label{ex:BasisForCosPlusSin}
@@ -152,11 +154,11 @@ by parametrizing.
        +\colvec{1 \\ 0 \\ -1 \\ 1}w
        \suchthat y,w\in\Re }
 \end{equation*}
-That is, we described the vector space of solutions as 
+Thus the vector space of solutions is 
 the span of a two-element set.
-We can easily check that this two-vector set is also linearly independent.
-Thus the solution set is a subspace of \( \Re^4 \) with a
-two-element  basis.
+This two-vector set is also linearly independent; that is easy to check.
+Therefore the solution set is a subspace of \( \Re^4 \) with a
+basis comprised of the above two elements.
 \end{example}
 
 \begin{example}
@@ -164,66 +166,57 @@ Parameterization helps find bases for other vector spaces, not just
 for solution sets of homogeneous systems.
 To find a basis for this subspace of $\matspace_{\nbyn{2}}$
 \begin{equation*}
-  \set{\begin{pmatrix}
+  \set{\begin{mat}
          a  &b  \\
          c  &0
-       \end{pmatrix} \suchthat a+b-2c=0}
+       \end{mat} \suchthat a+b-2c=0}
 \end{equation*}
 we rewrite the condition as $a=-b+2c$.
 \begin{equation*}
-  \set{\begin{pmatrix}
+  \set{\begin{mat}
          -b+2c  &b  \\
           c     &0
-       \end{pmatrix} \suchthat b,c \in \Re}
-  =\set{b\begin{pmatrix}
+       \end{mat} \suchthat b,c \in \Re}
+  =\set{b\begin{mat}[r]
          -1  &1  \\
           0  &0
-       \end{pmatrix}+
-       c\begin{pmatrix}
+       \end{mat}+
+       c\begin{mat}[r]
           2  &0  \\
           1  &0
-       \end{pmatrix} \suchthat b,c \in \Re}
+       \end{mat} \suchthat b,c \in \Re}
 \end{equation*}
 Thus, this is a natural candidate for a basis.
 \begin{equation*}
-  \sequence{\begin{pmatrix}
+  \sequence{\begin{mat}[r]
          -1  &1  \\
           0  &0
-       \end{pmatrix},
-       \begin{pmatrix}
+       \end{mat},
+       \begin{mat}[r]
           2  &0  \\
           1  &0
-       \end{pmatrix} }
+       \end{mat} }
 \end{equation*}
 The above work shows that it spans the space.
-To show that it is linearly independent is routine.
+Linear independence is also easy.
 \end{example}
 
 Consider again \nearbyexample{ex:FstBasisRTwo}.
-It involves two verifications.
-
-In the first, to check that the set is linearly independent we looked at 
+To verify linearly independence we looked at 
 linear combinations of the set's members that total to
 the zero vector 
 $c_1\vec{\beta}_1+c_2\vec{\beta}_2=\binom{0}{0}$.
 The resulting 
 calculation shows that such a combination is unique,
 that $c_1$ must be $0$ and $c_2$ must be $0$.
-
-The second verification, that the set spans the space, 
-looks at linear combinations that total to any
+To verify that the set spans the space we
+looked at linear combinations that total to any
 member of the space
 $c_1\vec{\beta}_1+c_2\vec{\beta}_2=\binom{x}{y}$.
-In \nearbyexample{ex:FstBasisRTwo} we noted only that 
-the resulting calculation shows that such a combination 
-exists, that for each $x,y$ there is a $c_1,c_2$.
-However, in fact the calculation also shows that the combination is 
+We only noted in that example that such a combination 
+exists, that for each $x,y$ there is a $c_1,c_2$, but
+in fact the calculation also shows that the combination is 
 unique:~$c_1$ must be $(y-x)/2$ and $c_2$ must be $2x-y$.
-
-That is, the first calculation is a special case of the second.
-The next result says that this holds in general for a spanning set:~the
-combination totaling to the zero vector is unique if and only if the 
-combination totaling to any vector is unique.
  
 \begin{theorem}
 \label{th:BasisIffUniqueRepWRT}
@@ -233,25 +226,27 @@ space can be expressed as a linear combination of elements of the subset
 in a unique way.
 \end{theorem}
 
-\noindent We consider combinations to be the same if they differ 
+\noindent We consider linear combinations to be the same if they differ 
 only in the order of
 summands or in the addition or deletion of terms of the form 
 `\( 0\cdot\vec{\beta} \)'.
 
 
 \begin{proof}
-By definition, a sequence is a basis if and only if its vectors form both
-a spanning set and a linearly independent set.
-A subset is a spanning set if and only if each vector in the space is a linear
+A sequence is a basis if and only if its vectors form a set
+that spans and that is linearly independent.
+And, a
+subset is a spanning set if and only if each vector in the space is a linear
 combination of elements of that subset in at least one way.
-
-Thus, to finish we need only show 
-that a subset is linearly independent if and only if every vector in the space
+Thus we need only show 
+that a spanning subset is linearly independent 
+if and only if every vector in the space
 is a linear combination of elements from the subset in at most one way.
+
 Consider two expressions of a vector as a linear combination of the
-members of the basis.
-We can rearrange the two sums, and if necessary
-add some \( 0\vec{\beta}_i \) terms, so that the two sums
+members of the subset.
+We can rearrange the two sums and if necessary
+add some \( 0\vec{\beta}_i \) terms so that the two sums
 combine the same \( \vec{\beta} \)'s in the same order:
 \( \vec{v}=\lincombo{c}{\vec{\beta}} \) and 
 \( \vec{v}=\lincombo{d}{\vec{\beta}} \). 
@@ -263,9 +258,12 @@ holds if and only if
 \begin{equation*}
    (c_1-d_1)\vec{\beta}_1+\dots+(c_n-d_n)\vec{\beta}_n=\zero
 \end{equation*}
-holds, and so asserting that 
+holds. 
+So, asserting that 
 each coefficient in the lower equation is zero is 
-the same thing as asserting that \( c_i=d_i \) for each \( i \).
+the same thing as asserting that \( c_i=d_i \) for each \( i \),
+that is, that every vector is expressible as a linear combination of
+the \( \vec{\beta} \)'s in a unique way.
 \end{proof}
 
 \begin{definition}
@@ -288,9 +286,15 @@ The \( c \)'s are the
 \index{coordinates!with respect to a basis}.
 \end{definition}
 
+\nearbydefinition{def:basis} requires that a basis is a sequence,
+that the order of the basis elements matters, in order to make this 
+definition possible.
+Without that requirement we couldn't write these \( c_i \)'s in order. 
+
 We will later do representations in contexts that involve more than one basis.
-To help with the bookkeeping, we shall often  
-attach a subscript $B$ to the column vector.
+To help keep straight which representation is with respect to which 
+basis we shall often
+write the basis name as a subscript on the column vector.
 
 \begin{example}
 In \( \polyspace_3 \), with respect to the basis
@@ -341,8 +345,8 @@ Then we have this.
 Here, although we've ommited the subscript \( B \) from the column, 
 the fact that the right side is a representation is clear from the context.
 
-The up side of the notation and the term `coordinates' is that they
-generalize the use that we are familiar with:~in \( \Re^n \) 
+The advantage the notation and the term `coordinates' is that they
+generalize the familiar case:~in \( \Re^n \) 
 and with respect to the standard
 basis \( \stdbasis_n \), the vector starting at the origin and ending at
 \( (v_1,\dots,v_n) \) has this representation.
@@ -398,18 +402,18 @@ We will see that in the next subsection.
           \end{equation*}
           gives
           \begin{equation*}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               1  &3  &0  &x  \\
               2  &2  &0  &y  \\
               3  &1  &1  &z
-            \end{amatrix}
+            \end{amat}
             \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
             \;\grstep{-2\rho_2+\rho_3}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               1  &3  &0  &x \hfill\hbox{}  \\
               0  &-4 &0  &-2x+y \hfill\hbox{}  \\
               0  &0  &1  &x-2y+z 
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           which has the unique solution
           \( c_3=x-2y+z \), \( c_2=x/2-y/4 \), and
@@ -423,18 +427,18 @@ We will see that in the next subsection.
           \end{equation*}
           gives a linear system whose solution
           \begin{equation*}
-            \begin{amatrix}{2}
+            \begin{amat}{2}
               1  &3  &x  \\ 
               2  &2  &y  \\
               3  &1  &z
-            \end{amatrix}
+            \end{amat}
             \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
             \;\grstep{-2\rho_2+\rho_3}
-            \begin{amatrix}{2}
+            \begin{amat}{2}
               1  &3  &x\hfill\hbox{}  \\ 
               0  &-4 &-2x+y\hfill\hbox{}  \\
               0  &0  &x-2y+z
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           is possible if and only if the three-tall vector's components
           $x$, $y$, and $z$ satisfy $x-2y+z=0$.
@@ -446,38 +450,38 @@ We will see that in the next subsection.
         \partsitem Yes, this is a basis.
          Setting up the relationship leads to this reduction
           \begin{equation*}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               0  &1  &2  &x \hfill\hbox{} \\
               2  &1  &5  &y \hfill\hbox{} \\
              -1  &1  &0  &z 
-            \end{amatrix}
+            \end{amat}
             \grstep{\rho_1\swap\rho_3}
             \;\grstep{2\rho_1+\rho_2}
             \;\grstep{-(1/3)\rho_2+\rho_3}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
              -1  &1  &0   &z  \hfill\hbox{} \\
               0  &3  &5   &y+2z \hfill\hbox{} \\
               0  &0  &1/3 &x-y/3-2z/3
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           which has a unique solution for each triple of components
           $x$, $y$, and $z$.
         \partsitem No, this is not a basis.
           The reduction  
           \begin{equation*}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
               0  &1  &1  &x   \\
               2  &1  &3  &y   \\
              -1  &1  &0  &z  
-            \end{amatrix}
+            \end{amat}
             \grstep{\rho_1\swap\rho_3}
             \;\grstep{2\rho_1+\rho_2}
             \grstep{(-1/3)\rho_2+\rho_3}
-            \begin{amatrix}{3}
+            \begin{amat}{3}
              -1  &1  &0  &z  \hfill\hbox{} \\
               0  &3  &3  &y+2z  \hfill\hbox{} \\
               0  &0  &0  &x-y/3-2z/3
-            \end{amatrix}
+            \end{amat}
           \end{equation*}
           which does not have a solution for each triple $x$, $y$, and $z$.
           Instead, the span of the given set 
@@ -504,15 +508,15 @@ We will see that in the next subsection.
           \end{equation*}
           with
           \begin{equation*}
-             \begin{amatrix}{2}
+             \begin{amat}[r]{2}
                1  &-1  &1  \\
                1  &1   &2
-             \end{amatrix}
+             \end{amat}
              \grstep{-\rho_1+\rho_2}
-             \begin{amatrix}{2}
+             \begin{amat}[r]{2}
                1  &-1  &1  \\
                0  &2   &1
-             \end{amatrix}
+             \end{amat}
           \end{equation*}
           and conclude that \( c_2=1/2 \) and so \( c_1=3/2 \).
           Thus, the representation is this.
@@ -554,15 +558,15 @@ We will see that in the next subsection.
     \begin{answer}
       The reduction
       \begin{equation*}
-        \begin{amatrix}{4}
+        \begin{amat}[r]{4}
           1  &-4  &3  &-1  &0  \\
           2  &-8  &6  &-2  &0
-        \end{amatrix}
+        \end{amat}
         \grstep{-2\rho_1+\rho_2}
-        \begin{amatrix}{4}
+        \begin{amat}[r]{4}
           1  &-4  &3  &-1  &0  \\
           0  &0   &0  &0   &0
-        \end{amatrix}
+        \end{amat}
       \end{equation*}
       gives that the only condition is that 
       $x_1=4x_2-3x_3+x_4$.
@@ -591,22 +595,22 @@ We will see that in the next subsection.
       This is a natural one.
       \begin{equation*}
         \sequence{
-           \begin{pmatrix}
+           \begin{mat}[r]
              1  &0  \\
              0  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &1  \\
              0  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &0  \\
              1  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &0  \\
              0  &1
-           \end{pmatrix}  }
+           \end{mat}  }
       \end{equation*} 
     \end{answer}
   \recommended \item 
@@ -618,10 +622,10 @@ We will see that in the next subsection.
           components add to zero
         \partsitem This subspace of the $\nbyn{2}$ matrices
           \begin{equation*}
-            \set{\begin{pmatrix}
+            \set{\begin{mat}
                    a  &b  \\
                    0  &c  
-                 \end{pmatrix} \suchthat c-2b=0}
+                 \end{mat} \suchthat c-2b=0}
           \end{equation*}
       \end{exparts}
       \begin{answer}
@@ -648,29 +652,29 @@ We will see that in the next subsection.
             independent is easy.
           \partsitem Rewriting
             \begin{equation*}
-              \set{\begin{pmatrix}
+              \set{\begin{mat}
                      a  &b  \\
                      0  &2b
-                   \end{pmatrix}\suchthat a,b\in\Re}
-              =\set{a\cdot\begin{pmatrix}
+                   \end{mat}\suchthat a,b\in\Re}
+              =\set{a\cdot\begin{mat}[r]
                      1  &0  \\
                      0  &0 
-                   \end{pmatrix}
-                  +b\cdot\begin{pmatrix}
+                   \end{mat}
+                  +b\cdot\begin{mat}[r]
                            0  &1  \\
                            0  &2
-                          \end{pmatrix} \suchthat a,b\in\Re}
+                          \end{mat} \suchthat a,b\in\Re}
             \end{equation*}
             suggests this for the basis.
             \begin{equation*}
-              \sequence{\begin{pmatrix}
+              \sequence{\begin{mat}[r]
                           1  &0  \\
                           0  &0
-                        \end{pmatrix},
-                        \begin{pmatrix}
+                        \end{mat},
+                        \begin{mat}[r]
                           0  &1  \\
                           0  &2
-                        \end{pmatrix}}
+                        \end{mat}}
             \end{equation*}
          \end{exparts}  
       \end{answer}
@@ -1031,61 +1035,61 @@ We will see that in the next subsection.
       \begin{exparts}
         \partsitem Describing the vector space as
           \begin{equation*}
-             \set{\begin{pmatrix}
+             \set{\begin{mat}
                      a  &b  \\
                      b  &c
-                  \end{pmatrix}  \suchthat a,b,c\in\Re}
+                  \end{mat}  \suchthat a,b,c\in\Re}
           \end{equation*}
           suggests this for a basis.
           \begin{equation*}
             \sequence{
-              \begin{pmatrix}
+              \begin{mat}[r]
                 1  &0  \\
                 0  &0
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &0  \\
                 0  &1
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &1  \\
                 1  &0
-              \end{pmatrix}  }
+              \end{mat}  }
           \end{equation*}
           Verification is easy.
         \partsitem This is one possible basis.
           \begin{equation*}
             \sequence{
-              \begin{pmatrix}
+              \begin{mat}[r]
                 1  &0  &0  \\
                 0  &0  &0  \\
                 0  &0  &0
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &0  &0  \\
                 0  &1  &0  \\
                 0  &0  &0
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &0  &0  \\
                 0  &0  &0  \\
                 0  &0  &1
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &1  &0  \\
                 1  &0  &0  \\
                 0  &0  &0
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &0  &1  \\
                 0  &0  &0  \\
                 1  &0  &0
-              \end{pmatrix},
-              \begin{pmatrix}
+              \end{mat},
+              \begin{mat}[r]
                 0  &0  &0  \\
                 0  &0  &1  \\
                 0  &1  &0
-              \end{pmatrix}  }
+              \end{mat}  }
           \end{equation*}
          \partsitem As in the prior two questions, we can form a basis from two
            kinds of  matrices.
@@ -1230,38 +1234,27 @@ We will see that in the next subsection.
 
 
 \subsection{Dimension}
-In the prior subsection we defined the basis of a vector space, and
+In the prior subsection we defined the basis of a vector space and
 we saw that a space can have many different bases.
-For example, following the definition of a basis, we saw three
-different bases for $\Re^2$.
+% For example, following the definition of a basis, we saw three
+% different bases for $\Re^2$.
 So we cannot talk about ``the'' basis for a vector space.
 True, some vector spaces have bases that strike us as more natural
-than others, for instance, $\Re^2$'s basis $\stdbasis_2$ or 
-$\Re^3$'s basis $\stdbasis_3$ or
-$\polyspace_2$'s basis $\sequence{1,x,x^2}$.
-But, 
-for example in the space $\set{a_2x^2+a_1x+a_0\suchthat 2a_2-a_0=a_1}$, 
-no particular basis leaps out at us as the most natural one.
+than others, for instance, $\Re^2$'s basis $\stdbasis_2$ 
+% or $\Re^3$'s basis $\stdbasis_3$
+or $\polyspace_2$'s basis $\sequence{1,x,x^2}$.
+But for 
+the vector space $\set{a_2x^2+a_1x+a_0\suchthat 2a_2-a_0=a_1}$, 
+no particular basis leaps out at us as the natural one.
 We cannot, in general, associate with a space any single basis that
 best describes that space.
 
-We can, however, find something about the bases that
+We can however find something about the bases that
 is uniquely associated with the space.
 This subsection shows that 
 any two bases for a space have the same number of elements.
-So, with each space we can associate a number, 
+So with each space we can associate a number, 
 the number of vectors in any of its bases.
-
-This brings us back to when we considered the two things that could be meant
-by the term `minimal spanning set'.
-At that point we defined `minimal' as linearly independent,
-but we noted that 
-another reasonable interpretation of the term is  
-that a spanning set is `minimal' when it has the fewest
-number of elements of any set with the same span.
-At the end of this subsection, after 
-we have shown that all bases have the same number of elements, then
-we will have shown that the two senses of `minimal' are equivalent.
 
 Before we start, we first
 limit our attention to spaces where at least one basis has only finitely
@@ -1275,15 +1268,15 @@ if it has a basis with only finitely many vectors.
 
 \noindent (One reason for sticking to finite-dimensional spaces is so that 
 the representation of a vector with respect to a 
-basis is a finitely-tall vector, and so can be easily written.)
-From now on we study only finite-dimensional vector spaces.
+basis is a finitely-tall vector, and so we can easily write it.)
+From now on we will study only finite-dimensional vector spaces.
 We shall take the term `vector space' to mean 
 `finite-dimensional vector space'.
-Other spaces are interesting and important, but they lie outside
-of our scope.
+% Other spaces are interesting and important, but they lie outside
+% of our scope.
 
 To prove the main theorem we shall use a technical result, the Exchange Lemma.
-We first illustrate its conclusion with an example.
+We first illustrate it with an example.
 
 \begin{example}
 Here is a basis for $\Re^3$ and a vector given as a linear combination
@@ -1298,15 +1291,15 @@ of members of that basis.
    +2\colvec{1 \\ 1 \\ 0}
    +0\cdot\colvec{0 \\ 0 \\ 2}
 \end{equation*}
-In that combination two of the basis vectors have non-zero coefficients.
-We can pick either one, here we pick the first.
-Replacing it with the vector we've expressed as the combination
+Two of the basis vectors are associated with non-zero coefficients.
+Pick one, for instance the first.
+Replace it with the vector that we've expressed as the combination
 \begin{equation*}
   \hat{B}=\sequence{\colvec{1 \\ 2  \\ 0},
               \colvec{1 \\ 1 \\ 0},
               \colvec{0 \\ 0 \\ 2}}
 \end{equation*}
-gives a new basis for the space.
+and the result is another basis for \( \Re^3 \).
 \end{example}
 
 \begin{lemma}[Exchange Lemma]
@@ -1363,15 +1356,15 @@ $\vec{\beta}_i=(-c_1/c_i)\vec{\beta}_1+\dots+(1/c_i)\vec{v}+\dots
 Now, consider any member
 $d_1\vec{\beta}_1+\dots+d_i\vec{\beta}_i+\dots+d_n\vec{\beta}_n$
 of $\spanof{B}$, substitute for $\vec{\beta}_i$ its expression as a linear
-combination of the members of $\hat{B}$, and recognize 
-(as in the first half of this argument) that the result is a linear
-combination of linear combinations, of members of $\hat{B}$, and hence is in 
+combination of the members of $\hat{B}$, and recognize, 
+as in the first half of this argument, that the result is a linear
+combination of linear combinations of members of $\hat{B}$, and hence is in 
 $\spanof{\smash{\hat{B}}}$.
 \end{proof}
 
 \begin{theorem}
 \label{th:AllBasesSameSize}
-In any finite-dimensional vector space, all of the 
+In any finite-dimensional vector space, all 
 bases have the same number of elements.\index{basis}
 \end{theorem}
 
@@ -1453,9 +1446,8 @@ enclosing space.
 \end{corollary}
 
 \begin{proof}
-Inspection of the above proof shows that
-it never uses that \( D \) spans the space,
-only that \( D \) is linearly independent.
+The above proof never uses that \( D \) spans the space,
+only that it is linearly independent.
 \end{proof}
 
 \begin{example} \label{ex:RefSubSpDiagram}
@@ -1467,8 +1459,8 @@ The whole space has a basis with three members,
 the plane subspaces have bases with two members,
 the line subspaces have bases with one member, 
 and the trivial subspace has a basis with zero members.
-When we saw that diagram we could not show that these are the only subspaces
-that this space has.
+When we saw that diagram we could not show that these are 
+\( \Re^3 \)'s only subspaces.
 We can show it now.
 The prior corollary proves that 
 the only subspaces of \( \Re^3 \) are either three-\hbox{},
@@ -1484,9 +1476,10 @@ Any linearly independent set can be expanded to make a basis.
 \begin{proof}
 If a linearly independent set 
 is not already a basis then it must not span the space.
-Adding to it a vector that is not in the span preserves linear independence.
-Keep adding, 
-until the resulting set does span the space, which the prior corollary
+Adding to the set a vector that is not in the span 
+will preserves linear independence.
+Keep adding until the resulting set does span the space, 
+which the prior corollary
 shows will happen after only a finite number of steps.
 \end{proof}
 
@@ -1504,7 +1497,6 @@ thereby making it linearly independent, without changing its span.
 Otherwise, $S$ contains a vector $\vec{s}_1$ with $\vec{s}_1\neq\zero$
 and we can form a basis \( B_1=\sequence{\vec{s}_1} \).
 If \( \spanof{B_1}=\spanof{S} \) then we are done.
-
 If not then there is a \( \vec{s}_2\in\spanof{S} \) such that
 \( \vec{s}_2\not\in\spanof{B_1} \).
 Let \( B_2=\sequence{\vec{s}_1,\vec{s_2}} \);
@@ -1516,7 +1508,7 @@ which must happen in at most finitely many steps.
 
 \begin{corollary}
 \label{cor:NVecsRNSpanIffLI}
-In an \( n \)-dimensional space, a set of \( n \) vectors is linearly 
+In an \( n \)-dimensional space, a set composed of \( n \) vectors is linearly 
 independent if and
 only if it spans the space.
 \end{corollary}
@@ -1525,7 +1517,7 @@ only if it spans the space.
 First we will
 show that a subset with \( n \) vectors is linearly independent if and only
 if it is a basis.
-`If' is trivially true\Dash bases are linearly independent.
+The `if' is trivially true\Dash bases are linearly independent.
 `Only if' holds
 because a linearly independent set can be expanded to a basis, but a
 basis has \( n \) elements, so this 
@@ -1546,21 +1538,32 @@ result in this book because, as \nearbyexample{ex:RefSubSpDiagram}
 shows, it describes what vector spaces and subspaces there can be.
 We will see more in the next chapter.
 
-\begin{remark}
-The case of infinite-dimensional vector spaces is somewhat controversial.
-The statement `any infinite-dimensional vector space has a basis'
-is known to be equivalent to a statement called the Axiom of Choice
-(see \cite{Blass84}).
-Mathematicians differ philosophically on whether to accept or reject 
-this statement as an axiom on which to base mathematics
-(although, the great majority seem to accept it).
-Consequently the question about infinite-dimensional vector spaces is
-still somewhat up in the air.
-(A discussion of the Axiom of Choice can be found in the
-Frequently Asked Questions list for the Usenet group \texttt{sci.math}.
-Another accessible reference is \cite{Rucker}.)
-%\typeout{Give a reference for the Axiom of Choice.} 
-\end{remark}
+One immediate consequence brings us 
+back to when we considered the two things that could be meant
+by the term `minimal spanning set'.
+At that point we defined `minimal' as linearly independent
+but we noted that 
+another reasonable interpretation of the term is  
+that a spanning set is `minimal' when it has the fewest
+number of elements of any set with the same span.
+Now taht 
+we have shown that all bases have the same number of elements, we know
+that the two senses of `minimal' are equivalent.
+
+% \begin{remark}
+% The case of infinite-dimensional vector spaces is somewhat controversial.
+% The statement `any infinite-dimensional vector space has a basis'
+% is known to be equivalent to a statement called the Axiom of Choice
+% (see \cite{Blass84}).
+% Mathematicians differ philosophically on whether to accept or reject 
+% this statement as an axiom on which to base mathematics
+% (although, the great majority seem to accept it).
+% Consequently the question about infinite-dimensional vector spaces is
+% still somewhat up in the air.
+% (A discussion of the Axiom of Choice can be found in the
+% Frequently Asked Questions list for the Usenet group \texttt{sci.math}.
+% Another accessible reference is \cite{Rucker}.)
+% \end{remark}
 
 \begin{exercises}
   \item[{\em Assume that all spaces are finite-dimensional unless otherwise
@@ -1601,49 +1604,49 @@ Another accessible reference is \cite{Rucker}.)
     \begin{answer}
       For this space
       \begin{equation*}
-        \set{\begin{pmatrix}
+        \set{\begin{mat}
                a  &b  \\
                c  &d
-             \end{pmatrix} \suchthat a,b,c,d\in\Re}
-        =\set{a\cdot\begin{pmatrix}
+             \end{mat} \suchthat a,b,c,d\in\Re}
+        =\set{a\cdot\begin{mat}[r]
              1  &0  \\
              0  &0
-           \end{pmatrix}
+           \end{mat}
            +\dots+
-           d\cdot\begin{pmatrix}
+           d\cdot\begin{mat}[r]
              0  &0  \\
              0  &1
-           \end{pmatrix} \suchthat a,b,c,d\in\Re}
+           \end{mat} \suchthat a,b,c,d\in\Re}
       \end{equation*}
       this is a natural basis.
       \begin{equation*}
         \sequence{
-           \begin{pmatrix}
+           \begin{mat}[r]
              1  &0  \\
              0  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &1  \\
              0  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &0  \\
              1  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &0  \\
              0  &1
-           \end{pmatrix}  }
+           \end{mat}  }
       \end{equation*}
       The dimension is four. 
     \end{answer}
   \item 
     Find the dimension of the vector space of matrices
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
         a  &b  \\
         c  &d
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     subject to each condition.
     \begin{exparts*}
@@ -1657,88 +1660,88 @@ Another accessible reference is \cite{Rucker}.)
         of matrices without restriction has this basis
         \begin{equation*}
          \sequence{
-           \begin{pmatrix}
+           \begin{mat}[r]
              1  &0  \\
              0  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &1  \\
              0  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &0  \\
              1  &0
-           \end{pmatrix},
-           \begin{pmatrix}
+           \end{mat},
+           \begin{mat}[r]
              0  &0  \\
              0  &1
-           \end{pmatrix}  }
+           \end{mat}  }
         \end{equation*}
         and so the dimension is four.
       \partsitem For this space
         \begin{equation*}
-         \set{\begin{pmatrix}
+         \set{\begin{mat}
                a  &b  \\
                c  &d
-             \end{pmatrix} \suchthat \text{$a=b-2c$ and $d\in\Re$}}
-         =\set{b\cdot\begin{pmatrix}
+             \end{mat} \suchthat \text{$a=b-2c$ and $d\in\Re$}}
+         =\set{b\cdot\begin{mat}[r]
              1  &1  \\
              0  &0
-           \end{pmatrix}
-           +c\cdot\begin{pmatrix}
+           \end{mat}
+           +c\cdot\begin{mat}[r]
              -2  &0  \\
               1  &0
-           \end{pmatrix}
-           +d\cdot\begin{pmatrix}
+           \end{mat}
+           +d\cdot\begin{mat}[r]
              0  &0  \\
              0  &1
-           \end{pmatrix} \suchthat b,c,d\in\Re}
+           \end{mat} \suchthat b,c,d\in\Re}
         \end{equation*}
         this is a natural basis.
         \begin{equation*}
           \sequence{
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
               0  &0
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               -2  &0  \\
                1  &0
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               0  &0  \\
               0  &1
-            \end{pmatrix}  }
+            \end{mat}  }
         \end{equation*}
         The dimension is three. 
       \partsitem Gauss' method applied to the two-equation linear system gives
         that $c=0$ and that $a=-b$.
         Thus, we have this description
         \begin{equation*}
-         \set{\begin{pmatrix}
+         \set{\begin{mat}
                -b  &b  \\
                 0  &d
-             \end{pmatrix} \suchthat b,d\in\Re}
-         =\set{b\cdot\begin{pmatrix}
+             \end{mat} \suchthat b,d\in\Re}
+         =\set{b\cdot\begin{mat}[r]
              -1  &1  \\
              0  &0
-           \end{pmatrix}
-           +d\cdot\begin{pmatrix}
+           \end{mat}
+           +d\cdot\begin{mat}[r]
              0  &0  \\
              0  &1
-           \end{pmatrix} \suchthat b,d\in\Re}
+           \end{mat} \suchthat b,d\in\Re}
         \end{equation*}
         and so this is a natural basis.
         \begin{equation*}
           \sequence{
-            \begin{pmatrix}
+            \begin{mat}[r]
               -1  &1  \\
                0  &0
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               0  &0  \\
               0  &1
-            \end{pmatrix}  }
+            \end{mat}  }
         \end{equation*}
         The dimension is two. 
      \end{exparts} 
@@ -1806,22 +1809,22 @@ Another accessible reference is \cite{Rucker}.)
       A basis is
       \begin{equation*}
         \sequence{
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &0  &0  &0  &0  \\
             0  &0  &0  &0  &0  \\
             0  &0  &0  &0  &0
-          \end{pmatrix},
-          \begin{pmatrix}
+          \end{mat},
+          \begin{mat}[r]
             0  &1  &0  &0  &0  \\
             0  &0  &0  &0  &0  \\
             0  &0  &0  &0  &0
-          \end{pmatrix},
-          \dots,
-          \begin{pmatrix}
+          \end{mat},
+          \ldots,
+          \begin{mat}[r]
             0  &0  &0  &0  &0  \\
             0  &0  &0  &0  &0  \\
             0  &0  &0  &0  &1
-          \end{pmatrix}  }
+          \end{mat}  }
       \end{equation*}
       and thus the dimension is \( 3\cdot 5=15 \).  
     \end{answer}
@@ -2229,10 +2232,10 @@ is the dimension of the row space, the number of linearly independent rows.
 \begin{example}
 If
 \begin{equation*}
-  A=\begin{pmatrix}
+  A=\begin{mat}[r]
           2  &3  \\
           4  &6
-       \end{pmatrix}
+       \end{mat}
 \end{equation*}
 then \( \rowspace{A} \) is this subspace of the space of
 two-component row vectors.
@@ -2304,18 +2307,18 @@ performing Gauss' method and taking the nonzero rows of the resulting
 echelon form matrix.
 For instance,
 \begin{eqnarray*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &3  &1  \\
     1  &4  &1  \\
     2  &0  &5
-  \end{pmatrix}
+  \end{mat}
   &\grstep[-2\rho_1+\rho_3]{-\rho_1+\rho_2}
   \;\grstep{6\rho_2+\rho_3}
-  &\begin{pmatrix}
+  &\begin{mat}[r]
     1  &3  &1  \\
     0  &1  &0  \\
     0  &0  &3
-  \end{pmatrix}
+  \end{mat}
 \end{eqnarray*}
 produces the basis $\sequence{\rowvec{1 &3 &1},
             \rowvec{0 &1 &0},
@@ -2359,28 +2362,28 @@ matrix of coefficients.
 \begin{example}   \label{ex:BasisForColSpace}
 Given this matrix,
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &3  &7  \\
     2  &3  &8  \\
     0  &1  &2  \\
     4  &0  &4
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 to get a basis for the column space,
 temporarily turn the columns into rows and reduce.
 \begin{eqnarray*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &2  &0  &4  \\
        3  &3  &1  &0  \\
        7  &8  &2  &4
-    \end{pmatrix}
+    \end{mat}
   &\grstep[-7\rho_1+\rho_3]{-3\rho_1+\rho_2}
   \;\grstep{-2\rho_2+\rho_3}
-  &\begin{pmatrix}
+  &\begin{mat}[r]
      1  &2  &0  &4  \\
      0  &-3 &1  &-12\\
      0  &0  &0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{eqnarray*}
 Now turn the rows back to columns.
 \begin{equation*}
@@ -2413,18 +2416,18 @@ as ``the same'' as the row vectors \( \rowvec{0 &0 &1 &0 &1} \),
 \( \rowvec{0 &0 &2 &0 &3} \), and
 \( \rowvec{0 &0 &-1 &0 &-3} \), apply Gauss' method
 \begin{eqnarray*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &0  &1  &0  &1  \\
     0  &0  &2  &0  &3  \\
     0  &0  &-1 &0  &-3
-  \end{pmatrix}
+  \end{mat}
   &\grstep[\rho_1+\rho_3]{-2\rho_1+\rho_2}
   \;\grstep{2\rho_2+\rho_3}
-  &\begin{pmatrix}
+  &\begin{mat}[r]
     0  &0  &1  &0  &1  \\
     0  &0  &0  &0  &1  \\
     0  &0  &0  &0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{eqnarray*}
 and translate back to get the basis
 \( \sequence{x^2+x^4,x^4} \).
@@ -2440,15 +2443,15 @@ Gaussian reduction.
 For the second point of this subsection,
 consider the effect on the column space of this row reduction.
 \begin{eqnarray*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &2  \\
     2  &4
-  \end{pmatrix}
+  \end{mat}
   &\grstep{-2\rho_1+\rho_2}
-  &\begin{pmatrix}
+  &\begin{mat}[r]
     1  &2  \\
     0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{eqnarray*}
 The column space of the left-hand matrix contains vectors with
 a second component that is nonzero.
@@ -2489,17 +2492,17 @@ the row space is to consider again Gauss-Jordan reduction.
 Recall that it ends with
 the reduced echelon form of a matrix, as here.
 \begin{eqnarray*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &3  &1  &6  \\
     2  &6  &3  &16 \\
     1  &3  &1  &6
-  \end{pmatrix}
+  \end{mat}
   &\grstep{}\;\cdots\;\grstep{}
-  &\begin{pmatrix}
+  &\begin{mat}[r]
     1  &3  &0  &2  \\
     0  &0  &1  &4  \\
     0  &0  &0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{eqnarray*}
 Consider the row space and the column space of this result.
 Our first point made above says
@@ -2617,36 +2620,36 @@ if the vectors of \( a \)'s form a basis.
   \item 
     Transpose each.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  2  &1  \\
                  3  &1
-               \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                  2  &1  \\
                  1  &3
-               \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                  1  &4  &3 \\
                  6  &7  &8
-               \end{pmatrix}  \)
+               \end{mat}  \)
       \partsitem \( \colvec{0 \\ 0 \\ 0} \)
       \partsitem \( \rowvec{-1 &-2} \)
     \end{exparts*}
     \begin{answer}  
       \begin{exparts*}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                    2  &3  \\
                    1  &1
-                 \end{pmatrix}  \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat}  \)
+        \partsitem \( \begin{mat}[r]
                    2  &1  \\
                    1  &3
-                 \end{pmatrix}  \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat}  \)
+        \partsitem \( \begin{mat}[r]
                    1  &6  \\
                    4  &7  \\
                    3  &8
-                 \end{pmatrix}  \)
+                 \end{mat}  \)
         \partsitem \( \rowvec{0 &0 &0} \)
         \partsitem \( \colvec{-1 \\ -2} \)
       \end{exparts*}  
@@ -2654,16 +2657,16 @@ if the vectors of \( a \)'s form a basis.
   \recommended \item 
     Decide if the vector is in the row space of the matrix.
     \begin{exparts*}
-       \partsitem \( \begin{pmatrix}
+       \partsitem \( \begin{mat}[r]
                   2  &1  \\
                   3  &1
-                \end{pmatrix}  \),
+                \end{mat}  \),
              \( \rowvec{1 &0} \)
-       \partsitem \( \begin{pmatrix}
+       \partsitem \( \begin{mat}[r]
                   0  &1  &3  \\
                  -1  &0  &1  \\
                  -1  &2  &7
-                \end{pmatrix}  \),
+                \end{mat}  \),
              \( \rowvec{1 &1 &1} \)
     \end{exparts*}
     \begin{answer}  
@@ -2688,19 +2691,19 @@ if the vectors of \( a \)'s form a basis.
               =\rowvec{1 &1 &1} \)
            has no solution.
            \begin{equation*}
-             \begin{amatrix}{3}
+             \begin{amat}[r]{3}
                0  &-1  &-1  &1  \\
                1  &0   &2   &1  \\
                3  &1   &7   &1
-             \end{amatrix}
+             \end{amat}
              \grstep{\rho_1\leftrightarrow\rho_2}
              \;\grstep{-3\rho_1+\rho_2}
              \;\grstep{\rho_2+\rho_3}
-             \begin{amatrix}{3}
+             \begin{amat}[r]{3}
                1  &0   &2   &1  \\
                0  &-1  &-1  &1  \\
                0  &0   &0   &-1
-             \end{amatrix}
+             \end{amat}
            \end{equation*}
            Thus, the vector is not in the row space.
       \end{exparts}  
@@ -2708,16 +2711,16 @@ if the vectors of \( a \)'s form a basis.
   \recommended \item 
     Decide if the vector is in the column space.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  1  &1  \\
                  1  &1
-               \end{pmatrix}  \),
+               \end{mat}  \),
             \( \colvec{1 \\ 3} \)
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  1  &3  &1 \\
                  2  &0  &4 \\
                  1  &-3 &-3
-               \end{pmatrix}  \),
+               \end{mat}  \),
             \( \colvec{1 \\ 0 \\ 0} \)
     \end{exparts*}
     \begin{answer}
@@ -2752,18 +2755,18 @@ if the vectors of \( a \)'s form a basis.
             \end{equation*}
             we get a linear system that, when Gauss' method is applied,
             \begin{equation*}
-              \begin{amatrix}{3}
+              \begin{amat}[r]{3}
                 1  &3  &1  &1  \\
                 2  &0  &4  &0  \\
                 1  &-3 &-3 &0
-              \end{amatrix}
+              \end{amat}
               \grstep[-\rho_1+\rho_3]{-2\rho_1+\rho_2}
               \;\grstep{-\rho_2+\rho_3}
-              \begin{amatrix}{3}
+              \begin{amat}[r]{3}
                 1  &3  &1  &1  \\
                 0  &-6 &2  &-2 \\
                 0  &0  &-6 &1
-              \end{amatrix}
+              \end{amat}
             \end{equation*}
             yields a solution.
             Thus, the vector is in the column space.
@@ -2772,31 +2775,31 @@ if the vectors of \( a \)'s form a basis.
   \recommended \item  
     Find a basis for the row space of this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
          2  &0  &3  &4  \\
          0  &1  &1  &-1 \\
          3  &1  &0  &2  \\
          1  &0  &-4 &-1
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     \begin{answer}
      A routine Gaussian reduction
      \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          2  &0  &3 &4   \\
          0  &1  &1  &-1 \\
          3  &1  &0  &2  \\
          1  &0  &-4  &1
-       \end{pmatrix}
+       \end{mat}
        \grstep[-(1/2)\rho_1+\rho_4]{-(3/2)\rho_1+\rho_3}
        \;\grstep{-\rho_2+\rho_3}
        \;\grstep{-\rho_3+\rho_4}
-       \begin{pmatrix}
+       \begin{mat}[r]
          2  &0  &3      &4   \\
          0  &1  &1      &-1 \\
          0  &0  &-11/2  &-3  \\
          0  &0  &0      &0
-       \end{pmatrix}
+       \end{mat}
      \end{equation*}
      suggests this basis
      $\sequence{\rowvec{2 &0 &3 &4},
@@ -2808,12 +2811,12 @@ if the vectors of \( a \)'s form a basis.
         \;\grstep[-2\rho_1+\rho_4]{-3\rho_1+\rho_3}
         \;\grstep{-\rho_2+\rho_3}
         \;\grstep{-\rho_3+\rho_4}
-        \begin{pmatrix}
+        \begin{mat}[r]
            1  &0  &-4 &-1 \\
            0  &1  &1  &-1 \\
            0  &0  &11 &6  \\
            0  &0  &0  &0
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       leading to the basis
       \( \sequence{\rowvec{1 &0 &-4 &-1},\rowvec{0 &1 &1 &-1},
@@ -2823,29 +2826,29 @@ if the vectors of \( a \)'s form a basis.
     Find the rank of each matrix.
     \begin{exparts*}
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           2  &1  &3  \\
           1  &-1 &2  \\
           1  &0  &3
-        \end{pmatrix}  \)
+        \end{mat}  \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &-1 &2  \\
           3  &-3 &6  \\
          -2  &2  &-4
-        \end{pmatrix}  \)
+        \end{mat}  \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &3  &2  \\
           5  &1  &1  \\
           6  &4  &3
-        \end{pmatrix}  \)
+        \end{mat}  \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  &0  \\
           0  &0  &0  \\
           0  &0  &0
-        \end{pmatrix}  \)
+        \end{mat}  \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -2854,11 +2857,11 @@ if the vectors of \( a \)'s form a basis.
              \mbox{}
              \grstep[-(1/2)\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
              \;\grstep{-(1/3)\rho_2+\rho_3}
-             \begin{pmatrix}
+             \begin{mat}[r]
                2  &1     &3     \\
                0  &-3/2  &1/2   \\
                0  &0     &4/3
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
            shows that the row rank, and hence the rank, is three.
          \partsitem Inspection of the columns shows that that the others
@@ -2868,33 +2871,33 @@ if the vectors of \( a \)'s form a basis.
            
            Alternatively, the reduction
            \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &-1  &2  \\
                3  &-3  &6  \\   
                -2 &2   &-4
-             \end{pmatrix}
+             \end{mat}
              \grstep[2\rho_1+\rho_3]{-3\rho_1+\rho_2}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &-1  &2  \\
                0  &0   &0  \\   
                0  &0   &0 
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
            shows the same thing.
          \partsitem This calculation
            \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &3  &2  \\
                5  &1  &1  \\
                6  &4  &3  
-             \end{pmatrix}
+             \end{mat}
              \grstep[-6\rho_1+\rho_3]{-5\rho_1+\rho_2}
              \;\grstep{-\rho_2+\rho_3}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &3   &2  \\
                0  &-14 &-9 \\
                0  &0   &0  
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
            shows that the rank is two.
          \partsitem The rank is zero.
@@ -2914,58 +2917,58 @@ if the vectors of \( a \)'s form a basis.
            \colvec{1 \\ -3 \\ -3}  }\subseteq\Re^3  \)
       \partsitem \(  \set{1+x,1-x^2,3+2x-x^2}\subseteq\polyspace_3  \)
       \partsitem \( \set{
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &0  &1  \\
             3  &1  &-1
-          \end{pmatrix},
-          \begin{pmatrix}
+          \end{mat},
+          \begin{mat}[r]
             1  &0  &3  \\
             2  &1  &4
-          \end{pmatrix},
-          \begin{pmatrix}
+          \end{mat},
+          \begin{mat}[r]
            -1  &0  &-5 \\
            -1  &-1 &-9
-          \end{pmatrix}  }  \subseteq\matspace_{\nbym{2}{3}}  \)
+          \end{mat}  }  \subseteq\matspace_{\nbym{2}{3}}  \)
     \end{exparts}
     \begin{answer}
       \begin{exparts}
         \partsitem This reduction
           \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &3  \\
               -1  &3  \\
                1  &4  \\
                2  &1
-             \end{pmatrix}
+             \end{mat}
              \grstep[-\rho_1+\rho_3 \\ -2\rho_1+\rho_4]{\rho_1+\rho_2}
              \grstep[(5/6)\rho_2+\rho_4]{-(1/6)\rho_2+\rho_3}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &3  \\
                0  &6  \\
                0  &0  \\
                0  &0
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           gives \( \sequence{\rowvec{1 &3},\rowvec{0 &6}} \).
         \partsitem Transposing and reducing
           \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &2  &1  \\
                3  &1  &-1 \\
                1  &-3 &-3
-             \end{pmatrix}
+             \end{mat}
              \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &2  &1  \\
                0  &-5 &-4 \\
                0  &-5 &-4
-             \end{pmatrix}
+             \end{mat}
              \grstep{-\rho_2+\rho_3}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &2  &1  \\
                0  &-5 &-4 \\
                0  &0  &0
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           and then transposing back gives this basis.
           \begin{equation*}
@@ -2978,46 +2981,46 @@ if the vectors of \( a \)'s form a basis.
           to be ``the same'' as the row vector $\rowvec{1 &1 &0 &0}$, etc., 
           leads to
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  &0  &0 \\
               1  &0  &-1 &0 \\
               3  &2  &-1 &0
-            \end{pmatrix}
+            \end{mat}
             \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
             \;\grstep{-\rho_2+\rho_3}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  &0  &0 \\
               0  &-1 &-1 &0 \\
               0  &0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           which yields the basis \( \sequence{1+x,-x-x^2} \).
         \partsitem Here ``the same'' gives
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  &1  &3  &1  &-1  \\
               1  &0  &3  &2  &1  &4   \\
              -1  &0  &-5  &-1 &-1 &-9
-            \end{pmatrix}
+            \end{mat}
             \grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}
             \;\grstep{2\rho_2+\rho_3}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  &1  &3  &1  &-1  \\
               0  &0  &2  &-1 &0  &5   \\
               0  &0  &0  &0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           leading to this basis.
           \begin{equation*}
             \sequence{
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  &1  \\
               3  &1  &-1
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               0  &0  &2  \\
              -1  &0  &5
-            \end{pmatrix}  }
+            \end{mat}  }
           \end{equation*}
       \end{exparts}   
      \end{answer}
@@ -3028,11 +3031,11 @@ if the vectors of \( a \)'s form a basis.
       Only the zero matrices have rank of zero.
       The only matrices of rank one have the form
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
            k_1\cdot \rho  \\
             \vdots  \\
            k_m\cdot \rho
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       where \( \rho \) is some nonzero row vector, and not all of the 
       \( k_i \)'s are zero.
@@ -3046,10 +3049,10 @@ if the vectors of \( a \)'s form a basis.
     Given \( a,b,c\in\Re \), what choice of \( d \) will cause this matrix 
     to have the rank of one?
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
          a  &b  \\
          c  &d
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       If \( a\neq 0 \) then a choice of \( d=(c/a)b \) will make the second
@@ -3067,10 +3070,10 @@ if the vectors of \( a \)'s form a basis.
   \item 
     Find the column rank of this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &3  &-1  &5  &0  &4  \\
         2  &0  &1   &0  &4  &1
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       The column rank is two.
@@ -3120,10 +3123,10 @@ if the vectors of \( a \)'s form a basis.
       \textit{Remark.}
       Consider
       \begin{equation*}
-        A=\begin{pmatrix}
+        A=\begin{mat}[r]
             1  &3  \\
             2  &6
-          \end{pmatrix}
+          \end{mat}
       \end{equation*}
       and note that the row space is the set of 
       all multiples of \( \rowvec{1 &3} \)
@@ -3149,36 +3152,36 @@ if the vectors of \( a \)'s form a basis.
       With that, one way to see that \( (1,0,1,0) \) is not in the span 
       of the first set is to note that this reduction
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &-1  &2  &-3  \\
           1  &1   &2  &0   \\
           3  &-1  &6  &-6
-        \end{pmatrix}
+        \end{mat}
         \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
         \;\grstep{-\rho_2+\rho_3}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &-1  &2  &-3  \\
           0  &2   &0  &3   \\
           0  &0   &0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and this one
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &-1  &2  &-3  \\
           1  &1   &2  &0   \\
           3  &-1  &6  &-6  \\
           1  &0   &1  &0
-        \end{pmatrix}
+        \end{mat}
         \grstep[-3\rho_1+\rho_3 \\ -\rho_1+\rho_4]{-\rho_1+\rho_2}
         \;\grstep[-(1/2)\rho_2+\rho_4]{-\rho_2+\rho_3}
         \;\grstep{\rho_3\leftrightarrow\rho_4}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &-1  &2  &-3  \\
           0  &2   &0  &3   \\
           0  &0   &-1 &3/2 \\
           0  &0   &0  &0   
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       yield matrices differing in rank.
       This means that addition of $(1,0,1,0)$ to the set of the first three
@@ -3203,11 +3206,11 @@ if the vectors of \( a \)'s form a basis.
     \begin{answer}
       It is a subspace because it is the column space of the matrix 
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           3  &2  &4  \\
           1  &0  &-1 \\
           2  &2  &5
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       of coefficients.
       To find a basis for the column space, 
@@ -3219,18 +3222,18 @@ if the vectors of \( a \)'s form a basis.
       \end{equation*}
       we take the three vectors from the spanning set, transpose, reduce,
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            3  &1  &2  \\
            2  &0  &2  \\
            4  &-1 &5
-         \end{pmatrix}
+         \end{mat}
          \grstep[-(4/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}
          \;\grstep{-(7/2)\rho_2+\rho_3}
-         \begin{pmatrix}
+         \begin{mat}[r]
            3  &1     &2  \\
            0  &-2/3  &2/3  \\
            0  &0     &0
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       and transpose back to get this.
       \begin{equation*}
@@ -3249,26 +3252,26 @@ if the vectors of \( a \)'s form a basis.
       This can be done as a straightforward calculation.
       \begin{align*}
         \trans{(rA+sB)}
-        &=\trans{\begin{pmatrix}
+        &=\trans{\begin{mat}
              ra_{1,1}+sb_{1,1}  &\ldots &ra_{1,n}+sb_{1,n} \\
              \vdots             &       &\vdots            \\
              ra_{m,1}+sb_{m,1}  &\ldots &ra_{m,n}+sb_{m,n}
-                \end{pmatrix}  }  \\
-        &=\begin{pmatrix}
+                \end{mat}  }  \\
+        &=\begin{mat}
            ra_{1,1}+sb_{1,1}  &\ldots &ra_{m,1}+sb_{m,1}  \\
            \vdots                                         \\
            ra_{1,n}+sb_{1,n}  &\ldots &ra_{m,n}+sb_{m,n}
-         \end{pmatrix}           \\
-        &=\begin{pmatrix}
+         \end{mat}           \\
+        &=\begin{mat}
            ra_{1,1}  &\ldots &ra_{m,1}  \\
            \vdots                       \\
            ra_{1,n}  &\ldots &ra_{m,n}
-         \end{pmatrix}           
-        +\begin{pmatrix}
+         \end{mat}           
+        +\begin{mat}
            sb_{1,1}  &\ldots &sb_{m,1}  \\
            \vdots                       \\
            sb_{1,n}  &\ldots &sb_{m,n}
-         \end{pmatrix}           \\
+         \end{mat}           \\
         &=r\trans{A}+s\trans{B}
       \end{align*}  
     \end{answer}
@@ -3289,53 +3292,53 @@ if the vectors of \( a \)'s form a basis.
       \begin{exparts}
         \partsitem These reductions give different bases.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &0  \\
               1  &2  &1
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_1+\rho_2}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &0  \\
               0  &0  &1
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &0  \\
               1  &2  &1
-            \end{pmatrix}
+            \end{mat}
             \grstep{-\rho_1+\rho_2}
             \;\grstep{2\rho_2}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &0  \\
               0  &0  &2
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem An easy example is this.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &1  \\
               3  &1  &4
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &1  \\
               3  &1  &4  \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           This is a less simplistic example.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &1  \\
               3  &1  &4
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  &1  \\
               3  &1  &4  \\
               2  &4  &2  \\
               4  &3  &5
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Assume that \( A \) and \( B \) are matrices with equal
           row spaces.
@@ -3343,13 +3346,13 @@ if the vectors of \( a \)'s form a basis.
           of \( B \), and another matrix \( D \) with the rows of \( B \)
           above the rows of \( A \).
           \begin{equation*}
-            C=\begin{pmatrix}
+            C=\begin{mat}
                  A \\ B
-              \end{pmatrix}
+              \end{mat}
             \qquad
-            D=\begin{pmatrix}
+            D=\begin{mat}
                  B \\ A
-              \end{pmatrix}
+              \end{mat}
           \end{equation*}
           Observe that \( C \) and \( D \) are row-equivalent (via a sequence
           of row-swaps) and so Gauss-Jordan reduce to the same reduced
@@ -3406,16 +3409,16 @@ if the vectors of \( a \)'s form a basis.
 
       This example, however,
       \begin{equation*}
-         A=\begin{pmatrix}
+         A=\begin{mat}[r]
              1  &2  &3  \\
              4  &5  &6
-           \end{pmatrix},
+           \end{mat},
          \qquad
-         \trans{A}=\begin{pmatrix}
+         \trans{A}=\begin{mat}[r]
              1  &4  \\
              2  &5  \\
              3  &6
-           \end{pmatrix}
+           \end{mat}
       \end{equation*}
       indicates that as soon as we have a formal meaning for ``the same'',
       we can apply it here:
@@ -3441,15 +3444,15 @@ if the vectors of \( a \)'s form a basis.
       No.
       Here, Gauss' method does not change the column space.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           3  &1
-        \end{pmatrix}
+        \end{mat}
         \grstep{-3\rho_1+\rho_2}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*} 
     \end{answer}
   \item
@@ -3550,37 +3553,37 @@ if the vectors of \( a \)'s form a basis.
       Addition is more interesting.
       The rank of a sum can be smaller than the rank of the summands.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &2  \\
           3  &4
-        \end{pmatrix}
+        \end{mat}
         +
-        \begin{pmatrix}
+        \begin{mat}[r]
          -1  &-2  \\
          -3  &-4
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}[r]
          0   &0   \\
          0   &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       The rank of a sum can be bigger than the rank of the summands.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &2  \\
           0  &0
-        \end{pmatrix}
+        \end{mat}
         +
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0   \\
           3  &4
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}[r]
          1   &2   \\
          3   &4
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       But there is an upper bound (other than the size of the matrices).
       In general, \( \rank(A+B)\leq\rank(A)+\rank(B) \).
@@ -4012,20 +4015,20 @@ $\Re^3=\text{$x$-axis}\directsum\text{$y$-axis}\directsum\text{$z$-axis}$.
 \begin{example}
 The space of \( \nbyn{2} \) matrices is this direct sum.
 \begin{equation*}
-  \set{\begin{pmatrix}
+  \set{\begin{mat}
          a  &0  \\
          0  &d
-       \end{pmatrix}  \suchthat a,d\in\Re }
+       \end{mat}  \suchthat a,d\in\Re }
   \,\mbox{}\directsum\mbox{}\,
-  \set{\begin{pmatrix}
+  \set{\begin{mat}
          0  &b  \\
          0  &0
-       \end{pmatrix}  \suchthat b\in\Re }
+       \end{mat}  \suchthat b\in\Re }
   \,\mbox{}\directsum\mbox{}\,
-  \set{\begin{pmatrix}
+  \set{\begin{mat}
          0  &0  \\
          c  &0
-       \end{pmatrix}  \suchthat c\in\Re }
+       \end{mat}  \suchthat c\in\Re }
 \end{equation*}
 It is the direct sum of subspaces in many other ways as well; 
 direct sum decompositions are not unique.
@@ -4437,20 +4440,20 @@ needed to do the Jordan Form construction in the fifth chapter.
 %\begin{example}
 %The space of \( \nbyn{2} \) matrices is this direct sum
 %\begin{equation*}
-%  \set{\begin{pmatrix}
+%  \set{\begin{mat}
 %         a  &0  \\
 %         0  &d
-%       \end{pmatrix}  \suchthat a,d\in\Re }
+%       \end{mat}  \suchthat a,d\in\Re }
 %  \,\mbox{}\directsum\mbox{}\,
-%  \set{\begin{pmatrix}
+%  \set{\begin{mat}
 %         0  &b  \\
 %         0  &0
-%       \end{pmatrix}  \suchthat b\in\Re }
+%       \end{mat}  \suchthat b\in\Re }
 %  \,\mbox{}\directsum\mbox{}\,
-%  \set{\begin{pmatrix}
+%  \set{\begin{mat}
 %         0  &0  \\
 %         c  &0
-%       \end{pmatrix}  \suchthat c\in\Re }
+%       \end{mat}  \suchthat c\in\Re }
 %\end{equation*}
 %(it is the direct sum of subspaces in many other ways also; as with the case
 %of only two subspaces, direct sum decompositions into three or more 
@@ -4920,15 +4923,15 @@ needed to do the Jordan Form construction in the fifth chapter.
         \( W_1\intersection W_2 \), \( \dim(W_1\intersection W_2) \),
         \( W_1+W_2 \), and \( \dim(W_1+W_2) \).
         \begin{equation*}
-          W_1=\set{\begin{pmatrix}
+          W_1=\set{\begin{mat}
                     0  &0  \\
                     c  &d
-                  \end{pmatrix} \suchthat c,d\in\Re  }
+                  \end{mat} \suchthat c,d\in\Re  }
           \qquad
-         W_2=\set{\begin{pmatrix}
+         W_2=\set{\begin{mat}
                     0  &b  \\
                     c  &0
-                  \end{pmatrix} \suchthat b,c\in\Re  }
+                  \end{mat} \suchthat b,c\in\Re  }
        \end{equation*}
      \partsitem Suppose that \( U \) and \( W \) are subspaces 
        of a vector space.
@@ -4960,15 +4963,15 @@ needed to do the Jordan Form construction in the fifth chapter.
       \begin{exparts}
         \partsitem The intersection and sum are
           \begin{equation*}
-             \set{\begin{pmatrix}
+             \set{\begin{mat}
                     0  &0  \\
                     c  &0
-                  \end{pmatrix} \suchthat c\in\Re  }
+                  \end{mat} \suchthat c\in\Re  }
              \qquad
-             \set{\begin{pmatrix}
+             \set{\begin{mat}
                     0  &b  \\
                     c  &d
-                   \end{pmatrix} \suchthat b,c,d\in\Re  }
+                   \end{mat} \suchthat b,c,d\in\Re  }
           \end{equation*}
         which have dimensions one and three.
       \partsitem We write $B_{U\intersection W}$ for the basis for 
@@ -5070,15 +5073,15 @@ needed to do the Jordan Form construction in the fifth chapter.
       \begin{exparts}
         \partsitem Two such are these.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  \\
               2  &3
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &1  \\
               -1 &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           For the antisymmetric one, entries on the diagonal must be zero.
         \partsitem A square symmetric matrix equals its transpose.
