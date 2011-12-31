@@ -1680,7 +1680,7 @@ so its nullity is $1$.
 
 \begin{example}
 The map from \nearbyexample{ex:MatToPolyRnge}
-has this nullspace.
+has this nullspace an nullity $2$.
 \begin{equation*}
    \nullspace{h}=\set{\begin{mat}
                          a  &b          \\
@@ -1690,22 +1690,24 @@ has this nullspace.
 \end{example}
 
 Now for the second insight from the above pictures.
-In \nearbyexample{ex:RThreeHomoRTwo}, each of the vertical lines is squashed down 
-to a single point\Dash $\pi$, in passing from the domain to the range,
-takes all of these one-dimensional vertical lines and ``zeroes them out'', 
+In \nearbyexample{ex:RThreeHomoRTwo} each of the vertical lines is 
+squashed down 
+to a single point\Dash in passing from the domain to the range $\pi$
+takes all of these one-dimensional vertical lines and squashes them
+to a point, 
 leaving the range one dimension smaller than the domain.
-Similarly, in \nearbyexample{ex:RTwoHomoRHardOne}, the
+Similarly, in \nearbyexample{ex:RTwoHomoRHardOne} the
 two-dimensional domain is mapped to a one-dimensional range by breaking 
-the domain into lines (here, they are diagonal lines), 
-and compressing each of those lines to a single member of the range.
-Finally, in \nearbyexample{ex:PicRThreeToRTwo},
+the domain into the diagonal lines 
+and compressing each of those to a single member of the range.
+Finally, in \nearbyexample{ex:PicRThreeToRTwo}
 the domain breaks into planes which get
-``zeroed out'', and so the map starts with a three-dimensional domain
+squashed to a point and so the map starts with a three-dimensional domain
 but ends with a
-one-dimensional range\Dash this map ``subtracts'' two from the dimension. 
-(Notice that, in this third example, the codomain is
+one-dimensional range. 
+(Notice that in this third example the codomain is
 two-dimensional but the range of the map is only one-dimensional, and it is
-the dimension of the range that is of interest.)
+the dimension of the range that we are studying.)
 
 \begin{theorem}
 \label{th:RankPlusNullEqDim}
@@ -1717,30 +1719,31 @@ A linear map's rank plus its nullity equals the dimension of its domain.
 Let \( \map{h}{V}{W} \) be linear and
 let \( B_N=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_k} \)
 be a basis for the nullspace.
-Extend that to a basis
+Expand that to a basis
 \( B_V=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_k,
        \vec{\beta}_{k+1},\dots,\vec{\beta}_n} \)
-for the entire domain.
+for the entire domain, using Corollary~Two.III.\ref{cor:LIExpBas}.
 We shall show that
 \( B_R=\sequence{ h(\vec{\beta}_{k+1}),\dots,h(\vec{\beta}_n)} \)
 is a basis for the rangespace.
-Then counting the size of these bases gives the result.
+With that, counting the size of these bases gives the result.
 
 To see that \( B_R \) is linearly independent, 
-consider the equation
-\( c_{k+1}h(\vec{\beta}_{k+1})+\dots+c_nh(\vec{\beta}_n)=\zero_W \). 
-This gives that 
-\( h(c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n)=\zero_W \)
-and so \( c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n \)
+consider 
+\( \zero_W=c_{k+1}h(\vec{\beta}_{k+1})+\dots+c_nh(\vec{\beta}_n) \).
+The function is linear so we have
+\( \vec{0_W}=h(c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n) \)
+and therefore \( c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n \)
 is in the nullspace of $h$.
-As \( B_N\) is a basis for this nullspace, there are scalars
-\( c_1,\dots,c_k\in\Re \) satisfying this relationship.
+As \( B_N\) is a basis for the nullspace there are scalars
+\( c_1,\dots,c_k \) satisfying this relationship.
 \begin{equation*}
    c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k
    =
    c_{k+1}\vec{\beta}_{k+1}+\dots+c_n\vec{\beta}_n
 \end{equation*}
-But \( B_V \) is a basis for \( V \) so each scalar equals zero.
+But this is an equation among the members of \( B_V \), 
+which is a basis for \( V \), so each $c_i$ equals $0$.
 Therefore \( B_R \) is linearly independent.
 
 To show that \( B_R \) spans the rangespace,
@@ -1776,43 +1779,42 @@ the rangespace and nullspace are
   \nullspace{h}=
     \set{\colvec{0 \\ 0 \\ z}\suchthat z\in\Re }
 \end{equation*}
-and so the rank of $h$ is two while the nullity is one.
+and so the rank of $h$ is $2$ while the nullity is $1$.
 \end{example}
 
 \begin{example}
 If \( \map{t}{\Re}{\Re} \) is the linear transformation \( x\mapsto -4x, \)
 then the range is \(  \rangespace{t}=\Re^1 \), and so 
-the rank of $t$ is one and the nullity is zero.
+the rank of $t$ is $1$ and the nullity is $0$.
 \end{example}
 
 \begin{corollary}
 \label{cor:RankDecreases}
 The rank of a linear map is less than or equal to the dimension of the domain.
-Equality holds if and only if the nullity of the map is zero.
+Equality holds if and only if the nullity of the map is $0$.
 \end{corollary}
 
 We  know 
 that an isomorphism exists between two spaces 
-if and only if their dimensions are equal.
-Here we see that for a homomorphism to exist,  
+if and only if the dimension of the range equals the dimension of the domain.
+We have now seen that for a homomorphism to exist,  
 the dimension of the range must be less than or equal to the 
 dimension of the domain.
 For instance, there is no homomorphism
 from \( \Re^2 \) onto \( \Re^3 \).
 There are many homomorphisms
-from \( \Re^2 \) into \( \Re^3 \), but none is onto all 
-of three-space.
+from \( \Re^2 \) into \( \Re^3 \), but none onto.
 
 The rangespace of a linear map can be of dimension strictly less than 
 the dimension of the domain
-(\nearbyexample{ex:DerivMapRnge}'s derivative transformation on $\polyspace_3$
-has a domain of dimension four but a range of dimension three).
-Thus, under a homomorphism, 
+and so
 linearly independent sets in the domain
-may map to linearly dependent sets in the range
-(for instance, the derivative sends
+may map to linearly dependent sets in the range.
+(\nearbyexample{ex:DerivMapRnge}'s derivative transformation on $\polyspace_3$
+has a domain of dimension~$4$ but a range of dimension~$3$
+and the derivative sends
 $\set{1,x,x^2,x^3}$ to $\set{0,1,2x,3x^2}$).
-That is, under a homomorphism, independence may be lost.
+That is, under a homomorphism independence may be lost.
 In contrast, dependence stays.
 
 \begin{lemma}
@@ -1831,7 +1833,7 @@ $c_i$.
 \end{proof}
 
 When is independence not lost?
-One obvious sufficient condition is when the homomorphism is an isomorphism.
+The obvious sufficient condition is when the homomorphism is an isomorphism.
 This condition is also necessary; 
 see \nearbyexercise{exer:NonSingIffPreservLI}.
 We will finish this subsection comparing homomorphisms with isomorphisms 
@@ -1856,14 +1858,16 @@ This one-to-one homomorphism \( \map{\iota}{\Re^2}{\Re^3} \)
   \colvec{x \\ y \\ 0}
 \end{equation*}
 gives a correspondence between \( \Re^2 \) and the \( xy \)-plane
-inside of \( \Re^3 \).
+subset of \( \Re^3 \).
 \end{example}
 
-The prior observation allows us to adapt some results about isomorphisms.
+% The prior observation allows us to adapt some results about isomorphisms.
 
 \begin{theorem}
 \label{th:OOHomoEquivalence}
 In an \( n \)-dimensional vector space \( V \), these
+are equivalent
+statements about a linear map \( \map{h}{V}{W} \).
 \begin{tfae}
   \item \( h \) is one-to-one
   \item \( h \) has an inverse, from its range to its domain, that is linear
@@ -1874,8 +1878,6 @@ In an \( n \)-dimensional vector space \( V \), these
         \( \sequence{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)} \)
         is a basis for \( \rangespace{h} \)
 \end{tfae}
-are equivalent
-statements about a linear map \( \map{h}{V}{W} \).
 \end{theorem}
 
 \begin{proof}
@@ -1887,8 +1889,8 @@ We will then show that
 \).
 
 For \( \text{(1)} \Longrightarrow \text{(2)} \),
-suppose that the linear map $h$ is one-to-one, and so has an inverse.
-The domain of that inverse is the range of $h$ and so a linear combination
+suppose that the linear map $h$ is one-to-one and so has an inverse.
+The domain of that inverse is the range of $h$ and thus a linear combination
 of  two members of that domain has the form $c_1h(\vec{v}_1)+c_2h(\vec{v}_2)$.
 On that combination, the inverse \( h^{-1} \) gives this.
 \begin{align*}
@@ -1896,11 +1898,12 @@ On that combination, the inverse \( h^{-1} \) gives this.
   &=h^{-1}(h(c_1\vec{v}_1+c_2\vec{v}_2))  \\
   &=\composed{h^{-1}}{h}\,(c_1\vec{v}_1+c_2\vec{v}_2) \\
   &=c_1\vec{v}_1+c_2\vec{v}_2 \\
-  &=c_1\composed{h^{-1}}{h}\,(\vec{v}_1)
-           +c_2\composed{h^{-1}}{h}\,(\vec{v}_2) \\
+%   &=c_1\composed{h^{-1}}{h}\,(\vec{v}_1)
+%            +c_2\composed{h^{-1}}{h}\,(\vec{v}_2) \\
   &=c_1\cdot h^{-1}(h(\vec{v}_1))+c_2\cdot h^{-1}(h(\vec{v}_2))
 \end{align*}
-Thus the inverse of a one-to-one linear map is automatically linear.
+Thus if a linear map is one-to-one, that is, if it has an inverse, then
+the inverse must be linear.
 But this also gives the \( \text{(2)} \Longrightarrow \text{(1)} \) 
 implication, because the inverse itself must be one-to-one.
 
@@ -1930,7 +1933,7 @@ is a basis for \( V \) so that
 \( \sequence{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)} \)
 is a basis for \( \rangespace{h} \).
 Then every
-\( \vec{w}\in\rangespace{h} \) a the unique representation
+\( \vec{w}\in\rangespace{h} \) has the unique representation
 \( \vec{w}=c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n) \).
 Define a map from \( \rangespace{h} \) to $V$ by
 \begin{equation*}
@@ -1941,8 +1944,8 @@ Checking that it is linear and that
 it is the inverse of $h$ are easy.
 \end{proof}
 
-We've now seen that a linear map
-shows how the structure of the domain is like that of the range.
+We have now seen that a linear map
+expresses how the structure of the domain is like that of the range.
 Such a map can be thought to organize the domain space into
 inverse images of points in the range.
 In the special case that the map is one-to-one, each inverse image is a single
