@@ -3,16 +3,15 @@
 %  2001-Jun-11
 \section{Homomorphisms}
 The definition of isomorphism has two conditions.
-In this section we will consider the second one,
-that the map must preserve the algebraic structure of the space.
-We will focus on this condition by studying maps that 
+In this section we will consider the second one.
+We will study maps that 
 are required only to preserve structure;
-that is, maps that are not required to be correspondences. 
+that is, maps that are not also required to be correspondences. 
 
-Experience shows that this kind of map is 
-tremendously useful in the study of vector spaces.
-For one thing, as we shall see in the second subsection below, 
-while isomorphisms describe how spaces are the same,
+Experience shows that these maps are 
+tremendously useful.
+For one thing we shall see in the second subsection below
+that while isomorphisms describe how spaces are the same,
 these maps describe how spaces can be thought of as alike.
 
 
@@ -52,7 +51,6 @@ map \( \map{\pi}{\Re^3}{\Re^2} \)
    \colvec{x \\ y}
 \end{equation*}
 is a homomorphism.
-%The check is familiar from the prior section.
 It preserves addition
 \begin{equation*}
   \pi(\colvec{x_1 \\ y_1 \\ z_1}\!+\!\colvec{x_2 \\ y_2 \\ z_2})
@@ -82,7 +80,7 @@ the zero vector in $\Re^2$.
 
 \begin{example} \label{exam:TwoMapsHomoNotIso}
 Of course, the domain and codomain 
-might be other than spaces of column vectors.
+can be other than spaces of column vectors.
 Both of these are homomorphisms;
 the verifications are straightforward.
 \begin{enumerate}
@@ -92,10 +90,10 @@ the verifications are straightforward.
     \end{equation*}
   \item \( \map{f_2}{M_{\nbyn{2}}}{\Re} \) given by
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
         a  &b  \\
         c  &d
-      \end{pmatrix}
+      \end{mat}
         \mapsto
       a+d
     \end{equation*}
@@ -117,22 +115,22 @@ These two suggest why we use the term `linear map'.
         \mapsunder{g}
       3x+2y-4.5z
     \end{equation*}
-    is linear (i.e., is a homomorphism).
+    is linear, that is, is a homomorphism.
     In contrast, the map \( \map{\hat{g}}{\Re^3}{\Re} \) given by
     \begin{equation*}
       \colvec{x \\ y \\ z}
         \mapsunder{\hat{g}}
       3x+2y-4.5z+1
     \end{equation*}
-    is not;~for instance,
+    is not.
     \begin{equation*}
-      \hat{g}(\colvec{0 \\ 0 \\ 0}+\colvec{1 \\ 0 \\ 0})=4
+      \hat{g}(\colvec[r]{0 \\ 0 \\ 0}+\colvec[r]{1 \\ 0 \\ 0})=4
       \quad\text{while}\quad
-      \hat{g}(\colvec{0 \\ 0 \\ 0})
-      +\hat{g}(\colvec{1 \\ 0 \\ 0})=5
+      \hat{g}(\colvec[r]{0 \\ 0 \\ 0})
+      +\hat{g}(\colvec[r]{1 \\ 0 \\ 0})=5
     \end{equation*}
-    (to show that a map is not linear we need only produce one example of
-    a linear combination that is not preserved).
+    (To show that a map is not linear we need only produce a single example of
+    a linear combination that is not preserved.)
   \item The first of these two maps 
     \( \map{t_1,t_2}{\Re^3}{\Re^2} \)
     is linear while the second is not.
@@ -144,34 +142,38 @@ These two suggest why we use the term `linear map'.
       \colvec{x \\ y \\ z}
         \mapsunder{t_2}
       \colvec{5x-2y \\ xy}
-    \end{equation*} 
-    Finding an example that the second fails to preserve structure is easy.
+    \end{equation*}
+    We can easily find an example of a linear combination that is not 
+    preserved in the second map. 
 \end{enumerate}
-What distinguishes the homomorphisms is that the
-coordinate functions are linear combinations of the arguments.
+The homomorphisms have 
+coordinate functions that are linear combinations of the arguments.
 See also \nearbyexercise{exer:GrpahNotALine}.
 \end{example}
 
-Obviously, any isomorphism is a
-homomorphism\Dash an isomorphism is a 
+Any isomorphism is a
+homomorphism, since an isomorphism is a 
 homomorphism that is also a correspondence.
-So, one way to think of the `homomorphism' idea 
-is that it is a generalization of `isomorphism',
+So one way to think of `homomorphism' 
+is as a generalization of `isomorphism'
 motivated by the observation that many of the properties of
 isomorphisms have only to do with the map's structure preservation property
-and not to do with it being a correspondence.
-As examples, these two results from the prior section
-do not use one-to-one-ness or onto-ness in their proof, 
-and therefore apply to any homomorphism.
+and not to do with being a correspondence.
+The next two results are examples of that thinking;
+the proof for each that was given in the prior section
+does not use one-to-one-ness or onto-ness  
+and therefore applies here, to any homomorphism.
 
 \begin{lemma}       \label{le:HomoSendsZeroToZero}
 A homomorphism sends a zero vector to a zero vector.
 \end{lemma}
 
 \begin{lemma}  \label{le:HomoPreserveLinCombo}
-Each of these is a necessary and sufficient condition for
-\( \map{f}{V}{W} \) to be a homomorphism.
+The following are equivalent statements for any vector space map
+\( \map{f}{V}{W} \).
 \begin{enumerate}
+  \item 
+      $f$ is a homomorphism 
   \item 
       $f(c_1\cdot\vec{v}_1+c_2\cdot\vec{v}_2)
       =c_1\cdot f(\vec{v}_1)+c_2\cdot f(\vec{v}_2)$
@@ -183,17 +185,15 @@ Each of these is a necessary and sufficient condition for
     \( \vec{v}_1,\ldots,\vec{v}_n\in V \)
 \end{enumerate}
 \end{lemma}
-Part~(1) is often used to check that 
-a function is linear.
 
 \begin{example}
-The map \( \map{f}{\Re^2}{\Re^4} \) given by
+The function \( \map{f}{\Re^2}{\Re^4} \) given by
 \begin{equation*}
   \colvec{x \\ y}
     \mapsunder{f}
   \colvec{x/2 \\ 0 \\ x+y \\ 3y}
 \end{equation*}
-satisfies (1) of the prior result
+is linear since it satisfies item~(2).
 \begin{equation*}
   \colvec{r_1(x_1/2)+r_2(x_2/2) \\ 0 \\ 
                  r_1(x_1+y_1)+r_2(x_2+y_2) \\ r_1(3y_1)+r_2(3y_2)}
@@ -202,19 +202,17 @@ satisfies (1) of the prior result
    +
   r_2\colvec{x_2/2 \\ 0 \\ x_2+y_2 \\ 3y_2}
 \end{equation*}
-and so it is a homomorphism.
 \end{example}
 
 However,
 some of the results that we have seen for isomorphisms fail to hold for
 homomorphisms in general.
-Consider the theorem that 
+One example is Lemma~I.\ref{lem:IsoImpliesSameDim}, whose proof shows that
 an isomorphism between spaces gives a correspondence between their
 bases.
 Homomorphisms do not give any such correspondence;
-\nearbyexample{ex:RThreeHomoRTwoFirst} shows that there 
-is no such correspondence, and another example is 
-the zero map between any two nontrivial spaces. 
+\nearbyexample{ex:RThreeHomoRTwoFirst} shows this and another example is
+the zero map between two nontrivial spaces. 
 Instead, for homomorphisms a weaker but still very useful result holds.
 
 \begin{theorem}
@@ -223,22 +221,22 @@ A homomorphism is determined by its action on a basis.
 That is, if
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
 is a basis of a vector space \( V \) and
-\( \vec{w}_1,\dots,\vec{w}_n \) are (perhaps not distinct) elements of
-a vector space \( W \) then
-there exists a homomorphism from \( V \) to \( W \) sending
-\( \vec{\beta}_1 \) to \( \vec{w}_1 \), \ldots, and
-\( \vec{\beta}_n \) to \( \vec{w}_n \), and that homomorphism is unique.
+\( \vec{w}_1,\dots,\vec{w}_n \) are elements of
+a vector space \( W \)  (perhaps not distinct elements) then
+there exists a homomorphism from \( V \) to \( W \) sending each
+\( \vec{\beta}_i \) to \( \vec{w}_i \), and that homomorphism is unique.
 \end{theorem}
 
 \begin{proof}
 We will define the map by 
-associating $\vec{\beta}_1$ with $\vec{w}_1$, etc.,
+associating $\vec{\beta}_i$ with $\vec{w}_i$
 and then extending linearly to all of the domain.
-That is, where 
-\( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \), the map
-\( \map{h}{V}{W} \) is given by 
+That is, given the input vector $\vec{v}$, we find its coordinates with
+respect to the basis
+\( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \) and define
+the associated output vector by using those coordinates
 $h(\vec{v})=c_1\vec{w}_1+\dots+c_n\vec{w}_n$.
-This is well-defined because, with respect to the basis,
+This is a well-defined function because, with respect to the basis,
 the representation of each domain vector \( \vec{v} \) is unique.
 
 This map is a homomorphism since it preserves linear combinations;
@@ -273,24 +271,23 @@ domain and specifying where the map sends those basis vectors.
 For instance, if we specify a map \( \map{h}{\Re^2}{\Re^2} \)
 that acts on the standard basis $\stdbasis_2$ in this way 
 \begin{equation*}
-  h(\colvec{1 \\ 0})=\colvec{-1 \\ 1}
-  \quad\text{and}\quad
-  h(\colvec{0 \\ 1})=\colvec{-4 \\ 4}
+  h(\colvec[r]{1 \\ 0})=\colvec[r]{-1 \\ 1}
+  \qquad
+  h(\colvec[r]{0 \\ 1})=\colvec[r]{-4 \\ 4}
 \end{equation*}
-then the action of $h$ on any other member of the domain is also
-specified.
+then we have also specified the action of $h$ on any other member of the domain.
 For instance,
 the value of $h$ on this argument
 \begin{equation*}
-  h(\colvec{3 \\ -2})=h(3\cdot \colvec{1 \\ 0}-2\cdot \colvec{0 \\ 1})
-                      =3\cdot h(\colvec{1 \\ 0})-2\cdot h(\colvec{0 \\ 1})
-                      =\colvec{5 \\ -5}
+  h(\colvec[r]{3 \\ -2})=h(3\cdot \colvec[r]{1 \\ 0}-2\cdot \colvec[r]{0 \\ 1})
+                      =3\cdot h(\colvec[r]{1 \\ 0})-2\cdot h(\colvec[r]{0 \\ 1})
+                      =\colvec[r]{5 \\ -5}
 \end{equation*}
 is a direct consequence of the value of $h$ on the basis vectors.
-
-Later in this chapter we shall develop a scheme, using matrices,
-that is convienent for computations like this one.
 \end{example}
+
+Later in this chapter we shall develop a convienent scheme for computations 
+like this one, using matrices.
 
 Just as the isomorphisms of a space with itself are useful and interesting, 
 so too are the homomorphisms of a space with itself.
@@ -302,8 +299,8 @@ A linear map from a space into itself \( \map{t}{V}{V} \) is a
 
 \begin{remark}
 In this book we use `linear transformation' only in the case where 
-the codomain equals the domain, but it is widely used in other texts as a
-general synonym for `homomorphism'.
+the codomain equals the domain but it is often used instead as a
+synonym for `homomorphism'.
 \end{remark}
 
 \begin{example}
@@ -321,26 +318,26 @@ The derivative map \( \map{d/dx}{\polyspace_n}{\polyspace_n} \)
     \mapsunder{d/dx}
   a_1+2a_2x+3a_3x^2+\cdots+na_nx^{n-1}
 \end{equation*}
-is a linear transformation, as this result from calculus notes:
+is a linear transformation, as this result from calculus shows:
 \( d(c_1f+c_2g)/dx=c_1\,(df/dx)+c_2\,(dg/dx) \).
 \end{example}
 
 \begin{example} \label{ex:MatTransMapLinear}
-The matrix transpose map 
+The matrix transpose operation
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     c  &d
-  \end{pmatrix}
+  \end{mat}
   \;\mapsto\;
-  \begin{pmatrix}
+  \begin{mat}
     a  &c  \\
     b  &d
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 is a linear transformation of \( \matspace_{\nbyn{2}} \).
-Note that this transformation is one-to-one and onto, and so in fact it is 
-an automorphism.
+(This transformation is one-to-one and onto and so in fact it is 
+an automorphism.)
 \end{example}
 
 We finish this subsection about maps by recalling that
@@ -394,29 +391,31 @@ and any scalar multiple is also linear.
 Hence \( \linmaps{V}{W} \) is a subspace.
 \end{proof}
 
-We started this section by isolating the structure preservation property
-of isomorphisms.
-That is, we defined homomorphisms as a generalization of isomorphisms.
-Some of the properties that we studied for isomorphisms carried over unchanged,
-while others were adapted to this more general setting.
+We started this section by 
+defining homomorphisms as a generalization of isomorphisms,
+isolating the structure preservation property.
+Some of the properties of isomorphismss carried over unchanged
+while others we adapted.
 
-It would be a mistake, though, to view this new notion of 
-homomorphism as derived from, or somehow secondary to,
-that of isomorphism.
-In the rest of this chapter we shall work mostly with homomorphisms,
+However, it would be a mistake to get the sense that 
+the idea of 
+`homomorphism' is somehow secondary to
+that of `isomorphism'.
+In the rest of this chapter we shall work mostly with homomorphisms.
+This is
 partly because any statement made about homomorphisms is automatically true 
-about isomorphisms, but more because, 
-while the isomorphism concept is perhaps more natural, 
+about isomorphisms but more because, 
+while the isomorphism concept is more natural, 
 experience shows that the homomorphism concept 
-is actually more fruitful and more central to further progress.
+is more fruitful and more central to further progress.
 
 \begin{exercises}
   \recommended \item
     Decide if each \( \map{h}{\Re^3}{\Re^2} \) is linear.
     \begin{exparts*}
       \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{x \\ x+y+z}  \)
-      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{0 \\ 0}  \)
-      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{1 \\ 1}  \)
+      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec[r]{0 \\ 0}  \)
+      \partsitem \( h(\colvec{x \\ y \\ z})=\colvec[r]{1 \\ 1}  \)
       \partsitem \( h(\colvec{x \\ y \\ z})=\colvec{2x+y \\ 3y-4z}  \)
     \end{exparts*}
     \begin{answer}
@@ -440,16 +439,16 @@ is actually more fruitful and more central to further progress.
             h(c_1\cdot\colvec{x_1 \\ y_1 \\ z_1}
               +c_2\cdot\colvec{x_2 \\ y_2 \\ z_2})
             &=h( \colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ c_1z_1+c_2z_2} ) \\
-            &=\colvec{0 \\ 0}                                              \\
+            &=\colvec[r]{0 \\ 0}                                      \\
             &=c_1\cdot h(\colvec{x_1 \\ y_1 \\ z_1}) 
                +c_2\cdot h(\colvec{x_2 \\ y_2 \\ z_2})            
           \end{align*}
         \partsitem No.
           An example of an addition that is not respected is this.
           \begin{equation*}
-            h(\colvec{0 \\ 0 \\ 0}+\colvec{0 \\ 0 \\ 0})
-            =\colvec{1 \\ 1}
-            \neq h(\colvec{0 \\ 0 \\ 0})+h(\colvec{0 \\ 0 \\ 0})
+            h(\colvec[r]{0 \\ 0 \\ 0}+\colvec[r]{0 \\ 0 \\ 0})
+            =\colvec[r]{1 \\ 1}
+            \neq h(\colvec[r]{0 \\ 0 \\ 0})+h(\colvec[r]{0 \\ 0 \\ 0})
           \end{equation*}
         \partsitem Yes.
            The verification is straightforward.
@@ -469,10 +468,10 @@ is actually more fruitful and more central to further progress.
   \recommended \item
     Decide if each map \( \map{h}{\matspace_{\nbyn{2}}}{\Re} \) is linear.
     \begin{exparts}
-      \partsitem \( h(\begin{pmatrix} a &b  \\ c &d \end{pmatrix})=a+d  \)
-      \partsitem \( h(\begin{pmatrix} a &b  \\ c &d \end{pmatrix})=ad-bc  \)
-      \partsitem \( h(\begin{pmatrix} a &b \\ c &d \end{pmatrix})=2a+3b+c-d  \)
-      \partsitem \( h(\begin{pmatrix} a &b  \\ c &d \end{pmatrix})=a^2+b^2  \)
+      \partsitem \( h(\begin{mat} a &b  \\ c &d \end{mat})=a+d  \)
+      \partsitem \( h(\begin{mat} a &b  \\ c &d \end{mat})=ad-bc  \)
+      \partsitem \( h(\begin{mat} a &b \\ c &d \end{mat})=2a+3b+c-d  \)
+      \partsitem \( h(\begin{mat} a &b  \\ c &d \end{mat})=a^2+b^2  \)
     \end{exparts}
     \begin{answer} 
       For each, we must either check that linear combinations
@@ -482,90 +481,90 @@ is actually more fruitful and more central to further progress.
         \partsitem Yes.
            The check that it preserves combinations is routine.
            \begin{align*}
-             h(r_1\cdot\begin{pmatrix}
+             h(r_1\cdot\begin{mat}
                  a_1  &b_1  \\
                  c_1  &d_1
-               \end{pmatrix}
-              +r_2\cdot\begin{pmatrix}
+               \end{mat}
+              +r_2\cdot\begin{mat}
                  a_2  &b_2  \\
                  c_2  &d_2
-               \end{pmatrix})
-              &=h(\begin{pmatrix}
+               \end{mat})
+              &=h(\begin{mat}
                  r_1a_1+r_2a_2  &r_1b_1+r_2b_2  \\
                  r_1c_1+r_2c_2  &r_1d_1+r_2d_2
-               \end{pmatrix})                    \\
+               \end{mat})                    \\
               &=(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)    \\
               &=r_1(a_1+d_1)+r_2(a_2+d_2)          \\
-              &=r_1\cdot h(\begin{pmatrix}
+              &=r_1\cdot h(\begin{mat}
                              a_1  &b_1  \\
                              c_1  &d_1
-                            \end{pmatrix})
-                +r_2\cdot h(\begin{pmatrix}
+                            \end{mat})
+                +r_2\cdot h(\begin{mat}
                              a_2  &b_2  \\
                              c_2  &d_2
-                            \end{pmatrix})
+                            \end{mat})
            \end{align*}
         \partsitem No.
           For instance, not preserved is multiplication by the scalar $2$.
           \begin{equation*}
-            h(2\cdot\begin{pmatrix}
+            h(2\cdot\begin{mat}[r]
                 1  &0  \\
                 0  &1  
-              \end{pmatrix})
-            =h(\begin{pmatrix}
+              \end{mat})
+            =h(\begin{mat}[r]
                 2  &0  \\
                 0  &2  
-              \end{pmatrix})
+              \end{mat})
             =4
             \quad\text{while}\quad
-            2\cdot h(\begin{pmatrix}
+            2\cdot h(\begin{mat}[r]
                 1  &0  \\
                 0  &1  
-              \end{pmatrix})
+              \end{mat})
             =2\cdot 1=2
           \end{equation*}
         \partsitem Yes.
            This is the check that it preserves combinations of two members of
            the domain.
            \begin{align*}
-             h(r_1\cdot\begin{pmatrix} a_1 &b_1 \\ c_1 &d_1 \end{pmatrix}
-               +r_2\cdot\begin{pmatrix} a_2 &b_2 \\ c_2 &d_2 \end{pmatrix})
-             &=h(\begin{pmatrix} 
+             h(r_1\cdot\begin{mat} a_1 &b_1 \\ c_1 &d_1 \end{mat}
+               +r_2\cdot\begin{mat} a_2 &b_2 \\ c_2 &d_2 \end{mat})
+             &=h(\begin{mat} 
                    r_1a_1+r_2a_2 &r_1b_1+r_2b_2   \\ 
                    r_1c_1+r_2c_2 &r_1d_1+r_2d_2 
-                 \end{pmatrix})                                 \\
+                 \end{mat})                                 \\
              &=2(r_1a_1+r_2a_2)+3(r_1b_1+r_2b_2)
                     +(r_1c_1+r_2c_2)-(r_1d_1+r_2d_2)              \\
              &=r_1(2a_1+3b_1+c_1-d_1)
                +r_2(2a_2+3b_2+c_2-d_2)              \\
-             &=r_1\cdot h(\begin{pmatrix} a_1 &b_1 \\ c_1 &d_1 \end{pmatrix}
-               +r_2\cdot h(\begin{pmatrix} a_2 &b_2 \\ c_2 &d_2 \end{pmatrix})
+             &=r_1\cdot h(\begin{mat} a_1 &b_1 \\ c_1 &d_1 \end{mat}
+               +r_2\cdot h(\begin{mat} a_2 &b_2 \\ c_2 &d_2 \end{mat})
            \end{align*}
         \partsitem No.
           An example of a combination that is not preserved is this.
           \begin{equation*}
-            h(\begin{pmatrix}
+            h(\begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix}
-            +\begin{pmatrix}
+            \end{mat}
+            +\begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix})
-           =h(\begin{pmatrix}
+            \end{mat})
+           =h(\begin{mat}[r]
               2  &0  \\
               0  &0
-            \end{pmatrix})
+            \end{mat})
            =4
            \quad\text{while}\quad
-            h(\begin{pmatrix}
+            h(\begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix})
-            +h(\begin{pmatrix}
+            \end{mat})
+            +h(\begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix})
+            \end{mat})
             =1+1
             =2
           \end{equation*}
@@ -635,7 +634,7 @@ is actually more fruitful and more central to further progress.
       \end{equation*}
       And projection to the origin is this map.
       \begin{equation*}
-         \colvec{x \\ y \\ z}\mapsto\colvec{0 \\ 0 \\ 0}
+         \colvec{x \\ y \\ z}\mapsto\colvec[r]{0 \\ 0 \\ 0}
       \end{equation*}
       Verification that each is a homomorphism is straightforward.
       (The last one, of course, is the zero transformation on $\Re^3$.)  
@@ -648,15 +647,15 @@ is actually more fruitful and more central to further progress.
       sent the constant polynomial $p(x)=1$.
       The second is not  one-to-one; both of these members of the domain
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &0  
-        \end{pmatrix}
+        \end{mat}
         \quad\text{and}\quad
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  \\
           0  &1  
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       are mapped to the same member of the codomain, $1\in\Re$.
      \end{answer}
@@ -804,7 +803,7 @@ is actually more fruitful and more central to further progress.
     Verify that this map \( \map{h}{\Re^3}{\Re} \)
     \begin{equation*}
       \colvec{x \\ y \\ z}\;\mapsto\;
-      \colvec{x \\ y \\ z}\dotprod\colvec{3 \\ -1 \\ -1}=3x-y-z
+      \colvec{x \\ y \\ z}\dotprod\colvec[r]{3 \\ -1 \\ -1}=3x-y-z
     \end{equation*}
     is linear.
     Generalize.
@@ -968,9 +967,9 @@ is actually more fruitful and more central to further progress.
           sends this linearly independent set in the domain 
           to a linearly dependent image.
           \begin{equation*}
-            \set{\vec{v}_1,\vec{v}_2}=\set{\colvec{1 \\ 0},\colvec{1 \\ 1}}
+            \set{\vec{v}_1,\vec{v}_2}=\set{\colvec[r]{1 \\ 0},\colvec[r]{1 \\ 1}}
             \;\mapsto\;
-            \set{\colvec{1 \\ 1},\colvec{2 \\ 2}}=\set{\vec{w}_1,\vec{w}_2}
+            \set{\colvec[r]{1 \\ 1},\colvec[r]{2 \\ 2}}=\set{\vec{w}_1,\vec{w}_2}
           \end{equation*}
         \partsitem Not necessarily.
           An example is the projection map 
@@ -981,8 +980,8 @@ is actually more fruitful and more central to further progress.
           and this set that does not span the domain but 
           maps to a set that does span the codomain.
           \begin{equation*}
-            \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 1 \\ 0}}
-            \mapsunder{\pi}\set{\colvec{1 \\ 0},\colvec{0 \\ 1}}
+            \set{\colvec[r]{1 \\ 0 \\ 0},\colvec[r]{0 \\ 1 \\ 0}}
+            \mapsunder{\pi}\set{\colvec[r]{1 \\ 0},\colvec[r]{0 \\ 1}}
           \end{equation*}
         \partsitem Not necessarily.
           For instance, the injection map $\map{\iota}{\Re^2}{\Re^3}$ sends
@@ -1003,46 +1002,46 @@ is actually more fruitful and more central to further progress.
       is the entry $m_{j,i}$ from row~$j$ and column~$i$ of $M$.
       Now, the check is routine. 
       \begin{align*}
-        \trans{[r\cdot\begin{pmatrix}
-                    &\vdots          \\
+        \trans{[r\cdot\begin{mat}
+                \    &\vdots          \\
              \cdots &a_{i,j} &\cdots \\
                     &\vdots
-           \end{pmatrix}
-         +s\cdot\begin{pmatrix}
-                    &\vdots          \\
+           \end{mat}
+         +s\cdot\begin{mat}
+                \    &\vdots          \\
              \cdots &b_{i,j} &\cdots \\
                     &\vdots
-           \end{pmatrix}]}
-        &=\trans{\begin{pmatrix}
-                         &\vdots                    \\
+           \end{mat}]}
+        &=\trans{\begin{mat}
+                 \       &\vdots                    \\
                   \cdots &ra_{i,j}+sb_{i,j} &\cdots \\
                          &\vdots
-                \end{pmatrix}}                               \\
-        &=\begin{pmatrix}
-                   &\vdots                    \\
+                \end{mat}}                               \\
+        &=\begin{mat}
+              \     &\vdots                    \\
             \cdots &ra_{j,i}+sb_{j,i} &\cdots \\
                    &\vdots
-          \end{pmatrix}                               \\
-        &=r\cdot\begin{pmatrix}
-                   &\vdots          \\
+          \end{mat}                               \\
+        &=r\cdot\begin{mat}
+             \     &\vdots          \\
             \cdots &a_{j,i} &\cdots \\
                    &\vdots
-          \end{pmatrix}
-         +s\cdot\begin{pmatrix}
-                   &\vdots          \\
+          \end{mat}
+         +s\cdot\begin{mat}
+             \      &\vdots          \\
             \cdots &b_{j,i} &\cdots \\
                    &\vdots
-          \end{pmatrix}                                \\
-        &=r\cdot\trans{\begin{pmatrix}
-                   &\vdots          \\
+          \end{mat}                                \\
+        &=r\cdot\trans{\begin{mat}
+             \      &\vdots          \\
             \cdots &a_{j,i} &\cdots \\
                    &\vdots
-          \end{pmatrix} }
-         +s\cdot\trans{\begin{pmatrix}
-                   &\vdots          \\
+          \end{mat} }
+         +s\cdot\trans{\begin{mat}
+              \     &\vdots          \\
             \cdots &b_{j,i} &\cdots \\
                    &\vdots
-          \end{pmatrix} }
+          \end{mat} }
       \end{align*}
       The domain is \( \matspace_{\nbym{m}{n}} \) 
       while the codomain is \( \matspace_{\nbym{n}{m}} \).  
@@ -1327,18 +1326,18 @@ subject to fewer restrictions than isomorphisms.
 We will examine what can happen with a homomorphism
 that is prevented by the extra restrictions satisfied by an isomorphism. 
 
-We first consider the effect of dropping the onto requirement, 
-of not requiring as part of the definition that a homomorphism be
+We first consider the effect of 
+not requiring that a homomorphism be
 onto its codomain.
-For instance, the injection map \( \map{\iota}{\Re^2}{\Re^3} \)
+Of course, 
+each homomorphism is onto some set, namely its range.
+For example, the injection map \( \map{\iota}{\Re^2}{\Re^3} \)
 \begin{equation*}
   \colvec{x \\ y} \mapsto \colvec{x \\ y \\ 0}
 \end{equation*}
-is not an isomorphism because it is not onto.
-Of course, being a function,
-a homomorphism is onto some set, namely its range;
-the map $\iota$ is onto the $xy$-plane subset of \( \Re^3\).
-% The next result says that for any  range set is a vector space.
+is a homomorphism but is not
+an isomorphism because it is not onto.
+But, $\iota$ is onto the $xy$-plane subset of \( \Re^3\).
 
 \begin{lemma}   \label{le:RangeIsSubSp}
 Under a homomorphism, the image of
@@ -1346,8 +1345,6 @@ any subspace of the domain is a subspace of the codomain.
 In particular, the image of the entire space,
 the range of the homomorphism, is a subspace of the codomain.
 \end{lemma}
-% add exercise that if h:V->W is a map then we can define +, * on W to make
-% h a homo?
 
 \begin{proof}
 Let $\map{h}{V}{W}$ be linear and let $S$ be a subspace of the domain 
@@ -1389,25 +1386,25 @@ is linear.
 The rangespace 
 \( \rangespace{d/dx} \) is the set of quadratic polynomials
 \( \set{r+sx+tx^2\suchthat r,s,t\in\Re } \).
-Thus, the rank of this map is three.
+Thus, the rank of this map is~\( 3 \).
 \end{example}
 
 \begin{example}  \label{ex:MatToPolyRnge}
 With this homomorphism \( \map{h}{M_{\nbyn{2}}}{\polyspace_3} \)
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     c  &d
-  \end{pmatrix}
+  \end{mat}
   \mapsto
-  (a+b+2d)+0x+cx^2+cx^3
+  (a+b+2d)+cx^2+cx^3
 \end{equation*}
 an image vector in the range
 can have any constant term, must have an $x$ coefficient of zero,
 and must have the same coefficient of $x^2$ as of $x^3$.
 That is, the rangespace is
-\( \rangespace{h}=\set{r+0x+sx^2+sx^3\suchthat r,s\in\Re} \)
-and so the rank is two.
+\( \rangespace{h}=\set{r+sx^2+sx^3\suchthat r,s\in\Re} \)
+and so the rank is~\( 2 \).
 \end{example}
 
 The prior result shows that, 
@@ -1431,8 +1428,7 @@ the set of elements of $V$ that are mapped to \( \vec{w}\in W \)
 is the  \definend{inverse image\/}\index{inverse image}%
 \index{function! inverse image}   
 $h^{-1}(\vec{w})=\set{\vec{v}\in V\suchthat h(\vec{v})=\vec{w}}$.
-Above, the three sets of many elements on the left
-are inverse images.
+Above, the left bean shows three inverse image sets.
 
 \begin{example}
 Consider the projection\index{projection}
@@ -1443,12 +1439,15 @@ Consider the projection\index{projection}
    \colvec{x \\ y}
 \end{equation*}
 which is a homomorphism that is many-to-one.
-In this instance,
-an inverse image set is a vertical line of vectors
+An inverse image set is a vertical line of vectors
 in the domain.
 \begin{center}
   \includegraphics{ch3.11}
 \end{center}
+One example is this.
+\begin{equation*}
+  \pi^{-1}(\colvec[r]{1 \\ 3})=\set{\colvec[r]{1 \\ 3 \\ z}\suchthat z\in\Re}
+\end{equation*}
 \end{example}
 
 \begin{example} \label{ex:RTwoHomoREasyOneMap}
@@ -1458,8 +1457,8 @@ This homomorphism $\map{h}{\Re^2}{\Re^1}$
    \mapsunder{h}
   x+y
 \end{equation*}
-is also many-to-one;
-for a fixed $w\in\Re^1$, 
+is also many-to-one.
+For a fixed $w\in\Re^1$, 
 the inverse image $h^{-1}(w)$
 \begin{center}
   \includegraphics{ch3.12}
@@ -1467,53 +1466,46 @@ the inverse image $h^{-1}(w)$
 is the set of plane vectors whose components add to $w$.
 \end{example}
 
-The above examples have only to do with the
-fact that we are considering functions,
-specifically, many-to-one functions.
-They show the inverse images 
-as sets of vectors that are 
-related to the image vector $\vec{w}$.
-But these are more than just arbitrary functions, they are
-homomorphisms; what do the two preservation
-conditions say about the relationships?
+% The above examples have only to do with the
+% fact that we are considering functions,
+% specifically, many-to-one functions.
+% They show the inverse images 
+% as sets of vectors that are 
+% related to the image vector $\vec{w}$.
+% But these are more than just arbitrary functions, they are
+% homomorphisms; what do the two preservation
+% conditions say about the relationships?
 
 In generalizing from isomorphisms to homomorphisms by 
-dropping the one-to-one condition,
-we lose the property that we've stated intuitively as: the 
-domain is ``the same as'' the range.
-That is, we lose that the domain
+dropping the one-to-one condition
+we lose the property that we've stated intuitively as that the 
+domain is ``the same'' as the range.
+We lose that the domain
 corresponds perfectly to the range
-in a one-vector-by-one-vector way.
-%Now, domain no longer corresponds to the codomain; 
-%in the first example there is no
-%single vector in $\Re^3$ that matches with the vector shown in
-%$\Re^2$,
-%and in the second example there is no vector in the plane that
-%corresponds to $a$.
-What we shall keep, as the examples below illustrate,
-is that a homomorphism 
-describes a way in which
-the domain is ``like'', or ``analgous to'', the range.
+in a one-vector-to-one-vector way.
+What we shall retain, as the examples below illustrate,
+is that a homomorphism describes how
+the domain is ``like'' or ``analgous to'' the range.
 
 \begin{example}    \label{ex:RThreeHomoRTwo} %\label{exPicProj}
-We think of $\Re^3$ as being like $\Re^2$, except that vectors have an extra
+We think of $\Re^3$ as like $\Re^2$ except that vectors have an extra
 component. 
 That is, we think of the vector with components $x$, $y$, and~$z$ 
-as like the vector with components $x$ and~$y$.
+as somehow like the vector with components $x$ and~$y$.
 In defining the projection map $\pi$, we make precise which
 members of the domain we are thinking of as related to which members
 of the codomain.
 
-Understanding in what way the
+To understanding how the
 preservation conditions in the definition of homomorphism
 show that the domain elements are like the codomain elements 
-is easiest if we draw $\Re^2$ as the $xy$-plane inside of $\Re^3$.
+we start by drawing $\Re^2$ as the $xy$-plane inside of $\Re^3$.
 (Of course, $\Re^2$ is a set of two-tall vectors while the
 $xy$-plane is a set of three-tall vectors with a third component of
-zero, but there is an obvious correspondence.)
-Then,
+zero but there is an obvious correspondence.)
+Then
 $\pi(\vec{v})$ is the ``shadow'' of $\vec{v}$ in the plane and
-the preservation of addition property says that
+the preservation of addition property says this.
 %vectors in \( \Re^3 \) act like their shadows in the plane in that
 \begin{center}  \small
   \begin{tabular}{@{}c@{}c@{}c@{}c@{}c@{}}
@@ -1531,18 +1523,18 @@ the preservation of addition property says that
 \noindent Briefly, the shadow of a sum 
 $\pi(\vec{v}_1+\vec{v}_2)$ equals the 
 sum of the shadows $\pi(\vec{v}_1)+\pi(\vec{v}_2)$.
-(Preservation of scalar multiplication has a similar interpretation.)
+Preservation of scalar multiplication is similar.
 
 Redrawing by
 separating the two spaces, moving the codomain $\Re^2$ to the right,
-gives an uglier picture but one that is more faithful to the
+gives a picture that is uglier but is more faithful to the
 ``bean'' sketch.
 \begin{center}  \small
   \includegraphics{ch3.4}
 \end{center}
-Again in this drawing, the vectors that map to $\vec{w}_1$ lie in the domain
+Again, in the domain the vectors that map to $\vec{w}_1$ lie
 in a vertical line
-(only one such vector is shown, in gray).
+(one such vector is shown, in gray).
 Call any such member of this inverse image %$\pi^{-1}(\vec{w}_1)$ 
 a ``$\vec{w}_1$~vector''.
 Similarly, there is a vertical line of ``$\vec{w}_2$~vectors'' and
@@ -1551,20 +1543,20 @@ Now, $\pi$ has the property that
 if $\pi(\vec{v}_1)=\vec{w}_1$ and $\pi(\vec{v}_2)=\vec{w}_2$ 
 then $\pi(\vec{v}_1+\vec{v}_2)=\pi(\vec{v}_1)+\pi(\vec{v}_2)
   =\vec{w}_1+\vec{w}_2$.
-This says that the vector classes add, in the sense that 
-any \( \vec{w}_1 \)~vector plus any
+The vector classes add:~any 
+\( \vec{w}_1 \)~vector plus any
 \( \vec{w}_2 \)~vector 
-equals a \( \vec{w}_1+\vec{w}_2 \)~vector,
-(A similar statement holds about the classes under scalar multiplication.)
+equals a \( \vec{w}_1+\vec{w}_2 \)~vector.
+Scalar multiplication is similar.
 
-Thus, although the two spaces $\Re^3$ and $\Re^2$ are not isomorphic,
+So although $\Re^3$ and $\Re^2$ are not isomorphic
 $\pi$ describes a way in which they are alike:~vectors 
 in $\Re^3$ add as do the associated vectors in $\Re^2$\Dash vectors 
 add as their shadows add. 
 \end{example}
 
 \begin{example}   \label{ex:RTwoHomoRHardOne}
-A homomorphism can be used to express
+A homomorphism can express
 an analogy between spaces that is more subtle than the prior one.
 For the map 
 \begin{equation*}
@@ -1579,8 +1571,8 @@ add to $w_1$,
 that is, the inverse image $h^{-1}(w_1)$ is the set of vectors 
 with endpoint on the diagonal line $x+y=w_1$.
 Call these the ``$w_1$ vectors''.
-Similarly, we have the ``$w_2$ vectors'' and the  ``$w_1+w_2$ vectors''.  
-Then the addition preservation property says that
+Similarly we have ``$w_2$ vectors'' and ``$w_1+w_2$ vectors''.  
+The addition preservation property says this
 \begin{center}  \small
   \begin{tabular}{@{}ccccc@{}}
     \includegraphics{ch3.6}
@@ -1590,7 +1582,7 @@ Then the addition preservation property says that
     &{\small plus}
     &{\small a ``$w_2$ vector''}
     &{\small equals}
-    &{\small a ``$w_1+w_2$ vector''.}
+    &{\small a ``$w_1+w_2$ vector''}
   \end{tabular}
 \end{center}
 Restated, if a
@@ -1598,8 +1590,8 @@ $w_1$~vector is added to a $w_2$~vector then the result
 is mapped by $h$ to a $w_1+w_2$ vector.
 Briefly, the image of a sum is the sum of the images.
 Even more briefly, \( h(\vec{v}_1+\vec{v}_2)=h(\vec{v}_1)+h(\vec{v}_2) \).
-(The preservation of scalar multiplication condition has a
-similar restatement.)
+% (The preservation of scalar multiplication condition has a
+% similar restatement.)
 \end{example}
 
 \begin{example}   \label{ex:PicRThreeToRTwo}
@@ -1626,16 +1618,15 @@ the domain's vectors fall into classes that act like
 the range's vectors is a good way to view homomorphisms.
 
 Another reason that we won't treat all of the homomorphisms that
-we see as above is that many vector spaces are hard to draw
-(e.g., a space of polynomials).
-However, there is nothing bad about gaining insights from those spaces
-that we are able to draw, 
-especially when those insights extend to all vector spaces.
+we see as above is that many vector spaces are hard to draw,
+e.g., a space of polynomials.
+But there is nothing bad about leveraging those spaces
+that we can draw.
 We derive two such insights from the three examples
 \ref{ex:RThreeHomoRTwo}, \ref{ex:RTwoHomoRHardOne}, 
 and~\ref{ex:PicRThreeToRTwo}.
 
-First, in all three examples, the inverse images are lines or planes, that is, 
+The first insight is that in all three examples the inverse images are
 linear surfaces.
 In particular, the inverse image of the range's zero vector is a line or plane
 through the origin\Dash a subspace of the domain.
@@ -1649,27 +1640,29 @@ is a subspace of the domain.
 
 \begin{proof}
 Let $\map{h}{V}{W}$ be a homomorphism
-and let $S$ be a subspace of the rangespace $h$.
-Consider $h^{-1}(S)=\set{\vec{v}\in V\suchthat h(\vec{v})\in S}$, 
-the inverse image of the set $S$.
+and let $S$ be a subspace of the rangespace of $h$.
+Consider the inverse image
+$h^{-1}(S)=\set{\vec{v}\in V\suchthat h(\vec{v})\in S}$.
 It is nonempty because it contains $\zero_V$, since
-\( h(\zero_V)=\zero_W \), which is an element $S$, as $S$ is a subspace.
-To show that $h^{-1}(S)$ is closed under linear combinations, let
-\( \vec{v}_1 \) and \( \vec{v}_2 \) be elements,
-so that $h(\vec{v}_1)$ and $h(\vec{v}_2)$ are elements of $S$,
-and then $c_1\vec{v}_1+c_2\vec{v}_2$
-is also in the inverse image because
+\( h(\zero_V)=\zero_W \) and \( \zero_W \) is an element $S$, 
+as $S$ is a subspace.
+To show that $h^{-1}(S)$ is closed under linear combinations let
+\( \vec{v}_1 \) and \( \vec{v}_2 \) be two of its elements.
+Then
+$h(\vec{v}_1)$ and $h(\vec{v}_2)$ are elements of $S$.
+Hence $c_1\vec{v}_1+c_2\vec{v}_2$
+is also an element of the inverse image as
 $h(c_1\vec{v}_1+c_2\vec{v}_2)
   =c_1h(\vec{v}_1)+c_2h(\vec{v}_2)$
-is a member of the subspace $S$. 
+is a member of $S$. 
 \end{proof}
 
 \begin{definition}
 The \definend{nullspace}\index{homomorphism!nullspace}\index{nullspace}
 or \definend{kernel}\index{kernel} of a linear map
-\( \map{h}{V}{W} \) is the inverse image of $0_W$
+\( \map{h}{V}{W} \) is the inverse image of $0_W$.
 \begin{equation*}
-  \nullspace{h}=h^{-1}(\zero_W)=\set{\vec{v}\in V\suchthat h(\vec{v})=\zero_W}.
+  \nullspace{h}=h^{-1}(\zero_W)=\set{\vec{v}\in V\suchthat h(\vec{v})=\zero_W}
 \end{equation*}
 The dimension of the nullspace is the map's
 {\em nullity}\index{nullity}\index{homomorphism!nullity}.
@@ -1681,17 +1674,18 @@ The dimension of the nullspace is the map's
 
 \begin{example}
 The map from \nearbyexample{ex:DerivMapRnge} has this nullspace
-\( \nullspace{d/dx}=\set{a_0+0x+0x^2+0x^3\suchthat a_0\in\Re} \).
+\( \nullspace{d/dx}=\set{a_0+0x+0x^2+0x^3\suchthat a_0\in\Re} \)
+so its nullity is $1$.
 \end{example}
 
 \begin{example}
 The map from \nearbyexample{ex:MatToPolyRnge}
 has this nullspace.
 \begin{equation*}
-   \nullspace{h}=\set{\begin{pmatrix}
+   \nullspace{h}=\set{\begin{mat}
                          a  &b          \\
                          0  &-(a+b)/2
-                      \end{pmatrix}\suchthat a,b\in\Re}
+                      \end{mat}\suchthat a,b\in\Re}
 \end{equation*}
 \end{example}
 
@@ -2012,18 +2006,18 @@ point and the map is an isomorphism between the domain and the range.
         \end{equation*}
       \partsitem \( \map{h}{\matspace_{\nbyn{2}}}{\Re} \) given by
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}
             a  &b  \\
             c  &d
-          \end{pmatrix}
+          \end{mat}
           \mapsto a+d
         \end{equation*}
       \partsitem \( \map{h}{\matspace_{\nbyn{2}}}{\polyspace_2} \) given by
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}
             a  &b  \\
             c  &d
-          \end{pmatrix}
+          \end{mat}
           \mapsto a+b+c+dx^2
         \end{equation*}
       \partsitem the zero map \( \map{Z}{\Re^3}{\Re^4} \)
@@ -2047,14 +2041,14 @@ point and the map is an isomorphism between the domain and the range.
         \partsitem The nullspace is this.
           \begin{equation*}
             \nullspace{h}
-             =\set{\begin{pmatrix}
+             =\set{\begin{mat}
                      a  &b  \\
                      c  &d
-                   \end{pmatrix} \suchthat a+d=0}
-             =\set{\begin{pmatrix}
+                   \end{mat} \suchthat a+d=0}
+             =\set{\begin{mat}
                      -d  &b  \\
                       c  &d
-                   \end{pmatrix} \suchthat b,c,d\in\Re }
+                   \end{mat} \suchthat b,c,d\in\Re }
           \end{equation*}
           The rangespace
           \begin{equation*}
@@ -2066,15 +2060,15 @@ point and the map is an isomorphism between the domain and the range.
           Thus, the nullity is three and the rank is one.
         \partsitem The nullspace is
           \begin{equation*}
-            \nullspace{h}=\set{\begin{pmatrix}
+            \nullspace{h}=\set{\begin{mat}
                                  a     &b  \\
                                  c     &d
-                               \end{pmatrix} \suchthat 
+                               \end{mat} \suchthat 
                                  \text{$a+b+c=0$ and $d=0$}}
-                         =\set{\begin{pmatrix}
+                         =\set{\begin{mat}
                                  -b-c  &b  \\
                                   c    &0
-                               \end{pmatrix} \suchthat b,c\in\Re }
+                               \end{mat} \suchthat b,c\in\Re }
           \end{equation*}
           while the rangespace is 
           $\rangespace{h}=\set{r+sx^2\suchthat r,s\in\Re}$.
@@ -2329,19 +2323,19 @@ point and the map is an isomorphism between the domain and the range.
       \end{equation*}
       Linear independence is preserved for this set
       \begin{equation*}
-        \set{\colvec{1 \\ 0 \\ 0}}\mapsto\set{\colvec{1 \\ 0}}
+        \set{\colvec[r]{1 \\ 0 \\ 0}}\mapsto\set{\colvec[r]{1 \\ 0}}
       \end{equation*}
       and (in a somewhat more tricky example) also for this set 
       \begin{equation*}
-        \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 1 \\ 0}}
-        \mapsto\set{\colvec{1 \\ 0}}
+        \set{\colvec[r]{1 \\ 0 \\ 0},\colvec[r]{0 \\ 1 \\ 0}}
+        \mapsto\set{\colvec[r]{1 \\ 0}}
       \end{equation*}
       (recall that in a set, repeated elements do not appear twice).
       However, there are sets whose independence is not preserved under this
       map 
       \begin{equation*}
-        \set{\colvec{1 \\ 0 \\ 0},\colvec{0 \\ 2 \\ 0}}
-        \mapsto\set{\colvec{1 \\ 0},\colvec{2 \\ 0}}
+        \set{\colvec[r]{1 \\ 0 \\ 0},\colvec[r]{0 \\ 2 \\ 0}}
+        \mapsto\set{\colvec[r]{1 \\ 0},\colvec[r]{2 \\ 0}}
       \end{equation*}
       and so not all sets have independence preserved. 
     \end{answer}
