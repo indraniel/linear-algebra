@@ -4,24 +4,26 @@
 \section{Computing Linear Maps}
 The prior section shows that
 a linear map is determined by its action on a basis.
-In fact, the equation
+The equation
 \begin{equation*}
   h(\vec{v})
   =h(c_1\cdot\vec{\beta}_1+\dots+c_n\cdot\vec{\beta}_n)
   =c_1\cdot h(\vec{\beta}_1)+\dots +c_n\cdot h(\vec{\beta}_n)
 \tag*{}\end{equation*}
-shows that, if we know the value of the map on the vectors in a basis, then we
-can compute the value of the map on any vector $\vec{v}$ at all.
-We just need to  
-find the $c$'s to express $\vec{v}$ with respect to the basis.
+describes how, 
+if we know the value of the map on the vectors in a basis, then we
+can extend linearly to 
+compute the value of the map on any vector $\vec{v}$ at all.
+% We just need to  
+% find the $c$'s to express $\vec{v}$ with respect to the basis.
 
-This section gives the scheme
-that computes, from the representation of a vector in the domain 
+This section gives a convenient scheme
+to use the representations of 
+\( h(\vec{\beta}_1) \), \ldots, \( h(\vec{\beta}_n) \)
+to compute, from the representation of a vector in the domain 
 $\rep{\vec{v}}{B}$,
 the representation of that vector's image in the codomain 
-$\rep{h(\vec{v})}{D}$,
-using the representations of 
-\( h(\vec{\beta}_1) \), \ldots, \( h(\vec{\beta}_n) \).
+$\rep{h(\vec{v})}{D}$.
 
 
 
@@ -39,108 +41,114 @@ using the representations of
 \subsection{Representing Linear Maps with Matrices}
 \index{homomorphism!matrix representing|(}
 \begin{example}  \label{ex:TypLinMapRepByMat}
-Consider a map $h$ with domain $\Re^2$ and codomain $\Re^3$, fixing 
+For the spaces $\Re^2$ and $\Re^3$ fix 
 \begin{equation*}
    B=\sequence{
-               \colvec{2 \\ 0},
-               \colvec{1 \\ 4}}
+               \colvec[r]{2 \\ 0},
+               \colvec[r]{1 \\ 4}}
    \quad\text{and}\quad
    D=\sequence{
-               \colvec{1 \\ 0 \\ 0},
-               \colvec{0 \\ -2 \\ 0},
-               \colvec{1 \\ 0 \\ 1}}
+               \colvec[r]{1 \\ 0 \\ 0},
+               \colvec[r]{0 \\ -2 \\ 0},
+               \colvec[r]{1 \\ 0 \\ 1}}
 \end{equation*}
-as the bases for these spaces, that is determined by this action
-on the vectors in the domain's basis.
+as the bases.
+Consider the map $\map{h}{\Re^2}{\Re^3}$
+with this action.
 \begin{equation*}
-  \colvec{2 \\ 0}
+  \colvec[r]{2 \\ 0}
     \mapsunder{h}
-  \colvec{1 \\ 1 \\ 1}
+  \colvec[r]{1 \\ 1 \\ 1}
   \qquad
-  \colvec{1 \\ 4}
+  \colvec[r]{1 \\ 4}
     \mapsunder{h}
-  \colvec{1 \\ 2 \\ 0}
+  \colvec[r]{1 \\ 2 \\ 0}
 \end{equation*}
 To compute the action of this map on any vector at all from the domain,
-we first express $h(\vec{\beta}_1)$ and $h(\vec{\beta}_2)$
-with respect to the codomain's basis:
+we first express $h(\vec{\beta}_1)$
 \begin{equation*}
-  \colvec{1 \\ 1 \\ 1}=
-         0\colvec{1 \\ 0 \\ 0}
-         -\frac{1}{2}\colvec{0 \\ -2 \\ 0}
-         +1\colvec{1 \\ 0 \\ 1}
+  \colvec[r]{1 \\ 1 \\ 1}=
+         0\colvec[r]{1 \\ 0 \\ 0}
+         -\frac{1}{2}\colvec[r]{0 \\ -2 \\ 0}
+         +1\colvec[r]{1 \\ 0 \\ 1}
   \quad\text{so}\quad
-   \rep{ h(\vec{\beta}_1) }{D}=\colvec{0 \\ -1/2 \\ 1}_D           
+   \rep{ h(\vec{\beta}_1) }{D}=\colvec[r]{0 \\ -1/2 \\ 1}_D           
 \end{equation*}
-and
+and $h(\vec{\beta}_2)$
 \begin{equation*}
-  \colvec{1 \\ 2 \\ 0}=
-        1\colvec{1 \\ 0 \\ 0}
-        -1\colvec{0 \\ -2 \\ 0}
-        +0\colvec{1 \\ 0 \\ 1}
+  \colvec[r]{1 \\ 2 \\ 0}=
+        1\colvec[r]{1 \\ 0 \\ 0}
+        -1\colvec[r]{0 \\ -2 \\ 0}
+        +0\colvec[r]{1 \\ 0 \\ 1}
   \quad\text{so}\quad
-  \rep{ h(\vec{\beta}_2) }{D}=\colvec{1 \\ -1 \\ 0}_D
+  \rep{ h(\vec{\beta}_2) }{D}=\colvec[r]{1 \\ -1 \\ 0}_D
 \end{equation*}
-(these are easy to check).
-Then, as described in the preamble, for any member $\vec{v}$ of the domain,
-we can express the image $h(\vec{v})$ in terms of the $h(\vec{\beta})$'s.
+with respect to the codomain's basis.
+Then for any member $\vec{v}$ of the domain
+we can compute $h(\vec{v})$ using the $h(\vec{\beta})$'s.
 \begin{align*}
   h(\vec{v})
-  &=h(c_1\cdot \colvec{2 \\ 0}+c_2\cdot \colvec{1 \\ 4})   \\
-  &=c_1\cdot h(\colvec{2 \\ 0})+c_2\cdot h(\colvec{1 \\ 4}) \\
+  &=h(c_1\cdot \colvec[r]{2 \\ 0}+c_2\cdot \colvec[r]{1 \\ 4})   \\
+  &=c_1\cdot h(\colvec[r]{2 \\ 0})+c_2\cdot h(\colvec[r]{1 \\ 4}) \\
   &=c_1\cdot (
-        0\colvec{1 \\ 0 \\ 0}
-        \!-\frac{1}{2}\colvec{0 \\ -2 \\ 0}
-        \!+1\colvec{1 \\ 0 \\ 1}\!  )
+        0\colvec[r]{1 \\ 0 \\ 0}
+        \!-\frac{1}{2}\colvec[r]{0 \\ -2 \\ 0}
+        \!+1\colvec[r]{1 \\ 0 \\ 1}\!  )
   +c_2\cdot (
-        1\colvec{1 \\ 0 \\ 0}
-        \!-1\colvec{0 \\ -2 \\ 0}
-        \!+0\colvec{1 \\ 0 \\ 1}\!  )      \\
-  &=(0c_1+1c_2)\cdot \colvec{1 \\ 0 \\ 0}
-   +(-\frac{1}{2}c_1-1c_2)\cdot \colvec{0 \\ -2 \\ 0}
-   +(1c_1+0c_2)\cdot \colvec{1 \\ 0 \\ 1}
+        1\colvec[r]{1 \\ 0 \\ 0}
+        \!-1\colvec[r]{0 \\ -2 \\ 0}
+        \!+0\colvec[r]{1 \\ 0 \\ 1}\!  )      \\
+  &=(0c_1+1c_2)\cdot \colvec[r]{1 \\ 0 \\ 0}
+   +(-\frac{1}{2}c_1-1c_2)\cdot \colvec[r]{0 \\ -2 \\ 0}
+   +(1c_1+0c_2)\cdot \colvec[r]{1 \\ 0 \\ 1}
 \end{align*}
 Thus,
 \begin{center}
-  with $\rep{\vec{v}}{B}=\colvec{c_1 \\ c_2}$
+  if $\rep{\vec{v}}{B}=\colvec{c_1 \\ c_2}$
   then $\rep{\,h(\vec{v})\,}{D}
   =\colvec{0c_1+1c_2 \\ -(1/2)c_1-1c_2 \\ 1c_1+0c_2}$.
 \end{center}
 For instance, 
 \begin{center}
-  with $\rep{\colvec{4 \\ 8}}{B}=\colvec{1 \\ 2}_B$
-  then 
-  $\rep{\,h(\colvec{4 \\ 8})\,}{D}
-   =\colvec{2 \\ -5/2 \\ 1}$.
+  since $\rep{\colvec[r]{4 \\ 8}}{B}=\colvec[r]{1 \\ 2}_B$
+  we have
+  $\rep{\,h(\colvec[r]{4 \\ 8})\,}{D}
+   =\colvec[r]{2 \\ -5/2 \\ 1}$.
 \end{center}
 \end{example}
 
-We will express computations like the one above with a matrix notation.
+We express computations like the one above with a matrix notation.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       0             &1  \\
       -1/2          &-1  \\
       1             &0
-    \end{pmatrix}_{B,D}
+    \end{mat}_{B,D}
   \colvec{c_1 \\ c_2}_B
   =
   \colvec{0c_1+1c_2 \\ (-1/2)c_1-1c_2 \\ 1c_1+0c_2}_D
 \end{equation*}
 In the middle is the argument $\vec{v}$ to the map, 
 represented with respect to the domain's basis $B$
-by a column vector with components $c_1$ and $c_2$.
-On the right is the value $h(\vec{v})$ of the map on that argument,
-represented with respect to the codomain's basis $D$
-by a column vector with components $0c_1+1c_2$, etc.
+by the column vector with components $c_1$ and $c_2$.
+On the right is the value of the map on that argument $h(\vec{v})$,
+represented with respect to the codomain's basis $D$.
 The matrix on the left is the new thing.
-It consists of the coefficients from the vector on the right,
+We will use it to represent the map and we will think of 
+the above equation as representing an application of the map to the matrix.
+
+That matrix consists of the coefficients from the vector on the right,
 $0$ and $1$ from the first row, $-1/2$ and $-1$ from the
 second row, and $1$ and $0$ from the third row.
-
-This notation simply breaks the parts from the right, 
-the coefficients and the $c$'s, out separately on the left, into a vector that
-represents the map's argument and a matrix that we will take to
-represent the map itself.
+Notice that it is made by adjoining the vectors 
+representing the $h(\vec{\beta})$'s. 
+\begin{equation*}
+  \left(\begin{array}{c|c}
+     \vdots                         &\vdots    \\
+     \rep{\,h(\vec{\beta}_1)\,}{D}  &\rep{\,h(\vec{\beta}_2)\,}{D}  \\
+     \vdots                         &\vdots
+  \end{array}\right)
+\end{equation*}
 
 \begin{definition} \label{def:MatRepMap}
 Suppose that \( V \) and \( W \) are vector spaces of dimensions \( n \) and
@@ -151,7 +159,7 @@ If
   \rep{h( \vec{\beta}_1 )}{D}
   =
   \colvec{h_{1,1} \\ h_{2,1} \\ \vdots \\ h_{m,1}}_D
-  \;\ldots\;
+  \;\;\ldots\;\;
   \rep{h( \vec{\beta}_n )}{D}
   =
   \colvec{h_{1,n} \\ h_{2,n} \\ \vdots \\ h_{m,n}}_D
@@ -165,20 +173,26 @@ is the \definend{matrix representation of \( h \) with respect to \( B, D \)}.%
 \index{homomorphism!matrix representing}
 \end{definition}
 
-Briefly, the vectors
-representing the $h(\vec{\beta})$'s are adjoined to 
-make the matrix representing the map. 
-\begin{equation*}
-  \rep{h}{B,D}=
-  \left(\begin{array}{c|@{\hspace{1.5em}}c@{\hspace{1.5em}}|c}
-     \vdots                         &       &\vdots    \\
-     \rep{\,h(\vec{\beta}_1)\,}{D}  &\cdots &\rep{\,h(\vec{\beta}_n)\,}{D}  \\
-     \vdots                         &       &\vdots
-  \end{array}\right)
-\end{equation*}
-Observe that the number of columns~$n$ of the matrix is the 
-dimension of the domain of the map 
-and the number of rows~$m$ is the dimension of the codomain.
+% Briefly, the vectors
+% representing the $h(\vec{\beta})$'s are adjoined to 
+% make the matrix representing the map. 
+% \begin{equation*}
+%   \rep{h}{B,D}=
+%   \left(\begin{array}{c|@{\hspace{1.5em}}c@{\hspace{1.5em}}|c}
+%      \vdots                         &       &\vdots    \\
+%      \rep{\,h(\vec{\beta}_1)\,}{D}  &\cdots &\rep{\,h(\vec{\beta}_n)\,}{D}  \\
+%      \vdots                         &       &\vdots
+%   \end{array}\right)
+% \end{equation*}
+\noindent In that matrix the number of columns~$n$ is the 
+dimension of the map's domain while  
+the number of rows~$m$ is the dimension of the codomain.
+
+We use lower case letters for a map, 
+upper case for the matrix,
+and lower case again for the entries of the matrix.
+Thus for the map \( h \), the matrix representing it is \( H \), with
+entries \( h_{i,j} \).
 
 \begin{example}  \label{ex:PolyOneToRThree}
 If \( \map{h}{\Re^3}{\polyspace_1} \) is given by
@@ -190,41 +204,35 @@ If \( \map{h}{\Re^3}{\polyspace_1} \) is given by
 then where
 \begin{equation*}
   B=
-  \sequence{\colvec{0 \\ 0 \\ 1},
-            \colvec{0 \\ 2 \\ 0},
-            \colvec{2 \\ 0 \\ 0} }
+  \sequence{\colvec[r]{0 \\ 0 \\ 1},
+            \colvec[r]{0 \\ 2 \\ 0},
+            \colvec[r]{2 \\ 0 \\ 0} }
   \quad\text{and}\quad
   D=
   \sequence{1+x,-1+x}
 \end{equation*}
-the action of \( h \) on \( B \) is given by
+the action of \( h \) on \( B \) is this.
 \begin{equation*}
-  \colvec{0 \\ 0 \\ 1}\mapsunder{h}-x
-  \qquad \colvec{0 \\ 2 \\ 0}\mapsunder{h}2
-  \qquad \colvec{2 \\ 0 \\ 0}\mapsunder{h}4
+  \colvec[r]{0 \\ 0 \\ 1}\mapsunder{h}-x
+  \qquad \colvec[r]{0 \\ 2 \\ 0}\mapsunder{h}2
+  \qquad \colvec[r]{2 \\ 0 \\ 0}\mapsunder{h}4
 \end{equation*}
-and a simple calculation gives
+A simple calculation
 \begin{equation*}
-  \rep{-x}{D}=\colvec{-1/2 \\ -1/2}_D
-  \quad \rep{2}{D}=\colvec{1 \\ -1}_D 
-  \quad \rep{4}{D}=\colvec{2 \\ -2}_D 
+  \rep{-x}{D}=\colvec[r]{-1/2 \\ -1/2}_D
+  \quad \rep{2}{D}=\colvec[r]{1 \\ -1}_D 
+  \quad \rep{4}{D}=\colvec[r]{2 \\ -2}_D 
 \end{equation*}
-showing that this is the matrix representing $h$ with respect to the bases.
+shows that this is the matrix representing $h$ with respect to the bases.
 \begin{equation*}
   \rep{h}{B,D}
    =
-   \begin{pmatrix}
+   \begin{mat}[r]
      -1/2  &1   &2  \\
      -1/2  &-1  &-2
-   \end{pmatrix}_{B,D}
+   \end{mat}_{B,D}
 \end{equation*}
 \end{example}
-
-We will use lower case letters for a map, 
-upper case for the matrix,
-and lower case again for the entries of the matrix.
-Thus for the map \( h \), the matrix representing it is \( H \), with
-entries \( h_{i,j} \).
 
 \begin{theorem} \label{th:MatMultRepsFuncAppl}
 Assume that \( V \) and \( W \) are vector spaces
@@ -272,38 +280,43 @@ of a \( \nbym{m}{n} \) matrix and a
 \end{equation*}
 \end{definition}
 
-The point of \nearbydefinition{def:MatRepMap} is to generalize
-\nearbyexample{ex:TypLinMapRepByMat}.
-That is, the point of the definition is 
-\nearbytheorem{th:MatMultRepsFuncAppl}: 
-the product of the matrix $\rep{h}{B,D}$ and the vector $\rep{\vec{v}}{B}$ 
-is the vector $\rep{h(\vec{v})}{D}$.
+% the product of the matrix $\rep{h}{B,D}$ with the vector $\rep{\vec{v}}{B}$ 
+% is the vector $\rep{h(\vec{v})}{D}$.  
 Briefly, 
 application of a linear map is represented by the matrix-vector product 
 of the map's representative and the vector's representative.
+
+\begin{remark}
+In some sense \nearbytheorem{th:MatMultRepsFuncAppl} is not at all surprising
+because we chose the matrix representative in \nearbydefinition{def:MatRepMap}
+precisely to make 
+\nearbytheorem{th:MatMultRepsFuncAppl} true.
+If the theorem were not true then we would adjust the definition.
+Nonetheless, we need the verification that the definition is right. 
+\end{remark}
 
 \begin{example}
 With the matrix from \nearbyexample{ex:PolyOneToRThree}
 we can calculate where that map sends this vector.
 \begin{equation*}
-  \vec{v}=\colvec{4 \\ 1 \\ 0}
+  \vec{v}=\colvec[r]{4 \\ 1 \\ 0}
 \end{equation*}
 This vector is represented, with respect to the domain basis $B$, by
 \begin{equation*}
-  \rep{\vec{v}}{B}=\colvec{0 \\ 1/2 \\ 2}_B
+  \rep{\vec{v}}{B}=\colvec[r]{0 \\ 1/2 \\ 2}_B
 \end{equation*}
 and so this is the representation of the value $h(\vec{v})$ with respect to
 the codomain basis $D$.
 \begin{align*}
   \rep{h(\vec{v})}{D}
-  &=\begin{pmatrix}
+  &=\begin{mat}[r]
       -1/2  &1   &2  \\
       -1/2  &-1  &-2
-    \end{pmatrix}_{B,D}
-    \colvec{0 \\ 1/2 \\ 2}_B                            \\
+    \end{mat}_{B,D}
+    \colvec[r]{0 \\ 1/2 \\ 2}_B                            \\
   &=\colvec{(-1/2)\cdot 0+1\cdot (1/2) + 2\cdot 2 \\ 
           (-1/2)\cdot 0-1\cdot (1/2) - 2\cdot 2}_D
-  =\colvec{9/2 \\ -9/2}_D
+  =\colvec[r]{9/2 \\ -9/2}_D
 \end{align*}
 To find $h(\vec{v})$ itself, not its representation,
 take $(9/2)(1+x)-(9/2)(-1+x)=9$.
@@ -314,81 +327,81 @@ Let \( \map{\pi}{\Re^3}{\Re^2} \) be projection onto the \( xy \)-plane.
 To give a matrix representing this map, we first fix bases.
 \begin{equation*}
   B=\sequence{
-              \colvec{1 \\ 0 \\ 0},
-              \colvec{1 \\ 1 \\ 0},
-              \colvec{-1 \\ 0 \\ 1} }
+              \colvec[r]{1 \\ 0 \\ 0},
+              \colvec[r]{1 \\ 1 \\ 0},
+              \colvec[r]{-1 \\ 0 \\ 1} }
   \qquad
   D=\sequence{
-              \colvec{2 \\ 1},
-              \colvec{1 \\ 1} }
+              \colvec[r]{2 \\ 1},
+              \colvec[r]{1 \\ 1} }
 \end{equation*}
 For each vector in the domain's basis, we find its image under the map. 
 \begin{equation*}
-  \colvec{1 \\ 0 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
+  \colvec[r]{1 \\ 0 \\ 0}\mapsunder{\pi}\colvec[r]{1 \\ 0}
   \quad
-  \colvec{1 \\ 1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 1}
+  \colvec[r]{1 \\ 1 \\ 0}\mapsunder{\pi}\colvec[r]{1 \\ 1}
   \quad
-  \colvec{-1 \\ 0 \\ 1}\mapsunder{\pi}\colvec{-1 \\ 0}
+  \colvec[r]{-1 \\ 0 \\ 1}\mapsunder{\pi}\colvec[r]{-1 \\ 0}
 \end{equation*}
 Then we find the representation of each image with respect to the codomain's
 basis 
 \begin{equation*}
-  \rep{\colvec{1 \\ 0}}{D}=\colvec{1 \\ -1}
+  \rep{\colvec[r]{1 \\ 0}}{D}=\colvec[r]{1 \\ -1}
   \quad
-  \rep{\colvec{1 \\ 1}}{D}=\colvec{0 \\ 1}
+  \rep{\colvec[r]{1 \\ 1}}{D}=\colvec[r]{0 \\ 1}
   \quad
-  \rep{\colvec{-1 \\ 0}}{D}=\colvec{-1 \\ 1}
+  \rep{\colvec[r]{-1 \\ 0}}{D}=\colvec[r]{-1 \\ 1}
 \end{equation*}
 (these are easily checked).
 Finally, adjoining these representations gives the matrix representing 
 \( \pi \) with respect to \( B,D \).
 \begin{equation*}
     \rep{\pi}{B,D}
-    =\begin{pmatrix}
+    =\begin{mat}[r]
       1  &0  &-1  \\
       -1 &1  &1
-    \end{pmatrix}_{B,D}
+    \end{mat}_{B,D}
 \end{equation*}
 We can illustrate \nearbytheorem{th:MatMultRepsFuncAppl} by computing
 the matrix-vector product representing the following statement 
 about the projection map.
 \begin{equation*}
   \pi(
-     \colvec{2 \\ 2 \\ 1}
-     )=\colvec{2 \\ 2}
+     \colvec[r]{2 \\ 2 \\ 1}
+     )=\colvec[r]{2 \\ 2}
 \end{equation*}
 Representing this vector from the domain
 with respect to the domain's basis
 \begin{equation*}
-   \rep{\colvec{2 \\ 2 \\ 1}}{B}=
-        \colvec{1 \\ 2 \\ 1}_B
+   \rep{\colvec[r]{2 \\ 2 \\ 1}}{B}=
+        \colvec[r]{1 \\ 2 \\ 1}_B
 \end{equation*}
 gives this matrix-vector product.
 \begin{equation*}
-   \rep{ \,\pi(\colvec{2 \\ 1 \\ 1})\,}{D}=
-      \begin{pmatrix}
+   \rep{ \,\pi(\colvec[r]{2 \\ 1 \\ 1})\,}{D}=
+      \begin{mat}[r]
         1  &0  &-1  \\
         -1 &1  &1
-      \end{pmatrix}_{B,D}
-   \colvec{1 \\ 2 \\ 1}_B
+      \end{mat}_{B,D}
+   \colvec[r]{1 \\ 2 \\ 1}_B
    =
-   \colvec{0 \\ 2}_D
+   \colvec[r]{0 \\ 2}_D
 \end{equation*}
 Expanding this representation into a linear combination of vectors from
 \( D \) 
 \begin{equation*}
-   0\cdot\colvec{2 \\ 1}
-   +2\cdot\colvec{1 \\ 1}
+   0\cdot\colvec[r]{2 \\ 1}
+   +2\cdot\colvec[r]{1 \\ 1}
    =
-   \colvec{2 \\ 2}
+   \colvec[r]{2 \\ 2}
 \end{equation*}
 checks that the map's action is indeed
 reflected in the operation of the matrix.
 (We will sometimes compress these three displayed equations into one 
 \begin{equation*}
-  \colvec{2 \\ 2 \\ 1}=\colvec{1 \\ 2 \\ 1}_B
+  \colvec[r]{2 \\ 2 \\ 1}=\colvec[r]{1 \\ 2 \\ 1}_B
     \;\overset{h}{\underset{H}{\longmapsto}}\;
-  \colvec{0 \\ 2}_D=\colvec{2 \\ 2}    
+  \colvec[r]{0 \\ 2}_D=\colvec[r]{2 \\ 2}    
 \end{equation*}
 in the course of a calculation.)
 \end{example}
@@ -415,9 +428,9 @@ Using $\stdbasis_2$ both as a domain basis and as a codomain basis is natural,
 Now, we find the image under the map of each
 vector in the domain's basis.
 \begin{equation*}
-  \colvec{1 \\ 0}\mapsunder{t_\theta}\colvec{\cos\theta \\ \sin\theta}
+  \colvec[r]{1 \\ 0}\mapsunder{t_\theta}\colvec{\cos\theta \\ \sin\theta}
   \qquad
-  \colvec{0 \\ 1}\mapsunder{t_\theta}\colvec{-\sin\theta \\ \cos\theta}
+  \colvec[r]{0 \\ 1}\mapsunder{t_\theta}\colvec{-\sin\theta \\ \cos\theta}
 \end{equation*}
 Then we represent these images with respect to the codomain's basis.
 Because this basis is $\stdbasis_2$, vectors are represented by themselves.
@@ -425,24 +438,24 @@ Finally, adjoining the representations gives the matrix representing the map.
 \begin{equation*}
   \rep{t_\theta}{\stdbasis_2,\stdbasis_2}
   =
-  \begin{pmatrix}
+  \begin{mat}
     \cos\theta  &-\sin\theta \\
     \sin\theta  &\cos\theta
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 The advantage of this scheme is that just by knowing how to
 represent the image of the two basis vectors, 
 we get a formula that tells us the image of any vector at 
 all; here a vector rotated by $\theta=\pi/6$.
 \begin{equation*}
-  \colvec{3  \\ -2}\;\mapsunder{t_{\pi/6}}\;
-  \begin{pmatrix}
+  \colvec[r]{3  \\ -2}\;\mapsunder{t_{\pi/6}}\;
+  \begin{mat}[r]
     \sqrt{3}/2  &-1/2  \\
      1/2        &\sqrt{3}/2
-  \end{pmatrix}
-  \colvec{3  \\ -2}
+  \end{mat}
+  \colvec[r]{3  \\ -2}
   \approx
-  \colvec{3.598 \\ -0.232}  
+  \colvec[r]{3.598 \\ -0.232}  
 \end{equation*}
 (Again, we are using the fact that, with respect to $\stdbasis_2$, 
 vectors represent themselves.)
@@ -464,19 +477,19 @@ In the definition
 the width of the matrix equals the height of the vector.
 Hence, the first product below is defined while the second is not. 
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       4  &3  &1
-    \end{pmatrix}
-  \colvec{1 \\ 0 \\ 2}
+    \end{mat}
+  \colvec[r]{1 \\ 0 \\ 2}
   =
-  \colvec{1 \\ 6}
+  \colvec[r]{1 \\ 6}
   \qquad
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       4  &3  &1
-    \end{pmatrix}
-  \colvec{1 \\ 0}
+    \end{mat}
+  \colvec[r]{1 \\ 0}
 \end{equation*}
 One reason that this product is not defined is purely formal:~the
 definition requires that the sizes match, and these sizes don't match.
@@ -489,11 +502,11 @@ vector represents a member of a two-dimensional space.
 A good way to view a matrix-vector product is
 as the dot products of the rows of the matrix with the column vector.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
                &\vdots                         \\
       a_{i,1}  &a_{i,2}  &\ldots   &a_{i,n}    \\
                &\vdots
-    \end{pmatrix}
+    \end{mat}
   \colvec{c_1 \\ c_2 \\ \vdots \\ c_n}
   =
   \colvec{\vdots \\ a_{i,1}c_1+a_{i,2}c_2+\ldots+a_{i,n}c_n \\ \vdots}
@@ -517,17 +530,17 @@ Matrix-vector product can also be viewed column-by-column.
 
 \begin{example}
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &-1  \\
       2  &0  &3
-    \end{pmatrix}
-  \colvec{2 \\ -1 \\ 1}
+    \end{mat}
+  \colvec[r]{2 \\ -1 \\ 1}
   =
-  2\colvec{1 \\ 2}
-  -1\colvec{0 \\ 0}
-  +1\colvec{-1 \\ 3}
+  2\colvec[r]{1 \\ 2}
+  -1\colvec[r]{0 \\ 0}
+  +1\colvec[r]{-1 \\ 3}
   =
-  \colvec{1 \\ 7}
+  \colvec[r]{1 \\ 7}
 \end{equation*}
 \end{example}
 
@@ -557,17 +570,17 @@ a linear map.
   \recommended \item  
     Multiply the matrix
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &3  &1  \\
         0  &-1 &2  \\
         1  &1  &0
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     by each vector (or state ``not defined'').
     \begin{exparts*}
-      \partsitem \( \colvec{2 \\ 1 \\ 0} \)
-      \partsitem \( \colvec{-2 \\ -2} \)
-      \partsitem \( \colvec{0 \\ 0 \\ 0} \)
+      \partsitem \( \colvec[r]{2 \\ 1 \\ 0} \)
+      \partsitem \( \colvec[r]{-2 \\ -2} \)
+      \partsitem \( \colvec[r]{0 \\ 0 \\ 0} \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts*}
@@ -575,49 +588,49 @@ a linear map.
            \colvec{1\cdot 2+3\cdot 1+1\cdot 0         \\
                         0\cdot 2+(-1)\cdot 1+2\cdot 0 \\
                         1\cdot 2+1\cdot 1+0\cdot 0}
-           =\colvec{5 \\ -1 \\ 3}   \)
+           =\colvec[r]{5 \\ -1 \\ 3}   \)
         \partsitem Not defined.
-        \partsitem \(  \colvec{0 \\ 0 \\ 0}  \)
+        \partsitem \(  \colvec[r]{0 \\ 0 \\ 0}  \)
       \end{exparts*}  
     \end{answer}
   \item 
     Perform, if possible, each matrix-vector multiplication.
     \begin{exparts*}
-      \partsitem $\begin{pmatrix}
+      \partsitem $\begin{mat}[r]
                     2  &1  \\
                     3  &-1/2
-                  \end{pmatrix}
-                  \colvec{4  \\ 2}$
-      \partsitem $\begin{pmatrix}
+                  \end{mat}
+                  \colvec[r]{4  \\ 2}$
+      \partsitem $\begin{mat}[r]
                     1  &1  &0 \\
                     -2 &1  &0
-                  \end{pmatrix}
-                  \colvec{1 \\ 3 \\ 1}$
-      \partsitem $\begin{pmatrix}
+                  \end{mat}
+                  \colvec[r]{1 \\ 3 \\ 1}$
+      \partsitem $\begin{mat}[r]
                     1  &1  \\
                     -2  &1
-                  \end{pmatrix}
-                  \colvec{1 \\ 3 \\ 1}$
+                  \end{mat}
+                  \colvec[r]{1 \\ 3 \\ 1}$
     \end{exparts*}
     \begin{answer}
       \begin{exparts*}
         \partsitem $\colvec{2\cdot 4 +1\cdot 2 \\
                             3\cdot 4-(1/2)\cdot 2}
-                   =\colvec{10 \\ 11}$
-        \partsitem $\colvec{4 \\ 1}$
+                   =\colvec[r]{10 \\ 11}$
+        \partsitem $\colvec[r]{4 \\ 1}$
         \partsitem Not defined.
       \end{exparts*}
     \end{answer}
   \recommended \item  
     Solve this matrix equation.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         2  &1  &1  \\
         0  &1  &3  \\
         1  &-1 &2
-      \end{pmatrix}
+      \end{mat}
       \colvec{x \\ y \\ z}
-      =\colvec{8 \\ 4 \\ 4}
+      =\colvec[r]{8 \\ 4 \\ 4}
     \end{equation*}
     \begin{answer}
       Matrix-vector multiplication gives rise to a linear system.
@@ -659,28 +672,28 @@ a linear map.
       With those choices, we have that
       \begin{equation*}
         \rep{h}{B,D}
-        =\begin{pmatrix}
+        =\begin{mat}[r]
            1   &1  &0  \\
            1   &2  &1  \\
            0   &0  &0  \\
            0   &0  &-1
-         \end{pmatrix}_{B,D}
+         \end{mat}_{B,D}
       \end{equation*}
       and, as
       \begin{equation*}
-        \rep{1-3x+2x^2}{B}=\colvec{1 \\ -3 \\ 2}_B
+        \rep{1-3x+2x^2}{B}=\colvec[r]{1 \\ -3 \\ 2}_B
       \end{equation*}
       the matrix-vector multiplication calculation gives this.
       \begin{equation*}
         \rep{h(1-3x+2x^2)}{D}=
-         \begin{pmatrix}
+         \begin{mat}[r]
            1   &1  &0  \\
            1   &2  &1  \\
            0   &0  &0  \\
            0   &0  &-1
-         \end{pmatrix}_{B,D}
-         \colvec{1 \\ -3 \\ 2}_B
-         =\colvec{-2 \\ -3 \\ 0 \\ -2}_D
+         \end{mat}_{B,D}
+         \colvec[r]{1 \\ -3 \\ 2}_B
+         =\colvec[r]{-2 \\ -3 \\ 0 \\ -2}_D
       \end{equation*}
       Thus, \( h(1-3x+2x^2)
               =-2\cdot 1-3\cdot x+0\cdot x^2-2\cdot x^3
@@ -691,9 +704,9 @@ a linear map.
     Assume that \( \map{h}{\Re^2}{\Re^3} \) is determined by 
     this action.
     \begin{equation*}
-      \colvec{1 \\ 0}\mapsto\colvec{2 \\ 2 \\ 0}
+      \colvec[r]{1 \\ 0}\mapsto\colvec[r]{2 \\ 2 \\ 0}
       \qquad
-      \colvec{0 \\ 1}\mapsto\colvec{0 \\ 1 \\ -1}
+      \colvec[r]{0 \\ 1}\mapsto\colvec[r]{0 \\ 1 \\ -1}
     \end{equation*}
     Using the standard bases, find
     \begin{exparts}
@@ -710,21 +723,21 @@ a linear map.
           and represent them with respect to the basis for the codomain.
           \begin{equation*}
             \rep{\,h(\vec{e}_1)\,}{\stdbasis_3}
-            =\rep{\colvec{2 \\ 2 \\ 0}}{\stdbasis_3}
-            =\colvec{2 \\ 2 \\ 0}
+            =\rep{\colvec[r]{2 \\ 2 \\ 0}}{\stdbasis_3}
+            =\colvec[r]{2 \\ 2 \\ 0}
             \qquad
             \rep{\,h(\vec{e}_2)\,}{\stdbasis_3}
-            =\rep{\colvec{0 \\ 1 \\ -1}}{\stdbasis_3}
-            =\colvec{0 \\ 1 \\ -1}
+            =\rep{\colvec[r]{0 \\ 1 \\ -1}}{\stdbasis_3}
+            =\colvec[r]{0 \\ 1 \\ -1}
           \end{equation*}
           These are adjoined to make the matrix.
           \begin{equation*}
             \rep{h}{\stdbasis_2,\stdbasis_3}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               2  &0  \\
               2  &1  \\
               0  &-1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem For any \( \vec{v} \) in the domain \( \Re^2 \),
           \begin{equation*}
@@ -735,11 +748,11 @@ a linear map.
           and so
           \begin{equation*}
             \rep{\,h(\vec{v})\,}{\stdbasis_3}
-            =\begin{pmatrix}
+            =\begin{mat}[r]
               2  &0  \\
               2  &1  \\
               0  &-1
-            \end{pmatrix}
+            \end{mat}
             \colvec{v_1 \\ v_2}
             =\colvec{2v_1 \\ 2v_1+v_2 \\ -v_2}
           \end{equation*}
@@ -761,45 +774,45 @@ a linear map.
         We must first find the image of each vector from the domain's basis,
         and then represent that image with respect to the codomain's basis.
         \begin{equation*}
-          \rep{\frac{d\,1}{dx}}{B}=\colvec{0 \\ 0 \\ 0 \\ 0}
+          \rep{\frac{d\,1}{dx}}{B}=\colvec[r]{0 \\ 0 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x}{dx}}{B}=\colvec{1 \\ 0 \\ 0 \\ 0}
+          \rep{\frac{d\,x}{dx}}{B}=\colvec[r]{1 \\ 0 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x^2}{dx}}{B}=\colvec{0 \\ 2 \\ 0 \\ 0}
+          \rep{\frac{d\,x^2}{dx}}{B}=\colvec[r]{0 \\ 2 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x^3}{dx}}{B}=\colvec{0 \\ 0 \\ 3 \\ 0}
+          \rep{\frac{d\,x^3}{dx}}{B}=\colvec[r]{0 \\ 0 \\ 3 \\ 0}
         \end{equation*}
         Those representations are then adjoined to make the matrix
         representing the map.
         \begin{equation*}
           \rep{\frac{d}{dx}}{B,B}=
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &1  &0  &0  \\
             0  &0  &2  &0  \\
             0  &0  &0  &3  \\
             0  &0  &0  &0 
-          \end{pmatrix}  
+          \end{mat}  
         \end{equation*}
         \partsitem Proceeding as in the prior item, we represent the images
           of the domain's basis vectors
         \begin{equation*}
-          \rep{\frac{d\,1}{dx}}{B}=\colvec{0 \\ 0 \\ 0 \\ 0}
+          \rep{\frac{d\,1}{dx}}{B}=\colvec[r]{0 \\ 0 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x}{dx}}{B}=\colvec{1 \\ 0 \\ 0 \\ 0}
+          \rep{\frac{d\,x}{dx}}{B}=\colvec[r]{1 \\ 0 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x^2}{dx}}{B}=\colvec{0 \\ 1 \\ 0 \\ 0}
+          \rep{\frac{d\,x^2}{dx}}{B}=\colvec[r]{0 \\ 1 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x^3}{dx}}{B}=\colvec{0 \\ 0 \\ 1 \\ 0}
+          \rep{\frac{d\,x^3}{dx}}{B}=\colvec[r]{0 \\ 0 \\ 1 \\ 0}
         \end{equation*}
         and adjoin to make the matrix.
         \begin{equation*}
           \rep{\frac{d}{dx}}{B,D}=
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &1  &0  &0  \\
             0  &0  &1  &0  \\
             0  &0  &0  &1  \\
             0  &0  &0  &0
-          \end{pmatrix}  
+          \end{mat}  
         \end{equation*}
       \end{exparts*}  
     \end{answer}
@@ -872,13 +885,13 @@ a linear map.
           The matrix
           \begin{equation*}
             \rep{\frac{d}{dx}}{B,B}
-            =\begin{pmatrix}
+            =\begin{mat}
               0  &1  &0  &\ldots  &0  \\
               0  &0  &2  &\ldots  &0  \\
                  &\vdots             \\
               0  &0  &0  &\ldots  &n  \\
               0  &0  &0  &\ldots  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           has $n+1$ rows and columns.
        \partsitem Once the images under this map of the domain's basis
@@ -901,13 +914,13 @@ a linear map.
           and put together to make the matrix.
           \begin{equation*}
             \rep{\int}{B_{n},B_{n+1}}
-            =\begin{pmatrix}
+            =\begin{mat}
               0  &0  &\ldots  &0      &0  \\
               1  &0  &\ldots  &0      &0  \\
               0  &1/2&\ldots  &0      &0  \\
                  &\vdots                  \\
               0  &0  &\ldots  &0      &1/(n+1)
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The images of the basis vectors of the domain are
           \begin{equation*} 
@@ -925,9 +938,9 @@ a linear map.
           so the matrix is 
           \begin{equation*}
             \rep{\int}{B,\stdbasis_1}
-            =\begin{pmatrix}
+            =\begin{mat}
               1  &1/2 &\cdots  &1/n    &1/(n+1)
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           (this is an $\nbym{1}{(n+1)}$ matrix).
         \partsitem Here, the images of the domain's basis vectors are
@@ -947,9 +960,9 @@ a linear map.
           and so the matrix is this.
           \begin{equation*}
             \rep{\int_0^1}{B,\stdbasis_1}
-            =\begin{pmatrix}
+            =\begin{mat}[r]
               1  &3   &9  &\cdots  &3^n
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The images of the basis vectors from the domain are
           \begin{equation*} 
@@ -961,24 +974,24 @@ a linear map.
           \end{equation*}
           which are represented as 
           \begin{equation*}
-            \rep{1}{B}=\colvec{1 \\ 0 \\ 0 \\ 0 \\ \vdots \\ 0}
+            \rep{1}{B}=\colvec[r]{1 \\ 0 \\ 0 \\ 0 \\ \vdotswithin{0} \\ 0}
             \quad
-            \rep{1+x}{B}=\colvec{1 \\ 1 \\ 0 \\ 0 \\ \vdots \\ 0}
+            \rep{1+x}{B}=\colvec{1 \\ 1 \\ 0 \\ 0 \\ \vdotswithin{0} \\ 0}
             \quad
-            \rep{1+2x+x^2}{B}=\colvec{1 \\ 2 \\ 1 \\ 0 \\ \vdots \\ 0}
+            \rep{1+2x+x^2}{B}=\colvec{1 \\ 2 \\ 1 \\ 0 \\ \vdotswithin{0} \\ 0}
             \quad\ldots
           \end{equation*}
           The resulting matrix
           \begin{equation*}
             \renewcommand{\arraystretch}{1.2}
             \rep{\int}{B,B}
-            =\begin{pmatrix}
+            =\begin{mat}
               1  &1   &1  &1  &\ldots  &1           \\
               0  &1   &2  &3  &\ldots  &\binom{n}{2}  \\
               0  &0   &1  &3  &\ldots  &\binom{n}{3}  \\
                  &\vdots                        \\
               0  &0   &0  &   &\ldots  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           is \definend{Pascal's triangle}\index{Pascal's triangle}
           (recall that $\binom{n}{r}$ is the number of ways to choose $r$
@@ -993,12 +1006,12 @@ a linear map.
       Where the space is \( n \)-dimensional,
       \begin{equation*}
         \rep{\text{id}}{B,B}=
-        \begin{pmatrix}
+        \begin{mat}
           1  &0  \ldots  &0  \\
           0  &1  \ldots  &0  \\
              &\vdots         \\
           0  &0  \ldots  &1
-        \end{pmatrix}_{B,B}
+        \end{mat}_{B,B}
       \end{equation*}
       is the $\nbyn{n}$ identity matrix.  
     \end{answer}
@@ -1011,22 +1024,22 @@ a linear map.
       \begin{equation*}
         B=\sequence{\vec{\beta}_1,\vec{\beta}_2,\vec{\beta}_3,\vec{\beta}_4}
          =\sequence{
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               0  &1  \\
               0  &0
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               0  &0  \\
               1  &0
-            \end{pmatrix},
-            \begin{pmatrix}
+            \end{mat},
+            \begin{mat}[r]
               0  &0  \\
               0  &1
-            \end{pmatrix}   }
+            \end{mat}   }
       \end{equation*}
       the transpose map acts in this way
       \begin{equation*}
@@ -1039,12 +1052,12 @@ a linear map.
       basis and adjoining those column vectors together gives this.
       \begin{equation*}
         \rep{\text{trans}}{B,B}=
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  &0  &0  \\
           0  &0  &1  &0  \\
           0  &1  &0  &0  \\
           0  &0  &0  &1
-        \end{pmatrix}_{B,B}
+        \end{mat}_{B,B}
       \end{equation*}   
      \end{answer}
   \item 
@@ -1072,38 +1085,38 @@ a linear map.
          \partsitem With respect to the basis of the codomain, the images of
            the members of the basis of the domain are represented as
            \begin{equation*}
-             \rep{\vec{\beta}_2}{B}=\colvec{0 \\ 1 \\ 0 \\ 0}
+             \rep{\vec{\beta}_2}{B}=\colvec[r]{0 \\ 1 \\ 0 \\ 0}
              \quad
-             \rep{\vec{\beta}_3}{B}=\colvec{0 \\ 0 \\ 1 \\ 0}
+             \rep{\vec{\beta}_3}{B}=\colvec[r]{0 \\ 0 \\ 1 \\ 0}
              \quad
-             \rep{\vec{\beta}_4}{B}=\colvec{0 \\ 0 \\ 0 \\ 1}
+             \rep{\vec{\beta}_4}{B}=\colvec[r]{0 \\ 0 \\ 0 \\ 1}
              \quad
-             \rep{\zero}{B}=\colvec{0 \\ 0 \\ 0 \\ 0}
+             \rep{\zero}{B}=\colvec[r]{0 \\ 0 \\ 0 \\ 0}
            \end{equation*}
            and consequently, the matrix representing the transformation is 
            this.
            \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                    0  &0  &0  &0  \\
                    1  &0  &0  &0  \\
                    0  &1  &0  &0  \\
                    0  &0  &1  &0
-                 \end{pmatrix}  
+                 \end{mat}  
          \end{equation*}
          \partsitem 
-              $\begin{pmatrix}
+              $\begin{mat}[r]
                    0  &0  &0  &0  \\
                    1  &0  &0  &0  \\
                    0  &0  &0  &0  \\
                    0  &0  &1  &0
-                 \end{pmatrix}$
+                 \end{mat}$
          \partsitem 
-               $\begin{pmatrix}
+               $\begin{mat}[r]
                    0  &0  &0  &0  \\
                    1  &0  &0  &0  \\
                    0  &1  &0  &0  \\
                    0  &0  &0  &0
-                 \end{pmatrix}$
+                 \end{mat}$
        \end{exparts}  
      \end{answer}
   \item
@@ -1127,9 +1140,9 @@ a linear map.
          This map's effect on the vectors in the standard basis for the domain 
          is 
          \begin{equation*} 
-            \colvec{1 \\ 0}\mapsunder{d_s}\colvec{s \\ 0}
+            \colvec[r]{1 \\ 0}\mapsunder{d_s}\colvec{s \\ 0}
             \qquad
-            \colvec{0 \\ 1}\mapsunder{d_s}\colvec{0 \\ s}
+            \colvec[r]{0 \\ 1}\mapsunder{d_s}\colvec{0 \\ s}
          \end{equation*}
          and those images are represented with respect to the 
          codomain's basis (again, the standard basis) by themselves.
@@ -1141,10 +1154,10 @@ a linear map.
          Thus the representation of the dilation map is this.
          \begin{equation*}
            \rep{d_s}{\stdbasis_2,\stdbasis_2}
-           =\begin{pmatrix}
+           =\begin{mat}
               s  &0  \\
               0  &s
-           \end{pmatrix}
+           \end{mat}
         \end{equation*}
       \partsitem The picture of $\map{f_\ell}{\Re^2}{\Re^2}$ is this.
          \begin{center}  \small
@@ -1153,20 +1166,20 @@ a linear map.
        Some calculation (see Exercise~I.\ref{exer:RigidPlaneMapsAutos})
        shows that when the line has slope $k$ 
        \begin{equation*}
-         \colvec{1 \\ 0}
+         \colvec[r]{1 \\ 0}
              \mapsunder{f_\ell}\colvec{(1-k^2)/(1+k^2) \\ 2k/(1+k^2)}
          \qquad
-         \colvec{0 \\ 1}
+         \colvec[r]{0 \\ 1}
              \mapsunder{f_\ell}\colvec{2k/(1+k^2) \\ -(1-k^2)/(1+k^2)}
        \end{equation*}
        (the case of a line with undefined slope is separate but easy) 
        and so the matrix representing reflection is this.
        \begin{equation*}
          \rep{f_\ell}{\stdbasis_2,\stdbasis_2}
-         =\frac{1}{1+k^2}\cdot\begin{pmatrix}
+         =\frac{1}{1+k^2}\cdot\begin{mat}
             1-k^2  &2k  \\
             2k     &-(1-k^2)
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -1174,22 +1187,22 @@ a linear map.
     Consider a linear transformation of \( \Re^2 \) determined
     by these two.
     \begin{equation*}
-      \colvec{1 \\ 1}\mapsto\colvec{2 \\ 0}
+      \colvec[r]{1 \\ 1}\mapsto\colvec[r]{2 \\ 0}
       \qquad
-      \colvec{1 \\ 0}\mapsto\colvec{-1 \\ 0}
+      \colvec[r]{1 \\ 0}\mapsto\colvec[r]{-1 \\ 0}
     \end{equation*}
     \begin{exparts}
       \partsitem Represent this transformation with respect to the standard
         bases.
       \partsitem Where does the transformation send this vector?
         \begin{equation*}
-          \colvec{0 \\ 5}
+          \colvec[r]{0 \\ 5}
         \end{equation*}
       \partsitem Represent this transformation with respect to these bases.
         \begin{equation*}
-          B=\sequence{\colvec{1 \\ -1},\colvec{1 \\ 1}}
+          B=\sequence{\colvec[r]{1 \\ -1},\colvec[r]{1 \\ 1}}
           \qquad
-          D=\sequence{\colvec{2 \\ 2},\colvec{-1 \\ 1}}
+          D=\sequence{\colvec[r]{2 \\ 2},\colvec[r]{-1 \\ 1}}
         \end{equation*}
       \partsitem Using \( B \) from the prior item, 
         represent the transformation with respect to \( B,B \).
@@ -1205,9 +1218,9 @@ a linear map.
           One way to find the image of $\vec{e}_2$ is by 
           eye\Dash we can see this.
           \begin{equation*}
-            \colvec{1 \\ 1}-\colvec{1 \\ 0}=\colvec{0 \\ 1}
+            \colvec[r]{1 \\ 1}-\colvec[r]{1 \\ 0}=\colvec[r]{0 \\ 1}
             \;\mapsunder{t}\;
-            \colvec{2 \\ 0}-\colvec{-1 \\ 0}=\colvec{3 \\ 0}
+            \colvec[r]{2 \\ 0}-\colvec[r]{-1 \\ 0}=\colvec[r]{3 \\ 0}
           \end{equation*}
 
           A more systemmatic way to find the image of $\vec{e}_2$ is to
@@ -1215,29 +1228,29 @@ a linear map.
           use that representation to determine the image.  
           Taking this for a basis,
           \begin{equation*}
-            C=\sequence{\colvec{1 \\ 1},\colvec{1 \\ 0}}
+            C=\sequence{\colvec[r]{1 \\ 1},\colvec[r]{1 \\ 0}}
           \end{equation*}
           the given information says this.
           \begin{equation*}
             \rep{t}{C,\stdbasis_2}
-            \begin{pmatrix}
+            \begin{mat}[r]
               2  &-1  \\
               0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           As
           \begin{equation*}
-            \rep{\vec{e}_2}{C}=\colvec{1 \\ -1}_C
+            \rep{\vec{e}_2}{C}=\colvec[r]{1 \\ -1}_C
           \end{equation*}
           we have that
           \begin{equation*}
             \rep{t(\vec{e}_2)}{\stdbasis_2}
-            =\begin{pmatrix}
+            =\begin{mat}[r]
                2  &-1  \\
                0  &0
-             \end{pmatrix}_{C,\stdbasis_2}
-            \colvec{1 \\ -1}_C
-            =\colvec{3 \\ 0}_{\stdbasis_2}
+             \end{mat}_{C,\stdbasis_2}
+            \colvec[r]{1 \\ -1}_C
+            =\colvec[r]{3 \\ 0}_{\stdbasis_2}
           \end{equation*}
           and consequently we know that $t(\vec{e}_2)=3\cdot\vec{e}_1$
           (since, with respect to the standard basis, this vector is 
@@ -1246,86 +1259,86 @@ a linear map.
           $\stdbasis_2,\stdbasis_2$.
           \begin{equation*}
             \rep{t}{\stdbasis_2,\stdbasis_2}
-            =\begin{pmatrix}
+            =\begin{mat}[r]
                -1 &3   \\
                0  &0
-             \end{pmatrix}_{\stdbasis_2,\stdbasis_2}
+             \end{mat}_{\stdbasis_2,\stdbasis_2}
           \end{equation*}
         \partsitem To use the matrix developed in the prior item, note that
           \begin{equation*}
-            \rep{\colvec{0 \\ 5}}{\stdbasis_2}=\colvec{0 \\ 5}_{\stdbasis_2}
+            \rep{\colvec[r]{0 \\ 5}}{\stdbasis_2}=\colvec[r]{0 \\ 5}_{\stdbasis_2}
           \end{equation*}
           and so we have this is the representation, with respect to the 
           codomain's basis, of the image of the given vector.
           \begin{equation*}
-            \rep{t(\colvec{0 \\ 5})}{\stdbasis_2}
-            =\begin{pmatrix}
+            \rep{t(\colvec[r]{0 \\ 5})}{\stdbasis_2}
+            =\begin{mat}[r]
               -1  &3   \\
                0  &0
-             \end{pmatrix}_{\stdbasis_2,\stdbasis_2}
-            \colvec{0 \\ 5}_{\stdbasis_2}
-            =\colvec{15 \\ 0}_{\stdbasis_2}
+             \end{mat}_{\stdbasis_2,\stdbasis_2}
+            \colvec[r]{0 \\ 5}_{\stdbasis_2}
+            =\colvec[r]{15 \\ 0}_{\stdbasis_2}
           \end{equation*}
           Because the codomain's basis is the standard one, and so vectors
           in the codomain are represented by themselves, we have this.
           \begin{equation*}
-            t(\colvec{0 \\ 5})
-            =\colvec{15 \\ 0}
+            t(\colvec[r]{0 \\ 5})
+            =\colvec[r]{15 \\ 0}
           \end{equation*}
         \partsitem We first find the image of each member of \( B \), and then
           represent those images with respect to \( D \).
           For the first step, we can use the matrix developed earlier.
           \begin{equation*}
-            \rep{\colvec{1 \\-1}}{\stdbasis_2}
-            =\begin{pmatrix}
+            \rep{\colvec[r]{1 \\-1}}{\stdbasis_2}
+            =\begin{mat}[r]
               -1  &3   \\
                0  &0
-             \end{pmatrix}_{\stdbasis_2,\stdbasis_2}
-            \colvec{1 \\ -1}_{\stdbasis_2}
-            =\colvec{-4 \\ 0}_{\stdbasis_2}
+             \end{mat}_{\stdbasis_2,\stdbasis_2}
+            \colvec[r]{1 \\ -1}_{\stdbasis_2}
+            =\colvec[r]{-4 \\ 0}_{\stdbasis_2}
             \quad\text{so}\quad
-            t(\colvec{1 \\ -1})=\colvec{-4 \\ 0}
+            t(\colvec[r]{1 \\ -1})=\colvec[r]{-4 \\ 0}
           \end{equation*}
           Actually, for the second member of $B$ there is no need to apply the
           matrix because the problem statement gives its image.
           \begin{equation*}
-            t(\colvec{1 \\ 1})=\colvec{2 \\ 0}
+            t(\colvec[r]{1 \\ 1})=\colvec[r]{2 \\ 0}
           \end{equation*}
           Now representing those images with respect to $D$ is routine.
           \begin{equation*}
-            \rep{\colvec{-4 \\ 0}}{D}=\colvec{-1 \\ 2}_D
+            \rep{\colvec[r]{-4 \\ 0}}{D}=\colvec[r]{-1 \\ 2}_D
             \quad\text{and}\quad
-            \rep{\colvec{2 \\ 0}}{D}=\colvec{1/2 \\ -1}_D
+            \rep{\colvec[r]{2 \\ 0}}{D}=\colvec[r]{1/2 \\ -1}_D
           \end{equation*}
           Thus, the matrix is this.
           \begin{equation*}
             \rep{t}{B,D}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               -1  &1/2  \\
                2  &-1
-            \end{pmatrix}_{B,D}
+            \end{mat}_{B,D}
           \end{equation*}
         \partsitem We know the images of the members of the domain's basis
           from the prior item.
           \begin{equation*}
-             t(\colvec{1 \\ -1})=\colvec{-4 \\ 0}
+             t(\colvec[r]{1 \\ -1})=\colvec[r]{-4 \\ 0}
              \qquad
-             t(\colvec{1 \\ 1})=\colvec{2 \\ 0}
+             t(\colvec[r]{1 \\ 1})=\colvec[r]{2 \\ 0}
           \end{equation*}
           We can  compute the representation of those images with respect to
           the codomain's basis.
           \begin{equation*}
-             \rep{\colvec{-4 \\ 0}}{B}=\colvec{-2 \\ -2}_B
+             \rep{\colvec[r]{-4 \\ 0}}{B}=\colvec[r]{-2 \\ -2}_B
              \quad\text{and}\quad
-             \rep{\colvec{2 \\ 0}}{B}=\colvec{1 \\ 1}_B
+             \rep{\colvec[r]{2 \\ 0}}{B}=\colvec[r]{1 \\ 1}_B
           \end{equation*}
           Thus this is the matrix.
           \begin{equation*}
             \rep{t}{B,B}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               -2  &1  \\
               -2  &1
-            \end{pmatrix}_{B,B}
+            \end{mat}_{B,B}
           \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -1355,21 +1368,21 @@ a linear map.
           and those images are represented with respect to the codomain's
           basis in this way.
           \begin{equation*}
-            \rep{\,h(\vec{\beta}_1)\,}{h(B)}=\colvec{1 \\ 0 \\ \vdots \\ 0}
+            \rep{\,h(\vec{\beta}_1)\,}{h(B)}=\colvec[r]{1 \\ 0 \\ \vdotswithin{0} \\ 0}
             \quad
-            \rep{\,h(\vec{\beta}_2)\,}{h(B)}=\colvec{0 \\ 1 \\ \vdots \\ 0}
+            \rep{\,h(\vec{\beta}_2)\,}{h(B)}=\colvec[r]{0 \\ 1 \\ \vdotswithin{0} \\ 0}
             \quad\ldots\quad
-            \rep{\,h(\vec{\beta}_n)\,}{h(B)}=\colvec{0 \\ 0 \\ \vdots \\ 1}
+            \rep{\,h(\vec{\beta}_n)\,}{h(B)}=\colvec[r]{0 \\ 0 \\ \vdotswithin{0} \\ 1}
           \end{equation*}
           Hence, the matrix is the identity.
           \begin{equation*}
             \rep{h}{B,h(B)}
-            =\begin{pmatrix}
+            =\begin{mat}
                1  &0  &\ldots  &0  \\
                0  &1  &        &0  \\
                   &   &\ddots      \\
                0  &0  &        &1 
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Using the matrix in the prior item, 
           the representation is this.
@@ -1386,12 +1399,12 @@ a linear map.
     \begin{answer}
       The product
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           h_{1,1} &\ldots  &h_{1,i} &\ldots &h_{1,n}  \\
           h_{2,1} &\ldots  &h_{2,i} &\ldots &h_{2,n}  \\
                   &\vdots                             \\
           h_{m,1} &\ldots  &h_{m,i} &\ldots &h_{1,n}
-        \end{pmatrix}
+        \end{mat}
         \colvec{0 \\ \vdots \\ 1 \\ \vdots \\ 0}
         =
         \colvec{h_{1,i} \\ h_{2,i} \\ \vdots \\ h_{m,i}}
@@ -1418,10 +1431,10 @@ a linear map.
           and adjoining the representations gives this matrix.
           \begin{equation*}
             \rep{\frac{d}{dx}}{B,B}=
-            \begin{pmatrix}
+            \begin{mat}[r]
                 0  &1  \\
                -1  &0
-            \end{pmatrix}_{B,B}
+            \end{mat}_{B,B}
           \end{equation*}
         \partsitem The images of the vectors in the domain's basis are 
           \( e^x\mapsunder{d/dx}e^x \) and
@@ -1430,10 +1443,10 @@ a linear map.
           gives this matrix.
           \begin{equation*}
             \rep{\frac{d}{dx}}{B,B}=
-            \begin{pmatrix}
+            \begin{mat}[r]
                 1  &0  \\
                 0  &2
-            \end{pmatrix}_{B,B}
+            \end{mat}_{B,B}
           \end{equation*}
         \partsitem The images of the members of the domain's basis are 
           \( 1\mapsunder{d/dx}0 \), 
@@ -1444,12 +1457,12 @@ a linear map.
           gives this matrix.
           \begin{equation*}
             \rep{\frac{d}{dx}}{B,B}=
-            \begin{pmatrix}
+            \begin{mat}[r]
                 0  &1  &0  &0 \\
                 0  &0  &0  &0 \\
                 0  &0  &1  &1 \\
                 0  &0  &0  &1
-            \end{pmatrix}_{B,B}
+            \end{mat}_{B,B}
           \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -1457,19 +1470,19 @@ a linear map.
     Find the range of the linear transformation of \( \Re^2 \) represented
     with respect to the standard bases by each matrix.
     \begin{exparts*}
-      \partsitem $\begin{pmatrix}
+      \partsitem $\begin{mat}[r]
             1  &0 \\
             0  &0
-          \end{pmatrix}$
-      \partsitem $\begin{pmatrix}
+          \end{mat}$
+      \partsitem $\begin{mat}[r]
           0  &0  \\
           3  &2  
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem a matrix of the form 
-        $\begin{pmatrix}
+        $\begin{mat}
             a   &b  \\
             2a  &2b
-          \end{pmatrix}$
+          \end{mat}$
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -1477,10 +1490,10 @@ a linear map.
           respect to the codomain's basis in this way.
           \begin{equation*}
             \set{
-              \begin{pmatrix}
+              \begin{mat}[r]
                 1  &0  \\
                 0  &0
-              \end{pmatrix}
+              \end{mat}
               \colvec{x  \\ y}
               \suchthat x,y\in\Re}
             =\set{\colvec{x  \\ 0}
@@ -1493,10 +1506,10 @@ a linear map.
           in this way.
           \begin{equation*}
             \set{
-              \begin{pmatrix}
+              \begin{mat}[r]
                 0  &0  \\
                 3  &2
-              \end{pmatrix}
+              \end{mat}
               \colvec{x  \\ y}
               \suchthat x,y\in\Re}
             =\set{\colvec{0  \\ 3x+2y}
@@ -1509,15 +1522,15 @@ a linear map.
           respect to $\stdbasis_2$ as
           \begin{equation*}
             \set{
-              \begin{pmatrix}
+              \begin{mat}
                 a   &b  \\
                 2a  &2b
-              \end{pmatrix}
+              \end{mat}
               \colvec{x  \\ y}
               \suchthat x,y\in\Re}
             =\set{\colvec{ax+by  \\ 2ax+2by}
                   \suchthat x,y\in\Re}
-            =\set{(ax+by)\cdot\colvec{1  \\ 2}
+            =\set{(ax+by)\cdot\colvec[r]{1  \\ 2}
                   \suchthat x,y\in\Re}
           \end{equation*}
           is the line $y=2x$, provided either $a$ or $b$ is not zero, and
@@ -1534,25 +1547,25 @@ a linear map.
       and codomain.
       For instance,
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &2  \\
           3  &4
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       represents a map \( \map{h}{\Re^2}{\Re^2} \) with respect to the standard
       bases that sends
       \begin{equation*}
-        \colvec{1 \\ 0}\mapsto\colvec{1 \\ 3}
+        \colvec[r]{1 \\ 0}\mapsto\colvec[r]{1 \\ 3}
         \quad\text{and}\quad
-        \colvec{0 \\ 1}\mapsto\colvec{2 \\ 4}
+        \colvec[r]{0 \\ 1}\mapsto\colvec[r]{2 \\ 4}
       \end{equation*}
       and also represents a
       \( \map{\hat{h}}{\polyspace_1}{\Re^2} \) with respect to
       \( \sequence{1,x} \) and \( \stdbasis_2 \) that acts in this way.
       \begin{equation*}
-        1\mapsto\colvec{1 \\ 3}
+        1\mapsto\colvec[r]{1 \\ 3}
         \quad\text{and}\quad
-        x\mapsto\colvec{2 \\ 4}
+        x\mapsto\colvec[r]{2 \\ 4}
       \end{equation*}
 
       The second reason is that, even if the domain and
@@ -1560,10 +1573,10 @@ a linear map.
       different maps.
       An example is the $\nbyn{2}$ identity matrix
       \begin{equation*}
-        I=\begin{pmatrix}
+        I=\begin{mat}[r]
           1  &0  \\
           0  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       which represents the identity map on $\Re^2$ with respect to
       $\stdbasis_2,\stdbasis_2$.
@@ -1588,11 +1601,11 @@ a linear map.
       the assumption that
       \begin{equation*}
         \rep{h}{B,D}
-        =\begin{pmatrix}
+        =\begin{mat}
            h_{1,1} &\ldots  &h_{1,n}  \\
            \vdots  &        &\vdots   \\
            h_{m,1} &\ldots  &h_{m,n}
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       means that
       $h(\vec{\beta}_i)=h_{i,1}\vec{\delta}_1+\dots+h_{i,n}\vec{\delta}_n$.
@@ -1645,11 +1658,11 @@ a linear map.
          \end{center}
          The images of the vectors from the domain's basis 
          \begin{equation*}
-           \colvec{1 \\ 0 \\ 0}\mapsto\colvec{1 \\ 0 \\ 0}
+           \colvec[r]{1 \\ 0 \\ 0}\mapsto\colvec[r]{1 \\ 0 \\ 0}
            \qquad
-           \colvec{0 \\ 1 \\ 0}\mapsto\colvec{0 \\ \cos\theta \\ -\sin\theta}
+           \colvec[r]{0 \\ 1 \\ 0}\mapsto\colvec{0 \\ \cos\theta \\ -\sin\theta}
            \qquad
-           \colvec{0 \\ 0 \\ 1}\mapsto\colvec{0 \\ \sin\theta \\ \cos\theta}
+           \colvec[r]{0 \\ 0 \\ 1}\mapsto\colvec{0 \\ \sin\theta \\ \cos\theta}
          \end{equation*}
          are represented with respect to the codomain's basis
          (again, $\stdbasis_3$) by themselves, 
@@ -1657,29 +1670,29 @@ a linear map.
          make the matrix gives this.
          \begin{equation*}
             \rep{r_\theta}{\stdbasis_3,\stdbasis_3}=
-            \begin{pmatrix}
+            \begin{mat}
               1  &0       &0                \\
               0  &\cos\theta   &\sin\theta   \\
               0  &-\sin\theta  &\cos\theta
-            \end{pmatrix}                  
+            \end{mat}                  
          \end{equation*}
        \partsitem The picture is similar to the one in the prior answer. 
          The images of the vectors from the domain's basis 
          \begin{equation*}
-           \colvec{1 \\ 0 \\ 0}\mapsto\colvec{\cos\theta \\ 0 \\ \sin\theta}
+           \colvec[r]{1 \\ 0 \\ 0}\mapsto\colvec{\cos\theta \\ 0 \\ \sin\theta}
            \qquad
-           \colvec{0 \\ 1 \\ 0}\mapsto\colvec{0 \\ 1 \\ 0}
+           \colvec[r]{0 \\ 1 \\ 0}\mapsto\colvec[r]{0 \\ 1 \\ 0}
            \qquad
-           \colvec{0 \\ 0 \\ 1}\mapsto\colvec{-\sin\theta \\ 0 \\ \cos\theta}
+           \colvec[r]{0 \\ 0 \\ 1}\mapsto\colvec{-\sin\theta \\ 0 \\ \cos\theta}
          \end{equation*}
          are represented with respect to the codomain's basis $\stdbasis_3$
          by themselves, so this is the matrix.
          \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               \cos\theta  &0       &-\sin\theta   \\
               0           &1       &0             \\
               \sin\theta  &0       &\cos\theta
-            \end{pmatrix}                  
+            \end{mat}                  
          \end{equation*}
        \partsitem To a person standing up, with the vertical $z$-axis,
          a rotation of the $xy$-plane that is clockwise proceeds from
@@ -1688,28 +1701,28 @@ a linear map.
          \nearbyexample{exam:RepsOfRigidPlaneMaps}.
          The images of the vectors from the domain's basis 
          \begin{equation*}
-           \colvec{1 \\ 0 \\ 0}\mapsto\colvec{\cos\theta \\ -\sin\theta \\ 0}
+           \colvec[r]{1 \\ 0 \\ 0}\mapsto\colvec{\cos\theta \\ -\sin\theta \\ 0}
            \qquad
-           \colvec{0 \\ 1 \\ 0}\mapsto\colvec{\sin\theta \\ \cos\theta \\ 0}
+           \colvec[r]{0 \\ 1 \\ 0}\mapsto\colvec{\sin\theta \\ \cos\theta \\ 0}
            \qquad
-           \colvec{0 \\ 0 \\ 1}\mapsto\colvec{0 \\ 0 \\ 1}
+           \colvec[r]{0 \\ 0 \\ 1}\mapsto\colvec[r]{0 \\ 0 \\ 1}
          \end{equation*}
          are represented with respect to $\stdbasis_3$
          by themselves, so the matrix is this.
          \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               \cos\theta    &\sin\theta  &0   \\
               -\sin\theta   &\cos\theta  &0    \\
               0             &0           &1
-            \end{pmatrix}                  
+            \end{mat}                  
          \end{equation*}
         \partsitem 
-            $\begin{pmatrix}
+            $\begin{mat}
               \cos\theta  &\sin\theta &0 &0 \\
               -\sin\theta  &\cos\theta  &0 &0 \\
               0           &0           &1 &0 \\
               0           &0           &0 &1
-            \end{pmatrix}$
+            \end{mat}$
       \end{exparts}   
     \end{answer}
   \item (Schur's Triangularization Lemma)\index{Triangularization}%
@@ -1782,23 +1795,23 @@ a linear map.
           The answer falls right out of the prior item:~if
           \begin{equation*}
             \rep{\restrictionmap{h}{U}}{B_U,D_{h(U)}}
-             =\begin{pmatrix}
+             =\begin{mat}
                 h_{1,1}  &\ldots  &h_{1,k}  \\
                 \vdots   &        &\vdots   \\
                 h_{p,1}  &\ldots  &h_{p,k}
-              \end{pmatrix}
+              \end{mat}
           \end{equation*}
           then the extension is represented in this way.
           \begin{equation*}
             \rep{h}{B_V,D_V}
-             =\begin{pmatrix}
+             =\begin{mat}
                 h_{1,1}  &\ldots  &h_{1,k}  &h_{1,k+1}  &\ldots  &h_{1,n}  \\
                 \vdots   &        &         &           &        &\vdots   \\
                 h_{p,1}  &\ldots  &h_{p,k}  &h_{p,k+1}  &\ldots  &h_{p,n}  \\
                 0        &\ldots  &0        &h_{p+1,k+1}&\ldots  &h_{p+1,n}  \\
                 \vdots   &        &         &           &        &\vdots   \\
                 0        &\ldots  &0        &h_{m,k+1}  &\ldots  &h_{m,n}
-              \end{pmatrix}
+              \end{mat}
           \end{equation*}
         \partsitem Take \( W_i \) to be the span of
           \( \set{h(\vec{\beta}_1),\dots,h(\vec{\beta}_i)} \).
@@ -1809,16 +1822,16 @@ a linear map.
           matrices 
           \begin{equation*}
              \rep{\pi_x}{\stdbasis_2,\stdbasis_2}=
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &0  \\
                0  &0
-             \end{pmatrix}
+             \end{mat}
              \quad\text{and}\quad
              \rep{\pi_x}{C,\stdbasis_2}=
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &1  \\
                0  &0
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           where \( C=\sequence{\vec{e}_2,\vec{e}_1} \).
       \end{exparts}  
@@ -1930,14 +1943,14 @@ Which map the matrix represents depends on which bases are used.
 If
 \begin{equation*}
   H=
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &0  \\
     0  &0
-  \end{pmatrix},
+  \end{mat},
   \quad
-  B_1=D_1=\sequence{\colvec{1 \\ 0},\colvec{0 \\ 1} },
+  B_1=D_1=\sequence{\colvec[r]{1 \\ 0},\colvec[r]{0 \\ 1} },
   \quad\text{and}\quad
-  B_2=D_2=\sequence{\colvec{0 \\ 1},\colvec{1 \\ 0} },
+  B_2=D_2=\sequence{\colvec[r]{0 \\ 1},\colvec[r]{1 \\ 0} },
 \end{equation*}
 then \( \map{h_1}{\Re^2}{\Re^2} \) represented by \( H \)
 with respect to \( B_1,D_1 \) maps
@@ -2037,12 +2050,12 @@ column space, and so the two spaces have the same dimension.
 \begin{example}
 Any map represented by
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &2  &2  \\
       1  &2  &1  \\
       0  &0  &3  \\
       0  &0  &2
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 must, by definition, be from a three-dimensional domain
 to a four-dimensional codomain.
@@ -2122,10 +2135,10 @@ Immediate from the prior result.
 Any map from \( \Re^2 \) to \( \polyspace_1 \) represented 
 with respect to any pair of bases by
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      1  &2  \\
      0  &3  
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 is nonsingular because this matrix has rank two.
 \end{example}
@@ -2133,10 +2146,10 @@ is nonsingular because this matrix has rank two.
 \begin{example} \label{ex:NonSMatHasNonSMap}
 Any map \( \map{g}{V}{W} \) represented by
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &2  \\
     3  &6
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 is singular because this matrix is singular.
 \end{example}
@@ -2160,26 +2173,26 @@ And, we shall see how to find the matrix that represents a map's inverse.
   \recommended \item  
     Decide if the vector is in the column space of the matrix.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                    2  &1  \\
                    2  &5
-                 \end{pmatrix} \),~\( \colvec{1 \\ -3}  \)
-      \partsitem \( \begin{pmatrix}
+                 \end{mat} \),~\( \colvec[r]{1 \\ -3}  \)
+      \partsitem \( \begin{mat}[r]
                    4  &-8 \\
                    2  &-4
-                 \end{pmatrix} \),~\( \colvec{0 \\ 1}  \)
-      \partsitem \( \begin{pmatrix}
+                 \end{mat} \),~\( \colvec[r]{0 \\ 1}  \)
+      \partsitem \( \begin{mat}[r]
                    1  &-1  &1  \\
                    1  &1   &-1 \\
                   -1  &-1  &1
-                \end{pmatrix} \),~\( \colvec{2 \\ 0 \\ 0}  \)
+                \end{mat} \),~\( \colvec[r]{2 \\ 0 \\ 0}  \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem Yes;
           we are asking if there are scalars \( c_1 \) and \( c_2 \) such that
           \begin{equation*}
-            c_1\colvec{2 \\ 2}+c_2\colvec{1 \\ 5}=\colvec{1 \\ -3}
+            c_1\colvec[r]{2 \\ 2}+c_2\colvec[r]{1 \\ 5}=\colvec[r]{1 \\ -3}
           \end{equation*}
           which gives rise to a linear system
           \begin{equation*}
@@ -2200,7 +2213,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
           we are asking if there are scalars $c_1$ and $c_2$
           such that 
           \begin{equation*}
-            c_1\colvec{4 \\ 2}+c_2\colvec{-8 \\ -4}=\colvec{0 \\ 1}
+            c_1\colvec[r]{4 \\ 2}+c_2\colvec[r]{-8 \\ -4}=\colvec[r]{0 \\ 1}
           \end{equation*}
           and one way to proceed is to consider the resulting linear system
           \begin{equation*}
@@ -2218,10 +2231,10 @@ And, we shall see how to find the matrix that represents a map's inverse.
           is the first column minus the second.
           Or, failing that, setting up the relationship among the columns 
           \begin{equation*}
-            c_1\colvec{1 \\ 1 \\ -1}
-             +c_2\colvec{-1 \\ 1 \\ -1}
-             +c_3\colvec{1 \\ -1 \\ 1}
-             =\colvec{2 \\ 0 \\ 0}
+            c_1\colvec[r]{1 \\ 1 \\ -1}
+             +c_2\colvec[r]{-1 \\ 1 \\ -1}
+             +c_3\colvec[r]{1 \\ -1 \\ 1}
+             =\colvec[r]{2 \\ 0 \\ 0}
           \end{equation*}
           and considering the resulting linear system
           \begin{equation*}
@@ -2254,36 +2267,37 @@ And, we shall see how to find the matrix that represents a map's inverse.
    Decide if each vector lies in the range of the map from \( \Re^3 \)
    to \( \Re^2 \) represented with respect to the standard bases by the matrix.
    \begin{exparts*}
-     \partsitem \( \begin{pmatrix}
+     \partsitem \( \begin{mat}[r]
                 1  &1  &3  \\
                 0  &1  &4
-              \end{pmatrix}  \),~\( \colvec{1 \\ 3} \)
-     \partsitem \( \begin{pmatrix}
+              \end{mat}  \),~\( \colvec[r]{1 \\ 3} \)
+     \partsitem \( \begin{mat}[r]
                 2  &0  &3  \\
                 4  &0  &6
-              \end{pmatrix}  \),~\( \colvec{1 \\ 1} \)
+              \end{mat}  \),~\( \colvec[r]{1 \\ 1} \)
    \end{exparts*}
    \begin{answer} 
      As described in the subsection, with respect to the standard bases,
      representations are transparent,
      and so, for instance, the first matrix describes this map.
      \begin{equation*}
-       \colvec{1 \\ 0 \\ 0}=\colvec{1 \\ 0 \\ 0}_{\stdbasis_3}
-          \!\mapsto\colvec{1 \\ 0}_{\stdbasis_2}=\colvec{1 \\ 0}
+       \colvec[r]{1 \\ 0 \\ 0}=\colvec[r]{1 \\ 0 \\ 0}_{\stdbasis_3}
+          \!\mapsto\colvec[r]{1 \\ 0}_{\stdbasis_2}=\colvec[r]{1 \\ 0}
        \qquad
-       %\colvec{0 \\ 1 \\ 0}=\colvec{0 \\ 1 \\ 0}_{\stdbasis_3}
-       %   \!\mapsto\colvec{1 \\ 1}_{\stdbasis_2}=\colvec{1 \\ 1}
-       \colvec{0 \\ 1 \\ 0}
-          \!\mapsto\colvec{1 \\ 1}
+       %\colvec[r]{0 \\ 1 \\ 0}=\colvec[r]{0 \\ 1 \\ 0}_{\stdbasis_3}
+       %   \!\mapsto\colvec[r]{1 \\ 1}_{\stdbasis_2}=\colvec[r]{1 \\ 1}
+       \colvec[r]{0 \\ 1 \\ 0}
+          \!\mapsto\colvec[r]{1 \\ 1}
        \qquad
-       %\colvec{0 \\ 0 \\ 1}=\colvec{0 \\ 0 \\ 1}_{\stdbasis_3}
-       %   \!\mapsto\colvec{3 \\ 4}_{\stdbasis_2}=\colvec{3 \\ 4}
-       \colvec{0 \\ 0 \\ 1}
-          \!\mapsto\colvec{3 \\ 4}
+       %\colvec[r]{0 \\ 0 \\ 1}=\colvec[r]{0 \\ 0 \\ 1}_{\stdbasis_3}
+       %   \!\mapsto\colvec[r]{3 \\ 4}_{\stdbasis_2}=\colvec[r]{3 \\ 4}
+       \colvec[r]{0 \\ 0 \\ 1}
+          \!\mapsto\colvec[r]{3 \\ 4}
      \end{equation*}
      So, for this first one, we are asking whether thare are scalars such that
      \begin{equation*}
-       c_1\colvec{1 \\ 0}+c_2\colvec{1 \\ 1}+c_3\colvec{3 \\ 4}=\colvec{1 \\ 3}
+       c_1\colvec[r]{1 \\ 0}+c_2\colvec[r]{1 \\ 1}
+           +c_3\colvec[r]{3 \\ 4}=\colvec[r]{1 \\ 3}
      \end{equation*}
      that is, whether the vector is in the column space of the matrix.
      \begin{exparts}
@@ -2300,10 +2314,10 @@ And, we shall see how to find the matrix that represents a map's inverse.
          component that is twice the first, while the vector does not.
          Alternatively, the column space of the matrix is 
          \begin{equation*}
-           \set{c_1\colvec{2 \\ 4}
-                +c_2\colvec{0 \\ 0}
-                +c_3\colvec{3 \\ 6} \suchthat c_1,c_2,c_3\in\Re}
-           =\set{c\colvec{1 \\ 2}\suchthat c\in\Re}
+           \set{c_1\colvec[r]{2 \\ 4}
+                +c_2\colvec[r]{0 \\ 0}
+                +c_3\colvec[r]{3 \\ 6} \suchthat c_1,c_2,c_3\in\Re}
+           =\set{c\colvec[r]{1 \\ 2}\suchthat c\in\Re}
          \end{equation*}
          (which is the fact already noted, but was arrived at by calculation 
          rather than inspiration), and the given vector is not in this set.
@@ -2314,14 +2328,14 @@ And, we shall see how to find the matrix that represents a map's inverse.
     and these bases for that space.
     \begin{equation*}
       \frac{1}{2}\cdot
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &1  \\
         -1 &1
-      \end{pmatrix}
+      \end{mat}
       \qquad
-      B=\sequence{\colvec{0 \\ 1},\colvec{1 \\ 0}}
+      B=\sequence{\colvec[r]{0 \\ 1},\colvec[r]{1 \\ 0}}
       \quad 
-      D=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+      D=\sequence{\colvec[r]{1 \\ 1},\colvec[r]{1 \\ -1}}
     \end{equation*}
     \begin{exparts}
       \partsitem To what vector in the codomain 
@@ -2336,29 +2350,29 @@ And, we shall see how to find the matrix that represents a map's inverse.
       \begin{exparts}
         \partsitem The first member of the basis
           \begin{equation*}
-            \colvec{0 \\ 1}=\colvec{1 \\ 0}_B
+            \colvec[r]{0 \\ 1}=\colvec[r]{1 \\ 0}_B
           \end{equation*}
           is mapped to 
           \begin{equation*}
-            \colvec{1/2 \\ -1/2}_D
+            \colvec[r]{1/2 \\ -1/2}_D
           \end{equation*}
           which is this member of the codomain.
           \begin{equation*}
-            \frac{1}{2}\cdot\colvec{1 \\ 1}
-              -\frac{1}{2}\cdot\colvec{1 \\ -1}
-              =\colvec{0 \\ 1}
+            \frac{1}{2}\cdot\colvec[r]{1 \\ 1}
+              -\frac{1}{2}\cdot\colvec[r]{1 \\ -1}
+              =\colvec[r]{0 \\ 1}
           \end{equation*}
         \partsitem The second member of the basis is mapped
           \begin{equation*}
-            \colvec{1 \\ 0}=\colvec{0 \\ 1}_B
+            \colvec[r]{1 \\ 0}=\colvec[r]{0 \\ 1}_B
             \mapsto
-            \colvec{(1/2 \\ 1/2}_D 
+            \colvec[r]{(1/2 \\ 1/2}_D 
           \end{equation*}
           to this member of the codomain.
           \begin{equation*}
-            \frac{1}{2}\cdot\colvec{1 \\ 1}
-              +\frac{1}{2}\cdot\colvec{1 \\ -1}
-              =\colvec{1 \\ 0}
+            \frac{1}{2}\cdot\colvec[r]{1 \\ 1}
+              +\frac{1}{2}\cdot\colvec[r]{1 \\ -1}
+              =\colvec[r]{1 \\ 0}
           \end{equation*}
         \partsitem Because the map that the matrix represents is the identity
           map on the basis, it must be the identity on all members of the 
@@ -2373,8 +2387,8 @@ And, we shall see how to find the matrix that represents a map's inverse.
           \end{equation*}
           which represents this member of $\Re^2$. 
           \begin{equation*}
-            \frac{x+y}{2}\cdot\colvec{1 \\ 1}
-              +\frac{x-y}{2}\cdot\colvec{1 \\ -1}
+            \frac{x+y}{2}\cdot\colvec[r]{1 \\ 1}
+              +\frac{x-y}{2}\cdot\colvec[r]{1 \\ -1}
             =\colvec{x \\ y}
           \end{equation*}
       \end{exparts}
@@ -2386,10 +2400,10 @@ And, we shall see how to find the matrix that represents a map's inverse.
     \( B=\sequence{\cos\theta-\sin\theta,\sin\theta} \) and
     \( D=\sequence{\cos\theta+\sin\theta,\cos\theta} \) by this matrix?
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
           0  &0  \\
           1  &0
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       A general member of the domain, represented with respect to the
@@ -2417,11 +2431,11 @@ And, we shall see how to find the matrix that represents a map's inverse.
      $\polyspace_2$ represented with respect to $\stdbasis_3$ and 
      $\sequence{1,1+x^2,x}$ by this matrix.
      \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          1  &3  &0  \\
          0  &1  &0  \\
          1  &0  &1
-       \end{pmatrix}
+       \end{mat}
      \end{equation*}
      \begin{answer}
        Denote the given basis of
@@ -2432,35 +2446,35 @@ And, we shall see how to find the matrix that represents a map's inverse.
        Thus, the first vector in $\stdbasis_3$ is mapped to the element
        of $\polyspace_2$ represented with respect to $B$ by
        \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          1  &3  &0  \\
          0  &1  &0  \\
          1  &0  &1
-       \end{pmatrix}
-       \colvec{1 \\ 0 \\ 0}
+       \end{mat}
+       \colvec[r]{1 \\ 0 \\ 0}
        =
-       \colvec{1 \\ 0 \\ 1}  
+       \colvec[r]{1 \\ 0 \\ 1}  
        \end{equation*}
        and that element is $1+x$.
        The other two images of basis vectors are calculated similarly.
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &3  &0  \\
            0  &1  &0  \\
            1  &0  &1
-         \end{pmatrix}
-         \colvec{0 \\ 1 \\ 0}
+         \end{mat}
+         \colvec[r]{0 \\ 1 \\ 0}
          =
-         \colvec{3 \\ 1 \\ 0}=\rep{4+x^2}{B}
+         \colvec[r]{3 \\ 1 \\ 0}=\rep{4+x^2}{B}
          \quad
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &3  &0  \\
            0  &1  &0  \\
            1  &0  &1
-         \end{pmatrix}
-         \colvec{0 \\ 0 \\ 1}
+         \end{mat}
+         \colvec[r]{0 \\ 0 \\ 1}
          =
-         \colvec{0 \\ 0 \\ 1}=\rep{x}{B}
+         \colvec[r]{0 \\ 0 \\ 1}=\rep{x}{B}
        \end{equation*}
        So the range of $h$ is the span of three polynomials 
        $1+x$, $4+x^2$, and $x$. 
@@ -2473,8 +2487,8 @@ And, we shall see how to find the matrix that represents a map's inverse.
        Thus it is in the range, and in fact it is the image of
        this vector. 
        \begin{equation*}
-         1\cdot\colvec{1 \\ 0 \\ 0}+0\cdot\colvec{0 \\ 1 \\ 0}
-             +1\cdot\colvec{0 \\ 0 \\ 1}
+         1\cdot\colvec[r]{1 \\ 0 \\ 0}+0\cdot\colvec[r]{0 \\ 1 \\ 0}
+             +1\cdot\colvec[r]{0 \\ 0 \\ 1}
        \end{equation*}
 
        \textit{Comment.}
@@ -2510,13 +2524,13 @@ And, we shall see how to find the matrix that represents a map's inverse.
         \partsitem The only representation of the zero vector in the codomain
            is 
            \begin{equation*}
-             \rep{\zero}{D}=\colvec{0 \\ 0}_D
+             \rep{\zero}{D}=\colvec[r]{0 \\ 0}_D
            \end{equation*}
            and so the set of representations of members of the nullspace is
            this.
            \begin{equation*}
              \set{\colvec{x \\ y}_B\suchthat \text{$x+2y=0$ and $3x+6y=0$}}
-             =\set{y\cdot\colvec{-1/2 \\ 1}_D\suchthat y\in\Re}
+             =\set{y\cdot\colvec[r]{-1/2 \\ 1}_D\suchthat y\in\Re}
            \end{equation*}
          \partsitem The representation map $\map{\mbox{Rep}_D}{W}{\Re^2}$
            and its inverse
@@ -2530,7 +2544,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
            this.
            \begin{equation*}
              \set{\colvec{x+2y \\ 3x+6y}_D\suchthat x,y\in\Re}
-             =\set{k\cdot\colvec{1 \\ 3}_D\suchthat k\in\Re}
+             =\set{k\cdot\colvec[r]{1 \\ 3}_D\suchthat k\in\Re}
            \end{equation*}
          \partsitem Of course, \nearbytheorem{th:RankMatEqRankMap} gives that
            the rank of the map equals the rank of the matrix, which is one.
@@ -2592,10 +2606,10 @@ And, we shall see how to find the matrix that represents a map's inverse.
       Yes.
       Consider
       \begin{equation*}
-        H=\begin{pmatrix}
+        H=\begin{mat}[r]
             1  &0  \\
             0  &1
-          \end{pmatrix}
+          \end{mat}
       \end{equation*}
       representing a map from \( \Re^2 \) to \( \Re^2 \).
       With respect to the standard bases 
@@ -2603,7 +2617,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
       represents the identity map.
       With respect to
       \begin{equation*}
-        B_2=D_2=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+        B_2=D_2=\sequence{\colvec[r]{1 \\ 1},\colvec[r]{1 \\ -1}}
       \end{equation*}
       this matrix again represents the identity.
       In fact, as long as the starting and ending bases 
@@ -2627,27 +2641,27 @@ And, we shall see how to find the matrix that represents a map's inverse.
     the map represented with respect to the standard 
     bases $\stdbasis_2,\stdbasis_2$ by this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         3  &0  \\
         0  &2
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     Do the same for these.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &0  \\
         0  &0
-      \end{pmatrix}
+      \end{mat}
       \quad
-      \begin{pmatrix}
+      \begin{mat}[r]
         0  &1  \\
         1  &0
-      \end{pmatrix}
+      \end{mat}
       \quad
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &3  \\
         0  &1
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       The first map 
@@ -2699,11 +2713,11 @@ And, we shall see how to find the matrix that represents a map's inverse.
        \partsitem Are there bases for $\Re^3$ such that
           this matrix
           \begin{equation*}
-            H=\begin{pmatrix}
+            H=\begin{mat}[r]
                 1  &0  &0 \\
                 2  &0  &0 \\
                 0  &1  &0 
-              \end{pmatrix}
+              \end{mat}
           \end{equation*}
           represents a map from $\Re^3$ to $\Re^3$ whose range is
           the $xy$~plane subspace of $\Re^3$?
@@ -2720,20 +2734,20 @@ And, we shall see how to find the matrix that represents a map's inverse.
             we require a basis $D$ for the codomain $\Re^3$.
             The matrix $H$ gives the action of the map as this
             \begin{equation*}
-              \colvec{1 \\ 0 \\ 0}=\colvec{1 \\ 0 \\ 0}_{\stdbasis_3}
-                 \mapsto\colvec{1 \\ 2 \\ 0}_D
+              \colvec[r]{1 \\ 0 \\ 0}=\colvec[r]{1 \\ 0 \\ 0}_{\stdbasis_3}
+                 \mapsto\colvec[r]{1 \\ 2 \\ 0}_D
               \quad       
-              \colvec{0 \\ 1 \\ 0}=\colvec{0 \\ 1 \\ 0}_{\stdbasis_3}
-                 \mapsto\colvec{0 \\ 0 \\ 1}_D
+              \colvec[r]{0 \\ 1 \\ 0}=\colvec[r]{0 \\ 1 \\ 0}_{\stdbasis_3}
+                 \mapsto\colvec[r]{0 \\ 0 \\ 1}_D
               \quad       
-              \colvec{0 \\ 0 \\ 1}=\colvec{0 \\ 0 \\ 1}_{\stdbasis_3}
-                 \mapsto\colvec{0 \\ 0 \\ 0}_D
+              \colvec[r]{0 \\ 0 \\ 1}=\colvec[r]{0 \\ 0 \\ 1}_{\stdbasis_3}
+                 \mapsto\colvec[r]{0 \\ 0 \\ 0}_D
             \end{equation*}
             and there is no harm in finding a basis $D$ so that
             \begin{equation*}
-              \rep{\colvec{1 \\ 0 \\ 0}}{D}=\colvec{1 \\ 2 \\ 0}_D
+              \rep{\colvec[r]{1 \\ 0 \\ 0}}{D}=\colvec[r]{1 \\ 2 \\ 0}_D
               \quad\mbox{and}\quad       
-              \rep{\colvec{0 \\ 1 \\ 0}}{D}=\colvec{0 \\ 0 \\ 1}_D
+              \rep{\colvec[r]{0 \\ 1 \\ 0}}{D}=\colvec[r]{0 \\ 0 \\ 1}_D
             \end{equation*}
             that is, so that the map represented by $H$ with respect to
             $\stdbasis_3,D$ is projection down onto the $xy$~plane.
@@ -2742,9 +2756,9 @@ And, we shall see how to find the matrix that represents a map's inverse.
             The first condition gives that the first member of $D$ plus twice
             the second equals $\vec{e}_1$, and so this basis will do.
             \begin{equation*}
-              D=\sequence{\colvec{0 \\ -1 \\ 0},
-                          \colvec{1/2 \\ 1/2 \\ 0},
-                          \colvec{0 \\ 1 \\ 0}}
+              D=\sequence{\colvec[r]{0 \\ -1 \\ 0},
+                          \colvec[r]{1/2 \\ 1/2 \\ 0},
+                          \colvec[r]{0 \\ 1 \\ 0}}
             \end{equation*}
        \end{exparts} 
      \end{answer}
@@ -2782,9 +2796,9 @@ And, we shall see how to find the matrix that represents a map's inverse.
        \partsitem Any linear map $\map{g}{V}{\Re}$ is represented by some
           matrix
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               g_1  &g_2 &\cdots &g_n
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           (the matrix has $n$ columns because $V$ is $n$-dimensional and it
           has only one row because $\Re$ is one-dimensional).
