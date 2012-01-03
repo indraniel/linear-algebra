@@ -140,7 +140,7 @@ the above equation as representing an application of the map to the matrix.
 That matrix consists of the coefficients from the vector on the right,
 $0$ and $1$ from the first row, $-1/2$ and $-1$ from the
 second row, and $1$ and $0$ from the third row.
-Notice that it is made by adjoining the vectors 
+That is, we make it by adjoining the vectors 
 representing the $h(\vec{\beta})$'s. 
 \begin{equation*}
   \left(\begin{array}{c|c}
@@ -173,17 +173,6 @@ is the \definend{matrix representation of \( h \) with respect to \( B, D \)}.%
 \index{homomorphism!matrix representing}
 \end{definition}
 
-% Briefly, the vectors
-% representing the $h(\vec{\beta})$'s are adjoined to 
-% make the matrix representing the map. 
-% \begin{equation*}
-%   \rep{h}{B,D}=
-%   \left(\begin{array}{c|@{\hspace{1.5em}}c@{\hspace{1.5em}}|c}
-%      \vdots                         &       &\vdots    \\
-%      \rep{\,h(\vec{\beta}_1)\,}{D}  &\cdots &\rep{\,h(\vec{\beta}_n)\,}{D}  \\
-%      \vdots                         &       &\vdots
-%   \end{array}\right)
-% \end{equation*}
 \noindent In that matrix the number of columns~$n$ is the 
 dimension of the map's domain while  
 the number of rows~$m$ is the dimension of the codomain.
@@ -195,7 +184,7 @@ Thus for the map \( h \), the matrix representing it is \( H \), with
 entries \( h_{i,j} \).
 
 \begin{example}  \label{ex:PolyOneToRThree}
-If \( \map{h}{\Re^3}{\polyspace_1} \) is given by
+If \( \map{h}{\Re^3}{\polyspace_1} \) is
 \begin{equation*}
   \colvec{a_1 \\ a_2 \\ a_3}
      \mapsunder{h}
@@ -296,16 +285,17 @@ Nonetheless, we need the verification that the definition is right.
 \end{remark}
 
 \begin{example}
-With the matrix from \nearbyexample{ex:PolyOneToRThree}
+For the matrix from \nearbyexample{ex:PolyOneToRThree}
 we can calculate where that map sends this vector.
 \begin{equation*}
   \vec{v}=\colvec[r]{4 \\ 1 \\ 0}
 \end{equation*}
-This vector is represented, with respect to the domain basis $B$, by
+With respect to the domain basis $B$ the representation of this vector is 
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec[r]{0 \\ 1/2 \\ 2}_B
 \end{equation*}
-and so this is the representation of the value $h(\vec{v})$ with respect to
+and so the matrix-vector product gives 
+the representation of the value $h(\vec{v})$ with respect to
 the codomain basis $D$.
 \begin{align*}
   \rep{h(\vec{v})}{D}
@@ -324,7 +314,8 @@ take $(9/2)(1+x)-(9/2)(-1+x)=9$.
 
 \begin{example}
 Let \( \map{\pi}{\Re^3}{\Re^2} \) be projection onto the \( xy \)-plane.
-To give a matrix representing this map, we first fix bases.
+To give a matrix representing this map, we first fix bases 
+(these are arbitrary).
 \begin{equation*}
   B=\sequence{
               \colvec[r]{1 \\ 0 \\ 0},
@@ -413,8 +404,8 @@ and the above formula that uses representations and matrix-vector
 multiplication.
 Compared to the first way, the second way might seem complicated.
 However, it has advantages.
-The next example shows that giving a formula for some maps is 
-simplified by this new scheme.  
+The next example shows that this new scheme simplifies
+the formula for some maps.  
 
 \begin{example} \label{exam:RepsOfRigidPlaneMaps}
 To represent a  \definend{rotation}\index{rotation (or turning)!represented}
@@ -433,8 +424,8 @@ vector in the domain's basis.
   \colvec[r]{0 \\ 1}\mapsunder{t_\theta}\colvec{-\sin\theta \\ \cos\theta}
 \end{equation*}
 Then we represent these images with respect to the codomain's basis.
-Because this basis is $\stdbasis_2$, vectors are represented by themselves.
-Finally, adjoining the representations gives the matrix representing the map.
+Because this basis is $\stdbasis_2$, vectors represent themselves.
+Adjoining the representations gives the matrix representing the map.
 \begin{equation*}
   \rep{t_\theta}{\stdbasis_2,\stdbasis_2}
   =
@@ -443,10 +434,10 @@ Finally, adjoining the representations gives the matrix representing the map.
     \sin\theta  &\cos\theta
   \end{mat}
 \end{equation*}
-The advantage of this scheme is that just by knowing how to
-represent the image of the two basis vectors, 
-we get a formula that tells us the image of any vector at 
-all; here a vector rotated by $\theta=\pi/6$.
+The advantage of this scheme is that by knowing how to
+represent the image of just the two basis vectors 
+we get a formula for the image of any vector at 
+all; here we rotate a vector by $\theta=\pi/6$.
 \begin{equation*}
   \colvec[r]{3  \\ -2}\;\mapsunder{t_{\pi/6}}\;
   \begin{mat}[r]
@@ -457,23 +448,12 @@ all; here a vector rotated by $\theta=\pi/6$.
   \approx
   \colvec[r]{3.598 \\ -0.232}  
 \end{equation*}
-(Again, we are using the fact that, with respect to $\stdbasis_2$, 
+(We are again using the fact that with respect to the standard basis,
 vectors represent themselves.)
 \end{example}
 
-We have already seen the addition and scalar multiplication
-operations of matrices and  
-the dot product operation of vectors. 
-Matrix-vector multiplication is a new operation in the arithmetic of 
-vectors and matrices.
-Nothing in \nearbydefinition{def:MatrixVecProd} requires us to view
-it in terms of representations.
-We can get some insight into this operation 
-by turning away from  what is being represented, and instead focusing on
-how the entries combine.
-
 \begin{example}
-In the definition
+In the definition of matrix-vector product
 the width of the matrix equals the height of the vector.
 Hence, the first product below is defined while the second is not. 
 \begin{equation*}
@@ -482,8 +462,8 @@ Hence, the first product below is defined while the second is not.
       4  &3  &1
     \end{mat}
   \colvec[r]{1 \\ 0 \\ 2}
-  =
-  \colvec[r]{1 \\ 6}
+  % =
+  % \colvec[r]{1 \\ 6}
   \qquad
     \begin{mat}[r]
       1  &0  &0  \\
@@ -491,15 +471,26 @@ Hence, the first product below is defined while the second is not.
     \end{mat}
   \colvec[r]{1 \\ 0}
 \end{equation*}
-One reason that this product is not defined is purely formal:~the
-definition requires that the sizes match, and these sizes don't match.
+One reason that this product is not defined is the purely formal one that the
+definition requires that the sizes match and these sizes don't match.
 Behind the formality, though, 
-is a reason why we will leave it undefined\Dash the
+is a sensible reason to leave it undefined:~the three-wide
 matrix represents a map with a three-dimensional domain while the 
-vector represents a member of a two-dimensional space.
+two-tall vector represents a member of a two-dimensional space.
 \end{example}
 
-A good way to view a matrix-vector product is
+Earlier we saw the operations of addition and scalar multiplication
+operations of matrices and  
+the dot product of vectors. 
+Matrix-vector multiplication is a new operation in the arithmetic of 
+vectors and matrices.
+Nothing in \nearbydefinition{def:MatrixVecProd} requires us to view
+it in terms of representations.
+We can get some insight
+by focusing on
+how the entries combine.
+
+A good way to view matrix-vector product is
 as the dot products of the rows of the matrix with the column vector.
 \begin{equation*}
     \begin{mat}
@@ -514,7 +505,7 @@ as the dot products of the rows of the matrix with the column vector.
 Looked at in this row-by-row way,
 this new operation generalizes dot product.
 
-Matrix-vector product can also be viewed column-by-column.
+We can also view the operation column-by-column.
 \begin{align*}
            \generalmatrix{h}{n}{m}
            \colvec{c_1 \\ c_2 \\ \vdots \\ c_n}
@@ -559,11 +550,11 @@ argument knowing only $h(\vec{\beta}_1)$, \ldots, $h(\vec{\beta}_n)$.
 We have developed this into a scheme to
 compute the action of the map by taking 
 the matrix-vector product of the matrix representing the 
-map and the vector representing the argument.
-In this way, any linear map is represented with respect to some bases
-by a matrix.
-In the next subsection, we will show the converse, that any matrix represents
-a linear map.
+map with the vector representing the argument.
+In this way, with respect to any bases, any linear map has a matrix 
+representing it.
+The next subsection will show the converse, that if we fix bases then 
+for any matrix there is an associated linear map.
 
 
 \begin{exercises}
@@ -1646,8 +1637,8 @@ a linear map.
         (Put the person's head at $\vec{e}_2$.)
       \partsitem Repeat, about the \( z \)-axis.
       \partsitem Extend the prior item to \( \Re^4 \).
-        (\textit{Hint:} 
-        `rotate about the \( z \)-axis' can be restated as `rotate parallel
+        (\textit{Hint:} we can restate 
+        `rotate about the \( z \)-axis' as `rotate parallel
         to the \( xy \)-plane'.)
     \end{exparts}
     \begin{answer}
@@ -1874,9 +1865,9 @@ the number of columns of the matrix is the dimension of the map's
 domain and the number of rows of the matrix is the dimension of the 
 map's codomain.
 Thus, for instance,
-a \( \nbym{2}{3} \) matrix cannot represent a map from \( \Re^5 \) to
-\( \Re^4 \).
-The next result says that, beyond this restriction on the dimensions, 
+a \( \nbym{2}{3} \) matrix cannot represent a map with domain \( \Re^5 \) 
+or codomain~\( \Re^4 \).
+The next result says that beyond this restriction on the dimensions 
 there are no other limitations:~the
 \( \nbym{2}{3} \) matrix represents a map from any
 three-dimensional space to any two-dimensional space. 
@@ -1898,28 +1889,31 @@ Also fix bases
 \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and
 \( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \) for those spaces.
 Define a function \( \map{h}{V}{W} \) by:~where $\vec{v}$ in the domain
-is represented as 
+has the representation
 \begin{equation*}
   \rep{\vec{v}}{B}
     =\colvec{v_1 \\ \vdots \\ v_n}_B
 \end{equation*}
-then its image \( h(\vec{v}) \) is the member the codomain represented by
+then its image \( h(\vec{v}) \) is the member the codomain represented 
+in this way.
 \begin{equation*}
   \rep{\,h(\vec{v})\,}{D}
     =\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n \\ \vdots \\ 
                    h_{m,1}v_1+\dots+h_{m,n}v_n}_D
 \end{equation*}
-that is,
-$h(\vec{v})=h(v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n)$ is defined to be 
+That is, for any $\vec{v}$ in the domain, express it with respect to the
+basis as
+$\vec{v}=v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n$ and then 
+$h(\vec{v})$ is
 $(h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
   +\dots+
   (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
 (This is well-defined by the uniqueness of the representation  
 \( \rep{\vec{v}}{B} \).)
 
-Observe that \( h \) has simply been defined to make it the map that is
-represented with respect to \( B,D \) by the matrix \( H \).
-So to finish, we need only check that \( h \) is linear.
+Observe that the definition simply makes \( h \) 
+the map is represented with respect to \( B,D \) by the matrix \( H \).
+So to finish we need only check that the defined map \( h \) is linear.
 If $\vec{v}, \vec{u}\in V$ are such that
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ \vdots \\ v_n}
@@ -1935,11 +1929,12 @@ and \( c,d\in\Re \) then the calculation
          +h_{m,n}(cv_n+du_n)\bigr)\cdot\vec{\delta}_m  \\
   &=c\cdot h(\vec{v})+d\cdot h(\vec{u})
 \end{align*}
-provides this verification.
+supplies this check.
 \end{proof}
 
 \begin{example} \label{ex:CngBasesChgMap}
-Which map the matrix represents depends on which bases are used.
+The map that the matrix represents depends on the domain and
+codomain bases that we choose.
 If
 \begin{equation*}
   H=
@@ -1976,35 +1971,38 @@ with respect to \( B_2,D_2 \) is this map.
   =
   \colvec{0 \\ c_2}
 \end{equation*}
-These two are different.
-The first is projection onto the \( x \)~axis, while the second 
-is projection onto the $y$~axis.
+These are different functions.
+The first is projection onto the \( x \)-axis, while the second 
+is projection onto the $y$-axis.
 \end{example}
 
-So not only is any linear map described by a
-matrix but any matrix describes a linear map.
-This means that we can, when convenient, 
-handle linear maps entirely as matrices,
-simply doing the computations, without
-have to worry that a matrix of interest does not represent 
-a linear map on some pair of spaces of interest.
-(In practice, when we are working with a matrix but no spaces or bases have
-been specified, we will often take the
+% So not only is any linear map described by a
+% matrix but any matrix describes a linear map.
+This result means that we can, when convenient, 
+work solely with matrices,
+just doing the computations without having to
+worry whether a matrix of interest represents 
+a linear map on some pair of spaces.
+When we are working with a matrix 
+but we do not have particular spaces or bases in mind then
+we often take the
 domain and codomain to be $\Re^n$ and $\Re^m$ and use the standard
 bases.
-In this case, because the
-representation is transparent\Dash the representation with respect to the
-standard basis of $\vec{v}$ is $\vec{v}$\Dash the
-column space of the matrix equals the range of the map.
-Consequently,
+This is convienent because with the standard bases
+vector representation is transparent\Dash
+the representation of $\vec{v}$ is $\vec{v}$.
+(In this case the
+column space of the matrix equals the range of the map and
+consequently
 the column space of \( H \) is often denoted by \( \rangespace{H} \).) 
 
-With the theorem, we have characterized linear maps as
-those maps that act in this matrix way.
-Each linear map is described by a matrix and each matrix describes a 
-linear map.
-We finish this section by illustrating how a matrix can be used to tell things
-about its maps.
+% With the theorem, we have characterized that for fixed bases we can 
+% pass back and forth between a linear map and its representation as a matrix.
+% Each linear map is described by a matrix and each matrix describes a 
+% linear map.
+We finish this section by illustrating how a matrix can 
+give us information
+about the associated maps.
 
 \begin{theorem} \label{th:RankMatEqRankMap}
 \index{rank}\index{homomorphism!rank}\index{matrix!rank}
@@ -2013,7 +2011,7 @@ The rank of a matrix equals the rank of any map that it represents.
 
 \begin{proof}
 Suppose that the matrix \( H \) is \( \nbym{m}{n} \). 
-Fix domain and codomain spaces $V$ and $W$ of dimension $n$ and~$m$, with
+Fix domain and codomain spaces $V$ and $W$ of dimension $n$ and~$m$ with
 bases \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and \( D \).
 Then \( H \) represents some linear map $h$ between those spaces with respect 
 to these bases whose rangespace
@@ -2025,24 +2023,24 @@ to these bases whose rangespace
             \suchthat c_1,\dots,c_n\in\Re}
 \end{align*}
 is the span $\spanof{\set{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)}}$.
-The rank of $h$ is the dimension of this rangespace.
+The rank of the map $h$ is the dimension of this rangespace.
 
-The rank of the matrix is its column rank (or its row rank; the two are equal).
-This is the dimension of the column space of the matrix, which is the span of
-the set of column vectors 
+The rank of the matrix is the dimension of its column space,
+the span of the set of its columns
 $\spanof{\set{\rep{h(\vec{\beta}_1)}{D},\dots,\rep{h(\vec{\beta}_n)}{D}}}$.
 
-To see that the two spans have the same dimension, recall that a
-representation with respect to a basis gives an isomorphism 
+To see that the two spans have the same dimension, recall 
+from the proof of Lemma~I.\ref{lem:EqDimImpIso} that if we fix a basis then
+representation with respect to that basis gives an isomorphism 
 $\map{\mbox{Rep}_D}{W}{\Re^m}$.
-Under this isomorphism, there is a linear relationship among members of the
+Under this isomorphism there is a linear relationship among members of the
 rangespace if and only if the same relationship holds in the
 column space, e.g,
 $\zero=c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)$ if and only if
 $\zero=c_1\rep{h(\vec{\beta}_1)}{D}+\dots+c_n\rep{h(\vec{\beta}_n)}{D}$.
 Hence, a subset of the rangespace is linearly independent if and only if the
 corresponding subset of the column space is linearly independent.
-This means that the size of the largest linearly independent subset of the
+Therefore the size of the largest linearly independent subset of the
 rangespace equals the size of the largest linearly independent subset of the
 column space, and so the two spaces have the same dimension.
 \end{proof}
@@ -2057,7 +2055,7 @@ Any map represented by
       0  &0  &2
     \end{mat}
 \end{equation*}
-must, by definition, be from a three-dimensional domain
+must be from a three-dimensional domain
 to a four-dimensional codomain.
 In addition, because the rank of this matrix is two 
 (we can spot this by eye or get it with Gauss' method),
@@ -2073,18 +2071,20 @@ its columns.
 \end{corollary}
 
 \begin{proof}
-For the first half, the dimension of the rangespace of $h$ is the rank of $h$,
+For the onto half, the dimension of the rangespace of $h$ is the rank of $h$,
 which equals the rank of $H$ by the theorem.
-Since the dimension of the codomain of $h$ is the number of rows in $H$,
-if the rank of $H$ equals the number of rows, then the dimension of the
+Since the dimension of the codomain of $h$ equals the number of rows in $H$,
+if the rank of $H$ equals the number of rows then the dimension of the
 rangespace equals the dimension of the codomain.
 But a subspace with the same dimension as its superspace must equal
 that superspace
-(a basis for the rangespace is a linearly independent subset of the codomain,
-whose size is equal to the dimension of the codomain, and so this set is 
+(because any basis for the rangespace is a linearly independent subset 
+of the codomain
+whose size is equal to the dimension of the codomain, and thus so this 
+basis for the reagespace must also be 
 a basis for the codomain).
 
-For the second half, 
+For the other half, 
 a linear map is one-to-one if and only if it is an isomorphism
 between its domain and its range, that is, if and only if its domain has the
 same dimension as its range.
@@ -2093,9 +2093,8 @@ by the theorem the rank of $H$ equals the dimension of
 $h$'s range.
 \end{proof}
 
-The above results end any confusion caused by our use of the
-word `rank' to mean apparently different things when applied to matrices and
-when applied to maps.
+The above results settle the apparent ambiguity in our use of the same
+word `rank' to apply both to matrices and to maps.
 
 \begin{definition}
 A linear map that is one-to-one and onto is 
@@ -2319,7 +2318,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
                 +c_3\colvec[r]{3 \\ 6} \suchthat c_1,c_2,c_3\in\Re}
            =\set{c\colvec[r]{1 \\ 2}\suchthat c\in\Re}
          \end{equation*}
-         (which is the fact already noted, but was arrived at by calculation 
+         (which is the fact already noted, but we got it by calculation 
          rather than inspiration), and the given vector is not in this set.
      \end{exparts}  
     \end{answer}
@@ -2352,7 +2351,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
           \begin{equation*}
             \colvec[r]{0 \\ 1}=\colvec[r]{1 \\ 0}_B
           \end{equation*}
-          is mapped to 
+          maps to 
           \begin{equation*}
             \colvec[r]{1/2 \\ -1/2}_D
           \end{equation*}
@@ -2362,7 +2361,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
               -\frac{1}{2}\cdot\colvec[r]{1 \\ -1}
               =\colvec[r]{0 \\ 1}
           \end{equation*}
-        \partsitem The second member of the basis is mapped
+        \partsitem The second member of the basis maps
           \begin{equation*}
             \colvec[r]{1 \\ 0}=\colvec[r]{0 \\ 1}_B
             \mapsto
@@ -2381,7 +2380,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
           \begin{equation*}
             \colvec{x \\ y}=\colvec{y \\ x}_B
           \end{equation*}
-          which is mapped to
+          which maps to
           \begin{equation*}
             \colvec{(x+y)/2 \\ (x-y)/2}_D
           \end{equation*}
@@ -2411,7 +2410,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
       \begin{equation*}
         a\cos\theta+b\sin\theta=\colvec{a \\ a+b}_B
       \end{equation*}
-      is mapped to 
+      maps to 
       \begin{equation*}
         \colvec{0 \\ a}_D
           \quad\text{representing}\quad
@@ -2443,7 +2442,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
        by $B$.
        Then application of the linear map is represented by matrix-vector 
        multiplication.
-       Thus, the first vector in $\stdbasis_3$ is mapped to the element
+       Thus, the first vector in $\stdbasis_3$ maps to the element
        of $\polyspace_2$ represented with respect to $B$ by
        \begin{equation*}
        \begin{mat}[r]
@@ -2456,7 +2455,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
        \colvec[r]{1 \\ 0 \\ 1}  
        \end{equation*}
        and that element is $1+x$.
-       The other two images of basis vectors are calculated similarly.
+       Calculate the other two images of basis vectors in the same way.
        \begin{equation*}
          \begin{mat}[r]
            1  &3  &0  \\
@@ -2548,7 +2547,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
            \end{equation*}
          \partsitem Of course, \nearbytheorem{th:RankMatEqRankMap} gives that
            the rank of the map equals the rank of the matrix, which is one.
-           Alternatively, the same argument that was used above for the 
+           Alternatively, the same argument that we used above for the 
            nullspace gives here that the dimension of the rangespace is one.
          \partsitem One plus one equals two. 
       \end{exparts}
