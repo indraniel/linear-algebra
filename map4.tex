@@ -2383,7 +2383,10 @@ In a product of two matrices $G$ and $H$,
 the columns of $GH$ are formed by taking $G$ times the columns of $H$
     \begin{equation*}
       G\cdot \begin{pmat}{c|@{\hspace{1em}}c@{\hspace{1em}}|c}
-         \vdots       &        &\vdots    \\
+         % \MTFlushSpaceAbove
+         % \vdotswithin{\vec{h}_1}       &        &\vdotswithin{\vec{h}_n}   
+         % \MTFlushSpaceBelow
+         \vdots       &        &\vdots   \\
          \vec{h}_1    &\cdots  &\vec{h}_n \\ 
          \vdots       &        &\vdots 
        \end{pmat}
@@ -3751,50 +3754,52 @@ clearer idea then we will go with it.
 
 
 \subsection{Inverses}
-We now consider how to represent the 
+We finish this section by considering how to represent the 
 inverse of a linear map.
 
-We start by recalling some facts about function 
-inverses.\appendrefs{function inverses}  %\spacefactor=1000\  
-Some functions have no inverse, or have an inverse on the left side 
-or right side only.
-
-\begin{example}  \label{ex:ProjLeftInvOfEmbed}
+We start by remembering some things about function 
+inverses.\appendrefs{function inverses} % \spacefactor=1000\  
+% Some functions have no inverse, or have an inverse on the left side 
+%or right side only.
+% 
+% \begin{example}  \label{ex:ProjLeftInvOfEmbed}
 Where 
 \( \map{\pi}{\Re^3}{\Re^2} \) is the projection map 
+and \( \map{\iota}{\Re^2}{\Re^3} \) is the embedding  
 \begin{equation*}
   \colvec{x \\ y \\ z}
-    \mapsto
+    \mapsunder{\pi}
   \colvec{x \\ y}
-\end{equation*}
-and \( \map{\eta}{\Re^2}{\Re^3} \) is the embedding  
-\begin{equation*}
+  \qquad
   \colvec{x \\ y}
-    \mapsto
+    \mapsunder{\iota}
   \colvec{x \\ y \\ 0}
 \end{equation*}
-the composition $\composed{\pi}{\eta}$ is the identity map on $\Re^2$.
+then the composition $\composed{\pi}{\iota}$ is the identity map on $\Re^2$.
 \begin{equation*}
   %\composed{\pi}{\eta}:\qquad
   \colvec{x \\ y}
-    \mapsunder{\eta}
+    \mapsunder{\iota}
   \colvec{x \\ y \\ 0}
     \mapsunder{\pi}
   \colvec{x \\ y}
 \end{equation*}
-We say $\pi$ is a \definend{left inverse map}\index{function!left inverse} 
-of $\eta$ or, what is the same thing, 
-that $\eta$ is a \definend{right inverse map}\index{function!right inverse} 
-of $\pi$.
-However, composition in the other order $\composed{\eta}{\pi}$ 
+We say that
+$\iota$ is a \definend{right inverse map}\index{function!right inverse} 
+of $\pi$
+or, what is the same thing, 
+that $\pi$ is a \definend{left inverse}\index{function!left inverse} 
+of $\iota$.
+
+However, composition in the other order $\composed{\iota}{\pi}$ 
 doesn't give the identity map\Dash here is a vector that is not 
-sent to itself under $\composed{\eta}{\pi}$. 
+sent to itself under $\composed{\iota}{\pi}$. 
 \begin{equation*}
   %\composed{\eta}{\pi}:\qquad
   \colvec[r]{0 \\ 0 \\ 1}
     \mapsunder{\pi}
   \colvec[r]{0 \\ 0}
-    \mapsunder{\eta}
+    \mapsunder{\iota}
   \colvec[r]{0 \\ 0 \\ 0}
 \end{equation*}
 In fact, the projection
@@ -3810,30 +3815,33 @@ then we would have
   \colvec{x \\ y \\ z}
 \end{equation*}
 for all of the infinitely many $z$'s.
-But no function $f$ can send a single argument to more than one value.
-\end{example}
-
-\par\noindent (An example of a function with no inverse on either side
+But no function can send a single argument to more than one value.
+% \end{example}
+(An example of a function with no inverse on either side
 is the zero transformation on $\Re^2$.)
+
 Some functions have a 
 \definend{two-sided inverse map},\index{function!two-sided inverse} 
 another function
-that is the inverse of the first, both from the left and from the right.
+that is the inverse of the first both from the left and from the right.
 For instance, the map given by 
 $\vec{v}\mapsto 2\cdot \vec{v}$ has the two-sided inverse 
 $\vec{v}\mapsto (1/2)\cdot\vec{v}$.  
-In this subsection we will focus on two-sided inverses.
+% In this subsection we will focus on two-sided inverses.
+% 
 The appendix shows that a function
 has a two-sided inverse if and only if it is both one-to-one and onto.
 The appendix also shows that if a function $f$ has a two-sided inverse then 
-it is unique, and so it is called 
+it is unique, and so we call it 
 `the'~inverse,\index{inverse function}\index{function!inverse}
-and is denoted $f^{-1}$.
-So our purpose in this subsection is, where a linear map $h$ has an inverse,
+and denote it $f^{-1}$.
+
+Also, recall that we have shown in Theorem~II.\ref{th:OOHomoEquivalence}
+that if a linear map has a two-sided inverse
+then that inverse is also linear. 
+
+Thus, our goal in this subsection is, where a linear $h$ has an inverse,
 to find the relationship between $\rep{h}{B,D}$ and $\rep{h^{-1}}{D,B}$
-(recall that we have shown, in \nearbytheorem{th:OOHomoEquivalence}
-of Section~II of this chapter, that if a linear map has an inverse
-then the inverse is a linear map also). 
 
 \begin{definition}
 A matrix \( G \) is a \definend{left inverse matrix}\index{inverse!left}
@@ -3841,7 +3849,7 @@ of the matrix \( H \) if \( GH \) is the identity matrix.
 It is a \definend{right inverse matrix}\index{inverse!right}
 if \( HG \) is the identity.
 A matrix $H$ with a two-sided inverse is an \definend{invertible matrix}.
-That two-sided inverse is called 
+That two-sided inverse is
 \definend{the inverse matrix}\index{inverse} and
 is denoted \( H^{-1} \).
 \end{definition}
@@ -4847,12 +4855,12 @@ elementary one can be interesting and useful.
       and so there is no left inverse.
     \end{answer}
   \item 
-    In \nearbyexample{ex:ProjLeftInvOfEmbed},
-    how many left inverses has \( \eta \)?
+    In the review of inverses example, % \nearbyexample{ex:ProjLeftInvOfEmbed},
+    how many left inverses has \( \iota \)?
     \begin{answer}
       With respect to the standard bases we have
       \begin{equation*}
-        \rep{\eta}{\stdbasis_2,\stdbasis_3}
+        \rep{\iota}{\stdbasis_2,\stdbasis_3}
         =\begin{mat}[r]
           1  &0  \\
           0  &1  \\
@@ -4910,7 +4918,7 @@ elementary one can be interesting and useful.
         \;\mapsunder{f_{2,3}}\;
         \colvec{x+2z \\ y+3z}
       \end{equation*}
-      The check that $\composed{f_{2,3}}{\eta}$ is the identity map on
+      The check that $\composed{f_{2,3}}{\iota}$ is the identity map on
       $\Re^2$ is easy.
     \end{answer}
   \item  
@@ -4923,6 +4931,37 @@ elementary one can be interesting and useful.
       a matrix with both left and right inverses has only one of each (and
       that one of each is one of both\Dash the left and right inverse matrices
       are equal).  
+    \end{answer}
+  \item Assume that $\map{g}{V}{W}$ is linear.
+    One of these is true, the other is false.
+    Which is which?
+    \begin{exparts}
+      \partsitem If $\map{f}{W}{V}$ is a left inverse of $g$ then $f$
+        must be linear.
+      \partsitem If $\map{f}{W}{V}$ is a right inverse of $g$ then $f$
+        must be linear.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem True,
+          It must be linear, 
+          as the proof from Theorem~II.\ref{th:OOHomoEquivalence} shows.
+        \partsitem False.
+          It may be linear, but it need not be.
+          Consider the projection map $\map{\pi}{\Re^3}{\Re^2}$ described
+          at the start of this subsection.
+          Define $\map{\eta}{\Re^2}{\Re^3}$ in this way.
+          \begin{equation*}
+            \colvec{x  \\  y}\mapsto\colvec{x  \\ y \\ 1}
+          \end{equation*}
+          It is a right inverse of $\pi$ because $\composed{\pi}{\eta}$
+          does this.  
+          \begin{equation*}
+            \colvec{x  \\  y}\mapsto\colvec{x  \\ y \\ 1}\mapsto\colvec{x \\ y}
+          \end{equation*}
+          It is not linear because it does not map the zero vector to the zero 
+          vector.
+      \end{exparts}
     \end{answer}
   \recommended \item
     Assume that \( H \) is invertible and that \( HG \) is the zero matrix.
