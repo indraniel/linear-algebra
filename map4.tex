@@ -3,31 +3,32 @@
 %  2001-Jun-12
 \section{Matrix Operations}
 The prior section shows how matrices represent linear maps.
-A good strategy, on seeing a new idea, 
-is to explore how it interacts with some already-established ideas.
-In the first subsection we will ask how the representation of the 
-sum of two maps $f+g$ is related to the representations of the two
-maps, and
-how the representation of a scalar product $r\cdot h$ of a map is related 
-to the representation of that map.
-In later subsections we will see how to represent 
-map composition and map inverse.
+When we see a new idea, a good strategy  
+is to explore how it interacts with some things
+that we already understand.
+In the first subsection below we will see how the representation of the 
+sum of two maps $f+g$ is related to the representations of $f$ and $g$, and
+also how the representation of a scalar product $r\cdot f$ is related 
+to the representation of $f$.
+In the later subsections we will explore the representation of 
+linear map composition and inverse.
 
 
 
 
 \subsection{Sums and Scalar Products}
-Recall that for two maps $f$ and $g$ with the same domain
-and codomain, the map sum $f+g$ has this definition.
+Recall that for two maps $\map{f,g}{V}{W}$, 
+the map sum $f+g$ has this definition.
 \begin{equation*}
   \vec{v} \;\stackrel{f+g}{\longmapsto}\; f(\vec{v})+g(\vec{v})
 \end{equation*}
-The easiest way to see how the representations of the maps
-combine to represent the map sum is with an example.
+To see how $\rep{f+g}{B,D}$ is related to 
+$\rep{f}{B,D}$ and $\rep{g}{B,D}$ we consider
+an example.
 
 \begin{example}
 Suppose that \( \map{f,g}{\Re^2}{\Re^3} \) are represented 
-with respect to the bases $B$ and $D$ by these matrices.
+with respect to some bases $B$ and $D$ by these matrices.
 \begin{equation*}
   F=\rep{f}{B,D}=
     \begin{pmatrix}
@@ -43,73 +44,76 @@ with respect to the bases $B$ and $D$ by these matrices.
        2  &4
     \end{pmatrix}_{B,D}
 \end{equation*}
-Then, for any $\vec{v}\in V$ represented with respect to $B$, 
-computation of the representation of $f(\vec{v})+g(\vec{v})$
+Let $\vec{v}\in V$ be represented with respect to $B$. 
+We compute the representation of $f(\vec{v})$ and of $g(\vec{v})$
+and add them.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
        1  &3  \\
        2  &0  \\
        1  &0
-    \end{pmatrix}
+    \end{mat}
   \colvec{v_1 \\ v_2}
   +
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &0  \\
       -1  &-2 \\
        2  &4
-    \end{pmatrix}
+    \end{mat}
     \colvec{v_1 \\ v_2}
   =\colvec{1v_1+3v_2 \\ 2v_1+0v_2 \\ 1v_1+0v_2}
   +\colvec{0v_1+0v_2 \\ -1v_1-2v_2 \\ 2v_1+4v_2}   
 \end{equation*}
-gives this representation of $f+g\,(\vec{v})$.
+So this is the representation of $f+g\,(\vec{v})$.
 \begin{equation*}
   \colvec{(1+0)v_1+(3+0)v_2 \\ (2-1)v_1+(0-2)v_2 \\ (1+2)v_1+(0+4)v_2}
   =\colvec{1v_1+3v_2 \\ 1v_1-2v_2 \\ 3v_1+4v_2}
 \end{equation*}
 Thus, the action of $f+g$ is described by this matrix-vector product.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
        1  &3  \\
        1  &-2 \\
        3  &4
-    \end{pmatrix}_{B,D}
+    \end{mat}_{B,D}
   \colvec{v_1 \\ v_2}_B
   =\colvec{1v_1+3v_2 \\ 1v_1-2v_2 \\ 3v_1+4v_2}_D
 \end{equation*}
-This matrix is the entry-by-entry sum of original matrices,
-e.g., the $1,1$~entry of $\rep{f+g}{B,D}$ is the sum of the $1,1$~entry of
-$F$ and the $1,1$ entry of $G$.
+So the matrix is $\rep{f+g}{B,D}$.
+This matrix is the entry-by-entry sum of original matrices.
 \end{example}
 
-Representing a scalar multiple of a map works the same way.
+We can see how the representation is affected by scalar multiplication
+with a similar example.
 
 \begin{example}
-If \( t \) is a transformation represented by
+Suppose that \( t \) is a transformation represented by this matrix
 \begin{equation*}
   \rep{t}{B,D}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  \\
       1  &1
-    \end{pmatrix}_{B,D}
-  \quad\text{so that}\quad
+    \end{mat}_{B,D}
+\end{equation*}
+so that this is the action of $t$.
+\begin{equation*}
   \vec{v}=\colvec{v_1 \\ v_2}_B\mapsto \colvec{v_1 \\ v_1+v_2}_D=t(\vec{v})
 \end{equation*}
-then the scalar multiple map $5t$ acts in this way.
+Then the scalar multiple map $5t$ is
 \begin{equation*}
    \vec{v}=\colvec{v_1 \\ v_2}_B
      \;\longmapsto\; 
    \colvec{5v_1 \\ 5v_1+5v_2}_D=5\cdot t(\vec{v})
 \end{equation*}
-Therefore, this is the matrix representing $5t$.
+and so this is the matrix representing $5t$.
 \begin{equation*}
   \rep{5t}{B,D}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       5  &0  \\
       5  &5
-    \end{pmatrix}_{B,D}
+    \end{mat}_{B,D}
 \end{equation*}
 \end{example}
 
@@ -121,10 +125,8 @@ The \definend{scalar multiple}\index{scalar multiple!matrix}%
 result of entry-by-entry scalar multiplication.
 \end{definition}
 
-\begin{remark}
-These extend the vector addition and scalar
+These operations extend the vector addition and scalar
 multiplication operations that we defined in the first chapter.
-\end{remark} 
 
 \begin{theorem}  \label{th:MatOpsRepMapOps}
 Let \( \map{h,g}{V}{W} \) be linear maps represented with respect to
@@ -139,27 +141,40 @@ by \( H+G \), and the map
 \nearbyexercise{exer:CorrspMapMatOps}; generalize the examples above.
 \end{proof}
 
+\begin{remark}
+Recall Remark~III.\ref{rem:NotSurprising} following 
+Theorem~III.\ref{th:MatMultRepsFuncAppl}.
+That theorem says that matrix-vector 
+multiplication represents the application of a linear map and
+the remark notes that the theorem
+simply justifies the definition of matrix-vector multiplication.
+In some sense the theorem has to hold, because if it didn't then we
+would adjust the definition to make the theorem hold.
+The above theorem is another example of such a result; it shows that
+our definition of the operations is sensible.
+\end{remark}
+
 A special case of scalar multiplication is multiplication by zero.
 For any map $0\cdot h$ is the zero homomorphism and for any matrix
 $0\cdot H$ is the matrix with all entries zero.
 
 \begin{definition}
-A \definend{zero matrix}\index{zero matrix}\index{matrix!zero}% 
+A \definend{zero matrix}\index{zero matrix}\index{matrix!zero} % 
 has all entries $0$.
-We write $Z_{\nbym{n}{m}}$, or simply $Z$
-(another, very common, notation is to use $0_{\nbym{n}{m}}$ or just $0$).
+We write $Z_{\nbym{n}{m}}$ or simply $Z$
+(another common notation is to use $0_{\nbym{n}{m}}$ or just $0$).
 \end{definition}
 
 \begin{example}
 The zero map from any three-dimensional space to any two-dimensional space
 is represented by the \( \nbym{2}{3} \) zero matrix
 \begin{equation*}
-   Z=\begin{pmatrix}
+   Z=\begin{mat}[r]
      0  &0  &0  \\
      0  &0  &0
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
-no matter which domain and codomain bases are used.
+no matter which domain and codomain bases we use.
 \end{example}
 
 
@@ -168,65 +183,65 @@ no matter which domain and codomain bases are used.
   \recommended \item
     Perform the indicated operations, if defined.
     \begin{exparts}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  5  &-1  &2  \\
                  6  &1   &1
-               \end{pmatrix}
+               \end{mat}
                +
-               \begin{pmatrix}
+               \begin{mat}[r]
                  2  &1   &4  \\
                  3  &0   &5
-               \end{pmatrix}    \)
-      \partsitem \( 6\cdot\begin{pmatrix}
+               \end{mat}    \)
+      \partsitem \( 6\cdot\begin{mat}[r]
                  2  &-1  &-1 \\
                  1  &2   &3
-               \end{pmatrix}   \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat}   \)
+      \partsitem \( \begin{mat}[r]
                  2  &1  \\
                  0  &3
-               \end{pmatrix}
+               \end{mat}
                +
-               \begin{pmatrix}
+               \begin{mat}[r]
                  2  &1  \\
                  0  &3
-               \end{pmatrix} \)
-      \partsitem \( 4\begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( 4\begin{mat}[r]
                  1  &2  \\
                  3  &-1
-               \end{pmatrix}
+               \end{mat}
                +
-               5\begin{pmatrix}
+               5\begin{mat}[r]
                 -1  &4  \\
                 -2  &1
-               \end{pmatrix} \)
-      \partsitem \( 3\begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( 3\begin{mat}[r]
                  2  &1  \\
                  3  &0
-               \end{pmatrix}
+               \end{mat}
                +2
-               \begin{pmatrix}
+               \begin{mat}[r]
                  1  &1  &4 \\
                  3  &0  &5
-               \end{pmatrix} \)
+               \end{mat} \)
     \end{exparts}
     \begin{answer} 
       \begin{exparts*}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                    7  &0  &6  \\
                    9  &1  &6
-                 \end{pmatrix}  \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat}  \)
+        \partsitem \( \begin{mat}[r]
                   12  &-6 &-6 \\
                    6  &12 &18
-                 \end{pmatrix}  \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat}  \)
+        \partsitem \( \begin{mat}[r]
                    4  &2  \\
                    0  &6
-                 \end{pmatrix}  \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat}  \)
+        \partsitem \( \begin{mat}[r]
                   -1  &28 \\
                    2  &1
-                 \end{pmatrix}  \)
+                 \end{mat}  \)
         \partsitem Not defined.
       \end{exparts*}  
    \end{answer}
@@ -297,34 +312,34 @@ no matter which domain and codomain bases are used.
       For example, writing
       \begin{equation*}
         G=
-        \begin{pmatrix}
+        \begin{mat}
           g_{1,1}  &\ldots  &g_{1,n}  \\
           \vdots   &        &\vdots   \\
           g_{m,1}  &\ldots  &g_{m,n}       
-        \end{pmatrix}
+        \end{mat}
         \qquad
         H=
-        \begin{pmatrix}
+        \begin{mat}
           h_{1,1}  &\ldots  &h_{1,n}  \\
           \vdots   &        &\vdots   \\
           h_{m,1}  &\ldots  &h_{m,n}       
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       then, by definition we have
       \begin{equation*}
         G+H=
-        \begin{pmatrix}
+        \begin{mat}
           g_{1,1}+h_{1,1}  &\ldots  &g_{1,n}+h_{1,n}  \\
           \vdots           &        &\vdots           \\
           g_{m,1}+h_{m,1}  &\ldots  &g_{m,n}+h_{m,n}       
-        \end{pmatrix}
+        \end{mat}
         \qquad
         H+G=
-        \begin{pmatrix}
+        \begin{mat}
           h_{1,1}+g_{1,1}  &\ldots  &h_{1,n}+g_{1,n}  \\
           \vdots           &        &\vdots           \\
           h_{m,1}+g_{m,1}  &\ldots  &h_{m,n}+g_{m,n}       
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and the two are equal since their entries are equal 
       $g_{i,j}+h_{i,j}=h_{i,j}+g_{i,j}$.
@@ -522,18 +537,18 @@ no matter which domain and codomain bases are used.
           A sum of rank \( n \) matrices can have rank greater than \( n \).
           Here are rank~one matrices that sum to a rank~two matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix}
-            +\begin{pmatrix}
+            \end{mat}
+            +\begin{mat}[r]
               0  &0  \\
               0  &1
-            \end{pmatrix}
-            =\begin{pmatrix}
+            \end{mat}
+            =\begin{mat}[r]
               1  &0  \\
               0  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -555,13 +570,12 @@ in the prior subsection, the natural next map operation to consider
 is composition.
 
 \begin{lemma}
-A composition of linear maps is linear.  
+A composition of linear maps is linear.
 \end{lemma}
 
 \begin{proof}
 \textit{(This argument has appeared earlier, 
-as part of the proof that isomorphism
-is an equivalence relation between spaces.)}  
+as part of the proof of Theorem~I.\ref{th:IsoEquivRel}.)}  
 Let $\map{h}{V}{W}$ and $\map{g}{W}{U}$ be linear. 
 The calculation
 \begin{multline*}
@@ -577,8 +591,8 @@ preserves linear combinations.
 \end{proof}
 
 To see how the representation of the 
-composite arises out of the representations
-of the two compositors, consider an example.
+composite is related to the representations
+of the compositors, consider an example.
 
 \begin{example} \label{ex:RepCompLinMaps}
 Let $\map{h}{\Re^4}{\Re^2}$ and $\map{g}{\Re^2}{\Re^3}$,
@@ -587,31 +601,31 @@ fix bases
 and let these be the representations.
 \begin{equation*}
   H=\rep{h}{B,C}
-  =\begin{pmatrix}
+  =\begin{mat}[r]
        4  &6  &8  &2  \\
        5  &7  &9  &3
-    \end{pmatrix}_{B,C}
+    \end{mat}_{B,C}
   \qquad
   G=\rep{g}{C,D}
-  =\begin{pmatrix}
+  =\begin{mat}[r]
        1  &1  \\
        0  &1  \\
        1  &0
-    \end{pmatrix}_{C,D}
+    \end{mat}_{C,D}
 \end{equation*}
 To 
 represent the composition \( \map{\composed{g}{h}}{\Re^4}{\Re^3} \)
-we fix a $\vec{v}$, represent $h$ of $\vec{v}$, 
+we start with a $\vec{v}$, represent $h$ of $\vec{v}$, 
 and then represent $g$ of that.
 The representation of $h(\vec{v})$ is the product of $h$'s matrix and 
 $\vec{v}$'s vector.
 \begin{equation*}
   \rep{\,h(\vec{v})\,}{C}
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
     4  &6  &8  &2  \\
     5  &7  &9  &3
-  \end{pmatrix}_{B,C}
+  \end{mat}_{B,C}
   \colvec{v_1 \\ v_2 \\ v_3 \\ v_4}_B  
   =
   \colvec{4v_1+6v_2+8v_3+2v_4 \\ 5v_1+7v_2+9v_3+3v_4}_C
@@ -620,11 +634,11 @@ The representation of $g(\,h(\vec{v})\,)$ is the product of $g$'s matrix
 and $h(\vec{v})$'s vector.
 \begin{align*}
   \rep{\,g(h(\vec{v}))\,}{D}\!
-  &=\!\begin{pmatrix}
+  &=\!\begin{mat}[r]
       1  &1  \\
       0  &1  \\
       1  &0
-   \end{pmatrix}_{C,D}
+   \end{mat}_{C,D}
    \colvec{4v_1+6v_2+8v_3+2v_4 \\ 5v_1+7v_2+9v_3+3v_4}_C    \\
   &=\!\colvec{1\cdot(4v_1+6v_2+8v_3+2v_4)+1\cdot(5v_1+7v_2+9v_3+3v_4) \\ 
                0\cdot(4v_1+6v_2+8v_3+2v_4)+1\cdot(5v_1+7v_2+9v_3+3v_4) \\
@@ -646,17 +660,17 @@ Distributing and regrouping on the $v$'s gives
                 (1\cdot8+0\cdot9)v_3+
                 (1\cdot2+0\cdot3)v_4}_D
 \end{equation*}
-which we recognizing as the result of this matrix-vector product.
+which we recognize as the result of this matrix-vector product.
 \begin{equation*}
   =
-  \begin{pmatrix}
+  \begin{mat}
     1\cdot4+1\cdot5  &1\cdot6+1\cdot7  &1\cdot8+1\cdot9  &1\cdot2+1\cdot3 \\
     0\cdot4+1\cdot5  &0\cdot6+1\cdot7  &0\cdot8+1\cdot9  &0\cdot2+1\cdot3 \\
     1\cdot4+0\cdot5  &1\cdot6+0\cdot7  &1\cdot8+0\cdot9  &1\cdot2+0\cdot3
-  \end{pmatrix}_{B,D}
+  \end{mat}_{B,D}
   \colvec{v_1 \\ v_2 \\ v_3 \\ v_4}_D
 \end{equation*}
-Thus,
+Thus
 the matrix representing $\composed{g}{h}$ has the rows of $G$
 combined with the columns of $H$.
 \end{example}
@@ -674,74 +688,74 @@ matrix~\( G \) and the \( \nbym{r}{n} \) matrix~\( H \) is the
   g_{i,1}h_{1,j}+g_{i,2}h_{2,j}+\dots+g_{i,r}h_{r,j}
 \end{equation*}
 that is, the \( i,j \)-th entry of the product is the dot product of the
-\( i \)-th row and the \( j \)-th column.
+\( i \)-th row of the first matrix with the \( j \)-th column of the second.
 \begin{equation*}
     GH=
-    \begin{pmatrix}
+    \begin{mat}
               &\vdots                     \\
       g_{i,1} &g_{i,2} &\ldots  &g_{i,r}  \\
               &\vdots
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}
               &h_{1,j}           \\
       \ldots  &h_{2,j} &\ldots   \\
               &\vdots            \\
               &h_{r,j}
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}
               &\vdots            \\
       \ldots  &p_{i,j}  &\ldots  \\
               &\vdots
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{definition}
 
 \begin{example}
 The matrices from \nearbyexample{ex:RepCompLinMaps} combine in this way.
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}
     1\cdot4+1\cdot5  &1\cdot6+1\cdot7  &1\cdot8+1\cdot9  &1\cdot2+1\cdot3 \\
     0\cdot4+1\cdot5  &0\cdot6+1\cdot7  &0\cdot8+1\cdot9  &0\cdot2+1\cdot3 \\
     1\cdot4+0\cdot5  &1\cdot6+0\cdot7  &1\cdot8+0\cdot9  &1\cdot2+0\cdot3
-    \end{pmatrix}               
-   =\begin{pmatrix}
+    \end{mat}               
+   =\begin{mat}[r]
       9  &13  &17  &5  \\
       5  &7   &9   &3  \\
       4  &6   &8   &2
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
 \begin{example}
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      2  &0  \\
      4  &6  \\
      8  &2
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
     1  &3  \\
     5  &7
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}
    2\cdot 1+0\cdot 5  &2\cdot 3+0\cdot 7  \\
    4\cdot 1+6\cdot 5  &4\cdot 3+6\cdot 7  \\
    8\cdot 1+2\cdot 5  &8\cdot 3+2\cdot 7
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
     2  &6  \\
    34  &54 \\
    18  &38
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 \end{example}
 
-%As with the definition and theorem for matrix-vector product 
-%in the prior subsection, the point of 
-%\nearbydefinition{def:MatMult} is that it gives the next result.
+We next check that our
+definition of the matrix-matrix multiplication operation
+does what we intend.
 
 \begin{theorem}
 \label{th:MatMultRepComp}
@@ -751,7 +765,7 @@ of the representatives.
 \end{theorem}
 
 \begin{proof}
-\textit{(This argument parallels \nearbyexample{ex:RepCompLinMaps}.)}
+This argument generalizes \nearbyexample{ex:RepCompLinMaps}.
 Let \( \map{h}{V}{W} \) and \( \map{g}{W}{X} \) be represented by
 \( H \) and \( G \) with respect to bases
 \( B\subset V \), \( C\subset W \), and \( D\subset X \), of sizes
@@ -783,10 +797,9 @@ Finish by recognizing that the coefficient of each \( v_j \)
 matches the definition of the \( i,j \) entry of the  product \( GH \).
 \end{proof}
 
-The theorem is an example of a result that supports 
-a definition.
-We can picture what the definition and theorem together say with this 
-\definend{arrow diagram}\index{arrow diagram}  
+This
+\definend{arrow diagram}\index{arrow diagram}
+pictures the relationship between maps and matrices
 (`wrt' abbreviates `with respect to').
 %\medskip
 \begin{center}
@@ -797,7 +810,7 @@ We can picture what the definition and theorem together say with this
 %\medskip
 Above the arrows, the maps show that the two ways of going from 
 \( V \) to \( X \),
-straight over via the composition or else by way of \( W \),
+straight over via the composition or else in two steps by way of \( W \),
 have the same effect 
 \begin{equation*}
   \vec{v}\mapsunder{g\circ h}g(h(\vec{v}))
@@ -808,46 +821,36 @@ have the same effect
 Below the arrows, the matrices indicate that the product
 does the same thing\Dash multiplying
 $GH$ into the column vector $\rep{\vec{v}}{B}$ has the same
-effect as  multiplying the column first by $H$ 
+effect as  multiplying the column vector first by $H$ 
 and then multiplying the result by $G$.
 \begin{equation*}
    \rep{\composed{g}{h}}{B,D}
-   =GH=
-   \rep{g}{C,D}\,\rep{h}{B,C}
+   =GH
+   \qquad
+   \rep{g}{C,D}\,\rep{h}{B,C}=GH
 \end{equation*}
-
-The definition of the matrix-matrix product operation
-does not restrict 
-us to view it as a representation of a linear map composition.
-We can get insight into this operation
-by studying it as a mechanical procedure.
-The striking thing is the way that rows and columns combine.
-
-One aspect of that combination is that 
-the sizes of the matrices involved is significant.
-Briefly,
-$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$.
 
 \begin{example}
-This product is not defined 
+Because the number of columns on the left 
+does not equal the number of rows on the right,
+this product is not defined. 
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
        -1  &2  &0  \\
         0  &10 &1.1
-     \end{pmatrix}
-     \begin{pmatrix}
+     \end{mat}
+     \begin{mat}[r]
         0  &0  \\
         0  &2
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
-because the number of columns on the left 
-does not equal the number of rows on the right. 
 \end{example}
 
-\par\noindent In terms of the underlying maps, 
-the fact that the sizes must match up
-reflects the fact that matrix multiplication is defined only when a 
-corresponding function composition 
+One way to understand why the combination in the prior example is undefined
+has to do with the underlying maps. 
+We require that the sizes match 
+because we want that the underlying
+function composition is possible.
 \begin{equation*}
   \text{dimension \( n \) space}
   \;\stackrel{h}{\longrightarrow}\;
@@ -855,120 +858,138 @@ corresponding function composition
   \;\stackrel{g}{\longrightarrow}\;
   \text{dimension \( m \) space}
 \end{equation*}
-is possible.
+So matrix product has a $\nbym{m}{r}$ matrix~$G$
+times a $\nbym{r}{n}$ matrix~$F$ to get a
+$\nbym{m}{n}$ result~$GF$.
+Briefly,
+`$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$'.
 
 \begin{remark}
 The order in which these things are written can be confusing.
-In the
-`$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$'
+In the prior
 equation, the number written first $m$ is the dimension of
 $g$'s codomain and is thus the number that appears last in the
 map dimension description above.
-The explanation is that while $f$ is done first
-and then $g$ is applied, 
-that composition is written $\composed{g}{f}$,
-from the notation `$g(f(\vec{v}))$'. 
+The explanation is that while $h$ is done first
+and then $g$, 
+we write the composition as $\composed{g}{h}$,
+from the notation `$g(h(\vec{v}))$'. 
 (Some people try to lessen confusion by reading 
-`$\composed{g}{f}$' aloud as ``$g$ following $f$''.)
-That order then carries over to matrices:~$\composed{g}{f}$
-is represented by $GF$.
+`$\composed{g}{h}$' aloud as ``$g$ following $h$.'')
+That right to left order carries over to matrices:~$\composed{g}{h}$
+is represented by $GH$.
 \end{remark}
 
-Another aspect of the way that rows and columns combine in the
-matrix product operation is that in the definition of the $i,j$ entry
-\begin{equation*}
+We can get insight into matrix-matrix product operation
+by studying how the entries combine.
+For instance, an alternative way to understand why we require above that
+the sizes match
+is that the row of the left-hand matrix must have the same number of
+entries as the column of the right-hand matrix, or else some entry
+will be left hanging, with no entry to combine with from the other matrix.
+
+Another aspect of the combinatorics of
+matrix multiplication is that in the definition of the $i,j$ entry
+\begin{equation*} \setlength{\fboxsep}{.15em}
   p_{i,j}
   =
-  g_{i,\fbox{\scriptsize \( 1 \)}}h_{\fbox{\scriptsize \( 1 \)},j}
-   +g_{i,\fbox{\scriptsize \( 2 \)}}h_{\fbox{\scriptsize \( 2 \)},j}
-   +\dots+g_{i,\fbox{\scriptsize \( r \)}}h_{\fbox{\scriptsize \( r \)},j}
+  g_{i,\text{\colorbox{lightgray}{$\scriptsize 1 $}}}h_{\text{\colorbox{lightgray}{$\scriptsize 1 $}},j}
+   +g_{i,\text{\colorbox{lightgray}{$\scriptsize 2 $}}}h_{\text{\colorbox{lightgray}{$\scriptsize 2 $}},j}
+   +\dots+g_{i,\text{\colorbox{lightgray}{$\scriptsize r $}}}h_{\text{\colorbox{lightgray}{$\scriptsize r $}},j}
 \end{equation*}
-the boxed subscripts on the $g$'s are column indicators while those on the
+% \begin{equation*}
+%   p_{i,j}
+%   =
+%   g_{i,\fbox{\scriptsize \( 1 \)}}h_{\fbox{\scriptsize \( 1 \)},j}
+%    +g_{i,\fbox{\scriptsize \( 2 \)}}h_{\fbox{\scriptsize \( 2 \)},j}
+%    +\dots+g_{i,\fbox{\scriptsize \( r \)}}h_{\fbox{\scriptsize \( r \)},j}
+% \end{equation*}
+the highlighted subscripts on the $g$'s are column indices while those on the
 $h$'s indicate rows.
-That is, summation takes place over the columns of $G$
-but over the rows of $H$;
-left is treated differently than right, so \( GH \) 
-may be unequal to \( HG \).
-Matrix multiplication is not commutative.
+That is, the summation takes place over the columns of $G$
+but over the rows of $H$\Dash
+the definition treats left differently than right.
+So we may reasonably suspect that \( GH \) 
+can sometimes be unequal to \( HG \).
 
 \begin{example}   \label{ex:MatMultNoCommute}
-Matrix multiplication hardly ever commutes.
-Test that by multiplying randomly chosen matrices both ways.
+Matrix multiplication is not commutative.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &2  \\
       3  &4
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       5  &6  \\
       7  &8
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       19  &22  \\
       43  &50
-    \end{pmatrix}
+    \end{mat}
   \qquad
-    \begin{pmatrix}
+    \begin{mat}[r]
       5  &6  \\
       7  &8
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       1  &2  \\
       3  &4
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       23  &34  \\
       31  &46
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
+% In fact, matrix multiplication hardly ever commutes, in that if we use
+% multiply randomly chosen matrices both ways.
 \end{example}
 
 \begin{example}  \label{ex:MatMultNoCommuteII}
 Commutativity can fail more dramatically:
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       5  &6  \\
       7  &8
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       1  &2  &0 \\
       3  &4  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       23  &34  &0  \\
       31  &46  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 while
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &2  &0 \\
       3  &4  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       5  &6  \\
       7  &8
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 isn't even defined.
 \end{example}
 
 \begin{remark}
 The fact that
-matrix multiplication is not commutative may be puzzling at first sight, 
-perhaps just because most
-algebraic operations in elementary mathematics are commutative.
-But on further reflection, it isn't so surprising.
-After all, matrix multiplication represents function composition, which
+matrix multiplication is not commutative can be puzzling at first sight, 
+perhaps because most
+operations in elementary mathematics are commutative.
+But matrix multiplication represents function composition, which
 is not commutative\Dash if
 \( f(x)=2x \) and \( g(x)=x+1 \) then \( \composed{g}{f}(x)=2x+1 \)
 while \( \composed{f}{g}(x)=2(x+1)=2x+2 \).
-True, this \( g \) is not linear and we might have hoped that linear functions
-commute, but this perspective shows that the failure of commutativity for
-matrix multiplication fits into a larger context.
+(True, this \( g \) is not linear and we might have hoped that linear functions
+would commute, but this shows that the failure of commutativity for
+matrix multiplication fits into a larger context.)
 \end{remark}
 
 Except for the lack of commutativity,
@@ -1039,108 +1060,106 @@ and regroup around the \( f \)'s
 \end{align*}
 to get the \( i,j \) entry of \( F(GH) \).
 
-Contrast these two ways of verifying associativity, the one in the proof and
-the one just above.
-The argument just above is hard to understand in the sense that, while
+Contrast these two ways of verifying associativity.
+The argument just above is hard to understand in that while
 the calculations are easy to check, the arithmetic seems unconnected to any
-idea (it also essentially repeats the proof of
-\nearbytheorem{th:MatMultRepComp} and so is inefficient).
+idea.
 The argument in the proof 
-is shorter, clearer, and says why this property ``really'' holds.
-This illustrates the comments made in the preamble 
-to the chapter on vector spaces\Dash at
-least some of the time an argument from higher-level constructs is clearer.
+is shorter and says why this property ``really'' holds.
+This illustrates the comments made at the start of
+the chapter on vector spaces\Dash at least some 
+of the time an argument from higher-level constructs is clearer.
 \end{remark}
 
 We have now seen how the representation of the composition of two linear maps
 is derived from the representations of the two maps.
 We have called the combination the product of the two matrices.
 This operation is extremely important.
-Before we go on to study how to represent the inverse of a linear map, we
-will explore it some more in the next subsection.
+We
+will explore it more in the next subsection.
 
 \begin{exercises}
   \recommended \item 
     Compute, or state ``not defined''.
     \begin{exparts*}
       \partsitem
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           3  &1  \\
           -4 &2 
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           0  &5  \\
           0  &0.5
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &1  &-1  \\
           4  &0  &3
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           2  &-1 &-1  \\
           3  &1  &1   \\
           3  &1  &1
-        \end{pmatrix}   \)
+        \end{mat}   \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           2  &-7 \\
           7  &4
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1  &0  &5   \\
          -1  &1  &1   \\
           3  &8  &4
-        \end{pmatrix}   \)
+        \end{mat}   \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           5  &2  \\
           3  &1
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           -1  &2   \\
            3  &-5
-        \end{pmatrix} \)
+        \end{mat} \)
     \end{exparts*}
     \begin{answer} 
       \begin{exparts*}
         \partsitem
-          $\begin{pmatrix}
+          $\begin{mat}[r]
             0  &15.5  \\
             0  &-19
-          \end{pmatrix}$
+          \end{mat}$
         \partsitem \(
-          \begin{pmatrix}
+          \begin{mat}[r]
             2  &-1  &-1  \\
            17  &-1  &-1
-          \end{pmatrix} \)
+          \end{mat} \)
         \partsitem Not defined.
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                    1  &0  \\
                    0  &1
-                 \end{pmatrix}  \)
+                 \end{mat}  \)
       \end{exparts*}  
     \end{answer}
   \recommended \item  
     Where
     \begin{equation*}
       A=
-       \begin{pmatrix}
+       \begin{mat}[r]
          1  &-1  \\
          2  &0   \\
-       \end{pmatrix}
+       \end{mat}
       \quad
       B=
-       \begin{pmatrix}
+       \begin{mat}[r]
          5  &2   \\
          4  &4   \\
-       \end{pmatrix}
+       \end{mat}
       \quad
       C=
-       \begin{pmatrix}
+       \begin{mat}[r]
         -2  &3   \\
         -4  &1   \\
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     compute or state `not defined'.
     \begin{exparts*}
@@ -1152,41 +1171,41 @@ will explore it some more in the next subsection.
     \begin{answer}  
       \begin{exparts*}
         \partsitem \(
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &-2   \\
             10 &4
-          \end{pmatrix}  \)
+          \end{mat}  \)
         \partsitem \( 
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &-2   \\
             10 &4
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
             -2 &3    \\
             -4 &1
-          \end{pmatrix}=
-          \begin{pmatrix}
+          \end{mat}=
+          \begin{mat}[r]
             6  &1    \\
            -36 &34
-          \end{pmatrix}  \)
+          \end{mat}  \)
         \partsitem \(
-          \begin{pmatrix}
+          \begin{mat}[r]
            -18 &17   \\
            -24 &16
-          \end{pmatrix}  \)
+          \end{mat}  \)
         \partsitem \(
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &-1  \\
             2  &0
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
            -18 &17   \\
            -24 &16
-          \end{pmatrix}=
-          \begin{pmatrix}
+          \end{mat}=
+          \begin{mat}[r]
             6  &1    \\
            -36 &34
-          \end{pmatrix}  \)
+          \end{mat}  \)
       \end{exparts*}  
     \end{answer}
   \item  
@@ -1265,18 +1284,18 @@ will explore it some more in the next subsection.
       The starting system, and the system used for the substitutions,
       can be expressed in matrix language.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           h_{1,1}  &h_{1,2}  &h_{1,3}  \\
           h_{2,1}  &h_{2,2}  &h_{2,3}
-        \end{pmatrix}
+        \end{mat}
         \colvec{x_1 \\ x_2 \\ x_3}
         =H\colvec{x_1 \\ x_2 \\ x_3}=\colvec{d_1 \\ d_2}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}
           g_{1,1}  &g_{1,2}  \\
           g_{2,1}  &g_{2,2}  \\
           g_{3,1}  &g_{3,2}
-        \end{pmatrix}
+        \end{mat}
         \colvec{y_1 \\ y_2}
         =G\colvec{y_1 \\ y_2}=\colvec{x_1 \\ x_2 \\ x_3}
       \end{equation*}
@@ -1307,33 +1326,33 @@ will explore it some more in the next subsection.
       this is its $\nbyn{(n+1)}$ matrix representation.
       \begin{equation*}
         \rep{\frac{d}{dx}}{B,B}=
-        \begin{pmatrix}
+        \begin{mat}
           0  &1 &0  &  &0  \\
           0  &0 &2  &  &0  \\
              &  &   &\ddots\\
           0  &0 &0  &  &n  \\
           0  &0 &0  &  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       The product of this matrix with itself is defined because the matrix is
       square.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           0  &1 &0  &  &0  \\
           0  &0 &2  &  &0  \\
              &  &   &\ddots\\
           0  &0 &0  &  &n  \\
           0  &0 &0  &  &0
-        \end{pmatrix}^2
+        \end{mat}^2
         =
-        \begin{pmatrix}
+        \begin{mat}
           0  &0 &2  &0  &        &0       \\
           0  &0 &0  &6  &        &0       \\
              &  &   &   &\ddots  &        \\
           0  &0 &0  &  &         &n(n-1)  \\
           0  &0 &0  &  &         &0       \\
           0  &0 &0  &  &         &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       The map so represented is the composition
       \begin{equation*}
@@ -1375,23 +1394,23 @@ will explore it some more in the next subsection.
       Fix a basis $B$ for the space and then the transformations are 
       represented by $\nbyn{1}$ matrices.
       \begin{equation*}
-        F=\rep{f}{B,B}=\begin{pmatrix}
+        F=\rep{f}{B,B}=\begin{mat}
                         f_{1,1}
-                     \end{pmatrix}
+                     \end{mat}
         \qquad
-        G=\rep{g}{B,B}=\begin{pmatrix}
+        G=\rep{g}{B,B}=\begin{mat}
                         g_{1,1}
-                     \end{pmatrix}
+                     \end{mat}
       \end{equation*}
       Therefore, the compositions can be represented as $GF$ and $FG$.
       \begin{equation*}
-        GF=\rep{\composed{g}{f}}{B,B}=\begin{pmatrix}
+        GF=\rep{\composed{g}{f}}{B,B}=\begin{mat}
                         g_{1,1}f_{1,1}
-                     \end{pmatrix}
+                     \end{mat}
         \qquad
-        FG=\rep{\composed{f}{g}}{B,B}=\begin{pmatrix}
+        FG=\rep{\composed{f}{g}}{B,B}=\begin{mat}
                         f_{1,1}g_{1,1}
-                     \end{pmatrix}
+                     \end{mat}
       \end{equation*}
       These two matrices are equal and so the compositions have the same
       effect on each vector in the space.
@@ -1555,18 +1574,18 @@ will explore it some more in the next subsection.
         maps in this way.
         \begin{equation*}
           \rep{\pi_x}{\stdbasis_2,\stdbasis_2}\cdot\rep{\pi_y}{\stdbasis_2,\stdbasis_2}=
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &0  \\
             0  &0
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
             0  &0  \\
             0  &1
-          \end{pmatrix}=
-          \begin{pmatrix}
+          \end{mat}=
+          \begin{mat}[r]
             0  &0  \\
             0  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
 
         To prove that the product of rank \( n \) matrices cannot have rank
@@ -1613,20 +1632,20 @@ will explore it some more in the next subsection.
       The `commutes with' relation is reflexive and symmetric.
       However, it is not transitive:~for instance, with
       \begin{equation*}
-        G=\begin{pmatrix}
+        G=\begin{mat}[r]
           1  &2  \\
           3  &4
-        \end{pmatrix}
+        \end{mat}
         \quad
-        H=\begin{pmatrix}
+        H=\begin{mat}[r]
           1  &0  \\
           0  &1
-        \end{pmatrix}
+        \end{mat}
         \quad
-        J=\begin{pmatrix}
+        J=\begin{mat}[r]
           5  &6  \\
           7  &8
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       $G$ commutes with $H$ and $H$ commutes with $J$, but $G$ does not
       commute with $J$.    
@@ -1657,48 +1676,48 @@ will explore it some more in the next subsection.
               \mapsunder{\pi_x}
             \colvec{x \\ 0 \\ 0}
               \mapsunder{\pi_y}
-            \colvec{0 \\ 0 \\ 0}
+            \colvec[r]{0 \\ 0 \\ 0}
             \qquad
             \colvec{x \\ y \\ z}
               \mapsunder{\pi_y}
             \colvec{0 \\ y \\ 0}
               \mapsunder{\pi_x}
-            \colvec{0 \\ 0 \\ 0}
+            \colvec[r]{0 \\ 0 \\ 0}
           \end{equation*}
         \partsitem The composition is the fifth derivative map
           $d^5/dx^5$ on the space of fourth-degree polynomials.
         \partsitem With respect to the natural bases,
           \begin{equation*}
-            \rep{\pi_x}{\stdbasis_3,\stdbasis_3}=\begin{pmatrix}
+            \rep{\pi_x}{\stdbasis_3,\stdbasis_3}=\begin{mat}[r]
               1  &0  &0  \\
               0  &0  &0  \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \rep{\pi_y}{\stdbasis_3,\stdbasis_3}=\begin{pmatrix}
+            \rep{\pi_y}{\stdbasis_3,\stdbasis_3}=\begin{mat}[r]
               0  &0  &0  \\
               0  &1  &0  \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and their product (in either order) is the zero matrix.
         \partsitem Where \( B=\sequence{1,x,x^2,x^3,x^4} \),
           \begin{equation*}
-            \rep{\frac{d^2}{dx^2}}{B,B}=\begin{pmatrix}
+            \rep{\frac{d^2}{dx^2}}{B,B}=\begin{mat}[r]
               0  &0  &2  &0  &0  \\
               0  &0  &0  &6  &0  \\
               0  &0  &0  &0  &12 \\
               0  &0  &0  &0  &0  \\
               0  &0  &0  &0  &0
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \rep{\frac{d^3}{dx^3}}{B,B}=\begin{pmatrix}
+            \rep{\frac{d^3}{dx^3}}{B,B}=\begin{mat}[r]
               0  &0  &0  &6  &0  \\
               0  &0  &0  &0  &24 \\
               0  &0  &0  &0  &0  \\
               0  &0  &0  &0  &0  \\
               0  &0  &0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and their product (in either order) is the zero matrix.
       \end{exparts}  
@@ -1711,27 +1730,27 @@ will explore it some more in the next subsection.
       at matrices that do not commute so that $-ST$ and $TS$ don't 
       cancel:~with 
       \begin{equation*}
-        S=\begin{pmatrix}
+        S=\begin{mat}[r]
             1  &2  \\
             3  &4
-          \end{pmatrix}
+          \end{mat}
         \quad
-        T=\begin{pmatrix}
+        T=\begin{mat}[r]
             5  &6  \\
             7  &8
-          \end{pmatrix}
+          \end{mat}
       \end{equation*}
       we have the desired inequality.
       \begin{equation*}
-        (S+T)(S-T)=\begin{pmatrix}
+        (S+T)(S-T)=\begin{mat}[r]
             -56  &-56  \\
             -88  &-88
-          \end{pmatrix}
+          \end{mat}
         \qquad
-        S^2-T^2=\begin{pmatrix}
+        S^2-T^2=\begin{mat}[r]
             -60  &-68  \\
             -76  &-84
-          \end{pmatrix}
+          \end{mat}
       \end{equation*}    
     \end{answer}
   \recommended \item \label{exer:IdMat} 
@@ -1748,13 +1767,13 @@ will explore it some more in the next subsection.
       $\vec{\beta}_n\mapsto\vec{\beta}_n$,
       the representation is this.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           1  &0  &0  &  &0 \\
           0  &1  &0  &  &0 \\
           0  &0  &1  &  &0 \\
              &   &   &\ddots  \\
           0  &0  &0  &  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       The second part of the question is obvious from 
       \nearbytheorem{th:MatMultRepComp}.
@@ -1770,10 +1789,10 @@ will explore it some more in the next subsection.
     \begin{answer}
       Here are four solutions.
       \begin{equation*}
-        T=\begin{pmatrix}
+        T=\begin{mat}[r]
           \pm 1  &0  \\
           0      &\pm 1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}  
     \end{answer}
   \item 
@@ -1800,10 +1819,10 @@ will explore it some more in the next subsection.
         such that \( m(T) \) is the zero matrix.
         Find the minimal polynomial of this matrix.
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
             \sqrt{3}/2  &-1/2       \\
             1/2         &\sqrt{3}/2
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         (This is the representation with respect to $\stdbasis_2,\stdbasis_2$, 
         the standard basis, of a rotation through $\pi/6$~radians
@@ -1824,52 +1843,52 @@ will explore it some more in the next subsection.
          \partsitem First compute the powers
            \begin{equation*}
               T^2=
-              \begin{pmatrix}
+              \begin{mat}[r]
                  1/2         &-\sqrt{3}/2  \\
                  \sqrt{3}/2  &1/2
-              \end{pmatrix} 
+              \end{mat} 
               \qquad
               T^3=
-              \begin{pmatrix}
+              \begin{mat}[r]
                  0           &-1           \\
                  1           &0
-              \end{pmatrix}
+              \end{mat}
              \qquad
               T^4=
-              \begin{pmatrix}
+              \begin{mat}[r]
                  -1/2        &-\sqrt{3}/2  \\
                  \sqrt{3}/2  &-1/2
-              \end{pmatrix}
+              \end{mat}
            \end{equation*}
            (observe that rotating by $\pi/6$ three times results in a 
            rotation by $\pi/2$, which is indeed what $T^3$ represents).
            Then set \( c_4T^4+c_3T^3+c_2T^2+c_1T+c_0I \) 
            equal to the zero matrix 
            \begin{multline*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                  -1/2        &-\sqrt{3}/2  \\
                  \sqrt{3}/2  &-1/2
-              \end{pmatrix}c_4
-              +\begin{pmatrix}
+              \end{mat}c_4
+              +\begin{mat}[r]
                  0           &-1           \\
                  1           &0
-              \end{pmatrix}c_3
-              +\begin{pmatrix}
+              \end{mat}c_3
+              +\begin{mat}[r]
                  1/2         &-\sqrt{3}/2  \\
                  \sqrt{3}/2  &1/2
-              \end{pmatrix}c_2
-              +\begin{pmatrix}
+              \end{mat}c_2
+              +\begin{mat}[r]
                  \sqrt{3}/2  &-1/2       \\
                  1/2         &\sqrt{3}/2
-               \end{pmatrix}c_1
-              +\begin{pmatrix}
+               \end{mat}c_1
+              +\begin{mat}[r]
                  1  &0  \\
                  0  &1 
-               \end{pmatrix}c_0                          \\
-               =\begin{pmatrix}
+               \end{mat}c_0                          \\
+               =\begin{mat}[r]
                   0  &0  \\
                   0  &0 
-               \end{pmatrix}                     
+               \end{mat}                     
            \end{multline*}
            to get this linear system.
            \begin{equation*}
@@ -2051,23 +2070,23 @@ For instance,
 here a second row and a third column combine to make a $2,3$~entry.
 \begin{equation*}
 \setlength{\fboxsep}{1.5pt}
-    \begin{pmatrix}
+    \begin{mat}
        \begin{array}{@{}cc@{}} 1  &1 \end{array}                         \\ 
        \text{\fbox{\( \begin{array}{@{}cc@{}}  0  &1  \end{array} \)}}   \\  
        \begin{array}{@{}cc@{}} 1  &0 \end{array}
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}
       \begin{array}{@{}c@{}}  4  \\  5  \end{array}
       &\begin{array}{@{}c@{}}  6  \\  7  \end{array}
       &\text{\fbox{ \(\begin{array}{@{}c@{}}  8  \\  9  \end{array}\) }}
       &\begin{array}{@{}c@{}}  2  \\  3  \end{array}
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       9  &13   &17                      &5  \\
       5  &7    &\text{\fbox{ \(9\) }}   &3  \\
       4  &6    &8                       &2
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 We can view this as the left matrix acting
 by multiplying its rows, one at a time, into the columns of the right matrix.
@@ -2083,33 +2102,33 @@ The first case, the action of a zero matrix, is very easy.
 Multiplying by an appropriately-sized zero matrix
 from the left or from the right
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &0  \\
        0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &3  &2   \\
       -1  &1  &-1
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &0  &0   \\
        0  &0  &0
-    \end{pmatrix}
+    \end{mat}
     \qquad
-    \begin{pmatrix}
+    \begin{mat}[r]
        2  &3  \\
        1  &4
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        0  &0  \\
        0  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &0  \\
        0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 results in a zero matrix.
 \end{example}
@@ -2127,21 +2146,21 @@ matrix.
 This is the \( 1,2\, \) unit matrix with three rows and two columns,
 multiplying from the left.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &1  \\
        0  &0  \\
        0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        5  &6  \\
        7  &8
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        7  &8  \\
        0  &0  \\
        0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 Acting
 from the left, an \( i,j \) unit matrix copies row~\( j \) of
@@ -2149,22 +2168,22 @@ the multiplicand into row~\( i \) of the result.
 From the right an \( i,j \) unit matrix copies column~\( i \) of
 the multiplicand into column~\( j \) of the result.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &2  &3  \\
        4  &5  &6  \\
        7  &8  &9
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        0  &1  \\
        0  &0  \\
        0  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &1  \\
        0  &4  \\
        0  &7
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2173,41 +2192,41 @@ Rescaling these matrices simply rescales the result.
 This is the action from the left of the matrix that is twice the one in the
 prior example.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &2  \\
        0  &0  \\
        0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        5  &6  \\
        7  &8
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       14  &16 \\
        0  &0  \\
        0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 And this is the action of the matrix that is minus three times the one 
 from the prior example.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &2  &3  \\
        4  &5  &6  \\
        7  &8  &9
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        0  &-3 \\
        0  &0  \\
        0  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &-3  \\
        0  &-12 \\
        0  &-21
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2218,48 +2237,48 @@ don't interact.
 
 \begin{example}
 \begin{align*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  \\
        0  &0  &2  \\
        0  &0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &2  &3  \\
        4  &5  &6  \\
        7  &8  &9
-    \end{pmatrix}
-  &=(  \begin{pmatrix}
+    \end{mat}
+  &=(  \begin{mat}[r]
           1  &0  &0  \\
           0  &0  &0  \\
           0  &0  &0
-       \end{pmatrix}
+       \end{mat}
     +
-       \begin{pmatrix}
+       \begin{mat}[r]
           0  &0  &0  \\
           0  &0  &2  \\
           0  &0  &0
-       \end{pmatrix}     )
-      \begin{pmatrix}
+       \end{mat}     )
+      \begin{mat}[r]
          1  &2  &3  \\
          4  &5  &6  \\
          7  &8  &9
-      \end{pmatrix}                      \\
-  &=\begin{pmatrix}
+      \end{mat}                      \\
+  &=\begin{mat}[r]
        1  &2  &3  \\
        0  &0  &0  \\
        0  &0  &0
-    \end{pmatrix}
+    \end{mat}
   +
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &0  &0  \\
       14  &16 &18 \\
        0  &0  &0
-    \end{pmatrix}                        \\
-  &=\begin{pmatrix}
+    \end{mat}                        \\
+  &=\begin{mat}[r]
        1  &2  &3  \\
       14  &16 &18 \\
        0  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{align*}
 \end{example}
 
@@ -2267,48 +2286,48 @@ don't interact.
 then that row of the result is a combination.
 \begin{example}
 \begin{align*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &2  \\
        0  &0  &0  \\
        0  &0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &2  &3  \\
        4  &5  &6  \\
        7  &8  &9
-    \end{pmatrix}
-  &=(  \begin{pmatrix}
+    \end{mat}
+  &=(  \begin{mat}[r]
           1  &0  &0  \\
           0  &0  &0  \\
           0  &0  &0
-       \end{pmatrix}
+       \end{mat}
     +
-       \begin{pmatrix}
+       \begin{mat}[r]
           0  &0  &2  \\
           0  &0  &0  \\
           0  &0  &0
-       \end{pmatrix}     )
-      \begin{pmatrix}
+       \end{mat}     )
+      \begin{mat}[r]
          1  &2  &3  \\
          4  &5  &6  \\
          7  &8  &9
-      \end{pmatrix}                     \\
-  &=\begin{pmatrix}
+      \end{mat}                     \\
+  &=\begin{mat}[r]
        1  &2  &3  \\
        0  &0  &0  \\
        0  &0  &0
-    \end{pmatrix}
+    \end{mat}
   +
-    \begin{pmatrix}
+    \begin{mat}[r]
       14  &16 &18 \\
        0  &0  &0  \\
        0  &0  &0
-    \end{pmatrix}                      \\
-  &=\begin{pmatrix}
+    \end{mat}                      \\
+  &=\begin{mat}[r]
       15  &18 &21 \\
        0  &0  &0  \\
        0  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{align*}
 \end{example}
 
@@ -2356,19 +2375,19 @@ and the rows of $GH$ are formed by taking the rows of $G$ times $H$
 We will show the $\nbyn{2}$ case and leave the general case as
 an exercise.
 \begin{equation*}
-  GH=\begin{pmatrix}
+  GH=\begin{mat}
     g_{1,1}  &g_{1,2}    \\
     g_{2,1}  &g_{2,2}    
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}
     h_{1,1}  &h_{1,2}    \\
     h_{2,1}  &h_{2,2}    
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}
     g_{1,1}h_{1,1}+g_{1,2}h_{2,1}  &g_{1,1}h_{1,2}+g_{1,2}h_{2,2} \\
     g_{2,1}h_{1,1}+g_{2,2}h_{2,1}  &g_{2,1}h_{1,2}+g_{2,2}h_{2,2} 
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 The right side of the first equation in the result 
 \begin{equation*}
@@ -2401,12 +2420,12 @@ An \definend{identity matrix\/}\index{identity!matrix}\index{matrix!identity}
 is square and has with all entries zero except for ones in the main diagonal.
 \begin{equation*}
    I_{\nbyn{n}}=
-      \begin{pmatrix}
+      \begin{mat}
         1  &0  &\ldots  &0  \\
         0  &1  &\ldots  &0  \\
            &\vdots          \\
         0  &0  &\ldots  &1
-      \end{pmatrix}
+      \end{mat}
 \end{equation*}
 \end{definition}
 
@@ -2414,23 +2433,23 @@ is square and has with all entries zero except for ones in the main diagonal.
 Here is the \( \nbyn{2} \) identity matrix leaving its multiplicand unchaged
 when it acts from the right.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &-2 \\
        0  &-2 \\
        1  &-1 \\
        4  &3
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  \\
        0  &1  \\
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &-2 \\
        0  &-2 \\
        1  &-1 \\
        4  &3
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2438,41 +2457,41 @@ when it acts from the right.
 Here the \( \nbyn{3} \) identity
 leaves its multiplicand unchanged both from the left
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  \\
        0  &1  &0  \\
        0  &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        2  &3  &6  \\
        1  &3  &8  \\
       -7  &1  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        2  &3  &6  \\
        1  &3  &8  \\
       -7  &1  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 and from the right.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        2  &3  &6  \\
        1  &3  &8  \\
       -7  &1  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  &0  \\
        0  &1  &0  \\
        0  &0  &1
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        2  &3  &6  \\
        1  &3  &8  \\
       -7  &1  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2488,12 +2507,12 @@ the resulting matrix will rescale whole rows or columns.
 A \definend{diagonal matrix\/}\index{matrix!diagonal}\index{diagonal matrix}
 is square and has zeros off the main diagonal.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
        a_{1,1}  &0        &\ldots     &0     \\
        0        &a_{2,2}  &\ldots     &0     \\
                 &\vdots                      \\
        0        &0        &\ldots     &a_{n,n}
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{definition}
 
@@ -2502,36 +2521,36 @@ From the left,
 the action of multiplication by a diagonal matrix is to
 rescales the rows.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        2  &0   \\
        0  &-1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        2  &1  &4  &-1  \\
       -1  &3  &4  &4
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        4  &2  &8  &-2  \\
        1  &-3 &-4 &-4
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 From the right such a matrix rescales the columns.
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
         1  &2  &1  \\
         2  &2  &2
-     \end{pmatrix}
-    \begin{pmatrix}
+     \end{mat}
+    \begin{mat}[r]
       3  &0  &0  \\
       0  &2  &0  \\
       0  &0  &-2
-    \end{pmatrix}
+    \end{mat}
   =
-     \begin{pmatrix}
+     \begin{mat}[r]
         3  &4  &-2 \\
         6  &4  &-4
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2549,41 +2568,41 @@ a single one in each row and column.
 \begin{example}
 From the left these matrices permute rows.
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
         0  &0  &1  \\
         1  &0  &0  \\
         0  &1  &0
-     \end{pmatrix}
-     \begin{pmatrix}
+     \end{mat}
+     \begin{mat}[r]
         1  &2  &3  \\
         4  &5  &6  \\
         7  &8  &9
-     \end{pmatrix}
+     \end{mat}
   =
-     \begin{pmatrix}
+     \begin{mat}[r]
         7  &8  &9  \\
         1  &2  &3  \\
         4  &5  &6
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 From the right they permute columns.
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
         1  &2  &3  \\
         4  &5  &6  \\
         7  &8  &9
-     \end{pmatrix}
-     \begin{pmatrix}
+     \end{mat}
+     \begin{mat}[r]
         0  &0  &1  \\
         1  &0  &0  \\
         0  &1  &0
-     \end{pmatrix}
+     \end{mat}
   =
-     \begin{pmatrix}
+     \begin{mat}[r]
         2  &3  &1  \\
         5  &6  &4  \\
         8  &9  &7
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2595,43 +2614,43 @@ We have seen how to produce a matrix that will rescale rows.
 Multiplying by this diagonal matrix rescales the second row of
 the other by a factor of three.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &3  &0  \\
       0  &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       0  &2    &1  &1  \\
       0  &1/3  &1  &-1 \\
       1  &0    &2  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       0  &2    &1  &1  \\
       0  &1    &3  &-3 \\
       1  &0    &2  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 We have seen how to produce a matrix that will swap rows.
 Multiplying by this permutation matrix swaps the 
 first and third rows.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       0  &0  &1  \\
       0  &1  &0  \\
       1  &0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       0  &2    &1  &1  \\
       0  &1    &3  &-3 \\
       1  &0    &2  &0
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0    &2  &0  \\
       0  &1    &3  &-3 \\
       0  &2    &1  &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2640,67 +2659,67 @@ we observe something about those two examples.
 The matrix that rescales the second row by a factor of three arises in this 
 way from the identity.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &1  &0  \\
       0  &0  &1
-    \end{pmatrix}
+    \end{mat}
   \grstep{3\rho_2}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &3  &0  \\
       0  &0  &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 Similarly, the matrix that swaps first and third rows arises in this way.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &1  &0  \\
       0  &0  &1
-    \end{pmatrix}
+    \end{mat}
   \grstep{\rho_1\leftrightarrow\rho_3}
-    \begin{pmatrix}
+    \begin{mat}[r]
       0  &0  &1  \\
       0  &1  &0  \\
       1  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 
 \begin{example}
 The \( \nbyn{3} \) matrix that arises as
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &1  &0  \\
       0  &0  &1
-    \end{pmatrix}
+    \end{mat}
   \grstep{-2\rho_2+\rho_3}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &1  &0  \\
       0  &-2 &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 will, when it acts from the left,
 perform the combination operation \( -2\rho_2+\rho_3 \).
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  &0  \\
       0  &1  &0  \\
       0  &-2 &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       1  &0    &2  &0  \\
       0  &1    &3  &-3 \\
       0  &2    &1  &1
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0    &2  &0  \\
       0  &1    &3  &-3 \\
       0  &0    &-5 &7
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2745,60 +2764,60 @@ performed Gauss' method.
 It can be reduced with matrix multiplication.
 Swap the first and third rows,
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        0  &0  &1  \\
        0  &1  &0  \\
        1  &0  &0
-    \end{pmatrix}
-    \begin{amatrix}{3}
+    \end{mat}
+    \begin{amat}[r]{3}
        0    &0    &3   &9   \\
        1    &5    &-2  &2   \\
       1/3   &2    &0   &3
-    \end{amatrix}
+    \end{amat}
   =
-    \begin{amatrix}{3}
+    \begin{amat}[r]{3}
       1/3   &2    &0   &3   \\
        1    &5    &-2  &2   \\
        0    &0    &3   &9
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 triple the first row,
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        3  &0  &0  \\
        0  &1  &0  \\
        0  &0  &1
-    \end{pmatrix}
-    \begin{amatrix}{3}
+    \end{mat}
+    \begin{amat}[r]{3}
       1/3   &2    &0   &3   \\
        1    &5    &-2  &2   \\
        0    &0    &3   &9
-    \end{amatrix}
+    \end{amat}
   =
-    \begin{amatrix}{3}
+    \begin{amat}[r]{3}
        1    &6    &0   &9   \\
        1    &5    &-2  &2   \\
        0    &0    &3   &9
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 and then add \( -1 \) times the first row to the second.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  \\
       -1  &1  &0  \\
        0  &0  &1
-    \end{pmatrix}
-    \begin{amatrix}{3}
+    \end{mat}
+    \begin{amat}[r]{3}
        1    &6    &0   &9   \\
        1    &5    &-2  &2   \\
        0    &0    &3   &9
-    \end{amatrix}
+    \end{amat}
   =
-    \begin{amatrix}{3}
+    \begin{amat}[r]{3}
        1    &6    &0   &9   \\
        0    &-1   &-2  &-7  \\
        0    &0    &3   &9
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 Now back substitution will give the solution.
 \end{example}
@@ -2807,46 +2826,46 @@ Now back substitution will give the solution.
 Gauss-Jordan reduction works the same way.
 For the matrix ending the prior example, first adjust the leading entries
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  \\
        0  &-1 &0  \\
        0  &0  &1/3
-    \end{pmatrix}
-    \begin{amatrix}{3}
+    \end{mat}
+    \begin{amat}[r]{3}
        1    &6    &0   &9   \\
        0    &-1   &-2  &-7  \\
        0    &0    &3   &9
-    \end{amatrix}
+    \end{amat}
   =
-    \begin{amatrix}{3}
+    \begin{amat}[r]{3}
        1    &6    &0   &9   \\
        0    &1    &2   &7   \\
        0    &0    &1   &3
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 and to finish, clear the third column and then the second column.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &-6 &0  \\
        0  &1  &0  \\
        0  &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  &0  \\
        0  &1  &-2 \\
        0  &0  &1
-    \end{pmatrix}
-    \begin{amatrix}{3}
+    \end{mat}
+    \begin{amat}[r]{3}
        1    &6    &0   &9   \\
        0    &1    &2   &7   \\
        0    &0    &1   &3
-    \end{amatrix}
+    \end{amat}
   =
-    \begin{amatrix}{3}
+    \begin{amat}[r]{3}
        1    &0    &0   &3   \\
        0    &1    &0   &1   \\
        0    &0    &1   &3
-    \end{amatrix}
+    \end{amat}
 \end{equation*}
 \end{example}
 
@@ -2876,46 +2895,46 @@ clearer idea then we shall use it.
     Predict the result of each multiplication by an elementary
     reduction matrix, and then check by multiplying it out.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  3  &0  \\
                  0  &0
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  1  &2  \\
                  3  &4
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  4  &0  \\
                  0  &2
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  1  &2  \\
                  3  &4
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  1  &0  \\
                 -2  &1
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  1  &2  \\
                  3  &4
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  1  &2  \\
                  3  &4
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  1  &-1 \\
                  0  &1
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  1  &2  \\
                  3  &4
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  0  &1  \\
                  1  &0
-               \end{pmatrix} \)
+               \end{mat} \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -2923,44 +2942,44 @@ clearer idea then we shall use it.
           by \( 3 \) and
           its second row multiplied by \( 0 \).
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               3  &6  \\
               0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The second matrix has its first row multiplied 
           by \( 4 \) and
           its second row multiplied by \( 2 \).
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               4  &8  \\
               6  &8
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The second matrix undergoes the combination operation
           of replacing the second row with \( -2 \) times the first row added
           to the second.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  \\
               1  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The first matrix undergoes the column operation of:~the
           second column is replaced by $-1$ times the first column plus the
           second.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
               3  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The first matrix has its columns swapped.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               2  &1  \\
               4  &3
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}   
     \end{answer}
@@ -3006,13 +3025,13 @@ clearer idea then we shall use it.
           (e.g, the first row shows that there is only one connection
           including Burlington, the road to Winooski).
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  &0  &0  &1  \\
               0  &0  &1  &1  &1  \\
               0  &1  &0  &1  &0  \\
               0  &1  &1  &0  &0  \\
               1  &1  &0  &0  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Because these are two-way roads, 
           any road connecting city~\( i \)
@@ -3058,10 +3077,10 @@ clearer idea then we shall use it.
   \item 
     Find the product of this matrix with its transpose.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
         \cos\theta  &-\sin\theta  \\
         \sin\theta  &\cos\theta
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       The product is the identity matrix (recall that
@@ -3083,18 +3102,18 @@ clearer idea then we shall use it.
       Therefore it is a subspace.
       The dimension is \( n \); here is a basis.
       \begin{equation*}
-        \set{\begin{pmatrix}
+        \set{\begin{mat}
                1  &0  &\ldots    \\
                0  &0             \\
                   &   &\ddots    \\
                0  &0  &      &0
-             \end{pmatrix},\ldots,
-             \begin{pmatrix}
+             \end{mat},\ldots,
+             \begin{mat}
                0  &0  &\ldots    \\
                0  &0             \\
                   &   &\ddots    \\
                0  &0  &      &1
-             \end{pmatrix}  }
+             \end{mat}  }
       \end{equation*} 
     \end{answer}
   \item 
@@ -3107,10 +3126,10 @@ clearer idea then we shall use it.
       the identity transformation is represented by by this matrix.
       \begin{equation*}
          \rep{\text{id}}{B,D}=
-         \begin{pmatrix}
+         \begin{mat}[r]
            1/2  &1/2  \\
            1/2  &-1/2
-         \end{pmatrix}_{B,D}
+         \end{mat}_{B,D}
       \end{equation*}   
     \end{answer}
   \item 
@@ -3126,30 +3145,30 @@ clearer idea then we shall use it.
       If a matrix commutes with all others then it commutes with this
       unit matrix.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           0  &a  \\
           0  &c 
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}
           a  &b  \\
           c  &d   
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           0  &1  \\
           0  &0
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}[r]
           0  &1  \\
           0  &0
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}
           a  &b  \\
           c  &d   
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}
           c  &d  \\
           0  &0 
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       From this we first conclude that the upper left entry~$a$ 
       must equal its lower right entry~$d$.
@@ -3161,15 +3180,15 @@ clearer idea then we shall use it.
     \begin{answer}
       It is false; these two don't commute.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &2  \\
            3  &4
-         \end{pmatrix}
+         \end{mat}
          \qquad
-         \begin{pmatrix}
+         \begin{mat}[r]
            5  &6  \\
            7  &8
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}  
     \end{answer}
   \recommended \item \label{exer:PermTimesTransEqId}
@@ -3214,10 +3233,10 @@ clearer idea then we shall use it.
   \item 
     Write
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1   &0  \\
         -3  &3
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     as the product of two elementary reduction matrices.
     \begin{answer}
@@ -3226,33 +3245,33 @@ clearer idea then we shall use it.
       of first multiplying the second column by three, and then adding the 
       negative of the resulting second column to the first.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &1
-        \end{pmatrix}
+        \end{mat}
         \;\grstep{}\;
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &3
-        \end{pmatrix}
+        \end{mat}
         \;\grstep{}\;
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           -3  &3
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       In contrast with row operations, column operations are written from
       left to right, so doing the above two operations
       is expressed with this matrix product.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &3
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1  &0  \\
          -1  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       \textit{Remark.}
       Alternatively, we could get the required matrix with row operations.
@@ -3283,22 +3302,22 @@ clearer idea then we shall use it.
       Perhaps the easiest way is to show that each \( \nbym{n}{m} \) matrix
       is a linear combination of unit matrices in one and only one way:
       \begin{equation*}
-        c_1\begin{pmatrix}
+        c_1\begin{mat}
              1  &0  &\ldots  \\
              0  &0           \\
              \vdots
-           \end{pmatrix}
+           \end{mat}
         +\dots+
-        c_{n,m}\begin{pmatrix}
+        c_{n,m}\begin{mat}
              0  &0      &\ldots  \\
              \vdots              \\
              0  &\ldots &       &1
-           \end{pmatrix}
-        =\begin{pmatrix}
+           \end{mat}
+        =\begin{mat}
            a_{1,1} &a_{1,2} &\ldots          \\
            \vdots                            \\
            a_{n,1} &\ldots  &      &a_{n,m} 
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       has the unique solution \( c_1=a_{1,1} \), \( c_2=a_{1,2} \),
       etc.  
@@ -3306,53 +3325,53 @@ clearer idea then we shall use it.
   \item  
     Find the formula for the $n$-th power of this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &1  \\
         1  &0
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       Call that matrix \( F \).
       We have
       \begin{equation*}
-        F^2=\begin{pmatrix}
+        F^2=\begin{mat}[r]
           2  &1  \\
           1  &1
-        \end{pmatrix}
+        \end{mat}
         \quad
-        F^3=\begin{pmatrix}
+        F^3=\begin{mat}[r]
           3  &2  \\
           2  &1
-        \end{pmatrix}
+        \end{mat}
         \quad
-        F^4=\begin{pmatrix}
+        F^4=\begin{mat}[r]
           5  &3  \\
           3  &2
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       In general, 
       \begin{equation*}
-        F^n=\begin{pmatrix}
+        F^n=\begin{mat}
           f_{n+1} &f_n  \\
           f_n     &f_{n-1}
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       where \( f_i \) is the \( i \)-th Fibonacci number
       \( f_i=f_{i-1}+f_{i-2} \) and \( f_0=0 \), \( f_1=1 \), 
       which is verified by induction, based on this equation.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           f_{i-1}  &f_{i-2} \\
           f_{i-2}  &f_{i-3}
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1  &1  \\
           1  &0
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}
            f_i     &f_{i-1}  \\
            f_{i-1} &f_{i-2}
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \recommended \item
@@ -3456,21 +3475,21 @@ clearer idea then we shall use it.
       Such a matrix can be written as the product of a permutation matrix and
       a diagonal matrix, e.g.,
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &4  &0  \\
           2  &0  &0  \\
           0  &0  &-5
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}[r]
           0  &1  &0  \\
           1  &0  &0  \\
           0  &0  &1
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           4  &0  &0  \\
           0  &2  &0  \\
           0  &0  &-5
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and its action is thus to rescale the rows and permute them.
     \end{answer}
@@ -3524,21 +3543,21 @@ clearer idea then we shall use it.
            V.~Strassen:
            where \( w=aA-(a-c-d)(A-C+D) \),
            \begin{multline*}
-               \begin{pmatrix}
+               \begin{mat}
                  a  &b  \\
                  c  &d
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}
                  A  &B  \\
                  C  &D
-                 \end{pmatrix}    \\
+                 \end{mat}    \\
                =
-               \begin{pmatrix}
+               \begin{mat}
                   aA+bB
                   &w+(c+d)(C-A)+(a+b-c-d)D \\
                   w+(a-c)(D-C)-d(A-B-C+D)
                   &w+(a-c)(D-C)+(c+d)(C-A)
-               \end{pmatrix}
+               \end{mat}
            \end{multline*}
            takes seven multiplications and fifteen additions (save the
            intermediate results).
@@ -3560,7 +3579,7 @@ clearer idea then we shall use it.
       \end{equation*}
       Observe that
       \begin{equation*}
-        \colvec{x \\ y \\ z}\mapsunder{abab}\colvec{0 \\ 0 \\ 0}
+        \colvec{x \\ y \\ z}\mapsunder{abab}\colvec[r]{0 \\ 0 \\ 0}
         \quad\text{but}\quad
         \colvec{x \\ y \\ z}\mapsunder{baba}\colvec{0 \\ 0 \\ x}.
       \end{equation*} 
@@ -3741,11 +3760,11 @@ doesn't give the identity map\Dash here is a vector that is not
 sent to itself under $\composed{\eta}{\pi}$. 
 \begin{equation*}
   %\composed{\eta}{\pi}:\qquad
-  \colvec{0 \\ 0 \\ 1}
+  \colvec[r]{0 \\ 0 \\ 1}
     \mapsunder{\pi}
-  \colvec{0 \\ 0}
+  \colvec[r]{0 \\ 0}
     \mapsunder{\eta}
-  \colvec{0 \\ 0 \\ 0}
+  \colvec[r]{0 \\ 0 \\ 0}
 \end{equation*}
 In fact, the projection
 $\pi$ has no left inverse at all.
@@ -3868,13 +3887,13 @@ A linear system is equivalent to a matrix equation, as here.
    2x_1  &-  &x_2  &=  &2  
   \end{linsys}
   \quad\Longleftrightarrow\quad
-  \begin{pmatrix}
+  \begin{mat}[r]
        1  &1  \\
        2  &-1
-    \end{pmatrix}
+    \end{mat}
   \colvec{x_1 \\ x_2}
   =
-  \colvec{3 \\ 2}
+  \colvec[r]{3 \\ 2}
 \tag*{($*$)}\end{equation*}
 By fixing spaces and bases (e.g., $\Re^2,\Re^2$ and $\stdbasis_2,\stdbasis_2$),
 we take the matrix $H$ to represent some map $h$.
@@ -3888,19 +3907,19 @@ to get $\rep{\vec{x}}{B}$.
 \begin{example}  \label{ex:InverseByLinSys}
 We can find a left inverse for the matrix just given
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
        m  &n  \\
        p  &q
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &1  \\
        2  &-1
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  \\
        0  &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 by using Gauss' method to solve the resulting linear system.
 \begin{equation*}
@@ -3918,12 +3937,12 @@ With it we can solve the system~($*$) above by
 applying the inverse.
 \begin{equation*}
   \colvec{x \\ y}
-  =\begin{pmatrix}
+  =\begin{mat}[r]
        1/3  &1/3  \\
        2/3  &-1/3
-    \end{pmatrix}
-  \colvec{3 \\ 2}          
-  =\colvec{5/3 \\ 4/3}
+    \end{mat}
+  \colvec[r]{3 \\ 2}          
+  =\colvec[r]{5/3 \\ 4/3}
 \end{equation*}
 \end{example}
 
@@ -3944,25 +3963,25 @@ same coefficients but different constants is easy and fast:~if
 we change the entries on the right of the system~($*$) 
 then we get a related problem
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &1  \\
        2  &-1
-    \end{pmatrix}
+    \end{mat}
   \colvec{x \\ y}
   =
-  \colvec{5 \\ 1}
+  \colvec[r]{5 \\ 1}
 \end{equation*}
 with a related solution method.
 \begin{equation*}
   \colvec{x \\ y}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1/3  &1/3  \\
        2/3  &-1/3
-    \end{pmatrix}
-  \colvec{5 \\ 1}
+    \end{mat}
+  \colvec[r]{5 \\ 1}
   =
-  \colvec{2 \\ 3}
+  \colvec[r]{2 \\ 3}
 \end{equation*}
 In applications, solving many systems having the same matrix of
 coefficients is common.
@@ -3971,21 +3990,21 @@ Another advantage of inverses is that we can
 explore a system's sensitivity to changes in the constants.
 For example, tweaking the $3$ on the right of the system~($*$) to
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &1  \\
        2  &-1
-    \end{pmatrix}
+    \end{mat}
   \colvec{x_1 \\ x_2}
   =
-  \colvec{3.01 \\ 2}
+  \colvec[r]{3.01 \\ 2}
 \end{equation*}
 can be solved with the inverse.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1/3  &1/3  \\
        2/3  &-1/3
-    \end{pmatrix}
-  \colvec{3.01 \\ 2}
+    \end{mat}
+  \colvec[r]{3.01 \\ 2}
   =
   \colvec{(1/3)(3.01)+(1/3)(2) \\ (2/3)(3.01)-(1/3)(2)}
 \end{equation*}
@@ -4032,73 +4051,73 @@ followed by $R_2$, etc., yields the inverse of $H$.
 \begin{example}
 To find the inverse of
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &1  \\
        2  &-1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 we do Gauss-Jordan reduction, meanwhile performing the same operations on
 the identity.
 For clerical convenience we write the matrix and the identity side-by-side,
 and do the reduction steps together.
 \begin{eqnarray*}
-    \begin{pmat}{cc|cc}
+    \begin{pmat}{rr|rr}
        1  &1   &1  &0  \\
        2  &-1  &0  &1
     \end{pmat}
   &\grstep{-2\rho_1+\rho_2}
-  &\begin{pmat}{cc|cc}
+  &\begin{pmat}{rr|rr}
         1  &1   &1  &0  \\
         0  &-3  &-2 &1
      \end{pmat}                 \\
   &\grstep{-1/3\rho_2}
-  &\begin{pmat}{cc|cc}
+  &\begin{pmat}{rr|rr}
         1  &1   &1   &0     \\
         0  &1   &2/3 &-1/3
      \end{pmat}                   \\
   &\grstep{-\rho_2+\rho_1}
-  &\begin{pmat}{cc|cc}
+  &\begin{pmat}{rr|rr}
         1  &0   &1/3 &1/3  \\
         0  &1   &2/3 &-1/3
      \end{pmat}
 \end{eqnarray*}
 This calculation has found the inverse.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &1  \\
        2  &-1
-    \end{pmatrix}^{-1}
+    \end{mat}^{-1}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1/3 &1/3  \\
        2/3 &-1/3
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
 \begin{example} \label{exam:ThreeByThreeMatInv}
 This one happens to start with a row swap.
 \begin{eqnarray*}
-     \begin{pmat}{ccc|ccc}
+     \begin{pmat}{rrr|rrr}
         0  &3  &-1  &1  &0  &0  \\
         1  &0  &1   &0  &1  &0  \\
         1  &-1 &0   &0  &0  &1
      \end{pmat}
   &\grstep{\rho_1\leftrightarrow\rho_2}
-  &   \begin{pmat}{ccc|ccc}
+  &   \begin{pmat}{rrr|rrr}
          1  &0  &1   &0  &1  &0  \\
          0  &3  &-1  &1  &0  &0  \\
          1  &-1 &0   &0  &0  &1
       \end{pmat}                             \\
   &\grstep{-\rho_1+\rho_3}
-  &   \begin{pmat}{ccc|ccc}
+  &   \begin{pmat}{rrr|rrr}
          1  &0  &1   &0  &1  &0  \\
          0  &3  &-1  &1  &0  &0  \\
          0  &-1 &-1  &0  &-1 &1
       \end{pmat}                             \\
   &\vdots                                  \\
   &\grstep{}
-  &   \begin{pmat}{ccc|ccc}
+  &   \begin{pmat}{rrr|rrr}
          1  &0  &0   &1/4  &1/4  &3/4  \\
          0  &1  &0   &1/4  &1/4  &-1/4 \\
          0  &0  &1   &-1/4 &3/4  &-3/4
@@ -4110,12 +4129,12 @@ This one happens to start with a row swap.
 A non-invertible matrix is detected by the fact that the left half won't
 reduce to the identity.
 \begin{equation*}
-    \begin{pmat}{cc|cc}
+    \begin{pmat}{rr|rr}
        1  &1   &1  &0  \\
        2  &2   &0  &1
     \end{pmat}
   \grstep{-2\rho_1+\rho_2}
-   \begin{pmat}{cc|cc}
+   \begin{pmat}{rr|rr}
        1  &1   &1  &0  \\
        0  &0   &-2 &1
     \end{pmat}
@@ -4129,16 +4148,16 @@ The $\nbyn{2}$ case is handy.
 \label{cor:TwoByTwoInv}
 The inverse for a \( \nbyn{2} \) matrix exists and equals
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     c  &d
-  \end{pmatrix}^{-1}
+  \end{mat}^{-1}
   =
   \frac{1}{ad-bc}
-  \begin{pmatrix}
+  \begin{mat}
     d  &-b \\
    -c  &a
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 if and only if \( ad-bc\neq 0 \).
 \end{corollary}
@@ -4181,32 +4200,32 @@ elementary one can be interesting and useful.
       Here is one way to proceed.
       \begin{multline*}
        \grstep{\rho_1\leftrightarrow\rho_2}\;
-       \begin{pmat}{ccc|ccc}
+       \begin{pmat}{rrr|rrr}
               1  &0  &1   &0  &1  &0  \\
               0  &3  &-1  &1  &0  &0  \\
               1  &-1 &0   &0  &0  &1
            \end{pmat}                          
        \;\grstep{-\rho_1+\rho_3}\;
-       \begin{pmat}{ccc|ccc}
+       \begin{pmat}{rrr|rrr}
               1  &0  &1   &0  &1  &0  \\
               0  &3  &-1  &1  &0  &0  \\
               0  &-1 &-1  &0  &-1 &1
            \end{pmat}                        \\                          
        \begin{aligned}
          &\grstep{(1/3)\rho_2+\rho_3}\;
-         \begin{pmat}{ccc|ccc}
+         \begin{pmat}{rrr|rrr}
                 1  &0  &1     &0   &1  &0  \\
                 0  &3  &-1    &1   &0  &0  \\
                 0  &0  &-4/3  &1/3 &-1 &1
              \end{pmat}                          
          \;\grstep[-(3/4)\rho_3]{(1/3)\rho_2}\;
-         \begin{pmat}{ccc|ccc}
+         \begin{pmat}{rrr|rrr}
                 1  &0  &1     &0    &1   &0    \\
                 0  &1  &-1/3  &1/3  &0   &0    \\
                 0  &0  &1     &-1/4 &3/4 &-3/4
              \end{pmat}                                  \\
          &\grstep[-\rho_3+\rho_1]{(1/3)\rho_3+\rho_2}\;
-         \begin{pmat}{ccc|ccc}
+         \begin{pmat}{rrr|rrr}
                 1  &0  &0     &1/4  &1/4 &3/4  \\
                 0  &1  &0     &1/4  &1/4 &-1/4 \\
                 0  &0  &1     &-1/4 &3/4 &-3/4
@@ -4219,20 +4238,20 @@ elementary one can be interesting and useful.
     has an inverse.
     \begin{exparts*}
       \partsitem
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            2  &1  \\
           -1  &1          
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           0  &4  \\
           1  &-3
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           2  &-3  \\
          -4  &6
-        \end{pmatrix}$
+        \end{mat}$
     \end{exparts*}
     \begin{answer}
       \begin{exparts*}
@@ -4248,28 +4267,28 @@ elementary one can be interesting and useful.
        \begin{exparts}
          \partsitem 
            $\displaystyle \frac{1}{2\cdot 1-1\cdot (-1)}
-            \cdot\begin{pmatrix}
+            \cdot\begin{mat}[r]
              1  &-1  \\
              1  &2
-           \end{pmatrix}
-          =\frac{\displaystyle 1}{\displaystyle 3}\cdot\begin{pmatrix}
+           \end{mat}
+          =\frac{\displaystyle 1}{\displaystyle 3}\cdot\begin{mat}[r]
              1  &-1  \\
              1  &2
-           \end{pmatrix}
-          =\begin{pmatrix}
+           \end{mat}
+          =\begin{mat}[r]
              1/3  &-1/3  \\
              1/3  &2/3
-           \end{pmatrix}$
+           \end{mat}$
          \partsitem 
            $\displaystyle \frac{1}{0\cdot (-3)-4\cdot 1}
-           \cdot\begin{pmatrix}
+           \cdot\begin{mat}[r]
              -3  &-4  \\
              -1  &0
-           \end{pmatrix}
-           =\begin{pmatrix}
+           \end{mat}
+           =\begin{mat}[r]
              3/4  &1  \\
              1/4  &0
-           \end{pmatrix}$
+           \end{mat}$
          \partsitem The prior question shows that no inverse exists.
        \end{exparts}
      \end{answer}
@@ -4278,88 +4297,88 @@ elementary one can be interesting and useful.
     Check the answers for the $\nbyn{2}$ matrices 
     with \nearbycorollary{cor:TwoByTwoInv}.
     \begin{exparts*}
-      \partsitem $\begin{pmatrix}
+      \partsitem $\begin{mat}[r]
                    3  &1  \\
                    0  &2
-                 \end{pmatrix}$
-      \partsitem \( \begin{pmatrix}
+                 \end{mat}$
+      \partsitem \( \begin{mat}[r]
                  2   &1/2  \\
                  3   &1
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  2   &-4   \\
                 -1   &2
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  1   &1  &3  \\
                  0   &2  &4  \\
                  -1  &1  &0
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  0   &1  &5  \\
                  0   &-2 &4  \\
                  2   &3  &-2
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  2   &2  &3  \\
                  1   &-2 &-3 \\
                  4   &-2 &-3
-               \end{pmatrix} \)
+               \end{mat} \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem The reduction is routine. 
           \begin{equation*}
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               3  &1  &1  &0 \\
               0  &2  &0  &1
             \end{pmat}
             \;\grstep[(1/2)\rho_2]{(1/3)\rho_1}\;
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               1  &1/3  &1/3  &0   \\
               0  &1    &0    &1/2
             \end{pmat}
             \;\grstep{-(1/3)\rho_2+\rho_1}\;
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               1  &0    &1/3  &-1/6 \\
               0  &1    &0    &1/2
             \end{pmat}
           \end{equation*}
           This answer agrees with the answer from the check.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               3  &1  \\
               0  &2
-            \end{pmatrix}^{-1}
+            \end{mat}^{-1}
             =\frac{1}{3\cdot 2-0\cdot 1}\cdot
-            \begin{pmatrix}
+            \begin{mat}[r]
               2  &-1  \\
               0  &3
-            \end{pmatrix}
+            \end{mat}
             =\frac{1}{6}\cdot
-            \begin{pmatrix}
+            \begin{mat}[r]
               2  &-1  \\
               0  &3
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem This reduction is easy.
           \begin{multline*}
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               2  &1/2  &1  &0  \\
               3  &1    &0  &1
             \end{pmat}
             \;\grstep{-(3/2)\rho_1+\rho_2}\;
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               2  &1/2  &1     &0  \\
               0  &1/4  &-3/2  &1
             \end{pmat}                       \\
             \;\grstep[4\rho_2]{(1/2)\rho_1}\;
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               1  &1/4   &1/2   &0  \\
               0  &1     &-6    &4
             \end{pmat}                         
             \;\grstep{-(1/4)\rho_2+\rho_1}\;
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               1  &0     &2     &-1 \\
               0  &1     &-6    &4
             \end{pmat}
@@ -4367,24 +4386,24 @@ elementary one can be interesting and useful.
           The check agrees.
           \begin{equation*}
             \frac{1}{2\cdot 1-3\cdot (1/2)}\cdot
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &-1/2  \\
               -3 &2
-            \end{pmatrix}
+            \end{mat}
             =2\cdot
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &-1/2  \\
               -3 &2
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Trying the Gauss-Jordan reduction
           \begin{equation*}
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               2  &-4  &1  &0  \\
              -1  &2   &0  &1 
             \end{pmat}
             \;\grstep{(1/2)\rho_1+\rho_2}\;
-            \begin{pmat}{cc|cc}
+            \begin{pmat}{rr|rr}
               2  &-4  &1   &0  \\
               0  &0   &1/2 &1 
             \end{pmat}
@@ -4394,38 +4413,38 @@ elementary one can be interesting and useful.
           The check $ad-bc=2\cdot 2-(-4)\cdot (-1)=0$ agrees.
         \partsitem This produces an inverse.
           \begin{multline*}
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0  &0  \\ 
               0  &2  &4  &0  &1  &0  \\
              -1  &1  &0  &0  &0  &1 
             \end{pmat}  
             \;\grstep{\rho_1+\rho_3}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0  &0  \\ 
               0  &2  &4  &0  &1  &0  \\
               0  &2  &3  &1  &0  &1 
             \end{pmat}
             \;\grstep{-\rho_2+\rho_3}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0  &0  \\ 
               0  &2  &4  &0  &1  &0  \\
               0  &0  &-1 &1  &-1 &1 
             \end{pmat}                                              \\
            \begin{aligned}
             &\grstep[-\rho_3]{(1/2)\rho_2}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0   &0  \\ 
               0  &1  &2  &0  &1/2 &0  \\
               0  &0  &1  &-1 &1   &-1
             \end{pmat}
             \;\grstep[-3\rho_3+\rho_1]{-2\rho_3+\rho_2}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               1  &1  &0  &4  &-3   &3  \\ 
               0  &1  &0  &2  &-3/2 &2  \\
               0  &0  &1  &-1 &1    &-1
             \end{pmat}                                         \\
             &\grstep{-\rho_2+\rho_1}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               1  &0  &0  &2  &-3/2 &1  \\ 
               0  &1  &0  &2  &-3/2 &2  \\
               0  &0  &1  &-1 &1    &-1
@@ -4434,38 +4453,38 @@ elementary one can be interesting and useful.
           \end{multline*}
        \partsitem This is one way to do the reduction.
           \begin{multline*}
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               0  &1  &5  &1  &0  &0  \\
               0  &-2 &4  &0  &1  &0  \\ 
               2  &3  &-2 &0  &0  &1
             \end{pmat}
             \;\grstep{\rho_3\leftrightarrow\rho_1}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               2  &3  &-2 &0  &0  &1  \\
               0  &-2 &4  &0  &1  &0  \\ 
               0  &1  &5  &1  &0  &0  
             \end{pmat}                                            \\
             \begin{aligned}
               &\;\grstep{(1/2)\rho_2+\rho_3}\;
-              \begin{pmat}{ccc|ccc}
+              \begin{pmat}{rrr|rrr}
                 2  &3  &-2 &0  &0   &1  \\
                 0  &-2 &4  &0  &1   &0  \\ 
                 0  &0  &7  &1  &1/2 &0  
               \end{pmat}                    
               \grstep[-(1/2)\rho_2 \\ (1/7)\rho_3]{(1/2)\rho_1}\;
-              \begin{pmat}{ccc|ccc}
+              \begin{pmat}{rrr|rrr}
                 1  &3/2  &-1 &0    &0     &1/2  \\
                 0  &1    &-2 &0    &-1/2  &0    \\ 
                 0  &0    &1  &1/7  &1/14  &0  
               \end{pmat}                                   \\
               &\;\grstep[\rho_3+\rho_1]{2\rho_3+\rho_2}\;
-              \begin{pmat}{ccc|ccc}
+              \begin{pmat}{rrr|rrr}
                 1  &3/2  &0  &1/7  &1/14  &1/2  \\
                 0  &1    &0  &2/7  &-5/14 &0    \\ 
                 0  &0    &1  &1/7  &1/14  &0  
               \end{pmat}                                   
               \grstep{-(3/2)\rho_2+\rho_1}\;
-              \begin{pmat}{ccc|ccc}
+              \begin{pmat}{rrr|rrr}
                 1  &0    &0  &-2/7 &17/28 &1/2  \\
                 0  &1    &0  &2/7  &-5/14 &0    \\ 
                 0  &0    &1  &1/7  &1/14  &0  
@@ -4474,19 +4493,19 @@ elementary one can be interesting and useful.
           \end{multline*}
         \partsitem There is no inverse.
           \begin{align*}
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               2  &2  &3  &1  &0  &0  \\
               1  &-2 &-3 &0  &1  &0  \\
               4  &-2 &-3 &0  &0  &1
             \end{pmat}
             &\;\grstep[-2\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               2  &2  &3    &1     &0  &0  \\
               0  &-3 &-9/2 &-1/2  &1  &0  \\
               0  &-6 &-9   &-2    &0  &1
             \end{pmat}                                          \\
             &\grstep{-2\rho_2+\rho_3}\;
-            \begin{pmat}{ccc|ccc}
+            \begin{pmat}{rrr|rrr}
               2  &2  &3    &1     &0   &0  \\
               0  &-3 &-9/2 &-1/2  &1   &0  \\
               0  &0  &0    &-1    &-2  &1
@@ -4501,23 +4520,23 @@ elementary one can be interesting and useful.
   \recommended \item 
     What matrix has this one for its inverse?
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &3  \\
         2  &5
-       \end{pmatrix}
+       \end{mat}
      \end{equation*}
      \begin{answer}
        We can use \nearbycorollary{cor:TwoByTwoInv}. 
        \begin{equation*}
          \frac{1}{1\cdot 5-2\cdot 3}\cdot
-         \begin{pmatrix}
+         \begin{mat}[r]
            5  &-3  \\
           -2  &1
-         \end{pmatrix}
-         =\begin{pmatrix}
+         \end{mat}
+         =\begin{mat}[r]
            -5  &3  \\
             2  &-1
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}  
       \end{answer}
   \item 
@@ -4537,60 +4556,60 @@ elementary one can be interesting and useful.
           $H$ has an inverse or that $G$ has an inverse.
           Neither of these matrices is invertible but their sum is.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  \\
               0  &0
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  \\
               0  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           Another point is that just because $H$ and $G$ each has an inverse
           doesn't mean $H+G$ has an inverse; here is an example.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  \\
               0  &1
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               -1  &0  \\
                0  &-1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           Still a third point is that, even if the two matrices have inverses,
           and the sum has an inverse, doesn't imply that the equation holds:
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               2  &0  \\
               0  &2
-            \end{pmatrix}^{-1}
-            =\begin{pmatrix}
+            \end{mat}^{-1}
+            =\begin{mat}[r]
               1/2  &0  \\
               0    &1/2
-            \end{pmatrix}^{-1}
+            \end{mat}^{-1}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               3  &0  \\
               0  &3
-            \end{pmatrix}^{-1}
-            =\begin{pmatrix}
+            \end{mat}^{-1}
+            =\begin{mat}[r]
               1/3  &0  \\
               0    &1/3
-            \end{pmatrix}^{-1}
+            \end{mat}^{-1}
           \end{equation*}
           but
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               5  &0  \\
               0  &5
-            \end{pmatrix}^{-1}
-            =\begin{pmatrix}
+            \end{mat}^{-1}
+            =\begin{mat}[r]
               1/5  &0  \\
               0    &1/5
-            \end{pmatrix}^{-1}
+            \end{mat}^{-1}
           \end{equation*}
           and $(1/2)_+(1/3)$ does not equal $1/5$.
       \end{exparts}  
@@ -4612,10 +4631,10 @@ elementary one can be interesting and useful.
     \( \map{t_\theta}{\Re^2}{\Re^2} \) be represented with respect to the
     standard bases by this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
          \cos\theta  &-\sin\theta  \\
          \sin\theta  &\cos\theta
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     Show that \( t_{\theta_1+\theta_2}=t_{\theta_1}\cdot t_{\theta_2} \).
     Show also that \( {t_{\theta}}^{-1}=t_{-\theta} \).
@@ -4623,24 +4642,24 @@ elementary one can be interesting and useful.
       One way to check that the first is true is with
       the angle sum formulas from trigonometry.
       \begin{align*}
-        \begin{pmatrix}
+        \begin{mat}
           \cos(\theta_1+\theta_2) &-\sin(\theta_1+\theta_2)  \\
           \sin(\theta_1+\theta_2) &\cos(\theta_1+\theta_2)
-        \end{pmatrix}
-        &=\begin{pmatrix}
+        \end{mat}
+        &=\begin{mat}
           \cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2
             &-\sin\theta_1\cos\theta_2-\cos\theta_1\sin\theta_2  \\
           \sin\theta_1\cos\theta_2+\cos\theta_1\sin\theta_2
             &\cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2
-        \end{pmatrix}                                                    \\
-        &=\begin{pmatrix}
+        \end{mat}                                                    \\
+        &=\begin{mat}
           \cos\theta_1 &-\sin\theta_1  \\
           \sin\theta_1 &\cos\theta_1
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}
           \cos\theta_2 &-\sin\theta_2  \\
           \sin\theta_2 &\cos\theta_2
-        \end{pmatrix}
+        \end{mat}
       \end{align*}
       Checking the second equation in this way is similar.
 
@@ -4714,10 +4733,10 @@ elementary one can be interesting and useful.
   \item 
     Show that this matrix 
     \begin{equation*}
-      H=\begin{pmatrix}
+      H=\begin{mat}[r]
           1  &0   &1  \\
           0  &1   &0
-        \end{pmatrix}
+        \end{mat}
     \end{equation*}
     has infinitely many right inverses.
     Show also that it has no left inverse.
@@ -4728,20 +4747,20 @@ elementary one can be interesting and useful.
       need $G$ to be $\nbym{3}{2}$. 
       Setting up the equation
       \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
              1  &0   &1  \\
              0  &1   &0
-           \end{pmatrix}
-          \begin{pmatrix}
+           \end{mat}
+          \begin{mat}
              m  &n  \\
              p  &q  \\
              r  &s
-          \end{pmatrix}
+          \end{mat}
         =
-          \begin{pmatrix}
+          \begin{mat}[r]
              1  &0  \\
              0  &1
-          \end{pmatrix}
+          \end{mat}
       \end{equation*}
       and solving the resulting linear system
       \begin{equation*}
@@ -4755,28 +4774,28 @@ elementary one can be interesting and useful.
       gives infinitely many solutions.
       \begin{equation*}
         \set{\colvec{m \\ n \\ p \\ q \\ r \\ s}
-              =\colvec{1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0}
-              +r\cdot \colvec{-1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0}
-              +s\cdot \colvec{0 \\ -1 \\ 0 \\ 0 \\ 0 \\ 1}
+              =\colvec[r]{1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0}
+              +r\cdot \colvec[r]{-1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0}
+              +s\cdot \colvec[r]{0 \\ -1 \\ 0 \\ 0 \\ 0 \\ 1}
              \suchthat r,s\in\Re}
       \end{equation*}
       Thus $H$ has infinitely many right inverses.
 
       As for left inverses, the equation
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
             a  &b  \\
             c  &d
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
              1  &0   &1  \\
              0  &1   &0
-          \end{pmatrix}
-          =\begin{pmatrix}
+          \end{mat}
+          =\begin{mat}[r]
              1  &0  &0  \\
              0  &1  &0  \\
              0  &0  &1
-           \end{pmatrix}
+           \end{mat}
       \end{equation*}
       gives rise to a linear system with nine equations and four unknowns.
       \begin{equation*}
@@ -4803,27 +4822,27 @@ elementary one can be interesting and useful.
       With respect to the standard bases we have
       \begin{equation*}
         \rep{\eta}{\stdbasis_2,\stdbasis_3}
-        =\begin{pmatrix}
+        =\begin{mat}[r]
           1  &0  \\
           0  &1  \\
           0  &0 
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and setting up the equation to find the matrix inverse
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           a &b &c \\
           d &e &f
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1 &0  \\
           0 &1  \\
           0 &0
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}[r]
           1 &0  \\
           0 &1 
-        \end{pmatrix}
+        \end{mat}
         =\rep{\identity}{\stdbasis_2,\stdbasis_2}
       \end{equation*}
       gives rise to a linear system.
@@ -4839,17 +4858,17 @@ elementary one can be interesting and useful.
       to this system because two of these variables are entirely unrestricted
       \begin{equation*}
         \set{\colvec{a \\ b \\ c \\ d \\ e \\ f}
-             =\colvec{1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0}
-              +c\cdot \colvec{0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0}
-              +f\cdot \colvec{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1}
+             =\colvec[r]{1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0}
+              +c\cdot \colvec[r]{0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0}
+              +f\cdot \colvec[r]{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1}
              \suchthat c,f\in\Re}
       \end{equation*}
       and so there are infinitely many solutions to the matrix equation.
       \begin{equation*}
-        \set{\begin{pmatrix}
+        \set{\begin{mat}
                1  &0  &c  \\
                0  &1  &f
-             \end{pmatrix}
+             \end{mat}
              \suchthat c,f\in\Re}
       \end{equation*}
       With the bases still fixed at $\stdbasis_2,\stdbasis_2$, 
@@ -5021,10 +5040,10 @@ elementary one can be interesting and useful.
     \begin{answer}
       Here are four solutions to \( H^2=I \).
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           \pm 1  &0  \\
           0      &\pm 1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}   
     \end{answer}
   \item 
@@ -5034,19 +5053,19 @@ elementary one can be interesting and useful.
    \begin{answer}
      It is not reflexive since, for instance, 
      \begin{equation*}
-       H=\begin{pmatrix}
+       H=\begin{mat}[r]
          1  &0  \\
          0  &2
-       \end{pmatrix}
+       \end{mat}
      \end{equation*}
      is not a two-sided inverse of itself.
      The same example shows that it is not transitive.
      That matrix has this two-sided inverse
      \begin{equation*}
-       G=\begin{pmatrix}
+       G=\begin{mat}[r]
          1  &0  \\
          0  &1/2
-       \end{pmatrix}
+       \end{mat}
      \end{equation*}
      and while \( H \) is a two-sided inverse of \( G \) and \( G \)
      is a two-sided inverse of \( H \), we know that \( H \) is not a two-sided
