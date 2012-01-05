@@ -3757,8 +3757,8 @@ clearer idea then we will go with it.
 We finish this section by considering how to represent the 
 inverse of a linear map.
 
-We start by remembering some things about function 
-inverses.\appendrefs{function inverses} % \spacefactor=1000\  
+We first recall some things about
+inverses.\appendrefs{function inverses}\spacefactor=1000\  
 % Some functions have no inverse, or have an inverse on the left side 
 %or right side only.
 % 
@@ -3790,7 +3790,6 @@ of $\pi$
 or, what is the same thing, 
 that $\pi$ is a \definend{left inverse}\index{function!left inverse} 
 of $\iota$.
-
 However, composition in the other order $\composed{\iota}{\pi}$ 
 doesn't give the identity map\Dash here is a vector that is not 
 sent to itself under $\composed{\iota}{\pi}$. 
@@ -3802,7 +3801,7 @@ sent to itself under $\composed{\iota}{\pi}$.
     \mapsunder{\iota}
   \colvec[r]{0 \\ 0 \\ 0}
 \end{equation*}
-In fact, the projection
+In fact,
 $\pi$ has no left inverse at all.
 For, if $f$ were to be a left inverse of $\pi$
 then we would have
@@ -3821,7 +3820,7 @@ But no function can send a single argument to more than one value.
 is the zero transformation on $\Re^2$.)
 
 Some functions have a 
-\definend{two-sided inverse map},\index{function!two-sided inverse} 
+\definend{two-sided inverse},\index{function!two-sided inverse} 
 another function
 that is the inverse of the first both from the left and from the right.
 For instance, the map given by 
@@ -3836,12 +3835,12 @@ it is unique, and so we call it
 `the'~inverse,\index{inverse function}\index{function!inverse}
 and denote it $f^{-1}$.
 
-Also, recall that we have shown in Theorem~II.\ref{th:OOHomoEquivalence}
+In addition, recall that we have shown in Theorem~II.\ref{th:OOHomoEquivalence}
 that if a linear map has a two-sided inverse
 then that inverse is also linear. 
 
 Thus, our goal in this subsection is, where a linear $h$ has an inverse,
-to find the relationship between $\rep{h}{B,D}$ and $\rep{h^{-1}}{D,B}$
+to find the relationship between $\rep{h}{B,D}$ and $\rep{h^{-1}}{D,B}$.
 
 \begin{definition}
 A matrix \( G \) is a \definend{left inverse matrix}\index{inverse!left}
@@ -3877,16 +3876,25 @@ matrix.
 \end{proof}
 
 \begin{lemma} \label{lem:ProdInvIsInv}
-A product of invertible matrices is invertible\Dash if
+A product of invertible matrices is invertible:~if
 \( G \) and \( H \) are invertible and if \( GH \) is defined then
 \( GH \) is invertible and \( (GH)^{-1}=H^{-1}G^{-1} \).
 \end{lemma}
 
 \begin{proof}
-\textit{(This is just like the prior proof except that it requires two maps.)}
-Fix appropriate spaces and bases and consider the represented maps \( h \) and
-\( g \).
-Note that \( h^{-1}g^{-1} \) is a two-sided map inverse of \( gh \) since
+% \textit{(This is just like the prior proof except that it requires two maps.)}
+Because the two matrices are invertible they are square.
+Because their product is defined they must be square of the same dimension,
+$\nbyn{n}$.
+So by fixing a basis for $\Re^n$\Dash we can use the standard 
+basis\Dash we get maps  
+$\map{g,h}{\Re^n}{\Re^n}$ that are associated with the matrices,
+$G=\rep{g}{\stdbasis_n,\stdbasis_n}$ and
+$H=\rep{h}{\stdbasis_n,\stdbasis_n}$.
+
+Consider $h^{-1}g^{-1}$. 
+By the prior paragraph this composition is defined.
+This map is a two-sided inverse of \( gh \) since
 \(
   (h^{-1}g^{-1})(gh)
   =
@@ -3902,11 +3910,10 @@ and
   =gg^{-1}
   =\identity
 \).
-This equality is reflected in the matrices representing the maps, as
-required.
+the matrices representing the maps reflect this equality.
 \end{proof}
 
-Here is the arrow diagram\index{arrow diagram} giving the relationship
+This is the arrow diagram\index{arrow diagram} giving the relationship
 between map inverses and matrix inverses. 
 It is a special case
 of the diagram for function composition and matrix multiplication.
@@ -3934,13 +3941,25 @@ A linear system is equivalent to a matrix equation, as here.
   =
   \colvec[r]{3 \\ 2}
 \tag*{($*$)}\end{equation*}
-By fixing spaces and bases (e.g., $\Re^2,\Re^2$ and $\stdbasis_2,\stdbasis_2$),
-we take the matrix $H$ to represent some map $h$.
-Then solving the system is the same as 
-asking:~what domain vector $\vec{x}$ is mapped by $h$ to the result 
-$\vec{d}\,$?
-If we could invert $h$ then we could solve the system  
-by multiplying $\rep{h^{-1}}{D,B}\cdot\rep{\vec{d}}{D}$
+By fixing spaces and bases 
+(for instance, $\Re^2,\Re^2$ with the standard bases),
+we take the matrix $H$ to represent a map $h$.
+The matrix equation then becomes this linear map equation.
+\begin{equation*}
+  h(\vec{x})=\vec{d}
+  \tag*{($**$)}
+\end{equation*}
+Asking for a solution to ($*$) is the same as  
+asking in ($**$)
+for the domain vector $\vec{x}$ that $h$ maps to the result 
+$\vec{d}\,$.
+If we had a left inverse map~$g$ then  
+we could apply it to both sides
+$\composed{g}{h}(\vec{x})=g(\vec{d})$,
+which simplifies to
+$\vec{x}=g(\vec{d})$.
+In terms of the matrices,
+we multiply $\rep{g}{C,B}\cdot\rep{\vec{d}}{C}$
 to get $\rep{\vec{x}}{B}$.
 
 \begin{example}  \label{ex:InverseByLinSys}
@@ -3970,10 +3989,9 @@ by using Gauss' method to solve the resulting linear system.
      \end{linsys}
 \end{equation*}
 Answer: \( m=1/3 \), \( n=1/3 \), \( p=2/3 \), and \( q=-1/3 \).
-This matrix is actually the two-sided inverse of $H$, 
-as can easily be checked.
-With it we can solve the system~($*$) above by
-applying the inverse.
+This matrix is actually the two-sided inverse of $H$;
+the check is easy.
+With it we can solve the system~($*$) above.
 \begin{equation*}
   \colvec{x \\ y}
   =\begin{mat}[r]
@@ -3986,19 +4004,19 @@ applying the inverse.
 \end{example}
 
 \begin{remark}
-Why solve systems this way, when
-Gauss' method takes less arithmetic
-(this assertion can be made precise by counting the 
-number of arithmetic operations,
-as computer algorithm designers do)? 
-Beyond its conceptual appeal of fitting into our program of
-discovering how to represent the various map operations,
-solving linear systems by using the matrix inverse has 
+Why do this when we have
+Gauss' method?
+% takes less arithmetic
+% (this assertion can be made precise by counting the 
+% number of arithmetic operations,
+% as computer algorithm designers do)? 
+Beyond the conceptual appeal of representing the map inverse operation,
+solving linear systems this way has 
 at least two advantages.
 
-First, once the work of finding an inverse has been done, 
+First, once we have done the work of finding an inverse then 
 solving a system with the
-same coefficients but different constants is easy and fast:~if
+same coefficients but different constants is fast:~if
 we change the entries on the right of the system~($*$) 
 then we get a related problem
 \begin{equation*}
@@ -4010,7 +4028,7 @@ then we get a related problem
   =
   \colvec[r]{5 \\ 1}
 \end{equation*}
-with a related solution method.
+that our inverse method solves quickly.
 \begin{equation*}
   \colvec{x \\ y}
   =
@@ -4022,8 +4040,8 @@ with a related solution method.
   =
   \colvec[r]{2 \\ 3}
 \end{equation*}
-In applications, solving many systems having the same matrix of
-coefficients is common.
+% In applications we often must solve many systems with the same matrix of
+% coefficients.
 
 Another advantage of inverses is that we can 
 explore a system's sensitivity to changes in the constants.
@@ -4037,7 +4055,7 @@ For example, tweaking the $3$ on the right of the system~($*$) to
   =
   \colvec[r]{3.01 \\ 2}
 \end{equation*}
-can be solved with the inverse.
+and solving with the inverse
 \begin{equation*}
     \begin{mat}[r]
        1/3  &1/3  \\
@@ -4047,43 +4065,51 @@ can be solved with the inverse.
   =
   \colvec{(1/3)(3.01)+(1/3)(2) \\ (2/3)(3.01)-(1/3)(2)}
 \end{equation*}
-to show that \( x_1 \) changes by \( 1/3 \) of the tweak while
-\( x_2 \) moves by \( 2/3 \) of that tweak.
-This sort of analysis is used, for example, to decide how accurately
-data must be specified in a linear model to ensure that the solution has
+shows that the first component of the solution
+changes by \( 1/3 \) of the tweak, while
+the second component moves by \( 2/3 \) of the tweak.
+This is \definend{sensitivity analysis}\index{sensitivity analysis}.
+For instance, we could use it to decide how accurately
+we must specify the data in a linear model to ensure that the solution has
 a desired accuracy.
 \end{remark}
 
 We finish by describing the computational procedure
-usually used to find the inverse matrix.
+that we shall use to find the inverse matrix.
 
 \begin{lemma} \label{lem:ComputeInvMat}
-A matrix is invertible if and only if it can be written as the product of
+A matrix $H$ is invertible if and only if it can be written as the product of
 elementary reduction matrices.
-The inverse can be computed by applying to the 
-identity matrix the same row steps, in the same order, as are used to
-Gauss-Jordan reduce the invertible matrix. 
+We can compute the inverse by applying to the 
+identity matrix the same row steps, in the same order, as we use to
+Gauss-Jordan reduce $H$. 
 \end{lemma}
 
 \begin{proof}
-A matrix $H$ is invertible if and only if it is nonsingular and thus 
+The matrix $H$ is invertible if and only if it is nonsingular and thus 
 Gauss-Jordan reduces to the identity.
-By \nearbycorollary{cor:ReducViaMatrices} this reduction can
-be done with elementary matrices 
-\( R_r\cdot R_{r-1}\dots R_1\cdot H=I \).
-This equation gives the two halves of the result.
+By \nearbycorollary{cor:ReducViaMatrices} we can do this reduction 
+with elementary matrices.
+\begin{equation*} 
+   R_r\cdot R_{r-1}\dots R_1\cdot H=I 
+   \tag{*}
+\end{equation*}
 
-First, elementary matrices are invertible and their inverses are also
+For the first sentence of the result, recall that
+elementary matrices are invertible and that their inverses are also
 elementary.
-Applying $R_r^{-1}$ to the left of both sides of that equation, then
-$R_{r-1}^{-1}$, etc., gives $H$ as the product of
+Apply $R_r^{-1}$ from the left to both sides of ($*$). 
+Then apply
+$R_{r-1}^{-1}$, etc.
+The result gives $H$ as the product of
 elementary matrices $H=R_1^{-1}\cdots R_r^{-1}\cdot I$
-(the $I$ is here to cover the trivial $r=0$ case).
+(the $I$ here covers the trivial $r=0$ case).
 
-Second, matrix inverses are unique and so comparison of the above
-equation with $H^{-1}H=I$ shows that 
+For the second sentence,
+rewrite ($*$) as $(R_r\cdot R_{r-1}\dots R_1)\cdot H=I$
+to recognize that 
 $H^{-1}=R_r\cdot R_{r-1}\dots R_1\cdot I$.
-Therefore, applying $R_1$ to the identity, 
+Restated, applying $R_1$ to the identity, 
 followed by $R_2$, etc., yields the inverse of $H$.
 \end{proof}
 
@@ -4165,7 +4191,8 @@ This one happens to start with a row swap.
 \end{example}
 
 \begin{example}
-A non-invertible matrix is detected by the fact that the left half won't
+We can detect
+a non-invertible matrix when the left half won't
 reduce to the identity.
 \begin{equation*}
     \begin{pmat}{rr|rr}
@@ -4180,8 +4207,11 @@ reduce to the identity.
 \end{equation*}
 \end{example}
 
-This procedure will find the inverse of a general $\nbyn{n}$ matrix.
-The $\nbyn{2}$ case is handy.
+With this procedure we can give a formula for 
+the inverse of a general $\nbyn{2}$ matrix, 
+which is worth memorizing.
+But larger matrices have more complex formulas so 
+we will wait for more explanation in the next chapter.
 
 \begin{corollary}
 \label{cor:TwoByTwoInv}
@@ -4209,26 +4239,26 @@ We have seen here, as in the Mechanics of Matrix Multiplication subsection,
 that we can exploit the correspondence between
 linear maps and matrices.
 So we can fruitfully study both maps and matrices, translating back and forth
-to whichever helps us the most.
+to whichever helps the most.
 
-Over the entire four subsections of 
-this section we have developed an algebra system for matrices.
+Over this whole 
+section we have developed an algebra system for matrices.
 We can compare it with the familiar algebra system for the real numbers.
 Here we are working not with numbers but with matrices.
 We have matrix addition and subtraction operations, 
 and they work in much the same
 way as the real number operations, except that they only combine same-sized
 matrices.
-We also have a matrix multiplication operation 
-and an operation inverse to multiplication.
-These are somewhat like the familiar real number operations
-(associativity, and distributivity over addition, for example), but
-there are differences (failure of commutativity, for example). 
-And, we have scalar multiplication, which is in some ways another extension
+We have scalar multiplication, which is in some ways another extension
 of real number multiplication.
+We also have a matrix multiplication operation 
+and a multiplicative inverse.
+These operations are somewhat like the familiar real number ones
+(associativity, and distributivity over addition, for example), but
+there are differences (failure of commutativity). 
 This matrix system provides an example that algebra
 systems other than the 
-elementary one can be interesting and useful.
+elementary real number system can be interesting and useful.
 
 
 \begin{exercises}
@@ -4856,7 +4886,7 @@ elementary one can be interesting and useful.
     \end{answer}
   \item 
     In the review of inverses example, % \nearbyexample{ex:ProjLeftInvOfEmbed},
-    how many left inverses has \( \iota \)?
+    starting this subsection, how many left inverses has \( \iota \)?
     \begin{answer}
       With respect to the standard bases we have
       \begin{equation*}
@@ -5010,8 +5040,8 @@ elementary one can be interesting and useful.
       Assume that $B$ is row equivalent to $A$ and that $A$ is invertible.
       Because they are row-equivalent, there is a sequence of row steps 
       to reduce one to the other.
-      That reduction can be done with matrices, for instance, $A$ can be
-      changed by row operations to $B$ as $B=R_n\cdots R_1A$.
+      We can do that reduction with matrices, for instance, $A$ can 
+      change by row operations to $B$ as $B=R_n\cdots R_1A$.
       This equation gives $B$ as a product of invertible matrices and
       by \nearbylemma{lem:ProdInvIsInv} then, $B$ is also invertible.  
     \end{answer}
