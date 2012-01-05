@@ -813,9 +813,9 @@ beginfig(20) % commutative diagram associated with prior bean picture
 
   z0 = (.75w,1.375v); % midpoint of bean
   pickup pencircle scaled line_width_light;
-  circleit.vv(btex $V_{wrt\ B}$ etex); vv.c=z0;  vv.dx=vv.dy=1.1u; 
-  circleit.ww(btex $W_{wrt\ C}$ etex); ww.c=z0 shifted wshift; ww.dx=ww.dy=1.1u; 
-  circleit.xx(btex $X_{wrt\ D}$ etex); xx.c=z0 shifted xshift; xx.dx=xx.dy=1.1u; 
+  circleit.vv(btex $V_\wrt{B}$ etex); vv.c=z0;  vv.dx=vv.dy=1.1u; 
+  circleit.ww(btex $W_\wrt{C}$ etex); ww.c=z0 shifted wshift; ww.dx=ww.dy=1.1u; 
+  circleit.xx(btex $X_\wrt{D}$ etex); xx.c=z0 shifted xshift; xx.dx=xx.dy=1.1u; 
   drawunboxed(vv,ww,xx);
   
   z1 = cutasimple(vv,ww) vv.c--ww.c;
@@ -849,9 +849,9 @@ beginfig(21) % commutative diagram for inverses
   pickup pencircle scaled line_width_light;
   %pair vv[], ww[], xx[];
   save vv, ww, xx;
-  circleit.vv(btex $V_{wrt\ B}$ etex); vv.c=z0;  vv.dx=vv.dy=1.1u; 
-  circleit.ww(btex $W_{wrt\ C}$ etex); ww.c=z0 shifted wshift; ww.dx=ww.dy=1.1u; 
-  circleit.xx(btex $V_{wrt\ B}$ etex); xx.c=z0 shifted xshift; xx.dx=xx.dy=1.1u; 
+  circleit.vv(btex $V_\wrt{B}$ etex); vv.c=z0;  vv.dx=vv.dy=1.1u; 
+  circleit.ww(btex $W_\wrt{C}$ etex); ww.c=z0 shifted wshift; ww.dx=ww.dy=1.1u; 
+  circleit.xx(btex $V_\wrt{B}$ etex); xx.c=z0 shifted xshift; xx.dx=xx.dy=1.1u; 
   drawunboxed(vv,ww,xx);
   
   z1 = cutasimple(vv,ww) vv.c--ww.c;

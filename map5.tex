@@ -3,39 +3,41 @@
 %  2001-Jun-12
 \section{Change of Basis}
 \index{change of basis|(}
-Representations, whether of vectors or of maps, vary with the bases.
-For instance, with respect to the two bases $\stdbasis_2$ and 
-\begin{equation*}
-  B=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
-\end{equation*}
-for $\Re^2$, the vector 
-$\vec{e}_1$ has two different representations.
+Representations vary with the bases.
+For instance, 
+$\vec{e}_1\in\Re^2$ has two different representations
 \begin{equation*}
   \rep{\vec{e}_1}{\stdbasis_2}=\colvec{1 \\ 0}
   \qquad
   \rep{\vec{e}_1}{B}=\colvec{1/2 \\ 1/2}
 \end{equation*}
-Similarly, with respect to $\stdbasis_2,\stdbasis_2$ and $\stdbasis_2,B$, the identity map
+with respect to the standard basis and this one.
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+\end{equation*}
+The same is true for maps;
+with respect to the basis pairs $\stdbasis_2,\stdbasis_2$ and $\stdbasis_2,B$, 
+the identity map
 has two different representations.
 \begin{equation*}
   \rep{\text{id}}{\stdbasis_2,\stdbasis_2}=
-   \begin{pmatrix}
+   \begin{mat}[r]
      1  &0  \\
      0  &1
-   \end{pmatrix}
+   \end{mat}
    \qquad
   \rep{\text{id}}{\stdbasis_2,B}=
-   \begin{pmatrix}
+   \begin{mat}[r]
      1/2  &1/2  \\
      1/2  &-1/2
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 With our point of view that the objects of our studies are vectors and
-maps, in fixing bases 
-we are adopting a scheme of tags or names for these objects, that are
-convienent for computation.
-We will now see how to translate among these names\Dash we will
-see exactly how representations vary as the bases vary.
+maps, by fixing bases 
+we are adopting a scheme of tags or names for these objects that are
+convenient for calculations.
+We will now see how to translate among these names, so we will
+see exactly how the representations vary as the bases vary.
 
 
 
@@ -61,7 +63,7 @@ the codomain space vectors are represented with respect to $D$.
 \begin{equation*}
   \begin{CD}
     V_\wrt{B}                      \\
-    @V\scriptstyle\identity VV   \\
+    @V\scriptsize\identity VV   \\
     V_\wrt{D}
   \end{CD}
 \end{equation*}
@@ -94,13 +96,13 @@ then $M$ is a change of basis matrix.
 \end{lemma}
 
 \begin{proof}
-For the first sentence, for each \( \vec{v} \),
-as matrix-vector multiplication represents a map application,
+For the first sentence, 
+because matrix-vector multiplication represents a map application
 \( \rep{\identity}{B,D}\cdot\rep{\vec{v}}{B}=\rep{\,\identity(\vec{v})\,}{D}
-  =\rep{\vec{v}}{D} \). 
-For the second sentence,
-with respect to $B,D$ the matrix $M$ represents some linear
-map, whose action is $\vec{v}\mapsto\vec{v}$, and is therefore
+  =\rep{\vec{v}}{D} \) for each \( \vec{v} \). 
+For the second,
+with respect to $B,D$ the matrix $M$ represents a linear
+map whose action is to map each vector to itself, and is therefore
 the identity map.
 \end{proof}
 
@@ -109,85 +111,91 @@ With these bases for \( \Re^2 \),
 \begin{equation*}
   B=
   \sequence{
-            \colvec{2 \\ 1},
-            \colvec{1 \\ 0} }
+            \colvec[r]{2 \\ 1},
+            \colvec[r]{1 \\ 0} }
   \qquad
   D=
   \sequence{
-            \colvec{-1 \\ 1},
-            \colvec{1 \\ 1} }
+            \colvec[r]{-1 \\ 1},
+            \colvec[r]{1 \\ 1} }
 \end{equation*}
 because
 \begin{equation*}
-  \rep{\,\identity(\colvec{2 \\ 1})}{D}
-  =\colvec{-1/2 \\ 3/2}_D
+  \rep{\,\identity(\colvec[r]{2 \\ 1})}{D}
+  =\colvec[r]{-1/2 \\ 3/2}_D
   \qquad
-  \rep{\,\identity(\colvec{1 \\ 0})}{D}
-  =\colvec{-1/2 \\ 1/2}_D
+  \rep{\,\identity(\colvec[r]{1 \\ 0})}{D}
+  =\colvec[r]{-1/2 \\ 1/2}_D
 \end{equation*}
 the change of basis matrix is this.
 \begin{equation*}
   \rep{\rm id}{B,D}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        -1/2  &-1/2  \\
         3/2  &1/2
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
-We can see this matrix at work by finding the two representations of
+For instance, if we 
+finding the representations of
 $\vec{e}_2$ 
 \begin{equation*}
-  \rep{\colvec{0 \\ 1} }{B}
-  =\colvec{1 \\ -2}
+  \rep{\colvec[r]{0 \\ 1} }{B}
+  =\colvec[r]{1 \\ -2}
   \qquad
-  \rep{\colvec{0 \\ 1} }{D}
-  =\colvec{1/2 \\ 1/2}
+  \rep{\colvec[r]{0 \\ 1} }{D}
+  =\colvec[r]{1/2 \\ 1/2}
 \end{equation*}
-and checking that the conversion goes as expected. 
+then the matrix will do the conversion. 
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        -1/2  &-1/2  \\
         3/2  &1/2
-    \end{pmatrix}
-  \colvec{1 \\ -2}
+    \end{mat}
+  \colvec[r]{1 \\ -2}
   =
-  \colvec{1/2 \\ 1/2}
+  \colvec[r]{1/2 \\ 1/2}
 \end{equation*}
 \end{example}
 
-We finish this subsection by recognizing that the change of basis matrices
-are familiar.
+We finish this subsection by recognizing that 
+the change of basis matrices form a familiar set.
 
 \begin{lemma}    \label{le:NonSingIsChBasis}
 A matrix changes bases if and only if it is nonsingular.
 \end{lemma}
 
 \begin{proof}
-For one direction, if left-multiplication by a matrix changes bases then
+For the `only if' direction, 
+if left-multiplication by a matrix changes bases then
 the matrix represents an invertible function,
-simply because the function is inverted by changing the bases back.
+simply because we can invert the function by changing the bases back.
 Such a matrix is itself invertible, and so is nonsingular.
 
-To finish, we will show that any nonsingular matrix $M$ 
+To finish we will show that any nonsingular matrix $M$ 
 performs a change of basis operation from any given starting basis $B$ 
 to some ending basis.
-Because the matrix is nonsingular, it will Gauss-Jordan reduce to the
-identity, so there are elementatry reduction matrices such that
-$R_r\cdots R_1\cdot M=I$.
-Elementary matrices are invertible and their inverses are also elementary,
-so multiplying from the left first
+Because the matrix is nonsingular it will Gauss-Jordan reduce to the
+identity.
+If the matrix is the identity~$I$ then the statement is obvious.
+Otherwise there are elementatry reduction matrices such that
+$R_r\cdots R_1\cdot M=I$ with $r\geq 1$.
+Elementary matrices are invertible and their inverses are also elementary
+so multiplying both sides of that equation from the left 
 by ${R_r}^{-1}$, then by ${R_{r-1}}^{-1}$, etc., gives 
 $M$ as a product of elementary matrices
 $M={R_1}^{-1}\cdots {R_r}^{-1}$.
+(We've combined ${R_r}^{-1}I$ to make ${R_r}^{-1}$; 
+because $r\geq 1$ we can always make the $I$ disappear in this way,
+which we need to do because it isn't an elementary matrix.)
+
 Thus, we will be done if we show that elementary matrices 
 change a given basis to another basis, for then 
 ${R_r}^{-1}$ changes $B$ to some other basis $B_r$, and
-${R_{r-1}}^{-1}$ changes $B_r$ to some $B_{r-1}$, \ldots, and
+${R_{r-1}}^{-1}$ changes $B_r$ to some $B_{r-1}$, etc., and
 the net effect is that $M$ changes $B$ to $B_1$.
-We will prove this about elementary matrices by covering the three types as
-separate cases.
-
-Applying a row-multiplication matrix
+We will prove this by covering the three types of elementary matrices
+separately; here are the three cases.
 \begin{equation*}
   M_{i}(k)
     \colvec{
@@ -203,12 +211,50 @@ Applying a row-multiplication matrix
        kc_i    \\
        \vdots  \\
        c_n  }
+  \quad
+  P_{i,j}
+    \colvec{
+       c_1     \\
+       \vdots  \\
+       c_i    \\
+       \vdots  \\
+       c_j    \\
+       \vdots  \\
+       c_n  }
+  =
+    \colvec{
+       c_1     \\
+       \vdots  \\
+       c_j    \\
+       \vdots  \\
+       c_i    \\
+       \vdots  \\
+       c_n  }
+  \quad
+  C_{i,j}(k)
+    \colvec{
+       c_1     \\
+       \vdots  \\
+       c_i    \\
+       \vdots  \\
+       c_j    \\
+       \vdots  \\
+       c_n  }
+  =
+    \colvec{
+       c_1     \\
+       \vdots  \\
+       c_i    \\
+       \vdots  \\
+       kc_i+c_j    \\
+       \vdots  \\
+       c_n  }
 \end{equation*}
+Applying a row-multiplication matrix
 changes a representation with respect to
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_n } \)
 to one with respect to
-\( \sequence{\vec{\beta}_1,\dots,(1/k)\vec{\beta}_i,\dots,\vec{\beta}_n } \)
-in this way.
+\( \sequence{\vec{\beta}_1,\dots,(1/k)\vec{\beta}_i,\dots,\vec{\beta}_n } \).
 \begin{multline*}
    \vec{v}= c_1\cdot\vec{\beta}_1+\dots+c_i\cdot\vec{\beta}_i
                                    +\dots+c_n\cdot\vec{\beta}_n  
@@ -216,13 +262,16 @@ in this way.
     c_1\cdot\vec{\beta}_1+\dots+kc_i\cdot(1/k)\vec{\beta}_i+\dots
                                   +c_n\cdot\vec{\beta}_n=\vec{v}     
 \end{multline*}
+We can easily see that the second one is a basis, given that the first is a 
+basis and that $k\neq 0$ is a restriction in the definition of a 
+row-multiplication matrix.
 Similarly, left-multiplication by a row-swap matrix $P_{i,j}$
 changes a representation with respect to the basis
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_j,
   \dots,\vec{\beta}_n } \)
-into one with respect to the basis
+into one with respect to this basis
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_j,\dots,\vec{\beta}_i,
-  \dots,\vec{\beta}_n } \) in this way.
+  \dots,\vec{\beta}_n } \).
 \begin{multline*}
    \vec{v}= c_1\cdot\vec{\beta}_1+\dots+c_i\cdot\vec{\beta}_i
                    +\dots+c_j\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n  
@@ -234,7 +283,7 @@ And, a representation with respect to
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_j,
   \dots,\vec{\beta}_n } \)
 changes via left-multiplication by a row-combination matrix
-$C_{i,j}(k)$ into a representation with respect to
+$C_{i,j}(k)$ into a representation with respect to 
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i-k\vec{\beta}_j,
   \dots,\vec{\beta}_j,\dots,\vec{\beta}_n } \)
 \begin{multline*}
@@ -244,8 +293,8 @@ $C_{i,j}(k)$ into a representation with respect to
     c_1\cdot\vec{\beta}_1+\dots+c_i\cdot(\vec{\beta}_i-k\vec{\beta}_j)+\dots
           +(kc_i+c_j)\cdot\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n=\vec{v} 
 \end{multline*}
-(the definition of reduction matrices specifies that \( i\neq k \) and
-\( k\neq 0 \) and so this last one is a basis).
+(the definition of reduction matrices specifies that \( i\neq j \) and
+\( k\neq 0 \)).
 \end{proof}
 
 \begin{corollary}
@@ -292,7 +341,7 @@ the same space, and where the map is the identity map.
   \recommended \item 
     In \( \Re^2 \), where
     \begin{equation*}
-      D=\sequence{\colvec{2 \\ 1},\colvec{-2 \\ 4}}
+      D=\sequence{\colvec[r]{2 \\ 1},\colvec[r]{-2 \\ 4}}
     \end{equation*}
     find the change of basis matrices from \( D \) to \( \stdbasis_2 \) and 
     from \( \stdbasis_2 \) to \( D \).
@@ -307,35 +356,35 @@ the same space, and where the map is the identity map.
       Of course, the representation of a vector in $\Re^2$ with respect to 
       the standard basis is easy.
       \begin{equation*}
-        \rep{\vec{\delta}_1}{\stdbasis_2}=\colvec{2 \\ 1}
+        \rep{\vec{\delta}_1}{\stdbasis_2}=\colvec[r]{2 \\ 1}
         \qquad
-        \rep{\vec{\delta}_2}{\stdbasis_2}=\colvec{-2 \\ 4}
+        \rep{\vec{\delta}_2}{\stdbasis_2}=\colvec[r]{-2 \\ 4}
       \end{equation*}
       Concatenating those two together to make the columns of the change of
       basis matrix gives this. 
       \begin{equation*}
         \rep{\identity}{D,\stdbasis_2}
-        =\begin{pmatrix}
+        =\begin{mat}[r]
           2     &-2    \\
           1     &4
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
-      The change of basis matrix in the other direction can be gotten by
-      calculating $\rep{\identity(\vec{e}_1)}{D}=\rep{\vec{e}_1}{D}$ and 
+      For the change of basis matrix in the other direction we can
+      calculate $\rep{\identity(\vec{e}_1)}{D}=\rep{\vec{e}_1}{D}$ and 
       $\rep{\identity(\vec{e}_2)}{D}=\rep{\vec{e}_2}{D}$ (this job is routine)
-      or it can be found by taking the inverse of the above matrix.
+      or we can take the inverse of the above matrix.
       Because of the formula for the inverse of a $\nbyn{2}$ matrix, 
       this is easy. 
       \begin{equation*}
         \rep{\identity}{\stdbasis_2,D}=
-        \frac{1}{10}\cdot\begin{pmatrix}
+        \frac{1}{10}\cdot\begin{mat}[r]
           4  &2  \\
          -1  &2
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}[r]
           4/10  &2/10  \\
          -1/10  &2/10
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \recommended \item \label{exer:ChngeBasMatsRTwo}
@@ -344,35 +393,35 @@ the same space, and where the map is the identity map.
       \partsitem \( B=\stdbasis_2 \),
         \( D=\sequence{\vec{e}_2,\vec{e}_1} \)
       \partsitem \( B=\stdbasis_2 \),
-        \( D=\sequence{\colvec{1 \\ 2},\colvec{1 \\ 4}} \)
-      \partsitem  \( B=\sequence{\colvec{1 \\ 2},\colvec{1 \\ 4}} \),
+        \( D=\sequence{\colvec[r]{1 \\ 2},\colvec[r]{1 \\ 4}} \)
+      \partsitem  \( B=\sequence{\colvec[r]{1 \\ 2},\colvec[r]{1 \\ 4}} \),
         \( D=\stdbasis_2 \)
-      \partsitem  \( B=\sequence{\colvec{-1 \\ 1},\colvec{2 \\ 2}} \),
-        \( D=\sequence{\colvec{0 \\ 4},\colvec{1 \\ 3}} \)
+      \partsitem  \( B=\sequence{\colvec[r]{-1 \\ 1},\colvec[r]{2 \\ 2}} \),
+        \( D=\sequence{\colvec[r]{0 \\ 4},\colvec[r]{1 \\ 3}} \)
     \end{exparts*}
     \begin{answer}
-      In each case, the columns 
+      In each case, concatenate the columns 
       $\rep{\identity(\vec{\beta}_1)}{D}=\rep{\vec{\beta}_1}{D}$
       and $\rep{\identity(\vec{\beta}_2)}{D}=\rep{\vec{\beta}_2}{D}$
-      are concatenated to make the change of basis matrix
+      to make the change of basis matrix
       $\rep{\identity}{B,D}$.
       \begin{exparts*}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                    0  &1  \\
                    1  &0
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                    2  &-1/2  \\
                    -1 &1/2
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                    1  &1     \\
                    2  &4
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                    1  &-1    \\
                   -1  &2
-                 \end{pmatrix} \)
+                 \end{mat} \)
       \end{exparts*}  
     \end{answer}
   \item 
@@ -387,22 +436,22 @@ the same space, and where the map is the identity map.
        \nearbyexercise{exer:ChngeBasMatsRTwo}. 
        \begin{exparts*}
         \partsitem
-          $\begin{pmatrix}
+          $\begin{mat}[r]
             0  &1  \\
             1  &0
-          \end{pmatrix}$
-        \partsitem \( \begin{pmatrix}
+          \end{mat}$
+        \partsitem \( \begin{mat}[r]
             1  &1  \\
             2  &4
-          \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+          \end{mat} \)
+        \partsitem \( \begin{mat}[r]
             2  &-1/2  \\
             -1 &1/2
-          \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+          \end{mat} \)
+        \partsitem \( \begin{mat}[r]
             2  &1  \\
             1  &1
-          \end{pmatrix} \)
+          \end{mat} \)
       \end{exparts*} 
     \end{answer}
   \recommended \item
@@ -423,21 +472,21 @@ the same space, and where the map is the identity map.
       make the change of basis matrix
       $\rep{\identity}{B,D}$.
       \begin{exparts*}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                    0  &0  &1  \\
                    1  &0  &0  \\
                    0  &1  &0
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                    1  &-1 &0  \\
                    0  &1  &-1 \\
                    0  &0  &1
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                    1  &-1 &1/2  \\
                    1  &1  &-1/2 \\
                    0  &2  &0
-                 \end{pmatrix} \)
+                 \end{mat} \)
       \end{exparts*}  
       E.g., for the first column of the first matrix,
       $1=0\cdot x^2+1\cdot 1+0\cdot x$.
@@ -446,22 +495,22 @@ the same space, and where the map is the identity map.
     Decide if each changes bases on \( \Re^2 \).
     To what basis is \( \stdbasis_2 \) changed?
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  5  &0  \\
                  0  &4
-               \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                  2  &1  \\
                  3  &1
-               \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                 -1  &4  \\
                  2  &-8
-               \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                  1  &-1 \\
                  1  &1
-               \end{pmatrix}  \)
+               \end{mat}  \)
     \end{exparts*}
     \begin{answer}
        A matrix changes bases if and only if it is nonsingular.
@@ -471,17 +520,17 @@ the same space, and where the map is the identity map.
           means finding $D$ such that 
           \begin{equation*}
             \rep{\identity}{\stdbasis_2,D}=
-            \begin{pmatrix}
+            \begin{mat}[r]
                  5  &0  \\
                  0  &4
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and by the definition of how a matrix represents a linear map,
           we have this.
           \begin{equation*}
-            \rep{\identity(\vec{e}_1)}{D}=\rep{\vec{e}_1}{D}=\colvec{5 \\ 0}
+            \rep{\identity(\vec{e}_1)}{D}=\rep{\vec{e}_1}{D}=\colvec[r]{5 \\ 0}
             \qquad
-            \rep{\identity(\vec{e}_2)}{D}=\rep{\vec{e}_2}{D}=\colvec{0 \\ 4}
+            \rep{\identity(\vec{e}_2)}{D}=\rep{\vec{e}_2}{D}=\colvec[r]{0 \\ 4}
           \end{equation*}
           Where
           \begin{equation*}
@@ -489,17 +538,17 @@ the same space, and where the map is the identity map.
           \end{equation*}
           we can either solve the system
           \begin{equation*}
-            \colvec{1 \\ 0}
+            \colvec[r]{1 \\ 0}
             =5\colvec{x_1 \\ y_1}+0\colvec{x_2 \\ y_1}
             \qquad
-            \colvec{0 \\ 1}
+            \colvec[r]{0 \\ 1}
             =0\colvec{x_1 \\ y_1}+4\colvec{x_2 \\ y_1}
           \end{equation*}
           or else just spot the answer
           (thinking of the proof of \nearbylemma{le:NonSingIsChBasis}).
           \begin{equation*}
-            D=\sequence{\colvec{1/5 \\ 0},
-                        \colvec{0 \\ 1/4}}
+            D=\sequence{\colvec[r]{1/5 \\ 0},
+                        \colvec[r]{0 \\ 1/4}}
           \end{equation*}
         \partsitem Yes, this matrix is nonsingular and so changes bases.
           To calculate $D$, we proceed as above with 
@@ -509,24 +558,24 @@ the same space, and where the map is the identity map.
           \end{equation*}
           to solve 
           \begin{equation*}
-            \colvec{1 \\ 0}
+            \colvec[r]{1 \\ 0}
             =2\colvec{x_1 \\ y_1}+3\colvec{x_2 \\ y_1}
             \quad\text{and}\quad
-            \colvec{0 \\ 1}
+            \colvec[r]{0 \\ 1}
             =1\colvec{x_1 \\ y_1}+1\colvec{x_2 \\ y_1}
           \end{equation*}
           and get this.
           \begin{equation*}
-            D=\sequence{\colvec{-1 \\ 3},
-                        \colvec{1 \\ -2}}
+            D=\sequence{\colvec[r]{-1 \\ 3},
+                        \colvec[r]{1 \\ -2}}
           \end{equation*}
         \partsitem No, this matrix does not change bases because it
            is singular.
         \partsitem Yes, this matrix changes bases because it is nonsingular.
           The calculation of the changed-to basis is as above. 
           \begin{equation*}
-            D=\sequence{\colvec{1/2 \\ -1/2},
-                        \colvec{1/2 \\ 1/2}}
+            D=\sequence{\colvec[r]{1/2 \\ -1/2},
+                        \colvec[r]{1/2 \\ 1/2}}
           \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -534,11 +583,11 @@ the same space, and where the map is the identity map.
     Find bases such that this matrix represents the identity map
     with respect to those bases.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         3  &1  &4  \\
         2  &-1 &1  \\
         0  &0  &4
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       This question has many different solutions.
@@ -551,9 +600,9 @@ the same space, and where the map is the identity map.
       to the standard basis is just the vector itself),
       we have this. 
       \begin{equation*}
-        B=\sequence{\colvec{3 \\ 2 \\ 0},
-                    \colvec{1 \\ -1 \\ 0},
-                    \colvec{4 \\ 1 \\ 4}  }
+        B=\sequence{\colvec[r]{3 \\ 2 \\ 0},
+                    \colvec[r]{1 \\ -1 \\ 0},
+                    \colvec[r]{4 \\ 1 \\ 4}  }
         \qquad
         D=\stdbasis_3
       \end{equation*}  
@@ -578,10 +627,10 @@ the same space, and where the map is the identity map.
       Obviously this is the answer.
       \begin{equation*}
         \rep{\identity}{B,D}
-        =\begin{pmatrix}
+        =\begin{mat}[r]
           2  &0  \\
           1  &3
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       For the change of basis matrix in the other direction we could 
       look for $\rep{\sin(x)}{B}$ and $\rep{\cos(x)}{B}$ by solving these. 
@@ -592,27 +641,27 @@ the same space, and where the map is the identity map.
       An easier method is to find the inverse of the matrix found above.
       \begin{equation*}
         \rep{\identity}{D,B}
-        =\begin{pmatrix}
+        =\begin{mat}[r]
           2  &0  \\
           1  &3  
-        \end{pmatrix}^{-1}
-        =\frac{1}{6}\cdot\begin{pmatrix}
+        \end{mat}^{-1}
+        =\frac{1}{6}\cdot\begin{mat}[r]
           3  &0  \\
           -1  &2  
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}[r]
            1/2  &0  \\
           -1/6  &1/3
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
     \end{answer}
   \item 
     Where does this matrix
     \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
            \cos(2\theta)   &\sin(2\theta)   \\
            \sin(2\theta)   &-\cos(2\theta)
-        \end{pmatrix}
+        \end{mat}
     \end{equation*}
     send the standard basis for \( \Re^2 \)?
     Any other bases?
@@ -625,14 +674,14 @@ the same space, and where the map is the identity map.
       \begin{equation*}
         \rep{\identity}{D,\stdbasis_2}
         \rep{\identity}{D,\stdbasis_2}^{-1}
-        =\frac{1}{-\cos^2(2\theta)-\sin^2(2\theta)}\cdot\begin{pmatrix}
+        =\frac{1}{-\cos^2(2\theta)-\sin^2(2\theta)}\cdot\begin{mat}
            -\cos(2\theta)   &-\sin(2\theta)  \\
            -\sin(2\theta)   &\cos(2\theta)
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}
            \cos(2\theta)   &\sin(2\theta)  \\
            \sin(2\theta)   &-\cos(2\theta)
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       This is more tractable than the representation the other way
       because this matrix is the concatenation of these two column vectors
@@ -675,7 +724,7 @@ the same space, and where the map is the identity map.
   \item 
     Finish the proof of \nearbylemma{le:NonSingIsChBasis}.
     \begin{answer}
-      What remains to be shown is that 
+      What remains is to show that 
       left multiplication by a reduction matrix represents a
       change from another basis to \( B=\basis{\beta}{n} \).
 
@@ -743,17 +792,17 @@ the same space, and where the map is the identity map.
         represenatation.
         \begin{equation*}
           \rep{1-x+3x^2-x^3}{B}=
-            \colvec{0 \\ 1 \\ 1 \\ 2}_B
+            \colvec[r]{0 \\ 1 \\ 1 \\ 2}_B
         \end{equation*}
         Find a basis \( D \) 
         giving this different representation for the same
         polynomial. 
         \begin{equation*}
           \rep{1-x+3x^2-x^3}{D}=
-            \colvec{1 \\ 0 \\ 2 \\ 0}_D
+            \colvec[r]{1 \\ 0 \\ 2 \\ 0}_D
         \end{equation*}
-      \partsitem State and prove that any nonzero vector
-        representation can be changed to any other.
+      \partsitem State and prove that we can change any nonzero vector
+        representation to any other.
     \end{exparts}
     \noindent\textit{Hint.}
     The proof of \nearbylemma{le:NonSingIsChBasis}
@@ -769,7 +818,7 @@ the same space, and where the map is the identity map.
           with resepect to a new basis $B_1$.
           \begin{equation*}
             \rep{1-x+3x^2-x^3}{B_1}=
-              \colvec{1 \\ 0 \\ 1 \\ 2}_{B_1}
+              \colvec[r]{1 \\ 0 \\ 1 \\ 2}_{B_1}
             \qquad
             B_1=\sequence{1-x,1+x,x^2+x^3,x^2-x^3}
           \end{equation*}
@@ -777,7 +826,7 @@ the same space, and where the map is the identity map.
           representation to the fourth row.
           \begin{equation*}
             \rep{1-x+3x^2-x^3}{B_3}=
-              \colvec{1 \\ 0 \\ 1 \\ 0}_{B_2}
+              \colvec[r]{1 \\ 0 \\ 1 \\ 0}_{B_2}
             \qquad
             B_2=\sequence{1-x,1+x,3x^2-x^3,x^2-x^3}
           \end{equation*}
@@ -786,7 +835,7 @@ the same space, and where the map is the identity map.
           Now we can finish by doubling the third row.
           \begin{equation*}
             \rep{1-x+3x^2-x^3}{D}=
-              \colvec{1 \\ 0 \\ 2 \\ 0}_{D}
+              \colvec[r]{1 \\ 0 \\ 2 \\ 0}_{D}
             \qquad
             D=\sequence{1-x,1+x,(3x^2-x^3)/2,x^2-x^3}
           \end{equation*}
@@ -825,7 +874,7 @@ the same space, and where the map is the identity map.
           is a nonzero vector.
           Use that component in a sequence of row operations to convert 
           $\vec{z}_1$ to $\vec{z}$.
-          (This sketch could be filled out as an induction 
+          (We could fill out this sketch as an induction 
           argument on the dimension of $V$.)  
        \end{exparts}  
      \end{answer}
@@ -856,9 +905,9 @@ the same space, and where the map is the identity map.
   \recommended \item 
     Find a matrix having this effect.
     \begin{equation*}
-      \colvec{1 \\ 3}
+      \colvec[r]{1 \\ 3}
       \;\mapsto\;
-      \colvec{4 \\ -1}
+      \colvec[r]{4 \\ -1}
     \end{equation*}
     That is, find a $M$ that left-multiplies the 
     starting vector to yield the ending vector.
@@ -866,14 +915,14 @@ the same space, and where the map is the identity map.
     \begin{exparts*}
       \partsitem
         $
-          \colvec{1 \\ 3}\mapsto\colvec{1 \\ 1}
+          \colvec[r]{1 \\ 3}\mapsto\colvec[r]{1 \\ 1}
           \quad
-          \colvec{2 \\ -1}\mapsto\colvec{-1 \\ -1}
+          \colvec[r]{2 \\ -1}\mapsto\colvec[r]{-1 \\ -1}
         $
       \partsitem $
-          \colvec{1 \\ 3}\mapsto\colvec{1 \\ 1}
+          \colvec[r]{1 \\ 3}\mapsto\colvec[r]{1 \\ 1}
           \quad
-          \colvec{2 \\ 6}\mapsto\colvec{-1 \\ -1}
+          \colvec[r]{2 \\ 6}\mapsto\colvec[r]{-1 \\ -1}
         $
    \end{exparts*}
    Give a necessary and sufficient condition for there to be a
@@ -885,9 +934,9 @@ the same space, and where the map is the identity map.
       One of them  represents with respect to
       \( \stdbasis_2 \) the transformation of \( \Re^2 \) with this action.
       \begin{equation*}
-        \colvec{1 \\ 0}\mapsto\colvec{4 \\ 0}
+        \colvec[r]{1 \\ 0}\mapsto\colvec[r]{4 \\ 0}
         \qquad
-        \colvec{0 \\ 1}\mapsto\colvec{0 \\ -1/3}
+        \colvec[r]{0 \\ 1}\mapsto\colvec[r]{0 \\ -1/3}
       \end{equation*}  
      The problem of specifying two distinct input/output pairs is a bit 
      trickier.
@@ -896,21 +945,21 @@ the same space, and where the map is the identity map.
        \partsitem Yes, there is such a matrix.
          These conditions
          \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}
              a  &b  \\
              c  &d
-           \end{pmatrix}
-           \colvec{1 \\ 3}
+           \end{mat}
+           \colvec[r]{1 \\ 3}
            =
-           \colvec{1 \\ 1}
+           \colvec[r]{1 \\ 1}
            \qquad
-           \begin{pmatrix}
+           \begin{mat}
              a  &b  \\
              c  &d
-           \end{pmatrix}
-           \colvec{2 \\ -1}
+           \end{mat}
+           \colvec[r]{2 \\ -1}
            =
-           \colvec{-1 \\ -1}
+           \colvec[r]{-1 \\ -1}
          \end{equation*}
          can be solved
          \begin{equation*}
@@ -923,16 +972,16 @@ the same space, and where the map is the identity map.
          \end{equation*}
          to give this matrix.
          \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}[r]
              -2/7  &3/7 \\
              -2/7  &3/7 
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
        \partsitem No, because
          \begin{equation*}
-           2\cdot\colvec{1 \\ 3}=\colvec{2 \\ 6}
+           2\cdot\colvec[r]{1 \\ 3}=\colvec[r]{2 \\ 6}
            \quad\text{but}\quad
-           2\cdot\colvec{1 \\ 1}\neq\colvec{-1 \\ -1}
+           2\cdot\colvec[r]{1 \\ 1}\neq\colvec[r]{-1 \\ -1}
          \end{equation*}
          no linear action can produce this effect.
        \partsitem A sufficient condition is that 
@@ -983,7 +1032,7 @@ arrow diagram.\index{arrow diagram}
 \begin{equation*}
   \begin{CD}
     V_\wrt{B}                   @>h>H>        W_\wrt{D}       \\
-    @V\scriptstyle\identity VV                @V\scriptstyle\identity VV \\
+    @V{\scriptsize\identity} VV                @V\scriptsize\identity VV \\
     V_\wrt{\hat{B}}             @>h>\hat{H}>  W_\wrt{\hat{D}}
   \end{CD}
 \end{equation*}
@@ -1002,23 +1051,23 @@ This equation summarizes.
    \hat{H}=
    \rep{\identity}{D,\hat{D}}\cdot H\cdot \rep{\identity}{\hat{B},B}
 \tag*{\text{($*$})}\end{equation*}
-(To compare this equation with the sentence before it, remember that the
-equation is read from right to left because 
-function composition is read right to left and matrix multiplication 
-represent the composition.)
+(To compare this equation with the sentence before it, remember to read the
+equation from right to left because we read
+function composition from right to left and matrix multiplication 
+represents composition.)
 
 \begin{example}
 The matrix
 \begin{equation*}
-  T=\begin{pmatrix}
+  T=\begin{mat}[r]
      \cos(\pi/6)  &-\sin(\pi/6)  \\
      \sin(\pi/6)  &\cos(\pi/6)
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
      \sqrt{3}/2  &-1/2  \\
      1/2         &\sqrt{3}/2
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 represents, with respect to \( \stdbasis_2,\stdbasis_2 \),
 the transformation \( \map{t}{\Re^2}{\Re^2} \) that rotates vectors
@@ -1026,124 +1075,123 @@ the transformation \( \map{t}{\Re^2}{\Re^2} \) that rotates vectors
 \begin{center}
   \includegraphics{ch3.22}
 \end{center}
-We can translate that representation with respect to $\stdbasis_2,\stdbasis_2$ 
-to one with respect to
+We can translate that to a representation 
+with respect to
 \begin{equation*}
   \hat{B}=\sequence{
-              \colvec{1 \\ 1}
-              \colvec{0 \\ 2} }
+              \colvec[r]{1 \\ 1}
+              \colvec[r]{0 \\ 2} }
   \qquad
   \hat{D}=\sequence{
-              \colvec{-1 \\ 0}
-              \colvec{2 \\ 3} }
+              \colvec[r]{-1 \\ 0}
+              \colvec[r]{2 \\ 3} }
 \end{equation*}
 by using the arrow diagram and formula~($*$) above.
 \begin{equation*}
   \begin{CD}
     \Re^2_\wrt{\stdbasis_2}              @>t>T>        \Re^2_\wrt{\stdbasis_2}       \\
-    @V\scriptstyle\identity VV                @V\scriptstyle\identity VV \\
+    @V\scriptsize\identity VV                @V\scriptsize\identity VV \\
     \Re^2_\wrt{\hat{B}}          @>t>\hat{T}>  \Re^2_\wrt{\hat{D}}
   \end{CD}
   \qquad
    \hat{T}=
    \rep{\identity}{\stdbasis_2,\hat{D}}\cdot T\cdot \rep{\identity}{\hat{B},\stdbasis_2}
 \end{equation*}
-Note that $\rep{\identity}{\stdbasis_2,\hat{D}}$ can be calculated as
+Note that $\rep{\identity}{\stdbasis_2,\hat{D}}$ is
 the matrix inverse of $\rep{\identity}{\hat{D},\stdbasis_2}$.
 \begin{align*}
    \rep{t}{\hat{B},\hat{D}}
-  &=\begin{pmatrix}
+  &=\begin{mat}[r]
      -1     &2   \\
      0      &3
-  \end{pmatrix}^{-1}
-  \begin{pmatrix}
+  \end{mat}^{-1}
+  \begin{mat}[r]
      \sqrt{3}/2  &-1/2  \\
      1/2         &\sqrt{3}/2
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
      1      &0   \\
      1      &2
-  \end{pmatrix}                              \\                            
-  &=\begin{pmatrix}
+  \end{mat}                              \\                            
+  &=\begin{mat}[r]
      (5-\sqrt{3})/6   &(3+2\sqrt{3})/3 \\
      (1+\sqrt{3})/6  &\sqrt{3}/3
-  \end{pmatrix}
+  \end{mat}
 \end{align*}
-Although the new matrix is messier-appearing,
+Although the new matrix is messier,
 the map that it represents is the same. 
 For instance, to replicate the effect of $t$ in the picture, 
 start with $\hat{B}$,
 \begin{equation*}
-  \rep{\colvec{1 \\ 3}}{\hat{B}}=\colvec{1 \\ 1}_{\hat{B}}
+  \rep{\colvec[r]{1 \\ 3}}{\hat{B}}=\colvec[r]{1 \\ 1}_{\hat{B}}
 \end{equation*}
 apply $\hat{T}$,
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      (5-\sqrt{3})/6   &(3+2\sqrt{3})/3 \\
      (1+\sqrt{3})/6  &\sqrt{3}/3
-  \end{pmatrix}_{\hat{B},\hat{D}}
-  \colvec{1 \\ 1}_{\hat{B}}
+  \end{mat}_{\hat{B},\hat{D}}
+  \colvec[r]{1 \\ 1}_{\hat{B}}
   =
-  \colvec{(11+3\sqrt{3})/6 \\ (1+3\sqrt{3})/6}_{\hat{D}}
+  \colvec[r]{(11+3\sqrt{3})/6 \\ (1+3\sqrt{3})/6}_{\hat{D}}
 \end{equation*}
 and check it against $\hat{D}$
 \begin{equation*}
-  \frac{11+3\sqrt{3}}{6}\cdot\colvec{-1 \\ 0}
-  +\frac{1+3\sqrt{3}}{6}\cdot\colvec{2 \\ 3}
-  =\colvec{(-3+\sqrt{3})/2 \\ (1+3\sqrt{3})/2}
+  \frac{11+3\sqrt{3}}{6}\cdot\colvec[r]{-1 \\ 0}
+  +\frac{1+3\sqrt{3}}{6}\cdot\colvec[r]{2 \\ 3}
+  =\colvec[r]{(-3+\sqrt{3})/2 \\ (1+3\sqrt{3})/2}
 \end{equation*}
-to see that it is the same result as above.
+and it gives the same outcome as above.
 \end{example}
 
 \begin{example} \label{ex:DiagizedMat}
-One reason to change bases is that the matrix may be simpler.
+We may make the matrix simpler by changing bases.
 On \( \Re^3 \) the map
 \begin{equation*}
   \colvec{x \\ y \\ z}\mapsunder{t}\colvec{y+z \\ x+z \\ x+y}
 \end{equation*}
-that is represented with respect to the standard basis in this way
+is represented with respect to the standard basis in this way.
 \begin{equation*}
   \rep{t}{\stdbasis_3,\stdbasis_3}=
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &1  &1  \\
     1  &0  &1  \\
     1  &1  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
-can also  be represented with respect to another basis
-\begin{center}
-  if 
-  $B=\sequence{\colvec{1 \\ -1 \\ 0},
-                             \colvec{1 \\ 1 \\ -2},
-                             \colvec{1 \\ 1 \\ 1}}$ 
-  \hspace*{1.5em} then 
-  $\rep{t}{B,B}=
-  \begin{pmatrix}
+Represented with respect to
+\begin{equation*}
+  B=\sequence{\colvec[r]{1 \\ -1 \\ 0},
+                             \colvec[r]{1 \\ 1 \\ -2},
+                             \colvec[r]{1 \\ 1 \\ 1}}
+\end{equation*} 
+gives a matrix 
+that is diagonal.
+\begin{equation*} 
+  \rep{t}{B,B}=
+  \begin{mat}[r]
    -1  &0  &0  \\
     0  &-1 &0  \\
     0  &0  &2
-  \end{pmatrix}$
-\end{center}
-in a way that is simpler, in that the action of a diagonal
-matrix is easy to understand.
+  \end{mat}
+\end{equation*}
 \end{example}
 
-Naturally, we usually prefer basis changes that make the
+Naturally we usually prefer basis changes that make the
 representation easier to understand.
-When the representation with respect to equal starting
-and ending bases is a diagonal matrix we say the map or matrix
-has been \definend{diagonalized}.\index{matrix!diagonalized}
-In Chaper Five we shall see which maps and matrices are diagonalizable, 
-and where one is not, we shall see how to get a representation that is nearly 
-diagonal.
-
-We finish this subsection by considering the easier case 
-where representations are with respect to possibly different starting and 
-ending bases.
+We say that a map or matrix
+has been \definend{diagonalized}\index{matrix!diagonalized}
+when its representation is diagonal with respect to $B,B$, that is,
+with respect to equal starting
+and ending bases. 
+In Chaper Five we shall see which maps and matrices are diagonalizable.
+In the rest of this subsection we consider the easier case 
+where representations are with respect to $B,D$, which are  
+possibly different starting and ending bases.
 Recall that the prior subsection 
 shows that a matrix changes bases if and only if it is nonsingular.
 That gives us another version of the above  arrow diagram
-and equation~($*$).
+and equation~($*$) from the start of this subsection.
 
 \begin{definition}
 \label{def:MatEquiv}
@@ -1175,10 +1223,10 @@ the set of matrices into matrix equivalence classes.
 \end{center}
 We can get some insight into the classes by comparing matrix equivalence
 with row equivalence
-(recall that matrices are row equivalent when they can be reduced to each
+(rememeber that matrices are row equivalent when they can be reduced to each
 other by row operations).
 In $\hat{H}=PHQ$, the matrices $P$ and $Q$ are nonsingular and 
-thus each can be written as a product of elementary reduction matrices
+thus we can write each as a product of elementary reduction matrices
 (\nearbylemma{lem:ComputeInvMat}).
 Left-multiplication by the reduction matrices making up $P$
 has the effect of performing row operations.
@@ -1200,17 +1248,17 @@ two matrices can be matrix equivalent but not row equivalent.
 \begin{example}
 These two
 \begin{equation*} 
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &0  \\
     0  &0
-  \end{pmatrix}
+  \end{mat}
   \qquad
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &1  \\
     0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
-are matrix equivalent because the second can be reduced to the first by
+are matrix equivalent because the second reduces to the first by
 the column operation of taking $-1$ times the first column and adding
 to the second.
 They are not row equivalent because they have different reduced echelon
@@ -1230,7 +1278,7 @@ Any \( \nbym{m}{n} \) matrix of rank \( k \) is matrix equivalent to
 the \( \nbym{m}{n} \) matrix that is all zeros except that
 the first \( k \) diagonal entries are ones.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
       1  &0      &\ldots &0  &0  &\ldots  &0  \\
       0  &1      &\ldots &0  &0  &\ldots  &0  \\
          &\vdots                              \\
@@ -1238,11 +1286,11 @@ the first \( k \) diagonal entries are ones.
       0  &0      &\ldots &0  &0  &\ldots  &0  \\
          &\vdots                              \\
       0  &0      &\ldots &0  &0  &\ldots  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{theorem}
 
-\noindent Sometimes this is described as a 
+\noindent This is a 
 \definend{block partial-identity}\index{matrix!block} 
 form.
 \begin{equation*}
@@ -1264,107 +1312,107 @@ Combine the reduction matrices used for those column operations into
 \begin{example}
 We illustrate the proof by finding the $P$ and $Q$ for this matrix. 
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &2  &1  &-1  \\
        0  &0  &1  &-1  \\
        2  &4  &2  &-2
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 First Gauss-Jordan row-reduce.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &-1 &0    \\
        0  &1  &0    \\
        0  &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  &0    \\
        0  &1  &0    \\
        -2 &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &2  &1  &-1  \\
        0  &0  &1  &-1  \\
        2  &4  &2  &-2
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &2  &0  &0   \\
        0  &0  &1  &-1  \\
        0  &0  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 Then column-reduce, which involves right-multiplication.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &2  &0  &0   \\
        0  &0  &1  &-1  \\
        0  &0  &0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &-2 &0  &0   \\
        0  &1  &0  &0   \\
        0  &0  &1  &0   \\
        0  &0  &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  &0  &0   \\
        0  &1  &0  &0   \\
        0  &0  &1  &1   \\
        0  &0  &0  &1
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  &0   \\
        0  &0  &1  &0  \\
        0  &0  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 Finish by swapping columns.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  &0   \\
        0  &0  &1  &0  \\
        0  &0  &0  &0
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  &0  &0   \\
        0  &0  &1  &0   \\
        0  &1  &0  &0   \\
        0  &0  &0  &1
-    \end{pmatrix}
+    \end{mat}
   =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  &0   \\
        0  &1  &0  &0  \\
        0  &0  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 Finally, combine the left-multipliers together as $P$ and the
 right-multipliers together as $Q$ to get the $PHQ$ equation.
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &-1 &0    \\
        0  &1  &0    \\
        -2 &0  &1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &2  &1  &-1  \\
        0  &0  &1  &-1  \\
        2  &4  &2  &-2
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
        1  &0  &-2  &0   \\
        0  &0  &1  &0   \\
        0  &1  &0  &1   \\
        0  &0  &0  &1
-    \end{pmatrix}
+    \end{mat}
     =
-    \begin{pmatrix}
+    \begin{mat}[r]
        1  &0  &0  &0   \\
        0  &1  &0  &0  \\
        0  &0  &0  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -1398,9 +1446,9 @@ Thus there are three matrix-equivalence classes.
                   \end{tabular}}
 \end{center}
 Each class consists of all of the $\nbyn{2}$ matrices with the same rank. 
-There is only one rank~zero matrix, so that class has only
-one member, but
-the other two classes each have infinitely many members.
+There is only one rank~zero matrix so that class has only
+one member. 
+The other two classes have infinitely many members.
 \end{example}
 
 In this subsection
@@ -1413,8 +1461,8 @@ with the proper choice of (possibly different) starting and ending bases, any
 map can be represented in block partial-identity form.
 
 One of the nice things about this representation is that,
-in some sense, we can completely understand the map when it is
-expressed in this way:
+in some sense, we can completely understand the map when we express it
+in this way:
 if the bases are
 \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
 and
@@ -1435,37 +1483,37 @@ Thus, we can understand any linear map as a kind of projection.
 \end{equation*}
 Of course, ``understanding'' a map expressed in this way 
 requires that we understand the relationship between \( B \) and \( D \).
-However, despite that difficulty, 
+Nonetheless,
 this is a good classification of linear maps.
 
 \begin{exercises}
   \recommended \item 
     Decide if these matrices are matrix equivalent.
     \begin{exparts}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  1  &3  &0  \\
                  2  &3  &0
-               \end{pmatrix} \),
-            \( \begin{pmatrix}
+               \end{mat} \),
+            \( \begin{mat}[r]
                  2  &2  &1  \\
                  0  &5  &-1
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  0  &3  \\
                  1  &1
-               \end{pmatrix} \),
-            \( \begin{pmatrix}
+               \end{mat} \),
+            \( \begin{mat}[r]
                  4  &0  \\
                  0  &5
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  1  &3  \\
                  2  &6
-               \end{pmatrix} \),
-            \( \begin{pmatrix}
+               \end{mat} \),
+            \( \begin{mat}[r]
                  1  &3  \\
                  2  &-6
-               \end{pmatrix} \)
+               \end{mat} \)
     \end{exparts}
     \begin{answer}
       \begin{exparts}
@@ -1478,28 +1526,28 @@ this is a good classification of linear maps.
     Find the canonical representative of the matrix-equivalence class of
     each matrix.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  2  &1  &0  \\
                  4  &2  &0
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                  0  &1  &0  &2  \\
                  1  &1  &0  &4  \\
                  3  &3  &3  &-1
-               \end{pmatrix} \)
+               \end{mat} \)
     \end{exparts*}
     \begin{answer}
       We need only decide what the rank of each is.
       \begin{exparts*}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                    1  &0  &0  \\
                    0  &0  &0
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                    1  &0  &0  &0  \\
                    0  &1  &0  &0  \\
                    0  &0  &1  &0
-                 \end{pmatrix} \)
+                 \end{mat} \)
       \end{exparts*}  
     \end{answer}
   \item 
@@ -1507,23 +1555,23 @@ this is a good classification of linear maps.
     \begin{equation*}
       B=\stdbasis_2
       \qquad
-      D=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+      D=\sequence{\colvec[r]{1 \\ 1},\colvec[r]{1 \\ -1}}
     \end{equation*}
     the transformation \( \map{t}{\Re^2}{\Re^2} \) is represented by
     this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &2  \\
         3  &4
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     Use change of basis matrices to represent \( t  \) with respect
     to each pair.
     \begin{exparts}
-      \partsitem \( \hat{B}=\sequence{\colvec{0 \\ 1},\colvec{1 \\ 1}} \),
-        \( \hat{D}=\sequence{\colvec{-1 \\ 0},\colvec{2 \\ 1}} \)
-      \partsitem \( \hat{B}=\sequence{\colvec{1 \\ 2},\colvec{1 \\ 0}} \),
-        \( \hat{D}=\sequence{\colvec{1 \\ 2},\colvec{2 \\ 1}} \)
+      \partsitem \( \hat{B}=\sequence{\colvec[r]{0 \\ 1},\colvec[r]{1 \\ 1}} \),
+        \( \hat{D}=\sequence{\colvec[r]{-1 \\ 0},\colvec[r]{2 \\ 1}} \)
+      \partsitem \( \hat{B}=\sequence{\colvec[r]{1 \\ 2},\colvec[r]{1 \\ 0}} \),
+        \( \hat{D}=\sequence{\colvec[r]{1 \\ 2},\colvec[r]{2 \\ 1}} \)
     \end{exparts}
     \begin{answer}
       Recall the diagram
@@ -1531,7 +1579,7 @@ this is a good classification of linear maps.
       \begin{equation*}
         \begin{CD}
           \Re^2_\wrt{B}                   @>t>T>        \Re^2_\wrt{D}       \\
-          @V\scriptstyle\identity VV             @V\scriptstyle\identity VV \\
+          @V\scriptsize\identity VV             @V\scriptsize\identity VV \\
           \Re^2_\wrt{\hat{B}}             @>t>\hat{T}>  \Re^2_\wrt{\hat{D}}
         \end{CD}
         \qquad \hat{T}=
@@ -1540,174 +1588,174 @@ this is a good classification of linear maps.
       \begin{exparts}
         \partsitem These two 
           \begin{equation*}
-            \colvec{1 \\ 1}=1\cdot\colvec{-1 \\ 0}
-                            +1\cdot\colvec{2 \\ 1}
+            \colvec[r]{1 \\ 1}=1\cdot\colvec[r]{-1 \\ 0}
+                            +1\cdot\colvec[r]{2 \\ 1}
             \qquad
-            \colvec{1 \\ -1}=(-3)\cdot\colvec{-1 \\ 0}
-                            +(-1)\cdot\colvec{2 \\ 1}
+            \colvec[r]{1 \\ -1}=(-3)\cdot\colvec[r]{-1 \\ 0}
+                            +(-1)\cdot\colvec[r]{2 \\ 1}
           \end{equation*}
           show that
           \begin{equation*}
-            \rep{\identity}{D,\hat{D}}=\begin{pmatrix}
+            \rep{\identity}{D,\hat{D}}=\begin{mat}[r]
               1  &-3  \\
               1  &-1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and similarly these two
           \begin{equation*}
-            \colvec{0 \\ 1}=0\cdot\colvec{1 \\ 0}
-                            +1\cdot\colvec{0 \\ 1}
+            \colvec[r]{0 \\ 1}=0\cdot\colvec[r]{1 \\ 0}
+                            +1\cdot\colvec[r]{0 \\ 1}
             \qquad
-            \colvec{1 \\  1}=1\cdot\colvec{1 \\ 0}
-                            +1\cdot\colvec{0 \\ 1}
+            \colvec[r]{1 \\  1}=1\cdot\colvec[r]{1 \\ 0}
+                            +1\cdot\colvec[r]{0 \\ 1}
           \end{equation*}
           give the other nonsinguar matrix.
           \begin{equation*}
-            \rep{\identity}{\hat{B},B}=\begin{pmatrix}
+            \rep{\identity}{\hat{B},B}=\begin{mat}[r]
               0  &1  \\
               1  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           Then the answer is this.
           \begin{equation*}
             \hat{T}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &-3  \\
               1  &-1
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               1  &2  \\
               3  &4
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               0  &1  \\
               1  &1
-            \end{pmatrix}
-            =\begin{pmatrix}
+            \end{mat}
+            =\begin{mat}[r]
               -10  &-18  \\
               -2   &-4 
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           Although not strictly necessary, a check is reassuring.
           Arbitrarily fixing 
           \begin{equation*}
-            \vec{v}=\colvec{3 \\ 2}
+            \vec{v}=\colvec[r]{3 \\ 2}
           \end{equation*}
           we have that
           \begin{equation*}
-            \rep{\vec{v}}{B}=\colvec{3 \\ 2}_B
+            \rep{\vec{v}}{B}=\colvec[r]{3 \\ 2}_B
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  \\
               3  &4
-            \end{pmatrix}_{B,D}
-            \colvec{3 \\ 2}_B
-            =\colvec{7 \\ 17}_D
+            \end{mat}_{B,D}
+            \colvec[r]{3 \\ 2}_B
+            =\colvec[r]{7 \\ 17}_D
           \end{equation*}
           and so $t(\vec{v})$ is this.
           \begin{equation*}
-            7\cdot\colvec{1 \\ 1}+17\cdot\colvec{1 \\ -1}=\colvec{24 \\ -10}
+            7\cdot\colvec[r]{1 \\ 1}+17\cdot\colvec[r]{1 \\ -1}=\colvec[r]{24 \\ -10}
           \end{equation*}
           Doing the calculation with respect to $\hat{B},\hat{D}$ starts with
           \begin{equation*}
-            \rep{\vec{v}}{\hat{B}}=\colvec{-1 \\ 3}_{\hat{B}}
+            \rep{\vec{v}}{\hat{B}}=\colvec[r]{-1 \\ 3}_{\hat{B}}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               -10  &-18  \\
                -2  &-4
-            \end{pmatrix}_{\hat{B},\hat{D}}
-            \colvec{-1 \\ 3}_{\hat{B}}
-            =\colvec{-44 \\ -10}_{\hat{D}}
+            \end{mat}_{\hat{B},\hat{D}}
+            \colvec[r]{-1 \\ 3}_{\hat{B}}
+            =\colvec[r]{-44 \\ -10}_{\hat{D}}
           \end{equation*}
           and then checks that this is the same result.
           \begin{equation*}
-            -44\cdot\colvec{-1 \\ 0}-10\cdot\colvec{2 \\ 1}=\colvec{24 \\ -10}
+            -44\cdot\colvec[r]{-1 \\ 0}-10\cdot\colvec[r]{2 \\ 1}=\colvec[r]{24 \\ -10}
           \end{equation*}
     \partsitem These two
       \begin{equation*}
-        \colvec{1 \\ 1}=\frac{1}{3}\cdot\colvec{1 \\ 2}
-                  +\frac{1}{3}\cdot\colvec{2 \\ 1}
+        \colvec[r]{1 \\ 1}=\frac{1}{3}\cdot\colvec[r]{1 \\ 2}
+                  +\frac{1}{3}\cdot\colvec[r]{2 \\ 1}
         \qquad
-        \colvec{1 \\ -1}=-1\cdot\colvec{1 \\ 2}
-                  +1\cdot\colvec{2 \\ 1}
+        \colvec[r]{1 \\ -1}=-1\cdot\colvec[r]{1 \\ 2}
+                  +1\cdot\colvec[r]{2 \\ 1}
       \end{equation*}
       show that
       \begin{equation*}
-        \rep{\identity}{D,\hat{D}}=\begin{pmatrix}
+        \rep{\identity}{D,\hat{D}}=\begin{mat}[r]
           1/3  &-1  \\
           1/3  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and these two
       \begin{equation*}
-        \colvec{1 \\ 2}=1\cdot\colvec{1 \\ 0}
-                  +2\cdot\colvec{0 \\ 1}
+        \colvec[r]{1 \\ 2}=1\cdot\colvec[r]{1 \\ 0}
+                  +2\cdot\colvec[r]{0 \\ 1}
         \qquad
-        \colvec{1 \\ 0}=-1\cdot\colvec{1 \\ 0}
-                  +0\cdot\colvec{0 \\ 1}
+        \colvec[r]{1 \\ 0}=-1\cdot\colvec[r]{1 \\ 0}
+                  +0\cdot\colvec[r]{0 \\ 1}
       \end{equation*}
       show this.
       \begin{equation*}
-        \rep{\identity}{\hat{B},B}=\begin{pmatrix}
+        \rep{\identity}{\hat{B},B}=\begin{mat}[r]
           1  &1  \\
           2  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       With those, the conversion goes in this way.
       \begin{equation*}
-        \hat{T}=\begin{pmatrix}
+        \hat{T}=\begin{mat}[r]
           1/3  &-1  \\
           1/3  &1
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1  &2  \\
           3  &4
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1  &1  \\
           2  &0
-        \end{pmatrix}
-        =\begin{pmatrix}
+        \end{mat}
+        =\begin{mat}[r]
           -28/3  &-8/3  \\
           38/3   &10/3
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
-      As in the prior item, a check provides some confidence that this
-      calculation was performed without mistakes.
+      As in the prior item, a check provides some confidence that we did
+      this calculation without mistakes.
       We can for instance, fix the vector
       \begin{equation*}
-        \vec{v}=\colvec{-1 \\ 2}
+        \vec{v}=\colvec[r]{-1 \\ 2}
       \end{equation*}
-      (this is selected for no reason, out of thin air).
+      (this is arbitrary, taken from thin air).
       Now we have
       \begin{equation*}
-        \rep{\vec{v}}{B}=\colvec{-1 \\ 2}
+        \rep{\vec{v}}{B}=\colvec[r]{-1 \\ 2}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &2  \\
           3  &4
-        \end{pmatrix}_{B,D}
-        \colvec{-1  \\ 2}_{B}
-        =\colvec{3  \\ 5}_D
+        \end{mat}_{B,D}
+        \colvec[r]{-1  \\ 2}_{B}
+        =\colvec[r]{3  \\ 5}_D
       \end{equation*}
       and so $t(\vec{v})$ is this vector.
       \begin{equation*}
-        3\cdot\colvec{1 \\ 1}+5\cdot\colvec{1 \\ -1}=\colvec{8 \\ -2}
+        3\cdot\colvec[r]{1 \\ 1}+5\cdot\colvec[r]{1 \\ -1}=\colvec[r]{8 \\ -2}
       \end{equation*}
       With respect to $\hat{B},\hat{D}$ we first calculate
       \begin{equation*}
-        \rep{\vec{v}}{\hat{B}}=\colvec{1 \\ -2}
+        \rep{\vec{v}}{\hat{B}}=\colvec[r]{1 \\ -2}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -28/3  &-8/3  \\
           38/3   &10/3
-        \end{pmatrix}_{\hat{B},\hat{D}}
-        \colvec{1 \\ -2}_{\hat{B}}
-        =\colvec{-4 \\ 6}_{\hat{D}}
+        \end{mat}_{\hat{B},\hat{D}}
+        \colvec[r]{1 \\ -2}_{\hat{B}}
+        =\colvec[r]{-4 \\ 6}_{\hat{D}}
       \end{equation*}
       and, sure enough, that is the same result for $t(\vec{v})$.
       \begin{equation*}
-        -4\cdot\colvec{1 \\ 2}+6\cdot\colvec{2 \\ 1}=\colvec{8 \\ -2}
+        -4\cdot\colvec[r]{1 \\ 2}+6\cdot\colvec[r]{2 \\ 1}=\colvec[r]{8 \\ -2}
       \end{equation*}
       \end{exparts} 
     \end{answer}
@@ -1829,13 +1877,13 @@ this is a good classification of linear maps.
     \begin{exparts}
       \partsitem Find $\rep{t}{B,B}$ in this specific case.
         \begin{equation*}
-          T=\begin{pmatrix}
+          T=\begin{mat}[r]
             1  &1  \\
             3  &-1
-          \end{pmatrix}
+          \end{mat}
           \qquad
-          B=\sequence{\colvec{1  \\ 2},
-                      \colvec{-1 \\ -1}}
+          B=\sequence{\colvec[r]{1  \\ 2},
+                      \colvec[r]{-1 \\ -1}}
         \end{equation*}
       \partsitem Describe $\rep{t}{B,B}$ in the general case where
         \( B=\basis{\beta}{n} \).
@@ -1845,77 +1893,78 @@ this is a good classification of linear maps.
         \partsitem We have
           \begin{equation*}
             \rep{\identity}{B,\stdbasis_2}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &-1  \\
               2  &-1
-            \end{pmatrix}
+            \end{mat}
             \qquad
             \rep{\identity}{\stdbasis_2,B}=\rep{\identity}{B,\stdbasis_2}^{-1}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &-1  \\
               2  &-1
-            \end{pmatrix}^{-1}
-            =\begin{pmatrix}
+            \end{mat}^{-1}
+            =\begin{mat}[r]
               -1  &1  \\
               -2  &1 
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           and thus the answer is this.
           \begin{equation*}
             \rep{t}{B,B}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &-1  \\
               2  &-1
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               1  &1  \\
               3  &-1   
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               -1  &1  \\
               -2  &1 
-            \end{pmatrix}
-            =\begin{pmatrix}
+            \end{mat}
+            =\begin{mat}[r]
               -2  &0   \\
               -5  &2 
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           As a quick check, we can take a vector at random
           \begin{equation*}
-            \vec{v}=\colvec{4  \\  5}
+            \vec{v}=\colvec[r]{4  \\  5}
           \end{equation*}
           giving
           \begin{equation*}
-            \rep{\vec{v}}{\stdbasis_2}=\colvec{4 \\ 5}
+            \rep{\vec{v}}{\stdbasis_2}=\colvec[r]{4 \\ 5}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
               3  &-1   
-            \end{pmatrix}
-            \colvec{4 \\ 5}
-            =\colvec{9 \\ 7}=t(\vec{v})
+            \end{mat}
+            \colvec[r]{4 \\ 5}
+            =\colvec[r]{9 \\ 7}=t(\vec{v})
           \end{equation*}
           while the calculation with respect to $B,B$ 
           \begin{equation*}
-            \rep{\vec{v}}{B}=\colvec{1 \\ -3}
+            \rep{\vec{v}}{B}=\colvec[r]{1 \\ -3}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               -2  &0   \\
               -5  &2 
-            \end{pmatrix}_{B,B}
-            \colvec{1 \\ -3}_B
-            =\colvec{-2 \\ -11}_B
+            \end{mat}_{B,B}
+            \colvec[r]{1 \\ -3}_B
+            =\colvec[r]{-2 \\ -11}_B
           \end{equation*}
           yields the same result.
           \begin{equation*}
-            -2\cdot\colvec{1 \\ 2}-11\cdot\colvec{-1 \\ -1}=\colvec{9 \\ 7}
+            -2\cdot\colvec[r]{1 \\ 2}-11\cdot\colvec[r]{-1 \\ -1}
+               =\colvec[r]{9 \\ 7}
           \end{equation*}
        \partsitem We have
           \begin{equation*}
             \begin{CD}
               \Re^2_\wrt{\stdbasis_2}         @>t>T>     \Re^2_\wrt{\stdbasis_2}       \\
-              @V\scriptstyle\identity VV         @V\scriptstyle\identity VV \\
+              @V\scriptsize\identity VV         @V\scriptsize\identity VV \\
               \Re^2_\wrt{B}        @>t>\hat{T}>  \Re^2_\wrt{B}
             \end{CD}
         \qquad 
@@ -1951,7 +2000,7 @@ this is a good classification of linear maps.
            \begin{equation*}
              \begin{CD}
                V_\wrt{B_1}                   @>h>H>        W_\wrt{D}       \\
-               @V\scriptstyle\identity VQV      @V\scriptstyle\identity VPV \\
+               @V\scriptsize\identity VQV      @V\scriptsize\identity VPV \\
                V_\wrt{B_2}             @>h>\hat{H}>  W_\wrt{D}
              \end{CD}
            \end{equation*}
@@ -1964,7 +2013,7 @@ this is a good classification of linear maps.
            \begin{equation*}
              \begin{CD}
                V_\wrt{B}                   @>h>H>   W_\wrt{D_1}       \\
-               @V\scriptstyle\identity VQV      @V\scriptstyle\identity VPV \\
+               @V\scriptsize\identity VQV      @V\scriptsize\identity VPV \\
                V_\wrt{B}             @>h>\hat{H}>  W_\wrt{D_2}
              \end{CD}
            \end{equation*}
@@ -1991,13 +2040,13 @@ this is a good classification of linear maps.
           \begin{equation*}
            \begin{CD}
              V_\wrt{B}                   @>h>H>      W_\wrt{D}       \\
-             @V\scriptstyle\identity VQV       @V\scriptstyle\identity VPV \\
+             @V\scriptsize\identity VQV       @V\scriptsize\identity VPV \\
              V_\wrt{\hat{B}}             @>h>\hat{H}> W_\wrt{\hat{D}}
             \end{CD}
             \hspace*{4em}\qquad
            \begin{CD}
              V_\wrt{B}              @<h^{-1}<H^{-1}<    W_\wrt{D}       \\
-             @V\scriptstyle\identity VQV       @V\scriptstyle\identity VPV \\
+             @V\scriptsize\identity VQV       @V\scriptsize\identity VPV \\
              V_\wrt{\hat{B}}        @<h^{-1}<\hat{H}^{-1}< W_\wrt{\hat{D}}
             \end{CD}
            \end{equation*}
@@ -2017,15 +2066,15 @@ this is a good classification of linear maps.
           these two matrices are both rank one and so they are
           matrix equivalent
           \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &0  \\
                0  &0
-             \end{pmatrix}
+             \end{mat}
              \qquad
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  \\
                1  &0
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           but the squares are not matrix equivalent\Dash the square of the 
           first has rank one while the square of the second has rank zero.
@@ -2033,15 +2082,15 @@ this is a good classification of linear maps.
           These two are not matrix equivalent but have matrix equivalent
           squares.
           \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  \\
                0  &0
-             \end{pmatrix}
+             \end{mat}
              \qquad
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  \\
                1  &0
-             \end{pmatrix} 
+             \end{mat} 
           \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -2063,12 +2112,12 @@ this is a good classification of linear maps.
     \end{exparts}
     \begin{answer}
       \begin{exparts}
-        \partsitem The definition is suggested by the appropriate 
-          arrow diagram.
+        \partsitem The 
+          arrow diagram suggests the definition.
           \begin{equation*}
             \begin{CD}
               V_\wrt{B_1}                   @>t>T>        V_\wrt{B_1}       \\
-              @V\scriptstyle\identity VV        @V\scriptstyle\identity VV \\
+              @V\scriptsize\identity VV        @V\scriptsize\identity VV \\
               V_\wrt{B_2}             @>t>\hat{T}>  V_\wrt{B_2}
             \end{CD}
           \end{equation*}
@@ -2095,15 +2144,15 @@ this is a good classification of linear maps.
         \partsitem These two are matrix equivalent but their squares are not
           matrix equivalent.
           \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &0  \\
                0  &0
-             \end{pmatrix}
+             \end{mat}
              \qquad
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  \\
                1  &0
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           By the prior item, matrix similarity and matrix equivalence are thus
           different.
