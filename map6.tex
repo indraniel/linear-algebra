@@ -3,11 +3,12 @@
 %  2001-Jun-12
 \section{Projection}
 \index{projection}
-\noindent\textit{This section is optional;
-     only the last two sections of Chapter Five require this material.}
+\noindent\textit{This section is optional.
+     It is only required for
+     the last two sections of Chapter Five.}
 
 We have described the projection \( \pi \) from $\Re^3$ into its
-\( xy \)~plane subspace as a `shadow map'.
+\( xy \)-plane subspace as a `shadow map'.
 This shows why,
 but it also shows that some shadows fall upward.
 \begin{center}  \small
@@ -15,12 +16,13 @@ but it also shows that some shadows fall upward.
   \hspace*{4em}
   \raisebox{0bp}{\includegraphics{ch3.26}}
 \end{center}
+\vspace*{1ex}  % graphic is poorly drawn and sticks down into text
 So perhaps a better description is:~the projection of $\vec{v}$
 is the $\vec{p}$ in the plane with the property that 
-someone standing on $\vec{p}$ and looking straight up or down sees
+someone standing on $\vec{p}$ and looking directly up or down sees
 $\vec{v}$.
 In this section we will generalize this to other projections,
-both orthogonal (i.e., `straight up and down') and nonorthogonal.
+both orthogonal and nonorthogonal.
 
 
 
@@ -31,29 +33,31 @@ both orthogonal (i.e., `straight up and down') and nonorthogonal.
 
 
 \subsectionoptional{Orthogonal Projection Into a Line}
-We first consider orthogonal projection into a line.
-To orthogonally project a vector \( \vec{v} \) into a line $\ell$,
-darken a point on the line if someone on that line and
-looking straight up or down (from that person's point of view)
-sees \( \vec{v} \).
+We first consider orthogonal projection 
+of a vector \( \vec{v} \) into a line $\ell$.
+% We darken a point on the line if someone at that point
+% looking straight up or down (that is, looking orthogonal to the line)
+% will see \( \vec{v} \).
+This picture shows someone walking out on the line 
+until they are at a point $\vec{p}\/$ such that
+the tip of $\vec{v}$ is directly overhead, where their line of sight is
+not parallel to the $y$-axis but is instead orthogonal to the line.
 \begin{center}  \small
   \includegraphics{ch3.28}
 \end{center}
-The picture shows someone who has walked out on the line 
-until the tip of $\vec{v}$ is straight overhead.
-That is, where the line is described as the span of some nonzero
+Since we can describe the line as the span of some
 vector $\ell=\set{c\cdot\vec{s}\suchthat c\in\Re}$,
-the person has walked out to find the coefficient $c_{\vec{p}}\,$
+this person has found the coefficient $c_{\vec{p}}\,$
 with the property that $\vec{v}-c_{\vec{p}}\cdot\vec{s}\,$ is orthogonal
-to $c_{\vec{p}}\cdot\vec{s}$.
+to $c_{\vec{p}}\,\vec{s}$.
 \begin{center}  \small
   \includegraphics{ch3.29}
 \end{center}
-We can solve for this coefficient by noting that because 
-$\vec{v}-c_{\vec{p}}\vec{s}\,$ is orthogonal to a scalar multiple 
-of $\vec{s}\,$ it must be orthogonal to $\vec{s}\,$ itself,
-and then the consequent fact that the dot product
-$(\vec{v}-c_{\vec{p}}\vec{s})\dotprod \vec{s}\,$ is zero gives that
+To solve for this coefficient, observe that because 
+$\vec{v}-c_{\vec{p}}\,\vec{s}\,$ is orthogonal to a scalar multiple 
+of $\vec{s}$, it must be orthogonal to $\vec{s}\,$ itself.
+Then 
+$(\vec{v}-c_{\vec{p}}\,\vec{s})\dotprod \vec{s}=0$ gives that
 $c_{\vec{p}}=\vec{v}\dotprod \vec{s}/\vec{s}\dotprod \vec{s}$.
 
 \begin{definition}
@@ -67,33 +71,31 @@ spanned by a nonzero \( \vec{s}\, \)}\index{projection!orthogonal}%
 \end{equation*}
 \end{definition}
 
-\noindent \nearbyexercise{exer:LineProjFormIndOfVec} checks that the 
-outcome of the calculation depends only on the line and not on which vector 
-\( \vec{s}\, \) happens to be used to describe that line.
+% \noindent \nearbyexercise{exer:LineProjFormIndOfVec} checks that the 
+% outcome of the calculation depends only on the line and not on which vector 
+% \( \vec{s}\, \) we used to describe that line.
 
 \begin{remark}
-The wording of that definition says `spanned by \( \vec{s}\, \)'
+That definition says `spanned by \( \vec{s}\, \)'
 instead the more formal `the span of the set \( \set{\vec{s}\,} \)'.
-This casual first phrase is common.
+This more casual phrase is common.
 \end{remark}
 
 \begin{example}
 To orthogonally project
 the vector $\binom{2}{3}$ into the line \( y=2x \),
 we first pick a direction vector for the line.
-For instance, 
 \begin{equation*}
-  \vec{s}=\colvec{1 \\ 2}
+  \vec{s}=\colvec[r]{1 \\ 2}
 \end{equation*}
-will do.
-Then the calculation is routine.
+The calculation is easy.
 \begin{center}  \small
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.30}\end{tabular}
-  \hspace*{6em}
-  $\frac{ \colvec{2 \\ 3}\dotprod\colvec{1 \\ 2} }{% 
-          \colvec{1 \\ 2}\dotprod\colvec{1 \\ 2} }
-     \cdot\colvec{1 \\ 2}
-    ={\displaystyle \frac{8}{5}}\cdot\colvec{1 \\ 2}=\colvec{8/5 \\ 16/5}$
+  \qquad
+  $\frac{ \colvec[r]{2 \\ 3}\dotprod\colvec[r]{1 \\ 2} }{% 
+          \colvec[r]{1 \\ 2}\dotprod\colvec[r]{1 \\ 2} }
+     \cdot\colvec[r]{1 \\ 2}
+    ={\displaystyle \frac{8}{5}}\cdot\colvec[r]{1 \\ 2}=\colvec[r]{8/5 \\ 16/5}$
 \end{center}
 \end{example}
 
@@ -104,9 +106,9 @@ In \( \Re^3 \), the orthogonal projection of a general vector
 \end{equation*}
 into the \( y \)-axis is
 \begin{equation*}
-  \frac{ \colvec{x \\ y \\ z}\dotprod\colvec{0 \\ 1 \\ 0} }{
-         \colvec{0 \\ 1 \\ 0}\dotprod\colvec{0 \\ 1 \\ 0} }
-          \cdot\colvec{0 \\ 1 \\ 0}=\colvec{0 \\ y \\ 0}
+  \frac{ \colvec{x \\ y \\ z}\dotprod\colvec[r]{0 \\ 1 \\ 0} }{
+         \colvec[r]{0 \\ 1 \\ 0}\dotprod\colvec[r]{0 \\ 1 \\ 0} }
+          \cdot\colvec[r]{0 \\ 1 \\ 0}=\colvec{0 \\ y \\ 0}
 \end{equation*}
 which matches our intuitive expectation.
 \end{example}
@@ -127,9 +129,9 @@ what speed will the car reach?
 For the wind we use a vector of length $15$ that points toward
 the northeast.
 \begin{equation*}
-  \vec{v}=\colvec{15\sqrt{1/2} \\ 15\sqrt{1/2}}
+  \vec{v}=\colvec[r]{15\sqrt{1/2} \\ 15\sqrt{1/2}}
 \end{equation*}
-The car can only be affected by the part of the wind blowing in the
+The car is only affected by the part of the wind blowing in the
 east-west direction\Dash the part of $\vec{v}$ in the direction
 of the $x$-axis is this (the picture has the same perspective as the
 railroad car picture above).
@@ -144,25 +146,24 @@ So the car will reach a velocity of
 
 Thus, another way to think
 of the picture that precedes the definition is that it shows
-$\vec{v}$ as decomposed into two parts, the part with the line (here, the part
-with the tracks, $\vec{p}$), 
+$\vec{v}$ as decomposed into two parts, the part $\vec{p}$ with the line, 
 and the part that is orthogonal to the line
-(shown here lying on the north-south axis).
-These two are ``not interacting'' or ``independent'', 
+(shown above on the north-south axis).
+These two are non-interacting 
 in the sense that the east-west car is not at all affected by the
 north-south part of the wind (see \nearbyexercise{exer:PerpAreInd}).
-So the orthogonal projection of \( \vec{v} \) 
-into the line spanned by \( \vec{s}\, \) can be thought of as 
+So we can think of the orthogonal projection of \( \vec{v} \) 
+into the line spanned by \( \vec{s}\, \)  as 
 the part of \( \vec{v}\, \) that lies in the direction of \( \vec{s} \).
 
-Finally, another useful way to think of the orthogonal projection 
-is to have the person stand not on the line, but on the vector that is to be
-projected to the line.
-This person has a rope over the line and pulls it tight, 
-naturally making the rope orthogonal to the line.
+Still another useful way to think of orthogonal projection 
+is to have the person stand not on the line but on the vector.
+This person holds a rope with a loop over the line $\ell$.
 \begin{center}  \small
   \includegraphics{ch3.33}
 \end{center}
+When they pull the rope tight, the loop slides on $\ell$ until 
+the rope orthogonal to that line.
 That is, we can think of the projection \( \vec{p}\, \) as being the vector 
 in the line that is closest to \( \vec{v} \)
 (see \nearbyexercise{exer:ProjMinimizesDist}). 
@@ -170,8 +171,8 @@ in the line that is closest to \( \vec{v} \)
 \begin{example}
 A submarine is tracking a ship moving along the line \( y=3x+2 \).
 Torpedo range is one-half mile.
-Can the sub stay where it is, at the origin on the chart below, 
-or must it move to reach a place where the ship will pass within range?
+If the sub stays where it is, at the origin on the chart below, 
+will the ship pass within range?
 \begin{center}  \small
   \includegraphics{ch3.34}
 \end{center} 
@@ -179,28 +180,30 @@ The formula for projection
 into a line does not immediately apply because the line doesn't pass through
 the origin, and so isn't the span of any $\vec{s}$.
 To adjust for this, we start by shifting the entire map down two units.
-Now the line is $y=3x$, which is a subspace, and we can project to get
-the point $\vec{p}$ of closest approach, the point on the 
-line through the origin closest to 
+Now the line is $y=3x$, a subspace. 
+We project to get
+the point $\vec{p}$ on the 
+line closest to 
 \begin{equation*}
-  \vec{v}=\colvec{0 \\ -2}
+  \vec{v}=\colvec[r]{0 \\ -2}
 \end{equation*}
 the sub's shifted position.
 \begin{equation*}
-  \vec{p}=\frac{\colvec{0 \\ -2}\dotprod\colvec{1 \\ 3}}{
-                \colvec{1 \\ 3}\dotprod\colvec{1 \\ 3}}
-          \cdot \colvec{1 \\ 3}=\colvec{-3/5 \\ -9/5}
+  \vec{p}=\frac{\colvec[r]{0 \\ -2}\dotprod\colvec[r]{1 \\ 3}}{
+                \colvec[r]{1 \\ 3}\dotprod\colvec[r]{1 \\ 3}}
+          \cdot \colvec[r]{1 \\ 3}=\colvec[r]{-3/5 \\ -9/5}
 \end{equation*}
-The distance between  $\vec{v}$ and $\vec{p}$ is approximately 
-\( 0.63 \)~miles and so the sub must move to get in range.
+The distance between  $\vec{v}$ and $\vec{p}$ is about
+\( 0.63 \)~miles. 
+The ship will not be in range.
 \end{example}
 
-This subsection has developed a natural projection map: orthogonal projection
+This subsection has developed a natural projection map, orthogonal projection
 into a line.
-As suggested by the examples, it is often called for in applications.
+As suggested by the examples, we use it often in applications.
 The next subsection shows how the definition of orthogonal
 projection into a line gives us a way to calculate especially convienent bases
-for vector spaces, again something that is common in applications.
+for vector spaces, again something that we often see in applications.
 The final subsection completely generalizes projection, orthogonal or not, 
 into any subspace at all.
 
@@ -209,109 +212,110 @@ into any subspace at all.
     Project the first vector orthogonally
     into the line spanned by the second vector.
     \begin{exparts*}
-      \partsitem \mbox{\( \colvec{2 \\ 1} \), \( \colvec{3 \\ -2} \)}
-      \partsitem \mbox{\( \colvec{2 \\ 1} \), \( 
-            \colvec{3 \\ 0} \)}
-      \partsitem \mbox{\( \colvec{1 \\ 1 \\ 4} \), \( 
-         \colvec{1 \\ 2 \\ -1} \)}
-      \partsitem \mbox{\( \colvec{1 \\ 1 \\ 4} \), \( 
-         \colvec{3 \\ 3 \\ 12} \)}
+      \partsitem \mbox{\( \colvec[r]{2 \\ 1} \), \( \colvec[r]{3 \\ -2} \)}
+      \partsitem \mbox{\( \colvec[r]{2 \\ 1} \), \( 
+            \colvec[r]{3 \\ 0} \)}
+      \partsitem \mbox{\( \colvec[r]{1 \\ 1 \\ 4} \), \( 
+         \colvec[r]{1 \\ 2 \\ -1} \)}
+      \partsitem \mbox{\( \colvec[r]{1 \\ 1 \\ 4} \), \( 
+         \colvec[r]{3 \\ 3 \\ 12} \)}
     \end{exparts*}
     \begin{answer}
        Each is a straightforward application of the formula from 
        \nearbydefinition{def:ProjIntoLine}.
        \begin{exparts*}
         \partsitem 
-          $\displaystyle \frac{\colvec{2 \\ 1}\dotprod\colvec{3 \\ -2}}{%
-                               \colvec{3 \\ -2}\dotprod\colvec{3 \\ -2}}
-             \cdot\colvec{3 \\ -2}
+          $\displaystyle \frac{\colvec[r]{2 \\ 1}\dotprod\colvec[r]{3 \\ -2}}{%
+                               \colvec[r]{3 \\ -2}\dotprod\colvec[r]{3 \\ -2}}
+             \cdot\colvec[r]{3 \\ -2}
            =\frac{4}{13}
-             \cdot\colvec{3 \\ -2}
-           =\colvec{12/13 \\ -8/13}$
+             \cdot\colvec[r]{3 \\ -2}
+           =\colvec[r]{12/13 \\ -8/13}$
         \partsitem 
-          $\displaystyle \frac{\colvec{2 \\ 1}\dotprod\colvec{3 \\ 0}}{%
-                               \colvec{3 \\ 0}\dotprod\colvec{3 \\ 0}}
-             \cdot\colvec{3 \\ 0}
+          $\displaystyle \frac{\colvec[r]{2 \\ 1}\dotprod\colvec[r]{3 \\ 0}}{%
+                               \colvec[r]{3 \\ 0}\dotprod\colvec[r]{3 \\ 0}}
+             \cdot\colvec[r]{3 \\ 0}
            =\frac{2}{3}
-             \cdot\colvec{3 \\ 0}
-           =\colvec{2 \\ 0}$
+             \cdot\colvec[r]{3 \\ 0}
+           =\colvec[r]{2 \\ 0}$
         \partsitem 
           $\displaystyle 
-             \frac{\colvec{1 \\ 1 \\ 4}\dotprod\colvec{1 \\ 2 \\ -1}}{%
-                   \colvec{1 \\ 2 \\ -1}\dotprod\colvec{1 \\ 2 \\ -1}}
-             \cdot\colvec{1 \\ 2 \\ -1}
+             \frac{\colvec[r]{1 \\ 1 \\ 4}\dotprod\colvec[r]{1 \\ 2 \\ -1}}{%
+                   \colvec[r]{1 \\ 2 \\ -1}\dotprod\colvec[r]{1 \\ 2 \\ -1}}
+             \cdot\colvec[r]{1 \\ 2 \\ -1}
            =\frac{-1}{6}
-             \cdot\colvec{1 \\ 2 \\ -1}
-           =\colvec{-1/6 \\ -1/3 \\ 1/6}$
+             \cdot\colvec[r]{1 \\ 2 \\ -1}
+           =\colvec[r]{-1/6 \\ -1/3 \\ 1/6}$
         \partsitem 
           $\displaystyle 
-             \frac{\colvec{1 \\ 1 \\ 4}\dotprod\colvec{3 \\ 3 \\ 12}}{%
-                   \colvec{3 \\ 3 \\ 12}\dotprod\colvec{3 \\ 3 \\ 12}}
-             \cdot\colvec{3 \\ 3 \\ 12}
+             \frac{\colvec[r]{1 \\ 1 \\ 4}\dotprod\colvec[r]{3 \\ 3 \\ 12}}{%
+                   \colvec[r]{3 \\ 3 \\ 12}\dotprod\colvec[r]{3 \\ 3 \\ 12}}
+             \cdot\colvec[r]{3 \\ 3 \\ 12}
            =\frac{1}{3}
-             \cdot\colvec{3 \\ 3 \\ 12}
-           =\colvec{1 \\ 1 \\ 4}$
+             \cdot\colvec[r]{3 \\ 3 \\ 12}
+           =\colvec[r]{1 \\ 1 \\ 4}$
       \end{exparts*}  
     \end{answer}
   \recommended \item 
     Project the vector orthogonally into the line.
     \begin{exparts*}
       \partsitem 
-       $\colvec{2 \\ -1 \\ 4},~\set{c\colvec{-3 \\ 1 \\ -3}\suchthat c\in\Re}$
-      \partsitem $\colvec{-1 \\ -1}$,~the line $y=3x$
+       $\colvec[r]{2 \\ -1 \\ 4},~\set{c\colvec[r]{-3 \\ 1 \\ -3}\suchthat c\in\Re}$
+      \partsitem $\colvec[r]{-1 \\ -1}$,~the line $y=3x$
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem 
           $\displaystyle
-             \frac{\colvec{2 \\ -1 \\ 4}\dotprod\colvec{-3 \\ 1 \\ -3}}{%
-                   \colvec{-3 \\ 1 \\ -3}\dotprod\colvec{-3 \\ 1 \\ -3}}
-             \cdot\colvec{-3 \\ 1 \\ -3}
-           =\frac{-19}{19}\cdot\colvec{-3 \\ 1 \\ -3}
-           =\colvec{3 \\ -1 \\ 3}$
+             \frac{\colvec[r]{2 \\ -1 \\ 4}\dotprod\colvec[r]{-3 \\ 1 \\ -3}}{%
+                   \colvec[r]{-3 \\ 1 \\ -3}\dotprod\colvec[r]{-3 \\ 1 \\ -3}}
+             \cdot\colvec[r]{-3 \\ 1 \\ -3}
+           =\frac{-19}{19}\cdot\colvec[r]{-3 \\ 1 \\ -3}
+           =\colvec[r]{3 \\ -1 \\ 3}$
          \partsitem Writing the line as 
-           $\set{c\cdot \colvec{1 \\ 3}\suchthat c\in\Re}$
+           $\set{c\cdot \colvec[r]{1 \\ 3}\suchthat c\in\Re}$
            gives this projection.
            \begin{equation*}
-             \frac{\colvec{-1 \\ -1}\dotprod\colvec{1 \\ 3}}{%
-                   \colvec{1 \\ 3}\dotprod\colvec{1 \\ 3}}
-              \cdot\colvec{1 \\ 3}
-             =\frac{-4}{10}\cdot\colvec{1 \\ 3}
-             =\colvec{-2/5 \\ -6/5}
+             \frac{\colvec[r]{-1 \\ -1}\dotprod\colvec[r]{1 \\ 3}}{%
+                   \colvec[r]{1 \\ 3}\dotprod\colvec[r]{1 \\ 3}}
+              \cdot\colvec[r]{1 \\ 3}
+             =\frac{-4}{10}\cdot\colvec[r]{1 \\ 3}
+             =\colvec[r]{-2/5 \\ -6/5}
            \end{equation*}
       \end{exparts}
     \end{answer}
   \item 
-    Although the development of \nearbydefinition{def:ProjIntoLine} 
-    is guided by the pictures, we are not restricted to spaces that 
+    Although pictures guided our 
+    development of \nearbydefinition{def:ProjIntoLine}, 
+    we are not restricted to spaces that 
     we can draw.
     In $\Re^4$ project this vector into this line.
     \begin{equation*}
-      \vec{v}=\colvec{1 \\ 2 \\ 1 \\ 3}
+      \vec{v}=\colvec[r]{1 \\ 2 \\ 1 \\ 3}
       \qquad
-      \ell=\set{c\cdot\colvec{-1 \\ 1 \\ -1 \\ 1}\suchthat c\in\Re}
+      \ell=\set{c\cdot\colvec[r]{-1 \\ 1 \\ -1 \\ 1}\suchthat c\in\Re}
     \end{equation*}
     \begin{answer}
       $\displaystyle 
-         \frac{\colvec{1 \\ 2 \\ 1 \\ 3}\dotprod\colvec{-1 \\ 1 \\ -1 \\ 1}}{%
-               \colvec{-1 \\ 1 \\ -1 \\ 1}\dotprod\colvec{-1 \\ 1 \\ -1 \\ 1}}
-         \cdot\colvec{-1 \\ 1 \\ -1 \\ 1}
+         \frac{\colvec[r]{1 \\ 2 \\ 1 \\ 3}\dotprod\colvec[r]{-1 \\ 1 \\ -1 \\ 1}}{%
+               \colvec[r]{-1 \\ 1 \\ -1 \\ 1}\dotprod\colvec[r]{-1 \\ 1 \\ -1 \\ 1}}
+         \cdot\colvec[r]{-1 \\ 1 \\ -1 \\ 1}
        =\frac{3}{4}
-         \cdot\colvec{-1 \\ 1 \\ -1 \\ 1}
-       =\colvec{-3/4 \\ 3/4 \\ -3/4 \\ 3/4}$ 
+         \cdot\colvec[r]{-1 \\ 1 \\ -1 \\ 1}
+       =\colvec[r]{-3/4 \\ 3/4 \\ -3/4 \\ 3/4}$ 
     \end{answer}
   \recommended \item 
     \nearbydefinition{def:ProjIntoLine} uses two vectors $\vec{s}$ and
     $\vec{v}$.
     Consider the transformation of $\Re^2$ resulting from fixing
     \begin{equation*}
-      \vec{s}=\colvec{3 \\ 1}
+      \vec{s}=\colvec[r]{3 \\ 1}
     \end{equation*}
     and projecting $\vec{v}$ into the line that is the span of $\vec{s}$.
     Apply it to these vectors.
     \begin{exparts*}
-      \partsitem $\colvec{1 \\ 2}$
-      \partsitem $\colvec{0 \\ 4}$ 
+      \partsitem $\colvec[r]{1 \\ 2}$
+      \partsitem $\colvec[r]{0 \\ 4}$ 
     \end{exparts*}
     Show that in general the projection tranformation is this.
     \begin{equation*}
@@ -323,39 +327,39 @@ into any subspace at all.
     \begin{answer}
       \begin{exparts*}
         \partsitem $\displaystyle
-          \frac{\colvec{1 \\ 2}\dotprod\colvec{3 \\ 1}}{%
-                 \colvec{3 \\ 1}\dotprod\colvec{3 \\ 1}}
-          \cdot \colvec{3 \\ 1}
-          =\frac{1}{2}\cdot\colvec{3 \\ 1}
-          =\colvec{3/2 \\ 1/2}$
+          \frac{\colvec[r]{1 \\ 2}\dotprod\colvec[r]{3 \\ 1}}{%
+                 \colvec[r]{3 \\ 1}\dotprod\colvec[r]{3 \\ 1}}
+          \cdot \colvec[r]{3 \\ 1}
+          =\frac{1}{2}\cdot\colvec[r]{3 \\ 1}
+          =\colvec[r]{3/2 \\ 1/2}$
         \partsitem $\displaystyle
-          \frac{\colvec{0 \\ 4}\dotprod\colvec{3 \\ 1}}{%
-                 \colvec{3 \\ 1}\dotprod\colvec{3 \\ 1}}
-          \cdot \colvec{3 \\ 1}
-          =\frac{2}{5}\cdot\colvec{3 \\ 1}
-          =\colvec{6/5 \\ 2/5}$
+          \frac{\colvec[r]{0 \\ 4}\dotprod\colvec[r]{3 \\ 1}}{%
+                 \colvec[r]{3 \\ 1}\dotprod\colvec[r]{3 \\ 1}}
+          \cdot \colvec[r]{3 \\ 1}
+          =\frac{2}{5}\cdot\colvec[r]{3 \\ 1}
+          =\colvec[r]{6/5 \\ 2/5}$
       \end{exparts*}
       \noindent In general the projection is this.
       \begin{equation*}
-          \frac{\colvec{x_1 \\ x_2}\dotprod\colvec{3 \\ 1}}{%
-                 \colvec{3 \\ 1}\dotprod\colvec{3 \\ 1}}
-          \cdot \colvec{3 \\ 1}
-          =\frac{3x_1+x_2}{10}\cdot\colvec{3 \\ 1}
+          \frac{\colvec{x_1 \\ x_2}\dotprod\colvec[r]{3 \\ 1}}{%
+                 \colvec[r]{3 \\ 1}\dotprod\colvec[r]{3 \\ 1}}
+          \cdot \colvec[r]{3 \\ 1}
+          =\frac{3x_1+x_2}{10}\cdot\colvec[r]{3 \\ 1}
           =\colvec{(9x_1+3x_2)/10 \\ (3x_1+x_2)/10}
       \end{equation*}
       The appropriate matrix is this.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           9/10  &3/10  \\
           3/10  &1/10
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}  
      \end{answer}
   \item \label{exer:PerpAreInd}
     \nearbyexample{exam:RailCar} suggests that projection breaks $\vec{v}$ into
     two parts, $\proj{\vec{v}\,}{\spanof{\vec{s}\,}}$ and 
     $\vec{v}-\proj{\vec{v}\,}{\spanof{\vec{s}\,}}$, that are 
-    ``not interacting''.
+    non-interacting.
     Recall that the two are orthogonal.
     Show that any two nonzero orthogonal vectors make up a linearly
     independent set.
@@ -405,8 +409,8 @@ into any subspace at all.
            =\vec{v}
          \end{equation*}
           (\textit{Remark}.
-          If we assume that $\vec{v}\,$ is nonzero then the above is
-          simplified on taking $\vec{s}\,$ to be $\vec{v}$.)
+          If we assume that $\vec{v}\,$ is nonzero then we can simplify 
+          the above by taking $\vec{s}\,$ to be $\vec{v}$.)
        \partsitem Write $c_{\vec{p}}\vec{s}\,$ for the projection
          $\proj{\vec{v}}{\spanof{\vec{s}\,}}$. 
          Note that, by the assumption that $\vec{v}$ is not in the line,
@@ -426,7 +430,7 @@ into any subspace at all.
          $(a_1+a_2)\cdot\vec{v}=a_2c_{\vec{p}}\cdot\vec{s}$.
          Because $\vec{v}\,$ isn't in the line, the scalars 
          $a_1+a_2$ and $a_2 c_{\vec{p}}$ must both be zero.
-         The $c_{\vec{p}}=0$ case is handled above, so 
+         We handled the $c_{\vec{p}}=0$ case above, so 
          the remaining case is that $a_2=0$, and 
          this gives that $a_1=0$ also.
          Hence the set is linearly independent.
@@ -524,8 +528,8 @@ into any subspace at all.
         \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}\cdot\vec{s}
       \end{equation*}
       the distance squared from the point to the line is this
-      (a vector dotted with itself $\vec{w}\dotprod\vec{w}$
-      is written $\vec{w}^2$).
+      (we write a vector dotted with itself $\vec{w}\dotprod\vec{w}$
+      as $\vec{w}^2$).
       \begin{align*}
         \norm{\vec{v}-
                 \frac{\vec{v}\dotprod\vec{s}}{\vec{s}\dotprod\vec{s}}
@@ -554,7 +558,7 @@ into any subspace at all.
       \end{align*}  
     \end{answer}
   \item \label{exer:ProjMinimizesDist}
-    Find the scalar \( c \) such that \( (cs_1,cs_2) \)
+    Find the scalar \( c \) such that the point \( (cs_1,cs_2) \)
     is a minimum distance from the point \( (v_1,v_2) \)
     by using calculus (i.e., consider the distance function, set the
     first derivative equal to zero, and solve). 
@@ -625,11 +629,11 @@ into any subspace at all.
     Consider the function mapping to plane to itself that takes 
     a vector to its projection into the line \( y=x \).
     These two each show that the map is linear, the first one in a way that
-    is bound to the coordinates (that is, it fixes a basis and then computes)
+    is coordinate-bound (that is, it fixes a basis and then computes)
     and the second in a way that is more conceptual.
     \begin{exparts} 
       \partsitem Produce a matrix that describes the function's action.
-      \partsitem Show also that this map can be obtained by first rotating 
+      \partsitem Show also that we can obtain this map can by first rotating 
          everything in the plane \( \pi/4 \)~radians  clockwise, 
         then projecting into the \( x \)-axis,
         and then rotating \( \pi/4 \)~radians counterclockwise.
@@ -638,24 +642,24 @@ into any subspace at all.
       \begin{exparts}
         \partsitem Fixing
           \begin{equation*}
-            \vec{s}=\colvec{1 \\ 1}
+            \vec{s}=\colvec[r]{1 \\ 1}
           \end{equation*}
           as the vector whose span is the line, the formula gives this
           action,
           \begin{equation*}
             \colvec{x \\ y}
              \mapsto
-            \frac{\colvec{x \\ y}\dotprod\colvec{1 \\ 1}}{%
-                  \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}\cdot\colvec{1 \\ 1}
-            =\frac{x+y}{2}\cdot\colvec{1 \\ 1}
+            \frac{\colvec{x \\ y}\dotprod\colvec[r]{1 \\ 1}}{%
+                  \colvec[r]{1 \\ 1}\dotprod\colvec[r]{1 \\ 1}}\cdot\colvec[r]{1 \\ 1}
+            =\frac{x+y}{2}\cdot\colvec[r]{1 \\ 1}
             =\colvec{(x+y)/2 \\ (x+y)/2}
           \end{equation*} 
           which is the effect of this matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1/2  &1/2  \\
               1/2  &1/2
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Rotating the entire plane $\pi/4$~radians clockwise
           brings the $y=x$~line to lie on the $x$-axis.
@@ -681,17 +685,17 @@ into any subspace at all.
       The sequence need not settle down.
       With
       \begin{equation*}
-        \vec{a}=\colvec{1 \\ 0}
+        \vec{a}=\colvec[r]{1 \\ 0}
         \qquad
-        \vec{b}=\colvec{1 \\ 1}
+        \vec{b}=\colvec[r]{1 \\ 1}
       \end{equation*}
       the projections are these.
       \begin{equation*}
-        \vec{v}_1=\colvec{1/2 \\ 1/2},
+        \vec{v}_1=\colvec[r]{1/2 \\ 1/2},
         \quad
-        \vec{v}_2=\colvec{1/2 \\ 0},
+        \vec{v}_2=\colvec[r]{1/2 \\ 0},
         \quad
-        \vec{v}_3=\colvec{1/4 \\ 1/4},
+        \vec{v}_3=\colvec[r]{1/4 \\ 1/4},
         \quad
         \ldots
       \end{equation*}
@@ -720,9 +724,9 @@ into any subspace at all.
 \subsectionoptional{Gram-Schmidt Orthogonalization}
 \index{Gram-Schmidt process|(}
 \noindent\textit{This subsection is optional.
-     It requires material from the prior, also optional, subsection.
-     The work done here will only be needed in the final two sections
-     of Chapter Five.}
+     We only need the work done here in the final two sections
+     of Chapter Five.
+     Also, this subsection requires material from the previous subsection.}
 
 The prior subsection suggests 
 that projecting into the line spanned by \( \vec{s} \)
@@ -733,7 +737,7 @@ decomposes a vector $\vec{v}$ into two parts
    $\displaystyle \vec{v}=\proj{\vec{v}}{\spanof{\vec{s}\,}}
              \,+\,\left(\vec{v}-\proj{\vec{v}}{\spanof{\vec{s}\,}}\right)$
 \end{center}
-that are orthogonal and so are ``not interacting''.
+that are orthogonal and so are not-interacting.
 We will now develop that suggestion.
 
 \begin{definition}
@@ -752,7 +756,7 @@ independent.
 \begin{proof}
 Consider a linear relationship
 \( c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k=\zero \).
-If $i\in [1..k]$ then taking the dot product of \( \vec{v}_i \)  
+If $i\in \set{1,..\,,k}$ then taking the dot product of \( \vec{v}_i \)  
 with both sides of the equation
 \begin{align*}
    \vec{v}_i\dotprod (c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k)
@@ -760,13 +764,14 @@ with both sides of the equation
    c_i\cdot(\vec{v}_i\dotprod\vec{v}_i)
    &=0
 \end{align*}
-shows, since \( \vec{v}_i \) is nonzero, that \( c_i \) is zero. 
+shows, since \( \vec{v}_i\neq\zero \), that \( c_i\neq 0 \). 
 \end{proof}
 
 \begin{corollary}
 \label{cor:OrthAndBigEnoughIsBasis}
-If the vectors in a size~\( k \) subset of a
-$k$~dimensional space are mutually orthogonal
+In a $k$~dimensional vector space,
+if the vectors in a size~\( k \) set
+are mutually orthogonal
 and nonzero then that set is a basis for the space.
 \end{corollary}
 
@@ -777,7 +782,7 @@ $k$~dimensional space is a basis.
 
 Of course, the converse of \nearbycorollary{cor:OrthAndBigEnoughIsBasis} 
 does not hold\Dash not every basis of every subspace
-of $\Re^n$ is made of mutually orthogonal vectors.
+of $\Re^n$ has mutually orthogonal vectors.
 However, we can get the partial converse
 that for every subspace of $\Re^n$ there is at least one basis
 consisting of mutually orthogonal vectors.
@@ -788,8 +793,8 @@ are not orthogonal.
 \begin{center}  \small
   $\displaystyle 
       B=\sequence{
-            \colvec{4 \\ 2},
-            \colvec{1 \\ 3} }$
+            \colvec[r]{4 \\ 2},
+            \colvec[r]{1 \\ 3} }$
   \qquad %\hspace*{3em}
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.36}\end{tabular}
 \end{center}
@@ -797,23 +802,23 @@ However, we can derive from $B$
 a new basis for the same space that does have mutually orthogonal members.
 For the first member of the new basis we simply use $\vec{\beta}_1$.
 \begin{equation*}
-  \vec{\kappa}_1=\colvec{4 \\ 2}
+  \vec{\kappa}_1=\colvec[r]{4 \\ 2}
 \end{equation*}
 For the second member of the new basis,  
-we take away from $\vec{\beta}_2$ its part in the direction of
-$\vec{\kappa}_1$, 
+we subtract from $\vec{\beta}_2$ the part in the direction of
+$\vec{\kappa}_1$.
+This leaves the part
+of $\vec{\beta}_2$ that is orthogonal to $\vec{\kappa}_1$.
+% (it is orthogonal by the definition of the projection into the span of 
+% $\vec{\kappa}_1$).
 \begin{center}  \small
-   $\displaystyle \vec{\kappa}_2=\colvec{1 \\ 3}
-    -\proj{\colvec{1 \\ 3}}{\scriptstyle\spanof{\vec{\kappa}_1}}
-    =\colvec{1 \\ 3}-\colvec{2 \\ 1}=\colvec{-1 \\ 2}$
+   $\displaystyle \vec{\kappa}_2=\colvec[r]{1 \\ 3}
+    -\proj{\colvec[r]{1 \\ 3}}{\scriptstyle\spanof{\vec{\kappa}_1}}
+    =\colvec[r]{1 \\ 3}-\colvec[r]{2 \\ 1}=\colvec[r]{-1 \\ 2}$
    \qquad
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.37}\end{tabular}
 \end{center} 
-which leaves the part, $\vec{\kappa}_2$ pictured above,
-of $\vec{\beta}_2$ that is orthogonal to $\vec{\kappa}_1$
-(it is orthogonal by the definition of the projection into the span of 
-$\vec{\kappa}_1$).
-Note that, by the corollary, $\set{\vec{\kappa}_1,\vec{\kappa}_2}$ 
+By the corollary $\sequence{\vec{\kappa}_1,\vec{\kappa}_2}$ 
 is a basis for $\Re^2$.
 \end{example}
 
@@ -823,64 +828,58 @@ An \definend{orthogonal basis\/}%
 for a vector space is a basis of mutually orthogonal vectors.
 \end{definition}
 
-The next result gives a way to produce an orthogonal basis 
-from any given starting basis.
-We first see an example.
+% The next result gives a way to produce an orthogonal basis 
+% from any given starting basis.
+% We first see an example.
 
 \begin{example} \label{ex:OrthoBasisForReThree}
-To turn this basis for \( \Re^3 \)
+To turn this basis for $\Re^3$
 \begin{equation*}
-  \sequence{
-           \colvec{1 \\ 1 \\ 1},
-           \colvec{0 \\ 2 \\ 0},
-           \colvec{1 \\ 0 \\ 3}
+  B=\sequence{
+           \colvec[r]{1 \\ 1 \\ 1},
+           \colvec[r]{0 \\ 2 \\ 0},
+           \colvec[r]{1 \\ 0 \\ 3}
             }
 \end{equation*}
-into an orthogonal basis, we take the first vector as it is given.
+into an orthogonal basis we take the first vector as it is.
 \begin{equation*}
-   \vec{\kappa}_1=\colvec{1 \\ 1 \\ 1}
+   \vec{\kappa}_1=\colvec[r]{1 \\ 1 \\ 1}
 \end{equation*}
-We get \( \vec{\kappa}_2 \) by starting with the given second vector 
+We get \( \vec{\kappa}_2 \) by starting with
 $\vec{\beta}_2$ and
-subtracting away the part of it in the direction of \( \vec{\kappa}_1 \).
+subtracting the part in the direction of \( \vec{\kappa}_1 \).
 \begin{equation*}
-   \vec{\kappa}_2=\colvec{0 \\ 2 \\ 0}
-                   -\proj{\colvec{0 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
-                 =\colvec{0 \\ 2 \\ 0}-\colvec{2/3 \\ 2/3 \\ 2/3}
-                 =\colvec{-2/3 \\ 4/3 \\ -2/3}
+   \vec{\kappa}_2=\colvec[r]{0 \\ 2 \\ 0}
+                   -\proj{\colvec[r]{0 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
+                 =\colvec[r]{0 \\ 2 \\ 0}-\colvec[r]{2/3 \\ 2/3 \\ 2/3}
+                 =\colvec[r]{-2/3 \\ 4/3 \\ -2/3}
 \end{equation*}
-Finally, we get $\vec{\kappa}_3$  
-by taking the third given vector and subtracting the part of it
-in the direction of \( \vec{\kappa}_1 \), and also the part 
-of it in the direction of \( \vec{\kappa}_2 \).
+We get $\vec{\kappa}_3$  
+by taking $\vec{\beta}_3$ and subtracting the part 
+in the direction of \( \vec{\kappa}_1 \) and also the part 
+in the direction of \( \vec{\kappa}_2 \).
 \begin{equation*}
-   \vec{\kappa}_3=\colvec{1 \\ 0 \\ 3}
-                   -\proj{\colvec{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_1}}
-                   -\proj{\colvec{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_2}}
-                 =\colvec{-1 \\ 0 \\ 1}
+   \vec{\kappa}_3=\colvec[r]{1 \\ 0 \\ 3}
+                   -\proj{\colvec[r]{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_1}}
+                   -\proj{\colvec[r]{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_2}}
+                 =\colvec[r]{-1 \\ 0 \\ 1}
 \end{equation*}
-Again the corollary gives that 
+Again, the corollary gives the result is a basis for $\Re^3$.
 \begin{equation*}
   \sequence{
-           \colvec{1 \\ 1 \\ 1},
-           \colvec{-2/3 \\ 4/3 \\ -2/3},
-           \colvec{-1 \\ 0 \\ 1}
+           \colvec[r]{1 \\ 1 \\ 1},
+           \colvec[r]{-2/3 \\ 4/3 \\ -2/3},
+           \colvec[r]{-1 \\ 0 \\ 1}
            }
 \end{equation*}
-is a basis for the space.
 \end{example}
 
-The next result verifies that
-the process used in those examples works with any basis for any 
-subspace of an $\Re^n$ 
-(we are restricted to $\Re^n$ only because we have not  given a 
-definition of orthogonality for other vector spaces).
 
 \begin{theorem}[Gram-Schmidt orthogonalization]
 \index{orthogonalization}\index{basis!orthogonalization}
 \label{th:GramSchmidt}
 If \( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \)
-is a basis for a subspace of \( \Re^n \) then, where
+is a basis for a subspace of \( \Re^n \) then the vectors
 \begin{align*}
   \vec{\kappa}_1
   &=\vec{\beta}_1    \\
@@ -890,39 +889,45 @@ is a basis for a subspace of \( \Re^n \) then, where
   &=\vec{\beta}_3
   -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}
   -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}}    \\
-  &\alignedvdots           \\
+  &\vdotswithin{=}           \\
   \vec{\kappa}_k
   &=\vec{\beta}_k
   -\proj{\vec{\beta}_k}{\spanof{\vec{\kappa}_1}}-\cdots
   -\proj{\vec{\beta}_k}{\spanof{\vec{\kappa}_{k-1}}}
 \end{align*}
-the \( \vec{\kappa}\, \)'s form an orthogonal basis for the
+form an orthogonal basis for the
 same subspace.
 \end{theorem}
 
+\begin{remark}
+This is restricted to $\Re^n$ only because we have not given a 
+definition of orthogonality for any other spaces.
+\end{remark}
+
 \begin{proof}
 We will use induction to check that each \( \vec{\kappa}_i \) is nonzero,
-is in the span of $\sequence{\vec{\beta}_1,\ldots\vec{\beta}_i}$
-and is orthogonal to all preceding vectors:
+is in the span of $\sequence{\vec{\beta}_1,\ldots\,\vec{\beta}_i}$,
+and is orthogonal to all preceding vectors
 \( \vec{\kappa}_1\dotprod\vec{\kappa}_i= \cdots
    =\vec{\kappa}_{i-1}\dotprod\vec{\kappa}_{i}=0 \).
-With those, and with
-\nearbycorollary{cor:OrthAndBigEnoughIsBasis}, we will have that
-\( \sequence{\vec{\kappa}_1,\ldots\vec{\kappa}_k} \) 
-is a basis for the same space as
+Then with
+\nearbycorollary{cor:OrthAndBigEnoughIsBasis} we will have that
+\( \sequence{\vec{\kappa}_1,\ldots\,\vec{\kappa}_k} \) 
+is a basis for the same space as is
 \( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \).
 
-We shall cover the cases up to \( i=3 \), which give the
+We shall only cover the cases up to \( i=3 \), to give the
 sense of the argument.
-Completing the details is \nearbyexercise{exer:GramSchmidt}.
+The remaining details are \nearbyexercise{exer:GramSchmidt}.
 
-The \( i=1 \) case is trivial\Dash setting \( \vec{\kappa}_1 \) equal to 
+The \( i=1 \) case is trivial; setting \( \vec{\kappa}_1 \) equal to 
 \( \vec{\beta}_1 \) 
 makes it a nonzero vector since $\vec{\beta}_1$ is a member of a basis, 
-it is obviously in the desired span,
-and the `orthogonal to all preceding vectors' condition is vacuously met.
+it is obviously in the span of $\vec{\beta}_1$,
+and the `orthogonal to all preceding vectors' condition
+is satisfied vacuously.
 
-For the \( i=2 \) case, expand the definition of $\vec{\kappa}_2$.
+In the \( i=2 \) case the expansion
 \begin{equation*}
   \vec{\kappa}_2=\vec{\beta}_2
       -\proj{\vec{\beta}_2}{\spanof{\vec{\kappa}_1}}=
@@ -936,12 +941,12 @@ For the \( i=2 \) case, expand the definition of $\vec{\kappa}_2$.
          \vec{\kappa}_1\dotprod\vec{\kappa}_1}
    \cdot\vec{\beta}_1
 \end{equation*}
-This expansion shows that $\vec{\kappa}_2$ is nonzero or else this
+shows that $\vec{\kappa}_2\neq \zero$ or else this
 would be a non-trivial linear dependence among the \( \vec{\beta} \)'s
-(it is nontrivial because the coefficient of $\vec{\beta}_2$ is $1$)
-and also shows that 
-$\vec{\kappa}_2$ is in the desired span.
-Finally, $\vec{\kappa}_2$ is orthogonal to the only preceding vector
+(it is nontrivial because the coefficient of $\vec{\beta}_2$ is $1$).
+It also shows that 
+$\vec{\kappa}_2$ is in the span of the first two $\vec{\beta}$'s.
+And, $\vec{\kappa}_2$ is orthogonal to the only preceding vector
 \begin{equation*}
    \vec{\kappa}_1\dotprod\vec{\kappa}_2=
    \vec{\kappa}_1\dotprod(\vec{\beta}_2
@@ -950,7 +955,7 @@ Finally, $\vec{\kappa}_2$ is orthogonal to the only preceding vector
 because this projection is orthogonal.
 
 The \( i=3 \) case is the same as the $i=2$ case except for one detail.
-As in the $i=2$ case, expanding the definition 
+As in the $i=2$ case, expand the definition. 
 \begin{align*}
   \vec{\kappa}_3
   &=\vec{\beta}_3
@@ -971,9 +976,23 @@ As in the $i=2$ case, expanding the definition
          \vec{\kappa}_1\dotprod\vec{\kappa}_1}
    \cdot\vec{\beta}_1\bigr)
 \end{align*}
-shows that $\vec{\kappa}_3$ is nonzero and is in the span.
-A calculation shows that 
-$\vec{\kappa}_3$ is orthogonal to the preceding vector $\vec{\kappa}_1$.
+The first line
+shows that $\vec{\kappa}_3\neq\zero$
+since $\vec{\beta}_3$ isn't in the span of $\vec{\beta}_1$ and 
+$\vec{\beta}_2$, and therefore by the inductive hypothesis it isn't in the
+span of $\vec{\kappa}_1$ and $\vec{\kappa}_2$.
+The second line shows that $\vec{\kappa}_3$ is in the span of the first three
+$\vec{\beta}$'s.
+Finally, 
+the calculation below shows that 
+$\vec{\kappa}_3$ is orthogonal to $\vec{\kappa}_1$.
+(The difference between this and the calculation in the $i=2$ case is that 
+the second line here has two kinds of terms.
+As happened for $i=2$, 
+the first term is $0$ because this projection is orthogonal.
+But here the second term is $0$ because \( \vec{\kappa}_1 \) is orthogonal
+to \( \vec{\kappa}_2 \) and so is orthogonal to any vector
+in the line spanned by \( \vec{\kappa}_2 \).)
 \begin{align*}
    \vec{\kappa}_1\dotprod\vec{\kappa}_3
    &=\vec{\kappa}_1\dotprod\bigl(\vec{\beta}_3
@@ -984,32 +1003,25 @@ $\vec{\kappa}_3$ is orthogonal to the preceding vector $\vec{\kappa}_1$.
     -\vec{\kappa}_1\dotprod\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}} \\
    &=0
 \end{align*}
-(Here's the difference from the $i=2$ case\Dash the second line has 
-two kinds of terms.
-The first term is zero because this projection is orthogonal, as in the
-$i=2$ case.
-The second term is zero because \( \vec{\kappa}_1 \) is orthogonal
-to \( \vec{\kappa}_2 \) and so is orthogonal to any vector
-in the line spanned by \( \vec{\kappa}_2 \).)
-The check that $\vec{\kappa}_3$ is also 
-orthogonal to the other preceding vector $\vec{\kappa}_2$ is similar.
+A similar check shows that $\vec{\kappa}_3$ is also 
+orthogonal to $\vec{\kappa}_2$.
 \end{proof}
 
 Beyond having the vectors in the basis be orthogonal, we can do more; 
-we can arrange for each vector to have length one by dividing
-each by its own length 
-(we can \definend{normalize}\index{normalize} the lengths).
+we can \definend{normalize}\index{normalize} each vector by dividing
+by its length, to end with an 
+\definend{orthonormal basis}.\index{basis!orthonormal}%
+\index{orthonormal basis}. 
 
 \begin{example}
-Normalizing the length of each vector in the orthogonal basis of
-\nearbyexample{ex:OrthoBasisForReThree}
-produces this \definend{orthonormal basis}.\index{basis!orthonormal}%
-\index{orthonormal basis}
+From the orthogonal basis of
+\nearbyexample{ex:OrthoBasisForReThree}, normalizing
+produces this orthonormal basis.
 \begin{equation*}
   \sequence{
-           \colvec{1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}},
-           \colvec{-1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}},
-           \colvec{-1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}}
+           \colvec[r]{1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}},
+           \colvec[r]{-1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}},
+           \colvec[r]{-1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}}
            }
 \end{equation*}
 \end{example}
@@ -1017,7 +1029,7 @@ produces this \definend{orthonormal basis}.\index{basis!orthonormal}%
 \noindent Besides its intuitive appeal, and its analogy with the 
 standard basis $\stdbasis_n$ for $\Re^n$, an orthonormal basis also simplifies
 some computations.
-See \nearbyexercise{exer:OrthoRepEasy}, for example.
+An example is in \nearbyexercise{exer:OrthoRepEasy}.
 
 
 
@@ -1028,16 +1040,16 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
     for $\Re^2$.
     \begin{exparts*}
       \partsitem \( \sequence{
-                         \colvec{1 \\ 1},
-                         \colvec{2 \\ 1}
+                         \colvec[r]{1 \\ 1},
+                         \colvec[r]{2 \\ 1}
                          }  \)
       \partsitem \( \sequence{
-                         \colvec{0 \\ 1},
-                         \colvec{-1 \\ 3}
+                         \colvec[r]{0 \\ 1},
+                         \colvec[r]{-1 \\ 3}
                          }  \)
       \partsitem \( \sequence{
-                         \colvec{0 \\ 1},
-                         \colvec{-1 \\ 0}
+                         \colvec[r]{0 \\ 1},
+                         \colvec[r]{-1 \\ 0}
                          }  \)
     \end{exparts*}
     Then turn those orthogonal bases into orthonormal bases.
@@ -1045,75 +1057,75 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
       \begin{exparts}
        \partsitem 
         \begin{align*}
-          \vec{\kappa}_1 &= \colvec{1 \\ 1}           \\
+          \vec{\kappa}_1 &= \colvec[r]{1 \\ 1}           \\
           \vec{\kappa}_2
             &=
-            \colvec{2 \\ 1}
-            -\proj{\colvec{2 \\ 1}}{\spanof{\vec{\kappa}_1}}  
+            \colvec[r]{2 \\ 1}
+            -\proj{\colvec[r]{2 \\ 1}}{\spanof{\vec{\kappa}_1}}  
             =
-            \colvec{2 \\ 1}
-            -\frac{\colvec{2 \\ 1}\dotprod\colvec{1 \\ 1}}{%
-                    \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}
-            \cdot\colvec{1 \\ 1}                                
+            \colvec[r]{2 \\ 1}
+            -\frac{\colvec[r]{2 \\ 1}\dotprod\colvec[r]{1 \\ 1}}{%
+                    \colvec[r]{1 \\ 1}\dotprod\colvec[r]{1 \\ 1}}
+            \cdot\colvec[r]{1 \\ 1}                                
             =
-            \colvec{2 \\ 1}
+            \colvec[r]{2 \\ 1}
             -\frac{3}{2}
-            \cdot\colvec{1 \\ 1}                                
-            =\colvec{1/2 \\ -1/2}
+            \cdot\colvec[r]{1 \\ 1}                                
+            =\colvec[r]{1/2 \\ -1/2}
         \end{align*}
        \partsitem 
         \begin{align*}
-          \vec{\kappa}_1 &= \colvec{0 \\ 1}           \\
+          \vec{\kappa}_1 &= \colvec[r]{0 \\ 1}           \\
           \vec{\kappa}_2
             &=
-            \colvec{-1 \\ 3}
-            -\proj{\colvec{-1 \\ 3}}{\spanof{\vec{\kappa}_1}}  
+            \colvec[r]{-1 \\ 3}
+            -\proj{\colvec[r]{-1 \\ 3}}{\spanof{\vec{\kappa}_1}}  
             =
-            \colvec{-1 \\ 3}
-            -\frac{\colvec{-1 \\ 3}\dotprod\colvec{0 \\ 1}}{%
-                    \colvec{0 \\ 1}\dotprod\colvec{0 \\ 1}}
-            \cdot\colvec{0 \\ 1}                                
+            \colvec[r]{-1 \\ 3}
+            -\frac{\colvec[r]{-1 \\ 3}\dotprod\colvec[r]{0 \\ 1}}{%
+                    \colvec[r]{0 \\ 1}\dotprod\colvec[r]{0 \\ 1}}
+            \cdot\colvec[r]{0 \\ 1}                                
             =
-            \colvec{-1 \\ 3}
+            \colvec[r]{-1 \\ 3}
             -\frac{3}{1}
-            \cdot\colvec{0 \\ 1}                              
-            =\colvec{-1 \\ 0}
+            \cdot\colvec[r]{0 \\ 1}                              
+            =\colvec[r]{-1 \\ 0}
         \end{align*}
        \partsitem 
         \begin{align*}
-          \vec{\kappa}_1 &= \colvec{0 \\ 1}           \\
+          \vec{\kappa}_1 &= \colvec[r]{0 \\ 1}           \\
           \vec{\kappa}_2
             &=
-            \colvec{-1 \\ 0}
-            -\proj{\colvec{-1 \\ 0}}{\spanof{\vec{\kappa}_1}}  
+            \colvec[r]{-1 \\ 0}
+            -\proj{\colvec[r]{-1 \\ 0}}{\spanof{\vec{\kappa}_1}}  
             =
-            \colvec{-1 \\ 0}
-            -\frac{\colvec{-1 \\ 0}\dotprod\colvec{0 \\ 1}}{%
-                    \colvec{0 \\ 1}\dotprod\colvec{0 \\ 1}}
-            \cdot\colvec{0 \\ 1}                                
+            \colvec[r]{-1 \\ 0}
+            -\frac{\colvec[r]{-1 \\ 0}\dotprod\colvec[r]{0 \\ 1}}{%
+                    \colvec[r]{0 \\ 1}\dotprod\colvec[r]{0 \\ 1}}
+            \cdot\colvec[r]{0 \\ 1}                                
             =
-            \colvec{-1 \\ 0}
+            \colvec[r]{-1 \\ 0}
             -\frac{0}{1}
-            \cdot\colvec{0 \\ 1}                                
-            =\colvec{-1 \\ 0}
+            \cdot\colvec[r]{0 \\ 1}                                
+            =\colvec[r]{-1 \\ 0}
         \end{align*}
       \end{exparts}
       The corresponding orthonormal bases for the three parts of this
       question are these.
       \begin{equation*}
         \sequence{
-              \colvec{1/\sqrt{2} \\ 1/\sqrt{2}},
-              \colvec{\sqrt{2}/2 \\ -\sqrt{2}/2}
+              \colvec[r]{1/\sqrt{2} \\ 1/\sqrt{2}},
+              \colvec[r]{\sqrt{2}/2 \\ -\sqrt{2}/2}
               }
         \qquad
         \sequence{
-              \colvec{0 \\ 1},
-              \colvec{-1 \\ 0}
+              \colvec[r]{0 \\ 1},
+              \colvec[r]{-1 \\ 0}
               }
         \qquad
         \sequence{
-              \colvec{0 \\ 1},
-              \colvec{-1 \\ 0}
+              \colvec[r]{0 \\ 1},
+              \colvec[r]{-1 \\ 0}
               }
       \end{equation*}
     \end{answer}
@@ -1122,14 +1134,14 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
     for $\Re^3$.
     \begin{exparts*}
       \partsitem \( \sequence{
-                         \colvec{2 \\ 2 \\ 2},
-                         \colvec{1 \\ 0 \\ -1},
-                         \colvec{0 \\ 3 \\ 1}
+                         \colvec[r]{2 \\ 2 \\ 2},
+                         \colvec[r]{1 \\ 0 \\ -1},
+                         \colvec[r]{0 \\ 3 \\ 1}
                          }  \)
       \partsitem \( \sequence{
-                         \colvec{1 \\ -1 \\ 0},
-                         \colvec{0 \\ 1 \\ 0},
-                         \colvec{2 \\ 3 \\ 1}
+                         \colvec[r]{1 \\ -1 \\ 0},
+                         \colvec[r]{0 \\ 1 \\ 0},
+                         \colvec[r]{2 \\ 3 \\ 1}
                          }  \)
     \end{exparts*}
     Then turn those orthogonal bases into orthonormal bases.
@@ -1137,94 +1149,94 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
       \begin{exparts}
        \partsitem 
         \begin{align*}
-          \vec{\kappa}_1 &= \colvec{2 \\ 2 \\ 2}           \\
+          \vec{\kappa}_1 &= \colvec[r]{2 \\ 2 \\ 2}           \\
           \vec{\kappa}_2
             &=
-            \colvec{1 \\ 0 \\ -1}
-            -\proj{\colvec{1 \\ 0 \\ -1}}{\spanof{\vec{\kappa}_1}}  
+            \colvec[r]{1 \\ 0 \\ -1}
+            -\proj{\colvec[r]{1 \\ 0 \\ -1}}{\spanof{\vec{\kappa}_1}}  
             =
-            \colvec{1 \\ 0 \\ -1}
-            -\frac{\colvec{1 \\ 0 \\ -1}\dotprod\colvec{2 \\ 2 \\ 2}}{%
-                    \colvec{2 \\ 2 \\ 2}\dotprod\colvec{2 \\ 2 \\ 2}}
-            \cdot\colvec{2 \\ 2 \\ 2}                                
+            \colvec[r]{1 \\ 0 \\ -1}
+            -\frac{\colvec[r]{1 \\ 0 \\ -1}\dotprod\colvec[r]{2 \\ 2 \\ 2}}{%
+                    \colvec[r]{2 \\ 2 \\ 2}\dotprod\colvec[r]{2 \\ 2 \\ 2}}
+            \cdot\colvec[r]{2 \\ 2 \\ 2}                                
             =
-            \colvec{1 \\ 0 \\ -1}
+            \colvec[r]{1 \\ 0 \\ -1}
             -\frac{0}{12}
-            \cdot\colvec{2 \\ 2 \\ 2}                                
-            =\colvec{1 \\ 0 \\ -1}                              \\
+            \cdot\colvec[r]{2 \\ 2 \\ 2}                                
+            =\colvec[r]{1 \\ 0 \\ -1}                              \\
           \vec{\kappa}_3
             &=
-            \colvec{0 \\ 3 \\ 1}
-            -\proj{\colvec{0 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_1}}  
-            -\proj{\colvec{0 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_2}}  
+            \colvec[r]{0 \\ 3 \\ 1}
+            -\proj{\colvec[r]{0 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_1}}  
+            -\proj{\colvec[r]{0 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_2}}  
             =
-            \colvec{0 \\ 3 \\ 1}
-            -\frac{\colvec{0 \\ 3 \\ 1}\dotprod\colvec{2 \\ 2 \\ 2}}{%
-                    \colvec{2 \\ 2 \\ 2}\dotprod\colvec{2 \\ 2 \\ 2}}
-            \cdot\colvec{2 \\ 2 \\ 2}                                
-            -\frac{\colvec{0 \\ 3 \\ 1}\dotprod\colvec{1 \\ 0 \\ -1}}{%
-                    \colvec{1 \\ 0 \\ -1}\dotprod\colvec{1 \\ 0 \\ -1}}
-            \cdot\colvec{1 \\ 0 \\ -1}                                   \\
+            \colvec[r]{0 \\ 3 \\ 1}
+            -\frac{\colvec[r]{0 \\ 3 \\ 1}\dotprod\colvec[r]{2 \\ 2 \\ 2}}{%
+                    \colvec[r]{2 \\ 2 \\ 2}\dotprod\colvec[r]{2 \\ 2 \\ 2}}
+            \cdot\colvec[r]{2 \\ 2 \\ 2}                                
+            -\frac{\colvec[r]{0 \\ 3 \\ 1}\dotprod\colvec[r]{1 \\ 0 \\ -1}}{%
+                    \colvec[r]{1 \\ 0 \\ -1}\dotprod\colvec[r]{1 \\ 0 \\ -1}}
+            \cdot\colvec[r]{1 \\ 0 \\ -1}                                   \\
             &\hbox{}\quad=
-            \colvec{0 \\ 3 \\ 1}
+            \colvec[r]{0 \\ 3 \\ 1}
             -\frac{8}{12}
-            \cdot\colvec{2 \\ 2 \\ 2}                                
+            \cdot\colvec[r]{2 \\ 2 \\ 2}                                
             -\frac{-1}{2}
-            \cdot\colvec{1 \\ 0 \\ -1}                              
-            =\colvec{-5/6 \\ 5/3 \\ -5/6}
+            \cdot\colvec[r]{1 \\ 0 \\ -1}                              
+            =\colvec[r]{-5/6 \\ 5/3 \\ -5/6}
         \end{align*}
        \partsitem 
         \begin{align*}
-          \vec{\kappa}_1 &= \colvec{1 \\ -1 \\ 0}           \\
+          \vec{\kappa}_1 &= \colvec[r]{1 \\ -1 \\ 0}           \\
           \vec{\kappa}_2
             &=
-            \colvec{0 \\ 1 \\ 0}
-            -\proj{\colvec{0 \\ 1 \\ 0}}{\spanof{\vec{\kappa}_1}}  
+            \colvec[r]{0 \\ 1 \\ 0}
+            -\proj{\colvec[r]{0 \\ 1 \\ 0}}{\spanof{\vec{\kappa}_1}}  
             =
-            \colvec{0 \\ 1 \\ 0}
-            -\frac{\colvec{0 \\ 1 \\ 0}\dotprod\colvec{1 \\ -1 \\ 0}}{%
-                    \colvec{1 \\ -1 \\ 0}\dotprod\colvec{1 \\ -1 \\ 0}}
-            \cdot\colvec{1 \\ -1 \\ 0}                                
+            \colvec[r]{0 \\ 1 \\ 0}
+            -\frac{\colvec[r]{0 \\ 1 \\ 0}\dotprod\colvec[r]{1 \\ -1 \\ 0}}{%
+                    \colvec[r]{1 \\ -1 \\ 0}\dotprod\colvec[r]{1 \\ -1 \\ 0}}
+            \cdot\colvec[r]{1 \\ -1 \\ 0}                                
             =
-            \colvec{0 \\ 1 \\ 0}
+            \colvec[r]{0 \\ 1 \\ 0}
             -\frac{-1}{2}
-            \cdot\colvec{1 \\ -1 \\ 0}                                
-            =\colvec{1/2 \\ 1/2 \\ 0}                                  \\
+            \cdot\colvec[r]{1 \\ -1 \\ 0}                                
+            =\colvec[r]{1/2 \\ 1/2 \\ 0}                                  \\
           \vec{\kappa}_3
             &=
-            \colvec{2 \\ 3 \\ 1}
-            -\proj{\colvec{2 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_1}}  
-            -\proj{\colvec{2 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_2}}       \\ 
+            \colvec[r]{2 \\ 3 \\ 1}
+            -\proj{\colvec[r]{2 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_1}}  
+            -\proj{\colvec[r]{2 \\ 3 \\ 1}}{\spanof{\vec{\kappa}_2}}       \\ 
             &=
-            \colvec{2 \\ 3 \\ 1}
-            -\frac{\colvec{2 \\ 3 \\ 1}\dotprod\colvec{1 \\ -1 \\ 0}}{%
-                    \colvec{1 \\ -1 \\ 0}\dotprod\colvec{1 \\ -1 \\ 0}}
-            \cdot\colvec{1 \\ -1 \\ 0}                                
-            -\frac{\colvec{2 \\ 3 \\ 1}\dotprod\colvec{1/2 \\ 1/2 \\ 0}}{%
-                    \colvec{1/2 \\ 1/2 \\ 0}\dotprod\colvec{1/2 \\ 1/2 \\ 0}}
-            \cdot\colvec{1/2 \\ 1/2 \\ 0}                   \\
+            \colvec[r]{2 \\ 3 \\ 1}
+            -\frac{\colvec[r]{2 \\ 3 \\ 1}\dotprod\colvec[r]{1 \\ -1 \\ 0}}{%
+                    \colvec[r]{1 \\ -1 \\ 0}\dotprod\colvec[r]{1 \\ -1 \\ 0}}
+            \cdot\colvec[r]{1 \\ -1 \\ 0}                                
+            -\frac{\colvec[r]{2 \\ 3 \\ 1}\dotprod\colvec[r]{1/2 \\ 1/2 \\ 0}}{%
+                    \colvec[r]{1/2 \\ 1/2 \\ 0}\dotprod\colvec[r]{1/2 \\ 1/2 \\ 0}}
+            \cdot\colvec[r]{1/2 \\ 1/2 \\ 0}                   \\
             &\hbox{}\quad=
-            \colvec{2 \\ 3 \\ 1}
+            \colvec[r]{2 \\ 3 \\ 1}
             -\frac{-1}{2}
-            \cdot\colvec{1 \\ -1 \\ 0}                                
+            \cdot\colvec[r]{1 \\ -1 \\ 0}                                
             -\frac{5/2}{1/2}
-            \cdot\colvec{1/2 \\ 1/2 \\ 0} 
-            =\colvec{0 \\ 0 \\ 1}
+            \cdot\colvec[r]{1/2 \\ 1/2 \\ 0} 
+            =\colvec[r]{0 \\ 0 \\ 1}
         \end{align*}
       \end{exparts}
       The corresponding orthonormal bases for the two parts of this
       question are these.
       \begin{equation*}
         \sequence{
-              \colvec{1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}},
-              \colvec{1/\sqrt{2} \\ 0 \\ -1/\sqrt{2}},
-              \colvec{-1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}}
+              \colvec[r]{1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}},
+              \colvec[r]{1/\sqrt{2} \\ 0 \\ -1/\sqrt{2}},
+              \colvec[r]{-1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}}
               }
         \qquad
         \sequence{
-              \colvec{1/\sqrt{2} \\ -1/\sqrt{2} \\ 0},
-              \colvec{1/\sqrt{2} \\ 1/\sqrt{2} \\ 0}
-              \colvec{0 \\ 0 \\ 1}
+              \colvec[r]{1/\sqrt{2} \\ -1/\sqrt{2} \\ 0},
+              \colvec[r]{1/\sqrt{2} \\ 1/\sqrt{2} \\ 0}
+              \colvec[r]{0 \\ 0 \\ 1}
               }
       \end{equation*}
     \end{answer}
@@ -1232,39 +1244,39 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
        Find an orthonormal basis for this subspace of $\Re^3$:~the
        plane $x-y+z=0$.
        \begin{answer}
-         The given space can be parametrized in this way.
+         We can paramatrize the given space can in this way.
          \begin{equation*}
            \set{\colvec{x \\ y \\ z} \suchthat x=y-z}
-           =\set{\colvec{1 \\ 1 \\ 0}\cdot y+\colvec{-1 \\ 0 \\ 1}\cdot z 
+           =\set{\colvec[r]{1 \\ 1 \\ 0}\cdot y+\colvec[r]{-1 \\ 0 \\ 1}\cdot z 
                      \suchthat y,z\in\Re}
          \end{equation*}
          So we take the basis
          \begin{equation*}
-           \sequence{\colvec{1 \\ 1 \\ 0},
-                     \colvec{-1 \\ 0 \\ 1}}
+           \sequence{\colvec[r]{1 \\ 1 \\ 0},
+                     \colvec[r]{-1 \\ 0 \\ 1}}
          \end{equation*}
          apply the Gram-Schmidt process
          \begin{align*}
-           \vec{\kappa}_1 &= \colvec{1 \\ 1 \\ 0}             \\
+           \vec{\kappa}_1 &= \colvec[r]{1 \\ 1 \\ 0}             \\
            \vec{\kappa}_2
            &=
-           \colvec{-1 \\ 0 \\ 1}-\proj{\colvec{-1 \\ 0 \\ 1}}{%
+           \colvec[r]{-1 \\ 0 \\ 1}-\proj{\colvec[r]{-1 \\ 0 \\ 1}}{%
                                         \spanof{\vec{\kappa}_1}} 
            =
-           \colvec{-1 \\ 0 \\ 1}
-            -\frac{\colvec{-1 \\ 0 \\ 1}\dotprod\colvec{1 \\ 1 \\ 0}}{%
-                    \colvec{1 \\ 1 \\ 0}\dotprod\colvec{1 \\ 1 \\ 0}}
-              \cdot\colvec{1 \\ 1 \\ 0}                             
+           \colvec[r]{-1 \\ 0 \\ 1}
+            -\frac{\colvec[r]{-1 \\ 0 \\ 1}\dotprod\colvec[r]{1 \\ 1 \\ 0}}{%
+                    \colvec[r]{1 \\ 1 \\ 0}\dotprod\colvec[r]{1 \\ 1 \\ 0}}
+              \cdot\colvec[r]{1 \\ 1 \\ 0}                             
            =
-           \colvec{-1 \\ 0 \\ 1}
-            -\frac{-1}{2}\cdot\colvec{1 \\ 1 \\ 0}                  
-           =\colvec{-1/2 \\ 1/2 \\ 1}
+           \colvec[r]{-1 \\ 0 \\ 1}
+            -\frac{-1}{2}\cdot\colvec[r]{1 \\ 1 \\ 0}                  
+           =\colvec[r]{-1/2 \\ 1/2 \\ 1}
          \end{align*}
          and then normalize.
          \begin{equation*}
            \sequence{
-                    \colvec{1/\sqrt{2} \\ 1/\sqrt{2} \\ 0},
-                    \colvec{-1/\sqrt{6} \\ 1/\sqrt{6} \\ 2/\sqrt{6}}
+                    \colvec[r]{1/\sqrt{2} \\ 1/\sqrt{2} \\ 0},
+                    \colvec[r]{-1/\sqrt{6} \\ 1/\sqrt{6} \\ 2/\sqrt{6}}
                     }
          \end{equation*}
        \end{answer}
@@ -1288,40 +1300,40 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
        \end{equation*}
        and parametrizing gives this description of the subspace.
        \begin{equation*}
-         \set{\colvec{-1 \\ -2 \\ 1 \\ 0}\cdot z
-              +\colvec{0 \\ 1 \\ 0 \\ 1}\cdot w
+         \set{\colvec[r]{-1 \\ -2 \\ 1 \\ 0}\cdot z
+              +\colvec[r]{0 \\ 1 \\ 0 \\ 1}\cdot w
               \suchthat z,w\in\Re}
        \end{equation*}
        So we take the basis,
        \begin{equation*}
          \sequence{
-                  \colvec{-1 \\ -2 \\ 1 \\ 0},
-                  \colvec{0 \\ 1 \\ 0 \\ 1}
+                  \colvec[r]{-1 \\ -2 \\ 1 \\ 0},
+                  \colvec[r]{0 \\ 1 \\ 0 \\ 1}
                   }
        \end{equation*}
        go through the Gram-Schmidt process
        \begin{align*}
-         \vec{\kappa}_1 &= \colvec{-1 \\ -2 \\ 1 \\ 0}   \\
+         \vec{\kappa}_1 &= \colvec[r]{-1 \\ -2 \\ 1 \\ 0}   \\
          \vec{\kappa}_2
           &=
-          \colvec{0 \\ 1 \\ 0 \\ 1}
-          -\proj{\colvec{0 \\ 1 \\ 0 \\ 1}}{\spanof{\vec{\kappa}_1}}   
+          \colvec[r]{0 \\ 1 \\ 0 \\ 1}
+          -\proj{\colvec[r]{0 \\ 1 \\ 0 \\ 1}}{\spanof{\vec{\kappa}_1}}   
           =
-          \colvec{0 \\ 1 \\ 0 \\ 1}
-         -\frac{\colvec{0 \\ 1 \\ 0 \\ 1}\dotprod\colvec{-1 \\ -2 \\ 1 \\ 0}}{%
-             \colvec{-1 \\ -2 \\ 1 \\ 0}\dotprod\colvec{-1 \\ -2 \\ 1 \\ 0}} 
-          \cdot\colvec{-1 \\ -2 \\ 1 \\ 0}           
+          \colvec[r]{0 \\ 1 \\ 0 \\ 1}
+         -\frac{\colvec[r]{0 \\ 1 \\ 0 \\ 1}\dotprod\colvec[r]{-1 \\ -2 \\ 1 \\ 0}}{%
+             \colvec[r]{-1 \\ -2 \\ 1 \\ 0}\dotprod\colvec[r]{-1 \\ -2 \\ 1 \\ 0}} 
+          \cdot\colvec[r]{-1 \\ -2 \\ 1 \\ 0}           
           =
-          \colvec{0 \\ 1 \\ 0 \\ 1}
+          \colvec[r]{0 \\ 1 \\ 0 \\ 1}
          -\frac{-2}{6} 
-          \cdot\colvec{-1 \\ -2 \\ 1 \\ 0}  
-          =\colvec{-1/3 \\ 1/3 \\ 1/3 \\ 1}
+          \cdot\colvec[r]{-1 \\ -2 \\ 1 \\ 0}  
+          =\colvec[r]{-1/3 \\ 1/3 \\ 1/3 \\ 1}
        \end{align*}
        and finish by normalizing.
        \begin{equation*}
          \sequence{
-               \colvec{-1/\sqrt{6} \\ -2/\sqrt{6} \\ 1/\sqrt{6} \\ 0},
-               \colvec{-\sqrt{3}/6 \\ \sqrt{3}/6 \\ \sqrt{3}/6 \\ \sqrt{3}/2}
+               \colvec[r]{-1/\sqrt{6} \\ -2/\sqrt{6} \\ 1/\sqrt{6} \\ 0},
+               \colvec[r]{-\sqrt{3}/6 \\ \sqrt{3}/6 \\ \sqrt{3}/6 \\ \sqrt{3}/2}
                   }
        \end{equation*}
      \end{answer}
@@ -1341,17 +1353,17 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
        set then we get some zero vectors.
        For instance, with
        \begin{equation*}
-         S=\set{\colvec{1 \\ 2},\colvec{3 \\ 6}}
+         S=\set{\colvec[r]{1 \\ 2},\colvec[r]{3 \\ 6}}
        \end{equation*}
        we would get this.
        \begin{equation*}
-         \vec{\kappa}_1   =   \colvec{1 \\ 2}
+         \vec{\kappa}_1   =   \colvec[r]{1 \\ 2}
          \qquad 
          \vec{\kappa}_2
            =
-           \colvec{3 \\ 6}-\proj{\colvec{3 \\ 6}}{\spanof{\vec{\kappa}_1}} 
+           \colvec[r]{3 \\ 6}-\proj{\colvec[r]{3 \\ 6}}{\spanof{\vec{\kappa}_1}} 
            =
-           \colvec{0 \\ 0}
+           \colvec[r]{0 \\ 0}
        \end{equation*}
        This first thing is not so bad because
        the zero vector is by definition orthogonal to every other vector,
@@ -1432,7 +1444,7 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
                       \vec{\kappa}_i\dotprod\vec{\kappa}_i)\right)
                    \cdot\vec{\kappa}_i$
            equals, after all of the cancellation is done, zero).
-         \partsitem The vector $\vec{v}$ is shown in black and the
+         \partsitem The vector $\vec{v}$ is in black and the
            vector $\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
                     +\proj{\vec{v}\,}{\spanof{\vec{v}_2}}
                    =1\cdot\vec{e}_1+2\cdot\vec{e}_2$ is in gray.
@@ -1444,15 +1456,15 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
                     +\proj{\vec{v}\,}{\spanof{\vec{v}_2}})$
               lies on the dotted line connecting the black vector to the 
               gray one, that is, it is orthogonal to the $xy$-plane.
-          \partsitem This diagram is gotten by following the hint.
+          \partsitem We get this diagram by following the hint.
            \begin{center}  \small
              \includegraphics{ch3.84}
             \end{center}
             The dashed triangle has a right angle where 
             the gray vector $1\cdot\vec{e}_1+2\cdot\vec{e}_2$
             meets the vertical dashed line
-            $\vec{v}-(1\cdot\vec{e}_1+2\cdot\vec{e}_2)$; this is what was
-            proved in the first item of this question.
+            $\vec{v}-(1\cdot\vec{e}_1+2\cdot\vec{e}_2)$; this is what
+            first item of this question proved.
             The Pythagorean theorem then gives that the hypoteneuse\Dash the
             segment from $\vec{v}$ to any other vector\Dash is longer than
             the vertical dashed line.
@@ -1494,52 +1506,52 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
    \item 
      Find a vector in \( \Re^3 \) that is orthogonal to both of these.
      \begin{equation*}
-       \colvec{1 \\ 5 \\ -1}
+       \colvec[r]{1 \\ 5 \\ -1}
        \qquad
-       \colvec{2 \\ 2 \\ 0}
+       \colvec[r]{2 \\ 2 \\ 0}
      \end{equation*}
      \begin{answer} 
        One way to proceed is to find a third vector so that the three together
        make a basis for $\Re^3$, e.g.,
        \begin{equation*}
-         \vec{\beta}_3=\colvec{1 \\ 0 \\ 0}  
+         \vec{\beta}_3=\colvec[r]{1 \\ 0 \\ 0}  
        \end{equation*} 
        (the second vector is not dependent on the third because it has a
        nonzero second component, and the first is not dependent on the second
        and third because of its nonzero third component),
        and then apply the Gram-Schmidt process.
        \begin{align*}
-         \vec{\kappa}_1 &= \colvec{1 \\ 5 \\ -1}  \\
+         \vec{\kappa}_1 &= \colvec[r]{1 \\ 5 \\ -1}  \\
          \vec{\kappa}_2
            &=
-           \colvec{2 \\ 2 \\ 0}
-           -\proj{\colvec{2 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
-           =\colvec{2 \\ 2 \\ 0}
-           -\frac{\colvec{2 \\ 2 \\ 0}\dotprod\colvec{1 \\ 5 \\ -1}}{%
-                  \colvec{1 \\ 5 \\ -1}\dotprod\colvec{1 \\ 5 \\ -1}}
-            \cdot\colvec{1 \\ 5 \\ -1}                               \\
+           \colvec[r]{2 \\ 2 \\ 0}
+           -\proj{\colvec[r]{2 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
+           =\colvec[r]{2 \\ 2 \\ 0}
+           -\frac{\colvec[r]{2 \\ 2 \\ 0}\dotprod\colvec[r]{1 \\ 5 \\ -1}}{%
+                  \colvec[r]{1 \\ 5 \\ -1}\dotprod\colvec[r]{1 \\ 5 \\ -1}}
+            \cdot\colvec[r]{1 \\ 5 \\ -1}                               \\
            &\hbox{}\quad=
-           \colvec{2 \\ 2 \\ 0}
-           -\frac{12}{27}\cdot\colvec{1 \\ 5 \\ -1}
-           =\colvec{14/9 \\ -2/9 \\ 4/9}                        \\
+           \colvec[r]{2 \\ 2 \\ 0}
+           -\frac{12}{27}\cdot\colvec[r]{1 \\ 5 \\ -1}
+           =\colvec[r]{14/9 \\ -2/9 \\ 4/9}                        \\
         \vec{\kappa}_3    
            &=  
-           \colvec{1 \\ 0 \\ 0}
-             -\proj{\colvec{1 \\ 0 \\ 0}}{\spanof{\vec{\kappa}_1}}
-             -\proj{\colvec{1 \\ 0 \\ 0}}{\spanof{\vec{\kappa}_2}}       \\
+           \colvec[r]{1 \\ 0 \\ 0}
+             -\proj{\colvec[r]{1 \\ 0 \\ 0}}{\spanof{\vec{\kappa}_1}}
+             -\proj{\colvec[r]{1 \\ 0 \\ 0}}{\spanof{\vec{\kappa}_2}}       \\
            &\hbox{}\quad=
-           \colvec{1 \\ 0 \\ 0}
-           -\frac{\colvec{1 \\ 0 \\ 0}\dotprod\colvec{1 \\ 5 \\ -1}}{%
-                    \colvec{1 \\ 5 \\ -1}\dotprod\colvec{1 \\ 5 \\ -1}}
-             \cdot\colvec{1 \\ 5 \\ -1}
-           -\frac{\colvec{1 \\ 0 \\ 0}\dotprod\colvec{14/9 \\ -2/9 \\  4/9}}{%
-            \colvec{14/9 \\ -2/9 \\ 4/9}\dotprod\colvec{14/9 \\ -2/9 \\ 4/9}}
-            \cdot\colvec{14/9 \\ -2/9 \\ 4/9}              \\
+           \colvec[r]{1 \\ 0 \\ 0}
+           -\frac{\colvec[r]{1 \\ 0 \\ 0}\dotprod\colvec[r]{1 \\ 5 \\ -1}}{%
+                    \colvec[r]{1 \\ 5 \\ -1}\dotprod\colvec[r]{1 \\ 5 \\ -1}}
+             \cdot\colvec[r]{1 \\ 5 \\ -1}
+           -\frac{\colvec[r]{1 \\ 0 \\ 0}\dotprod\colvec[r]{14/9 \\ -2/9 \\  4/9}}{%
+            \colvec[r]{14/9 \\ -2/9 \\ 4/9}\dotprod\colvec[r]{14/9 \\ -2/9 \\ 4/9}}
+            \cdot\colvec[r]{14/9 \\ -2/9 \\ 4/9}              \\
          &\hbox{}\quad=
-         \colvec{1 \\ 0 \\ 0}
-           -\frac{1}{27}\cdot\colvec{1 \\ 5 \\ -1}
-           -\frac{7}{12}\cdot\colvec{14/9 \\ -2/9 \\ 4/9}
-         =\colvec{1/18 \\ -1/18  \\ -4/18}
+         \colvec[r]{1 \\ 0 \\ 0}
+           -\frac{1}{27}\cdot\colvec[r]{1 \\ 5 \\ -1}
+           -\frac{7}{12}\cdot\colvec[r]{14/9 \\ -2/9 \\ 4/9}
+         =\colvec[r]{1/18 \\ -1/18  \\ -4/18}
        \end{align*}
        The result $\vec{\kappa}_3$ is orthogonal to both $\vec{\kappa}_1$
        and $\vec{\kappa}_2$.
@@ -1553,18 +1565,18 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
     \begin{exparts}
       \partsitem For this vector and this non-orthogonal basis for $\Re^2$
         \begin{equation*}
-          \vec{v}=\colvec{2 \\ 3}
+          \vec{v}=\colvec[r]{2 \\ 3}
           \qquad
-          B=\sequence{\colvec{1 \\ 1},
-                    \colvec{1 \\ 0}}
+          B=\sequence{\colvec[r]{1 \\ 1},
+                    \colvec[r]{1 \\ 0}}
         \end{equation*}
         first represent the vector with respect to the basis. 
         Then project the vector into the span of each basis vector
         $\spanof{\smash{\vec{\beta}_1}}$ and $\spanof{\smash{\vec{\beta}_2}}$.
       \partsitem With this orthogonal basis for $\Re^2$
         \begin{equation*}
-          K=\sequence{\colvec{1 \\ 1},
-                    \colvec{1 \\ -1}}
+          K=\sequence{\colvec[r]{1 \\ 1},
+                    \colvec[r]{1 \\ -1}}
         \end{equation*}
         represent the same vector $\vec{v}$ with respect to the basis. 
         Then project the vector into the span of each basis vector.
@@ -1584,44 +1596,44 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
     \end{exparts}
     \begin{answer}
       \begin{exparts}
-        \partsitem The representation can be done by eye.
+        \partsitem We can do the representation by eye.
           \begin{equation*}
-            \colvec{2 \\ 3}=3\cdot\colvec{1 \\ 1}+(-1)\cdot\colvec{1 \\ 0}
+            \colvec[r]{2 \\ 3}=3\cdot\colvec[r]{1 \\ 1}+(-1)\cdot\colvec[r]{1 \\ 0}
             \qquad
-            \rep{\vec{v}\,}{B}=\colvec{3 \\ -1}_B
+            \rep{\vec{v}\,}{B}=\colvec[r]{3 \\ -1}_B
           \end{equation*}
           The two projections are also easy.
           \begin{equation*}
-            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_1}}
-            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ 1}}{%
-                   \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}
-              \cdot\colvec{1 \\ 1}
-            =\frac{5}{2}\cdot\colvec{1 \\ 1}
+            \proj{\colvec[r]{2 \\ 3}}{\spanof{\vec{\beta}_1}}
+            =\frac{\colvec[r]{2 \\ 3}\dotprod\colvec[r]{1 \\ 1}}{%
+                   \colvec[r]{1 \\ 1}\dotprod\colvec[r]{1 \\ 1}}
+              \cdot\colvec[r]{1 \\ 1}
+            =\frac{5}{2}\cdot\colvec[r]{1 \\ 1}
             \qquad
-            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_2}}
-            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ 0}}{%
-                   \colvec{1 \\ 0}\dotprod\colvec{1 \\ 0}}
-              \cdot\colvec{1 \\ 0}
-            =\frac{2}{1}\cdot\colvec{1 \\ 0}
+            \proj{\colvec[r]{2 \\ 3}}{\spanof{\vec{\beta}_2}}
+            =\frac{\colvec[r]{2 \\ 3}\dotprod\colvec[r]{1 \\ 0}}{%
+                   \colvec[r]{1 \\ 0}\dotprod\colvec[r]{1 \\ 0}}
+              \cdot\colvec[r]{1 \\ 0}
+            =\frac{2}{1}\cdot\colvec[r]{1 \\ 0}
           \end{equation*}
-        \partsitem As above, the representation can be done by eye
+        \partsitem As above, we can do the representation by eye
           \begin{equation*}
-            \colvec{2 \\ 3}=(5/2)\cdot\colvec{1 \\ 1}
-                             +(-1/2)\cdot\colvec{1 \\ -1}
+            \colvec[r]{2 \\ 3}=(5/2)\cdot\colvec[r]{1 \\ 1}
+                             +(-1/2)\cdot\colvec[r]{1 \\ -1}
           \end{equation*}
           and the two projections are easy.
           \begin{equation*}
-            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_1}}
-            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ 1}}{%
-                   \colvec{1 \\ 1}\dotprod\colvec{1 \\ 1}}
-              \cdot\colvec{1 \\ 1}
-            =\frac{5}{2}\cdot\colvec{1 \\ 1}
+            \proj{\colvec[r]{2 \\ 3}}{\spanof{\vec{\beta}_1}}
+            =\frac{\colvec[r]{2 \\ 3}\dotprod\colvec[r]{1 \\ 1}}{%
+                   \colvec[r]{1 \\ 1}\dotprod\colvec[r]{1 \\ 1}}
+              \cdot\colvec[r]{1 \\ 1}
+            =\frac{5}{2}\cdot\colvec[r]{1 \\ 1}
             \qquad
-            \proj{\colvec{2 \\ 3}}{\spanof{\vec{\beta}_2}}
-            =\frac{\colvec{2 \\ 3}\dotprod\colvec{1 \\ -1}}{%
-                   \colvec{1 \\ -1}\dotprod\colvec{1 \\ -1}}
-              \cdot\colvec{1 \\ -1}
-            =\frac{-1}{2}\cdot\colvec{1 \\ -1}
+            \proj{\colvec[r]{2 \\ 3}}{\spanof{\vec{\beta}_2}}
+            =\frac{\colvec[r]{2 \\ 3}\dotprod\colvec[r]{1 \\ -1}}{%
+                   \colvec[r]{1 \\ -1}\dotprod\colvec[r]{1 \\ -1}}
+              \cdot\colvec[r]{1 \\ -1}
+            =\frac{-1}{2}\cdot\colvec[r]{1 \\ -1}
           \end{equation*}
           Note the recurrence of the $5/2$ and the $-1/2$.
         \partsitem Represent $\vec{v}$ with respect to the basis
@@ -1758,7 +1770,7 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
       The result now follows on gathering like terms and on recognizing that
       $\vec{\kappa}_1\dotprod\vec{\kappa}_1=1$ and           
       $\vec{\kappa}_2\dotprod\vec{\kappa}_2=1$ because these vectors are
-      given as members of an orthonormal set.           
+      members of an orthonormal set.           
     \end{answer}
   \item
     Prove or disprove:~every vector in \( \Re^n \) is in some orthogonal
@@ -1796,32 +1808,32 @@ See \nearbyexercise{exer:OrthoRepEasy}, for example.
       correct).
       Those, in turn, hold if and only if 
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           a &d &g \\
           b &e &h \\
           c &f &i
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}
           a &b &c  \\
           d &e &f  \\
           g &h &i
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}
           1 &0 &0  \\
           0 &1 &0  \\
           0 &0 &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       as required.
 
       This is an example, the inverse of this matrix is its transpose.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1/\sqrt{2}  &1/\sqrt{2}  &0  \\
          -1/\sqrt{2}  &1/\sqrt{2}  &0  \\
           0           &0           &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \item 
@@ -2010,112 +2022,112 @@ haven't seen any in this book.)
 The space \( \matspace_{\nbyn{2}} \) of $\nbyn{2}$ matrices is the
 direct sum of these two.
 \begin{equation*}
-   M=\set{\begin{pmatrix}
+   M=\set{\begin{mat}
               a  &b  \\
               0  &0
-            \end{pmatrix} \suchthat a,b\in\Re }
+            \end{mat} \suchthat a,b\in\Re }
   \qquad
-   N=\set{\begin{pmatrix}
+   N=\set{\begin{mat}
               0  &0  \\
               c  &d
-            \end{pmatrix} \suchthat c,d\in\Re }
+            \end{mat} \suchthat c,d\in\Re }
 \end{equation*}
 To project
 \begin{equation*}
-  A=\begin{pmatrix}
+  A=\begin{mat}[r]
           3  &1  \\
           0  &4
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 into $M$ along $N$, we first fix bases for the two subspaces.
 \begin{equation*}
   B_{M}=\sequence{
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  \\
       0  &0      
-    \end{pmatrix},
-    \begin{pmatrix}
+    \end{mat},
+    \begin{mat}[r]
       0  &1  \\
       0  &0
-    \end{pmatrix}
+    \end{mat}
                    }
   \qquad
   B_{N}=\sequence{
-    \begin{pmatrix}
+    \begin{mat}[r]
       0  &0  \\
       1  &0      
-    \end{pmatrix},
-    \begin{pmatrix}
+    \end{mat},
+    \begin{mat}[r]
       0  &0  \\
       0  &1
-    \end{pmatrix}
+    \end{mat}
                    }
 \end{equation*}
 The concatenation of these
 \begin{equation*}
   B=\cat{B_{M}}{B_{N}}=\sequence{
-    \begin{pmatrix}
+    \begin{mat}[r]
       1  &0  \\
       0  &0      
-    \end{pmatrix},
-    \begin{pmatrix}
+    \end{mat},
+    \begin{mat}[r]
       0  &1  \\
       0  &0
-    \end{pmatrix},
-    \begin{pmatrix}
+    \end{mat},
+    \begin{mat}[r]
       0  &0  \\
       1  &0      
-    \end{pmatrix},
-    \begin{pmatrix}
+    \end{mat},
+    \begin{mat}[r]
       0  &0  \\
       0  &1
-    \end{pmatrix}
+    \end{mat}
                    }
 \end{equation*}
 is a basis for the entire space, because the space is the direct sum, 
 so we can use it to represent $A$.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
           3  &1  \\
           0  &4
-  \end{pmatrix}=
-    3\cdot\begin{pmatrix}
+  \end{mat}=
+    3\cdot\begin{mat}[r]
       1  &0  \\
       0  &0      
-    \end{pmatrix}
-    +1\cdot\begin{pmatrix}
+    \end{mat}
+    +1\cdot\begin{mat}[r]
       0  &1  \\
       0  &0
-    \end{pmatrix}
-    +0\cdot\begin{pmatrix}
+    \end{mat}
+    +0\cdot\begin{mat}[r]
       0  &0  \\
       1  &0      
-    \end{pmatrix}
-    +4\cdot\begin{pmatrix}
+    \end{mat}
+    +4\cdot\begin{mat}[r]
       0  &0  \\
       0  &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 Now the projection of $A$ into $M$ along $N$ is found by keeping the 
 $M$ part of this sum and dropping the $N$ part.
 \begin{equation*}
-  \proj{\begin{pmatrix}
+  \proj{\begin{mat}[r]
           3  &1  \\
           0  &4
-  \end{pmatrix} }{M,N}
+  \end{mat} }{M,N}
   =
-    3\cdot\begin{pmatrix}
+    3\cdot\begin{mat}[r]
       1  &0  \\
       0  &0      
-    \end{pmatrix}
-    +1\cdot\begin{pmatrix}
+    \end{mat}
+    +1\cdot\begin{mat}[r]
       0  &1  \\
       0  &0
-    \end{pmatrix}
-    =\begin{pmatrix}
+    \end{mat}
+    =\begin{mat}[r]
       3  &1  \\
       0  &0      
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2130,63 +2142,63 @@ fix this plane subspace of $\Re^3$ and its basis
   M=\set{\colvec{x \\ y \\ z}\suchthat y-2z=0}
   \qquad
   B_M=\sequence{
-                \colvec{1 \\ 0 \\ 0},
-                \colvec{0 \\ 2 \\ 1} }
+                \colvec[r]{1 \\ 0 \\ 0},
+                \colvec[r]{0 \\ 2 \\ 1} }
 \end{equation*}
 and compare the projections along two different subspaces. 
 \begin{equation*}
-  N=\set{k\colvec{0 \\ 0 \\ 1}\suchthat k\in\Re}
+  N=\set{k\colvec[r]{0 \\ 0 \\ 1}\suchthat k\in\Re}
   \qquad
-  \hat{N}=\set{k\colvec{0 \\ 1 \\ -2}\suchthat k\in\Re}
+  \hat{N}=\set{k\colvec[r]{0 \\ 1 \\ -2}\suchthat k\in\Re}
 \end{equation*}
 (Verification that \( \Re^3=M\directsum N \) and 
 \( \Re^3=M\directsum \hat{N} \) is routine.)
 We will check that these projections are different by checking that
 they have different effects on this vector.
 \begin{equation*}
-  \vec{v}=\colvec{2 \\ 2 \\ 5}
+  \vec{v}=\colvec[r]{2 \\ 2 \\ 5}
 \end{equation*}
 
 For the first one we find a basis for $N$
 \begin{equation*}
   B_N=\sequence{
-                \colvec{0 \\ 0 \\ 1} }
+                \colvec[r]{0 \\ 0 \\ 1} }
 \end{equation*}
 and represent $\vec{v}$ with respect to the concatenation $\cat{B_M}{B_N}$. 
 \begin{equation*}
-  \colvec{2 \\ 2 \\ 5}=
-  2\cdot\colvec{1 \\ 0 \\ 0}+
-  1\cdot\colvec{0 \\ 2 \\ 1}+
-  4\cdot\colvec{0 \\ 0 \\ 1}
+  \colvec[r]{2 \\ 2 \\ 5}=
+  2\cdot\colvec[r]{1 \\ 0 \\ 0}+
+  1\cdot\colvec[r]{0 \\ 2 \\ 1}+
+  4\cdot\colvec[r]{0 \\ 0 \\ 1}
 \end{equation*}
 The projection of $\vec{v}$ into $M$ along $N$ is found by
 keeping the $M$ part and dropping the $N$ part. 
 \begin{equation*}
   \proj{\vec{v}\,}{M,N}
-  =2\cdot\colvec{1 \\ 0 \\ 0}+
-  1\cdot\colvec{0 \\ 2 \\ 1}
-  =\colvec{2 \\ 2 \\ 1}
+  =2\cdot\colvec[r]{1 \\ 0 \\ 0}+
+  1\cdot\colvec[r]{0 \\ 2 \\ 1}
+  =\colvec[r]{2 \\ 2 \\ 1}
 \end{equation*}
 
 For the other subspace $\hat{N}$, this basis is natural. 
 \begin{equation*}
   B_{\hat{N}}=\sequence{
-                \colvec{0 \\ 1 \\ -2} }
+                \colvec[r]{0 \\ 1 \\ -2} }
 \end{equation*}
 Representing $\vec{v}$ with respect to the concatenation  
 \begin{equation*}
-  \colvec{2 \\ 2 \\ 5}=
-  2\cdot\colvec{1 \\ 0 \\ 0}
-  +(9/5)\cdot\colvec{0 \\ 2 \\ 1}
-  -(8/5)\cdot\colvec{0 \\ 1 \\ -2}
+  \colvec[r]{2 \\ 2 \\ 5}=
+  2\cdot\colvec[r]{1 \\ 0 \\ 0}
+  +(9/5)\cdot\colvec[r]{0 \\ 2 \\ 1}
+  -(8/5)\cdot\colvec[r]{0 \\ 1 \\ -2}
 \end{equation*}
 and then keeping only the $M$ part gives this. 
 \begin{equation*}
   \proj{\vec{v}\,}{M,\hat{N}}
   =
-  2\cdot\colvec{1 \\ 0 \\ 0}
-  +(9/5)\cdot\colvec{0 \\ 2 \\ 1}
-  =\colvec{2 \\ 18/5 \\ 9/5}
+  2\cdot\colvec[r]{1 \\ 0 \\ 0}
+  +(9/5)\cdot\colvec[r]{0 \\ 2 \\ 1}
+  =\colvec[r]{2 \\ 18/5 \\ 9/5}
 \end{equation*}
 Therefore projection along different subspaces may yield different results.
 
@@ -2239,8 +2251,8 @@ In \( \Re^3 \), to find the orthogonal complement of the plane
 \end{equation*}
 we start with a basis for \( P \).
 \begin{equation*}
-   B=\sequence{\colvec{1 \\ 0 \\ 3},
-               \colvec{0 \\ 1 \\ 2} }
+   B=\sequence{\colvec[r]{1 \\ 0 \\ 3},
+               \colvec[r]{0 \\ 1 \\ 2} }
 \end{equation*}
 Any \( \vec{v} \) perpendicular to every vector in $B$
 is perpendicular to every vector in the span of $B$
@@ -2248,18 +2260,18 @@ is perpendicular to every vector in the span of $B$
 Therefore, the subspace $P^\perp$ consists of the vectors that satisfy
 these two conditions.
 \begin{equation*}
-  \colvec{1 \\ 0 \\ 3}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
+  \colvec[r]{1 \\ 0 \\ 3}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
   \qquad
-  \colvec{0 \\ 1 \\ 2}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
+  \colvec[r]{0 \\ 1 \\ 2}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
 \end{equation*}
 We can express those conditions more compactly as a linear system.
 \begin{equation*}
-  P^\perp=\set{\colvec{v_1 \\ v_2 \\ v_3}\suchthat \begin{pmatrix}
+  P^\perp=\set{\colvec{v_1 \\ v_2 \\ v_3}\suchthat \begin{mat}[r]
                                                       1  &0  &3  \\
                                                       0  &1  &2
-                                                    \end{pmatrix}
+                                                    \end{mat}
                                                     \colvec{v_1 \\ v_2 \\ v_3}
-                                                    =\colvec{0 \\ 0} }
+                                                    =\colvec[r]{0 \\ 0} }
 \end{equation*}
 We are thus left with finding the nullspace of the map represented 
 by the matrix, that is, with 
@@ -2270,7 +2282,7 @@ calculating the solution set of a homogeneous linear system.
                                               v_1 &  &    &+ &3v_3 &= &0 \\
                                                   &  &v_2 &+ &2v_3 &= &0
                                             \end{linsys}\; }
-  =\set{k\colvec{-3 \\ -2 \\ 1}\suchthat k\in\Re}
+  =\set{k\colvec[r]{-3 \\ -2 \\ 1}\suchthat k\in\Re}
 \end{equation*}
 Instead of the term orthogonal complement,
 in some contexts this is called the line \definend{normal}\index{normal} %
@@ -2285,7 +2297,7 @@ that's not right.
 Some vectors from the \( yz \)-plane are not perpendicular to every
 vector in the \( xy \)-plane.
 \begin{center}  \small
-    {\small $\colvec{1 \\ 1 \\ 0} \not\perp \colvec{0 \\ 3 \\ 2}$}
+    {\small $\colvec[r]{1 \\ 1 \\ 0} \not\perp \colvec[r]{0 \\ 3 \\ 2}$}
    \quad
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.41}\end{tabular}
    \quad
@@ -2299,12 +2311,12 @@ prior example and taking the natural basis for the $xy$-plane gives this.
 \begin{equation*}
   M^\perp
   =
-  \set{\colvec{x \\ y \\ z}\suchthat \begin{pmatrix}
+  \set{\colvec{x \\ y \\ z}\suchthat \begin{mat}[r]
                                          1  &0  &0  \\
                                          0  &1  &0
-                                       \end{pmatrix}
+                                       \end{mat}
                                        \colvec{x \\ y \\ z}=
-                                       \colvec{0 \\ 0} \;}
+                                       \colvec[r]{0 \\ 0} \;}
   =
   \set{\colvec{x \\ y \\ z}\suchthat x=0 \text{\ and\ }y=0  }
 \end{equation*}
@@ -2436,52 +2448,52 @@ $\proj{\vec{v}\,}{M}=A\cdot\vec{c}$.
 \begin{example}
 To orthogonally project this vector into this subspace
 \begin{equation*}
-  \vec{v}=\colvec{1 \\ -1 \\ 1}
+  \vec{v}=\colvec[r]{1 \\ -1 \\ 1}
   \qquad
   P=\set{\colvec{x \\ y \\ z}\suchthat x+z=0}
 \end{equation*}
 first make a matrix whose columns are a basis for the subspace
 \begin{equation*}
-  A=\begin{pmatrix}
+  A=\begin{mat}[r]
       0  &1  \\
       1  &0  \\
       0  &-1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 and then compute.
 \begin{align*}
   A\bigl(\trans{A}A\bigr)^{-1}\trans{A}
-  &=\begin{pmatrix}
+  &=\begin{mat}[r]
       0  &1  \\
       1  &0  \\
       0  &-1
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       1    &0  \\
       0    &1/2
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
       0   &1  &0  \\
       1   &0  &-1 
-    \end{pmatrix}             \\
+    \end{mat}             \\
     &=
-    \begin{pmatrix}
+    \begin{mat}[r]
       1/2     &0  &-1/2  \\
       0     &1    &0   \\
       -1/2  &0    &1/2
-    \end{pmatrix}
+    \end{mat}
 \end{align*}
 With the matrix, calculating the orthogonal projection of any vector into $P$
 is easy.
 \begin{equation*}
   \proj{\vec{v}}{P}=
-    \begin{pmatrix}
+    \begin{mat}[r]
       1/2     &0  &-1/2  \\
       0     &1    &0   \\
       -1/2  &0    &1/2
-    \end{pmatrix}
-    \colvec{1 \\ -1 \\ 1}
-    =\colvec{0 \\ -1 \\ 0}
+    \end{mat}
+    \colvec[r]{1 \\ -1 \\ 1}
+    =\colvec[r]{0 \\ -1 \\ 0}
 \end{equation*}
 Note, as a check, that this result is indeed in $P$.
 \end{example}
@@ -2490,72 +2502,72 @@ Note, as a check, that this result is indeed in $P$.
   \recommended \item
     Project the vectors into \( M \) along \( N \).
      \begin{exparts}
-       \partsitem \( \colvec{3 \\ -2},\quad
+       \partsitem \( \colvec[r]{3 \\ -2},\quad
                 M=\set{\colvec{x \\ y}\suchthat x+y=0},\quad
                 N=\set{\colvec{x \\ y}\suchthat -x-2y=0} \)
-       \partsitem \( \colvec{1 \\ 2},\quad
+       \partsitem \( \colvec[r]{1 \\ 2},\quad
                 M=\set{\colvec{x \\ y}\suchthat x-y=0},\quad
                 N=\set{\colvec{x \\ y}\suchthat 2x+y=0} \)
-       \partsitem \( \colvec{3 \\ 0 \\ 1},\quad
+       \partsitem \( \colvec[r]{3 \\ 0 \\ 1},\quad
                 M=\set{\colvec{x \\ y \\ z}\suchthat x+y=0},\quad
-                N=\set{c\cdot\colvec{1 \\ 0 \\ 1}\suchthat c\in\Re} \)
+                N=\set{c\cdot\colvec[r]{1 \\ 0 \\ 1}\suchthat c\in\Re} \)
      \end{exparts}
      \begin{answer}
        \begin{exparts}
          \partsitem When bases for the subspaces
            \begin{equation*}
-             B_M=\sequence{\colvec{1 \\ -1}}
+             B_M=\sequence{\colvec[r]{1 \\ -1}}
              \qquad
-             B_N=\sequence{\colvec{2 \\ -1}}
+             B_N=\sequence{\colvec[r]{2 \\ -1}}
            \end{equation*}
            are concatenated 
            \begin{equation*}
-             B=\cat{B_M}{B_N}=\sequence{\colvec{1 \\ -1},
-                                        \colvec{2 \\ -1}}
+             B=\cat{B_M}{B_N}=\sequence{\colvec[r]{1 \\ -1},
+                                        \colvec[r]{2 \\ -1}}
            \end{equation*}
            and the given vector is represented
            \begin{equation*}
-             \colvec{3 \\ -2}=1\cdot\colvec{1 \\ -1}+1\cdot\colvec{2 \\ -1}
+             \colvec[r]{3 \\ -2}=1\cdot\colvec[r]{1 \\ -1}+1\cdot\colvec[r]{2 \\ -1}
            \end{equation*}
            then the answer comes from retaining the $M$~part and dropping the 
            $N$~part.
            \begin{equation*}
-             \proj{\colvec{3 \\ -2}}{M,N}
-             =\colvec{1 \\ -1}
+             \proj{\colvec[r]{3 \\ -2}}{M,N}
+             =\colvec[r]{1 \\ -1}
            \end{equation*}
          \partsitem When the bases
            \begin{equation*}
-             B_M=\sequence{\colvec{1 \\ 1}}
+             B_M=\sequence{\colvec[r]{1 \\ 1}}
              \qquad
-             B_N\sequence{\colvec{1 \\ -2}}
+             B_N\sequence{\colvec[r]{1 \\ -2}}
            \end{equation*}
            are concatenated, and the vector is represented,
            \begin{equation*}
-             \colvec{1 \\ 2}
-               =(4/3)\cdot\colvec{1 \\ 1}
-                -(1/3)\cdot\colvec{1 \\ -2}
+             \colvec[r]{1 \\ 2}
+               =(4/3)\cdot\colvec[r]{1 \\ 1}
+                -(1/3)\cdot\colvec[r]{1 \\ -2}
            \end{equation*}
            then retaining only the $M$~part gives this answer.
            \begin{equation*}
-             \proj{\colvec{1 \\ 2}}{M,N}=\colvec{4/3 \\ 4/3}
+             \proj{\colvec[r]{1 \\ 2}}{M,N}=\colvec[r]{4/3 \\ 4/3}
            \end{equation*}
          \partsitem With these bases
            \begin{equation*}
-             B_M=\sequence{\colvec{1 \\ -1 \\ 0},
-                           \colvec{0 \\ 0 \\ 1}}
+             B_M=\sequence{\colvec[r]{1 \\ -1 \\ 0},
+                           \colvec[r]{0 \\ 0 \\ 1}}
              \qquad
-             B_N=\sequence{\colvec{1 \\ 0 \\ 1}}
+             B_N=\sequence{\colvec[r]{1 \\ 0 \\ 1}}
            \end{equation*}
            the representation with respect to the concatenation is this.
            \begin{equation*}
-             \colvec{3 \\ 0 \\ 1}
-               =0\cdot\colvec{1 \\ -1 \\ 0}
-                -2\cdot\colvec{0 \\ 0 \\ 1}
-                +3\cdot\colvec{1 \\ 0 \\ 1}
+             \colvec[r]{3 \\ 0 \\ 1}
+               =0\cdot\colvec[r]{1 \\ -1 \\ 0}
+                -2\cdot\colvec[r]{0 \\ 0 \\ 1}
+                +3\cdot\colvec[r]{1 \\ 0 \\ 1}
            \end{equation*}
            and so the projection is this.
            \begin{equation*}
-             \proj{\colvec{3 \\ 0 \\ 1}}{M,N}=\colvec{0 \\ 0 \\ -2}
+             \proj{\colvec[r]{3 \\ 0 \\ 1}}{M,N}=\colvec[r]{0 \\ 0 \\ -2}
            \end{equation*}
        \end{exparts}
      \end{answer}
@@ -2578,48 +2590,48 @@ Note, as a check, that this result is indeed in $P$.
        \begin{exparts}
          \partsitem Parametrizing to get
            \begin{equation*}
-             M=\set{c\cdot\colvec{-1 \\ 1}\suchthat c\in\Re}
+             M=\set{c\cdot\colvec[r]{-1 \\ 1}\suchthat c\in\Re}
            \end{equation*}
            gives that 
            \begin{equation*}
              M^\perp
               \set{\colvec{u \\ v}
                    \suchthat 
-                      0=\colvec{u \\ v}\dotprod\colvec{-1 \\ 1}}
+                      0=\colvec{u \\ v}\dotprod\colvec[r]{-1 \\ 1}}
               =\set{\colvec{u \\ v}\suchthat 0=-u+v}
            \end{equation*}
            Parametrizing the one-equation linear system gives this 
            description.
            \begin{equation*}
-             M^\perp=\set{k\cdot\colvec{1 \\ 1}\suchthat k\in\Re}
+             M^\perp=\set{k\cdot\colvec[r]{1 \\ 1}\suchthat k\in\Re}
            \end{equation*}
          \partsitem As in the answer to the prior part, $M$ can be described as
            a span
            \begin{equation*}
-             M=\set{c\cdot\colvec{3/2 \\ 1}\suchthat c\in\Re}
+             M=\set{c\cdot\colvec[r]{3/2 \\ 1}\suchthat c\in\Re}
              \qquad
-             B_M=\sequence{\colvec{3/2 \\ 1}}
+             B_M=\sequence{\colvec[r]{3/2 \\ 1}}
            \end{equation*}
            and then $M^\perp$ is the set of vectors perpendicular to the 
            one vector in this basis.
            \begin{equation*}
              M^\perp
              =\set{\colvec{u \\ v}\suchthat (3/2)\cdot u+1\cdot v=0}
-             =\set{k\cdot\colvec{-2/3 \\ 1}\suchthat k\in\Re}
+             =\set{k\cdot\colvec[r]{-2/3 \\ 1}\suchthat k\in\Re}
            \end{equation*}
          \partsitem Parametrizing the linear requirement in the description
             of $M$ gives this basis.
             \begin{equation*}
-              M=\set{c\cdot\colvec{1 \\ 1}\suchthat c\in\Re}
+              M=\set{c\cdot\colvec[r]{1 \\ 1}\suchthat c\in\Re}
               \qquad
-              B_M=\sequence{\colvec{1 \\ 1}}
+              B_M=\sequence{\colvec[r]{1 \\ 1}}
             \end{equation*}
             Now, $M^\perp$ is the set of vectors perpendicular to (the one
             vector in) $B_M$.
             \begin{equation*}
               M^\perp
               =\set{\colvec{u \\ v}\suchthat u+v=0}
-              =\set{k\cdot\colvec{-1 \\ 1}\suchthat k\in\Re}
+              =\set{k\cdot\colvec[r]{-1 \\ 1}\suchthat k\in\Re}
             \end{equation*}
             (By the way, this answer checks with the first item in this 
             question.)
@@ -2627,23 +2639,23 @@ Note, as a check, that this result is indeed in $P$.
             vector so $M^\perp=\Re^n$.
           \partsitem The appropriate description and basis for $M$ are routine.
             \begin{equation*}
-              M=\set{y\cdot\colvec{0 \\ 1}\suchthat y\in\Re}
+              M=\set{y\cdot\colvec[r]{0 \\ 1}\suchthat y\in\Re}
               \qquad
-              B_M=\sequence{\colvec{0 \\ 1}}
+              B_M=\sequence{\colvec[r]{0 \\ 1}}
             \end{equation*}
             Then
             \begin{equation*}
               M^\perp
               =\set{\colvec{u \\ v}\suchthat 0\cdot u+1\cdot v=0}
-              =\set{k\cdot\colvec{1 \\ 0}\suchthat k\in\Re}
+              =\set{k\cdot\colvec[r]{1 \\ 0}\suchthat k\in\Re}
             \end{equation*}
             and so $(\text{$y$-axis})^\perp=\text{$x$-axis}$.
           \partsitem The description of $M$ is easy to find by parametrizing.
             \begin{equation*}
-              M=\set{c\cdot\colvec{3 \\ 1 \\ 0}
-                     +d\cdot\colvec{1 \\ 0 \\ 1}\suchthat c,d\in\Re}
+              M=\set{c\cdot\colvec[r]{3 \\ 1 \\ 0}
+                     +d\cdot\colvec[r]{1 \\ 0 \\ 1}\suchthat c,d\in\Re}
               \qquad
-              B_M=\sequence{\colvec{3 \\ 1 \\ 0},\colvec{1 \\ 0 \\ 1}}
+              B_M=\sequence{\colvec[r]{3 \\ 1 \\ 0},\colvec[r]{1 \\ 0 \\ 1}}
             \end{equation*}
             Finding $M^\perp$ here just requires solving a linear system
             with two equations
@@ -2661,21 +2673,21 @@ Note, as a check, that this result is indeed in $P$.
             and parametrizing.
             \begin{equation*}
               M^\perp
-              =\set{k\cdot\colvec{-1 \\ 3 \\ 1}\suchthat k\in\Re}
+              =\set{k\cdot\colvec[r]{-1 \\ 3 \\ 1}\suchthat k\in\Re}
             \end{equation*}
           \partsitem Here, $M$ is one-dimensional
             \begin{equation*}
-              M=\set{c\cdot\colvec{0 \\ -1 \\ 1}\suchthat c\in\Re}
+              M=\set{c\cdot\colvec[r]{0 \\ -1 \\ 1}\suchthat c\in\Re}
               \qquad
-              B_M=\sequence{\colvec{0 \\ -1 \\ 1}}
+              B_M=\sequence{\colvec[r]{0 \\ -1 \\ 1}}
             \end{equation*}
             and as a result, $M^\perp$ is two-dimensional.
             \begin{equation*}
               M^\perp
               =\set{\colvec{u \\ v \\ w}
                      \suchthat 0\cdot u-1\cdot v+1\cdot w=0}
-              =\set{j\cdot\colvec{1 \\ 0 \\ 0}
-                    +k\cdot\colvec{0 \\ 1 \\ 1}\suchthat j,k\in\Re}
+              =\set{j\cdot\colvec[r]{1 \\ 0 \\ 0}
+                    +k\cdot\colvec[r]{0 \\ 1 \\ 1}\suchthat j,k\in\Re}
             \end{equation*}
        \end{exparts}
      \end{answer}
@@ -2692,7 +2704,7 @@ Note, as a check, that this result is indeed in $P$.
       \partsitem Represent this vector with respect to the concatenation
         of the two bases from the prior item.
         \begin{equation*}
-          \vec{v}=\colvec{1 \\ 1 \\ 2}
+          \vec{v}=\colvec[r]{1 \\ 1 \\ 2}
         \end{equation*}
       \partsitem Find the orthogonal projection of $\vec{v}$ into $P$
         by keeping only the $P$ part from the prior item.
@@ -2704,8 +2716,8 @@ Note, as a check, that this result is indeed in $P$.
         \partsitem Parametrizing the equation leads to this basis for
           $P$.
           \begin{equation*}
-            B_P=\sequence{\colvec{1 \\ 0 \\ 3},
-                          \colvec{0 \\ 1 \\ 2} }
+            B_P=\sequence{\colvec[r]{1 \\ 0 \\ 3},
+                          \colvec[r]{0 \\ 1 \\ 2} }
           \end{equation*}
         \partsitem Because $\Re^3$ is three-dimensional 
           and $P$ is two-dimensional, the complement $P^\perp$ must be
@@ -2714,78 +2726,78 @@ Note, as a check, that this result is indeed in $P$.
           \begin{equation*}
             P^\perp=\set{\colvec{x \\ y \\ z}
                          \suchthat
-                         \begin{pmatrix}
+                         \begin{mat}[r]
                            1  &0 &3  \\
                            0  &1 &2
-                         \end{pmatrix}
+                         \end{mat}
                          \colvec{x \\ y \\ z}
-                         =\colvec{0 \\ 0}\;}
+                         =\colvec[r]{0 \\ 0}\;}
           \end{equation*}
           gives this basis for $P^\perp$.
           \begin{equation*}
-            B_{P^\perp}=\sequence{\colvec{3 \\ 2 \\ -1} }
+            B_{P^\perp}=\sequence{\colvec[r]{3 \\ 2 \\ -1} }
           \end{equation*}
         \partsitem $ \displaystyle       
-             \colvec{1 \\ 1 \\ 2}=
-             (5/14)\cdot\colvec{1 \\ 0 \\ 3}+
-             (8/14)\cdot\colvec{0 \\ 1 \\ 2}+
-             (3/14)\cdot\colvec{3 \\ 2 \\ -1}$
-        \partsitem $\proj{\colvec{1 \\ 1 \\ 2}}{P}
-          =\colvec{5/14 \\ 8/14 \\ 31/14}$
+             \colvec[r]{1 \\ 1 \\ 2}=
+             (5/14)\cdot\colvec[r]{1 \\ 0 \\ 3}+
+             (8/14)\cdot\colvec[r]{0 \\ 1 \\ 2}+
+             (3/14)\cdot\colvec[r]{3 \\ 2 \\ -1}$
+        \partsitem $\proj{\colvec[r]{1 \\ 1 \\ 2}}{P}
+          =\colvec[r]{5/14 \\ 8/14 \\ 31/14}$
         \partsitem The matrix of the projection
           \begin{align*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0 \\
               0  &1 \\
               3  &2
-            \end{pmatrix}
+            \end{mat}
             \bigl(
-              \begin{pmatrix}
+              \begin{mat}[r]
                 1  &0  &3 \\
                 0  &1  &2 
-              \end{pmatrix}
-              \begin{pmatrix}
+              \end{mat}
+              \begin{mat}[r]
                 1  &0 \\
                 0  &1 \\
                 3  &2
-              \end{pmatrix}
+              \end{mat}
             \bigr)^{-1}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  &3 \\
               0  &1  &2 
-            \end{pmatrix}
+            \end{mat}
             &=
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0 \\
               0  &1 \\
               3  &2
-            \end{pmatrix}
-              \begin{pmatrix}
+            \end{mat}
+              \begin{mat}[r]
                 10  &6  \\
                 6   &5
-              \end{pmatrix}^{-1}
-            \begin{pmatrix}
+              \end{mat}^{-1}
+            \begin{mat}[r]
               1  &0  &3 \\
               0  &1  &2 
-            \end{pmatrix}                                     \\
+            \end{mat}                                     \\
             &=
             \frac{1}{14}
-            \begin{pmatrix}
+            \begin{mat}[r]
               5  &-6 &3  \\
              -6  &10 &2  \\
               3  &2  &13
-            \end{pmatrix}
+            \end{mat}
           \end{align*}
           when applied to the vector, yields the expected result.
           \begin{equation*}
             \frac{1}{14}
-            \begin{pmatrix}
+            \begin{mat}[r]
               5  &-6 &3  \\
              -6  &10 &2  \\
               3  &2  &13
-            \end{pmatrix}
-            \colvec{1 \\ 1 \\ 2}
-            =\colvec{5/14 \\ 8/14 \\ 31/14}
+            \end{mat}
+            \colvec[r]{1 \\ 1 \\ 2}
+            =\colvec[r]{5/14 \\ 8/14 \\ 31/14}
           \end{equation*}
       \end{exparts}
     \end{answer}
@@ -2799,9 +2811,9 @@ Note, as a check, that this result is indeed in $P$.
     $M$~part, and the way of \nearbytheorem{th:OrthProjMat}.
     For these cases, do all three ways.
      \begin{exparts}
-       \partsitem \( \vec{v}=\colvec{1 \\ -3},\quad
+       \partsitem \( \vec{v}=\colvec[r]{1 \\ -3},\quad
                 M=\set{\colvec{x \\ y}\suchthat x+y=0} \)
-       \partsitem \( \vec{v}=\colvec{0 \\ 1 \\ 2},\quad
+       \partsitem \( \vec{v}=\colvec[r]{0 \\ 1 \\ 2},\quad
                 M=\set{\colvec{x \\ y \\ z}
                         \suchthat \text{$x+z=0$ and $y=0$}} \)
      \end{exparts}
@@ -2809,27 +2821,27 @@ Note, as a check, that this result is indeed in $P$.
        \begin{exparts}
          \partsitem Parametrizing gives this.
            \begin{equation*}
-             M=\set{c\cdot\colvec{-1 \\ 1}\suchthat c\in\Re}
+             M=\set{c\cdot\colvec[r]{-1 \\ 1}\suchthat c\in\Re}
            \end{equation*}
            
            For the first way, we take the vector spanning the line $M$ to be
            \begin{equation*}
-             \vec{s}=\colvec{-1 \\ 1}
+             \vec{s}=\colvec[r]{-1 \\ 1}
            \end{equation*}
            and the \nearbydefinition{def:ProjIntoLine} formula gives this.
            \begin{equation*}
-             \proj{\colvec{1 \\ -3}}{\spanof{\vec{s}\,}}
-              =\frac{\colvec{1 \\ -3}\dotprod\colvec{-1 \\ 1}}{
-                     \colvec{-1 \\ 1}\dotprod\colvec{-1 \\ 1}}
-                \cdot\colvec{-1 \\ 1}
+             \proj{\colvec[r]{1 \\ -3}}{\spanof{\vec{s}\,}}
+              =\frac{\colvec[r]{1 \\ -3}\dotprod\colvec[r]{-1 \\ 1}}{
+                     \colvec[r]{-1 \\ 1}\dotprod\colvec[r]{-1 \\ 1}}
+                \cdot\colvec[r]{-1 \\ 1}
               =\frac{-4}{2}
-                \cdot\colvec{-1 \\ 1}
-              =\colvec{2 \\ -2}
+                \cdot\colvec[r]{-1 \\ 1}
+              =\colvec[r]{2 \\ -2}
            \end{equation*}
 
            For the second way, we fix
            \begin{equation*}
-             B_M=\sequence{\colvec{-1 \\ 1}}
+             B_M=\sequence{\colvec[r]{-1 \\ 1}}
            \end{equation*}
            and so
            (as in \nearbyexample{ex:OrthoCompOne} and~\ref{ex:OrthoCompTwo}, 
@@ -2838,18 +2850,18 @@ Note, as a check, that this result is indeed in $P$.
            \begin{equation*}
              M^\perp
              =\set{\colvec{u \\ v}\suchthat -1\cdot u+1\cdot v=0}
-             =\set{k\cdot\colvec{1 \\ 1}\suchthat k\in\Re}
+             =\set{k\cdot\colvec[r]{1 \\ 1}\suchthat k\in\Re}
              \qquad
-             B_{M^\perp}=\sequence{\colvec{1 \\ 1}}
+             B_{M^\perp}=\sequence{\colvec[r]{1 \\ 1}}
            \end{equation*}
            and representing the vector with respect to the concatenation
            gives this.
            \begin{equation*}
-             \colvec{1 \\ -3}=-2\cdot\colvec{-1 \\ 1}-1\cdot\colvec{1 \\ 1}
+             \colvec[r]{1 \\ -3}=-2\cdot\colvec[r]{-1 \\ 1}-1\cdot\colvec[r]{1 \\ 1}
            \end{equation*}
            Keeping the $M$~part yields the answer.
            \begin{equation*}
-             \proj{\colvec{1 \\ -3}}{M,M^\perp}=\colvec{2 \\ -2}
+             \proj{\colvec[r]{1 \\ -3}}{M,M^\perp}=\colvec[r]{2 \\ -2}
            \end{equation*}
 
            The third part is also a simple calculation
@@ -2858,162 +2870,162 @@ Note, as a check, that this result is indeed in $P$.
            \begin{multline*}
              A\left(\trans{A}A\right)^{-1}\trans{A}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 1
-             \end{pmatrix}
+             \end{mat}
              \left(
-               \begin{pmatrix}
+               \begin{mat}[r]
                  -1  &1
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  -1  \\
                   1
-               \end{pmatrix}
+               \end{mat}
              \right)^{-1}
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1  &1
-             \end{pmatrix}
+             \end{mat}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 1
-             \end{pmatrix}
-               \begin{pmatrix}
+             \end{mat}
+               \begin{mat}[r]
                  2
-               \end{pmatrix}^{-1}
-             \begin{pmatrix}
+               \end{mat}^{-1}
+             \begin{mat}[r]
                -1  &1
-             \end{pmatrix}               \\
+             \end{mat}               \\
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 1
-             \end{pmatrix}
-               \begin{pmatrix}
+             \end{mat}
+               \begin{mat}[r]
                  1/2
-               \end{pmatrix}
-             \begin{pmatrix}
+               \end{mat}
+             \begin{mat}[r]
                -1  &1
-             \end{pmatrix}               
+             \end{mat}               
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 1
-             \end{pmatrix}
-             \begin{pmatrix}
+             \end{mat}
+             \begin{mat}[r]
                -1/2  &1/2
-             \end{pmatrix}               
+             \end{mat}               
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                1/2  &-1/2  \\
               -1/2  &1/2  
-             \end{pmatrix}
+             \end{mat}
            \end{multline*}
            which of course gives the same answer.
            \begin{equation*}
-             \proj{\colvec{1 \\ -3}}{M}
+             \proj{\colvec[r]{1 \\ -3}}{M}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                1/2  &-1/2  \\
               -1/2  &1/2  
-             \end{pmatrix}
-             \colvec{1 \\ -3}
-             =\colvec{2 \\ -2}
+             \end{mat}
+             \colvec[r]{1 \\ -3}
+             =\colvec[r]{2 \\ -2}
            \end{equation*}
          \partsitem Parametrization gives this.
            \begin{equation*}
-             M=\set{c\cdot\colvec{-1 \\ 0 \\ 1}\suchthat c\in\Re}
+             M=\set{c\cdot\colvec[r]{-1 \\ 0 \\ 1}\suchthat c\in\Re}
            \end{equation*}
            With that, the formula for the first way gives this.
            \begin{equation*}
-             \frac{\colvec{0 \\ 1 \\ 2}\dotprod\colvec{-1 \\ 0 \\ 1}}{
-                   \colvec{-1 \\ 0 \\ 1}\dotprod\colvec{-1 \\ 0 \\ 1}}
-               \cdot\colvec{-1 \\ 0 \\ 1}
+             \frac{\colvec[r]{0 \\ 1 \\ 2}\dotprod\colvec[r]{-1 \\ 0 \\ 1}}{
+                   \colvec[r]{-1 \\ 0 \\ 1}\dotprod\colvec[r]{-1 \\ 0 \\ 1}}
+               \cdot\colvec[r]{-1 \\ 0 \\ 1}
              =\frac{2}{2}
-               \cdot\colvec{-1 \\ 0 \\ 1}
-             =\colvec{-1 \\ 0 \\ 1}
+               \cdot\colvec[r]{-1 \\ 0 \\ 1}
+             =\colvec[r]{-1 \\ 0 \\ 1}
            \end{equation*}
            To proceed by the second method we find $M^\perp$,
            \begin{equation*}
              M^\perp
              =\set{\colvec{u \\ v \\ w}\suchthat -u+w=0}
-             =\set{j\cdot\colvec{1 \\ 0 \\ 1}
-                   +k\cdot\colvec{0 \\ 1 \\ 0}\suchthat j,k\in\Re}
+             =\set{j\cdot\colvec[r]{1 \\ 0 \\ 1}
+                   +k\cdot\colvec[r]{0 \\ 1 \\ 0}\suchthat j,k\in\Re}
            \end{equation*}
            find the representation of the given vector with respect to the
            concatenation of the bases $B_M$ and $B_{M^\perp}$
            \begin{equation*}
-             \colvec{0 \\ 1 \\ 2}
-              =1\cdot\colvec{-1 \\ 0 \\ 1}
-               +1\cdot\colvec{1 \\ 0 \\ 1}
-               +1\cdot\colvec{0 \\ 1 \\ 0}
+             \colvec[r]{0 \\ 1 \\ 2}
+              =1\cdot\colvec[r]{-1 \\ 0 \\ 1}
+               +1\cdot\colvec[r]{1 \\ 0 \\ 1}
+               +1\cdot\colvec[r]{0 \\ 1 \\ 0}
            \end{equation*}
            and retain only the $M$~part.
            \begin{equation*}
-             \proj{\colvec{0 \\ 1 \\ 2}}{M}=1\cdot\colvec{-1 \\ 0 \\ 1}
-                       =\colvec{-1 \\ 0 \\ 1}
+             \proj{\colvec[r]{0 \\ 1 \\ 2}}{M}=1\cdot\colvec[r]{-1 \\ 0 \\ 1}
+                       =\colvec[r]{-1 \\ 0 \\ 1}
            \end{equation*}
            Finally, for the third method, the matrix calculation
            \begin{multline*}
              A\left(\trans{A}A\right)^{-1}\trans{A}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 0  \\  1
-             \end{pmatrix}
+             \end{mat}
              \bigl(
-               \begin{pmatrix}
+               \begin{mat}[r]
                  -1  &0  &1
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                  -1  \\
                   0  \\
                   1
-               \end{pmatrix}
+               \end{mat}
              \bigr)^{-1}
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1  &0  &1
-             \end{pmatrix}
+             \end{mat}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 0  \\  1
-             \end{pmatrix}
-               \begin{pmatrix}
+             \end{mat}
+               \begin{mat}[r]
                  2
-               \end{pmatrix}^{-1}
-             \begin{pmatrix}
+               \end{mat}^{-1}
+             \begin{mat}[r]
                -1  &0  &1
-             \end{pmatrix}              \\
+             \end{mat}              \\
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 0  \\  1
-             \end{pmatrix}
-               \begin{pmatrix}
+             \end{mat}
+               \begin{mat}[r]
                  1/2
-               \end{pmatrix}
-             \begin{pmatrix}
+               \end{mat}
+             \begin{mat}[r]
                -1  &0  &1
-             \end{pmatrix}
+             \end{mat}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1 \\ 0  \\  1
-             \end{pmatrix}
-             \begin{pmatrix}
+             \end{mat}
+             \begin{mat}[r]
                -1/2  &0  &1/2
-             \end{pmatrix}
+             \end{mat}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                1/2  &0  &-1/2  \\
                0    &0  &0     \\
               -1/2  &0  &1/2
-             \end{pmatrix}
+             \end{mat}
            \end{multline*}
            followed by matrix-vector multiplication
            \begin{equation*}
-             \proj{\colvec{0 \\ 1 \\ 2}}{M}
-             \begin{pmatrix}
+             \proj{\colvec[r]{0 \\ 1 \\ 2}}{M}
+             \begin{mat}[r]
                1/2  &0  &-1/2  \\
                0    &0  &0     \\
               -1/2  &0  &1/2
-             \end{pmatrix}
-             \colvec{0 \\ 1 \\ 2}
-             =\colvec{-1 \\ 0 \\ 1}
+             \end{mat}
+             \colvec[r]{0 \\ 1 \\ 2}
+             =\colvec[r]{-1 \\ 0 \\ 1}
            \end{equation*}
            gives the answer.
        \end{exparts}
@@ -3223,7 +3235,7 @@ Note, as a check, that this result is indeed in $P$.
         \end{equation*}
         with respect to the standard bases and show that
         \begin{equation*}
-          \colvec{1 \\ 2 \\ 3}
+          \colvec[r]{1 \\ 2 \\ 3}
         \end{equation*}
         is a member of the perp of the nullspace.
         Prove that  $\nullspace{f}^\perp$ is equal to the span of this 
@@ -3238,8 +3250,8 @@ Note, as a check, that this result is indeed in $P$.
         \end{equation*}
         with respect to the standard bases and show that
         \begin{equation*}
-          \colvec{1 \\ 2 \\ 3},
-          \;\colvec{4 \\ 5 \\ 6}
+          \colvec[r]{1 \\ 2 \\ 3},
+          \;\colvec[r]{4 \\ 5 \\ 6}
         \end{equation*}
         are both members of the perp of the nullspace.
         Prove that $\nullspace{f}^\perp$ is the span of these two.
@@ -3262,9 +3274,9 @@ Note, as a check, that this result is indeed in $P$.
           is this.
           \begin{equation*}
             \rep{f}{\stdbasis_3,\stdbasis_1}
-            =\begin{pmatrix}
+            =\begin{mat}[r]
                1  &2  &3
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           By the definition of $f$
           \begin{equation*}
@@ -3273,12 +3285,12 @@ Note, as a check, that this result is indeed in $P$.
                   \suchthat 1v_1+2v_2+3v_3=0}
             =\set{\colvec{v_1 \\ v_2 \\ v_3}
                   \suchthat 
-                   \colvec{1 \\ 2 \\ 3}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0}
+                   \colvec[r]{1 \\ 2 \\ 3}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0}
           \end{equation*}
           and this second description exactly says this.
           \begin{equation*}
             \nullspace{f}^\perp
-            =\spanof{\set{\colvec{1 \\ 2 \\ 3}}}
+            =\spanof{\set{\colvec[r]{1 \\ 2 \\ 3}}}
           \end{equation*}
         \partsitem The generalization is that for any $\map{f}{\Re^n}{\Re}$
            there is a vector $\vec{h}$ so that
@@ -3297,36 +3309,36 @@ Note, as a check, that this result is indeed in $P$.
            \begin{equation*}
              \rep{f}{\stdbasis_3,\stdbasis_2}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                1  &2  &3  \\
                4  &5  &6
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
            and so the nullspace is this set.
            \begin{equation*}
              \nullspace{f}
              \set{\colvec{v_1 \\ v_2 \\ v_3}
                   \suchthat
-                   \;\begin{pmatrix}
+                   \;\begin{mat}[r]
                      1  &2  &3  \\
                      4  &5  &6
-                   \end{pmatrix}
+                   \end{mat}
                    \colvec{v_1 \\ v_2 \\ v_3}
-                   =\colvec{0  \\ 0}\;}
+                   =\colvec[r]{0  \\ 0}\;}
            \end{equation*}
            That description makes clear that
            \begin{equation*}
-             \colvec{1 \\ 2 \\ 3},
-              \,\colvec{4 \\ 5 \\ 6}\in\nullspace{f}^\perp
+             \colvec[r]{1 \\ 2 \\ 3},
+              \,\colvec[r]{4 \\ 5 \\ 6}\in\nullspace{f}^\perp
            \end{equation*}
            and since $\nullspace{f}^\perp$ is a subspace of $\Re^n$,
            the span of the two vectors is a subspace of the perp of 
            the nullspace.
            To see that this containment is an equality, take
            \begin{equation*}
-             M=\spanof{\set{\colvec{1 \\ 2 \\ 3}}}
+             M=\spanof{\set{\colvec[r]{1 \\ 2 \\ 3}}}
              \qquad
-             N=\spanof{\set{\colvec{4 \\ 5 \\ 6}}}
+             N=\spanof{\set{\colvec[r]{4 \\ 5 \\ 6}}}
            \end{equation*}
            in the third item of \nearbyexercise{exer:AlgOfPerps}, as suggested
            in the hint.

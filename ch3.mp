@@ -891,10 +891,10 @@ beginfig(22) % \pi/6 rotation map
   z1=((-3+(sqrt 3))*0.5*w,(1+(3*(sqrt 3)))*0.5*v);
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.rt(btex {\scriptsize $\colvec{1 \\ 3}$} etex,z0);
+    label.rt(btex {\scriptsize $\colvec[r]{1 \\ 3}$} etex,z0);
   drawarrow ((0w,0v)--z1) shifted codomainshift;
     z2=(0w,3v);
-    label.rt(btex \makebox[0pt][l]{\scriptsize $\colvec{(-3+\sqrt{3})/2 \\
+    label.rt(btex \makebox[0pt][l]{\scriptsize $\colvec[r]{(-3+\sqrt{3})/2 \\
                                         (1+3\sqrt{3})/2}$} etex,
                z2 shifted codomainshift);
 
@@ -1019,10 +1019,10 @@ beginfig(25) % (2,2,1) and its projection
 
   pickup pencircle scaled (line_width_light);
   drawarrow z0--z1;
-    label.rt(btex \raisebox{0ex}[0pt][0pt]{\scriptsize $\colvec{1 \\ 2 \\ 2}$} etex,z1);
+    label.rt(btex \raisebox{0ex}[0pt][0pt]{\scriptsize $\colvec[r]{1 \\ 2 \\ 2}$} etex,z1);
   pickup pencircle scaled (line_width_dark);
   drawarrow z0--z2;
-    %label.lrt(btex {\scriptsize $\colvec{1 \\ 2 \\ 0}$} etex,z2);
+    %label.lrt(btex {\scriptsize $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);
   draw_action_arrow((z1+(1pt,0))--(z2+(1pt,0)));
   % shift so y-axis is on TeX's baseline (to line this pic with #26)
   show ypart(llcorner currentpicture);
@@ -1064,10 +1064,10 @@ beginfig(26) % (2,2,-1) and its projection
 
   pickup pencircle scaled (line_width_light);
   drawarrow z0--z1;
-    label.rt(btex \raisebox{0ex}[0pt][0pt]{\scriptsize $\colvec{1 \\ 2 \\ -1}$} etex,z1);
+    label.rt(btex \raisebox{0ex}[0pt][0pt]{\scriptsize $\colvec[r]{1 \\ 2 \\ -1}$} etex,z1);
   pickup pencircle scaled (line_width_dark);
   drawarrow z0--z2;
-    %label.lrt(btex {\scriptsize $\colvec{1 \\ 2 \\ 0}$} etex,z2);
+    %label.lrt(btex {\scriptsize $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);
   draw_action_arrow((z1+(1pt,0))--(z2+(1pt,0)));
   % shift so y-axes of this and prior one line up; use raisebox in TeX file.
   show ypart(llcorner currentpicture);
@@ -1188,7 +1188,7 @@ beginfig(29) % projection picture like stick figure's
   draw z0--z2 withcolor white;
   pickup pencircle scaled line_width_dark; % vector projected to
   drawarrow z0--z2 cutafter bpath cps;
-    label.bot(btex {\small $c_{\vec{p}}\vec{s}$} etex,z2);
+    label.bot(btex {\small $c_{\vec{p}}\,\vec{s}$} etex,z2);
 
   z5=z1 rotated 55;
   z6=whatever[z0,z5]; y6=ypart(point 0 of yaxis); % endpoint of line
@@ -1215,7 +1215,7 @@ beginfig(29) % projection picture like stick figure's
   %draw perppath dashed withdots scaled .5;
   pickup pencircle scaled line_width_dark; % 
   drawarrow z2--z10 cutbefore bpath cps cutafter bpath v; 
-  label.rt(btex {\small $\vec{v}-c_{\vec{p}}\vec{s}$} etex,.618[z2,z10]);
+  label.rt(btex {\small $\vec{v}-c_{\vec{p}}\,\vec{s}$} etex,.618[z2,z10]);
 endfig;
 
 
@@ -4281,14 +4281,14 @@ beginfig(97) % compound map
   
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.urt(btex {\scriptsize $\colvec{\sqrt{3}/2 \\ 1/2}$} etex,z0);
+    label.urt(btex {\scriptsize $\colvec[r]{\sqrt{3}/2 \\ 1/2}$} etex,z0);
   drawarrow ((0w,0v)--z1) shifted codomainshift;
-    label.urt(btex {\scriptsize $\colvec{(\sqrt{3}+1)/2 \\ 1/2}$} etex,z1 shifted codomainshift);
+    label.urt(btex {\scriptsize $\colvec[r]{(\sqrt{3}+1)/2 \\ 1/2}$} etex,z1 shifted codomainshift);
   drawarrow ((0w,0v)--z2) shifted compoundshift;
-    label.urt(btex {\scriptsize $\colvec{\sqrt{2}(\sqrt{3}+1)/2 \\ \sqrt{2}/2}$} etex,
+    label.urt(btex {\scriptsize $\colvec[r]{\sqrt{2}(\sqrt{3}+1)/2 \\ \sqrt{2}/2}$} etex,
                z2 shifted compoundshift);
   drawarrow ((0w,0v)--z3) shifted d_compoundshift;
-    label.lrt(btex {\scriptsize $\colvec{\sqrt{2}(\sqrt{3}+1)/4 \\ \sqrt{2}(1-\sqrt{3})/4}$} etex,
+    label.lrt(btex {\scriptsize $\colvec[r]{\sqrt{2}(\sqrt{3}+1)/4 \\ \sqrt{2}(1-\sqrt{3})/4}$} etex,
                z3 shifted d_compoundshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
