@@ -12,5 +12,5 @@ data=[[1870,268.8],
       [1950,241.4]]
 var('slope,intercept')
 model(x) = slope*x+intercept
-g=points(data)+plot(model(intercept=find_fit(data,model)[0].rhs(),slope=find_fit(data,model)[1].rhs()),(x,1860,1960),color='red',figsize=3)
+g=points(data)+plot(model(intercept=find_fit(data,model)[0].rhs(),slope=find_fit(data,model)[1].rhs()),(x,1860,1960),color='red',figsize=3,fontsize=7)
 g.save("four_minute_mile.png")

@@ -2107,14 +2107,14 @@ beginfig(42) % least squares coin flip
   draw z0--z1;  % flips axis (x-axis)
     label.lrt(btex {\small \textit{flips}} etex,z1);
     updown_ticks(9,(10w,0v),(10w,0v));
-    label.bot(btex {\tiny 30} etex,(30w,0v));
-    label.bot(btex {\tiny 60} etex,(60w,0v));
-    label.bot(btex {\tiny 90} etex,(90w,0v));
+    label.bot(btex {\scriptsize 30} etex,(30w,0v));
+    label.bot(btex {\scriptsize 60} etex,(60w,0v));
+    label.bot(btex {\scriptsize 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
     label.ulft(btex {\small \textit{heads}} etex,z2);
     sidetoside_ticks(6,(0w,10v),(0w,10v));
-    label.lft(btex {\tiny 30} etex,(0w,30v));
-    label.lft(btex {\tiny 60} etex,(0w,60v));
+    label.lft(btex {\scriptsize 30} etex,(0w,30v));
+    label.lft(btex {\scriptsize 60} etex,(0w,60v));
 
   % the line
   pickup pencircle scaled line_width_light;
@@ -2194,16 +2194,16 @@ beginfig(44) % least squares money denom vs life
   draw z0--z1;  % denom axis (x-axis)
     label.lrt(btex {\small \textit{denom}} etex,z1);
     updown_ticks(10,(10w,0v),(10w,0v));
-    label.bot(btex {\tiny 10} etex,(10w,0v));
-    label.bot(btex {\tiny 30} etex,(30w,0v));
-    label.bot(btex {\tiny 50} etex,(50w,0v));
-    label.bot(btex {\tiny 70} etex,(70w,0v));
-    label.bot(btex {\tiny 90} etex,(90w,0v));
+    label.bot(btex {\scriptsize 10} etex,(10w,0v));
+    label.bot(btex {\scriptsize 30} etex,(30w,0v));
+    label.bot(btex {\scriptsize 50} etex,(50w,0v));
+    label.bot(btex {\scriptsize 70} etex,(70w,0v));
+    label.bot(btex {\scriptsize 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
     label.ulft(btex {\small \textit{life (yrs)}} etex,z2);
     sidetoside_ticks(8,(0w,1v),(0w,1v));
-    label.lft(btex {\tiny 4} etex,(0w,4v));
-    label.lft(btex {\tiny 8} etex,(0w,8v));
+    label.lft(btex {\scriptsize 4} etex,(0w,4v));
+    label.lft(btex {\scriptsize 8} etex,(0w,8v));
 
   % the line
   pickup pencircle scaled line_width_light;
@@ -2245,22 +2245,22 @@ beginfig(45) % least squares men's mile
     draw (z0+(5w,0v))--z0 dashed withdots scaled .25;
     label.lrt(btex {\small \textit{year}} etex,z1);
     updown_ticks(15,(10w,0v),(10w,0v));
-    label.bot(btex {\tiny 1870} etex,(20w,0v));
-    label.bot(btex {\tiny 1890} etex,(40w,0v));
-    label.bot(btex {\tiny 1910} etex,(60w,0v));
-    label.bot(btex {\tiny 1930} etex,(80w,0v));
-    label.bot(btex {\tiny 1950} etex,(100w,0v));
-    label.bot(btex {\tiny 1970} etex,(120w,0v));
-    label.bot(btex {\tiny 1990} etex,(140w,0v));
+    label.bot(btex {\scriptsize 1870} etex,(20w,0v));
+    label.bot(btex {\scriptsize 1890} etex,(40w,0v));
+    label.bot(btex {\scriptsize 1910} etex,(60w,0v));
+    label.bot(btex {\scriptsize 1930} etex,(80w,0v));
+    label.bot(btex {\scriptsize 1950} etex,(100w,0v));
+    label.bot(btex {\scriptsize 1970} etex,(120w,0v));
+    label.bot(btex {\scriptsize 1990} etex,(140w,0v));
   pickup pensquare scaled line_width_light;
   draw (z0+(0w,5v))--z2;  % world record axis (y-axis)
     pickup pencircle scaled line_width_light;
     draw (z0+(0w,5v))--z0 dashed withdots scaled .25;
     label.ulft(btex {\small \textit{seconds}} etex,z2);
     sidetoside_ticks(6,(0w,10v),(0w,10v));
-    label.lft(btex {\tiny 220} etex,(0w,10v));
-    label.lft(btex {\tiny 240} etex,(0w,30v));
-    label.lft(btex {\tiny 260} etex,(0w,50v));
+    label.lft(btex {\scriptsize 220} etex,(0w,10v));
+    label.lft(btex {\scriptsize 240} etex,(0w,30v));
+    label.lft(btex {\scriptsize 260} etex,(0w,50v));
     
   % the line
   pickup pencircle scaled line_width_light;

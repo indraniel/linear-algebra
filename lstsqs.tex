@@ -66,27 +66,27 @@ Minimizing the distance
 between the given vector and the vector used as the right-hand side
 minimizes the total of these vertical lengths,
 and consequently
-we say that the line has been
-obtained through \definend{fitting by least-squares}\index{least squares}
+we say that the line comes from
+\definend{fitting by least-squares}\index{least squares}
 \begin{center}  \small
   \includegraphics{ch3.43}
 \end{center}
-(the vertical scale here has been exaggerated ten times
+(we have exaggerated the vertical scale by ten
 to make the lengths visible).
 
-We arranged the equation above so that the line 
-must pass through \( (0,0) \)
+In the above equation the line 
+must pass through \( (0,0) \),
 because we take it to be
 the line whose slope is this coin's true proportion
 of heads to flips. 
 We can also handle cases where the line need not
 pass through the origin.
 
-For example, the different denominations of U.S.\ money have different average 
+For example, the different denominations of US\ money have different average 
 times in circulation.\cite{FedReserve}
-(The $\$2$~bill is left off as a special case because 
+(The $\$2$~bill is a special case because 
 Americans mistakenly believe that 
-it is a collectible, and do not circulate these bills.)
+it is collectible and do not circulate these bills.)
 How long should a $\$25$~bill last?
 \begin{center}  \small
   \begin{tabular}{r|cccccc}
@@ -97,7 +97,7 @@ How long should a $\$25$~bill last?
         &$22.0$ &$15.9$  &$18.3$   &$24.3$   &$55.4$   &$88.8$  \\
   \end{tabular}
 \end{center}
-The plot (see below) looks roughly linear.
+The data plot below looks roughly linear.
 It isn't a perfect line, i.e.,
 the linear system with equations $b+1m=1.5$, \ldots, $b+100m=20$ has no 
 solution, but we can again use orthogonal projection 
@@ -122,16 +122,16 @@ that coefficients $b$ and $m$ so that the linear combination
 of the columns of $A$ is as close as possible to the vector $\vec{v}$ 
 are the entries of $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 Some calculation
-gives an intercept of $b=1.05$ and a slope
-of $m= 0.18$.
+gives an intercept of $b=14.16$ and a slope
+of $m= 0.75$.
 \begin{center}  \small
   \includegraphics{ch3.44}
 \end{center}
 Plugging $x=25$ into the equation of the line shows that such a 
-bill should last between five and six years.
+bill should last about two and three-quarters years.
 
 We close by considering 
-the progression of world record times for the men's mile race.\cite{Oakley}
+the progression of world record times for the men's mile race \cite{Oakley}.
 In the early 1900's many people wondered when
 this record would fall below the four minute mark.
 Here are the times that were in force on January first
@@ -139,7 +139,7 @@ of each decade through the first half of that century.
 (Restricting ourselves to the times at the start of 
 each decade reduces the data entry burden 
 and gives much the same result.
-There are a number of different sequences of times from competing standards
+There are different sequences of times from competing standards
 bodies but these are from \cite{WikipediaMensMile}.)
 \begin{center} \small
   \begin{tabular}{r|ccccccccc}
@@ -150,7 +150,7 @@ bodies but these are from \cite{WikipediaMensMile}.)
         &$255.6$  &$252.6$  &$250.4$ &$246.4$ &$241.4$
   \end{tabular}  
 \end{center}
-We can use this data to predict the date for $240$ seconds, and 
+We can use this to predict the date for $240$ seconds, and 
 we can then compare to the actual date.
 
 %\begin{center}
@@ -166,27 +166,27 @@ we can then compare to the actual date.
 %      $246.4$  &$241.4$  &$234.5$  &$231.1$  &$229.0$  &$226.3$ &$223.1$
 %  \end{tabular}
 
-A few minutes in \textit{Sage} gives the slope and intercept.
+\textit{Sage} gives the slope and intercept.
 % see mile.sage
-\begin{indented}\small
-\begin{verbatim}
-sage: data=[[1870,268.8], [1880,264.5], [1890,258.4], [1900,255.6],  
-....:    [1910,255.6], [1920,252.6], [1930,250.4], [1940,246.4], 
-....:    [1950,241.4]] 
+\begin{lstlisting}
+sage: data=[[1870,268.8], [1880,264.5], [1890,258.4],   
+....:  [1900,255.6], [1910,255.6], [1920,252.6],   
+....:  [1930,250.4], [1940,246.4], [1950,241.4]] 
 sage: var('slope,intercept')
 (slope, intercept)
 sage: model(x) = slope*x+intercept
 sage: find_fit(data,model)
-[intercept == 837.0872267857003, slope == -0.30483333572258886]
-\end{verbatim}
-\end{indented}
-Plotting the data along with the line of best fit
-\begin{indented}\small
-\begin{verbatim}
-sage: points(data)+plot(model(intercept=find_fit(data,model)[0].rhs(),
-....:   slope=find_fit(data,model)[1].rhs()),(x,1860,1960),color='red')  
-\end{verbatim}
-\end{indented}
+[intercept == 837.0872267857003, 
+  slope == -0.30483333572258886]
+\end{lstlisting}
+(People in the year $0$ didn't run very fast!)
+Plotting the data and the line
+\begin{lstlisting}
+sage: points(data)
+....:  +plot(model(intercept=find_fit(data,model)[0].rhs(),
+....:    slope=find_fit(data,model)[1].rhs()),
+....:    (x,1860,1960),color='red',figsize=3,fontsize=7)  
+\end{lstlisting}
 gives this graph.  
 \begin{center}
   % black and white
@@ -195,7 +195,7 @@ gives this graph.
   \includegraphics{four_minute_mile.png}
 \end{center}
 Note that the progression is surprisingly linear.
-Our prediction is $1958.73$; the actual date of Roger Bannister's
+We predict $1958.73$; the actual date of Roger Bannister's
 record was 1954-May-06.
 
 %
@@ -612,13 +612,102 @@ record was 1954-May-06.
 %  \item 
 %    Look up the records for men's long jump.
 %    How far out-of-trend was Bob Beamon's record?
+  \item
+    \textit{(This illustrates that there are data sets for which a 
+    linear model is not right,  and that the line of best fit doesn't
+    in that case have any predictive value.)} 
+    In a highway resturant a trucker told me that his boss often sends 
+    him by a roundabout route, using more gas
+    but paying lower bridge tolls.
+    He said that New York state sets the bridge 
+    toll so that for each bridge across the Hudson, 
+    the extra gas to get there
+    from New York City balances the lower toll.
+    This table, from \cite{CostOfTolls} and \cite{GoogleMaps},
+    lists for each toll crossing of the Hudson River, 
+    the distance to drive from Times Square in miles and the cost in US~dollars 
+    for a passenger car
+    (if a crossings has a one-way toll then it shows half that number). 
+    \begin{center}
+      \small
+      % \begin{tabular}{lrr}
+      %    \multicolumn{1}{c}{\textit{Crossing}}
+      %      &\multicolumn{1}{c}{\textit{Distance}}
+      %      &\textit{Toll}  \\ \hline
+      %    Lincoln Tunnel &$2$  &$6.00$ \\
+      %    Holland Tunnel &$7$  &$6.00$  \\
+      %    George Washington Bridge &$8$  &$6.00$  \\
+      %    Verrazano-Narrows Bridge &$16$  &$6.50$  \\
+      %    Tappan Zee Bridge &$27$  &$2.50$  \\
+      %    Bear Mountain Bridge &$47$  &$1.00$  \\
+      %    Newburgh-Beacon Bridge &$67$  &$1.00$  \\
+      %    Mid-Hudson Bridge &$82$  &$1.00$  \\
+      %    Kingston-Rhinecliff Bridge &$102$  &$1.00$  \\
+      %    Rip Van Winkle Bridge &$120$  &$1.00$  
+      % \end{tabular}
+      \begin{tabular}{ccc}
+         \textit{Crossing}
+           &\textit{Distance}
+           &\textit{Toll}  \\ \hline
+         \begin{tabular}{@{}l@{}}
+           Lincoln Tunnel \\
+           Holland Tunnel  \\
+           George Washington Bridge  \\
+           Verrazano-Narrows Bridge   \\
+           Tappan Zee Bridge  \\
+           Bear Mountain Bridge  \\
+           Newburgh-Beacon Bridge  \\
+           Mid-Hudson Bridge   \\
+           Kingston-Rhinecliff Bridge  \\
+           Rip Van Winkle Bridge   
+         \end{tabular}
+         &\begin{tabular}{@{}r@{}}
+           $2$ \\
+           $7$  \\
+           $8$  \\
+           $16$  \\
+           $27$   \\
+           $47$   \\
+           $67$   \\
+           $82$  \\
+           $102$  \\
+           $120$ 
+          \end{tabular}  
+         &\begin{tabular}{@{}r@{}}
+           $6.00$ \\
+           $6.00$  \\
+           $6.00$  \\
+           $6.50$  \\
+           $2.50$  \\
+           $1.00$  \\
+           $1.00$  \\
+           $1.00$  \\
+           $1.00$  \\
+           $1.00$ 
+         \end{tabular} 
+      \end{tabular}
+    \end{center}
+    Find the line of best fit and graph the data to
+    show that the driver was practicing on my credulity.
+    \begin{answer}
+      \textit{Sage} gives the line of best fit as
+      $\text{toll}=-0.05\text{dist}+5.63$.
+      But the graph shows that the equation has no predictive value.
+      \begin{center}
+        \includegraphics{bridges.png}
+      \end{center}
+      Apparently a better model is that 
+      (with only one intermediate exception) crossings in the city
+      all cost roughly the same as each other,
+      and crossings upstate all cost the same as each other.
+    \end{answer}
   \item 
     When the space shuttle Challenger exploded in 1986, one of the
-    criticisms made of NASA's decision to launch was in the way the
-    analysis of number of O-ring failures versus temperature was made
-    (of course, O-ring failure caused the explosion).
+    criticisms made of NASA's decision to launch was in the way they did the
+    analysis of number of O-ring failures versus temperature
+    (O-ring failure caused the explosion).
     Four O-ring failures will cause the rocket to explode.
-    NASA had data from 24 previous flights.
+    NASA had data from $24$ previous flights.
     \begin{center}
       \begin{tabular}{r|rrrrrrrrrrr}
          \textit{temp\ ${}^\circ$F} 
@@ -647,7 +736,7 @@ record was 1954-May-06.
         when the number of failures will exceed four.
     \end{exparts}
     Which do you think is the more accurate method of predicting?
-    (An excellent discussion appears in \cite{Stats}.)
+    (An excellent discussion is in \cite{Stats}.)
     \begin{answer}
       \begin{exparts}
         \partsitem A computer algebra system like MAPLE or MuPAD will give
@@ -746,8 +835,8 @@ record was 1954-May-06.
         logarithm of the distance.
         Does this look like a line?
       \partsitem The asteroid belt between Mars and
-        Jupiter is thought
-        to be what is left of a planet that broke apart.
+        Jupiter is 
+        what is left of a planet that broke apart.
         Renumber so that Jupiter is $6$, Saturn is $7$, and Uranus is
         $8$, and plot against the log again.
         Does this look better?
@@ -811,70 +900,70 @@ record was 1954-May-06.
             The actual distance is about $39.503$.
         \end{exparts}
       \end{answer}
-  \item 
-    William Bennett has proposed an Index of Leading Cultural Indicators
-    for the US (\cite{Bennett}, in 1993).
-    Among the statistics cited are the average daily hours spent watching TV, 
-    and the average combined SAT scores.
-    \begin{center}
-      \begin{tabular}{r|cccccccc}
-         &1960   &1965   &1970   &1975   &1980   &1985   &1990   &1992  
-            \\ \hline
-         \textit{TV}
-         &5:06   &5:29   &5:56   &6:07   &6:36   &7:07   &6:55   &7:04 \\
-         \textit{SAT}
-         &$975$  &$969$  &$948$  &$910$  &$890$  &$906$  &$900$  &$899$ 
-      \end{tabular} 
-    \end{center}
-    Suppose that a cause and effect relationship is proposed between
-    the time spent watching TV and the decline in SAT scores (in this article,
-    Mr.~Bennett does not argue that there is a direct connection).
-    \begin{exparts}
-     \partsitem Find the line of best fit relating the independent variable
-       of average daily TV hours to the dependent variable of SAT scores.
-     \partsitem Find the most recent estimate of the average daily TV hours  
-       (Bennett's cites Neilsen Media Research as the source of these 
-       estimates).
-       Estimate the associated SAT score.
-       How close is your estimate to the actual average?
-       (Warning: a change has been made recently in the SAT,
-       so you should investigate whether some adjustment needs to be made to
-       the reported average to make a valid comparison.)
-    \end{exparts}
-    \begin{answer}
-      \begin{exparts}
-        \partsitem With this input
-          \begin{equation*}
-            A = 
-            \begin{mat}[r]
-              1 & 306 \\
-              1 & 329 \\
-              1 & 356 \\
-              1 & 367 \\
-              1 & 396 \\
-              1 & 427 \\
-              1 & 415 \\
-              1 & 424
-            \end{mat}
-            \qquad
-            b = 
-            \colvec[r]{975 \\
-                    969 \\
-                    948 \\
-                    910 \\
-                    890 \\
-                    906 \\
-                    900 \\
-                    899}
-          \end{equation*}
-          MAPLE gives the intercept 
-          $b=34009779/28796\approx 1181.0591$ and the slope 
-          $m=-19561/28796\approx -0.6793$.
-          \begin{center}  \small
-            \includegraphics{ch3.94}
-       \end{center}
-      \end{exparts}
-    \end{answer}
+  % \item 
+  %   William Bennett has proposed an Index of Leading Cultural Indicators
+  %   for the US (\cite{Bennett}, in 1993).
+  %   Among the statistics cited are the average daily hours spent watching TV, 
+  %   and the average combined SAT scores.
+  %   \begin{center}
+  %     \begin{tabular}{r|cccccccc}
+  %        &1960   &1965   &1970   &1975   &1980   &1985   &1990   &1992  
+  %           \\ \hline
+  %        \textit{TV}
+  %        &5:06   &5:29   &5:56   &6:07   &6:36   &7:07   &6:55   &7:04 \\
+  %        \textit{SAT}
+  %        &$975$  &$969$  &$948$  &$910$  &$890$  &$906$  &$900$  &$899$ 
+  %     \end{tabular} 
+  %   \end{center}
+  %   Suppose that a cause and effect relationship is proposed between
+  %   the time spent watching TV and the decline in SAT scores (in this article,
+  %   Mr.~Bennett does not argue that there is a direct connection).
+  %   \begin{exparts}
+  %    \partsitem Find the line of best fit relating the independent variable
+  %      of average daily TV hours to the dependent variable of SAT scores.
+  %    \partsitem Find the most recent estimate of the average daily TV hours  
+  %      (Bennett's cites Neilsen Media Research as the source of these 
+  %      estimates).
+  %      Estimate the associated SAT score.
+  %      How close is your estimate to the actual average?
+  %      (Warning: a change has been made recently in the SAT,
+  %      so you should investigate whether some adjustment needs to be made to
+  %      the reported average to make a valid comparison.)
+  %   \end{exparts}
+  %   \begin{answer}
+  %     \begin{exparts}
+  %       \partsitem With this input
+  %         \begin{equation*}
+  %           A = 
+  %           \begin{mat}[r]
+  %             1 & 306 \\
+  %             1 & 329 \\
+  %             1 & 356 \\
+  %             1 & 367 \\
+  %             1 & 396 \\
+  %             1 & 427 \\
+  %             1 & 415 \\
+  %             1 & 424
+  %           \end{mat}
+  %           \qquad
+  %           b = 
+  %           \colvec[r]{975 \\
+  %                   969 \\
+  %                   948 \\
+  %                   910 \\
+  %                   890 \\
+  %                   906 \\
+  %                   900 \\
+  %                   899}
+  %         \end{equation*}
+  %         MAPLE gives the intercept 
+  %         $b=34009779/28796\approx 1181.0591$ and the slope 
+  %         $m=-19561/28796\approx -0.6793$.
+  %         \begin{center}  \small
+  %           \includegraphics{ch3.94}
+  %      \end{center}
+  %     \end{exparts}
+  %   \end{answer}
 %  \item
 %    Derive the 
 %    \definend{normal equations}\index{least squares!normal equations}%
