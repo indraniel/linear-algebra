@@ -6,7 +6,7 @@
 \index{line of best fit|(}
 \index{linear equation!inconsistent systems}
 \textit{This Topic requires the formulas from the subsections on 
-        Orthogonal Projection Into a Line, and Projection Into a
+        Orthogonal Projection Into a Line and Projection Into a
         Subspace.} 
 
 Scientists are often presented with a system that 
@@ -36,22 +36,23 @@ So we expect that the system derived from the experiment has no solution.
     90m  &=  &51
   \end{linsys}
 \end{equation*}
-That is, the vector of experimental data is not in the subspace
-of solutions.
+That is, the vector of data that we collected is not in the subspace
+where in theory we should find it.
 \begin{equation*}
   \colvec{16 \\ 34 \\ 51}\not\in
     \set{ m\colvec{30 \\ 60 \\ 90}  \suchthat m\in\Re}
 \end{equation*}
-However, we want to find the~$m$ that most nearly works.
+We have to do something, so we look for the~$m$ that most nearly works.
 An orthogonal projection of the data vector into the line subspace
-gives our best guess.
+gives this best guess.
 \begin{equation*}
-  \frac{ \colvec{16 \\ 34 \\ 51}\dotprod\colvec{30 \\ 60 \\ 90} }{
-           \colvec{30 \\ 60 \\ 90}\dotprod\colvec{30 \\ 60 \\ 90} }
-     \cdot\colvec{30 \\ 60 \\ 90}
-  =\frac{7110}{12600}\cdot \colvec{30 \\ 60 \\ 90}
+  \frac{ \colvec[r]{16 \\ 34 \\ 51}\dotprod\colvec[r]{30 \\ 60 \\ 90} }{
+           \colvec[r]{30 \\ 60 \\ 90}\dotprod\colvec[r]{30 \\ 60 \\ 90} }
+     \cdot\colvec[r]{30 \\ 60 \\ 90}
+  =\frac{7110}{12600}\cdot \colvec[r]{30 \\ 60 \\ 90}
 \end{equation*}
-The estimate (\( m=7110/12600\approx 0.56 \)) is a bit high but not much, 
+The estimate (\( m=7110/12600\approx 0.56 \)) is a bit more than one half,
+but not much, 
 so probably the penny is fair enough. 
 
 The line with the slope \( m\approx 0.56 \)
@@ -82,14 +83,18 @@ We can also handle cases where the line need not
 pass through the origin.
 
 For example, the different denominations of U.S.\ money have different average 
-times in circulation
-(the $\$2$~bill is left off as a special case).
-How long should we expect a $\$25$~bill to last?
+times in circulation.\cite{FedReserve}
+(The $\$2$~bill is left off as a special case because 
+Americans mistakenly believe that 
+it is a collectible, and do not circulate these bills.)
+How long should a $\$25$~bill last?
 \begin{center}  \small
   \begin{tabular}{r|cccccc}
-     \textit{denomination}          &$1$   &$5$  &$10$  &$20$  &$50$  &$100$ \\
+     \textit{denomination}          
+        &$1$   &$5$    &$10$     &$20$     &$50$     &$100$ \\
       \hline
-     \textit{average life (years)}  &$1.5$ &$2$  &$3$   &$5$   &$9$   &$20$  \\
+     \textit{average life (mos)}  
+        &$22.0$ &$15.9$  &$18.3$   &$24.3$   &$55.4$   &$88.8$  \\
   \end{tabular}
 \end{center}
 The plot (see below) looks roughly linear.
@@ -101,16 +106,16 @@ Consider the matrix of coefficients of that linear system and also its
 vector of constants, the experimentally-determined values.
 \begin{equation*}
   A=
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &1  \\
     1  &5  \\
     1  &10  \\
     1  &20  \\
     1  &50  \\
     1  &100  
-  \end{pmatrix}
+  \end{mat}
   \qquad
-  \vec{v}=\colvec{1.5 \\ 2 \\ 3 \\ 5 \\ 9 \\ 20}
+  \vec{v}=\colvec[r]{22.0 \\ 15.9 \\ 18.3 \\ 24.3 \\ 55.4 \\ 88.8}
 \end{equation*}
 The ending result in the subsection on Projection into a Subspace says
 that coefficients $b$ and $m$ so that the linear combination
@@ -162,6 +167,7 @@ we can then compare to the actual date.
 %  \end{tabular}
 
 A few minutes in \textit{Sage} gives the slope and intercept.
+% see mile.sage
 \begin{indented}\small
 \begin{verbatim}
 sage: data=[[1870,268.8], [1880,264.5], [1890,258.4], [1900,255.6],  
@@ -183,8 +189,10 @@ sage: points(data)+plot(model(intercept=find_fit(data,model)[0].rhs(),
 \end{indented}
 gives this graph.  
 \begin{center}
-  \scannedpicture{four_minute_mile_greyscale}
-  % or the color version: \scannedpicture{four_minute_mile}
+  % black and white
+  % \scannedpicture{four_minute_mile_greyscale}
+  % or the color version: 
+  \includegraphics{four_minute_mile.png}
 \end{center}
 Note that the progression is surprisingly linear.
 Our prediction is $1958.73$; the actual date of Roger Bannister's
@@ -211,7 +219,7 @@ record was 1954-May-06.
 %With this input
 %\begin{equation*}
 %  A= 
-%  \begin{pmatrix}
+%  \begin{mat}
 %    1 & 1860 \\
 %    1 & 1870 \\
 %%    1 & 1880 \\
@@ -228,7 +236,7 @@ record was 1954-May-06.
 %    \vdots &\vdots  \\
 %    1 &1990  \\
 %    1 &2000
-%  \end{pmatrix}
+%  \end{mat}
 %  \qquad
 %  \vec{v} = \colvec{280.0 \\
 %                    268.8 \\
@@ -464,18 +472,18 @@ record was 1954-May-06.
       \end{equation*}
       Projecting into the linear subspace gives this
       \begin{equation*}
-        \frac{\colvec{4 \\ 9 \\ 13 \\ 17 \\20}
+        \frac{\colvec[r]{4 \\ 9 \\ 13 \\ 17 \\20}
           \dotprod
-          \colvec{8  \\ 16 \\ 24 \\ 32 \\ 40}}{%
-          \colvec{8  \\ 16 \\ 24 \\ 32 \\ 40}
+          \colvec[r]{8  \\ 16 \\ 24 \\ 32 \\ 40}}{%
+          \colvec[r]{8  \\ 16 \\ 24 \\ 32 \\ 40}
           \dotprod
-          \colvec{8  \\ 16 \\ 24 \\ 32 \\ 40}}
+          \colvec[r]{8  \\ 16 \\ 24 \\ 32 \\ 40}}
         \cdot
-        \colvec{8  \\ 16 \\ 24 \\ 32 \\ 40}
+        \colvec[r]{8  \\ 16 \\ 24 \\ 32 \\ 40}
         =
         \frac{1832}{3520}
         \cdot
-        \colvec{8  \\ 16 \\ 24 \\ 32 \\ 40}
+        \colvec[r]{8  \\ 16 \\ 24 \\ 32 \\ 40}
       \end{equation*}
       so the slope of the line of best fit is approximately $0.52$.
       \begin{center}  \small
@@ -491,13 +499,13 @@ record was 1954-May-06.
      With this input
      \begin{equation*}
        A =  
-       \begin{pmatrix}
+       \begin{mat}
            1 & 1852.71 \\
            1 & 1858.88 \\
           \vdots  &\vdots      \\
            1 & 1985.54 \\
            1 & 1993.71
-        \end{pmatrix}
+        \end{mat}
         \qquad
         b = \colvec{ 292.0 \\ 
                      285.0 \\ 
@@ -521,13 +529,13 @@ record was 1954-May-06.
    With this input (the years are zeroed at $1900$)
    \begin{equation*}
      A := 
-     \begin{pmatrix}
+     \begin{mat}
         1 &   .38   \\
         1 &   .54   \\
        \vdots \vdots \\ 
         1 & 92.71 \\
         1 & 95.54
-     \end{pmatrix}
+     \end{mat}
      \qquad      
      b = \colvec{ 249.0 \\
                   246.2 \\
@@ -550,13 +558,13 @@ record was 1954-May-06.
     With this input (the years are zeroed at $1900$)
     \begin{equation*}
       A =  
-      \begin{pmatrix}
+      \begin{mat}
          1 & 21.46 \\
          1 & 32.63 \\
         \vdots  &\vdots     \\
          1 & 89.54  \\
          1 & 96.63
-      \end{pmatrix}
+      \end{mat}
       \qquad
       b = 
       \colvec{ 373.2 \\
@@ -652,7 +660,7 @@ record was 1954-May-06.
         \partsitem On the basis of this information
           \begin{equation*}
             A =  
-            \begin{pmatrix}
+            \begin{mat}
                1 & 53 \\
                1 & 75 \\
 %              1 & 57 \\
@@ -678,7 +686,7 @@ record was 1954-May-06.
                \vdots \\
                1 & 80 \\
                1 & 81
-            \end{pmatrix}
+            \end{mat}
             \qquad
             b = 
             \colvec{ 3 \\
@@ -772,7 +780,7 @@ record was 1954-May-06.
             With this input
             \begin{equation*}
               A =  
-              \begin{pmatrix}
+              \begin{mat}[r]
                 1 & 1 \\
                 1 & 2 \\
                 1 & 3 \\
@@ -780,9 +788,9 @@ record was 1954-May-06.
                 1 & 6 \\
                 1 & 7 \\
                 1 & 8
-              \end{pmatrix}
+              \end{mat}
               \qquad
-              b = \colvec{-0.40893539 \\
+              b = \colvec[r]{-0.40893539 \\
                           -0.1426675 \\
                            0 \\
                            0.18184359 \\
@@ -838,7 +846,7 @@ record was 1954-May-06.
         \partsitem With this input
           \begin{equation*}
             A = 
-            \begin{pmatrix}
+            \begin{mat}[r]
               1 & 306 \\
               1 & 329 \\
               1 & 356 \\
@@ -847,10 +855,10 @@ record was 1954-May-06.
               1 & 427 \\
               1 & 415 \\
               1 & 424
-            \end{pmatrix}
+            \end{mat}
             \qquad
             b = 
-            \colvec{975 \\
+            \colvec[r]{975 \\
                     969 \\
                     948 \\
                     910 \\

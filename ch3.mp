@@ -2183,11 +2183,11 @@ beginfig(44) % least squares money denom vs life
   numeric u;  %scaling factor
   numeric v;  %vertical scaling factor
   numeric w;  %horizontal scaling factor
-  u:=.01in; w:=u; v:=0.618*4w;
+  u:=.02in; w:=u; v:=4w;
 
   z0=(0w,0v);
   z1=(105w,0v);
-  z2=(0w,22.5v);
+  z2=(0w,8.5v);
 
   % the axes
   pickup pensquare scaled line_width_light
@@ -2200,25 +2200,25 @@ beginfig(44) % least squares money denom vs life
     label.bot(btex {\tiny 70} etex,(70w,0v));
     label.bot(btex {\tiny 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
-    label.ulft(btex {\small \textit{avg life}} etex,z2);
-    sidetoside_ticks(4,(0w,5v),(0w,5v));
-    label.lft(btex {\tiny 5} etex,(0w,5v));
-    label.lft(btex {\tiny 15} etex,(0w,15v));
+    label.ulft(btex {\small \textit{life (yrs)}} etex,z2);
+    sidetoside_ticks(8,(0w,1v),(0w,1v));
+    label.lft(btex {\tiny 4} etex,(0w,4v));
+    label.lft(btex {\tiny 8} etex,(0w,8v));
 
   % the line
   pickup pencircle scaled line_width_light;
-  z3=(100w,(0.18*100v)+1.05v); % 
-  z4=(0w,1.05v);
-  draw z4--z3 dashed evenly scaled .707;
+  z3=(100w,((0.7513/12)*100v)+(14.1582/12)*v); % 
+  z4=(0w,(14.1582/12)*v);
+  draw z4--z3 dashed evenly scaled .707; % .7[white,black];
 
   pickup pencircle scaled line_width_dark;
   % the points
-  z10=(1w,1.5v);
-  z11=(5w,2v);
-  z12=(10w,3v);
-  z13=(20w,5v);
-  z14=(50w,9v);
-  z15=(100w,20v);
+  z10=(1w,(22/12)*v);
+  z11=(5w,(15.9/12)*v);
+  z12=(10w,(18.3/12)*v);
+  z13=(20w,(24.3/12)*v);
+  z14=(50w,(55.4/12)*v);
+  z15=(100w,(88.8/12)*v);
   for k = 10 upto 15:
     drawpoint(z[k]);
   endfor
