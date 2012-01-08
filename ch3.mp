@@ -2587,7 +2587,7 @@ beginfig(53) % negative doubling the x's
   numeric w;  %horizontal scaling factor
   u:=.15in; w:=u; v:=u;
 
-  save codomain_shift; pair codomain_shift; codomain_shift=(12.5w,0v);
+  save codomain_shift; pair codomain_shift; codomain_shift=(15w,0v);
   % the axes
   save xmin, xmax, ymin, ymax; numeric xmin, xmax, ymin, ymax;
   xmin = -2.5w; xmax = 3.5w; ymin = -.5v; ymax = 3.5v; 
