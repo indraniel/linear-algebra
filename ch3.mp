@@ -2435,7 +2435,7 @@ beginfig(50) % rotation ccw
   numeric w;  %horizontal scaling factor
   u:=.15in; w:=u; v:=u;
 
-  save codomain_shift; pair codomain_shift; codomain_shift=(12.5w,0v);
+  save codomain_shift; pair codomain_shift; codomain_shift=(15.5w,0v);
   % the axes
   save xmin, xmax, ymin, ymax; numeric xmin, xmax, ymin, ymax;
   xmin = -.5w; xmax = 3.5w; ymin = -.5v; ymax = 3.5v; 
@@ -2449,7 +2449,7 @@ beginfig(50) % rotation ccw
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{x\cos\theta-y\sin\theta \\ x\sin\theta+y\cos\theta}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x\cos\theta-y\sin\theta \\ x\sin\theta+y\cos\theta}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2531,7 +2531,7 @@ beginfig(51) % projection to xz-axis
   
   %z30 = .25*(z10+z11+z12+z13)+.5*codomain_shift;
   z30 = (point .5 of zaxis) shifted (.5*codomain_shift);
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y \\ z} \mapsto \colvec{x \\ 0 \\ z}}$} etex,z30);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y \\ z} \mapsto \colvec{x \\ 0 \\ z}}$ etex,z30);
 
   % clean up the observer
   free_vect(lpn);
@@ -2566,7 +2566,7 @@ beginfig(52) % tripling the x's
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{3x \\ y}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{3x \\ y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2605,7 +2605,7 @@ beginfig(53) % negative doubling the x's
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{-2x \\ y}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{-2x \\ y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2644,7 +2644,7 @@ beginfig(54) % negative doubling the x's
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{y \\ x}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{y \\ x}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2688,7 +2688,7 @@ beginfig(55) % skew's action
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2735,7 +2735,7 @@ beginfig(56) % skew on unit square
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2783,7 +2783,7 @@ beginfig(57) % second skew on unit square
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex {\tiny $\mapsunder{\colvec{x \\ y} \mapsto \colvec{x+2y \\ y}}$} etex,z1);
+  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x+2y \\ y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
