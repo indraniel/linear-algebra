@@ -6,9 +6,9 @@
 \index{matrix!orthonormal|(}
 In \emph{The Elements},\index{Euclid} Euclid considers two figures to be
 the same if they have the same size and shape.
-That is, the triangles below are not equal because they are not the same 
-set of points.
-But they are \definend{congruent}\index{congruent figures}\Dash essentially 
+That is, while the triangles below are not equal because they are not the same 
+set of points,
+they are \definend{congruent}\index{congruent figures}\Dash essentially 
 indistinguishable
 for Euclid's purposes\Dash because we can imagine 
 picking the plane up,
@@ -22,11 +22,11 @@ but he uses it often \cite{Casey}.)
   \includegraphics{ch3.61}
 \end{center}
 In modern terminology, ``picking the plane up~\ldots'' 
-means considering a
+is considering a
 map from the plane to itself. 
-Euclid has limited consideration to only certain 
-transformations of the plane, ones
-that may possibly slide or turn the plane but not bend or stretch it.
+Euclid considers only  
+transformations of the plane
+that may slide or turn the plane but not bend or stretch it.
 Accordingly, we define a map $\map{f}{\Re^2}{\Re^2}$ to be 
 \definend{distance-preserving}\index{distance-preserving}%
 \index{map!distance-preserving} 
@@ -56,12 +56,12 @@ any distance-preserving map
 (if a figure is a triangle then the image of that figure is also a triangle),
 (iv)~and the property of being a circle is invariant under any
 distance-preserving map.
-In 1872, F.~Klein\index{Klein, F.} suggested that 
-Euclidean geometry can be characterized as the study of properties that
+In 1872, F.~Klein\index{Klein, F.} suggested that we can define 
+Euclidean geometry as the study of properties that
 are invariant under these maps.
 (This forms part of Klein's Erlanger\index{Erlanger Program} Program, 
-which proposes the organizing principle that each kind of 
-geometry\Dash Euclidean, projective, etc.\Dash can be described 
+which proposes the organizing principle that we can describe each kind of 
+geometry\Dash Euclidean, projective, etc.\Dash 
 as the study of the properties that are
 invariant under some group of transformations.
 The word `group' here means more than just `collection', 
@@ -70,7 +70,7 @@ but that lies outside of our scope.)
 We can use linear algebra to characterize the distance-preserving maps
 of the plane.
 
-First,
+We must first observe that
 there are distance-preserving transformations of the plane that are not linear.
 The obvious example is this \emph{translation}.\index{translation}
 \begin{equation*}
@@ -91,7 +91,7 @@ To prove this equivalent statement, let
   t(\vec{e}_2)=\colvec{c \\ d}
 \end{equation*}
 for some $a,b,c,d\in\Re$. 
-Then to show that $t$ is linear, we can show that 
+Then to show that $t$ is linear we can show that 
 it can be represented by a matrix, that is, that $t$ acts in this way
 for all $x,y\in\Re$.
 \begin{equation*}
@@ -100,12 +100,12 @@ for all $x,y\in\Re$.
   \colvec{ax+cy  \\  bx+dy}
 \tag*{\text{($*$)}}\end{equation*}
 Recall that if we fix three non-collinear points 
-then any point
-in the plane can be described by giving its distance from those three.
-So any point $\vec{v}$ in the domain is determined by its distance from
-the three fixed points $\zero$, $\vec{e}_1$, and $\vec{e}_2$. 
-Similarly, any point $t(\vec{v})$ 
-in the codomain is determined by its distance from
+then we can determine any point 
+by giving its distance from those three.
+So we can determine any point $\vec{v}$ in the domain by its distance from
+$\zero$, $\vec{e}_1$, and $\vec{e}_2$. 
+Similarly, we can determine any point $t(\vec{v})$ 
+in the codomain by its distance from
 the three fixed points $t(\zero)$, $t(\vec{e}_1)$, and $t(\vec{e}_2)$
 (these three are not collinear because, as mentioned above, 
 collinearity is invariant and
@@ -126,7 +126,7 @@ $d_0$, $d_1$, and $d_2$ cases
   =\dist(t(\colvec{x \\ y}),t(\zero))
   =\dist(\colvec{ax+cy \\ bx+dy},\zero)
 \end{equation*}
-($t$ is assumed to send $\zero$ to itself)
+(we assumed that $t$ maps $\zero$ to itself)
 \begin{equation*}
   \dist(\colvec{x \\ y},\vec{e}_1)
   =\dist(t(\colvec{x \\ y}),t(\vec{e}_1))
@@ -141,26 +141,30 @@ and
 suffices to show that ($*$) describes $t$.
 Those checks are routine.
 
-Thus, any distance-preserving $\map{f}{\Re^2}{\Re^2}$ can be written
+Thus we can write any distance-preserving $\map{f}{\Re^2}{\Re^2}$ as
 $f(\vec{v})=t(\vec{v})+\vec{v}_0$ for some constant vector $\vec{v}_0$
 and linear map $t$ that is distance-preserving.
+So what is left in order to understand distance-preserving maps is to
+understand distance-preserving linear maps.
 
-Not every linear map is distance-preserving, for example, 
+Not every linear map is distance-preserving. 
+For example
 $\vec{v}\mapsto 2\vec{v}$ does not preserve distances.
+
 But there is a neat characterization:~a linear transformation $t$ of the
 plane is distance-preserving if and only if both 
-$\norm{t(\vec{e}_1)}=\norm{t(\vec{e}_2)}=1$ 
+$\norm{t(\vec{e}_1)}=\norm{t(\vec{e}_2)}=1$, 
 and $t(\vec{e}_1)$ is orthogonal to $t(\vec{e}_2)$.
 The `only if' half of that statement is easy\Dash because $t$ is 
-distance-preserving it must preserve the lengths of vectors, 
+distance-preserving it must preserve the lengths of vectors 
 and because $t$ is distance-preserving the Pythagorean theorem shows
 that it must preserve orthogonality.
-For the `if' half, it suffices to check that the map preserves lengths
-of vectors, because then for all
+To show the `if' half we can check that the map preserves lengths
+of vectors because then for all
 $\vec{p}$ and $\vec{q}$ the distance between the two is preserved
 $\norm{t(\vec{p}-\vec{q}\,)}=\norm{t(\vec{p})-t(\vec{q}\,)}
 =\norm{\vec{p}-\vec{q}\,}$.
-For that check, let
+For that check let
 \begin{equation*}
   \vec{v}=\colvec{x \\ y} 
   \quad 
@@ -168,7 +172,7 @@ For that check, let
   \quad
   t(\vec{e}_2)=\colvec{c \\ d}
 \end{equation*}
-and, with the `if' assumptions that
+and with the `if' assumptions that
 $a^2+b^2=c^2+d^2=1$ and $ac+bd=0$ we have this.
 \begin{align*}
   \norm{t(\vec{v}\,)}^2
@@ -181,30 +185,30 @@ $a^2+b^2=c^2+d^2=1$ and $ac+bd=0$ we have this.
 
 One thing that is neat
 about this characterization is that we can easily recognize
-matrices that represent such a map with respect to the standard bases.
-Those matrices have that when the columns are written as vectors then they
+matrices that represent such a map with respect to the standard bases:
+the columns
 are of length one and are mutually orthogonal.
-Such a matrix is called an 
+This is an 
 \definend{orthonormal matrix}\index{orthonormal matrix}%
 \index{matrix!orthonormal}
 or
 \definend{orthogonal matrix}\index{orthogonal matrix}\index{matrix!orthogonal}
-(the second term is commonly used to mean not just that the columns are
-orthogonal, but also that they have length one). 
+(people often use the second term to mean not just that the columns are
+orthogonal but also that they have length one). 
 
-We can use this insight to
-delimit the geometric actions possible in
+We can use this to
+understand the geometric actions of
 distance-preserving maps.
-Because $\norm{t(\vec{v}\,)}=\norm{\vec{v}\,}$, any $\vec{v}$
-is mapped by $t$ to lie somewhere on the circle about the origin that has
+Because $\norm{t(\vec{v}\,)}=\norm{\vec{v}\,}$, the map~$t$ 
+sends any $\vec{v}$ somewhere on the circle about the origin that has
 radius equal to the length of $\vec{v}$.
 In particular,
-$\vec{e}_1$ and $\vec{e}_2$ are mapped to the unit circle.
+$\vec{e}_1$ and $\vec{e}_2$ map to the unit circle.
 What's more, %because of the orthogonality restriction,
 once we fix the unit vector $\vec{e}_1$ as mapped
 to the vector with components $a$ and $b$ then there are only two places  
-where $\vec{e}_2$ can be mapped if that image is to be perpendicular 
-to the first vector:~one
+where $\vec{e}_2$ can go if its image is to be perpendicular 
+to the first vector's image:~it can map either to one
 where $\vec{e}_2$ maintains its position a quarter circle clockwise
 from $\vec{e}_1$
 \begin{center}
@@ -216,7 +220,7 @@ from $\vec{e}_1$
     b  &a
   \end{mat}$ 
 \end{center}
-and one where is is mapped a quarter circle counterclockwise.
+or to one where it goes a quarter circle counterclockwise.
 \begin{center}
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.63}\end{tabular}
   \qquad
@@ -228,8 +232,8 @@ and one where is is mapped a quarter circle counterclockwise.
 \end{center}
 
 We can geometrically describe these two cases.
-Let $\theta$ be the angle between the $x$-axis and the image of $\vec{e}_1$,
-measured counterclockwise. 
+Let $\theta$ be the counterclockwise
+angle between the $x$-axis and the image of $\vec{e}_1$.
 The first matrix above represents, with respect to the standard bases,
 a \definend{rotation}\index{rotation}\index{linear map!rotation} 
 of the plane by $\theta$ radians.
@@ -253,20 +257,20 @@ bisecting the angle between $\vec{e}_1$ and $t(\vec{e}_1)$.
 (This picture shows $\vec{e}_1$ reflected up into the first 
 quadrant and $\vec{e}_2$ reflected down into the fourth quadrant.)
 
-Note again:  
+Note: in the domain  
 the angle between $\vec{e}_1$ and $\vec{e}_2$ runs counterclockwise,
 and in the first map above the angle from 
 $t(\vec{e}_1)$ to $t(\vec{e}_2)$ is also counterclockwise,
-so the orientation of the angle is preserved.
-But in the second map the orientation is reversed.
+so it preserves the orientation of the angle.
+But the second map reverses the orientation.
 A distance-preserving map is 
-\definend{direct}\index{direct map} if it 
+\definend{direct}\index{direct map}\index{orientation preserving map} if it 
 preserves orientations
-and \definend{opposite}\index{opposite map} 
+and \definend{opposite}\index{opposite map}\index{orientation reversing map} 
 if it reverses orientation.
 
-So, we have characterized the Euclidean study of congruence:
-it considers, for plane figures, the properties that are invariant 
+So, we have characterized the Euclidean study of congruence.
+It considers, for plane figures, the properties that are invariant 
 under combinations of (i)~a rotation followed by a translation,
 or (ii)~a reflection followed by a translation
 (a reflection followed by a non-trivial 
@@ -281,16 +285,15 @@ the same shape as the first, but $3/2$-ths the size.
 \begin{center}
   \includegraphics{ch3.65}
 \end{center}
-From the above work, we have that figures are similar if there
+From the above work we have that figures are similar if there
 is an orthonormal matrix $T$ such that the points $\vec{q}$ 
-on one are derived from
-the points $\vec{p}$ by 
+on one figure are the images of 
+the points $\vec{p}$ on the other figure by 
 $\vec{q}=(kT)\vec{v}+\vec{p}_0$
 for some nonzero real number $k$ and constant vector $\vec{p}_0$.
 
-Although many of these ideas were first 
-explored by Euclid, mathematics is timeless and
-they are very much in use today. 
+Although these ideas are from Euclid, mathematics is timeless and
+they are still in use today. 
 One application of the maps studied above is in computer graphics.
 We can, for example, animate this top view of a cube 
 by putting together film frames of it rotating; that's a rigid motion. 
@@ -315,10 +318,10 @@ frames of it shrinking, which gives us figures that are similar.
 Computer graphics incorporates techniques
 from linear algebra in many other ways (see \nearbyexercise{exer:HomoCrds}).
 
-So the analysis above of distance-preserving maps
-is useful as well as interesting.
+% So the analysis above of distance-preserving maps
+% is useful as well as interesting.
 A beautiful book that explores some of this area is \cite{Weyl}.
-More on groups, of transformations and otherwise, can be found in any book
+More on groups, of transformations and otherwise, is in any book
 on Modern Algebra, for instance \cite{BirkhoffMaclane}.
 More on Klein and the Erlanger Program is in \cite{Yaglom}.
  
