@@ -19574,8 +19574,7 @@
           produces the identity matrix
           so there is no need for column-swapping operations
           to end with a partial-identity.
-        \partsitem The reduction is expressed in matrix multiplication
-          as
+        \partsitem In matrix multiplication the reduction is
           \begin{equation*}
             \begin{mat}[r]
               1  &-1 \\
@@ -19592,7 +19591,7 @@
             H
             =I
           \end{equation*}
-          (note that composition of the Gaussian operations is performed
+          (note that composition of the Gaussian operations is
           from right to left).
         \partsitem  Taking inverses
           \begin{equation*}
@@ -19823,7 +19822,7 @@
         \mapsto
         \colvec{x_1}
       \end{equation*}
-      is indeed expressible as a composition of swaps\Dash as zero swaps.
+      is expressible as a composition of swaps\Dash as zero swaps.
       For the inductive step we assume that the map induced by
       any permutation of fewer than
       $n$ numbers can be expressed with swaps only, and we consider the map
@@ -20066,14 +20065,14 @@ octave:6> B100*[0;1;0;0;0;0]
           \end{equation*}
           We get this transition matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               1/6  &0   &0   &0   &0   &0  \\
               1/6  &2/6 &0   &0   &0   &0  \\
               1/6  &1/6 &3/6 &0   &0   &0  \\
               1/6  &1/6 &1/6 &4/6 &0   &0  \\
               1/6  &1/6 &1/6 &1/6 &5/6 &0  \\
               1/6  &1/6 &1/6 &1/6 &1/6 &6/6
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
        \partsitem This is the Octave session,
          with outputs edited out and condensed into the table at the end.
@@ -20158,9 +20157,9 @@ octave:7> v5=F*v4
         have little influence.
         That is, while a company may move or stay because of where it is,
         it is unlikely to move or stay because of where it was.
-      \partsitem This Octave session has been edited, with the outputs
+      \partsitem This is  the Octave session, slightly edited, with the outputs
         put together in a table at the end.
-\begin{computercode}
+\begin{lstlisting}
 octave:1> M=[.787,0,0,.111,.102;
 >            0,.966,.034,0,0;
 >            0,.063,.937,0,0;
@@ -20177,8 +20176,8 @@ octave:3> v1=M*v0
 octave:4> v2=M*v1
 octave:5> v3=M*v2
 octave:6> v4=M*v3
-\end{computercode}
-        is summarized in this table.
+\end{lstlisting}
+        This table summarizes.
         \begin{center}
            \begin{tabular}{c|cccc}
              $\vec{p}_0$   &$\vec{p}_1$    &$\vec{p}_2$
@@ -20222,13 +20221,13 @@ octave:6> v4=M*v3
        \end{center}
        \partsitem This is a continuation of the Octave session from
          the prior item.
-\begin{computercode}
+\begin{lstlisting}
 octave:7> p0=[.0000;.6522;.3478;.0000;.0000]
 octave:8> p1=M*p0
 octave:9> p2=M*p1
 octave:10> p3=M*p2
 octave:11> p4=M*p3
-\end{computercode}
+\end{lstlisting}
         This summarizes the output.
         \begin{center}
            \begin{tabular}{c|cccc}
@@ -20272,7 +20271,7 @@ octave:11> p4=M*p3
            \end{tabular}
        \end{center}
         \partsitem This is more of the same Octave session.
-\begin{computercode}
+\begin{lstlisting}
 octave:12> M50=M**50
 M50 =
   0.03992  0.33666  0.20318  0.02198  0.37332
@@ -20294,7 +20293,7 @@ p51 =
   0.54442
   0.33091
   0.29076
-\end{computercode}
+\end{lstlisting}
         This is close to a steady state.
       \end{exparts}
     
@@ -20332,7 +20331,7 @@ p51 =
                                      \\ s_{A}(n+1) \\ s_{B}(n+1)}
           \end{equation*}
         \partsitem This is the Octave code, with the output removed.
-\begin{computercode}
+\begin{lstlisting}
 octave:1> T=[.5,.25,.25,0,0;
 >            .25,.5,0,0,0;
 >            .25,0,.5,0,0;
@@ -20350,7 +20349,7 @@ octave:4> p2=T*p1
 octave:5> p3=T*p2
 octave:6> p4=T*p3
 octave:7> p5=T*p4
-\end{computercode}
+\end{lstlisting}
         Here is the output.
         The probability of ending at $s_A$ is about $0.23$.
         \begin{equation*}
@@ -20410,7 +20409,7 @@ octave:7> p5=T*p4
           \end{array}
         \end{equation*}
        \partsitem With this file as \texttt{learn.m}
-\begin{computercode}
+\begin{lstlisting}
 # Octave script file for learning model.
 function w = learn(p)
    T = [1-2*p,p,    p,    0, 0;
@@ -20422,11 +20421,11 @@ function w = learn(p)
   p5 = T5*[1;0;0;0;0];
   w = p5(4);
 endfunction
-\end{computercode}
+\end{lstlisting}
         issuing the command \texttt{octave:1> learn(.20)} yields
         \texttt{ans = 0.17664}.
        \partsitem This Octave session
-\begin{computercode}
+\begin{lstlisting}
 octave:1> x=(.01:.01:.50)';
 octave:2> y=(.01:.01:.50)';
 octave:3> for i=.01:.01:.50
@@ -20434,7 +20433,7 @@ octave:3> for i=.01:.01:.50
 >         endfor
 octave:4> z=[x, y];
 octave:5> gplot z
-\end{computercode}
+\end{lstlisting}
         yields this plot.
         There is no threshold value \Dash  no probability above which the
         curve rises sharply.
@@ -20516,7 +20515,7 @@ octave:5> gplot z
 \begin{ans}{6}
      These are the $p=.55$ vectors,
      \begin{center}\small
-       \begin{tabular}{@{}rl|lllllll@{}}
+       \begin{tabular}{@{}rc|ccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\
         \hline
         \begin{tabular}{@{}c@{}}
@@ -20757,7 +20756,7 @@ octave:5> gplot z
        \end{center}
        and these are the $p=.60$ vectors.
        \begin{center}\small
-       \begin{tabular}{@{}rl|lllllll@{}}
+       \begin{tabular}{@{}rc|ccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\
         \hline
         \begin{tabular}{@{}c@{}}
@@ -20997,9 +20996,8 @@ octave:5> gplot z
        \end{tabular}
      \end{center}
      \begin{exparts}
-      \partsitem The script from the computer code section can be easily
-        adapted.
-\begin{computercode}
+      \partsitem We can adapt the script from the end of this Topic.
+\begin{lstlisting}
 # Octave script file to compute chance of World Series outcomes.
 function w = markov(p,v)
   q = 1-p;
@@ -21030,7 +21028,7 @@ function w = markov(p,v)
   v7 = (A**7) * v;
   w = v7(11)+v7(16)+v7(20)+v7(23)
 endfunction
-\end{computercode}
+\end{lstlisting}
        Using this script, we get that when the American League has a
        $p=0.55$ probability of winning each game then their probability
        of winning the first-to-win-four series is $0.60829$.
@@ -21038,7 +21036,7 @@ endfunction
        then their probability of winning the series is
        $0.71021$.
       \partsitem This Octave session
-\begin{computercode}
+\begin{lstlisting}
 octave:1> v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
 octave:2> x=(.01:.01:.99)';
 octave:3> y=(.01:.01:.99)';
@@ -21047,7 +21045,7 @@ octave:4> for i=.01:.01:.99
 >         endfor
 octave:5> z=[x, y];
 octave:6> gplot z
-\end{computercode}
+\end{lstlisting}
        yields this graph.
        By eye we judge that if $p>0.7$ then the team is close to assurred
        of the series.

@@ -6,7 +6,7 @@
 
 Here is a simple game:
 a player bets on coin tosses, a dollar each time, 
-and the game ends either when the player has no money left 
+and the game ends either when the player has no money 
 or is up to five dollars. 
 If the player starts with three dollars, what is the chance that the game 
 takes at least five flips?
@@ -16,13 +16,12 @@ At any point, this player has either \$0, or \$1, \ldots, or \$5.
 We say that the player is in the 
 \definend{state}\index{state} 
 $s_0$, $s_1$, \ldots, or $s_5$.
-A game consists of moving from state to state.
+In the game the player moves from state to state.
 For instance,
-a player now in state $s_3$ has on the next flip a $.5$ chance of moving
-to state $s_2$ and a $.5$ chance of moving to $s_4$.
+a player now in state $s_3$ has on the next flip a $0.5$ chance of moving
+to state $s_2$ and a $0.5$ chance of moving to $s_4$.
 The boundary states are a bit different; 
-once in state~$s_0$ or state~$s_5$, 
-the player never leaves.
+a player never leaves state~$s_0$ or state~$s_5$.
 
 Let $p_{i}(n)$ be the probability that the player is in state $s_i$
 after $n$ flips.
@@ -31,14 +30,14 @@ after flip~$n+1$ is
 $p_{0}(n+1)=p_{0}(n)+0.5\cdot p_{1}(n)$.
 This matrix equation sumarizes.
 \begin{equation*}
-  \begin{pmatrix}
-      1  &.5 &0  &0  &0   &0  \\ 
-      0  &0  &.5 &0  &0   &0  \\ 
-      0  &.5 &0  &.5 &0   &0  \\ 
-      0  &0  &.5 &0  &.5  &0  \\ 
-      0  &0  &0  &.5 &0   &0  \\ 
-      0  &0  &0  &0  &.5  &1   
-   \end{pmatrix}
+  \begin{dmat}{D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}}
+      1.  &.5  &0.  &0.  &0.   &0.  \\ 
+      0.  &0.  &.5  &0.  &0.   &0.  \\ 
+      0.  &.5  &0.  &.5  &0.   &0.  \\ 
+      0.  &0.  &.5  &0.  &.5   &0.  \\ 
+      0.  &0.  &0.  &.5  &0.   &0.  \\ 
+      0.  &0.  &0.  &0.  &.5   &1.   
+   \end{dmat}
    \colvec{p_{0}(n) \\ 
         p_{1}(n) \\
         p_{2}(n) \\
@@ -64,135 +63,129 @@ three dollars, calculation gives this.
     &$\cdots$
     &$n=24$ \\ 
     \hline  
-    $\left(\begin{aligncolondecimal}{0}
+    $\colvec{
              0 \\ 0    \\  0   \\  1    \\  0    \\  0
-           \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{1}
+           }$
+    &$\dcolvec[1]{
        0      \\  0    \\  .5  \\  0    \\  .5    \\  0
-             \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{2}
+         }$
+    &$\dcolvec[2]{
       0      \\  .25  \\ 0    \\ .5    \\  0     \\  .25
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{3}
+         }$
+    &$\dcolvec[3]{
         .125   \\   0   \\ .375 \\ 0     \\ .25    \\  .25
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{4}
+          }$
+    &$\dcolvec[4]{
         .125   \\ .1875 \\ 0    \\ .3125 \\ 0      \\ .375
-            \end{aligncolondecimal}
-     \right)$
+          }$
     &$\cdots$
-    &$\left(\begin{aligncolondecimal}{5}
+    &$\dcolvec[5]{
         .39600 \\ .00276   \\ 0    \\ .00447 \\ 0  \\ .59676
-            \end{aligncolondecimal}
-     \right)$
+          }$
   \end{tabular}  
 \end{center}
-As this computational exploration suggests, the game is not likely to go on 
-for long, with the player quickly ending in either state~$s_0$ 
-or state~$s_5$.
-For instance, after the fourth flip there is a probability of $0.50$ that 
+This exploration suggests that the game is not likely to go on 
+for long, with the player quickly moving to an ending state.
+For instance, after the fourth flip there is a $0.50$~probability that 
 the game is already over.
-(Because a player who enters either of the boundary states never leaves, they
-are said to be \definend{absorbtive}.)\index{state!absorbtive}
+% (Because a player who enters either of the boundary states never leaves, they
+% are said to be \definend{absorbtive}.)\index{state!absorbtive}
 
-This game is an example of a \definend{Markov chain},\index{Markov chain} 
-named for A.A.~Markov, who worked in the first half of the 1900's.
-Each vector of $p$'s is a 
+This is a \definend{Markov chain},\index{Markov chain} 
+named for A.A.~Markov, who worked in the first half of the $1900$'s.
+Each vector is a 
 \definend{probability vector}\index{vector!probability}%
-\index{probability vector} and 
-the matrix is a 
-\definend{transition matrix}.\index{matrix!transition}%
+\index{probability vector}, whose entries are nonnegative real numbers that
+sum to $1$.  
+The matrix is a 
+\definend{transition matrix}\index{matrix!transition}%
 \index{transition matrix} 
-The notable feature of a Markov chain model is that it is 
-\definend{historyless}\index{historyless!Markov chain}%
-\index{Markov chain!historyless} in that 
-with a fixed transition matrix, 
+or \definend{stochastic matrix},\index{matrix!stochastic}%
+\index{stochastic matrix}  
+whose entries are nonnegative reals and whose columns sum to $1$.
+
+A characteriztic feature of 
+a Markov chain model is that it is
+\definend{historyless}\index{historyless}%
+\index{Markov chain!historyless} in that  
 the next state depends only on the current state,  
-not on any prior states.
-Thus a player, say, 
-who arrives at $s_2$ by starting in state $s_3$, 
-then going to state $s_2$, then to $s_1$,
-and then to $s_2$ has at this point exactly the same chance of 
-moving next to state $s_3$ as does a player whose history was to
-start in $s_3$, then go to $s_4$, and to $s_3$, and then to $s_2$.
+not on any prior ones.
+Thus, a player
+who arrives at $s_2$ by starting in state $s_3$ and 
+then going to state~$s_2$ has exactly the same chance of 
+moving next to $s_3$ as does a player whose history was to
+start in $s_3$ then go to~$s_4$ then to~$s_3$ and then to~$s_2$.
 
 Here is a Markov chain from sociology.
 A study (\cite{MacdonaldRidge}, p.~202) 
-divided occupations in the United Kingdom into
-upper level (executives and professionals), 
-middle level (supervisors and skilled manual workers), 
-and lower level (unskilled).
-To determine 
-the mobility across these levels in a generation, about 
-two thousand men were asked, ``At which level are you,
-and at which level was your father when you were fourteen years old?''
-This equation summarizes the results.
+divided occupations in the United Kingdom into three levels:
+executives and professionals, 
+supervisors and skilled manual workers, 
+and unskilled workers.
+They asked about 
+two thousand men, ``At what level are you,
+and at what level was your father when you were fourteen years old?''
+Here the Markov model assumption about history
+seems reasonable\Dash 
+while a parent's occupation has a direct influence on the occupation of the 
+child, the grandparent's occupation likely has no such direct influence.
+This summarizes their conclusions.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{dmat}{D{.}{.}{2}D{.}{.}{2}D{.}{.}{2}}
     .60  &.29  &.16  \\
     .26  &.37  &.27  \\
     .14  &.34  &.57  
-  \end{pmatrix}
+  \end{dmat}
   \colvec{p_{U}(n) \\ p_{M}(n) \\ p_{L}(n)}
   =\colvec{p_{U}(n+1) \\ p_{M}(n+1) \\ p_{L}(n+1)}
 \end{equation*} 
-For instance, 
-a child of a lower class worker has a $.27$ probability of
-growing up to be middle class.
-Notice that the Markov model assumption about history
-seems reasonable\Dash we expect that
-while a parent's occupation has a direct influence on the occupation of the 
-child, the grandparent's occupation has no such direct influence.
+For instance, looking at the middle class for the next generation, 
+a child of an upper class worker has a $0.26$~probability of becoming
+middle class, 
+a child of a middle class worker has a $0.37$~chance of being middle
+class, and 
+a child of a lower class worker has a $0.27$ probability of
+becoming middle class.
 With the initial distribution of the respondents's fathers given below, 
-this table lists the 
-distributions for the next five generations.
+this table gives the next five generations.
 \begin{center}
   \begin{tabular}{c|ccccc}
     $n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  \\ \hline
-    $\left(\begin{aligncolondecimal}{2}
+    $\dcolvec[2]{
                .12 \\ .32  \\ .56
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{2}
+       }$
+    &$\dcolvec[2]{
                .23 \\ .34  \\ .42
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{2}
+       }$
+    &$\dcolvec[2]{
                .29 \\ .34  \\ .37  
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{2}
+       }$
+    &$\dcolvec[2]{
                .31 \\ .34  \\ .35  
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{2}
+       }$
+    &$\dcolvec[2]{
                .32 \\ .33 \\ .34  
-            \end{aligncolondecimal}
-     \right)$
-    &$\left(\begin{aligncolondecimal}{2}
+       }$
+    &$\dcolvec[2]{
                .33 \\ .33  \\ .34  
-            \end{aligncolondecimal}
-     \right)$
+       }$
   \end{tabular}
 \end{center}
 
-One more example, from a very important subject, indeed.
-The World Series of American baseball is
-played between the team winning the American League
-and the team winning the National League
-(we follow [Brunner] but see also [Woodside]).
-The series is won by the first team to win four games.
+One more example.
+At the end of each American baseball season 
+the team winning the American League
+and the team winning the National League play the World Series.
+% what are these? (we follow [Brunner] but see also [Woodside]).
+The winner is the first team to win four games.
 That means that a series is in one of twenty-four states: 
-0-0 (no games won yet by either team), 1-0 
-(one game won for the American League
+$0$-$0$ (no games won yet by either team), 
+$1$-$0$ (one game won for the American League
 team and no games for the National League team), etc.
-If we assume that there is a probability $p$ that 
-the American League team wins each game then we have the following transition
-matrix.
+
+Consider a series with a probability $p$ that 
+the American League team wins each game. 
+We have this.
 \begin{equation*}
   \begin{pmatrix}
     0      &0      &0      &0   &\ldots  \\
@@ -211,12 +204,18 @@ matrix.
            p_{\text{2-0}}(n+1) \\ p_{\text{1-1}}(n+1) \\ p_{\text{0-2}}(n+1) \\ 
            \vdots }
 \end{equation*}
-An especially interesting special case is $p=0.50$; this table lists the
+An especially interesting special case is when the teams are 
+evenly matched, $p=0.50$.
+This table below lists the
 resulting components of the $n=0$ through $n=7$ vectors.
 (The code to generate this table in the computer algebra system
 Octave follows the exercises.)
+
+Note that evenly-matched teams are likely to have a long series\Dash there
+is a probability of $0.625$ that the series goes at least six games.
+
 \begin{center}\small
-\begin{tabular}{@{}rl|lllllll@{}}
+\begin{tabular}{@{}rc|ccccccc@{}}
       &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\ \hline
   $\begin{array}{@{}c@{}}
     0-0 \\
@@ -454,14 +453,11 @@ Octave follows the exercises.)
    \end{aligncolondecimal}$
 \end{tabular}
 \end{center}
-Note that evenly-matched teams are likely to have a long series\Dash there
-is a probability of $0.625$ that the series goes at least six games.
 
-One reason for the inclusion of this Topic
-is that Markov chains are one of the most 
+Markov chains are a 
 widely-used applications of matrix operations.
-Another reason 
-is that it provides an example of the use of matrices where we do not consider
+They also  give us 
+an example of the use of matrices where we do not consider
 the significance of the maps represented by the matrices.
 For more on Markov chains, there are many sources such as
 \cite{KemenySnell} and \cite{Iosifescu}.
@@ -647,6 +643,7 @@ octave:6> B100*[0;1;0;0;0;0]
       \end{exparts}
     \end{answer}
   \item 
+    \cite{Feller} % , p.~424.
     We consider throws of a die, and say the system is in state $s_i$ if the
     largest number yet appearing on the die was $i$.
     \begin{exparts}
@@ -655,7 +652,6 @@ octave:6> B100*[0;1;0;0;0;0]
         for five throws.
         What is the vector at the end? 
     \end{exparts}
-    \cite{Feller}, p.~424
     \begin{answer}
       \begin{exparts}
         \partsitem From these equations
@@ -680,14 +676,14 @@ octave:6> B100*[0;1;0;0;0;0]
           \end{equation*}
           We get this transition matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               1/6  &0   &0   &0   &0   &0  \\
               1/6  &2/6 &0   &0   &0   &0  \\
               1/6  &1/6 &3/6 &0   &0   &0  \\
               1/6  &1/6 &1/6 &4/6 &0   &0  \\
               1/6  &1/6 &1/6 &1/6 &5/6 &0  \\
               1/6  &1/6 &1/6 &1/6 &1/6 &6/6  
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
        \partsitem This is the Octave session, 
          with outputs edited out and condensed into the table at the end.
@@ -764,12 +760,13 @@ octave:7> v5=F*v4
       \end{exparts}
     \end{answer}
   \item 
+    \cite{Kelton} % , p.~43
     There has been much interest in whether industries in the
     United States are moving from the Northeast and North Central regions to 
     the South and  West, motivated by the warmer climate, by lower wages, 
     and by less unionization.
     Here is the transition matrix for large firms in 
-    Electric and Electronic Equipment (\cite{Kelton}, p.~43)
+    Electric and Electronic Equipment.
     \begin{center}
       \begin{tabular}{c|ccccc}
             &\textit{NE}      
@@ -863,9 +860,9 @@ octave:7> v5=F*v4
         have little influence.
         That is, while a company may move or stay because of where it is, 
         it is unlikely to move or stay because of where it was.
-      \partsitem This Octave session has been edited, with the outputs
+      \partsitem This is  the Octave session, slightly edited, with the outputs
         put together in a table at the end.
-\begin{computercode}
+\begin{lstlisting}
 octave:1> M=[.787,0,0,.111,.102;
 >            0,.966,.034,0,0;
 >            0,.063,.937,0,0;
@@ -882,8 +879,8 @@ octave:3> v1=M*v0
 octave:4> v2=M*v1
 octave:5> v3=M*v2
 octave:6> v4=M*v3
-\end{computercode}
-        is summarized in this table.
+\end{lstlisting}
+        This table summarizes.
         \begin{center}
            \begin{tabular}{c|cccc}
              $\vec{p}_0$   &$\vec{p}_1$    &$\vec{p}_2$   
@@ -927,13 +924,13 @@ octave:6> v4=M*v3
        \end{center} 
        \partsitem This is a continuation of the Octave session from
          the prior item.
-\begin{computercode}
+\begin{lstlisting}
 octave:7> p0=[.0000;.6522;.3478;.0000;.0000]
 octave:8> p1=M*p0
 octave:9> p2=M*p1
 octave:10> p3=M*p2
 octave:11> p4=M*p3
-\end{computercode}
+\end{lstlisting}
         This summarizes the output.
         \begin{center}
            \begin{tabular}{c|cccc}
@@ -977,7 +974,7 @@ octave:11> p4=M*p3
            \end{tabular}
        \end{center} 
         \partsitem This is more of the same Octave session.
-\begin{computercode}
+\begin{lstlisting}
 octave:12> M50=M**50
 M50 =
   0.03992  0.33666  0.20318  0.02198  0.37332
@@ -999,25 +996,25 @@ p51 =
   0.54442
   0.33091
   0.29076
-\end{computercode}
+\end{lstlisting}
         This is close to a steady state.
       \end{exparts}
     \end{answer}
   \item 
-    This model has been suggested for some kinds of learning 
-    (\cite{Wickens}, p.~41).
+    \cite{Wickens} % , p.~41).
+    Here is a  model of some kinds of learning 
     The learner starts in an undecided state $s_U$.
     Eventually the learner has to decide to do either response $A$
     (that is, end in state $s_A$) or response $B$ (ending in $s_B$).
-    However, the learner doesn't jump right from being undecided to being 
-    sure $A$ is the correct thing to do (or $B$).
+    However, the learner doesn't jump right from undecided to  
+    sure that $A$ is the correct thing to do (or $B$).
     Instead, the learner spends some time in a ``tentative-$A$'' state,
     or a ``tentative-$B$'' state, trying the response out (denoted here
     $t_A$ and $t_B$).
     Imagine that once the learner has decided, it is final, so once
-    $s_A$ or $s_B$ is entered it is never left.
-    For the other state changes, imagine a transition
-    is made with probability $p$ in either direction.
+    in $s_A$ or $s_B$, the learner stays there.
+    For the other state changes, we can posit transitions
+    with probability $p$ in either direction.
     \begin{exparts}
       \partsitem Construct the transition matrix.
       \partsitem Take $p=0.25$ and take the initial vector to be $1$ at $s_U$.
@@ -1061,7 +1058,7 @@ p51 =
                                      \\ s_{A}(n+1) \\ s_{B}(n+1)}
           \end{equation*}
         \partsitem This is the Octave code, with the output removed.
-\begin{computercode}
+\begin{lstlisting}
 octave:1> T=[.5,.25,.25,0,0;
 >            .25,.5,0,0,0;
 >            .25,0,.5,0,0;
@@ -1079,7 +1076,7 @@ octave:4> p2=T*p1
 octave:5> p3=T*p2
 octave:6> p4=T*p3
 octave:7> p5=T*p4
-\end{computercode}
+\end{lstlisting}
         Here is the output.
         The probability of ending at $s_A$ is about $0.23$.
         \begin{equation*}
@@ -1139,7 +1136,7 @@ octave:7> p5=T*p4
           \end{array}
         \end{equation*}
        \partsitem With this file as \texttt{learn.m}
-\begin{computercode}
+\begin{lstlisting}
 # Octave script file for learning model.
 function w = learn(p)
    T = [1-2*p,p,    p,    0, 0;
@@ -1151,11 +1148,11 @@ function w = learn(p)
   p5 = T5*[1;0;0;0;0];
   w = p5(4);
 endfunction
-\end{computercode}
+\end{lstlisting}
         issuing the command \texttt{octave:1> learn(.20)} yields
         \texttt{ans = 0.17664}.
        \partsitem This Octave session
-\begin{computercode}
+\begin{lstlisting}
 octave:1> x=(.01:.01:.50)';
 octave:2> y=(.01:.01:.50)';
 octave:3> for i=.01:.01:.50   
@@ -1163,7 +1160,7 @@ octave:3> for i=.01:.01:.50
 >         endfor
 octave:4> z=[x, y];
 octave:5> gplot z
-\end{computercode}
+\end{lstlisting}
         yields this plot.
         There is no threshold value \Dash  no probability above which the
         curve rises sharply.
@@ -1267,11 +1264,11 @@ octave:5> gplot z
         Is there a threshold value\Dash a $p$ above which the better team
         is essentially ensured of winning?
     \end{exparts}
-    (Some sample code is included below.)
+    % (Some sample code is included below.)
     \begin{answer}
      These are the $p=.55$ vectors, 
      \begin{center}\small
-       \begin{tabular}{@{}rl|lllllll@{}}
+       \begin{tabular}{@{}rc|ccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\ 
         \hline
         \begin{tabular}{@{}c@{}}
@@ -1512,7 +1509,7 @@ octave:5> gplot z
        \end{center}
        and these are the $p=.60$ vectors.
        \begin{center}\small
-       \begin{tabular}{@{}rl|lllllll@{}}
+       \begin{tabular}{@{}rc|ccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\ 
         \hline
         \begin{tabular}{@{}c@{}}
@@ -1752,9 +1749,8 @@ octave:5> gplot z
        \end{tabular}
      \end{center}
      \begin{exparts}
-      \partsitem The script from the computer code section can be easily 
-        adapted.
-\begin{computercode}
+      \partsitem We can adapt the script from the end of this Topic.
+\begin{lstlisting}
 # Octave script file to compute chance of World Series outcomes.
 function w = markov(p,v)
   q = 1-p;
@@ -1785,7 +1781,7 @@ function w = markov(p,v)
   v7 = (A**7) * v;
   w = v7(11)+v7(16)+v7(20)+v7(23)
 endfunction
-\end{computercode}
+\end{lstlisting}
        Using this script, we get that when the American League has a
        $p=0.55$ probability of winning each game then their probability
        of winning the first-to-win-four series is $0.60829$.
@@ -1793,7 +1789,7 @@ endfunction
        then their probability of winning the series is  
        $0.71021$.
       \partsitem This Octave session
-\begin{computercode}
+\begin{lstlisting}
 octave:1> v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
 octave:2> x=(.01:.01:.99)';
 octave:3> y=(.01:.01:.99)';
@@ -1802,7 +1798,7 @@ octave:4> for i=.01:.01:.99
 >         endfor
 octave:5> z=[x, y];
 octave:6> gplot z
-\end{computercode}
+\end{lstlisting}
        yields this graph.
        By eye we judge that if $p>0.7$ then the team is close to assurred
        of the series.
@@ -1812,18 +1808,18 @@ octave:6> gplot z
      \end{exparts}
     \end{answer}
   \item 
-    A \definend{Markov matrix}\index{Markov matrix}\index{matrix!Markov} 
-    has each entry positive and each column sums to $1$.
+    Above we define a transition matrix to have 
+    each entry nonnegative and each column sum to $1$.
     \begin{exparts}
       \item Check that the three transistion matrices shown in this Topic
         meet these two conditions.
         Must any transition matrix do so?
       \item Observe that if $A\vec{v}_0=\vec{v}_1$ and $A\vec{v}_1=\vec{v}_2$
         then $A^2$ is a transition matrix from $\vec{v}_0$ to $\vec{v}_2$.
-        Show that a power of a Markov matrix is also a Markov matrix.
+        Show that a power of a transition matrix is also a transistion matrix.
       \item Generalize the prior item by  
-        proving that the product of two appropriately-sized Markov matrices
-        is a Markov matrix.
+        proving that the product of two appropriately-sized transistion matrices
+        is a transistion matrix.
     \end{exparts}
     \begin{answer}
       \begin{exparts}
@@ -1875,9 +1871,9 @@ octave:6> gplot z
 
 \announcecomputercode
 This script \textit{markov.m} for the computer algebra system Octave 
-was used to generate the table of World Series outcomes.
-(The sharp character \texttt{\#} marks the rest of a line as a comment.)
-\begin{computercode}
+generated the table of World Series outcomes.
+(The hash character \texttt{\#} marks the rest of a line as a comment.)
+\begin{lstlisting}
 # Octave script file to compute chance of World Series outcomes.
 function w = markov(p,v)
   q = 1-p;
@@ -1907,15 +1903,15 @@ function w = markov(p,v)
      0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,q,0,0,1]; # 3-4
   w = A * v;
 endfunction
-\end{computercode}
+\end{lstlisting}
 \noindent Then the Octave session was this.
-\begin{computercode}
+\begin{lstlisting}
 > v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
 > p=.5
 > v1=markov(p,v0)
 > v2=markov(p,v1)
   ...
-\end{computercode}
+\end{lstlisting}
 \noindent Translating to another computer algebra system should be 
 easy\Dash all 
 have commands similar to these.
