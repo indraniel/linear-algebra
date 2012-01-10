@@ -2,47 +2,48 @@
 %  http://joshua.smcvt.edu/linalg.html
 %  2001-Jun-12
 \chapter{Determinants} 
-In the first chapter of this book we considered linear systems 
-and we picked out the special case of systems
+In the first chapter  
+we highlighted the special case of linear systems
 with the same number of equations as unknowns, 
 those of the form \( T\vec{x}=\vec{b} \) where $T$ is a square matrix.
 We noted a distinction between two classes of $T$'s.
-While such systems may have a unique solution or no solutions or infinitely
-many solutions, if a particular $T$ is associated with a unique solution
-in any system, such as the homogeneous system $T\vec{x}=\zero$, then
-$T$ is associated with a unique solution for every $\vec{b}$.
+If a $T$ is associated with a unique solution
+for any vector $\vec{b}$ of constants, 
+such as for the homogeneous system $T\vec{x}=\zero$, then
+$T$ is associated with a unique solution for every vector $\vec{b}$.
 We call such a matrix of coefficients `nonsingular'.
 The other kind of $T$, where every linear system for which it is the 
 matrix of coefficients has either no solution or infinitely many solutions,
 we call `singular'.  
 
-Through the second and third chapters the value of this distinction
-has been a theme.
-For instance, we now know that 
-nonsingularity of an \( \nbyn{n} \)
-matrix \( T \) is equivalent to each of these:
+The value of this distinction has been a theme of our work since then.
+For instance, we now know that an 
+\( \nbyn{n} \) matrix \( T \) is nonsingluar if and only if
+each of these:
 \begin{itemize}
-   \item a system \( T\vec{x}=\vec{b} \) has a solution, 
+   \item any system \( T\vec{x}=\vec{b} \) has a solution, 
           and that solution is unique;
    \item Gauss-Jordan reduction of $T$ yields an identity matrix;
    \item the rows of $T$ form a linearly independent set;
-   \item the columns of \( T \) form a basis for \( \Re^n \);
+   \item the columns of \( T \) form a linearly independent set, 
+         and a basis for \( \Re^n \);
    \item any map that \( T \) represents is an isomorphism;
    \item an inverse matrix \( T^{-1} \) exists.
 \end{itemize}
-So when we look at a particular square matrix, 
-the question of whether it is nonsingular is one of the first things 
-that we ask.
-This chapter develops a formula to determine this.
-(Since we will restrict the discussion to square matrices, in this chapter
-we will usually simply say `matrix' in place of `square matrix'.)
+So when we look at a particular square matrix, one of the first things
+that we ask is whether it is  
+nonsingular.
 
+Naturally there is a formula for this.
+This chapter develops the formula. 
 More precisely, we will develop infinitely many formulas, 
 one for $\nbyn{1}$~matrices, one for $\nbyn{2}$~matrices, etc.
-Of course, these formulas are related \Dash  that is, 
-we will develop a family of
+Of course, these formulas are related,  that is, 
+we will have a family of
 formulas, a scheme that describes the formula for each size.
 
+Since we will restrict the discussion to square matrices, in this chapter
+we will often simply say `matrix' in place of `square matrix'.
 
 
 
@@ -52,33 +53,35 @@ formulas, a scheme that describes the formula for each size.
 For \( \nbyn{1} \) matrices, determining nonsingularity
 is trivial.
 \begin{center}
-  \( \begin{pmatrix}
+  \( \begin{mat}
           a
-     \end{pmatrix}  \)
+     \end{mat}  \)
   is nonsingular iff
   \( a \neq 0 \)
 \end{center}
-The $\nbyn{2}$ formula came out in the course of developing  
-the inverse. 
+When we developed the method for  
+finding matrix inverses we used it to find the formula for 
+the inverse of a general $\nbyn{2}$ matrix. 
 \begin{center}
-  \( \begin{pmatrix}
+  \( \begin{mat}
            a  &b  \\
            c  &d
-      \end{pmatrix}  \)
+      \end{mat}  \)
    is nonsingular iff
    \( ad-bc \neq 0 \)
 \end{center}
-The $\nbyn{3}$ formula can be produced similarly  
-(see \nearbyexercise{exer:ThreeByThreeDetForm}).
-\begin{center}
-  \( \begin{pmatrix}
+We could produce the $\nbyn{3}$ formula as we did the prior one  
+(see \nearbyexercise{exer:ThreeByThreeDetForm}),
+although the computation is much more involved.
+\begin{equation*}
+     \begin{mat}
            a  &b  &c  \\
            d  &e  &f  \\
            g  &h  &i
-     \end{pmatrix} \)
-  is nonsingular iff
-  \( aei+bfg+cdh-hfa-idb-gec \neq 0 \)
-\end{center}
+     \end{mat}
+  \quad\text{is nonsingular iff}\quad
+    aei+bfg+cdh-hfa-idb-gec \neq 0
+\end{equation*}
 With these cases in mind, we posit a family of 
 formulas, $a$, $ad-bc$, etc. 
 For each $n$ the formula gives rise to a 
@@ -97,9 +100,8 @@ could only mean `\( \det_{\nbyn{n}}(T) \)'.)
 
 
 \subsectionoptional{Exploration}
-\textit{This subsection is optional.
-It briefly describes how an investigator might
-come to a good general definition, which is given in the next 
+\textit{This subsection is an optional
+introduction to the general definition, which is given in the next 
 subsection.}
 
 The three cases above don't 
@@ -112,11 +114,11 @@ We may also observe that in those terms
 there is a letter from each row and column of the matrix, e.g., 
 the letters in the \(cdh\) term
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}
           &    &c \\
       d           \\
           &h
-   \end{pmatrix} 
+   \end{mat} 
 \end{equation*}
 come one from each row and one from each column.
 But these observations perhaps seem more puzzling than
@@ -163,10 +165,10 @@ then is \( \det(\hat{T})=\det(T) \)?
 This check of the $\nbyn{2}$ determinant after the $k\rho_1+\rho_2$ operation
 \begin{equation*}
    \det(
-       \begin{pmatrix}
+       \begin{mat}
          a     &b       \\
          ka+c  &kb+d    \\
-      \end{pmatrix}
+      \end{mat}
    )
    = a(kb+d)-(ka+c)b = ad-bc
 \end{equation*}
@@ -175,11 +177,11 @@ the other $\nbyn{2}$ combination $k\rho_2+\rho_1$ gives the same result.
 The $\nbyn{3}$ combination $k\rho_3+\rho_2$ leaves the determinant unchanged
   \begin{align*}
     \det(
-      \begin{pmatrix}
+      \begin{mat}
          a    &b    &c    \\
          kg+d &kh+e &ki+f \\
          g    &h    &i
-      \end{pmatrix}
+      \end{mat}
     )
     &=\begin{array}[t]{@{}l@{}}
          a(kh+e)i+b(ki+f)g+c(kg+d)h \\
@@ -204,10 +206,10 @@ of swapping two rows.
 The \(\nbyn{2}\) row swap $\rho_1\leftrightarrow\rho_2$
   \begin{equation*}
      \det(
-       \begin{pmatrix}
+       \begin{mat}
          c  &d \\
          a  &b
-       \end{pmatrix}
+       \end{mat}
      )
      = cb - ad
   \end{equation*}
@@ -215,11 +217,11 @@ does not yield \( ad-bc \).
 This $\rho_1\leftrightarrow\rho_3$ swap inside of a \(\nbyn{3}\) matrix
 \begin{equation*}
    \det(
-     \begin{pmatrix}
+     \begin{mat}
         g  &h  &i \\
         d  &e  &f \\
         a  &b  &c
-     \end{pmatrix}
+     \end{mat}
    )
    = gec + hfa + idb - bfg - cdh - aei
 \end{equation*}
@@ -228,11 +230,11 @@ there is a sign change.
 Trying a different \(\nbyn{3}\) swap $\rho_1\leftrightarrow\rho_2$ 
 \begin{equation*}
    \det(
-     \begin{pmatrix}
+     \begin{mat}
         d  &e  &f \\
         a  &b  &c \\
         g  &h  &i
-     \end{pmatrix}
+     \end{mat}
    )
    = dbi + ecg + fah - hcd - iae - gbf
 \end{equation*}
@@ -256,10 +258,10 @@ of multiplying a row by a scalar $k\neq 0$.
 One of the $\nbyn{2}$ cases is
 \begin{equation*}
   \det(
-    \begin{pmatrix}
+    \begin{mat}
       a   &b   \\
       kc  &kd
-    \end{pmatrix}
+    \end{mat}
   )
   = a(kd) - (kc)b
   =k\cdot (ad-bc)
@@ -268,11 +270,11 @@ and the other case has the same result.
 Here is one \(\nbyn{3}\) case
 \begin{align*}
   \det(
-  \begin{pmatrix}
+  \begin{mat}
     a    &b    &c   \\
     d    &e    &f   \\
     kg   &kh   &ki
-  \end{pmatrix}
+  \end{mat}
   )
    &= \begin{array}[t]{@{}l@{}}
          ae(ki) + bf(kg) + cd(kh)                \\
@@ -301,18 +303,18 @@ of each row without affecting other rows.
 For instance, in this equality
 \begin{equation*}
     \det(
-      \begin{pmatrix}
+      \begin{mat}[r]
         3  &3  &9  \\
         2  &1  &1  \\
         5  &10 &-5
-     \end{pmatrix}
+     \end{mat}
     )
     =3 \cdot \det(
-               \begin{pmatrix}
+               \begin{mat}[r]
                  1  &1  &3  \\
                  2  &1  &1  \\
                  5  &10 &-5
-               \end{pmatrix}
+               \end{mat}
              )                                  
 \end{equation*}
 the $3$ isn't factored out of all three rows, only out of the top row.
@@ -331,22 +333,22 @@ in this way.
      Evaluate the determinant of each.
      \begin{exparts*}
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 3    &1   \\
                -1    &1
-            \end{pmatrix}    \)
+            \end{mat}    \)
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 2    &0   &1  \\
                 3    &1   &1 \\
                -1    &0   &1
-            \end{pmatrix}    \)
+            \end{mat}    \)
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 4    &0   &1  \\
                 0    &0   &1 \\
                 1    &3   &-1
-            \end{pmatrix}    \)
+            \end{mat}    \)
      \end{exparts*}
      \begin{answer}
        \begin{exparts*}
@@ -358,20 +360,20 @@ in this way.
   \item 
      Evaluate the determinant of each.
      \begin{exparts*}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                     2  &0  \\
                    -1  &3
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                     2  &1  &1  \\
                     0  &5  &-2 \\
                     1  &-3 &4
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                     2  &3  &4  \\
                     5  &6  &7  \\
                     8  &9  &1
-                 \end{pmatrix} \)
+                 \end{mat} \)
      \end{exparts*}
     \begin{answer}
       \begin{exparts*}
@@ -385,11 +387,11 @@ in this way.
     $\nbyn{3}$ matrix is the product down the diagonal. 
     \begin{equation*}
        \det(
-       \begin{pmatrix}
+       \begin{mat}
            a    &b   &c    \\
            0    &e   &f    \\
            0    &0   &i
-       \end{pmatrix}
+       \end{mat}
        )
        =aei
     \end{equation*}
@@ -404,20 +406,20 @@ in this way.
      nonsingular.
      \begin{exparts*}
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 2    &1   \\
                 3    &1
-            \end{pmatrix}    \)
+            \end{mat}    \)
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 0    &1   \\
                 1    &-1
-            \end{pmatrix}    \)
+            \end{mat}    \)
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 4    &2   \\
                 2    &1
-            \end{pmatrix}    \)
+            \end{mat}    \)
      \end{exparts*}
      \begin{answer}
        \begin{exparts}
@@ -431,23 +433,23 @@ in this way.
      Use the determinant to decide.
      \begin{exparts*}
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 2    &1   &1  \\
                 3    &2   &2 \\
                 0    &1   &4
-            \end{pmatrix}    \)
+            \end{mat}    \)
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 1    &0   &1  \\
                 2    &1   &1 \\
                 4    &1   &3
-            \end{pmatrix}    \)
+            \end{mat}    \)
        \partsitem \(
-            \begin{pmatrix}
+            \begin{mat}[r]
                 2    &1   &0  \\
                 3    &-2  &0 \\
                 1    &0   &0
-            \end{pmatrix}    \)
+            \end{mat}    \)
      \end{exparts*}
      \begin{answer}
       \begin{exparts}
@@ -461,34 +463,34 @@ in this way.
     Use this operation to
     compare \( \det(A) \) with \( \det(B) \).
      \begin{exparts}
-        \partsitem \( A=\begin{pmatrix}
+        \partsitem \( A=\begin{mat}[r]
                       1  &2  \\
                       2  &3
-                   \end{pmatrix} \)
-               \(  B=\begin{pmatrix}
+                   \end{mat} \)
+               \(  B=\begin{mat}[r]
                       1  &2  \\
                       0  &-1
-                   \end{pmatrix}  \)
-        \partsitem \( A=\begin{pmatrix}
+                   \end{mat}  \)
+        \partsitem \( A=\begin{mat}[r]
                       3  &1  &0  \\
                       0  &0  &1  \\
                       0  &1  &2
-                   \end{pmatrix} \)
-              \(   B=\begin{pmatrix}
+                   \end{mat} \)
+              \(   B=\begin{mat}[r]
                       3  &1  &0  \\
                       0  &1  &2  \\
                       0  &0  &1
-                   \end{pmatrix}  \)
-        \partsitem \( A=\begin{pmatrix}
+                   \end{mat}  \)
+        \partsitem \( A=\begin{mat}[r]
                       1  &-1 &3  \\
                       2  &2  &-6 \\
                       1  &0  &4
-                   \end{pmatrix} \)
-              \(   B=\begin{pmatrix}
+                   \end{mat} \)
+              \(   B=\begin{mat}[r]
                       1  &-1 &3  \\
                       1  &1  &-3 \\
                       1  &0  &4
-                   \end{pmatrix}  \)
+                   \end{mat}  \)
      \end{exparts}
      \begin{answer}
        \begin{exparts}
@@ -502,11 +504,11 @@ in this way.
      Show this.
       \begin{equation*}
          \det(
-         \begin{pmatrix}
+         \begin{mat}
              1    &1   &1    \\
              a    &b   &c    \\
              a^2  &b^2 &c^2
-         \end{pmatrix}
+         \end{mat}
          )
          =(b-a)(c-a)(c-b)
       \end{equation*}
@@ -531,20 +533,20 @@ in this way.
    \recommended \item 
       Which real numbers \( x \) make this matrix singular?
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
             12-x  &4  \\
             8    &8-x
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       \begin{answer}
          This equation
          \begin{equation*}
            0=
            \det(
-             \begin{pmatrix}
+             \begin{mat}
                 12-x  &4  \\
                 8    &8-x
-             \end{pmatrix}
+             \end{mat}
            )
            =64-20x+x^2
            =(x-16)(x-4) 
@@ -556,11 +558,11 @@ in this way.
     the formula for $\nbyn{3}$ matrices stated in the preamble to
     this section.
     \begin{center}
-      \( \begin{pmatrix}
+      \( \begin{mat}
                a  &b  &c  \\
                d  &e  &f  \\
                g  &h  &i
-         \end{pmatrix} \)
+         \end{mat} \)
       is nonsingular iff
       \( aei+bfg+cdh-hfa-idb-gec \neq 0 \)
     \end{center}
@@ -569,32 +571,32 @@ in this way.
       To begin, assume that \( a\neq 0 \) and that \( ae-bd\neq 0 \).
       \begin{eqnarray*}
         \grstep{(1/a)\rho_1}\;
-        \begin{pmatrix}
+        \begin{mat}
            1   &b/a   &c/a   \\
            d   &e     &f     \\
            g   &h     &i
-         \end{pmatrix}                                           
+         \end{mat}                                           
         &\grstep[-g\rho_1+\rho_3]{-d\rho_1+\rho_2}
-        &\begin{pmatrix}
+        &\begin{mat}
            1   &b/a           &c/a           \\
            0   &(ae-bd)/a     &(af-cd)/a     \\
            0   &(ah-bg)/a     &(ai-cg)/a
-         \end{pmatrix}                                            \\
+         \end{mat}                                            \\
         &\grstep{(a/(ae-bd))\rho_2}
-        &\begin{pmatrix}
+        &\begin{mat}
            1   &b/a           &c/a             \\
            0   &1             &(af-cd)/(ae-bd) \\
            0   &(ah-bg)/a     &(ai-cg)/a
-         \end{pmatrix}
+         \end{mat}
       \end{eqnarray*}
       This step finishes the calculation.
       \begin{equation*}
         \grstep{((ah-bg)/a)\rho_2+\rho_3}
-        \begin{pmatrix}
+        \begin{mat}
            1   &b/a    &c/a             \\
            0   &1      &(af-cd)/(ae-bd)      \\
            0   &0      &(aei+bgf+cdh-hfa-idb-gec)/(ae-bd)
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       Now assuming that $a\neq 0$ and \( ae-bd\neq 0 \), 
       the original matrix is nonsingular
@@ -607,17 +609,17 @@ in this way.
       taken for convienence in the prior paragraph do not hold.
       First, if \( a\neq 0 \) but \( ae-bd=0 \) then we can swap
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
            1   &b/a           &c/a           \\
            0   &0             &(af-cd)/a     \\
            0   &(ah-bg)/a     &(ai-cg)/a
-         \end{pmatrix}                                  
+         \end{mat}                                  
         \grstep{\rho_2\leftrightarrow\rho_3}
-        \begin{pmatrix}
+        \begin{mat}
            1   &b/a           &c/a           \\
            0   &(ah-bg)/a     &(ai-cg)/a     \\
            0   &0             &(af-cd)/a
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       and conclude that the matrix is nonsingular if and only if either
       \( ah-bg=0 \) or \( af-cd=0 \).
@@ -649,11 +651,11 @@ in this way.
      and \( (x_2,y_2) \) is expressed by this determinant.
      \begin{equation*}
         \det(
-        \begin{pmatrix}
+        \begin{mat}
            x   &y   &1  \\
            x_1 &y_1 &1  \\
            x_2 &y_2 &1
-        \end{pmatrix})=0 \qquad x_1\neq x_2
+        \end{mat})=0 \qquad x_1\neq x_2
      \end{equation*}
      \begin{answer}
        Figuring the determinant and doing some algebra gives this.
@@ -714,16 +716,16 @@ in this way.
           An example is that this matrix is
           singular because the second and third rows are equal 
           \begin{equation*}
-            \begin{pmatrix}  
+            \begin{mat}[r]  
               1  &0  &0  &1   \\
               0  &1  &1  &0   \\
               0  &1  &1  &0   \\
              -1  &0  &0  &1  
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
           but following the scheme of the mnemonic does not give zero.
           \begin{equation*}
-            \begin{pmat}{cccc|ccc}
+            \begin{pmat}{rrrr|rrr}
                        1  &0  &0  &1  &1  &0  &0  \\
                        0  &1  &1  &0  &0  &1  &1  \\
                        0  &1  &1  &0  &0  &1  &1  \\
@@ -748,11 +750,11 @@ in this way.
     is the vector computed as this determinant.
     \begin{equation*}
       \vec{x}\times\vec{y}=
-      \det(\begin{pmatrix}
+      \det(\begin{mat}
         \vec{e}_1  &\vec{e}_2  &\vec{e}_3  \\
         x_1        &x_2        &x_3        \\
         y_1        &y_2        &y_3
-      \end{pmatrix})
+      \end{mat})
     \end{equation*}
     Note that the first row is composed of vectors, the vectors from the
     standard basis for $\Re^3$.
@@ -801,19 +803,19 @@ in this way.
         \partsitem Plug and chug:
           the determinant of the product is this
           \begin{align*}
-             \det(\begin{pmatrix}
+             \det(\begin{mat}
                        a  &b  \\
                        c  &d
-                    \end{pmatrix}
-                    \begin{pmatrix}
+                    \end{mat}
+                    \begin{mat}
                        w  &x  \\
                        y  &z
-                    \end{pmatrix}  )
+                    \end{mat}  )
              &=
-             \det(\begin{pmatrix}
+             \det(\begin{mat}
                  aw+by  &ax+bz  \\
                  cw+dy  &cx+dz
-              \end{pmatrix} )                 \\
+              \end{mat} )                 \\
              &=
              \begin{array}[t]{@{}l@{}} 
                  acwx+adwz+bcxy+bdyz  \\
@@ -822,14 +824,14 @@ in this way.
           \end{align*}
           while the product of the determinants is this.
           \begin{equation*}
-             \det(\begin{pmatrix}
+             \det(\begin{mat}
                 a  &b  \\
                 c  &d
-             \end{pmatrix})
-             \cdot\det(\begin{pmatrix}
+             \end{mat})
+             \cdot\det(\begin{mat}
                 w  &x  \\
                 y  &z
-             \end{pmatrix})
+             \end{mat})
              =
              (ad-bc)\cdot (wz-xy)
           \end{equation*}
@@ -850,18 +852,18 @@ in this way.
     is equal to the value of this determinant.
     \begin{equation*}
        \det(
-       \begin{pmatrix}
+       \begin{mat}
           x_1  &x_2  \\
           y_1  &y_2
-       \end{pmatrix})
+       \end{mat})
     \end{equation*}
     Compare with this.
     \begin{equation*}
        \det(
-       \begin{pmatrix}
+       \begin{mat}
           x_2  &x_1  \\
           y_2  &y_1
-       \end{pmatrix})
+       \end{mat})
     \end{equation*}
     \begin{answer}
       One way is to count these areas
@@ -898,20 +900,20 @@ in this way.
       Recall that constants come out one row at a time.
       \begin{equation*}
          \det(
-         \begin{pmatrix}
+         \begin{mat}[r]
             2  &4  \\
             2  &6  \\
-         \end{pmatrix})
+         \end{mat})
          =
-         2\cdot\det(\begin{pmatrix}
+         2\cdot\det(\begin{mat}[r]
             1  &2  \\
             2  &6  \\
-         \end{pmatrix})
+         \end{mat})
          =
-         2\cdot 2\cdot \det(\begin{pmatrix}
+         2\cdot 2\cdot \det(\begin{mat}[r]
             1  &2  \\
             1  &3  \\
-         \end{pmatrix})
+         \end{mat})
       \end{equation*}
       This contradicts linearity (here we didn't need \( S \), i.e., we can 
       take $S$ to be the matrix of zeros).  
@@ -925,10 +927,10 @@ in this way.
   \item 
     Which real numbers \( \theta \) make
     \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}
           \cos\theta  &-\sin\theta  \\
           \sin\theta  &\cos\theta
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     singular?
     Explain geometrically.
@@ -964,11 +966,11 @@ in this way.
       Therefore \( 412 \) the maximum value for the determinant and one form
       for the determinant is
       \begin{equation*}
-         \begin{vmatrix}
+         \begin{vmat}[r]
             9  &4  &2  \\
             3  &8  &6  \\
             5  &1  &7
-         \end{vmatrix}.
+         \end{vmat}.
       \end{equation*}  
     \end{answer}
 \end{exercises}
@@ -1117,32 +1119,32 @@ is zero so we can use property~(3) of the definition to factor them out
 (again, the vertical bars \( \deter{\cdots} \) indicate the determinant
 operation).
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     t_{1,1}  &t_{1,2}  &     &t_{1,n}  \\
     0        &t_{2,2}  &     &t_{2,n}  \\
              &         &\ddots         \\
     0        &         &     &t_{n,n}
-  \end{vmatrix}
+  \end{vmat}
   =
   t_{1,1}\cdot t_{2,2}\cdots t_{n,n}\cdot
-  \begin{vmatrix}
+  \begin{vmat}
     1        &t_{1,2}/t_{1,1}  &     &t_{1,n}/t_{1,1}  \\
     0        &1                &     &t_{2,n}/t_{2,2}  \\
              &                 &\ddots         \\
     0        &                 &     &1
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 Next, the Jordan half of Gauss-Jordan elimination,
 using property~(1) of the definition, leaves the identity matrix.
 \begin{equation*}
   =
   t_{1,1}\cdot t_{2,2}\cdots t_{n,n}\cdot
-  \begin{vmatrix}
+  \begin{vmat}
     1        &0                &     &0                \\
     0        &1                &     &0                \\
              &                 &\ddots         \\
     0        &                 &     &1
-  \end{vmatrix}
+  \end{vmat}
   =
   t_{1,1}\cdot t_{2,2}\cdots t_{n,n}\cdot 1
 \end{equation*}
@@ -1163,15 +1165,15 @@ see in this book.
 \begin{example}
 Doing \( \nbyn{2} \) determinants
 \begin{equation*}
-   \begin{vmatrix}
+   \begin{vmat}[r]
       2  &4  \\
       -1 &3
-   \end{vmatrix}
+   \end{vmat}
    =
-   \begin{vmatrix}
+   \begin{vmat}[r]
       2  &4  \\
       0  &5
-   \end{vmatrix}
+   \end{vmat}
    =10
 \end{equation*}
 with Gauss' method won't give a big savings
@@ -1179,23 +1181,23 @@ because the $\nbyn{2}$ determinant formula is so easy.
 However, a \( \nbyn{3} \) determinant is usually easier to calculate
 with Gauss' method than with the formula given earlier.
 \begin{equation*}
-   \begin{vmatrix}
+   \begin{vmat}[r]
      2  &2  &6  \\
      4  &4  &3  \\
      0  &-3 &5
-   \end{vmatrix}
+   \end{vmat}
    =
-   \begin{vmatrix}
+   \begin{vmat}[r]
      2  &2  &6  \\
      0  &0  &-9 \\
      0  &-3 &5
-   \end{vmatrix}
+   \end{vmat}
    =
-   -\begin{vmatrix}
+   -\begin{vmat}[r]
      2  &2  &6  \\
      0  &-3 &5  \\
      0  &0  &-9
-   \end{vmatrix}
+   \end{vmat}
    =-54
 \end{equation*}
 \end{example}
@@ -1204,26 +1206,26 @@ with Gauss' method than with the formula given earlier.
 Determinants of matrices any bigger than $\nbyn{3}$ are almost always 
 most quickly done with this Gauss' method procedure.
 \begin{equation*}
-   \begin{vmatrix}
+   \begin{vmat}[r]
       1  &0  &1  &3  \\
       0  &1  &1  &4  \\
       0  &0  &0  &5  \\
       0  &1  &0  &1
-   \end{vmatrix}
+   \end{vmat}
    =
-   \begin{vmatrix}
+   \begin{vmat}[r]
       1  &0  &1  &3  \\
       0  &1  &1  &4  \\
       0  &0  &0  &5  \\
       0  &0  &-1 &-3
-   \end{vmatrix}
+   \end{vmat}
    =
-   -\begin{vmatrix}
+   -\begin{vmat}[r]
       1  &0  &1  &3  \\
       0  &1  &1  &4  \\
       0  &0  &-1 &-3 \\
       0  &0  &0  &5
-   \end{vmatrix}
+   \end{vmat}
    =-(-5)=5
 \end{equation*}
 \end{example}
@@ -1265,99 +1267,99 @@ In the rest of the section we will produce determinant functions.
   \recommended \item 
     Use Gauss' method to find each determinant.
     \begin{exparts*}
-      \partsitem \( \begin{vmatrix}
+      \partsitem \( \begin{vmat}[r]
                  3  &1  &2  \\
                  3  &1  &0  \\
                  0  &1  &4
-               \end{vmatrix} \)
-      \partsitem \( \begin{vmatrix}
+               \end{vmat} \)
+      \partsitem \( \begin{vmat}[r]
                  1  &0  &0  &1 \\
                  2  &1  &1  &0 \\
                 -1  &0  &1  &0 \\
                  1  &1  &1  &0
-               \end{vmatrix} \)
+               \end{vmat} \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
-      \partsitem \( \begin{vmatrix}
+      \partsitem \( \begin{vmat}[r]
                  3  &1  &2  \\
                  3  &1  &0  \\
                  0  &1  &4
-               \end{vmatrix}
+               \end{vmat}
                =
-               \begin{vmatrix}
+               \begin{vmat}[r]
                  3  &1  &2  \\
                  0  &0  &-2 \\
                  0  &1  &4
-               \end{vmatrix}
+               \end{vmat}
                =
-               -\begin{vmatrix}
+               -\begin{vmat}[r]
                  3  &1  &2  \\
                  0  &1  &4  \\
                  0  &0  &-2
-               \end{vmatrix}
+               \end{vmat}
                =6  \)
-      \partsitem \( \begin{vmatrix}
+      \partsitem \( \begin{vmat}[r]
                  1  &0  &0  &1 \\
                  2  &1  &1  &0 \\
                 -1  &0  &1  &0 \\
                  1  &1  &1  &0
-               \end{vmatrix}
+               \end{vmat}
                =
-               \begin{vmatrix}
+               \begin{vmat}[r]
                  1  &0  &0  &1 \\
                  0  &1  &1  &-2\\
                  0  &0  &1  &1 \\
                  0  &1  &1  &-1
-               \end{vmatrix}
+               \end{vmat}
                =
-               \begin{vmatrix}
+               \begin{vmat}[r]
                  1  &0  &0  &1 \\
                  0  &1  &1  &-2\\
                  0  &0  &1  &1 \\
                  0  &0  &0  &1
-               \end{vmatrix}
+               \end{vmat}
                =1    \)
       \end{exparts} 
     \end{answer}
   \item Use Gauss' method to find each.
     \begin{exparts*}
-      \partsitem \( \begin{vmatrix}
+      \partsitem \( \begin{vmat}[r]
                  2  &-1  \\
                  -1 &-1
-               \end{vmatrix}  \)
-      \partsitem \( \begin{vmatrix}
+               \end{vmat}  \)
+      \partsitem \( \begin{vmat}[r]
                  1  &1  &0  \\
                  3  &0  &2  \\
                  5  &2  &2
-               \end{vmatrix} \)
+               \end{vmat} \)
     \end{exparts*}
     \begin{answer}
      \begin{exparts*}
       \partsitem \(
-        \begin{vmatrix}
+        \begin{vmat}[r]
                  2  &-1  \\
                  -1 &-1
-               \end{vmatrix}
-             =\begin{vmatrix}
+               \end{vmat}
+             =\begin{vmat}[r]
                  2  &-1  \\
                  0  &-3/2
-               \end{vmatrix}=-3  \);
-      \partsitem \( \begin{vmatrix}
+               \end{vmat}=-3  \);
+      \partsitem \( \begin{vmat}[r]
                  1  &1  &0  \\
                  3  &0  &2  \\
                  5  &2  &2
-               \end{vmatrix}
-              =\begin{vmatrix}
+               \end{vmat}
+              =\begin{vmat}[r]
                  1  &1  &0  \\
                  0  &-3 &2  \\
                  0  &-3 &2
-               \end{vmatrix}
-              =\begin{vmatrix}
+               \end{vmat}
+              =\begin{vmat}[r]
                  1  &1  &0  \\
                  0  &-3 &2  \\
                  0  &0  &0
-               \end{vmatrix}
+               \end{vmat}
               =0 \)
      \end{exparts*}  
     \end{answer}
@@ -1375,19 +1377,19 @@ In the rest of the section we will produce determinant functions.
     \begin{answer}
      When is the determinant not zero?
       \begin{equation*}
-         \begin{vmatrix}
+         \begin{vmat}
            1  &0  &1  &-1  \\
            0  &1  &-2 &0   \\
            1  &0  &k  &0   \\
            0  &0  &1  &-1
-         \end{vmatrix}
+         \end{vmat}
          =
-         \begin{vmatrix}
+         \begin{vmat}
            1  &0  &1  &-1  \\
            0  &1  &-2 &0   \\
            0  &0  &k-1&1   \\
            0  &0  &1  &-1
-         \end{vmatrix}           
+         \end{vmat}           
       \end{equation*}
       Obviously, 
       $k=1$ gives nonsingularity and hence a nonzero determinant. 
@@ -1395,12 +1397,12 @@ In the rest of the section we will produce determinant functions.
       we get echelon form with a $(-1/k-1)\rho_3+\rho_4$ combination.
       \begin{equation*}
          =
-         \begin{vmatrix}
+         \begin{vmat}
            1  &0  &1  &-1  \\
            0  &1  &-2 &0   \\
            0  &0  &k-1&1   \\
            0  &0  &0  &-1-(1/k-1)
-         \end{vmatrix}
+         \end{vmat}
       \end{equation*}
       Multiplying down the diagonal gives $(k-1)(-1-(1/k-1))=-(k-1)-1=-k$.
       Thus the matrix has a nonzero determinant, and so the system
@@ -1409,81 +1411,81 @@ In the rest of the section we will produce determinant functions.
   \recommended \item 
     Express each of these in terms of \( \deter{H} \).
     \begin{exparts}
-      \partsitem \( \begin{vmatrix}
+      \partsitem \( \begin{vmat}
             h_{3,1}  &h_{3,2} &h_{3,3} \\
             h_{2,1}  &h_{2,2} &h_{2,3} \\
             h_{1,1}  &h_{1,2} &h_{1,3}
-          \end{vmatrix} \)
-      \partsitem \( \begin{vmatrix}
+          \end{vmat} \)
+      \partsitem \( \begin{vmat}
            -h_{1,1}   &-h_{1,2}  &-h_{1,3} \\
            -2h_{2,1}  &-2h_{2,2} &-2h_{2,3} \\
            -3h_{3,1}  &-3h_{3,2} &-3h_{3,3}
-          \end{vmatrix} \)
-      \partsitem \( \begin{vmatrix}
+          \end{vmat} \)
+      \partsitem \( \begin{vmat}
             h_{1,1}+h_{3,1}  &h_{1,2}+h_{3,2} &h_{1,3}+h_{3,3} \\
             h_{2,1}          &h_{2,2}         &h_{2,3} \\
             5h_{3,1}         &5h_{3,2}        &5h_{3,3}
-          \end{vmatrix} \)
+          \end{vmat} \)
     \end{exparts}
     \begin{answer}
       \begin{exparts}
         \partsitem Property~(2) of the definition of determinants
           applies via the swap $\rho_1\leftrightarrow\rho_3$.
           \begin{equation*}
-            \begin{vmatrix}
+            \begin{vmat}
               h_{3,1}  &h_{3,2} &h_{3,3} \\
               h_{2,1}  &h_{2,2} &h_{2,3} \\
               h_{1,1}  &h_{1,2} &h_{1,3}
-            \end{vmatrix}
+            \end{vmat}
             =
-            -\begin{vmatrix}
+            -\begin{vmat}
               h_{1,1}  &h_{1,2} &h_{1,3} \\
               h_{2,1}  &h_{2,2} &h_{2,3} \\
               h_{3,1}  &h_{3,2} &h_{3,3} 
-            \end{vmatrix}
+            \end{vmat}
           \end{equation*}
         \partsitem Property~(3) applies.
           \begin{equation*}
-            \begin{vmatrix}
+            \begin{vmat}
              -h_{1,1}   &-h_{1,2}  &-h_{1,3} \\
              -2h_{2,1}  &-2h_{2,2} &-2h_{2,3} \\
              -3h_{3,1}  &-3h_{3,2} &-3h_{3,3}
-            \end{vmatrix}
+            \end{vmat}
             =
             (-1)\cdot(-2)\cdot(-3)\cdot
-            \begin{vmatrix}
+            \begin{vmat}
              h_{1,1}   &h_{1,2}  &h_{1,3} \\
              h_{2,1}   &h_{2,2}  &h_{2,3} \\
              h_{3,1}   &h_{3,2}  &h_{3,3}
-            \end{vmatrix}
+            \end{vmat}
             =
             (-6)\cdot
-            \begin{vmatrix}
+            \begin{vmat}
              h_{1,1}   &h_{1,2}  &h_{1,3} \\
              h_{2,1}   &h_{2,2}  &h_{2,3} \\
              h_{3,1}   &h_{3,2}  &h_{3,3}
-            \end{vmatrix}
+            \end{vmat}
           \end{equation*}
         \partsitem 
           \begin{align*}
-          \begin{vmatrix}
+          \begin{vmat}
             h_{1,1}+h_{3,1}  &h_{1,2}+h_{3,2} &h_{1,3}+h_{3,3} \\
             h_{2,1}          &h_{2,2}         &h_{2,3} \\
             5h_{3,1}         &5h_{3,2}        &5h_{3,3}
-          \end{vmatrix}
+          \end{vmat}
           &=
           5\cdot     
-          \begin{vmatrix}
+          \begin{vmat}
             h_{1,1}+h_{3,1}  &h_{1,2}+h_{3,2} &h_{1,3}+h_{3,3} \\
             h_{2,1}          &h_{2,2}         &h_{2,3} \\
             h_{3,1}          &h_{3,2}         &h_{3,3}
-          \end{vmatrix}                                     \\
+          \end{vmat}                                     \\
           &=5\cdot
-          \begin{vmatrix}
+          \begin{vmat}
             h_{1,1}          &h_{1,2}         &h_{1,3} \\
             h_{2,1}          &h_{2,2}         &h_{2,3} \\
             h_{3,1}          &h_{3,2}         &h_{3,3}
-          \end{vmatrix}
+          \end{vmat}
           \end{align*}
       \end{exparts}  
      \end{answer}
@@ -1502,11 +1504,11 @@ In the rest of the section we will produce determinant functions.
   \recommended \item 
     Show that this determinant is zero.
     \begin{equation*}
-      \begin{vmatrix}
+      \begin{vmat}
         y+z  &x+z  &x+y  \\
         x    &y    &z    \\
         1    &1    &1
-      \end{vmatrix}
+      \end{vmat}
     \end{equation*}
     \begin{answer} 
       Adding the second row to the first gives a matrix whose first row
@@ -1522,18 +1524,18 @@ In the rest of the section we will produce determinant functions.
     \begin{answer}
       \begin{exparts}
         \partsitem 
-          $\begin{pmatrix}
+          $\begin{mat}[r]
             1
-          \end{pmatrix}$,
-          $\begin{pmatrix}
+          \end{mat}$,
+          $\begin{mat}[r]
             1  &-1  \\
             -1  &1
-          \end{pmatrix}$,
-          $\begin{pmatrix}
+          \end{mat}$,
+          $\begin{mat}[r]
             1   &-1  &1   \\
             -1  &1   &-1  \\
             1   &-1  &1
-          \end{pmatrix}$
+          \end{mat}$
         \partsitem The determinant in the $\nbyn{1}$ case is $1$.
           In every other case the second row is the negative of the first,
           and so matrix is singular and the determinant is zero. 
@@ -1549,37 +1551,37 @@ In the rest of the section we will produce determinant functions.
     \begin{answer}
       \begin{exparts}
         \partsitem 
-          $\begin{pmatrix}
+          $\begin{mat}[r]
             2
-          \end{pmatrix}$,
-          $\begin{pmatrix}
+          \end{mat}$,
+          $\begin{mat}[r]
             2  &3  \\
             3  &4
-          \end{pmatrix}$,
-          $\begin{pmatrix}
+          \end{mat}$,
+          $\begin{mat}[r]
             2  &3  &4  \\
             3  &4  &5  \\
             4  &5  &6
-          \end{pmatrix}$
+          \end{mat}$
         \partsitem The $\nbyn{1}$ and $\nbyn{2}$ cases yield these.
           \begin{equation*}
-            \begin{vmatrix}
+            \begin{vmat}[r]
               2
-            \end{vmatrix}
+            \end{vmat}
             =2
             \qquad
-            \begin{vmatrix}
+            \begin{vmat}[r]
               2  &3  \\
               3  &4
-            \end{vmatrix}=-1
+            \end{vmat}=-1
           \end{equation*}
           And $\nbyn{n}$ matrices with $n\geq 3$ are singular, e.g.,
           \begin{equation*}
-            \begin{vmatrix}
+            \begin{vmat}[r]
               2  &3  &4  \\
               3  &4  &5  \\
               4  &5  &6
-            \end{vmatrix}=0
+            \end{vmat}=0
           \end{equation*}
           because twice the second row minus the first row 
           equals the third row.
@@ -1593,19 +1595,19 @@ In the rest of the section we will produce determinant functions.
       This one 
       \begin{equation*}
          A=B=
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &2  \\
            3  &4
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       is easy to check.
       \begin{equation*}
          \deter{A+B}
          =
-         \begin{vmatrix}
+         \begin{vmat}[r]
            2  &4  \\
            6  &8
-         \end{vmatrix}
+         \end{vmat}
          =-8
          \qquad
          \deter{A}+\deter{B}
@@ -1757,16 +1759,16 @@ In the rest of the section we will produce determinant functions.
     some of the rows and columns of $A$.
     Thus, the first matrix here is a submatrix of the second.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         3  &1  \\
         2  &5
-      \end{pmatrix}
+      \end{mat}
       \qquad
-      \begin{pmatrix}
+      \begin{mat}[r]
         3  &4  &1  \\
         0  &9  &-2 \\
         2  &-1 &5
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     Prove that for any square matrix,
     the rank of the matrix is $r$ if and only if
@@ -1808,12 +1810,12 @@ In the rest of the section we will produce determinant functions.
      professors on campus, (e)~putting \( B \), \( C \), \( D \) in the
      determinant
      \begin{equation*}
-       \begin{vmatrix}
+       \begin{vmat}
          1   &a   &a^2  &a^3  \\
          a^3 &1   &a    &a^2  \\
          B   &a^3 &1    &a    \\
          C   &D   &a^3  &1
-       \end{vmatrix}.
+       \end{vmat}.
      \end{equation*}
      \cite{Monthly53p115}
      \begin{answer}
@@ -1871,32 +1873,32 @@ first and third conditions.
 Here is an instance of the conflict:~here are
 two Gauss' method reductions of the same matrix, the first without any row swap
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &2  \\
     3  &4
-  \end{pmatrix}
+  \end{mat}
   \grstep{-3\rho_1+\rho_2}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &2  \\
     0  &-2
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 and the second with a swap.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &2  \\
     3  &4
-  \end{pmatrix}
+  \end{mat}
   \grstep{\rho_1\leftrightarrow\rho_2}
-  \begin{pmatrix}
+  \begin{mat}[r]
     3  &4  \\
     1  &2
-  \end{pmatrix}
+  \end{mat}
   \grstep{-(1/3)\rho_1+\rho_2}
-  \begin{pmatrix}
+  \begin{mat}[r]
     3  &4  \\
     0  &2/3
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 Following \nearbydefinition{def:Det} gives that both
 calculations yield the determinant $-2$ 
@@ -1939,25 +1941,25 @@ This property shows that determinants are not linear.
 For this matrix
 \( \det(2A)\neq 2\cdot\det(A) \).
 \begin{equation*}
-   A=\begin{pmatrix}
+   A=\begin{mat}[r]
        2  &1  \\
       -1  &3
-     \end{pmatrix}
+     \end{mat}
 \end{equation*} 
 Instead, the scalar comes out of each of the two rows.
 \begin{equation*}
-   \begin{vmatrix}
+   \begin{vmat}[r]
        4  &2  \\
       -2  &6
-     \end{vmatrix}
-  =2\cdot\begin{vmatrix}
+     \end{vmat}
+  =2\cdot\begin{vmat}[r]
        2  &1  \\
       -2  &6
-     \end{vmatrix}
-  =4\cdot\begin{vmatrix}
+     \end{vmat}
+  =4\cdot\begin{vmat}[r]
        2  &1  \\
       -1  &3
-     \end{vmatrix}
+     \end{vmat}
 \end{equation*}
 \end{example}
 
@@ -2061,42 +2063,42 @@ determinants, each of which involves a simple matrix.
 We can use multilinearity to split this determinant into two,
 first breaking up the first row
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &1  \\
      4  &3
-  \end{vmatrix}
+  \end{vmat}
   =
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &0  \\
      4  &3
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0  &1  \\
      4  &3
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 and then separating each of those two, breaking along the second rows.
 \begin{equation*}
-  =\begin{vmatrix}
+  =\begin{vmat}[r]
      2  &0  \\
      4  &0
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &0  \\
      0  &3
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0  &1  \\
      4  &0
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0  &1  \\
      0  &3
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 We are left with four determinants, such that 
 in each row of each matrix there is
@@ -2111,64 +2113,64 @@ We start by splitting along the first row, producing three determinants
 (the zero in the $1,3$ position is underlined to set it off visually
 from the zeroes that appear in the splitting).
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2              &1  &-1  \\
      4              &3  &\underline{0}  \\
      2              &1  &5
-  \end{vmatrix}
+  \end{vmat}
   =
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2              &0  &0   \\
      4              &3  &\underline{0}  \\
      2              &1  &5
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0              &1  &0   \\
      4              &3  &\underline{0}   \\
      2              &1  &5
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0              &0  &-1  \\
      4              &3  &\underline{0}  \\
      2  &1  &5
-  \end{vmatrix}                       
+  \end{vmat}                       
 \end{equation*}
 Each of these three will itself split in three along the second row.
 Each of the resulting nine splits in three along the third row, resulting
 in twenty seven determinants
 \begin{equation*}
   =
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2              &0  &0   \\
      4              &0  &0   \\
      2              &0  &0
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &0  &0   \\
      4  &0  &0   \\
      0  &1  &0
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &0  &0   \\
      4  &0  &0   \\
      0  &0  &5
-  \end{vmatrix}
+  \end{vmat}
   +
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &0  &0   \\
      0  &3  &0   \\
      2  &0  &0
-  \end{vmatrix}
+  \end{vmat}
   +\dots+
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0  &0  &-1  \\
      0  &0  &\underline{0}  \\
      0  &0  &5
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 such that each row contains a single entry from the starting matrix.
 \end{example}
@@ -2185,23 +2187,23 @@ two of the rows have their entry from the starting matrix in the same column,
 e.g.,
 in the first matrix, the $2$ and the $4$ both come from the first column.
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2               &0  &0   \\
      4               &0  &0  \\
      0               &1  &0
-  \end{vmatrix}
+  \end{vmat}
   \qquad
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0               &0  &-1  \\
      0               &3  &0  \\
      0               &0  &5
-  \end{vmatrix}
+  \end{vmat}
   \qquad\
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0               &1  &0   \\
      0               &0  &\underline{0}  \\
      0               &0  &5
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 Any such matrix is singular, because in each,
 one row is a multiple of the other (or is a zero row).
@@ -2210,77 +2212,77 @@ Thus, any such determinant is zero, by \nearbylemma{le:IdenRowsDetZero}.
 Therefore, the above expansion of the \( \nbyn{3} \) determinant into
 the sum of the twenty seven determinants simplifies to the sum of these six.
 \begin{align*}
-  \begin{vmatrix}
+  \begin{vmat}[r]
      2  &1  &-1  \\
      4  &3  &\underline{0}  \\
      2  &1  &5
-  \end{vmatrix}
-  &=\begin{vmatrix}
+  \end{vmat}
+  &=\begin{vmat}[r]
      2  &0  &0   \\
      0  &3  &0   \\
      0  &0  &5
-  \end{vmatrix}
+  \end{vmat}
   +
-   \begin{vmatrix}
+   \begin{vmat}[r]
      2  &0  &0   \\
      0  &0  &\underline{0}   \\
      0  &1  &0
-  \end{vmatrix}                      \\
-  &\quad\hbox{}+\begin{vmatrix}
+  \end{vmat}                      \\
+  &\quad\hbox{}+\begin{vmat}[r]
      0  &1  &0   \\
      4  &0  &0   \\
      0  &0  &5
-  \end{vmatrix}
+  \end{vmat}
   +
-   \begin{vmatrix}
+   \begin{vmat}[r]
      0  &1  &0   \\
      0  &0  &\underline{0}   \\
      2  &0  &0
-  \end{vmatrix}                      \\
-  &\quad\hbox{}+\begin{vmatrix}
+  \end{vmat}                      \\
+  &\quad\hbox{}+\begin{vmat}[r]
      0  &0  &-1  \\
      4  &0  &0   \\
      0  &1  &0
-  \end{vmatrix}
+  \end{vmat}
   +
-   \begin{vmatrix}
+   \begin{vmat}[r]
      0  &0  &-1  \\
      0  &3  &0    \\
      2  &0  &0
-  \end{vmatrix}                      
+  \end{vmat}                      
 \end{align*}
 We can bring out the scalars.
 \begin{align*}
-  &=(2)(3)(5)\begin{vmatrix}
+  &=(2)(3)(5)\begin{vmat}[r]
                1  &0  &0  \\
                0  &1  &0  \\
                0  &0  &1
-            \end{vmatrix}
-  +(2)(\underline{0})(1)\begin{vmatrix}
+            \end{vmat}
+  +(2)(\underline{0})(1)\begin{vmat}[r]
                1  &0  &0  \\
                0  &0  &1  \\
                0  &1  &0
-            \end{vmatrix}                     \\
-  &\quad\hbox{}+(1)(4)(5)\begin{vmatrix}
+            \end{vmat}                     \\
+  &\quad\hbox{}+(1)(4)(5)\begin{vmat}[r]
                0  &1  &0  \\
                1  &0  &0  \\
                0  &0  &1
-            \end{vmatrix}
-  +(1)(\underline{0})(2)\begin{vmatrix}
+            \end{vmat}
+  +(1)(\underline{0})(2)\begin{vmat}[r]
                0  &1  &0  \\
                0  &0  &1  \\
                1  &0  &0
-            \end{vmatrix}                       \\
-  &\quad\hbox{}+(-1)(4)(1)\begin{vmatrix}
+            \end{vmat}                       \\
+  &\quad\hbox{}+(-1)(4)(1)\begin{vmat}[r]
                0  &0  &1  \\
                1  &0  &0  \\
                0  &1  &0
-            \end{vmatrix}
-  +(-1)(3)(2)\begin{vmatrix}
+            \end{vmat}
+  +(-1)(3)(2)\begin{vmat}[r]
                0  &0  &1  \\
                0  &1  &0  \\
                1  &0  &0
-            \end{vmatrix}                       
+            \end{vmat}                       
 \end{align*}
 To finish, we evaluate those six determinants by row-swapping them 
 to the identity matrix,
@@ -2326,18 +2328,18 @@ matrix, we can scramble the numbers from $1$ to $4$ into
 this sequence \( \sequence{3,2,1,4} \) and take the corresponding 
 row vector $\iota$'s.
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}
       \iota_{3} \\
       \iota_{2} \\
       \iota_{1} \\
       \iota_{4} 
-   \end{pmatrix}=
-  \begin{pmatrix}
+   \end{mat}=
+  \begin{mat}[r]
      0  &0  &1  &0  \\
      0  &1  &0  &0  \\
      1  &0  &0  &0  \\
      0  &0  &0  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 
 \begin{definition}
@@ -2352,24 +2354,24 @@ The $2$-permutations are
 These are the associated permutation matrices.
 \begin{equation*}
   P_{\phi_1}
-  =\begin{pmatrix}
+  =\begin{mat}
       \iota_1 \\
       \iota_2 
-   \end{pmatrix}
-  =\begin{pmatrix}
+   \end{mat}
+  =\begin{mat}[r]
     1  &0         \\
     0  &1   
-  \end{pmatrix}
+  \end{mat}
   \qquad
   P_{\phi_2}
-   =\begin{pmatrix}
+   =\begin{mat}
       \iota_2 \\
       \iota_1 
-   \end{pmatrix}
-   =\begin{pmatrix}
+   \end{mat}
+   =\begin{mat}[r]
     0  &1         \\
     1  &0   
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 We sometimes write permutations as functions, e.g., \( \phi_2(1)=2 \),
 and \( \phi_2(2)=1 \).
@@ -2386,28 +2388,28 @@ The $3$-permutations are
 Here are two of the associated permutation matrices.
 \begin{equation*}
   P_{\phi_2}
-   =\begin{pmatrix}
+   =\begin{mat}
       \iota_1 \\
       \iota_3 \\
       \iota_2 
-   \end{pmatrix}
-  =\begin{pmatrix}
+   \end{mat}
+  =\begin{mat}[r]
      1      &0        &0        \\
      0      &0        &1        \\
      0      &1        &0
-  \end{pmatrix}
+  \end{mat}
   \qquad
   P_{\phi_5}
-   =\begin{pmatrix}
+   =\begin{mat}
       \iota_3 \\
       \iota_1 \\
       \iota_2 
-   \end{pmatrix}
-  =\begin{pmatrix}
+   \end{mat}
+  =\begin{mat}[r]
      0      &0        &1        \\
      1      &0        &0        \\
      0      &1        &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 For instance, the rows of $P_{\phi_5}$ are $\iota_{\phi_5(1)}=\iota_3$, 
 $\iota_{\phi_5(2)}=\iota_1$, and $\iota_{\phi_5(3)}=\iota_2$.
@@ -2420,12 +2422,12 @@ The \definend{permutation expansion}\index{determinant!permutation expansion}%
 \index{permutation expansion}
 for determinants is
 \begin{equation*}
-   \begin{vmatrix}
+   \begin{vmat}
       t_{1,1}  &t_{1,2}  &\ldots  &t_{1,n}  \\
       t_{2,1}  &t_{2,2}  &\ldots  &t_{2,n}  \\
                &\vdots                      \\
       t_{n,1}  &t_{n,2}  &\ldots  &t_{n,n}
-   \end{vmatrix}
+   \end{vmat}
    =
    \begin{array}[t]{l}
       t_{1,\phi_1(1)}t_{2,\phi_1(2)}\cdots
@@ -2462,24 +2464,24 @@ and \textit{(Step 3)}~sum all such terms together.
 The familiar formula for the determinant of a $\nbyn{2}$ matrix
 can be derived in this way.
 \begin{align*}
-  \begin{vmatrix}
+  \begin{vmat}
     t_{1,1}  &t_{1,2} \\
     t_{2,1}  &t_{2,2}
-  \end{vmatrix}
+  \end{vmat}
   &=
   t_{1,1}t_{2,2}\cdot\deter{P_{\phi_1}}
   +
   t_{1,2}t_{2,1}\cdot\deter{P_{\phi_2}}      \\     
   &=
-  t_{1,1}t_{2,2}\cdot\begin{vmatrix}
+  t_{1,1}t_{2,2}\cdot\begin{vmat}[r]
            1  &0 \\
            0  &1
-         \end{vmatrix}
+         \end{vmat}
   +
-  t_{1,2}t_{2,1}\cdot\begin{vmatrix}
+  t_{1,2}t_{2,1}\cdot\begin{vmat}[r]
             0  &1 \\
             1  &0
-          \end{vmatrix}               \\
+          \end{vmat}               \\
   &=t_{1,1}t_{2,2}-t_{1,2}t_{2,1}
 \end{align*}
 (the second permutation matrix takes one row swap to pass to the 
@@ -2487,11 +2489,11 @@ identity).
 Similarly, the formula for the determinant of a $\nbyn{3}$ matrix
 is this.
 \begin{align*}
-  \begin{vmatrix}
+  \begin{vmat}
     t_{1,1}  &t_{1,2}  &t_{1,3} \\
     t_{2,1}  &t_{2,2}  &t_{2,3} \\
     t_{3,1}  &t_{3,2}  &t_{3,3} 
-  \end{vmatrix}
+  \end{vmat}
   &=
   \begin{aligned}[t]
     &t_{1,1}t_{2,2}t_{3,3}\deter{P_{\phi_1}}
@@ -2598,27 +2600,27 @@ Solution: just one.
     Compute the determinant by using the permutation expansion.
     \begin{exparts*}
       \partsitem 
-        $\begin{vmatrix}
+        $\begin{vmat}[r]
           1  &2  &3  \\
           4  &5  &6  \\
           7  &8  &9
-        \end{vmatrix}$
+        \end{vmat}$
       \partsitem 
-        $\begin{vmatrix}
+        $\begin{vmat}[r]
           2  &2  &1  \\
           3  &-1 &0  \\
           -2 &0  &5
-        \end{vmatrix}$
+        \end{vmat}$
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem This matrix is singular. 
           \begin{align*}
-            \begin{vmatrix}
+            \begin{vmat}[r]
               1  &2  &3  \\
               4  &5  &6  \\
               7  &8  &9
-            \end{vmatrix}
+            \end{vmat}
             &=
             \begin{aligned}[t]
               &(1)(5)(9)\deter{P_{\phi_1}}
@@ -2633,11 +2635,11 @@ Solution: just one.
           \end{align*}
         \partsitem This matrix is nonsingular. 
           \begin{align*}
-            \begin{vmatrix}
+            \begin{vmat}[r]
               2  &2  &1  \\
               3  &-1 &0  \\
               -2 &0  &5
-            \end{vmatrix}
+            \end{vmat}
             &=
             \begin{aligned}[t]
               &(2)(-1)(5)\deter{P_{\phi_1}}
@@ -2656,86 +2658,86 @@ Solution: just one.
     Compute these both with Gauss' method and with the permutation
     expansion formula.
     \begin{exparts*}
-      \partsitem \( \begin{vmatrix}
+      \partsitem \( \begin{vmat}[r]
                  2  &1  \\
                  3  &1
-               \end{vmatrix}   \)
-      \partsitem \( \begin{vmatrix}
+               \end{vmat}   \)
+      \partsitem \( \begin{vmat}[r]
                   0  &1  &4  \\
                   0  &2  &3  \\
                   1  &5  &1
-               \end{vmatrix}  \)
+               \end{vmat}  \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem Gauss' method gives this
           \begin{equation*}
-             \begin{vmatrix}
+             \begin{vmat}[r]
                  2  &1  \\
                  3  &1
-             \end{vmatrix}
+             \end{vmat}
              =
-             \begin{vmatrix}
+             \begin{vmat}[r]
                  2  &1  \\
                  0  &-1/2
-             \end{vmatrix}
+             \end{vmat}
              =-1
           \end{equation*}
           and permutation expansion gives this.
           \begin{equation*}
-             \begin{vmatrix}
+             \begin{vmat}[r]
                  2  &1  \\
                  3  &1
-             \end{vmatrix}
+             \end{vmat}
              =
-             \begin{vmatrix}
+             \begin{vmat}[r]
                  2  &0  \\
                  0  &1
-             \end{vmatrix} +
-             \begin{vmatrix}
+             \end{vmat} +
+             \begin{vmat}[r]
                  0  &1  \\
                  3  &0
-             \end{vmatrix}             
+             \end{vmat}             
              =
-             (2)(1)\begin{vmatrix}
+             (2)(1)\begin{vmat}[r]
                  1  &0  \\
                  0  &1
-             \end{vmatrix} +
-             (1)(3)\begin{vmatrix}
+             \end{vmat} +
+             (1)(3)\begin{vmat}[r]
                  0  &1  \\
                  1  &0
-             \end{vmatrix}             
+             \end{vmat}             
              =
              -1
           \end{equation*}
         \partsitem Gauss' method gives this
           \begin{equation*}
-            \begin{vmatrix}
+            \begin{vmat}[r]
               0  &1  &4  \\
               0  &2  &3  \\
               1  &5  &1
-            \end{vmatrix}
+            \end{vmat}
             =
-            -\begin{vmatrix}
+            -\begin{vmat}[r]
               1  &5  &1  \\
               0  &2  &3  \\
               0  &1  &4  
-            \end{vmatrix}
+            \end{vmat}
             =
-            -\begin{vmatrix}
+            -\begin{vmat}[r]
               1  &5  &1  \\
               0  &2  &3  \\
               0  &0  &5/2  
-            \end{vmatrix}
+            \end{vmat}
             =-5
           \end{equation*}
           and the permutation expansion gives this.
           \begin{align*}
-            \begin{vmatrix}
+            \begin{vmat}[r]
               0  &1  &4  \\
               0  &2  &3  \\
               1  &5  &1
-            \end{vmatrix}
+            \end{vmat}
             &=
             \begin{aligned}[t]
             &(0)(2)(1)\deter{P_{\phi_1}}
@@ -2756,11 +2758,11 @@ Solution: just one.
     \begin{answer}
         Following \nearbyexample{ex:SamplePermExp} gives this.
           \begin{align*}
-             \begin{vmatrix}
+             \begin{vmat}
                 t_{1,1}  &t_{1,2}  &t_{1,3}  \\
                 t_{2,1}  &t_{2,2}  &t_{2,3}  \\
                 t_{3,1}  &t_{3,2}  &t_{3,3}
-             \end{vmatrix}
+             \end{vmat}
              &=\begin{aligned}[t]
                  &t_{1,1}t_{2,2}t_{3,3}\deter{P_{\phi_1}}
                    +t_{1,1}t_{2,3}t_{3,2}\deter{P_{\phi_2}} \\
@@ -2934,10 +2936,10 @@ Solution: just one.
     \begin{answer}
       False.
       \begin{equation*}
-        \begin{vmatrix}
+        \begin{vmat}[r]
           1  &-1  \\
           1  &1
-        \end{vmatrix}
+        \end{vmat}
         =2
       \end{equation*} 
      \end{answer}
@@ -2973,10 +2975,10 @@ Solution: just one.
     \index{skew-symmetric} if \( \trans{A}=-A \),
     as in this matrix.
     \begin{equation*}
-      A=\begin{pmatrix}
+      A=\begin{mat}[r]
           0  &3  \\
          -3  &0
-        \end{pmatrix}
+        \end{mat}
     \end{equation*}
     Show that \( \nbyn{n} \) skew-symmetric matrices with nonzero
     determinants exist only for even \( n \).
@@ -3006,13 +3008,13 @@ Solution: just one.
     \index{Vandermonde matrix}
     Prove that the determinant of the transpose of that matrix of coefficients
     \begin{equation*}
-      \begin{vmatrix}
+      \begin{vmat}
          1       &1       &\ldots   &1       \\
          x_1     &x_2     &\ldots   &x_n     \\
          {x_1}^2 &{x_2}^2 &\ldots   &{x_n}^2 \\
                  &\vdots                     \\
          {x_1}^{n-1} &{x_2}^{n-1}   &\ldots   &{x_n}^{n-1}
-      \end{vmatrix}
+      \end{vmat}
     \end{equation*}
     equals the product, over all indices \( i,j\in\set{1,\dots,n} \) with
     \( i<j \), of terms of the form \( x_j-x_i \).
@@ -3025,33 +3027,33 @@ Solution: just one.
       $-x_1\rho_2+\rho_3$ and $-x_1\rho_1+\rho_2$
       give this.
       \begin{equation*}
-        \begin{vmatrix}
+        \begin{vmat}
           1     &1     &1     \\
           x_1   &x_2   &x_3   \\
           x_1^2 &x_2^2 &x_3^2 
-        \end{vmatrix}
+        \end{vmat}
         =
-        \begin{vmatrix}
+        \begin{vmat}
           1     &1             &1             \\
           x_1   &x_2           &x_3           \\
           0     &(-x_1+x_2)x_2 &(-x_1+x_3)x_3 
-        \end{vmatrix}
+        \end{vmat}
         =
-        \begin{vmatrix}
+        \begin{vmat}
           1     &1             &1             \\
           0     &-x_1+x_2      &-x_1+x_3      \\
           0     &(-x_1+x_2)x_2 &(-x_1+x_3)x_3 
-        \end{vmatrix}
+        \end{vmat}
       \end{equation*}
       Then the row combination operation of $x_2\rho_2+\rho_3$ gives
       the desired result.
       \begin{equation*}
         =
-        \begin{vmatrix}
+        \begin{vmat}
           1     &1             &1                     \\
           0     &-x_1+x_2      &-x_1+x_3              \\
           0     &0             &(-x_1+x_3)(-x_2+x_3) 
-        \end{vmatrix}
+        \end{vmat}
         =(x_2-x_1)(x_3-x_1)(x_3-x_2)
       \end{equation*}
     \end{answer}
@@ -3060,7 +3062,7 @@ Solution: just one.
     \definend{blocks},\index{block matrix}\index{matrix!block} %
     as here,
     \begin{equation*} 
-      \begin{pmat}{cc|c}
+      \begin{pmat}{rr|r}
           1  &2   &0  \\
           3  &4   &0  \\  \cline{1-3}
           0  &0   &-2 
@@ -3124,11 +3126,11 @@ Solution: just one.
       \begin{equation*}
         \deter{T-rI}
         =
-        \begin{vmatrix}
+        \begin{vmat}
           t_{1,1}-x  &t_{1,2}   &t_{1,3}  \\ 
           t_{2,1}    &t_{2,2}-x &t_{2,3}  \\ 
           t_{3,1}    &t_{3,2}   &t_{3,3}-x  
-        \end{vmatrix}
+        \end{vmat}
       \end{equation*}
       Each term in the permutation expansion has three factors drawn from 
       entries in the matrix (e.g., $(t_{1,1}-x)(t_{2,2}-x)(t_{3,3}-x)$
@@ -3159,11 +3161,11 @@ Solution: just one.
   \item 
     Show that
     \begin{equation*}
-      \begin{vmatrix}
+      \begin{vmat}
         x-2  &x-3  &x-4  \\
         x+1  &x-1  &x-3  \\
         x-4  &x-7  &x-10
-      \end{vmatrix}=0.
+      \end{vmat}=0.
     \end{equation*}
     \cite{MathMag63Q237}
     \begin{answer}
@@ -3173,21 +3175,21 @@ Solution: just one.
       determinant are proportional, so the determinant vanishes.
       That is,
       \begin{equation*}
-        \begin{vmatrix}
+        \begin{vmat}
           2  &1    &x-4  \\
           4  &2    &x-3  \\
           6  &3    &x-10
-        \end{vmatrix}=
-        \begin{vmatrix}
+        \end{vmat}=
+        \begin{vmat}
           1    &x-3  &-1   \\
           2    &x-1  &-2   \\
           3    &x-7  &-3
-        \end{vmatrix}=
-        \begin{vmatrix}
+        \end{vmat}=
+        \begin{vmat}
           x-2  &-1   &-2   \\
           x+1  &-2   &-4   \\
           x-4  &-3   &-6
-        \end{vmatrix}=0.
+        \end{vmat}=0.
       \end{equation*}  
     \end{answer}
   \puzzle \item 
@@ -3217,26 +3219,26 @@ Solution: just one.
       Hence, adding rows and columns,
       \begin{equation*}
         D=
-        \begin{vmatrix}
+        \begin{vmat}
           a  &b  &c  \\
           d  &e  &f  \\
           g  &h  &i
-        \end{vmatrix}
-        =\begin{vmatrix}
+        \end{vmat}
+        =\begin{vmat}
           a  &b  &c  \\
           d  &e  &f  \\
          3e  &3e &3e
-        \end{vmatrix}             
-        =\begin{vmatrix}
+        \end{vmat}             
+        =\begin{vmat}
           a  &b  &3e \\
           d  &e  &3e \\
          3e  &3e &9e
-        \end{vmatrix}             
-        =\begin{vmatrix}
+        \end{vmat}             
+        =\begin{vmat}
           a  &b  &e  \\
           d  &e  &e  \\
           1  &1  &1
-        \end{vmatrix}S.
+        \end{vmat}S.
       \end{equation*}  
     \end{answer}
   \puzzle \item 
@@ -3313,12 +3315,12 @@ permutation expansion.\index{determinant!permutation expansion}%
 \begin{align*}
    %\deter{T}
    %=
-   \begin{vmatrix}
+   \begin{vmat}
       t_{1,1}  &t_{1,2}  &\ldots  &t_{1,n}  \\
       t_{2,1}  &t_{2,2}  &\ldots  &t_{2,n}  \\
                &\vdots                      \\
       t_{n,1}  &t_{n,2}  &\ldots  &t_{n,n}
-   \end{vmatrix}
+   \end{vmat}
    &=
    \begin{array}[t]{l}
       t_{1,\phi_1(1)}t_{2,\phi_1(2)}\cdots
@@ -3343,48 +3345,48 @@ We still have not shown that the result is well-defined.
 For instance, the determinant of
 \begin{equation*}
    P_{\phi}=
-   \begin{pmatrix}
+   \begin{mat}[r]
       0  &1  &0  &0 \\
       1  &0  &0  &0 \\
       0  &0  &1  &0 \\
       0  &0  &0  &1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 could be computed with one swap
 \begin{equation*}
    P_{\phi}
    \grstep{\rho_1\leftrightarrow\rho_2}
-   \begin{pmatrix}
+   \begin{mat}[r]
       1  &0  &0  &0 \\
       0  &1  &0  &0 \\
       0  &0  &1  &0 \\
       0  &0  &0  &1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 or with three.
 \begin{equation*}
    P_{\phi}
    \grstep{\rho_3\leftrightarrow\rho_1}
-   \begin{pmatrix}
+   \begin{mat}[r]
       0  &0  &1  &0 \\
       1  &0  &0  &0 \\
       0  &1  &0  &0 \\
       0  &0  &0  &1
-   \end{pmatrix}
+   \end{mat}
    \grstep{\rho_2\leftrightarrow\rho_3}
-   \begin{pmatrix}
+   \begin{mat}[r]
       0  &0  &1  &0 \\
       0  &1  &0  &0 \\
       1  &0  &0  &0 \\
       0  &0  &0  &1
-   \end{pmatrix}
+   \end{mat}
    \grstep{\rho_1\leftrightarrow\rho_3}
-   \begin{pmatrix}
+   \begin{mat}[r]
       1  &0  &0  &0 \\
       0  &1  &0  &0 \\
       0  &0  &1  &0 \\
       0  &0  &0  &1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 Both reductions
 have an odd number of swaps so we figure that \( \deter{P_{\phi}}=-1 \)
@@ -3398,13 +3400,13 @@ an even number of swaps and the other with an odd number of swaps.
 \begin{definition}
 Two rows of a permutation matrix
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     \vdots          \\
     \iota_{k} \\
     \vdots          \\
     \iota_{j} \\
     \vdots
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 such that \( k>j \) are in an \definend{inversion}\index{inversion}%
 \index{permutation!inversions}
@@ -3414,17 +3416,17 @@ of their natural order.
 \begin{example}
 This permutation matrix
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     \iota_3  \\
     \iota_2  \\
     \iota_1
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &0  &1  \\
     0  &1  &0  \\
     1  &0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 has three inversions: \( \iota_3 \) precedes \( \iota_1 \),
 \( \iota_3 \) precedes \( \iota_2 \), and \( \iota_2 \) precedes
@@ -3441,19 +3443,19 @@ Consider a swap of rows $j$ and $k$, where $k>j$.
 If the two rows are adjacent
 \begin{equation*}
    P_{\phi}=
-   \begin{pmatrix}
+   \begin{mat}
      \vdots           \\
      \iota_{\phi(j)}  \\
      \iota_{\phi(k)}  \\
      \vdots
-   \end{pmatrix}
+   \end{mat}
  \grstep{\rho_k\leftrightarrow\rho_j}
-   \begin{pmatrix}
+   \begin{mat}
      \vdots           \\
      \iota_{\phi(k)}  \\
      \iota_{\phi(j)}  \\
      \vdots
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 then the swap changes the total number of inversions by one \Dash 
 either removing or producing one inversion, depending on whether
@@ -3465,7 +3467,7 @@ or from even to odd.
 If the rows are not adjacent then they can be swapped
 via a sequence of adjacent swaps, first bringing row~$k$ up
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}
      \vdots             \\
      \iota_{\phi(j)}    \\
      \iota_{\phi(j+1)}  \\
@@ -3473,12 +3475,12 @@ via a sequence of adjacent swaps, first bringing row~$k$ up
      \vdots             \\
      \iota_{\phi(k)}    \\
      \vdots
-   \end{pmatrix}
+   \end{mat}
   \grstep{\rho_k\swap\rho_{k-1}}\;\;
   \grstep{\rho_{k-1}\swap\rho_{k-2}}
   \dots
   \grstep{\rho_{j+1}\swap\rho_j}
-   \begin{pmatrix}
+   \begin{mat}
      \vdots             \\
      \iota_{\phi(k)}    \\
      \iota_{\phi(j)}    \\
@@ -3486,7 +3488,7 @@ via a sequence of adjacent swaps, first bringing row~$k$ up
      \vdots             \\
      \iota_{\phi(k-1)}  \\
      \vdots
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 and then bringing row~$j$ down.
 \begin{equation*}
@@ -3494,7 +3496,7 @@ and then bringing row~$j$ down.
   \grstep{\rho_{j+2}\swap\rho_{j+3}}
   \dots
   \grstep{\rho_{k-1}\swap\rho_k}
-   \begin{pmatrix}
+   \begin{mat}
      \vdots             \\
      \iota_{\phi(k)}    \\
      \iota_{\phi(j+1)}  \\
@@ -3502,7 +3504,7 @@ and then bringing row~$j$ down.
      \vdots             \\
      \iota_{\phi(j)}    \\
      \vdots
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 Each of these adjacent swaps changes the number of 
 inversions from odd to even or from even to odd.
@@ -3721,32 +3723,32 @@ Writing out the permutation expansion of the general
 $\nbyn{3}$ matrix and of its transpose, and
 comparing corresponding terms
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     a  &b  &c  \\
     d  &e  &f  \\
     g  &h  &i
-  \end{vmatrix}
+  \end{vmat}
   = \cdots\,+
-  cdh\cdot\begin{vmatrix}
+  cdh\cdot\begin{vmat}[r]
     0  &0  &1  \\
     1  &0  &0  \\
     0  &1  &0
-  \end{vmatrix}
+  \end{vmat}
    +\,\cdots
 \end{equation*}
 (terms with the same letters)
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     a  &d  &g  \\
     b  &e  &h  \\
     c  &f  &i
-  \end{vmatrix}
+  \end{vmat}
   = \cdots\,+
- dhc\cdot\begin{vmatrix}
+ dhc\cdot\begin{vmat}[r]
     0  &1  &0  \\
     0  &0  &1  \\
     1  &0  &0
-  \end{vmatrix}
+  \end{vmat}
    +\,\cdots\
 \end{equation*}
 shows that the corresponding permutation matrices are transposes.
@@ -3831,33 +3833,33 @@ as required.
       This is the permutation expansion of the determinant of a 
       $\nbyn{2}$ matrix
       \begin{equation*}
-        \begin{vmatrix}
+        \begin{vmat}
           a  &b  \\
           c  &d
-        \end{vmatrix}
-         =ad\cdot \begin{vmatrix}
+        \end{vmat}
+         =ad\cdot \begin{vmat}[r]
                     1  &0  \\
                     0  &1
-                  \end{vmatrix}
-         +bc\cdot \begin{vmatrix}
+                  \end{vmat}
+         +bc\cdot \begin{vmat}[r]
                     0  &1 \\
                     1  &0
-                  \end{vmatrix}
+                  \end{vmat}
       \end{equation*}
       and the permutation expansion of the determinant of its transpose.
       \begin{equation*}
-         \begin{vmatrix}
+         \begin{vmat}
             a  &c  \\
             b  &d
-         \end{vmatrix}
-         =ad\cdot\begin{vmatrix}
+         \end{vmat}
+         =ad\cdot\begin{vmat}[r]
                     1  &0  \\
                     0  &1
-                 \end{vmatrix}
-         +cb\cdot\begin{vmatrix}
+                 \end{vmat}
+         +cb\cdot\begin{vmat}[r]
                    0  &1 \\
                    1  &0
-                 \end{vmatrix}
+                 \end{vmat}
        \end{equation*}
        As with the $\nbyn{3}$ expansions described in the subsection,
        the permutation matrices from corresponding terms are
@@ -3906,12 +3908,12 @@ as required.
     Find the only nonzero term in the permutation expansion of
     this matrix.
     \begin{equation*}
-      \begin{vmatrix}
+      \begin{vmat}[r]
         0  &1  &0  &0  \\
         1  &0  &1  &0  \\
         0  &1  &0  &1  \\
         0  &0  &1  &0
-      \end{vmatrix}
+      \end{vmat}
     \end{equation*}
     Compute that determinant by finding the signum of the associated
     permutation.
@@ -3922,12 +3924,12 @@ as required.
       the the \( 3,4 \) entry.
       The signum of \( \sequence{2,1,4,3} \) is \( +1 \) because from
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &1  &0  &0  \\
           1  &0  &0  &0  \\
           0  &0  &0  &1  \\
           0  &0  &1  &0            
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       the two rwo swaps $\rho_1\leftrightarrow\rho_2$ and 
       $\rho_3\leftrightarrow\rho_4$ will produce the identity matrix.  
@@ -4003,7 +4005,7 @@ as required.
       and let \( \iota_k \) be the first row giving that inversion.
       We have this interval of rows.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            \vdots      \\
            \iota_k     \\
            \iota_{r_1} \\
@@ -4011,12 +4013,12 @@ as required.
            \iota_{r_s} \\
            \iota_j     \\
            \vdots
-         \end{pmatrix}
+         \end{mat}
          \qquad j<k<r_1<\dots <r_s
       \end{equation*}
       Swap.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            \vdots      \\
            \iota_j     \\
            \iota_{r_1} \\
@@ -4024,7 +4026,7 @@ as required.
            \iota_{r_s} \\
            \iota_k     \\
            \vdots
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       The second matrix has one fewer inversion because there is one
       fewer inversion
