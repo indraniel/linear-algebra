@@ -11,17 +11,17 @@ If a $T$ is associated with a unique solution
 for any vector $\vec{b}$ of constants, 
 such as for the homogeneous system $T\vec{x}=\zero$, then
 $T$ is associated with a unique solution for every vector $\vec{b}$.
-We call such a matrix of coefficients `nonsingular'.
+We call such a matrix of coefficients nonsingular.
 The other kind of $T$, where every linear system for which it is the 
 matrix of coefficients has either no solution or infinitely many solutions,
-we call `singular'.  
+is singular.  
 
-The value of this distinction has been a theme of our work since then.
+In our work since then the value of this distinction has been a theme.
 For instance, we now know that an 
 \( \nbyn{n} \) matrix \( T \) is nonsingluar if and only if
 each of these:
 \begin{itemize}
-   \item any system \( T\vec{x}=\vec{b} \) has a solution, 
+   \item any system \( T\vec{x}=\vec{b} \) has a solution 
           and that solution is unique;
    \item Gauss-Jordan reduction of $T$ yields an identity matrix;
    \item the rows of $T$ form a linearly independent set;
@@ -34,8 +34,8 @@ So when we look at a particular square matrix, one of the first things
 that we ask is whether it is  
 nonsingular.
 
-Naturally there is a formula for this.
-This chapter develops the formula. 
+Naturally there is a formula that determines whether $T$ is nonsingular.
+This chapter develops that formula. 
 More precisely, we will develop infinitely many formulas, 
 one for $\nbyn{1}$~matrices, one for $\nbyn{2}$~matrices, etc.
 Of course, these formulas are related,  that is, 
@@ -52,25 +52,26 @@ we will often simply say `matrix' in place of `square matrix'.
 \section{Def{}inition}
 For \( \nbyn{1} \) matrices, determining nonsingularity
 is trivial.
-\begin{center}
-  \( \begin{mat}
-          a
-     \end{mat}  \)
-  is nonsingular iff
-  \( a \neq 0 \)
-\end{center}
-When we developed the method for  
-finding matrix inverses we used it to find the formula for 
-the inverse of a general $\nbyn{2}$ matrix. 
-\begin{center}
-  \( \begin{mat}
+\begin{equation*}
+  \begin{mat}
+       a
+  \end{mat} 
+  \quad\text{is nonsingular iff}\quad
+  a \neq 0
+\end{equation*}
+As part of our development if the method for  
+computing matrix inverses, in 
+Corollary~Three.IV.\ref{cor:TwoByTwoInv} we gave the formula for 
+the inverse of a $\nbyn{2}$ matrix. 
+\begin{equation*}
+     \begin{mat}
            a  &b  \\
            c  &d
-      \end{mat}  \)
-   is nonsingular iff
-   \( ad-bc \neq 0 \)
-\end{center}
-We could produce the $\nbyn{3}$ formula as we did the prior one  
+      \end{mat}  
+   \quad\text{is nonsingular iff}\quad
+   ad-bc \neq 0
+\end{equation*}
+We can produce the $\nbyn{3}$ formula as we did the prior one  
 (see \nearbyexercise{exer:ThreeByThreeDetForm}),
 although the computation is much more involved.
 \begin{equation*}
@@ -83,16 +84,15 @@ although the computation is much more involved.
     aei+bfg+cdh-hfa-idb-gec \neq 0
 \end{equation*}
 With these cases in mind, we posit a family of 
-formulas, $a$, $ad-bc$, etc. 
+formulas: $a$, $ad-bc$, etc. 
 For each $n$ the formula gives rise to a 
 \definend{determinant}\index{determinant}\index{matrix!determinant} 
 function
 $\map{\det_{\nbyn{n}}}{\matspace_{\nbyn{n}}}{\Re}$ 
 such that an $\nbyn{n}$ matrix $T$ is nonsingular if and
 only if $\det_{\nbyn{n}}(T)\neq 0$.
-(We usually omit the subscript because 
-if \( T \) is \( \nbyn{n} \) then `\( \det(T) \)'
-could only mean `\( \det_{\nbyn{n}}(T) \)'.)
+(We usually omit the subscript \( \nbyn{n} \) because 
+the size of \( T \) tells us which determinant function we mean.)
 
 
 
@@ -100,19 +100,24 @@ could only mean `\( \det_{\nbyn{n}}(T) \)'.)
 
 
 \subsectionoptional{Exploration}
-\textit{This subsection is an optional
-introduction to the general definition, which is given in the next 
+\textit{This is an optional
+motivation of the general definition, suggesting how a person might
+develop that formula.
+The definition is in the next 
 subsection.}
 
-The three cases above don't 
-show an evident pattern to use for the general $\nbyn{n}$ formula.
+Above, in each case the matrix is nonsingular if and only 
+if some formula is nonzero.
+But the three cases don't 
+show an obvious pattern for the formula. 
 We may spot that the \(\nbyn{1}\) term
 \( a \) has one letter, that the \(\nbyn{2}\) terms
 \(ad\) and \(bc\) have two letters, and that the \(\nbyn{3}\)
 terms \(aei\), etc., have three letters.
-We may also observe that in those terms
+We may also spot that in those terms
 there is a letter from each row and column of the matrix, e.g., 
-the letters in the \(cdh\) term
+in the \(cdh\) term one letter 
+comes from each row and from each column.
 \begin{equation*}
    \begin{mat}
           &    &c \\
@@ -120,8 +125,7 @@ the letters in the \(cdh\) term
           &h
    \end{mat} 
 \end{equation*}
-come one from each row and one from each column.
-But these observations perhaps seem more puzzling than
+But these observations are perhaps more puzzling than
 enlightening.
 For instance, we might wonder why 
 some of the terms are added while others are subtracted.
@@ -131,31 +135,33 @@ see what properties a solution must have and
 then search for something with those properties.
 So we shall start by asking what properties we require of the formulas.
 
-At this point,
-our primary way to decide whether a matrix is singular is to do Gaussian 
+At this point, our
+main way to decide whether a matrix is singular or nonsingular
+is to do Gaussian 
 reduction and then check whether 
 the diagonal of resulting echelon form matrix has any zeroes
-(that is, to check whether the product down the diagonal is zero).
-So, we may expect that the proof that a formula determines singularity 
-will involve applying Gauss' method to the matrix,
+(that is, to check whether the product down the diagonal is~zero).
+So we could guess that whatever formula we find, the proof that 
+it is right may involve applying Gauss' method to the matrix
 to show that in the end the product down the diagonal is zero if and only if
 the determinant formula gives zero. 
-This suggests our initial plan:~we will look for a family of 
-functions with the property of being
+
+This suggests a plan:~we will look for a family of determinant
+formulas with the property of being
 unaffected by row operations and with the property that a determinant of an
 echelon form matrix is the product of its diagonal entries.
-Under this plan, a proof that the functions determine singularity would go, 
-``Where $T\rightarrow\cdots\rightarrow\hat{T}$ is the Gaussian
-reduction, the determinant of $T$ equals the
-determinant of $\hat{T}$ (because the determinant is unchanged by row
-operations), which is the product down the diagonal, which is
-zero if and only if the matrix is singular''.
-In the rest of this subsection we will test this plan on the 
-$\nbyn{2}$ and $\nbyn{3}$ determinants that we know.
-We will end up modifying the ``unaffected by row operations'' 
+% Under this plan, a proof that the functions determine singularity would go, 
+% ``Where $T\rightarrow\cdots\rightarrow\hat{T}$ is the Gaussian
+% reduction, the determinant of $T$ equals the
+% determinant of $\hat{T}$ (because the determinant is unchanged by row
+% operations), which is the product down the diagonal, which is
+% zero if and only if the matrix is singular''.
+In the rest of this subsection we will test this plan against the 
+$\nbyn{2}$ and $\nbyn{3}$ formulas.
+In the end, we will have to modify the ``unaffected by row operations'' 
 part, but not by much.
 
-The first step in checking the plan is to test whether   
+The first step in testing this plan is to see whether   
 the $\nbyn{2}$ and $\nbyn{3}$ formulas are unaffected by the 
 row operation of combining:~if 
 \begin{equation*}
@@ -192,18 +198,19 @@ The $\nbyn{3}$ combination $k\rho_3+\rho_2$ leaves the determinant unchanged
 as do the other $\nbyn{3}$ row combination operations.
 
 So there seems to be promise in the plan.
-Of course, perhaps
-the $\nbyn{4}$ determinant formula is affected by row combinations.
-We are exploring a possibility here and we do not yet have all the facts.
+Of course, perhaps if we had worked out 
+the $\nbyn{4}$ determinant formula and tested it then we might have found
+that it is affected by row combinations.
+This is an exploration and we do not yet have all the facts.
 Nonetheless, so far, so good.
 
-The next step is to compare \( \det(\hat{T}) \) with 
-\( \det(T) \) for the operation
-\begin{equation*}
-   T \grstep{ {\rho}_i \leftrightarrow {\rho}_j } \hat{T}
-\end{equation*}
-of swapping two rows.
-The \(\nbyn{2}\) row swap $\rho_1\leftrightarrow\rho_2$
+Next in the plan test is to compare \( \det(\hat{T}) \) with 
+\( \det(T) \) for row swaps.
+% \begin{equation*}
+%    T \grstep{ {\rho}_i \leftrightarrow {\rho}_j } \hat{T}
+% \end{equation*}
+We run into a snag:
+the \(\nbyn{2}\) row swap $\rho_1\leftrightarrow\rho_2$
   \begin{equation*}
      \det(
        \begin{mat}
@@ -214,7 +221,7 @@ The \(\nbyn{2}\) row swap $\rho_1\leftrightarrow\rho_2$
      = cb - ad
   \end{equation*}
 does not yield \( ad-bc \).
-This $\rho_1\leftrightarrow\rho_3$ swap inside of a \(\nbyn{3}\) matrix
+And this $\rho_1\leftrightarrow\rho_3$ swap inside of a \(\nbyn{3}\) matrix
 \begin{equation*}
    \det(
      \begin{mat}
@@ -240,22 +247,22 @@ Trying a different \(\nbyn{3}\) swap $\rho_1\leftrightarrow\rho_2$
 \end{equation*}
 also gives a change of sign.
 
-Thus, row swaps appear 
+So row swaps seem 
 to change the sign of a determinant.
-This modifies our plan, but does not wreck it.
+This does not wreck our plan entirely.
 We intend to decide nonsingularity by considering
 only whether the determinant is zero, not by considering its sign.
 Therefore, instead of expecting determinants to be
-entirely unaffected by row operations, will look for them to change sign
-on a swap.
+entirely unaffected by row operations, we modify our plan to 
+have them to change sign on a swap.
 
-To finish,
+To finish
 we compare \( \det(\hat{T}) \) to \( \det(T) \) for the operation
-\begin{equation*}
-   T \grstep{ k{\rho}_i } \hat{T}
-\end{equation*}
+% \begin{equation*}
+%    T \grstep{ k{\rho}_i } \hat{T}
+% \end{equation*}
 of multiplying a row by a scalar $k\neq 0$. 
-One of the $\nbyn{2}$ cases is
+This
 \begin{equation*}
   \det(
     \begin{mat}
@@ -266,8 +273,9 @@ One of the $\nbyn{2}$ cases is
   = a(kd) - (kc)b
   =k\cdot (ad-bc)
 \end{equation*}
-and the other case has the same result.
-Here is one \(\nbyn{3}\) case
+ends with the determinant multiplied by~$k$,
+and the other $\nbyn{2}$ case has the same result.
+This \(\nbyn{3}\) case ends the same way
 \begin{align*}
   \det(
   \begin{mat}
@@ -283,24 +291,23 @@ Here is one \(\nbyn{3}\) case
    &= k\cdot(aei + bfg + cdh - hfa - idb - gec)
 \end{align*}
 and the other two are similar.
-These lead us to suspect that multiplying a row by $k$
-multiplies the determinant by $k$.
-This fits 
-with our modified plan because we are asking only that the
+These test cases lead us to suspect that multiplying a row by~$k$
+multiplies the determinant by~$k$.
+As before, this modifies our plan but does not wreck it.
+We are asking only that the
 zeroness of the determinant be unchanged and we are not focusing on the
-determinant's sign or magnitude.
+its sign or magnitude.
 
-In summary,                       
-to develop the scheme for the formulas to compute determinants,
-we look for determinant functions that remain unchanged
+In summary, our modified plan is that
+we look for determinants that remain unchanged
 under the operation of row combination, that change sign on
 a row swap, and that rescale on the rescaling of a row.
-In the next two subsections we will find that for each $n$
-such a function exists and is unique.
+In the next two subsections we will find that for each~$n$
+there is such a function, and is unique.
 
-For the next subsection, note that, as above, scalars come out
-of each row without affecting other rows.
-For instance, in this equality
+For the next subsection, note that scalars factor out
+of a row without affecting other rows:
+here
 \begin{equation*}
     \det(
       \begin{mat}[r]
@@ -317,16 +324,12 @@ For instance, in this equality
                \end{mat}
              )                                  
 \end{equation*}
-the $3$ isn't factored out of all three rows, only out of the top row.
-The determinant acts on each row of independently of the
-other rows.
-When we want to use this property of determinants, we shall 
-write the determinant as a function of the rows:
-`\( \det (\vec{\rho}_1,\vec{\rho}_2,\dots\vec{\rho}_n) \)', instead of
-as `\( \det(T) \)'
-or `\( \det(t_{1,1},\dots,t_{n,n}) \)'.
-The definition of the determinant that starts the next subsection is written
-in this way.
+the $3$ comes only out of the top row only, leaving the other rows unchanged.
+So in the definition of determinant we will
+write it as a function of the rows
+\( \det (\vec{\rho}_1,\vec{\rho}_2,\dots\vec{\rho}_n) \), not as 
+\( \det(T) \) or as a function of the entries
+\( \det(t_{1,1},\dots,t_{n,n}) \).
 
 \begin{exercises}
   \recommended \item 
@@ -945,10 +948,10 @@ in this way.
       Each such map is one-to-one \Dash  for one thing, it is invertible.  
     \end{answer}
   \puzzle \item  
+    \cite{Monthly55p257}
     If a third order determinant has elements
     \( 1 \), \( 2 \), \ldots, \( 9 \), what is the maximum value it may
     have?
-    \cite{Monthly55p257}
     \begin{answer}
       \answerasgiven
       Let \( P \) be the sum of the three positive terms of the determinant
@@ -996,18 +999,17 @@ in this way.
 
 \subsection{Properties of Determinants}
 \index{determinant|(}
-As described above, we want a formula
+We want a formula
 to determine whether an $\nbyn{n}$  matrix is nonsingular.
 We will not begin by stating such a formula.
 Instead, we will begin by considering the function that such a formula
 calculates.
-We will define the function by its properties,
-then prove that the function with these properties exist and is unique
+We will define this function by its properties,
+then prove that the function with these properties exist and is unique,
 and also describe formulas that compute this function.
-(Because we will show that the function exists and is unique, 
+(Because we will eventually show that the function exists and is unique, 
 from the start we will say `\( \det(T) \)' instead of
-`if there is a determinant function then \( \det(T) \)' and
-`the determinant' instead of `any determinant'.)
+`if there is a unique determinant function then \( \det(T) \)'.)
 
 \begin{definition}
 \label{def:Det}
@@ -1060,8 +1062,9 @@ It is listed only for convenience.
 \end{remark}
 
 \begin{remark}
-Property~(3) does not have the restriction that $k\neq 0$ that we
-needed for Gauss' method operations but 
+In Gauss' method the operation of multiplying a row by a constant~$k$
+had a $k\neq 0$ restriction. 
+Property~(3) does not have the restriction because
 \nearbylemma{le:IdenRowsDetZero} below shows that we do not need it here.
 \end{remark}
 
@@ -1081,41 +1084,37 @@ The determinant of an echelon form matrix is the product down its diagonal.
 
 \begin{proof}
 To verify the first sentence, swap the two equal rows.
-The sign of the determinant changes, but the matrix is unchanged
+The sign of the determinant changes but the matrix is unchanged
 and so its determinant is unchanged.
 Thus the determinant is zero.
 
-The second sentence is clearly true if the matrix is \( \nbyn{1} \).
-If it has at least two rows then apply property~(1) of the definition
-with the zero row as row~$j$ and with $k=1$.
-\begin{equation*}
-   \det (\dots,\vec{\rho}_i,\dots,\zero,\dots)
-   =\det (\dots,\vec{\rho}_i,\dots,\vec{\rho}_i+\zero,\dots)
-\end{equation*}
-The first sentence of this lemma gives that the determinant is zero.
+The second sentence is true because multiplying 
+the zero row by $k=2$ leaves the row unchanged, and hence 
+the determinant unchanged, and so the determinant must be zero.
 
 For the third sentence, 
 where $T \rightarrow\cdots\rightarrow\hat{T}$ is the
 Gauss-Jordan reduction, by the definition
 the determinant of $T$ is zero if and only if
 the determinant of $\hat{T}$ is zero
-(although they could differ in sign or magnitude).
+(although the two could differ in sign or magnitude).
 A nonsingular $T$ Gauss-Jordan reduces to an identity matrix
 and so has a nonzero determinant.
 A singular $T$ reduces to a $\hat{T}$ with a zero row;
 by the second sentence of this lemma its determinant is zero.
 
-Finally,
-for the fourth sentence, if an echelon form matrix is singular then
-it has a zero on its diagonal, that is,
+Verifying the fourth sentence breaks into two cases.
+If an echelon form matrix is singular then
+it has a zero on its diagonal so
 the product down its diagonal is zero.
-The third sentence says that if a matrix is singular 
-then its determinant is zero.
-So if the echelon form matrix is singular then its determinant equals the
+Thus by the third sentence, if a matrix is singular 
+then its determinant is zero and
+therefore if the echelon form matrix is singular then 
+its determinant equals the
 product down its diagonal.
 
 If an echelon form matrix is nonsingular then none of its diagonal entries
-is zero so we can use property~(3) of the definition to factor them out
+is zero so we can use property~(3) to get $1$'s on the diagonal
 (again, the vertical bars \( \deter{\cdots} \) indicate the determinant
 operation).
 \begin{equation*}
@@ -1134,7 +1133,7 @@ operation).
     0        &                 &     &1
   \end{vmat}
 \end{equation*}
-Next, the Jordan half of Gauss-Jordan elimination,
+Then the Jordan half of Gauss-Jordan elimination,
 using property~(1) of the definition, leaves the identity matrix.
 \begin{equation*}
   =
@@ -1156,7 +1155,7 @@ That result gives us a way to compute the value of a determinant
 function on a matrix:
 do Gaussian reduction, keeping track of any changes of  
 sign caused by row swaps and any scalars that are factored out, 
-and then finish by multiplying
+and finish by multiplying
 down the diagonal of the echelon form result.
 This takes the same amount of time as Gauss' method and so
 is fast enugh to be practical on the matrices that we 
@@ -1247,19 +1246,16 @@ we can perform Gauss' method on the
 matrix, keeping track of how the sign alternates on row swaps, and then 
 multiply down the diagonal of the echelon form result.
 By the definition and the lemma,
-all $\nbyn{n}$ determinant functions must return this value on this matrix.
-Thus all $\nbyn{n}$ determinant functions are equal, that is, there is only
-one input argument/output value relationship satisfying
-the four conditions.
+all $\nbyn{n}$ determinant functions must return the same value on the matrix.
 \end{proof}
 
 The `if there is an $\nbyn{n}$ determinant function' 
-emphasizes that,
+emphasizes that
 although we can
 use Gauss' method to compute the only value that a determinant function 
 could possibly return, 
 we haven't yet shown that such a determinant function exists for all $n$.
-In the rest of the section we will produce determinant functions.
+In the rest of the section we will do that.
 
 \begin{exercises}
   \item[{\em For these, assume that an $\nbyn{n}$ determinant
@@ -1805,6 +1801,7 @@ In the rest of the section we will produce determinant functions.
       down the diagonal is rational.  
     \end{answer}
   \puzzle \item 
+     \cite{Monthly53p115}
      Find the element of likeness in (a)~simplifying a fraction, (b)~powdering
      the nose, (c)~building new steps on the church, (d)~keeping emeritus
      professors on campus, (e)~putting \( B \), \( C \), \( D \) in the
@@ -1817,7 +1814,6 @@ In the rest of the section we will produce determinant functions.
          C   &D   &a^3  &1
        \end{vmat}.
      \end{equation*}
-     \cite{Monthly53p115}
      \begin{answer}
        \answerasgiven
        The value \( (1-a^4)^3 \) of the determinant is independent of the
@@ -1860,18 +1856,13 @@ What is left is to show that for each $n$ such a function exists.
 
 How could such a function not exist?
 After all, we have done computations that start with a square matrix,
-follow the conditions, and end with a number.
+use Gauss' method and end by multiplying down the diagonal to
+get a number.
 
-The difficulty is that, as far as we know, 
-the computation might not give a well-defined result.
-To illustrate this possibility,
-suppose that we were to change the second condition in the definition of
-determinant to be that the value of a determinant does not change on 
-a row swap.
-By \nearbyremark{rem:SwapRowsRedun} we know that this conflicts with the
-first and third conditions.
-Here is an instance of the conflict:~here are
-two Gauss' method reductions of the same matrix, the first without any row swap
+The difficulty is that we must show that 
+the computation gives a well-defined result.
+Consider these two Gauss' method reductions
+of the same matrix, the first without any row swap
 \begin{equation*}
   \begin{mat}[r]
     1  &2  \\
@@ -1883,7 +1874,7 @@ two Gauss' method reductions of the same matrix, the first without any row swap
     0  &-2
   \end{mat}
 \end{equation*}
-and the second with a swap.
+and the second with one.
 \begin{equation*}
   \begin{mat}[r]
     1  &2  \\
@@ -1900,42 +1891,47 @@ and the second with a swap.
     0  &2/3
   \end{mat}
 \end{equation*}
-Following \nearbydefinition{def:Det} gives that both
+Both
 calculations yield the determinant $-2$ 
 since in the second one
-we keep track of the fact that the row swap changes the sign of the result
+we must keep track of the fact that the row swap changes the sign of the result
 of multiplying down the diagonal.
-But if we follow the supposition and 
-change the second condition then the two calculations yield
-different values, $-2$ and $2$. 
-That is, under the supposition the outcome would not be well-defined \Dash  no 
-function exists that satisfies the changed second condition
-along with the other three. 
+To illustrate how a computation that is like the ones that we are doing could 
+fail to be well-defined, 
+suppose that \nearbydefinition{def:Det} did not include condition~(2). 
+Suppose that we instead tried to define it so that
+the value of a determinant would not change on a row swap.
+Then first reduction above would
+yield $-2$ while the second would yield $+2$.
+We could still do computations but they wouldn't give consistent outcomes\Dash
+there is no 
+function that satisfies conditions (1), (2), and (4), and also this
+hypothetical second condition. 
 
 Of course, observing that \nearbydefinition{def:Det} does the right thing
-in this one instance is not enough; what we will do in the rest of this 
-section is to show that there is never a conflict.
-The natural way to try this would be 
-to define the determinant function with:~``The value of the
-function is the result of doing Gauss' method,
-keeping track of row swaps, and finishing by multiplying down the diagonal''. 
-(Since Gauss' method allows for some variation, such as a  
-choice of which row to use when swapping, 
-we would have to fix an explicit algorithm.)
-Then we would be done if we verified that 
-this way of computing the determinant satisfies the four properties.
-For instance, if $T$ and $\hat{T}$ 
-are related by a row swap then we would need to show that this
-algorithm returns determinants that are negatives of each other.
-However, how to verify this is not evident.
-So the development below will not proceed in this way.
-Instead, in this subsection we will define a different way to compute
-the value of a determinant, a formula, and we will use this way to 
-prove that the conditions are satisfied.
+with these two reductions of one matrix is not enough.
+In the rest of this 
+section we will  show that there is never a conflict.
 
-The formula that we shall use is based on an insight gotten from  
-property~(3) of the definition of determinants.
-This property shows that determinants are not linear.
+% \begin{remark}
+% The natural way approach to this would be 
+% to define the determinant function with:~``The value of the
+% function is the result of doing Gauss' method,
+% keeping track of row swaps, and finishing by multiplying down the diagonal''. 
+% (Since Gauss' method allows for some variation, as we saw above, 
+% we would have to fix an explicit algorithm.)
+% Then we would be done if we verified that 
+% this way algorithm satisfies the four properties.
+% However, how to verify this is not evident.
+% So the development below will not proceed in this way.
+% \end{remark}
+
+To do this, below we will define an alternative way to compute
+the value of a determinant, one that makes it easier to 
+prove that the conditions are satisfied.
+To develop this new formula, consider again  
+property~(3) of \nearbydefinition{def:Det}.
+It shows that the determinant function (if it exists) is not linear.
 
 \begin{example}
 For this matrix
@@ -1988,27 +1984,31 @@ if
 for \( \vec{v}, \vec{w}\in V \) and \( k\in\Re \).
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}  \label{lem:DetsMultilinear}
 Determinants are multilinear.
 \end{lemma}
 
 \begin{proof}
-The definition of determinants gives property~(2). 
-% (\nearbylemma{le:IdenRowsDetZero} following that definition
-% covers the $k=0$ case) so we need only check property~(1).
-\begin{equation*}
-  \det(\vec{\rho}_1,\dots,\vec{v}+\vec{w},
-      \dots,\vec{\rho}_n)
-  =\det(\vec{\rho}_1,\dots,\vec{v},\dots,\vec{\rho}_n)
-  +\det(\vec{\rho}_1,\dots,\vec{w},\dots,\vec{\rho}_n)
-\end{equation*}
-If the set 
-\( \set{\vec{\rho}_1,\dots,\vec{\rho}_{i-1},\vec{\rho}_{i+1},
-       \dots,\vec{\rho}_n} \)
+Property~(2) here is just condition~(3) in \nearbydefinition{def:Det}
+so we need only verify property~(1).
+% \begin{equation*}
+%   \det(\vec{\rho}_1,\dots,\vec{v}+\vec{w},
+%       \dots,\vec{\rho}_n)
+%   =\det(\vec{\rho}_1,\dots,\vec{v},\dots,\vec{\rho}_n)
+%   +\det(\vec{\rho}_1,\dots,\vec{w},\dots,\vec{\rho}_n)
+% \end{equation*}
+
+There are two cases.
+If the set of other rows
+\(
+  \set{\vec{\rho}_1,\dots,\vec{\rho}_{i-1},\vec{\rho}_{i+1},
+       \dots,\vec{\rho}_n} 
+\)
 is linearly dependent then all three matrices are singular and so all
 three determinants are zero and the equality is trivial.
-Therefore assume that the set is linearly independent.
-This set of $n$-wide row vectors has $n-1$ members, so we can make a basis by 
+
+Therefore assume that the set of other rows is linearly independent.
+This set has $n-1$ members so we can make a basis by 
 adding one more vector
 $\sequence{\vec{\rho}_1,\dots,\vec{\rho}_{i-1},\vec{\beta},
                \vec{\rho}_{i+1},\dots,\vec{\rho}_n}$.
@@ -2019,25 +2019,39 @@ Express $\vec{v}$ and $\vec{w}$ with respect to this basis
   \vec{w} &= w_1\vec{\rho}_1+\dots+w_{i-1}\vec{\rho}_{i-1}+w_i\vec{\beta}
             +w_{i+1}\vec{\rho}_{i+1}+\dots+w_n\vec{\rho}_n
 \end{align*}
-giving this.
+and add.
 \begin{equation*}
   \vec{v}+\vec{w}
   =
   (v_1+w_1)\vec{\rho}_1+\dots+(v_i+w_i)\vec{\beta}
             +\dots+(v_n+w_n)\vec{\rho}_n 
 \end{equation*}
-By the definition of determinant, the value of 
-$\det(\vec{\rho}_1,\dots,\vec{v}+\vec{w},\dots,\vec{\rho}_n)$
+Expand the $\vec{v}+\vec{w}$ from property~(1).
+% $\det (\vec{\rho}_1,\dots,\vec{v}+\vec{w},\dots,\vec{\rho}_n)$.
+\begin{equation*}
+    \det (\vec{\rho}_1,\dots,\,(v_1+w_1)\vec{\rho}_1+\dots+(v_i+w_i)\vec{\beta}
+            +\dots+(v_n+w_n)\vec{\rho}_n,\,\dots,\vec{\rho}_n) 
+  % \tag{*}
+\end{equation*}
+Gauss' method enables us to eliminate the term for $\vec{\rho}_1$, for
+$\vec{\rho}_2$, etc., from the
+the $(v_1+w_1)\vec{\rho}_1+\dots+(v_i+w_i)\vec{\beta}
+            +\dots+(v_n+w_n)\vec{\rho}_n$ expression.
+That is, by condition~(1) in the definition of determinant the value of 
+the determinant
+% $\det(\vec{\rho}_1,\dots,\vec{v}+\vec{w},\dots,\vec{\rho}_n)$
 is unchanged by the operation of 
-adding $-(v_1+w_1)\vec{\rho}_1$ to $\vec{v}+\vec{w}$.
+adding $-(v_1+w_1)\vec{\rho}_1$ to the $i$-th row, $\vec{v}+\vec{w}$.
+The $i$-th row now is this.
 \begin{equation*}
   \vec{v}+\vec{w}-(v_1+w_1)\vec{\rho}_1
   =
   (v_2+w_2)\vec{\rho}_2+\cdots+(v_i+w_i)\vec{\beta}
             +\dots+(v_n+w_n)\vec{\rho}_n 
 \end{equation*}
-Then, to the result, we can add $-(v_2+w_2)\vec{\rho}_2$, etc.
-Thus
+Next add $-(v_2+w_2)\vec{\rho}_2$, etc., to eliminate 
+all of the terms from the other rows.
+Apply condition~(2) from the definition of determinant.
 \begin{multline*}
   \det (\vec{\rho}_1,\dots,\vec{v}+\vec{w},\dots,\vec{\rho}_n)          \\
   \begin{aligned}
@@ -2047,21 +2061,24 @@ Thus
      +w_i\cdot \det (\vec{\rho}_1,\dots,\vec{\beta},\dots,\vec{\rho}_n)
   \end{aligned}
 \end{multline*}
-(using~(2) for the second equality).
-To finish, bring $v_i$ and $w_i$ back inside in front of $\vec{\beta}$
-and use row combination again, 
+This is now a sum of two determinants.
+To finish, bring $v_i$ and $w_i$ back inside in front of the 
+$\vec{\beta}$'s
+and use row combinations again, 
 this time to reconstruct the expressions of $\vec{v}$
-and $\vec{w}$ in terms of the basis, e.g., start with the operations
+and $\vec{w}$ in terms of the basis.
+That is, start with the operations
 of adding $v_1\vec{\rho}_1$ to $v_i\vec{\beta}$ 
-and $w_1\vec{\rho}_1$ to $w_i\vec{\rho}_1$, etc. 
+and $w_1\vec{\rho}_1$ to $w_i\vec{\rho}_1$, etc.,
+to get the expansions of $\vec{v}$ and $\vec{w}$.
 \end{proof}
 
 Multilinearity allows us to expand a determinant into a sum of
 determinants, each of which involves a simple matrix.
 
 \begin{example}
-We can use multilinearity to split this determinant into two,
-first breaking up the first row
+Using property~(1) of \nearbylemma{lem:DetsMultilinear} we can 
+first break up the first row
 \begin{equation*}
   \begin{vmat}[r]
      2  &1  \\
@@ -2078,7 +2095,7 @@ first breaking up the first row
      4  &3
   \end{vmat}
 \end{equation*}
-and then separating each of those two, breaking along the second rows.
+and then separate each of those two, breaking along the second rows.
 \begin{equation*}
   =\begin{vmat}[r]
      2  &0  \\
@@ -2109,35 +2126,35 @@ a single entry from the original matrix.
 In the same way,
 a \( \nbyn{3} \) determinant separates into a sum of 
 many simpler determinants.
-We start by splitting along the first row, producing three determinants
-(the zero in the $1,3$ position is underlined to set it off visually
-from the zeroes that appear in the splitting).
+Splitting along the first row produces three determinants
+(the zero in the $1,3$ position is highlighted to set it off visually
+from the zeroes that appear as part of the splitting).
 \begin{equation*}
   \begin{vmat}[r]
      2              &1  &-1  \\
-     4              &3  &\underline{0}  \\
+     4              &3  &\highlight{0}  \\
      2              &1  &5
   \end{vmat}
   =
   \begin{vmat}[r]
      2              &0  &0   \\
-     4              &3  &\underline{0}  \\
+     4              &3  &\highlight{0}  \\
      2              &1  &5
   \end{vmat}
   +
   \begin{vmat}[r]
      0              &1  &0   \\
-     4              &3  &\underline{0}   \\
+     4              &3  &\highlight{0}   \\
      2              &1  &5
   \end{vmat}
   +
   \begin{vmat}[r]
      0              &0  &-1  \\
-     4              &3  &\underline{0}  \\
+     4              &3  &\highlight{0}  \\
      2  &1  &5
   \end{vmat}                       
 \end{equation*}
-Each of these three will itself split in three along the second row.
+These three split in three along the second row.
 Each of the resulting nine splits in three along the third row, resulting
 in twenty seven determinants
 \begin{equation*}
@@ -2168,7 +2185,7 @@ in twenty seven determinants
   +\dots+
   \begin{vmat}[r]
      0  &0  &-1  \\
-     0  &0  &\underline{0}  \\
+     0  &0  &\highlight{0}  \\
      0  &0  &5
   \end{vmat}
 \end{equation*}
@@ -2182,10 +2199,12 @@ starting matrix.
 However, many of these summand determinants are zero.
 
 \begin{example} \label{ex:SamplePermExp}
-In each of these three matrices from the above expansion, 
-two of the rows have their entry from the starting matrix in the same column,
-e.g.,
-in the first matrix, the $2$ and the $4$ both come from the first column.
+Here are three matrices from the above expansion,
+All have the property that each row contains one entry from the original
+matrix, with the rest of the entries from that row $0$'s produced in the
+splitting.
+In each of these three, 
+two of the rows have this entry in the same column,
 \begin{equation*}
   \begin{vmat}[r]
      2               &0  &0   \\
@@ -2201,12 +2220,15 @@ in the first matrix, the $2$ and the $4$ both come from the first column.
   \qquad\
   \begin{vmat}[r]
      0               &1  &0   \\
-     0               &0  &\underline{0}  \\
+     0               &0  &\highlight{0}  \\
      0               &0  &5
   \end{vmat}
 \end{equation*}
-Any such matrix is singular, because in each,
-one row is a multiple of the other (or is a zero row).
+For instance
+in the first matrix, the $2$ and the $4$ both come from the first column
+of the original matrix.
+Any such matrix of the twenty seven is singular because in each
+one row is a multiple of the other.
 Thus, any such determinant is zero, by \nearbylemma{le:IdenRowsDetZero}.
 
 Therefore, the above expansion of the \( \nbyn{3} \) determinant into
@@ -2214,7 +2236,7 @@ the sum of the twenty seven determinants simplifies to the sum of these six.
 \begin{align*}
   \begin{vmat}[r]
      2  &1  &-1  \\
-     4  &3  &\underline{0}  \\
+     4  &3  &\highlight{0}  \\
      2  &1  &5
   \end{vmat}
   &=\begin{vmat}[r]
@@ -2225,7 +2247,7 @@ the sum of the twenty seven determinants simplifies to the sum of these six.
   +
    \begin{vmat}[r]
      2  &0  &0   \\
-     0  &0  &\underline{0}   \\
+     0  &0  &\highlight{0}   \\
      0  &1  &0
   \end{vmat}                      \\
   &\quad\hbox{}+\begin{vmat}[r]
@@ -2236,7 +2258,7 @@ the sum of the twenty seven determinants simplifies to the sum of these six.
   +
    \begin{vmat}[r]
      0  &1  &0   \\
-     0  &0  &\underline{0}   \\
+     0  &0  &\highlight{0}   \\
      2  &0  &0
   \end{vmat}                      \\
   &\quad\hbox{}+\begin{vmat}[r]
@@ -2930,9 +2952,9 @@ Solution: just one.
       \( n \) so its columns form a basis for \( \Re^n \).  
     \end{answer}
   \item 
+    \cite{Strang}
     True or false: a matrix whose entries are only zeros
     or ones has a determinant equal to zero, one, or negative one.
-    \cite{Strang}
     \begin{answer}
       False.
       \begin{equation*}
@@ -3144,10 +3166,10 @@ Solution: just one.
       A polynomial of degree \( n \) has at most \( n \) roots. 
     \end{answer}
   \puzzle \item 
+    \cite{MathMag63Q307}
     The nine positive digits can be arranged into \( \nbyn{3} \) arrays
     in \( 9! \) ways.
     Find the sum of the determinants of these arrays.
-    \cite{MathMag63Q307}
     \begin{answer}
       \answerasgiven
       When two rows of a determinant are interchanged, the sign of the
@@ -3159,6 +3181,7 @@ Solution: just one.
       which sums to zero.  
     \end{answer}
   \item 
+    \cite{MathMag63Q237}
     Show that
     \begin{equation*}
       \begin{vmat}
@@ -3167,7 +3190,6 @@ Solution: just one.
         x-4  &x-7  &x-10
       \end{vmat}=0.
     \end{equation*}
-    \cite{MathMag63Q237}
     \begin{answer}
       \answerasgiven
       When the elements of any column are subtracted from the elements of
@@ -3193,11 +3215,11 @@ Solution: just one.
       \end{equation*}  
     \end{answer}
   \puzzle \item 
+    \cite{Monthly49p33}
     Let \( S \) be the sum of the integer elements of a magic square of  order
     three and let \( D \) be the value of the square considered as a
     determinant.
     Show that \( D/S \) is an integer.
-    \cite{Monthly49p33}
     \begin{answer}
       \answerasgiven
       Let
@@ -3242,6 +3264,7 @@ Solution: just one.
       \end{equation*}  
     \end{answer}
   \puzzle \item 
+    \cite{Monthly31p355}
     Show that the determinant of the \( n^2 \) elements in the upper left
     corner of the Pascal triangle
     \begin{equation*}
@@ -3255,7 +3278,6 @@ Solution: just one.
       \end{array}
     \end{equation*}
     has the value unity.
-    \cite{Monthly31p355}
     \begin{answer}
       \answerasgiven
       Denote by \( D_n \) the determinant in question and by \( a_{i,j} \)
@@ -3935,9 +3957,9 @@ as required.
       $\rho_3\leftrightarrow\rho_4$ will produce the identity matrix.  
     \end{answer}
   \item  
+    \cite{Strang}
     What is the signum of the $n$-permutation
     \( \phi=\sequence{n,n-1,\dots,2,1} \)?
-    \cite{Strang}
     \begin{answer}
       The pattern is this.
       \begin{center}
