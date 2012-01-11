@@ -2280,7 +2280,7 @@ We can bring out the scalars.
                0  &1  &0  \\
                0  &0  &1
             \end{vmat}
-  +(2)(\underline{0})(1)\begin{vmat}[r]
+  +(2)(\highlight{0})(1)\begin{vmat}[r]
                1  &0  &0  \\
                0  &0  &1  \\
                0  &1  &0
@@ -2290,7 +2290,7 @@ We can bring out the scalars.
                1  &0  &0  \\
                0  &0  &1
             \end{vmat}
-  +(1)(\underline{0})(2)\begin{vmat}[r]
+  +(1)(\highlight{0})(2)\begin{vmat}[r]
                0  &1  &0  \\
                0  &0  &1  \\
                1  &0  &0
@@ -2308,7 +2308,7 @@ We can bring out the scalars.
 \end{align*}
 To finish, we evaluate those six determinants by row-swapping them 
 to the identity matrix,
-keeping track of the resulting sign changes.
+keeping track of the sign changes.
 \begin{align*}
   &=30\cdot (+1)+0\cdot (-1)  \\
   &\quad\hbox{}+20\cdot (-1)+0\cdot (+1) \\
@@ -2316,31 +2316,39 @@ keeping track of the resulting sign changes.
 \end{align*}
 \end{example}
 
-That example illustrates the key idea.
-We've applied multilinearity to a $\nbyn{3}$ determinant to get 
-$3^3$ separate determinants, each with one distinguished entry per row.
-We can drop most of these new determinants because the matrices are singular,
-with one row a multiple of another.
+That example captures the new calculation scheme.
+We've apply multilinearity to a determinant to get 
+many separate determinants, each with one entry per row from the 
+original matrix.
+Most of these matrices have
+one row that is a multiple of another
+so we can omit these determinants from the calculation.
 We are left with the one-entry-per-row determinants 
-also having only one entry per column (one entry from the original determinant,
-that is).
-And, since we can factor scalars out, we can further reduce to
-only considering determinants of
-one-entry-per-row-and-column matrices where the entries are ones.
+also having only one entry per column from the original matrix.
+And, since we can factor scalars out, we can further reduce the
+determinants that we must compute to those
+one-entry-per-row-and-column matrices where all the entries are $1$'s.
 
-These are permutation matrices.
-Thus, the determinant can be computed in this
-three-step way 
-\textit{(Step~1)}~for each permutation matrix, multiply together
-the entries from the original matrix
-where that permutation matrix has ones, 
-\textit{(Step~2)}~multiply that by the determinant of the permutation matrix 
-and
-\textit{(Step~3)}~do that for all permutation matrices 
-and sum the results together.
+\begin{definition}
+A square matrix whose entries are all $0$'s except for
+one $1$ in each row and column is a
+\definend{permutation matrix}.\index{permutation matrix}%
+\index{matrix!permutation}
+\end{definition}
 
-To state this as a formula, we introduce a notation for permutation matrices.
-Let $\iota_j$ be the row vector that is all zeroes except for a one in its 
+% Thus, we can compute a determinant in this
+% three-step way: 
+% \textit{(Step~1)}~for each correctly-sized permutation matrix, multiply together
+% the entries from the original matrix
+% where that permutation matrix has ones, 
+% \textit{(Step~2)}~multiply that by the determinant of the permutation matrix 
+% and
+% \textit{(Step~3)}~do that for all permutation matrices 
+% and sum the results together.
+
+To state the new calculation scheme as a formula 
+we introduce a notation for permutation matrices.
+Let $\iota_j$ be the row vector that is all $0$'s except for a $1$ in its 
 $j$-th entry, so that the four-wide $\iota_2$ is $\rowvec{0 &1 &0 &0}$.
 We can construct permutation matrices by 
 permuting \Dash  that is, scrambling \Dash  the numbers $1$, $2$, \ldots, $n$,
@@ -2407,20 +2415,21 @@ The $3$-permutations are
 \( \phi_4=\sequence{2,3,1} \),
 \( \phi_5=\sequence{3,1,2} \), and
 \( \phi_6=\sequence{3,2,1} \).
-Here are two of the associated permutation matrices.
-\begin{equation*}
-  P_{\phi_2}
-   =\begin{mat}
-      \iota_1 \\
-      \iota_3 \\
-      \iota_2 
-   \end{mat}
-  =\begin{mat}[r]
-     1      &0        &0        \\
-     0      &0        &1        \\
-     0      &1        &0
-  \end{mat}
-  \qquad
+Here is a sample permutation matrix; note that
+the rows of $P_{\phi_5}$ are $\iota_{\phi_5(1)}=\iota_3$, 
+$\iota_{\phi_5(2)}=\iota_1$, and $\iota_{\phi_5(3)}=\iota_2$.\begin{equation*}
+  % P_{\phi_2}
+  %  =\begin{mat}
+  %     \iota_1 \\
+  %     \iota_3 \\
+  %     \iota_2 
+  %  \end{mat}
+  % =\begin{mat}[r]
+  %    1      &0        &0        \\
+  %    0      &0        &1        \\
+  %    0      &1        &0
+  % \end{mat}
+  % \qquad
   P_{\phi_5}
    =\begin{mat}
       \iota_3 \\
@@ -2433,11 +2442,7 @@ Here are two of the associated permutation matrices.
      0      &1        &0
   \end{mat}
 \end{equation*}
-For instance, the rows of $P_{\phi_5}$ are $\iota_{\phi_5(1)}=\iota_3$, 
-$\iota_{\phi_5(2)}=\iota_1$, and $\iota_{\phi_5(3)}=\iota_2$.
 \end{example}
-
-%Now we can restate the three-step procedure as a formula.
 
 \begin{definition}
 The \definend{permutation expansion}\index{determinant!permutation expansion}%
@@ -2476,15 +2481,10 @@ notation}\index{summation notation!for permutation expansion}
 read aloud as
 ``the sum, over all permutations \( \phi \), of terms having the form
 \( t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)} \deter{P_{\phi}} \)''.
-This phrase is just a restating of the three-step process
-\textit{(Step 1)}~for each permutation matrix, compute
-\( t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)} \)
-\textit{(Step 2)}~multiply that by \( \deter{P_{\phi}} \) 
-and \textit{(Step 3)}~sum all such terms together.
+This just restates the computation scheme given above.
 
 \begin{example}
-The familiar formula for the determinant of a $\nbyn{2}$ matrix
-can be derived in this way.
+The familiar $\nbyn{2}$ determinant formula follows from the above
 \begin{align*}
   \begin{vmat}
     t_{1,1}  &t_{1,2} \\
@@ -2508,8 +2508,7 @@ can be derived in this way.
 \end{align*}
 (the second permutation matrix takes one row swap to pass to the 
 identity). 
-Similarly, the formula for the determinant of a $\nbyn{3}$ matrix
-is this.
+So does the $\nbyn{3}$ determinant.
 \begin{align*}
   \begin{vmat}
     t_{1,1}  &t_{1,2}  &t_{1,3} \\
@@ -2541,11 +2540,10 @@ is this.
 
 Computing a determinant by permutation expansion usually takes longer than
 Gauss' method.
-However, here we are not trying to do the computation efficiently, 
-we are instead 
-trying to give a determinant formula that we can prove to be well-defined. 
-While the permutation expansion is impractical for computations,
-we will find it useful in  the proofs below.
+However, 
+While the permutation expansion is impractical for computations
+we will find it useful in the proofs that 
+the determinant function is well-defined.
 
 \begin{theorem}
 \index{determinant!exists} \label{th:DetsExist}
