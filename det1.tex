@@ -2675,7 +2675,7 @@ Solution: just one.
       \end{exparts}
     \end{answer}
   \recommended \item
-    Compute these both with Gauss' method and with the permutation
+    Compute these both with Gauss' method and the permutation
     expansion formula.
     \begin{exparts*}
       \partsitem \( \begin{vmat}[r]
@@ -3320,17 +3320,15 @@ Solution: just one.
 
 \subsectionoptional{Determinants Exist}
 \textit{This subsection is optional.
-It consists of proofs of two results 
+It proves two results 
 from the prior subsection.
 These proofs involve the properties of
-permutations, which will not be used later, except in the
+permutations, which will only be used later in the
 optional Jordan Canonical Form subsection.}
 
-The prior subsection attacks the problem of showing that 
-for any size there is
-a determinant function on the set of square matrices of that size
-by using multilinearity to develop the 
-permutation expansion.\index{determinant!permutation expansion}%
+The prior subsection develops the 
+permutation expansion formula for 
+determinants.\index{determinant!permutation expansion}%
 \index{permutation expansion}
 \begin{align*}
    %\deter{T}
@@ -3355,13 +3353,16 @@ permutation expansion.\index{determinant!permutation expansion}%
      t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}
                                  \deter{P_{\phi}}
 \end{align*}
-This reduces the problem to showing that there is a determinant
-function on the set of permutation matrices of that size.
+This reduces the problem of showing that for any size~$n$ the
+determinant function on all $\nbyn{n}$ matrices is well-defined 
+to only showing that it is 
+well-defined on the set of permutation matrices of that size.
 
-Of course, a permutation matrix can be row-swapped to the identity matrix
-and to calculate its determinant we can keep track of the number of row swaps.
-However, the problem is still not solved.
-We still have not shown that the result is well-defined.
+A permutation matrix can be row-swapped to the identity matrix
+and so we can 
+calculate its determinant by keeping track of the number of swaps.
+However,
+we still must show that the result is well-defined.
 For instance, the determinant of
 \begin{equation*}
    P_{\phi}=
@@ -3410,10 +3411,11 @@ or with three.
 \end{equation*}
 Both reductions
 have an odd number of swaps so we figure that \( \deter{P_{\phi}}=-1 \)
-but how do we know that there isn't some way to do it with an even number of
-swaps?
-\nearbycorollary{cor:ParityInversEqParitySwaps} below proves 
-that there is no permutation matrix
+but if there were some way to do it with an even number of
+swaps then we would have two different answers to one question.
+Below, \nearbycorollary{cor:ParityInversEqParitySwaps} proves 
+that this cannot happen\Dash
+there is no permutation matrix
 that can be row-swapped to an identity matrix in two ways, one with 
 an even number of swaps and the other with an odd number of swaps.
 
@@ -3477,10 +3479,11 @@ If the two rows are adjacent
      \vdots
    \end{mat}
 \end{equation*}
-then the swap changes the total number of inversions by one \Dash 
+then since inversions involving rows not in this pair
+are not affected,
+the swap changes the total number of inversions by one, 
 either removing or producing one inversion, depending on whether
-\( \phi(j)>\phi(k) \) or not, since inversions involving rows not in this pair
-are not affected.
+\( \phi(j)>\phi(k) \) or not.
 Consequently, the total number of inversions changes from odd to even 
 or from even to odd.
 
@@ -3533,20 +3536,6 @@ The total change in the number of inversions
 is from even to odd or from odd to even.
 \end{proof}
 
-\begin{definition}
-The \definend{signum}\index{permutation!signum}\index{signum}%
-\index{sgn!see{signum}}
-of a permutation \( \sgn(\phi) \)
-is \( +1 \) if the number of inversions in \( P_\phi \) is even, and is
-\( -1 \) if the number of inversions is odd.
-\end{definition}
-
-\begin{example}
-With the subscripts from \nearbyexample{ex:AllTwoThreePerms}
-for the $3$-permutations,
-\( \sgn(\phi_1)=1 \) while \( \sgn(\phi_2)=-1 \).
-\end{example}
-
 \begin{corollary}
 \label{cor:ParityInversEqParitySwaps}
 If a permutation matrix has an odd number of inversions then swapping
@@ -3561,25 +3550,57 @@ To change an odd number to zero requires an odd number of swaps,
 and to change an even number to zero requires an even number of swaps.
 \end{proof}
 
-We still have not shown that the permutation expansion is
+\begin{definition}
+The \definend{signum}\index{permutation!signum}\index{signum}%
+\index{sgn!see{signum}}
+of a permutation \( \sgn(\phi) \)
+is \( -1 \) if the number of inversions in \( P_\phi \) is odd and is
+\( +1 \) if the number of inversions is even.
+\end{definition}
+
+\begin{example}
+In the notation for the $3$-permutations
+from \nearbyexample{ex:AllTwoThreePerms} we have
+\begin{equation*}
+  P_{\phi_1}=
+  \begin{mat}
+    1  &0  &0  \\
+    0  &1  &0  \\
+    0  &0  &1
+  \end{mat}
+  \quad\text{and}\quad
+  P_{\phi_2}=
+  \begin{mat}
+    1  &0  &0  \\
+    0  &0  &1  \\
+    0  &1  &0  
+  \end{mat}
+\end{equation*}
+so
+\( \sgn(\phi_1)=1 \) because there are no inversions, 
+while \( \sgn(\phi_2)=-1 \) because there is one.
+\end{example}
+
+We still have not shown that the determinant function is
 well-defined because we have not considered row operations 
 on permutation matrices other than row swaps.
-We will finesse this problem:~we will define a function
+We will finesse this issue.
+We will define a function
 \( \map{d}{\matspace_{\nbyn{n}}}{\Re} \)
 by altering the permutation expansion formula, replacing
-$\deter{P_\phi}$ with $\sgn(\phi)$
+$\deter{P_\phi}$ with $\sgn(\phi)$.
 \begin{equation*}
   d(T)=
   \sum_{\text{permutations\ }\phi}t_{1,\phi(1)}t_{2,\phi(2)}\dots t_{n,\phi(n)}
                                  \sgn(\phi)
 \end{equation*}
-(this gives the same value as the permutation expansion
-because the prior result shows that $\det(P_\phi)=\sgn(\phi)$).
-This formula's advantage is that the number of inversions 
+This gives the same value as the permutation expansion
+because the corollary shows that $\det(P_\phi)=\sgn(\phi)$.
+The advantage that this formula has is that the number of inversions 
 is clearly well-defined \Dash  just count them.
-Therefore, we will show that a determinant function exists
-for all sizes by showing that \( d \) is it, that is, that $d$
-satisfies the four conditions.
+Therefore, we will finish showing that an~$\nbyn{n}$ determinant function 
+exists by showing  that this $d$
+satisfies the conditions in the determinant's definition.
 
 \begin{lemma}
 \index{determinant!exists}
@@ -3591,20 +3612,21 @@ Hence determinants exist for every $n$.
 We'll must check that it has the four properties
 from the definition.
 
-Property~(4) is easy; in
+Property~(4) is easy; where $I$ is the $\nbyn{n}$ identity, in
 \begin{equation*}
   d(I)=
-  \sum_{\text{perms\ }\phi}
+  \sum_{\text{perm\ }\phi}
     \iota_{1,\phi(1)}\iota_{2,\phi(2)}\cdots \iota_{n,\phi(n)}
                                  \sgn(\phi)
 \end{equation*}
-all of the summands are zero except for the product down the diagonal,
-which is one.
+all of the terms in the summation are $0$ 
+except for the product down the diagonal,
+which is $1$.
 
 For property~(3) consider $d(\hat{T})$ where 
 \( T\smash[b]{\grstep{k\rho_i}}\hat{T} \).
 \begin{equation*}
-  \sum_{\text{perms\ }\phi}\!\!
+  \sum_{\text{perm\ }\phi}\!\!
     \hat{t}_{1,\phi(1)}
      \cdots\hat{t}_{i,\phi(i)}\cdots\hat{t}_{n,\phi(n)}
                                  \sgn(\phi)                      
@@ -3612,7 +3634,7 @@ For property~(3) consider $d(\hat{T})$ where
      t_{1,\phi(1)}\cdots kt_{i,\phi(i)}\cdots t_{n,\phi(n)}
                                  \sgn(\phi)
 \end{equation*}
-Factor the~\( k \) out of each term to get the desired equality.
+Factor out the~\( k \) to get the desired equality.
 \begin{equation*}
   =k\cdot\sum_{\phi}
      t_{1,\phi(1)}\cdots t_{i,\phi(i)}\cdots t_{n,\phi(n)}
@@ -3620,62 +3642,94 @@ Factor the~\( k \) out of each term to get the desired equality.
   =k\cdot d(T)
 \end{equation*}
 
-For~(2), let 
+For~(2) let 
 \( T\smash[b]{\grstep{\rho_i\swap\rho_j}}\hat{T} \).
+We must show that this is the negative of $d(T)$.
 \begin{equation*}
   d(\hat{T})=
-  \sum_{\text{perms\ }\phi}\!\!
+  \sum_{\text{perm\ }\phi}\!\!
     \hat{t}_{1,\phi(1)}
     \cdots\hat{t}_{i,\phi(i)}
     \cdots\hat{t}_{j,\phi(j)}
     \cdots \hat{t}_{n,\phi(n)}
                                  \sgn(\phi)
+    \tag{*}
 \end{equation*}
-To convert to unhatted \( t \)'s, 
-for each $\phi$ consider the permutation \( \sigma \) that
-equals \( \phi \) except that the
-\( i \)-th and \( j \)-th numbers are interchanged,
-\( \sigma(i)=\phi(j) \) and \( \sigma(j)=\phi(i) \).
-Replacing the \( \phi \) in
-\( \hat{t}_{1,\phi(1)}
+We will show that for each term in ($*$) there is a term in $d(t)$
+matching it, except that they are negatives of each other.
+Consider the matrix from the multilinear expansion 
+of $d(\hat{T})$ that is associated with the term  
+    $\hat{t}_{1,\phi(1)}
     \cdots\hat{t}_{i,\phi(i)}
     \cdots\hat{t}_{j,\phi(j)}
-    \cdots \hat{t}_{n,\phi(n)} 
-    \)
-with this \( \sigma \) gives
+    \cdots \hat{t}_{n,\phi(n)}
+                                 \sgn(\phi)$.
+\begin{equation*}
+  \begin{mat}
+     \ &                  &\vdots &               &     \\
+       &\hat{t}_{i,\phi(i)}  &       &               &    \\
+       &                &\vdots &                 &  \\
+       &                &       &\hat{t}_{j,\phi(j)} &  \\
+       &                &\vdots                   &
+  \end{mat}
+\end{equation*}
+It is the result of the $\rho_i\swap\rho_j$ operation performed on this
+matrix.
+\begin{equation*}
+  \begin{mat}
+       \ &              &\vdots &           &        \\
+         &              &       &t_{i,\phi(j)} &  \\
+         &              &\vdots &           &       \\
+         &  t_{j,\phi(i)}  &       &          &        \\
+         &              &\vdots &          &
+  \end{mat}
+\end{equation*}
+That is, matching the term with hatted $t$'s is 
+this term
+from $d(T)$:
  \(    t_{1,\sigma(1)}
        \cdots t_{j,\sigma(j)}
        \cdots t_{i,\sigma(i)}
-       \cdots t_{n,\sigma(n)} 
-       \).
-Now \( \sgn(\phi)=-\sgn(\sigma) \)
-(by \nearbylemma{le:SwapsChangeSgn})
-and so we get
-\begin{align*}
-  &=\sum_\sigma
+       \cdots t_{n,\sigma(n)} \sgn(\sigma)
+       \), where the permutation
+\( \sigma \) 
+equals \( \phi \) but with the
+\( i \)-th and \( j \)-th numbers interchanged,
+\( \sigma(i)=\phi(j) \) and \( \sigma(j)=\phi(i) \).
+These two terms have the same multiplicands
+$\hat{t}_{1,\phi(1)}=t_{1,\sigma(1)}$, \ldots, 
+including the entries from the swapped rows
+$\hat{t}_{i,\phi(i)}=t_{j,\phi(i)}=t_{j,\sigma(j)}$. 
+But they are negatives of each other
+since \( \sgn(\phi)=-\sgn(\sigma) \) by \nearbylemma{le:SwapsChangeSgn}.
+
+Now, any permutation $\phi$ can be derived from some 
+other permutation $\sigma$ by such a swap,
+in one and only one way.
+Therefore the summation in ($*$) is in fact a sum over all permutations,
+taken once and only once.
+\begin{multline*}
+  d(\hat{T})=
+  \sum_{\text{perm\ }\phi}\!\!
+    \hat{t}_{1,\phi(1)}
+    \cdots\hat{t}_{i,\phi(i)}
+    \cdots\hat{t}_{j,\phi(j)}
+    \cdots \hat{t}_{n,\phi(n)}
+                                 \sgn(\phi)   \\
+  =\sum_{\text{perm\ }\sigma}\!\!
      t_{1,\sigma(1)}
     \cdots t_{j,\sigma(j)}
     \cdots t_{i,\sigma(i)}
     \cdots t_{n,\sigma(n)}
-                                 \cdot\bigl(-\sgn(\sigma)\bigr)        \\
-  &=-\sum_{\sigma}
-     t_{1,\sigma(1)}\cdots t_{j,\sigma(j)}
-    \cdots t_{i,\sigma(i)}\cdots t_{n,\sigma(n)}\cdot\sgn(\sigma)
-\end{align*}
-where the sum is over all permutations \( \sigma \) derived from
-another permutation \( \phi \) by a swap of the \( i \)-th and
-\( j \)-th numbers.
-But any permutation can be derived from some other permutation by such a swap,
-in one and only one way,
-so this summation is in fact a sum over all permutations,
-taken once and only once.
+                                 \cdot\bigl(-\sgn(\sigma)\bigr)        
+\end{multline*}
 Thus \( d(\hat{T})=-d(T) \).
 
 To do property~(1) let \( T\smash[b]{\grstep{k\rho_i+\rho_j}}\hat{T} \)
 and consider
 \begin{align*}
   d(\hat{T})
-  &=\sum_{\text{perms\ }\phi}
+  &=\sum_{\text{perm\ }\phi}
     \hat{t}_{1,\phi(1)}\cdots\hat{t}_{i,\phi(i)}
     \cdots\hat{t}_{j,\phi(j)}\cdots\hat{t}_{n,\phi(n)}
                                  \sgn(\phi)                \\
