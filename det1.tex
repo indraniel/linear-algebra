@@ -1165,6 +1165,7 @@ will see.
 
 \begin{example}
 Doing \( \nbyn{2} \) determinants
+with Gauss' method 
 \begin{equation*}
    \begin{vmat}[r]
       2  &4  \\
@@ -1177,7 +1178,7 @@ Doing \( \nbyn{2} \) determinants
    \end{vmat}
    =10
 \end{equation*}
-with Gauss' method doesn't give a big time savings
+doesn't give a big time savings
 because the $\nbyn{2}$ determinant formula is easy.
 However, a \( \nbyn{3} \) determinant is often easier to calculate
 with Gauss' method than with the formula given earlier.
@@ -2036,15 +2037,15 @@ Consider the left side of property~(1) and expand $\vec{v}+\vec{w}$.
             +\dots+(v_n+w_n)\vec{\rho}_n,\,\dots,\vec{\rho}_n) 
    \tag{*}
 \end{equation*}
-Gauss' method enables us to eliminate the terms for $\vec{\rho}_1$,
-$\vec{\rho}_2$, etc., from the expanded expression.
+% Gauss' method enables us to eliminate the terms for $\vec{\rho}_1$,
+% $\vec{\rho}_2$, etc., from the expanded expression.
 % the $(v_1+w_1)\vec{\rho}_1+\dots+(v_i+w_i)\vec{\beta}
 %             +\dots+(v_n+w_n)\vec{\rho}_n$ expression.
-That is, by the definition of determinant's condition~(1), the value of 
+By the definition of determinant's condition~(1), the value of 
 ($*$) % the determinant
 % $\det(\vec{\rho}_1,\dots,\vec{v}+\vec{w},\dots,\vec{\rho}_n)$
 is unchanged by the operation of 
-adding $-(v_1+w_1)\vec{\rho}_1$ to the $i$-th row, $\vec{v}+\vec{w}$.
+adding $-(v_1+w_1)\vec{\rho}_1$ to the $i$-th row $\vec{v}+\vec{w}$.
 The $i$-th row becomes this.
 \begin{equation*}
   \vec{v}+\vec{w}-(v_1+w_1)\vec{\rho}_1
@@ -2157,8 +2158,8 @@ from the zeroes that appear as part of the splitting).
      2  &1  &5
   \end{vmat}                       
 \end{equation*}
-These three each split in three along the second row.
-Each of these nine splits in three along the third row, resulting
+Each of these splits in three along the second row.
+Each of the nine splits in three along the third row, resulting
 in twenty seven determinants
 such that each row contains a single entry from the starting matrix.
 \begin{equation*}
@@ -2197,17 +2198,13 @@ such that each row contains a single entry from the starting matrix.
 
 So with multilinearlty, an \( \nbyn{n} \) determinant expands into a
 sum of \( n^n \) determinants where
-each row of each summands contains a single entry from the
+each row of each summand contains a single entry from the
 starting matrix.
 However, many of these summand determinants are zero.
 
 \begin{example} \label{ex:SamplePermExp}
-These examples from the prior expansion
-all have the property that each row contains one entry from the original
-matrix, while the rest of the entries from that row are $0$'s produced in the
-splitting.
-In each,
-two of these original entries are in the same column.
+In each of these examples from the prior expansion,
+two of the entries from the original matrix are in the same column.
 \begin{equation*}
   \begin{vmat}[r]
      2               &0  &0   \\
@@ -2230,12 +2227,15 @@ two of these original entries are in the same column.
 For instance
 in the first matrix, the $2$ and the $4$ both come from the first column
 of the original matrix.
-Any such matrix of the twenty seven is singular because in each
+Any such matrix is singular because 
 one row is a multiple of the other.
 Thus, any such determinant is zero, by \nearbylemma{le:IdenRowsDetZero}.
 
-Therefore, the above expansion of the \( \nbyn{3} \) determinant into
-the sum of the twenty seven determinants simplifies to the sum of these six.
+With that observation 
+the above expansion of the \( \nbyn{3} \) determinant into
+the sum of the twenty seven determinants simplifies to the sum of these six,
+the ones where the entries from the original matrix come not just one per row
+but also one per column.
 \begin{align*}
   \begin{vmat}[r]
      2  &1  &-1  \\
@@ -2326,35 +2326,24 @@ original matrix.
 Most of these matrices have
 one row that is a multiple of another
 so we can omit these determinants from the calculation.
-We are left with the one-entry-per-row determinants 
-also having only one entry per column from the original matrix.
-And, since we can factor scalars out, we can further reduce the
+We are left with the determinants that have one entry per row and
+per column from the original matrix.
+Then by factoring out the scalars we can further reduce the
 determinants that we must compute to those
 one-entry-per-row-and-column matrices where all the entries are $1$'s.
 
 \begin{definition}
-A square matrix whose entries are all $0$'s except for
+A square matrix whose entries are $0$ except for
 one $1$ in each row and column is a
 \definend{permutation matrix}.\index{permutation matrix}%
 \index{matrix!permutation}
 \end{definition}
 
-% Thus, we can compute a determinant in this
-% three-step way: 
-% \textit{(Step~1)}~for each correctly-sized permutation matrix, multiply together
-% the entries from the original matrix
-% where that permutation matrix has ones, 
-% \textit{(Step~2)}~multiply that by the determinant of the permutation matrix 
-% and
-% \textit{(Step~3)}~do that for all permutation matrices 
-% and sum the results together.
-
-To state the new calculation scheme as a formula 
-we introduce a notation for permutation matrices.
+We next introduce a notation for permutation matrices.
 Let $\iota_j$ be the row vector that is all $0$'s except for a $1$ in its 
 $j$-th entry, so that the four-wide $\iota_2$ is $\rowvec{0 &1 &0 &0}$.
 We can construct permutation matrices by 
-permuting \Dash  that is, scrambling \Dash  the numbers $1$, $2$, \ldots, $n$,
+permuting, that is, scrambling, the numbers $1$, $2$, \ldots, $n$,
 and using them as indices on the $\iota$'s.
 For instance, to get a \( \nbyn{4} \) permutation matrix
 matrix, we can scramble the numbers from $1$ to $4$ into 
@@ -2408,8 +2397,8 @@ These are the associated permutation matrices.
 \end{equation*}
 We sometimes write permutations as functions, e.g., \( \phi_2(1)=2 \),
 and \( \phi_2(2)=1 \).
-Then the rows of $P_{\phi_2}$ are 
-$\iota_{\phi_2(1)}=\iota_2$ and $\iota_{\phi_2(2)}=\iota_1$.
+Then $P_{\phi_2}$'s first row is 
+$\iota_{\phi_2(1)}=\iota_2$ and its second is $\iota_{\phi_2(2)}=\iota_1$.
 
 The $3$-permutations are
 \( \phi_1=\sequence{1,2,3} \),
@@ -2476,15 +2465,15 @@ This formula is often written in
 \definend{summation 
 notation}\index{summation notation!for permutation expansion}
 \begin{equation*}
-  \deter{T}=
+  \deter{T}=\!\!
   \sum_{\text{permutations\ }\phi}\!\!\!\!
      t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}
                                  \deter{P_{\phi}}
 \end{equation*}
 read aloud as
 ``the sum, over all permutations \( \phi \), of terms having the form
-\( t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)} \deter{P_{\phi}} \)''.
-This just restates the computation scheme given above.
+\( t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)} \deter{P_{\phi}} \).''
+
 
 \begin{example}
 The familiar $\nbyn{2}$ determinant formula follows from the above.
@@ -2544,17 +2533,17 @@ So does the $\nbyn{3}$ determinant formula.
 Computing a determinant by permutation expansion usually takes longer than
 Gauss' method.
 However, 
-while it is typically impractical
+while it is not often used in practice, 
 we use it for the theory, to prove that 
 the determinant function is well-defined.
 
-We will just state that result here, and 
+We will just state the result here, and 
 defer its proof to the following subsection.
 
 
 \begin{theorem}
 \index{determinant!exists} \label{th:DetsExist}
-For each $n$ there is a $\nbyn{n}$ determinant function.
+For each $n$ there is an $\nbyn{n}$ determinant function.
 \end{theorem}
 
 Also in the next subsection is the proof of this
@@ -3353,13 +3342,13 @@ determinants.\index{determinant!permutation expansion}%
       \>\hbox{}+t_{1,\phi_k(1)}t_{2,\phi_k(2)}\cdots
            t_{n,\phi_k(n)}\deter{P_{\phi_k}} 
    \end{array}                                                 \\[1ex]
-   &=\sum_{\text{permutations\ }\phi}\!\!\!\!
+   &=\!\!\sum_{\text{permutations\ }\phi}\!\!\!\!
      t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}
                                  \deter{P_{\phi}}
 \end{align*}
 This reduces the problem of showing that for any size~$n$ the
 determinant function on all $\nbyn{n}$ matrices is well-defined 
-to only showing that it is 
+to only showing that the determinant is 
 well-defined on the set of permutation matrices of that size.
 
 A permutation matrix can be row-swapped to the identity matrix
@@ -3422,6 +3411,9 @@ that this cannot happen\Dash
 there is no permutation matrix
 that can be row-swapped to an identity matrix in two ways, one with 
 an even number of swaps and the other with an odd number of swaps.
+
+So the critical step will be a way to calculate whether the 
+number of swaps that it takes could be even or odd.
 
 \begin{definition}
 Two rows of a permutation matrix
@@ -3486,7 +3478,7 @@ If the two rows are adjacent
 then since inversions involving rows not in this pair
 are not affected,
 the swap changes the total number of inversions by one, 
-either removing or producing one inversion, depending on whether
+either removing or producing one inversion depending on whether
 \( \phi(j)>\phi(k) \) or not.
 Consequently, the total number of inversions changes from odd to even 
 or from even to odd.
@@ -3595,13 +3587,13 @@ by altering the permutation expansion formula, replacing
 $\deter{P_\phi}$ with $\sgn(\phi)$.
 \begin{equation*}
   d(T)=
-  \sum_{\text{permutations\ }\phi}t_{1,\phi(1)}t_{2,\phi(2)}\dots t_{n,\phi(n)}
+  \sum_{\text{permutations\ }\phi}t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}
                                  \sgn(\phi)
 \end{equation*}
 This gives the same value as the permutation expansion
 because the corollary shows that $\det(P_\phi)=\sgn(\phi)$.
-The advantage that this formula has is that the number of inversions 
-is clearly well-defined \Dash  just count them.
+The advantage of this formula is that the number of inversions 
+is clearly well-defined\Dash  just count them.
 Therefore, we will finish showing that an~$\nbyn{n}$ determinant function 
 exists by showing  that this $d$
 satisfies the conditions in the determinant's definition.
@@ -3623,9 +3615,9 @@ Property~(4) is easy; where $I$ is the $\nbyn{n}$ identity, in
     \iota_{1,\phi(1)}\iota_{2,\phi(2)}\cdots \iota_{n,\phi(n)}
                                  \sgn(\phi)
 \end{equation*}
-all of the terms in the summation are $0$ 
+all of the terms in the summation are zero
 except for the product down the diagonal,
-which is $1$.
+which is one.
 
 For property~(3) consider $d(\hat{T})$ where 
 \( T\smash[b]{\grstep{k\rho_i}}\hat{T} \).
@@ -3647,8 +3639,8 @@ Factor out the~\( k \) to get the desired equality.
 \end{equation*}
 
 For~(2) let 
-\( T\smash[b]{\grstep{\rho_i\swap\rho_j}}\hat{T} \).
-We must show that this is the negative of $d(T)$.
+\( T\;\smash[b]{\grstep{\rho_i\swap\rho_j}}\;\hat{T} \).
+We must show this is the negative of $d(T)$.
 \begin{equation*}
   d(\hat{T})=
   \sum_{\text{perm\ }\phi}\!\!
@@ -3659,10 +3651,10 @@ We must show that this is the negative of $d(T)$.
                                  \sgn(\phi)
     \tag{*}
 \end{equation*}
-We will show that for each term in ($*$) there is a term in $d(t)$
-matching it, except that they are negatives of each other.
+We will show that each term in ($*$) is associated with a term in $d(t)$, 
+and the two are negatives of each other.
 Consider the matrix from the multilinear expansion 
-of $d(\hat{T})$ that is associated with the term  
+of $d(\hat{T})$ from which we get the term  
     $\hat{t}_{1,\phi(1)}
     \cdots\hat{t}_{i,\phi(i)}
     \cdots\hat{t}_{j,\phi(j)}
@@ -3688,9 +3680,8 @@ matrix.
          &              &\vdots &          &
   \end{mat}
 \end{equation*}
-That is, matching the term with hatted $t$'s is 
-this term
-from $d(T)$:
+That is, the term with hatted $t$'s is associated with 
+this term from the $d(T)$ expansion:
  \(    t_{1,\sigma(1)}
        \cdots t_{j,\sigma(j)}
        \cdots t_{i,\sigma(i)}
@@ -3700,11 +3691,12 @@ from $d(T)$:
 equals \( \phi \) but with the
 \( i \)-th and \( j \)-th numbers interchanged,
 \( \sigma(i)=\phi(j) \) and \( \sigma(j)=\phi(i) \).
-These two terms have the same multiplicands
+The two terms have the same multiplicands
 $\hat{t}_{1,\phi(1)}=t_{1,\sigma(1)}$, \ldots, 
 including the entries from the swapped rows
-$\hat{t}_{i,\phi(i)}=t_{j,\phi(i)}=t_{j,\sigma(j)}$. 
-But they are negatives of each other
+$\hat{t}_{i,\phi(i)}=t_{j,\phi(i)}=t_{j,\sigma(j)}$
+and $\hat{t}_{j,\phi(j)}=t_{i,\phi(j)}=t_{i,\sigma(i)}$. 
+But the two terms are negatives of each other
 since \( \sgn(\phi)=-\sgn(\sigma) \) by \nearbylemma{le:SwapsChangeSgn}.
 
 Now, any permutation $\phi$ can be derived from some 
@@ -3712,25 +3704,26 @@ other permutation $\sigma$ by such a swap,
 in one and only one way.
 Therefore the summation in ($*$) is in fact a sum over all permutations,
 taken once and only once.
-\begin{multline*}
-  d(\hat{T})=
+\begin{align*}
+  d(\hat{T})
+  &=
   \sum_{\text{perm\ }\phi}\!\!
     \hat{t}_{1,\phi(1)}
     \cdots\hat{t}_{i,\phi(i)}
     \cdots\hat{t}_{j,\phi(j)}
     \cdots \hat{t}_{n,\phi(n)}
                                  \sgn(\phi)   \\
-  =\sum_{\text{perm\ }\sigma}\!\!
+  &=\sum_{\text{perm\ }\sigma}\!\!
      t_{1,\sigma(1)}
     \cdots t_{j,\sigma(j)}
     \cdots t_{i,\sigma(i)}
     \cdots t_{n,\sigma(n)}
                                  \cdot\bigl(-\sgn(\sigma)\bigr)        
-\end{multline*}
+\end{align*}
 Thus \( d(\hat{T})=-d(T) \).
 
-To do property~(1) let \( T\smash[b]{\grstep{k\rho_i+\rho_j}}\hat{T} \)
-and consider
+To do property~(1) let \( T\;\smash[b]{\grstep{k\rho_i+\rho_j}}\;\hat{T} \)
+and consider the effect of a row combination.
 \begin{align*}
   d(\hat{T})
   &=\sum_{\text{perm\ }\phi}
@@ -3742,46 +3735,46 @@ and consider
     \cdots (kt_{i,\phi(j)}+t_{j,\phi(j)})\cdots t_{n,\phi(n)}
                                  \sgn(\phi)
 \end{align*}
-(notice:~that's 
-\( kt_{i,\phi(j)} \), not \( kt_{j,\phi(j)} \)).
-Distribute, commute, and factor.
+% (notice:~that's 
+% \( kt_{i,\phi(j)} \), not \( kt_{j,\phi(j)} \)).
+Do the algebra.
 \begin{align*}
-  &=\sum_{\phi} 
+  &= 
       \begin{aligned}[t]
-        &\big[t_{1,\phi(1)}\cdots t_{i,\phi(i)}
+        &\smash[b]{\sum_{\smash{\phi}}}\big[t_{1,\phi(1)}\cdots t_{i,\phi(i)}
           \cdots kt_{i,\phi(j)}\cdots t_{n,\phi(n)}
-                                 \sgn(\phi)         \\
-        &\hbox{}\quad\hbox{}
+                                 \sgn(\phi)         \\ % [-1ex]
+        &\hbox{}\qquad\hbox{}
            +t_{1,\phi(1)}\cdots t_{i,\phi(i)}
            \cdots t_{j,\phi(j)}\cdots t_{n,\phi(n)}
                                  \sgn(\phi)\big]
-      \end{aligned}                                               \\
+      \end{aligned}                                               \\[.5ex]
   &=\begin{aligned}[t] 
-         &\sum_{\smash{\phi}} t_{1,\phi(1)}\cdots t_{i,\phi(i)}
+         &\smash[b]{\sum_{\smash{\phi}}} t_{1,\phi(1)}\cdots t_{i,\phi(i)}
             \cdots kt_{i,\phi(j)}\cdots t_{n,\phi(n)}
-                                 \sgn(\phi)           \\[-1ex]               
-         &\hbox{}\quad\hbox{}
-            +\sum_{\phi}
+                                 \sgn(\phi)           \\ % [-1ex]               
+         &\hbox{}\qquad\hbox{}
+            +\smash[b]{\sum_{\phi}}\:
             t_{1,\phi(1)}\cdots t_{i,\phi(i)}
             \cdots t_{j,\phi(j)}\cdots t_{n,\phi(n)}
                                  \sgn(\phi)        
-     \end{aligned}                                               \\
+     \end{aligned}                                               \\[1.25ex]
   &=\begin{aligned}[t]
-       &k\cdot \sum_{\smash{\phi}}
+       &k\cdot \smash[b]{\sum_{\smash{\phi}}}\:
             t_{1,\phi(1)}\cdots t_{i,\phi(i)}
             \cdots t_{i,\phi(j)}\cdots t_{n,\phi(n)}
-                                 \sgn(\phi)          \\[-.75ex]
-       &\hbox{}\quad\hbox{}
+                                 \sgn(\phi)          \\  % [-.75ex]
+       &\hbox{}\qquad\hbox{}
              +d(T)          
      \end{aligned}
 \end{align*}
-We finish by showing that the terms
+To finish observe that the terms
 \( t_{1,\phi(1)}\cdots t_{i,\phi(i)} \cdots t_{i,\phi(j)}\dots t_{n,\phi(n)}
-   \sgn(\phi)  \) add to zero.
-This sum represents \( d(S) \) where \( S \) is a matrix equal to  \( T \)
+   \sgn(\phi)  \) add to zero:
+this sum represents \( d(S) \) where \( S \) is a matrix equal to  \( T \)
 except that row~$j$ of $S$ is a copy of row~$i$ of $T$ 
-(because the factor is \( t_{i,\phi(j)} \), not \( t_{j,\phi(j)} \)).
-Thus, $S$ has two equal rows, rows~$i$ and~$j$.
+(because the factor is \( t_{i,\phi(j)} \), not \( t_{j,\phi(j)} \))
+and so $S$ has two equal rows, rows~$i$ and~$j$.
 Since we have already shown that $d$ changes sign on row swaps,
 as in \nearbylemma{le:IdenRowsDetZero} we conclude that $d(S)=0$.
 \end{proof}
@@ -3790,50 +3783,50 @@ We have now shown that determinant functions exist for each size.
 We already know that for each size there is at most one
 determinant.
 Therefore, the permutation expansion
-computes the one and only determinant value of a square matrix.
+computes the one and only determinant.
 
 We end this subsection by proving the other result 
 remaining from the prior subsection, that the determinant of a matrix
 equals the determinant of its transpose.
 
-\begin{example}
-Writing out the permutation expansion of the general
-$\nbyn{3}$ matrix and of its transpose, and
-comparing corresponding terms
-\begin{equation*}
-  \begin{vmat}
-    a  &b  &c  \\
-    d  &e  &f  \\
-    g  &h  &i
-  \end{vmat}
-  = \cdots\,+
-  cdh\cdot\begin{vmat}[r]
-    0  &0  &1  \\
-    1  &0  &0  \\
-    0  &1  &0
-  \end{vmat}
-   +\,\cdots
-\end{equation*}
-(terms with the same letters)
-\begin{equation*}
-  \begin{vmat}
-    a  &d  &g  \\
-    b  &e  &h  \\
-    c  &f  &i
-  \end{vmat}
-  = \cdots\,+
- dhc\cdot\begin{vmat}[r]
-    0  &1  &0  \\
-    0  &0  &1  \\
-    1  &0  &0
-  \end{vmat}
-   +\,\cdots\
-\end{equation*}
-shows that the corresponding permutation matrices are transposes.
-That is, there is a relationship between these corresponding permutations.
-\nearbyexercise{exer:PermInvIffMatTrans} 
-shows that they are inverses. 
-\end{example}
+% \begin{example}
+% Writing out the permutation expansion of the general
+% $\nbyn{3}$ matrix and of its transpose, and
+% comparing corresponding terms
+% \begin{equation*}
+%   \begin{vmat}
+%     a  &b  &c  \\
+%     d  &e  &f  \\
+%     g  &h  &i
+%   \end{vmat}
+%   = \cdots\,+
+%   cdh\cdot\begin{vmat}[r]
+%     0  &0  &1  \\
+%     1  &0  &0  \\
+%     0  &1  &0
+%   \end{vmat}
+%    +\,\cdots
+% \end{equation*}
+% (terms with the same letters)
+% \begin{equation*}
+%   \begin{vmat}
+%     a  &d  &g  \\
+%     b  &e  &h  \\
+%     c  &f  &i
+%   \end{vmat}
+%   = \cdots\,+
+%  dhc\cdot\begin{vmat}[r]
+%     0  &1  &0  \\
+%     0  &0  &1  \\
+%     1  &0  &0
+%   \end{vmat}
+%    +\,\cdots\
+% \end{equation*}
+% shows that the corresponding permutation matrices are transposes.
+% That is, there is a relationship between these corresponding permutations.
+% \nearbyexercise{exer:PermInvIffMatTrans} 
+% shows that they are inverses. 
+% \end{example}
 
 \begin{theorem}
 \index{transpose!determinant}
@@ -3846,33 +3839,33 @@ Call the matrix \( T \) and denote the entries of \( \trans{T} \) with
 Substitution gives this
 \begin{equation*}
   \deter{T}
-  =\sum_{\text{perms }\phi} t_{1,\phi(1)}\dots t_{n,\phi(n)}
+  =\sum_{\text{perms }\phi} t_{1,\phi(1)}\cdots t_{n,\phi(n)}
           \sgn(\phi)    
-  =\sum_{\phi} s_{\phi(1),1}\dots s_{\phi(n),n}
+  =\sum_{\phi} s_{\phi(1),1}\cdots s_{\phi(n),n}
           \sgn(\phi)
 \end{equation*}
-and we can finish the argument by manipulating the expression on the right
+and we will finish the argument by manipulating the expression on the right
 to be recognizable as the determinant of the transpose.
 We have written all permutation expansions 
-(as in the middle expression above) 
+% (as in the middle expression above) 
 with the row indices ascending.
 To rewrite the expression on the right in this way, note that 
-because $\phi$ is a permutation, 
-the row indices in the term on the right $\phi(1)$, \ldots, $\phi(n)$
+because $\phi$ is a permutation 
+the row indices $\phi(1)$, \ldots, $\phi(n)$
 are just the numbers $1$, \ldots, $n$, rearranged. 
-We can thus commute to have these ascend, giving
-$s_{1,\phi^{-1}(1)}\cdots s_{n,\phi^{-1}(n)}$
-(if the column index is $j$ and the row index is $\phi(j)$ then, 
-where the row index is $i$, the column index is $\phi^{-1}(i)$). 
-Substituting on the right gives
+Apply commutivity to have these ascend, giving
+$s_{1,\phi^{-1}(1)}\cdots s_{n,\phi^{-1}(n)}$.
+% (if the column index is $j$ and the row index is $\phi(j)$ then, 
+% where the row index is $i$, the column index is $\phi^{-1}(i)$). 
+% The right side becomes this.
 \begin{equation*}
   =\sum_{\phi^{-1}}
      s_{1,\phi^{-1}(1)}\cdots s_{n,\phi^{-1}(n)} \sgn(\phi^{-1})
 \end{equation*}
-(\nearbyexercise{exer:PermInvFacts}
-shows that \( \sgn(\phi^{-1})=\sgn(\phi) \)).
+\nearbyexercise{exer:PermInvFacts}
+shows that \( \sgn(\phi^{-1})=\sgn(\phi) \).
 Since every permutation is the inverse of another,
-a sum over all $\phi^{-1}$ is a sum over all permutations~$\phi$
+a sum over all $\phi^{-1}$ is a sum over all permutations
 \begin{equation*}
   =\sum_{\text{perms }\sigma}
      s_{1,\sigma^(1)}\dots s_{n,\sigma(n)} \sgn(\sigma)  
