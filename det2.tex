@@ -3,14 +3,13 @@
 %  2001-Jun-12
 \section{Geometry of Determinants}
 The prior section develops the determinant algebraically, by
-considering what formulas satisfy certain properties.
+considering formulas satisfying certain properties.
 This section complements that with a geometric approach.
-One advantage of this approach is that, while 
+One advantage of this approach is that while 
 we have so far only considered whether or not a determinant is zero,
-here we shall give a meaning to the value of that determinant.
-(The prior section handles determinants as functions of the
-rows, but in this section columns are more convenient.
-The final result of the prior section says that we can make the switch.)
+here we shall give a meaning to the value of the determinant.
+(The prior section treats determinants as functions of the
+rows but in this section we focus on columns.)
 
 
 
@@ -23,11 +22,27 @@ The final result of the prior section says that we can make the switch.)
 
 \subsection{Determinants as Size Functions}
 This parallelogram picture
+is familiar from the construction of the sum of the two vectors.
 \begin{center}
   \includegraphics{ch4.30}
 \end{center}
-is familiar from the construction of the sum of the two vectors.
-One way to compute the area that it encloses is to draw this rectangle
+
+\begin{definition}
+In $\Re^n$
+the \definend{box}\index{box}
+(or \definend{parallelepiped}\index{parallelepiped})
+formed by 
+\( \sequence{\vec{v}_1,\dots,\vec{v}_n} \) 
+is the set
+\( \set{t_1\vec{v}_1+\dots+t_n\vec{v}_n
+      \suchthat t_1,\ldots,t_n\in [0..1]} \).
+\end{definition}
+
+\noindent Thus, the parallelogram shown above is the box defined by 
+$\sequence{\binom{x_1}{y_1},\binom{x_2}{y_2}}$.
+
+We are interested in the area of the box.
+One way to compute it is to draw this rectangle
 and subtract the area of each subregion.
 \begin{center}
   \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.31}\hfil\hbox{}}
@@ -50,6 +65,7 @@ and subtract the area of each subregion.
     \end{array}$
     \hfil\hbox{}}
 \end{center}
+
 The fact that the area equals the value of the determinant
 \begin{equation*}
   \begin{vmatrix}
@@ -59,77 +75,121 @@ The fact that the area equals the value of the determinant
   =x_1y_2-x_2y_1
 \end{equation*}
 is no coincidence.
-The properties in the definition of determinants 
-make reasonable postulates for a function 
-that measures the size of the region
-enclosed by the vectors in the matrix.\index{size}
+The properties from the definition of determinants 
+make good postulates for a function 
+that measures the size of the box
+defined by the matrix's columns.\index{size}
 
-For instance, this shows    
-the effect of multiplying one of the box-defining vectors by
-a scalar (the scalar used is $k=1.4$).
+For instance, a function that measures the size of the box
+should have the property that multiplying one of the box-defining vectors by
+a scalar (here $k=1.4$)
+will multiply the size by that scalar.
 \begin{center}
   \includegraphics{ch4.32}
   \qquad
   \includegraphics{ch4.33}
 \end{center}
-The region formed by $k\vec{v}$ and~$\vec{w}$
-is bigger, by a factor of \( k \),
-than the shaded region enclosed by $\vec{v}$ and~$\vec{w}$.
-That is,
-\( \size (k\vec{v},\vec{w})=k\cdot\size (\vec{v},\vec{w}) \) and
-in general we expect of the size measure that
+(On the right the rescaled region is in solid lines with the 
+original region in shade for comparison.)
+% The region formed by $k\vec{v}$ and~$\vec{w}$
+% is bigger by a factor of \( k \)
+% than the shaded region enclosed by $\vec{v}$ and~$\vec{w}$.
+% That is,
+% \( \size (k\vec{v},\vec{w})=k\cdot\size (\vec{v},\vec{w}) \) and
+We can reasonably expect of a size measure that
 $\size (\dots,k\vec{v},\dots)=k\cdot\size (\dots,\vec{v},\dots)$.
-Of course, this postulate is already familiar as 
-one of the properties in the defintion of determinants.
+Of course, this property is familiar from 
+the definition of determinants.
 
-Another property of determinants is that
-they are unaffected by combining rows.
+Another property of determinants that should apply to any 
+function that gives the size of the box is that
+it is unaffected by combining rows.
 Here are before-combining and 
-after-combining boxes (the scalar used is $k=0.35$). 
+after-combining boxes (the scalar shown is $k=0.35$). 
+The box formed by $v$ and 
+$k\vec{v}+\vec{w}$ is
+more slanted than the original one but the two have the
+same base and the same height and hence the same area.
 \begin{center}
   \includegraphics{ch4.34}
   \qquad
   \includegraphics{ch4.35}
 \end{center}   
-Although the region on the right, the box formed by $v$ and 
-$k\vec{v}+\vec{w}$, is
-more slanted than the shaded region, the two have the
-same base and the same height and hence the same area.
-This illustrates that
-\( \size (\vec{v},k\vec{v}+\vec{w})=\size (\vec{v},\vec{w}) \).
-Generalized, 
+(As above, on the right the 
+original region is in shade.)
+So we can reasonably expect that  
 $\size (\dots,\vec{v},\dots,\vec{w},\dots)
 =\size (\dots,\vec{v},\dots,k\vec{v}+\vec{w},\dots)$,
-which is a restatement of the determinant postulate.
+again just a restatement of a determinant postulate.
 
-Of course, this picture
+This picture shows that \( \size (\vec{e}_1,\vec{e}_2)=1 \)
 \begin{center}
   \includegraphics{ch4.36}
 \end{center}
-shows that \( \size (\vec{e}_1,\vec{e}_2)=1 \), 
 and we naturally extend that to any number of dimensions
-$\size(\vec{e}_1,\dots,\vec{e}_n)=1$,
-which is a restatement of the property that the determinant of
-the identity matrix is one.
+$\size(\vec{e}_1,\dots,\vec{e}_n)=1$.
+Again, that is a determinant property.
 
-With that, because property~(2) of determinants is 
-redundant (as remarked right after the definition), 
-we have that all of the properties of determinants are reasonable
+Because property~(2) of determinants is 
+redundant (as remarked following the definition) 
+we have that the properties of the determinant function are reasonable
 to expect of a function that gives the size of boxes.
-We can now cite the work done in the prior section to show
-that the determinant exists and is unique to be 
-assured that these postulates are consistent and sufficient
+The prior section starts with these properties and shows
+that the determinant exists and is unique, so we know  
+that these postulates are consistent and sufficient
 (that is, we do not need any more postulates).
-So we've got an intuitive
-justification to interpret \( \det(\vec{v}_1,\dots,\vec{v}_n) \) as the
+So we will
+interpret \( \det(\vec{v}_1,\dots,\vec{v}_n) \) as the
 size of the box formed by the vectors.
-(\textit{Comment.}
-  An even more basic approach, which also leads to the definition
-  below, is in \cite{Weston59}.)
+% (\textit{Comment.}
+%   An even more basic approach, which also leads to the definition
+%   below, is in \cite{Weston59}.)
+
+\begin{remark}
+Although property~(2) of the definition of
+determinants is redundant, it raises an important point.
+Consider these two.
+\begin{center}
+  \begin{tabular}{c@{\hspace*{8em}}c}
+    \includegraphics{ch4.37}  
+      &\includegraphics{ch4.38}  \\[.25ex]
+    \ $\begin{vmatrix}
+        4  &1   \\
+        2  &3
+      \end{vmatrix}=10$
+      &\ $\begin{vmatrix}
+          1  &4   \\
+          3  &2
+        \end{vmatrix}=-10$
+  \end{tabular}
+\end{center}
+Swapping changes the sign.
+If we take $\vec{u}$ first and then $\vec{v}$,
+following the counterclockwise arc,
+then the sign is positive.
+Following the clockwise arc gives a negative sign.
+The sign returned by the size function reflects the 
+\definend{orientation}\index{box!orientation}\index{orientation} 
+or \definend{sense}\index{box!sense}\index{sense} of the box.
+(We see the same thing if we picture the effect of scalar multiplication
+by a negative scalar.)
+
+Although it is both interesting and important, we don't need the idea of
+orientation for the development below and so we will pass it by.
+(See \nearbyexercise{exer:BasisOrient}.)
+\end{remark}
+
+\begin{definition}
+The \definend{volume}\index{volume}\index{box!volume}
+of a box is the absolute value of the determinant of
+a matrix with those vectors as columns.
+\end{definition}
 
 \begin{example} \label{ex:VolParPiped}
-The volume of this parallelepiped, which can be found by the usual
-formula from high school geometry, is $12$.
+By the high school geometry formula that takes the area of the
+base times the height, the volume of this 
+parallelepiped is $12$.
+That agrees with the determinant formula.
 \begin{center}
    \parbox{2in}{\hbox{}\hfil\includegraphics{ch4.39}\hfil\hbox{}}  
   \quad
@@ -139,62 +199,8 @@ formula from high school geometry, is $12$.
      2 &1 &1
   \end{vmatrix}=12$
 \end{center}
-\end{example}
-
-\begin{remark}
-Although property~(2) of the definition of
-determinants is redundant, it raises an important point.
-Consider these two.
-\begin{center}
-  \begin{tabular}{c@{\hspace*{6em}}c}
-    \includegraphics{ch4.37}  
-      &\includegraphics{ch4.38}  \\
-    $\begin{vmatrix}
-        4  &1   \\
-        2  &3
-      \end{vmatrix}=10$
-      &$\begin{vmatrix}
-          1  &4   \\
-          3  &2
-        \end{vmatrix}=-10$
-  \end{tabular}
-\end{center}
-The only difference between them is in the order in which the vectors 
-are taken.
-If we take $\vec{u}$ first and then go to $\vec{v}$,
-follow the counterclockwise arc shown,
-then the sign is positive.
-Following a clockwise arc gives a negative sign.
-The sign returned by the size function reflects the 
-\definend{orientation}\index{box!orientation}\index{orientation} 
-or \definend{sense}\index{box!sense}\index{sense} of the box.
-We see the same thing if we picture the effect of scalar multiplication
-by a negative scalar.
-
-Although it is both interesting and important, we don't need the idea of
-orientation for the development below and so we will pass it by.
-(See \nearbyexercise{exer:BasisOrient}.)
-\end{remark}
-
-\begin{definition}
-In $\Re^n$
-the \definend{box}\index{box}
-(or \definend{parallelepiped}\index{parallelepiped})
-formed by 
-\( \sequence{\vec{v}_1,\dots,\vec{v}_n} \) 
-includes all of the set
-\( \set{t_1\vec{v}_1+\dots+t_n\vec{v}_n
-      \suchthat t_1,\ldots,t_n\in [0..1]} \).
-The \definend{volume}\index{volume}\index{box!volume}
-of a box is the absolute value of the determinant of
-the matrix with those vectors as columns.
-\end{definition}
-
-\begin{example}
-Volume, because it is an absolute value,
-does not depend on the order in which the vectors are given.
-The volume of the parallelepiped in \nearbyexercise{ex:VolParPiped},
-can also be computed as the absolute value of this determinant. 
+We can also compute the volume
+as the absolute value of this determinant. 
 \begin{equation*}
   \begin{vmatrix}
      0  &2 &0 \\
@@ -204,10 +210,9 @@ can also be computed as the absolute value of this determinant.
 \end{equation*}
 \end{example}
 
-The definition of volume gives a geometric interpretation to
-something in the space, boxes made from vectors.
-The next result relates the geometry to the functions that operate on
-spaces. 
+The next result describes some of the geometry of the linear
+functions that act on
+\( \Re^n \). 
 
 \begin{theorem}
 \label{th:MatChVolByDetMat}
@@ -217,54 +222,56 @@ by the same factor, namely the size of the image of a box
 $\deter{t(S)}$ is $\deter{T}$ times the size of the box $\deter{S}$,
 where $T$ is the matrix
 representing $t$ with respect to the standard basis.
+
 That is, for all $\nbyn{n}$ matrices, the determinant of a product is the
 product of the determinants $\deter{TS}=\deter{T}\cdot\deter{S}$.
 \end{theorem}
 
-The two sentences state the same idea, first in map terms and then
+The two sentences say the same thing, first in map terms and then
 in matrix terms. 
-Although we tend to prefer a map point of view,
-the second sentence, the matrix version, is more convienent for the proof
-and is also the way that we shall use this result later.
-(Alternate proofs are given as 
-\nearbyexercise{exer:DetProdEqProdDetsFcn} and
-\nearbyexercise{exer:DetProdEqProdDetsPerms}.)
-
-\begin{proof}
-The two statements are equivalent because
+This is because
 $\deter{t(S)}=\deter{TS}$, as both give the size of the box that is the
 image of the unit box $\stdbasis_n$ under the composition $\composed{t}{s}$
 (where $s$ is the map represented by $S$ with respect to the standard basis).
 
-First consider the case that $\deter{T}=0$.
+% We will prove the second sentence, the matrix version, because 
+% it is more convienent for the argument 
+% and also because it is the way that we shall later use this result.
+% (Alternate proofs are in 
+% \nearbyexercise{exer:DetProdEqProdDetsFcn} and
+% \nearbyexercise{exer:DetProdEqProdDetsPerms}.)
+
+\begin{proof}
+First consider the $\deter{T}=0$ case.
 A matrix has a zero determinant if and only if it is not invertible.
-Observe that if \( TS \) is invertible, so that there
-is an $M$ such that \( (TS)M=I \), then
-the associative property of matrix multiplication 
-\( T(SM)=I \) shows that \( T \) is also invertible  (with inverse $SM$).
-Therefore, if \( T \) is not invertible then neither is \( TS \) \Dash 
-if $\deter{T}=0$ then $\deter{TS}=0$,
-and the result holds in this case.
+Observe that if \( TS \) is invertible then there
+is an $M$ such that \( (TS)M=I \), so 
+\( T(SM)=I \), which shows that \( T \) is invertible, with inverse $SM$.
+By contrapositive, 
+if \( T \) is not invertible then neither is \( TS \) \Dash 
+if $\deter{T}=0$ then $\deter{TS}=0$.
 
 Now consider the case that $\deter{T}\neq 0$, that $T$ is nonsingular. 
-Recall that any nonsingular matrix can be factored into a product 
+Recall that any nonsingular matrix factors into a product 
 of elementary matrices, so that $TS=E_1E_2\cdots E_rS$.
-In the rest of this argument, 
+To finish this argument 
 we will verify that if $E$ is an elementary matrix then
 \( \deter{ES}=\deter{E}\cdot\deter{S} \). 
-The result will follow because then 
+The result will then follow because 
 $\deter{TS}=\deter{E_1\cdots E_rS}=\deter{E_1}\cdots\deter{E_r}\cdot\deter{S}
   =\deter{E_1\cdots E_r}\cdot\deter{S}=\deter{T}\cdot\deter{S}$.
 
+There are three kinds of elementary matrix. 
+We will cover the $M_i(k)$ case and
+the $E=P_{i,j}=-1$ and $E=C_{i,j}(k)$ checks are similar.
 If the elementary matrix $E$ is $M_i(k)$ 
-then $M_i(k)S$ equals $S$ except that row~$i$ has been multiplied by $k$.
+then $M_i(k)S$ equals $S$ except that row~$i$ is multiplied by $k$.
 The third property of determinant functions
 then gives that $\deter{M_i(k)S}=k\cdot\deter{S}$.
 But $\deter{M_i(k)}=k$, again by the third property because
 $M_i(k)$ is derived from the identity by multiplication of row~$i$ by
 $k$, and so \( \deter{ES}=\deter{E}\cdot\deter{S} \) holds for
 $E=M_i(k)$.
-The $E=P_{i,j}=-1$ and $E=C_{i,j}(k)$ checks are similar.
 \end{proof}
 
 
@@ -272,10 +279,10 @@ The $E=P_{i,j}=-1$ and $E=C_{i,j}(k)$ checks are similar.
 Application of the map $t$ represented with respect to the standard  
 bases by
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &1  \\
    -2  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 will double sizes of boxes, e.g., from this
 \begin{center}
@@ -307,24 +314,24 @@ inverse of its determinant $\deter{T^{-1}}=1/\deter{T}$.
 $1=\deter{I}=\deter{TT^{-1}}=\deter{T}\cdot\deter{T^{-1}}$  
 \end{proof}
 
-Recall that determinants are not additive homomorphisms, 
+Recall that determinants are not additive homomorphisms, that
 $\det(A+B)$ need not equal $\det(A)+\det(B)$.
-The above theorem says, in contrast, that determinants are
+In contrast, the above theorem says that determinants are
 multiplicative homomorphisms:
-$\det(AB)$ does equal $\det(A)\cdot \det(B)$.
+$\det(AB)$ equals $\det(A)\cdot \det(B)$.
 
 
 \begin{exercises}
   \item 
     Find the volume of the region formed.
     \begin{exparts}
-      \partsitem $\sequence{\colvec{1 \\ 3},\colvec{-1 \\ 4}}$
-      \partsitem $\sequence{\colvec{2 \\ 1 \\ 0},\colvec{3 \\ -2 \\ 4},
-                              \colvec{8 \\ -3 \\ 8}}$
-      \partsitem $\sequence{\colvec{1 \\ 2 \\ 0 \\ 1},
-                             \colvec{2 \\ 2 \\ 2 \\ 2},
-                             \colvec{-1 \\ 3 \\ 0 \\ 5},
-                             \colvec{0 \\ 1 \\ 0 \\ 7}}$
+      \partsitem $\sequence{\colvec[r]{1 \\ 3},\colvec[r]{-1 \\ 4}}$
+      \partsitem $\sequence{\colvec[r]{2 \\ 1 \\ 0},\colvec[r]{3 \\ -2 \\ 4},
+                              \colvec[r]{8 \\ -3 \\ 8}}$
+      \partsitem $\sequence{\colvec[r]{1 \\ 2 \\ 0 \\ 1},
+                             \colvec[r]{2 \\ 2 \\ 2 \\ 2},
+                             \colvec[r]{-1 \\ 3 \\ 0 \\ 5},
+                             \colvec[r]{0 \\ 1 \\ 0 \\ 7}}$
     \end{exparts}
     \begin{answer}
       For each, find the determinant and take the absolute value.
@@ -337,23 +344,23 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
   \recommended \item 
     Is
     \begin{equation*}
-      \colvec{4 \\ 1 \\ 2}
+      \colvec[r]{4 \\ 1 \\ 2}
     \end{equation*}
     inside of the box formed by these three?
     \begin{equation*}
-      \colvec{3 \\ 3 \\ 1}
+      \colvec[r]{3 \\ 3 \\ 1}
       \quad
-      \colvec{2 \\ 6 \\ 1}
+      \colvec[r]{2 \\ 6 \\ 1}
       \quad
-      \colvec{1 \\ 0 \\ 5}
+      \colvec[r]{1 \\ 0 \\ 5}
     \end{equation*}
     \begin{answer}
       Solving
       \begin{equation*}
-        c_1\colvec{3 \\ 3 \\ 1}
-        +c_2\colvec{2 \\ 6 \\ 1}
-        +c_3\colvec{1 \\ 0 \\ 5}
-        =\colvec{4 \\ 1 \\ 2}
+        c_1\colvec[r]{3 \\ 3 \\ 1}
+        +c_2\colvec[r]{2 \\ 6 \\ 1}
+        +c_3\colvec[r]{1 \\ 0 \\ 5}
+        =\colvec[r]{4 \\ 1 \\ 2}
       \end{equation*}
       gives the unique solution
       \( c_3=11/57 \), \( c_2=-40/57 \) and \( c_1=99/57 \).
@@ -369,8 +376,8 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
       so that it becomes the box formed by 
       \begin{equation*}
         \sequence{
-          \colvec{3 \\ 0},
-          \colvec{2 \\ 1}
+          \colvec[r]{3 \\ 0},
+          \colvec[r]{2 \\ 1}
         }      
       \end{equation*}
       and now the absolute value of this determinant is 
@@ -419,10 +426,10 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
     \( [2..4]\times [2..5] \) under the action of
     this matrix?
     \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          2  &3  \\
          4  &-1
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     \begin{answer}
       The starting area is \( 6 \) and the matrix changes sizes by
@@ -438,15 +445,15 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
      \end{answer}
   \item 
     In what way does the definition of a box differ from the
-    defintion of a span?
+    definition of a span?
     \begin{answer}
       For a box we take a sequence of vectors (as described
-      in the remark, the order in which the vectors are taken matters),
+      in the remark, the order of the vectors matters),
       while for a span we take a set of vectors.
       Also, for a box subset of $\Re^n$ there must be $n$ vectors; 
       of course for a span there can be any number of vectors.
       Finally, for a box the coefficients $t_1$,~\ldots, $t_n$
-      are restricted to the interval $[0..1]$, while for a 
+      are in the interval $[0..1]$, while for a 
       span the coefficients are free to range over all of $\Re$. 
     \end{answer}
   \recommended \item 
@@ -466,22 +473,22 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
       \end{tabular}
     \end{center}
     \begin{answer}
-      That picture is drawn to mislead.
+      We have drawn that picture to mislead.
       The picture on the left is not the box formed by two vectors.
       If we slide it to the origin then it becomes the box formed by
       this sequence.
       \begin{equation*}
         \sequence{
-          \colvec{0 \\ 1},
-          \colvec{2 \\ 0}
+          \colvec[r]{0 \\ 1},
+          \colvec[r]{2 \\ 0}
        }
       \end{equation*}
       Then the image under the action of the matrix is the box formed
       by this sequence.
       \begin{equation*}
         \sequence{
-          \colvec{1 \\ 1},
-          \colvec{4 \\ 0}
+          \colvec[r]{1 \\ 1},
+          \colvec[r]{4 \\ 0}
          }
       \end{equation*}
       which has an area of $4$.
@@ -525,10 +532,10 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
     \begin{answer}
       No, for instance the determinant of 
       \begin{equation*}
-        T=\begin{pmatrix}
+        T=\begin{mat}[r]
           2  &0  \\
           0  &1/2
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       is \( 1 \) so it preserves areas, but the vector \( T\vec{e}_1 \)
       has length \( 2 \).  
@@ -548,21 +555,21 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
     \begin{answer}
       Two of the three sides of the triangle are formed by these vectors.
       \begin{equation*}
-        \colvec{2 \\ 2 \\ 2}-\colvec{1 \\ 2 \\ 1}=\colvec{1 \\ 0 \\ 1}
+        \colvec[r]{2 \\ 2 \\ 2}-\colvec[r]{1 \\ 2 \\ 1}=\colvec[r]{1 \\ 0 \\ 1}
         \qquad
-        \colvec{3 \\ -1 \\ 4}-\colvec{1 \\ 2 \\ 1}=\colvec{2 \\ -3 \\ 3}
+        \colvec[r]{3 \\ -1 \\ 4}-\colvec[r]{1 \\ 2 \\ 1}=\colvec[r]{2 \\ -3 \\ 3}
       \end{equation*}
       One way to find the area of this triangle is to produce a length-one
       vector orthogonal to these two.
       From these two relations
       \begin{equation*}
-        \colvec{1 \\ 0 \\ 1}
+        \colvec[r]{1 \\ 0 \\ 1}
         \cdot\colvec{x \\ y \\ z}
-        =\colvec{0 \\ 0 \\ 0}
+        =\colvec[r]{0 \\ 0 \\ 0}
         \qquad
-        \colvec{2 \\ -3 \\ 3}
+        \colvec[r]{2 \\ -3 \\ 3}
         \cdot\colvec{x \\ y \\ z}
-        =\colvec{0 \\ 0 \\ 0}
+        =\colvec[r]{0 \\ 0 \\ 0}
       \end{equation*}
       we get a system
       \begin{equation*}
@@ -578,11 +585,11 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
       \end{equation*}
       with this solution set.
       \begin{equation*}
-        \set{\colvec{-1 \\ 1/3 \\ 1}z\suchthat z\in\Re},
+        \set{\colvec[r]{-1 \\ 1/3 \\ 1}z\suchthat z\in\Re},
       \end{equation*}
       A solution of length one is this.
       \begin{equation*}
-        \frac{1}{\sqrt{19/9}}\colvec{-1 \\ 1/3 \\ 1}
+        \frac{1}{\sqrt{19/9}}\colvec[r]{-1 \\ 1/3 \\ 1}
       \end{equation*}
       Thus the area of the triangle is the absolute value of
       this determinant.
@@ -643,7 +650,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
           as the determinant \( \deter{TS} \) changes sign on
           the row swap, we'll then have \( \deter{\hat{T}S}=-\deter{TS} \),
           and so \( d(\hat{T})=-d(T) \)). 
-          This ckeck runs just like the one for the first property.
+          This check runs just like the one for the first property.
 
           For the third property, we need only show that performing
           $T\smash[b]{\grstep{k\rho_i}}\hat{T}$ 
@@ -688,10 +695,10 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
 
       The converse does not hold; here is an example.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           3  &1  \\
           2  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \item 
@@ -713,7 +720,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
       has \( c^3 \) times as many cubic units of volume.  
     \end{answer}
   \recommended \item 
-    Matrices $H$ and $G$ are said to be 
+    We say that matrices $H$ and $G$ are 
     \definend{similar}\index{similar}\index{matrix!similar} 
     if there is a nonsingular matrix $P$ such that $H=P^{-1}GP$
     (we will study this relation in Chapter Five).
@@ -731,7 +738,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
     \begin{center}
       \parbox{.75in}{\hbox{}\hfil\includegraphics{ch4.45}\hfil\hbox{}}
       \qquad
-      \( \rep{\vec{v}}{\stdbasis_2}=\colvec{+3 \\ +2} \)
+      \( \rep{\vec{v}}{\stdbasis_2}=\colvec[r]{+3 \\ +2} \)
     \end{center}
     Moving counterclockwise around the origin, we cycle thru four regions:
     {\scriptsize
@@ -745,7 +752,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
     \end{equation*} }
     Using this basis
     \begin{center}
-      \( B=\sequence{\colvec{0 \\ 1},\colvec{-1 \\ 0}} \)
+      \( B=\sequence{\colvec[r]{0 \\ 1},\colvec[r]{-1 \\ 0}} \)
       \qquad
       \parbox{.75in}{\hbox{}\hfil\includegraphics{ch4.46}\hfil\hbox{}}
     \end{center}
@@ -770,14 +777,14 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
         \partsitem The new basis is the old basis rotated by \( \pi/4 \).
         \partsitem 
           $
-             \sequence{\colvec{-1 \\ 0},
-                       \colvec{0 \\ -1}}
+             \sequence{\colvec[r]{-1 \\ 0},
+                       \colvec[r]{0 \\ -1}}
           $, $
-             \sequence{\colvec{0 \\ -1},
-                       \colvec{1 \\ 0}}
+             \sequence{\colvec[r]{0 \\ -1},
+                       \colvec[r]{1 \\ 0}}
           $
         \partsitem In each case the determinant is \( +1 \) 
-          (these bases are said to
+          (we say that these bases
           have \definend{positive orientation}).
         \partsitem Because only one sign can change at a time, the only other
           cycle possible is
@@ -790,7 +797,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
              \;\longrightarrow\cdots\,.
           \end{equation*}
           Here each associated determinant is \( -1 \)
-          (such bases are said to have a \definend{negative orientation}).
+          (we say that such bases have a \definend{negative orientation}).
         \partsitem There is one positively oriented basis \( \sequence{(1)} \)
           and one negatively oriented basis \( \sequence{(-1)} \).
         \partsitem There are \( 48 \) bases (\( 6 \) half-axis choices are
@@ -805,8 +812,9 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
            \includegraphics{ch4.48}
           \end{center}
           In \( \Re^3 \) positive orientation is sometimes called 
-          `right hand orientation' because if a person's right hand is placed
-          with the fingers curling
+          `right hand orientation' because if a person places their
+          right hand
+          with their fingers curling
           from \( \vec{e}_1 \) to \( \vec{e}_2 \) then the 
           thumb will point with \( \vec{e}_3 \).
       \end{exparts}  
@@ -920,7 +928,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
       \end{equation*}
       As in the proof that the determinant of a matrix 
       equals the determinant 
-      of its transpose, we commute the $s$'s so they are listed by ascending
+      of its transpose, we commute the $s$'s to list them by ascending
       row number instead of by ascending column number
       (and we substitute $\sgn(\phi^{-1})$ for $\sgn(\phi)$).
       \begin{equation*}
@@ -1008,8 +1016,8 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
         That only happens (assuming that $(x_2,y_3)\neq (x_3,y_3)$)
         if  $(x,y)$ lies on the line through the other two. 
        \partsitem \answerasgiven %
-        The altitude through $(x_1,y_1)$ of a triangle with vertices
-        $(x_1,y_1)$ $(x_2,y_2)$ and $(x_3,y_3)$ is found in the usual
+        We find the altitude through $(x_1,y_1)$ of a triangle with vertices
+        $(x_1,y_1)$ $(x_2,y_2)$ and $(x_3,y_3)$ in the usual
         way from the normal form of the above:
         \begin{equation*}
           \frac{1}{\sqrt{(x_2-x_3)^2+(y_2-y_3)^2}}
@@ -1029,7 +1037,7 @@ $\det(AB)$ does equal $\det(A)\cdot \det(B)$.
           \end{vmatrix}.
         \end{equation*}
         This exposition reveals the \textit{modus operandi} more clearly
-        than the usual proof of showing a collection of terms to be identitical
+        than the usual proof of showing a collection of terms to be identical
         with the determinant.
        \partsitem  \answerasgiven %
         Let

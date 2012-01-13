@@ -14,7 +14,7 @@ input graph
 
 % GLOBAL Values
 color lightgray;
-  lightgray=.70white;
+  lightgray=.80white;
 color medgray;
   medgray=.60white;
 color darkgray;
