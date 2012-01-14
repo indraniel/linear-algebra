@@ -65,13 +65,12 @@ and subtract the area of each subregion.
     \end{array}$
     \hfil\hbox{}}
 \end{center}
-
 The fact that the area equals the value of the determinant
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     x_1  &x_2  \\
     y_1  &y_2
-  \end{vmatrix}
+  \end{vmat}
   =x_1y_2-x_2y_1
 \end{equation*}
 is no coincidence.
@@ -96,13 +95,13 @@ original region in shade for comparison.)
 % than the shaded region enclosed by $\vec{v}$ and~$\vec{w}$.
 % That is,
 % \( \size (k\vec{v},\vec{w})=k\cdot\size (\vec{v},\vec{w}) \) and
-We can reasonably expect of a size measure that
+That is, we can reasonably expect of a size measure that
 $\size (\dots,k\vec{v},\dots)=k\cdot\size (\dots,\vec{v},\dots)$.
 Of course, this property is familiar from 
 the definition of determinants.
 
 Another property of determinants that should apply to any 
-function that gives the size of the box is that
+function giving the size of a box is that
 it is unaffected by combining rows.
 Here are before-combining and 
 after-combining boxes (the scalar shown is $k=0.35$). 
@@ -115,20 +114,20 @@ same base and the same height and hence the same area.
   \qquad
   \includegraphics{ch4.35}
 \end{center}   
-(As above, on the right the 
-original region is in shade.)
-So we can reasonably expect that  
+(As before, the figure on the right has the 
+original region in shade for comparison.)
+So we expect that  
 $\size (\dots,\vec{v},\dots,\vec{w},\dots)
-=\size (\dots,\vec{v},\dots,k\vec{v}+\vec{w},\dots)$,
-again just a restatement of a determinant postulate.
+=\size (\dots,\vec{v},\dots,k\vec{v}+\vec{w},\dots)$;
+again, a restatement of a determinant postulate.
 
-This picture shows that \( \size (\vec{e}_1,\vec{e}_2)=1 \)
+Lastly, we expect that \( \size (\vec{e}_1,\vec{e}_2)=1 \)
 \begin{center}
   \includegraphics{ch4.36}
 \end{center}
 and we naturally extend that to any number of dimensions
 $\size(\vec{e}_1,\dots,\vec{e}_n)=1$.
-Again, that is a determinant property.
+% Again, that is a determinant property.
 
 Because property~(2) of determinants is 
 redundant (as remarked following the definition) 
@@ -136,9 +135,9 @@ we have that the properties of the determinant function are reasonable
 to expect of a function that gives the size of boxes.
 The prior section starts with these properties and shows
 that the determinant exists and is unique, so we know  
-that these postulates are consistent and sufficient
-(that is, we do not need any more postulates).
-So we will
+that these postulates are consistent and 
+that we do not need any more postulates.
+Thus, we will
 interpret \( \det(\vec{v}_1,\dots,\vec{v}_n) \) as the
 size of the box formed by the vectors.
 % (\textit{Comment.}
@@ -149,18 +148,18 @@ size of the box formed by the vectors.
 Although property~(2) of the definition of
 determinants is redundant, it raises an important point.
 Consider these two.
-\begin{center}
+\begin{center} \small
   \begin{tabular}{c@{\hspace*{8em}}c}
     \includegraphics{ch4.37}  
       &\includegraphics{ch4.38}  \\[.25ex]
-    \ $\begin{vmatrix}
+    \ $\begin{vmat}[r]
         4  &1   \\
         2  &3
-      \end{vmatrix}=10$
-      &\ $\begin{vmatrix}
+      \end{vmat}=10$
+      &\ $\begin{vmat}[r]
           1  &4   \\
           3  &2
-        \end{vmatrix}=-10$
+        \end{vmat}=-10$
   \end{tabular}
 \end{center}
 Swapping changes the sign.
@@ -186,27 +185,27 @@ a matrix with those vectors as columns.
 \end{definition}
 
 \begin{example} \label{ex:VolParPiped}
-By the high school geometry formula that takes the area of the
+By the formula that takes the area of the
 base times the height, the volume of this 
 parallelepiped is $12$.
-That agrees with the determinant formula.
+That agrees with the determinant.
 \begin{center}
    \parbox{2in}{\hbox{}\hfil\includegraphics{ch4.39}\hfil\hbox{}}  
   \quad
-  $\begin{vmatrix}
+  $\begin{vmat}[r]
      2 &0 &-1\\
      0 &3 &0 \\
      2 &1 &1
-  \end{vmatrix}=12$
+  \end{vmat}=12$
 \end{center}
 We can also compute the volume
 as the absolute value of this determinant. 
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}[r]
      0  &2 &0 \\
      3  &0 &3 \\
      1  &2 &1
-  \end{vmatrix}=-12  
+  \end{vmat}=-12  
 \end{equation*}
 \end{example}
 
@@ -253,24 +252,25 @@ if $\deter{T}=0$ then $\deter{TS}=0$.
 
 Now consider the case that $\deter{T}\neq 0$, that $T$ is nonsingular. 
 Recall that any nonsingular matrix factors into a product 
-of elementary matrices, so that $TS=E_1E_2\cdots E_rS$.
+of elementary matrices $T=E_1E_2\cdots E_r$.
 To finish this argument 
-we will verify that if $E$ is an elementary matrix then
-\( \deter{ES}=\deter{E}\cdot\deter{S} \). 
+we will verify that 
+\( \deter{ES}=\deter{E}\cdot\deter{S} \)
+for all matrices~$S$ and elementary matrices~$E$. 
 The result will then follow because 
 $\deter{TS}=\deter{E_1\cdots E_rS}=\deter{E_1}\cdots\deter{E_r}\cdot\deter{S}
   =\deter{E_1\cdots E_r}\cdot\deter{S}=\deter{T}\cdot\deter{S}$.
 
 There are three kinds of elementary matrix. 
-We will cover the $M_i(k)$ case and
-the $E=P_{i,j}=-1$ and $E=C_{i,j}(k)$ checks are similar.
-If the elementary matrix $E$ is $M_i(k)$ 
-then $M_i(k)S$ equals $S$ except that row~$i$ is multiplied by $k$.
+We will cover the $M_i(k)$ case; 
+the $P_{i,j}$ and $C_{i,j}(k)$ checks are similar.
+We have that $M_i(k)S$ equals $S$ except that row~$i$ is multiplied by $k$.
 The third property of determinant functions
 then gives that $\deter{M_i(k)S}=k\cdot\deter{S}$.
 But $\deter{M_i(k)}=k$, again by the third property because
 $M_i(k)$ is derived from the identity by multiplication of row~$i$ by
-$k$, and so \( \deter{ES}=\deter{E}\cdot\deter{S} \) holds for
+$k$. 
+Thus \( \deter{ES}=\deter{E}\cdot\deter{S} \) holds for
 $E=M_i(k)$.
 \end{proof}
 
@@ -288,19 +288,19 @@ will double sizes of boxes, e.g., from this
 \begin{center}
     \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.40}\hfil\hbox{}}  
     \quad
-    $\begin{vmatrix}
+    $\begin{vmat}[r]
       2  &1  \\
       1  &2
-    \end{vmatrix}=3$
+    \end{vmat}=3$
 \end{center}
 to this
 \begin{center}
     \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.41}\hfil\hbox{}}  
     \quad
-    $\begin{vmatrix}
+    $\begin{vmat}[r]
         3  &3  \\
        -4  &-2
-     \end{vmatrix}=6$
+     \end{vmat}=6$
 \end{center}
 \end{example}
 
@@ -323,7 +323,7 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
 
 \begin{exercises}
   \item 
-    Find the volume of the region formed.
+    Find the volume of the region defined by the vectors.
     \begin{exparts}
       \partsitem $\sequence{\colvec[r]{1 \\ 3},\colvec[r]{-1 \\ 4}}$
       \partsitem $\sequence{\colvec[r]{2 \\ 1 \\ 0},\colvec[r]{3 \\ -2 \\ 4},
@@ -383,10 +383,10 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
       and now the absolute value of this determinant is 
       easily computed as $3$.
       \begin{equation*}
-        \begin{vmatrix}
+        \begin{vmat}[r]
           3  &2  \\
           0  &1
-        \end{vmatrix}=3
+        \end{vmat}=3
       \end{equation*}
      \end{answer}
   \recommended \item 
@@ -521,10 +521,10 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
     \( \theta \) radians.
     By what factor does \( T \) change sizes?
     \begin{answer}
-       \(\begin{vmatrix}
+       \(\begin{vmat}
                 \cos\theta  &-\sin\theta  \\
                 \sin\theta  &\cos\theta
-              \end{vmatrix}=1 \)  
+              \end{vmat}=1 \)  
     \end{answer}
   \recommended \item
     Must a transformation \( \map{t}{\Re^2}{\Re^2} \) that preserves areas
@@ -594,11 +594,11 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
       Thus the area of the triangle is the absolute value of
       this determinant.
       \begin{equation*}
-        \begin{vmatrix}
+        \begin{vmat}[r]
              1  &2   &-3/\sqrt{19}   \\
              0  &-3  &1/\sqrt{19}   \\
              1  &3   &3/\sqrt{19}
-        \end{vmatrix}
+        \end{vmat}
         =-12/\sqrt{19}
       \end{equation*} 
     \end{answer}
@@ -965,22 +965,22 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
         the equation of a line in \( \Re^2 \) thru
         \( (x_2,y_2) \) and \( (x_3,y_3) \).
         \begin{equation*}
-          \begin{vmatrix}
+          \begin{vmat}
             x    &x_2 &x_3  \\
             y    &y_2 &y_3  \\
             1    &1   &1
-          \end{vmatrix}=0
+          \end{vmat}=0
         \end{equation*}
       \partsitem \cite{Monthly55p249}
         Prove that the area of a triangle with vertices \( (x_1,y_1) \),
         \( (x_2,y_2) \), and \( (x_3,y_3) \) is
         \begin{equation*}
           \frac{1}{2}
-          \begin{vmatrix}
+          \begin{vmat}
             x_1  &x_2 &x_3  \\
             y_1  &y_2 &y_3  \\
             1    &1   &1
-          \end{vmatrix}.
+          \end{vmat}.
         \end{equation*}
       \partsitem \cite{MathMag73p286}
         Prove that the area of a triangle with vertices at \( (x_1,y_1) \),
@@ -1021,20 +1021,20 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
         way from the normal form of the above:
         \begin{equation*}
           \frac{1}{\sqrt{(x_2-x_3)^2+(y_2-y_3)^2}}
-          \begin{vmatrix}
+          \begin{vmat}
             x_1  &x_2  &x_3  \\
             y_1  &y_2  &y_3  \\
             1    &1    &1
-          \end{vmatrix}.
+          \end{vmat}.
         \end{equation*}
         Another step shows the area of the triangle to be
         \begin{equation*}
           \frac{1}{2}
-          \begin{vmatrix}
+          \begin{vmat}
             x_1  &x_2  &x_3  \\
             y_1  &y_2  &y_3  \\
             1    &1    &1
-          \end{vmatrix}.
+          \end{vmat}.
         \end{equation*}
         This exposition reveals the \textit{modus operandi} more clearly
         than the usual proof of showing a collection of terms to be identical
@@ -1043,11 +1043,11 @@ $\det(AB)$ equals $\det(A)\cdot \det(B)$.
         Let
         \begin{equation*}
           D=
-          \begin{vmatrix}
+          \begin{vmat}
             x_1  &x_2  &x_3  \\
             y_1  &y_2  &y_3  \\
             1    &1    &1
-          \end{vmatrix}
+          \end{vmat}
         \end{equation*}
         then the area of the triangle is $(1/2)\deter{D}$.
         Now if the coordinates are all integers, then $D$ is an integer.
