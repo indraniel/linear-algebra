@@ -3,14 +3,14 @@
 %  2001-Jun-12
 \topic{Cramer's Rule}
 \index{Cramer's rule|(}
-We have introduced determinant functions algebraically by looking
-for a formula to decide whether a matrix is nonsingular.
-After that introduction we saw a geometric interpretation, 
-that the determinant function
-gives the size of the box with sides formed by the columns of the matrix.
-This Topic makes a connection between the two views.
+% We have introduced determinant functions algebraically by looking
+% for a formula to decide whether a matrix is nonsingular.
+% After that introduction we saw a geometric interpretation, 
+% that the determinant function
+% gives the size of the box with sides formed by the columns of the matrix.
+% Here we make a connection between the two views.
 
-First, a linear system
+We have seen that a linear system
 \begin{equation*}
   \begin{linsys}{2}
      x_1  &+  &2x_2  &=  &6  \\
@@ -21,23 +21,22 @@ is equivalent to a linear relationship among vectors.
 \begin{equation*}
   x_1\cdot\colvec{1 \\ 3}+x_2\cdot\colvec{2 \\ 1}=\colvec{6 \\ 8}
 \end{equation*}
-The picture below shows a parallelogram with sides formed from
-$\binom{1}{3}$ and $\binom{2}{1}$ nested inside a parallelogram 
+This pictures that vector equation.
+A parallelogram with sides formed from
+$\binom{1}{3}$ and $\binom{2}{1}$ is nested inside a parallelogram 
 with sides formed from $x_1\binom{1}{3}$ and $x_2\binom{2}{1}$.
 \begin{center}
   \includegraphics{ch4.1}
 \end{center}
-So even without determinants
-we can state the algebraic issue that opened this book,
-finding the solution of a linear system,
+That is,
+we can restate the algebraic question of
+finding the solution of a linear system
 in geometric terms:~by 
 what factors $x_1$ and $x_2$ must we dilate the vectors to expand the small 
-parallegram to fill the larger one?
+parallelogram so that it will fill the larger one?
 
-However, by employing the geometric significance of determinants
-we can get something that is not just a restatement, but also
-gives us a new insight and sometimes allows us to compute 
-answers quickly.
+We can apply the geometric significance of determinants
+to that picture to get a new formula.
 Compare the sizes of these shaded boxes.
 \begin{center}
    \includegraphics{ch4.2}
@@ -46,88 +45,89 @@ Compare the sizes of these shaded boxes.
    \hfil
    \includegraphics{ch4.4}
 \end{center}
-The second is formed from $x_1\binom{1}{3}$ and $\binom{2}{1}$, and
+The second is defined by the vectors $x_1\binom{1}{3}$ and $\binom{2}{1}$, and
 one of the properties of the size function\Dash the determinant\Dash is 
-that its size is therefore \( x_1 \) times the size of the 
+that therefore the size of the second box is \( x_1 \) times the size of the 
 first box.
-Since the third box is formed from 
+Since the third box is defined by the vector
 $x_1\binom{1}{3}+x_2\binom{2}{1}=\binom{6}{8}$ 
-and $\binom{2}{1}$,
-and the determinant is unchanged by adding $x_2$ 
+and the vector $\binom{2}{1}$,
+and since the determinant does not change when we  add $x_2$ 
 times the second column to the first column,
 the size of the third box equals that of the second.
-We have this.
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}[r]
      6  &2  \\
      8  &1
-  \end{vmatrix}
+  \end{vmat}
   =
-  \begin{vmatrix}
+  \begin{vmat}
      x_1\cdot 1  &2  \\
      x_1\cdot 3  &1
-  \end{vmatrix}
+  \end{vmat}
   =
-  x_1\cdot \begin{vmatrix}
+  x_1\cdot \begin{vmat}[r]
      1  &2  \\
      3  &1
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 Solving gives the value of one of the variables.
 \begin{equation*}
   x_1=
-  \frac{\begin{vmatrix}
+  \frac{\begin{vmat}[r]
      6  &2  \\
      8  &1
-  \end{vmatrix} }{
-  \begin{vmatrix}
+  \end{vmat} }{
+  \begin{vmat}[r]
      1  &2  \\
      3  &1
-  \end{vmatrix}  }
+  \end{vmat}  }
   =\frac{-10}{-5}=2
 \end{equation*}
 
-The theorem that generalizes this example, \definend{Cramer's Rule}%
+The generalization of this example is \definend{Cramer's Rule}:%
 \index{determinant!Cramer's rule}%
-\index{linear equation!solutions of!Cramer's rule},
-is:~if \( \deter{A}\neq 0 \) then the system \( A\vec{x}=\vec{b} \) has the
+\index{linear equation!solutions of!Cramer's rule}
+if \( \deter{A}\neq 0 \) then the system \( A\vec{x}=\vec{b} \) has the
 unique solution
 $
    x_i=\deter{B_i}/\deter{A}
 $
 where the matrix $B_i$ is formed from $A$ by replacing column~$i$ 
 with the vector \( \vec{b} \).
-\nearbyexercise{ex:CramerRule} asks for a proof.
+The proof is \nearbyexercise{ex:CramerRule}.
 
 For instance, to solve this system for \( x_2 \)
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &0  &4  \\
     2  &1  &-1 \\
     1  &0  &1
-  \end{pmatrix}
+  \end{mat}
   \colvec{x_1 \\ x_2 \\ x_3}
-  =\colvec{2 \\ 1 \\ -1}
+  =\colvec[r]{2 \\ 1 \\ -1}
 \end{equation*}
 we do this computation.
 \begin{equation*}
   x_2=
-  \frac{ \begin{vmatrix}
+  \frac{ \begin{vmat}[r]
            1  &2  &4  \\
            2  &1  &-1 \\
            1  &-1 &1
-         \end{vmatrix}  }{
-         \begin{vmatrix}
+         \end{vmat}  }{
+         \begin{vmat}[r]
            1  &0  &4  \\
            2  &1  &-1 \\
            1  &0  &1
-         \end{vmatrix}  }
+         \end{vmat}  }
   =\frac{-18}{-3}
 \end{equation*}
 
 Cramer's Rule allows us to solve 
-many two equations/two unknowns systems by eye.
-It is also sometimes used for three equations/three unknowns systems.
+simple two equations/two unknowns systems by eye
+(they must be simple in that we can mentally compute with the numbers
+in the system).
+With practice a person can also do simple equations/three unknowns systems.
 But computing large determinants takes a long time, so solving
 large systems by Cramer's Rule is not practical.
 
@@ -149,25 +149,25 @@ large systems by Cramer's Rule is not practical.
         \partsitem 
           \begin{equation*}
             x=
-             \frac{ \begin{vmatrix}
+             \frac{ \begin{vmat}[r]
                        4  &-1  \\
                       -7  &2   
-                    \end{vmatrix}  }{
-                    \begin{vmatrix}
+                    \end{vmat}  }{
+                    \begin{vmat}[r]
                        1  &-1  \\
                       -1  &2 
-                    \end{vmatrix}  }
+                    \end{vmat}  }
             =\frac{1}{1}=1
             \qquad
             y=
-             \frac{ \begin{vmatrix}
+             \frac{ \begin{vmat}[r]
                        1  &4  \\
                       -1  &-7   
-                    \end{vmatrix}  }{
-                    \begin{vmatrix}
+                    \end{vmat}  }{
+                    \begin{vmat}[r]
                        1  &-1  \\
                       -1  &2 
-                    \end{vmatrix}  }
+                    \end{vmat}  }
             =\frac{-3}{1}=-3
           \end{equation*}
         \partsitem $x=2$, $y=2$
@@ -240,13 +240,14 @@ large systems by Cramer's Rule is not practical.
     solutions and one with infinitely many?
     \begin{answer}
       Of course, singular systems have \( \deter{A} \) equal to zero, but
-      the infinitely many solutions case is characterized by the fact that
+      we can characterize 
+      the infinitely many solutions case is by the fact that
       all of the \( \deter{B_i} \) are zero as well.  
     \end{answer}
   \item 
     The first picture in this Topic (the one that doesn't use determinants)
     shows a unique solution case.
-    Produce a similar picture for the case of infintely many solutions,
+    Produce a similar picture for the case of infinitely many solutions,
     and the case of no solutions.
     \begin{answer}
       We can consider the two nonsingular cases together with this
@@ -261,7 +262,7 @@ large systems by Cramer's Rule is not practical.
       value for $c$ yields no solutions.  
       The corresponding vector equation
       \begin{equation*}
-        x_1\cdot\colvec{1 \\ 1}+x_2\cdot\colvec{2 \\ 2}=\colvec{6 \\ c}
+        x_1\cdot\colvec[r]{1 \\ 1}+x_2\cdot\colvec[r]{2 \\ 2}=\colvec[r]{6 \\ c}
       \end{equation*}
       gives a picture of two overlapping vectors.
       Both lie on the line $y=x$.

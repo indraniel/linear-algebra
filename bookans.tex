@@ -22327,18 +22327,43 @@ octave:6> gplot z
     
 \end{ans}
 \begin{ans}{Four.I.3.27}
+      \cite{SchmidtSO}
+      We will show that $P\trans{P}=I$; the $\trans{P}P=I$ argument is similar.
+      The $i,j$ entry of $P\trans{P}$ is the sum of terms of the form
+      $p_{i,k}q_{k,j}$ where the entries of $\trans{P}$ are denoted with $q$'s,
+      that is, $q_{k,j}=p_{j,k}$.
+      Thus the $i,j$ entry of $P\trans{P}$ is the sum
+      \(
+        \sum_{k=1}^n p_{i,k}p_{j,k}
+      \).
+      But $p_{i,k}$ is usually $0$, and so $P_{i,k}P_{j,k}$ is usually $0$.
+      The only time $P_{i,k}$ is nonzero is when it is $1$,
+      but then there are no other $i^\prime\neq i$ such that $P_{i^\prime,k}$
+      is nonzero ($i$ is the only row with a $1$ in column~$k$).
+      In other words,
+      \begin{equation*}
+        \sum_{k=1}^n p_{i,k}p_{j,k}=
+        \begin{cases}
+          1  &i=j  \\
+          0  &\text{otherwise}
+        \end{cases}
+      \end{equation*}
+      and this is exactly the formula for the entries of the identity matrix.
+    
+\end{ans}
+\begin{ans}{Four.I.3.28}
       In
       \( \deter{A}=\deter{\trans{A}}=\deter{-A}=(-1)^n\deter{A} \)
       the exponent $n$ must be even.
     
 \end{ans}
-\begin{ans}{Four.I.3.28}
+\begin{ans}{Four.I.3.29}
       Showing that no placement of three zeros suffices is routine.
       Four zeroes does suffice; put them all in the same
       row or column.
     
 \end{ans}
-\begin{ans}{Four.I.3.29}
+\begin{ans}{Four.I.3.30}
       The $n=3$ case shows what to do.
       The row combination operations of
       $-x_1\rho_2+\rho_3$ and $-x_1\rho_1+\rho_2$
@@ -22375,7 +22400,7 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.I.3.30}
+\begin{ans}{Four.I.3.31}
       Let \( T \) be \( \nbyn{n} \),
       let \( J \) be \( \nbyn{p} \),
       and let \( K \) be \( \nbyn{q} \).
@@ -22411,7 +22436,7 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.I.3.31}
+\begin{ans}{Four.I.3.32}
       The $n=3$ case shows what happens.
       \begin{equation*}
         \deter{T-rI}
@@ -22434,7 +22459,7 @@ octave:6> gplot z
       A polynomial of degree \( n \) has at most \( n \) roots.
     
 \end{ans}
-\begin{ans}{Four.I.3.32}
+\begin{ans}{Four.I.3.33}
       \answerasgiven
       When two rows of a determinant are interchanged, the sign of the
       determinant is changed.
@@ -22445,7 +22470,7 @@ octave:6> gplot z
       which sums to zero.
     
 \end{ans}
-\begin{ans}{Four.I.3.33}
+\begin{ans}{Four.I.3.34}
       \answerasgiven
       When the elements of any column are subtracted from the elements of
       each of the other two, the elements in two of the columns of the derived
@@ -22470,7 +22495,7 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.I.3.34}
+\begin{ans}{Four.I.3.35}
       \answerasgiven
       Let
       \begin{equation*}
@@ -22514,7 +22539,7 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.I.3.35}
+\begin{ans}{Four.I.3.36}
       \answerasgiven
       Denote by \( D_n \) the determinant in question and by \( a_{i,j} \)
       the element in the \( i \)-th row and \( j \)-th column.
@@ -23601,7 +23626,7 @@ octave:6> gplot z
           0  &0  &1
         \end{vmat}=1
       \end{equation*}
-      dosn't equal the result of
+      doesn't equal the result of
       expanding down the diagonal.
       \begin{equation*}
         1\cdot (+1)\begin{vmat}[r]
@@ -23874,25 +23899,25 @@ octave:6> gplot z
         \partsitem
           \begin{equation*}
             x=
-             \frac{ \begin{vmatrix}
+             \frac{ \begin{vmat}[r]
                        4  &-1  \\
                       -7  &2
-                    \end{vmatrix}  }{
-                    \begin{vmatrix}
+                    \end{vmat}  }{
+                    \begin{vmat}[r]
                        1  &-1  \\
                       -1  &2
-                    \end{vmatrix}  }
+                    \end{vmat}  }
             =\frac{1}{1}=1
             \qquad
             y=
-             \frac{ \begin{vmatrix}
+             \frac{ \begin{vmat}[r]
                        1  &4  \\
                       -1  &-7
-                    \end{vmatrix}  }{
-                    \begin{vmatrix}
+                    \end{vmat}  }{
+                    \begin{vmat}[r]
                        1  &-1  \\
                       -1  &2
-                    \end{vmatrix}  }
+                    \end{vmat}  }
             =\frac{-3}{1}=-3
           \end{equation*}
         \partsitem $x=2$, $y=2$
@@ -23943,7 +23968,8 @@ octave:6> gplot z
 \end{ans}
 \begin{ans}{6}
       Of course, singular systems have \( \deter{A} \) equal to zero, but
-      the infinitely many solutions case is characterized by the fact that
+      we can characterize
+      the infinitely many solutions case is by the fact that
       all of the \( \deter{B_i} \) are zero as well.
     
 \end{ans}
@@ -23960,7 +23986,7 @@ octave:6> gplot z
       value for $c$ yields no solutions.
       The corresponding vector equation
       \begin{equation*}
-        x_1\cdot\colvec{1 \\ 1}+x_2\cdot\colvec{2 \\ 2}=\colvec{6 \\ c}
+        x_1\cdot\colvec[r]{1 \\ 1}+x_2\cdot\colvec[r]{2 \\ 2}=\colvec[r]{6 \\ c}
       \end{equation*}
       gives a picture of two overlapping vectors.
       Both lie on the line $y=x$.
