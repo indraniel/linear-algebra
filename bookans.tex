@@ -23998,18 +23998,18 @@ octave:6> gplot z
 \begin{ans}{1}
       \begin{exparts}
         \partsitem Under Octave, \texttt{rank(rand(5))} finds the
-          rank of a $\nbyn{5}$ matrix whose entries are (uniformily
+          rank of a $\nbyn{5}$ matrix whose entries are (uniformly
           distributed) in the interval $[0..1)$.
           This loop which runs the test $5000$ times
-\begin{computercode}
+\begin{lstlisting}
 octave:1> for i=1:5000
 > if rank(rand(5))<5 printf("That's one."); endif
 > endfor
-\end{computercode}
+\end{lstlisting}
           produces (after a few seconds) returns the prompt, with no output.
 
           The Octave script
-\begin{computercode}
+\begin{lstlisting}
 function elapsed_time = detspeed (size)
   a=rand(size);
   tic();
@@ -24018,9 +24018,9 @@ function elapsed_time = detspeed (size)
   endfor
   elapsed_time=toc();
 endfunction
-\end{computercode}
+\end{lstlisting}
           lead to this session (obviously, your times will vary).
-\begin{computercode}
+\begin{lstlisting}
 octave:1> detspeed(5)
 ans = 0.019505
 octave:2> detspeed(15)
@@ -24029,7 +24029,7 @@ octave:3> detspeed(25)
 ans = 0.0097431
 octave:4> detspeed(35)
 ans = 0.017398
-\end{computercode}
+\end{lstlisting}
           \partsitem Here is the data (rounded a bit), and the graph.
             \begin{center}
               \begin{tabular}{r|ccccccccc}
@@ -24060,8 +24060,7 @@ ans = 0.017398
     
 \end{ans}
 \begin{ans}{2}
-       The number of operations depends on exactly how the operations
-       are carried out.
+       The number of operations depends on exactly how we do the operations.
        \begin{exparts}
          \partsitem The determinant is $-11$.
            To row reduce takes a single row combination
@@ -24086,20 +24085,6 @@ ans = 0.017398
     
 \end{ans}
 \begin{ans}{4}
-      This is a simple one.
-\begin{computercode}
-DO 5 ROW=1, N
-   PIVINV=1.0/A(ROW,ROW)
-   DO 10 I=ROW+1, N
-      DO 20 J=I, N
-         A(I,J)=A(I,J)-PIVINV*A(ROW,J)
-      20 CONTINUE
-   10 CONTINUE
-5 CONTINUE
-\end{computercode}
-    
-\end{ans}
-\begin{ans}{5}
       Yes, because the $J$ is in the innermost loop.
     
 \end{ans}
