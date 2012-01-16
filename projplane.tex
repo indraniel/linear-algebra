@@ -4,26 +4,22 @@
 \topic{Projective Geometry}
 \index{Projective Geometry|(}
 There are geometries other than the familiar Euclidean one.
-One such geometry arose in art, where it was observed
+One such geometry arose in art, where people observed
 that what a viewer sees is not necessarily what is there.
 This is Leonardo da Vinci's 
 \emph{The Last Supper}.\index{da Vinci, Leonardo}
+% From http://upload.wikimedia.org/wikipedia/commons/7/77/DaVinci_LastSupper_high_res_2_nowatmrk.jpg
 \begin{center} 
-  \scannedpicture{lastsup}
+  \includegraphics[width=.5\textwidth]{LastSupper.jpg}
 \end{center}
-What is there in the room, 
-for instance where the ceiling meets the left and right walls,
-are lines that are parallel. 
-However, what a viewer sees
-is lines that, if extended, would intersect.
-The intersection point is called the \emph{vanishing point}.
-\index{vanishing point}\index{projection!central!vanishing point}%
-This aspect of perspective is also familiar as the image of a long stretch of 
+Look at where the ceiling meets the left and right walls.
+In the room those lines are parallel but 
+as viewers we see lines that, if extended, would intersect.
+The intersection point is the \emph{vanishing point}.\index{vanishing point}\index{projection!central!vanishing point}
+This aspect of perspective is familiar as an image of 
 railroad tracks that appear to converge at the horizon.
 
-%So the artist is trying to depict the room not as it is, but instead 
-%as it appears.
-To depict the room, da~Vinci has adopted a model of how we see, of how
+To depict the room da~Vinci has adopted a model of how we see, of how
 we project the three dimensional scene to a two dimensional image.
 This model is only a first approximation \Dash  it does not take into
 account that our retina is curved and our lens bends the light,
@@ -31,24 +27,25 @@ that we have binocular vision, or that our brain's processing
 greatly affects what we see \Dash  but nonetheless it is interesting,
 both artistically and mathematically.
 
-The projection is not orthogonal, it is a 
+This is a 
 \emph{central projection}\index{projection!central}\index{central projection} 
-from a single point, to the plane of the canvas.  
+from a single point to the plane of the canvas.
 \begin{center}
   \includegraphics{ch4.5}
 \end{center}
-(It is not an orthogonal projection since the line
-from the viewer to $C$ is not orthogonal to the image plane.)
-As the picture suggests, the operation of  
+It is not a orthogonal projection 
+since the line
+from the viewer to~$C$ is not orthogonal to the image plane.
+
+The operation of  
 central projection preserves some geometric 
-properties \Dash  lines project to lines.
-However, it fails to preserve some others \Dash  equal 
-length segments can project to segments of unequal length; 
-the length of $AB$ is greater than the length of $BC$ because the
+properties, for instance lines project to lines.
+However, it fails to preserve some others, for instance equal 
+length segments can project to segments of unequal length 
+($AB$ is longer than $BC$, because the
 segment projected to $AB$ is closer to the viewer and 
-closer things look bigger.
+closer things look bigger).
 The study of the effects of central projections is projective geometry.
-We will see how linear algebra can be used in this study.
 
 There are three cases of central projection.
 The first is the projection done by a movie projector.
@@ -57,13 +54,12 @@ The first is the projection done by a movie projector.
 \end{center}
 We can think that each source point is ``pushed'' from the domain plane 
 outward to the image point in the codomain plane.
-This case of projection has a somewhat different character than 
-the second case, that of the artist
+The second case of projection is that of the artist
 ``pulling'' the source back to the canvas.
 \begin{center}
   \includegraphics{ch4.7}
 \end{center}
-In the first case $S$ is in the middle
+The two are different because in the first case $S$ is in the middle
 while in the second case $I$ is in the middle.
 One more configuration is possible, with $P$ in the middle. 
 An example of this is when we use a pinhole to shine the 
@@ -71,29 +67,35 @@ image of a solar eclipse onto a piece of paper.
 \begin{center}
   \includegraphics{ch4.8}
 \end{center}
-%Although the three are not exactly the same geometric actions, 
-%they are quite similar, and 
-We shall take each of the three to be a central projection by $P$ of
+
+Although the three are not exactly the same,  
+they are similar.
+We shall say that 
+each is a central projection by $P$ of
 $S$ to $I$.
+We next look at three models of central projection, 
+of increasing abstractness but
+also of increasing uniformity.
+The last will bring out the linear algebra.
 
 %To illustrate some of the geometric effects of these projections,  
 Consider again the effect of railroad tracks  
 that appear to converge to a point.
 We model this with parallel lines in a domain plane~$S$
 and a projection via a $P$ to a codomain plane~$I$. 
-(The gray lines are parallel to $S$ and~$I$.)
+(The gray lines are parallel to $S$ and~$I$ planes.)
 \begin{center}
   \includegraphics{ch4.9}
 \end{center}
-All three projection cases appear here.
-The first picture below shows $P$ acting like a movie projector by pushing
+All three projection cases appear in this one setting.
+The first picture below shows $P$ acting as a movie projector by pushing
 points from part of $S$ out to image points on the lower half of $I$.
-The middle picture shows $P$ acting like the artist by 
+The middle picture shows $P$ acting as the artist by 
 pulling points from another part of $S$ back to  
 image points in the middle of $I$.
-In the third picture, $P$ acts like the pinhole, projecting points from $S$
+In the third picture $P$ acts as the pinhole, projecting points from $S$
 to the upper part of $I$.
-This picture is the trickiest\Dash the points that are
+This third picture is the trickiest\Dash the points that are
 projected near to the vanishing point are the ones that are 
 far out on the bottom left of $S$. 
 Points in $S$ that are near to the vertical gray line
@@ -105,12 +107,13 @@ are sent high up on $I$.
 \hfil
   \includegraphics{ch4.12}
 \end{center}
+
 There are two awkward things about this situation.
 The first is that neither of the two points in the domain
 nearest to the vertical gray line (see below) has an image 
 because a projection from those two is along the
 gray line that is parallel to the codomain plane
-(we sometimes say that these two are projected ``to infinity'').
+(we sometimes say that these two are projected to infinity).
 The second awkward thing is that 
 the vanishing point in $I$
 isn't the image of any point from $S$ 
@@ -122,8 +125,9 @@ that is parallel to the domain plane
   \includegraphics{ch4.13}
 \end{center}
 
-For a better model, put the projector $P$ at the origin.
-Imagine that $P$ is covered by a glass hemispheric dome.
+For a model that eliminates this awkwardness, 
+put the projector $P$ at the origin.
+Imagine that we cover $P$ with a glass hemispheric dome.
 As $P$ looks outward, anything 
 in the line of vision is projected to the same spot on the dome.
 This includes things on the line between $P$ and the dome, as in the 
@@ -136,7 +140,7 @@ as in the case of projection by a pinhole.
   \includegraphics{ch4.14}
 \end{center}
 From this perspective $P$, all of the spots on the line 
-are seen as the same point.
+are the same point.
 Accordingly,
 for any nonzero vector $\vec{v}\in\Re^3$, we define the associated 
 \definend{point $v$ in the projective plane}\index{point!in projective plane} 
@@ -148,18 +152,18 @@ of the line, so that
 the projective point shown above 
 can be represented in any of these three ways.
 \begin{equation*}
-  \colvec{1 \\ 2 \\ 3}
+  \colvec[r]{1 \\ 2 \\ 3}
   \qquad
   \colvec{1/3 \\ 2/3 \\ 1}
   \qquad
-  \colvec{-2 \\ -4 \\ -6}
+  \colvec[r]{-2 \\ -4 \\ -6}
 \end{equation*} 
 Each of these is a
 \definend{homogeneous coordinate vector}\index{coordinates!homogeneous}%
 \index{homogeneous coordinate vector}\index{vector!homogeneous coordinate}
 for $v$. 
 
-This picture, and the above definition that arises from it,
+This picture and definition
 clarifies the description of central projection
 but there is something awkward about the dome 
 model:~what if the viewer looks down?
@@ -175,20 +179,27 @@ drops the line of sight toward the bottom of the
 dome then the projective point drops also and as
 the line of sight continues down past the equator, the projective point
 suddenly shifts from the front of the dome to the back of the dome.
-This discontinuity in the drawing means that
+(This brings out that in fact the dome is not quite a hemisphere, or else
+when the viewer is looking exactly along the equator then there are 
+two points in the line on the dome. 
+Instead we define it so that the
+points on the equator with a positive~$y$ coordinate, as well as the point
+where $y=0$ and $x$ is positive, are on the dome but the other equatorial
+points are not.)
+This discontinuity means that
 we often have to treat equatorial points as a separate case.
 That is, while the railroad track discussion of central projection
 has three cases,
 the dome model has two.
 
-We can do better than this.
+We can do better, we can reduct to having no separate cases.
 Consider a sphere centered at the origin.
 Any line through the origin intersects the sphere in two spots, which
-are said to be \emph{antipodal}.\index{antipodal}
+are \emph{antipodal}.\index{antipodal}
 Because we associate each line through the origin 
 with a point in the projective 
 plane, we can draw such a point as a pair of antipodal spots on the sphere. 
-Below, the two antipodal spots are shown connected by a dashed line
+Below, we show the two antipodal spots connected by a dashed line
 to emphasize that they are not two 
 different points, the pair of spots together make one projective point.
 \begin{center}
@@ -199,9 +210,8 @@ spots is not as natural as the one-spot-per-point dome mode,
 on the other hand
 the awkwardness of the dome model is gone, in that if 
 as a line of view slides from north to south, 
-no sudden changes happen on the picture.
-This model of central projection is uniform \Dash 
-the three cases are reduced to one.
+no sudden changes happen.
+This model of central projection is uniform.
 
 So far we have described points in projective geometry.
 What about lines?
@@ -211,7 +221,8 @@ through the origin.
 \begin{center}
   \includegraphics{ch4.16}
 \end{center}
-(One of the projective points on this line is shown to bring out a subtlety. 
+(We've included one of the projective points on this line 
+to bring out a subtlety. 
 Because two antipodal spots together make up a single projective point, 
 the great circle's 
 behind-the-paper part is the same set of projective points as its
@@ -221,7 +232,7 @@ we will also describe a projective line with a triple of reals.
 For instance, the members of this plane through the origin
 in $\Re^3$
 \begin{equation*}
-  %\set{y\colvec{1 \\ -1 \\ 0}+z\colvec{1 \\ 0 \\ 1}\suchthat y,z\in\Re}=
+  %\set{y\colvec[r]{1 \\ -1 \\ 0}+z\colvec[r]{1 \\ 0 \\ 1}\suchthat y,z\in\Re}=
   \set{\colvec{x \\ y \\ z}\suchthat x+y-z=0}
 \end{equation*} 
 project to a line that we can described with the triple
@@ -256,14 +267,14 @@ Thus, we can do analytic projective geometry.
 For instance, the projective 
 line $L=\rowvec{1 &1 &-1}$ has the equation 
 $1v_1+1v_2-1v_3=0$,
-because points incident on the line are characterized by having the property 
+because points incident on the line have the property 
 that their representatives satisfy this equation.
 One difference from familiar Euclidean anlaytic geometry is that
 in projective geometry 
 we talk about the equation of a point. 
 For a fixed point like
 \begin{equation*}
-  v=\colvec{1 \\ 2 \\ 3}
+  v=\colvec[r]{1 \\ 2 \\ 3}
 \end{equation*}
 the property that characterizes lines through this point 
 (that is, lines incident on this point) is that the components 
@@ -276,7 +287,7 @@ the \definend{Duality Principle}\index{projective geometry!Duality Principle}
 of projective geometry:~in any true statement,
 interchanging `point' with `line' results in another true statement. 
 For example, just as two distinct points determine one and only one line,
-in the projective plane, two distinct lines determine one and only one point. 
+in the projective plane two distinct lines determine one and only one point. 
 Here is a picture showing two lines that cross in antipodal spots and thus 
 cross at one projective point.
 \begin{center}
@@ -290,8 +301,8 @@ In this way, projective geometry is simpler, more uniform,
 than Euclidean geometry.
 
 That simplicity is relevant because there is a 
-relationship between the two spaces:~the 
-projective plane can be viewed as an extension of the Euclidean plane.
+relationship between the two spaces:~we can view the 
+projective plane as an extension of the Euclidean plane.
 Take the sphere model of the projective plane to be the unit sphere in $\Re^3$
 and take Euclidean space to be the plane $z=1$.
 This gives us a way of viewing some points
@@ -317,7 +328,7 @@ and the equator is the
 \definend{ideal line}\index{ideal line}%
 \index{projective plane!ideal line} or 
 \definend{line at infinity}\index{line at infinity}
-(note that it is not a Euclidean line, it is a projective line). 
+(it is not a Euclidean line, it is a projective line). 
 
 The advantage of the extension to the projective plane
 is that some of the awkwardness 
@@ -334,7 +345,7 @@ one case, that lines intersect (possibly at a point at infinity).
 The projective case is nicer in many ways than the Euclidean case but 
 has the problem that we don't have the same experience or
 intuitions with it.
-That's one advantage of doing analytic geometry, where the equations can 
+That's one advantage of doing analytic geometry where the equations can 
 lead us to the right conclusions.
 Analytic projective geometry uses linear algebra.
 For instance, for three points of the projective plane
@@ -346,11 +357,11 @@ system has infinitely many row vector solutions
 representing that line.
 That, in turn, holds if and only if this determinant is zero.
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     t_1  &u_1  &v_1  \\
     t_2  &u_2  &v_2  \\
     t_3  &u_3  &v_3  
-  \end{vmatrix}
+  \end{vmat}
 \end{equation*}
 Thus, three points in the projective plane are collinear if and only if
 any three representative column vectors are linearly dependent.
@@ -360,8 +371,8 @@ point if and only if any three row vectors representing them are linearly
 dependent.
 
 The following result is more evidence of the `niceness' 
-of the geometry of the projective plane, compared to the Euclidean case.
-These two triangles are said to be 
+of the geometry of the projective plane, compared with the Euclidean case.
+These two triangles 
 \definend{in perspective}\index{perspective!triangles} from $P$ 
 because their corresponding vertices are collinear.
 \begin{center}
@@ -372,15 +383,15 @@ the sides $T_1U_1$ and $T_2U_2$,
 the sides $T_1V_1$ and $T_2V_2$, 
 and the sides $U_1V_1$ and $U_2V_2$.
 Desargue's Theorem 
-is that when the three pairs of corresponding 
-sides are extended to lines, they intersect
+is that when we extend the three pairs of corresponding 
+sides to full lines, they intersect
 (shown here as the point $TU$, the point $TV$, and the point $UV$),
 and further, those three intersection points are collinear.
 \begin{center}
   \includegraphics{ch4.23}
 \end{center}
 We will prove this theorem, using projective geometry.
-(These are drawn as Euclidean figures because it is the more familiar image.
+(We've drawn these as Euclidean figures because it is the more familiar image.
 To consider them as projective figures,
 we can imagine that, although the line segments shown are parts of great 
 circles and so are curved,
@@ -395,22 +406,21 @@ vectors $\vec{w}$, $\vec{x}$, $\vec{y}$, and $\vec{z}$
 for the projective points, and a basis $B$ for $\Re^3$, 
 satisfying this. 
 \begin{equation*}
-  \rep{\vec{w}}{B}=\colvec{1 \\ 0 \\ 0}
+  \rep{\vec{w}}{B}=\colvec[r]{1 \\ 0 \\ 0}
   \quad
-  \rep{\vec{x}}{B}=\colvec{0 \\ 1 \\ 0}
+  \rep{\vec{x}}{B}=\colvec[r]{0 \\ 1 \\ 0}
   \quad
-  \rep{\vec{y}}{B}=\colvec{0 \\ 0 \\ 1}
+  \rep{\vec{y}}{B}=\colvec[r]{0 \\ 0 \\ 1}
   \quad
-  \rep{\vec{z}}{B}=\colvec{1 \\ 1 \\ 1}
+  \rep{\vec{z}}{B}=\colvec[r]{1 \\ 1 \\ 1}
 \end{equation*}
-The proof is straightforward.
-Because $W,\,X,\,Y$ are not on the same projective line, any
+For the proof, 
+because $W$, $X$, and $Y$ are not on the same projective line, any
 homogeneous coordinate vectors 
-$\vec{w}_0,\,\vec{x}_0,\,\vec{y}_0$ do not line on the same
+$\vec{w}_0$, $\vec{x}_0$, and $\vec{y}_0$ do not line on the same
 plane through the origin in $\Re^3$ and so form a 
 spanning set for $\Re^3$.
-Thus any homogeneous coordinate vector for $Z$ can be
-written as a combination 
+Thus any homogeneous coordinate vector for $Z$ is a combination 
 $\vec{z}_0=a\cdot\vec{w}_0+b\cdot\vec{x}_0+c\cdot\vec{y}_0$.
 Then,  we can take 
 $\vec{w}=a\cdot\vec{w}_0$,
@@ -419,24 +429,24 @@ $\vec{y}=c\cdot\vec{y}_0$,
 and $\vec{z}=\vec{z}_0$, where the basis is 
 $B=\sequence{\vec{w},\vec{x},\vec{y}}$.  
 
-Now, to prove of Desargue's Theorem, use the lemma to fix homogeneous
+Now to prove of Desargue's Theorem use the lemma to fix homogeneous
 coordinate vectors and a basis.
 \begin{equation*}
-  \rep{\vec{t}_1}{B}=\colvec{1 \\ 0 \\ 0}
+  \rep{\vec{t}_1}{B}=\colvec[r]{1 \\ 0 \\ 0}
   \quad
-  \rep{\vec{u}_1}{B}=\colvec{0 \\ 1 \\ 0}
+  \rep{\vec{u}_1}{B}=\colvec[r]{0 \\ 1 \\ 0}
   \quad
-  \rep{\vec{v}_1}{B}=\colvec{0 \\ 0 \\ 1}
+  \rep{\vec{v}_1}{B}=\colvec[r]{0 \\ 0 \\ 1}
   \quad
-  \rep{\vec{o}}{B}=\colvec{1 \\ 1 \\ 1}    
+  \rep{\vec{o}}{B}=\colvec[r]{1 \\ 1 \\ 1}    
 \end{equation*}
 Because the projective point $T_2$ is incident on the projective line $OT_1$,
 any homogeneous coordinate vector for $T_2$ lies in the
 plane through the origin in $\Re^3$ that is spanned by homogeneous
 coordinate vectors of $O$ and $T_1$:
 \begin{equation*}
-  \rep{\vec{t}_2}{B}=a\colvec{1 \\ 1 \\ 1}
-                          +b\colvec{1 \\ 0 \\ 0}
+  \rep{\vec{t}_2}{B}=a\colvec[r]{1 \\ 1 \\ 1}
+                          +b\colvec[r]{1 \\ 0 \\ 0}
 \end{equation*}
 for some scalars $a$ and $b$.
 That is, the homogenous coordinate vectors of members $T_2$ of the line 
@@ -451,15 +461,15 @@ of the form on the left below, and the forms for $U_2$ and $V_2$ are similar.
 \end{equation*}
 The projective line $T_1U_1$ is the image of a plane through the 
 origin in $\Re^3$.
-A quick way to get its equation is to note that any vector in it
+One way to get its equation is to note that any vector in it
 is linearly dependent on the vectors for $T_1$ and
 $U_1$ and so this determinant is zero.
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     1  &0  &x  \\
     0  &1  &y  \\
     0  &0  &z
-  \end{vmatrix}=0
+  \end{vmat}=0
   \qquad
   \Longrightarrow
   \qquad
@@ -468,11 +478,11 @@ $U_1$ and so this determinant is zero.
 The equation of the 
 plane in $\Re^3$ whose image is the projective line $T_2U_2$ is this.
 \begin{equation*}
-  \begin{vmatrix}
+  \begin{vmat}
     t_2  &1    &x  \\
     1    &u_2  &y  \\
     1    &1    &z
-  \end{vmatrix}=0
+  \end{vmat}=0
   \qquad
   \Longrightarrow
   \qquad
@@ -492,15 +502,15 @@ The other two intersections are similar.
   U_1V_1\,\intersection\, U_2V_2
   =\colvec{0 \\ u_2-1 \\ 1-v_2}
 \end{equation*}
-The proof is finished by noting that
+Finish the proof by noting that
 these projective points are on one projective line because
 the sum of the three homogeneous coordinate vectors is zero.
 
 Every projective theorem has a translation to a Euclidean version, although 
-the Euclidean result is often messier to state and prove.
+the Euclidean result may be messier to state and prove.
 Desargue's theorem illustrates this.
-In the translation to Euclidean space, the case
-where $O$ lies on the ideal line must be treated separately for then the lines
+In the translation to Euclidean space, we must treat separately the case
+where $O$ lies on the ideal line, for then the lines
 $T_1T_2$, $U_1U_2$, and $V_1V_2$ are parallel.
 
 The parenthetical remark
@@ -508,16 +518,16 @@ following the statement of Desargue's Theorem suggests thinking
 of the Euclidean pictures as figures from projective geometry 
 for a model of very large radius.
 That is, just as a small area of the earth appears flat to people living there,
-the projective plane is also `locally Euclidean'.
+the projective plane is also locally Euclidean.
 
 Although its local properties are the familiar Euclidean ones,
 there is a global property of the projective plane that is
 quite different.
 The picture below shows a projective point.
-At that point is drawn an $xy$-axis.
+At that point we have drawn a Cartesian axis.
 There is something interesting about the way this axis appears at the 
 antipodal ends of the sphere.
-In the northern hemisphere, where the axis are drawn in black, a
+In the northern hemisphere, where the axis is in black, a
 right hand put down with fingers on the $x$-axis 
 will have the thumb point along the $y$-axis.
 But the antipodal axis has just the opposite:~a 
@@ -562,9 +572,9 @@ counterclockwise).
 
 This exhibition of the existence of a 
 non-orientable space raises the question of whether
-our universe is orientable:~is is possible for
+our universe is orientable:~is it possible for
 an astronaut to leave right-handed and return left-handed?
-An excellent nontechnical reference is \cite{Gardner}.
+\cite{Gardner} is a nontechnical reference.
 An classic science fiction story about 
 orientation reversal is \cite{Clarke}.
 
@@ -588,12 +598,12 @@ An interesting and easy application is \cite{Davies}
   \item 
     What is the equation of this point?
     \begin{equation*}
-       \colvec{1 \\ 0 \\ 0}
+       \colvec[r]{1 \\ 0 \\ 0}
     \end{equation*}
     \begin{answer}
       From the dot product
       \begin{equation*}
-        0=\colvec{1 \\ 0 \\ 0}\dotprod\rowvec{L_1 &L_2 &L_3}
+        0=\colvec[r]{1 \\ 0 \\ 0}\dotprod\rowvec{L_1 &L_2 &L_3}
          =L_1
       \end{equation*}
       we get that the equation is $L_1=0$.
@@ -603,7 +613,7 @@ An interesting and easy application is \cite{Davies}
       \partsitem Find the line incident on these points in the 
          projective plane.
          \begin{equation*}
-           \colvec{1 \\ 2 \\ 3},\,\colvec{4 \\ 5 \\ 6}
+           \colvec[r]{1 \\ 2 \\ 3},\,\colvec[r]{4 \\ 5 \\ 6}
          \end{equation*}
       \partsitem Find the point incident on both of 
          these projective lines. 
@@ -615,15 +625,15 @@ An interesting and easy application is \cite{Davies}
       \begin{exparts}
         \partsitem This determinant
           \begin{equation*}
-            0=\begin{vmatrix}
+            0=\begin{vmat}
               1  &4  &x \\
               2  &5  &y \\
               3  &6  &z
-            \end{vmatrix}
+            \end{vmat}
             =-3x+6y-3z
           \end{equation*}
           shows that the line is $L=\rowvec{-3 &6 &-3}$.
-        \partsitem $\colvec{-3 \\ 6 \\ -3}$
+        \partsitem $\colvec[r]{-3 \\ 6 \\ -3}$
       \end{exparts}
     \end{answer}
   \item
@@ -636,13 +646,13 @@ An interesting and easy application is \cite{Davies}
         \qquad
         v=\colvec{v_1 \\ v_2 \\ v_3}
       \end{equation*}
-      can be found from this determinant equation.
+      comes from this determinant equation.
       \begin{equation*}
-        0=\begin{vmatrix}
+        0=\begin{vmat}
           u_1  &v_1  &x  \\
           u_2  &v_2  &y  \\
           u_3  &v_3  &z
-        \end{vmatrix}
+        \end{vmat}
         =(u_2v_3-u_3v_2)\cdot x 
           + (u_3v_1-u_1v_3)\cdot y 
           + (u_1v_2-u_2v_1)\cdot z
@@ -679,15 +689,15 @@ An interesting and easy application is \cite{Davies}
     circles, that a circle may project to an ellipse.
     Can a (non-circular) ellipse project to a circle?
     %Must it (in the sense that for any ellipse there is a projection
-    %such that it would project to to a circle)? 
+    %such that it would project to a circle)? 
     \begin{answer}
       The picture of the solar eclipse \Dash  unless 
       the image plane is exactly perpendicular
       to the line from the sun through the pinhole \Dash  shows the circle
       of the sun projecting to an image that is an  ellipse.
       (Another example is that in many pictures in this 
-      Topic, the circle that is the sphere's equator is drawn as an ellipse,
-      that is, is seen by a viewer of the drawing as an ellipse.)
+      Topic, we've shown the circle that is the sphere's equator as an ellipse,
+      that is, a viewer of the drawing sees a circle as an ellipse.)
       
       The solar eclipse picture also shows the converse. 
       If we picture the projection as going from left to right 
@@ -768,19 +778,19 @@ An interesting and easy application is \cite{Davies}
           basis $B$ with respect to which the points have these
           homogeneous coordinate vectors.
           \begin{equation*}
-            \rep{\vec{t}_0}{B}=\colvec{1 \\ 0 \\ 0}
+            \rep{\vec{t}_0}{B}=\colvec[r]{1 \\ 0 \\ 0}
             \quad
-            \rep{\vec{t}_1}{B}=\colvec{0 \\ 1 \\ 0}
+            \rep{\vec{t}_1}{B}=\colvec[r]{0 \\ 1 \\ 0}
             \quad
-            \rep{\vec{t}_2}{B}=\colvec{0 \\ 0 \\ 1}
+            \rep{\vec{t}_2}{B}=\colvec[r]{0 \\ 0 \\ 1}
             \quad
-            \rep{\vec{v}_0}{B}=\colvec{1 \\ 1 \\ 1}
+            \rep{\vec{v}_0}{B}=\colvec[r]{1 \\ 1 \\ 1}
           \end{equation*}
         \partsitem
           First, any $U_0$ on $T_0V_0$
           \begin{equation*}
-            \rep{\vec{u}_0}{B}=a\colvec{1 \\ 0 \\ 0}
-                               +b\colvec{1 \\ 1 \\ 1}
+            \rep{\vec{u}_0}{B}=a\colvec[r]{1 \\ 0 \\ 0}
+                               +b\colvec[r]{1 \\ 1 \\ 1}
                               =\colvec{a+b \\ b \\ b}
           \end{equation*}
           has homogeneous coordinate vectors of this form
@@ -792,8 +802,8 @@ An interesting and easy application is \cite{Davies}
           a homogeneous coordinate vector of this form for some $u_0\in\Re$).
           Similarly, $U_2$ is on $T_1V_0$
           \begin{equation*}
-            \rep{\vec{u}_2}{B}=c\colvec{0 \\ 1 \\ 0}
-                                +d\colvec{1 \\ 1 \\ 1}
+            \rep{\vec{u}_2}{B}=c\colvec[r]{0 \\ 1 \\ 0}
+                                +d\colvec[r]{1 \\ 1 \\ 1}
                               =\colvec{d \\ c+d \\ d}
           \end{equation*}
           and so has this homogeneous coordinate vector.
@@ -802,8 +812,8 @@ An interesting and easy application is \cite{Davies}
           \end{equation*}
           Also similarly, $U_1$ is incident on $T_2V_0$
           \begin{equation*}
-            \rep{\vec{u}_1}{B}=e\colvec{0 \\ 0 \\ 1}
-                                +f\colvec{1 \\ 1 \\ 1}
+            \rep{\vec{u}_1}{B}=e\colvec[r]{0 \\ 0 \\ 1}
+                                +f\colvec[r]{1 \\ 1 \\ 1}
                               =\colvec{f \\ f \\ e+f}  
           \end{equation*}
           and has this homogeneous coordinate vector.
@@ -813,8 +823,8 @@ An interesting and easy application is \cite{Davies}
         \partsitem
           Because $V_1$ is $T_0U_2\,\intersection\,U_0T_2$ we have this.
           \begin{equation*}
-            g\colvec{1 \\ 0 \\ 0}+h\colvec{1 \\ u_2 \\ 1}
-            =i\colvec{u_0 \\ 1 \\ 1}+j\colvec{0 \\ 0 \\ 1}
+            g\colvec[r]{1 \\ 0 \\ 0}+h\colvec{1 \\ u_2 \\ 1}
+            =i\colvec{u_0 \\ 1 \\ 1}+j\colvec[r]{0 \\ 0 \\ 1}
             \qquad\Longrightarrow\qquad
             \begin{aligned}
               g+h  &= iu_0 \\
@@ -835,8 +845,8 @@ An interesting and easy application is \cite{Davies}
            Since $V_2$ is the intersection 
            $T_0U_1\,\intersection\,T_1U_0$ 
            \begin{equation*}
-             k\colvec{1 \\ 0 \\ 0}+l\colvec{1 \\ 1 \\ u_1}
-              =m\colvec{0 \\ 1 \\ 0}+n\colvec{u_0 \\ 1 \\ 1}
+             k\colvec[r]{1 \\ 0 \\ 0}+l\colvec{1 \\ 1 \\ u_1}
+              =m\colvec[r]{0 \\ 1 \\ 0}+n\colvec{u_0 \\ 1 \\ 1}
             \qquad\Longrightarrow\qquad
             \begin{aligned}
               k+l  &= nu_0 \\
@@ -857,7 +867,7 @@ An interesting and easy application is \cite{Davies}
            Because $V_1$ is on the $T_1U_1$ line its
            homogeneous coordinate vector has the form
            \begin{equation*}
-             p\colvec{0 \\ 1 \\ 0}+q\colvec{1 \\ 1 \\ u_1}
+             p\colvec[r]{0 \\ 1 \\ 0}+q\colvec{1 \\ 1 \\ u_1}
              =\colvec{q \\ p+q \\ qu_1}
            \tag*{($*$)}\end{equation*}
            but a previous part of this question established that $V_1$'s
@@ -881,7 +891,7 @@ An interesting and easy application is \cite{Davies}
            Now, the $T_2U_2$ line consists of the points whose homogeneous 
            coordinates have this form.
            \begin{equation*}
-             r\colvec{0 \\ 0 \\ 1}+s\colvec{1 \\ u_2 \\ 1}
+             r\colvec[r]{0 \\ 0 \\ 1}+s\colvec{1 \\ u_2 \\ 1}
              =\colvec{s \\ su_2 \\ r+s}
            \end{equation*}
            Taking $s=1$ and $r=u_1u_2-1$ shows that the

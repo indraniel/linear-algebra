@@ -1721,9 +1721,9 @@ beginfig(24);  % a walk around the projective plane
     pickup pencircle scaled line_width_dark;
     drawarrow subpath (t0,t2) of meridian;
     drawarrow subpath (t1,t3) of proj_line;
-    pickup pencircle scaled line_width_light;
-    drawarrow subpath (t10,t12) of meridian;
-    drawarrow subpath (t11,t13) of proj_line;
+    % pickup pencircle scaled line_width_light;
+    drawarrow subpath (t10,t12) of meridian withcolor blue;
+    drawarrow subpath (t11,t13) of proj_line withcolor blue;
   endgroup;
   %
   pickup pencircle scaled line_width_light;
@@ -1772,9 +1772,9 @@ beginfig(25);  % a walk around the projective plane
     pickup pencircle scaled line_width_dark;
     drawarrow subpath (t0,t2) of meridian;
     drawarrow subpath (t1,t3) of proj_line;
-    pickup pencircle scaled line_width_light;
-    drawarrow subpath (t10,t12) of meridian;
-    drawarrow subpath (t11,t13) of proj_line;
+    % pickup pencircle scaled line_width_light;
+    drawarrow subpath (t10,t12) of meridian withcolor blue;
+    drawarrow subpath (t11,t13) of proj_line withcolor blue;
   endgroup;
   %
   pickup pencircle scaled line_width_light;
@@ -1822,9 +1822,9 @@ beginfig(26);  % a walk around the projective plane; back fig thru south pole
     pickup pencircle scaled line_width_dark;
     drawarrow subpath (t0,t2) of meridian;
     drawarrow subpath (t1,t3) of proj_line;
-    pickup pencircle scaled line_width_light;
-    drawarrow subpath (t10,t12) of meridian;
-    drawarrow subpath (t11,t13) of proj_line;
+    % pickup pencircle scaled line_width_light;
+    drawarrow subpath (t10,t12) of meridian withcolor blue;
+    drawarrow subpath (t11,t13) of proj_line withcolor blue;
   endgroup;
   %
   pickup pencircle scaled line_width_light;
@@ -1872,9 +1872,9 @@ beginfig(27);  % a walk around the projective plane; back fig near equator
     pickup pencircle scaled line_width_dark;
     drawarrow subpath (t0,t2) of meridian;
     drawarrow subpath (t1,t3) of proj_line;
-    pickup pencircle scaled line_width_light;
-    drawarrow subpath (t10,t12) of meridian;
-    drawarrow subpath (t11,t13) of proj_line;
+    % pickup pencircle scaled line_width_light;
+    drawarrow subpath (t10,t12) of meridian withcolor blue;
+    drawarrow subpath (t11,t13) of proj_line withcolor blue;
   endgroup;
   %
   pickup pencircle scaled line_width_light;
