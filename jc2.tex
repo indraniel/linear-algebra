@@ -3,12 +3,13 @@
 %  2001-Jun-12
 \section{Similarity}
 \index{similarity|(}
-
-\subsection{Definition and Examples}
-We've defined \( H \) and \( \hat{H} \) to be
+We've defined two matrices \( H \) and \( \hat{H} \) to be
 matrix-equivalent if there are nonsingular matrices \( P \) and \( Q \)
 such that \( \hat{H}=PHQ \).
-That definition is motivated by this diagram
+We were motivated by this diagram
+showing $H$ and $\hat{H}$ both representing a map 
+$h$ but with respect to different
+pairs of bases, $B,D$ and $\hat{B},\hat{D}$.
 \begin{equation*}
   \begin{CD}
     V_\wrt{B}                   @>h>H>        W_\wrt{D}       \\
@@ -16,28 +17,32 @@ That definition is motivated by this diagram
     V_\wrt{\hat{B}}             @>h>\hat{H}>  W_\wrt{\hat{D}}
   \end{CD}
 \end{equation*}
-showing that $H$ and $\hat{H}$ both represent $h$ but with respect to different
-pairs of bases.
-We now specialize that setup to the case
-where the codomain equals the domain, and
-where the codomain's basis equals the domain's basis.\index{arrow diagram}
+
+We now consider the special case
+where the codomain equals the domain and in particular we add the requirement
+that the codomain's basis equals the domain's basis,
+so we are considering representations with respect to 
+$B,B$ and $D,D$.\index{arrow diagram}
 \begin{equation*}
   \begin{CD}
-    V_\wrt{B}                   @>t>>        V_\wrt{B}       \\
+    V_\wrt{B}                   @>t>S>        V_\wrt{B}       \\
     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_\wrt{D}                   @>t>>        V_\wrt{D}
+    V_\wrt{D}                   @>t>T>        V_\wrt{D}
   \end{CD}
 \end{equation*}
-To move from the lower left to the lower right we can either go straight
-over, or up, over, and then down. 
+% To move from the lower left to the lower right we can either go straight
+% over, or up, over, and then down. 
 In matrix terms, 
-\begin{equation*}
-\rep{t}{D,D}
-  =\rep{\identity}{B,D}\;\rep{t}{B,B}\;\bigl(\rep{\identity}{B,D}\bigr)^{-1}
-\end{equation*}
-(recall that a representation of composition like this one reads right to
-left).
+% \begin{equation*}
+\(\rep{t}{D,D}
+  =\rep{\identity}{B,D}\;\rep{t}{B,B}\;\bigl(\rep{\identity}{B,D}\bigr)^{-1} \).
+% \end{equation*}
+% (recall that a representation of composition like this one reads right to
+% left).
 
+
+
+\subsection{Definition and Examples}
 \begin{definition}
 The matrices  \( T \) and $S$ are 
 \definend{similar}\index{matrix!similarity}%
@@ -48,74 +53,71 @@ $
 $.
 \end{definition}
 
-%\noindent (\nearbyexercise{exer:SimIsEquivRel} checks that
-%similarity is an equivalence relation.)
-
 \noindent Since nonsingular matrices are square, 
-the similar matrices $T$ and $S$ must
+$T$ and $S$ must
 be square and of the same size.
+\nearbyexercise{exer:SimIsEquivRel} checks that
+similarity is an equivalence relation.
 
 \begin{example}
 %One way to produce similar matrices is to start with an arbitrary nonsingular
 %matrix $P$, and an arbitrary $T$.
-With these two,
+Calculation with these two,
 \begin{equation*}
   P=
-  \begin{pmatrix}
+  \begin{mat}[r]
     2  &1  \\
     1  &1
-  \end{pmatrix}
+  \end{mat}
   \qquad
   S=
-  \begin{pmatrix}
+  \begin{mat}[r]
     2  &-3  \\
     1  &-1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
-calculation gives that $S$ is similar to
-this matrix.
+gives that $S$ is similar to this matrix.
 \begin{equation*}
   T=
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &-1  \\
     1  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 \end{example}
 
 \begin{example}  \label{ex:OnlyZeroSimToZero}
 The only matrix similar to the zero matrix is itself:~$PZP^{-1}=PZ=Z$.
-The only matrix similar to the identity matrix is 
-itself:~$PIP^{-1}=PP^{-1}=I$.
+The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
 \end{example}
 
 Since matrix similarity is a special case of matrix equivalence, 
 if two matrices are similar then they are equivalent.
-What about the converse:~must matrix equivalent square matrices be similar?
-The answer is no.
-The prior example shows that the similarity classes are different
-from the matrix equivalence classes, because the matrix equivalence class
+What about the converse:~must any two matrix equivalent square matrices be 
+similar?
+No;
+the prior example shows that the similarity classes are different
+from the matrix equivalence classes because the matrix equivalence class
 of the identity consists of all nonsingular matrices of that size. 
 Thus, for instance, these two are
 matrix equivalent but not similar.
 \begin{equation*}
   T=
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &0  \\
     0  &1
-  \end{pmatrix}
+  \end{mat}
   \qquad
   S=
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &2  \\
     0  &3
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
-
 So some matrix equivalence classes
 split into two or more similarity classes\Dash similarity gives a finer
 partition than does equivalence.
-This picture shows some matrix equivalence classes subdivided into
+This pictures some matrix equivalence classes subdivided into
 similarity classes.
 \begin{center}
   \includegraphics{ch5.4}
@@ -142,54 +144,54 @@ if and only if they have the same rank).
     For
     \begin{equation*}
       S=
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &3  \\
        -2  &-6
-      \end{pmatrix}
+      \end{mat}
       \quad
       T=
-      \begin{pmatrix}
+      \begin{mat}[r]
         0    &0  \\
        -11/2 &-5
-      \end{pmatrix}
+      \end{mat}
       \quad
       P=
-      \begin{pmatrix}
+      \begin{mat}[r]
         4  &2  \\
        -3  &2
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     check that $T=PSP^{-1}$.
     \begin{answer}
       One way to proceed is left to right.
       \begin{equation*}
         PSP^{-1}=
-        \begin{pmatrix}
+        \begin{mat}[r]
           4  &2  \\
          -3  &2
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           1  &3  \\
          -2  &-6
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}[r]
           2/14  &-2/14  \\
           3/14  &4/14
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  \\
          -7  &-21
-        \end{pmatrix}  
-        \begin{pmatrix}
+        \end{mat}  
+        \begin{mat}[r]
           2/14  &-2/14  \\
           3/14  &4/14
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}[r]
           0    &0  \\
          -11/2 &-5
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \recommended \item
@@ -218,40 +220,40 @@ if and only if they have the same rank).
         $c=0$ and $c=1$.
       \partsitem No, as this example shows.
         \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}[r]
               1  &-2  \\
              -1  &1
-            \end{pmatrix}
-           \begin{pmatrix}
+            \end{mat}
+           \begin{mat}[r]
              -1  &0   \\
               0  &-3
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
               -1  &-2   \\
               -1  &-1
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
               -5  &-4   \\
               2   &1
-           \end{pmatrix}
+           \end{mat}
         \end{equation*} 
     \end{exparts}  
    \end{answer}
   \item 
     Show that these matrices are not similar.
     \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
           1  &0  &4  \\
           1  &1  &3  \\
           2  &1  &7
-       \end{pmatrix}
+       \end{mat}
        \qquad
-       \begin{pmatrix}
+       \begin{mat}[r]
           1  &0  &1  \\
           0  &1  &1  \\
           3  &1  &2
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     \begin{answer}
       Gauss' method shows that
@@ -272,20 +274,20 @@ if and only if they have the same rank).
         \partsitem Because $t$ is described with the members of $B$,
           finding the matrix representation is easy:
           \begin{equation*}
-            \rep{t(x^2)}{B}=\colvec{0 \\ 1 \\ 1}_B
+            \rep{t(x^2)}{B}=\colvec[r]{0 \\ 1 \\ 1}_B
             \quad
-            \rep{t(x)}{B}=\colvec{1 \\ 0 \\ -1}_B
+            \rep{t(x)}{B}=\colvec[r]{1 \\ 0 \\ -1}_B
             \quad
-            \rep{t(1)}{B}=\colvec{0 \\ 0 \\ 3}_B
+            \rep{t(1)}{B}=\colvec[r]{0 \\ 0 \\ 3}_B
           \end{equation*}
           gives this.
           \begin{equation*}
             \rep{t}{B,B}
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &1  &0  \\
               1  &0  &0  \\
               1  &-1 &3  
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem We will find $t(1)$, $t(1+x)$, and $t(1+x+x^2$,
           to find how each is represented with respect to $D$.
@@ -293,21 +295,21 @@ if and only if they have the same rank).
           $t(1+x)=x^2+2$ and $t(1+x+x^2)=x^2+x+3$.
           By eye, we get the representation of each vector
           \begin{equation*}
-            \rep{t(1)}{D}=\colvec{3 \\ 0 \\ 0}_D
+            \rep{t(1)}{D}=\colvec[r]{3 \\ 0 \\ 0}_D
             \quad
-            \rep{t(1+x)}{D}=\colvec{2  \\ -1 \\  1}_D
+            \rep{t(1+x)}{D}=\colvec[r]{2  \\ -1 \\  1}_D
             \quad
-            \rep{t(1+x+x^2)}{D}=\colvec{2 \\ 0 \\ 1}_D
+            \rep{t(1+x+x^2)}{D}=\colvec[r]{2 \\ 0 \\ 1}_D
           \end{equation*}
           and thus the representation of the map.
           \begin{equation*}
             \rep{t}{D,D}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               3  &2  &2  \\
               0  &-1 &0  \\
               0  &1  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
          \partsitem The diagram, adapted for this $T$ and $S$,
            \begin{equation*}
@@ -320,11 +322,11 @@ if and only if they have the same rank).
            shows that $P=\rep{\identity}{D,B}$.
            \begin{equation*}
              P=
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  &1  \\ 
                0  &1  &1  \\
                1  &1  &1 
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
       \end{exparts}
     \end{answer}
@@ -332,9 +334,9 @@ if and only if they have the same rank).
      Exhibit an nontrivial similarity relationship in this way:~let
      \( \map{t}{\C^2}{\C^2} \) act by
      \begin{equation*}
-        \colvec{1 \\ 2}\mapsto\colvec{3 \\ 0}
+        \colvec[r]{1 \\ 2}\mapsto\colvec[r]{3 \\ 0}
         \qquad
-        \colvec{-1 \\ 1}\mapsto\colvec{-1 \\ 2}
+        \colvec[r]{-1 \\ 1}\mapsto\colvec[r]{-1 \\ 2}
      \end{equation*}
      and pick two bases,
      and represent \( t \) with respect to then
@@ -345,126 +347,126 @@ if and only if they have the same rank).
      \begin{answer}
        One possible choice of the bases is 
        \begin{equation*}
-         B=\sequence{\colvec{1 \\ 2},\colvec{-1 \\ 1}}
+         B=\sequence{\colvec[r]{1 \\ 2},\colvec[r]{-1 \\ 1}}
          \qquad
-         D=\stdbasis_2=\sequence{\colvec{1 \\ 0},\colvec{0 \\ 1}}
+         D=\stdbasis_2=\sequence{\colvec[r]{1 \\ 0},\colvec[r]{0 \\ 1}}
        \end{equation*}
        (this $B$ is suggested by the map description).
        To find the matrix $T=\rep{t}{B,B}$, solve the relations 
        \begin{equation*}
-          c_1\colvec{1 \\ 2}+c_2\colvec{-1 \\ 1}=\colvec{3 \\ 0}
+          c_1\colvec[r]{1 \\ 2}+c_2\colvec[r]{-1 \\ 1}=\colvec[r]{3 \\ 0}
           \qquad
-         \hat{c}_1\colvec{1 \\ 2}+\hat{c}_2\colvec{-1 \\ 1}=\colvec{-1 \\ 2}
+         \hat{c}_1\colvec[r]{1 \\ 2}+\hat{c}_2\colvec[r]{-1 \\ 1}=\colvec[r]{-1 \\ 2}
        \end{equation*}
        to get \( c_1=1 \), \( c_2=-2 \), \( \hat{c}_1=1/3 \) and
        \( \hat{c}_2=4/3 \).
        \begin{equation*}
           \rep{t}{B,B}=
-          \begin{pmatrix}
+          \begin{mat}[r]
              1  &1/3 \\
             -2  &4/3
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
 
        Finding \( \rep{t}{D,D} \) involves a bit more computation.
        We first find \( t(\vec{e}_1) \).
        The relation
        \begin{equation*}
-         c_1\colvec{1 \\ 2}+c_2\colvec{-1 \\ 1}=\colvec{1 \\ 0}
+         c_1\colvec[r]{1 \\ 2}+c_2\colvec[r]{-1 \\ 1}=\colvec[r]{1 \\ 0}
        \end{equation*}
        gives \( c_1=1/3 \) and \( c_2=-2/3 \), and so 
        \begin{equation*}
-         \rep{\vec{e}_1}{B}=\colvec{1/3 \\ -2/3}_B
+         \rep{\vec{e}_1}{B}=\colvec[r]{1/3 \\ -2/3}_B
        \end{equation*}
        making
        \begin{equation*}
           \rep{t(\vec{e}_1)}{B}=
-                 \begin{pmatrix}
+                 \begin{mat}[r]
                     1  &1/3  \\
                    -2  &4/3
-                 \end{pmatrix}_{B,B}
-                 \colvec{1/3 \\ -2/3}_B
+                 \end{mat}_{B,B}
+                 \colvec[r]{1/3 \\ -2/3}_B
                  =
-                 \colvec{1/9 \\ -14/9}_B
+                 \colvec[r]{1/9 \\ -14/9}_B
        \end{equation*}
        and hence $t$ acts on the first basis vector $\vec{e}_1$ in this way.
        \begin{equation*}
          t(\vec{e}_1)
-         =(1/9)\cdot\colvec{1 \\ 2}-(14/9)\cdot\colvec{-1 \\ 1}
-         =\colvec{5/3 \\ -4/3}      
+         =(1/9)\cdot\colvec[r]{1 \\ 2}-(14/9)\cdot\colvec[r]{-1 \\ 1}
+         =\colvec[r]{5/3 \\ -4/3}      
        \end{equation*}
        The computation for \( t(\vec{e}_2) \) is similar.
        The relation
        \begin{equation*}
-         c_1\colvec{1 \\ 2}+c_2\colvec{-1 \\ 1}=\colvec{0 \\ 1}
+         c_1\colvec[r]{1 \\ 2}+c_2\colvec[r]{-1 \\ 1}=\colvec[r]{0 \\ 1}
        \end{equation*}
        gives \( c_1=1/3 \) and \( c_2=1/3 \), so
        \begin{equation*}
-         \rep{\vec{e}_1}{B}=\colvec{1/3 \\ 1/3}_B      
+         \rep{\vec{e}_1}{B}=\colvec[r]{1/3 \\ 1/3}_B      
        \end{equation*}
        making
        \begin{equation*}
          \rep{t(\vec{e}_1)}{B}=
-                 \begin{pmatrix}
+                 \begin{mat}[r]
                     1  &1/3  \\
                    -2  &4/3
-                 \end{pmatrix}_{B,B}
-                 \colvec{1/3 \\ 1/3}_B
+                 \end{mat}_{B,B}
+                 \colvec[r]{1/3 \\ 1/3}_B
                  =
-                 \colvec{4/9 \\ -2/9}_B
+                 \colvec[r]{4/9 \\ -2/9}_B
        \end{equation*}
        and hence $t$ acts on the second basis vector $\vec{e}_2$ in this way.
        \begin{equation*}
          t(\vec{e}_2)
-         =(4/9)\cdot\colvec{1 \\ 2}-(2/9)\cdot\colvec{-1 \\ 1}
-         =\colvec{2/3 \\ 2/3}
+         =(4/9)\cdot\colvec[r]{1 \\ 2}-(2/9)\cdot\colvec[r]{-1 \\ 1}
+         =\colvec[r]{2/3 \\ 2/3}
        \end{equation*}
        Therefore
        \begin{equation*}
           \rep{t}{D,D}=
-          \begin{pmatrix}
+          \begin{mat}[r]
              5/3  &2/3  \\
             -4/3  &2/3
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
        and these are the change of basis matrices.
        \begin{equation*}
          P=\rep{\identity}{B,D}
-         =\begin{pmatrix}
+         =\begin{mat}[r]
            1  &-1  \\
            2  &1 
-         \end{pmatrix}
+         \end{mat}
          \qquad
          P^{-1}=\bigl(\rep{\identity}{B,D}\bigr)^{-1}
-         =\begin{pmatrix}
+         =\begin{mat}[r]
             1  &-1 \\
             2  &1
-         \end{pmatrix}^{-1}
+         \end{mat}^{-1}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
            1/3  &1/3  \\
            -2/3 &1/3
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       The check of these computations is routine.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &-1 \\
             2  &1
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
             1  &1/3 \\
            -2  &4/3
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            1/3 &1/3 \\
           -2/3 &1/3
-         \end{pmatrix}
+         \end{mat}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
            5/3 &2/3 \\
           -4/3 &2/3
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}  
     \end{answer}
   \item 
@@ -482,9 +484,9 @@ if and only if they have the same rank).
       respect to some $B,D$.)
     \end{answer}
   \recommended \item 
+    \cite{Halmos}
     Are there two matrices \( A \) and \( B \) that are
     similar while \( A^2 \) and \( B^2 \) are not similar?
-    \cite{Halmos}
     \begin{answer}
       No.
       If \( A=PBP^{-1} \) then \( A^2=(PBP^{-1})(PBP^{-1})=PB^2P^{-1} \).
@@ -529,30 +531,30 @@ if and only if they have the same rank).
         First note that
         \begin{equation*}
            S=\rep{f_x}{\stdbasis_2,\stdbasis_2}=
-           \begin{pmatrix}
+           \begin{mat}[r]
               1  &0  \\
               0  &-1
-           \end{pmatrix}
+           \end{mat}
            \qquad
            T=\rep{f_y}{\stdbasis_2,\stdbasis_2}=
-           \begin{pmatrix}
+           \begin{mat}[r]
              -1  &0  \\
               0  &1
-           \end{pmatrix}
+           \end{mat}
         \end{equation*}
         are similar because the second matrix is the representation of $f_x$
         with respect to the basis \( A=\sequence{\vec{e}_2,\vec{e}_1} \):
         \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}[r]
               1  &0  \\
               0  &-1
-           \end{pmatrix}
+           \end{mat}
            =    
            P
-           \begin{pmatrix}
+           \begin{mat}[r]
              -1  &0  \\
               0  &1
-           \end{pmatrix}
+           \end{mat}
            P^{-1}
         \end{equation*}
         where $P=\rep{\identity}{A,\stdbasis_2}$.
@@ -646,15 +648,15 @@ if and only if they have the same rank).
     \begin{answer}
       Yes, these are similar
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &0  \\
            0  &3
-         \end{pmatrix}
+         \end{mat}
          \qquad
-         \begin{pmatrix}
+         \begin{mat}[r]
            3  &0  \\
            0  &1
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       since, where the first matrix is $\rep{t}{B,B}$ for 
       $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$, 
@@ -734,77 +736,77 @@ if and only if they have the same rank).
       No.
       Here is an example that has two pairs, each of two similar matrices:
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &-1  \\
             1  &2
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
             1  &0   \\
             0  &3
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
             2/3  &1/3   \\
            -1/3  &1/3
-         \end{pmatrix}
+         \end{mat}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
             5/3  &-2/3  \\
            -4/3  &7/3
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       and
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &-2  \\
            -1  &1
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            -1  &0   \\
             0  &-3
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
             -1  &-2   \\
             -1  &-1
-         \end{pmatrix}
+         \end{mat}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
             -5  &-4   \\
              2  &1
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       (this example is mostly arbitrary, but not entirely, because the
       the center matrices on the two left sides add to the zero matrix).
       Note that the sums of these similar matrices are not similar
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &0   \\
             0  &3
-         \end{pmatrix}
+         \end{mat}
          +
-         \begin{pmatrix}
+         \begin{mat}[r]
            -1  &0   \\
             0  &-3
-         \end{pmatrix}
+         \end{mat}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
            0  &0  \\
            0  &0
-         \end{pmatrix}
+         \end{mat}
          \qquad
-         \begin{pmatrix}
+         \begin{mat}[r]
             5/3  &-2/3   \\
             -4/3 &7/3
-         \end{pmatrix}
+         \end{mat}
          +
-         \begin{pmatrix}
+         \begin{mat}[r]
             -5  &-4   \\
              2  &1
-         \end{pmatrix}
+         \end{mat}
          \neq
-         \begin{pmatrix}
+         \begin{mat}[r]
            0  &0  \\
            0  &0
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       since the zero matrix is similar only to itself.
     \end{answer}
@@ -840,28 +842,32 @@ if and only if they have the same rank).
 
 
 \subsection{Diagonalizability}
-The prior subsection defines the relation of similarity and shows that,
+The prior subsection defines the relation of similarity and shows that
 although similar matrices are necessarily matrix equivalent, the converse
 does not hold.
-Some matrix-equivalence classes break into two or more similarity 
-classes (the nonsingular $\nbyn{n}$ matrices, for instance).
-This means that the canonical form for matrix equivalence, 
-a block partial-identity, cannot be used as a canonical form 
+Some matrix equivalence classes break into two or more similarity 
+classes; for instance, the nonsingular $\nbyn{n}$ matrices
+form one matrix equivalence class but more than one similarity class.
+
+Thus the canonical form for matrix equivalence, 
+a block partial-identity matrix, cannot be used as a canonical form 
 for matrix similarity because
 the partial-identities cannot be in more than one
 similarity class, so there are similarity classes without one.
-This picture illustrates.
-As earlier in this book, class representatives are shown with stars.
+This illustrates 
+(class representatives are shown as stars).
 \begin{center}
   \includegraphics{ch5.5}
 \end{center}
-We are developing a canonical form for representatives of
-the similarity classes.
-We naturally try to build on our previous work, meaning 
+To develop a canonical form for representatives of
+the similarity classes
+we would naturally try to build on previous work.
+This means 
 first that the partial identity matrices should represent the similarity
-classes into which they fall, 
-and beyond that, that the representatives should be as simple as possible. 
-The simplest extension of the partial-identity form is a diagonal form.
+classes into which they fall. 
+Beyond that, the representatives should be as simple as possible, and
+the partial identities are simple in that they consist mostly of zero entries. 
+The simplest extension of the partial identity form is the diagonal form.
 
 \begin{definition}
 A transformation is \definend{diagonalizable}\index{diagonalizable|(}%
@@ -876,50 +882,55 @@ if there is a nonsingular \( P \) such that \( PTP^{-1} \) is diagonal.
 \begin{example} \label{ex:DiagTwoByTwo}
 The matrix 
 \begin{equation*}
-  \begin{pmatrix} 
+  \begin{mat}[r] 
      4 &-2 \\ 
      1 &1 
-  \end{pmatrix}
+  \end{mat}
 \end{equation*} 
 is diagonalizable.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      2  &0   \\
      0  &3
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
     -1  &2  \\
      1  &-1
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
      4  &-2 \\
      1  &1
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
     -1  &2  \\
      1  &-1
-  \end{pmatrix}^{-1}
+  \end{mat}^{-1}
 \end{equation*}
 \end{example}
 
 \begin{example}
-Not every matrix is diagonalizable.
-The square of
+This matrix is not diagonalizable.
 \begin{equation*}
-  N=\begin{pmatrix}
+  N=\begin{mat}[r]
        0  &0  \\
        1  &0
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
-is the zero matrix.
-Thus, for any map~$n$ that \( N \) represents 
-(with respect to the same basis for the domain as for the codomain), 
+The reason is that this matrix is not the zero matrix 
+but its square is the zero matrix.
+The fact that $N$ is not the zero matrix means that it cannot be similar to
+the zero matrix, by \nearbyexample{ex:OnlyZeroSimToZero}.
+So if $N$ is similar to a diagonal matrix $D$ then $D$ has at least one
+nonzero entry on its diagonal.
+The fact that $N$'s square is the zero matrix means that
+for any map~$n$ that \( N \) represents, 
 the composition \( \composed{n}{n} \) is the zero map.
-This implies that no such map \( n \) can be diagonally represented (with
-respect to any $B,B$) because no power
-of a nonzero diagonal matrix is zero.
-That is, there is no diagonal matrix in $N$'s similarity class.
+The only matrix representing the zero map is the zero matrix and
+thus $D^2$ would have to be the zero matrix.
+But $D^2$ cannot be the zero matrix because the square of a diagonal
+matrix is the diagonal matrix whose entries are the squares of the entries 
+from the starting matrix, and $D$ is not the zero matrix.
 \end{example}
 
 That example shows that a diagonal form will not do for a 
@@ -941,33 +952,34 @@ for each \( i \).
 \end{corollary}
 
 \begin{proof}
-This follows from the definition by
-considering a diagonal representation matrix.
+Consider a diagonal representation matrix.
 \begin{equation*}
    \rep{t}{B,B}=
-   \begin{pmat}{c|@{\hspace*{1em}}c@{\hspace*{1em}}|c}
+   \begin{pmat}{c@{\hspace*{1em}}c@{\hspace*{1em}}c}
       \vdots                    &       &\vdots                     \\
       \rep{t(\vec{\beta}_1)}{B} &\cdots &\rep{t(\vec{\beta}_n)}{B}  \\
       \vdots                    &       &\vdots
    \end{pmat}
    =
-   \begin{pmat}{c|@{\hspace*{1em}}c@{\hspace*{1em}}|c}
+   \begin{pmat}{c@{\hspace*{1em}}c@{\hspace*{1em}}c}
       \lambda_1   &       &0         \\
       \vdots      &\ddots &\vdots    \\
       0           &       &\lambda_n
    \end{pmat}
 \end{equation*}
-This representation is equivalent to the existence of a basis satisfying the
-stated conditions simply by the definition of matrix representation.
+Let $\vec{v}$ be a member of the space and consider its representation 
+with respect to the basis $\rep{\vec{v}}{B}$.
+The product of the diagonal matrix and the representation vector will have the 
+stated action.
 \end{proof}
 
 \begin{example}     \label{ex:DiagUpperTrian}
 To diagonalize
 \begin{equation*}
-   T=\begin{pmatrix}
+   T=\begin{mat}[r]
       3  &2  \\
       0  &1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 we take it as the representation of a transformation with respect to the
 standard basis $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ and we look for a basis
@@ -975,81 +987,82 @@ standard basis $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ and we look for a basis
 \begin{equation*}
   \rep{t}{B,B}
   =
-  \begin{pmatrix}
+  \begin{mat}
     \lambda_1  &0          \\
     0          &\lambda_2
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 that is, such that 
 $t(\vec{\beta}_1)=\lambda_1\vec{\beta}_1$ 
 and $t(\vec{\beta}_2)=\lambda_2\vec{\beta}_2$.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      3  &2  \\
      0  &1
-  \end{pmatrix}
+  \end{mat}
   \vec{\beta}_1=\lambda_1\cdot\vec{\beta}_1
   \qquad
-  \begin{pmatrix}
+  \begin{mat}[r]
      3  &2  \\
      0  &1
-  \end{pmatrix}
+  \end{mat}
   \vec{\beta}_2=\lambda_2\cdot\vec{\beta}_2
 \end{equation*} 
 We are looking for scalars \( x \) such that this equation
 \begin{equation*}
- \begin{pmatrix}
+ \begin{mat}[r]
     3  &2  \\
     0  &1
- \end{pmatrix}
+ \end{mat}
  \colvec{b_1 \\ b_2}=x\cdot\colvec{b_1 \\ b_2}
 \end{equation*}
-has solutions $b_1$ and $b_2$, which are not both zero.
-Rewrite that as a linear system.
+has solutions $b_1$ and $b_2$, which are not both zero
+(the zero vector is not the member of any basis).
+That's a linear system.
 \begin{equation*}
   \begin{linsys}{2}
      (3-x)\cdot b_1  &+  &2\cdot b_2       &=  &0  \\
                      &   &(1-x)\cdot b_2   &=  &0 
   \end{linsys}
 \tag*{($*$)}\end{equation*}
-In the bottom equation
-the two numbers multiply to give zero only if
-at least one of them is zero so there are two possibilities,
-$b_2=0$ and $x=1$. 
-In the \( b_2=0 \) possibility, 
+Focus first on the bottom equation.
+The two numbers multiply to give zero only if
+at least one of them is zero so there are two cases,
+$b_2=0$ or $x=1$. 
+In the \( b_2=0 \) case, 
 the first equation gives that either $b_1=0$ or \( x=3 \).
-Since the case of both $b_1=0$ and $b_2=0$ is disallowed,
-we are left looking at the possibility of $x=3$. 
+Since we've disallowed the case of both $b_1=0$ and $b_2=0$,
+we are left looking at the possibility that $x=3$. 
 With it, the first equation in ($*$) is $0\cdot b_1+2\cdot b_2=0$
 and so associated with $3$ are vectors
 with a second component of zero and a first component that is free. 
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
         3  &2  \\
         0  &1
-     \end{pmatrix}
+     \end{mat}
      \colvec{b_1 \\ 0}=3\cdot\colvec{b_1 \\ 0} 
 \end{equation*}
-That is, one solution to ($*$) is $\lambda_1=3$, and we have a 
+That is, one solution to ($*$) is $\lambda_1=3$ and we have the 
 first basis vector.
 \begin{equation*}
-   \vec{\beta}_1=\colvec{1 \\ 0}
+   \vec{\beta}_1=\colvec[r]{1 \\ 0}
 \end{equation*}
-In the $x=1$ possibility, 
-the first equation in ($*$) is $2\cdot b_1+2\cdot b_2=0$, and so
-associated with $1$ are vectors whose 
+The second case for the bottom equation of ($*$) is $x=1$. 
+The first equation in ($*$) is then $2\cdot b_1+2\cdot b_2=0$ and so
+associated with $1$ are vectors such that their 
 second component is the negative of their first component.
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
         3  &2  \\
         0  &1
-     \end{pmatrix}
+     \end{mat}
      \colvec{b_1 \\ -b_1}=1\cdot\colvec{b_1 \\ -b_1} 
 \end{equation*}
 Thus, another solution is $\lambda_2=1$ and 
 a second basis vector is this.
 \begin{equation*}
-   \vec{\beta}_2=\colvec{1 \\ -1}
+   \vec{\beta}_2=\colvec[r]{1 \\ -1}
 \end{equation*}
 To finish, drawing the similarity diagram        
 \begin{equation*}
@@ -1065,25 +1078,25 @@ To finish, drawing the similarity diagram
       \end{CD}
 \end{equation*}
 and noting that the matrix $\rep{\identity}{B,\stdbasis_2}$ is easy
-leads to this diagonalization.
+gives us this diagonalization.
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}[r]
      3  &0  \\
      0  &1
-   \end{pmatrix}
+   \end{mat}
    =
-   \begin{pmatrix}
+   \begin{mat}[r]
      1  &1  \\
      0  &-1
-   \end{pmatrix}^{-1}
-   \begin{pmatrix}
+   \end{mat}^{-1}
+   \begin{mat}[r]
      3  &2  \\
      0  &1
-   \end{pmatrix}
-   \begin{pmatrix}
+   \end{mat}
+   \begin{mat}[r]
      1  &1  \\
      0  &-1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 \end{example}
 
@@ -1103,10 +1116,10 @@ the way that we will routinely use, to find the $\lambda$'s.
       However, here is one way to go;
       to diagonalize
       \begin{equation*}
-         T=\begin{pmatrix}
+         T=\begin{mat}[r]
             4  &-2  \\
             1  &1
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       take it as the representation of a transformation with respect to the
       standard basis $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ and look for
@@ -1114,32 +1127,32 @@ the way that we will routinely use, to find the $\lambda$'s.
       \begin{equation*}
         \rep{t}{B,B}
         =
-        \begin{pmatrix}
+        \begin{mat}
           \lambda_1  &0          \\
           0          &\lambda_2
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       that is, such that 
       $t(\vec{\beta}_1)=\lambda_1$ and $t(\vec{\beta}_2)=\lambda_2$.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
            4  &-2  \\
            1  &1
-        \end{pmatrix}
+        \end{mat}
         \vec{\beta}_1=\lambda_1\cdot\vec{\beta}_1
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
            4  &-2  \\
            1  &1
-        \end{pmatrix}
+        \end{mat}
         \vec{\beta}_2=\lambda_2\cdot\vec{\beta}_2
       \end{equation*} 
       We are looking for scalars \( x \) such that this equation
       \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
           4  &-2  \\
           1  &1
-       \end{pmatrix}
+       \end{mat}
        \colvec{b_1 \\ b_2}=x\cdot\colvec{b_1 \\ b_2}
       \end{equation*}
       has solutions $b_1$ and $b_2$, which are not both zero.
@@ -1170,26 +1183,26 @@ the way that we will routinely use, to find the $\lambda$'s.
       associated with $x=2$ we have
       vectors whose first and second components are equal:
       \begin{equation*}
-         \vec{\beta}_1=\colvec{1 \\ 1}
+         \vec{\beta}_1=\colvec[r]{1 \\ 1}
          \qquad\text{(so \(
-           \begin{pmatrix}
+           \begin{mat}[r]
               4  &-2  \\
               1  &1
-           \end{pmatrix}
-           \colvec{1 \\ 1}=2\cdot\colvec{1 \\ 1} \), and $\lambda_1=2$).}
+           \end{mat}
+           \colvec[r]{1 \\ 1}=2\cdot\colvec[r]{1 \\ 1} \), and $\lambda_1=2$).}
       \end{equation*}
       If \( x=3 \) then the first equation is
       $b_1-2b_2=0$ and so the associated vectors 
       are those whose first component is 
       twice their second:
       \begin{equation*}
-         \vec{\beta}_2=\colvec{2 \\ 1}
+         \vec{\beta}_2=\colvec[r]{2 \\ 1}
          \qquad\text{(so \(
-           \begin{pmatrix}
+           \begin{mat}[r]
               4  &-2  \\
               1  &1
-           \end{pmatrix}
-           \colvec{2 \\ 1}=3\cdot\colvec{2 \\ 1} \), and so $\lambda_2=3$).}
+           \end{mat}
+           \colvec[r]{2 \\ 1}=3\cdot\colvec[r]{2 \\ 1} \), and so $\lambda_2=3$).}
       \end{equation*}
       This picture 
         \begin{equation*}
@@ -1206,75 +1219,75 @@ the way that we will routinely use, to find the $\lambda$'s.
         \end{equation*}
       shows how to get the diagonalization.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            2  &0  \\
            0  &3
-         \end{pmatrix}
+         \end{mat}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &2  \\
            1  &1
-         \end{pmatrix}^{-1}
-         \begin{pmatrix}
+         \end{mat}^{-1}
+         \begin{mat}[r]
            4  &-2  \\
            1  &1
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            1  &2  \\
            1  &1
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       \textit{Comment}.
       This equation matches the $T=PSP^{-1}$ definition under this renaming.
       \begin{equation*}
         T=
-         \begin{pmatrix}
+         \begin{mat}[r]
            2  &0  \\
            0  &3
-         \end{pmatrix}
+         \end{mat}
          \quad
          P=
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &2  \\
            1  &1
-         \end{pmatrix}^{-1}
+         \end{mat}^{-1}
          \quad
          P^{-1}=
-         \begin{pmatrix}
+         \begin{mat}[r]
            1  &2  \\
            1  &1
-         \end{pmatrix}
+         \end{mat}
          \quad
          S=
-         \begin{pmatrix}
+         \begin{mat}[r]
            4  &-2  \\
            1  &1
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
     \end{answer}
   \item 
     Diagonalize these upper triangular matrices.
     \begin{exparts*}
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           -2  &1  \\
            0  &2
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           5  &4  \\
           0  &1
-        \end{pmatrix}$
+        \end{mat}$
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
         \partsitem
           Setting up
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               -2  &1  \\
                0  &2
-            \end{pmatrix}
+            \end{mat}
             \colvec{b_1 \\ b_2}
             =x\cdot\colvec{b_1 \\ b_2}
             \qquad\Longrightarrow\qquad 
@@ -1291,24 +1304,24 @@ the way that we will routinely use, to find the $\lambda$'s.
           associated vectors whose second component is zero, and whose
           first component is free.  
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               -2  &1  \\
                0  &2
-            \end{pmatrix}
+            \end{mat}
             \colvec{b_1 \\ 0}
             =-2\cdot\colvec{b_1 \\ 0}
             \qquad
-            \vec{\beta}_1=\colvec{1 \\ 0}
+            \vec{\beta}_1=\colvec[r]{1 \\ 0}
           \end{equation*}
           Following the other possibility leads to a first equation of
           $-4b_1+b_2=0$ and so the vectors associated with this 
           solution have a second component that is four times their first
           component.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               -2  &1  \\
                0  &2
-            \end{pmatrix}
+            \end{mat}
             \colvec{b_1 \\ 4b_1}
             =2\cdot\colvec{b_1 \\ 4b_1}
             \qquad
@@ -1316,30 +1329,30 @@ the way that we will routinely use, to find the $\lambda$'s.
           \end{equation*}
           The diagonalization is this.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
               0  &4
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               -2  &1  \\
                0  &2
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               1  &1  \\
               0  &4
-            \end{pmatrix}^{-1}
+            \end{mat}^{-1}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               -2  &0  \\
                0  &2
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \partsitem The calculations are like those in the prior part.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
                5  &4  \\
                0  &1
-            \end{pmatrix}
+            \end{mat}
             \colvec{b_1 \\ b_2}
             =x\cdot\colvec{b_1 \\ b_2}
             \qquad\Longrightarrow\qquad 
@@ -1355,33 +1368,33 @@ the way that we will routinely use, to find the $\lambda$'s.
           that $x=5$, associated with vectors whose second component
           is zero and whose first component is free.
           \begin{equation*}
-            \vec{\beta}_1=\colvec{1 \\ 0}
+            \vec{\beta}_1=\colvec[r]{1 \\ 0}
           \end{equation*}
           The $x=1$ possibility gives a first equation of
           $4b_1+4b_2=0$ and so the associated vectors have a 
           second component that is the negative of their first component.
           \begin{equation*}
-            \vec{\beta}_1=\colvec{1 \\ -1}
+            \vec{\beta}_1=\colvec[r]{1 \\ -1}
           \end{equation*}
           We thus have this diagonalization.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
               0  &-1
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
                5  &4  \\
                0  &1
-            \end{pmatrix}
-            \begin{pmatrix}^{-1}
+            \end{mat}
+            \begin{mat}[r]
               1  &1  \\
               0  &-1
-            \end{pmatrix}
+            \end{mat}^{-1}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
                5  &0  \\
                0  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}
     \end{answer}
@@ -1390,16 +1403,16 @@ the way that we will routinely use, to find the $\lambda$'s.
     \begin{answer}
       For any integer \( p \),
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           d_1  &0      &   \\
           0    &\ddots &   \\
                &       &d_n
-        \end{pmatrix}^p=
-        \begin{pmatrix}
+        \end{mat}^p=
+        \begin{mat}
           d_1^p  &0      &   \\
           0      &\ddots &   \\
                  &       &d_n^p
-        \end{pmatrix}.
+        \end{mat}.
      \end{equation*} 
     \end{answer}
   \item 
@@ -1409,29 +1422,29 @@ the way that we will routinely use, to find the $\lambda$'s.
      \begin{answer}
        These two are not similar 
        \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
              0  &0  \\
              0  &0
-          \end{pmatrix}
+          \end{mat}
           \qquad
-          \begin{pmatrix}
+          \begin{mat}[r]
              1  &0  \\
              0  &1
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
        because each is alone in its similarity class.
 
        For the second half, these
        \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
              2  &0  \\
              0  &3
-          \end{pmatrix}
+          \end{mat}
           \qquad
-          \begin{pmatrix}
+          \begin{mat}[r]
              3  &0  \\
              0  &2
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
        are similar via the matrix that changes bases from
        \( \sequence{\vec{\beta}_1,\vec{\beta}_2} \) to
@@ -1446,15 +1459,15 @@ the way that we will routinely use, to find the $\lambda$'s.
     \begin{answer}
       Contrast these two.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            2  &0  \\
            0  &1
-         \end{pmatrix}
+         \end{mat}
          \qquad
-         \begin{pmatrix}
+         \begin{mat}[r]
            2  &0  \\
            0  &0
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       The first is nonsingular, the second is singular.  
      \end{answer}
@@ -1466,18 +1479,18 @@ the way that we will routinely use, to find the $\lambda$'s.
        To check that the inverse of a diagonal matrix is the diagonal
        matrix of the inverses, just multiply.
        \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}
              a_{1,1}  &0                \\
              0        &a_{2,2}          \\
                       &       &\ddots    \\
                       &       &      &a_{n,n}
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}
             1/a_{1,1}  &0                \\
              0        &1/a_{2,2}          \\
                       &       &\ddots    \\
                       &       &      &1/a_{n,n}
-          \end{pmatrix}
+          \end{mat}
       \end{equation*}
       (Showing that it is a left inverse is just as easy.)
 
@@ -1487,23 +1500,23 @@ the way that we will routinely use, to find the $\lambda$'s.
   \item 
     The equation ending \nearbyexample{ex:DiagUpperTrian}
     \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          1  &1  \\
          0  &-1
-       \end{pmatrix}^{-1}
-       \begin{pmatrix}
+       \end{mat}^{-1}
+       \begin{mat}[r]
          3  &2  \\
          0  &1
-       \end{pmatrix}
-       \begin{pmatrix}
+       \end{mat}
+       \begin{mat}[r]
          1  &1  \\
          0  &-1
-       \end{pmatrix}
+       \end{mat}
        =
-       \begin{pmatrix}
+       \begin{mat}[r]
          3  &0  \\
          0  &1
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     is a bit jarring because for $P$ we must take the first matrix,
     which is shown as an inverse, and for $P^{-1}$ we take the inverse of the
@@ -1512,23 +1525,23 @@ the way that we will routinely use, to find the $\lambda$'s.
     \begin{exparts}
       \partsitem Check that this nicer-appearing equation holds.
         \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}[r]
              3  &0  \\
              0  &1
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              1  &1  \\
              0  &-1
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              3  &2  \\
              0  &1
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              1  &1  \\
              0  &-1
-           \end{pmatrix}^{-1}
+           \end{mat}^{-1}
         \end{equation*}
       \partsitem Is the previous item a coincidence?
         Or can we always switch the $P$ and the $P^{-1}$?
@@ -1537,33 +1550,33 @@ the way that we will routinely use, to find the $\lambda$'s.
      \begin{exparts}
        \partsitem The check is easy.
          \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}[r]
              1  &1  \\
              0  &-1
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              3  &2  \\
              0  &1
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              3  &3  \\
              0  &-1
-           \end{pmatrix}
+           \end{mat}
            \qquad
-           \begin{pmatrix}
+           \begin{mat}[r]
              3  &3  \\
              0  &-1
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              1  &1  \\
              0  &-1
-           \end{pmatrix}^{-1}
+           \end{mat}^{-1}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              3  &0  \\
              0  &1
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
         \partsitem It is a coincidence, in the sense that if $T=PSP^{-1}$
           then $T$ need not equal $P^{-1}SP$.
@@ -1571,33 +1584,33 @@ the way that we will routinely use, to find the $\lambda$'s.
           $D=PTP^{-1}$ does not imply that $D$ equals $P^{-1}TP$.
           The matrices from \nearbyexample{ex:DiagTwoByTwo} show this.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &2  \\
               1  &1
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               4  &-2  \\
               1  &1
-            \end{pmatrix}
+            \end{mat}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               6  &0  \\
               5  &-1
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               6  &0  \\
               5  &-1
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               1  &2  \\
               1  &1
-            \end{pmatrix}^{-1}
+            \end{mat}^{-1}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               -6  &12  \\
               -6  &11
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
      \end{exparts}
    \end{answer}
@@ -1616,77 +1629,77 @@ the way that we will routinely use, to find the $\lambda$'s.
     Find a formula for the powers of this matrix
     \textit{Hint}:~see \nearbyexercise{exer:PowersOfDiags}.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         -3  &1  \\
         -4  &2
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       Diagonalizing and then taking powers of the diagonal matrix shows that
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           -3  &1  \\
           -4  &2
-        \end{pmatrix}^k
+        \end{mat}^k
         =
         \frac{1}{3}
-        \begin{pmatrix}
+        \begin{mat}[r]
           -1  &1  \\
           -4  &4
-        \end{pmatrix}
+        \end{mat}
         +(\frac{-2}{3})^k
-        \begin{pmatrix}
+        \begin{mat}[r]
            4  &-1 \\
            4  &-1
-        \end{pmatrix}.
+        \end{mat}.
       \end{equation*}  
      \end{answer}
   \recommended \item \label{exer:DiagThese} 
     Diagonalize these.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                   1  &1  \\
                   0  &0
-               \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}
+               \end{mat} \)
+      \partsitem \( \begin{mat}[r]
                   0  &1  \\
                   1  &0
-               \end{pmatrix} \)
+               \end{mat} \)
     \end{exparts*}
     \begin{answer}
      \begin{exparts}
-        \partsitem \( \begin{pmatrix}
+        \partsitem \( \begin{mat}[r]
                     1  &1  \\
                     0  &-1
-                 \end{pmatrix}^{-1}
-                 \begin{pmatrix}
+                 \end{mat}^{-1}
+                 \begin{mat}[r]
                     1  &1  \\
                     0  &0
-                 \end{pmatrix}
-                 \begin{pmatrix}
+                 \end{mat}
+                 \begin{mat}[r]
                     1  &1  \\
                     0  &-1
-                 \end{pmatrix}
-                =\begin{pmatrix}
+                 \end{mat}
+                =\begin{mat}[r]
                     1  &0  \\
                     0  &0
-                 \end{pmatrix} \)
-        \partsitem \( \begin{pmatrix}
+                 \end{mat} \)
+        \partsitem \( \begin{mat}[r]
                     1  &1  \\
                     0  &-1
-                 \end{pmatrix}^{-1}
-                 \begin{pmatrix}
+                 \end{mat}^{-1}
+                 \begin{mat}[r]
                     0  &1  \\
                     1  &0
-                 \end{pmatrix}
-                 \begin{pmatrix}
+                 \end{mat}
+                 \begin{mat}[r]
                     1  &1  \\
                     0  &-1
-                 \end{pmatrix}
-                =\begin{pmatrix}
+                 \end{mat}
+                =\begin{mat}[r]
                     1  &0  \\
                     0  &-1
-                 \end{pmatrix} \)
+                 \end{mat} \)
       \end{exparts}  
      \end{answer}
   \item 
@@ -1705,15 +1718,15 @@ the way that we will routinely use, to find the $\lambda$'s.
       \definend{simultaneously diagonalizable}).
       Specifically, these two are diagonalizable but their sum is not:
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &1  \\
             0  &0
-         \end{pmatrix}
+         \end{mat}
          \qquad
-         \begin{pmatrix}
+         \begin{mat}[r]
            -1  &0  \\
             0  &0
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       (the second is already diagonal; for the first, see 
       \nearbyexercise{exer:DiagThese}).
@@ -1723,84 +1736,84 @@ the way that we will routinely use, to find the $\lambda$'s.
      be diagonalizable.
      These two are diagonalizable but their product is not:
      \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
            1  &0  \\
            0  &0
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
            0  &1  \\
            1  &0
-        \end{pmatrix}
+        \end{mat}
      \end{equation*}
      (for the second, see \nearbyexercise{exer:DiagThese}).   
     \end{answer}
   \recommended \item 
     Show that matrices of this form are not diagonalizable.
     \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
           1  &c  \\
           0  &1
-       \end{pmatrix}
+       \end{mat}
        \qquad c\neq 0
     \end{equation*}
     \begin{answer}
       If
       \begin{equation*}
          P
-         \begin{pmatrix}
+         \begin{mat}
             1  &c  \\
             0  &1
-         \end{pmatrix}
+         \end{mat}
          P^{-1}
          =
-         \begin{pmatrix}
+         \begin{mat}
             a  &0  \\
             0  &b
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       then
       \begin{equation*}
          P
-         \begin{pmatrix}
+         \begin{mat}
             1  &c  \\
             0  &1
-         \end{pmatrix}
+         \end{mat}
          =
-         \begin{pmatrix}
+         \begin{mat}
             a  &0  \\
             0  &b
-         \end{pmatrix}
+         \end{mat}
          P
       \end{equation*}
       so
       \begin{align*}
-         \begin{pmatrix}
+         \begin{mat}
             p  &q  \\
             r  &s
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}
             1  &c  \\
             0  &1
-         \end{pmatrix}
+         \end{mat}
          &=
-         \begin{pmatrix}
+         \begin{mat}
             a  &0  \\
             0  &b
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}
             p  &q  \\
             r  &s
-         \end{pmatrix}        \\
-         \begin{pmatrix}
+         \end{mat}        \\
+         \begin{mat}
             p  &cp+q  \\
             r  &cr+s
-         \end{pmatrix}
+         \end{mat}
          &=
-         \begin{pmatrix}
+         \begin{mat}
             ap  &aq  \\
             br  &bs
-         \end{pmatrix}
+         \end{mat}
       \end{align*}
       The \( 1,1 \) entries show that \( a=1 \) and the \( 1,2 \) entries
       then show that \( pc=0 \).
@@ -1816,15 +1829,15 @@ the way that we will routinely use, to find the $\lambda$'s.
     Show that each of these is diagonalizable.
     \begin{exparts*}
       \partsitem
-       \( \begin{pmatrix}
+       \( \begin{mat}[r]
              1  &2  \\
              2  &1
-          \end{pmatrix}  \)
+          \end{mat}  \)
       \partsitem
-       \( \begin{pmatrix}
+       \( \begin{mat}
              x  &y  \\
              y  &z
-          \end{pmatrix}
+          \end{mat}
           \qquad \text{$x,y,z$ scalars}  \)
     \end{exparts*}
     \begin{answer}
@@ -1832,69 +1845,69 @@ the way that we will routinely use, to find the $\lambda$'s.
       \partsitem Using the formula for the inverse of a $\nbyn{2}$
         matrix gives this.
         \begin{align*}
-           \begin{pmatrix}
+           \begin{mat}
               a  &b  \\
               c  &d
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
               1  &2  \\
               2  &1
-           \end{pmatrix}
+           \end{mat}
            \cdot\frac{1}{ad-bc}\cdot
-           \begin{pmatrix}
+           \begin{mat}
               d  &-b \\
              -c  &a
-           \end{pmatrix}
+           \end{mat}
            &=\frac{1}{ad-bc}
-           \begin{pmatrix}
+           \begin{mat}
               ad+2bd-2ac-bc    &-ab-2b^2+2a^2+ab \\
               cd+2d^2-2c^2-cd  &-bc-2bd+2ac+ad
-           \end{pmatrix}
+           \end{mat}
         \end{align*}
         Now pick scalars \( a,\ldots,d \) so that
         \( ad-bc\neq 0 \) and \( 2d^2-2c^2=0 \) and \( 2a^2-2b^2=0 \).
         For example, these will do.
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
             1  &1  \\
             1  &-1
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
             1  &2  \\
             2  &1
-          \end{pmatrix}
+          \end{mat}
           \cdot\frac{1}{-2}\cdot
-          \begin{pmatrix}
+          \begin{mat}[r]
             -1  &-1  \\
             -1  &1
-          \end{pmatrix}
+          \end{mat}
           =
           \frac{1}{-2}
-          \begin{pmatrix}
+          \begin{mat}[r]
             -6  &0   \\
              0  &2
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
       \partsitem As above,
         \begin{align*}
-           \begin{pmatrix}
+           \begin{mat}
               a  &b  \\
               c  &d
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}
               x  &y  \\
               y  &z
-           \end{pmatrix}
+           \end{mat}
            \cdot\frac{1}{ad-bc}\cdot
-           \begin{pmatrix}
+           \begin{mat}
               d  &-b \\
              -c  &a
-           \end{pmatrix}
+           \end{mat}
            &=\frac{1}{ad-bc}
-           \begin{pmatrix}
+           \begin{mat}
               adx+bdy-acy-bcz    &-abx-b^2y+a^2y+abz \\
               cdx+d^2y-c^2y-cdz  &-bcx-bdy+acy+adz
-           \end{pmatrix}
+           \end{mat}
         \end{align*}
         we are looking for scalars \( a,\ldots,d \) so that
         \( ad-bc\neq 0 \) and
@@ -2073,17 +2086,17 @@ It has an eigenvalue of \( 2 \) associated with eigenvectors of the form
 If we represent \( t \) with respect to \( B=\sequence{1+1x,1-1x} \)
 \begin{equation*}
    T=\rep{t}{B,B}=
-   \begin{pmatrix}
+   \begin{mat}[r]
       2  &0  \\
       0  &0
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 then \( 2 \) is an eigenvalue of \( T \), associated with these eigenvectors.
 \begin{equation*}
-   \set{\colvec{c_0 \\ c_1}\suchthat \begin{pmatrix}
+   \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
                                          2  &0  \\
                                          0  &0
-                                      \end{pmatrix}\colvec{c_0 \\ c_1}
+                                      \end{mat}\colvec{c_0 \\ c_1}
                                       =\colvec{2c_0 \\ 2c_1}  }
   =\set{\colvec{c_0 \\ 0}\suchthat c_0\in\C,\, c_0\neq 0 }
 \end{equation*}
@@ -2091,18 +2104,18 @@ On the other hand, representing $t$ with respect to
 \( D=\sequence{2+1x,1+0x} \) gives 
 \begin{equation*}
    S=\rep{t}{D,D}=
-   \begin{pmatrix}
+   \begin{mat}[r]
       3  &1  \\
      -3  &-1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 and the eigenvectors of \( S \) associated with the eigenvalue \( 2 \) are
 these.
 \begin{equation*}
-   \set{\colvec{c_0 \\ c_1}\suchthat \begin{pmatrix}
+   \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
                                          3  &1  \\
                                         -3  &-1
-                                      \end{pmatrix}\colvec{c_0 \\ c_1}
+                                      \end{mat}\colvec{c_0 \\ c_1}
                                       =\colvec{2c_0 \\ 2c_1}  }
   =\set{\colvec{0 \\ c_1}\suchthat c_1\in\C,\, c_1\neq 0 }
 \end{equation*}
@@ -2126,21 +2139,21 @@ finding eigenvectors and eigenvalues.
 What are the eigenvalues and eigenvectors of this matrix?
 \begin{equation*}
   T=
-  \begin{pmatrix}
+  \begin{mat}[r]
      1    &2    &1    \\
      2    &0    &-2   \\
     -1    &2    &3
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 To find the scalars \( x \) such that
 \( T\vec{\zeta}=x\vec{\zeta} \) for non-\( \zero \) eigenvectors
 \( \vec{\zeta} \), bring everything to the left-hand side
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      1    &2    &1    \\
      2    &0    &-2   \\
     -1    &2    &3
-  \end{pmatrix}
+  \end{mat}
   \colvec{z_1 \\ z_2 \\ z_3}
   -x\colvec{z_1 \\ z_2 \\ z_3}
   =\zero
@@ -2151,14 +2164,14 @@ and factor
 because \( T \) is a matrix while \( x \) is a scalar.)
 This homogeneous linear system
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
    1-x           &2            &1            \\
      2           &0-x          &-2           \\
     -1           &2            &3-x
-  \end{pmatrix}
+  \end{mat}
   \colvec{z_1 \\ z_2 \\ z_3}
   =
-  \colvec{0 \\ 0 \\ 0}
+  \colvec[r]{0 \\ 0 \\ 0}
 \end{equation*}
 has a non-\( \zero \) solution if and only if the
 matrix is singular.
@@ -2178,14 +2191,14 @@ The eigenvalues are \( \lambda_1=0 \) and \( \lambda_2=2 \).
 To find the associated eigenvectors, plug in each eigenvalue.
 Plugging in $\lambda_1=0$ gives
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
      1-0         &2            &1            \\
      2           &0-0          &-2           \\
     -1           &2            &3-0
-  \end{pmatrix}
+  \end{mat}
   \colvec{z_1 \\ z_2 \\ z_3}
   =
-  \colvec{0 \\ 0 \\ 0}
+  \colvec[r]{0 \\ 0 \\ 0}
   \qquad\Longrightarrow\qquad
   \colvec{z_1 \\ z_2 \\ z_3}
   =
@@ -2195,14 +2208,14 @@ for a scalar parameter \( a\neq 0 \)
 (\( a \) is non-\( 0 \) because eigenvectors must be non-\( \zero \)).
 In the same way, plugging in $\lambda_2=2$ gives 
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
      1-2         &2            &1            \\
      2           &0-2          &-2           \\
     -1           &2            &3-2
-  \end{pmatrix}
+  \end{mat}
   \colvec{z_1 \\ z_2 \\ z_3}
   =
-  \colvec{0 \\ 0 \\ 0}
+  \colvec[r]{0 \\ 0 \\ 0}
   \qquad\Longrightarrow\qquad
   \colvec{z_1 \\ z_2 \\ z_3}
   =
@@ -2215,32 +2228,32 @@ with \( b\neq 0 \).
 If
 \begin{equation*}
   S=
-  \begin{pmatrix}
+  \begin{mat}[r]
     \pi      &1      \\
     0        &3
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 (here \( \pi \) is not a projection map, it is the number
 \( 3.14\ldots \)) then
 \begin{equation*}
   \deter{
-    \begin{pmatrix}
+    \begin{mat}
       \pi-x &1         \\
       0     &3-x
-    \end{pmatrix} }
+    \end{mat} }
   =
   (x-\pi)(x-3)
 \end{equation*}
 so \( S \) has eigenvalues of \( \lambda_1=\pi \) and \( \lambda_2=3 \).
 To find associated eigenvectors, first plug in $\lambda_1$ for $x$:
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     \pi-\pi     &1         \\
     0           &3-\pi
-  \end{pmatrix}
+  \end{mat}
   \colvec{z_1 \\ z_2}
   =
-  \colvec{0 \\ 0}
+  \colvec[r]{0 \\ 0}
   \qquad\Longrightarrow\qquad
   \colvec{z_1 \\ z_2}
   =
@@ -2249,13 +2262,13 @@ To find associated eigenvectors, first plug in $\lambda_1$ for $x$:
 for a scalar \( a\neq 0 \),
 and then plug in $\lambda_2$:
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     \pi-3       &1         \\
     0           &3-3
-  \end{pmatrix}
+  \end{mat}
   \colvec{z_1 \\ z_2}
   =
-  \colvec{0 \\ 0}
+  \colvec[r]{0 \\ 0}
   \qquad\Longrightarrow\qquad
   \colvec{z_1 \\ z_2}
   =
@@ -2361,11 +2374,11 @@ is two.
 \begin{example}
 With respect to the standard bases, this matrix
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      1  &0  &0  \\
      0  &1  &0  \\
      0  &0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 represents projection.
 \begin{equation*}
@@ -2437,19 +2450,19 @@ we are left with the equation \( \vec{v}_{k+1}\neq\zero \).
 \begin{example}
 The eigenvalues of
 \begin{equation*}
-     \begin{pmatrix}
+     \begin{mat}[r]
         2   &-2   &2   \\
         0   &1    &1   \\
        -4   &8    &3
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 are distinct: \( \lambda_1=1 \), \( \lambda_2=2 \), and~\( \lambda_3=3 \).
 A set of associated eigenvectors like
 \begin{equation*}
   \set{
-       \colvec{2 \\ 1 \\ 0},
-       \colvec{9 \\ 4 \\ 4},
-       \colvec{2 \\ 1 \\ 2}  }
+       \colvec[r]{2 \\ 1 \\ 0},
+       \colvec[r]{9 \\ 4 \\ 4},
+       \colvec[r]{2 \\ 1 \\ 2}  }
 \end{equation*}
 is linearly independent.
 \end{example}
@@ -2470,26 +2483,26 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
   \item 
     For each, find the characteristic polynomial and the eigenvalues.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                  10  &-9 \\
                   4  &-2
-            \end{pmatrix}  \)
-      \partsitem $\begin{pmatrix}
+            \end{mat}  \)
+      \partsitem $\begin{mat}[r]
                     1  &2  \\
                     4  &3  
-                 \end{pmatrix}$
-      \partsitem \( \begin{pmatrix}
+                 \end{mat}$
+      \partsitem \( \begin{mat}[r]
                   0  &3  \\
                   7 &0
-                 \end{pmatrix} \)
-      \partsitem \( \begin{pmatrix}  
+                 \end{mat} \)
+      \partsitem \( \begin{mat}[r]  
                   0  &0  \\
                   0  &0
-            \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+            \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                   1  &0  \\
                   0  &1
-            \end{pmatrix}  \)
+            \end{mat}  \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -2516,14 +2529,14 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
     For each matrix, find the characteristic equation, and the
     eigenvalues and associated eigenvectors.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
                   3  &0  \\
                   8  &-1
-            \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+            \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
                   3  &2  \\
                  -1  &0
-            \end{pmatrix}  \)
+            \end{mat}  \)
     \end{exparts*}
     \begin{answer}
        \begin{exparts}
@@ -2532,12 +2545,12 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
            \( \lambda_2=-1 \).
            For the eigenvectors we consider this equation.
            \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}
                3-x  &0    \\
                8    &-1-x
-             \end{pmatrix}
+             \end{mat}
              \colvec{b_1  \\  b_2}
-             =\colvec{0  \\  0}
+             =\colvec[r]{0  \\  0}
            \end{equation*}
            For the eigenvector associated with $\lambda_1=3$,
            we consider the resulting linear system.
@@ -2552,10 +2565,10 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
            \begin{equation*}
              \set{\colvec{b_2/2 \\ b_2}\suchthat b_2\in\C}
              \qquad
-             \begin{pmatrix}
+             \begin{mat}[r]
                3  &0  \\
                8  &-1
-             \end{pmatrix}
+             \end{mat}
              \colvec{b_2/2  \\ b_2}
              =3\cdot\colvec{b_2/2 \\ b_2}
            \end{equation*}
@@ -2563,7 +2576,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
            is free in the above system.)
            Hence, this is an eigenvector associated with the eigenvalue $3$.
            \begin{equation*}
-             \colvec{1 \\ 2}
+             \colvec[r]{1 \\ 2}
            \end{equation*}
 
            Finding an eigenvector associated with $\lambda_2=-1$ is similar.
@@ -2579,16 +2592,16 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
            \begin{equation*}
              \set{\colvec{0 \\ b_2}\suchthat b_2\in\C}
              \qquad
-             \begin{pmatrix}
+             \begin{mat}[r]
                3  &0  \\
                8  &-1
-             \end{pmatrix}
+             \end{mat}
              \colvec{0  \\ b_2}
              =-1\cdot\colvec{0 \\ b_2}
            \end{equation*}
            And so this is an eigenvector associated with $\lambda_2$.
            \begin{equation*}
-             \colvec{0 \\ 1}
+             \colvec[r]{0 \\ 1}
            \end{equation*}
          \partsitem The characteristic equation is
            \begin{equation*}
@@ -2619,7 +2632,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
              \set{\colvec{-2b_2 \\ b_2}
                    \suchthat b_2\in\C}
              \qquad
-             \colvec{-2 \\ 1}
+             \colvec[r]{-2 \\ 1}
            \end{equation*}
            For $\lambda_2=1$ the system is 
            \begin{equation*}
@@ -2633,7 +2646,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
              \set{\colvec{-b_2 \\ b_2}
                    \suchthat b_2\in\C}
              \qquad
-             \colvec{-1 \\ 1}
+             \colvec[r]{-1 \\ 1}
            \end{equation*}
        \end{exparts}  
      \end{answer}
@@ -2643,10 +2656,10 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
     \textit{Hint.}
       The eigenvalues are complex.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
          -2  &-1 \\
           5  &2
-      \end{pmatrix}  
+      \end{mat}  
     \end{equation*}
     \begin{answer}
          The characteristic equation 
@@ -2719,11 +2732,11 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
     Find the characteristic polynomial, the eigenvalues, and the associated
     eigenvectors of this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         1  &1  &1  \\
         0  &0  &1  \\
         0  &0  &1
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer}
       The characteristic equation is
@@ -2757,25 +2770,25 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
       So these are eigenvectors associated with $\lambda_1=1$ and 
       $\lambda_2=0$.
       \begin{equation*}
-        \colvec{1 \\ 0 \\ 0}
+        \colvec[r]{1 \\ 0 \\ 0}
         \qquad
-        \colvec{-1 \\ 1 \\ 0}  
+        \colvec[r]{-1 \\ 1 \\ 0}  
       \end{equation*}
     \end{answer}
   \recommended \item
     For each matrix, find the characteristic equation, and the
     eigenvalues and associated eigenvectors.
     \begin{exparts*}
-      \partsitem \( \begin{pmatrix}
+      \partsitem \( \begin{mat}[r]
               3  &-2 &0  \\
              -2  &3  &0  \\
               0  &0  &5
-            \end{pmatrix}  \)
-      \partsitem \( \begin{pmatrix}
+            \end{mat}  \)
+      \partsitem \( \begin{mat}[r]
               0  &1   &0  \\
               0  &0   &1  \\
               4  &-17 &8
-            \end{pmatrix}  \)
+            \end{mat}  \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -2812,7 +2825,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
              \set{\colvec{b_2 \\ b_2 \\ 0}
                    \suchthat b_2\in\C}
              \qquad
-             \colvec{1 \\ 1 \\ 0}
+             \colvec[r]{1 \\ 1 \\ 0}
            \end{equation*}
            For $\lambda_2=5$ the system is 
            \begin{equation*}
@@ -2827,7 +2840,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
              \set{\colvec{-b_2 \\ b_2 \\ 0}+\colvec{0 \\ 0 \\ b_3}
                    \suchthat b_2,b_3\in\C}
              \qquad
-             \colvec{-1 \\ 1 \\ 0},\,\colvec{0 \\ 0 \\ 1}
+             \colvec[r]{-1 \\ 1 \\ 0},\,\colvec[r]{0 \\ 0 \\ 1}
            \end{equation*}
          \partsitem The characteristic equation is
            \begin{equation*}
@@ -2875,7 +2888,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
              V_4=\set{\colvec{(1/16)\cdot b_3 \\ (1/4)\cdot b_3 \\ b_3}
                    \suchthat b_2\in\C}
              \qquad
-             \colvec{1 \\ 4 \\ 16}
+             \colvec[r]{1 \\ 4 \\ 16}
            \end{equation*}
 
            Substituting $x=\lambda_2=2+\sqrt{3}$ gives the system 
@@ -2992,21 +3005,21 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
       \begin{equation*}
         \rep{t}{B,B}
         =
-        \begin{pmatrix}
+        \begin{mat}[r]
           5  &6  &2  \\
           0  &-1 &-8 \\
           1  &0  &-2 
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       Thus the characteristic equation 
       \begin{equation*}
         0
         =
-        \begin{pmatrix}
+        \begin{mat}
           5-x  &6    &2  \\
           0    &-1-x &-8 \\
           1    &0    &-2-x 
-        \end{pmatrix}
+        \end{mat}
         =(5-x)(-1-x)(-2-x)-48-2\cdot(-1-x)
       \end{equation*}
       is $0=-x^3+2x^2+15x-36=-1\cdot (x+4)(x-3)^2$.
@@ -3067,7 +3080,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
                            b_3}
                     \suchthat b_3\in\C}
              \qquad
-             \colvec{5  \\ 
+             \colvec[r]{5  \\ 
                      -2  \\ 
                        1}
            \end{equation*}
@@ -3076,36 +3089,36 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
      Find the eigenvalues and eigenvectors of this
      map \( \map{t}{\matspace_2}{\matspace_2} \).
      \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
             a  &b  \\
             c  &d
-         \end{pmatrix}
+         \end{mat}
        \mapsto
-         \begin{pmatrix}
+         \begin{mat}
            2c    &a+c  \\
            b-2c  &d
-         \end{pmatrix}
+         \end{mat}
      \end{equation*}
      \begin{answer}
         $\lambda=1,
-          \begin{pmatrix}
+          \begin{mat}
                    0  &0  \\
                    0  &1
-          \end{pmatrix} \text{ and }
-          \begin{pmatrix}
+          \end{mat} \text{ and }
+          \begin{mat}[r]
                    2  &3  \\
                    1  &0
-          \end{pmatrix}$,           
+          \end{mat}$,           
           $\lambda=-2,
-          \begin{pmatrix}
+          \begin{mat}[r]
                   -1  &0  \\
                    1  &0
-          \end{pmatrix}$,
+          \end{mat}$,
           $\lambda=-1,
-          \begin{pmatrix}
+          \begin{mat}[r]
                   -2  &1  \\
                    1  &0
-          \end{pmatrix}$  
+          \end{mat}$  
        \end{answer}
    \recommended \item 
      Find the eigenvalues and associated eigenvectors of the
@@ -3117,12 +3130,12 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
        and $x^3\mapsto 3x^2$ and its representation is easy to compute.
        \begin{equation*}
          T=\rep{d/dx}{B,B}=
-         \begin{pmatrix}
+         \begin{mat}[r]
            0  &1  &0  &0  \\
            0  &0  &2  &0  \\
            0  &0  &0  &3  \\
            0  &0  &0  &0
-         \end{pmatrix}_{B,B}
+         \end{mat}_{B,B}
        \end{equation*}
        We find the eigenvalues with this computation.
        \begin{equation*}
@@ -3138,12 +3151,12 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
        Thus the map has the single eigenvalue $\lambda=0$.
        To find the associated eigenvectors, we solve
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            0  &1  &0  &0  \\
            0  &0  &2  &0  \\
            0  &0  &0  &3  \\
            0  &0  &0  &0
-         \end{pmatrix}_{B,B}
+         \end{mat}_{B,B}
          \colvec{b_1 \\ b_2 \\ b_3 \\ b_4}_B
          =0\cdot\colvec{b_1 \\ b_2 \\ b_3 \\ b_4}_B
          \qquad\Longrightarrow\qquad
@@ -3194,10 +3207,10 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
       It is not true.
       All of the eigenvalues of this matrix are $0$.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &1  \\
           0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \recommended \item 
@@ -3230,10 +3243,10 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
   \item 
     Prove that if $a,\ldots,\,d$ are all integers and \( a+b=c+d \) then
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
          a  &b  \\
          c  &d
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     has integral eigenvalues, namely \( a+b \) and \( a-c \).
     \begin{answer}
@@ -3324,15 +3337,15 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
       These are two same-sized, equal rank, matrices
       with different eigenvalues.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &1
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &0  \\
           0  &2
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \item 
@@ -3345,22 +3358,22 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
   \item 
     Diagonalize.
     \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          -1  &2  &2  \\
           2  &2  &2  \\
          -3  &-6 &-6
-       \end{pmatrix}
+       \end{mat}
     \end{equation*}
     \begin{answer}
       The characteristic polynomial $x^3-5x^2+6x$ has distinct roots
       \( \lambda_1=0 \), \( \lambda_2=-2 \), and \( \lambda_3=-3 \).
       Thus the matrix can be diagonalized into this form.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             0  &0  &0  \\
             0  &-2 &0  \\
             0  &0  &-3
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}    
     \end{answer}
   \item 
@@ -3389,9 +3402,9 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
       similar:~$t_P(cT)=P(c\cdot T)P^{-1}=c\cdot (PTP^{-1})=c\cdot t_P(T)$.
     \end{answer}
   \puzzle \item 
+    \cite{MathMag67p232}
     Show that if \( A \) is an \( n \) square matrix and each row (column)
     sums to \( c \) then \( c \) is a characteristic root of \( A \).
-    \cite{MathMag67p232}
     \begin{answer}
       \answerasgiven %
       If the argument of the characteristic function of \( A \) is set equal

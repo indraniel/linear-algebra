@@ -118,9 +118,9 @@ beginfig(4) % equiv relation; row-equiv mats from ch1.27, further split
   path p[]; partition; % dotlabels.ulft(5,6,7,8,9,10,11,12,13);
   label(btex {\scriptsize \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-    label.rt(btex {\scriptsize $A$} etex,z14);
+    label.rt(btex {\scriptsize $S$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-    label.rt(btex {\scriptsize $B$} etex,z15);
+    label.rt(btex {\scriptsize $T$} etex,z15);
 
   pickup pencircle scaled line_width_light;
   % split part in center
