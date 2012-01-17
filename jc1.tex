@@ -2,7 +2,7 @@
 %  http://joshua.smcvt.edu/linalg.html
 %  2001-Jun-12
 \chapter{Similarity}
-While studying matrix equivalence, we have shown that for any 
+We have shown that for any 
 homomorphism there are bases $B$ and~$D$ such that the 
 representation matrix has a block partial-identity form.
 \begin{equation*}
@@ -14,8 +14,7 @@ representation matrix has a block partial-identity form.
        \text{\textit{Zero}}      &\text{\textit{Zero}}
     \end{pmat}
 \end{equation*}
-This representation describes
-the map as sending
+This representation describes the map as sending
 \( c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \) to
 \(c_1\vec{\delta}_1+\dots+c_k\vec{\delta}_k+\zero+\dots+\zero \),
 where $n$ is the dimension of the domain and \( k \) is the dimension of
@@ -25,14 +24,13 @@ the action of the map is easy to understand
 because most of the matrix entries are zero.
 
 This chapter considers the special case where the domain and
-the codomain are equal, that is, where
-the homomorphism is a transformation.
-In this case we naturally ask to find a single basis
-\( B \) so that \( \rep{t}{B,B} \) is as simple as possible
+codomain are the same.
+We naturally ask for the basis for the domain and codomain be the same, that is,
+we want a \( B \) so that \( \rep{t}{B,B} \) is as simple as possible
 (we will take `simple' to mean that it has many zeroes).
-A matrix having the above block partial-identity form
-is not always possible here.
-But we will develop a form that comes close, a
+We will find that we 
+cannot always get a matrix having the above block partial-identity form
+but we will develop a form that comes close, a
 representation that is nearly diagonal.
 
 
@@ -49,40 +47,33 @@ representation that is nearly diagonal.
 
 \section{Complex Vector Spaces}
 \index{vector space!over complex numbers}
-This chapter requires that we factor polynomials.
-Of course, many polynomials do not factor over the real numbers;
-for instance,
-\( x^2+1 \) does not factor into the product of two linear polynomials
-with real coefficients.
-For that reason, we shall from now on take our scalars from the complex
-numbers.
+This chapter requires that we factor polynomials,
+but many polynomials do not factor over the real numbers.
+For instance,
+\( x^2+1 \) does not factor into a product of two linear polynomials
+with real coefficients,
+instead it requires complex numbers $x^2+1=(x-i)(x+i)$.
 
+Therefore, in this chapter 
+we shall use complex numbers for our scalars,
+including entries in vectors and matrices. 
 That is, we are shifting from studying vector spaces over the real numbers
-to vector spaces over the complex numbers\Dash
-in this chapter
-vector and matrix entries are complex.
+to vector spaces over the complex numbers.
 
 Any real number is a complex number and
-a glance through this chapter shows that most of the examples use
+in this chapter most of the examples use
 only real numbers.
-Nonetheless, the critical theorems require that the scalars be complex
-numbers, so
+Nonetheless, the critical theorems require that the scalars be complex so
 the first section below is a quick review of complex numbers.
-%We shall not do an extensive development; instead, we shall only
-%quote the facts we need.
-%Specifically, we shall define of the addition and multiplication operations, 
-%and state the Fundamental Theorem.
 
-In this book we are moving to the more general context 
+In this book, our approach is to shift to this more general context 
 of taking scalars to be complex only for the 
-pragmatic reason that we must do so in order to 
-develop the representation.
-We will not go into using other sets of scalars in more detail because
-it could distract from our goal.
-However, the idea of taking scalars from a structure other than the real
-numbers is an interesting one.
-Delightful
-presentations taking this approach are in
+pragmatic reason that we must do so now in order to 
+move forward.
+However, the idea of doing vector spaces 
+by taking scalars from a structure other than the real
+numbers is an interesting and useful one.
+Delightful presentations that take this approach from the start are in
 \cite{Halmos} and \cite{HoffmanKunze}.
 
 
@@ -111,9 +102,16 @@ If \( m(x) \) is a non-zero polynomial then there are \definend{quotient} and
 where the degree of \( r(x) \) is strictly less than the degree of \( m(x) \).
 \end{theorem}
 
-\noindent In this book constant polynomials, 
-including the zero polynomial, are said to have degree \( 0 \).
-(This is not the standard definition, but it is convienent here.)
+\begin{remark}
+Constant polynomials that are not the zero polynomial have degree zero.
+The zero polynomial is usually defined to have degree 
+$-\infty$ in order to make 
+the equation $\text{degree}(fg)=\text{degree}(f)+\text{degree}(g)$
+work for polynomial functions $f$ and $g$. 
+\end{remark}
+% \noindent In this book constant polynomials, 
+% including the zero polynomial, are defined to have degree~\( 0 \).
+% (This is not the standard definition but it is convienent here.)
 
 The point of the integer division statement
 `\( 4 \) goes \( 5 \) times into \( 21 \) with remainder \( 1 \)'
@@ -207,7 +205,7 @@ So we adjoin this root \( i \) to the reals and close the new system with
 respect to addition, multiplication, etc.\ (i.e., we also add
 \( 3+i \), and \( 2i \), and \( 3+2i \), etc., putting in all linear
 combinations of $1$ and $i$).
-We then get a new structure, the \definend{complex numbers}, denoted
+We then get a new structure, the \definend{complex numbers}\index{complex numbers}
 \( \C \).
 
 In $\C$ we can factor (obviously, at least some) quadratics that would be
@@ -275,23 +273,23 @@ for real vector spaces carry over unchanged.
 Matrix multiplication is the same, although the scalar arithmetic involves more
 bookkeeping.
 \begin{multline*}
-  \begin{pmatrix}
+  \begin{mat}
      1+1i  &2-0i  \\
       i    &-2+3i
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}
      1+0i  &1-0i  \\
      3i    &-i
-  \end{pmatrix}             \\
+  \end{mat}             \\
  \begin{aligned}
-  &=\begin{pmatrix}
+  &=\begin{mat}
      (1+1i)\cdot(1+0i)+(2-0i)\cdot(3i)   &(1+1i)\cdot(1-0i)+(2-0i)\cdot(-i) \\
      (i)\cdot(1+0i)+(-2+3i)\cdot(3i)     &(i)\cdot(1-0i)+(-2+3i)\cdot(-i)
-  \end{pmatrix}                                                  \\
-  &=\begin{pmatrix}
+  \end{mat}                                                  \\
+  &=\begin{mat}
      1+7i  &1-1i  \\
     -9-5i  &3+3i
-  \end{pmatrix}
+  \end{mat}
  \end{aligned}
 \end{multline*}
 \end{example}
