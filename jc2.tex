@@ -1064,7 +1064,7 @@ a second basis vector is this.
 \begin{equation*}
    \vec{\beta}_2=\colvec[r]{1 \\ -1}
 \end{equation*}
-To finish, drawing the similarity diagram        
+Now drawing the similarity diagram        
 \begin{equation*}
      \begin{CD}
             \Re^2_\wrt{\stdbasis_2}                   
@@ -2009,10 +2009,20 @@ $
 $.
 \end{definition}
 
-\noindent (``Eigen'' is German for ``characteristic of'' or ``peculiar to''; 
+\noindent (``Eigen'' is German for ``characteristic of'' or ``peculiar to.'' 
 some authors call these \definend{characteristic}%
-\index{characteristic!vectors, values} values and vectors.
-No authors call them ``peculiar''.)
+\index{characteristic!vectors, values} values and vectors;
+no one calls them ``peculiar vectors.'')
+
+\begin{remark}
+This definition requires that the eigenvector be non-$\zero$.
+Some authors allow $\zero$ as
+an eigenvector for $\lambda$ as long as there are also
+non-$\zero$ vectors associated with $\lambda$.
+In both styles the key point is 
+to not allow a case where $\lambda$ is such that
+$t(\vec{v})=\lambda\vec{v}$ for only the single vector $\vec{v}=\zero$.  
+\end{remark}
 
 \begin{example}
 The projection map
@@ -2026,15 +2036,14 @@ has an eigenvalue of \( 1 \) associated with any eigenvector of the form
 \begin{equation*}
    \colvec{x \\ y \\ 0}
 \end{equation*}
-where \( x \) and \( y \) are non-\( 0 \) scalars.
+where \( x \) and \( y \) are non-$0$ scalars.
 On the other hand, \( 2 \) is not an eigenvalue of \( \pi \) 
-since no non-\( \zero \) vector is doubled.
+since no non-$\zero$ vector is doubled.
 \end{example}
 
-That example shows why the `non-$\zero$' appears in the definition.
-Disallowing \( \zero \) as an eigenvector eliminates trivial eigenvalues.
-(Note, however, that a matrix can
-have an eigenvalue $\lambda=0$.)
+% That shows why the `nonzero' appears in \nearbydefinition{def:Eigen}.
+% Disallowing \( \zero \) as an eigenvector eliminates trivial eigenvalues.
+% Note, however, that a matrix can have an eigenvalue of $\lambda=0$.
 
 \begin{example}  \label{ex:NoEigenOnTrivSp}
 The only transformation on the trivial space \( \set{\zero\,} \) is
@@ -2045,12 +2054,13 @@ This map has no eigenvalues because there are no non-\( \zero \) vectors
 $\vec{v}$ mapped to a scalar multiple $\lambda\cdot\vec{v}$ of themselves.
 \end{example}        
 
-\begin{example}
+\begin{example} \label{ex:TransPolyOne}
 Consider the homomorphism \( \map{t}{\polyspace_1}{\polyspace_1} \)
 given by \( c_0+c_1x\mapsto(c_0+c_1)+(c_0+c_1)x \).
-The range of \( t \) is one-dimensional.
-Thus an application of
-\( t \) to a vector in the range will simply rescale that vector:
+While the codomain $\polyspace_1$ of $t$ is two-dimensional, its 
+range is one-dimensional $\rangespace{t}=\set{x+cx\suchthat c\in\C}$.
+Application of
+\( t \) to a vector in that range will simply rescale the vector
 \( c+cx\mapsto (2c)+(2c)x \).
 That is, \( t \) has an eigenvalue of \( 2 \) associated with eigenvectors of
 the form \( c+cx \) where \( c\neq 0 \).
@@ -2058,9 +2068,6 @@ the form \( c+cx \) where \( c\neq 0 \).
 This map also has an eigenvalue of \( 0 \) associated with eigenvectors of
 the form \( c-cx \) where \( c\neq 0 \).
 \end{example}
-
-%We can extend \nearbydefinition{def:Eigen}, which applies to transformations,
-%to also cover square matrices.
 
 \begin{definition}
 A square matrix \( T \) has a scalar
@@ -2070,18 +2077,18 @@ A square matrix \( T \) has a scalar
 \( T\vec{\zeta}=\lambda\cdot\vec{\zeta} \).
 \end{definition}
 
-\begin{remark}
-Although this extension from maps to matrices is obvious, 
-there is a point that must be made.
+Although this extension from maps to matrices is natural, 
+we need to make one observation.
 Eigenvalues of a map are also the eigenvalues of matrices representing
-that map, and so similar matrices have the same eigenvalues.
-But the eigenvectors are different\Dash similar matrices need not have the 
+that map and so similar matrices have the same eigenvalues.
+But the eigenvectors can different\Dash similar matrices need not have the 
 same eigenvectors.
 
-For instance, consider again the transformation 
-\( \map{t}{\polyspace_1}{\polyspace_1} \) given by
+\begin{example}
+Consider again the transformation \( \map{t}{\polyspace_1}{\polyspace_1} \) 
+from \nearbyexample{ex:TransPolyOne} given by
 \( c_0+c_1x\mapsto (c_0+c_1)+(c_0+c_1)x \).
-It has an eigenvalue of \( 2 \) associated with eigenvectors of the form
+One of its eigenvalues is \( 2 \), associated with the eigenvectors
 \( c+cx \) where \( c\neq 0 \).
 If we represent \( t \) with respect to \( B=\sequence{1+1x,1-1x} \)
 \begin{equation*}
@@ -2091,7 +2098,8 @@ If we represent \( t \) with respect to \( B=\sequence{1+1x,1-1x} \)
       0  &0
    \end{mat}
 \end{equation*}
-then \( 2 \) is an eigenvalue of \( T \), associated with these eigenvectors.
+then \( 2 \) is an eigenvalue of the matrix \( T \), 
+associated with these eigenvectors.
 \begin{equation*}
    \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
                                          2  &0  \\
@@ -2100,8 +2108,8 @@ then \( 2 \) is an eigenvalue of \( T \), associated with these eigenvectors.
                                       =\colvec{2c_0 \\ 2c_1}  }
   =\set{\colvec{c_0 \\ 0}\suchthat c_0\in\C,\, c_0\neq 0 }
 \end{equation*}
-On the other hand, representing $t$ with respect to
-\( D=\sequence{2+1x,1+0x} \) gives 
+On the other hand, if we represent $t$ with respect to
+\( D=\sequence{2+1x,1+0x} \)  
 \begin{equation*}
    S=\rep{t}{D,D}=
    \begin{mat}[r]
@@ -2109,7 +2117,7 @@ On the other hand, representing $t$ with respect to
      -3  &-1
    \end{mat}
 \end{equation*}
-and the eigenvectors of \( S \) associated with the eigenvalue \( 2 \) are
+then the eigenvectors associated with the eigenvalue \( 2 \) are
 these.
 \begin{equation*}
    \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
@@ -2119,9 +2127,10 @@ these.
                                       =\colvec{2c_0 \\ 2c_1}  }
   =\set{\colvec{0 \\ c_1}\suchthat c_1\in\C,\, c_1\neq 0 }
 \end{equation*}
-Thus similar matrices can have different eigenvectors.
+\end{example}
 
-Here is an informal description of what's happening.  
+\begin{remark}
+Here is an informal description of the reason for the difference.
 The underlying transformation doubles the 
 eigenvectors $\vec{v}\mapsto 2\cdot\vec{v}$.
 But when the matrix representing the transformation is
@@ -2132,11 +2141,11 @@ are representations with respect to \( D \).
 So the vectors that get doubled by each matrix look different.
 \end{remark}
 
-The next example illustrates the basic tool for
+The next example shows the basic tool for
 finding eigenvectors and eigenvalues.
 
 \begin{example}  \label{ex:IntroCharEqn}
-What are the eigenvalues and eigenvectors of this matrix?
+If
 \begin{equation*}
   T=
   \begin{mat}[r]
@@ -2145,7 +2154,7 @@ What are the eigenvalues and eigenvectors of this matrix?
     -1    &2    &3
   \end{mat}
 \end{equation*}
-To find the scalars \( x \) such that
+then to find the scalars \( x \) such that
 \( T\vec{\zeta}=x\vec{\zeta} \) for non-\( \zero \) eigenvectors
 \( \vec{\zeta} \), bring everything to the left-hand side
 \begin{equation*}
@@ -2160,7 +2169,8 @@ To find the scalars \( x \) such that
 \end{equation*}
 and factor
 \( (T-x I)\vec{\zeta}=\zero \).
-(Note that it says $T-xI$; the expression \( T-x \) doesn't make sense 
+(Note that it says $T-xI$. 
+The expression \( T-x \) doesn't make sense 
 because \( T \) is a matrix while \( x \) is a scalar.)
 This homogeneous linear system
 \begin{equation*}
@@ -2173,7 +2183,7 @@ This homogeneous linear system
   =
   \colvec[r]{0 \\ 0 \\ 0}
 \end{equation*}
-has a non-\( \zero \) solution if and only if the
+has a non-\( \zero \) solution $\vec{z}$ if and only if the
 matrix is singular.
 We can determine when that happens.
 \begin{align*}
@@ -2188,7 +2198,7 @@ We can determine when that happens.
   &=x(x-2)^2
 \end{align*}
 The eigenvalues are \( \lambda_1=0 \) and \( \lambda_2=2 \).
-To find the associated eigenvectors, plug in each eigenvalue.
+To find the associated eigenvectors plug in each eigenvalue.
 Plugging in $\lambda_1=0$ gives
 \begin{equation*}
   \begin{mat}
@@ -2199,14 +2209,14 @@ Plugging in $\lambda_1=0$ gives
   \colvec{z_1 \\ z_2 \\ z_3}
   =
   \colvec[r]{0 \\ 0 \\ 0}
-  \qquad\Longrightarrow\qquad
+  \quad\Longrightarrow\quad
   \colvec{z_1 \\ z_2 \\ z_3}
   =
-  \colvec{a \\ -a \\ a}
+  \colvec[r]{a \\ -a \\ a}
 \end{equation*}
-for a scalar parameter \( a\neq 0 \)
+for \( a\neq 0 \)
 (\( a \) is non-\( 0 \) because eigenvectors must be non-\( \zero \)).
-In the same way, plugging in $\lambda_2=2$ gives 
+Plugging in $\lambda_2=2$ gives 
 \begin{equation*}
   \begin{mat}
      1-2         &2            &1            \\
@@ -2216,7 +2226,7 @@ In the same way, plugging in $\lambda_2=2$ gives
   \colvec{z_1 \\ z_2 \\ z_3}
   =
   \colvec[r]{0 \\ 0 \\ 0}
-  \qquad\Longrightarrow\qquad
+  \quad\Longrightarrow\quad
   \colvec{z_1 \\ z_2 \\ z_3}
   =
   \colvec{b \\ 0 \\ b}
@@ -2236,16 +2246,15 @@ If
 (here \( \pi \) is not a projection map, it is the number
 \( 3.14\ldots \)) then
 \begin{equation*}
-  \deter{
-    \begin{mat}
+    \begin{vmat}
       \pi-x &1         \\
       0     &3-x
-    \end{mat} }
+    \end{vmat} 
   =
   (x-\pi)(x-3)
 \end{equation*}
 so \( S \) has eigenvalues of \( \lambda_1=\pi \) and \( \lambda_2=3 \).
-To find associated eigenvectors, first plug in $\lambda_1$ for $x$:
+To find associated eigenvectors, first plug in $\lambda_1$ for $x$
 \begin{equation*}
   \begin{mat}
     \pi-\pi     &1         \\
@@ -2259,8 +2268,8 @@ To find associated eigenvectors, first plug in $\lambda_1$ for $x$:
   =
   \colvec{a \\ 0}
 \end{equation*}
-for a scalar \( a\neq 0 \),
-and then plug in $\lambda_2$:
+for a scalar \( a\neq 0 \).
+Then plug in $\lambda_2$
 \begin{equation*}
   \begin{mat}
     \pi-3       &1         \\
@@ -2278,20 +2287,22 @@ where \( b\neq 0 \).
 \end{example}
 
 \begin{definition}
-The \definend{characteristic polynomial}\index{characteristic polynomial}%
+The \definend{characteristic polynomial of a square matrix}\index{characteristic polynomial}%
 \index{matrix!characteristic polynomial}
-of a square matrix \( T \) is the
-determinant of the matrix \( T-x I \), where \( x \) is a variable.
+\( T \) is the
+determinant of \( T-x I \), where \( x \) is a variable.
 The \definend{characteristic equation}\index{characteristic equation}%
 \index{matrix!characteristic polynomial}
 is $\deter{T-xI}=0$.
-The characteristic polynomial of a transformation \( t \) is the polynomial
+The \definend{characteristic polynomial of a transformation}
+\( t \) is the polynomial
 of any \( \rep{t}{B,B} \).\index{transformation!characteristic polynomial}
 \end{definition}
 
 \noindent \nearbyexercise{exer:CharPolyTransWellDefed} checks that the 
 characteristic polynomial of a transformation is 
-well-defined, that is, any choice of basis yields the same polynomial.
+well-defined, that is, that the characteristic polynomial is the same
+no matter which basis~$B$ we use for the representation.
 
 \begin{lemma} \label{le:MapNonTrivSpHasEigen}
 A linear transformation on a nontrivial vector space has at least one
@@ -2302,16 +2313,18 @@ eigenvalue.
 Any root of the characteristic polynomial is an eigenvalue.
 Over the complex numbers, any polynomial of degree one or greater
 has a root.
-(This is the reason that in this chapter 
-we've gone to scalars that are complex.)
 \end{proof}
 
-Notice the familiar form of the sets of eigenvectors in the above examples.
+\begin{remark}
+This result is the reason that in this chapter 
+we've changed to using scalars that are complex.
+\end{remark}
+
+% Notice the familiar form of the sets of eigenvectors in the above examples.
 
 \begin{definition}
-The \definend{eigenspace}\index{eigenspace}\index{transformation!eigenspace}
-of a transformation \( t \) associated with the
-eigenvalue \( \lambda \) is
+The \definend{eigenspace of a transformation $t$ associated with the eigenvalue $\lambda$}\index{eigenspace}\index{transformation!eigenspace}
+is
 $
   V_\lambda=\set{\vec{\zeta}\suchthat t(\vec{\zeta}\,)=\lambda\vec{\zeta}\,}
               % \union\set{\zero\,}
@@ -2319,23 +2332,33 @@ $.
 The eigenspace of a matrix is defined analogously.
 \end{definition}
 
+% \begin{remark}
+% In \nearbydefinition{def:Eigen} we specified that eigenvectors must be
+% non-$\zero$.
+% So, strictly speaking, the eigenspace for $\lambda$ contains the set of
+% associated eigenvectors along with $\zero$.
+% We need the zero vector for the next result. 
+% \end{remark}
+
 \begin{lemma}  \label{le:EigSpaceIsSubSp}
 An eigenspace is a subspace.
 \end{lemma}
+
 \begin{proof}
-An eigenspace must be nonempty\Dash for one thing it contains the zero
-vector since a. linear transformation maps the zero vector to the 
-zero vector. 
-Thus we need only check closure.
-Take vectors \( \vec{\zeta}_1,\ldots,\vec{\zeta}_n \) from \( V_\lambda \),
-to show that any linear combination is in \( V_\lambda \)
+An eigenspace is nonempty because it contains the zero
+vector since for any linear transformation $t(\zero)=\zero$, which equals
+$\lambda\zero$. 
+Thus we need only check closure of linear combinations.
+Take \( \vec{\zeta}_1,\ldots,\vec{\zeta}_n\in V_\lambda \) and verify 
 \begin{align*}
   t(\lincombo{c}{\vec{\zeta}})
   &=c_1t(\vec{\zeta}_1)+\dots+c_nt(\vec{\zeta}_n)               \\
   &=c_1\lambda\vec{\zeta}_1+\dots+c_n\lambda\vec{\zeta}_n          \\
   &=\lambda(c_1\vec{\zeta}_1+\dots+c_n\vec{\zeta}_n)
 \end{align*}
-(the second equality holds even if any \( \vec{\zeta}_i \) is \( \zero \) since
+that the combination is also in $V_\lambda$
+(despite that the zero vector isn't an eigenvector, 
+the second equality holds even if some \( \vec{\zeta}_i \) is \( \zero \) since
 \( t(\zero)=\lambda\cdot\zero=\zero \)).
 \end{proof}
 
@@ -2344,32 +2367,32 @@ In \nearbyexample{ex:AnotherCharPoly} the eigenspace associated with the
 eigenvalue \( \pi \) 
 and the eigenspace associated with the eigenvalue \( 3 \) are these.
 \begin{equation*}
-  V_{\pi}=\set{\colvec{a \\ 0}\suchthat a\in\Re}
+  V_{\pi}=\set{\colvec{a \\ 0}\suchthat a\in\C}
   \qquad
-  V_3=\set{\colvec{-b/\pi-3 \\ b}\suchthat b\in\Re}
+  V_3=\set{\colvec{-b/(\pi-3) \\ b}\suchthat b\in\C}
 \end{equation*}
 \end{example}
 
 \begin{example}
-In \nearbyexample{ex:IntroCharEqn},
+In \nearbyexample{ex:IntroCharEqn}
 these are the eigenspaces associated with the eigenvalues \( 0 \) 
 and \( 2 \).
 \begin{equation*}
-  V_0=\set{\colvec{a \\ -a \\ a}\suchthat a\in\Re},
+  V_0=\set{\colvec{a \\ -a \\ a}\suchthat a\in\C},
   \qquad
-  V_2=\set{\colvec{b \\ 0 \\ b}\suchthat b\in\Re}.
+  V_2=\set{\colvec{b \\ 0 \\ b}\suchthat b\in\C}.
 \end{equation*}
 \end{example}
 
-\begin{remark}
-The characteristic equation is \( 0=x(x-2)^2 \) so in some sense
-\( 2 \) is an eigenvalue ``twice''.
-However there are not ``twice'' as many eigenvectors, in that the dimension
-of the eigenspace is one, not two.
-The next example shows a case where a number, \( 1 \), is a double root of
+The characteristic equation 
+in \nearbyexample{ex:IntroCharEqn}
+is \( 0=x(x-2)^2 \) so in some sense
+\( 2 \) is an eigenvalue twice.
+However there are not twice as many eigenvectors in that the dimension
+of the associated eigenspace $V_2$ is one, not two.
+The next example is a case where a number is a double root of
 the characteristic equation and the dimension of the associated eigenspace
 is two.
-\end{remark}
 
 \begin{example}
 With respect to the standard bases, this matrix
@@ -2397,16 +2420,18 @@ are easy to find.
 \end{equation*}
 \end{example}
 
-By the lemma, if two eigenvectors $\vec{v}_1$ and $\vec{v}_2$ are 
-associated with the same eigenvalue then any linear combination of those
-two is also an eigenvector associated with that same eigenvalue.
-But, if two eigenvectors \( \vec{v}_1 \) and \( \vec{v}_2 \) 
-are associated with different eigenvalues
-then the sum \( \vec{v}_1+\vec{v}_2 \) need not be related 
-to the eigenvalue of either one.
-In fact, just the opposite.
-If the eigenvalues are different then the eigenvectors are not 
-linearly related.
+By \nearbylemma{le:EigSpaceIsSubSp} 
+if two eigenvectors $\vec{v}_1$ and $\vec{v}_2$ are 
+associated with the same eigenvalue then a linear combination of those
+two is also an eigenvector, associated with the same eigenvalue.
+Thus, referring to the prior example, this sum of two members of $V_1$
+\begin{equation*}
+  \colvec[r]{1 \\ 0 \\ 0}+\colvec[r]{0 \\ 1 \\ 0}
+\end{equation*}
+yields another member of $V_1$.
+
+The next result speaks to the situation where the vectors come from
+different eigenspaces.
 
 \begin{theorem}
 \label{th:DistEValueGivesLIEvecs}
@@ -2423,17 +2448,19 @@ and in either case is linearly independent.
 
 For induction, assume that the theorem
 is true for any set of \( k \)
-distinct eigenvalues, suppose that 
+distinct eigenvalues. 
+Consider the distince eigenvalues 
 \( \lambda_1,\dots,\lambda_{k+1} \)
-are distinct eigenvalues,
 and let \( \vec{v}_1,\dots,\vec{v}_{k+1} \)
 be associated eigenvectors.
-If
-\( c_1\vec{v}_1+\dots+c_k\vec{v}_k+c_{k+1}\vec{v}_{k+1}=\zero \)
-then after multiplying both sides of the displayed equation by
-\( \lambda_{k+1} \), applying the map or matrix to both sides
+Suppose that
+\begin{equation*}
+   c_1\vec{v}_1+\dots+c_k\vec{v}_k+c_{k+1}\vec{v}_{k+1}=\zero 
+\end{equation*}
+multiply both sides by \( \lambda_{k+1} \), 
+apply the map or matrix to both sides
 of the displayed equation,
-and subtracting the first result from the second, we have this.
+and subtract the first result from the second to get this.
 \begin{equation*}
   c_1(\lambda_{k+1}-\lambda_1)\vec{v}_1+\dots
   +c_k(\lambda_{k+1}-\lambda_k)\vec{v}_k
