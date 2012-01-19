@@ -6,7 +6,7 @@ The goal of this chapter is to show that every square matrix is similar to one
 that is a sum of two kinds of simple matrices.
 The prior section
 focused on the first simple kind, diagonal matrices.
-We now consider the other kind.
+We now consider the other.
 
 
 
@@ -16,22 +16,22 @@ We now consider the other kind.
 
 
 
-\subsectionoptional{Self-Composition}
-\index{self composition!of maps}\index{map!self composition}%
-\index{transformation!composed with itself}\index{composition!self}
-\noindent\textit{This subsection is optional, although it is necessary
-for later material in this section and in the next one.}
+\subsectionoptional{Self-Composition}\index{self composition!of maps}\index{map!self composition}\index{transformation!composed with itself}\index{composition!self}
+% \noindent\textit{This subsection is optional, although it is necessary
+% for later material in this section and in the next one.}
 
-A linear transformations $\map{t}{V}{V}$, because it has the same domain and
-codomain, can be iterated.\appendrefs{function interation}\spacefactor=1000 %
-That is, compositions of $t$ with itself such as \( t^2=\composed{t}{t} \) 
-and \( t^3=\composed{t}{\composed{t}{t}} \) are defined.
+Because a linear transformation $\map{t}{V}{V}$ has the same domain as
+codomain, we can
+find the composition of $t$ with itself 
+\( t^2=\composed{t}{t} \), 
+and \( t^3=\composed{t}{\composed{t}{t}} \), etc.\appendrefs{function interation}\spacefactor=1000 %
 \begin{center}
   \includegraphics{ch5.1}
 \end{center}
-Note that this
-power notation for the linear transformation functions dovetails with 
-the notation that we've used earlier for their square matrix representations
+Note that the superscript
+power notation $t^j$ for iterates of the transformations 
+dovetails with 
+the notation that we've used for their square matrix representations
 because if $\rep{t}{B,B}=T$ then \( \rep{t^j}{B,B}=T^j \).
 
 
@@ -39,15 +39,15 @@ because if $\rep{t}{B,B}=T$ then \( \rep{t^j}{B,B}=T^j \).
 For the derivative map \( \map{d/dx}{\polyspace_3}{\polyspace_3} \)
 given by 
 \begin{equation*}
-  a+bx+cx^2+dx^3\mapsunder{d/dx} b+2cx+3dx^2
+  a+bx+cx^2+dx^3\xmapsunder{d/dx} b+2cx+3dx^2
 \end{equation*}
 the second power is the second derivative
 \begin{equation*}
-  a+bx+cx^2+dx^3\mapsunder{d^2/dx^2} 2c+6dx 
+  a+bx+cx^2+dx^3\xmapsunder{d^2/dx^2} 2c+6dx 
 \end{equation*}
 the third power is the third derivative
 \begin{equation*}
-  a+bx+cx^2+dx^3\mapsunder{d^3/dx^3} 6d 
+  a+bx+cx^2+dx^3\xmapsunder{d^3/dx^3} 6d 
 \end{equation*}
 and any higher power is the zero map.
 \end{example}
@@ -55,46 +55,45 @@ and any higher power is the zero map.
 \begin{example}
 This transformation of the space of $\nbyn{2}$ matrices
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     c  &d
-  \end{pmatrix}
+  \end{mat}
   \mapsunder{t}
-  \begin{pmatrix}
+  \begin{mat}
     b  &a  \\
     d  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 has this second power
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     c  &d
-  \end{pmatrix}
+  \end{mat}
   \mapsunder{t^2}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 and this third power.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     a  &b  \\
     c  &d
-  \end{pmatrix}
+  \end{mat}
   \mapsunder{t^3}
-  \begin{pmatrix}
+  \begin{mat}
     b  &a  \\
     0  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 After that, $t^4=t^2$ and $t^5=t^3$, etc.
 \end{example}
 
-These examples suggest that on iteration more and more zeros appear
-until there is a settling down.
-The next result makes this precise.
+These examples suggest that after some number of iterations
+the map settles down.
 
 \begin{lemma}  \label{le:RangeAndNullChains}
 For any transformation \( \map{t}{V}{V} \), the rangespaces of the powers
@@ -108,43 +107,49 @@ and the nullspaces form an ascending chain.
 \end{equation*}
 Further, there is a \( k \) such that
 for powers less than $k$ the subsets are proper
-(if $j<k$ then $\rangespace{t^j}\supset\rangespace{t^{j+1}}$
+so that if $j<k$ then $\rangespace{t^j}\supset\rangespace{t^{j+1}}$
 and 
-$\nullspace{t^j}\subset\nullspace{t^{j+1}}$), 
-while for powers greater than $k$ the sets are equal
-(if $j\geq k$ then $\rangespace{t^j}=\rangespace{t^{j+1}}$
+$\nullspace{t^j}\subset\nullspace{t^{j+1}}$
+while for higher powers the sets are equal,
+that is, if $j\geq k$ then $\rangespace{t^j}=\rangespace{t^{j+1}}$
 and 
 $\nullspace{t^j}=\nullspace{t^{j+1}}$).  
 \end{lemma}
 
 \begin{proof}
-We will do the rangespace half and leave the rest for
-\nearbyexercise{exer:RangeAndNullChains}.
-Recall, however, that for any map the dimension of its rangespace
+First recall that for any map the dimension of its rangespace
 plus the dimension of its nullspace equals
-the dimension of its domain.
-So if the rangespaces shrink then the nullspaces must grow.
+the dimension of its domain,
+So if the dimensions of the rangespaces shrink then the 
+dimensions of the nullspaces must grow.
+We will do the rangespace half here and leave the rest for
+\nearbyexercise{exer:RangeAndNullChains}.
 
-That the rangespaces form chains is clear
-because if $\vec{w}\in\rangespace{t^{j+1}}$, so that
+First we show that 
+that the rangespaces form a chain.
+If $\vec{w}\in\rangespace{t^{j+1}}$, so that
 $\vec{w}=t^{j+1}(\vec{v})$, 
-then $\vec{w}=t^{j}(\,t(\vec{v})\,)$ and so $\vec{w}\in\rangespace{t^{j}}$.
-To verify the ``further'' property, 
-first observe that if any pair of rangespaces in the
+then $\vec{w}=t^{j}(\,t(\vec{v})\,)$.
+Thus $\vec{w}\in\rangespace{t^{j}}$.
+
+Next we verify the ``further'' property:
+while the subsets in the chain of rangespaces may be proper 
+for a while, from some power $k$ onward the rangespaces are equal. 
+We first show that if any pair of adjacent rangespaces in the
 chain are equal \( \rangespace{t^{k}}=\rangespace{t^{k+1}} \)
 then all subsequent ones are also equal
 \( \rangespace{t^{k+1}}=\rangespace{t^{k+2}} \), etc.
-This is because if
+This holds because
 \( \map{t}{\rangespace{t^{k+1}}}{\rangespace{t^{k+2}}} \)
 is the same map, with the same domain, as
 \( \map{t}{\rangespace{t^{k}}}{\rangespace{t^{k+1}}} \) and
-it therefore has the same range:
+it therefore has the same range
 \( \rangespace{t^{k+1}}=\rangespace{t^{k+2}} \)
-(and induction shows that it holds for all higher powers).
-So if the chain of rangespaces ever stops being strictly decreasing then it is 
-stable from that point onward.
+(it holds for all higher powers by induction).
+So if the chain of rangespaces ever stops strictly decreasing then
+from that point onward it is stable.
 
-But the chain must stop decreasing. 
+We end by showing that the chain must eventually stop decreasing. 
 Each rangespace is a subspace of the one before it.
 For it to be a proper subspace it must be of strictly lower dimension
 (see \nearbyexercise{exer:PropSubspStrictLowerDimen}).
@@ -154,7 +159,7 @@ that is, the power $k$ is at most the dimension of $V$.
 \end{proof}
 
 \begin{example}
-The derivative map $a+bx+cx^2+dx^3\mapsunder{d/dx} b+2cx+3dx^2$
+The derivative map $a+bx+cx^2+dx^3\xmapsunder{d/dx} b+2cx+3dx^2$
 of \nearbyexample{ex:DerivIter} has this chain of rangespaces
 \begin{equation*}
   \polyspace_3\supset\polyspace_2\supset\polyspace_1
@@ -211,7 +216,8 @@ as the distance above zero\Dash and thus also shows the dimension of the
 nullspace as the distance below the gray horizontal line, 
 because the two add to the dimension $n$ of the domain.
 \begin{center}
-  \includegraphics{ch5.2}
+  % \includegraphics{ch5.2}
+  \includegraphics{ch5.8}
 \end{center}
 As sketched, on iteration 
 the rank falls and with it the nullity grows 
@@ -523,22 +529,22 @@ The next example shows that the two can have a nontrivial intersection.
 Consider the transformation of \( \C^2 \)
 defined by this action on the elements of the standard basis.
 \begin{equation*}
-  \colvec{1 \\ 0}
+  \colvec[r]{1 \\ 0}
     \mapsunder{n}
-    \colvec{0 \\ 1}
+    \colvec[r]{0 \\ 1}
   \quad
-  \colvec{0 \\ 1}
+  \colvec[r]{0 \\ 1}
     \mapsunder{n}
-    \colvec{0 \\ 0}
+    \colvec[r]{0 \\ 0}
   \qquad
-  N=\rep{n}{\stdbasis_2,\stdbasis_2}=\begin{pmatrix}
+  N=\rep{n}{\stdbasis_2,\stdbasis_2}=\begin{mat}[r]
     0  &0  \\
     1  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 The vector 
 \begin{equation*}
-  \vec{e}_2=\colvec{0 \\ 1}
+  \vec{e}_2=\colvec[r]{0 \\ 1}
 \end{equation*}
 is in both the rangespace and nullspace.
 Another way to depict this map's action is with a 
@@ -573,12 +579,12 @@ The matrix representation  is all zeros except for
 some subdiagonal ones.
 \begin{equation*}
   \hat{N}=\rep{\hat{n}}{\stdbasis_4,\stdbasis_4}
-  =\begin{pmatrix}
+  =\begin{mat}[r]
     0  &0  &0  &0 \\
     1  &0  &0  &0 \\
     0  &1  &0  &0 \\
     0  &0  &1  &0 \
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 \end{example}
 
@@ -597,7 +603,7 @@ is represented by a matrix that is all zeros except for blocks
 of subdiagonal ones
 \begin{equation*}
   \rep{t}{B,B}=
-  \begin{pmat}{ccc|cc}
+  \begin{pmat}{rrr|rr}
      0  &0  &0  &0  &0  \\
      1  &0  &0  &0  &0  \\
      0  &1  &0  &0  &0  \\ \hline
@@ -638,11 +644,11 @@ and taking the basis \( B=\sequence{x^2,2x,2} \)
 gives this representation.
 \begin{equation*}
   \rep{d/dx}{B,B}=
-  \begin{pmatrix}
+  \begin{mat}[r]
      0  &0  &0  \\
      1  &0  &0  \\
      0  &1  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 \end{example}
 
@@ -653,39 +659,39 @@ subdiagonal ones.
 With the matrix $\hat{N}$ from \nearbyexample{NilIndexFourOnCFour},
 and this four-vector basis
 \begin{equation*}
-  D=\sequence{\colvec{1 \\ 0 \\ 1 \\ 0},
-              \colvec{0 \\ 2 \\ 1 \\ 0},
-              \colvec{1 \\ 1 \\ 1 \\ 0},
-              \colvec{0 \\ 0 \\ 0 \\ 1}}
+  D=\sequence{\colvec[r]{1 \\ 0 \\ 1 \\ 0},
+              \colvec[r]{0 \\ 2 \\ 1 \\ 0},
+              \colvec[r]{1 \\ 1 \\ 1 \\ 0},
+              \colvec[r]{0 \\ 0 \\ 0 \\ 1}}
 \end{equation*}
 a change of basis operation 
 produces this representation with respect to \( D,D \).
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &0  &1 &0 \\
     0  &2  &1 &0 \\
     1  &1  &1 &0 \\
     0  &0  &0 &1
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
     0  &0  &0 &0 \\
     1  &0  &0 &0 \\
     0  &1  &0 &0 \\
     0  &0  &1 &0
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
     1  &0  &1 &0 \\
     0  &2  &1 &0 \\
     1  &1  &1 &0 \\
     0  &0  &0 &1
-  \end{pmatrix}^{-1}\!\!
+  \end{mat}^{-1}\!\!
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
    -1  &0  &1   &0 \\
    -3  &-2 &5   &0 \\
    -2  &-1  &3  &0 \\
     2  &1   &-2 &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 The new matrix is nilpotent; it's fourth power 
 is the zero matrix since
@@ -769,13 +775,13 @@ Consider the map \( \map{t}{\C^5}{\C^5} \) with this action.
   \end{minipage}
   \hspace*{3em}
   $\rep{t}{\stdbasis_5,\stdbasis_5}=
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &0  &0  &0  &0  \\
     0  &0  &0  &0  &0  \\
     1  &1  &0  &0  &0  \\
     0  &0  &0  &0  &0  \\
     0  &0  &0  &1  &0
-  \end{pmatrix}$
+  \end{mat}$
 \end{center}
 Even after ommitting the zero vector, these three 
 strings aren't disjoint, but that doesn't end hope of finding a 
@@ -820,28 +826,28 @@ To produce a string basis, first
 pick \( \vec{\beta}_2 \) and \( \vec{\beta}_4 \) from
 \( \rangespace{t}\intersection\nullspace{t} \)
 \begin{equation*}
-  \vec{\beta}_2=\colvec{0 \\ 0 \\ 1 \\ 0 \\ 0}\qquad
-  \vec{\beta}_4=\colvec{0 \\ 0 \\ 0 \\ 0 \\ 1}
+  \vec{\beta}_2=\colvec[r]{0 \\ 0 \\ 1 \\ 0 \\ 0}\qquad
+  \vec{\beta}_4=\colvec[r]{0 \\ 0 \\ 0 \\ 0 \\ 1}
 \end{equation*}
 (other choices are possible, just be sure that 
 \( \set{\vec{\beta}_2,\vec{\beta}_4} \) is linearly independent).
 For \( \vec{\beta}_5 \) pick a vector from \( \nullspace{t} \)
 that is not in the span of \( \set{ \vec{\beta}_2,\vec{\beta}_4 } \).
 \begin{equation*}
-  \vec{\beta}_5=\colvec{1 \\ -1 \\ 0 \\ 0 \\ 0}
+  \vec{\beta}_5=\colvec[r]{1 \\ -1 \\ 0 \\ 0 \\ 0}
 \end{equation*}
 Finally, take \( \vec{\beta}_1 \) and \( \vec{\beta}_3 \) such that
 \( t(\vec{\beta}_1)=\vec{\beta}_2 \) and
 \( t(\vec{\beta}_3)=\vec{\beta}_4 \).
 \begin{equation*}
-  \vec{\beta}_1=\colvec{0 \\ 1 \\ 0 \\ 0 \\ 0}\qquad
-  \vec{\beta}_3=\colvec{0 \\ 0 \\ 0 \\ 1 \\ 0}
+  \vec{\beta}_1=\colvec[r]{0 \\ 1 \\ 0 \\ 0 \\ 0}\qquad
+  \vec{\beta}_3=\colvec[r]{0 \\ 0 \\ 0 \\ 1 \\ 0}
 \end{equation*}
 Now, with respect to \( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_5} \),
 the matrix of $t$ is as desired.
 \begin{equation*}
   \rep{t}{B,B}=
-  \begin{pmat}{cc|cc|c}
+  \begin{pmat}{rr|rr|r}
     0  &0  &0  &0  &0  \\
     1  &0  &0  &0  &0  \\  \hline
     0  &0  &0  &0  &0  \\
@@ -873,14 +879,14 @@ according to whether they are in the nullspace or not).
          &\cdots &  &  &  &  &  &  &  &\cdots
          &\mapsto &\digitincirc{1}
          &\mapsto &\digitinsq{1} &\mapsto &\zero  \\[.75ex]
-         &\alignedvdots  \\
+         &\smash{\vdotswithin{\mapsto}}  \\
      \digitincirc{3}
          &\mapsto &\digitincirc{1} &\mapsto
          &\cdots &
          &\mapsto &\digitincirc{1}
          &\mapsto &\digitinsq{1} &\mapsto &\zero  \\[.75ex]
-     \digitinsq{2} &\mapsto &\zero \\
-         &\alignedvdots  \\
+     \digitinsq{2} &\mapsto &\zero \\[.75ex]
+         &\smash{\vdotswithin{\mapsto}}  \\
      \digitinsq{2} &\mapsto &\zero
    \end{strings}
 \end{equation*}
@@ -976,27 +982,27 @@ provided that we order the blocks, say, from longest to shortest.
 \begin{example}
 The matrix
 \begin{equation*}
-  M=\begin{pmatrix}
+  M=\begin{mat}[r]
       1  &-1  \\
       1  &-1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 has an index of nilpotency of two, as this calculation shows.
 \begin{center}
   \begin{tabular}{c|cc}
     \( p \)  &\( M^p \)  &\( \nullspace{M^p}  \)   \\  \hline
     \( 1 \)
-    &\(  M=\begin{pmatrix}
+    &\(  M=\begin{mat}[r]
          1  &-1  \\
          1  &-1
-       \end{pmatrix}  \)
+       \end{mat}  \)
     &\( \set{\colvec{x \\ x}\suchthat
                                x\in\C}  \)   \\[2ex]
     \( 2 \)
-    &\(  M^2=\begin{pmatrix}
+    &\(  M^2=\begin{mat}[r]
          0  &0   \\
          0  &0
-       \end{pmatrix}  \)
+       \end{mat}  \)
     &\( \C^2  \)
   \end{tabular}
 \end{center}
@@ -1010,10 +1016,10 @@ Thus, the action of the map is
 $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$ 
 and the canonical form of the matrix is this.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &0  \\
     1  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 
 We can exhibit such a $m$-string basis 
@@ -1024,9 +1030,9 @@ pick a \( \vec{\beta}_2\in\nullspace{m} \)
 and also pick a \( \vec{\beta}_1 \) 
 so that \( m(\vec{\beta}_1)=\vec{\beta}_2 \).
 \begin{equation*}
-  \vec{\beta}_2=\colvec{1 \\ 1}
+  \vec{\beta}_2=\colvec[r]{1 \\ 1}
   \qquad
-  \vec{\beta}_1=\colvec{1 \\ 0}
+  \vec{\beta}_1=\colvec[r]{1 \\ 0}
 \end{equation*}
 (If we take $M$ to be a representative with respect to some nonstandard bases
 then this picking step is just more messy.)
@@ -1042,35 +1048,35 @@ The canonical form equals \( \rep{m}{B,B}=PMP^{-1} \), where
 \begin{equation*}
    P^{-1} %=\bigl(\rep{\identity}{\stdbasis_2,B}\bigr)^{-1}
          =\rep{\identity}{B,\stdbasis_2}
-         =\begin{pmatrix}
+         =\begin{mat}[r]
             1  &1  \\
             0  &1
-          \end{pmatrix}
+          \end{mat}
    \qquad
    P=(P^{-1})^{-1}
-         =\begin{pmatrix}
+         =\begin{mat}[r]
             1  &-1  \\
             0  &1
-          \end{pmatrix}
+          \end{mat}
 \end{equation*}
 and the verification of the matrix calculation is routine.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
     1  &-1  \\
     0  &1
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
     1  &-1  \\
     1  &-1
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{mat}
+  \begin{mat}[r]
     1  &1  \\
     0  &1
-  \end{pmatrix}=
-  \begin{pmatrix}
+  \end{mat}=
+  \begin{mat}[r]
     0  &0  \\
     1  &0
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 %which does indeed describe the effect of $m$ on the string basis.
 \end{example}
@@ -1078,13 +1084,13 @@ and the verification of the matrix calculation is routine.
 \begin{example} \label{ex:FiveByNilStrBas}
 The matrix
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      0  &0  &0  &0  &0  \\
      1  &0  &0  &0  &0  \\
      -1 &1  &1  &-1 &1  \\
      0  &1  &0  &0  &0  \\
      1  &0  &-1 &1  &-1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 is nilpotent.
 These calculations show the nullspaces growing. 
@@ -1092,22 +1098,22 @@ These calculations show the nullspaces growing.
   \begin{tabular}{c|cc}
     \( p \)  &\( N^p \)  &\( \nullspace{N^p}  \)   \\  \hline
     \( 1 \)
-    &\(\begin{pmatrix}
+    &\(\begin{mat}[r]
          0  &0  &0  &0  &0  \\
          1  &0  &0  &0  &0  \\
          -1 &1  &1  &-1 &1  \\
          0  &1  &0  &0  &0  \\
          1  &0  &-1 &1  &-1
-       \end{pmatrix}  \)
+       \end{mat}  \)
     &\( \set{\colvec{0 \\ 0 \\ u-v \\ u \\ v} \suchthat u,v\in\C}  \) \\[2.4ex]
     \( 2 \)
-    &\(\begin{pmatrix}
+    &\(\begin{mat}[r]
          0  &0  &0  &0  &0  \\
          0  &0  &0  &0  &0  \\
          1  &0  &0  &0  &0  \\
          1  &0  &0  &0  &0  \\
          0  &0  &0  &0  &0
-       \end{pmatrix}  \)
+       \end{mat}  \)
     &\( \set{\colvec{0 \\ y \\ z \\ u \\ v}
                        \suchthat y,z,u,v\in\C}  \)  \\[2.4ex]
     \( 3 \)
@@ -1132,20 +1138,20 @@ basis vector is sent to zero in three hops.
 To produce such a basis, first pick two independent vectors from
 \( \nullspace{n} \)
 \begin{equation*}
-   \vec{\beta}_3=\colvec{0 \\ 0 \\ 1 \\ 1 \\ 0} \quad
-   \vec{\beta}_5=\colvec{0 \\ 0 \\ 0 \\ 1 \\ 1}
+   \vec{\beta}_3=\colvec[r]{0 \\ 0 \\ 1 \\ 1 \\ 0} \quad
+   \vec{\beta}_5=\colvec[r]{0 \\ 0 \\ 0 \\ 1 \\ 1}
 \end{equation*}
 then add \( \vec{\beta}_2,\vec{\beta}_4\in\nullspace{n^2} \)
 such that \( n(\vec{\beta}_2)=\vec{\beta}_3 \) and
 \( n(\vec{\beta}_4)=\vec{\beta}_5 \)
 \begin{equation*}
-   \vec{\beta}_2=\colvec{0 \\ 1 \\ 0 \\ 0 \\ 0} \quad
-   \vec{\beta}_4=\colvec{0 \\ 1 \\ 0 \\ 1 \\ 0}
+   \vec{\beta}_2=\colvec[r]{0 \\ 1 \\ 0 \\ 0 \\ 0} \quad
+   \vec{\beta}_4=\colvec[r]{0 \\ 1 \\ 0 \\ 1 \\ 0}
 \end{equation*}
 and finish by adding \( \vec{\beta}_1\in\nullspace{n^3}=\C^5 \)) 
 such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
 \begin{equation*}
-   \vec{\beta}_1=\colvec{1 \\ 0 \\ 1 \\ 0 \\ 0}
+   \vec{\beta}_1=\colvec[r]{1 \\ 0 \\ 1 \\ 0 \\ 0}
 \end{equation*}
 \end{example}
 
@@ -1213,12 +1219,12 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
           Thus the index of nilpotency is two.
           This is the canonical form.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  &0  &0  \\
               1  &0  &0  &0  \\
               0  &0  &0  &0  \\
               0  &0  &1  &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The dimension of the domain of this map is six.
           For the first power the dimension of the nullspace is four
@@ -1230,14 +1236,14 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
           The index of nilpotency is three, and this is the
           canonical form.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  &0  &0  &0  &0  \\
               1  &0  &0  &0  &0  &0  \\
               0  &1  &0  &0  &0  &0  \\
               0  &0  &0  &0  &0  &0  \\              
               0  &0  &0  &0  &0  &0  \\              
               0  &0  &0  &0  &0  &0  
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The dimension of the domain is three, and the index of 
           nilpotency is three.
@@ -1250,11 +1256,11 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
           has dimension zero.
           Here is the canonical form matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  &0  \\
               1  &0  &0  \\
               0  &1  &0 
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}
     \end{answer}
@@ -1262,33 +1268,33 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
     Decide which of these matrices are nilpotent.
     \begin{exparts*}
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            -2  &4  \\
            -1  &2
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           3  &1  \\
           1  &3
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
           -3  &2  &1  \\
           -3  &2  &1  \\
           -3  &2  &1
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            1  &1  &4  \\
            3  &0  &-1 \\
            5  &2  &7
-        \end{pmatrix}$
+        \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            45  &-22  &-19  \\
            33  &-16  &-14  \\
            69  &-34  &-29
-        \end{pmatrix}$
+        \end{mat}$
     \end{exparts*}
     \begin{answer}
       By \nearbylemma{le:RangeAndNullChains} the nullity has grown as 
@@ -1302,29 +1308,29 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
           its square is the zero matrix.
         \partsitem No, the square is not the zero matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
                3  &1  \\
                1  &3
-            \end{pmatrix}^2
-            =\begin{pmatrix}
+            \end{mat}^2
+            =\begin{mat}[r]
                10  &6  \\
                6   &10
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Yes, the cube is the zero matrix.
           In fact, the square is zero.
         \partsitem No, the third power is not the zero matrix.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  &4  \\
               3  &0  &-1 \\
               5  &2  &7
-            \end{pmatrix}^3
-            =\begin{pmatrix}
+            \end{mat}^3
+            =\begin{mat}[r]
               206  &86  &304  \\
                26  &8   &26   \\
               438  &180 &634
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem Yes, the cube of this matrix is the zero matrix.
       \end{exparts}
@@ -1334,36 +1340,36 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
   \recommended \item 
     Find the canonical form of this matrix.
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}[r]
         0  &1  &1  &0  &1  \\
         0  &0  &1  &1  &1  \\
         0  &0  &0  &0  &0  \\
         0  &0  &0  &0  &0  \\
         0  &0  &0  &0  &0
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     \begin{answer} The table os calculations
       \begin{center}
           \begin{tabular}{c|cc}
              \( p \)  &\( N^p \)  &\( \nullspace{N^p}  \)   \\  \hline
              \( 1 \)
-               &\(\begin{pmatrix}
+               &\(\begin{mat}[r]
                    0  &1  &1  &0  &1  \\
                    0  &0  &1  &1  &1  \\
                    0  &0  &0  &0  &0  \\
                    0  &0  &0  &0  &0  \\
                    0  &0  &0  &0  &0
-                  \end{pmatrix}  \)
+                  \end{mat}  \)
                &\( \set{\colvec{r \\ u \\ -u-v \\ u \\ v} 
                               \suchthat r,u,v\in\C}  \) \\[4ex]
              \( 2 \)
-               &\(\begin{pmatrix}
+               &\(\begin{mat}[r]
                    0  &0  &1  &1  &1  \\
                    0  &0  &0  &0  &0  \\
                    0  &0  &0  &0  &0  \\
                    0  &0  &0  &0  &0  \\
                    0  &0  &0  &0  &0
-                  \end{pmatrix}  \)
+                  \end{mat}  \)
                &\( \set{\colvec{r \\ s \\ -u-v \\ u \\ v} 
                               \suchthat r,s,u,v\in\C}  \) \\[3ex]
             \( 2 \)
@@ -1386,13 +1392,13 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
         \end{equation*}
         From that the canonical form is immediate.
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  &0  &0  \\
             1  &0  &0  &0  &0  \\
             0  &1  &0  &0  &0  \\
             0  &0  &0  &0  &0  \\
             0  &0  &0  &0  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
     \end{answer}
   \recommended \item 
@@ -1410,7 +1416,7 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
         \partsitem The canonical form has a $\nbyn{3}$ block and a 
           $\nbyn{2}$ block
           \begin{equation*}
-            \begin{pmat}{ccc|cc}
+            \begin{pmat}{rrr|rr}
               0  &0  &0  &0  &0  \\
               1  &0  &0  &0  &0  \\
               0  &1  &0  &0  &0  \\ \hline
@@ -1440,25 +1446,25 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
          \begin{equation*}
            P^{-1}
            =\rep{\identity}{B,\stdbasis_5}
-           =\begin{pmatrix}
+           =\begin{mat}[r]
               1 &0 &0 &0 &0 \\              
               0 &1 &0 &1 &0 \\
               1 &0 &1 &0 &0 \\
               0 &0 &1 &1 &1 \\
               0 &0 &0 &0 &1
-            \end{pmatrix}
+            \end{mat}
          \end{equation*}
          and $P$ is the inverse of that.
          \begin{equation*}
            P=\rep{\identity}{\stdbasis_5,B}
             =(P^{-1})^{-1}
-           =\begin{pmatrix}
+           =\begin{mat}[r]
               1 &0 &0 &0 &0 \\              
              -1 &1 &1 &-1&1 \\
              -1 &0 &1 &0 &0 \\
               1 &0 &-1&1 &-1\\
               0 &0 &0 &0 &1
-            \end{pmatrix}
+            \end{mat}
          \end{equation*}
         \partsitem The calculation to check this is routine.
       \end{exparts}
@@ -1467,22 +1473,22 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
     Each of these matrices is nilpotent.
     \begin{exparts*}
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           1/2  &-1/2  \\
           1/2  &-1/2
-        \end{pmatrix}        \)
+        \end{mat}        \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  &0  \\
           0  &-1 &1  \\
           0  &-1 &1
-        \end{pmatrix}        \)
+        \end{mat}        \)
       \partsitem \(
-        \begin{pmatrix}
+        \begin{mat}[r]
          -1  &1  &-1 \\
           1  &0  &1  \\
           1  &-1 &1
-        \end{pmatrix}        \)
+        \end{mat}        \)
     \end{exparts*}
     Put each in canonical form.
     \begin{answer}
@@ -1492,10 +1498,10 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
           \begin{tabular}{c|cc}
              \( p \)  &\( N^p \)  &\( \nullspace{N^p}  \)   \\  \hline
              \( 1 \)
-               &\(\begin{pmatrix}
+               &\(\begin{mat}[r]
                     1/2  &-1/2  \\
                     1/2  &-1/2 
-                  \end{pmatrix}  \)
+                  \end{mat}  \)
                &\( \set{\colvec{u \\ u} 
                               \suchthat u\in\C}  \) \\[2ex]
             \( 2 \)
@@ -1515,21 +1521,21 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
         Therefore, this representation with respect to
         $\sequence{\vec{\beta}_1,\vec{\beta}_2}$ is the canonical form.
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
             0    &0   \\
             1    &0
-          \end{pmatrix}        
+          \end{mat}        
         \end{equation*}
       \partsitem The calculation here is similar to the prior one.
         \begin{center}
           \begin{tabular}{c|cc}
              \( p \)  &\( N^p \)  &\( \nullspace{N^p}  \)   \\  \hline
              \( 1 \)
-               &\(\begin{pmatrix}
+               &\(\begin{mat}[r]
                     0  &0  &0  \\
                     0  &-1 &1  \\
                     0  &-1 &1  
-                  \end{pmatrix}  \)
+                  \end{mat}  \)
                &\( \set{\colvec{u \\ v \\ v} 
                               \suchthat u,v\in\C}  \) \\[2ex]
            \( 2 \)
@@ -1554,19 +1560,19 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
           \begin{tabular}{c|cc}
              \( p \)  &\( N^p \)  &\( \nullspace{N^p}  \)   \\  \hline
              \( 1 \)
-               &\(\begin{pmatrix}
+               &\(\begin{mat}[r]
                     -1  &1  &-1  \\
                      1  &0  &1   \\
                      1  &-1 &1 
-                  \end{pmatrix}  \)
+                  \end{mat}  \)
                &\( \set{\colvec{u \\ 0 \\ -u} 
                               \suchthat u\in\C}  \) \\[2ex]
              \( 2 \)
-               &\(\begin{pmatrix}
+               &\(\begin{mat}[r]
                      1  &0  &1   \\
                      0  &0  &0   \\
                     -1  &0  &-1
-                  \end{pmatrix}  \)
+                  \end{mat}  \)
                &\( \set{\colvec{u \\ v \\ -u} 
                               \suchthat u,v\in\C}  \) \\[2ex]
             \( 3 \)
@@ -1584,11 +1590,11 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
         \end{equation*}
         Therefore, this is the canonical form.
         \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
             0    &0   &0   \\
             1    &0   &0   \\
             0    &1   &0
-          \end{pmatrix}        
+          \end{mat}        
         \end{equation*}
       \end{exparts*}  
      \end{answer}
@@ -1598,60 +1604,60 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
     \begin{answer}
       A couple of examples 
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  \\
           1  &0
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}
           a  &b  \\
           c  &d
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}
           0  &0  \\
           a  &b  
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  &0 \\
           1  &0  &0 \\
           0  &1  &0
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}
           a  &b  &c \\
           d  &e  &f \\
           g  &h  &i
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}
           0  &0  &0 \\
           a  &b  &c \\
           d  &e  &f
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       suggest that left multiplication by a block of subdiagonal ones
       shifts the rows of a matrix downward.
       Distinct blocks
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  &0  &0  \\
           1  &0  &0  &0  \\
           0  &0  &0  &0  \\
           0  &0  &1  &0
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{mat}
+        \begin{mat}
           a  &b  &c  &d  \\
           e  &f  &g  &h  \\
           i  &j  &k  &l  \\
           m  &n  &o  &p
-        \end{pmatrix}
+        \end{mat}
         =
-        \begin{pmatrix}
+        \begin{mat}
           0  &0  &0  &0  \\
           a  &b  &c  &d  \\       
           0  &0  &0  &0  \\
           i  &j  &k  &l  
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       act to shift down distinct parts of the matrix.
 
@@ -1682,11 +1688,11 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
       Observe that a canonical form nilpotent matrix has only
       zero eigenvalues; e.g., the determinant of this lower-triangular matrix
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            -x  &0  &0  \\
             1  &-x &0  \\
             0  &1  &-x
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       is \( (-x)^3 \), the only root of which is zero.
       But similar matrices have the same eigenvalues and every nilpotent
@@ -1755,14 +1761,14 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
         \partsitem Of course, $t$ acts on the span by acting on
           this basis as a single, $k$-long, $t$-string.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}
               0 &0 &0 &0 &\ldots &0 &0 \\
               1 &0 &0 &0 &\ldots &0 &0 \\
               0 &1 &0 &0 &\ldots &0 &0 \\
               0 &0 &1 &0 &       &0 &0 \\
                 &  &  &\ddots          \\
               0 &0 &0 &0 &       &1 &0 \\
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}
     \end{answer}
@@ -1827,11 +1833,11 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
               &\mapsto &\vec{\beta}_4 &\mapsto &\zero  \\
             \vec{\beta}_5 &\mapsto &\vec{\beta}_6 &\mapsto &\vec{\beta}_7
               &\mapsto &\vec{\beta}_8 &\mapsto &\zero  \\
-            &\vdots                                    \\
+            &\vdotswithin{\vec{\beta}_{4k-3}}                       \\
             \vec{\beta}_{4k-3} &\mapsto &\vec{\beta}_{4k-2} 
               &\mapsto &\vec{\beta}_{4k-1}
               &\mapsto &\vec{\beta}_{4k} &\mapsto &\zero  \\
-            &\vdots                                       \\
+            &\vdotswithin{\vec{\beta}_{4k-3}}              \\
             \multicolumn{8}{l}{%
               \text{\textit{--possibly other, shorter, strings--}}}
          \end{strings}
@@ -1847,15 +1853,15 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
     \begin{answer}
       These two have only zero for eigenvalues
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           0  &0  \\
           0  &0
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}
           0  &0  \\
           1  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       but are not similar (they have different canonical
       representatives, namely, themselves).  
@@ -1874,18 +1880,18 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
       is represented with respect to 
       $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$ by this matrix
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           0  &0  \\
           1  &0          
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       but is represented with respect to 
       $B=\sequence{\vec{\beta}_2,\vec{\beta}_1}$ in this way.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           0  &1  \\
           0  &0          
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
     \end{answer}
   \recommended \item
@@ -1962,14 +1968,14 @@ such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
 
       This statement is not `only if' since
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &0  \\
             0  &1
-         \end{pmatrix}
-         -\begin{pmatrix}
+         \end{mat}
+         -\begin{mat}[r]
             -1  &0  \\
             0  &-1
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       is invertible.  
      \end{answer}

@@ -66,18 +66,18 @@ beginfig(2);
 %                         and                      \\ 
 %                         rank of $t^j$ (below)
 % 			\end{tabular} etex,OUT);
-    glabel.bot(btex Power $j$ of the transformation etex,OUT);
-    otick.bot(btex$0$etex,1);    
-    otick.bot(btex$1$etex,2);    
-    otick.bot(btex$2$etex,3);    
-    otick.bot(btex$j$etex,5);    
+    glabel.bot(btex \small Power $j$ of the transformation etex,OUT);
+    otick.bot(btex \scriptsize $0$etex,1);    
+    otick.bot(btex \scriptsize $1$etex,2);    
+    otick.bot(btex \scriptsize $2$etex,3);    
+    otick.bot(btex \scriptsize $j$etex,5);    
     otick.bot(btex{\ }etex,8);    
     grid.bot(btex$n$etex,9) withcolor .85white;    
     otick.bot(btex{\ }etex,10);    
-    grid.lft(btex$n$etex,8) withcolor .85white;    
+    grid.lft(btex \small $n$etex,8) withcolor .85white;    
     otick.lft(btex{\ }etex,7);    
     otick.lft(btex{\ }etex,6);    
-    otick.lft(btex$\text{rank}(t^j)$etex,3);    
+    otick.lft(btex$\small \text{rank}(t^j)$etex,3);    
     otick.lft(btex{\ }etex,1);    
     otick.lft(btex{\ }etex,1);    
     otick.lft(btex{\ }etex,1);    
@@ -279,6 +279,73 @@ beginfig(7) % Tower of Hanoi (three disks at start)
   % right needle
   drawdisk(needle_length,needle_width,needle_hgt)
      shifted (0,needle_hgt) shifted 2needle_shift;
+endfig;
+
+
+
+
+beginfig(8) % graph of rank falling and nullity rising
+  numeric u;  %scaling factor
+  numeric v;  %vertical scaling factor
+  numeric w;  %horizontal scaling factor
+  u:=10pt; v:=u; w:=v; %
+  
+  % axes
+  z0=(0w,0v);
+  z1=(-.5w,0v); z2=(20.5w,0v);  % x axis
+  z3=(0w,-.5v); z4=(0w,9.5v);  % y axis
+  pickup pensquare scaled line_width_light;
+  draw z1--z2;
+  draw z3--z4;
+  label.lrt(btex \small power etex,z2);
+  % label.ulft(btex \small power of the transformation etex,z2);
+  % point of interest
+  z10=(10w,5v);
+  % ticks
+  pickup updown_tick;
+  for i = 1 upto 3:
+    drawdot (i*w,0v);
+  endfor
+  label.bot(btex \scriptsize $0$ etex,(1w,0v));
+  label.bot(btex \scriptsize $1$ etex,(2w,0v));
+  label.bot(btex \scriptsize $2$ etex,(3w,0v));
+  drawdot (x10,0v);
+  label.bot(btex \scriptsize $j$ etex,(10w,0v));
+  for i = 17 upto 19:
+    drawdot (i*w,0v);
+  endfor
+  label.bot(btex \scriptsize $k$ etex,(18w,0v));
+  % label.bot(btex \scriptsize $k+1$ etex,(14w,0v));
+  pickup sidetoside_tick;
+  for i = 7 upto 9:
+    drawdot (0w,i*v);
+  endfor
+  label.lft(btex \scriptsize $n$ etex,(0w,9v));
+  drawdot (0w,y10);
+  for i = 1 upto 3:
+    drawdot (0w,i*v);
+  endfor
+  label.lft(btex \scriptsize $0$ etex,(0w,1v));
+  % The points
+  pickup pencircle scaled line_width_light;
+  drawpoint(z10);
+    pickup pensquare  scaled line_width_light;
+    draw (x10,y10+0.5v)--(x10,y4-0.5v) withcolor .8white;  % vert line above dot
+    draw (x10-0.25w,y4-0.5v)--(x10+0.25w,y4-0.5v) withcolor .8white; % whisker at  top
+    draw (x10-0.25w,y10+0.5v)--(x10+0.25w,y10+0.5v) withcolor .8white; % whisker at  top
+    label.rt(btex \scriptsize $\nullity (t^j)$ etex,(x10,.5[y10,y4]));
+    draw (x10,y10-0.5v)--(x10,1v) withcolor .8white; % vert line below dot
+    draw (x10-0.25w,y10-0.5v)--(x10+0.25w,y10-0.5v) withcolor .8white; % whisker at top
+    draw (x10-0.25w,1v)--(x10+0.25w,1v) withcolor .8white; % whisker at bot
+    label.lft(btex \scriptsize $\rank (t^j)$ etex,(x10,.5[y10,1v]));
+  pickup pencircle scaled line_width_light;
+  drawpoint((1w,9v));
+  drawpoint((2w,7v));
+  drawpoint((3w,6v));
+  drawpoint((17w,3v));
+  drawpoint((18w,2v));
+  drawpoint((19w,2v));
+  drawpoint((20w,2v));
 endfig;
 
 
