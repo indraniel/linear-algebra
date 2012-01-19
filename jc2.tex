@@ -4,10 +4,10 @@
 \section{Similarity}
 \index{similarity|(}
 We've defined two matrices \( H \) and \( \hat{H} \) to be
-matrix-equivalent if there are nonsingular matrices \( P \) and \( Q \)
+matrix equivalent if there are nonsingular \( P \) and \( Q \)
 such that \( \hat{H}=PHQ \).
 We were motivated by this diagram
-showing $H$ and $\hat{H}$ both representing a map 
+showing both $H$ and $\hat{H}$ representing a map, 
 $h$ but with respect to different
 pairs of bases, $B,D$ and $\hat{B},\hat{D}$.
 \begin{equation*}
@@ -92,14 +92,14 @@ The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
 \end{example}
 
 Since matrix similarity is a special case of matrix equivalence, 
-if two matrices are similar then they are equivalent.
+if two matrices are similar then they are matrix equivalent.
 What about the converse:~must any two matrix equivalent square matrices be 
 similar?
 No;
 the prior example shows that the similarity classes are different
 from the matrix equivalence classes because the matrix equivalence class
 of the identity consists of all nonsingular matrices of that size. 
-Thus, for instance, these two are
+Thus these two are
 matrix equivalent but not similar.
 \begin{equation*}
   T=
@@ -130,7 +130,7 @@ a canonical form for
 representatives\appendrefs{representatives}\spacefactor=1000 %
 of the similarity classes, called Jordan form.
 With this canonical form, we can decide if two matrices are similar by checking
-whether they reduce to the same representative.
+whether they are in a class with the same representative.
 We've also seen with both row equivalence and matrix equivalence that a
 canonical form gives us insight into the ways in which members of
 the same class are alike
@@ -240,7 +240,7 @@ if and only if they have the same rank).
         \end{equation*} 
     \end{exparts}  
    \end{answer}
-  \item 
+  \recommended \item 
     Show that these matrices are not similar.
     \begin{equation*}
        \begin{mat}[r]
@@ -842,30 +842,31 @@ if and only if they have the same rank).
 
 
 \subsection{Diagonalizability}
-The prior subsection defines the relation of similarity and shows that
+The prior subsection shows that
 although similar matrices are necessarily matrix equivalent, the converse
 does not hold.
 Some matrix equivalence classes break into two or more similarity 
-classes; for instance, the nonsingular $\nbyn{n}$ matrices
+classes; for instance, the nonsingular $\nbyn{2}$ matrices
 form one matrix equivalence class but more than one similarity class.
 
 Thus we cannot use the canonical form for matrix equivalence, 
 a block partial-identity matrix, as a canonical form 
-for matrix similarity because
-the partial-identities cannot be in more than one
-similarity class, so there are similarity classes without one.
-This illustrates 
-(we've drawn the class representatives as stars).
+for matrix similarity. 
+The diagram below illustrates. 
+The stars are similarity class representatives.
+Each dashed-line similarity class subdivision has one star 
+but each solid-curve matrix equivalence class division has only one 
+partial identity matrix.
 \begin{center}
   \includegraphics{ch5.5}
 \end{center}
 To develop a canonical form for representatives of
 the similarity classes
-we would naturally try to build on previous work.
+we naturally build on previous work.
 This means 
 first that the partial identity matrices should represent the similarity
 classes into which they fall. 
-Beyond that, the representatives should be as simple as possible, and
+Beyond that, the representatives should be as simple as possible and
 the partial identities are simple in that they consist mostly of zero entries. 
 The simplest extension of the partial identity form is the diagonal form.
 
@@ -910,14 +911,14 @@ is diagonalizable.
 \end{example}
 
 \begin{example}
-This matrix is not diagonalizable.
+This matrix is not diagonalizable
 \begin{equation*}
   N=\begin{mat}[r]
        0  &0  \\
        1  &0
     \end{mat}
 \end{equation*}
-The reason is that this matrix is not the zero matrix 
+because it is not the zero matrix 
 but its square is the zero matrix.
 The fact that $N$ is not the zero matrix means that it cannot be similar to
 the zero matrix, by \nearbyexample{ex:OnlyZeroSimToZero}.
@@ -933,13 +934,13 @@ matrix is the diagonal matrix whose entries are the squares of the entries
 from the starting matrix, and $D$ is not the zero matrix.
 \end{example}
 
-That example shows that a diagonal form will not do for a 
+That example shows that a diagonal form will not suffice as a 
 canonical form\Dash we cannot
 find a diagonal matrix in each matrix similarity class.
 However, the canonical form that we are developing has the property that if
 a matrix can be diagonalized then the diagonal matrix is the canonical
-representative of the similarity class. 
-The next result characterizes which maps can be diagonalized.
+representative of its similarity class. 
+% We now characterize which maps can be diagonalized.
 
 \begin{corollary}
 \label{cor:DiagIffBasisOfEigens}
@@ -967,9 +968,20 @@ Consider a diagonal representation matrix.
       0           &       &\lambda_n
    \end{pmat}
 \end{equation*}
-Let $\vec{v}$ be a member of the space and consider its representation 
-with respect to the basis $\rep{\vec{v}}{B}$.
-The product of the diagonal matrix and the representation vector will have the 
+Consider the representation of a member of this basis 
+with respect to the basis $\rep{\vec{\beta}_i}{B}$.
+The product of the diagonal matrix and the representation vector
+\begin{equation*}
+   \rep{t(\vec{\beta}_i)}{B}
+   =\begin{pmat}{c@{\hspace*{1em}}c@{\hspace*{1em}}c}
+      \lambda_1   &       &0         \\
+      \vdots      &\ddots &\vdots    \\
+      0           &       &\lambda_n
+   \end{pmat}  
+  \colvec{0 \\ \vdots \\ 1 \\ \vdots \\ 0}
+  =\colvec{0 \\ \vdots \\ \lambda_i \\ \vdots \\ 0}
+\end{equation*}
+has the 
 stated action.
 \end{proof}
 
@@ -1032,9 +1044,9 @@ $b_2=0$ or $x=1$.
 In the \( b_2=0 \) case, 
 the first equation gives that either $b_1=0$ or \( x=3 \).
 Since we've disallowed the case of both $b_1=0$ and $b_2=0$,
-we are left looking at the possibility that $x=3$. 
-With it, the first equation in ($*$) is $0\cdot b_1+2\cdot b_2=0$
-and so associated with $3$ are vectors
+we are left with $\lambda_1=3$. 
+Then the first equation in ($*$) is $0\cdot b_1+2\cdot b_2=0$
+and so associated with $\lambda_1=3$ are vectors
 with a second component of zero and a first component that is free. 
 \begin{equation*}
      \begin{mat}[r]
@@ -1043,15 +1055,14 @@ with a second component of zero and a first component that is free.
      \end{mat}
      \colvec{b_1 \\ 0}=3\cdot\colvec{b_1 \\ 0} 
 \end{equation*}
-That is, one solution to ($*$) is $\lambda_1=3$ and we have the 
-first basis vector.
+Choose any nonzero $b_1$ to have a first basis vector.
 \begin{equation*}
    \vec{\beta}_1=\colvec[r]{1 \\ 0}
 \end{equation*}
-The second case for the bottom equation of ($*$) is $x=1$. 
+The second case for the bottom equation of ($*$) is $\lambda_2=1$. 
 The first equation in ($*$) is then $2\cdot b_1+2\cdot b_2=0$ and so
 associated with $1$ are vectors such that their 
-second component is the negative of their first component.
+second component is the negative of their first.
 \begin{equation*}
      \begin{mat}[r]
         3  &2  \\
@@ -1059,8 +1070,7 @@ second component is the negative of their first component.
      \end{mat}
      \colvec{b_1 \\ -b_1}=1\cdot\colvec{b_1 \\ -b_1} 
 \end{equation*}
-Thus, another solution is $\lambda_2=1$ and 
-a second basis vector is this.
+Choose a nonzero one of these to have a second basis vector.
 \begin{equation*}
    \vec{\beta}_2=\colvec[r]{1 \\ -1}
 \end{equation*}
@@ -2010,18 +2020,22 @@ $.
 \end{definition}
 
 \noindent (``Eigen'' is German for ``characteristic of'' or ``peculiar to.'' 
-some authors call these \definend{characteristic}%
+Some authors call these \definend{characteristic}%
 \index{characteristic!vectors, values} values and vectors;
-no one calls them ``peculiar vectors.'')
+no one calls them ``peculiar.'')
 
 \begin{remark}
 This definition requires that the eigenvector be non-$\zero$.
 Some authors allow $\zero$ as
 an eigenvector for $\lambda$ as long as there are also
 non-$\zero$ vectors associated with $\lambda$.
+Neither style  of definition is clearly better; both involve small tradeoffs.
 In both styles the key point is 
 to not allow a case where $\lambda$ is such that
-$t(\vec{v})=\lambda\vec{v}$ for only the single vector $\vec{v}=\zero$.  
+$t(\vec{v})=\lambda\vec{v}$ for only the single vector $\vec{v}=\zero$.
+
+Also, note that $\lambda$ could be $0$.
+The issue is whether $\vec{\zeta}$ could be $\zero$.  
 \end{remark}
 
 \begin{example}
@@ -2036,7 +2050,7 @@ has an eigenvalue of \( 1 \) associated with any eigenvector of the form
 \begin{equation*}
    \colvec{x \\ y \\ 0}
 \end{equation*}
-where \( x \) and \( y \) are non-$0$ scalars.
+where \( x \) and \( y \) are scalars that are not both zero.
 On the other hand, \( 2 \) is not an eigenvalue of \( \pi \) 
 since no non-$\zero$ vector is doubled.
 \end{example}
@@ -2058,7 +2072,7 @@ $\vec{v}$ mapped to a scalar multiple $\lambda\cdot\vec{v}$ of themselves.
 Consider the homomorphism \( \map{t}{\polyspace_1}{\polyspace_1} \)
 given by \( c_0+c_1x\mapsto(c_0+c_1)+(c_0+c_1)x \).
 While the codomain $\polyspace_1$ of $t$ is two-dimensional, its 
-range is one-dimensional $\rangespace{t}=\set{x+cx\suchthat c\in\C}$.
+range is one-dimensional $\rangespace{t}=\set{c+cx\suchthat c\in\C}$.
 Application of
 \( t \) to a vector in that range will simply rescale the vector
 \( c+cx\mapsto (2c)+(2c)x \).
@@ -2072,7 +2086,7 @@ the form \( c-cx \) where \( c\neq 0 \).
 \begin{definition}
 A square matrix \( T \) has a scalar
 \definend{eigenvalue}\index{eigenvalue, eigenvector!of a matrix}
-\( \lambda \) associated with the non-\( \zero \)
+\( \lambda \) associated with the nonzero
 \definend{eigenvector} \( \vec{\zeta} \) if
 \( T\vec{\zeta}=\lambda\cdot\vec{\zeta} \).
 \end{definition}
@@ -2134,11 +2148,12 @@ Here is an informal description of the reason for the difference.
 The underlying transformation doubles the 
 eigenvectors $\vec{v}\mapsto 2\cdot\vec{v}$.
 But when the matrix representing the transformation is
-\( T=\rep{t}{B,B} \) then it ``assumes'' that column vectors are 
+\( T=\rep{t}{B,B} \) then the matrix ``assumes'' that column vectors are 
 representations with respect to \( B \).
 In contrast, \( S=\rep{t}{D,D} \) ``assumes'' that column vectors 
 are representations with respect to \( D \).
-So the vectors that get doubled by each matrix look different.
+So the column vector representations that get doubled by each matrix 
+are different.
 \end{remark}
 
 The next example shows the basic tool for
@@ -2155,7 +2170,7 @@ If
   \end{mat}
 \end{equation*}
 then to find the scalars \( x \) such that
-\( T\vec{\zeta}=x\vec{\zeta} \) for non-\( \zero \) eigenvectors
+\( T\vec{\zeta}=x\vec{\zeta} \) for nonzero eigenvectors
 \( \vec{\zeta} \), bring everything to the left-hand side
 \begin{equation*}
   \begin{mat}[r]
@@ -2183,7 +2198,7 @@ This homogeneous linear system
   =
   \colvec[r]{0 \\ 0 \\ 0}
 \end{equation*}
-has a non-\( \zero \) solution $\vec{z}$ if and only if the
+has a nonzero solution $\vec{z}$ if and only if the
 matrix is singular.
 We can determine when that happens.
 \begin{align*}
@@ -2290,13 +2305,14 @@ where \( b\neq 0 \).
 The \definend{characteristic polynomial of a square matrix}\index{characteristic polynomial}%
 \index{matrix!characteristic polynomial}
 \( T \) is the
-determinant of \( T-x I \), where \( x \) is a variable.
+determinant \( \deter{T-x I} \) where \( x \) is a variable.
 The \definend{characteristic equation}\index{characteristic equation}%
 \index{matrix!characteristic polynomial}
 is $\deter{T-xI}=0$.
 The \definend{characteristic polynomial of a transformation}
-\( t \) is the polynomial
-of any \( \rep{t}{B,B} \).\index{transformation!characteristic polynomial}
+\( t \) is the characteristic polynomial
+of any matrix representatation
+\( \rep{t}{B,B} \).\index{transformation!characteristic polynomial}
 \end{definition}
 
 \noindent \nearbyexercise{exer:CharPolyTransWellDefed} checks that the 
@@ -2378,7 +2394,7 @@ In \nearbyexample{ex:IntroCharEqn}
 these are the eigenspaces associated with the eigenvalues \( 0 \) 
 and \( 2 \).
 \begin{equation*}
-  V_0=\set{\colvec{a \\ -a \\ a}\suchthat a\in\C},
+  V_0=\set{\colvec[r]{a \\ -a \\ a}\suchthat a\in\C},
   \qquad
   V_2=\set{\colvec{b \\ 0 \\ b}\suchthat b\in\C}.
 \end{equation*}
@@ -2456,12 +2472,12 @@ and let \( \vec{v}_1,\dots,\vec{v}_{k+1} \)
 be associated eigenvectors.
 Suppose that
 $\zero=c_1\vec{v}_1+\dots+c_k\vec{v}_k+c_{k+1}\vec{v}_{k+1}$. 
-Derive from that two equations, the first by multiplying \( \lambda_{k+1} \) 
+Derive two equations from that, the first by multiplying \( \lambda_{k+1} \) 
 on both sides $\zero=c_1\lambda_{k+1}\vec{v}_1+\dots+c_{k+1}\lambda_{k+1}\vec{v}_{k+1}$
 and the second by applying the map to both sides
 $\zero=c_1t(\vec{v}_1)+\dots+c_{k+1}t(\vec{v}_{k+1})
   =c_1\lambda_1\vec{v}_1+\dots+c_{k+1}\lambda_{k+1}\vec{v}_{k+1}$
-(applying the matrix gives a similar result). 
+(applying the matrix gives the same result). 
 Subtract the second equation from the first
 \begin{equation*}
   \zero=
@@ -2488,7 +2504,7 @@ The eigenvalues of
      \end{mat}
 \end{equation*}
 are distinct: \( \lambda_1=1 \), \( \lambda_2=2 \), and~\( \lambda_3=3 \).
-A set of associated eigenvectors like
+A set of associated eigenvectors 
 \begin{equation*}
   \set{
        \colvec[r]{2 \\ 1 \\ 0},
@@ -3362,7 +3378,7 @@ Apply \nearbycorollary{cor:DiagIffBasisOfEigens}.
       \end{exparts}
     \end{answer}
   \item 
-    Do matrix-equivalent matrices have the same eigenvalues?
+    Do matrix equivalent matrices have the same eigenvalues?
     \begin{answer}
       No.
       These are two same-sized, equal rank, matrices
@@ -3436,6 +3452,7 @@ Apply \nearbycorollary{cor:DiagIffBasisOfEigens}.
     \cite{MathMag67p232}
     Show that if \( A \) is an \( n \) square matrix and each row (column)
     sums to \( c \) then \( c \) is a characteristic root of \( A \).
+    (``Characteristic root'' is a synonym for eigenvalue.)\index{characteristic root}\index{root!characteristic}
     \begin{answer}
       \answerasgiven %
       If the argument of the characteristic function of \( A \) is set equal to
