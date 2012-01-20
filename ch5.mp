@@ -300,7 +300,7 @@ beginfig(8) % graph of rank falling and nullity rising
   % label.lrt(btex \small power etex,z2);
   % label.ulft(btex \small rank etex,z4);
   % point of interest
-  z10=(10w,4v);
+  z10=(10w,3.75v);
   % ticks
   pickup updown_tick;
   for i = 1 upto 3:
@@ -314,7 +314,7 @@ beginfig(8) % graph of rank falling and nullity rising
   for i = 17 upto 21:
     drawdot (i*w,0v);
   endfor
-  label.bot(btex \scriptsize $k$ etex,(18w,0v));
+  % label.bot(btex \scriptsize $k$ etex,(18w,0v));
   label.bot(btex \scriptsize $n$ etex,(20w,0v));
   % label.bot(btex \scriptsize $k+1$ etex,(14w,0v));
   pickup sidetoside_tick;
@@ -334,20 +334,33 @@ beginfig(8) % graph of rank falling and nullity rising
     pickup pensquare  scaled line_width_light;
     draw (x10,y10+0.5v)--(x10,y4-0.5v) withcolor .8white;  % vert line above dot
     draw (x10-.5whisker_width,y4-0.5v)--(x10+.5whisker_width,y4-0.5v) withcolor .8white; % whisker at  top
-    draw (x10-.5whisker_width,y10+0.5v)--(x10+.5whisker_width,y10+0.5v) withcolor .8white; % whisker at  top
+    draw (x10-.5whisker_width,y10+0.5v)--(x10+.5whisker_width,y10+0.5v) withcolor .8white; % whisker at  bot
     label.rt(btex \scriptsize $\nullity (t^j)$ etex,(x10,.5[y10,y4]));
     draw (x10,y10-0.5v)--(x10,1v) withcolor .8white; % vert line below dot
     draw (x10-.5whisker_width,y10-0.5v)--(x10+.5whisker_width,y10-0.5v) withcolor .8white; % whisker at top
     draw (x10-.5whisker_width,1v)--(x10+.5whisker_width,1v) withcolor .8white; % whisker at bot
-    label.lft(btex \scriptsize $\rank (t^j)$ etex,(x10,.5[y10,1v]));
+    label.lft(btex \scriptsize $\rank (t^j)$ etex,(x10,.55[y10,1v]));
   pickup pencircle scaled line_width_light;
   drawpoint((1w,9v));
   drawpoint((2w,7v));
   drawpoint((3w,6v));
-  drawpoint((17w,2.25v));
+  drawpoint((17w,2.2v));
   drawpoint((18w,2v));
   drawpoint((19w,2v));
   drawpoint((20w,2v));
+  % drawpoint((21w,2v));
+  label(btex \scriptsize $\ldots$ etex,(21w,2v));
+  % Generalized spaces
+    z20=(20w,2v); % were to anchor the line for generalized spaces
+    pickup pensquare  scaled line_width_light;
+    draw (x20,y20+0.5v)--(x20,y4-0.5v) withcolor .8white;  % vert line above dot
+    draw (x20-.5whisker_width,y4-0.5v)--(x20+.5whisker_width,y4-0.5v) withcolor .8white; % whisker at  top
+    draw (x20-.5whisker_width,y20+0.5v)--(x20+.5whisker_width,y20+0.5v) withcolor .8white; % whisker at  bot
+    label.rt(btex \scriptsize $\dim(\gennullspace{t})$ etex,(x20,.5[y20,y4]));
+    draw (x20,y20-0.5v)--(x20,1v) withcolor .8white; % vert line below dot
+    draw (x20-.5whisker_width,y20-0.5v)--(x20+.5whisker_width,y20-0.5v) withcolor .8white; % whisker at top
+    draw (x20-.5whisker_width,1v)--(x20+.5whisker_width,1v) withcolor .8white; % whisker at bot
+    label.rt(btex \scriptsize $\dim(\genrangespace{t})$ etex,(x20,.8[y20,1v]));
 endfig;
 
 

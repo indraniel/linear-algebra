@@ -124,7 +124,7 @@ form a descending chain
 \end{equation*}
 and the nullspaces form an ascending chain.
 \begin{equation*}
-  \set{\vec{0}\,}\subseteq\nullspace{t}\subseteq\nullspace{t^2}\subseteq\cdots
+  \set{\vec{0}}\subseteq\nullspace{t}\subseteq\nullspace{t^2}\subseteq\cdots
 \end{equation*}
 Further, there is a \( k \) such that
 for powers less than $k$ the subsets are proper
@@ -236,7 +236,7 @@ first two coordinates
    \colvec{c_1 \\ c_2 \\ 0}
 \end{equation*}
 has \( \C^3\supset\rangespace{\pi}=\rangespace{\pi^2}=\cdots \)
-and \( \set{\zero\,}\subset\nullspace{\pi}=\nullspace{\pi^2}=\cdots\, \)
+and \( \set{\zero}\subset\nullspace{\pi}=\nullspace{\pi^2}=\cdots\, \)
 where this is the rangespace and the nullspace.
 \begin{equation*}
   \rangespace{\pi}=\set{\colvec{a \\ b \\ 0}\suchthat a,b\in\C}
@@ -263,24 +263,26 @@ This graph illustrates.
 The horizontal axis gives the power~$j$ of a transformation.
 The vertical axis gives
 the dimension of the rangespace of $t^j$
-as the distance above zero\Dash and thus also shows the dimension of the 
-nullspace as the distance below the gray horizontal line, 
-because the two add to the dimension $n$ of the domain.
+as the distance above zero, and thus also shows the dimension of the 
+nullspace because the two add to the dimension $n$ of the domain.
 \begin{center}
   % \includegraphics{ch5.2}
   \includegraphics{ch5.8}
 \end{center}
-As sketched, on iteration 
-the rank falls and with it the nullity grows 
-until the two reach a steady state.
-This state must be reached by the $n$-th iterate.
-The steady state's distance above zero is the dimension of the 
-generalized rangespace
-and its distance below $n$ is the dimension of
-the generalized nullspace.
+On iteration 
+the rank falls and the nullity rises
+until there is some $k$ such that 
+the map reaches a steady state
+$\rangespace{t^k}=\rangespace{t^{k+1}}=\genrangespace{t}$
+and $\nullspace{t^k}=\nullspace{t^{k+1}}=\gennullspace{t}$.
+This must happen by the $n$-th iterate.
+% The steady state's distance above zero is the dimension of the 
+% generalized rangespace
+% and its distance below $n$ is the dimension of
+% the generalized nullspace.
 
 \begin{exercises}
-  \item 
+  \recommended \item 
     Give the chains of rangespaces and nullspaces for the zero and
     identity transformations.
     \begin{answer}
@@ -292,7 +294,7 @@ the generalized nullspace.
       \( V=V=V=\cdots \) and
       \( \set{\vec{0}}=\set{\vec{0}}=\cdots\, \). 
     \end{answer}
-  \item 
+  \recommended\item 
      For each map, 
      give the chain of rangespaces and the chain of nullspaces,
      and the generalized rangespace and the 
@@ -345,12 +347,12 @@ the generalized nullspace.
            \begin{equation*}
              \Re^2
                \supset\set{\colvec{0 \\ p}\suchthat p\in\C}
-               \supset\set{\zero\,}
+               \supset\set{\zero}
                =\cdots
            \end{equation*}
            and the chain of nullspaces 
            \begin{equation*}
-             \set{\zero\,}
+             \set{\zero}
                \subset\set{\colvec{q \\ 0}\suchthat q\in\C}
                \subset\Re^2
                =\cdots
@@ -370,11 +372,11 @@ the generalized nullspace.
            \begin{equation*}
              \polyspace_2=\polyspace_2=\cdots
               \qquad
-              \set{\zero\,}=\set{\zero\,}=\cdots  
+              \set{\zero}=\set{\zero}=\cdots  
            \end{equation*}
            Thus, obviously,
            generalized spaces are $\genrangespace{t_2}=\polyspace_2$
-           and $\gennullspace{t_2}=\set{\zero\,}$.
+           and $\gennullspace{t_2}=\set{\zero}$.
          \partsitem We have 
            \begin{equation*}
              \colvec{a \\ b \\ c}
@@ -392,7 +394,7 @@ the generalized nullspace.
            \end{equation*}
            and the chain of nullspaces
            \begin{equation*}
-             \set{\zero\,}
+             \set{\zero}
                 \subset\set{\colvec{0 \\ 0 \\ r}\suchthat r\in \C}
                 \subset\set{\colvec{0 \\ q \\ r}\suchthat q,r\in \C}
                 =\cdots
@@ -424,7 +426,7 @@ the generalized nullspace.
       if $W$ is a proper subspace then $V$ is not the span of $B_W$, and
       so $B_V$ must have at least one vector more than does $B_W$.     
     \end{answer}
-  \item 
+  \recommended\item 
     Prove that the generalized rangespace $\genrangespace{t}$ is the
     entire space, and the generalized nullspace $\gennullspace{t}$ is trivial,
     if the transformation $t$ is nonsingular.
@@ -457,7 +459,7 @@ the generalized nullspace.
       the containments in the chain are not proper\Dash the nullspaces 
       are equal. 
     \end{answer}
-\item
+  \recommended\item
     Give an example of a transformation on a three
     dimensional space whose range has dimension two.
     What is its nullspace?
@@ -517,46 +519,61 @@ The answer is yes for the smallest power $j=0$ since
 \( V=\rangespace{t^0}\directsum\nullspace{t^0}=V\directsum\set{\zero} \).
 The answer is also yes at the other extreme.
 
-\begin{lemma} \label{GenRngNullDirSumToSp}
-Where \( \map{t}{V}{V} \) is a linear transformation, 
-the space is the direct sum 
-\( V=\genrangespace{t}\directsum\gennullspace{t} \).
-That is, both \( \dim(V)=\dim(\genrangespace{t})+\dim(\gennullspace{t}) \) and
-\( \genrangespace{t}\intersection\gennullspace{t}=\set{\zero\,} \).
+\begin{lemma} \label{lem:RestONeToOne}
+For any linear \( \map{t}{V}{V} \) 
+the function \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \)
+is one-to-one.
 \end{lemma}
 
 \begin{proof}
+Let the dimension of $V$ be $n$.
+Because \( \rangespace{t^n}=\rangespace{t^{n+1}} \),
+the map \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \) is
+a dimension-preserving homomorphism. 
+Therefore, by Theorem~Two.II.\ref{th:OOHomoEquivalence} it is one-to-one.  
+\end{proof}
+
+\begin{corollary} \label{GenRngNullDirSumToSp}
+Where \( \map{t}{V}{V} \) is a linear transformation, 
+the space is the direct sum 
+\( V=\genrangespace{t}\directsum\gennullspace{t} \).
+That is, both (1)~\( \dim(V)=\dim(\genrangespace{t})+\dim(\gennullspace{t}) \) 
+and (2)~\( \genrangespace{t}\intersection\gennullspace{t}=\set{\zero} \).
+\end{corollary}
+
+\begin{proof}
+Let the dimension of $V$ be $n$.
 We will verify the second sentence, which is equivalent to the first.
-The first clause, that the dimension $n$ of the domain of $t^n$ equals
-the rank of $t^n$ plus the nullity of $t^n$, holds for any transformation and
-so we need only verify the second clause, that the intersection of the two
-is the trivial subspace.
+Clause~(1) is true because any transformation satisfies that
+its rank plus its nullity
+equals the dimension of the space,  
+and in particular this holds for the transformation $t^n$.
+Thus we need only verify clause~(2).
 
 Assume that
-\( \vec{v}\in\genrangespace{t}\intersection\gennullspace{t}
-              =\rangespace{t^n}\intersection\nullspace{t^n} \),
-to prove that $\vec{v}$ is \( \zero \).
-Because \( \vec{v} \) is in the nullspace, \( t^n(\vec{v})=\zero \).
-On the other hand, because \( \rangespace{t^n}=\rangespace{t^{n+1}} \),
-the map \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \) is
-a dimension-preserving homomorphism and therefore is one-to-one.
-A composition of one-to-one maps is one-to-one and so
+\( \vec{v}\in\genrangespace{t}\intersection\gennullspace{t} \)
+%               =\rangespace{t^n}\intersection\nullspace{t^n} \)
+to prove that $\vec{v}=\zero$.
+Because \( \vec{v} \) is in the generalized nullspace, \( t^n(\vec{v})=\zero \).
+On the other hand, by the lemma
+\( \map{t}{\genrangespace{t}}{\genrangespace{t}} \)
+is one-to-one, and 
+a composition of one-to-one maps is one-to-one, so
 \( \map{t^n}{\genrangespace{t}}{\genrangespace{t}} \) is one-to-one.
-But now\Dash because only \( \zero \) is sent by a one-to-one linear map to
-\( \zero \)\Dash the fact that \( t^n(\vec{v})=\zero \) implies that
+Only \( \zero \) is sent by a one-to-one linear map to
+\( \zero \),  so the fact that \( t^n(\vec{v})=\zero \) implies that
 \( \vec{v}=\zero \).
 \end{proof}
 
-\begin{remark} \label{note:RestONeToOne}
-Technically we should distinguish the map $\map{t}{V}{V}$ from
-the map \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \) 
-because the domains or codomains might differ.
-The second one is said to be the 
-\definend{restriction}\appendrefs{map restrictions}\spacefactor=1000 %
-of $t$ to 
-$\rangespace{t^n}$. 
-We shall use later a point from that proof about the restriction map, 
-namely that it is one-to-one.
+\begin{remark}
+Technically there is a difference between the map $\map{t}{V}{V}$ and
+the map on the subspace \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \)
+if the generalized rangespace is not equal to $V$, because the domains are
+different.
+The second is said to be the 
+\definend{restriction}\index{restriction}\index{map!restriction}\appendrefs{map restrictions}\spacefactor=1000 %
+of the first to 
+$\genrangespace{t}$. 
 \end{remark}
 
 For powers between $j=0$ and~$j=n$, 
@@ -737,13 +754,14 @@ produces this representation with respect to \( D,D \).
   \end{mat}
 \end{equation*}
 The new matrix is nilpotent; it's fourth power 
-is the zero matrix since
+is the zero matrix.
+We could verify this with a tedious computation, or we can observe that
+it is nilpotent since it is similar to the nilpotent matrix \( \hat{N}^4 \).
 \begin{equation*}
    (P\hat{N}P^{-1})^4
    =P\hat{N}P^{-1}\cdot P\hat{N}P^{-1}\cdot P\hat{N}P^{-1}\cdot P\hat{N}P^{-1}
    =P\hat{N}^4P^{-1}
 \end{equation*}
-and \( \hat{N}^4 \) is the zero matrix.
 \end{example}
 
 The goal of this subsection is to show
@@ -762,7 +780,7 @@ is a basis that is a concatenation of \( t \)-strings.
 \end{definition}
 
 Note that the strings cannot form a basis under concatenation
-if they are not disjoint. 
+if they are not disjoint because a basis cannot have a repeated vector. 
 
 \begin{example}
 In \nearbyexample{ThirdNilMap}, the $t$-strings
@@ -941,16 +959,19 @@ depending on whether they are in the nullspace or not).
 \end{equation*}
 
 \begin{proof}
-Fix a vector space $V$; we will argue by induction on the index of nilpotency
-of $\map{t}{V}{V}$.
-If that index is \( 1 \) then \( t \) is the zero map and any basis 
+Fix a vector space $V$. 
+We will argue by induction on the index of nilpotency.
+If the map $\map{t}{V}{V}$
+has index of nilpotency~\( 1 \) then it is the zero map and any basis 
 is a string basis $\vec{\beta}_1\mapsto\zero$, \ldots, 
 $\vec{\beta}_n\mapsto\zero$.
+
 For the inductive step, assume that the theorem holds for any transformation
-with an index of nilpotency between $1$ and \( k-1 \)
+$\map{t}{V}{V}$
+with an index of nilpotency between $1$ and~\( k-1 \) (with $k>1$)
 and consider the index~$k$ case.
 
-First observe that the restriction to
+Observe that the restriction of $t$ to
 the rangespace
 \( \map{t}{\rangespace{t}}{\rangespace{t}} \) 
 is also nilpotent, of index \( k-1 \).
@@ -964,25 +985,27 @@ is determined by \( t \).
   \cat{\sequence{\vec{\beta}_2,\ldots,t^{h_2}(\vec{\beta}_2)}}}{\cdots}}{
   \sequence{\vec{\beta}_i,\ldots,t^{h_i}(\vec{\beta}_i)} }
 \end{equation*}
-(In the illustration these are the basis vectors of kind~\( 1 \),
-so there are $i$ strings shown with this kind of basis vector.)
+(In the illustration above these are the vectors of kind~\( 1 \).)
 
-Second, note that taking the final nonzero vector in each string
+Note that taking the final nonzero vector in each 
+of these strings
 gives a basis
 \( C=\sequence{t^{h_1}(\vec{\beta}_1),\dots,t^{h_i}(\vec{\beta}_i)} \)
-for \( \rangespace{t}\intersection\nullspace{t} \).
-(These are illustrated with \( 1 \)'s in squares.)
-For, a member of \( \rangespace{t} \) is mapped to zero if and only
+for the intersection \( \rangespace{t}\intersection\nullspace{t} \).
+This is because a member of \( \rangespace{t} \) is mapped to zero if and only
 if it is a linear combination of those basis vectors that are mapped
 to zero.
-Extend \( C \) to a basis for all of \( \nullspace{t} \).
+(The illustration shows these as \( 1 \)'s in squares.)
+
+Now extend \( C \) to a basis for all of \( \nullspace{t} \).
 \begin{equation*}
   \hat{C}=\cat{C}{\sequence{\vec{\xi}_1,\dots,\vec{\xi}_p}}
 \end{equation*}
-(The $\vec{\xi}$'s are the vectors of kind~\( 2 \) 
-so that \( \hat{C} \) is the set of squares.)
-While many choices are possible for the \( \vec{\xi} \)'s,
-their number \( p \) is determined by the map \( t \) as it is the dimension of
+(In the illustration the $\vec{\xi}$'s are the vectors of kind~\( 2 \) 
+and so the set \( \hat{C} \) is the set of all vectors in a square.)
+While which vectors \( \vec{\xi} \) we choose isn't uniquely
+determined by $t$, what is uniquely determined is the number
+of them: it is the dimension of
 \( \nullspace{t} \) minus the dimension of
 \( \rangespace{t}\intersection\nullspace{t} \).
 
@@ -1002,14 +1025,15 @@ Note that
   &=
   \dim (V)-i
 \end{align*}
-and so \( \cat{B}{\hat{C}} \) can be extended to a basis for all of 
-\( V \) by the addition of \( i \) more vectors.
-Specifically, remember that each of \( \vec{\beta}_1,\dots,\vec{\beta}_i \) is
+and so we can extend \( \cat{B}{\hat{C}} \) to a basis for all of 
+\( V \) by the addition of \( i \) more vectors, 
+provided they are not linearly dependent on what we have already.
+Recall that each of \( \vec{\beta}_1,\dots,\vec{\beta}_i \) is
 in \( \rangespace{t} \), and extend \( \cat{B}{\hat{C}} \) with vectors
 \( \vec{v}_1,\dots,\vec{v}_i \) such that
 \( t(\vec{v}_1)=\vec{\beta}_1,\dots,t(\vec{v}_i)=\vec{\beta}_i \).
-(In the illustration, these are the \( 3 \)'s.)
-The check that linear independence is preserved by this extension is
+(In the illustration these are the \( 3 \)'s.)
+The check that this extension preserves linear independence is
 \nearbyexercise{exer:NilMapWillHaveStrBas}.
 \end{proof}
 
@@ -1042,17 +1066,18 @@ has an index of nilpotency of two, as this calculation shows.
   \begin{tabular}{c|cc}
     \( p \)  &\( M^p \)  &\( \nullspace{M^p}  \)   \\  \hline
     \( 1 \)
-    &\(  M=\begin{mat}[r]
+    &\(  
+       M=\matrixvenlarge{\begin{mat}[r]
          1  &-1  \\
          1  &-1
-       \end{mat}  \)
-    &\( \set{\colvec{x \\ x}\suchthat
-                               x\in\C}  \)   \\[2ex]
+       \end{mat}}  \)
+    &\( \set{\matrixvenlarge{\colvec{x \\ x}}\suchthat
+                               x\in\C}  \)   \\
     \( 2 \)
-    &\(  M^2=\begin{mat}[r]
+    &\(  M^2=\matrixvenlarge{\begin{mat}[r]
          0  &0   \\
          0  &0
-       \end{mat}  \)
+       \end{mat}}  \)
     &\( \C^2  \)
   \end{tabular}
 \end{center}
@@ -1075,8 +1100,10 @@ and the canonical form of the matrix is this.
 We can exhibit such a $m$-string basis 
 and the change of basis matrices witnessing the matrix similarity.
 For the basis,
-take \( M \) to represent $m$ with respect to the standard bases,
-pick a \( \vec{\beta}_2\in\nullspace{m} \)
+take \( M \) to represent $m$ with respect to the standard bases.
+(We could take $M$ to be a representative with respect to some other basis
+but the standard basis is convienent.)
+Pick a \( \vec{\beta}_2\in\nullspace{m} \)
 and also pick a \( \vec{\beta}_1 \) 
 so that \( m(\vec{\beta}_1)=\vec{\beta}_2 \).
 \begin{equation*}
@@ -1084,8 +1111,6 @@ so that \( m(\vec{\beta}_1)=\vec{\beta}_2 \).
   \qquad
   \vec{\beta}_1=\colvec[r]{1 \\ 0}
 \end{equation*}
-(If we take $M$ to be a representative with respect to some nonstandard bases
-then this picking step is just more messy.)
 Recall the similarity diagram.
 \begin{equation*}
   \begin{CD}
@@ -1143,29 +1168,45 @@ The matrix
   \end{mat}
 \end{equation*}
 is nilpotent.
-These calculations show the nullspaces growing. 
-\begin{center}
+% \newlength{\extramatrixvspace}
+% \setlength{\extramatrixvspace}{.75ex}
+% \newcommand{\matrixvenlarge}[1]{\raisebox{-0.5\height}{\vbox{
+%        \vspace*{\extramatrixvspace}
+%        \hbox{$#1$}
+%         \vspace*{\extramatrixvspace}
+%         }}}
+\begin{center} 
   \begin{tabular}{c|cc}
     \( p \)  &\( N^p \)  &\( \nullspace{N^p}  \)   \\  \hline
     \( 1 \)
-    &\(\begin{mat}[r]
+    &
+       \raisebox{-0.5\height}{\vbox{
+       \vspace*{\extramatrixvspace}
+       \hbox{\(
+         \begin{mat}[r]
          0  &0  &0  &0  &0  \\
          1  &0  &0  &0  &0  \\
          -1 &1  &1  &-1 &1  \\
          0  &1  &0  &0  &0  \\
          1  &0  &-1 &1  &-1
-       \end{mat}  \)
-    &\( \set{\colvec{0 \\ 0 \\ u-v \\ u \\ v} \suchthat u,v\in\C}  \) \\[2.4ex]
+         \end{mat}  \)}
+        \vspace*{\extramatrixvspace}
+        }}  
+    &\( 
+        \set{\matrixvenlarge{\colvec{0 \\ 0 \\ u-v \\ u \\ v}} 
+           \suchthat u,v\in\C}  \)                      \\
     \( 2 \)
-    &\(\begin{mat}[r]
+    &\(
+       \matrixvenlarge{\begin{mat}[r]
          0  &0  &0  &0  &0  \\
          0  &0  &0  &0  &0  \\
          1  &0  &0  &0  &0  \\
          1  &0  &0  &0  &0  \\
          0  &0  &0  &0  &0
-       \end{mat}  \)
-    &\( \set{\colvec{0 \\ y \\ z \\ u \\ v}
-                       \suchthat y,z,u,v\in\C}  \)  \\[2.4ex]
+       \end{mat}}  \)
+    &\( 
+        \set{\matrixvenlarge{\colvec{0 \\ y \\ z \\ u \\ v}}
+                       \suchthat y,z,u,v\in\C}  \)  \\
     \( 3 \)
     &\textit{--zero matrix--}
     &\( \C^5 \)
