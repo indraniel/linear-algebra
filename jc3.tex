@@ -92,6 +92,27 @@ and this third power.
 After that, $t^4=t^2$ and $t^5=t^3$, etc.
 \end{example}
 
+\begin{example}
+Consider the shift transformation $\map{t}{\C^3}{\C^3}$.
+\begin{equation*}
+  \colvec{x \\ y \\ z} \mapsunder{t} \colvec{0 \\ x \\ y}
+\end{equation*}
+We have that 
+\begin{equation*}
+  \colvec{x \\ y \\ z} \mapsunder{t} \colvec{0 \\ x \\ y}
+                       \mapsunder{t} \colvec{0 \\ 0 \\ x}
+                       \mapsunder{t} \colvec{0 \\ 0 \\ 0}
+\end{equation*}
+so the rangespaces descend to the trivial subspace.
+\begin{equation*}
+  \rangespace{t}=\set{\colvec{0 \\ a \\ b}\suchthat a,b\in\C}
+  \quad
+  \rangespace{t^2}=\set{\colvec{0 \\ 0 \\ c}\suchthat c\in\C}
+  \quad
+  \rangespace{t^3}=\set{\colvec{0 \\ 0 \\ 0}}  
+\end{equation*}
+\end{example}
+
 These examples suggest that after some number of iterations
 the map settles down.
 
@@ -125,7 +146,7 @@ dimensions of the nullspaces must grow.
 We will do the rangespace half here and leave the rest for
 \nearbyexercise{exer:RangeAndNullChains}.
 
-First we show that 
+We start by showing that 
 that the rangespaces form a chain.
 If $\vec{w}\in\rangespace{t^{j+1}}$, so that
 $\vec{w}=t^{j+1}(\vec{v})$, 
@@ -160,28 +181,26 @@ that is, the power $k$ is at most the dimension of $V$.
 
 \begin{example}
 The derivative map $a+bx+cx^2+dx^3\xmapsunder{d/dx} b+2cx+3dx^2$
-of \nearbyexample{ex:DerivIter} has this chain of rangespaces
+on $\polyspace_3$ has this chain of rangespaces
 \begin{equation*}
-  \polyspace_3\supset\polyspace_2\supset\polyspace_1
-    \supset\polyspace_0\supset\set{\zero\,}=\set{\zero\,}=\cdots
+  \rangespace{t^0}=\polyspace_3
+    \,\supset\,\rangespace{t^1}=\polyspace_2
+    \,\supset\,\rangespace{t^2}=\polyspace_1
+    \,\supset\,\rangespace{t^3}=\polyspace_0
+    \,\supset\,\rangespace{t^4}=\set{\zero}
+    % =\rangespace{t^5}=\set{\zero}=
+    % \,=\,\cdots
 \end{equation*}
-and this chain of nullspaces.
+(all later elements of the chain are the trivial space). 
+And it has this chain of nullspaces
 \begin{equation*}
-  \set{\zero\,}\subset\polyspace_0\subset\polyspace_1\subset\polyspace_2
-    \subset\polyspace_3=\polyspace_3=\cdots
+  \nullspace{t^0}=\set{\zero}
+  \,\subset\, \nullspace{t^1}=\polyspace_0
+  \,\subset\,\nullspace{t^2}=\polyspace_1
+  \,\subset\,\nullspace{t^3}=\polyspace_2
+  \,\subset\,\nullspace{t^4}=\polyspace_3
 \end{equation*}
-\end{example}
-
-\begin{example}
-The transformation \( \map{\pi}{\C^3}{\C^3} \) projecting onto the
-first two coordinates
-\begin{equation*}
-   \colvec{c_1 \\ c_2 \\ c_3}
-     \mapsunder{\pi}
-   \colvec{c_1 \\ c_2 \\ 0}
-\end{equation*}
-has \( \C^3\supset\rangespace{\pi}=\rangespace{\pi^2}=\cdots \)
-and \( \set{\zero\,}\subset\nullspace{\pi}=\nullspace{\pi^2}=\cdots\, \).
+(later elements are the entire space).
 \end{example}
 
 \begin{example} \label{exam:PolyRankFalls}
@@ -196,7 +215,7 @@ iteration the rangespace shrinks
     \quad
   \rangespace{t^2}=\set{a\suchthat a\in\C}
 \end{equation*}
-and then stabilizes $\rangespace{t^2}=\rangespace{t^3}=\cdots$,
+and then stabilizes $\rangespace{t^2}=\rangespace{t^3}=\cdots$
 while the nullspace grows
 \begin{equation*}
   \nullspace{t^0}=\set{0}
@@ -208,7 +227,39 @@ while the nullspace grows
 and then stabilizes $\nullspace{t^2}=\nullspace{t^3}=\cdots$.
 \end{example}
 
-This graph illustrates \nearbylemma{le:RangeAndNullChains}.
+\begin{example}
+The transformation \( \map{\pi}{\C^3}{\C^3} \) projecting onto the
+first two coordinates
+\begin{equation*}
+   \colvec{c_1 \\ c_2 \\ c_3}
+     \mapsunder{\pi}
+   \colvec{c_1 \\ c_2 \\ 0}
+\end{equation*}
+has \( \C^3\supset\rangespace{\pi}=\rangespace{\pi^2}=\cdots \)
+and \( \set{\zero\,}\subset\nullspace{\pi}=\nullspace{\pi^2}=\cdots\, \)
+where this is the rangespace and the nullspace.
+\begin{equation*}
+  \rangespace{\pi}=\set{\colvec{a \\ b \\ 0}\suchthat a,b\in\C}
+  \qquad
+  \nullspace{\pi}=\set{\colvec{0 \\ 0 \\ c}\suchthat c\in\C}
+\end{equation*}
+\end{example}
+
+\begin{definition}
+Let \( t \) be a transformation on an \( n \)-dimensional space.
+The \definend{generalized rangespace}\index{generalized rangespace}%
+\index{rangespace!generalized}
+(or the \definend{closure of the rangespace\/}\index{closure!of rangespace}%
+\index{rangespace!closure of})
+is $\genrangespace{t}=\rangespace{t^n}$
+The \definend{generalized nullspace}\index{generalized nullspace}%
+\index{nullspace!generalized}
+(or the \definend{closure of the nullspace\/}\index{closure!of nullspace}%
+\index{nullspace!closure of})
+is $\gennullspace{t}=\nullspace{t^n}$.
+\end{definition}
+
+This graph illustrates.
 The horizontal axis gives the power~$j$ of a transformation.
 The vertical axis gives
 the dimension of the rangespace of $t^j$
@@ -227,20 +278,6 @@ The steady state's distance above zero is the dimension of the
 generalized rangespace
 and its distance below $n$ is the dimension of
 the generalized nullspace.
-
-\begin{definition}
-Let \( t \) be a transformation on an \( n \)-dimensional space.
-The \definend{generalized rangespace}\index{generalized rangespace}%
-\index{rangespace!generalized}
-(or the \definend{closure of the rangespace\/}\index{closure!of rangespace}%
-\index{rangespace!closure of})
-is $\genrangespace{t}=\rangespace{t^n}$
-The \definend{generalized nullspace}\index{generalized nullspace}%
-\index{nullspace!generalized}
-(or the \definend{closure of the nullspace\/}\index{closure!of nullspace}%
-\index{nullspace!closure of})
-is $\gennullspace{t}=\nullspace{t^n}$.
-\end{definition}
 
 \begin{exercises}
   \item 
@@ -464,13 +501,14 @@ is $\gennullspace{t}=\nullspace{t^n}$.
 
 \subsectionoptional{Strings}
 \index{nilpotent|(}
-\noindent\textit{This subsection is optional, and requires material from the 
+\noindent\textit{This subsection requires material from the 
     optional Direct Sum subsection.}
 
 The prior subsection shows that as \( j \) increases,
 the dimensions of the $\rangespace{t^j}$'s fall while
 the dimensions of the $\nullspace{t^j}$'s rise, 
-in such a way that this rank and nullity split the dimension of $V$.
+in such a way that this rank and nullity split between them 
+the dimension of $V$.
 Can we say more;
 do the two split a basis\Dash is
 \( V=\rangespace{t^j}\directsum\nullspace{t^j} \)?
@@ -491,7 +529,8 @@ That is, both \( \dim(V)=\dim(\genrangespace{t})+\dim(\gennullspace{t}) \) and
 We will verify the second sentence, which is equivalent to the first.
 The first clause, that the dimension $n$ of the domain of $t^n$ equals
 the rank of $t^n$ plus the nullity of $t^n$, holds for any transformation and
-so we need only verify the second clause.
+so we need only verify the second clause, that the intersection of the two
+is the trivial subspace.
 
 Assume that
 \( \vec{v}\in\genrangespace{t}\intersection\gennullspace{t}
@@ -501,26 +540,26 @@ Because \( \vec{v} \) is in the nullspace, \( t^n(\vec{v})=\zero \).
 On the other hand, because \( \rangespace{t^n}=\rangespace{t^{n+1}} \),
 the map \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \) is
 a dimension-preserving homomorphism and therefore is one-to-one.
-A composition of one-to-one maps is one-to-one, and so
+A composition of one-to-one maps is one-to-one and so
 \( \map{t^n}{\genrangespace{t}}{\genrangespace{t}} \) is one-to-one.
 But now\Dash because only \( \zero \) is sent by a one-to-one linear map to
 \( \zero \)\Dash the fact that \( t^n(\vec{v})=\zero \) implies that
 \( \vec{v}=\zero \).
 \end{proof}
 
-\begin{note} \label{note:RestONeToOne}
+\begin{remark} \label{note:RestONeToOne}
 Technically we should distinguish the map $\map{t}{V}{V}$ from
 the map \( \map{t}{\genrangespace{t}}{\genrangespace{t}} \) 
 because the domains or codomains might differ.
 The second one is said to be the 
 \definend{restriction}\appendrefs{map restrictions}\spacefactor=1000 %
 of $t$ to 
-$\rangespace{t^k}$. 
+$\rangespace{t^n}$. 
 We shall use later a point from that proof about the restriction map, 
 namely that it is one-to-one.
-\end{note}
+\end{remark}
 
-In contrast to the $j=0$ and~$j=n$ cases, for intermediate powers 
+For powers between $j=0$ and~$j=n$, 
 the space $V$ might not be the direct sum of
 $\rangespace{t^j}$ and $\nullspace{t^j}$.
 The next example shows that the two can have a nontrivial intersection.
@@ -542,11 +581,10 @@ defined by this action on the elements of the standard basis.
     1  &0
   \end{mat}
 \end{equation*}
-The vector 
+This is a shift map.
 \begin{equation*}
-  \vec{e}_2=\colvec[r]{0 \\ 1}
+  \colvec{x \\ y}\mapsto \colvec{0 \\ x}
 \end{equation*}
-is in both the rangespace and nullspace.
 Another way to depict this map's action is with a 
 \definend{string}.\index{string!of basis vectors}
 \begin{equation*}
@@ -554,6 +592,11 @@ Another way to depict this map's action is with a
      \vec{e}_1 &\mapsto &\vec{e}_2 &\mapsto &\zero
   \end{strings}
 \end{equation*}
+The vector 
+\begin{equation*}
+  \vec{e}_2=\colvec[r]{0 \\ 1}
+\end{equation*}
+is in both the rangespace and nullspace.
 \end{example}
 
 \begin{example}  \label{NilIndexFourOnCFour}
@@ -614,7 +657,7 @@ of subdiagonal ones
 (the lines just visually organize the blocks).
 \end{example}
 
-In those three examples all vectors are eventually transformed to
+In those examples all vectors are eventually transformed to
 zero.
 
 \begin{definition} \label{def:nilpotent} \index{nilpotent!definition}
@@ -703,20 +746,23 @@ is the zero matrix since
 and \( \hat{N}^4 \) is the zero matrix.
 \end{example}
 
-The goal of this subsection is \nearbytheorem{th:NilMapHasStrBas},
-which shows that the prior example is prototypical
+The goal of this subsection is to show
+that the prior example is prototypical
 in that every nilpotent matrix is similar to one that is all
 zeros except for blocks of subdiagonal ones.
 
 \begin{definition}
 Let \( t \) be a nilpotent transformation on \( V \).
-A \definend{\( t \)-string generated by}\index{string}
-\( \vec{v}\in V \) is a sequence
+A \definend{\( t \)-string of length $k$ generated by 
+\( \vec{v}\in V \)}\index{string}
+is a sequence
 \( \sequence{\vec{v},t(\vec{v}),\ldots,t^{k-1}(\vec{v})} \).
-This sequence has \definend{length}~$k$.
 A \definend{\( t \)-string basis}\index{basis!string}\index{string!basis}
 is a basis that is a concatenation of \( t \)-strings.
 \end{definition}
+
+Note that the strings cannot form a basis under concatenation
+if they are not disjoint. 
 
 \begin{example}
 In \nearbyexample{ThirdNilMap}, the $t$-strings
@@ -726,7 +772,8 @@ can be concatenated to make a basis for the domain of $t$.
 \end{example}
 
 \begin{lemma}  \label{le:LongestTowerIsIndex}
-If a space has a \( t \)-string basis then the longest string in it has 
+If a space has a basis of \( t \)-strings then the longest string in that
+basis has 
 length equal to the index of nilpotency of $t$.
 \end{lemma}
 
@@ -749,10 +796,10 @@ That is impossible.
 
 We shall show that every
 nilpotent map has an associated string basis.
-Then our goal theorem, that every
-nilpotent matrix is similar to one that is
-all zeros except for blocks of subdiagonal ones, is immediate,
-as in \nearbyexample{ThirdNilMap}.
+% Then our goal theorem, that every
+% nilpotent matrix is similar to one that is
+% all zeros except for blocks of subdiagonal ones, is immediate,
+ %as in \nearbyexample{ThirdNilMap}.
 
 Looking for a counterexample, a nilpotent map without an associated
 string basis that is disjoint, will suggest the idea for the proof.
@@ -783,12 +830,15 @@ Consider the map \( \map{t}{\C^5}{\C^5} \) with this action.
     0  &0  &0  &1  &0
   \end{mat}$
 \end{center}
-Even after ommitting the zero vector, these three 
-strings aren't disjoint, but that doesn't end hope of finding a 
-$t$-string basis.
-It only means that \( \stdbasis_5 \) will not do for the string basis.
+These three 
+strings aren't disjoint. 
+The first two strings $\vec{e}_1\mapsto\vec{e}_3\mapsto\zero$ and 
+$\vec{e}_1\mapsto\vec{e}_3\mapsto\zero$ overlap, even after omitting $\zero$.
+But that doesn't mean that there is no  
+$t$-string basis;
+it only means that \( \stdbasis_5 \) is not one.
 
-To find a basis that will do, we first find 
+To find a basis we first find 
 the number and lengths of its strings.
 Since $t$'s index of nilpotency is two,
 \nearbylemma{le:LongestTowerIsIndex} says that 
@@ -863,10 +913,9 @@ While the basis is not unique, the number
 and the length of the strings is determined by \( t \).
 \end{theorem}
 
-\begin{proof}
 This illustrates the argument below, which describes three kinds of
-basis vectors (these basis vectors are shown as squares or circles, 
-according to whether they are in the nullspace or not).
+basis vectors (these basis vectors are shown in squares or circles, 
+depending on whether they are in the nullspace or not).
 \begin{equation*}
    \begin{strings}{ccccccccccccccccccc}
      \digitincirc{3}
@@ -891,6 +940,7 @@ according to whether they are in the nullspace or not).
    \end{strings}
 \end{equation*}
 
+\begin{proof}
 Fix a vector space $V$; we will argue by induction on the index of nilpotency
 of $\map{t}{V}{V}$.
 If that index is \( 1 \) then \( t \) is the zero map and any basis 
