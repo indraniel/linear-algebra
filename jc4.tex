@@ -5,7 +5,7 @@
 \index{Jordan form|(}
 \noindent\textit{This section uses material from three optional
 subsections:~Direct Sum, Determinants Exist, and
-Other Formulas for the Determinant.}
+Laplace's Expansion Formula.}
 
 The chapter on linear maps shows that every $\map{h}{V}{W}$ can
 be represented by a partial-identity matrix with respect to some
@@ -13,30 +13,33 @@ bases $B\subset V$ and $D\subset W$.
 This chapter revisits this issue in the special case that the map is a
 linear transformation $\map{t}{V}{V}$.
 Of course, the general result still applies 
-but with the codomain and domain equal
-we naturally ask about having the two bases also be equal.
-That is, we want a canonical form to represent transformations
+but with the codomain equal to the domain
+we naturally ask about what is possible when the two bases also be equal\Dash
+we want a canonical form to represent a transformation
 as $\rep{t}{B,B}$.
 
-After a brief review section, we began 
-by noting that a block partial identity form matrix 
-is not always obtainable in this $B,B$ case.
+We began 
+by noting that while a block partial identity matrix is the canonical form
+for the $B,D$ case, in the $B,B$ case there are some matrix similarity
+classes without one.
 We therefore considered the natural generalization, diagonal matrices, and
-showed that if its eigenvalues are distinct then
-a map or matrix can be diagonalized.
-But we also gave an example of a matrix that cannot be diagonalized and
-in the section prior to this one we developed that example.
-We showed that 
-a linear map is nilpotent\Dash if we take higher and higher powers of the
-map or matrix then we eventually get the zero map or matrix\Dash if and only 
-if there is a basis on which it acts via disjoint strings.
-That led to a canonical form for nilpotent matrices.
+showed that the map or matrix can be diagonalized
+if its eigenvalues are distinct.
+But we also gave an example of a matrix that cannot be diagonalized,
+so diagonal form won't do as the canonical form. 
 
-Now, this section concludes the chapter.
+The prior section developed that example.
+We showed that 
+a linear map is nilpotent if and only 
+if there is a basis on which it acts via disjoint strings.
+That gave us a canonical form for nilpotent matrices.
+
+This section concludes the chapter.
 We will show that the two cases we've studied are exhaustive 
 in that for any linear transformation there is
 a basis such that the matrix representation $\rep{t}{B,B}$ is the sum of a 
-diagonal matrix and a nilpotent matrix in its canonical form.
+diagonal matrix and a nilpotent matrix.
+This is the canonical form that we want.
 
 
 
@@ -46,8 +49,7 @@ diagonal matrix and a nilpotent matrix in its canonical form.
 
 
 
-\subsectionoptional{Polynomials of Maps and Matrices}
-\index{polynomial!of map, matrix}
+\subsectionoptional{Polynomials of Maps and Matrices}\index{polynomial!of map, matrix}
 Recall that the set of square matrices
 is a vector space under entry-by-entry addition and scalar multiplication and
 that 
@@ -73,10 +75,10 @@ Rotation of plane vectors \( \pi/6 \)~radians counterclockwise is represented
 with respect to the standard basis by
 \begin{equation*}
   T=
-  \begin{pmatrix}
+  \begin{mat}[r]
      \sqrt{3}/2  &-1/2  \\
      1/2         &\sqrt{3}/2
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 and verifying that \( 0T^4+0T^3+1T^2-2T-1I \) equals the zero matrix is easy.
 \end{example}
@@ -84,48 +86,64 @@ and verifying that \( 0T^4+0T^3+1T^2-2T-1I \) equals the zero matrix is easy.
 \begin{definition}
 For any polynomial \( f(x)=c_nx^n+\dots+c_1x+c_0 \),
 where \( t \) is a linear transformation then \( f(t) \) is the
-transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on the same space and
+transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on the same space, and
 where \( T \) is a square matrix then \( f(T) \) is
 the matrix \( c_nT^n+\dots+c_1T+c_0I \).
 \end{definition}
 
-\begin{remark}
-If, for instance, \( f(x)=x-3 \), then most authors
-write in the identity matrix:~\( f(T)=T-3I \).
-But most authors don't write in the identity map:~\( f(t)=t-3 \).
-In this book we shall also observe this convention.
-\end{remark}
-
-Of course, if \( T=\rep{t}{B,B} \) then \( f(T)=\rep{f(t)}{B,B} \),
-which follows from the relationships \( T^j=\rep{t^j}{B,B} \),
+\noindent The polynomial of the matrix represents the polynomial of the map:~if 
+\( T=\rep{t}{B,B} \) then \( f(T)=\rep{f(t)}{B,B} \)
+This is because \( T^j=\rep{t^j}{B,B} \),
 and \( cT=\rep{ct}{B,B} \), and \( T_1+T_2 =\rep{t_1+t_2}{B,B} \).
 
-As \nearbyexample{ex:PolySendRotMatToZ} shows, there may be polynomials of
-degree smaller than $n^2$ that zero the map or matrix.
+\begin{remark}
+Most authors write the matrix polynomial slightly differently than the 
+map polynomial. 
+For instance, if  \( f(x)=x-3 \) then 
+most authors explicitly write the identity matrix~\( f(T)=T-3I \)
+but don't write the identity map~\( f(t)=t-3 \).
+We shall follow this convention.
+\end{remark}
+
+Consider again \nearbyexample{ex:PolySendRotMatToZ}.
+Although $T\in\matspace_{\nbyn{2}}$, which is a dimension~four space,
+we exhibited a polynomial of $T$ that gave the zero matrix,
+and was of degree less than four. 
+So for any particular map or matrix
+degree~$n^2$ will suffice but there may be a smaller degree polynomial that
+works.
 
 \begin{definition}
 The \definend{minimal polynomial}\index{polynomial!minimal}%
 \index{minimal polynomial}
 \( m(x) \) of a transformation \( t \)\index{transformation!minimal polynomial}
 or a square matrix \( T \)\index{matrix!minimal polynomial} is the
-polynomial of least degree and with leading coefficient \( 1 \)
+polynomial of least degree and with leading coefficient one
 such that \( m(t) \) is the zero map or \( m(T) \) is the zero matrix.
 \end{definition}
 
-A minimal polynomial always exists by the observation opening this subsection.
-A minimal polynomial is unique by the
-`with leading coefficient \( 1 \)' clause.
-This is because if there are two polynomials 
+\noindent The fact that leading coefficient must be one keeps a minimal
+polynomial from being the zero polynomial.
+
+\begin{lemma}
+Any transformation or square matrix has a unique minimal polynomial.  
+\end{lemma}
+
+\begin{proof}
+A minimal polynomial always exists by the observation made above  
+that degree~$n^2$ suffices.
+To see that it is unique suppose that 
+there are two polynomials 
 \( m(x) \) and \( \hat{m}(x) \) that are both of the 
 minimal degree to make the
-map or matrix zero (and thus are of equal degree), and both have
-leading \( 1 \)'s, then their difference \( m(x)-\hat{m}(x) \)
-has a smaller degree than either and still sends the map or matrix
+map or matrix zero, and thus are of equal degree, and both have
+leading \( 1 \)'s.
+Then their difference \( m(x)-\hat{m}(x) \)
+has a smaller degree than either and still takes the map or matrix
 to zero.
-Thus \( m(x)-\hat{m}(x) \) is the zero polynomial 
+Thus \( m(x)-\hat{m}(x) \) is the zero polynomial, 
 and the two are equal.
-(The leading coefficient requirement also prevents a minimal
-polynomial from being the zero polynomial.)
+\end{proof}
 
 \begin{example}  \label{ex:MinPolyForRotMat}
 We can see that \( m(x)=x^2-2x-1 \) is minimal for the matrix of
@@ -133,24 +151,24 @@ We can see that \( m(x)=x^2-2x-1 \) is minimal for the matrix of
 up to the power $n^2=4$.
 \begin{equation*}
    T^2=
-   \begin{pmatrix}
+   \begin{mat}[r]
       1/2         &-\sqrt{3}/2  \\
       \sqrt{3}/2  &1/2
-   \end{pmatrix} 
+   \end{mat} 
    \quad
    T^3=
-   \begin{pmatrix}
+   \begin{mat}[r]
       0           &-1           \\
       1           &0
-   \end{pmatrix}
+   \end{mat}
    \quad
    T^4=
-   \begin{pmatrix}
+   \begin{mat}[r]
       -1/2        &-\sqrt{3}/2  \\
       \sqrt{3}/2  &-1/2
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
-Next, put \( c_4T^4+c_3T^3+c_2T^2+c_1T+c_0I \) equal to the zero matrix
+Put \( c_4T^4+c_3T^3+c_2T^2+c_1T+c_0I \) equal to the zero matrix
 \begin{equation*}
   \begin{linsys}{5}
      -(1/2)c_4  &  &             &+ &(1/2)c_2
@@ -180,13 +198,14 @@ Thus the minimal polynomial is quadratic.
 \end{example}
 
 Using the method of that example to find the minimal polynomial of a
-\( \nbyn{3} \) matrix would mean doing Gaussian reduction on
+\( \nbyn{3} \) matrix would be tedious because it 
+would mean doing Gaussian reduction on
 a system with nine equations in ten unknowns.
 We shall develop an alternative.
-To begin, note that we can break a polynomial of a map or a matrix into
-its components.
-(For this lemma, recall that we are using complex numbers in this chapter
-so all polynomials break completely into linear factors.)
+% To begin, note that we can break a polynomial of a map or a matrix into
+% its components.
+% (For this lemma, recall that we are using complex numbers in this chapter
+% so all polynomials break completely into linear factors.)
 
 \begin{lemma} \label{le:PolyMapsFactor}
 Suppose that the polynomial \( f(x)=c_nx^n+\dots+c_1x+c_0 \) factors as
@@ -204,16 +223,16 @@ are equal matrices.
 \end{lemma}
 
 \begin{proof}
-This argument is by induction on the degree of the polynomial.
+We will do induction on the degree of the polynomial.
 The cases where the polynomial is of
-degree \( 0 \) and \( 1 \) are clear.
+degree~zero and degree~one are clear.
 The full induction argument is \nearbyexercise{le:PolyMapsFactor}
-but the degree~two case gives its sense.
+but we can give its sense with the degree~two case.
 
 A quadratic polynomial factors into two
 linear terms \( f(x)=k(x-\lambda_1)\cdot(x-\lambda_2)
                     =k(x^2+(\lambda_1+\lambda_2)x+\lambda_1\lambda_2) \)
-(the roots $\lambda_1$ and $\lambda_2$ might be equal).
+(the roots $\lambda_1$ and $\lambda_2$ could be equal).
 We can check that substituting \( t \) 
 for \( x \) in the factored and
 unfactored versions gives the same map.
@@ -227,7 +246,7 @@ unfactored versions gives the same map.
    &=k\cdot(t^2-(\lambda_1+\lambda_2)t+\lambda_1\lambda_2)\>(\vec{v})
 \end{align*}
 The third equality holds because the scalar $\lambda_2$  comes out of the
-second term, as \( t \) is linear.
+second term, since \( t \) is linear.
 \end{proof}
 
 In particular, if a minimial polynomial $m(x)$ for a transformation $t$ 
@@ -240,29 +259,23 @@ is the zero map.
 Since \( m(t) \) sends every vector to zero, at least
 one of the maps \( t-\lambda_i \)  sends some
 nonzero vectors to zero.
-So, too, in the matrix case\Dash if $m$ is minimal for $T$ then
+Exactly the same holds in the matrix case\Dash if $m$ is minimal for $T$ then
 \( m(T)=(T-\lambda_1I)^{q_1}\cdots (T-\lambda_\ell I)^{q_\ell} \)
 is the zero matrix and at least one of the matrices $T-\lambda_iI$
 sends some nonzero vectors to zero. 
-Rewording both cases:~at least some of the \( \lambda_i \) are eigenvalues.
-(See \nearbyexercise{exer:SomeRootsMinPolyAreEigs}.)
+That is, in both cases at least some of the \( \lambda_i \) are eigenvalues.
+(\nearbyexercise{exer:SomeRootsMinPolyAreEigs} expands on this.)
 
-Recall how we have earlier found eigenvalues.
-We have looked for $\lambda$ such that $T\vec{v}=\lambda\vec{v}$ by considering
-the equation $\zero=T\vec{v}-x\vec{v}=(T-xI)\vec{v}$
-and computing the determinant of the matrix $T-xI$.
-That determinant is a polynomial in $x$, 
-the characteristic polynomial, 
-whose roots are the eigenvalues.
-The major result of this subsection, the next result, is that 
-there is a connection between this characteristic polynomial
-and the minimal polynomial.
-This results expands on the prior paragraph's insight that some roots of the
-minimal polynomial are eigenvalues by asserting that
-every root of the minimal polynomial is an eigenvalue and further
+The next result is that
+every root of the minimal polynomial is an eigenvalue, and further
 that every eigenvalue is a root of the minimal polynomial 
 (this is because it says `$1\leq q_i$' and 
 not just `$0\leq q_i$').
+For that result, recall that to find eigenvalues
+we solve $\deter{T-xI}=0$.
+That determinant gives a polynomial in $x$, 
+called the characteristic polynomial, 
+whose roots are the eigenvalues.
 
 \begin{theorem}[Cayley-Hamilton]
 \label{th:CayHam}
@@ -281,32 +294,32 @@ where \( 1\leq q_i \leq p_i \) for each \( i \) between \( 1 \) and \( \ell \).
 \end{theorem}
 
 \noindent The proof takes up the next three lemmas.
-Although they are stated only in matrix terms, they apply equally
+They are stated in matrix terms but they apply equally
 well to maps.
-We give the matrix version only because it is convenient for the first proof.
+(The matrix version is convenient 
+for the first proof.)
 
-The first result is the key\Dash some authors call it the Cayley-Hamilton
-Theorem and call \nearbytheorem{th:CayHam} above a corollary.
-For the proof, observe that
-a matrix of polynomials can be thought of as a polynomial with
+The first result is the key.
+For the proof, observe that we can view
+a matrix of polynomials as a polynomial with
 matrix coefficients.
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}
      2x^2+3x-1  &x^2+2    \\
      3x^2+4x+1  &4x^2+x+1
-   \end{pmatrix}
- = \begin{pmatrix}
+   \end{mat}
+ = \begin{mat}[r]
     2  &1  \\
     3  &4
-  \end{pmatrix}x^2
- + \begin{pmatrix}
+  \end{mat}x^2
+ + \begin{mat}[r]
     3  &0  \\
     4  &1
-  \end{pmatrix}x
- + \begin{pmatrix}
+  \end{mat}x
+ + \begin{mat}[r]
    -1  &2  \\
     1  &1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 
 \begin{lemma}   \label{le:MatSatItsCharPoly}
@@ -319,45 +332,51 @@ Let \( C \) be \( T-xI \),
 the matrix whose determinant is the characteristic polynomial
 \( c(x)=c_nx^n+\dots+c_1x+c_0 \).
 \begin{equation*}
-  C=\begin{pmatrix}
+  C=\begin{mat}
     t_{1,1}-x        &t_{1,2}   &\ldots        \\
     t_{2,1}          &t_{2,2}-x               \\
     \vdots           &          &\ddots       \\
                      &          &       &t_{n,n}-x
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
-Recall that the product of the adjoint of a matrix with the matrix itself is
-the determinant of that matrix times the identity.
+Recall Theorem~Four.III.\ref{th:MatTimesAdjEqDiagDets},
+that the product of a matrix with its adjoint of a matrix equals
+the determinant of the matrix times the identity.
 \begin{equation*}
   c(x)\cdot I
   =\adj (C)C
   =\adj (C)(T-xI)
   =\adj (C)T- \adj(C)\cdot x
-\tag*{($*$)}\end{equation*}
-The entries of \( \adj (C) \) are polynomials, each of degree
+\tag*{($*$)}
+\end{equation*}
+The left side of~($*$) is 
+$c_nIx^n+c_{n-1}Ix^{n-1}+\dots+c_1Ix+c_0I$.
+For the right side,
+the entries of \( \adj (C) \) are polynomials, each of degree
 at most \( n-1 \) since the minors of a matrix drop a row and column.
-Rewrite it, as suggested above, as
+As suggested before the proof, rewrite it as a polynomial with
+matrix coefficients:
 \( \adj (C)=C_{n-1}x^{n-1}+\dots+C_1x+C_0 \)
 where each \( C_i \) is a matrix of scalars.
-The left and right ends of equation~($*$) above give this.
-\begin{align*}
-  c_nIx^n+c_{n-1}Ix^{n-1}+\dots+c_1Ix+c_0I
-  &=(C_{n-1}T)x^{n-1}+\dots+(C_1T)x+C_0T  \\
-  &\quad\hbox{}-C_{n-1}x^n-C_{n-2}x^{n-1}-\dots-C_0x
-\end{align*}
-Equate the coefficients of \( x^n \), the coefficients of $x^{n-1}$, etc.
+Now this is the right side of~($*$).
+\begin{equation*}
+  [(C_{n-1}T)x^{n-1}+\dots+(C_1T)x+C_0T]  
+   -[C_{n-1}x^n-C_{n-2}x^{n-1}-\dots-C_0x]
+\end{equation*}
+Equate the left and right side's
+coefficients of \( x^n \), coefficients of $x^{n-1}$, etc.
 \begin{align*}
   c_nI
   &=-C_{n-1}    \\
   c_{n-1}I
   &=-C_{n-2}+C_{n-1}T    \\
-  &\alignedvdots             \\
+  &\vdotswithin{=}             \\
   c_{1}I
   &=-C_{0}+C_{1}T    \\
   c_{0}I
   &=C_{0}T
 \end{align*}
-Multiply (from the right) both sides of the first equation by \( T^n \), 
+Multiply, from the right, both sides of the first equation by \( T^n \), 
 both sides of the second equation by \( T^{n-1} \), etc.
 Add.
 The result on the left is 
@@ -433,12 +452,12 @@ We can use the Cayley-Hamilton Theorem to help find the minimal polynomial of
 this matrix.
 \begin{equation*}
    T=
-   \begin{pmatrix}
+   \begin{mat}[r]
       2  &0  &0  &1  \\
       1  &2  &0  &2  \\
       0  &0  &2  &-1 \\
       0  &0  &0  &1
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 First, its characteristic polynomial \( c(x)=(x-1)(x-2)^3 \)
 can be found with the usual determinant.
@@ -450,48 +469,48 @@ Now, the Cayley-Hamilton Theorem says that
 We can decide among the choices just by computing:
 \begin{equation*}
    (T-1I)(T-2I)=\!
-   \begin{pmatrix}
+   \begin{mat}[r]
       1  &0  &0  &1  \\
       1  &1  &0  &2  \\
       0  &0  &1  &-1 \\
       0  &0  &0  &0
-   \end{pmatrix}
-   \begin{pmatrix}
+   \end{mat}
+   \begin{mat}[r]
       0  &0  &0  &1  \\
       1  &0  &0  &2  \\
       0  &0  &0  &-1 \\
       0  &0  &0  &-1
-   \end{pmatrix}
+   \end{mat}
    =
-   \begin{pmatrix}
+   \begin{mat}[r]
       0  &0  &0  &0  \\
       1  &0  &0  &1  \\
       0  &0  &0  &0  \\
       0  &0  &0  &0
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 and
 \begin{equation*}
    (T-1I)(T-2I)^2=
-   \begin{pmatrix}
+   \begin{mat}[r]
       0  &0  &0  &0  \\
       1  &0  &0  &1  \\
       0  &0  &0  &0  \\
       0  &0  &0  &0
-   \end{pmatrix}
-   \begin{pmatrix}
+   \end{mat}
+   \begin{mat}[r]
       0  &0  &0  &1  \\
       1  &0  &0  &2  \\
       0  &0  &0  &-1 \\
       0  &0  &0  &-1
-   \end{pmatrix}
+   \end{mat}
    =
-   \begin{pmatrix}
+   \begin{mat}[r]
       0  &0  &0  &0  \\
       0  &0  &0  &0  \\
       0  &0  &0  &0  \\
       0  &0  &0  &0
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 and so \( m(x)=(x-1)(x-2)^2 \).
 \end{example}
@@ -542,38 +561,38 @@ and so \( m(x)=(x-1)(x-2)^2 \).
   \recommended \item 
     Find the minimal polynomial of each matrix.
     \begin{exparts*}
-       \partsitem \( \begin{pmatrix}
+       \partsitem \( \begin{mat}[r]
                    3  &0  &0  \\
                    1  &3  &0  \\
                    0  &0  &4
-                \end{pmatrix} \)
-       \partsitem \( \begin{pmatrix}
+                \end{mat} \)
+       \partsitem \( \begin{mat}[r]
                    3  &0  &0  \\
                    1  &3  &0  \\
                    0  &0  &3
-                \end{pmatrix} \)
-       \partsitem \( \begin{pmatrix}
+                \end{mat} \)
+       \partsitem \( \begin{mat}[r]
                    3  &0  &0  \\
                    1  &3  &0  \\
                    0  &1  &3
-                \end{pmatrix} \)
-       \partsitem \( \begin{pmatrix}
+                \end{mat} \)
+       \partsitem \( \begin{mat}[r]
                    2  &0  &1  \\
                    0  &6  &2  \\
                    0  &0  &2
-                \end{pmatrix} \)
-       \partsitem \( \begin{pmatrix}
+                \end{mat} \)
+       \partsitem \( \begin{mat}[r]
                    2  &2  &1  \\
                    0  &6  &2  \\
                    0  &0  &2
-                \end{pmatrix} \)
-       \partsitem \( \begin{pmatrix}
+                \end{mat} \)
+       \partsitem \( \begin{mat}[r]
                    -1 &4  &0  &0  &0  \\
                     0 &3  &0  &0  &0  \\
                     0 &-4 &-1 &0  &0  \\
                     3 &-9 &-4 &2  &-1 \\
                     1 &5  &4  &1  &4
-                \end{pmatrix} \)
+                \end{mat} \)
     \end{exparts*}
     \begin{answer}
       In each case we will use the method of \nearbyexample{ex:MinPolyUsingCH}.
@@ -581,11 +600,11 @@ and so \( m(x)=(x-1)(x-2)^2 \).
        \partsitem Because $T$ is triangular, $T-xI$ is also triangular
          \begin{equation*}
            T-xI=
-           \begin{pmatrix}
+           \begin{mat}
              3-x  &0    &0   \\
              1    &3-x  &0   \\
              0    &0    &4-x
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
          the characteristic polynomial is
          easy $c(x)=\deter{T-xI}=(3-x)^2(4-x)=-1\cdot (x-3)^2(x-4)$.
@@ -598,44 +617,44 @@ and so \( m(x)=(x-1)(x-2)^2 \).
          \begin{equation*}
            (T-3I)(T-4I)
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &0  \\
              1  &0  &0  \\
              0  &0  &1
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              -1  &0  &0  \\
               1  &-1 &0  \\
               0  &0  &0
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &0  \\
             -1  &0  &0  \\
              0  &0  &0
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
          the minimal polynomial is $m(x)=m_2(x)$.
          \begin{equation*}
            (T-3I)^2(T-4I)
            =(T-3I)\cdot\bigl((T-3I)(T-4I)\bigr)
            =
-           \begin{pmatrix}
+           \begin{mat}
              0  &0  &0  \\
              1  &0  &0  \\
              0  &0  &1
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
               0  &0  &0  \\
              -1  &0  &0  \\
               0  &0  &0
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &0  \\
              0  &0  &0  \\
              0  &0  &0
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
        \partsitem As in the prior item, the fact that the matrix is 
         triangular makes computation of the characteristic polynomial
@@ -643,11 +662,11 @@ and so \( m(x)=(x-1)(x-2)^2 \).
         \begin{equation*}
           c(x)=\deter{T-xI}
               =
-              \begin{vmatrix}
+              \begin{vmat}
                 3-x  &0   &0   \\
                 1    &3-x &0   \\
                 0    &0   &3-x
-              \end{vmatrix}
+              \end{vmat}
               =(3-x)^3=-1\cdot (x-3)^3
         \end{equation*}
         There are three possibilities for the minimal polynomial
@@ -655,31 +674,31 @@ and so \( m(x)=(x-1)(x-2)^2 \).
         We settle the question by computing $m_1(T)$
         \begin{equation*}
           T-3I=
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &0  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         and $m_2(T)$.
         \begin{equation*}
           (T-3I)^2=
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &0  &0
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &0  &0
-          \end{pmatrix}
+          \end{mat}
           =          
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             0  &0  &0  \\
             0  &0  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         Because $m_2(T)$ is the zero matrix, $m_2(x)$ is the minimal
         polynomial.
@@ -687,11 +706,11 @@ and so \( m(x)=(x-1)(x-2)^2 \).
         \begin{equation*}
           c(x)=\deter{T-xI}
               =
-              \begin{vmatrix}
+              \begin{vmat}
                 3-x  &0   &0   \\
                 1    &3-x &0   \\
                 0    &1   &3-x
-              \end{vmatrix}
+              \end{vmat}
               =(3-x)^3=-1\cdot (x-3)^3
         \end{equation*}
         Again, there are three possibilities for the minimal polynomial
@@ -699,63 +718,63 @@ and so \( m(x)=(x-1)(x-2)^2 \).
         We compute $m_1(T)$
         \begin{equation*}
           T-3I=
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &1  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         and $m_2(T)$
         \begin{equation*}
           (T-3I)^2=
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &1  &0
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &1  &0
-          \end{pmatrix}
+          \end{mat}
           =          
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             0  &0  &0  \\
             1  &0  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         and $m_3(T)$.
         \begin{equation*}
           (T-3I)^3
           =(T-3I)^2(T-3I)
           =
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             0  &0  &0  \\
             1  &0  &0
-          \end{pmatrix}
-          \begin{pmatrix}
+          \end{mat}
+          \begin{mat}[r]
             0  &0  &0  \\
             1  &0  &0  \\
             0  &1  &0
-          \end{pmatrix}
+          \end{mat}
           =          
-          \begin{pmatrix}
+          \begin{mat}[r]
             0  &0  &0  \\
             0  &0  &0  \\
             0  &0  &0
-          \end{pmatrix}
+          \end{mat}
         \end{equation*}
         Therefore, the minimal polynomial is $m(x)=m_3(x)=(x-3)^3$.
        \partsitem This case is also triangular, here upper triangular.
          \begin{equation*}
            c(x)=\deter{T-xI}=
-           \begin{vmatrix}
+           \begin{vmat}
              2-x  &0   &1     \\
              0    &6-x &2     \\
              0    &0   &2-x
-           \end{vmatrix}
+           \end{vmat}
            =(2-x)^2(6-x)=-(x-2)^2(x-6)
          \end{equation*}
          There are two possibilities for the minimal polynomial,
@@ -763,52 +782,52 @@ and so \( m(x)=(x-1)(x-2)^2 \).
          Computation shows that the minimal polynomial isn't $m_1(x)$.
          \begin{equation*}
            (T-2I)(T-6I)=
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &1  \\
              0  &4  &2  \\
              0  &0  &0  
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              -4  &0  &1  \\
               0  &0  &2  \\
               0  &0  &-4
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &-4  \\
              0  &0  &0   \\
              0  &0  &0
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
          It therefore must be that $m(x)=m_2(x)=(x-2)^2(x-6)$. 
          Here is a verification.
          \begin{equation*}
            (T-2I)^2(T-6I)=(T-2I)\cdot\bigl((T-2I)(T-6I)\bigr)=
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &1  \\
              0  &4  &2  \\
              0  &0  &0  
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
               0  &0  &-4   \\
               0  &0  &0   \\
               0  &0  &0
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &0  \\
              0  &0  &0   \\
              0  &0  &0
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
        \partsitem The characteristic polynomial is 
          \begin{equation*}
            c(x)=\deter{T-xI}=
-           \begin{vmatrix}
+           \begin{vmat}
              2-x  &2   &1     \\
              0    &6-x &2     \\
              0    &0   &2-x
-           \end{vmatrix}
+           \end{vmat}
            =(2-x)^2(6-x)=-(x-2)^2(x-6)
          \end{equation*}
          and there are two possibilities for the minimal polynomial,
@@ -816,35 +835,35 @@ and so \( m(x)=(x-1)(x-2)^2 \).
          Checking the first one
          \begin{equation*}
            (T-2I)(T-6I)=
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &2  &1  \\
              0  &4  &2  \\
              0  &0  &0  
-           \end{pmatrix}
-           \begin{pmatrix}
+           \end{mat}
+           \begin{mat}[r]
              -4  &2  &1  \\
               0  &0  &2  \\
               0  &0  &-4
-           \end{pmatrix}
+           \end{mat}
            =
-           \begin{pmatrix}
+           \begin{mat}[r]
              0  &0  &0  \\
              0  &0  &0   \\
              0  &0  &0
-           \end{pmatrix}
+           \end{mat}
          \end{equation*}
          shows that the minimal polynomial is
          $m(x)=m_1(x)=(x-2)(x-6)$.
        \partsitem The characteristic polynomial is this.
          \begin{equation*}
            c(x)=\deter{T-xI}=
-           \begin{vmatrix} 
+           \begin{vmat} 
               -1-x &4    &0    &0    &0    \\
                0   &3-x  &0    &0    &0    \\
                0   &-4   &-1-x &0    &0    \\
                3   &-9   &-4   &2-x  &-1   \\
                1   &5    &4    &1    &4-x
-           \end{vmatrix}     
+           \end{vmat}     
            =(x-3)^3(x+1)^2
          \end{equation*}
          There are a number of possibilities for the minimal polynomial,
@@ -856,56 +875,56 @@ and so \( m(x)=(x-1)(x-2)^2 \).
          \begin{align*}
            (T-3I)(T+1I)
            &=
-           \begin{pmatrix} 
+           \begin{mat}[r] 
               -4   &4    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &-4   &-4   &0    &0    \\
                3   &-9   &-4   &-1   &-1   \\
                1   &5    &4    &1    &1  
-           \end{pmatrix}     
-           \begin{pmatrix} 
+           \end{mat}     
+           \begin{mat}[r] 
                0   &4    &0    &0    &0    \\
                0   &4    &0    &0    &0    \\
                0   &-4   &0    &0    &0    \\
                3   &-9   &-4   &3    &-1   \\
                1   &5    &4    &1    &5  
-           \end{pmatrix}                           \\     
+           \end{mat}                           \\     
            &=
-           \begin{pmatrix} 
+           \begin{mat}[r] 
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
               -4   &-4   &0    &-4   &-4   \\
                4   &4    &0    &4    &4  
-           \end{pmatrix}           
+           \end{mat}           
          \end{align*}
          but the second one does.
          \begin{multline*}
            (T-3I)^2(T+1I)=(T-3I)\bigl((T-3I)(T+1I)\bigr) \\
            \begin{aligned}
            &=
-           \begin{pmatrix} 
+           \begin{mat}[r] 
               -4   &4    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &-4   &-4   &0    &0    \\
                3   &-9   &-4   &-1   &-1   \\
                1   &5    &4    &1    &1  
-           \end{pmatrix}     
-           \begin{pmatrix} 
+           \end{mat}     
+           \begin{mat}[r] 
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
               -4   &-4   &0    &-4   &-4   \\
                4   &4    &0    &4    &4  
-           \end{pmatrix}                          \\          
+           \end{mat}                          \\          
            &=
-           \begin{pmatrix} 
+           \begin{mat}[r] 
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0    \\
                0   &0    &0    &0    &0  
-           \end{pmatrix}  
+           \end{mat}  
            \end{aligned}         
          \end{multline*}
          The minimal polynomial is \( m(x)=(x-3)^2(x+1) \).
@@ -914,20 +933,20 @@ and so \( m(x)=(x-1)(x-2)^2 \).
    \item 
      Find the minimal polynomial of this matrix.
      \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
            0  &1  &0  \\
            0  &0  &1  \\
            1  &0  &0
-        \end{pmatrix}
+        \end{mat}
      \end{equation*}
      \begin{answer}
        Its characteristic polynomial has complex roots.
        \begin{equation*}
-          \begin{vmatrix}
+          \begin{vmat}
                    -x  &1  &0  \\
                     0  &-x &1  \\
                     1  &0  &-x
-          \end{vmatrix}
+          \end{vmat}
           =(1-x)\cdot (x-(-\frac{1}{2}+\frac{\sqrt{3}}{2}i))
                 \cdot (x-(-\frac{1}{2}-\frac{\sqrt{3}}{2}i))
        \end{equation*}
@@ -946,13 +965,13 @@ and so \( m(x)=(x-1)(x-2)^2 \).
        Represent this operator using the canonical 
        form for nilpotent transformations.
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
            0  &0  &0  &\ldots &  &0  \\
            1  &0  &0  &       &  &0  \\
            0  &1  &0  &       &  &   \\
               &   &\ddots            \\
            0  &0  &0  &       &1 &0 
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        This is an $\nbyn{(n+1)}$ matrix with an easy 
        characteristic polynomial,
@@ -968,14 +987,14 @@ and so \( m(x)=(x-1)(x-2)^2 \).
   \recommended \item 
     Find the minimal polynomial of matrices of this form
     \begin{equation*}
-      \begin{pmatrix}
+      \begin{mat}
         \lambda  &0        &0          &\ldots  &        &0  \\
         1        &\lambda  &0          &        &        &0  \\
         0        &1        &\lambda                          \\
                  &         &           &\ddots                \\
                  &         &           &        &\lambda &0   \\
         0        &0        &\ldots     &        &1       &\lambda
-      \end{pmatrix}
+      \end{mat}
     \end{equation*}
     where the scalar $\lambda$ is fixed (i.e., is not a variable).
     \begin{answer}
@@ -985,13 +1004,13 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       To see that the minimal polynomial is the same, consider
       $T-\lambda I$.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}
           0        &0        &0          &\ldots  &0  \\
           1        &0        &0          &\ldots  &0  \\
           0        &1        &0                       \\
                    &         &\ddots                  \\
           0        &0        &\ldots     &1       &0      
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       Recognize it as the canonical form for a transformation that is 
       nilpotent of degree~$n$; the power $(T-\lambda I)^j$ is zero first
@@ -1016,44 +1035,44 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       \end{equation*}
       and so the representation $\rep{t}{B,B}$ is this upper triangular matrix.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           1  &1  &1  &1  \\
           0  &1  &2  &3  \\
           0  &0  &1  &3  \\
           0  &0  &0  &1
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       Because it is triangular, the fact that the characteristic polynomial is
       $c(x)=(x-1)^4$ is clear.
       For the minimal polynomial, the candidates are $m_1(x)=(x-1)$,
       \begin{equation*}
         T-1I=
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &1  &1  &1  \\
           0  &0  &2  &3  \\
           0  &0  &0  &3  \\
           0  &0  &0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       $m_2(x)=(x-1)^2$, 
       \begin{equation*}
         (T-1I)^2=
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  &2  &6  \\
           0  &0  &0  &6  \\
           0  &0  &0  &0  \\
           0  &0  &0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       $m_3(x)=(x-1)^3$,
       \begin{equation*}
         (T-1I)^3=
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &0  &0  &6  \\
           0  &0  &0  &0  \\
           0  &0  &0  &0  \\
           0  &0  &0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       and $m_4(x)=(x-1)^4$.
       Because $m_1$, $m_2$, and $m_3$ are not right, $m_4$ must be right,
@@ -1086,9 +1105,9 @@ and so \( m(x)=(x-1)(x-2)^2 \).
         $c_1\cdot \pi+c_0\cdot \identity=z$ (where $z$ is the zero map)
         to these two vectors.
         \begin{equation*}
-          \colvec{0 \\ 0 \\ 1}
+          \colvec[r]{0 \\ 0 \\ 1}
           \qquad
-          \colvec{1 \\ 0 \\ 0}
+          \colvec[r]{1 \\ 0 \\ 0}
         \end{equation*}
         Thus the minimal polynomial is $m$.
       \end{answer}
@@ -1098,11 +1117,11 @@ and so \( m(x)=(x-1)(x-2)^2 \).
      \begin{answer}
         This is one answer.
         \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  &0  \\
               1  &0  &0  \\
               0  &0  &0
-            \end{pmatrix}
+            \end{mat}
         \end{equation*} 
       \end{answer}
   \item 
@@ -1119,43 +1138,43 @@ and so \( m(x)=(x-1)(x-2)^2 \).
     \begin{answer}
       The characteristic polynomial of
       \begin{equation*}
-         T=\begin{pmatrix}
+         T=\begin{mat}
               a  &b  \\
               c  &d
-           \end{pmatrix}
+           \end{mat}
       \end{equation*}
       is \( (a-x)(d-x)-bc=x^2-(a+d)x+(ad-bc) \).
       Substitute
       \begin{multline*}
-         \begin{pmatrix}
+         \begin{mat}
               a  &b  \\
               c  &d
-         \end{pmatrix}^2
+         \end{mat}^2
          -
-         (a+d)\begin{pmatrix}
+         (a+d)\begin{mat}
             a  &b  \\
             c  &d
-         \end{pmatrix}
+         \end{mat}
          +
-         (ad-bc)\begin{pmatrix}
+         (ad-bc)\begin{mat}[r]
             1  &0  \\
             0  &1
-         \end{pmatrix}                            \\
+         \end{mat}                            \\
          =                     
-         \begin{pmatrix}
+         \begin{mat}
             a^2+bc  &ab+bd  \\
             ac+cd   &bc+d^2
-         \end{pmatrix}
+         \end{mat}
          -
-         \begin{pmatrix}
+         \begin{mat}
             a^2+ad  &ab+bd   \\
             ac+cd   &ad+d^2
-         \end{pmatrix}
+         \end{mat}
          +
-         \begin{pmatrix}
+         \begin{mat}
             ad-bc  &0      \\
             0      &ad-bc
-         \end{pmatrix}
+         \end{mat}
       \end{multline*}
       and just check each entry sum to see that the result is the zero matrix.
     \end{answer}
@@ -1208,12 +1227,12 @@ and so \( m(x)=(x-1)(x-2)^2 \).
        For a diagonal matrix
        \begin{equation*}
           T=
-          \begin{pmatrix}
+          \begin{mat}
              t_{1,1}   &0        \\
              0         &t_{2,2}  \\
                        &        &\ddots  \\
                        &        &      &t_{n,n}
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
        the characteristic polynomial is 
        $(t_{1,1}-x)(t_{2,2}-x)\cdots (t_{n,n}-x)$.     
@@ -1222,11 +1241,11 @@ and so \( m(x)=(x-1)(x-2)^2 \).
        For instance, the characteristic polynomial of
        \begin{equation*}
           D=
-          \begin{pmatrix}
+          \begin{mat}[r]
              3 &0 &0  \\
              0 &3 &0  \\
              0 &0 &1
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
        is \( (3-x)^2(1-x)=-1\cdot (x-3)^2(x-1) \). 
 
@@ -1251,21 +1270,21 @@ and so \( m(x)=(x-1)(x-2)^2 \).
        For instance, in the product 
        \begin{equation*}
          (D-3I)(D-1I)=(D-3I)(D-1I)I=
-         \begin{pmatrix}
+         \begin{mat}[r]
            0  &0  &0  \\
            0  &0  &0  \\
            0  &0  &-2        
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            2  &0  &0  \\
            0  &2  &0  \\
            0  &0  &0
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            1  &0  &0  \\
            0  &1  &0  \\
            0  &0  &1
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        because the first and second rows of the first matrix $D-3I$ are
        zero, the entire product will have a first row and second
@@ -1386,10 +1405,10 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       the standard basis by this matrix.
       \begin{equation*}
         N=
-        \begin{pmatrix}
+        \begin{mat}[r]
           0  &1  \\
           0  &0
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       The characteristic polynomial is $c(x)=x^2$. 
       Thus the minimal polynomial is either $m_1(x)=x$ or $m_2(x)=x^2$.
@@ -1408,15 +1427,15 @@ and so \( m(x)=(x-1)(x-2)^2 \).
        \partsitem Show that similar matrices have the same minimal polynomial.
        \partsitem Decide if these are similar.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &3  \\
               2  &3
-            \end{pmatrix}
+            \end{mat}
             \qquad
-            \begin{pmatrix}
+            \begin{mat}[r]
               4  &-1 \\
               1  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
      \end{exparts}
      \begin{answer}
@@ -1547,20 +1566,20 @@ and so \( m(x)=(x-1)(x-2)^2 \).
 %      $c_S(x)=c_T(x)=(x-2)^4$.
 %      \begin{equation*}
 %        S=
-%        \begin{pmatrix}
+%        \begin{mat}[r]
 %          2  &0  &0  &0  \\
 %          1  &2  &0  &0  \\
 %          0  &0  &2  &0  \\
 %          0  &0  &0  &2
-%        \end{pmatrix}
+%        \end{mat}
 %        \qquad
 %        T=
-%        \begin{pmatrix}
+%        \begin{mat}[r]
 %          2  &0  &0  &0  \\
 %          1  &2  &0  &0  \\
 %          0  &0  &2  &0  \\
 %          0  &0  &1  &2
-%        \end{pmatrix}
+%        \end{mat}
 %      \end{equation*}
 %      For each of the two
 %      the candidates for the minimal polynomial are 
@@ -1569,30 +1588,30 @@ and so \( m(x)=(x-1)(x-2)^2 \).
 %      We have 
 %      \begin{equation*}
 %        S-2I=
-%        \begin{pmatrix}
+%        \begin{mat}[r]
 %          0  &0  &0  &0  \\
 %          1  &0  &0  &0  \\
 %          0  &0  &0  &0  \\
 %          0  &0  &0  &0
-%        \end{pmatrix}
+%        \end{mat}
 %        \qquad
 %        T-2I=
-%        \begin{pmatrix}
+%        \begin{mat}[r]
 %          0  &0  &0  &0  \\
 %          1  &0  &0  &0  \\
 %          0  &0  &0  &0  \\
 %          0  &0  &1  &0
-%        \end{pmatrix}
+%        \end{mat}
 %      \end{equation*}
 %      and
 %      \begin{equation*}
 %        (S-2I)^2=
-%        \begin{pmatrix}
+%        \begin{mat}[r]
 %          0  &0  &0  &0  \\
 %          0  &0  &0  &0  \\
 %          0  &0  &0  &0  \\
 %          0  &0  &0  &0
-%        \end{pmatrix}
+%        \end{mat}
 %        =
 %        (T-2I)^2
 %      \end{equation*}
@@ -1607,13 +1626,13 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       \( x^n+m_{n-1}x^{n-1}+\dots+m_1x+m_0 \) is plus or minus the
       determinant of this.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}
             -x  &0  &0  &      &    &m_0    \\
              0  &1-x&0  &      &    &m_1    \\
              0  &0  &1-x&      &    &m_2    \\
                 &   &   &\ddots             \\
                 &   &   &      &1-x &m_{n-1}
-         \end{pmatrix}
+         \end{mat}
       \end{equation*} 
      \end{answer}
 \end{exercises}
@@ -1683,18 +1702,18 @@ Therefore \( N+\lambda I=PTP^{-1} \), as required.
 \begin{example}   \label{ex:SingJordBlock}
 The characteristic polynomial of
 \begin{equation*}
-  T=\begin{pmatrix}
+  T=\begin{mat}[r]
       2  &-1  \\
       1  &4
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 is \( (x-3)^2 \) and so \( T \) has only the single eigenvalue \( 3 \).
 Thus for 
 \begin{equation*}
-  T-3I=\begin{pmatrix}
+  T-3I=\begin{mat}[r]
      -1  &-1  \\
       1  &1
-    \end{pmatrix}
+    \end{mat}
 \end{equation*}
 the only eigenvalue is \( 0 \), and \( T-3I \) is nilpotent.
 The null spaces are routine to find; to ease this computation we take 
@@ -1714,22 +1733,22 @@ with one choice for a string basis is
 \begin{equation*}
   \rep{t-3}{B,B}
   =N
-  =\begin{pmatrix}
+  =\begin{mat}[r]
       0  &0   \\
       1  &0
-    \end{pmatrix}
+    \end{mat}
   \qquad
-  B=\sequence{\colvec{1 \\ 1},\colvec{-2 \\ 2}}
+  B=\sequence{\colvec[r]{1 \\ 1},\colvec[r]{-2 \\ 2}}
 \end{equation*}
 and by \nearbylemma{le:SimRespAddScalar}, \( T \) is similar to
 this matrix.
 \begin{equation*}
   \rep{t}{B,B}=
   N+3I=
-  \begin{pmatrix}
+  \begin{mat}[r]
      3  &0  \\
      1  &3
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 
 We can produce the similarity computation.
@@ -1748,42 +1767,42 @@ describes that to move from the lower left to the upper left we multiply by
 \begin{equation*}
   P^{-1}=\bigl(\rep{\identity}{\stdbasis_2,B}\bigr)^{-1}
     =\rep{\identity}{B,\stdbasis_2}
-    =\begin{pmatrix}
+    =\begin{mat}[r]
         1  &-2  \\
         1  &2
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 and to move from the upper right to the lower right we multiply by
 this matrix.
 \begin{equation*}
-  P=\begin{pmatrix}
+  P=\begin{mat}[r]
       1  &-2  \\
       1  &2
-     \end{pmatrix}^{-1}
-   =\begin{pmatrix}
+     \end{mat}^{-1}
+   =\begin{mat}[r]
       1/2  &1/2  \\
       -1/4 &1/4
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 So the similarity is expressed by
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      3  &0  \\
      1  &3
-  \end{pmatrix}
+  \end{mat}
   =
-  \begin{pmatrix}
+  \begin{mat}[r]
       1/2  &1/2  \\
       -1/4 &1/4
-   \end{pmatrix}
-   \begin{pmatrix}
+   \end{mat}
+   \begin{mat}[r]
       2  &-1  \\
       1  &4
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{mat}
+    \begin{mat}[r]
         1  &-2  \\
         1  &2
-     \end{pmatrix}
+     \end{mat}
 \end{equation*}
 which is easily checked.
 \end{example}
@@ -1792,12 +1811,12 @@ which is easily checked.
 This matrix has characteristic polynomial \( (x-4)^4 \) 
 \begin{equation*}
   T=
-  \begin{pmatrix}
+  \begin{mat}[r]
     4  &1  &0  &-1  \\
     0  &3  &0  &1   \\
     0  &0  &4  &0   \\
     1  &0  &0  &5
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 and so has the single eigenvalue $4$.
 The nullities of $t-4$ are:~
@@ -1810,12 +1829,12 @@ This gives the canonical form $N$ for $t-4$, which in turn gives the
 form for \( t \).
 \begin{equation*}
   N+4I=
-  \begin{pmatrix}
+  \begin{mat}[r]
     4  &0  &0  &0   \\
     1  &4  &0  &0   \\
     0  &1  &4  &0   \\
     0  &0  &0  &4
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 \end{example}
 
@@ -1831,31 +1850,31 @@ The \( \nbyn{3} \) matrices whose only eigenvalue is \( 1/2 \) separate into
 three similarity classes.
 The three classes have these canonical representatives.
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}[r]
      1/2  &0    &0  \\
      0    &1/2  &0  \\
      0    &0    &1/2
-   \end{pmatrix}
+   \end{mat}
    \qquad 
-   \begin{pmatrix}
+   \begin{mat}[r]
      1/2  &0    &0  \\
      1    &1/2  &0  \\
      0    &0    &1/2
-   \end{pmatrix}
+   \end{mat}
    \qquad 
-   \begin{pmatrix}
+   \begin{mat}[r]
      1/2  &0    &0  \\
      1    &1/2  &0  \\
      0    &1    &1/2
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 In particular, this matrix
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}[r]
      1/2  &0    &0    \\
      0    &1/2  &0    \\
      0    &1    &1/2
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 belongs to the similarity class represented by the middle one, because we have
 adopted the convention of ordering the blocks of subdiagonal ones from the 
@@ -2097,21 +2116,21 @@ equals
 
 \begin{example}
 \begin{equation*}
-    \begin{vmatrix}
+    \begin{vmat}[r]
        2  &0  &0  &0  \\
        1  &2  &0  &0  \\
        0  &0  &3  &0  \\
        0  &0  &0  &3
-    \end{vmatrix}
-   =\begin{vmatrix}
+    \end{vmat}
+   =\begin{vmat}[r]
        2  &0  \\
        1  &2
-    \end{vmatrix}
+    \end{vmat}
     \cdot
-    \begin{vmatrix}
+    \begin{vmat}[r]
        3  &0  \\
        0  &3
-    \end{vmatrix}
+    \end{vmat}
    =36
 \end{equation*}
 \end{example}
@@ -2218,13 +2237,13 @@ translates those steps into matrix terms.
 \index{canonical form!for similarity}\index{transformation!Jordan form for}
 Any square matrix is similar to one in \definend{Jordan form}
 \begin{equation*}
-  \begin{pmatrix}
+  \begin{mat}
     J_{\lambda_1}  &     &\text{\textit{--zeroes--}}                 \\
          &J_{\lambda_2}                                              \\
          &     &\ddots                                     \\
          &     &                           &J_{\lambda_{\ell-1}}     \\
          &     &\text{\textit{--zeroes--}} &  &J_{\lambda_{\ell}}
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 where each \( J_{\lambda} \) is the Jordan block associated with the
 eigenvalue $\lambda$ of the original matrix (that is, is all zeroes except for
@@ -2260,11 +2279,11 @@ This matrix
 has the characteristic polynomial \( (x-2)^2(x-6) \).
 \begin{equation*}
    T=
-   \begin{pmatrix}
+   \begin{mat}[r]
      2  &0  &1  \\
      0  &6  &2  \\
      0  &0  &2
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 We will handle the eigenvalues $2$ and $6$ separately.
 
@@ -2276,30 +2295,34 @@ with respect to the standard basis.)
 \begin{center}
   \renewcommand{\arraystretch}{1.25}
   \begin{tabular}{r|ccc}
-    \textit{power} \( p \)  &\( (T-2I)^p \) &\( \nullspace{(t-2)^p}  \) 
-      &\textit{nullity}                                            \\  \hline
+    \multicolumn{1}{c}{\textit{power} \( p \)}  
+         &\( (T-2I)^p \) &\( \nullspace{(t-2)^p}  \) 
+         &\textit{nullity}                                            \\  
+    \hline
     \( 1 \)
-    &\( \begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &0  &1  \\
           0  &4  &2  \\
           0  &0  &0
-        \end{pmatrix} \)
-    &\( \set{\colvec{x \\ 0 \\ 0}\suchthat x\in\C}  \)  
+        \end{mat}}
+    &\( \set{\matrixvenlarge{\colvec{x \\ 0 \\ 0}}
+         \suchthat x\in\C}  \)  
     &$1$                                                   \\
     \( 2 \)
-    &\( \begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &0  &0  \\
           0  &16 &8  \\
           0  &0  &0
-        \end{pmatrix} \)
-    &\( \set{\colvec{x \\ -z/2 \\  z}\suchthat x,z\in\C}  \) 
+        \end{mat}}
+    &\( \set{\matrixvenlarge{\colvec{x \\ -z/2 \\  z}}
+               \suchthat x,z\in\C}  \) 
     &$2$                                                   \\
     \( 3 \)
-    &\( \begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &0  &0  \\
           0  &64 &32 \\
           0  &0  &0
-        \end{pmatrix} \)
+        \end{mat}}
     &\textit{--same--}
     &\textit{---}
   \end{tabular}
@@ -2312,24 +2335,24 @@ $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.
 Thus the restriction can be represented in the canonical form 
 \begin{equation*}
   N_2=
-  \begin{pmatrix}
+  \begin{mat}[r]
     0  &0  \\
     1  &0  
-  \end{pmatrix}
+  \end{mat}
   =\rep{t-2}{B,B}
   \qquad
-   B_2=\sequence{\colvec{1 \\ 1 \\ -2},
-                 \colvec{-2 \\ 0 \\ 0}}  
+   B_2=\sequence{\colvec[r]{1 \\ 1 \\ -2},
+                 \colvec[r]{-2 \\ 0 \\ 0}}  
 \end{equation*}
 where many choices of basis are possible.
 Consequently, the action of the restriction of $t$ to 
 $\gennullspace{t-2}$ is represented by this matrix.
 \begin{equation*}
   J_2=N_2+2I=\rep{t}{B_2,B_2}=
-  \begin{pmatrix}
+  \begin{mat}[r]
     2  &0  \\
     1  &2
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 
 The second eigenvalue's computations are easier.
@@ -2343,18 +2366,18 @@ Consequently, the canonical form $J_6$ for the action of $t$ on
 $\gennullspace{t-6}$ is the $\nbyn{1}$ matrix with the single entry $6$.
 For the basis we can use any nonzero vector from the generalized null space.  
 \begin{equation*}
-   B_6=\sequence{\colvec{0 \\ 1 \\ 0}}
+   B_6=\sequence{\colvec[r]{0 \\ 1 \\ 0}}
 \end{equation*}
 
 Taken together, these two give that
 the Jordan form of \( T \) is
 \begin{equation*}
    \rep{t}{B,B}=
-   \begin{pmatrix}
+   \begin{mat}[r]
       2  &0  &0  \\
       1  &2  &0  \\
       0  &0  &6
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 where \( B \) is the concatenation of $B_2$ and $B_6$.
 \end{example}
@@ -2363,34 +2386,37 @@ where \( B \) is the concatenation of $B_2$ and $B_6$.
 Contrast the prior example with
 \begin{equation*}
    T=
-   \begin{pmatrix}
+   \begin{mat}[r]
      2  &2  &1  \\
      0  &6  &2  \\
      0  &0  &2
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 which has the same characteristic polynomial \( (x-2)^2(x-6) \).
 
 While the characteristic polynomial is the same, 
 \begin{center}
-  \renewcommand{\arraystretch}{1.25}
+  % \renewcommand{\arraystretch}{1.25}
   \begin{tabular}{r|ccc}
-    \textit{power} \( p \)  &\( (T-2I)^p \)  &\( \nullspace{(t-2)^p}  \) 
-                    &\textit{nullity}                      \\  \hline
+    \multicolumn{1}{c}{\textit{power} \( p \)}  
+          &\( (T-2I)^p \)  &\( \nullspace{(t-2)^p}  \) 
+                    &\textit{nullity}                      \\  
+    \hline
     \( 1 \)
-    &\( \begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &2  &1  \\
           0  &4  &2  \\
           0  &0  &0
-        \end{pmatrix} \)
-    &\( \set{\colvec{x \\ -z/2 \\ z}\suchthat x,z\in\C}  \) 
+        \end{mat}}
+    &\( \set{\matrixvenlarge{\colvec{x \\ -z/2 \\ z}}
+         \suchthat x,z\in\C}  \) 
     &$2$ \\
     \( 2 \)
-    &\( \begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &8  &4  \\
           0  &16 &8  \\
           0  &0  &0
-        \end{pmatrix} \)
+        \end{mat}}
     &\textit{--same--}
     &\textit{---}
   \end{tabular}
@@ -2409,10 +2435,10 @@ basis as $\vec{\beta}_1\mapsto\zero$ and $\vec{\beta}_2\mapsto\zero$,
 and we get this Jordan block associated with the eigenvalue~$2$.
 \begin{equation*}
   J_2=
-  \begin{pmatrix}
+  \begin{mat}[r]
     2  &0  \\
     0  &2  
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
 
 For the other eigenvalue, the arguments for the second eigenvalue of
@@ -2425,24 +2451,24 @@ Thus $t-6$'s canonical form $N_6$ is the $\nbyn{1}$ zero matrix,
 and the associated Jordan block $J_6$ is the $\nbyn{1}$ matrix with entry $6$.
  
 %\begin{center}
-%  \renewcommand{\arraystretch}{1.25}
+%  % \renewcommand{\arraystretch}{1.25}
 %  \begin{tabular}{c|cc}
-%    \textit{power} \( p \)  &\( (T-6I)^p \)  &\( \nullspace{(t-6)^p}  \)  
+%    \multicolumn{1}{c}{\textit{power} \( p \)}  &\( (T-6I)^p \)  &\( \nullspace{(t-6)^p}  \)  
 %        &\textit{nullity} \\                                     \hline
 %    \( 1 \)
-%    &\( \begin{pmatrix}
+%    &\matrixvenlarge{\begin{mat}[r]
 %         -4  &3  &1  \\
 %          0  &0  &2  \\
 %          0  &0  &-4
-%        \end{pmatrix} \)
-%%\( \set{\colvec{x \\ (4/3)x \\ 0}\suchthat x\in\C}  \) 
+%        \end{mat}}
+%%\( \set{\matrixvenlarge{\colvec{x \\ (4/3)x \\ 0}}\suchthat x\in\C}  \) 
 %    &$1$                                                     \\
 %    \( 2 \)
-%    &\( \begin{pmatrix}
+%    &\matrixvenlarge{\begin{mat}[r]
 %         16  &-12&-2 \\
 %          0  &0  &-8 \\
 %          0  &0  &16
-%        \end{pmatrix} \)
+%        \end{mat}}
 %    &\textit{--same--}
 %    &\textit{---}
 %  \end{tabular}
@@ -2450,16 +2476,16 @@ and the associated Jordan block $J_6$ is the $\nbyn{1}$ matrix with entry $6$.
 Therefore, \( T \) is diagonalizable.
 \begin{equation*}
   \rep{t}{B,B}=
-  \begin{pmatrix}
+  \begin{mat}[r]
     2  &0  &0  \\
     0  &2  &0  \\
     0  &0  &6
-  \end{pmatrix}
+  \end{mat}
   \qquad
   B=\cat{B_2}{B_6}
-   =\sequence{\colvec{1 \\ 0 \\ 0},
-              \colvec{0 \\ 1 \\ -2},
-              \colvec{2 \\ 4 \\ 0}}
+   =\sequence{\colvec[r]{1 \\ 0 \\ 0},
+              \colvec[r]{0 \\ 1 \\ -2},
+              \colvec[r]{2 \\ 4 \\ 0}}
 \end{equation*}
 (Checking that the third vector in $B$ is in the nullspace of $t-6$ is
 routine.)
@@ -2469,58 +2495,60 @@ routine.)
 A bit of computing with
 \begin{equation*}
    T=
-   \begin{pmatrix}
+   \begin{mat}[r]
      -1  &4  &0  &0  &0  \\
       0  &3  &0  &0  &0  \\
       0  &-4 &-1 &0  &0  \\
       3  &-9 &-4 &2  &-1 \\
       1  &5  &4  &1  &4
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 shows that its characteristic polynomial
 is \( (x-3)^3(x+1)^2 \).
 This table
 \begin{center}
-  \renewcommand{\arraystretch}{1.25}
+  % \renewcommand{\arraystretch}{1.25}
   \begin{tabular}{@{}r|c@{}c@{}c@{}}
-    \textit{power} \( p \)  &\( (T-3I)^p \)  &\( \nullspace{(t-3)^p}  \)
-             &\textit{nullity}   \\  \hline
+    \multicolumn{1}{c}{\textit{power} \( p \)}  
+            &\( (T-3I)^p \)  &\( \nullspace{(t-3)^p}  \)
+             &\textit{nullity}   
+    \\  \hline
     \( 1 \)
-    &\(\begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
          -4  &4  &0  &0  &0  \\
           0  &0  &0  &0  &0  \\
           0  &-4 &-4 &0  &0  \\
           3  &-9 &-4 &-1 &-1 \\
           1  &5  &4  &1  &1
-       \end{pmatrix}  \)
-    &\( \set{\colvec{-(u+v)/2 \\
+       \end{mat}}
+    &\( \set{\matrixvenlarge{\colvec{-(u+v)/2 \\
                      -(u+v)/2 \\
                       (u+v)/2 \\
                        u      \\
-                       v}\suchthat u,v\in\C}  \) 
+                       v}}\suchthat u,v\in\C}  \) 
     &$2$                                            \\
     \( 2 \)
-    &\(\begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
          16  &-16&0  &0  &0  \\
           0  &0  &0  &0  &0  \\
           0  &16 &16 &0  &0  \\
         -16  &32 &16 &0  &0  \\
           0  &-16&-16&0  &0
-       \end{pmatrix}  \)
-    &\( \set{\colvec{ -z      \\
+       \end{mat}}
+    &\( \set{\matrixvenlarge{\colvec{ -z      \\
                       -z      \\
                        z      \\
                        u      \\
-                       v}\suchthat z,u,v\in\C}  \) 
+                       v}}\suchthat z,u,v\in\C}  \) 
     &$3$                                              \\
     \( 3 \)
-    &\(\begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
         -64  &64   &0   &0   &0  \\
           0  &0    &0   &0   &0  \\
           0  &-64  &-64 &0   &0  \\
          64  &-128 &-64 &0   &0  \\
           0  &64   &64  &0   &0
-       \end{pmatrix}  \)
+       \end{mat}}
     &\textit{--same--}
     &\textit{---}
   \end{tabular}
@@ -2535,30 +2563,32 @@ A similar calculation for the other eigenvalue
 \begin{center}
   \renewcommand{\arraystretch}{1.25}
   \begin{tabular}{r|ccc}
-    \textit{power} \( p \)  &\( (T+1I)^p \)  &\( \nullspace{(t+1)^p}  \) 
-         &\textit{nullity}  \\  \hline
+    \multicolumn{1}{c}{\textit{power} \( p \)}  
+         &\( (T+1I)^p \)  &\( \nullspace{(t+1)^p}  \) 
+         &\textit{nullity}  \\  
+    \hline
     \( 1 \)
-    &\(\begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &4  &0  &0  &0  \\
           0  &4  &0  &0  &0  \\
           0  &-4 &0  &0  &0  \\
           3  &-9 &-4 &3  &-1 \\
           1  &5  &4  &1  &5
-       \end{pmatrix}  \)
-    &\( \set{\colvec{-(u+v)   \\
+       \end{mat}}
+    &\( \set{\matrixvenlarge{\colvec{-(u+v)   \\
                        0      \\
                       -v      \\
                        u      \\
-                       v}\suchthat u,v\in\C}  \)  
+                       v}}\suchthat u,v\in\C}  \)  
     &$2$                                              \\
     \( 2 \)
-    &\(\begin{pmatrix}
+    &\matrixvenlarge{\begin{mat}[r]
           0  &16 &0  &0  &0  \\
           0  &16 &0  &0  &0  \\
           0  &-16&0  &0  &0  \\
           8  &-40&-16&8  &-8 \\
           8  &24 &16 &8  &24
-       \end{pmatrix}  \)
+       \end{mat}}
     &\textit{--same--}
     &\textit{---}
   \end{tabular}
@@ -2570,13 +2600,13 @@ $\vec{\beta}_4\mapsto\zero$ and $\vec{\beta}_5\mapsto\zero$.
 Therefore
 \( T \) is similar to this Jordan form matrix.
 \begin{equation*}
-   \begin{pmatrix}
+   \begin{mat}[r]
      -1  &0  &0  &0  &0  \\
       0  &-1 &0  &0  &0  \\    
       0  &0  &3  &0  &0  \\
       0  &0  &1  &3  &0  \\
       0  &0  &0  &0  &3  
-   \end{pmatrix}
+   \end{mat}
 \end{equation*}
 \end{example}
 
@@ -2599,25 +2629,25 @@ matrix.
     \begin{answer}
       We are required to check that
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            3  &0  \\
            1  &3
-         \end{pmatrix}
+         \end{mat}
          =
          N+3I=PTP^{-1}
          =
-         \begin{pmatrix}
+         \begin{mat}[r]
            1/2  &1/2  \\
           -1/4 &1/4
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            2  &-1  \\
            1  &4
-         \end{pmatrix}
-         \begin{pmatrix}
+         \end{mat}
+         \begin{mat}[r]
            1  &-2  \\
            1  &2
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       That calculation is easy.
     \end{answer}
@@ -2626,61 +2656,61 @@ matrix.
     State its characteristic polynomial and its minimal polynomial.
     \begin{exparts*}
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            3  &0  \\
            1  &3        
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            -1  &0  \\
             0  &-1 
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            2  &0  &0  \\
            1  &2  &0  \\
            0  &0  &-1/2
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            3  &0  &0  \\
            1  &3  &0  \\
            0  &1  &3  \\ 
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            3  &0  &0  &0  \\
            1  &3  &0  &0  \\
            0  &0  &3  &0  \\
            0  &0  &1  &3 
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            4  &0  &0  &0  \\
            1  &4  &0  &0  \\
            0  &0  &-4 &0  \\
            0  &0  &1  &-4
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            5  &0  &0  \\
            0  &2  &0  \\
            0  &0  &3  
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            5  &0  &0  &0  \\
            0  &2  &0  &0  \\
            0  &0  &2  &0  \\
            0  &0  &0  &3 
-         \end{pmatrix}$
+         \end{mat}$
       \partsitem 
-        $\begin{pmatrix}
+        $\begin{mat}[r]
            5  &0  &0  &0  \\
            0  &2  &0  &0  \\
            0  &1  &2  &0  \\
            0  &0  &0  &3 
-         \end{pmatrix}$
+         \end{mat}$
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -2731,24 +2761,24 @@ matrix.
           Consequently, $t-3$ can be represented in this canonical form.
           \begin{equation*}
             N_3=
-            \begin{pmatrix}
+            \begin{mat}[r]
                0  &0  &0  &0  &0  \\
                1  &0  &0  &0  &0  \\
                0  &1  &0  &0  &0  \\
                0  &0  &1  &0  &0  \\
                0  &0  &0  &0  &0
-             \end{pmatrix}
+             \end{mat}
           \end{equation*}
           and therefore $T$ is similar to this this canonical form matrix.
           \begin{equation*}
            J_3=N_3+3I=
-           \begin{pmatrix}
+           \begin{mat}[r]
                3  &0  &0  &0  &0  \\
                1  &3  &0  &0  &0  \\
                0  &1  &3  &0  &0  \\
                0  &0  &1  &3  &0  \\
                0  &0  &0  &0  &3
-             \end{pmatrix}
+             \end{mat}
          \end{equation*} 
          \partsitem The restriction of the transformation $s+1$ is nilpotent
           on the subspace $\gennullspace{s+1}$, and the action on a 
@@ -2759,13 +2789,13 @@ matrix.
           and $\vec{\beta}_4\mapsto\vec{\beta}_5\mapsto\zero$.        
           Consequently the Jordan form is this
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               -1  &0  &0  &0  &0  \\
                0  &2  &0  &0  &0  \\
                0  &1  &2  &0  &0  \\
                0  &0  &0  &2  &0  \\
                0  &0  &0  &1  &2
-             \end{pmatrix} 
+             \end{mat} 
           \end{equation*}
           (note that the blocks are arranged with the least eigenvalue first).
       \end{exparts}  
@@ -2796,44 +2826,44 @@ matrix.
           \begin{equation*}
             P^{-1}=\bigl(\rep{\identity}{\stdbasis_3,B}\bigr)^{-1}
                   =\rep{\identity}{B,\stdbasis_3}   
-                  =\begin{pmatrix}
+                  =\begin{mat}[r]
                      1  &-2   &0 \\
                      1  &0   &1 \\
                     -2  &0   &0
-                   \end{pmatrix}
+                   \end{mat}
           \end{equation*}
           The matrix $P$ to move from the upper right to the lower
           right is the inverse of $P^{-1}$.
         \partsitem We want this matrix and its inverse.
           \begin{equation*}
             P^{-1}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &0  &3  \\
               0  &1  &4  \\
               0  &-2 &0
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The concatenation of these bases for the 
           generalized null spaces will do for the basis for the
           entire space.
           \begin{equation*}
-             B_{-1}=\sequence{\colvec{-1\\ 0 \\  0 \\ 1 \\ 0},
-                 \colvec{-1\\ 0 \\ -1 \\ 0 \\ 1}}
+             B_{-1}=\sequence{\colvec[r]{-1\\ 0 \\  0 \\ 1 \\ 0},
+                 \colvec[r]{-1\\ 0 \\ -1 \\ 0 \\ 1}}
             \qquad
-             B_3=\sequence{\colvec{1 \\ 1 \\ -1 \\ 0 \\ 0},
-                 \colvec{0 \\ 0 \\  0 \\-2 \\ 2},
-                 \colvec{-1\\-1 \\  1 \\ 2 \\ 0}}
+             B_3=\sequence{\colvec[r]{1 \\ 1 \\ -1 \\ 0 \\ 0},
+                 \colvec[r]{0 \\ 0 \\  0 \\-2 \\ 2},
+                 \colvec[r]{-1\\-1 \\  1 \\ 2 \\ 0}}
           \end{equation*}
           The change of basis matrices are this one and its inverse.
           \begin{equation*}
             P^{-1}=
-            \begin{pmatrix}
+            \begin{mat}[r]
               -1  &-1  &1  &0  &-1  \\
               0   &0   &1  &0  &-1  \\
               0   &-1  &-1 &0  &1   \\
               1   &0   &0  &-2 &2   \\
               0   &1   &0  &2  &0   \\
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}
     \end{answer}
@@ -2842,52 +2872,52 @@ matrix.
     \begin{exparts}
       \partsitem 
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
           -10  &4  \\
           -25  &10
-        \end{pmatrix} \)
+        \end{mat} \)
       \partsitem 
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
            5   &-4 \\
            9   &-7
-        \end{pmatrix} \)
+        \end{mat} \)
       \partsitem 
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
            4   &0    &0  \\
            2   &1    &3  \\
            5   &0    &4
-        \end{pmatrix} \)
+        \end{mat} \)
       \partsitem 
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
            5   &4    &3  \\
           -1   &0    &-3 \\
            1   &-2   &1
-        \end{pmatrix} \)
+        \end{mat} \)
       \partsitem
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
            9   &7    &3  \\
           -9   &-7   &-4 \\
            4   &4    &4
-        \end{pmatrix} \)
+        \end{mat} \)
       \partsitem 
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
            2   &2    &-1 \\
           -1   &-1   &1  \\
           -1   &-2   &2
-        \end{pmatrix} \)
+        \end{mat} \)
       \partsitem 
         \(
-        \begin{pmatrix}
+        \begin{mat}[r]
            7   &1    &2   &2 \\
            1   &4    &-1  &-1\\
           -2   &1    &5   &-1\\
            1   &1    &2   &8
-        \end{pmatrix} \)
+        \end{mat} \)
     \end{exparts}
     \begin{answer}
       The general procedure is to factor the characteristic polynomial 
@@ -2914,22 +2944,24 @@ matrix.
            \begin{center}
              \renewcommand{\arraystretch}{1.25}
              \begin{tabular}{r|ccc}
-                \textit{power}~$p$ &$(T+0\cdot I)^p$ &$\nullspace{(t-0)^p}$
+                \multicolumn{1}{c}{\textit{power}~$p$} 
+                    &$(T+0\cdot I)^p$ &$\nullspace{(t-0)^p}$
                     &\textit{nullity}                   \\ 
                 \hline
                 $1$  
-                &$\begin{pmatrix}
+                &\matrixvenlarge{\begin{mat}[r]
                   -10  &4  \\ 
                   -25  &10
-                \end{pmatrix}$
-                &$\set{\colvec{2y/5 \\ y}\suchthat
+                \end{mat}}
+                &$\set{\matrixvenlarge{\colvec{2y/5 \\ y}}
+                                     \suchthat
                                      y\in\C}$
                 &$1$                                       \\
                 $2$  
-                &$\begin{pmatrix}
+                &\matrixvenlarge{\begin{mat}[r]
                     0  &0  \\ 
                     0  &0
-                \end{pmatrix}$
+                \end{mat}}
                 &$\C^2$
                 &$2$
              \end{tabular}
@@ -2943,18 +2975,18 @@ matrix.
            $\gennullspace{t-0}=\C^2$
            \begin{equation*}
              N_0=
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  \\
                1  &0
-            \end{pmatrix}
+            \end{mat}
            \end{equation*}
            and this is the Jordan form of the matrix.
            \begin{equation*}
              J_0=N_0+0\cdot I=
-             \begin{pmatrix}
+             \begin{mat}[r]
                0  &0  \\
                1  &0
-            \end{pmatrix}
+            \end{mat}
            \end{equation*}
            Note that if a matrix is nilpotent then its canonical form
            equals its Jordan form.
@@ -2962,8 +2994,8 @@ matrix.
            We can find such a string basis using the techniques of the 
            prior section.
            \begin{equation*}
-                 B=\sequence{\colvec{1 \\ 0},
-                             \colvec{-10 \\ -25}}
+                 B=\sequence{\colvec[r]{1 \\ 0},
+                             \colvec[r]{-10 \\ -25}}
            \end{equation*}
            The first basis vector has been taken so that it is in
            the null space of $t^2$ but is not in the null space of $t$.
@@ -2986,25 +3018,25 @@ matrix.
            \begin{equation*}
              N_{-1}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                 0  &0  \\
                 1  &0 
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
            the Jordan form of T is
            \begin{equation*}
              J_{-1}=N_{-1}+-1\cdot I
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                -1  &0  \\
                 1  &-1
-             \end{pmatrix}
+             \end{mat}
            \end{equation*}
            and choosing vectors from the above null spaces gives
            this string basis (many other choices are possible).
            \begin{equation*}
-             B=\sequence{\colvec{1 \\ 0},
-                         \colvec{6 \\ 9}}
+             B=\sequence{\colvec[r]{1 \\ 0},
+                         \colvec[r]{6 \\ 9}}
            \end{equation*}
         \partsitem The characteristic polynomial 
             \( c(x)=(1-x)(4-x)^2=-1\cdot (x-1)(x-4)^2 \) has two roots
@@ -3046,19 +3078,19 @@ matrix.
             Putting the information for the two eigenvalues 
             together gives the Jordan form of the transformation $t$.
             \begin{equation*}
-              \begin{pmatrix}
+              \begin{mat}[r]
                 1  &0  &0  \\
                 0  &4  &0  \\
                 0  &1  &4
-              \end{pmatrix}
+              \end{mat}
             \end{equation*}
             We can take elements of the nullspaces to get an appropriate
             basis.
             \begin{equation*}
               B=\cat{B_{1}}{B_4}=
-               \sequence{\colvec{0 \\ 1 \\ 0},
-                          \colvec{1 \\ 0 \\ 1},
-                          \colvec{0 \\ 5 \\ 5}}
+               \sequence{\colvec[r]{0 \\ 1 \\ 0},
+                          \colvec[r]{1 \\ 0 \\ 1},
+                          \colvec[r]{0 \\ 5 \\ 5}}
             \end{equation*}
         \partsitem The characteristic polynomial is 
             \( c(x)=(-2-x)(4-x)^2=-1\cdot (x+2)(x-4)^2 \).
@@ -3090,18 +3122,18 @@ matrix.
 
             Therefore the Jordan form is  
             \begin{equation*}
-              \begin{pmatrix}
+              \begin{mat}[r]
                 -2  &0  &0  \\
                  0  &4  &0  \\
                  0  &1  &4
-              \end{pmatrix}
+              \end{mat}
             \end{equation*}
             and a suitable basis is this.
             \begin{equation*}
               B=\cat{B_{-2}}{B_4}=
-                \sequence{\colvec{1 \\ 1 \\ 1},
-                          \colvec{0 \\ -1 \\ 1},
-                          \colvec{-1 \\ 1 \\ -1}}
+                \sequence{\colvec[r]{1 \\ 1 \\ 1},
+                          \colvec[r]{0 \\ -1 \\ 1},
+                          \colvec[r]{-1 \\ 1 \\ -1}}
             \end{equation*}
         \partsitem The characteristic polynomial of this
             matrix is \( c(x)=(2-x)^3=-1\cdot (x-2)^3 \).
@@ -3123,17 +3155,17 @@ matrix.
                    \vec{\beta}_3\mapsto\zero$.
             The Jordan form is this
             \begin{equation*}
-                  \begin{pmatrix}
+                  \begin{mat}[r]
                     2  &0  &0  \\
                     1  &2  &0  \\
                     0  &1  &2
-                  \end{pmatrix}
+                  \end{mat}
             \end{equation*}
             and one choice of basis is this.
             \begin{equation*}
-              B=\sequence{\colvec{0 \\ 1 \\ 0},
-                          \colvec{7 \\ -9 \\ 4},
-                          \colvec{-2 \\ 2 \\ 0}}
+              B=\sequence{\colvec[r]{0 \\ 1 \\ 0},
+                          \colvec[r]{7 \\ -9 \\ 4},
+                          \colvec[r]{-2 \\ 2 \\ 0}}
             \end{equation*}
         \partsitem The characteristic polynomial
             \( c(x)=(1-x)^3=-(x-1)^3 \) has only a single root,
@@ -3153,18 +3185,18 @@ matrix.
             Therefore the Jordan form is
             \begin{equation*}
                   J=
-                  \begin{pmatrix}
+                  \begin{mat}[r]
                     1  &0  &0  \\
                     1  &1  &0  \\
                     0  &0  &1
-                  \end{pmatrix}
+                  \end{mat}
             \end{equation*}
             and an appropriate basis (a string basis associated with
             $t-1$) is this.
             \begin{equation*}
-              B=\sequence{\colvec{0 \\ 1 \\ 0},
-                          \colvec{2 \\ -2 \\ -2},
-                          \colvec{1 \\ 0 \\ 1}}
+              B=\sequence{\colvec[r]{0 \\ 1 \\ 0},
+                          \colvec[r]{2 \\ -2 \\ -2},
+                          \colvec[r]{1 \\ 0 \\ 1}}
             \end{equation*}
         \partsitem The characteristic polynomial is a bit large for by-hand
             calculation, but just manageable 
@@ -3188,19 +3220,19 @@ matrix.
             $\vec{\beta}_4\mapsto\zero$.
             The Jordan form is
             \begin{equation*}
-              \begin{pmatrix}
+              \begin{mat}[r]
                 6  &0  &0  &0  \\
                 1  &6  &0  &0  \\
                 0  &1  &6  &0  \\
                 0  &0  &0  &6  \\
-              \end{pmatrix}
+              \end{mat}
             \end{equation*}
             and finding a suitable string basis is routine.
             \begin{equation*}
-              B=\sequence{\colvec{0 \\ 0 \\ 0 \\ 1},
-                          \colvec{2 \\ -1 \\ -1 \\ 2},
-                          \colvec{3 \\ 3 \\ -6 \\ 3},
-                          \colvec{-1 \\ -1 \\ 1 \\ 0}}
+              B=\sequence{\colvec[r]{0 \\ 0 \\ 0 \\ 1},
+                          \colvec[r]{2 \\ -1 \\ -1 \\ 2},
+                          \colvec[r]{3 \\ 3 \\ -6 \\ 3},
+                          \colvec[r]{-1 \\ -1 \\ 1 \\ 0}}
             \end{equation*}
       \end{exparts}  
     \end{answer}
@@ -3235,33 +3267,33 @@ matrix.
       the two first actions, the second and first, the first and second, and
       the two second actions.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           -2  &0  &0  &0  \\
            1  &-2 &0  &0  \\
            0  &0  &1  &0  \\
            0  &0  &1  &1
-        \end{pmatrix}
+        \end{mat}
         \quad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -2  &0  &0  &0  \\
            0  &-2 &0  &0  \\
            0  &0  &1  &0  \\
            0  &0  &1  &1
-        \end{pmatrix}
+        \end{mat}
         \quad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -2  &0  &0  &0  \\
            1  &-2 &0  &0  \\
            0  &0  &1  &0  \\
            0  &0  &0  &1
-        \end{pmatrix}
+        \end{mat}
         \quad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -2  &0  &0  &0  \\
            0  &-2 &0  &0  \\
            0  &0  &1  &0  \\
            0  &0  &0  &1
-        \end{pmatrix}
+        \end{mat}
      \end{equation*}  
     \end{answer}
   \item 
@@ -3292,26 +3324,26 @@ matrix.
      action from $t+2$), the one arising from the second action, and
      the one arising from the third action.
      \begin{equation*}
-       \begin{pmatrix}
+       \begin{mat}[r]
          -2  &0  &0  &0  \\
           0  &1  &0  &0  \\
           0  &1  &1  &0  \\
           0  &0  &1  &1
-       \end{pmatrix}
+       \end{mat}
        \quad
-       \begin{pmatrix}
+       \begin{mat}[r]
          -2  &0  &0  &0  \\
           0  &1  &0  &0  \\
           0  &1  &1  &0  \\
           0  &0  &0  &1
-       \end{pmatrix}
+       \end{mat}
        \quad
-       \begin{pmatrix}
+       \begin{mat}[r]
          -2  &0  &0  &0  \\
           0  &1  &0  &0  \\
           0  &0  &1  &0  \\
           0  &0  &0  &1
-       \end{pmatrix}
+       \end{mat}
      \end{equation*}
     \end{answer}
   \recommended \item
@@ -3332,12 +3364,12 @@ matrix.
       \end{equation*}
       Therefore there is only one Jordan form that is possible.
       \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
             -1  &0  &0  &0  \\
              0  &2  &0  &0  \\
              0  &1  &2  &0  \\
              0  &0  &0  &2
-          \end{pmatrix}
+          \end{mat}
        \end{equation*}
      \end{answer}
   \item 
@@ -3364,33 +3396,33 @@ matrix.
       \end{equation*}
       The resulting Jordan form matrics are these. 
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           -1  &0  &0  &0  &0  \\
            0  &2  &0  &0  &0  \\
            0  &1  &2  &0  &0  \\
            0  &0  &0  &2  &0  \\
            0  &0  &0  &1  &2
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -1  &0  &0  &0  &0  \\
            0  &2  &0  &0  &0  \\
            0  &1  &2  &0  &0  \\
            0  &0  &0  &2  &0  \\
            0  &0  &0  &0  &2
-        \end{pmatrix}
+        \end{mat}
      \end{equation*}  
     \end{answer}
   \recommended \item Diagonalize these.
     \begin{exparts*}
-       \partsitem \( \begin{pmatrix}
+       \partsitem \( \begin{mat}[r]
                   1  &1  \\
                   0  &0
-                \end{pmatrix}  \)
-       \partsitem \( \begin{pmatrix}
+                \end{mat}  \)
+       \partsitem \( \begin{mat}[r]
                   0  &1  \\
                   1  &0
-                \end{pmatrix}  \)
+                \end{mat}  \)
     \end{exparts*}
     \begin{answer}
       \begin{exparts}
@@ -3409,27 +3441,27 @@ matrix.
           (and the null space of $(t-1)^2$ is the same).
           We can take this basis
           \begin{equation*}
-            B=\sequence{\colvec{1 \\ -1},\colvec{1 \\ 0}}
+            B=\sequence{\colvec[r]{1 \\ -1},\colvec[r]{1 \\ 0}}
           \end{equation*}
           to get the diagonalization.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
              -1  &0
-            \end{pmatrix}^{-1}
-            \begin{pmatrix}
+            \end{mat}^{-1}
+            \begin{mat}[r]
               1  &1  \\
               0  &0
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               1  &1  \\
              -1  &0
-            \end{pmatrix}
+            \end{mat}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               0  &0  \\
               0  &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
         \partsitem The characteristic polynomial is 
           \( c(x)=x^2-1=(x+1)(x-1) \).
@@ -3447,27 +3479,27 @@ matrix.
           and the null space of $(t-1)^2$ is the same.
           We can take this basis
           \begin{equation*}
-            B=\sequence{\colvec{1 \\ -1},\colvec{1 \\ 1}}
+            B=\sequence{\colvec[r]{1 \\ -1},\colvec[r]{1 \\ 1}}
           \end{equation*}
           to get a diagonalization.
           \begin{equation*}
-            \begin{pmatrix}
+            \begin{mat}[r]
               1  &1  \\
               1  &-1
-            \end{pmatrix}^{-1}
-            \begin{pmatrix}
+            \end{mat}^{-1}
+            \begin{mat}[r]
               0  &1  \\
               1  &0
-            \end{pmatrix}
-            \begin{pmatrix}
+            \end{mat}
+            \begin{mat}[r]
               1   &1  \\
               -1  &1
-            \end{pmatrix}
+            \end{mat}
             =
-            \begin{pmatrix}
+            \begin{mat}[r]
               -1  &0  \\
               0   &1
-            \end{pmatrix}
+            \end{mat}
           \end{equation*}
       \end{exparts}  
      \end{answer}
@@ -3482,26 +3514,26 @@ matrix.
       Its Jordan form is its canonical form as a nilpotent matrix.
       \begin{equation*}
          J=
-         \begin{pmatrix}
+         \begin{mat}[r]
            0  &0  &0  &0  \\
            1  &0  &0  &0  \\
            0  &1  &0  &0  \\
            0  &0  &1  &0
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
     \end{answer}
    \recommended \item 
       Decide if these two are similar.
       \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
             1  &-1 \\
             4  &-3 \\
-         \end{pmatrix}
+         \end{mat}
          \qquad
-         \begin{pmatrix}
+         \begin{mat}[r]
            -1  &0  \\
             1  &-1 \\
-         \end{pmatrix}
+         \end{mat}
       \end{equation*}
       \begin{answer}
         Yes.
@@ -3518,20 +3550,20 @@ matrix.
         The way that the nullities rise shows that each is  
         similar to this Jordan form matrix
         \begin{equation*}
-           \begin{pmatrix}
+           \begin{mat}[r]
              -1  &0  \\
               1  &-1 \\
-           \end{pmatrix}
+           \end{mat}
         \end{equation*}
         and they are therefore similar to each other.  
       \end{answer}
   \item 
      Find the Jordan form of this matrix.
      \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
            0  &-1  \\
            1  &0
-        \end{pmatrix}
+        \end{mat}
      \end{equation*}
      Also give a Jordan basis.
      \begin{answer}
@@ -3542,10 +3574,10 @@ matrix.
        the matrix is diagonalizable and its Jordan form is that
        diagonal matrix. 
        \begin{equation*}
-         \begin{pmatrix}
+         \begin{mat}[r]
            -i  &0  \\
             0  &i
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}  
        To find an associated basis we compute the null spaces.
        \begin{equation*}
@@ -3558,10 +3590,10 @@ matrix.
        For instance, 
        \begin{equation*}
          T+i\cdot I=
-         \begin{pmatrix}
+         \begin{mat}[r]
            i  &-1  \\
            1  &i
-         \end{pmatrix}
+         \end{mat}
        \end{equation*}
        and so we get a description of the null space of $t+i$ by solving
        this linear system.
@@ -3582,8 +3614,8 @@ matrix.
 
        As a result, one such basis is this.
        \begin{equation*}
-         B=\sequence{\colvec{-i \\ 1},
-                     \colvec{i \\ 1}}
+         B=\sequence{\colvec[r]{-i \\ 1},
+                     \colvec[r]{i \\ 1}}
        \end{equation*}  
      \end{answer}
   \item 
@@ -3606,32 +3638,32 @@ matrix.
      \end{equation*}
      There are two associated Jordan form matrices.
      \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           -3  &0  &0  \\
            1  &-3 &0  \\
            0  &0  &4
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -3  &0  &0  \\
            0  &-3 &0  \\
            0  &0  &4
-        \end{pmatrix}
+        \end{mat}
       \end{equation*}
       Similarly there are two Jordan form matrices that could arise
       out of $c_2$.
       \begin{equation*}
-        \begin{pmatrix}
+        \begin{mat}[r]
           -3  &0  &0  \\
            0  &4  &0  \\
            0  &1  &4
-        \end{pmatrix}
+        \end{mat}
         \qquad
-        \begin{pmatrix}
+        \begin{mat}[r]
           -3  &0  &0  \\
            0  &4  &0  \\
            0  &0  &4
-        \end{pmatrix}
+        \end{mat}
      \end{equation*}  
      So in total there are four possible Jordan forms.
     \end{answer}
@@ -3670,19 +3702,19 @@ matrix.
        False; these two $\nbyn{4}$ matrices each have $c(x)=(x-3)^4$
        and $m(x)=(x-3)^2$.
        \begin{equation*}
-          \begin{pmatrix}
+          \begin{mat}[r]
              3  &0  &0  &0  \\
              1  &3  &0  &0  \\
              0  &0  &3  &0  \\
              0  &0  &1  &3
-          \end{pmatrix}
+          \end{mat}
           \quad
-          \begin{pmatrix}
+          \begin{mat}[r]
              3  &0  &0  &0  \\
              1  &3  &0  &0  \\
              0  &0  &3  &0  \\
              0  &0  &0  &3
-          \end{pmatrix}
+          \end{mat}
        \end{equation*} 
      \end{answer}
   \item 
@@ -3705,10 +3737,10 @@ matrix.
       \begin{exparts}
          \partsitem The characteristic polynomial is this. 
            \begin{equation*}
-             \begin{vmatrix}
+             \begin{vmat}
                a-x  &b  \\
                c  &d-x
-             \end{vmatrix}
+             \end{vmat}
              =(a-x)(d-x)-bc=ad-(a+d)x+x^2-bc
              =x^2-(a+d)x+(ad-bc)
            \end{equation*}
@@ -3723,23 +3755,23 @@ matrix.
             An easy example is this.
             \begin{equation*}
                PTQ=
-               \begin{pmatrix}
+               \begin{mat}[r]
                   2  &0  \\
                   0  &1
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                   1  &0  \\
                   0  &1
-               \end{pmatrix}
-               \begin{pmatrix}
+               \end{mat}
+               \begin{mat}[r]
                   1  &0  \\
                   0  &1
-               \end{pmatrix}
+               \end{mat}
                =
-               \begin{pmatrix}
+               \begin{mat}[r]
                   2  &0  \\
                   0  &1
-               \end{pmatrix}
+               \end{mat}
             \end{equation*}
             Even easier examples using $\nbyn{1}$ matrices are possible.
          \partsitem Put the matrix in Jordan form.
@@ -3747,10 +3779,10 @@ matrix.
          \partsitem The first part is easy; use the third item.
             The converse does not hold:~this matrix
             \begin{equation*}
-               \begin{pmatrix}
+               \begin{mat}[r]
                   1  &0  \\
                   0  &-1
-               \end{pmatrix}
+               \end{mat}
             \end{equation*}
             has a trace of zero but is not nilpotent.
        \end{exparts}  
@@ -3886,17 +3918,17 @@ matrix.
          By non-singularity, there are no zero eigenvalues on the diagonal.
          Ape this example:
           \begin{equation*}
-             \begin{pmatrix}
+             \begin{mat}[r]
                 9  &0  &0 \\
                 1  &9  &0 \\
                 0  &0  &4
-             \end{pmatrix}
+             \end{mat}
              =
-             \begin{pmatrix}
+             \begin{mat}[r]
                 3  &0  &0 \\
                1/6 &3  &0 \\
                 0  &0  &2
-             \end{pmatrix}^2
+             \end{mat}^2
           \end{equation*}
          to construct a square root.
          Show that it holds up under similarity: if \( S^2=T \) then
