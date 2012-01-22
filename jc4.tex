@@ -59,16 +59,15 @@ this space
 \( \matspace_{\nbyn{n}} \) has dimension \( n^2 \).
 Thus, for any \( \nbyn{n} \) matrix $T$ the
 \( n^2+1 \)-member set \( \set{I,T,T^2,\dots,T^{n^2} } \) is linearly
-dependent and so there are scalars \( c_0,\dots,c_{n^2} \) such that
-$c_{n^2}T^{n^2}+\dots+c_1T+c_0I$
+dependent and so there are scalars \( c_0,\dots,c_{n^2} \),
+not all zero, such that
+\begin{equation*}
+  c_{n^2}T^{n^2}+\dots+c_1T+c_0I
+\end{equation*}
 is the zero matrix.
-
-\begin{remark}
-This observation is small but important.
-It says that every transformation exhibits a 
+That is, every transformation exhibits a kind of
 generalized nilpotency:~the powers
-of a square matrix cannot climb forever without a ``repeat''.
-\end{remark}
+of a square matrix cannot climb forever without a ``repeat.''
 
 \begin{example}  \label{ex:PolySendRotMatToZ}
 Rotation of plane vectors \( \pi/6 \)~radians counterclockwise is represented
@@ -124,25 +123,42 @@ such that \( m(t) \) is the zero map or \( m(T) \) is the zero matrix.
 
 \noindent The fact that leading coefficient must be one keeps a minimal
 polynomial from being the zero polynomial.
+That is, a minimal polynomial must have degree at least one.
+The zero matrix has minimal polynomial $p(x)=x$ while the 
+identity matrix has minimal polynomial $\hat{p}(x)=x-1$.
 
 \begin{lemma}
 Any transformation or square matrix has a unique minimal polynomial.  
 \end{lemma}
 
 \begin{proof}
-A minimal polynomial always exists by the observation made above  
-that degree~$n^2$ suffices.
-To see that it is unique suppose that 
-there are two polynomials 
-\( m(x) \) and \( \hat{m}(x) \) that are both of the 
-minimal degree to make the
-map or matrix zero, and thus are of equal degree, and both have
-leading \( 1 \)'s.
-Then their difference \( m(x)-\hat{m}(x) \)
-has a smaller degree than either and still takes the map or matrix
-to zero.
-Thus \( m(x)-\hat{m}(x) \) is the zero polynomial, 
-and the two are equal.
+We first show existence.
+The observation made earlier
+that degree~$n^2$ suffices shows that there is at least one 
+nonzero polynomial $p(x)=c_kx^k+\cdots+c_0$ that
+takes the map or matrix to zero
+($p$ is not the zero polynomial because the earlier observation includes that
+at least one of the coefficients is nonzero).
+From among all nonzero polynomials taking the map or matrix to zero, 
+there must be at least one of minimal degree.
+Divide this $p$ by $c_k$ to get a leading one.
+Thus for any map or matrix a minimal polynomial exists.
+
+We now show uniqueness.
+Suppose that 
+there are \( m(x) \) and \( \hat{m}(x) \) that are both of the 
+minimal degree to make the map or matrix zero, and thus are of equal degree, 
+and suppose that both have leading ones.
+In their difference \( d(x)=m(x)-\hat{m}(x) \) the leading terms cancel.
+Thus, 
+if the leading coefficient of $d$ were nonzero then we could divide
+$d$ by it to get a polynomial that takes the map or matriz to zero,
+has leading coefficient one, and is of degree smaller than 
+$m$ and~$\hat{m}$.
+This would contradict the choice of $m$ and $\hat{m}$ as of minimal degree. 
+Thus the leading coefficient of $d$ is zero,
+so the \( m(x)-\hat{m}(x) \) is the zero polynomial, 
+and so the two are equal.
 \end{proof}
 
 \begin{example}  \label{ex:MinPolyForRotMat}
@@ -378,14 +394,30 @@ coefficients of \( x^n \), coefficients of $x^{n-1}$, etc.
 \end{align*}
 Multiply, from the right, both sides of the first equation by \( T^n \), 
 both sides of the second equation by \( T^{n-1} \), etc.
+\begin{align*}
+  c_nT^n
+  &=-C_{n-1}T^n    \\
+  c_{n-1}T^{n-1}
+  &=-C_{n-2}T^{n-1}+C_{n-1}T^n    \\
+  &\vdotswithin{=}             \\
+  c_{1}T
+  &=-C_{0}T+C_{1}T^2    \\
+  c_{0}I
+  &=C_{0}T
+\end{align*}
 Add.
-The result on the left is 
-\( c_nT^n+c_{n-1}T^{n-1}+\dots+c_0I \), and the result on the right is
-the zero matrix.
+The left is 
+\( c_nT^n+c_{n-1}T^{n-1}+\dots+c_0I \). 
+The right telescopes;
+for instance $-C_{n-1}T^n$ from the first line combines with the 
+$+C_{n-1}T^n$ half of the second line, and so 
+the right's total is the zero matrix.
 \end{proof}
 
-We sometimes refer to that lemma by saying that a
-matrix or map \definend{satisfies} its characteristic polynomial.
+We refer to that result by saying that a
+matrix or map 
+\definend{satisfies}\index{characteristic polynomial!satisfied by} 
+its characteristic polynomial.
 
 \begin{lemma}
 Where \( f(x) \) is a polynomial, if \( f(T) \) is the zero matrix 
@@ -412,13 +444,13 @@ any root of the minimal polynomial is also a root of the characteristic
 polynomial. 
 That is, so far we have that if 
 \( m(x)=(x-\lambda_1)^{q_1}\dots(x-\lambda_i)^{q_i} \) then
-\( c(x) \) must has the form
+\( c(x) \) has the form
 \( (x-\lambda_1)^{p_1}\dots(x-\lambda_i)^{p_i}
      (x-\lambda_{i+1})^{p_{i+1}}\dots(x-\lambda_\ell)^{p_\ell} \) where
 each \( q_j \) is less than or equal to \( p_j \).
-The proof of the Cayley-Hamilton Theorem is finished by showing that 
-in fact the characteristic polynomial has no extra roots
-$\lambda_{i+1}$, etc.
+We finish the proof of the Cayley-Hamilton Theorem by showing that 
+the characteristic polynomial has no additional roots, that is,
+there are no $\lambda_{i+1}$, $\lambda_{i+2}$, etc.
 
 \begin{lemma}
 Each linear factor of the characteristic polynomial of a square matrix
@@ -428,27 +460,35 @@ is also a linear factor of the minimal polynomial.
 \begin{proof}
 Let \( T \) be a square matrix with minimal polynomial \( m(x) \) and 
 assume that \( x-\lambda \) is a factor of the characteristic polynomial of 
-\( T \), that is, assume that \( \lambda \) is an eigenvalue of \( T \).
+\( T \), that \( \lambda \) is an eigenvalue of \( T \).
 We must show that $x-\lambda$ is a factor of $m$, that is, that 
 $m(\lambda)=0$.
 
-In general,
-where \( \lambda \) is associated with the eigenvector \( \vec{v} \),
-for any polynomial function \( f(x) \), application of the matrix \( f(T) \)
+Suppose the $\lambda$ is an eigenvalue of $T$ with associated 
+eigenvector~$\vec{v}$.
+Then $T^2$ has the eigenvalue $\lambda^2$ associated with $\vec{v}$
+because $T^2\vec{v}=T\cdot\lambda\vec{v}=\lambda T\vec{v}=\lambda^2\vec{v}$.
+Similarly $T^k$ has the eigenvalue~$\lambda^n$ associated with $\vec{v}$.
+
+With that, we have that 
+for any polynomial function \( p(x) \), application of the matrix \( p(T) \)
 to \( \vec{v} \) equals the result of multiplying \( \vec{v} \) by the scalar
-\( f(\lambda) \).
-(For instance, if $T$ has eigenvalue $\lambda$ associated with the 
-eigenvector $\vec{v}$ and $f(x)=x^2+2x+3$ then
-\( (T^2+2T+3)\,(\vec{v})=T^2(\vec{v})+2T(\vec{v})+3\vec{v}=
-  \lambda^2\cdot\vec{v}+2\lambda\cdot\vec{v}+3\cdot\vec{v}=
-  (\lambda^2+2\lambda+3)\cdot\vec{v} \).)
-Now, as \( m(T) \) is the zero matrix,
+\( p(\lambda) \).
+\begin{multline*}
+  p(T)\cdot\vec{v}
+  =(c_kT^k+\dots+c_1T+c_0I)\cdot\vec{v}
+  =c_kT^k\vec{v}+\dots+c_1T\vec{v}+c_0\vec{v}  \\
+  =c_k\lambda^k\vec{v}+\dots+c_1\lambda\vec{v}+c_0\vec{v}
+  =p(\lambda)\cdot\vec{v}
+\end{multline*}
+
+Since \( m(T) \) is the zero matrix,
 \( \zero=m(T)(\vec{v})=m(\lambda)\cdot\vec{v} \) and
-therefore \( m(\lambda)=0 \).
+hence \( m(\lambda)=0 \).
 \end{proof}
 
 \begin{example} \label{ex:MinPolyUsingCH}
-We can use the Cayley-Hamilton Theorem to help find the minimal polynomial of
+We can use the Cayley-Hamilton Theorem to find the minimal polynomial of
 this matrix.
 \begin{equation*}
    T=
@@ -459,14 +499,14 @@ this matrix.
       0  &0  &0  &1
    \end{mat}
 \end{equation*}
-First, its characteristic polynomial \( c(x)=(x-1)(x-2)^3 \)
-can be found with the usual determinant.
-Now, the Cayley-Hamilton Theorem says that 
+First we find its characteristic polynomial \( c(x)=(x-1)(x-2)^3 \)
+with the usual determinant.
+Now the Cayley-Hamilton Theorem says that 
 \( T \)'s minimal polynomial is either
 \( (x-1)(x-2) \) or
 \( (x-1)(x-2)^2 \) or
 \( (x-1)(x-2)^3 \).
-We can decide among the choices just by computing:
+We can decide among the choices just by computing
 \begin{equation*}
    (T-1I)(T-2I)=\!
    \begin{mat}[r]
@@ -1649,8 +1689,11 @@ and so \( m(x)=(x-1)(x-2)^2 \).
 
 
 \subsectionoptional{Jordan Canonical Form}
-This subsection moves from the canonical form for nilpotent matrices to
-the one for all matrices.
+We are looking for a canonical form for the relation of matrix similarlty.
+This subsection completes this program by moving
+from the canonical form for the classes 
+of nilpotent matrices to
+the canonical form for all classes.
 
 We have shown that if a map is nilpotent then all of its eigenvalues are zero.
 We can now prove the converse.
@@ -1668,12 +1711,14 @@ characteristic polynimial so \( t^n \) is the zero map.
 Thus $t$ is nilpotent.
 \end{proof}
 
-We have a canonical form for nilpotent matrices, 
-that is, for each matrix whose single eigenvalue is zero:~each 
+We already have the canonical form that we want for 
+the case of nilpotent matrices, 
+that is, for each matrix whose single eigenvalue is zero.
+Corollary~III.\ref{cor:NilpotentMatCanonForm} says that each 
 such matrix is similar to one that is all
 zeroes except for blocks of subdiagonal ones.
 (To make this representation unique we can fix some arrangement of
-the blocks, say, from longest to shortest.)
+the blocks, perhaps from longest to shortest.)
 We next extend this to all single-eigenvalue matrices.
 
 Observe that if \( t \)'s only eigenvalue is \( \lambda \) then 
@@ -1681,9 +1726,9 @@ Observe that if \( t \)'s only eigenvalue is \( \lambda \) then
 \( t(\vec{v})=\lambda\vec{v} \) if and 
 only if \( (t-\lambda)\,(\vec{v})=0\cdot\vec{v} \).
 The natural way to extend the results for nilpotent matrices is to
-represent $t-\lambda$ in the canonical form $N$, and try to use that
-to get a simple representation $T$ for $t$.  
-The next result says that this try works.
+represent $t-\lambda$ in the canonical form for nilpotent matrices 
+and try to use that
+to get a simple representation for $t$.
 
 \begin{lemma}   \label{le:SimRespAddScalar}
 If the matrices \( T-\lambda I \) and \( N \) are similar 
@@ -1696,7 +1741,7 @@ With \( N=P(T-\lambda I)P^{-1}=PTP^{-1}-P(\lambda I)P^{-1} \)
 we have $N=PTP^{-1}-PP^{-1}(\lambda I)$
 since the diagonal matrix \( \lambda I \) commutes with anything, 
 and so \( N=PTP^{-1}-\lambda I \).
-Therefore \( N+\lambda I=PTP^{-1} \), as required.
+Therefore \( N+\lambda I=PTP^{-1} \).
 \end{proof}
 
 \begin{example}   \label{ex:SingJordBlock}
@@ -1716,9 +1761,9 @@ Thus for
     \end{mat}
 \end{equation*}
 the only eigenvalue is \( 0 \), and \( T-3I \) is nilpotent.
-The null spaces are routine to find; to ease this computation we take 
-$T$ to represent the transformation $\map{t}{\C^2}{\C^2}$ with respect to
-the standard basis (we shall maintain this convention
+Finding the nullspaces is routine; to ease this computation we take 
+$T$ to represent a transformation $\map{t}{\C^2}{\C^2}$ with respect to
+the standard basis (we shall do this
 for the rest of the chapter). 
 \begin{equation*}
    \nullspace{t-3}=\set{\colvec{-y \\ y}\suchthat y\in\C}
@@ -1726,10 +1771,10 @@ for the rest of the chapter).
    \nullspace{(t-3)^2}=\C^2
 \end{equation*}
 The dimensions of these null spaces
-show that the action of an associated map $t-3$ on a string basis is
+show that the action of the map $t-3$ on a string basis is
 $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.
-Thus, the canonical form for $t-3$
-with one choice for a string basis is
+Thus, here is the canonical form for $t-3$
+with one choice for a string basis.
 \begin{equation*}
   \rep{t-3}{B,B}
   =N
@@ -1740,7 +1785,7 @@ with one choice for a string basis is
   \qquad
   B=\sequence{\colvec[r]{1 \\ 1},\colvec[r]{-2 \\ 2}}
 \end{equation*}
-and by \nearbylemma{le:SimRespAddScalar}, \( T \) is similar to
+By \nearbylemma{le:SimRespAddScalar}, \( T \) is similar to
 this matrix.
 \begin{equation*}
   \rep{t}{B,B}=
@@ -1750,9 +1795,8 @@ this matrix.
      1  &3
   \end{mat}
 \end{equation*}
-
 We can produce the similarity computation.
-Recall from the Nilpotence section how to find the change of
+Recall how to find the change of
 basis matrices $P$ and $P^{-1}$ to express \( N \) as \( P(T-3I)P^{-1} \).
 The similarity diagram
 \begin{equation*}
@@ -1784,7 +1828,7 @@ this matrix.
       -1/4 &1/4
    \end{mat}
 \end{equation*}
-So the similarity is expressed by
+So the similarity is expressed in this equation.
 \begin{equation*}
   \begin{mat}[r]
      3  &0  \\
@@ -1804,7 +1848,6 @@ So the similarity is expressed by
         1  &2
      \end{mat}
 \end{equation*}
-which is easily checked.
 \end{example}
 
 \begin{example}
@@ -1820,8 +1863,8 @@ This matrix has characteristic polynomial \( (x-4)^4 \)
 \end{equation*}
 and so has the single eigenvalue $4$.
 The nullities of $t-4$ are:~
-the null space of $t-4$ has dimension two, the null space of $(t-4)^2$
-has dimension three, and the null space of $(t-4)^3$ has dimension four.
+the nullspace of $t-4$ has dimension two, the nullspace of $(t-4)^2$
+has dimension three, and the nullspace of $(t-4)^3$ has dimension four.
 Thus, $t-4$ has the action on a string basis of
 $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero$ and
 $\vec{\beta}_4\mapsto\zero$.
@@ -1892,13 +1935,13 @@ a part with \( \lambda_2 \), etc.
 This ideal is in fact what happens.
 For any transformation \( \map{t}{V}{V} \),
 we shall break the space \( V \) into the direct sum of a part on which
-\( t-\lambda_1 \) is nilpotent, plus a part on which \( t-\lambda_2 \)
+\( t-\lambda_1 \) is nilpotent, a part on which \( t-\lambda_2 \)
 is nilpotent, etc.
-More precisely, we shall take three steps to get to this section's major
-theorem and the third step shows that
-\( V=\gennullspace{t-\lambda_1}\directsum\cdots\directsum
-       \gennullspace{t-\lambda_\ell} \)
-where \( \lambda_1,\ldots,\lambda_\ell \) are \( t \)'s eigenvalues.
+% More precisely, we shall take three steps to get to this section's major
+% theorem and the third step shows that
+% \( V=\gennullspace{t-\lambda_1}\directsum\cdots\directsum
+%        \gennullspace{t-\lambda_\ell} \)
+% where \( \lambda_1,\ldots,\lambda_\ell \) are \( t \)'s eigenvalues.
 
 Suppose that \( \map{t}{V}{V} \) is a linear transformation.
 Note that the restriction\appendrefs{restrictions of functions} %
@@ -1906,38 +1949,50 @@ of \( t \) to a subspace \( M \) need not be a linear transformation on \( M \)
 because there may be an \( \vec{m}\in M \)
 with \( t(\vec{m})\not\in M \).
 To ensure that the restriction of a transformation 
-to a `part' of a space is a transformation on the partwe need the next 
+to a part of a space is a transformation on the part we need the next 
 condition. 
 
 \begin{definition} \label{def:invariant}
 Let \( \map{t}{V}{V} \) be a transformation.
-A subspace \( M \) is \definend{$t$ invariant\/}%
+A subspace \( M \) is \definend{$t$ invariant}%
 \index{invariant subspace!definition}\index{subspace!invariant}
 if whenever \( \vec{m}\in M \) then \( t(\vec{m})\in M \)
 (shorter: \( t(M)\subseteq M \)).
 \end{definition}
  
-Two examples are that
-the generalized null space $\gennullspace{t}$ and the generalized range space
-$\genrangespace{t}$ of any transformation $t$ are invariant.
-For the generalized null space, if $\vec{v}\in\gennullspace{t}$ then
-$t^n(\vec{v})=\zero$ where $n$ is the dimension of the underlying space
-and so $t(\vec{v})\in\gennullspace{t}$ because
-$t^n(\,t(\vec{v})\,)$ is zero also.
-For the generalized range space, if $\vec{v}\in\genrangespace{t}$ then
-$\vec{v}=t^n(\vec{w})$ for some $\vec{w}$ and then 
-$t(\vec{v})=t^{n+1}(\vec{w})=t^n(\,t(\vec{w})\,)$ 
-shows that $t(\vec{v})$ is also a member of $\genrangespace{t}$.
-
-Thus the spaces $\gennullspace{t-\lambda_i}$ and $\genrangespace{t-\lambda_i}$
+Recall that Lemma~III.\ref{le:RangeAndNullChains} shows that for any
+transformation~$t$ on an $n$~dimensional space
+the rangespaces of iterates are stable 
+\begin{equation*}
+  \rangespace{t^n}=\rangespace{t^{n+1}}=\cdots=\genrangespace{t}
+\end{equation*} 
+as are the nullspaces. 
+\begin{equation*}
+  \nullspace{t^n}=\nullspace{t^{n+1}}=\cdots=\gennullspace{t}
+\end{equation*} 
+Thus,
+the generalized nullspace $\gennullspace{t}$ and the generalized rangespace
+$\genrangespace{t}$ are $t$-invariant.
+% For the generalized nullspace, if $\vec{v}\in\gennullspace{t}$ then
+% $t^n(\vec{v})=\zero$ where $n$ is the dimension of the underlying space
+% and so $t(\vec{v})\in\gennullspace{t}$ because
+% $t^n(\,t(\vec{v})\,)$ is zero also.
+% For the generalized rangespace, if $\vec{v}\in\genrangespace{t}$ then
+% $\vec{v}=t^n(\vec{w})$ for some $\vec{w}$ and then 
+% $t(\vec{v})=t^{n+1}(\vec{w})=t^n(\,t(\vec{w})\,)$ 
+% shows that $t(\vec{v})$ is also a member of $\genrangespace{t}$.
+In particular, 
+the spaces $\gennullspace{t-\lambda_i}$ and $\genrangespace{t-\lambda_i}$
 are $t-\lambda_i$~invariant.
-Observe also that $t-\lambda_i$ is nilpotent on 
-$\gennullspace{t-\lambda_i}$ because, simply, 
-if $\vec{v}$ has the property that
-some power of $t-\lambda_i$ maps it to zero\Dash that is, if it is in the 
-generalized null space\Dash then some power of $t-\lambda_i$ maps
-it to zero.
-The generalized null space $\gennullspace{t-\lambda_i}$ is a `part' of
+
+Observe also that any transformation~$t$ is nilpotent on the 
+generalized nullspace, because if $\vec{v}\in\gennullspace{t}$ then 
+by definition $t^n(\vec{v})=\zero$ and therefore $t^n$ maps all members
+of $\gennullspace{t}$ to zero. 
+In particular, $t-\lambda_i$ is nilpotent on 
+$\gennullspace{t-\lambda_i}$.
+
+Thus, the generalized nullspace $\gennullspace{t-\lambda_i}$ is a part of
 the space on which the action of $t-\lambda_i$ is easy to understand.
 
 The next result is the first of our three steps.
@@ -1946,32 +2001,30 @@ It establishes that \( t-\lambda_j \) leaves
 
 \begin{lemma} \label{le:tInvIfftMinLambdaInv}
 A subspace is \( t \) invariant if and only if 
-it is \( t-\lambda \) invariant for any scalar \( \lambda \).
+it is \( t-\lambda \) invariant for all scalars \( \lambda \).
 In particular, 
-where \( \lambda_i \) is an eigenvalue of  a linear transformation
-\( t \), then for any other eigenvalue $\lambda_j$,
+if \( \lambda_i \) is an eigenvalue of  a linear transformation
+\( t \) then for any other eigenvalue $\lambda_j$
 the spaces \( \gennullspace{t-\lambda_i} \) 
 and \( \genrangespace{t-\lambda_i} \)
 are \( t-\lambda_j \) invariant.
 \end{lemma}
 
 \begin{proof}
-For the first sentence we check the two implications of the
-`if and only if' separately.
-One of them is easy: if the subspace is $t-\lambda$ invariant for 
-any $\lambda$ then taking $\lambda=0$ shows that it is $t$ invariant.
-For the other implication suppose that the subspace is $t$ invariant,
+For the first sentence we check the two implications separately.
+The `if' half is easy: if the subspace is $t-\lambda$ invariant for 
+all scalars $\lambda$ then using $\lambda=0$ shows that it is $t$ invariant.
+For `only if' suppose that the subspace is $t$ invariant,
 so that if $\vec{m}\in M$ then $t(\vec{m})\in M$, and let $\lambda$ be 
-any scalar.
+a scalar.
 The subspace $M$ is closed under linear combinations and so if 
 $t(\vec{m})\in M$ then $t(\vec{m})-\lambda\vec{m}\in M$.
-Thus if $\vec{m}\in M$ then $(t-\lambda)\,(\vec{m})\in M$, as required.
+Thus if $\vec{m}\in M$ then $(t-\lambda)\,(\vec{m})\in M$.
 
-The second sentence follows straight from the first.
-Because the
-two spaces are $t-\lambda_i$~invariant, they are 
-therefore \( t \)~invariant.
-From this, applying the first sentence again, we
+The second sentence follows from the first.
+The
+two spaces are $t-\lambda_i$~invariant so they are \( t \)~invariant.
+Apply the first sentence again to
 conclude that they are also \( t-\lambda_j \) invariant.
 \end{proof}
 
@@ -2001,7 +2054,7 @@ Let \( \map{t}{V}{V} \) be a transformation and let \( \mathscr{N} \) and
 \( t \) invariant complementary subspaces of \( V \).
 Then \( t \) can be represented by a matrix with
 blocks of square submatrices $T_1$ and $T_2$
-\begin{equation*}
+\begin{equation*} \renewcommand{\arraystretch}{1.2}
   \begin{pmat}{c|c}
       T_1   &Z_2  \\  \cline{1-2}
       Z_1 &T_2
@@ -2023,7 +2076,7 @@ for \( V \).
 We shall show that the matrix
 \begin{equation*}
   \rep{t}{B,B}=
-  \begin{pmat}{c|@{\hspace*{1em}}c@{\hspace*{1em}}|c}
+  \begin{pmat}{c@{\hspace*{1em}}c@{\hspace*{1em}}c}
      \vdots                   &        &\vdots     \\
      \rep{t(\vec{\nu}_1)}{B}  &\cdots  &\rep{t(\vec{\mu}_q)}{B}  \\
      \vdots                   &        &\vdots     \\
@@ -2031,31 +2084,35 @@ We shall show that the matrix
 \end{equation*}
 has the desired form.
 
-Any vector \( \vec{v}\in V \) is in \( \mathscr{N} \) 
-if and only if its final \( q \)
-components are zeroes when it is represented with respect to \( B \).
+Any vector \( \vec{v}\in V \) is a member of \( \mathscr{N} \) 
+if and only if when it is represented with respect to \( B \)
+its final \( q \)
+components are zeroes.
 As \( \mathscr{N} \) is \( t \)~invariant, each of the vectors
 \( \rep{t(\vec{\nu}_1)}{B} \),
-\ldots, \( \rep{t(\vec{\nu}_p)}{B} \) has that form.
+\ldots, \( \rep{t(\vec{\nu}_p)}{B} \) has this form.
 Hence the lower left of \( \rep{t}{B,B} \) is all zeroes.
-
 The argument for the upper right is similar.
 \end{proof}
 
-To see that \( t \) has been decomposed into its action on the parts, observe
+To see that we have decomposed \( t \) into its action on the parts, 
+let $B_{\mathscr{N}}=\sequence{\vec{\nu}_1,\dots,\vec{\nu}_p}$ and 
+$B_{\mathscr{R}}=\sequence{\vec{\mu}_1,\ldots,\vec{\mu}_q}$.
+Observe
 that the restrictions of \( t \) to the subspaces \( \mathscr{N} \) 
 and~\( \mathscr{R} \) 
-are represented,
-with respect to the obvious bases, 
+are represented
+with respect to the bases $B_{\mathscr{N}},B_{\mathscr{N}}$
+and $B_{\mathscr{R}},B_{\mathscr{R}}$
 by the matrices \( T_1 \) and \( T_2 \).
-So, with subspaces that are invariant and complementary, 
+So with subspaces that are invariant and complementary 
 we can split the problem of examining
 a linear transformation into two lower-dimensional subproblems.
 The next result illustrates this decomposition into blocks.
 
 \begin{lemma} \label{le:DetIsProdOfSubDets}
 If $T$ is a matrix with square submatrices $T_1$ and $T_2$
-\begin{equation*}
+\begin{equation*} \renewcommand{\arraystretch}{1.2}
   T=
   \begin{pmat}{c|c}
       T_1   &Z_2  \\  \cline{1-2}
@@ -2081,18 +2138,18 @@ each term comes from a rearrangement of the column numbers
 The upper right block $Z_2$ is all zeroes, so if a
 \( \phi \) has at least one of \( p+1,\dots,n \) among its first
 \( p \) column numbers \( \phi(1),\dots,\phi(p) \) then the term arising
-from \( \phi \) is zero,
+from \( \phi \) does not contribute to the sum because it is zero,
 e.g., if \( \phi(1)=n \) then
 \( t_{1,\phi(1)}t_{2,\phi(2)}\dots t_{n,\phi(n)}
    =0\cdot t_{2,\phi(2)}\dots t_{n,\phi(n)}=0 \).
 
 So the above formula reduces to a sum over all permutations with 
-two halves:~any significant $\phi$ is the composition of a $\phi_1$ that
+two halves:~any contributing $\phi$ is the composition of a $\phi_1$ that
 rearranges only \( 1,\dots,p \) 
 and a $\phi_2$ that rearranges only \( p+1,\dots,p+q \).
 Now, the distributive law 
-(and the fact that the signum of a composition is the product
-of the signums) gives that this
+and the fact that the signum of a composition is the product
+of the signums gives that this
 \begin{multline*}
    \deter{T_1}\cdot\deter{T_2}=
    \bigg(\sum_{\begin{subarray}{c}
@@ -2110,7 +2167,7 @@ of the signums) gives that this
 \end{multline*}
 equals
   $\deter{T}=
-  \sum_{\text{\scriptsize significant\ }\phi}
+  \sum_{\text{\scriptsize contributing\ }\phi}
           t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)}\sgn(\phi)$.
 \end{proof}
 
@@ -2139,10 +2196,10 @@ From \nearbylemma{le:DetIsProdOfSubDets} we conclude that
 if two subspaces 
 are complementary and \( t \)~invariant then
 \( t \) is one-to-one if and only if its 
-restrictions %\appendrefs{restrictions}
-to both subspaces are nonsingular.
+restriction %\appendrefs{restrictions}
+to each subspace is nonsingular.
 
-Now for the promised third, final, step to the main result.
+Now for the promised third, and final, step to the main result.
 
 \begin{lemma}
 If a linear transformation \( \map{t}{V}{V} \) has the 
@@ -2156,15 +2213,15 @@ and
 
 \begin{proof}
 Because \( \dim (V) \) is the degree \( p_1+\cdots+p_\ell \) of the
-characteristic polynomial, to establish statement~(1) we need only show that 
-statement~(2) holds and that
+characteristic polynomial, to establish clause~(1) we need only show that 
+clause~(2) holds and that
 \( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
 is trivial whenever \( i\neq j \).
 
-For the latter, by \nearbylemma{le:tInvIfftMinLambdaInv},
+For the latter, by \nearbylemma{le:tInvIfftMinLambdaInv}
 both \( \gennullspace{t-\lambda_i} \) and 
 \( \gennullspace{t-\lambda_j} \) are \( t \)~invariant.
-Notice that an intersection of \( t \) invariant subspaces is \( t \)
+The intersection of \( t \) invariant subspaces is \( t \)
 invariant and so the restriction of \( t \) to
 \( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
 is a linear transformation.
@@ -2172,18 +2229,19 @@ But both \( t-\lambda_i \) and \( t-\lambda_j \) are nilpotent on this subspace
 and so if \( t \) has any eigenvalues on the intersection 
 then its ``only'' eigenvalue is both
 \( \lambda_i \) and \( \lambda_j \).
-That cannot be, so this restriction has no eigenvalues:
+This cannot be, so the restriction has no eigenvalues:
 \( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
 is trivial
 (\nearbylemma{le:MapNonTrivSpHasEigen} shows that 
-the only transformation without any eigenvalues is on the trivial space).
+the only transformation that is without any eigenvalues is 
+the transformation on the trivial space).
 
-To prove statement~(2), fix the index \( i \).
+To prove clause~(2), fix the index \( i \).
 Decompose \( V \) as 
 \( \gennullspace{t-\lambda_i}\directsum\genrangespace{t-\lambda_i} \)
 %with basis $B=\cat{B_\mathscr{N}}{B_\mathscr{R}}$
 and apply \nearbylemma{le:InvCompSubspSplitTrans}.
-\begin{equation*}
+\begin{equation*}   \renewcommand{\arraystretch}{1.2}
   T=
 %  \rep{t}{B,B}=
   \begin{pmat}{c|c}
@@ -2191,8 +2249,8 @@ and apply \nearbylemma{le:InvCompSubspSplitTrans}.
       Z_1   &T_2
    \end{pmat}
    \begin{array}{ll}
-     \} \text{$\dim(\,\gennullspace{t-\lambda_i}\,)$-many rows}  \\
-     \} \text{$\dim(\,\genrangespace{t-\lambda_i}\,)$-many rows}
+     \} \text{$\dim(\,\,\gennullspace{t-\lambda_i}\,)$-many rows}  \\
+     \} \text{$\dim(\,\,\genrangespace{t-\lambda_i}\,)$-many rows}
    \end{array}
 \end{equation*}
 By \nearbylemma{le:DetIsProdOfSubDets},
@@ -2206,12 +2264,12 @@ and
 and the sum of the powers of these factors is the power of the factor
 in the characteristic polynomial:
 \( q_1+r_1=p_1 \), \dots, \( q_\ell+r_\ell=p_\ell \).
-Statement~(2) will be proved if we will show that $q_i=p_i$ and that
+We will have proved clause~(2) if we verify that $q_i=p_i$ and that
 $q_j=0$ for all $j\neq i$, because then the degree of 
 the polynomial $\deter{T_1-xI}$\Dash which equals the dimension of the
 generalized null space\Dash is as required.
 
-For that, first,
+For that verification, first,
 as the restriction of \( t-\lambda_i \) to \( \gennullspace{t-\lambda_i} \)
 is nilpotent on that space,
 the only eigenvalue of \( t \) on it is \( \lambda_i \).
