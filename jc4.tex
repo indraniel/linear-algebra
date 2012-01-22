@@ -8,18 +8,19 @@ subsections:~Direct Sum, Determinants Exist, and
 Laplace's Expansion Formula.}
 
 The chapter on linear maps shows that every $\map{h}{V}{W}$ can
-be represented by a partial-identity matrix with respect to some
+be represented by a partial identity matrix with respect to some
 bases $B\subset V$ and $D\subset W$. 
 This chapter revisits this issue in the special case that the map is a
 linear transformation $\map{t}{V}{V}$.
-Of course, the general result still applies 
-but with the codomain equal to the domain
-we naturally ask about what is possible when the two bases also be equal\Dash
+The general result still applies so we can get a partial identity
+with respect to $B,D$ but
+with the codomain equal to the domain
+we naturally ask what is possible when the two bases are also equal\Dash
 we want a canonical form to represent a transformation
 as $\rep{t}{B,B}$.
 
 We began 
-by noting that while a block partial identity matrix is the canonical form
+by noting that while a partial identity matrix is the canonical form
 for the $B,D$ case, in the $B,B$ case there are some matrix similarity
 classes without one.
 We therefore considered the natural generalization, diagonal matrices, and
@@ -106,7 +107,7 @@ We shall follow this convention.
 
 Consider again \nearbyexample{ex:PolySendRotMatToZ}.
 Although $T\in\matspace_{\nbyn{2}}$, which is a dimension~four space,
-we exhibited a polynomial of $T$ that gave the zero matrix,
+we exhibited a polynomial of $T$ that gave the zero matrix
 and was of degree less than four. 
 So for any particular map or matrix
 degree~$n^2$ will suffice but there may be a smaller degree polynomial that
@@ -419,7 +420,7 @@ matrix or map
 \definend{satisfies}\index{characteristic polynomial!satisfied by} 
 its characteristic polynomial.
 
-\begin{lemma}
+\begin{lemma} \label{le:tSatisImpMinPolyDivides}
 Where \( f(x) \) is a polynomial, if \( f(T) \) is the zero matrix 
 then \( f(x) \) is divisible by the minimal polynomial of \( T \).
 That is, any polynomial satisfied by \( T \) is divisable by
@@ -1695,20 +1696,45 @@ from the canonical form for the classes
 of nilpotent matrices to
 the canonical form for all classes.
 
-We have shown that if a map is nilpotent then all of its eigenvalues are zero.
-We can now prove the converse.
-
-\begin{lemma}
-  A linear transformation whose only eigenvalue is zero is nilpotent.
+\begin{lemma} \label{le:NilIffOnlyEigenZero}
+A linear transformation on a nontrivial vector space 
+is nilpotent if and only if its only eigenvalue is zero.
 \end{lemma}
 
 \begin{proof}
-If a transformation \( t \) on an
+Let the linear transformation be $\map{t}{V}{V}$.
+If $t$ is nilpotent then there is an $n$ such that $t^n$ is the zero map,
+so $t$ satisfies the polynomial $p(x)=x^n=(x-0)^n$.
+By \nearbylemma{le:tSatisImpMinPolyDivides} the minimal polynomial of 
+$t$ divides $p$, so the minimal polynomial has only zero for a root.
+By Cayley-Hamilton, \nearbytheorem{th:CayHam},
+the characteristic polynomial has only zero for a root.
+Thus the only eigenvalue of $t$ is zero.
+
+Conversely, if a transformation \( t \) on an
 \( n \)-dimensional space has only the single eigenvalue of zero 
 then its characteristic polynomial is \( x^n \). 
 The Cayley-Hamilton Theorem says that a map satisfies its
 characteristic polynimial so \( t^n \) is the zero map.
 Thus $t$ is nilpotent.
+\end{proof}
+
+\noindent The phrase ``nontrivial vector space'' is there because on a trivial
+space $\set{\zero}$ the only transformation is the zero map, which has
+no eigenvalues because there are no nonzero eigenvectors with which to
+be associated.
+
+\begin{corollary}
+The transformation $t-\lambda$ is nilpotent if and only if 
+$t$'s only eigenvalue is $\lambda$   
+\end{corollary}
+
+\begin{proof}
+The transformation \( t-\lambda \) is nilpotent if and only if
+$t-\lambda$'s only eigenvalue is \( 0 \).
+That holds if and only if $t$'s only eigenvalue is $\lambda$, because
+\( t(\vec{v})=\lambda\vec{v} \) if and 
+only if \( (t-\lambda)\,(\vec{v})=0\cdot\vec{v} \).
 \end{proof}
 
 We already have the canonical form that we want for 
@@ -1719,16 +1745,13 @@ such matrix is similar to one that is all
 zeroes except for blocks of subdiagonal ones.
 (To make this representation unique we can fix some arrangement of
 the blocks, perhaps from longest to shortest.)
-We next extend this to all single-eigenvalue matrices.
+% We next extend this to all single-eigenvalue matrices.
 
-Observe that if \( t \)'s only eigenvalue is \( \lambda \) then 
-\( t-\lambda \)'s only eigenvalue is \( 0 \) because
-\( t(\vec{v})=\lambda\vec{v} \) if and 
-only if \( (t-\lambda)\,(\vec{v})=0\cdot\vec{v} \).
-The natural way to extend the results for nilpotent matrices is to
-represent $t-\lambda$ in the canonical form for nilpotent matrices 
-and try to use that
-to get a simple representation for $t$.
+% The natural way to extend these results for nilpotent matrices 
+% to general maps or matrices is to  
+% represent $t-\lambda$ in the canonical form for nilpotent matrices 
+% and try to use that
+% to get a simple representation for $t$.
 
 \begin{lemma}   \label{le:SimRespAddScalar}
 If the matrices \( T-\lambda I \) and \( N \) are similar 
@@ -1932,7 +1955,7 @@ their first eigenvalue \( \lambda_1 \)
 (which we represent using its Jordan block),
 a part with \( \lambda_2 \), etc.
 
-This ideal is in fact what happens.
+This is what happens.
 For any transformation \( \map{t}{V}{V} \),
 we shall break the space \( V \) into the direct sum of a part on which
 \( t-\lambda_1 \) is nilpotent, a part on which \( t-\lambda_2 \)
@@ -1972,7 +1995,7 @@ as are the nullspaces.
 \end{equation*} 
 Thus,
 the generalized nullspace $\gennullspace{t}$ and the generalized rangespace
-$\genrangespace{t}$ are $t$-invariant.
+$\genrangespace{t}$ are $t$~invariant.
 % For the generalized nullspace, if $\vec{v}\in\gennullspace{t}$ then
 % $t^n(\vec{v})=\zero$ where $n$ is the dimension of the underlying space
 % and so $t(\vec{v})\in\gennullspace{t}$ because
@@ -2212,32 +2235,44 @@ and
 \end{lemma}
 
 \begin{proof}
-Because \( \dim (V) \) is the degree \( p_1+\cdots+p_\ell \) of the
-characteristic polynomial, to establish clause~(1) we need only show that 
-clause~(2) holds and that
-\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
-is trivial whenever \( i\neq j \).
+We start by proving that
+\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j}=\set{\zero} \)
+when \( i\neq j \).
+This shows that the bases for the generalized nullspaces, when concatenated,
+form a linearly independent subset of the space~$V$.
+We will then show that clause~(2) holds because with that, since
+the degree \( p_1+\cdots+p_\ell \) of the
+characteristic polynomial equals the dimension of the space~$V$,
+we will have proved clause~(1) also.
 
-For the latter, by \nearbylemma{le:tInvIfftMinLambdaInv}
+So consider
+\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
+when \( i\neq j \).
+By \nearbylemma{le:tInvIfftMinLambdaInv}
 both \( \gennullspace{t-\lambda_i} \) and 
 \( \gennullspace{t-\lambda_j} \) are \( t \)~invariant.
 The intersection of \( t \) invariant subspaces is \( t \)
 invariant and so the restriction of \( t \) to
 \( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
 is a linear transformation.
-But both \( t-\lambda_i \) and \( t-\lambda_j \) are nilpotent on this subspace
-and so if \( t \) has any eigenvalues on the intersection 
-then its ``only'' eigenvalue is both
+Observe that 
+$t-\lambda_i$ is nilpotent on \( \gennullspace{t-\lambda_i} \)
+and  
+$t-\lambda_j$ is nilpotent on \( \gennullspace{t-\lambda_j} \),
+so both \( t-\lambda_i \) and \( t-\lambda_j \) are 
+nilpotent on the intersection.
+Therefore by \nearbylemma{le:NilIffOnlyEigenZero} and the observation
+following it, if \( t \) has any eigenvalues on the intersection 
+then the ``only'' eigenvalue is both
 \( \lambda_i \) and \( \lambda_j \).
 This cannot be, so the restriction has no eigenvalues:
 \( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
-is trivial
+is the trivial space
 (\nearbylemma{le:MapNonTrivSpHasEigen} shows that 
 the only transformation that is without any eigenvalues is 
 the transformation on the trivial space).
 
-To prove clause~(2), fix the index \( i \).
-Decompose \( V \) as 
+To prove clause~(2), decompose \( V \) as 
 \( \gennullspace{t-\lambda_i}\directsum\genrangespace{t-\lambda_i} \)
 %with basis $B=\cat{B_\mathscr{N}}{B_\mathscr{R}}$
 and apply \nearbylemma{le:InvCompSubspSplitTrans}.
@@ -2249,8 +2284,8 @@ and apply \nearbylemma{le:InvCompSubspSplitTrans}.
       Z_1   &T_2
    \end{pmat}
    \begin{array}{ll}
-     \} \text{$\dim(\,\,\gennullspace{t-\lambda_i}\,)$-many rows}  \\
-     \} \text{$\dim(\,\,\genrangespace{t-\lambda_i}\,)$-many rows}
+     \} \text{\ $\dim(\,\gennullspace{t-\lambda_i}\,)$-many rows}  \\
+     \} \text{\ $\dim(\,\genrangespace{t-\lambda_i}\,)$-many rows}
    \end{array}
 \end{equation*}
 By \nearbylemma{le:DetIsProdOfSubDets},
@@ -2296,11 +2331,11 @@ translates those steps into matrix terms.
 Any square matrix is similar to one in \definend{Jordan form}
 \begin{equation*}
   \begin{mat}
-    J_{\lambda_1}  &     &\text{\textit{--zeroes--}}                 \\
-         &J_{\lambda_2}                                              \\
-         &     &\ddots                                     \\
-         &     &                           &J_{\lambda_{\ell-1}}     \\
-         &     &\text{\textit{--zeroes--}} &  &J_{\lambda_{\ell}}
+    J_{\lambda_1}  &            &\text{\textit{--zeroes--}}                 \\
+               &J_{\lambda_2}                                              \\
+               &     &\ddots                                     \\
+    %            &     &                           &     \\
+               &     &\text{\textit{--zeroes--}} &J_{\lambda_{\ell}}
   \end{mat}
 \end{equation*}
 where each \( J_{\lambda} \) is the Jordan block associated with the
