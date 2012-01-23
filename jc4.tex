@@ -27,7 +27,7 @@ We therefore considered the natural generalization, diagonal matrices, and
 showed that the map or matrix can be diagonalized
 if its eigenvalues are distinct.
 But we also gave an example of a matrix that cannot be diagonalized,
-so diagonal form won't do as the canonical form. 
+so diagonal form won't do as the canonical form that we want. 
 
 The prior section developed that example.
 We showed that 
@@ -153,7 +153,7 @@ and suppose that both have leading ones.
 In their difference \( d(x)=m(x)-\hat{m}(x) \) the leading terms cancel.
 Thus, 
 if the leading coefficient of $d$ were nonzero then we could divide
-$d$ by it to get a polynomial that takes the map or matriz to zero,
+$d$ by it to get a polynomial that takes the map or matrix to zero,
 has leading coefficient one, and is of degree smaller than 
 $m$ and~$\hat{m}$.
 This would contradict the choice of $m$ and $\hat{m}$ as of minimal degree. 
@@ -266,7 +266,7 @@ The third equality holds because the scalar $\lambda_2$  comes out of the
 second term, since \( t \) is linear.
 \end{proof}
 
-In particular, if a minimial polynomial $m(x)$ for a transformation $t$ 
+In particular, if a minimal polynomial $m(x)$ for a transformation $t$ 
 factors as
 $m(x)=(x-\lambda_1)^{q_1}\cdots (x-\lambda_\ell)^{q_\ell}$
 then 
@@ -311,7 +311,7 @@ where \( 1\leq q_i \leq p_i \) for each \( i \) between \( 1 \) and \( \ell \).
 \end{theorem}
 
 \noindent The proof takes up the next three lemmas.
-They are stated in matrix terms but they apply equally
+We will state them in matrix terms but they apply equally
 well to maps.
 (The matrix version is convenient 
 for the first proof.)
@@ -423,7 +423,7 @@ its characteristic polynomial.
 \begin{lemma} \label{le:tSatisImpMinPolyDivides}
 Where \( f(x) \) is a polynomial, if \( f(T) \) is the zero matrix 
 then \( f(x) \) is divisible by the minimal polynomial of \( T \).
-That is, any polynomial satisfied by \( T \) is divisable by
+That is, any polynomial satisfied by \( T \) is divisible by
 \( T \)'s minimal polynomial.
 \end{lemma}
 
@@ -591,7 +591,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
         \partsitem We have $m_1(x)=(x-2)(x-5)$, $m_2(x)=(x-2)^2(x-5)$,
           $m_3(x)=(x-2)(x-5)^2$, and $m_4(x)=(x-2)^2(x-5)^2$.
           They are polynomials of degree two, three, three, and four.
-        \partsitem The possiblities are \( m_1(x)=(x+3)(x-1)(x-2) \),
+        \partsitem The possibilities are \( m_1(x)=(x+3)(x-1)(x-2) \),
           \( m_2(x)=(x+3)^2(x-1)(x-2) \),
           \( m_3(x)=(x+3)(x-1)(x-2)^2 \),
           and \( m_4(x)=(x+3)^2(x-1)(x-2)^2 \).
@@ -907,7 +907,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
            \end{vmat}     
            =(x-3)^3(x+1)^2
          \end{equation*}
-         There are a number of possibilities for the minimal polynomial,
+         Here are the possibilities for the minimal polynomial,
          listed here by ascending degree:
          $m_1(x)=(x-3)(x+1)$, $m_1(x)=(x-3)^2(x+1)$, $m_1(x)=(x-3)(x+1)^2$, 
          $m_1(x)=(x-3)^3(x+1)$, $m_1(x)=(x-3)^2(x+1)^2$, 
@@ -1131,7 +1131,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       As the above example illustrates, an induction argument will 
       show that, where $T$ has only nonnegative entries, 
       $T^j$ is $j$-upper triangular.
-      That argument is left to the reader.
+      % We leave that argument to the reader.
     \end{answer}
    \item 
      What is the minimal polynomial of
@@ -1221,7 +1221,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
     \end{answer}
   \recommended \item
     Prove that the minimal polynomial of an \( \nbyn{n} \) matrix has
-    degree at most \( n \) (not \( n^2 \) as might be guessed from this
+    degree at most \( n \) (not \( n^2 \) as a person might guess from this
     subsection's opening).
     Verify that this maximum, \( n \), can happen.
     \begin{answer}
@@ -1231,13 +1231,24 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       \nearbyexample{ex:MinPolyForRotMat} shows that \( n \) can happen.
     \end{answer}
    \recommended \item 
-     The only eigenvalue of a nilpotent map is zero.
-     Show that the converse statement holds.
+     Show that, on a nontrivial vector space, a linear transformation is 
+     nilpotent if and only if its only eigenvalue is zero.
      \begin{answer}
-       Suppose that \( t \)'s only eigenvalue is zero.
-       Then the characteristic polynomial of \( t \) is \( x^n \).
-       Because \( t \) satisfies its characteristic polynomial, it is
-       a nilpotent map. 
+       Let the linear transformation be $\map{t}{V}{V}$.
+       If $t$ is nilpotent then there is an $n$ such that $t^n$ is the zero map,
+       so $t$ satisfies the polynomial $p(x)=x^n=(x-0)^n$.
+       By \nearbylemma{le:tSatisImpMinPolyDivides} the minimal polynomial of 
+       $t$ divides $p$, so the minimal polynomial has only zero for a root.
+       By Cayley-Hamilton, \nearbytheorem{th:CayHam},
+       the characteristic polynomial has only zero for a root.
+       Thus the only eigenvalue of $t$ is zero.
+
+       Conversely, if a transformation \( t \) on an
+       \( n \)-dimensional space has only the single eigenvalue of zero 
+       then its characteristic polynomial is \( x^n \). 
+       The Cayley-Hamilton Theorem says that a map satisfies its
+       characteristic polynomial so \( t^n \) is the zero map.
+       Thus $t$ is nilpotent.
      \end{answer}
    \item 
        What is the minimal polynomial of a zero map or matrix?
@@ -1258,7 +1269,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
      Interpret the minimal polynomial of 
      \nearbyexample{ex:PolySendRotMatToZ} geometrically.
      \begin{answer}
-       The polynomial can be read geometrically to say ``a \( \degs{60} \)
+       We can interpret the polynomial can geometrically as, ``a \( \degs{60} \)
        rotation minus two rotations of \( \degs{30} \) equals the
        identity.''
      \end{answer}
@@ -1337,9 +1348,9 @@ and so \( m(x)=(x-1)(x-2)^2 \).
     A \definend{projection}\index{projection}%
     \index{transformation!projection} 
     is any transformation \( t \) such that \( t^2=t \).
-    (For instance, the transformation of the plane $\Re^2$ projecting
-    each vector onto its first coordinate will, if done twice,
-    result in the same value as if it is done just once.)
+    (For instance, consider the transformation of the plane $\Re^2$ projecting
+    each vector onto its first coordinate.
+    If we project twice then we get the same result as if we project just once.)
     What is the minimal polynomial of a projection?
     \begin{answer}
       This subsection starts with the observation that the powers of 
@@ -1357,7 +1368,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       satisfy that $c_0\cdot\identity=z$, where $c_0=1$ since the leading
       coefficient of a minimal polynomial is $1$.
       This is only satisfied by the zero transformation on a trivial space.
-      This is indeed a projection, but not a very interesting one.
+      This is a projection, but not an interesting one.
 
       For the minimal polynomial of a transformation to be linear would give 
       $c_1\cdot t+c_0\cdot\identity=z$ where $c_1=1$.
@@ -1376,12 +1387,12 @@ and so \( m(x)=(x-1)(x-2)^2 \).
       \partsitem Prove that the composition of one-to-one maps is
         one-to-one.
       \partsitem Prove that if a linear map is not one-to-one then
-        at least one nonzero vector from the domain is sent to the 
+        at least one nonzero vector from the domain maps to the 
         zero vector in the codomain.
       \partsitem Verify the statement, excerpted here, that
-         preceeds \nearbytheorem{th:CayHam}.
+         precedes \nearbytheorem{th:CayHam}.
          \begin{quotation}
-           \noindent \ldots if a minimial polynomial $m(x)$ for a 
+           \noindent \ldots if a minimal polynomial $m(x)$ for a 
            transformation $t$ factors as
            $m(x)=(x-\lambda_1)^{q_1}\cdots (x-\lambda_\ell)^{q_\ell}$
            then 
@@ -1416,7 +1427,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
           Because $h$ is linear, we have
           $\zero=h(\vec{v}_1)-h(\vec{v}_2)=h(\vec{v}_1-\vec{v}_2)$
           and so $\vec{v}_1-\vec{v}_2$ is a nonzero vector from the domain
-          that is mapped by $h$ to the zero vector of the codomain  
+          that $h$ maps to the zero vector of the codomain  
           ($\vec{v}_1-\vec{v}_2$
           does not equal the zero vector of the domain because $\vec{v}_1$
           does not equal $\vec{v}_2$).
@@ -1690,7 +1701,7 @@ and so \( m(x)=(x-1)(x-2)^2 \).
 
 
 \subsectionoptional{Jordan Canonical Form}
-We are looking for a canonical form for the relation of matrix similarlty.
+We are looking for a canonical form for the relation of matrix similarity.
 This subsection completes this program by moving
 from the canonical form for the classes 
 of nilpotent matrices to
@@ -1715,16 +1726,15 @@ Conversely, if a transformation \( t \) on an
 \( n \)-dimensional space has only the single eigenvalue of zero 
 then its characteristic polynomial is \( x^n \). 
 The Cayley-Hamilton Theorem says that a map satisfies its
-characteristic polynimial so \( t^n \) is the zero map.
+characteristic polynomial so \( t^n \) is the zero map.
 Thus $t$ is nilpotent.
 \end{proof}
 
 \noindent The phrase ``nontrivial vector space'' is there because on a trivial
 space $\set{\zero}$ the only transformation is the zero map, which has
-no eigenvalues because there are no nonzero eigenvectors with which to
-be associated.
+no eigenvalues because there are no associated nonzero eigenvectors.
 
-\begin{corollary}
+\begin{corollary} \label{cor:tMinLambdaNilpotent}
 The transformation $t-\lambda$ is nilpotent if and only if 
 $t$'s only eigenvalue is $\lambda$   
 \end{corollary}
@@ -1793,7 +1803,7 @@ for the rest of the chapter).
    \qquad
    \nullspace{(t-3)^2}=\C^2
 \end{equation*}
-The dimensions of these null spaces
+The dimensions of these nullspaces
 show that the action of the map $t-3$ on a string basis is
 $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.
 Thus, here is the canonical form for $t-3$
@@ -1851,7 +1861,7 @@ this matrix.
       -1/4 &1/4
    \end{mat}
 \end{equation*}
-So the similarity is expressed in this equation.
+So this equation expresses the similarity.
 \begin{equation*}
   \begin{mat}[r]
      3  &0  \\
@@ -2075,16 +2085,16 @@ of \( t \) on \( \vec{v} \) breaks into the ``non-overlapping'' actions of
 Let \( \map{t}{V}{V} \) be a transformation and let \( \mathscr{N} \) and 
 \( \mathscr{R} \) be
 \( t \) invariant complementary subspaces of \( V \).
-Then \( t \) can be represented by a matrix with
+Then we can represent \( t \) by a matrix with
 blocks of square submatrices $T_1$ and $T_2$
 \begin{equation*} \renewcommand{\arraystretch}{1.2}
   \begin{pmat}{c|c}
       T_1   &Z_2  \\  \cline{1-2}
       Z_1 &T_2
    \end{pmat}
-   \begin{array}{ll}
-     \} \text{$\dim(\mathscr{N})$-many rows}  \\
-     \} \text{$\dim(\mathscr{R})$-many rows}
+   \begin{array}{@{}l}
+     \} \text{\ $\dim(\mathscr{N})$-many rows}  \\
+     \} \text{\ $\dim(\mathscr{R})$-many rows}
    \end{array}
 \end{equation*}
 where \( Z_1 \) and \( Z_2 \) are blocks of zeroes.
@@ -2227,9 +2237,9 @@ Now for the promised third, and final, step to the main result.
 \begin{lemma}
 If a linear transformation \( \map{t}{V}{V} \) has the 
 characteristic polynomial
-\( (x-\lambda_1)^{p_1}\dots(x-\lambda_\ell)^{p_\ell} \) then
+\( (x-\lambda_1)^{p_1}\dots(x-\lambda_k)^{p_k} \) then
 (1)~\( V=\gennullspace{t-\lambda_1}\directsum\cdots
-             \directsum\gennullspace{t-\lambda_\ell} \) 
+             \directsum\gennullspace{t-\lambda_k} \) 
 and
 (2)~\( \dim(\gennullspace{t-\lambda_i})=p_i  \).
 \end{lemma}
@@ -2241,7 +2251,7 @@ when \( i\neq j \).
 This shows that the bases for the generalized nullspaces, when concatenated,
 form a linearly independent subset of the space~$V$.
 We will then show that clause~(2) holds because with that, since
-the degree \( p_1+\cdots+p_\ell \) of the
+the degree \( p_1+\cdots+p_k \) of the
 characteristic polynomial equals the dimension of the space~$V$,
 we will have proved clause~(1) also.
 
@@ -2283,47 +2293,51 @@ and apply \nearbylemma{le:InvCompSubspSplitTrans}.
       T_1   &Z_2  \\  \cline{1-2}
       Z_1   &T_2
    \end{pmat}
-   \begin{array}{ll}
+   \begin{array}{@{}l}
      \} \text{\ $\dim(\,\gennullspace{t-\lambda_i}\,)$-many rows}  \\
      \} \text{\ $\dim(\,\genrangespace{t-\lambda_i}\,)$-many rows}
    \end{array}
 \end{equation*}
-By \nearbylemma{le:DetIsProdOfSubDets},
+\nearbylemma{le:DetIsProdOfSubDets} says that
 \( \deter{T-xI}=\deter{T_1-xI}\cdot\deter{T_2-xI} \).
-By the uniqueness clause of the Fundamental Theorem of Arithmetic,
+By the uniqueness clause of the Fundamental Theorem of Algebra, 
 the determinants of the blocks have the same factors as the
 characteristic polynomial
-\( \deter{T_1-xI}=(x-\lambda_1)^{q_1}\dots(x-\lambda_\ell)^{q_\ell} \)
+\( \deter{T_1-xI}=(x-\lambda_1)^{q_1}\cdots(x-\lambda_k)^{q_k} \)
 and
-\( \deter{T_2-xI}=(x-\lambda_1)^{r_1}\dots(x-\lambda_\ell)^{r_\ell} \),
-and the sum of the powers of these factors is the power of the factor
-in the characteristic polynomial:
-\( q_1+r_1=p_1 \), \dots, \( q_\ell+r_\ell=p_\ell \).
-We will have proved clause~(2) if we verify that $q_i=p_i$ and that
-$q_j=0$ for all $j\neq i$, because then the degree of 
-the polynomial $\deter{T_1-xI}$\Dash which equals the dimension of the
-generalized null space\Dash is as required.
+\( \deter{T_2-xI}=(x-\lambda_1)^{r_1}\cdots(x-\lambda_k)^{r_k} \),
+where
+\( q_1+r_1=p_1 \), \dots, \( q_k+r_k=p_k \).
+Theorem~I.\ref{th:FundThmAlg}.
+We will finish by establishing that (i)~$q_j=0$ for all $j\neq i$,
+and (ii)~$q_i=p_i$.
+Together these prove clause~(2) because they show that the degree of 
+the polynomial $\deter{T_1-xI}$ is $q_i$, and
+the degree of that polynomial equals 
+the dimension of the
+generalized nullspace $\gennullspace{t-\lambda_i}$. 
 
-For that verification, first,
-as the restriction of \( t-\lambda_i \) to \( \gennullspace{t-\lambda_i} \)
+For (i),
+because the restriction of \( t-\lambda_i \) to \( \gennullspace{t-\lambda_i} \)
 is nilpotent on that space,
-the only eigenvalue of \( t \) on it is \( \lambda_i \).
-Thus the characteristic equation of \( t \) on
-\( \gennullspace{t-\lambda_i} \) is
-\( \deter{T_1-xI}=(x-\lambda_i)^{q_i} \).
-And thus $q_j=0$ for all $j\neq i$.
+$t$'s only eigenvalue on that space is \( \lambda_i \),
+by \nearbylemma{cor:tMinLambdaNilpotent}.
+So $q_j=0$ for $j\neq i$.
 
-Now consider the restriction of \( t \) to \( \genrangespace{t-\lambda_i} \).
+For (ii),
+consider the restriction of \( t \) to \( \genrangespace{t-\lambda_i} \).
 By Lemma~III.\ref{lem:RestONeToOne}, the map
 \( t-\lambda_i \) is one-to-one on
 \( \genrangespace{t-\lambda_i} \) and so \( \lambda_i \) is not an
 eigenvalue of \( t \) on that subspace.
 Therefore, \( x-\lambda_i \) is not a factor of \( \deter{T_2-xI} \),
-and so \( q_i=p_i \).
+so $r_i=0$, and so \( q_i=p_i \).
 \end{proof}
 
-Our major result just
-translates those steps into matrix terms.
+Recall the goal of this chapter, to give a canonical form for matrix similarity.
+That result is next.
+It 
+translates the above steps into matrix terms.
 
 \begin{theorem}
 \index{Jordan form!represents similarity classes}\index{similar!canonical form}
@@ -2334,8 +2348,8 @@ Any square matrix is similar to one in \definend{Jordan form}
     J_{\lambda_1}  &            &\text{\textit{--zeroes--}}                 \\
                &J_{\lambda_2}                                              \\
                &     &\ddots                                     \\
-    %            &     &                           &     \\
-               &     &\text{\textit{--zeroes--}} &J_{\lambda_{\ell}}
+                &     &                           &J_{\lambda_{k-1}} &     \\
+               &     &\text{\textit{--zeroes--}} &            &J_{\lambda_{k}}
   \end{mat}
 \end{equation*}
 where each \( J_{\lambda} \) is the Jordan block associated with the
@@ -2349,8 +2363,8 @@ Given an \( \nbyn{n} \) matrix \( T \), consider the linear map
 with respect to the standard bases.
 Use the prior lemma to write
 \( \C^n=\gennullspace{t-\lambda_1}\directsum\cdots
-        \directsum\gennullspace{t-\lambda_\ell} \)
-where \( \lambda_1,\ldots,\lambda_\ell \) are the eigenvalues of \( t \).
+        \directsum\gennullspace{t-\lambda_k} \)
+where \( \lambda_1 \), \ldots, \(\lambda_k \) are the eigenvalues of \( t \).
 Because each \( \gennullspace{t-\lambda_i} \)  is \( t \) invariant,
 \nearbylemma{le:InvCompSubspSplitTrans} and the prior lemma show
 that \( t \) is represented by a matrix that is all zeroes except for square
@@ -2360,11 +2374,21 @@ to be a string basis for the action of \( t-\lambda_i \) on
 \( \gennullspace{t-\lambda_i} \). 
 \end{proof}
 
-Jordan form is a canonical form for similarity classes of square
-matrices,\index{representative!of similarity classes}
-provided that we make it unique by arranging the
-Jordan blocks from least eigenvalue to greatest and then
-arranging the subdiagonal $1$ blocks inside each Jordan block from 
+\begin{corollary}
+Every square matrix is similar to the sum of a diagonal matrix and a nilpotent
+matrix.
+\end{corollary}
+
+Strictly speaking, to make Jordan form a canonical form for matrix similarity 
+classes\index{representative!of similarity classes}
+it must be unique.
+That is, for any square matrix there needs to be one and only one matrix $J$
+similar to it and of the specified form.
+As we have stated it, the theorem allows us to rearrange the Jordan blocks.
+We could make it unique, say 
+by arranging the
+Jordan blocks from the least eigenvalue to greatest and arranging
+the blocks of subdiagonal ones inside each Jordan block from 
 longest to shortest.
 
 \begin{example} \label{ex:FirstJordForm}
@@ -2380,14 +2404,15 @@ has the characteristic polynomial \( (x-2)^2(x-6) \).
 \end{equation*}
 We will handle the eigenvalues $2$ and $6$ separately.
 
-Computation of the powers, and the null spaces and nullities, 
+First the eigenvalue~$2$.
+Computation of the powers, and the nullspaces and nullities, 
 of $T-2I$ is routine.
 (Recall from \nearbyexample{ex:SingJordBlock} the convention
 of taking $T$ to represent a transformation, here $\map{t}{\C^3}{\C^3}$,
 with respect to the standard basis.)
 \begin{center}
   \renewcommand{\arraystretch}{1.25}
-  \begin{tabular}{r|ccc}
+  \begin{tabular}{r|ccc} 
     \multicolumn{1}{c}{\textit{power} \( p \)}  
          &\( (T-2I)^p \) &\( \nullspace{(t-2)^p}  \) 
          &\textit{nullity}                                            \\  
@@ -2417,15 +2442,15 @@ with respect to the standard basis.)
           0  &0  &0
         \end{mat}}
     &\textit{--same--}
-    &\textit{---}
+    &\textit{--same--}
   \end{tabular}
 \end{center}
-So the generalized null space $\gennullspace{t-2}$ has dimension two.
+So the generalized nullspace $\gennullspace{t-2}$ has dimension two.
 We've noted that the restriction of $t-2$ is nilpotent on this subspace.
 From the way that the nullities grow we know that the action
 of $t-2$ on a string basis
 $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$.  
-Thus the restriction can be represented in the canonical form 
+Thus we can represent the restriction in the canonical form 
 \begin{equation*}
   N_2=
   \begin{mat}[r]
@@ -2437,7 +2462,7 @@ Thus the restriction can be represented in the canonical form
    B_2=\sequence{\colvec[r]{1 \\ 1 \\ -2},
                  \colvec[r]{-2 \\ 0 \\ 0}}  
 \end{equation*}
-where many choices of basis are possible.
+(other choices of basis are possible).
 Consequently, the action of the restriction of $t$ to 
 $\gennullspace{t-2}$ is represented by this matrix.
 \begin{equation*}
@@ -2457,7 +2482,7 @@ since it is the zero map, its canonical form $N_6$
 is the $\nbyn{1}$ zero matrix.
 Consequently, the canonical form $J_6$ for the action of $t$ on 
 $\gennullspace{t-6}$ is the $\nbyn{1}$ matrix with the single entry $6$.
-For the basis we can use any nonzero vector from the generalized null space.  
+For the basis we can use any nonzero vector from the generalized nullspace.  
 \begin{equation*}
    B_6=\sequence{\colvec[r]{0 \\ 1 \\ 0}}
 \end{equation*}
@@ -2511,19 +2536,13 @@ While the characteristic polynomial is the same,
           0  &0  &0
         \end{mat}}
     &\textit{--same--}
-    &\textit{---}
+    &\textit{--same--}
   \end{tabular}
 \end{center}
 here the action of $t-2$ is stable after only one application\Dash the 
 restriction
 of $t-2$ to $\gennullspace{t-2}$ is nilpotent of index one. 
-(So the contrast with the prior example is that while 
-the characteristic polynomial tells us to look at the 
-action of the $t-2$ on its generalized null space, the characteristic
-polynomial does not describe completely its action and we 
-must do some computations to find, in this example, that  
-the minimal polynomial is \( (x-2)(x-6) \).)
-The restriction of $t-2$ to the generalized null space acts on a string
+The restriction of $t-2$ to the generalized nullspace acts on a string
 basis as $\vec{\beta}_1\mapsto\zero$ and $\vec{\beta}_2\mapsto\zero$,
 and we get this Jordan block associated with the eigenvalue~$2$.
 \begin{equation*}
@@ -2534,11 +2553,19 @@ and we get this Jordan block associated with the eigenvalue~$2$.
   \end{mat}
 \end{equation*}
 
-For the other eigenvalue, the arguments for the second eigenvalue of
+So the contrast with the prior example is that while 
+the characteristic polynomial tells us to look at the 
+action of the $t-2$ on its generalized nullspace, the characteristic
+polynomial does not completely describe $t-2$'s action. 
+We must do some computations to find that  
+the minimal polynomial is \( (x-2)(x-6) \).
+
+For the other eigenvalue, $6$, the arguments for the second eigenvalue of
 the prior example apply again.
 The restriction of $t-6$ to $\gennullspace{t-6}$ is nilpotent of 
-index one (it can't be of index less than one, and since $x-6$ is a 
-factor of the characteristic polynomial to the power one it can't
+index one
+(it can't be of index less than one and since $x-6$ is a 
+factor of the characteristic polynomial with the exponent one it can't
 be of index more than one either). 
 Thus $t-6$'s canonical form $N_6$ is the $\nbyn{1}$ zero matrix,
 and the associated Jordan block $J_6$ is the $\nbyn{1}$ matrix with entry $6$.
@@ -2643,7 +2670,7 @@ This table
           0  &64   &64  &0   &0
        \end{mat}}
     &\textit{--same--}
-    &\textit{---}
+    &\textit{--same--}
   \end{tabular}
 \end{center}
 shows that the restriction of $t-3$ to $\gennullspace{t-3}$ acts on a 
@@ -2683,10 +2710,10 @@ A similar calculation for the other eigenvalue
           8  &24 &16 &8  &24
        \end{mat}}
     &\textit{--same--}
-    &\textit{---}
+    &\textit{--same--}
   \end{tabular}
 \end{center}
-shows that the restriction of $t+1$ to its generalized null space
+shows that the restriction of $t+1$ to its generalized nullspace
 acts on a string basis via the two separate strings
 $\vec{\beta}_4\mapsto\zero$ and $\vec{\beta}_5\mapsto\zero$.
 
@@ -2704,15 +2731,6 @@ Therefore
 \end{example}
 
 
-We close with the statement that the subjects considered earlier in this
-Chapter are indeed, in this sense, exhaustive.
-
-\begin{corollary}
-Every square matrix is similar to the sum of a diagonal matrix and a nilpotent
-matrix.
-\end{corollary}
-
-
 
 
 
@@ -2720,7 +2738,7 @@ matrix.
   \item 
     Do the check for \nearbyexample{ex:SingJordBlock}.
     \begin{answer}
-      We are required to check that
+      We must check that
       \begin{equation*}
          \begin{mat}[r]
            3  &0  \\
@@ -2862,7 +2880,7 @@ matrix.
                0  &0  &0  &0  &0
              \end{mat}
           \end{equation*}
-          and therefore $T$ is similar to this this canonical form matrix.
+          and therefore $T$ is similar to this canonical form matrix.
           \begin{equation*}
            J_3=N_3+3I=
            \begin{mat}[r]
@@ -2875,12 +2893,12 @@ matrix.
          \end{equation*} 
          \partsitem The restriction of the transformation $s+1$ is nilpotent
           on the subspace $\gennullspace{s+1}$, and the action on a 
-          string basis is given as $\vec{\beta}_1\mapsto\zero$.  
+          string basis is  $\vec{\beta}_1\mapsto\zero$.  
           The restriction of the transformation $s-2$ is nilpotent
           on the subspace $\gennullspace{s-2}$, having the action on a 
           string basis of $\vec{\beta}_2\mapsto\vec{\beta}_3\mapsto\zero$
           and $\vec{\beta}_4\mapsto\vec{\beta}_5\mapsto\zero$.        
-          Consequently the Jordan form is this
+          Consequently the Jordan form is this.
           \begin{equation*}
             \begin{mat}[r]
               -1  &0  &0  &0  &0  \\
@@ -2890,7 +2908,6 @@ matrix.
                0  &0  &0  &1  &2
              \end{mat} 
           \end{equation*}
-          (note that the blocks are arranged with the least eigenvalue first).
       \end{exparts}  
     \end{answer}
   \item 
@@ -2937,7 +2954,7 @@ matrix.
             \end{mat}
           \end{equation*}
         \partsitem The concatenation of these bases for the 
-          generalized null spaces will do for the basis for the
+          generalized nullspaces will do for the basis for the
           entire space.
           \begin{equation*}
              B_{-1}=\sequence{\colvec[r]{-1\\ 0 \\  0 \\ 1 \\ 0},
@@ -3020,11 +3037,11 @@ matrix.
       string basis for the action of the transformation $t-\lambda_i$
       when restricted to $\gennullspace{t-\lambda_i}$,
       by computing the powers of the matrix $T-\lambda_iI$ and finding
-      the associated null spaces, until these null spaces settle down
-      (do not change), at which point we have the generalized null space.
-      The dimensions of those null spaces (the nullities) tell us the
+      the associated nullspaces, until these nullspaces settle down
+      (do not change), at which point we have the generalized nullspace.
+      The dimensions of those nullspaces (the nullities) tell us the
       action of $t-\lambda_i$ on a string basis for the generalized
-      null space, and so we can write the pattern of subdiagonal ones
+      nullspace, and so we can write the pattern of subdiagonal ones
       to have $N_{\lambda_i}$.
       From this matrix, the Jordan block $J_{\lambda_i}$ associated
       with $\lambda_i$ is immediate $J_{\lambda_i}=N_{\lambda_i}+\lambda_iI$.
@@ -3090,12 +3107,12 @@ matrix.
                  B=\sequence{\colvec[r]{1 \\ 0},
                              \colvec[r]{-10 \\ -25}}
            \end{equation*}
-           The first basis vector has been taken so that it is in
-           the null space of $t^2$ but is not in the null space of $t$.
+           We took the first basis vector so that it is in
+           the nullspace of $t^2$ but is not in the nullspace of $t$.
            The second basis vector is the image of the first under $t$.
         \partsitem The characteristic polynomial of this matrix
            is \( c(x)=(x+1)^2 \), so it is a single-eigenvalue matrix.
-           (That is, the generalized null space of $t+1$ is the entire
+           (That is, the generalized nullspace of $t+1$ is the entire
            space.) 
            We have
            \begin{equation*}
@@ -3125,8 +3142,8 @@ matrix.
                 1  &-1
              \end{mat}
            \end{equation*}
-           and choosing vectors from the above null spaces gives
-           this string basis (many other choices are possible).
+           and choosing vectors from the above nullspaces gives
+           this string basis (other choices are possible).
            \begin{equation*}
              B=\sequence{\colvec[r]{1 \\ 0},
                          \colvec[r]{6 \\ 9}}
@@ -3142,14 +3159,14 @@ matrix.
               \nullspace{t-1}=\set{\colvec{0 \\ y \\ 0}
                                       \suchthat y\in\C}
             \end{equation*}
-            and the null space of $(t-1)^2$ is the same.
-            Thus this set is the generalized null space 
+            and the nullspace of $(t-1)^2$ is the same.
+            Thus this set is the generalized nullspace 
             $\gennullspace{t-1}$.
             The nullities show that the action of the restriction of $t-1$ 
-            to the generalized null space on a string basis
+            to the generalized nullspace on a string basis
             is  $\vec{\beta}_1\mapsto\zero$.
 
-            A similar calculation for $\lambda_2=4$ gives these null spaces.
+            A similar calculation for $\lambda_2=4$ gives these nullspaces.
             \begin{equation*}
               \nullspace{t-4}=\set{\colvec{0 \\ z \\ z}
                                       \suchthat z\in\C}
@@ -3157,12 +3174,12 @@ matrix.
               \nullspace{(t-4)^2}=\set{\colvec{y-z \\ y \\ z}
                                           \suchthat y,z\in\C}
             \end{equation*}
-            (The null space of $(t-4)^3$ is the same, as it must be because
+            (The nullspace of $(t-4)^3$ is the same, as it must be because
             the power of the term associated with $\lambda_2=4$ in the
             characteristic polynomial is two, and so the restriction of
-            $t-2$ to the generalized null space $\gennullspace{t-2}$
+            $t-2$ to the generalized nullspace $\gennullspace{t-2}$
             is nilpotent of index at most two\Dash it takes at most
-            two applications of $t-2$ for the null space to settle down.)
+            two applications of $t-2$ for the nullspace to settle down.)
             The pattern of how the nullities rise tells us that
              the action of $t-4$ on an associated string basis 
             for $\gennullspace{t-4}$ is 
@@ -3194,8 +3211,8 @@ matrix.
               \nullspace{t+2}=\set{\colvec{z \\ z \\ z}
                                       \suchthat z\in\C}
             \end{equation*}
-            The null space of $(t+2)^2$ is the same, and so 
-            this is the generalized null space $\gennullspace{t+2}$.
+            The nullspace of $(t+2)^2$ is the same, and so 
+            this is the generalized nullspace $\gennullspace{t+2}$.
             Thus the action of the restriction of $t+2$ to 
             $\gennullspace{t+2}$ on an associated
             string basis is $\vec{\beta}_1\mapsto\zero$.
@@ -3264,7 +3281,7 @@ matrix.
             \( c(x)=(1-x)^3=-(x-1)^3 \) has only a single root,
             so the matrix has only a single eigenvalue $\lambda=1$.
             Finding the powers of $T-1I$ 
-            and calculating the null spaces
+            and calculating the nullspaces
             \begin{equation*}
                \nullspace{t-1}=\set{\colvec{-2y+z \\ y \\ z}
                                       \suchthat y,z\in\C} 
@@ -3296,7 +3313,7 @@ matrix.
             \( c(x)=x^4-24x^3+216x^2-864x+1296=(x-6)^4 \).
             This is a single-eigenvalue map, so
             the transformation $t-6$ is nilpotent.
-            The null spaces
+            The nullspaces
             \begin{equation*}
                \nullspace{t-6}=\set{\colvec{-z-w \\ -z-w \\ z \\ w}
                                       \suchthat z,w\in\C} 
@@ -3487,7 +3504,7 @@ matrix.
           \vec{\beta}_5\mapsto\zero                      
         \end{array}        
       \end{equation*}
-      The resulting Jordan form matrics are these. 
+      The resulting Jordan form matrices are these. 
       \begin{equation*}
         \begin{mat}[r]
           -1  &0  &0  &0  &0  \\
@@ -3525,13 +3542,13 @@ matrix.
             \nullspace{t-0}=\set{\colvec{-y \\ y}
                                  \suchthat y\in\C }  
           \end{equation*} 
-          (of course, the null space of $t^2$ is the same).
+          (of course, the nullspace of $t^2$ is the same).
           For $\lambda_2=1$,
           \begin{equation*}
             \nullspace{t-1}=\set{\colvec{x \\ 0}
                                      \suchthat x\in\C }  
           \end{equation*}
-          (and the null space of $(t-1)^2$ is the same).
+          (and the nullspace of $(t-1)^2$ is the same).
           We can take this basis
           \begin{equation*}
             B=\sequence{\colvec[r]{1 \\ -1},\colvec[r]{1 \\ 0}}
@@ -3563,13 +3580,13 @@ matrix.
             \nullspace{t+1}=\set{\colvec{-y \\ y}
                                     \suchthat y\in\C } 
           \end{equation*}
-          and the null space of $(t+1)^2$ is the same.
+          and the nullspace of $(t+1)^2$ is the same.
           For $\lambda_2=1$ 
           \begin{equation*}
             \nullspace{t-1}=\set{\colvec{y \\ y}
                                     \suchthat y\in\C } 
           \end{equation*}
-          and the null space of $(t-1)^2$ is the same.
+          and the nullspace of $(t-1)^2$ is the same.
           We can take this basis
           \begin{equation*}
             B=\sequence{\colvec[r]{1 \\ -1},\colvec[r]{1 \\ 1}}
@@ -3638,7 +3655,7 @@ matrix.
           \qquad
           \nullspace{t_2+1}=\set{\colvec{0 \\ y} \suchthat y\in\C}
         \end{equation*}
-        (Of course, for each the null space of the square is 
+        (Of course, for each the nullspace of the square is 
         the entire space.)
         The way that the nullities rise shows that each is  
         similar to this Jordan form matrix
@@ -3672,7 +3689,7 @@ matrix.
             0  &i
          \end{mat}
        \end{equation*}  
-       To find an associated basis we compute the null spaces.
+       To find an associated basis we compute the nullspaces.
        \begin{equation*}
          \nullspace{t+i}=\set{\colvec{-iy \\ y}
                                         \suchthat y\in\C} 
@@ -3688,7 +3705,7 @@ matrix.
            1  &i
          \end{mat}
        \end{equation*}
-       and so we get a description of the null space of $t+i$ by solving
+       and so we get a description of the nullspace of $t+i$ by solving
        this linear system.
        \begin{equation*}
          \begin{linsys}{2}
@@ -3915,7 +3932,7 @@ matrix.
       Of course, the union of two subspaces need not be a subspace
       (remember that the $x$-\hbox{} and $y$-axes are subspaces of the plane
       $\Re^2$ but the union of the two axes fails to be closed
-      under vector addition, for instance it does not contain
+      under vector addition; for instance it does not contain
       $\vec{e}_1+\vec{e}_2$.)
       However, the union of invariant subsets is an invariant subset; if
       \( \vec{v}\in M\union N \) then \( \vec{v}\in M \) or \( \vec{v}\in N \)
