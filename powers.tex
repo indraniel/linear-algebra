@@ -5,19 +5,20 @@
 \index{method of powers|(}
 \index{powers, method of|(}
 In practice, calculating eigenvalues and eigenvectors is a difficult problem.
-Finding, and solving, the characteristic polynomial
-of the large matrices often encountered in applications is too slow and too
-hard. 
+In applications the matrices can be quite large.
+Finding and solving the characteristic polynomial
+can be too slow and too hard. 
 Other techniques, indirect ones that avoid the characteristic polynomial,
-are used. 
+can be useful. 
 Here we shall see such a method that is suitable for large matrices that are
-`sparse' (the great majority of the entries are zero).
+\definend{sparse}\index{matrix!sparse}\index{sparse matrix}, 
+meaning that the great majority of the entries are zero.
 
 Suppose that the $\nbyn{n}$ matrix $T$ has the $n$ distinct eigenvalues
 $\lambda_1$, $\lambda_2$, \ldots, $\lambda_n$.
-Then $\Re^n$ has a basis that is composed of the associated eigenvectors
+Then $\C^n$ has a basis that is composed of the associated eigenvectors
 $\sequence{\vec{\zeta}_1,\dots,\vec{\zeta}_n}$.
-For any $\vec{v}\in\Re^n$, writing
+For any $\vec{v}\in\C^n$, writing
 $\vec{v}=c_1\vec{\zeta}_1+\dots+c_n\vec{\zeta}_n$ and iterating $T$ on $\vec{v}$
 gives these.
 \begin{align*}
@@ -35,57 +36,55 @@ gives these.
       &=c_1\lambda_1^k\vec{\zeta}_1+c_2\lambda_2^k\vec{\zeta}_2+
                               \dots+c_n\lambda_n^k\vec{\zeta}_n  
 \end{align*}
-If one of the eigenvalues 
-has a larger absolute value than any of the other eigenvalues
-then its term will dominate the above expression.
-Put another way, assuming that the absolute value of $\lambda_1$
+Assuming that $|\lambda_1|$
 is the largest and dividing through
 \begin{equation*}
   \frac{T^k\vec{v}}{\lambda_1^k} 
       =c_1\vec{\zeta}_1+c_2\frac{\lambda_2^k}{\lambda_1^k}\vec{\zeta}_2+
                     \dots+c_n\frac{\lambda_n^k}{\lambda_1^k}\vec{\zeta}_n  
 \end{equation*} 
-shows that as $k$ gets larger the fractions go to zero.
-Thus, the entire expression goes to $c_1\vec{\zeta}_1$.
+shows that as $k$ gets larger the fractions go to zero
+and so $\lambda_1$'s term will dominate the expression.
+Thus, the entire expression has a limit of $c_1\vec{\zeta}_1$.
 
-That is (as long as $c_1$ is not zero),
-as $k$ increases, the vectors $T^k\vec{v}$ will tend toward the direction of 
+That is, if $c_1\neq 0$, 
+as $k$ increases the vectors $T^k\vec{v}$ will tend toward the direction of 
 the eigenvectors associated with the dominant eigenvalue,
 and, consequently,
 the ratios of the lengths $\norm{\,T^{k}\vec{v}\,}/\norm{\,T^{k-1}\vec{v}\,}$ 
 will tend toward that dominant eigenvalue.
 
-For example (sample computer code for this follows the exercises), because
+For example because
 the matrix 
 \begin{equation*}
-  T=\begin{pmatrix}
+  T=\begin{mat}[r]
     3  &0  \\
     8  &-1
-  \end{pmatrix}
+  \end{mat}
 \end{equation*}
-is triangular, its eigenvalues are just the entries on the diagonal, $3$
+is triangular, its eigenvalues are the diagonal entries $3$
 and $-1$.
-Arbitrarily taking $\vec{v}$ to have the components $1$ and $1$ gives 
+If for instance $\vec{v}$ has the components $1$ and $1$ then
 \begin{center}
   \begin{tabular}{c|ccccc}
      $\vec{v}$  &$T\vec{v}$  &$T^2\vec{v}$ 
         &$\cdots$ &$T^9\vec{v}$ &$T^{10}\vec{v}$        \\ \hline 
-     $\colvec{1 \\ 1}$  &$\colvec{3 \\ 7}$ &$\colvec{9 \\ 17}$ 
-        &$\cdots$  &$\colvec{19\,683 \\ 39\,367}$   
-        &$\colvec{59\,049 \\ 118\,097}$
+     $\colvec[r]{1 \\ 1}$  &$\colvec[r]{3 \\ 7}$ &$\colvec[r]{9 \\ 17}$ 
+        &$\cdots$  &$\colvec[r]{19\,683 \\ 39\,367}$   
+        &$\colvec[r]{59\,049 \\ 118\,097}$
   \end{tabular}
 \end{center}
 and the ratio between the lengths of the last two is $2.999\,9$.
 
-Two implementation issues must be addressed.
-The first issue is that,
+We shall note two implementation issues.
+First,
 instead of finding the powers of $T$ and applying them to $\vec{v}$, 
 we will compute $\vec{v}_1$ as $T\vec{v}$ and then compute $\vec{v}_2$ as
-$T\vec{v}_1$, etc.\ (i.e., we never separately calculate 
-$T^2$, $T^3$, etc.). 
-These matrix-vector products can be done quickly even if $T$ is large,
+$T\vec{v}_1$, etc.\ (that is, we do not separately calculate 
+$T^2$, $T^3$, \ldots). 
+We can quickly do these matrix-vector products even if $T$ is large,
 provided that it is sparse.
-The second issue is that, 
+The second issue is that 
 to avoid generating numbers that are so large that they 
 overflow our computer's capability, we can normalize
 the $\vec{v}_i$'s at each step.
@@ -98,18 +97,18 @@ We thus implement this method by generating
   \vec{v}_1  &=T\vec{w}_0                 \\
   \vec{w}_1  &=\vec{v}_1/\norm{\vec{v}_1} \\
   \vec{v}_2  &=T\vec{w}_2                 \\
-             &\alignedvdots    \\
+             &\vdotswithin{=}    \\
   \vec{w}_{k-1}  &=\vec{v}_{k-1}/\norm{\vec{v}_{k-1}} \\
   \vec{v}_k  &=T\vec{w}_k                 
 \end{align*}
 until we are satisfied.
-Then the vector $\vec{v}_k$ is an approximation of an eigenvector, and 
+Then $\vec{v}_k$ is an approximation of an eigenvector, and 
 the approximation of the dominant eigenvalue is
 the ratio $\norm{\vec{v}_{k}}/\norm{\vec{w}_{k-1}}$.
 
-One way we could be `satisfied'
+One way that we could be `satisfied'
 is to iterate until our approximation of the eigenvalue settles down.
-We could decide, for instance, to stop the iteration
+We could decide for instance to stop the iteration
 process not after some fixed number of steps, but instead
 when $\norm{\vec{v}_k}$ differs from $\norm{\vec{v}_{k-1}}$ 
 by less than one percent, or when they agree up to the 
@@ -118,7 +117,7 @@ second significant digit.
 The rate of convergence is determined by the rate at which 
 the powers of $\norm{\lambda_2/\lambda_1}$ go to zero,
 where $\lambda_2$ is the eigenvalue of second largest norm. 
-If that ratio is much less than one then convergence is fast, but
+If that ratio is much less than one then convergence is fast but
 if it is only slightly less than one then convergence can be quite slow.
 Consequently, the method of powers
 is not the most commonly used way of finding eigenvalues
@@ -132,8 +131,8 @@ such as \emph{tridiagonal form}:~the only nonzero
 entries are on the diagonal, or just above or below it.
 Then special techniques can be used 
 to find the eigenvalues.
-Once the eigenvalues are known, 
-the eigenvectors of $T$ can be easily computed. 
+Once the eigenvalues are known, we can easily compute 
+the eigenvectors of $T$. 
 These other methods  are outside of our scope.
 A good reference is \cite{Goult}
 
@@ -146,14 +145,14 @@ A good reference is \cite{Goult}
     Compare the answer with the one obtained by solving the characteristic
     equation.
     \begin{exparts*}
-      \partsitem $\begin{pmatrix}
+      \partsitem $\begin{mat}[r]
                     1  &5  \\
                     0  &4
-                  \end{pmatrix}$
-      \partsitem $\begin{pmatrix}
+                  \end{mat}$
+      \partsitem $\begin{mat}[r]
                     3   &2  \\
                     -1  &0
-                  \end{pmatrix}$
+                  \end{mat}$
     \end{exparts*}
     \begin{answer}
      \begin{exparts}
@@ -174,16 +173,16 @@ A good reference is \cite{Goult}
     Compare the answer with the one obtained by solving the characteristic
     equation.
     \begin{exparts*}
-      \partsitem $\begin{pmatrix}
+      \partsitem $\begin{mat}[r]
                     4   &0  &1 \\
                     -2  &1  &0  \\
                     -2  &0  &1
-                  \end{pmatrix}$
-      \partsitem $\begin{pmatrix}
+                  \end{mat}$
+      \partsitem $\begin{mat}[r]
                    -1  &2  &2  \\
                     2  &2  &2  \\
                    -3  &-6 &-6
-                  \end{pmatrix}$
+                  \end{mat}$
     \end{exparts*}
     \begin{answer}
      \begin{exparts}
@@ -218,11 +217,10 @@ A good reference is \cite{Goult}
     \end{answer}
 \end{exercises}
 
-\announcecomputercode
 This is the code for the computer algebra system Octave that was used to
 do the calculation above.
 (It has been lightly edited to remove blank lines, etc.)
-\begin{computercode}
+\begin{lstlisting}
 >T=[3, 0;
     8, -1]
 T=
@@ -258,9 +256,10 @@ v10=
  118096
 >norm(v10)/norm(v9)
 ans=2.9999
-\end{computercode}
-Remark:~we are ignoring the power of Octave here;
-there are built-in functions to automatically
+\end{lstlisting}
+\textit{Remark.}
+Wwe are ignoring the power of Octave;
+it has built-in functions to automatically
 apply quite sophisticated methods to find eigenvalues and eigenvectors.
 Instead, we are using just the system as a calculator. 
 
