@@ -4,19 +4,18 @@
 \topic{Method of Powers}
 \index{method of powers|(}
 \index{powers, method of|(}
-In practice, calculating eigenvalues and eigenvectors is a difficult problem.
 In applications the matrices can be quite large.
-Finding and solving the characteristic polynomial
+Calculating eigenvalues and eigenvectors by
+finding and solving the characteristic polynomial
 can be too slow and too hard. 
-Other techniques, indirect ones that avoid the characteristic polynomial,
-can be useful. 
+There are techniques that avoid the characteristic polynomial. 
 Here we shall see such a method that is suitable for large matrices that are
 \definend{sparse}\index{matrix!sparse}\index{sparse matrix}, 
 meaning that the great majority of the entries are zero.
 
-Suppose that the $\nbyn{n}$ matrix $T$ has the $n$ distinct eigenvalues
+Suppose that the $\nbyn{n}$ matrix $T$ has $n$ distinct eigenvalues
 $\lambda_1$, $\lambda_2$, \ldots, $\lambda_n$.
-Then $\C^n$ has a basis that is composed of the associated eigenvectors
+Then $\C^n$ has a basis made of the associated eigenvectors
 $\sequence{\vec{\zeta}_1,\dots,\vec{\zeta}_n}$.
 For any $\vec{v}\in\C^n$, writing
 $\vec{v}=c_1\vec{\zeta}_1+\dots+c_n\vec{\zeta}_n$ and iterating $T$ on $\vec{v}$
@@ -31,7 +30,7 @@ gives these.
   T^3\vec{v} 
       &=c_1\lambda_1^3\vec{\zeta}_1+c_2\lambda_2^3\vec{\zeta}_2+
                               \dots+c_n\lambda_n^3\vec{\zeta}_n  \\
-      &\alignedvdots                                            \\
+      &\vdotswithin{=}                                            \\
   T^k\vec{v} 
       &=c_1\lambda_1^k\vec{\zeta}_1+c_2\lambda_2^k\vec{\zeta}_2+
                               \dots+c_n\lambda_n^k\vec{\zeta}_n  
@@ -47,14 +46,14 @@ shows that as $k$ gets larger the fractions go to zero
 and so $\lambda_1$'s term will dominate the expression.
 Thus, the entire expression has a limit of $c_1\vec{\zeta}_1$.
 
-That is, if $c_1\neq 0$, 
+Thus if $c_1\neq 0$, 
 as $k$ increases the vectors $T^k\vec{v}$ will tend toward the direction of 
 the eigenvectors associated with the dominant eigenvalue,
-and, consequently,
-the ratios of the lengths $\norm{\,T^{k}\vec{v}\,}/\norm{\,T^{k-1}\vec{v}\,}$ 
+and consequently
+the ratios $\norm{\,T^{k}\vec{v}\,}/\norm{\,T^{k-1}\vec{v}\,}$ 
 will tend toward that dominant eigenvalue.
 
-For example because
+For example the eigenvalues of 
 the matrix 
 \begin{equation*}
   T=\begin{mat}[r]
@@ -62,16 +61,18 @@ the matrix
     8  &-1
   \end{mat}
 \end{equation*}
-is triangular, its eigenvalues are the diagonal entries $3$
-and $-1$.
+are $3$ and $-1$.
 If for instance $\vec{v}$ has the components $1$ and $1$ then
 \begin{center}
   \begin{tabular}{c|ccccc}
      $\vec{v}$  &$T\vec{v}$  &$T^2\vec{v}$ 
         &$\cdots$ &$T^9\vec{v}$ &$T^{10}\vec{v}$        \\ \hline 
-     $\colvec[r]{1 \\ 1}$  &$\colvec[r]{3 \\ 7}$ &$\colvec[r]{9 \\ 17}$ 
-        &$\cdots$  &$\colvec[r]{19\,683 \\ 39\,367}$   
-        &$\colvec[r]{59\,049 \\ 118\,097}$
+     $\matrixvenlarge{\colvec[r]{1 \\ 1}}$  
+        &$\matrixvenlarge{\colvec[r]{3 \\ 7}}$ 
+        &$\matrixvenlarge{\colvec[r]{9 \\ 17}}$ 
+        &$\cdots$  
+        &$\matrixvenlarge{\colvec[r]{19\,683 \\ 39\,367}}$   
+        &$\matrixvenlarge{\colvec[r]{59\,049 \\ 118\,097}}$
   \end{tabular}
 \end{center}
 and the ratio between the lengths of the last two is $2.999\,9$.
@@ -81,7 +82,7 @@ First,
 instead of finding the powers of $T$ and applying them to $\vec{v}$, 
 we will compute $\vec{v}_1$ as $T\vec{v}$ and then compute $\vec{v}_2$ as
 $T\vec{v}_1$, etc.\ (that is, we do not separately calculate 
-$T^2$, $T^3$, \ldots). 
+$T^2\!$, $T^3\!$, \ldots). 
 We can quickly do these matrix-vector products even if $T$ is large,
 provided that it is sparse.
 The second issue is that 
@@ -115,25 +116,24 @@ by less than one percent, or when they agree up to the
 second significant digit. 
 
 The rate of convergence is determined by the rate at which 
-the powers of $\norm{\lambda_2/\lambda_1}$ go to zero,
+the powers of $|\lambda_2/\lambda_1|$ go to zero,
 where $\lambda_2$ is the eigenvalue of second largest norm. 
 If that ratio is much less than one then convergence is fast but
 if it is only slightly less than one then convergence can be quite slow.
 Consequently, the method of powers
 is not the most commonly used way of finding eigenvalues
-(although it is the simplest one, which is why it is here as
-the illustration of the possibility of computing eigenvalues
-without solving the characteristic polynomial).
+(although it is the simplest one, which is why it is here).
 Instead, there are a variety of methods that generally work by first 
 replacing the given matrix $T$ with another that is similar to it
 and so has the same eigenvalues, but is in some reduced form
-such as \emph{tridiagonal form}:~the only nonzero
+such as 
+\emph{tridiagonal form}\index{tridiagonal form}\index{matrix!tridiagonal},
+where the only nonzero
 entries are on the diagonal, or just above or below it.
-Then special techniques can be used 
-to find the eigenvalues.
-Once the eigenvalues are known, we can easily compute 
+Then special techniques can find the eigenvalues.
+Once we know the eigenvalues then we can easily compute 
 the eigenvectors of $T$. 
-These other methods  are outside of our scope.
+These other methods are outside of our scope.
 A good reference is \cite{Goult}
 
 
@@ -165,7 +165,7 @@ A good reference is \cite{Goult}
      $\norm{\vec{v}_k}-\norm{\vec{v}_{k-1}}$ has absolute value less than
      $0.01$
      At each step, normalize by dividing each vector by its length.
-     How many iterations are required?
+     How many iterations does it take?
      Are the answers significantly different?
   \item 
     Use ten iterations to estimate the largest eigenvalue of these
@@ -209,16 +209,17 @@ A good reference is \cite{Goult}
        it would have taken with a more fortunate choice of initial vector. 
      \end{answer}
   \item 
-    How can the method of powers
-    be adopted to find the smallest eigenvalue?
+    How can we adapt the method of powers
+    to find the smallest eigenvalue?
     \begin{answer}
       Instead of using $\vec{v}_k=T\vec{v}_{k-1}$, 
       use $T^{-1}\vec{v}_k=\vec{v}_{k-1}$.
     \end{answer}
 \end{exercises}
 
-This is the code for the computer algebra system Octave that was used to
-do the calculation above.
+\announcecomputercode
+This is the code for the computer algebra system Octave that did
+the calculation above.
 (It has been lightly edited to remove blank lines, etc.)
 \begin{lstlisting}
 >T=[3, 0;
@@ -258,10 +259,9 @@ v10=
 ans=2.9999
 \end{lstlisting}
 \textit{Remark.}
-Wwe are ignoring the power of Octave;
+This does not use the full power of Octave;
 it has built-in functions to automatically
-apply quite sophisticated methods to find eigenvalues and eigenvectors.
-Instead, we are using just the system as a calculator. 
+apply sophisticated methods to find eigenvalues and eigenvectors.
 
 \index{powers, method of|)}
 \index{method of powers|)}
