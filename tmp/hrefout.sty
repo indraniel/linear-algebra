@@ -1,0 +1,102 @@
+\ProvidesPackage{hrefout}[2001/05/23 Set whether output is hyperref-ed (JH)]
+% hrefout.sty
+%  LaTeX file to help set, perhaps from the command line, whether
+% hyperref-ed output is desired.
+%
+% BACKGROUND
+%   I want, from the same source file, sometimes to have hyperref-ed
+% output and sometimes not.
+%    > latex ``\def\hrefout{yes}\input myfile''
+% This package allows this.
+%
+% USAGE
+%  With this in your source file
+%    \documentclass{article}
+%    \usepackage{hrefout}
+% the package will do this.
+%  (1) If the command line is 
+%      > latex ``\def\hrefout{yes}\input myfile''
+%    then \hrefouttrue is set (and also the macro \hrefout is def-ed
+%    to `yes').  If the command line is
+%      > latex ``\def\hrefout{no}\input myfile''
+%    (or anything except `yes') then \hrefoutfalse is set (and \hrefout
+%    is def-ed to `no').
+%  (3) If the command line is 
+%      > latex myfile
+%    then the package will try to grab the default answer from 
+%    hrefout.cfg.  If there is no such file then the default is to
+%    set \hrefoutfalse.
+% Also possible is to get a per-document default.  Call the package as
+%    \documentclass{article}
+%    \usepackage[yes]{hrefout}
+% in which case, absent (1) above we have
+%  (2) the package will set \hrefouttrue.
+%
+% SEE ALSO
+%  dvidrv.sty   Allows you to set the dvi driver from the command line.
+%
+% HISTORY
+% 2001-May-23 Jim Hefferon jim@joshua.smcvt.edu Written.
+%               Donald Arseneau on ctt got me past an ExecuteOptions*
+%               point that I didn't understand.  (Thanks!)
+%
+
+% The INITIAL CODE part
+\newif\ifhrefout %
+\def\hrefout@yes{yes}%
+\def\hrefout@settrue{\hrefouttrue\def\hrefout{yes}}%
+\def\hrefout@setfalse{\hrefoutfalse\def\hrefout{no}}%
+
+\@ifundefined{hrefout}% Has it been set already?
+  {}%
+  {\ifx\hrefout@yes\hrefout % yes, it has
+     \hrefout@settrue %
+   \else
+     \hrefout@setfalse %
+   \fi
+  }
+
+
+% The DECLARATION OF OPTIONS part
+\DeclareOption*{\@ifundefined{hrefout}%
+	         {\ifx\hrefout@yes\CurrentOption %
+		    \hrefout@settrue %
+                   \else
+                     \hrefout@setfalse %
+                   \fi
+                 }{\ifhrefout %
+		    %
+                   \else
+                     \hrefout@setfalse % define to `no', no matter what
+                   \fi
+                 }}
+
+% The EXECUTION OF OPTIONS part
+\ProcessOptions % grab any options off the options list for (2) above
+\@ifundefined{hrefout}%
+  {\InputIfFileExists{hrefout.cfg}{}{\hrefout@setfalse}% default for (3)
+  }{\ifx\hrefout@yes\hrefout %
+      \hrefout@settrue %
+     \else
+       \hrefout@setfalse %
+     \fi
+   }
+
+% The PACKAGE LOADING part
+
+% The MAIN CODE part
+\typeout{   href output is turned on?  \hrefout.}
+
+% ========test file==========
+%\documentclass{article}
+%\usepackage[yes]{hrefout}
+%
+%\begin{document}
+%Hello. 
+%
+%\ifhrefout
+%  Yes, the test works.
+%\else
+%  No, the test doesn't work
+%\fi
+%\end{document}

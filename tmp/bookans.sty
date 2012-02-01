@@ -1,0 +1,362 @@
+\ProvidesPackage{bookans}[2001/06/06 Use the answer style with Linear Algebra (JH)]
+% bookans.sty
+%
+% Make the exercises and answers do what I want them to do for my book.
+% (1) There should be an `exercises' environment.  The exercises should 
+%   be numbered in sequence with the other material (theorems, lemma's,
+%   etc.)
+% (2) The recommended exercises are marked.  There is also a mark for 
+%   exercises that are `puzzles' (to warn an independent reader that this
+%   probably has some twist to it).
+% (3) There should be an `answers' environment.  The answers should be 
+%   kept with the exercises, and output to a file for later LaTeXing.
+% (4) If desired, the recommended exercises can be output to a separate
+%   file than the answers to the non-recommended.
+% (5) If there is hyper-linking then the exercise's number should be a  
+%   link to the answer, and the answer's number should be a link to the
+%   exercise.
+% 
+% BUGS 
+%  * The \puzzle and \recommended code at the end interacts with the file
+%   single-or-double stuff at the start.  I didn't see how to avoid that.
+%  * The \chapter and \topic code in bookjh.sty use some of this stuff
+%   so to understand what is going on, you need both .sty's.
+% 
+% HISTORY
+%   2001-Jun-06 Jim Hefferon jim@joshua.smcvt.edu
+%     Written, although I had been working on parts for years.
+% 
+% LICENSE
+%   LaTeX Project Public License
+% 
+
+%================================
+% The INITIAL CODE part
+\newif\ifsingleanswerfile \singleanswerfiletrue % 
+\newif\ifopenanswerfileforwriting \openanswerfileforwritingfalse %
+
+%================================
+% The DECLARATION OF OPTIONS part
+\DeclareOption{single}{\singleanswerfiletrue}
+\DeclareOption{singleanswerfile}{\singleanswerfiletrue}
+\DeclareOption{double}{\singleanswerfilefalse}
+\DeclareOption{doubleanswerfile}{\singleanswerfilefalse}
+\DeclareOption{write}{\openanswerfileforwritingtrue}
+\DeclareOption{nowrite}{\openanswerfileforwritingfalse}
+\DeclareOption{openanswerfileforwriting}{\openanswerfileforwritingtrue}
+
+%================================
+% The EXECUTION OF OPTIONS part
+\ProcessOptions
+
+%================================
+% The PACKAGE LOADING part
+\RequirePackage{answers}
+\RequirePackage{hrefout} % defines \ifhrefout 
+
+%================================
+% The MAIN CODE part
+
+% decide on the file names
+\ifsingleanswerfile
+  \newcommand{\ans@fn}{bookans}      % the name of the file to which answers go
+  \newcommand{\otherans@fn}{\ans@fn}
+  \ifopenanswerfileforwriting
+    \Opensolutionfile{\ans@fn}
+  \fi
+\else
+  \newcommand{\ans@fn}{recans} % name of file of recommended-only answers
+  \newcommand{\otherans@fn}{otherans} % name of file for non-recommended
+  \ifopenanswerfileforwriting
+    \Opensolutionfile{\ans@fn}
+    \Opensolutionfile{\otherans@fn}
+  \fi
+\fi
+
+% Next, modify the answer package's Newassociation code.
+% 2001-Jun-04 JH
+% I add a hook before and after the filesave (the verbatim write) op.
+% This allows me to, in mid-book, change the file to which the answers
+% are written by calling that hook. 
+%
+% Specifically, the default behavior is Piff's; it outputs to the
+% file named in the \Newassociation command.  But, if you do this:
+%  \def\recommended{... \gdef\answerprehook{\gdef\answerfilename{newname}} ...}
+% then it will put the answers out to the file `newname'.  (See the code 
+% at the end of this file for the \recommended command.)  Then I reset
+% it in the end part, and call the posthook (which I have in just for
+% symmetry; it doesn't do anything).
+
+\renewcommand{\Newassociation}[3]{%
+   \newsolution{#2}%
+   \expandafter\ifx\csname #3opentrue\endcsname\relax
+      \expandafter\newif\csname if#3open\endcsname
+   \fi
+   \expandafter\gdef\csname #1prehook\endcsname{\gdef\answerfilename{#3}} % JH 
+   \expandafter\gdef\csname #1posthook\endcsname{\gdef\answerfilename{#3}}% JH
+   \newenvironment{#1}{%
+      \csname #1prehook\endcsname % JH
+      \Ifanswerfiles{%
+         \let\Tmp\relax
+         \Iffileundefined{\answerfilename}{}{% JH (changed the #3)
+            \Ifopen{\answerfilename}{%
+               \immediate\write\@nameuse{\answerfilename @file}% JH
+                  {\string\begin{#2}\@nameuse{#2params}}%
+            \def\Tmp{\Filesave{\answerfilename}}% JH
+            }{}%
+         }%
+      }{%
+         \edef\Tmp{\noexpand\begin{#2}\@nameuse{#2params}}%
+      }%
+      \csname pre#1\endcsname
+      \Tmp
+   }%
+   {%
+      \Ifanswerfiles{%
+         \Iffileundefined{\answerfilename}{}{%
+            \Ifopen{\answerfilename}{% JH
+               \endFilesave%
+               \immediate\write\@nameuse{\answerfilename @file}% JH
+                  {\string\end{#2}}%
+               \csname post#1\endcsname
+            }{}%
+         }%
+      }{%
+         \end{#2}%
+      }%
+      \expandafter\gdef\csname #1prehook\endcsname{\gdef\answerfilename{#3}}
+      \csname #1posthook\endcsname % JH
+   }%
+}
+
+\Newassociation{answer}{ans}{\otherans@fn} % default is not-recommended
+
+
+% \answerspacer 
+% \answerdivider
+%  Visual candy put into answer files to separate answers from different
+% sections and chapters.
+\newcommand{\answerspacer}{\protect\begin{center}
+                                \protect\answerdivider
+                             \protect\end{center}}
+\newcommand{\answerdivider}{\hbox to \textwidth{\rule{0in}{.25in}
+                                  \leaders\hbox to .707em{\hss.\hss}\hfill}}
+
+
+% \announcesectioninginanswerfile
+%  This command writes to the answer file something saying that 
+% a new section/topic has occurred, and its answers are about to come.
+\newcommand{\announcesectioninginanswerfile}{%
+  \Writetofile{\ans@fn}{\protect\subsection\protect{%
+     \Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}: 
+     \sectioningname%
+     \protect}}
+  \ifsingleanswerfile\relax\else
+     \Writetofile{\otherans@fn}{\protect\section\protect{% 
+         \Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}: 
+         \sectioningname
+         \protect}}
+  \fi}
+
+% the way it is done inside of chapters
+\newcommand{\sectioninginanswerfilechapterstyle}{%
+  \Writetofile{\ans@fn}{\protect\subsection\protect{% 
+     Subsection \Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}:
+     \sectioningname
+     \protect}}
+  \ifsingleanswerfile\relax\else
+     \Writetofile{\otherans@fn}{\protect\subsection\protect{%
+         \Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}: 
+         \sectioningname
+         \protect}}
+  \fi}
+% the way it is done inside of Topics
+\newcommand{\sectioninginanswerfiletopicstyle}{%
+  \Writetofile{\ans@fn}{\protect\subsection\protect{%
+                Topic:
+                \sectioningname
+                \protect}}
+  \ifsingleanswerfile\relax\else
+     \Writetofile{\otherans@fn}{\protect\subsection\protect{%
+                Topic:
+                \sectioningname
+                \protect}}
+  \fi} %
+
+
+
+% \exercise@makelabel
+% \exercise@deflabel
+% The next two govern the label formatting of exerciselists.
+%  Change them in the definition of Chapter or Topic
+%   * makelabel formats the label: no args
+%   * deflabel gives the label for an \item or \recitem having no args:
+%     #1 is the name of a counter containing the value of the question number
+%        (it will be incremented by one before being used)  
+% (you can include, say, the subsection number when you renewcommand).
+\newcommand{\exercise@makelabel}{} % redefine this in chapter or topic
+
+\ifhrefout
+  \newcommand{\exercise@deflabel}[1]{\hypertarget{exercise.\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\arabic{#1}}{\textbf{\arabic{subsection}.\arabic{#1}}}}
+\else
+  \newcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{#1}}}
+\fi
+
+
+% exerciselist
+%  arg1: integer; first item will be numbered one higher than this integer.
+%  Environment called by the exercise environment.  Puts items closer
+% together, formats the label as in the description environment, etc.
+%  Note: see the \exercise@deflabel and \exercise@makelabel commands,
+% which can be reset by the chapter and topic commands to allow for
+% somewhat different formatting in the two cases.
+\newcounter{exercisecounter}
+\newenvironment{exerciselist}[1]{%
+    \begin{list}{\exercise@deflabel{exercisecounter}}{%
+                  \usecounter{exercisecounter} 
+                      \setcounter{exercisecounter}{#1}
+                  \setlength{\leftmargin}{\parindent}
+                  \setlength{\rightmargin}{0em}
+                  \setlength{\parsep}{\parskip}
+                  \setlength{\itemsep}{.4ex plus .1ex minus .15ex}
+                  \setlength{\itemindent}{0em}
+                  \setlength{\listparindent}{\parindent}
+                  \setlength{\topsep}{0ex plus 5pt}
+                  \setlength{\partopsep}{0ex plus 5pt}
+                  \setlength{\labelsep}{.5em}
+                  \setlength{\labelwidth}{0em}
+                  \setlength{\abovedisplayskip}{3pt plus2pt minus3pt}%
+                  \setlength{\belowdisplayskip}{\abovedisplayskip}
+                  \setlength{\abovedisplayshortskip}{\z@ plus2pt}%
+                  \setlength{\belowdisplayshortskip}{3pt plus2pt minus3pt}
+                  \renewcommand{\makelabel}{\exercise@makelabel}
+                 }
+  }{\end{list}
+   }
+
+% \exercise@setfirstitemnumber
+%  args: none
+% Return the number for the first exercise.  Typically redefined by
+% chapter (to give the current value of a counter) and topic (to be 1). 
+%  Note: number will be increased by one before it is used.
+\newcommand{\exercise@setfirstitemnumber}{\value{theorem}} % counter exists?
+
+% exercises
+%  Environment for writing exercises and answers.  Does some initial work
+% and then calls exerciselist.
+%  The initial work is to encourage a page break, write ``Exercises'', write
+% a similiar section header to the answer file(s), put what follows in 
+% small size, then call the exerciselist environment, and finish by
+% again encouraging a page break.  
+%   1999-Oct-23 jh
+\newenvironment{exercises}{%
+  \bigbreak
+  \noindent\textbf{Exercises}\nopagebreak
+  \announcesectioninginanswerfile % note the section change in the answer file
+  \begingroup\@beginparpenalty 10000
+  \small
+  \begin{exerciselist}{\exercise@setfirstitemnumber}
+}{%
+  \end{exerciselist}\endgroup\pagebreak[2]%
+}
+
+
+% \recommendation 
+% \puzzle
+% Allows placing marks in the margin just before the exercise number
+% noting that the exercise is recommended, or is a puzzle, or both.
+% If it is both, the \puzzlemark will appear on the left.
+%
+%   * \recommendation takes no arguments.  It sets \recommendationmark
+%      and it sets the file to output answers to (must have already been 
+%      opened).
+%   * \puzzle is similar to \recommendation.  (Note the space to separate it
+%      from the \recommendationmark.)
+%
+% Then I grab the definition of \@item and put in the two (if they are
+% \def-ed to \relax then there is no harm).  Then I reset the definitions
+% of \recommended and \puzzled back to the default.
+
+\def\recommendationmark{\checkmark} % REQUIRES amsfonts.sty 
+%\def\recommendationmark{\textbf{*}} % if amsfonts.sty is inconvienent 
+
+\newcommand{\puzzlemark}{{\sffamily\bfseries ?}}%
+
+\def\recommended{%
+  \gdef\recommendation{\recommendationmark\ }% 
+  \gdef\answerprehook{\gdef\answerfilename{\ans@fn}}%
+}
+
+\def\puzzle{%
+  \gdef\puzzled{\puzzlemark\ }% space to separate from recommendationmark
+}
+
+\def\decoratefalse{%
+  \gdef\recommendation{\relax}%
+  \gdef\puzzled{\relax}%
+}
+% initialize them
+\decoratefalse %
+
+\let\dec@itemsave=\@item %
+\def\@item[#1]{%
+    \dec@itemsave[\llap{\puzzled\recommendation}%
+                    \decoratefalse%
+                    #1]%
+}
+
+\def\recitem{\recommended\item}  % I used to do it another way.
+
+% Indicate in source file which exercises have been thoroughly checked.
+\newcommand{\checked}{\relax}
+
+
+%=============================================================
+% Brief Usage 
+%
+% With the defaults unchanged:
+%
+%    ...
+%    \usepackage[single,write]{bookans}
+%    ...
+%    \begin{document}
+%    ...
+%    \begin{exercises}
+%    \item First exercise
+%       \begin{answer}
+%          Answer to the $1$-st exercise.
+%       \end{answer}    
+%    \recommended \item Second exercise
+%       \begin{answer}
+%          Answer to the $2$-nd exercise.
+%       \end{answer}
+%    \item Third exercise
+%    \end{exercises}
+%
+% will do as required.  Because of the `single' option, it will write
+% to a single answer file (bookans.tex is the default).  Note that the 
+% math text ``$1$-st'' will be OK.  Because of the `\recommended' it
+% will put a `\recommendationmark' inthe margin before the exercise
+% number.
+%
+% Note also that the answers appear in their file as 
+%  
+%    \begin{ans}{0.0.0.1}
+%       Answer to the $1$-st exercise.
+%    \end{ans}
+%
+% so to typeset the answers requires the you just define an `ans' environment
+% that takes the one argument (say, and typesets it in boldface).
+%
+% Finally, note the `\ifhrefout' code.  If we are putting out a file that
+% is under the influence of the hyperref package then we can make each
+% exercise a target of linking (that is, an `anchor' in HTML terminology).
+% So, for instance, if you click on the answer then you can be sent to
+% the question.
+%
+\endinput
+
+
+
+
+

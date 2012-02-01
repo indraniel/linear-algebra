@@ -25,8 +25,8 @@
 %  \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
 %  }%
 %\ifpdf
-  \typeout{ ABOUT TO RUN GRAPHICS RULE }
-  \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
+  % \typeout{ ABOUT TO RUN GRAPHICS RULE }
+  % \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
 %\fi
 \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
 \usepackage{linalgjh}
@@ -347,25 +347,30 @@
 \renewcommand{\section}{\@startsection%
      {section}{1}{0em}{-12ex plus1ex minus2ex}{1em}%
      {\raggedright\Large\bfseries}}
+\newcommand{\jh@subsection}{\@startsection%
+     {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
+     {\raggedright\large\bfseries}}
+\renewcommand{\subsection}{\jh@subsection}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 % \renewcommand{\subsection}[1]{\gdef\sectioningname{#1}\@startsection%
 %    {subsection}{2}{0em}{10ex plus1ex minus1ex}{1em}%
 %    {\raggedright\large\bfseries}}
-\renewcommand{\subsection}{%
-\refstepcounter{subsection}%
-\secdef\subseccmda\subseccmdb}
+% \renewcommand{\subsection}{%
+% \refstepcounter{subsection}%
+% \secdef\subseccmda\subseccmdb}
 
-\newcommand{\subseccmda}[2][default]{%
-\addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection} #1}%
-\subsecheader{#2}}
+% \newcommand{\subseccmda}[2][default]{%
+% \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection} #1}%
+% \subsecheader{#2}}
 
-\newcommand{\subseccmdb}[1]{\subsecheader{#1}}
+% \newcommand{\subseccmdb}[1]{\subsecheader{#1}}
 
 \usepackage{trimspaces}
-\newcommand{\subsecheader}[1]{\pagebreak[3]%
-\vspace{10ex plus1ex minus1ex}%
-\gdef\sectioningname{#1}% grab the subsec's name
-{\raggedright\large\bfseries\thesection.\thesubsection\ #1}%
-\nopagebreak\vspace*{1em}\par\noindent\trim@spaces}
+% \newcommand{\subsecheader}[1]{\pagebreak[3]%
+% \vspace{10ex plus1ex minus1ex}%
+% \gdef\sectioningname{#1}% grab the subsec's name
+% {\raggedright\large\bfseries\thesection.\thesubsection\ #1}%
+% \nopagebreak\vspace*{1em}\par\noindent\trim@spaces}
 
 % --------OPTIONAL SUBSECTION
 %
@@ -482,9 +487,13 @@
                 pdfpagemode=UseNone,pdfstartview=FitH,
                 pdftitle={Linear Algebra},
                 pdfauthor={Jim Hefferon, Saint Michael's College, Vermont USA,
-                           http://joshua.smcvt.edu/math/hefferon.html},
+                           http://joshua.smcvt.edu/linearalgebra},
                 pdfsubject={linear algebra},
                 pdfkeywords={linear algebra, mathematics, free, textbook}]{hyperref}
 \fi
+
+% \usepackage[capitalise]{cleveref}  % nameinlink option not in my LaTeX yet?
+
+
 
 \endinput
