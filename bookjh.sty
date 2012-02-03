@@ -12,6 +12,7 @@
 % The PACKAGE LOADING part
 % The dvidrv package allows me to specify on the command line what is
 % my driver.
+\newcommand{\dvidrv}{pdftex}
 \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
 \usepackage[\dvidrv]{xcolor}
 \usepackage[\dvidrv]{graphicx}  %
@@ -45,57 +46,123 @@
 \RequirePackage{fancyhdr}
 
 
-% styling of proofs
-\renewcommand{\proofname}{{\scshape\small Proof}}
-% End of \begin{proof} ... \end{proof}
-\renewcommand{\qedsymbol}{{\scshape\small QED}}
-
 
 
 %=============== shaded and non-shaded theorems =============
 % The shadethm package allows, say, \begin{theorem} .. \end{theorem} 
 % material to always come out shaded. 
-\RequirePackage{shadethm}
+% \RequirePackage{shadethm}
 
-% Theorem style for textual matters: remarks, etc.
-\newtheoremstyle{text}%
-{\thm@preskip}{\thm@postskip}%
-{\normalfont}{0pt}{\bfseries}{}{ }%
-{\arabic{subsection}.\arabic{shadetheorem}\ \thmname{#1}\ \thmnote{(#3)\ }} %
-\theoremstyle{text} % the theorem environments below will use the `text' style
+% \RequirePackage{amsthm}
+% \swapnumbers
+% \renewcommand{\thmnote}[1]{{\bfseries #1}}
+% \newtheoremstyle{text}% name of the style to be used
+%   {\thm@preskip}% measure of space to leave above the theorem. E.g.: 3pt
+%   {\thm@postskip}% measure of space to leave below the theorem. E.g.: 3pt
+%   {\normalfont}% name of font to use in the body of the theorem
+%   {0pt}% measure of space to indent
+%   {\bfseries}% name of head font
+%   {}% punctuation between head and body
+%   { }% space after theorem head; leave blank space (not empty) for normal interword space
+%   {\arabic{subsection}.\arabic{theorem}\ \thmname{#1}\thmnote{ (#3)}\ } % Manually specify head
+% \theoremstyle{text} % the theorem environments below will use the `text' style
+% % shaded theorems
+% \newtheorem{theorem}{Theorem}[subsection]
+%   % \surroundwithmdframed[style=thmstyle]{theorem}\resetparens[theorem]
+% \newtheorem{proposition}[theorem]{Proposition}
+%   \surroundwithmdframed[style=thmstyle]{proposition}
+% \newtheorem{axiom}[theorem]{Axiom}
+%   \surroundwithmdframed[style=thmstyle]{axiom}
+% \newtheorem{axioms}[theorem]{Axioms}
+%   \surroundwithmdframed[style=thmstyle]{axioms}
+% \newtheorem{definition}[theorem]{Definition}
+%   \surroundwithmdframed[style=thmstyle]{definition}\resetparens[definition]
+% \newtheorem{notation}[theorem]{Notation}
+%   \surroundwithmdframed[style=thmstyle]{notation}\resetparens[notation]
+% % unshaded theorems
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{example}[theorem]{Example}
+% \newtheorem{exercise}[theorem]{Exercise}
+% \newtheorem{remark}[theorem]{Remark}
+% \newtheorem{note}[theorem]{Note} %conflicts with seminar
+% % I like the theorems to only list the subsection and the theorem number
+% \renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
 
-% shaded theorems
-\newshadetheorem{theorem}{Theorem}[subsection]
-\newshadetheorem{proposition}[theorem]{Proposition}
-\newshadetheorem{axiom}[theorem]{Axiom}
-\newshadetheorem{axioms}[theorem]{Axioms}
-\newshadetheorem{definition}[theorem]{Definition}
-\newshadetheorem{notation}[theorem]{Notation}
-\newshadetheorem{stupidkludge}[theorem]{Theorem}
-% unshaded theorems
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}[theorem]{Exercise}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{note}[theorem]{Note} %conflicts with seminar
-%\newtheorem{comment}[theorem]{Comment}
-% I like the theorems to only list the subsection and the theorem number
-\newcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+\definecolor{shadecolor}{rgb}{0.9412,.9412,1.0000} % 
+\definecolor{shaderulecolor}{rgb}{0.1529,0.2510,0.5451} % RoyalBlue
+\usepackage[framemethod=tikz]{mdframed}
+\newrobustcmd*\resetparens[1][definition]{\AtBeginEnvironment{#1}{\mdf@restoreparams}}   % md says this will be incorporated in next version of mdframed
+% I don't see that leftmargin and rightmargin have any effect.
+\mdfdefinestyle{thmstyle}{nobreak=true,
+          leftmargin=-0.2em,innerleftmargin=0.2em,
+          rightmargin=-0.2em,innerrightmargin=0.2em,
+          skipabove=.4ex,innertopmargin=-.6ex,
+          % skipabove=.5\thm@preskip,innertopmargin=.5\thm@preskip,
+          innerbottommargin=.6ex,skipbelow=.6ex,
+          % is better in principle, but doesn't work: innerbottommargin=.5\thm@postskip,skipbelow=.5\thm@postskip,
+          backgroundcolor=shadecolor,
+          linewidth=0.4pt,
+          linecolor=shaderulecolor}
+
+\usepackage{amsthm} 
+\usepackage{thmtools}
+\declaretheoremstyle[
+  % spaceabove=.5\thm@preskip, spacebelow=.5\thm@postskip,
+  headfont=\normalfont\bfseries,
+  notefont=\normalfont\bfseries, notebraces={ (}{)},
+  headformat={\NUMBER\ \NAME\NOTE\ignorespaces}, % note that \thetheorem is redefined below so \NUMBER is altered
+  headpunct={},
+  bodyfont=\normalfont,
+  postheadspace={.618em plus .2em minus .1em},
+  ]{text}
+\declaretheorem[name=Theorem,
+                style=text,
+                numberwithin=subsection,]{theorem}
+   \surroundwithmdframed[style=thmstyle]{theorem}\resetparens[theorem]
+\renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+\declaretheorem[name=Definition,
+                style=text,
+                sibling=theorem]{definition}\resetparens[definition]
+   \surroundwithmdframed[style=thmstyle]{definition}
+\declaretheorem[name=Lemma,
+                style=text,
+                sibling=theorem]{lemma}
+   \surroundwithmdframed[style=thmstyle]{lemma}\resetparens[lemma]
+\declaretheorem[name=Corollary,
+                style=text,
+                sibling=theorem]{corollary}
+   \surroundwithmdframed[style=thmstyle]{corollary}\resetparens[corollary]
+\declaretheorem[name=Example,
+                style=text,
+                sibling=theorem]{example}
+\declaretheorem[name=Exercise,
+                style=text,
+                sibling=theorem]{exercise}
+\declaretheorem[name=Remark,
+                style=text,
+                sibling=theorem]{remark}
+
+
+% styling of proofs
+\renewcommand{\proofname}{{\scshape\small Proof}}
+% End of \begin{proof} ... \end{proof}
+\renewcommand{\qedsymbol}{{\scshape\small QED}}
+
 %------------SHADING colors and sizes
-\setlength{\shadeboxrule}{.4pt} % make it 0pt to eliminate the rule altogether
-\setlength{\shadedtextwidth}{\textwidth}
-\addtolength{\shadedtextwidth}{-2\shadeboxsep}
-\addtolength{\shadedtextwidth}{-2\shadeboxrule}
-\ifhrefout
-  \definecolor{shadethmcolor}{rgb}{0.9412,.9412,1.0000} % 
-  \definecolor{shaderulecolor}{rgb}{0.1529,0.2510,0.5451} % RoyalBlue 
-  \definecolor{lightergray}{gray}{0.95}
-\else
-  \definecolor{shadethmcolor}{gray}{0.94}  % Regular gray, dark enough to copy
-  \definecolor{shaderulecolor}{gray}{0.94}
-  \definecolor{lightergray}{gray}{0.95}
-\fi
+% \setlength{\shadeboxrule}{.4pt} % make it 0pt to eliminate the rule altogether
+% \setlength{\shadedtextwidth}{\textwidth}
+% \addtolength{\shadedtextwidth}{-2\shadeboxsep}
+% \addtolength{\shadedtextwidth}{-2\shadeboxrule}
+% \ifhrefout
+%   \definecolor{shadethmcolor}{rgb}{0.9412,.9412,1.0000} % 
+%   \definecolor{shaderulecolor}{rgb}{0.1529,0.2510,0.5451} % RoyalBlue 
+%   \definecolor{lightergray}{gray}{0.95}
+% \else
+%   \definecolor{shadethmcolor}{gray}{0.94}  % Regular gray, dark enough to copy
+%   \definecolor{shaderulecolor}{gray}{0.94}
+%   \definecolor{lightergray}{gray}{0.95}
+% \fi
 %end SHADING
 
 
@@ -115,14 +182,14 @@
 
 
 
-\newenvironment{inlinegraphic}{\begin{center}}{\end{center}} %
-\newcommand{\scannedpicture}[1]{%
-%\ifpdf
-%  \includegraphics{#1.pdf}
-%\else
-  \includegraphics{#1.jpg}
-%\fi 
-}
+% \newenvironment{inlinegraphic}{\begin{center}}{\end{center}} %
+% \newcommand{\scannedpicture}[1]{%
+% %\ifpdf
+% %  \includegraphics{#1.pdf}
+% %\else
+%   \includegraphics{#1.jpg}
+% %\fi 
+% }
 
 %=========================================
 % Enumeration environments
