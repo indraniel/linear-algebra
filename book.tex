@@ -8,8 +8,6 @@
     \usepackage{dvidrv} % set the dvi driver from the command line
     \usepackage[no]{hrefout} % allow selection of hyperref from command line
   \fi
-% I like this font, but I can't expect folks to have it.
-\usepackage{pbsifont}
 
 \usepackage{xr}
 \usepackage[single,write]{bookans}
@@ -20,7 +18,6 @@
 \includeonly{
 cover,symlist,%
 pref,%
-%dummy_chapter,% for printing the answers to Topic exercises
 gr1,gr2,gr3,cas,leontif,ppivot,network,%
 vs1,vs2,vs3,fields,crystal,voting,dimen,%
 map1,map2,map3,map4,map5,map6,lstsqs,homogeom,markov,erlang,%
@@ -39,30 +36,37 @@ bib%
 \pagestyle{bookfront}\clearemptydoublepage\setcounter{page}{1}\thispagestyle{empty}\include{pref} %
 \pagestyle{booktoc}\clearemptydoublepage\tableofcontents\bigskip\par\noindent${}^*\!$\textit{Note:} starred subsections are optional.\clearemptydoublepage %
 \pagenumbering{arabic}
-\mainmatter\pagestyle{bookbody} 
+\mainmatter
+\pagestyle{bookbody} 
 \include{gr1}
 \include{gr2}
 \include{gr3}
-\include{cas} \include{leontif} \include{ppivot} \include{network} 
+\pagestyle{booktopic}
+  \include{cas} \include{leontif} \include{ppivot} \include{network}\pagestyle{bookbody} 
 \include{vs1}
 \include{vs2}
 \include{vs3}
-\include{fields} \include{crystal} \include{voting}  \include{dimen}
+\pagestyle{booktopic}
+  \include{fields} \include{crystal} \include{voting}  \include{dimen}\pagestyle{bookbody}
 \include{map1}
 \include{map2}
 \include{map3}
 \include{map4}
 \include{map5}
 \include{map6}
-\include{lstsqs} \include{homogeom} \include{markov} \include{erlang}
+\pagestyle{booktopic}
+  \include{lstsqs} \include{homogeom} \include{markov} \include{erlang}\pagestyle{bookbody}
 \include{det1}
 \include{det2}
-\include{det3} \include{cramer} \include{detspeed}  \include{projplane}
+\include{det3} 
+\pagestyle{booktopic}
+  \include{cramer} \include{detspeed}  \include{projplane} \pagestyle{bookbody}
 \include{jc1}
 \include{jc2}
 \include{jc3}
 \include{jc4}
-\include{powers} \include{pops} \include{recur}
+\pagestyle{booktopic}
+  \include{powers} \include{pops} \include{recur} \pagestyle{bookbody}
 %\include{eigengeom}
 \include{appen}
 %\typeout{ BIBLIOGRAPHY COMMENTED OUT}

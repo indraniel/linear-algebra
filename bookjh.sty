@@ -12,6 +12,7 @@
 % The PACKAGE LOADING part
 % The dvidrv package allows me to specify on the command line what is
 % my driver.
+\usepackage[yes]{hrefout}
 \newcommand{\dvidrv}{pdftex}
 \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
 \usepackage[\dvidrv]{xcolor}
@@ -32,6 +33,9 @@
 \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
 \usepackage{linalgjh}
 \usepackage{makeidx}
+
+\usepackage{pbsi} % This font is in TeXLive so I consider it accessible at this point
+\newcommand{\fancyfont}[1]{\textbsi{#1}}
 
 % The MAIN CODE part
 
@@ -62,6 +66,7 @@
 % \thechapter 	current chapter number
 % \thesection 	current section number
 
+% Main body of book
 \fancypagestyle{bookbody}{%
   \renewcommand{\headrulewidth}{.4pt}
   \renewcommand{\footrulewidth}{0pt}
@@ -73,6 +78,19 @@
   \cfoot{\fancyplain{\renewcommand{\footrulewidth}{.4pt}\thepage}{}}
 }
 
+% Topic sections
+\fancypagestyle{booktopic}{%
+  \renewcommand{\headrulewidth}{.4pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lhead[\fancyplain{\renewcommand{\headrulewidth}{0pt}}{\thepage}]{\fancyplain{\renewcommand{\headrulewidth}{0pt}}{\textsl{\rightmark}}}
+  \rhead[\fancyplain{}{\textsl{\leftmark}}]{\fancyplain{}{\thepage}}
+  \chead{}
+  \lfoot{\fancyplain{\thepage}{}}
+  \rfoot{\fancyplain{\thepage}{}}
+  \cfoot{\fancyplain{\thepage}{}}
+}
+
+% Front matter
 \fancypagestyle{bookfront}{%
   \lhead{}
   \rhead{}
@@ -84,6 +102,19 @@
   \cfoot{\fancyplain{}{-- \thepage{} --}}
 }
 
+% Chapters start with an empty page (includes first page of toc)
+\fancypagestyle{bookemptypage}{%
+  \lhead{}
+  \rhead{}
+  \chead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lfoot{}
+  \rfoot{}
+  \cfoot{}
+}
+
+% Table of contents
 \fancypagestyle{booktoc}{%
   \lhead{}
   \rhead{}
@@ -303,36 +334,187 @@
 \def\labelitemiv{$\cdot$}
 
 
+
+%================= TABLE OF CONTENTS =========================
+% For table of contents
+% See tocloft package documentation for info.  Anything more than below should
+% probably bring in that package.
+\setcounter{tocdepth}{2} \setcounter{secnumdepth}{2}
+
+\renewcommand{\@pnumwidth}{15.85pt} %trial and error; addtolength didn't work
+\renewcommand{\@tocrmarg}{4em}
+
+% \renewcommand*\l@chapter[2]{%
+%   \ifnum \c@tocdepth >\m@ne
+%     \addpenalty{-\@highpenalty}%
+%     \vskip 1.0em \@plus\p@
+%     \setlength\@tempdima{8.5em}% was 1.5em
+%     \begingroup
+%       \parindent \z@ \rightskip \@pnumwidth
+%       \parfillskip -\@pnumwidth
+%       \leavevmode \bfseries
+%       \advance\leftskip\@tempdima
+%       \hskip -\leftskip
+%       #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+%       \penalty\@highpenalty
+%     \endgroup
+%   \fi}
+%
+\renewcommand*\l@section{\@dottedtocline{1}{2em}{1.65em}} %98XII08 was 1.5
+\renewcommand*\l@subsection{\@dottedtocline{2}{3em}{2.5em}} % 98Xii05 was 1.5em
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{3em}{1.25em}} 
+\renewcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
+\renewcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
+
+%end PAGE LAYOUT
+
+
 %===================================================
 % CHAPTER
 % Does these things:
 %  (1) Outputs an empty page, if needed, to start the chapter on an 
 %  odd-numbered page.
 %
-\let\jh@chapter=\chapter %
-\newcommand{\chapterjh}[1]{%
-  \gdef\sectioningname{#1}%
-  % Write to the answer file
-  % Chapters are done differently there than Topics 
-  \renewcommand{\announcesectioninginanswerfile}{%
-       \sectioninginanswerfilechapterstyle} % set to way its done inside chaps
-  \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
-  \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter xx \Englishnumber{\value{chapter}}: #1\protect}}
-  % Renew definition of exercise formatting (perhaps undone in Topic)
-  \renewcommand{\exercise@makelabel}{} % 
-  \ifhrefout
-    \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
-  \else
-    \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
-  \fi
-  \pagestyle{bookbody}\thispagestyle{bookbody}
-  \jh@chapter{#1}}
+% \renewcommand{\chapter}[1]{%
+%   \gdef\sectioningname{#1}%
+%   % Write to the answer file
+%   % Chapters are done differently there than Topics 
+%   \renewcommand{\announcesectioninginanswerfile}{%
+%        \sectioninginanswerfilechapterstyle} % set to way its done inside chaps
+%   \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
+%   % \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter xx \Englishnumber{\value{chapter}}: #1\protect}}
+%   % Renew definition of exercise formatting (perhaps undone in Topic)
+%   \renewcommand{\exercise@makelabel}{} % 
+%   \ifhrefout
+%     \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
+%   \else
+%     \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
+%   \fi
+%   \pagestyle{bookbody} % \thispagestyle{bookbody}
+%   % below here taken from book.cls, modified only to change pagestyle
+%   \if@openright\cleardoublepage\else\clearpage\fi
+%                     \thispagestyle{bookbody}%
+%                     \global\@topnum\z@
+%                     \@afterindentfalse
+%                     \secdef\@chapter\@schapter}
 
-\renewcommand\chapter{\pagestyle{bookbody}\if@openright\clearemptydoublepage\else\clearpage\fi
-   %
-   % 
+% \renewcommand{\chapter}[1]{\pagestyle{bookbody}\if@openright\clearemptydoublepage\else\clearpage\fi
+%    %
+%    % 
+%    \gdef\sectioningname{#1}%
+%    \renewcommand{\announcesectioninginanswerfile}{%
+%      \sectioninginanswerfilechapterstyle} % set to way its done inside chaps
+%    \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
+%   % renew definition of exercise formatting (perhaps undone in Topic)
+%   \renewcommand{\exercise@makelabel}{} % 
+%   \ifhrefout
+%     \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
+%   \else
+%     \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
+%   \fi
+%    \global\@topnum\z@
+%    \@afterindentfalse
+%    \thispagestyle{empty}
+%    \secdef\@chapter\@schapter}
+% %\usepackage{ocm}
+
+% % The \chapter commands use \secdef. The definition of \chapter 
+% % has the line \secdef\@chapter\@schapter .  The first argument to \secdef 
+% % tells LaTeX what to do with \chapter while the second tells LaTeX what to
+% % do with \chapter* .  So \chapter{Introduction} will use \@chapter, whereas 
+% % \chapter*{Acknowledgements} will use \@schapter. The commands 
+% % \@chapter and \@schapter write to some external files and then 
+% % use \@makechapterhead and \@makeschapterhead to do the actual formatting.
+
+% % copied from book.cls 2012-Feb-08 JH
+% % Change what goes into the table of contents for chapters here.
+% \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+%                        \if@mainmatter
+%                          \refstepcounter{chapter}%
+%                          \typeout{\@chapapp\space\thechapter.}%
+%                          \addcontentsline{toc}{chapter}%
+%                                    {\protect\numberline{\thechapter}#1}%
+%                          % \addcontentsline{toc}{chapter}%
+%                          %           {\protect\numberline{Chapter \thechapter:}#1}
+%                          % JH Announce the new chapter in the answer file, after
+%                          % the chapter number was incremented
+%                          \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter \Englishnumber{\value{chapter}}: #1\protect}}
+%                        \else
+%                          % \addcontentsline{toc}{chapter}{#1}%
+%                          \relax
+%                        \fi
+%                     \else
+%                       % \addcontentsline{toc}{chapter}{#1}%
+%                       \relax
+%                     \fi
+%                     \chaptermark{#1}%
+%                     \addtocontents{lof}{\protect\addvspace{10\p@}}%
+%                     \addtocontents{lot}{\protect\addvspace{10\p@}}%
+%                     \if@twocolumn
+%                       \@topnewpage[\@makechapterhead{#2}]%
+%                     \else
+%                       \@makechapterhead{#2}%
+%                       \@afterheading
+%                     \fi}
+
+
+% \def\@makechapterhead#1{\clearemptydoublepage
+%   \vspace*{50\p@}% was 50
+%   {\parindent \z@\raggedright
+%     \ifnum \c@secnumdepth >\m@ne
+% %     \Large\bf \@chapapp{} \Englishnumber{\thechapter} %93-Jul-22 jh
+%     {{%\fontshape{ol}
+% % 2001-Jun-18      \selectfont\Large \@chapapp{} \thechapter}} %was \Englishnumber{\thechapter}
+%       \selectfont\Large\bsifamily \@chapapp{} \thechapter}} %
+%     \par
+%     \vskip 0\p@ \fi %was 20\p@
+%     \Huge \bf
+%     #1\par
+%     \nobreak
+%     \vskip 40\p@ %was 40
+%   }}
+
+% copied \@chapter from book.cls and made changes
+% \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+%                        \if@mainmatter
+%                          \refstepcounter{chapter}%
+%                          \typeout{\@chapapp\space\thechapter.}%
+%                          %\addtocontents{toc}{\protect\medbreak}
+%                          \addcontentsline{toc}{chapter}%
+%                                    {\protect\numberline{Chapter \thechapter:}#1}%
+%                        \else
+%                          \addcontentsline{toc}{chapter}{#1}%
+%                        \fi
+%                     \else
+%                       \addcontentsline{toc}{chapter}{#1}%
+%                     \fi
+%                     \chaptermark{#1}%
+%                     \addtocontents{lof}{\protect\addvspace{10\p@}}%
+%                     \addtocontents{lot}{\protect\addvspace{10\p@}}%
+%                     \if@twocolumn
+%                       \@topnewpage[\@makechapterhead{#2}]%
+%                     \else
+%                       \@makechapterhead{#2}%
+%                       \@afterheading
+%                     \fi}
+
+% Redefine the chapter-making commands
+% 
+% The \chapter command does not take an argument.  Instead, both \chapter
+% and \chapter* use \secdef, with the line \secdef\@chapter\@schapter .  
+% The first argument to \secdef tells LaTeX what to do with \chapter while 
+% the second tells LaTeX what to do with \chapter* .  So \chapter{Introduction}
+% will use \@chapter (which does have an argument and so grabs the chapter
+% name), whereas \chapter*{Acknowledgements} will use \@schapter. 
+%
+% The \@chapter and \@schapter write to some external files and then 
+% use \@makechapterhead and \@makeschapterhead to do the actual formatting.
+% 
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+   % Redefine the way exercises are handled, back from 
+   % how Topics handle them 
    \renewcommand{\announcesectioninginanswerfile}{%
-     \sectioninginanswerfilechapterstyle} % set to way its done inside chaps
+     \sectioninginanswerfilechapterstyle}
    \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
   % renew definition of exercise formatting (perhaps undone in Topic)
   \renewcommand{\exercise@makelabel}{} % 
@@ -341,43 +523,24 @@
   \else
     \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
   \fi
+   \thispagestyle{bookemptypage}%
    \global\@topnum\z@
    \@afterindentfalse
-  % \thispagestyle{plain}
    \secdef\@chapter\@schapter}
-%\usepackage{ocm}
-\def\@makechapterhead#1{\clearemptydoublepage
-  \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter \Englishnumber{\value{chapter}}: #1\protect}}
-  \ifsingleanswerfile\relax\else
-     \Writetofile{\otherans@fn}{\protect\clearpage\protect\item[]\protect\begin{center}
-                             \protect\rule{0in}{.25in}
-                             \protect\large\protect\bfseries{}\leftmark
-                           \protect\end{center}}
-  \fi
-  \gdef\sectioningname{#1}%
-  \vspace*{50\p@}% was 50
-  {\parindent \z@\raggedright
-    \ifnum \c@secnumdepth >\m@ne
-%     \Large\bf \@chapapp{} \Englishnumber{\thechapter} %93-Jul-22 jh
-    {{%\fontshape{ol}
-% 2001-Jun-18      \selectfont\Large \@chapapp{} \thechapter}} %was \Englishnumber{\thechapter}
-      \selectfont\Large\bsifamily \@chapapp{} \thechapter}} %
-    \par
-    \vskip 0\p@ \fi %was 20\p@
-    \Huge \bf
-    #1\par
-    \nobreak
-    \vskip 40\p@ %was 40
-  }}
 
-% copied \@chapter from book.cls and made changes
+%\usepackage{ocm}
+
+% Change what goes into the table of contents for chapters here.
+
+% Copied from book.cls
 \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
                        \if@mainmatter
                          \refstepcounter{chapter}%
                          \typeout{\@chapapp\space\thechapter.}%
-                         %\addtocontents{toc}{\protect\medbreak}
                          \addcontentsline{toc}{chapter}%
-                                   {\protect\numberline{Chapter \thechapter:}#1}%
+                                   {\protect\numberline{Chapter \thechapter:}#1}
+                         % Announce the chapter also in the answers to exercises
+                         \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter \Englishnumber{\value{chapter}}: #1\protect}}
                        \else
                          \addcontentsline{toc}{chapter}{#1}%
                        \fi
@@ -394,6 +557,26 @@
                       \@afterheading
                     \fi}
 
+\def\@makechapterhead#1{\clearemptydoublepage
+  % Grab the name of the chapter.  Has to go here, not in \chapter, since
+  % that macro does not take an argument.
+  \gdef\sectioningname{#1} 
+  % Below here is where the chapter heading is formatted
+  \vspace*{50\p@}% 
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        % \huge\bfseries \@chapapp\space \thechapter
+        \selectfont\Large\fancyfont{ \@chapapp{} \thechapter} 
+        \par\nobreak
+        \vskip 0\p@
+      \fi
+    \par
+    \vskip 0\p@ \fi %was 20\p@
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@ 
+  }}
 
 
 
@@ -560,41 +743,9 @@
   \renewcommand{\exercise@makelabel}{} % 
   \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{##1}}}
   \renewcommand{\ansparams}{{\Currentlabel}}
+  \thispagestyle{empty}
 }
 
-
-%================= TABLE OF CONTENTS =========================
-% For table of contents
-% See tocloft package documentation for info.  Anything more than below should
-% probably bring in that package.
-\setcounter{tocdepth}{2} \setcounter{secnumdepth}{2}
-
-\renewcommand{\@pnumwidth}{15.85pt} %trial and error; addtolength didn't work
-\renewcommand{\@tocrmarg}{4em}
-
-\renewcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{8.5em}% was 1.5em
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode \bfseries
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}
-%
-\renewcommand*\l@section{\@dottedtocline{1}{2em}{1.65em}} %98XII08 was 1.5
-\renewcommand*\l@subsection{\@dottedtocline{2}{3em}{2.5em}} % 98Xii05 was 1.5em
-\renewcommand*\l@subsubsection{\@dottedtocline{3}{3em}{1.25em}} 
-\renewcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
-\renewcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
-
-%end PAGE LAYOUT
 
 
 %============ Spacing and dashes
