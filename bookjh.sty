@@ -16,6 +16,32 @@
 \newcommand{\dvidrv}{pdftex}
 \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
 \usepackage[\dvidrv]{xcolor}
+  % These are from http://kuler.adobe.com/#themeID/1538583
+  % clear by reisjart (lightened one color)
+  % \definecolor{basecolor}{rgb}{0.1686, 0.5032, 0.4118}  % 43,78,105
+  % \definecolor{darkcolor}{rgb}{0.0824, 0.1412, 0.2157}  % 21,39,55
+  % \definecolor{bgcolor}{rgb}{0.6627, 0.8196, 0.8784}  % 165,209,224
+  % \definecolor{flourishcolor}{rgb}{0.4078, 0.1373, 0.1294}  % 104,35,33 
+  % These are from http://kuler.adobe.com/#themeID/19069
+  % read and smooth by info
+  % \definecolor{bgcolor}{rgb}{0.905882353, 0.91372549, 0.819607843}  % 231,233,209
+  % \definecolor{rulecolor}{rgb}{0.82745098, 0.831372549, 0.666666667}  % 211,212,170
+  % \definecolor{papercolor}{rgb}{0.988235294, 0.980392157, 0.901960784}  % 252,250,230
+  % \definecolor{darkcolor}{rgb}{0.266666667, 0.266666667, 0.266666667}  % 68,68,68
+  % \definecolor{flourishcolor}{rgb}{0.564705882, 0.094117647, 0.031372549}  % 144,24,8
+  % These are from http://kuler.adobe.com/#themeID/1440313
+  % Cote Azur by Philip.Schweikert (lightened one color)
+  % \definecolor{darkcolor}{rgb}{0, 0.34510, 0.37255}  % 0,88,95
+  % \definecolor{boldcolor}{rgb}{0, 0.57647, 0.57647}  % 0,147,147
+  % \definecolor{neutralcolor}{rgb}{1.00000, 0.98824, 0.76863}  % 255,252,196
+  % \definecolor{bgcolor}{rgb}{0.94118, 0.92941, 0.73333}  % 240,237,187 
+  % \definecolor{flourishcolor}{rgb}{1.00000, 0.21961, 0}  % 255,56,0
+  % These are from http://www.colorcombos.com/color-scheme-20.html
+  \definecolor{darkcolor}{HTML}{217C7E}  % 
+  \definecolor{boldcolor}{HTML}{3399FF}  % 
+  \definecolor{bgcolor}{HTML}{F3EFE0}  %  
+  \definecolor{flourishcolor}{HTML}{9A3334}  %
+
 \usepackage[\dvidrv]{graphicx}  %
 \usepackage{url}
 % \usepackage{color}
@@ -129,16 +155,6 @@
 \pagestyle{bookfront}
 \pagenumbering{roman}
 
-% \lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\textsl{\rightmark}}}
-% \rhead[\fancyplain{}{\textsl{\leftmark}}]{\fancyplain{}{\thepage}}
-% \chead{}
-% \renewcommand{\headrulewidth}{.4pt}
-% \renewcommand{\footrulewidth}{0pt}
-% \lfoot{}
-% \rfoot{}
-% \cfoot{\fancyplain{\thepage}{}}
-
-
 
 
 %=============== shaded and non-shaded theorems =============
@@ -182,7 +198,8 @@
 % % I like the theorems to only list the subsection and the theorem number
 % \renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
 
-\definecolor{shadecolor}{rgb}{0.9412,.9412,1.0000} % 
+% \definecolor{shadecolor}{rgb}{0.9412,.9412,1.0000} % 
+\colorlet{shadecolor}{bgcolor}
 \definecolor{shaderulecolor}{rgb}{0.1529,0.2510,0.5451} % RoyalBlue
 % \usepackage[framemethod=tikz]{mdframed}
 % \newrobustcmd*\resetparens[1][definition]{\AtBeginEnvironment{#1}{\mdf@restoreparams}}   % md says this will be incorporated in next version of mdframed
@@ -232,7 +249,7 @@
   bodyfont=\normalfont,
   postheadspace={.618em plus .2em minus .1em},
   prefoothook={\hfill\qedsymbol}
-  ]{proof}  % for proofs, with qedsymbol at the end
+  ]{pf}  % for proofs, with qedsymbol at the end
 \declaretheorem[name=Theorem,
                 style=shadedtext,
                 numberwithin=subsection,]{theorem}
@@ -262,7 +279,7 @@
 \let\proof\@undefined                        % undefine \proof
 \let\endproof\@undefined                  % undefine \endproof
 \declaretheorem[name=Proof,
-                style=proof,
+                style=pf,
                 numberwithin=subsection]{proof}
 
 
@@ -270,23 +287,6 @@
 \renewcommand{\proofname}{{\scshape\small Proof}}
 % End of \begin{proof} ... \end{proof}
 \renewcommand{\qedsymbol}{{\scshape\small QED}}
-
-%------------SHADING colors and sizes
-% \setlength{\shadeboxrule}{.4pt} % make it 0pt to eliminate the rule altogether
-% \setlength{\shadedtextwidth}{\textwidth}
-% \addtolength{\shadedtextwidth}{-2\shadeboxsep}
-% \addtolength{\shadedtextwidth}{-2\shadeboxrule}
-% \ifhrefout
-%   \definecolor{shadethmcolor}{rgb}{0.9412,.9412,1.0000} % 
-%   \definecolor{shaderulecolor}{rgb}{0.1529,0.2510,0.5451} % RoyalBlue 
-%   \definecolor{lightergray}{gray}{0.95}
-% \else
-%   \definecolor{shadethmcolor}{gray}{0.94}  % Regular gray, dark enough to copy
-%   \definecolor{shaderulecolor}{gray}{0.94}
-%   \definecolor{lightergray}{gray}{0.95}
-% \fi
-%end SHADING
-
 
 
 
@@ -341,9 +341,13 @@
 % probably bring in that package.
 \setcounter{tocdepth}{2} \setcounter{secnumdepth}{2}
 
-\renewcommand{\@pnumwidth}{15.85pt} %trial and error; addtolength didn't work
+% \renewcommand{\@pnumwidth}{15.85pt} %trial and error; addtolength didn't work
+\renewcommand{\@pnumwidth}{18pt} 
 \renewcommand{\@tocrmarg}{4em}
-
+\usepackage{tocloft}
+\tocloftpagestyle{booktoc}
+\cftpagenumbersoff{chapter}
+\setlength{\cftchapnumwidth}{8em}
 % \renewcommand*\l@chapter[2]{%
 %   \ifnum \c@tocdepth >\m@ne
 %     \addpenalty{-\@highpenalty}%
@@ -371,134 +375,6 @@
 
 %===================================================
 % CHAPTER
-% Does these things:
-%  (1) Outputs an empty page, if needed, to start the chapter on an 
-%  odd-numbered page.
-%
-% \renewcommand{\chapter}[1]{%
-%   \gdef\sectioningname{#1}%
-%   % Write to the answer file
-%   % Chapters are done differently there than Topics 
-%   \renewcommand{\announcesectioninginanswerfile}{%
-%        \sectioninginanswerfilechapterstyle} % set to way its done inside chaps
-%   \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
-%   % \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter xx \Englishnumber{\value{chapter}}: #1\protect}}
-%   % Renew definition of exercise formatting (perhaps undone in Topic)
-%   \renewcommand{\exercise@makelabel}{} % 
-%   \ifhrefout
-%     \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
-%   \else
-%     \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
-%   \fi
-%   \pagestyle{bookbody} % \thispagestyle{bookbody}
-%   % below here taken from book.cls, modified only to change pagestyle
-%   \if@openright\cleardoublepage\else\clearpage\fi
-%                     \thispagestyle{bookbody}%
-%                     \global\@topnum\z@
-%                     \@afterindentfalse
-%                     \secdef\@chapter\@schapter}
-
-% \renewcommand{\chapter}[1]{\pagestyle{bookbody}\if@openright\clearemptydoublepage\else\clearpage\fi
-%    %
-%    % 
-%    \gdef\sectioningname{#1}%
-%    \renewcommand{\announcesectioninginanswerfile}{%
-%      \sectioninginanswerfilechapterstyle} % set to way its done inside chaps
-%    \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
-%   % renew definition of exercise formatting (perhaps undone in Topic)
-%   \renewcommand{\exercise@makelabel}{} % 
-%   \ifhrefout
-%     \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
-%   \else
-%     \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
-%   \fi
-%    \global\@topnum\z@
-%    \@afterindentfalse
-%    \thispagestyle{empty}
-%    \secdef\@chapter\@schapter}
-% %\usepackage{ocm}
-
-% % The \chapter commands use \secdef. The definition of \chapter 
-% % has the line \secdef\@chapter\@schapter .  The first argument to \secdef 
-% % tells LaTeX what to do with \chapter while the second tells LaTeX what to
-% % do with \chapter* .  So \chapter{Introduction} will use \@chapter, whereas 
-% % \chapter*{Acknowledgements} will use \@schapter. The commands 
-% % \@chapter and \@schapter write to some external files and then 
-% % use \@makechapterhead and \@makeschapterhead to do the actual formatting.
-
-% % copied from book.cls 2012-Feb-08 JH
-% % Change what goes into the table of contents for chapters here.
-% \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
-%                        \if@mainmatter
-%                          \refstepcounter{chapter}%
-%                          \typeout{\@chapapp\space\thechapter.}%
-%                          \addcontentsline{toc}{chapter}%
-%                                    {\protect\numberline{\thechapter}#1}%
-%                          % \addcontentsline{toc}{chapter}%
-%                          %           {\protect\numberline{Chapter \thechapter:}#1}
-%                          % JH Announce the new chapter in the answer file, after
-%                          % the chapter number was incremented
-%                          \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter \Englishnumber{\value{chapter}}: #1\protect}}
-%                        \else
-%                          % \addcontentsline{toc}{chapter}{#1}%
-%                          \relax
-%                        \fi
-%                     \else
-%                       % \addcontentsline{toc}{chapter}{#1}%
-%                       \relax
-%                     \fi
-%                     \chaptermark{#1}%
-%                     \addtocontents{lof}{\protect\addvspace{10\p@}}%
-%                     \addtocontents{lot}{\protect\addvspace{10\p@}}%
-%                     \if@twocolumn
-%                       \@topnewpage[\@makechapterhead{#2}]%
-%                     \else
-%                       \@makechapterhead{#2}%
-%                       \@afterheading
-%                     \fi}
-
-
-% \def\@makechapterhead#1{\clearemptydoublepage
-%   \vspace*{50\p@}% was 50
-%   {\parindent \z@\raggedright
-%     \ifnum \c@secnumdepth >\m@ne
-% %     \Large\bf \@chapapp{} \Englishnumber{\thechapter} %93-Jul-22 jh
-%     {{%\fontshape{ol}
-% % 2001-Jun-18      \selectfont\Large \@chapapp{} \thechapter}} %was \Englishnumber{\thechapter}
-%       \selectfont\Large\bsifamily \@chapapp{} \thechapter}} %
-%     \par
-%     \vskip 0\p@ \fi %was 20\p@
-%     \Huge \bf
-%     #1\par
-%     \nobreak
-%     \vskip 40\p@ %was 40
-%   }}
-
-% copied \@chapter from book.cls and made changes
-% \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
-%                        \if@mainmatter
-%                          \refstepcounter{chapter}%
-%                          \typeout{\@chapapp\space\thechapter.}%
-%                          %\addtocontents{toc}{\protect\medbreak}
-%                          \addcontentsline{toc}{chapter}%
-%                                    {\protect\numberline{Chapter \thechapter:}#1}%
-%                        \else
-%                          \addcontentsline{toc}{chapter}{#1}%
-%                        \fi
-%                     \else
-%                       \addcontentsline{toc}{chapter}{#1}%
-%                     \fi
-%                     \chaptermark{#1}%
-%                     \addtocontents{lof}{\protect\addvspace{10\p@}}%
-%                     \addtocontents{lot}{\protect\addvspace{10\p@}}%
-%                     \if@twocolumn
-%                       \@topnewpage[\@makechapterhead{#2}]%
-%                     \else
-%                       \@makechapterhead{#2}%
-%                       \@afterheading
-%                     \fi}
-
-% Redefine the chapter-making commands
 % 
 % The \chapter command does not take an argument.  Instead, both \chapter
 % and \chapter* use \secdef, with the line \secdef\@chapter\@schapter .  
@@ -567,15 +443,16 @@
     \ifnum \c@secnumdepth >\m@ne
       \if@mainmatter
         % \huge\bfseries \@chapapp\space \thechapter
-        \selectfont\Large\fancyfont{ \@chapapp{} \thechapter} 
+        {\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth]{\rule{0em}{0.6pt}}}} \\[-4.5ex]
+        \selectfont\Large\textcolor{boldcolor}{\fancyfont{ \@chapapp{} \thechapter}}
         \par\nobreak
         \vskip 0\p@
       \fi
     \par
     \vskip 0\p@ \fi %was 20\p@
     \interlinepenalty\@M
-    \Huge \bfseries #1\par\nobreak
-    \vskip 40\p@ 
+    \Huge \bfseries \textcolor{black}{#1}\par\nobreak
+    \vskip 30\p@ 
   }}
 
 
@@ -692,13 +569,57 @@
 %end headings
 
 % PAGE LAYOUT
+% (from http://theoval.cmp.uea.ac.uk/~nlct/latex/thesis/node9.html)
+% \@startsection{<type>}{<level>}{<indent>}{<beforeskip>}{<afterskip>}{<style>} 
+% where 
+% <type>
+%     One of: section, subsection, subsubsection, paragraph or subparagraph. (Note no backslash.)
+%
+% <level>
+%  part          -1
+%  chapter        0
+%  section        1
+%  subsection     2
+%  subsubsection  3
+%  paragraph      4
+%  subparagraph   5
+% 
+% <indent>
+%     A length giving indentation from the left margin.
+% 
+% <beforeskip>
+%     The absolute value is how much vertical distance to leave before the 
+% heading. If <beforeskip> is negative the first paragraph following the 
+% section heading will not be indented.
+% 
+% <afterskip>
+%     The absolute value is how much vertical distance to leave after the 
+% heading. If <afterskip> is negative, the text following the sectioning 
+% command will appear on the same level as the section heading.
+% 
+% <style>
+%     The declarations to set the style of the heading (e.g. \itshape for 
+% an italic heading.) The last command in <style> may be a 
+% command which takes a single argument but all the others must be declarations.
 \renewcommand{\section}{\@startsection%
      {section}{1}{0em}{-12ex plus1ex minus2ex}{1em}%
      {\raggedright\Large\bfseries}}
-\newcommand{\jh@subsection}{\@startsection%
-     {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
-     {\raggedright\large\bfseries}}
-\renewcommand{\subsection}{\jh@subsection}
+\newcommand{\topicsection}{\@startsection%
+     {section}{1}{0em}{-12ex plus1ex minus2ex}{3em}%
+     {\raggedright\makebox[0em][l]{%
+         \raisebox{6ex}{%
+             \raisebox{-.25ex}{\makebox[0em][l]{\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth][r]{\rule{0em}{0.8pt}}}}}%
+            \large\bfseries\textcolor{boldcolor}{\fancyfont{Topic}}%
+            }%
+        }%
+        \LARGE\bfseries}}
+% \newcommand{\jh@subsection}{\@startsection%
+%      {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
+%      {\raggedright\large\bfseries}}
+% \renewcommand{\subsection}{\jh@subsection}
+\renewcommand{\subsection}{\@startsection
+   {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
+   {\raggedright\large\bfseries}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 % \renewcommand{\subsection}[1]{\gdef\sectioningname{#1}\@startsection%
 %    {subsection}{2}{0em}{10ex plus1ex minus1ex}{1em}%
@@ -732,10 +653,7 @@
 %==================== TOPICS ============================
 % For applications sections.
 % 
-\newcommand{\topic}[1]{\clearpage\section*{Topic: #1}
-             \gdef\sectioningname{#1}%
-             \markright{Topic: #1}
-             \addcontentsline{toc}{section}{Topic: #1}
+\newcommand{\topic}[1]{\clearpage\topicsection*{#1}
    \renewcommand{\announcesectioninginanswerfile}{%
       \sectioninginanswerfiletopicstyle}
   % renew definition of exercise formatting (perhaps undone in Chapter)
@@ -744,6 +662,12 @@
   \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{##1}}}
   \renewcommand{\ansparams}{{\Currentlabel}}
   \thispagestyle{empty}
+  \gdef\sectioningname{#1}%
+  \markright{Topic: #1}
+  \addcontentsline{toc}{section}{Topic: #1}
+  % \vspace*{15pt}\noindent\fancyfont{Topic}\par
+  % \vspace*{10pt}\noindent{\Large\bfseries #1}\vspace{20pt}
+  % \par\@afterindentfalse\nobreak 
 }
 
 
@@ -797,7 +721,7 @@
 \ifhrefout %
   \usepackage[\dvidrv,
                 colorlinks=true,
-                linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue,
+                linkcolor=darkcolor,citecolor=darkcolor,filecolor=darkcolor,urlcolor=darkcolor,
                 naturalnames=false,  % if true, toc Three.IV.2 link no work 
                 % hypertexnames=false, % 
                 % hyperindex=false, % if true, pages are ten off
