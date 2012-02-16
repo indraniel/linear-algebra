@@ -2,7 +2,6 @@
 %  http://joshua.smcvt.edu/linalg.html
 %  2012-Feb-12
 \topic{Magic Squares}
-% \newcommand{\magicsquares}{\mathcal{M}}
 \index{magic squares|(}
 A Chinese legend tells the story of a  
 flood by the Lo river.
@@ -45,7 +44,7 @@ Another example of a magic square appears in the engraving
 \textit{Melencolia I} by Albrecht D\"urer.
 % (http://en.wikipedia.org/wiki/Melencolia_I)
 \begin{center}
-  \includegraphics[height=2.25in]{Melencolia.jpg} % wikipedia http://upload.wikimedia.org/wikipedia/commons/1/14/Melencolia_I_%28Durero%29.jpg
+  \includegraphics[height=2.5in]{Melencolia.jpg} % wikipedia http://upload.wikimedia.org/wikipedia/commons/1/14/Melencolia_I_%28Durero%29.jpg
 \end{center}
 One interpretation is that this depicts melancholy, a depressed state.
 The figure, genius,
@@ -56,9 +55,9 @@ But the figure is unmoved; all the things are unused.
 One of the potential delights is the $\nbyn{4}$ matrix in the upper right.
 The rows, columns, and diagonals add to $34$.
 \begin{center}
-  \includegraphics[height=1.25in]{Melencoliadetail.jpg} % wikipedia http://upload.wikimedia.org/wikipedia/commons/7/7e/Albrecht_D%C3%BCrer_-_Melencolia_I_%28detail%29.jpg
+  \vcenteredhbox{\includegraphics[height=1.25in]{Melencoliadetail.jpg}} % wikipedia http://upload.wikimedia.org/wikipedia/commons/7/7e/Albrecht_D%C3%BCrer_-_Melencolia_I_%28detail%29.jpg
   \qquad
-  \begin{tabular}[b]{|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|}
     \hline
       $16$  &$3$  &$2$  &$13$  \\ \hline
       $5$   &$10$ &$11$ &$8$   \\ \hline
@@ -73,9 +72,16 @@ A sum of two same-sized magic squares is magic and a
 scalar multiple of a magic square is magic, so the set of 
 $\nbyn{n}$ magic squares
 $\magicsquares_n$ is a subspace of $\matspace_{\nbyn{n}}$.
-
 The set $\magicsquares_{n,0}$ of $\nbyn{n}$~magic squares with magic number~$0$ 
 is another subspace.
+
+A square matrix is \definend{semimagic} if 
+the rows and columns add to the same value, that is, we drop the
+condition on the diagonals.
+The set of semimagic squares $\semimagicsquares_n$ 
+is a subspace of $\matspace_{\nbyn{n}}$.
+So is the set $\semimagicsquares_{n,0}$  
+of $\nbyn{n}$~semimagic squares with magic number~$0$. 
 
 Every $\nbyn{1}$ square is magic, trivially.
 If the rows, columns, and diagonals of a $\nbyn{2}$ matrix add to $k$
@@ -89,26 +95,99 @@ then $a+b=s$, $c+d=s$, $a+c=s$, $b+d=s$, $a+d=s$, and $b+c=s$.
 \nearbyexercise{exer:TwoByTwoMagicSqUnique} shows that
 the system has the unique solution $a=b=c=d=s/2$.
 So $\magicsquares_2$ is a one-dimensional subspace of $\matspace_{\nbyn{2}}$.
+
 In this Topic we will show that for $n>2$ the 
 dimension of
 $\magicsquares_n$ is $n^2-n$.
+We will do this in three steps: first we show that the space 
+$\semimagicsquares_{n,0}$ has dimension~$(n-1)^2$,
+then we show that the space $\magicsquares_{n,0}$ has dimension
+$(n-1)^2-2$, and finally we produce the desired result.
 
-A square matrix is \definend{semimagic} if 
-the rows and columns add to the same value (that is, we drop the
-condition on the diagonals).
-The set of semimagic squares $\mathcal{H}_n$ 
-is a subspace of $\matspace_{\nbyn{n}}$.
-So is the set $\mathcal{H}_{n,0}$  
-of $\nbyn{n}$~semimagic squares with magic number~$0$. 
-We start by showing that this space has dimension $(n-1)^2$.
+For the first step
+let the function $\map{\phi}{\matspace_{\nbyn{n}}}{\matspace_{\nbyn{(n-1)}}}$
+be the identity map except that it 
+drops the final row and column: $\phi(M)=\hat{M}$ where 
+$\hat{m}_{i,j}=m_{i,j}$ for all $i,j\in\setinterval{1}{n-1}$.
+The check that $\phi$ is linear is easy.
+Consider $\phi$'s restriction
+$\map{\phi}{\semimagicsquares_{n,0}}{\matspace_{\nbyn{(n-1)}}}$.
+We claim that it is one-to-one and onto.
 
+To show that it is one-to-one we will show that the only member of 
+$\semimagicsquares_{n,0}$ mapped to the zero matrix $Z_{\nbyn{(n-1)}}$
+is the zero matrix~$Z_{\nbyn{n}}$.
+So suppose that $\phi(M)=Z_{\nbyn{(n-1)}}$ for $M\in\semimagicsquares_{\nbyn{n}}$.
+Because $\phi$ is the identity on all but the final row and column,
+the entries in $M$ in all but the final row and column
+$m_{i,j}=0$ for $i,j\in\setinterval{1}{n-1}$ are zero.
+The first row of $M$ adds to zero and hence
+the last entry in that row $m_{1,n}$ is zero.
+Similarly the last entry in each row $i\in\setinterval{1}{n-1}$
+and column $j\in\setinterval{1}{n-1}$ is zero.
+Then, the last column adds to zero so $m_{n,n}=0$.
+Thus $M$ is the zero matrix $Z_{\nbyn{n}}$ and the restriction of $\phi$ 
+is one-to-one. 
+
+To see that the restriction is onto,
+consider a member $\hat{M}$ of the codomain $\matspace_{\nbyn{(n-1)}}$.
+We will produce a matrix $M$ from the domain 
+$\semimagicsquares_{n,0}$ that maps to it.
+The function $\phi$ is the identity on all but the final row and column of 
+$M$ so for $i,j\in\setinterval{1}{n-1}$
+the entries are $m_{i,j}=\hat{m}_{i,j}$.
+\begin{equation*}
+  M=\begin{mat}
+      \hat{m}_{1,1}    &\hat{m}_{1,2}  &\ldots &\hat{m}_{1,n-1} &m_{1,n}  \\
+      \vdotswithin{\hat{m}_{1,1}}  
+         &\vdotswithin{\hat{m}_{1,2}}     \\
+      \hat{m}_{n-1,1}  &\hat{m}_{n-1,2} &\ldots &\hat{m}_{n-1,n-1} &m_{n-1,n}  \\
+      m_{n,1}         &m_{n,2}         &\ldots &m_{n,n-1}        &m_{n,n}  
+    \end{mat}
+\end{equation*}
+The first row of $M$ must add to zero so we take $m_{1,n}$ to be  
+$-(\hat{m}_{1,1}+\cdots+\hat{m}_{1,n-1})$.
+In the same way we get the final entries 
+$m_{i,n}=-(\hat{m}_{i,1}+\cdots+\hat{m}_{i,n-1})$ in all the rows but the 
+bottom $i\in\setinterval{1}{n-1}$, 
+and the final entries $m_{n,j}=-(\hat{m}_{1,j}+\cdots+\hat{m}_{n-1,j})$ 
+in all the columns but the last
+$j\in\setinterval{1}{n-1}$.
+The entry remaining is the one in the lower right~$m_{n,n}$.
+The final column adds to zero so we set it to 
+$-(m_{1,n}+\cdots+m_{n-1,n})$ but we must check
+that the final row now also adds to zero.
+We have $m_{n,n}=-m_{1,n}-\cdots-m_{n-1,n}$ and expanding each of the
+$m_{i,n}$ as $-\hat{m}_{1,1}-\cdots-\hat{m}_{1,n-1}$
+gives that we have defined $m_{n,n}$ to be the sum of all the entries
+of $\hat{M}$.
+The sum of the all the entries but the last in the final row is
+$m_{1,n}+m_{2,n}+\cdots+m_{n-1,n}$ and expanding each 
+$m_{n,j}=-\hat{m}_{1,j}-\cdots-\hat{m}_{n-1,j}$ 
+verifies that the sum of the final row is zero.
+Thus $M$ is semimagic with magic number zero and so $\phi$ is onto.
+
+Theorem~Two.II.\ref{th:RankPlusNullEqDim} says that for any linear map the
+dimension of the domain equals its rank plus its nullity.
+Because $\map{\phi}{\semimagicsquares_n}{\matspace_{\nbyn{(n-1)}}}$ is one-to-one
+its nullity is zero.
+Because it is onto its rank is $\dim(\matspace_{\nbyn{(n-1)}})=(n-1)^2$.
+Thus the domain of $\phi$, the subspace  
+$\semimagicsquares_{n,0}$ of semimagic squares with magic number zero,
+has dimension~$(n-1)^2$.
+
+
+The second step of the proof we give in this Topic is to show that 
+$\magicsquares_{n,0}$ has dimension
+$(n-1)^2-2$.
+For that, we consider another function.
 The sum of numbers down the upper-left to lower-right diagonal
 $\trace (M)=m_{1,1}+\cdots+m_{n,n}$ is the 
 \definend{trace}\index{trace}\index{matrix!trace}
 of the matrix~$M$.
 We define also the sum down the other diagonal
 $\trace^* (M)=m_{1,n}+\cdots+m_{n,1}$.
-Consider the map $\map{\theta}{\mathcal{H}_n}{\Re^2}$ that sends a 
+Consider the function $\map{\theta}{\mathcal{H}_n}{\Re^2}$ that sends a 
 matrix~$M$ to
 the ordered pair $(\trace(M),\trace^*(M))$.
 \nearbyexercise{xx} shows that this function is linear. 
@@ -134,9 +213,10 @@ We have
 and so the image of $\theta$ includes a basis for $\Re^3$.
 Thus $\theta$ is onto.
 
-Theorem~Two.II.\ref{th:RankPlusNullEqDim} says that for any linear map the
-dimension of the domain equals its rank plus its nullity.
-Here that gives $\dim(\mathcal{H}_n)=\dim(\magicsquares_{n,0})+2 $
+Now we can again cite 
+Theorem~Two.II.\ref{th:RankPlusNullEqDim}, that for any linear map the
+dimension of the domain equals its rank plus its nullity,
+to conclude that $\dim(\mathcal{H}_n)=\dim(\magicsquares_{n,0})+2$, as desired.
 
 % It is an unsolved problem to determine the number of magic squares of an arbitrary order, but the number of distinct magic squares (excluding those obtained by rotation and reflection) of order n=1, 2, ... are 1, 0, 1, 880, 275305224, ... (Sloane's A006052; Madachy 1979, p. 87). The 880 squares of order four were enumerated by Frénicle de Bessy in 1693, and are illustrated in Berlekamp et al. (1982, pp. 778-783). The number of 5×5 magic squares was computed by R. Schroeppel in 1973. The number of 6×6 squares is not known, but Pinn and Wieczerkowski (1998) estimated it to be (1.7745+/-0.0016)×10^(19) using Monte Carlo simulation and methods from statistical mechanics. 
 %(http://mathworld.wolfram.com/MagicSquare.html)
