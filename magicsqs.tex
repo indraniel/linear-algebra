@@ -6,7 +6,7 @@
 A Chinese legend tells the story of a  
 flood by the Lo river.
 The people offered sacrifices to appease the river.
-Each time a turtle emerged, 
+Each time from the river a turtle emerged, 
 walked around the sacrifice, and returned to the river.
 Fuh-Hi, % (2858-2738~BC)
 the founder of Chinese civilization,
@@ -37,8 +37,7 @@ Now that the people knew how much to sacrifice, at last the river's anger cooled
 A square matrix is 
 \definend{magic}\index{magic square}\index{matrix!magic square}
 if each row, column, and diagonal add to the same
-value.
-This value is the \definend{magic number}.
+value, the matrix's \definend{magic number}.
 
 Another example of a magic square appears in the engraving
 \textit{Melencolia I} by Albrecht D\"urer.
@@ -46,12 +45,12 @@ Another example of a magic square appears in the engraving
 \begin{center}
   \includegraphics[height=2.5in]{Melencolia.jpg} % wikipedia http://upload.wikimedia.org/wikipedia/commons/1/14/Melencolia_I_%28Durero%29.jpg
 \end{center}
-One interpretation is that this depicts melancholy, a depressed state.
+One interpretation is that it depicts melancholy, a depressed state.
 The figure, genius,
 is surrounded by a wealth of fascinating things to be explored.
 These include
 the compass, the geometrical solid, the scale, and the hourglass.
-But the figure is unmoved; all the things are unused.
+But the figure is unmoved; all of these things lie unused.
 One of the potential delights is the $\nbyn{4}$ matrix in the upper right.
 The rows, columns, and diagonals add to $34$.
 \begin{center}
@@ -96,40 +95,104 @@ then $a+b=s$, $c+d=s$, $a+c=s$, $b+d=s$, $a+d=s$, and $b+c=s$.
 the system has the unique solution $a=b=c=d=s/2$.
 So $\magicsquares_2$ is a one-dimensional subspace of $\matspace_{\nbyn{2}}$.
 
-In this Topic we will show that for $n>2$ the 
+This Topic shows that for $n>2$ the 
 dimension of
 $\magicsquares_n$ is $n^2-n$.
-We will do this in three steps: first we show that the space 
-$\semimagicsquares_{n,0}$ has dimension~$(n-1)^2$,
-then we show that the space $\magicsquares_{n,0}$ has dimension
-$(n-1)^2-2$, and finally we produce the desired result.
+We will do this in three steps.
 
-For the first step
+The first step is to show that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1$.
+We define 
+the sum of numbers down the upper-left to lower-right diagonal
+$\trace (M)=m_{1,1}+\cdots+m_{n,n}$ to be the 
+\definend{trace}\index{trace}\index{matrix!trace}
+of the matrix~$M$.
+We also define
+the sum down the other diagonal to be
+$\trace^* (M)=m_{1,n}+\cdots+m_{n,1}$.
+\nearbyexercise{yy} shows that both of these functions 
+$\map{\trace,\trace^*}{\magicsquares_n}{\Re}$ 
+are linear.
+(We shall use $\trace^*$ in the second step below.)
+
+Observe that 
+the nullspace $\nullspace{\trace}$ is the set of magic squares with magic
+number zero 
+$\magicsquares_{n,0}$.
+Observe also that the trace is onto because for any member~$r$ of the 
+codomain $\Re$ the $\nbyn{n}$ matrix whose entries are all $r/n$ is
+a magic square with magic number~$r$. 
+
+Now recall 
+Theorem~Two.II.\ref{th:RankPlusNullEqDim}, that for any linear map the
+dimension of the domain equals the dimension of the rangespace 
+plus the dimension of the nullspace,
+the map's rank plus its nullity.
+Here the domain is $\magicsquares_n$, the rangespace is 
+$\Re$ and the nullspace is $\magicsquares_{n,0}$,
+so we have the $\dim\magicsquares_n=1+\dim\magicsquares_{n,0}$
+formula.
+
+The second step of the proof is that 
+$\dim\magicsquares_{n,0}=\dim\semimagicsquares_{n,0}+2$.
+Consider the function $\map{\theta}{\semimagicsquares_n}{\Re^2}$ that sends a 
+matrix~$M$ to
+the ordered pair $(\trace(M),\trace^*(M))$.
+\nearbyexercise{xx} shows that this function is linear 
+and its nullspace is $\magicsquares_{n,0}$,
+the $\nbyn{n}$ magic squares with magic number~$0$.
+
+We will show that when $n\geq 3$ the map $\theta$ is onto.
+Because $\theta$ is linear we need only find a basis for $\Re^2$ that is the
+image of two members of $\mathcal{H}_n$.
+Consider the matrix $C\in \mathcal{H}_n$ that has all entries zero except
+that the four corners are $c_{1,1}=c_{n,n}=1$ and $c_{1,n}=c_{n,1}=-1$.
+Also consider the matrix $D\in \mathcal{H}_n$ with all entries zero except that 
+$d_{1,1}=d_{2,2}=1$ and $d_{1,2}=d_{2,1}=-1$.
+We have
+\begin{equation*}
+  \theta(C)=\colvec{2 \\ -2}
+  \qquad
+  \theta(D)=\begin{cases}
+               \binom{2}{-1}  &\text{if $n=3$}  \\[1ex]
+               \binom{2}{0}  &\text{if $n>3$}
+            \end{cases}
+\end{equation*}
+and so the image of $\theta$ includes a basis for $\Re^2$ and
+thus $\theta$ is onto.
+
+With that, we can again cite that for any linear map the
+dimension of the domain equals its rank plus its nullity
+to conclude that $\dim(\mathcal{H}_n)=\dim(\magicsquares_{n,0})+2$, as desired.
+
+Our third step is to show that the space 
+$\semimagicsquares_{n,0}$ has dimension~$(n-1)^2$.
+For that,
 let the function $\map{\phi}{\matspace_{\nbyn{n}}}{\matspace_{\nbyn{(n-1)}}}$
 be the identity map except that it 
 drops the final row and column: $\phi(M)=\hat{M}$ where 
 $\hat{m}_{i,j}=m_{i,j}$ for all $i,j\in\setinterval{1}{n-1}$.
 The check that $\phi$ is linear is easy.
-Consider $\phi$'s restriction
+Consider $\phi$'s restriction to the semimagic squares with 
+magic number zero
 $\map{\phi}{\semimagicsquares_{n,0}}{\matspace_{\nbyn{(n-1)}}}$.
-We claim that it is one-to-one and onto.
+We claim that this is one-to-one and onto.
 
 To show that it is one-to-one we will show that the only member of 
 $\semimagicsquares_{n,0}$ mapped to the zero matrix $Z_{\nbyn{(n-1)}}$
 is the zero matrix~$Z_{\nbyn{n}}$.
-So suppose that $\phi(M)=Z_{\nbyn{(n-1)}}$ for $M\in\semimagicsquares_{\nbyn{n}}$.
-Because $\phi$ is the identity on all but the final row and column,
-the entries in $M$ in all but the final row and column
-$m_{i,j}=0$ for $i,j\in\setinterval{1}{n-1}$ are zero.
+Suppose that $M\in\semimagicsquares_{\nbyn{n}}$ and $\phi(M)=Z_{\nbyn{(n-1)}}$.
+On all but the final row and column $\phi$ is the identity so
+the entries in $M$ in all but the final row and column are zero: 
+$m_{i,j}=0$ for $i,j\in\setinterval{1}{n-1}$.
 The first row of $M$ adds to zero and hence
-the last entry in that row $m_{1,n}$ is zero.
-Similarly the last entry in each row $i\in\setinterval{1}{n-1}$
+the final entry in that row $m_{1,n}$ is zero.
+Similarly the final entry in each row $i\in\setinterval{1}{n-1}$
 and column $j\in\setinterval{1}{n-1}$ is zero.
-Then, the last column adds to zero so $m_{n,n}=0$.
-Thus $M$ is the zero matrix $Z_{\nbyn{n}}$ and the restriction of $\phi$ 
+Then, the final column adds to zero so $m_{n,n}=0$.
+Therefore $M$ is the zero matrix $Z_{\nbyn{n}}$ and the restriction of $\phi$ 
 is one-to-one. 
 
-To see that the restriction is onto,
+To see that the map $\phi$ is onto,
 consider a member $\hat{M}$ of the codomain $\matspace_{\nbyn{(n-1)}}$.
 We will produce a matrix $M$ from the domain 
 $\semimagicsquares_{n,0}$ that maps to it.
@@ -176,47 +239,11 @@ Thus the domain of $\phi$, the subspace
 $\semimagicsquares_{n,0}$ of semimagic squares with magic number zero,
 has dimension~$(n-1)^2$.
 
+That finishes the three steps. 
+We have that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1
+ =(\dim\semimagicsquares_n-2)+1=(n-1)^2-1=n^2-n$
+when $n\geq 3$.
 
-The second step of the proof we give in this Topic is to show that 
-$\magicsquares_{n,0}$ has dimension
-$(n-1)^2-2$.
-For that, we consider another function.
-The sum of numbers down the upper-left to lower-right diagonal
-$\trace (M)=m_{1,1}+\cdots+m_{n,n}$ is the 
-\definend{trace}\index{trace}\index{matrix!trace}
-of the matrix~$M$.
-We define also the sum down the other diagonal
-$\trace^* (M)=m_{1,n}+\cdots+m_{n,1}$.
-Consider the function $\map{\theta}{\mathcal{H}_n}{\Re^2}$ that sends a 
-matrix~$M$ to
-the ordered pair $(\trace(M),\trace^*(M))$.
-\nearbyexercise{xx} shows that this function is linear. 
-and that its nullspace is the space $\magicsquares_{n,0}$
-of $\nbyn{n}$ magic squares with magic number~$0$.
-
-We will show that $\theta$ is an onto map when $n\geq 3$.
-Because $\theta$ is linear we need only find a basis for $\Re^2$ that is the
-image of two members of $\mathcal{H}_n$.
-Consider the matrix $C\in \mathcal{H}_n$ that has all entries zero except
-that the four corners are $c_{1,1}=c_{n,n}=1$ and $c_{1,n}=c_{n,1}=-1$.
-Also consider the matrix $D\in \mathcal{H}_n$ with all entries zero except that 
-$d_{1,1}=d_{2,2}=1$ and $d_{1,2}=d_{2,1}=-1$.
-We have
-\begin{equation*}
-  \theta(C)=\colvec{2 \\ -2}
-  \qquad
-  \theta(D)=\begin{cases}
-               \colvec{2 \\ -1}  &\text{if $n=3$}  \\
-               \colvec{2 \\  0}  &\text{if $n>3$}
-            \end{cases}
-\end{equation*}
-and so the image of $\theta$ includes a basis for $\Re^3$.
-Thus $\theta$ is onto.
-
-Now we can again cite 
-Theorem~Two.II.\ref{th:RankPlusNullEqDim}, that for any linear map the
-dimension of the domain equals its rank plus its nullity,
-to conclude that $\dim(\mathcal{H}_n)=\dim(\magicsquares_{n,0})+2$, as desired.
 
 % It is an unsolved problem to determine the number of magic squares of an arbitrary order, but the number of distinct magic squares (excluding those obtained by rotation and reflection) of order n=1, 2, ... are 1, 0, 1, 880, 275305224, ... (Sloane's A006052; Madachy 1979, p. 87). The 880 squares of order four were enumerated by Frénicle de Bessy in 1693, and are illustrated in Berlekamp et al. (1982, pp. 778-783). The number of 5×5 magic squares was computed by R. Schroeppel in 1973. The number of 6×6 squares is not known, but Pinn and Wieczerkowski (1998) estimated it to be (1.7745+/-0.0016)×10^(19) using Monte Carlo simulation and methods from statistical mechanics. 
 %(http://mathworld.wolfram.com/MagicSquare.html)
