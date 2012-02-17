@@ -67,23 +67,21 @@ The rows, columns, and diagonals add to $34$.
 The middle entries on the bottom row give $1514$, the 
 date of the engraving.
 
-A sum of two same-sized magic squares is magic and a 
-scalar multiple of a magic square is magic, so the set of 
-$\nbyn{n}$ magic squares
-$\magicsquares_n$ is a subspace of $\matspace_{\nbyn{n}}$.
-The set $\magicsquares_{n,0}$ of $\nbyn{n}$~magic squares with magic number~$0$ 
-is another subspace.
-
-A square matrix is \definend{semimagic} if 
-the rows and columns add to the same value, that is, we drop the
-condition on the diagonals.
-The set of semimagic squares $\semimagicsquares_n$ 
-is a subspace of $\matspace_{\nbyn{n}}$.
-So is the set $\semimagicsquares_{n,0}$  
-of $\nbyn{n}$~semimagic squares with magic number~$0$. 
-
+The above two are arrangements of $1$, \ldots, $n^2$.
+They are \definend{normal}\index{magic square!normal}.
+The $\nbyn{1}$ square whose sole entry is $1$ is normal, there is
+no normal $\nbyn{2}$ magic square by \nearbyexercise{exer:TwoByTwoMagicSqUnique},
+and there are normal magic squares of every other size; 
+see \cite{WikipediaMagicSquare}.
+The problem of finding the number of magic squares of each size is unsolved
+but we know the number for $\nbyn{3}$, $\nbyn{4}$, and $\nbyn{5}$;
+see \cite{OnlineEncyclopedia}.
+ 
+We can say more about set of 
+magic squares that are not required to be normal.
 Every $\nbyn{1}$ square is magic, trivially.
-If the rows, columns, and diagonals of a $\nbyn{2}$ matrix add to $k$
+If the rows, columns, and diagonals of a $\nbyn{2}$ matrix add to 
+the magic number~$s$
 \begin{equation*}
   \begin{mat}
     a  &b  \\
@@ -93,27 +91,45 @@ If the rows, columns, and diagonals of a $\nbyn{2}$ matrix add to $k$
 then $a+b=s$, $c+d=s$, $a+c=s$, $b+d=s$, $a+d=s$, and $b+c=s$.
 \nearbyexercise{exer:TwoByTwoMagicSqUnique} shows that
 the system has the unique solution $a=b=c=d=s/2$.
-So $\magicsquares_2$ is a one-dimensional subspace of $\matspace_{\nbyn{2}}$.
+So the set of $\nbyn{2}$ magic squares
+is a one-dimensional subspace of $\matspace_{\nbyn{2}}$.
 
-This Topic shows that for $n>2$ the 
+In general, a sum of two same-sized magic squares is magic and a 
+scalar multiple of a magic square is magic so the set of 
+$\nbyn{n}$ magic squares
+$\magicsquares_n$ is a vector space, a subspace of $\matspace_{\nbyn{n}}$.
+This Topic shows that for $n\geq 3$ the 
 dimension of
 $\magicsquares_n$ is $n^2-n$.
-We will do this in three steps.
+The set $\magicsquares_{n,0}$ of $\nbyn{n}$~magic squares with magic number~$0$ 
+is another subspace, and we will find the formula for its dimension also.
 
-The first step is to show that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1$.
-We define 
-the sum of numbers down the upper-left to lower-right diagonal
-$\trace (M)=m_{1,1}+\cdots+m_{n,n}$ to be the 
+A square matrix is \definend{semimagic} if 
+the rows and columns add to the same value, that is, if we drop the
+condition on the diagonals.
+The set of semimagic squares $\semimagicsquares_n$ 
+is a subspace of $\matspace_{\nbyn{n}}$, as is
+the set $\semimagicsquares_{n,0}$  
+of $\nbyn{n}$~semimagic squares with magic number~$0$. 
+
+We will find the dimension of 
+$\magicsquares_n$ 
+in three steps.
+The first is to show that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1$.
+Define 
+the sum of numbers down the upper-left to lower-right diagonal of a matrix
+to be the
 \definend{trace}\index{trace}\index{matrix!trace}
-of the matrix~$M$.
-We also define
-the sum down the other diagonal to be
+$\trace (M)=m_{1,1}+\cdots+m_{n,n}$.
+Define also
+the sum down the other diagonal
 $\trace^* (M)=m_{1,n}+\cdots+m_{n,1}$.
-\nearbyexercise{yy} shows that both of these functions 
-$\map{\trace,\trace^*}{\magicsquares_n}{\Re}$ 
+\nearbyexercise{exer:TraceIsLinear} shows that both of these functions 
 are linear.
 (We shall use $\trace^*$ in the second step below.)
 
+Consider the restriction of the trace to the magic squares
+$\map{\trace}{\magicsquares_n}{\Re}$. 
 Observe that 
 the nullspace $\nullspace{\trace}$ is the set of magic squares with magic
 number zero 
@@ -121,7 +137,6 @@ $\magicsquares_{n,0}$.
 Observe also that the trace is onto because for any member~$r$ of the 
 codomain $\Re$ the $\nbyn{n}$ matrix whose entries are all $r/n$ is
 a magic square with magic number~$r$. 
-
 Now recall 
 Theorem~Two.II.\ref{th:RankPlusNullEqDim}, that for any linear map the
 dimension of the domain equals the dimension of the rangespace 
@@ -134,14 +149,16 @@ formula.
 
 The second step of the proof is that 
 $\dim\magicsquares_{n,0}=\dim\semimagicsquares_{n,0}+2$.
-Consider the function $\map{\theta}{\semimagicsquares_n}{\Re^2}$ that sends a 
+Let the function $\map{\theta}{\matspace_n}{\Re^2}$ send a 
 matrix~$M$ to
 the ordered pair $(\trace(M),\trace^*(M))$.
-\nearbyexercise{xx} shows that this function is linear 
-and its nullspace is $\magicsquares_{n,0}$,
+\nearbyexercise{exer:TraceIsLinear} shows that this function is linear.
+ 
+We consider the restriction of that map
+$\map{\theta}{\semimagicsquares_n}{\Re^2}$ to the semimagic squares.  
+Note that its nullspace is $\magicsquares_{n,0}$,
 the $\nbyn{n}$ magic squares with magic number~$0$.
-
-We will show that when $n\geq 3$ the map $\theta$ is onto.
+We will show that when $n\geq 3$ this restriction $\theta$ is onto.
 Because $\theta$ is linear we need only find a basis for $\Re^2$ that is the
 image of two members of $\mathcal{H}_n$.
 Consider the matrix $C\in \mathcal{H}_n$ that has all entries zero except
@@ -159,10 +176,10 @@ We have
 \end{equation*}
 and so the image of $\theta$ includes a basis for $\Re^2$ and
 thus $\theta$ is onto.
-
-With that, we can again cite that for any linear map the
+With that, again citing that for any linear map the
 dimension of the domain equals its rank plus its nullity
-to conclude that $\dim(\mathcal{H}_n)=\dim(\magicsquares_{n,0})+2$, as desired.
+allows us to conclude that 
+$\dim(\mathcal{H}_n)=2+\dim(\magicsquares_{n,0})$, as desired.
 
 Our third step is to show that the space 
 $\semimagicsquares_{n,0}$ has dimension~$(n-1)^2$.
@@ -332,6 +349,43 @@ when $n\geq 3$.
           of all entries.
       \end{exparts}
     \end{answer}
+  \item   \label{exer:TraceIsLinear}
+    \begin{exparts}
+      \partsitem 
+        Show that the two functions 
+        $\map{\trace,\trace^*}{\matspace_{\nbyn{n}}}{\Re}$
+        giving the sums down the diagonals are linear.
+      \partsitem
+        Show that the function
+       $\map{\theta}{\matspace_{\nbyn{n}}}{\Re^2}$
+       given by $\theta(M)=(\trace(M),\trace^*(m))$
+       is linear.
+     \partsitem
+       Generalize the prior item. 
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          Where $M,N\in\matspace_{\nbyn{n}}$ we have 
+          $\trace(cM+dN)=(cm_{1,1}+dn_{1,1})+\cdots+(cm_{n,n}+dn_{n,n})
+          =(cm_{1,1}+\cdots+cm_{n,n})+(dn_{1,1}+\cdots+dn_{n,n})
+          =c\cdot\trace(M)+d\cdot\trace(N)$ where
+          all numbers are real, so the trace preserves linear
+         combinations.
+         The argument for $\trace^*$ is similar.
+       \partsitem
+         It preserves linear combinations: where all numbers are real,
+          $\theta(cM+dN)=(\trace(cM+dN),\trace^*(cM+dN))
+          =(c\cdot\trace(M)+d\cdot\trace(N), c\cdot\trace^*(M)+d\cdot\trace^*(N))
+          =c\cdot\theta(M)+d\cdot\theta(N)$.
+       \partsitem   
+         Where $\map{h_1,\ldots,h_n}{V}{W}$ are linear then so is
+         $\map{g}{V}{W^n}$ given by
+         $g(\vec{v})=(h_1(\vec{v}), \ldots, h_n(\vec{v}))$.
+         The proof just follows the proof of the prior item.
+      \end{exparts}
+    \end{answer}
+
         
 
 \end{exercises}
