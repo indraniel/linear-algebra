@@ -147,124 +147,143 @@ $\Re$ and the nullspace is $\magicsquares_{n,0}$,
 so we have the $\dim\magicsquares_n=1+\dim\magicsquares_{n,0}$
 formula.
 
-The second step of the proof is that 
-$\dim\magicsquares_{n,0}=\dim\semimagicsquares_{n,0}+2$.
-Let the function $\map{\theta}{\matspace_n}{\Re^2}$ send a 
-matrix~$M$ to
-the ordered pair $(\trace(M),\trace^*(M))$.
-\nearbyexercise{exer:TraceIsLinear} shows that this function is linear.
- 
-We consider the restriction of that map
-$\map{\theta}{\semimagicsquares_n}{\Re^2}$ to the semimagic squares.  
-Note that its nullspace is $\magicsquares_{n,0}$,
-the $\nbyn{n}$ magic squares with magic number~$0$.
-We will show that when $n\geq 3$ this restriction $\theta$ is onto.
-Because $\theta$ is linear we need only find a basis for $\Re^2$ that is the
-image of two members of $\mathcal{H}_n$.
-Consider the matrix $C\in \mathcal{H}_n$ that has all entries zero except
-that the four corners are $c_{1,1}=c_{n,n}=1$ and $c_{1,n}=c_{n,1}=-1$.
-Also consider the matrix $D\in \mathcal{H}_n$ with all entries zero except that 
-$d_{1,1}=d_{2,2}=1$ and $d_{1,2}=d_{2,1}=-1$.
-We have
+We next argue that $\dim\magicsquares_{n,0}=n^2-2n-1$.
+We will write out the $n=3$ case but other $n$'s are similar.
+If the rows, columns, and diagonals of this matrix
 \begin{equation*}
-  \theta(C)=\colvec{2 \\ -2}
-  \qquad
-  \theta(D)=\begin{cases}
-               \binom{2}{-1}  &\text{if $n=3$}  \\[1ex]
-               \binom{2}{0}  &\text{if $n>3$}
-            \end{cases}
-\end{equation*}
-and so the image of $\theta$ includes a basis for $\Re^2$ and
-thus $\theta$ is onto.
-With that, again citing that for any linear map the
-dimension of the domain equals its rank plus its nullity
-allows us to conclude that 
-$\dim(\mathcal{H}_n)=2+\dim(\magicsquares_{n,0})$, as desired.
-
-Our third step is to show that the space 
-$\semimagicsquares_{n,0}$ has dimension~$(n-1)^2$.
-For that,
-let the function $\map{\phi}{\matspace_{\nbyn{n}}}{\matspace_{\nbyn{(n-1)}}}$
-be the identity map except that it 
-drops the final row and column: $\phi(M)=\hat{M}$ where 
-$\hat{m}_{i,j}=m_{i,j}$ for all $i,j\in\setinterval{1}{n-1}$.
-The check that $\phi$ is linear is easy.
-Consider $\phi$'s restriction to the semimagic squares with 
-magic number zero
-$\map{\phi}{\semimagicsquares_{n,0}}{\matspace_{\nbyn{(n-1)}}}$.
-We claim that this is one-to-one and onto.
-
-To show that it is one-to-one we will show that the only member of 
-$\semimagicsquares_{n,0}$ mapped to the zero matrix $Z_{\nbyn{(n-1)}}$
-is the zero matrix~$Z_{\nbyn{n}}$.
-Suppose that $M\in\semimagicsquares_{\nbyn{n}}$ and $\phi(M)=Z_{\nbyn{(n-1)}}$.
-On all but the final row and column $\phi$ is the identity so
-the entries in $M$ in all but the final row and column are zero: 
-$m_{i,j}=0$ for $i,j\in\setinterval{1}{n-1}$.
-The first row of $M$ adds to zero and hence
-the final entry in that row $m_{1,n}$ is zero.
-Similarly the final entry in each row $i\in\setinterval{1}{n-1}$
-and column $j\in\setinterval{1}{n-1}$ is zero.
-Then, the final column adds to zero so $m_{n,n}=0$.
-Therefore $M$ is the zero matrix $Z_{\nbyn{n}}$ and the restriction of $\phi$ 
-is one-to-one. 
-
-To see that the map $\phi$ is onto,
-consider a member $\hat{M}$ of the codomain $\matspace_{\nbyn{(n-1)}}$.
-We will produce a matrix $M$ from the domain 
-$\semimagicsquares_{n,0}$ that maps to it.
-The function $\phi$ is the identity on all but the final row and column of 
-$M$ so for $i,j\in\setinterval{1}{n-1}$
-the entries are $m_{i,j}=\hat{m}_{i,j}$.
-\begin{equation*}
-  M=\begin{mat}
-      \hat{m}_{1,1}    &\hat{m}_{1,2}  &\ldots &\hat{m}_{1,n-1} &m_{1,n}  \\
-      \vdotswithin{\hat{m}_{1,1}}  
-         &\vdotswithin{\hat{m}_{1,2}}     \\
-      \hat{m}_{n-1,1}  &\hat{m}_{n-1,2} &\ldots &\hat{m}_{n-1,n-1} &m_{n-1,n}  \\
-      m_{n,1}         &m_{n,2}         &\ldots &m_{n,n-1}        &m_{n,n}  
+    \begin{mat}
+      a &b &c \\
+      d &e &f \\
+      g &h &i
     \end{mat}
 \end{equation*}
-The first row of $M$ must add to zero so we take $m_{1,n}$ to be  
-$-(\hat{m}_{1,1}+\cdots+\hat{m}_{1,n-1})$.
-In the same way we get the final entries 
-$m_{i,n}=-(\hat{m}_{i,1}+\cdots+\hat{m}_{i,n-1})$ in all the rows but the 
-bottom $i\in\setinterval{1}{n-1}$, 
-and the final entries $m_{n,j}=-(\hat{m}_{1,j}+\cdots+\hat{m}_{n-1,j})$ 
-in all the columns but the last
-$j\in\setinterval{1}{n-1}$.
-The entry remaining is the one in the lower right~$m_{n,n}$.
-The final column adds to zero so we set it to 
-$-(m_{1,n}+\cdots+m_{n-1,n})$ but we must check
-that the final row now also adds to zero.
-We have $m_{n,n}=-m_{1,n}-\cdots-m_{n-1,n}$ and expanding each of the
-$m_{i,n}$ as $-\hat{m}_{1,1}-\cdots-\hat{m}_{1,n-1}$
-gives that we have defined $m_{n,n}$ to be the sum of all the entries
-of $\hat{M}$.
-The sum of the all the entries but the last in the final row is
-$m_{1,n}+m_{2,n}+\cdots+m_{n-1,n}$ and expanding each 
-$m_{n,j}=-\hat{m}_{1,j}-\cdots-\hat{m}_{n-1,j}$ 
-verifies that the sum of the final row is zero.
-Thus $M$ is semimagic with magic number zero and so $\phi$ is onto.
+add to zero then we have this system.
+\begin{equation*}
+  \begin{linsys}{9}
+    a &+ &b &+ &c &  &  &  &  &  &  &  &  &  &  &  &  &= &0 \\ 
+      &  &  &  &  &  &d &+ &e &+ &f &  &  &  &  &  &  &= &0 \\ 
+      &  &  &  &  &  &  &  &  &  &  &  &g &+ &h &+ &i &= &0 \\ 
+    a &  &  &  &  &+ &d &  &  &  &  &+ &g &  &  &  &  &= &0 \\ 
+      &  &b &  &  &  &  &+ &e &  &  &  &  &+ &h &  &  &= &0 \\ 
+      &  &  &  &c &  &  &  &  &+ &f &  &  &  &  &+ &i &= &0 \\ 
+    a &  &  &  &  &  &  &+ &e &  &  &  &  &  &  &+ &i &= &0 \\ 
+      &  &  &  &c &  &  &+ &e &  &  &+ &g &  &  &  &  &= &0    
+  \end{linsys}
+\end{equation*}
+The matrix of coefficients in the $n=3$ and~$n=4$ cases
+are shown below (with the rows and columns numbered).
+With respect to the standard basis, each represents a linear map
+$\map{h}{\Re^{n^2}}{\Re^{2n+2}}$.
+The nullspace of $h$ is $\magicsquares_{n,0}$ so if we show that the
+rank of the matrix is $2n+1$ then we will have
+what we want, that the nullity is $n^2-(2n+1)$.
 
-Theorem~Two.II.\ref{th:RankPlusNullEqDim} says that for any linear map the
-dimension of the domain equals its rank plus its nullity.
-Because $\map{\phi}{\semimagicsquares_n}{\matspace_{\nbyn{(n-1)}}}$ is one-to-one
-its nullity is zero.
-Because it is onto its rank is $\dim(\matspace_{\nbyn{(n-1)}})=(n-1)^2$.
-Thus the domain of $\phi$, the subspace  
-$\semimagicsquares_{n,0}$ of semimagic squares with magic number zero,
-has dimension~$(n-1)^2$.
+\newlength{\interblockhspace}
+\setlength{\interblockhspace}{1.45em}
+\newlength{\interblockvspace}
+\setlength{\interblockvspace}{1ex}
+\newlength{\colwidth}
+\settowidth{\colwidth}{$9$}
+\begin{equation*}
+  \begin{array}{r|ccc@{\hspace*{\interblockhspace}}ccc@{\hspace*{\interblockhspace}}ccc}
+    \multicolumn{1}{c}{\ }  &1 &2 &3 &4 &5 &6 &7 &8 &9 \\
+    \cline{2-10}
+    \vec{\rho}_1 &1 &1 &1 &0 &0 &0 &0 &0 &0 \\
+    \vec{\rho}_2 &0 &0 &0 &1 &1 &1 &0 &0 &0 \\
+    \vec{\rho}_3 &0 &0 &0 &0 &0 &0 &1 &1 &1 \\[\interblockvspace]
+    \vec{\rho}_4 &1 &0 &0 &1 &0 &0 &1 &0 &0 \\
+    \vec{\rho}_5 &0 &1 &0 &0 &1 &0 &0 &1 &0 \\
+    \vec{\rho}_6 &0 &0 &1 &0 &0 &1 &0 &0 &1 \\[\interblockvspace]
+    \vec{\rho}_7 &1 &0 &0 &0 &1 &0 &0 &0 &1 \\
+    \vec{\rho}_8 &0 &0 &1 &0 &1 &0 &1 &0 &0 
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \begin{array}{r|cccc@{\hspace*{\interblockhspace}}cccc@{\hspace*{\interblockhspace}}cccc@{\hspace*{\interblockhspace}}cccc}
+    \multicolumn{1}{c}{\ }  &1 &2 &3 &4 &5 &6 &7 &8 &9 
+           &\makebox[\colwidth]{$10$} &\makebox[\colwidth]{$11$} 
+           &\makebox[\colwidth]{$12$} &\makebox[\colwidth]{$13$} 
+           &\makebox[\colwidth]{$14$} &\makebox[\colwidth]{$15$} 
+           &\makebox[\colwidth]{$16$} \\
+    \cline{2-17}
+    \vec{\rho}_1   &1 &1 &1 &1  &0 &0 &0 &0  &0 &0 &0 &0  &0 &0 &0 &0 \\
+    \vec{\rho}_2   &0 &0 &0 &0  &1 &1 &1 &1  &0 &0 &0 &0  &0 &0 &0 &0 \\
+    \vec{\rho}_3   &0 &0 &0 &0  &0 &0 &0 &0  &1 &1 &1 &1  &0 &0 &0 &0 \\
+    \vec{\rho}_4   &0 &0 &0 &0  &0 &0 &0 &0  &0 &0 &0 &0  &1 &1 &1 &1 \\[\interblockvspace]
+    \vec{\rho}_5   &1 &0 &0 &0  &1 &0 &0 &0  &1 &0 &0 &0  &1 &0 &0 &0 \\
+    \vec{\rho}_6   &0 &1 &0 &0  &0 &1 &0 &0  &0 &1 &0 &0  &0 &1 &0 &0 \\
+    \vec{\rho}_7   &0 &0 &1 &0  &0 &0 &1 &0  &0 &0 &1 &0  &0 &0 &1 &0 \\
+    \vec{\rho}_8   &0 &0 &0 &1  &0 &0 &0 &1  &0 &0 &0 &1  &0 &0 &0 &1 \\[\interblockvspace]
+    \vec{\rho}_9   &1 &0 &0 &0  &0 &1 &0 &0  &0 &0 &1 &0  &0 &0 &0 &1 \\
+    \vec{\rho}_{10} &0 &0 &0 &1  &0 &0 &1 &0  &0 &1 &0 &0  &1 &0 &0 &0 \\
+  \end{array}
+\end{equation*}
 
-That finishes the three steps. 
-We have that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1
- =(\dim\semimagicsquares_n-2)+1=(n-1)^2-1=n^2-n$
-when $n\geq 3$.
+The first $n$~rows add to the same vector
+as the second $n$~rows, the vector of all ones.
+So to calculate the rank of this matrix by 
+finding a maximal linearly independent
+set of rows we must omit at least one row.
+We will drop the first one and show that the set of remaining rows 
+$S=\setinterval{\vec{\rho}_2}{\vec{\rho}_{2n+2}}$
+is linearly independent.
+So we set up a linear relationship.
+\begin{equation*}
+  c_2\vec{\rho}_2+\cdots+c_{2n}\vec{\rho}_{2n}
+     +c_{2n+1}\vec{\rho}_{2n+1}+c_{2n+2}\vec{\rho}_{2n+2}=\zero
+  \tag{*}
+\end{equation*}
 
+Now it gets messy.
+In the first~$n$ columns, in the final two rows, there is a block that 
+is all zeros except that it starts with a one in column~$1$
+and there is a block that is all zeros except that it ends with a one
+in column~$n-1$.
+With $\vec{\rho}_1$ absent from ($*$), each of those columns contain only 
+two ones, and so we can conclude that $c_{2n+1}=-c_{n+1}$ as well as that
+$c_{2n+2}=-c_{2n}$.
 
-% It is an unsolved problem to determine the number of magic squares of an arbitrary order, but the number of distinct magic squares (excluding those obtained by rotation and reflection) of order n=1, 2, ... are 1, 0, 1, 880, 275305224, ... (Sloane's A006052; Madachy 1979, p. 87). The 880 squares of order four were enumerated by Frénicle de Bessy in 1693, and are illustrated in Berlekamp et al. (1982, pp. 778-783). The number of 5×5 magic squares was computed by R. Schroeppel in 1973. The number of 6×6 squares is not known, but Pinn and Wieczerkowski (1998) estimated it to be (1.7745+/-0.0016)×10^(19) using Monte Carlo simulation and methods from statistical mechanics. 
-%(http://mathworld.wolfram.com/MagicSquare.html)
+Next consider the columns between those two
+(in the $n=3$ illustration above this includes only the second column); 
+each has a single one.
+That is, for each column index $j\in\interval{2}{n-2}$
+the column consists of only zeros except for a one in row~$n+j$, 
+and hence $c_{n+j}=0$.
 
+On to the next block of columns, from $n+1$ through~$2n-1$.
+Column~$n+1$ has only two ones so $c_2=-c_{n+1}$,
+and therefore $c_2=c_{2n+1}$.
+We conclude from column~$2n-1$ that $c_2=-c_{2n}$,
+and so $c_2=c_{2n+2}$.  
+
+But $n\geq 3$.
+So there is at least one column between column~$n+1$ and column~$2n-1$.
+In at least one of those columns a one appears in $\vec{\rho}_{2n+1}$.
+If a one also appears in that column in $\vec{\rho}_{2n+2}$ then we have 
+$c_2=-(c_{2n+1}+c_{2n+2})$.
+If a one does not appear in that column in $\vec{\rho}_{2n+2}$
+then we have $c_2=-c_{2n+1}$
+In either case, $c_2=0$, and also
+$c_{2n+1}=c_{2n+2}=0$, and also  
+$c_{n+1}=c_{2n}=0$.
+
+If the next block of $n$~many columns is not the last then similarly
+conclude from the  
+first and last columns that $c_3=c_{2n+1}=c_{2n+2}=0$.
+
+Keep this up until we reach the last block of columns, those numbered
+$(n-1)n+1$ through~$n^2$.
+Because $c_{n+1}=\cdots=c_{2n}=0$ the $n^2$~column 
+gives that $c_{n}=-c_{2n+1}=0$.
+
+Thus the set of all the rows but the first is linearly independent, 
+while the set of all the rows is linearly dependent.
+Therefore the rank of the matrix is $2n+1$, as required.
+
+\medskip
+The classic source on normal magic squares is \cite{Ball}.
+More on the Lo Shu square is at \cite{WikipediaLoShuSquare}.
+The proof given here began with \cite{Ward}.
 
 \begin{exercises}
   \item \label{exer:TwoByTwoMagicSqUnique}
@@ -385,8 +404,140 @@ when $n\geq 3$.
          The proof just follows the proof of the prior item.
       \end{exparts}
     \end{answer}
+  \item 
+    \cite{Beardon}
+    Here is a slicker proof of the result of this Topic, when $n\geq 3$.
+    \begin{exparts}
+      \partsitem
+        First show that 
+        $\dim\magicsquares_{n,0}=\dim\semimagicsquares_{n,0}+2$.
+        To do this, consider the function
+        $\map{\theta}{\matspace_n}{\Re^2}$ sending a 
+        matrix~$M$ to
+        the ordered pair $(\trace(M),\trace^*(M))$.
+        Specifically, consider the restriction of that map
+        $\map{\theta}{\semimagicsquares_n}{\Re^2}$ to the semimagic squares.  
+        Clearly its nullspace is $\magicsquares_{n,0}$.
+        Show that when $n\geq 3$ this restriction $\theta$ is onto.
+        (\textit{Hint:} we need only find a basis for 
+           $\Re^2$ that is the
+           image of two members of $\mathcal{H}_n$)  
+      \partsitem
+        Let the function $\map{\phi}{\matspace_{\nbyn{n}}}{\matspace_{\nbyn{(n-1)}}}$
+        be the identity map except that it 
+        drops the final row and column: $\phi(M)=\hat{M}$ where 
+        $\hat{m}_{i,j}=m_{i,j}$ for all $i,j\in\setinterval{1}{n-1}$.
+        The check that $\phi$ is linear is easy.
+        Consider $\phi$'s restriction to the semimagic squares with 
+        magic number zero
+       $\map{\phi}{\semimagicsquares_{n,0}}{\matspace_{\nbyn{(n-1)}}}$.
+       Show that $\phi$ is one-to-one
+     \partsitem
+       Show that $\phi$ is onto.
+     \partsitem Conclude that
+        $\semimagicsquares_{n,0}$ has dimension~$(n-1)^2$.
+     \partsitem 
+        Conclude that $\dim(\magicsquares_n)=n^2-n$
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          Consider the matrix $C\in \mathcal{H}_n$ that has all 
+          entries zero except
+          that the four corners are $c_{1,1}=c_{n,n}=1$ and $c_{1,n}=c_{n,1}=-1$.
+           Also consider the matrix $D\in \mathcal{H}_n$ with all entries 
+           zero except that 
+           $d_{1,1}=d_{2,2}=1$ and $d_{1,2}=d_{2,1}=-1$.
+           We have
+           \begin{equation*}
+              \theta(C)=\colvec{2 \\ -2}
+              \qquad
+              \theta(D)=\begin{cases}
+                           \binom{2}{-1}  &\text{if $n=3$}  \\[1ex]
+                           \binom{2}{0}  &\text{if $n>3$}
+                        \end{cases}
+           \end{equation*}
+           and so the image of $\theta$ includes a basis for $\Re^2$ and
+           thus $\theta$ is onto.
+           With that, because for any linear map the
+           dimension of the domain equals its rank plus its nullity
+           we conclude that 
+           $\dim(\mathcal{H}_n)=2+\dim(\magicsquares_{n,0})$, as desired.
+        \partsitem
+           We claim that 
+           $\map{\phi}{\semimagicsquares_{n,0}}{\matspace_{\nbyn{(n-1)}}}$.
+           is one-to-one and onto.
 
-        
+           To show that it is one-to-one we will show that the only member of 
+           $\semimagicsquares_{n,0}$ mapped to the zero matrix $Z_{\nbyn{(n-1)}}$
+           is the zero matrix~$Z_{\nbyn{n}}$.
+           Suppose that $M\in\semimagicsquares_{\nbyn{n}}$ and 
+           $\phi(M)=Z_{\nbyn{(n-1)}}$.
+           On all but the final row and column $\phi$ is the identity so
+           the entries in $M$ in all but the final row and column are zero: 
+           $m_{i,j}=0$ for $i,j\in\setinterval{1}{n-1}$.
+           The first row of $M$ adds to zero and hence
+           the final entry in that row $m_{1,n}$ is zero.
+           Similarly the final entry in each row $i\in\setinterval{1}{n-1}$
+           and column $j\in\setinterval{1}{n-1}$ is zero.
+           Then, the final column adds to zero so $m_{n,n}=0$.
+           Therefore $M$ is the zero matrix $Z_{\nbyn{n}}$ and the 
+           restriction of $\phi$ 
+           is one-to-one. 
+        \partsitem
+           Consider a member $\hat{M}$ of the codomain $\matspace_{\nbyn{(n-1)}}$.
+           We will produce a matrix $M$ from the domain 
+           $\semimagicsquares_{n,0}$ that maps to it.
+           The function $\phi$ is the identity on all but the final row 
+           and column of 
+           $M$ so for $i,j\in\setinterval{1}{n-1}$
+           the entries are $m_{i,j}=\hat{m}_{i,j}$.
+           \begin{equation*}
+             M=\begin{mat}
+               \hat{m}_{1,1}    &\hat{m}_{1,2}  &\ldots &\hat{m}_{1,n-1} &m_{1,n}  \\
+               \vdotswithin{\hat{m}_{1,1}}  
+                 &\vdotswithin{\hat{m}_{1,2}}     \\
+               \hat{m}_{n-1,1}  &\hat{m}_{n-1,2} &\ldots &\hat{m}_{n-1,n-1} &m_{n-1,n}  \\
+               m_{n,1}         &m_{n,2}         &\ldots &m_{n,n-1}        &m_{n,n}  
+            \end{mat}
+          \end{equation*}
+          The first row of $M$ must add to zero so we take $m_{1,n}$ to be  
+          $-(\hat{m}_{1,1}+\cdots+\hat{m}_{1,n-1})$.
+          In the same way we get the final entries 
+          $m_{i,n}=-(\hat{m}_{i,1}+\cdots+\hat{m}_{i,n-1})$ in all the rows but the 
+          bottom $i\in\setinterval{1}{n-1}$, 
+          and the final entries $m_{n,j}=-(\hat{m}_{1,j}+\cdots+\hat{m}_{n-1,j})$ 
+          in all the columns but the last
+          $j\in\setinterval{1}{n-1}$.
+          The entry remaining is the one in the lower right~$m_{n,n}$.
+          The final column adds to zero so we set it to 
+          $-(m_{1,n}+\cdots+m_{n-1,n})$ but we must check
+          that the final row now also adds to zero.
+          We have $m_{n,n}=-m_{1,n}-\cdots-m_{n-1,n}$ and expanding each of the
+          $m_{i,n}$ as $-\hat{m}_{1,1}-\cdots-\hat{m}_{1,n-1}$
+          gives that we have defined $m_{n,n}$ to be the sum of all the entries
+          of $\hat{M}$.
+          The sum of the all the entries but the last in the final row is
+          $m_{1,n}+m_{2,n}+\cdots+m_{n-1,n}$ and expanding each 
+          $m_{n,j}=-\hat{m}_{1,j}-\cdots-\hat{m}_{n-1,j}$ 
+          verifies that the sum of the final row is zero.
+          Thus $M$ is semimagic with magic number zero and so $\phi$ is onto.
+        \partsitem
+           Theorem~Two.II.\ref{th:RankPlusNullEqDim} says that for any linear 
+           map the
+           dimension of the domain equals its rank plus its nullity.
+           Because $\map{\phi}{\semimagicsquares_n}{\matspace_{\nbyn{(n-1)}}}$ 
+           is one-to-one its nullity is zero.
+           Because it is onto its rank is $\dim(\matspace_{\nbyn{(n-1)}})=(n-1)^2$.
+           Thus the domain of $\phi$, the subspace  
+           $\semimagicsquares_{n,0}$ of semimagic squares with magic number zero,
+           has dimension~$(n-1)^2$.
+         \partsitem   
+           We have that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1
+           =(\dim\semimagicsquares_n-2)+1=(n-1)^2-1=n^2-n$ 
+           when $n\geq 3$.
+      \end{exparts}
+    \end{answer}
 
 \end{exercises}
 \index{magic squares|)}

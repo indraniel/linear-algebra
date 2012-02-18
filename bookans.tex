@@ -21317,6 +21317,106 @@ octave:6> gplot z
       \end{exparts}
     
 \end{ans}
+\begin{ans}{4}
+      \begin{exparts}
+        \partsitem
+          Consider the matrix $C\in \mathcal{H}_n$ that has all
+          entries zero except
+          that the four corners are $c_{1,1}=c_{n,n}=1$ and $c_{1,n}=c_{n,1}=-1$.
+           Also consider the matrix $D\in \mathcal{H}_n$ with all entries
+           zero except that
+           $d_{1,1}=d_{2,2}=1$ and $d_{1,2}=d_{2,1}=-1$.
+           We have
+           \begin{equation*}
+              \theta(C)=\colvec{2 \\ -2}
+              \qquad
+              \theta(D)=\begin{cases}
+                           \binom{2}{-1}  &\text{if $n=3$}  \\[1ex]
+                           \binom{2}{0}  &\text{if $n>3$}
+                        \end{cases}
+           \end{equation*}
+           and so the image of $\theta$ includes a basis for $\Re^2$ and
+           thus $\theta$ is onto.
+           With that, because for any linear map the
+           dimension of the domain equals its rank plus its nullity
+           we conclude that
+           $\dim(\mathcal{H}_n)=2+\dim(\magicsquares_{n,0})$, as desired.
+        \partsitem
+           We claim that
+           $\map{\phi}{\semimagicsquares_{n,0}}{\matspace_{\nbyn{(n-1)}}}$.
+           is one-to-one and onto.
+
+           To show that it is one-to-one we will show that the only member of
+           $\semimagicsquares_{n,0}$ mapped to the zero matrix $Z_{\nbyn{(n-1)}}$
+           is the zero matrix~$Z_{\nbyn{n}}$.
+           Suppose that $M\in\semimagicsquares_{\nbyn{n}}$ and
+           $\phi(M)=Z_{\nbyn{(n-1)}}$.
+           On all but the final row and column $\phi$ is the identity so
+           the entries in $M$ in all but the final row and column are zero:
+           $m_{i,j}=0$ for $i,j\in\setinterval{1}{n-1}$.
+           The first row of $M$ adds to zero and hence
+           the final entry in that row $m_{1,n}$ is zero.
+           Similarly the final entry in each row $i\in\setinterval{1}{n-1}$
+           and column $j\in\setinterval{1}{n-1}$ is zero.
+           Then, the final column adds to zero so $m_{n,n}=0$.
+           Therefore $M$ is the zero matrix $Z_{\nbyn{n}}$ and the
+           restriction of $\phi$
+           is one-to-one.
+        \partsitem
+           Consider a member $\hat{M}$ of the codomain $\matspace_{\nbyn{(n-1)}}$.
+           We will produce a matrix $M$ from the domain
+           $\semimagicsquares_{n,0}$ that maps to it.
+           The function $\phi$ is the identity on all but the final row
+           and column of
+           $M$ so for $i,j\in\setinterval{1}{n-1}$
+           the entries are $m_{i,j}=\hat{m}_{i,j}$.
+           \begin{equation*}
+             M=\begin{mat}
+               \hat{m}_{1,1}    &\hat{m}_{1,2}  &\ldots &\hat{m}_{1,n-1} &m_{1,n}  \\
+               \vdotswithin{\hat{m}_{1,1}}
+                 &\vdotswithin{\hat{m}_{1,2}}     \\
+               \hat{m}_{n-1,1}  &\hat{m}_{n-1,2} &\ldots &\hat{m}_{n-1,n-1} &m_{n-1,n}  \\
+               m_{n,1}         &m_{n,2}         &\ldots &m_{n,n-1}        &m_{n,n}
+            \end{mat}
+          \end{equation*}
+          The first row of $M$ must add to zero so we take $m_{1,n}$ to be
+          $-(\hat{m}_{1,1}+\cdots+\hat{m}_{1,n-1})$.
+          In the same way we get the final entries
+          $m_{i,n}=-(\hat{m}_{i,1}+\cdots+\hat{m}_{i,n-1})$ in all the rows but the
+          bottom $i\in\setinterval{1}{n-1}$,
+          and the final entries $m_{n,j}=-(\hat{m}_{1,j}+\cdots+\hat{m}_{n-1,j})$
+          in all the columns but the last
+          $j\in\setinterval{1}{n-1}$.
+          The entry remaining is the one in the lower right~$m_{n,n}$.
+          The final column adds to zero so we set it to
+          $-(m_{1,n}+\cdots+m_{n-1,n})$ but we must check
+          that the final row now also adds to zero.
+          We have $m_{n,n}=-m_{1,n}-\cdots-m_{n-1,n}$ and expanding each of the
+          $m_{i,n}$ as $-\hat{m}_{1,1}-\cdots-\hat{m}_{1,n-1}$
+          gives that we have defined $m_{n,n}$ to be the sum of all the entries
+          of $\hat{M}$.
+          The sum of the all the entries but the last in the final row is
+          $m_{1,n}+m_{2,n}+\cdots+m_{n-1,n}$ and expanding each
+          $m_{n,j}=-\hat{m}_{1,j}-\cdots-\hat{m}_{n-1,j}$
+          verifies that the sum of the final row is zero.
+          Thus $M$ is semimagic with magic number zero and so $\phi$ is onto.
+        \partsitem
+           Theorem~Two.II.\ref{th:RankPlusNullEqDim} says that for any linear
+           map the
+           dimension of the domain equals its rank plus its nullity.
+           Because $\map{\phi}{\semimagicsquares_n}{\matspace_{\nbyn{(n-1)}}}$
+           is one-to-one its nullity is zero.
+           Because it is onto its rank is $\dim(\matspace_{\nbyn{(n-1)}})=(n-1)^2$.
+           Thus the domain of $\phi$, the subspace
+           $\semimagicsquares_{n,0}$ of semimagic squares with magic number zero,
+           has dimension~$(n-1)^2$.
+         \partsitem
+           We have that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1
+           =(\dim\semimagicsquares_n-2)+1=(n-1)^2-1=n^2-n$
+           when $n\geq 3$.
+      \end{exparts}
+    
+\end{ans}
 \chapter{Chapter Four: Determinants}
 \subsection{Subsection Four.I.1: Determinants}
 \begin{ans}{Four.I.1.1}
