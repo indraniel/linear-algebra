@@ -11,8 +11,8 @@ walked around the sacrifice, and returned to the water.
 Fuh-Hi, % (2858-2738~BC)
 the founder of Chinese civilization,
 interpreted this to mean that
-the river did not accepted the sacrifices.  
-A child provided the answer by noticing 
+the river did not accept the sacrifices.  
+A child solved the crisis by noticing 
 that on its shell the turtle had what is today
 called the pattern of Lo Shu (``river scroll'').
 \begin{center}
@@ -101,13 +101,13 @@ This Topic shows that for $n\geq 3$ the
 dimension of
 $\magicsquares_n$ is $n^2-n$.
 The set $\magicsquares_{n,0}$ of $\nbyn{n}$~magic squares with magic number~$0$ 
-is another subspace, and we will find the formula for its dimension also.
+is another subspace, and we will find the formula for its dimension also,
+$n^2-2n-1$ when $n\geq 3$.
 
 We will first show that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1$.
-Define 
-the sum down the upper-left to lower-right diagonal of a matrix
-to be the
-\definend{trace}\index{trace}\index{matrix!trace},
+Define the 
+\definend{trace}\index{trace}\index{matrix!trace} of a matrix to be
+the sum down its upper-left to lower-right diagonal
 $\trace (M)=m_{1,1}+\cdots+m_{n,n}$.
 Consider the restriction of the trace to the magic squares
 $\map{\trace}{\magicsquares_n}{\Re}$. 
@@ -130,7 +130,7 @@ $\dim\magicsquares_{n,0}=n^2-2n-1$ for $n\geq 3$.
 (For $n=1$ the dimension is clearly $0$.
 \nearbyexercise{exer:DimTwoMagicSqsMagicSumZero} shows it is also $0$
 for $n=2$.)
-If the rows, columns, and diagonals of this matrix
+If the rows, columns, and diagonals of a matrix
 \begin{equation*}
     \begin{mat}
       a &b &c \\
@@ -156,9 +156,10 @@ are below (with the rows and columns numbered to help in reading
 the proof).
 With respect to the standard basis, each represents a linear map
 $\map{h}{\Re^{n^2}}{\Re^{2n+2}}$.
-The nullspace of $h$ is $\magicsquares_{n,0}$ so if we show that the
+The domain has dimension~$n^2$ so if we show that the
 rank of the matrix is $2n+1$ then we will have
-what we want, that the nullity is $n^2-(2n+1)$.
+what we want, that the dimension of the nullspace 
+$\magicsquares_{n,0}$ is $n^2-(2n+1)$.
 \newlength{\interblockhspace}
 \setlength{\interblockhspace}{1.45em}
 \newlength{\interblockvspace}
@@ -212,27 +213,31 @@ So consider this linear relationship.
 \begin{equation*}
   c_2\vec{\rho}_2+\cdots+c_{2n}\vec{\rho}_{2n}
      +c_{2n+1}\vec{\rho}_{2n+1}+c_{2n+2}\vec{\rho}_{2n+2}=\zero
+   \tag{*}
 \end{equation*}
 
 Now it gets messy.
-In the first~$n$ columns, in the final two rows, is a block that 
+In the final two rows, in first~$n$ columns, is a subrow that 
 is all zeros except that it starts with a one in column~$1$
-and a block that is all zeros except that it ends with a one
+and a subrow that is all zeros except that it ends with a one
 in column~$n-1$.
-With $\vec{\rho}_1$ not present in the set, each of those columns contain only 
+With $\vec{\rho}_1$ not in ($*$), each of those columns contains only 
 two ones and so we can conclude that $c_{2n+1}=-c_{n+1}$ as well as that
 $c_{2n+2}=-c_{2n}$.
 
 Next consider the columns between those two\Dash
 in the $n=3$ illustration above this includes only the second column while 
-in the $n=4$~matrix it is the second and third columns.
-Each has a single one.
+in the $n=4$~matrix it includes both the second and third columns.
+Each such column has a single one.
 That is, for each column index $j\in\setinterval{2}{n-2}$
 the column consists of only zeros except for a one in row~$n+j$, 
 and hence $c_{n+j}=0$.
 
 On to the next block of columns, from $n+1$ through~$2n$.
-Column~$n+1$ has only two ones (because $n\geq 3$) so $c_2=-c_{n+1}$,
+Column~$n+1$ has only two ones (because $n\geq 3$ the ones
+in the last two rows do not fall in the first column of this
+block). 
+Thus $c_2=-c_{n+1}$
 and therefore $c_2=c_{2n+1}$.
 Likewise, from column~$2n$ we conclude that $c_2=-c_{2n}$
 and so $c_2=c_{2n+2}$.  
@@ -241,7 +246,8 @@ Because $n\geq 3$
 there is at least one column between column~$n+1$ and column~$2n-1$.
 In at least one of those columns a one appears in $\vec{\rho}_{2n+1}$.
 If a one also appears in that column in $\vec{\rho}_{2n+2}$ then we have 
-$c_2=-(c_{2n+1}+c_{2n+2})$.
+$c_2=-(c_{2n+1}+c_{2n+2})$ 
+(recall that $c_{n+j}=0$ for $j\in\setinterval{2}{n-2}$).
 If a one does not appear in that column in $\vec{\rho}_{2n+2}$
 then we have $c_2=-c_{2n+1}$.
 In either case, $c_2=0$, and thus 
