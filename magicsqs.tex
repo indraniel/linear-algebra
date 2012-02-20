@@ -151,7 +151,7 @@ add to zero then we have an $\nbym{(2n+2)}{n^2}$ linear system.
       &  &  &  &c &  &  &+ &e &  &  &+ &g &  &  &  &  &= &0    
   \end{linsys}
 \end{equation*}
-The matrix of coefficients for the particular cases of $n=3$ case and~$n=4$
+The matrix of coefficients for the particular cases of $n=3$ and~$n=4$
 are below (with the rows and columns numbered to help in reading
 the proof).
 With respect to the standard basis, each represents a linear map
@@ -271,6 +271,48 @@ More on the Lo Shu square is at \cite{WikipediaLoShuSquare}.
 The proof given here began with \cite{Ward}.
 
 \begin{exercises}
+  \item Let $M$ be a $\nbyn{3}$ magic square with magic number~$s$.
+    \begin{exparts}
+      \partsitem Prove that the sum of $M$'s entries is $3s$.
+      \partsitem Prove that $s=3\cdot m_{2,2}$.
+      \partsitem Prove that $m_{2,2}$ is the average of the entries
+        in its row, its column, and in each diagonal.
+      \partsitem Prove that $m_{2,2}$ is the median of $M$'s entries.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The sum of the entries of $M$ is the sum of the sums of
+          the three rows. 
+        \partsitem The constraints on entries of $M$ involving the center 
+          entry make this system.
+          \begin{equation*}
+            \begin{linsys}{3}
+              m_{2,1}  &+  &m_{2,2}  &+  &m_{2,3}  &=  &s  \\ 
+              m_{1,2}  &+  &m_{2,2}  &+  &m_{3,2}  &=  &s  \\ 
+              m_{1,1}  &+  &m_{2,2}  &+  &m_{3,3}  &=  &s  \\ 
+              m_{1,3}  &+  &m_{2,2}  &+  &m_{3,1}  &=  &s  
+            \end{linsys}
+          \end{equation*}
+          Adding those four equations counts each matrix entry once and only
+          once, except that we count the center entry four times.
+          Thus the left side sums to $3s+3m_{2,2}$ while the right sums to $4s$.
+          So $3m_{2,2}=s$.
+        \partsitem
+          The second row adds to $s$ so $m_{2,1}+m_{2,2}+m_{2,3}=3m_{2,2}$,
+          giving that $(1/2)\cdot(m_{2,1}+m_{2,3})=m_{2,2}$.
+          The same goes for the column and the diagonals.
+        \partsitem
+          By the prior exercise either both $m_{2,1}$ and $m_{2,3}$ are equal
+          to $m_{2,2}$ or else one is greater while one is smaller.
+          Thus $m_{2,2}$ is the median of the set
+          $\set{m_{2,1},m_{2,2},m_{2,3}}$.
+          The same reasoning applied to the second column shows that 
+          Thus $m_{2,2}$ is the median of the set
+          $\set{m_{1,2},m_{2,1},m_{2,2},m_{2,3},m_{3,2}}$.
+          Extending to the two diagonals shows it is the median of the set
+          of all entries.
+      \end{exparts}
+    \end{answer}
   \item \label{exer:TwoByTwoMagicSqUnique}
     Solve the system $a+b=s$, $c+d=s$, $a+c=s$, $b+d=s$, $a+d=s$, and $b+c=s$.
     \begin{answer}
@@ -315,48 +357,6 @@ The proof given here began with \cite{Ward}.
     Show that $\dim\magicsquares_{2,0}=0$.
     \begin{answer}
        By the prior exercise the only member is $Z_{\nbyn{2}}$.
-    \end{answer}
-  \item Let $M$ be a $\nbyn{3}$ magic square with magic number~$s$.
-    \begin{exparts}
-      \partsitem Prove that the sum of $M$'s entries is $3s$.
-      \partsitem Prove that $s=3\cdot m_{2,2}$.
-      \partsitem Prove that $m_{2,2}$ is the average of the entries
-        in its row, its column, and in each diagonal.
-      \partsitem Prove that $m_{2,2}$ is the median of $M$'s entries.
-    \end{exparts}
-    \begin{answer}
-      \begin{exparts}
-        \partsitem The sum of the entries of $M$ is the sum of the sums of
-          the three rows. 
-        \partsitem The constraints on entries of $M$ involving the center 
-          entry make this system.
-          \begin{equation*}
-            \begin{linsys}{3}
-              m_{2,1}  &+  &m_{2,2}  &+  &m_{2,3}  &=  &s  \\ 
-              m_{1,2}  &+  &m_{2,2}  &+  &m_{3,2}  &=  &s  \\ 
-              m_{1,1}  &+  &m_{2,2}  &+  &m_{3,3}  &=  &s  \\ 
-              m_{1,3}  &+  &m_{2,2}  &+  &m_{3,1}  &=  &s  
-            \end{linsys}
-          \end{equation*}
-          Adding those four equations counts each matrix entry once and only
-          once, except that we count the center entry four times.
-          Thus the left side sums to $3s+3m_{2,2}$ while the right sums to $4s$.
-          So $3m_{2,2}=s$.
-        \partsitem
-          The second row adds to $s$ so $m_{2,1}+m_{2,2}+m_{2,3}=3m_{2,2}$,
-          giving that $(1/2)\cdot(m_{2,1}+m_{2,3})=m_{2,2}$.
-          The same goes for the column and the diagonals.
-        \partsitem
-          By the prior exercise either both $m_{2,1}$ and $m_{2,3}$ are equal
-          to $m_{2,2}$ or else one is greater while one is smaller.
-          Thus $m_{2,2}$ is the median of the set
-          $\set{m_{2,1},m_{2,2},m_{2,3}}$.
-          The same reasoning applied to the second column shows that 
-          Thus $m_{2,2}$ is the median of the set
-          $\set{m_{1,2},m_{2,1},m_{2,2},m_{2,3},m_{3,2}}$.
-          Extending to the two diagonals shows it is the median of the set
-          of all entries.
-      \end{exparts}
     \end{answer}
   \item   \label{exer:TraceIsLinear}
     Let the \definend{trace} function be 
