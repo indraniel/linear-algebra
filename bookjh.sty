@@ -12,10 +12,11 @@
 % The PACKAGE LOADING part
 % The dvidrv package allows me to specify on the command line what is
 % my driver.
-\usepackage[yes]{hrefout}
-\newcommand{\dvidrv}{pdftex}
-\typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
-\usepackage[\dvidrv]{xcolor}
+% \usepackage[yes]{hrefout}
+% \newcommand{\dvidrv}{pdftex}
+% \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
+% \usepackage[\dvidrv]{xcolor}
+\usepackage{xcolor}
   % These are from http://kuler.adobe.com/#themeID/1538583
   % clear by reisjart (lightened one color)
   % \definecolor{basecolor}{rgb}{0.1686, 0.5032, 0.4118}  % 43,78,105
@@ -48,7 +49,8 @@
   \definecolor{bgcolor}{HTML}{FCFFDC}  %  
   \definecolor{flourishcolor}{HTML}{F80018}  %
 
-\usepackage[\dvidrv]{graphicx}  %
+% \usepackage[\dvidrv]{graphicx}  %
+\usepackage{graphicx}  %
 \usepackage{url}
 % \usepackage{color}
 % \usepackage{graphicx}  %
@@ -301,6 +303,18 @@
 
 
 
+%------------------------- code listings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\scriptsize,
+   commentstyle=\textit,
+   keywordstyle=\color{blue}\bfseries,
+   showstringspaces=false,
+   xleftmargin=.7em,
+   backgroundcolor=\color{bgcolor}
+}
+\lstdefinestyle{inline}{basicstyle=\ttfamily\small}
+
+
 
 
 %================================================================
@@ -405,11 +419,11 @@
    \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
   % renew definition of exercise formatting (perhaps undone in Topic)
   \renewcommand{\exercise@makelabel}{} % 
-  \ifhrefout
+  % \ifhrefout
     \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
-  \else
-    \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
-  \fi
+  % \else
+  %    \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
+  % \fi
    \thispagestyle{bookemptypage}%
    \global\@topnum\z@
    \@afterindentfalse
@@ -729,8 +743,8 @@
 
 % The hrefout package allows me to specify on the command line if I want
 % to have hyperreffed output.
-\ifhrefout %
-  \usepackage[\dvidrv,
+% \ifhrefout %
+  \usepackage[
                 colorlinks=true,
                 linkcolor=darkcolor,citecolor=darkcolor,filecolor=darkcolor,urlcolor=darkcolor,
                 naturalnames=false,  % if true, toc Three.IV.2 link no work 
@@ -743,7 +757,7 @@
                            http://joshua.smcvt.edu/linearalgebra},
                 pdfsubject={linear algebra},
                 pdfkeywords={linear algebra, mathematics, free, textbook}]{hyperref}
-\fi
+% \fi
 
 % \usepackage[capitalise]{cleveref}  % nameinlink option not in my LaTeX yet?
 

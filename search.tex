@@ -1,0 +1,139 @@
+% Topic from _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2012-Feb-12
+\topic{Page Ranking}
+\index{page ranking|(}
+
+Imagine that you are online, trying to find the best book
+on Linear Algebra.
+You probably would try a search engine such as Google.
+These lists pages ranked by their calculation of each 
+page's importance.
+That ranking is, roughly, that a page is important if other important
+pages link to it: 
+``a page can have a high PageRank if there are many pages that point
+to it, or if there are some pages that point to it and have a high PageRank''
+\cite{BrinPage}.
+But isn't that circular\Dash how can they tell whether a page is
+important without first deciding on the important pages?
+With eigenvalues and eigenvectors.
+
+We will present a simplified version of the Page Rank algorithm. 
+We model the World Wide Web as a collection of pages connected by
+links.
+This diagram from \cite{Wills}
+shows the pages as circles, and the links as arrows;
+for instance, page~$p_1$ has a link to page~$p_2$. 
+
+The key idea is that pages that should be highly ranked should be those that
+are often linked-to.
+% (In practice people have tried to game the ranking system by
+% setting up link farms of many pages that all point to each other.
+% But our model will be simple.)
+That is, we raise the importance of a page~$p_i$,
+if it is linked-to from page~$p_j$.
+The increment is the importance of the linking page~$p_j$
+divided by how many out-links are on that page.
+\begin{equation*}
+  \mathcal{I}(p_i)=\sum_{\text{in-linking pages $p_j$}}  \frac{\mathcal{I}(p_j)}{a_j}
+\end{equation*}
+This matrix stores the information.
+\begin{equation*}
+  \begin{mat}
+    0   &0  &1/3  &0   \\
+    1   &0  &1/3  &0   \\
+    0   &1  &0    &0 \\
+    0   &0  &1/3  &0
+  \end{mat}
+\end{equation*}
+
+The algorithm's inventors describe a way to think about the matrix~$H$. 
+\begin{quotation}
+PageRank can be thought of as a model of user behavior. 
+We assume there is a `random surfer' who is
+given a web page at random and keeps clicking on links, 
+never hitting ``back'' \ldots 
+% but eventually gets bored
+% and starts on another random page. 
+The probability that the random surfer visits a page is its PageRank.
+\cite{BrinPage}
+\end{quotation}
+In the diagram, a surfer on page~$p_3$ has a probability $1/3$ of going 
+next to each of the other pages. 
+
+We will find vector $\vec{\mathcal{I}}$ whose components are the
+importance rankings of each page $\mathcal{I}(p_i)$.
+With this notation, 
+our requirements for the page rank are: $H\vec{\mathcal{I}}=\vec{\mathcal{I}}$.
+That is, we want an eigenvector of the matrix associated with the
+eigenvalue~$\lambda=1$.
+
+To that basic strategy we will add two refinements.
+The first is the problem of page~$p_4$.
+Many targets of links are 
+\definend{dangling} or \definend{sink links},
+without any outbound links.
+The simplest thing is to imagine that when the surfer gets to a page like this
+then they go to a next page entirely at random.
+\begin{equation*}
+  \begin{mat}
+    0   &0  &1/3  &1/4   \\
+    1   &0  &1/3  &1/4   \\
+    0   &1  &0    &1/4 \\
+    0   &0  &1/3  &1/4
+  \end{mat}
+\end{equation*}
+
+% sage: H=matrix(CC,[[0,0,1/3,1/4], [1,0,1/3,1/4], [0,1,0,1/4], [0,0,1/3,1/4]])  
+% sage: H.eigenvectors_right()                                                 
+% [(1.00000000000000, [
+
+% ], 1), (0, [
+% (0, 1.00000000000000, 3.00000000000000, -4.00000000000000)
+% ], 1), (-0.375000000000000 + 0.438985573035531*I, [
+
+% ], 1), (-0.375000000000000 - 0.438985573035531*I, [
+
+% ], 1)]
+
+The other refinenment is to allow the surfer to pick a new page at random 
+even if they are not on a dangling page.
+Suppose this happens with probability~$\alpha$.
+\begin{equation*}
+  G=\alpha\cdot\begin{mat}
+    0   &0  &1/3  &1/4   \\
+    1   &0  &1/3  &1/4   \\
+    0   &1  &0    &1/4 \\
+    0   &0  &1/3  &1/4
+  \end{mat}
+  +(1-\alpha)\cdot\begin{mat}
+    1/4   &1/4  &1/4  &1/4   \\
+    1/4   &1/4  &1/4  &1/4   \\
+    1/4   &1/4  &1/4  &1/4  \\
+    1/4   &1/4  &1/4  &1/4
+  \end{mat}
+\end{equation*}
+This is the \definend{Google matrix}\index{Google matrix}\index{matrix!Google}.
+In practice $\alpha$ is often set to a value between $0.85$ and~$0.99$.
+
+
+
+
+
+
+
+\medskip
+The details of the algorithms used by commercial search engines are 
+secret, and no doubt have many refinements, and also change frequently.
+But the inventors of Google were gracious enough to outline the basis for 
+their work in \cite{BrinPage}.
+Two additional excellent expositions are 
+\cite{Wills} and
+\cite{Austin}.
+
+% \begin{exercises}
+% \end{exercises}
+\index{page ranking|)}
+\endinput
+
+
