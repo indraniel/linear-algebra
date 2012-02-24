@@ -364,4 +364,56 @@ beginfig(8) % graph of rank falling and nullity rising
 endfig;
 
 
+
+%--------------------------------
+%  Topic: Page Rank
+%    Graph illustrating page links
+%
+beginfig(9);   % m
+  %numeric u;  %scaling factor
+  %numeric v;  %vertical scaling factor
+  %numeric w;  %horizontal scaling factor
+  numeric circlescale; circlescale=20pt;
+  path node; node=fullcircle scaled circlescale;
+  path n[]; % node paths
+  pickup pencircle scaled line_width_light;
+  z1=(0w,6v);
+    n1=node shifted z1;
+    draw n1; label(btex $p_1$ etex,z1);
+  z2=(9w,y1);
+    n2=node shifted z2;
+    draw n2; label(btex $p_2$ etex,z2);
+  z3=(x2,0v);
+    n3=node shifted z3;
+    draw n3; label(btex $p_3$ etex,z3);
+  z4=(x1,y3);
+    n4=node shifted z4;
+    draw n4; label(btex $p_4$ etex,z4);
+  path p[], q[];
+  pair times[];  % intersection times
+  % arrow from p1 to p2 
+  p12=z1--z2;  
+  times121=p12 intersectiontimes n1;
+  times122=p12 intersectiontimes n2;
+  drawarrow subpath(xpart(times121)+.05,xpart(times122)-.05) of p12;
+  % arrow from p2 to p3 
+  p23=z2--z3;  
+  times232=p23 intersectiontimes n2;
+  times233=p23 intersectiontimes n3;
+  drawdblarrow subpath(xpart(times232)+.05,xpart(times233)-.05) of p23;
+  % arrow from p3 to p1 
+  p31=z3--z1;  
+  times313=p31 intersectiontimes n3;
+  times311=p31 intersectiontimes n1;
+  drawarrow subpath(xpart(times313)+.05,xpart(times311)-.05) of p31;
+  % arrow from p3 to p4 
+  p34=z3--z4;  
+  times343=p34 intersectiontimes n3;
+  times344=p34 intersectiontimes n4;
+  drawarrow subpath(xpart(times343)+.05,xpart(times344)-.05) of p34;
+endfig;
+
+
+
+
 end
