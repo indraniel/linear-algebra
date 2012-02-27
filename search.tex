@@ -79,7 +79,7 @@ without any outbound links.
 The simplest thing is to imagine that when the surfer gets to a page like this
 then they go to a next page entirely at random.
 \begin{equation*}
-  \begin{mat}
+  H=\begin{mat}
     0   &0  &1/3  &1/4   \\
     1   &0  &1/3  &1/4   \\
     0   &1  &0    &1/4 \\
@@ -144,10 +144,38 @@ Let this happen with probability~$\alpha$.
 This is the \definend{Google matrix}\index{Google matrix}\index{matrix!Google}.
 In practice $\alpha$ is often set in between $0.85$ and~$0.99$.
 
-
-
-
-
+Here are the ranks for the four pages with a couple of different values
+of $\alpha$.
+\begin{center}
+  \begin{tabular}{r|cccc}
+    \multicolumn{1}{c}{$\alpha$}
+          &$0.85$  &$0.90$  &$0.95$ &$0.99$ \\ \hline
+    $p_1$ &$0.325$ &$0.317$ &$0.309$  &$0.302$  \\
+    $p_2$ &$0.602$ &$0.602$ &$0.602$  &$0.601$  \\
+    $p_3$ &$0.652$ &$0.661$ &$0.669$  &$0.675$  \\
+    $p_4$ &$0.325$ &$0.317$ &$0.309$  &$0.302$  
+  \end{tabular}
+\end{center}
+% Numbers computed as:
+% sage: H=matrix(QQ,[[0,0,1/3,1/4], [1,0,1/3,1/4], [0,1,0,1/4], [0,0,1/3,1/4]])
+% sage: S=matrix(QQ,[[1/4,1/4,1/4,1/4], [1/4,1/4,1/4,1/4], [1/4,1/4,1/4,1/4], [1/4,1/4,1/4,1/4]]) 
+% sage: alpha=0.95                       
+% sage: G=alpha*H+(1-alpha)*S    
+% sage: N=G-I  
+% sage: 1200*N         
+% [-1185.00000000000  15.0000000000000  395.000000000000  300.000000000000]
+% [ 1155.00000000000 -1185.00000000000  395.000000000000  300.000000000000]
+% [ 15.0000000000000  1155.00000000000 -1185.00000000000  300.000000000000]
+% [ 15.0000000000000  15.0000000000000  395.000000000000 -900.000000000000]
+% sage: M=matrix(QQ,[[-1185,15,395,300], [1155,-1185,395,300], [15,1155,-1185,300], [15,15,395,-900]])
+% sage: M.echelon_form()         
+% [         1          0          0         -1]
+% [         0          1          0     -39/20]
+% [         0          0          1 -3423/1580]
+% [         0          0          0          0]
+% sage: v=vector([1,39/20,3423/1580,1]) 
+% sage: v/v.norm().n()   
+% (0.308665053665036, 0.601896854646821, 0.668709163731278, 0.308665053665036)
 
 
 \medskip
@@ -159,8 +187,21 @@ Two additional excellent expositions are
 \cite{Wills} and
 \cite{Austin}.
 
-% \begin{exercises}
-% \end{exercises}
+\begin{exercises}
+  \item A square matrix is \definend{stochastic}\index{stochastic matrix}\index{matrix!stochastic}
+    if the sum of the entries in each column is one.
+    The Google matrix is computed by taking a combination
+    $G=\alpha*H+(1-\alpha)*S$ of two stochastic matrices.
+    Show that $G$ must be stochastic.
+    \begin{answer}
+      The sum of the entries in column~$j$ is 
+      $\sum_i \alpha h_{i,j}+(1-\alpha)s_{i,j}
+       =\sum_i \alpha h_{i,j}+\sum_i (1-\alpha)s_{i,j}
+       =\alpha\sum_i \alpha h_{i,j} +(1-\alpha)\sum_i s_{i,j}
+       =\alpha\cdot 1+(1-\alpha)\cdot 1$,
+      which is one.
+    \end{answer}
+\end{exercises}
 \index{page ranking|)}
 \endinput
 
