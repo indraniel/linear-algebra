@@ -373,22 +373,22 @@ beginfig(9);   % m
   %numeric u;  %scaling factor
   %numeric v;  %vertical scaling factor
   %numeric w;  %horizontal scaling factor
-  numeric circlescale; circlescale=20pt;
+  numeric circlescale; circlescale=19pt;
   path node; node=fullcircle scaled circlescale;
   path n[]; % node paths
   pickup pencircle scaled line_width_light;
   z1=(0w,6v);
     n1=node shifted z1;
-    draw n1; label(btex $p_1$ etex,z1);
+    draw n1; label(btex \small $p_1$ etex,z1);
   z2=(9w,y1);
     n2=node shifted z2;
-    draw n2; label(btex $p_2$ etex,z2);
+    draw n2; label(btex \small $p_2$ etex,z2);
   z3=(x2,0v);
     n3=node shifted z3;
-    draw n3; label(btex $p_3$ etex,z3);
+    draw n3; label(btex \small $p_3$ etex,z3);
   z4=(x1,y3);
     n4=node shifted z4;
-    draw n4; label(btex $p_4$ etex,z4);
+    draw n4; label(btex \small $p_4$ etex,z4);
   path p[], q[];
   pair times[];  % intersection times
   % arrow from p1 to p2 
@@ -411,6 +411,63 @@ beginfig(9);   % m
   times343=p34 intersectiontimes n3;
   times344=p34 intersectiontimes n4;
   drawarrow subpath(xpart(times343)+.05,xpart(times344)-.05) of p34;
+endfig;
+
+
+%    Exercise from KURT BRYAN AND TANYA LEISE
+%
+beginfig(10);   % m
+  %numeric u;  %scaling factor
+  %numeric v;  %vertical scaling factor
+  %numeric w;  %horizontal scaling factor
+  numeric circlescale; circlescale=19pt;
+  path node; node=fullcircle scaled circlescale;
+  path n[]; % node paths
+  pickup pencircle scaled line_width_light;
+  z1=(0w,6v);
+    n1=node shifted z1;
+    draw n1; label(btex \small $p_1$ etex,z1);
+  z2=(9w,y1);
+    n2=node shifted z2;
+    draw n2; label(btex \small $p_2$ etex,z2);
+  z3=(x2,0v);
+    n3=node shifted z3;
+    draw n3; label(btex \small $p_3$ etex,z3);
+  z4=(x1,y3);
+    n4=node shifted z4;
+    draw n4; label(btex \small $p_4$ etex,z4);
+  path p[], q[];
+  pair times[];  % intersection times
+  % arrow from p1 to p2 
+  p12=z1--z2;  
+  times121=p12 intersectiontimes n1;
+  times122=p12 intersectiontimes n2;
+  drawarrow subpath(xpart(times121)+.05,xpart(times122)-.05) of p12;
+  % arrow from p1 to p3 
+  p13=z1--z3;  
+  times131=p13 intersectiontimes n1;
+  times133=p13 intersectiontimes n3;
+  drawdblarrow subpath(xpart(times131)+.05,xpart(times133)-.05) of p13;
+  % arrow from p1 to p4 
+  p14=z1--z4;  
+  times141=p14 intersectiontimes n1;
+  times144=p14 intersectiontimes n4;
+  drawdblarrow subpath(xpart(times141)+.05,xpart(times144)-.05) of p14;
+  % arrow from p2 to p3 
+  p23=z2--z3;  
+  times232=p23 intersectiontimes n2;
+  times233=p23 intersectiontimes n3;
+  drawarrow subpath(xpart(times232)+.05,xpart(times233)-.05) of p23;
+  % arrow from p2 to p4 
+  p24=z2--z4;  
+  times242=p24 intersectiontimes n2;
+  times244=p24 intersectiontimes n4;
+  drawarrow subpath(xpart(times242)+.05,xpart(times244)-.05) of p24;
+  % arrow from p4 to p5 
+  p43=z4--z3;  
+  times433=p43 intersectiontimes n4;
+  times434=p43 intersectiontimes n3;
+  drawarrow subpath(xpart(times433)+.05,xpart(times434)-.05) of p43;
 endfig;
 
 
