@@ -10,11 +10,19 @@
 %\ProcessOptions
 
 % The PACKAGE LOADING part
+
 % The dvidrv package allows me to specify on the command line what is
 % my driver.
 % \usepackage[yes]{hrefout}
 % \newcommand{\dvidrv}{pdftex}
 % \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
+
+% Set page margins, etc.
+\usepackage[paper=letterpaper,
+            textwidth=345pt,textheight=598pt,  % LaTeX defaults
+            % top=1in,bottom=1in % squeeze a lot on the paper
+            ]{geometry}
+
 % \usepackage[\dvidrv]{xcolor}
 \usepackage{xcolor}
   % These are from http://kuler.adobe.com/#themeID/1538583
@@ -463,7 +471,7 @@
   % that macro does not take an argument.
   \gdef\sectioningname{#1} 
   % Below here is where the chapter heading is formatted
-  \vspace*{50\p@}% 
+  \vspace*{90\p@} % was 50\p@ 
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
       \if@mainmatter
@@ -477,7 +485,7 @@
     \vskip 0\p@ \fi %was 20\p@
     \interlinepenalty\@M
     \Huge \bfseries \textcolor{black}{#1}\par\nobreak
-    \vskip 40\p@  % was 30\p@
+    \vskip 50\p@  % was 30\p@
   }}
 
 
@@ -627,7 +635,7 @@
 % an italic heading.) The last command in <style> may be a 
 % command which takes a single argument but all the others must be declarations.
 \renewcommand{\section}{\@startsection%
-     {section}{1}{0em}{-12ex plus1ex minus2ex}{1em}%
+     {section}{1}{0em}{-14ex plus1ex minus2ex}{1em}%
      {\raggedright\Large\bfseries}}
 \newcommand{\topicsection}{\@startsection%
      {section}{1}{0em}{-12ex plus1ex minus2ex}{3em}%
@@ -678,7 +686,7 @@
 %==================== TOPICS ============================
 % For applications sections.
 % 
-\newcommand{\topic}[1]{\clearpage\topicsection*{#1}
+\newcommand{\topic}[1]{\clearpage\vspace*{.25in}\topicsection*{#1}
    \renewcommand{\announcesectioninginanswerfile}{%
       \sectioninginanswerfiletopicstyle}
   % renew definition of exercise formatting (perhaps undone in Chapter)
@@ -761,6 +769,28 @@
 
 % \usepackage[capitalise]{cleveref}  % nameinlink option not in my LaTeX yet?
 
+% ==================== Cover
+\newcommand{\covergraphic}{%
+\par\noindent\makebox[0pt][c]{\contourlength{1.4pt}
+  \rule{5.7in}{0em}
+  \fontsize{260pt}{8pt}
+  {\fontfamily{qzc}\itshape\selectfont \contour{darkcolor}{\textcolor{lightcolor}{Linear}}}
+}  \\[-2.15in] 
+\noindent\makebox[0pt][c]{\rule{8.5in}{0pt}%
+  \makebox[0pt][l]{\contourlength{0.6pt} %
+  \fontsize{65pt}{10pt}
+  {\fontfamily{qzc}\itshape\selectfont \contour{flourishcolor}{\textcolor{white}{Algebra}}}
+  }
+}
+}
+
+\newcommand{\coverauthor}{%
+\noindent\makebox[0em][l]{\makebox[8.5in]{%
+\begin{tabular}{r}
+{\Large Jim Hef{}feron}  \\[1ex]
+{\large \url{http://joshua.smcvt.edu/linearalgebra}}
+\end{tabular}}}
+}
 
 
 \endinput
