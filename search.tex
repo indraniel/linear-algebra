@@ -204,6 +204,36 @@ Two additional excellent expositions are
        =\alpha\cdot 1+(1-\alpha)\cdot 1$,
       which is one.
     \end{answer}
+  \item For this web of pages, the importance of each page should be equal.
+    Check that for $\alpha=0.85$.
+    \begin{center}
+      \includegraphics{ch5.11}
+    \end{center}
+    \begin{answer}
+      This \textit{Sage} session gives equal values.
+\begin{lstlisting}
+sage: H=matrix(QQ,[[0,0,0,1], [1,0,0,0], [0,1,0,0], [0,0,1,0]])
+sage: S=matrix(QQ,[[1/4,1/4,1/4,1/4], [1/4,1/4,1/4,1/4], [1/4,1/4,1/4,1/4], [1/4,1/4,1/4,1/4]])
+sage: alpha=0.85     
+sage: G=alpha*H+(1-alpha)*S    
+sage: I=matrix(QQ,[[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]])
+sage: N=G-I
+sage: 1200*N         
+[-1155.00000000000  45.0000000000000  45.0000000000000  1065.00000000000]
+[ 1065.00000000000 -1155.00000000000  45.0000000000000  45.0000000000000]
+[ 45.0000000000000  1065.00000000000 -1155.00000000000  45.0000000000000]
+[ 45.0000000000000  45.0000000000000  1065.00000000000 -1155.00000000000]
+sage: M=matrix(QQ,[[-1155,45,45,1065], [1065,-1155,45,45], [45,1065,-1155,45], [45,45,1065,-1155]]) 
+sage: M.echelon_form()       
+[ 1  0  0 -1]
+[ 0  1  0 -1]
+[ 0  0  1 -1]
+[ 0  0  0  0]
+sage: v=vector([1,1,1,1])
+sage: (v/v.norm()).n()
+(0.500000000000000, 0.500000000000000, 0.500000000000000, 0.500000000000000)
+\end{lstlisting}
+    \end{answer}
   \item \cite{BryanLeise}
     Give the importance ranking for this web of pages.
     \begin{center}

@@ -671,6 +671,11 @@ beginfig(19) % 2-flat in R3; 2x+y+z=4, paramatized
   %drawarrow z8--z5 withcolor shading_color;
   drawarrow z5--z6 withcolor shading_color;
   drawarrow z5--z7 withcolor shading_color;
+
+  label.rt(btex {\hspace*{0.05in} \scriptsize 
+          $  P=\set{\colvec{x \\ y \\ z}=\colvec[r]{2 \\ 0 \\ 0}
+         +y\cdot\colvec[r]{-1/2 \\ 1 \\ 0}
+         +z\cdot\colvec[r]{-1/2 \\ 0 \\ 1}\suchthat y,z\in\Re}$} etex,.618[z3,z4]);
 endfig;
 
 
