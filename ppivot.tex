@@ -34,8 +34,8 @@ $\text{\lstinline!a[row\_below,col]!}=
            +\text{\lstinline!a[row\_below,col]!}$
 operation.
 
-This code provides a quick take on how Gauss' method can be
-mechanized but it is naive, in many ways.
+This code provides a quick take on how mechanizing Gauss' method.
+But it is naive in many ways.
 For one thing, it assumes that 
 the entry in the
 $\text{\lstinline!row!},\text{\lstinline!row!}$ position is nonzero.
@@ -77,7 +77,7 @@ off, we graph the system.
   \includegraphics{ch1.33}
   %\includegraphics{ppivot1.eps}
 \end{center}
-At the scale that this graph is drawn, we cannon tell the two lines apart.
+At the scale that we have drawn this graph we cannot tell the two lines apart.
 This system is nearly singular in the sense that
 the two lines are nearly the same line.
 Near-singularity gives this system the property that a small change in the
@@ -93,13 +93,13 @@ The above example gives one way in which a system can be
 difficult to solve on a computer and
 it has the advantage that the picture of nearly-equal lines gives a memorable 
 insight into one way that numerical difficulties can arise.
-Unfortunately this insight isn't very useful when we wish
+Unfortunately this insight isn't useful when we wish
 to solve some large system.
 We cannot, typically, hope to understand the geometry of an arbitrary large
 system.
 In addition, there are ways that a computer's results may be
 unreliable other than that the angle between some
-of the linear surfaces is quite small.
+of the linear surfaces is small.
 
 For an example, consider the system below, from \cite{Hamming}.
 \begin{equation*}
@@ -125,7 +125,7 @@ a second equation $-1001y=-999$, which the computer rounds to two places as
 $(-1.0\times 10^{3})y=-1.0\times 10^{3}$.
 Then the computer decides from the second equation that $y=1$ 
 and from the first equation that $x=0$.
-This $y$ value is fairly good, but the $x$ is quite 
+This $y$ value is fairly good, but the $x$ is very 
 bad.\index{accuracy!rounding error}
 Thus, another cause of 
 unreliable output is a mixture of floating point arithmetic
@@ -137,13 +137,13 @@ that retains sixteen significant digits.
 This will indeed solve many problems.
 However, double precision has twice
 the memory requirements
-and besides, the above systems can obviously be tweaked to give the
+and besides, we can obviously tweak the above systems to give the
 same trouble in the seventeenth digit, so double precision
 isn't a panacea.
 We need is a strategy to minimize the numerical
 trouble arising from solving systems on a computer
-as well as some guidance as to how far the reported 
-solutions can be trusted. 
+as well as some guidance as to how far we can trust the reported 
+solutions. 
 
 A basic improvement on the naive code above 
 is to not simply take the entry
@@ -153,7 +153,7 @@ but rather to look at all of the entries in the \textit{row}
 column below the $\text{\textit{row}},\text{\textit{row}}$ entry
 and take the one that is most likely to give reliable results
 (e.g., take one that is not too small).
-This strategy is called \definend{partial pivoting}.%
+This is \definend{partial pivoting}.%
 \index{partial pivoting}\index{pivoting!full} 
 
 For example, to solve the troublesome system ($*$) above,
