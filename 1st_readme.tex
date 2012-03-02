@@ -15,13 +15,13 @@
   {0em}%
   {5ex plus1ex minus.5ex}%
   {1ex plus .25ex minus .15ex}%
-  {\Large\bfseries\raggedright}}
+  {\large\bfseries\raggedright}}
 \renewcommand{\subsection}{\@startsection{subsection}%
   {2}%
   {0em}%
   {3ex plus.25ex minus.25ex}%
   {.5ex plus .05ex minus .05ex}%
-  {\large\bfseries\raggedright}}
+  {\bfseries\raggedright}}
 \renewcommand{\subsubsection}{\@startsection{subsubsection}%
   {3}%
   {0em}%
@@ -32,8 +32,6 @@
 
 \newcommand{\latexnote}{\textit{\LaTeX\ note.} }
 
-% I put in a fancy title, just for fun.  But it can be disabled
-% because it really works best with postscript fonts 
 \newif\iffancytitle\fancytitletrue % change to ..true for fancy title page
 \iffancytitle
   \usepackage{color}
@@ -44,7 +42,7 @@
 \else
   \title{\LaTeX-ing \textit{Linear Algebra}}
   \author{Jim Hef{}feron}
-  \date{2003-May-05}
+  \date{2012-Feb-29}
 \fi
 
 \begin{document}
@@ -55,7 +53,7 @@
     \begin{picture}(0,0)(0,0)
       \put(0,40){\makebox[0pt]{\color{titlegray}\fontsize{100}{130}\usefont{OT1}{bigandbold}{m}{n}\selectfont\LaTeX-ing}}
       \put(68,0){\makebox[0pt]{\Huge\bsifamily Linear Algebra}}  
-      \put(0,-350){\makebox[0pt]{\large\scshape\begin{tabular}{c} Jim Hef{}feron \\ 2003-May-05\end{tabular}}}
+      \put(0,-350){\makebox[0pt]{\large\scshape\begin{tabular}{c} Jim Hef{}feron \\ 2012-Feb-29\end{tabular}}}
     \end{picture}
   \end{center}
   \clearpage\setcounter{page}{1}
@@ -63,75 +61,69 @@
   \maketitle
 \fi
 
-This document contains material about using Jim Hef{}feron's
+This document contains instructions for compiling the source
+to Jim Hef{}feron's
 undergraduate textbook \textit{Linear Algebra}.
-This book is freely available on the web.
 
 
 
 
 \section{Summary of \textit{Linear Algebra}.}
 \textit{Linear Algebra}
-covers the material usually done in a three or four
+covers the material that is usually done in a three or four
 hour a week, one semester US course:
 solving linear systems,
 vector spaces, linear maps, determinants, and eigenvalues and eigenvectors.
-The pedagogical effort of the book is to help a student make the
+The pedagogical approach of the book is to help a student make the
 transition from calculus to upper division mathematics.
 Therefore the presentation stresses careful motivation,
 many examples, clarity in the proofs, and 
-extensive exercise sets.
+developmental exercise sets.
 The Preface contains a more detailed description.
 
 
 
 \subsection{Best When Viewed By \ldots}
-The simplest way to have a look is to 
+To have a look
 go to \url{http://joshua.smcvt.edu/linearalgebra}.
-The files there can be viewed with \textit{Acrobat Reader}.
-Alternatively, you can FTP to 
-\url{joshua.smcvt.edu/pub/hefferon/book}
-and get \url{book.pdf}.
+The files there can be viewed with \textit{Acrobat Reader} 
+(or, that I know of, any PDF reader).
 
-If you get both the book and the answers, name the first \url{book.pdf}
-and the second \url{jhanswer.pdf} and put them in the same directory
-so that the interfile hyperlinks work
-(clicking on a question gives you the answer, and clicking on the answer 
-gets you the question).
+Get both the book and the answers and put them in the same directory,
+so that 
+clicking on a question number takes you to its answer 
+and clicking on the answer 
+takes you back to the question.
 
 
 
 
 
 
-\subsection{The Materials are Free}
-These materials are freely available, in both source and viewable form.
+\subsection{It is Free}
+These materials are freely available, in both readable and source form.
 
-That means, first of all, that you are free to download the book.
-You are free to use it yourself, and if you are a mathematics
-instructor you are also free to have students in your class 
+First, you are free to download the book.
+If you are a mathematics
+instructor then you are also free to have students in your class 
 use paper or electronic copies as a course text,
 either as the main text or as an auxilliary text. 
+(This includes the freedom to print out copies and sell them
+from your bookstore.)
 
 Besides being free to use the output form of the text, you are
-also free to use the source form.
+also free to use the source.
 Some examples of how this can be helpful are:
 an instructor can add a few favorite exercises 
-here and there, or perhaps include a new Topic, or adjust the development
+here and there, perhaps include a new Topic, adjust the development
 in a subsection, or even rewrite a portion entirely.
 Another example is: someone who finds an error, say in the answer to an
-exercise, can send me the correction (i.e., a `diff file').
-
-With the source and the instructions below on using the macros
-these are all straightforward 
-(meaning that with the computer work largely set up for you
-and with this mass of examples to copy, jobs like these become
-mostly about knowing the mathematics rather than being
-dominated by the necessity of mastering computer details).  
+exercise, can send me the correction (email me either a page number and a
+description or a diff file).
 
 I welcome contribution of work back to the project.
 I of course reserve the ability to not use some things but all
-the contributions that I do use will be acknowledged.
+the contributions that I do use are acknowledged in the source.
 
 
 
@@ -146,105 +138,25 @@ the contributions that I do use will be acknowledged.
 
 
 
-\section{Using the Source}
+\section{Use the Source}
 To do more than read the material, 
-you need to know that the files here are for the \TeX\ system.
+you need to know that the files here
+use the \LaTeX\ macro system for the text formatter \TeX. 
+If you are unfamiliar with this system, it is the 
+standard system for writing mathematics.
 
-\TeX\ is a typesetter which uses a markup language~--- it is not a 
-word processor.
-Instead, you intersperse commands and text:~for instance, 
-the source `\verb!Consider the vector space $V$!' 
-will set `Consider the vector space' as regular text, 
-and then set the `V' as math text 
-(that's what surrounding text with \verb!$!'s does).
-I used it for this project because I know of no
-other system that can do the job.
-In particular, the output is the best that I have ever seen
-from a personal computer.
-It especially shines at mathematics.
+So the first think you need is a
+distribution of \TeX. 
+I recommend \TeX{}Live, \texttt{http://www.tug.org/texlive}. 
 
-This book is written using the \LaTeX\ macro system for \TeX. 
-The `macro system' modifier means that commands have been added to 
-make it easier to use the underlying \TeX.
-For example, \LaTeX\ simplifies the numbering of theorems, indexing,
-and cross-references.
-
-
-
-\subsection{Starting \TeX-ing}
-Many people find that using the \TeX\ system gives rise to
-a lot of head-scratching.
-As with any powerful tool, there is a lot to learn, and 
-I can't in this document try to teach you \TeX\ or \LaTeX. 
-
-
-
-\subsubsection{What you need to know}
-What I can do is to suggest that if you are a newbie then
-you could start with the 
-\textit{Short Guide to \LaTeX2e} at
-\url{http://www.ctan.org/info/lshort2e}, which might be enough
-for you to get through making small changes in the materials here.
-After that, get 
-\textit{\LaTeX: A Documentation Preparation System}
-by Lamport (ISBN~0-201-52983-1), and 
-\textit{The \LaTeX\ Companion}
-by Goosens and others (ISBN~0-201-54199-8).
-Most university libraries will have both.
-You may also find useful the original book on \TeX\ by its developer,
-\textit{The \TeX book}
-by Knuth (ISBN~0-201-13448-9).
-There are many other good books and in particular people often
-recommend the one by Kopka and~Daly (which I happen never to have used
-so I don't have an ISBN handy).
-
-The graphics here are in MetaPost.
-For that language you need the manual from
-\url{http://cm.bell-labs.com/who/hobby/MetaPost.html} 
-and also \textit{The MetaFont Book} by Knuth
-(ISBN~0-201-13444-6).
-
-You should also be aware of three resources.
-The first is the Comprehensive \TeX\ Archive Network, CTAN, which
-is a group of Internet sites that cooperate to keep a very large
-collection of useful \TeX\ material all in one place.
-There are sites all over the world, but you can get started
-at \url{http://www.ctan.org}.
-The second resource is that there are a number of Users Groups.
-Here also, all over the world there are groups, but a good single place 
-to start is \url{http://www.tug.org}.
-If you find \TeX\ and friends useful, join your local group.
-Finally, the third resource is the usenet group \texttt{comp.text.tex}.
-This is a mailing list that you can read, search, or post to, from
-\url{http://groups.google.com}.
-If you have a question, you've exhausted your background trying 
-to make it out on your own, and you can't find the answer by searching
-old posts, try posting there yourself.
-It is a very friendly group, helpful and polite.
-
-
-
-\subsubsection{What you need to have}
-If you are just beginning then the first thing that you need is a
-distribution of \TeX\ and friends. 
-That is a collection of all of the 
-associated programs and other materials that together
-make this system so powerful.
-For information on where to get such a distribution, 
-whether free or commercial, for various platforms,
-see \texttt{http://www.tug.org}.
-
-If you aim to modify or add material to
-the book and are unfamiliar with \TeX\ then 
+If you are unfamiliar with \TeX\ then 
 a good way to get started is to get this document to come out.  
 These work for me under Linux:
 `\verb!pdflatex 1st_readme!'. 
 If that works~--- if you can view it under \textit{Acrobat Reader}~--- then 
 your setup is at least partially correct. 
 However, I must say that each \TeX\ distribution 
-has a slightly different approach and,
-as with \TeX\ in general, I'm sorry, I can't tell you how each different
-distribution is set up exactly.
+has a slightly different approach and, I'm sorry, I can't help much.
 You'll have to find that information in the distribution
 documentation.
 
@@ -253,74 +165,128 @@ It builds character.
 Anyway, if you are having trouble even getting started, or only want a quick
 look, I've included the output material in the file \texttt{1st\_readme.pdf}. 
 
+If you are just starting working with \LaTeX{} then I recommend finding the 
+\textit{Short Guide to \LaTeX2e} at
+\url{http://www.ctan.org/}, which might be enough
+for you to get through making small changes in the materials.
+
+The graphics here are in MetaPost.
+This should come with a \TeX{} distribution, but 
+you need to search for the manual and you may also want 
+\textit{The MetaFont Book} by Knuth
+(ISBN~0-201-13444-6).
 
 
 
 
-\subsection{The Book's Files}
-The book's source material comes in a number of separate files.
+
+\subsection{Compiling from source}
+
+Make a new directory \textit{book} and change into it.
+Get the contents of the book, either by accessing the version control archive
+or by unzipping the provided file.
+
+The book's source comes in a number of separate files.
+In addition to separate files for each section, such as 
+\texttt{gr1.tex} for the first section of the first chapter,
+here are some other key files.
 \begin{center}
   \begin{tabular}{r|l}
     \textit{file name}  &\textit{what it is}  \\
     \hline
-    \texttt{book.zip}  &Material for the book as a whole and styles \\
-    \texttt{front.zip} &Front matter (e.g., the Preface) 
-                         and back matter (the Appendix)  \\
-    \texttt{gr.zip}    &Chapter One, on Gaussian reduction \\
-    \texttt{vs.zip}    &Chapter Two, on vector spaces \\
-    \texttt{map.zip}   &Chapter Three, linear maps \\
-    \texttt{det.zip}   &Chapter Four, on determinants \\
-    \texttt{jc.zip}    &Chapter Five, on eigenvalues and eigenvectors \\
+    \texttt{book.tex}     &Main file \\
+    \texttt{bookjh.sty}   &Formatting instructions  \\
+    \texttt{linalgjh.sty} &Macros for Linear Algebra \\
+    \texttt{jhanswer.tex} &Main file for the answers \\
   \end{tabular}
 \end{center}
-Each of these \texttt{.zip} files is a set of other
-files (it is an archive).
-Unzip it with \texttt{pkunzip}, or \texttt{winzip}, or the free material
-from the Info-zip folks.
 
-After you unzip the above files, you will have in your
+After you get the files, you will have in your
 directory many \texttt{.tex} files, a few \texttt{.mp} files, and 
 a few other types such as \LaTeX\ style files \texttt{.sty}.
 The \texttt{.tex} files are for \LaTeX\ and the \texttt{.mp} files
 are for MetaPost for the graphics
-(a few graphics are also in Encapsulated PostScript \texttt{.eps} form).
+(a few graphics are in forms such as \texttt{.jpg}).
 
-Before you get the book going you need to have the graphics available.
-First, invoke MetaPost on the file \texttt{dotprod.mp}.
-On my system `\texttt{mpost dotprod.mp}' does the job.
-It produces a file \texttt{dotprod.1}.
-This file is very simple; it contains only one graphic,
-the dot in dot product, and so if anything will work it should be this.
 
-Next invoke MetaPost on the five chapter files 
-\verb!mpost ch1.mp!, \ldots, \verb!mpost ch5.mp!, 
-along with \verb!mpost appen! and \verb!mpost voting!.
-You'll get files whose names are \texttt{ch1.1}, \texttt{ch1.2}, etc.
-There should be a lot of them.
+\subsubsection{The easy way}
+If you are on a Unix-y machine, such as Linux, 
+try running \verb!./make_book_for_web.sh! from the command line.
+That's how I get a version of the book.
 
-If that works then you are on a roll.
-Run \LaTeX\ on the book.
-On my system the command `\verb!pdflatex book!' works.
-The first time through should produce an alarming number of warning messages.
-Do it a second time.
-The number of messages should drop; what's happened is that the first time
-through \LaTeX\ warned you about cross-references while it was saving them
-to a file, and the second time through it found them in the file so it
-did not warn you that they were not found.
-Make the index \verb!makeindex -s book.isty -p odd book.idx!.
-\LaTeX\ the book again. 
-At this point, I can read the book using the \textit{Acrobat Reader} program, 
-with `\verb!acroread book.pdf!'.
+If you are not on a Unix machine then you have to read 
+\verb!make_book_for_web.sh! and mimic the steps.
+There are not too many of them; it shouldn't be hard.
+These steps will give a printable version.  
+\begin{center}
+  \begin{tabular}{ll}
+    \verb!mpost dotprod.mp!  &Make the dot product symbol.        \\ 
+    \verb!mpost ch1.mp! \ldots \verb!mpost ch5.mp!, \verb!mpost appen.mp!, \verb!mpost voting.mp!  &Make the line art. \\
+    \verb!pdflatex book!  &Produce the book and the future references       \\
+    \verb!makeindex -s book.isty -p odd book.idx!  &Alphabatize index.  \\ 
+    \verb!pdflatex book!  &Produce the final version of the book         \\
+    \verb!pdflatex jhanswer!  &Produce the answers               \\
+    \verb!pdflatex jhanswer!  &Resolve references from the first run  %       \\
+  \end{tabular}
+\end{center}
 
-To get the answers, do the same steps on 
-\textit{jhanswer.tex}.
-That is, `\verb!pdflatex jhanswer!' done twice,
-%followed by `\verb!dvips -Pwww -ojhanswer.ps jhanswer!', 
-followed by `\verb!acroread jhanswer.pdf!' works for me.
+If something fails, make sure you have the latest \TeX{} installation.
+Try it again.
 
-If you are a really lucky person, and you are using a unix-ish system
-(oops, being redundant!) then you could try running the script
-`\verb!make_book_for_web.sh!', which wraps together all of the above steps.
+If you still have trouble, in case it helps I can tell you what I have that 
+works for me.
+I have the \TeX{}Live~2009 that comes with Ubuntu's package system.
+The additional packages that I have downloaded (often these are updates
+of the 2009 ones), 
+besides the ones distributed in my file bundle, are these.
+\begin{verbatim}
+$ ls /usr/local/share/texmf/tex/latex
+emerald       l3kernel        luxi          picins       thmtools
+etoolbox      l3kernel.zip    mdframed      siunitx      thmtools.zip
+etoolbox.zip  l3packages      mdframed.zip  siunitx.zip
+geometry      l3packages.zip  mh            slatex
+geometry.zip  local           mh.zip        tabu
+\end{verbatim}
+(Some of them may not be relevant.)
+
+
+
+% Before you get the book going you need to have the graphics available.
+% First, invoke MetaPost on the file \texttt{dotprod.mp}.
+% On my system `\texttt{mpost dotprod.mp}' does the job.
+% It produces a file \texttt{dotprod.1}.
+% This file is very simple; it contains only one graphic,
+% the dot in dot product, and so if anything will work it should be this.
+
+% Next invoke MetaPost on the five chapter files 
+% \verb!mpost ch1.mp!, \ldots, \verb!mpost ch5.mp!, 
+% along with \verb!mpost appen! and \verb!mpost voting!.
+% You'll get files whose names are \texttt{ch1.1}, \texttt{ch1.2}, etc.
+% There should be a lot of them.
+
+% If that works then you are on a roll.
+% Run \LaTeX\ on the book.
+% On my system the command `\verb!pdflatex book!' works.
+% The first time through should produce an alarming number of warning messages.
+% Do it a second time.
+% The number of messages should drop; what's happened is that the first time
+% through \LaTeX\ warned you about cross-references while it was saving them
+% to a file, and the second time through it found them in the file so it
+% did not warn you that they were not found.
+% Make the index \verb!makeindex -s book.isty -p odd book.idx!.
+% \LaTeX\ the book again. 
+% At this point, I can read the book using the \textit{Acrobat Reader} program, 
+% with `\verb!acroread book.pdf!'.
+
+% To get the answers, do the same steps on 
+% \textit{jhanswer.tex}.
+% That is, `\verb!pdflatex jhanswer!' done twice,
+% %followed by `\verb!dvips -Pwww -ojhanswer.ps jhanswer!', 
+% followed by `\verb!acroread jhanswer.pdf!' works for me.
+
+% If you are a really lucky person, and you are using a unix-ish system
+% (oops, being redundant!) then you could try running the script
+% `\verb!make_book_for_web.sh!', which wraps together all of the above steps.
 
 
 
@@ -395,87 +361,58 @@ Not very elegant, I know, and once I accidentally left out the
 
 
 
-\subsubsection{Options}
-I have set up a few options.
+% \subsubsection{Options}
+% I have set up a few options.
 
-You can set the DVI driver from the command line with
-`\verb!pdflatex "\def\dvidrv{pdftex}\input book"!' 
-(the DVI driver matters to the \textit{graphics} package).
-If you do not set this then the package \textit{dvidrv.sty} that I 
-provided tries to guess it from your \textit{color.def} file, and failing
-that uses \textit{dvips}.
-To set your own default you can change the line in \textit{book.tex}
-to read, say, `\verb!\usepackage[dvips]{dvidrv}!'.
+% You can set the DVI driver from the command line with
+% `\verb!pdflatex "\def\dvidrv{pdftex}\input book"!' 
+% (the DVI driver matters to the \textit{graphics} package).
+% If you do not set this then the package \textit{dvidrv.sty} that I 
+% provided tries to guess it from your \textit{color.def} file, and failing
+% that uses \textit{dvips}.
+% To set your own default you can change the line in \textit{book.tex}
+% to read, say, `\verb!\usepackage[dvips]{dvidrv}!'.
 
-Similarly, you can decide from the command line to have the output
-file hyperlinked (by using the package \textit{hyperref}).
-Say `\verb!pdflatex "\def\hrefout{yes}\input book"!'.
-Anything other than `yes', even `Yes' or `y', will leave the file not
-hyperlinked.
+% Similarly, you can decide from the command line to have the output
+% file hyperlinked (by using the package \textit{hyperref}).
+% Say `\verb!pdflatex "\def\hrefout{yes}\input book"!'.
+% Anything other than `yes', even `Yes' or `y', will leave the file not
+% hyperlinked.
 
-You can also use the pbsi font in a similar way:
-`\verb!pdflatex "\def\pbsifont{yes}\input book"!'
-will use the font on the cover page and on chapter pages
-(you may need to download this font separately from a CTAN).
+% You can also use the pbsi font in a similar way:
+% `\verb!pdflatex "\def\pbsifont{yes}\input book"!'
+% will use the font on the cover page and on chapter pages
+% (you may need to download this font separately from a CTAN).
 
-These options combine.
-I use 
-`\verb!pdflatex "\def\dvidrv{pdftex}\def\hrefout{yes}\input book"!' to 
-produce output for \textit{Reader}.
-%Some options take some tweaking;
-%for instance, the DVI driver 
-%\textit{dvips} will work if you ask for hyperlinking but you need
-%to call it specially to get the best results:
-%`\verb!dvips -Ppdf -G0 -obook.ps book!', I think, can be distilled
-%to give a sound \texttt{.pdf} file.
+% These options combine.
+% I use 
+% `\verb!pdflatex "\def\dvidrv{pdftex}\def\hrefout{yes}\input book"!' to 
+% produce output for \textit{Reader}.
+% %Some options take some tweaking;
+% %for instance, the DVI driver 
+% %\textit{dvips} will work if you ask for hyperlinking but you need
+% %to call it specially to get the best results:
+% %`\verb!dvips -Ppdf -G0 -obook.ps book!', I think, can be distilled
+% %to give a sound \texttt{.pdf} file.
 
-All those options apply to the answer file, and one more.
-When you \LaTeX\ the book you can either choose to have all the 
-answers output to a single file 
-(the default filename is \textit{bookans.tex}), 
-or to have the recommended answers output to one file \textit{recans.tex} 
-and the other answers output to another \textit{otherans.tex}.
-The default is one big answer file.
-To switch it, look for a line early in \textit{book.tex} that says
-\verb!\usepackage[single,write]{bookans}! and change the 
-`\verb!single!' to `\verb!double!'.
-Then to read in the file of interest, invoke the answer file with,
-for instance,
-`\verb!latex "\def\ansfile{recans}\input jhanswer"!'.
-The default here, matching the book's default, 
-is to use the one big file \textit{bookans.tex}.  
+% All those options apply to the answer file, and one more.
+% When you \LaTeX\ the book you can either choose to have all the 
+% answers output to a single file 
+% (the default filename is \textit{bookans.tex}), 
+% or to have the recommended answers output to one file \textit{recans.tex} 
+% and the other answers output to another \textit{otherans.tex}.
+% The default is one big answer file.
+% To switch it, look for a line early in \textit{book.tex} that says
+% \verb!\usepackage[single,write]{bookans}! and change the 
+% `\verb!single!' to `\verb!double!'.
+% Then to read in the file of interest, invoke the answer file with,
+% for instance,
+% `\verb!latex "\def\ansfile{recans}\input jhanswer"!'.
+% The default here, matching the book's default, 
+% is to use the one big file \textit{bookans.tex}.  
 
 
-\subsubsection{Summary}
-The steps below work for me.
-I make a new directory \textit{book} and change into it.
-I \verb!unzip linear_algebra!, and then also unzip each sub-archive.  
-These steps will give a printable version.  
-\begin{center}
-  \begin{tabular}{ll}
-    \verb!mpost dotprod.mp!  &Make the dot product symbol.        \\ 
-    \verb!mpost ch1.mp! \ldots \verb!mpost ch5.mp!, \verb!mpost appen.mp!, \verb!mpost voting.mp!  &Make the line art. \\
-    \verb!pdflatex book!  &Produce the book's reference files.       \\
-    \verb!makeindex -s book.isty -p odd book.idx!  &Alphabatize index.  \\ 
-    \verb!pdflatex book!  &Produce the book's .dvi file.            %   \\
-    % \verb!dvips -Pwww book!  &Produce the book in PostScript form. 
-  \end{tabular}
-\end{center}
 
-To get the version on the web I substitute this.
-\begin{quotation}
-    \verb!pdflatex "\def\dvidrv{dvipdfm}\def\pbsifont{yes}\def\hrefout{yes}\input book"!
-\end{quotation}
-%(I had to get the \textit{dvipdfm} DVI driver and the 
-%\textit{BrushScriptItalic} font from CTAN; see the final section of this 
-%document).
-I then run the same command with \textit{jhanswer} instead of 
-\textit{book} to get the answers.
-(I don't like the way the hyperlinked colors print, so for the printable
-version I drop the links.)
-
-As mentioned above, 
-all these steps are in the unix shell script \verb!make_book_for_web.sh!.
 
 
 
@@ -599,32 +536,45 @@ for the range space.
   Swap two rows with \verb|\rho_1\swap\rho_2|.
   
 \item[matrix structures]
-Generic matrices are made with \verb|pmatrix|. 
+Generic matrices are made with \verb|mat|. 
 \begin{verbatim}
   \begin{equation*}
-    \begin{pmatrix}
+    \begin{mat}
       1  &2  &3  \\
       4  &5  &6 
-    \end{pmatrix}
+    \end{mat}
   \end{equation*}
 \end{verbatim}
   Note that there is no need to specify the number of columns;
   see the \textit{amsmath} documentation.
 
-  But there are a few places where I needed something a little different.
+  There is an optional argument to make the columns right-aligned.
+\begin{verbatim}
+  \begin{equation*}
+    \begin{mat}[r]
+      1  &2  &13  \\
+      4  &5  &6 
+    \end{mat}
+  \end{equation*}
+\end{verbatim}
+I restrict its use to those matrices (and column vectors) that contain
+only numbers, no variables at all.
+
+  There are places where I needed something a little different.
   In particular, I needed augmented matrices:
 \begin{verbatim}
   \begin{equation*}
-    \begin{amatrix}{2}
+    \begin{amat}{2}
       1  &2  &3  \\
       4  &5  &6 
-    \end{amatrix}
+    \end{amat}
   \end{equation*}
 \end{verbatim}
   produces a matrix that is two-by-three, with a vertical bar between
   the final and next-to-final columns. 
   The argument \texttt{2} means that there
   are two columns before the vertical bar.
+  (This also has an optional argument to right-align.)
   I also sometime need matrices partitioned into columns:
 \begin{verbatim}
   \begin{equation*}
@@ -637,20 +587,23 @@ Generic matrices are made with \verb|pmatrix|.
   produces a two-by-three matrix that has vertical bars separating the
   columns.
 
-  I make displayed determinant arrays with \verb!detmat! 
+  I make displayed determinant arrays with \verb!vmat! 
 \begin{verbatim}
   \begin{equation*}
-    \begin{detmat}
+    \begin{vmat}
       a  &c  \\
       b  &d   
-    \end{detmat}
+    \end{vmat}
     =ad-bc
   \end{equation*}
 \end{verbatim}
   and in-line  determinants with \verb!\deter{A}!.
+  (Again, there is an optional argument to right-align.)
 
 \item[vectors]
   Make column vectors with \verb|\colvec{1 \\ 2 \\ 3}|.
+  (There is an optonal argument to right-align that I use 
+  for number-only vectors \verb|\colvec[r]{1 \\ 2 \\ 3}|)
   Make row vectors with \verb|\rowvec{1  &2  &3}|.
 
 \item[decimal point-aligned columns]
@@ -680,9 +633,6 @@ Generic matrices are made with \verb|pmatrix|.
 \end{verbatim}
   There are five \verb!c!'s because the longest line
   is of length five.
-
-  
-
 
 \item[names for things]
   Note that there is a page (inside the book's cover) 
@@ -762,11 +712,11 @@ Generic matrices are made with \verb|pmatrix|.
 
 \item[aligned vdots]
   To make \verb!\vdots! come out inside a bunch of aligned equations,
-  I use \verb!\alignedvdots!.
+  I use \verb!\vdotswithin{}! from the \textit{mathtools} package.
 \begin{verbatim}
   \begin{align*}
     a_{1,1}x_1+\cdots+a_{1,n}x_n &= d_1         \\
-                                 &\alignedvdots \\
+                                 &\vdotswithin{=} \\
     a_{m,1}x_1+\cdots+a_{m,n}x_n &= d_m         
   \end{align*}
 \end{verbatim}
@@ -788,21 +738,20 @@ or how the exercises are laid out, are in the file
 \begin{description}
   \item[theorem-like structures]
     I have already declared the
-    \texttt{theorem}, \texttt{proposition}, 
-    \texttt{axiom}, \texttt{definition}, and \texttt{notation}
+    \texttt{theorem}, \texttt{lemma}, 
+    \texttt{definition}, and \texttt{corollary}
     environments.
     These will come out shaded.
     To change this, or the color of the shading or its border, see
-    also \textit{shadethm.sty}
+    also \textit{bookjh.sty}
 \begin{verbatim}
   \begin{definition}
     A \definend{big} vector space is one where you can't  see the end when 
     you are standing at the zero vector, even with your glasses on. 
   \end{definition}
 \end{verbatim}
-    I have also declared (not shaded):~\texttt{lemma}, 
-    \texttt{corollary}, \texttt{example},
-    \texttt{remark}, \texttt{note}, and \texttt{comment}.
+    I have also declared (not shaded):~ \texttt{example} and 
+    \texttt{remark}.
 
     By the way, note the \verb!\definend!; I use this for the
     term being defined (I though I would automate indexing,
@@ -829,9 +778,7 @@ or how the exercises are laid out, are in the file
 
   \item[graphics]
     I am using MetaPost for all of the graphics and all of the 
-    DVI drivers that I am interested in handle \textit{.mp}'s straight off, 
-    so I have not used the \verb!inlinegraphic! and
-    \verb!scannedpicture! environments.
+    output drivers that I am interested in handle \textit{.mp}'s straight off. 
     Instead I say this.
 \begin{verbatim}
   \begin{center}
@@ -840,8 +787,8 @@ or how the exercises are laid out, are in the file
 \end{verbatim}
    Putting two graphics side-by-side, or putting parallel text, are
    all a bit messy.
-   Either look at the document on CTAN in the \texttt{info} directory,
-   or just mimic what I did somewhere.
+   I use \verb!vcenteredhbox{}!
+   jJust mimic what I did somewhere.
 
   \item[exercises and answers]
     The exercise portions of a subsection looks like you might expect.
@@ -972,16 +919,6 @@ or how the exercises are laid out, are in the file
   \item[tfae]
     A small environment for The Following are Equivalent-type lists.
  
-  \item[computercode]
-    Another small environment, this time for displaying computer code,
-    obviously.
-    I intend to change this to use the very nice \textit{listings} style
-    when I get a chance.
-
-  \item[indented] 
-    An environment that is much like \LaTeX's \verb|trivlist| but which I
-    thought fit better with the typographic look of the rest of the book.
-
   \item[clearemptydoublepage]
     Taken straight from the \textit{Companion}.
     It does what it says.
@@ -1071,14 +1008,16 @@ See the web page for more extensive examples.
 
 \section{Bugs}
 
-These are known to me; I'd appreciate any help, of course.
-\begin{description}
-  \item[2001-Oct-08]
-    I can't figure out how to get \textit{hyperref.sty} to 
-    have the indexing links both work and show the correct page number
-    (they are advanced by ten, which I presume is length of the front matter).
-    I've disabled the indexing links with \verb!hyperindex=false!. 
-\end{description}
+See the \verb!TODO.org! file in the source.
+
+% These are known to me; I'd appreciate any help, of course.
+% \begin{description}
+%   \item[2001-Oct-08]
+%     I can't figure out how to get \textit{hyperref.sty} to 
+%     have the indexing links both work and show the correct page number
+%     (they are advanced by ten, which I presume is length of the front matter).
+%     I've disabled the indexing links with \verb!hyperindex=false!. 
+% \end{description}
 
 
 
