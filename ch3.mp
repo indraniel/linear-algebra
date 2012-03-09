@@ -3,9 +3,9 @@
 verbatimtex
 %&latex
 \documentclass{book}
-\usepackage{dvidrv} \usepackage{hrefout}
-\usepackage{bookjh,linalgjh}
-\usepackage{verbatim}
+\usepackage{bookjhconcrete} % uncomment if using bookjhconcrete.sty for book
+% \usepackage{bookjh}  % uncomment if using bookjh.sty for book
+\usepackage{linalgjh}
 \begin{document}
 etex
 

@@ -3,15 +3,9 @@
 verbatimtex
 %&latex
 \documentclass{book}
-\typeout{PAST documentclass{book}}
-\usepackage{dvidrv}
-\typeout{PAST dvidrv}
-\usepackage{hrefout}
-\typeout{PAST hrefout}
-\usepackage{bookjh,linalgjh}
-\typeout{PAST bookjh}
-\usepackage{verbatim}
-\typeout{PAST verbatim}
+\usepackage{bookjhconcrete} % uncomment if using bookjhconcrete.sty for book
+% \usepackage{bookjh}  % uncomment if using bookjh.sty for book
+\usepackage{linalgjh}
 \begin{document}
 etex
 
