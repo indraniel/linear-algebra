@@ -380,7 +380,7 @@
 \usepackage[titles]{tocloft}
 \tocloftpagestyle{booktoc}
 \cftpagenumbersoff{chapter}
-\setlength{\cftchapnumwidth}{8em}
+\setlength{\cftchapnumwidth}{7em}
 % \renewcommand*\l@chapter[2]{%
 %   \ifnum \c@tocdepth >\m@ne
 %     \addpenalty{-\@highpenalty}%
@@ -646,6 +646,9 @@
 %     The declarations to set the style of the heading (e.g. \itshape for 
 % an italic heading.) The last command in <style> may be a 
 % command which takes a single argument but all the others must be declarations.
+% \def\SetSectioningName#1{\gdef\sectioningname{#1}%
+%   \typeout{SUBSECTION\space START:\space\sectioningname}}
+
 \renewcommand{\section}{\@startsection%
      {section}{1}{0em}{-14ex plus1ex minus2ex}{1em}%
      {\usefont{T1}{fvs}{b}{n}\Large}}
@@ -679,6 +682,42 @@
 % \subsecheader{#2}}
 
 % \newcommand{\subseccmdb}[1]{\subsecheader{#1}}
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \ifnum #2>\c@secnumdepth
+    \let\@svsec\@empty
+  \else
+    \refstepcounter{#1}%
+    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+  \fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@
+    \begingroup
+      #6{%
+        \@hangfrom{\hskip #3\relax\@svsec}%
+          \interlinepenalty \@M #8\@@par}%
+    \endgroup
+    \csname #1mark\endcsname{#7}%
+    % JH 2012-Mar-10
+    \Writetofile{\ans@fn}{\expandafter\protect\csname #1\endcsname\protect{#8\protect}}
+    \addcontentsline{toc}{#1}{%
+      \ifnum #2>\c@secnumdepth \else
+        \protect\numberline{\csname the#1\endcsname}%
+      \fi
+      #7}%
+  \else
+    \def\@svsechd{%
+      #6{\hskip #3\relax
+      \@svsec #8}%
+      \csname #1mark\endcsname{#7}%
+      \addcontentsline{toc}{#1}{%
+        \ifnum #2>\c@secnumdepth \else
+          \protect\numberline{\csname the#1\endcsname}%
+        \fi
+        #7}}%
+  \fi
+  \@xsect{#5}}
+
+
 
 \usepackage{trimspaces}
 % \newcommand{\subsecheader}[1]{\pagebreak[3]%

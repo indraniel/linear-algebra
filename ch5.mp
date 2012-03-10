@@ -232,7 +232,7 @@ beginfig(6) % Tower of Hanoi (three disks at start)
   save needle_shift; pair needle_shift; needle_shift = (1.2disk_length,0v);
   save needle_length, needle_width, needle_hgt;
   numeric needle_length, needle_width, needle_hgt; % how thick is body of bee?
-  needle_length = .4u; needle_width = .4needle_length; needle_hgt = 6u;
+  needle_length = .4u; needle_width = .4needle_length; needle_hgt = 4u;
   % left needle
   drawdisk(disk_length,disk_width,disk_hgt);
   drawdisk(.9disk_length,.9disk_width,disk_hgt) shifted (0,1.5disk_hgt);
@@ -263,7 +263,7 @@ beginfig(7) % Tower of Hanoi (three disks at start)
   save needle_shift; pair needle_shift; needle_shift = (1.2disk_length,0v);
   save needle_length, needle_width, needle_hgt;
   numeric needle_length, needle_width, needle_hgt; % how thick is body of bee?
-  needle_length = .4u; needle_width = .4needle_length; needle_hgt = 6u;
+  needle_length = .4u; needle_width = .4needle_length; needle_hgt = 4u;
   % left needle
   drawdisk(disk_length,disk_width,disk_hgt);
   drawdisk(needle_length,needle_width,needle_hgt-disk_hgt)

@@ -2299,19 +2299,19 @@ beginfig(46) % f_1(x)=e^x
   u:=.2in; w:=u; v:=.175in;
 
   save codomain_shift; pair codomain_shift; codomain_shift=(3w,0v);
-  z0=(0w,0v);  z1=(0w,7.5v); z2=(0w,-5.5v);
+  z0=(0w,0v);  z1=(0w,7.5v); z2=(0w,-2.5v);
   z10=z0+codomain_shift; z11=z1+codomain_shift; z12=z2+codomain_shift;
   
   % the axes
   pickup pensquare scaled line_width_light;
   draw z2--z1;  % input axis 
-    sidetoside_ticks(13,(0w,-5v),(0w,1v));
-    label.lft(btex {\tiny -5} etex,(0w,-5v));
+    sidetoside_ticks(10,(0w,-2v),(0w,1v));
+    % label.lft(btex {\tiny -5} etex,(0w,-5v));
     label.lft(btex {\tiny 0} etex,(0w,0v));
     label.lft(btex {\tiny 5} etex,(0w,5v));
   draw z12--z11;  % output axis
-    sidetoside_ticks(13,codomain_shift+(ticklength,-5v),(0w,1v));
-    label.rt(btex {\tiny -5} etex,(0w,-5v)+codomain_shift);
+    sidetoside_ticks(10,codomain_shift+(ticklength,-2v),(0w,1v));
+    % label.rt(btex {\tiny -5} etex,(0w,-5v)+codomain_shift);
     label.rt(btex {\tiny 0} etex,(0w,0v)+codomain_shift);
     label.rt(btex {\tiny 5} etex,(0w,5v)+codomain_shift);
     
@@ -2333,19 +2333,19 @@ beginfig(47) % f_2(x)=x^2
   u:=.2in; w:=u; v:=.175in;
 
   save codomain_shift; pair codomain_shift; codomain_shift=(3w,0v);
-  z0=(0w,0v);  z1=(0w,7.5v); z2=(0w,-5.5v);
+  z0=(0w,0v);  z1=(0w,7.5v); z2=(0w,-2.5v);
   z10=z0+codomain_shift; z11=z1+codomain_shift; z12=z2+codomain_shift;
   
   % the axes
   pickup pensquare scaled line_width_light;
   draw z2--z1;  % input axis 
-    sidetoside_ticks(13,(0w,-5v),(0w,1v));
-    label.lft(btex {\tiny -5} etex,(0w,-5v));
+    sidetoside_ticks(10,(0w,-2v),(0w,1v));
+    % label.lft(btex {\tiny -5} etex,(0w,-5v));
     label.lft(btex {\tiny 0} etex,(0w,0v));
     label.lft(btex {\tiny 5} etex,(0w,5v));
   draw z12--z11;  % output axis
-    sidetoside_ticks(13,codomain_shift+(ticklength,-5v),(0w,1v));
-    label.rt(btex {\tiny -5} etex,(0w,-5v)+codomain_shift);
+    sidetoside_ticks(10,codomain_shift+(ticklength,-2v),(0w,1v));
+    % label.rt(btex {\tiny -5} etex,(0w,-5v)+codomain_shift);
     label.rt(btex {\tiny 0} etex,(0w,0v)+codomain_shift);
     label.rt(btex {\tiny 5} etex,(0w,5v)+codomain_shift);
     
@@ -2893,7 +2893,7 @@ beginfig(60) % composition; chain rule
   drawinterval((0w,.8v)--(0w,1.2v));  
     label.lft(btex {\tiny $x$} etex,(0w,1v));
   drawinterval(((0w,1.6v)--(0w,2.4v)) shifted codomain_shift);  
-    label.rt(btex {\tiny $f(x)$} etex,((0w,2v)+codomain_shift));
+    label.rt(btex {\tiny \ $f(x)$} etex,((0w,2v)+codomain_shift));
   drawinterval(((0w,3.4v)--(0w,4.6v)) shifted 2codomain_shift);  
     label.rt(btex {\tiny $g(f(x))$} etex,((0w,4v)+2codomain_shift));
   
