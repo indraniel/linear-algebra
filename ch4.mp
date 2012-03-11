@@ -3,8 +3,7 @@
 verbatimtex
 %&latex
 \documentclass{book}
-\usepackage{bookjhconcrete} % uncomment if using bookjhconcrete.sty for book
-% \usepackage{bookjh}  % uncomment if using bookjh.sty for book
+\usepackage{bookjh}
 \usepackage{linalgjh}
 \begin{document}
 etex

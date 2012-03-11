@@ -1,0 +1,795 @@
+\ProvidesPackage{bookjh}[2001/05/24 Material for _Linear Algebra_ (JH)]
+%% bookjh.sty 
+% The INITIAL CODE part
+
+% The DECLARATION OF OPTIONS part
+%\DeclareOption{singleanswerfile}{}
+
+
+% The EXECUTION OF OPTIONS part
+%\ProcessOptions
+
+% The PACKAGE LOADING part
+
+% The dvidrv package allows me to specify on the command line what is
+% my driver.
+% \usepackage[yes]{hrefout}
+% \newcommand{\dvidrv}{pdftex}
+% \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
+
+% Set page margins, etc.
+\usepackage[paper=letterpaper,
+            textwidth=345pt,textheight=598pt,  % LaTeX defaults
+            % top=1in,bottom=1in % squeeze a lot on the paper
+            ]{geometry}
+
+% \usepackage[\dvidrv]{xcolor}
+\usepackage{xcolor}
+  % These are from http://kuler.adobe.com/#themeID/1538583
+  % clear by reisjart (lightened one color)
+  % \definecolor{basecolor}{rgb}{0.1686, 0.5032, 0.4118}  % 43,78,105
+  % \definecolor{darkcolor}{rgb}{0.0824, 0.1412, 0.2157}  % 21,39,55
+  % \definecolor{bgcolor}{rgb}{0.6627, 0.8196, 0.8784}  % 165,209,224
+  % \definecolor{flourishcolor}{rgb}{0.4078, 0.1373, 0.1294}  % 104,35,33 
+  % These are from http://kuler.adobe.com/#themeID/19069
+  % read and smooth by info
+  % \definecolor{bgcolor}{rgb}{0.905882353, 0.91372549, 0.819607843}  % 231,233,209
+  % \definecolor{rulecolor}{rgb}{0.82745098, 0.831372549, 0.666666667}  % 211,212,170
+  % \definecolor{papercolor}{rgb}{0.988235294, 0.980392157, 0.901960784}  % 252,250,230
+  % \definecolor{darkcolor}{rgb}{0.266666667, 0.266666667, 0.266666667}  % 68,68,68
+  % \definecolor{flourishcolor}{rgb}{0.564705882, 0.094117647, 0.031372549}  % 144,24,8
+  % These are from http://kuler.adobe.com/#themeID/1440313
+  % Cote Azur by Philip.Schweikert (lightened one color)
+  % \definecolor{darkcolor}{rgb}{0, 0.34510, 0.37255}  % 0,88,95
+  % \definecolor{boldcolor}{rgb}{0, 0.57647, 0.57647}  % 0,147,147
+  % \definecolor{neutralcolor}{rgb}{1.00000, 0.98824, 0.76863}  % 255,252,196
+  % \definecolor{bgcolor}{rgb}{0.94118, 0.92941, 0.73333}  % 240,237,187 
+  % \definecolor{flourishcolor}{rgb}{1.00000, 0.21961, 0}  % 255,56,0
+  % These are from http://www.colorcombos.com/color-scheme-20.html
+  % \definecolor{darkcolor}{HTML}{217C7E}  % 
+  % \definecolor{boldcolor}{HTML}{3399FF}  % 
+  % \definecolor{bgcolor}{HTML}{F3EFE0}  %  
+  % \definecolor{flourishcolor}{HTML}{9A3334}  %
+  % From http://colorschemedesigner.com/#3M32r--..k.Yu
+  \definecolor{darkcolor}{HTML}{193E9A}  % 
+  \definecolor{boldcolor}{HTML}{0034B7}  % 
+  \definecolor{lightcolor}{HTML}{DAE4FC} % {799FFC}  % 
+  \definecolor{bgcolor}{HTML}{FCFFDC}  %  
+  \definecolor{flourishcolor}{HTML}{F80018}  %
+
+% \usepackage[\dvidrv]{graphicx}  %
+\usepackage{graphicx}  %
+\usepackage{url}
+% \usepackage{color}
+% \usepackage{graphicx}  %
+%\graphicspath{{./}{./graphics/}} %
+\usepackage{ifpdf}
+%  \@ifundefined{pdfoutput}{}{%
+%  \typeout{ ABOUT TO RUN GRAPHICS RULE }
+%  \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
+%  }%
+%\ifpdf
+  % \typeout{ ABOUT TO RUN GRAPHICS RULE }
+  % \DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
+%\fi
+\DeclareGraphicsRule{*}{mps}{*}{} % make pdflatex take fig.1 as metapost.
+\usepackage{linalgjh}
+\usepackage{makeidx}
+
+\usepackage{pbsi} % This font is in TeXLive so I consider it accessible at this point
+\newcommand{\fancyfont}[1]{\textbsi{#1}}
+% Next two are for the cover
+% \usepackage{emerald}
+% \usepackage{tgchorus}
+\usepackage[outline]{contour}
+\usepackage{rotating}
+
+% The MAIN CODE part
+
+
+%================= me 
+\newcommand{\myname}{Jim Hef{}feron}             % The empty box prevents
+                                                 % using a ligature for the ff 
+
+
+%=========== formatting ===================================
+% HEADERS and FOOTERS
+\RequirePackage{fancyhdr}
+% See http://en.wikibooks.org/wiki/LaTeX/Page_Layout
+\setlength{\headheight}{15.2pt}
+
+%HEADINGS
+% \lhead[lh-even]{lh-odd} \chead[ch-even]{ch-odd} \rhead[rh-even]{rh-odd}
+% \lfoot[lf-even]{lf-odd} \cfoot[cf-even]{cf-odd} \rfoot[rf-even]{rf-odd}
+% where
+% When LaTeX wants to create a page with an empty style, it will insert the 
+% first argument of fancyplain, in all the other cases it will use the 
+% second argument
+% and available are
+% \thepage  number of the current page
+% \leftmark current chapter name printed like "CHAPTER 3. THIS IS THE CHAPTER TITLE"
+% \rightmark current section name printed like "1.6. THIS IS THE SECTION TITLE"
+% \chaptername the name chapter in the current language. If this is English, it will display "Chapter"
+% \thechapter 	current chapter number
+% \thesection 	current section number
+
+% Main body of book
+\fancypagestyle{bookbody}{%
+  \renewcommand{\headrulewidth}{.4pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lhead[\fancyplain{\renewcommand{\headrulewidth}{0pt}}{\thepage}]{\fancyplain{\renewcommand{\headrulewidth}{0pt}}{\textsl{\rightmark}}}
+  \rhead[\fancyplain{}{\textsl{\leftmark}}]{\fancyplain{}{\thepage}}
+  \chead{}
+  \lfoot{}
+  \rfoot{}
+  \cfoot{\fancyplain{\renewcommand{\footrulewidth}{.4pt}\thepage}{}}
+}
+
+% Topic sections
+\fancypagestyle{booktopic}{%
+  \renewcommand{\headrulewidth}{.4pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lhead[\fancyplain{\renewcommand{\headrulewidth}{0pt}}{\thepage}]{\fancyplain{\renewcommand{\headrulewidth}{0pt}}{\textsl{\rightmark}}}
+  \rhead[\fancyplain{}{\textsl{\leftmark}}]{\fancyplain{}{\thepage}}
+  \chead{}
+  \lfoot{\fancyplain{\thepage}{}}
+  \rfoot{\fancyplain{\thepage}{}}
+  \cfoot{\fancyplain{\thepage}{}}
+}
+
+% Front matter
+\fancypagestyle{bookfront}{%
+  \lhead{}
+  \rhead{}
+  \chead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lfoot{}
+  \rfoot{}
+  \cfoot{\fancyplain{}{-- \thepage{} --}}
+}
+
+% Chapters start with an empty page (includes first page of toc)
+\fancypagestyle{bookemptypage}{%
+  \lhead{}
+  \rhead{}
+  \chead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lfoot{}
+  \rfoot{}
+  \cfoot{}
+}
+
+% Table of contents
+\fancypagestyle{booktoc}{%
+  \lhead{}
+  \rhead{}
+  \chead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lfoot{}
+  \rfoot{}
+  \cfoot{}
+}
+
+\pagestyle{bookfront}
+\pagenumbering{roman}
+
+
+
+%=============== shaded and non-shaded theorems =============
+% The shadethm package allows, say, \begin{theorem} .. \end{theorem} 
+% material to always come out shaded. 
+% \RequirePackage{shadethm}
+
+% \RequirePackage{amsthm}
+% \swapnumbers
+% \renewcommand{\thmnote}[1]{{\bfseries #1}}
+% \newtheoremstyle{text}% name of the style to be used
+%   {\thm@preskip}% measure of space to leave above the theorem. E.g.: 3pt
+%   {\thm@postskip}% measure of space to leave below the theorem. E.g.: 3pt
+%   {\normalfont}% name of font to use in the body of the theorem
+%   {0pt}% measure of space to indent
+%   {\bfseries}% name of head font
+%   {}% punctuation between head and body
+%   { }% space after theorem head; leave blank space (not empty) for normal interword space
+%   {\arabic{subsection}.\arabic{theorem}\ \thmname{#1}\thmnote{ (#3)}\ } % Manually specify head
+% \theoremstyle{text} % the theorem environments below will use the `text' style
+% % shaded theorems
+% \newtheorem{theorem}{Theorem}[subsection]
+%   % \surroundwithmdframed[style=thmstyle]{theorem}\resetparens[theorem]
+% \newtheorem{proposition}[theorem]{Proposition}
+%   \surroundwithmdframed[style=thmstyle]{proposition}
+% \newtheorem{axiom}[theorem]{Axiom}
+%   \surroundwithmdframed[style=thmstyle]{axiom}
+% \newtheorem{axioms}[theorem]{Axioms}
+%   \surroundwithmdframed[style=thmstyle]{axioms}
+% \newtheorem{definition}[theorem]{Definition}
+%   \surroundwithmdframed[style=thmstyle]{definition}\resetparens[definition]
+% \newtheorem{notation}[theorem]{Notation}
+%   \surroundwithmdframed[style=thmstyle]{notation}\resetparens[notation]
+% % unshaded theorems
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{example}[theorem]{Example}
+% \newtheorem{exercise}[theorem]{Exercise}
+% \newtheorem{remark}[theorem]{Remark}
+% \newtheorem{note}[theorem]{Note} %conflicts with seminar
+% % I like the theorems to only list the subsection and the theorem number
+% \renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+
+% \definecolor{shadecolor}{rgb}{0.9412,.9412,1.0000} % 
+\colorlet{shadecolor}{bgcolor}
+\definecolor{shaderulecolor}{rgb}{0.1529,0.2510,0.5451} % RoyalBlue
+% \usepackage[framemethod=tikz]{mdframed}
+% \newrobustcmd*\resetparens[1][definition]{\AtBeginEnvironment{#1}{\mdf@restoreparams}}   % md says this will be incorporated in next version of mdframed
+% I don't see that leftmargin and rightmargin have any effect.
+% \mdfdefinestyle{thmstyle}{nobreak=true,
+%           leftmargin=-0.2em,innerleftmargin=0.2em,
+%           rightmargin=-0.2em,innerrightmargin=0.2em,
+%           % skipabove=.4ex,innertopmargin=-.6ex,
+%           skipabove=.5\thm@preskip,innertopmargin=.5\thm@preskip,
+%           % innerbottommargin=.6ex,skipbelow=.6ex,
+%           % is better in principle, but doesn't work: 
+%           innerbottommargin=.5\thm@postskip,skipbelow=.5\thm@postskip,
+%           backgroundcolor=shadecolor,
+%           linewidth=0.4pt,
+%           linecolor=shaderulecolor}
+
+\usepackage{framed}
+\usepackage{amsthm} 
+\usepackage{thmtools}
+\declaretheoremstyle[
+  % spaceabove=.5\thm@preskip, spacebelow=.5\thm@postskip,
+  headfont=\normalfont\bfseries,
+  notefont=\normalfont\bfseries, notebraces={ (}{)},
+  headformat={\NUMBER\ \NAME\NOTE\ignorespaces}, % note that \thetheorem is redefined below so \NUMBER is altered
+  headpunct={},
+  bodyfont=\normalfont,
+  postheadspace={.618em plus .2em minus .1em},
+  preheadhook={\begin{snugshade}},
+  postfoothook={\end{snugshade}}
+%   % for doing this with mdframed, see also http://tex.stackexchange.com/questions/34405/shaded-theorems-thmtools-spanning-pages
+  ]{shadedtext}  % for text that has a shaded box behind it TODO: make the frames not add any vertical space, add a rule to the frame
+\declaretheoremstyle[
+  % spaceabove=.5\thm@preskip, spacebelow=.5\thm@postskip,
+  headfont=\normalfont\bfseries,
+  notefont=\normalfont\bfseries, notebraces={ (}{)},
+  headformat={\NUMBER\ \NAME\NOTE\ignorespaces}, % note that \thetheorem is redefined below so \NUMBER is altered
+  headpunct={},
+  bodyfont=\normalfont,
+  postheadspace={.618em plus .2em minus .1em},
+  ]{text}   % for text that is not shaded 
+\declaretheoremstyle[
+  % spaceabove=.5\thm@preskip, spacebelow=.5\thm@postskip,
+  headfont=\normalfont\small\scshape,
+  notefont=\normalfont\small\scshape, notebraces={ (}{)},
+  headformat={\NAME\NOTE\ignorespaces}, % note that \thetheorem is redefined below so \NUMBER is altered
+  headpunct={},
+  bodyfont=\normalfont,
+  postheadspace={.618em plus .2em minus .1em},
+  prefoothook={\hfill\qedsymbol}
+  ]{pf}  % for proofs, with qedsymbol at the end
+\declaretheorem[name=Theorem,
+                style=shadedtext,
+                numberwithin=subsection,]{theorem}
+   % \surroundwithmdframed[style=thmstyle]{theorem}\resetparens[theorem]
+\renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+\declaretheorem[name=Definition,
+                style=shadedtext,
+                sibling=theorem]{definition} 
+   % \surroundwithmdframed[style=thmstyle]{definition} \resetparens[definition]
+\declaretheorem[name=Lemma,
+                style=shadedtext,
+                sibling=theorem]{lemma}
+   % \surroundwithmdframed[style=thmstyle]{lemma}\resetparens[lemma]
+\declaretheorem[name=Corollary,
+                style=shadedtext,
+                sibling=theorem]{corollary}
+   % \surroundwithmdframed[style=thmstyle]{corollary}\resetparens[corollary]
+\declaretheorem[name=Example,
+                style=text,
+                sibling=theorem]{example}
+\declaretheorem[name=Exercise,
+                style=text,
+                sibling=theorem]{exercise}
+\declaretheorem[name=Remark,
+                style=text,
+                sibling=theorem]{remark}
+\let\proof\@undefined                        % undefine \proof
+\let\endproof\@undefined                  % undefine \endproof
+\declaretheorem[name=Proof,
+                style=pf,
+                numberwithin=subsection]{proof}
+
+
+% styling of proofs
+\renewcommand{\proofname}{{\scshape\small Proof}}
+% End of \begin{proof} ... \end{proof}
+\renewcommand{\qedsymbol}{{\scshape\small QED}}
+
+
+
+%------------------------- code listings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\scriptsize,
+   commentstyle=\textit,
+   keywordstyle=\color{blue}\bfseries,
+   showstringspaces=false,
+   xleftmargin=.7em,
+   backgroundcolor=\color{bgcolor}
+}
+\lstdefinestyle{inline}{basicstyle=\ttfamily\small}
+
+
+
+
+%================================================================
+% FOOTNOTES
+% Footnotes: Use footnote symbols (not numbers) on a per-page basis.
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\RequirePackage{footnpag}
+% That package is only used for this purpose.
+\newcommand{\appendrefs}[1]{\footnote{
+                             More information on #1 is in the appendix.} }
+
+
+
+
+% \newenvironment{inlinegraphic}{\begin{center}}{\end{center}} %
+% \newcommand{\scannedpicture}[1]{%
+% %\ifpdf
+% %  \includegraphics{#1.pdf}
+% %\else
+%   \includegraphics{#1.jpg}
+% %\fi 
+% }
+
+%=========================================
+% Enumeration environments
+% Changed to support new kind of enumeration environment jh 90-7-10
+\def\labelenumi{(\arabic{enumi})}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumii{\(\bullet\)}
+\def\theenumii{\alph{enumii}}
+\def\p@enumii{\theenumi}
+\def\labelenumiii{(\roman{enumiii})}
+\def\theenumiii{\roman{enumiii}}
+\def\p@enumiii{\theenumi(\theenumii)}
+\def\labelenumiv{\bf --}
+\def\theenumiv{\Alph{enumiv}}
+\def\p@enumiv{\p@enumiii\theenumiii}
+
+\def\labelitemi{$\bullet$}
+\def\labelitemii{\bf --}
+\def\labelitemiii{$\ast$}
+\def\labelitemiv{$\cdot$}
+
+
+
+%================= TABLE OF CONTENTS =========================
+% For table of contents
+% See tocloft package documentation for info.  Anything more than below should
+% probably bring in that package.
+\setcounter{tocdepth}{2} \setcounter{secnumdepth}{2}
+
+% \renewcommand{\@pnumwidth}{15.85pt} %trial and error; addtolength didn't work
+\renewcommand{\@pnumwidth}{18pt} 
+\renewcommand{\@tocrmarg}{4em}
+\usepackage{tocloft}
+\tocloftpagestyle{booktoc}
+\cftpagenumbersoff{chapter}
+\setlength{\cftchapnumwidth}{8em}
+% \renewcommand*\l@chapter[2]{%
+%   \ifnum \c@tocdepth >\m@ne
+%     \addpenalty{-\@highpenalty}%
+%     \vskip 1.0em \@plus\p@
+%     \setlength\@tempdima{8.5em}% was 1.5em
+%     \begingroup
+%       \parindent \z@ \rightskip \@pnumwidth
+%       \parfillskip -\@pnumwidth
+%       \leavevmode \bfseries
+%       \advance\leftskip\@tempdima
+%       \hskip -\leftskip
+%       #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+%       \penalty\@highpenalty
+%     \endgroup
+%   \fi}
+%
+\renewcommand*\l@section{\@dottedtocline{1}{2em}{1.65em}} %98XII08 was 1.5
+\renewcommand*\l@subsection{\@dottedtocline{2}{3em}{2.5em}} % 98Xii05 was 1.5em
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{3em}{1.25em}} 
+\renewcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
+\renewcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
+
+%end PAGE LAYOUT
+
+
+%===================================================
+% CHAPTER
+% 
+% The \chapter command does not take an argument.  Instead, both \chapter
+% and \chapter* use \secdef, with the line \secdef\@chapter\@schapter .  
+% The first argument to \secdef tells LaTeX what to do with \chapter while 
+% the second tells LaTeX what to do with \chapter* .  So \chapter{Introduction}
+% will use \@chapter (which does have an argument and so grabs the chapter
+% name), whereas \chapter*{Acknowledgements} will use \@schapter. 
+%
+% The \@chapter and \@schapter write to some external files and then 
+% use \@makechapterhead and \@makeschapterhead to do the actual formatting.
+% 
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+   % Redefine the way exercises are handled, back from 
+   % how Topics handle them 
+   \renewcommand{\announcesectioninginanswerfile}{%
+     \sectioninginanswerfilechapterstyle}
+   \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
+  % renew definition of exercise formatting (perhaps undone in Topic)
+  \renewcommand{\exercise@makelabel}{} % 
+  % \ifhrefout
+    \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\arabic{subsection}.\Currentlabel}}}
+  % \else
+  %    \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{subsection}.\arabic{##1}}}
+  % \fi
+   \thispagestyle{bookemptypage}%
+   \global\@topnum\z@
+   \@afterindentfalse
+   \secdef\@chapter\@schapter}
+
+%\usepackage{ocm}
+
+% Change what goes into the table of contents for chapters here.
+
+% Copied from book.cls
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{Chapter \thechapter:}#1}
+                         % Announce the chapter also in the answers to exercises
+                         \Writetofile{\ans@fn}{\protect\chapter\protect{Chapter \Englishnumber{\value{chapter}}: #1\protect}}
+                       \else
+                         \addcontentsline{toc}{chapter}{#1}%
+                       \fi
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+
+\def\@makechapterhead#1{\clearemptydoublepage
+  % Grab the name of the chapter.  Has to go here, not in \chapter, since
+  % that macro does not take an argument.
+  \gdef\sectioningname{#1} 
+  % Below here is where the chapter heading is formatted
+  \vspace*{90\p@} % was 50\p@ 
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        % \huge\bfseries \@chapapp\space \thechapter
+        {\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth]{\rule{0em}{0.6pt}}}} \\[-4.5ex]
+        \selectfont\Large\textcolor{boldcolor}{\fancyfont{ \@chapapp{} \thechapter}}
+        \par\nobreak
+        \vskip 0\p@
+      \fi
+    \par
+    \vskip 0\p@ \fi %was 20\p@
+    \interlinepenalty\@M
+    \Huge \bfseries\textcolor{black}{#1}\par\nobreak
+    \vskip 50\p@  % was 30\p@
+  }}
+
+
+
+%--------exparts and exparts*
+% For exercises with sub-parts.  The *-ed version prints them across:
+% (a) xxx  (b) yyy  (c) zzz ..
+% while the un-*-ed version prints them down:
+% (a) xxx
+% (b) yyy 
+% Use this way:
+% \begin{exparts}
+%  \partitem        % not just \item so works in *-ed version.
+% \end{exparts}
+\newcounter{expartscount}
+\newenvironment{exparts}{%
+\def\partsitem{\item\relax}%
+\begin{expartslist}%
+}{%
+\end{expartslist}}
+%
+\newenvironment{exparts*}{%
+\def\partsitem{\penalty-400\hskip1.25em\relax\hbox{%
+\refstepcounter{expartscount}\textbf{(\alph{expartscount})}\hspace*{.5em}}\nobreak}
+\begin{expartslist}
+\setlength{\itemindent}{-1.25em}
+\rightskip=0pt plus7em\spaceskip=.3333em\xspaceskip=.5em\relax%
+\item[]}{%
+\end{expartslist}}
+%
+\newenvironment{expartslist}{%
+\begin{list}{\textbf{(\alph{expartscount})}}{
+  \usecounter{expartscount}
+  \setlength{\leftmargin}{1em}
+  \setlength{\rightmargin}{0em}
+  \setlength{\listparindent}{\parindent}
+  \setlength{\itemindent}{0em}
+  \setlength{\labelsep}{.4em}
+  \setlength{\labelwidth}{0em}
+  \setlength{\topsep}{0ex}
+  \setlength{\parskip}{0ex}
+  \setlength{\partopsep}{0ex}
+  \setlength{\parsep}{0ex}
+  \setlength{\itemsep}{0ex}
+  }%
+}{%
+\end{list}}
+%
+%...........end: exparts and exparts*
+
+
+%...........
+% environment: tfae
+%  for lists of statements that are equivalent.
+\newcounter{tfaecount}
+\newenvironment{tfae}{%
+\begin{list}{(\arabic{tfaecount})}{\usecounter{tfaecount}
+  \setlength{\leftmargin}{\parindent}
+  \setlength{\itemsep}{0ex}
+  \setlength{\topsep}{.2ex}
+  \setlength{\partopsep}{0ex}
+  \setlength{\parskip}{0ex}
+  \setlength{\parsep}{0ex}}}{%
+\end{list}}
+%
+\newcounter{saveshadetheorem}
+\renewcommand{\theoremstyle}{\textbf{\arabic{subsection}.\arabic{theorem}}}
+ \newcounter{exerciselistcounter}
+
+% ENVIRONMENT: computercode
+\newcommand{\announcecomputercode}{\bigbreak\par\noindent%
+                                   \textbf{Computer Code}\par\noindent}
+\RequirePackage{verbatim}
+\newenvironment{computercode}{
+        \begingroup\small\verbatim
+      }{\endverbatim\endgroup\pagebreak[2]%
+      }
+
+% ENVIRONMENT: indented
+\newenvironment{indented}{%
+    \begin{list}{\exercisecounterstyle
+                }{%
+                  \setlength{\leftmargin}{1.2\parindent}
+                  \setlength{\rightmargin}{0em}
+                  \setlength{\parsep}{\parskip}
+                  \setlength{\itemsep}{.4ex plus .1ex minus .15ex}
+                  \setlength{\itemindent}{0em} % \leftmargin}
+                  \setlength{\listparindent}{\parindent}
+                  \setlength{\topsep}{.5ex plus .1ex minus .1ex}
+                  \setlength{\partopsep}{0ex plus .1ex}
+                  \setlength{\labelsep}{0em}
+                  \setlength{\labelwidth}{0em}
+                  \setlength{\abovedisplayskip}{3pt plus2pt minus3pt}%
+                  \setlength{\belowdisplayskip}{\abovedisplayskip}
+                  \setlength{\abovedisplayshortskip}{\z@ plus2pt}%
+                  \setlength{\belowdisplayshortskip}{3pt plus2pt minus3pt}
+                 }
+  \item[]}{\end{list}
+   }
+
+
+
+\usepackage{engnum}
+%\renewcommand{\thechapter}{\Englishnumber{\value{chapter}}}
+%\renewcommand{\thesection}{\thechapter.\Roman{section}}
+\renewcommand{\thechapter}{\Englishnumber{\value{chapter}}}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\chaptermark}[1]{% docs in fancyheadings.
+  \markboth{\chaptername~\thechapter. #1}{}}
+\renewcommand{\sectionmark}[1]{%
+  \markright{Section~\Roman{section}. #1}}
+%\renewcommand{\thesubsection}{\arabic{subsection}}
+%end headings
+
+% PAGE LAYOUT
+% (from http://theoval.cmp.uea.ac.uk/~nlct/latex/thesis/node9.html)
+% \@startsection{<type>}{<level>}{<indent>}{<beforeskip>}{<afterskip>}{<style>} 
+% where 
+% <type>
+%     One of: section, subsection, subsubsection, paragraph or subparagraph. (Note no backslash.)
+%
+% <level>
+%  part          -1
+%  chapter        0
+%  section        1
+%  subsection     2
+%  subsubsection  3
+%  paragraph      4
+%  subparagraph   5
+% 
+% <indent>
+%     A length giving indentation from the left margin.
+% 
+% <beforeskip>
+%     The absolute value is how much vertical distance to leave before the 
+% heading. If <beforeskip> is negative the first paragraph following the 
+% section heading will not be indented.
+% 
+% <afterskip>
+%     The absolute value is how much vertical distance to leave after the 
+% heading. If <afterskip> is negative, the text following the sectioning 
+% command will appear on the same level as the section heading.
+% 
+% <style>
+%     The declarations to set the style of the heading (e.g. \itshape for 
+% an italic heading.) The last command in <style> may be a 
+% command which takes a single argument but all the others must be declarations.
+\renewcommand{\section}{\@startsection%
+     {section}{1}{0em}{-14ex plus1ex minus2ex}{1em}%
+     {\raggedright\Large\bfseries}}
+\newcommand{\topicsection}{\@startsection%
+     {section}{1}{0em}{-12ex plus1ex minus2ex}{3em}%
+     {\raggedright\makebox[0em][l]{%
+         \raisebox{6ex}{%
+             \raisebox{-.25ex}{\makebox[0em][l]{\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth][r]{\rule{0em}{0.8pt}}}}}%
+            \Large\bfseries\textcolor{boldcolor}{\fancyfont{Topic}}%
+            }%
+        }%
+        \LARGE\bfseries}}
+% \newcommand{\jh@subsection}{\@startsection%
+%      {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
+%      {\raggedright\large\bfseries}}
+% \renewcommand{\subsection}{\jh@subsection}
+\renewcommand{\subsection}{\@startsection
+   {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
+   {\raggedright\large\bfseries}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+% \renewcommand{\subsection}[1]{\gdef\sectioningname{#1}\@startsection%
+%    {subsection}{2}{0em}{10ex plus1ex minus1ex}{1em}%
+%    {\raggedright\large\bfseries}}
+% \renewcommand{\subsection}{%
+% \refstepcounter{subsection}%
+% \secdef\subseccmda\subseccmdb}
+
+% \newcommand{\subseccmda}[2][default]{%
+% \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection} #1}%
+% \subsecheader{#2}}
+
+% \newcommand{\subseccmdb}[1]{\subsecheader{#1}}
+
+\usepackage{trimspaces}
+% \newcommand{\subsecheader}[1]{\pagebreak[3]%
+% \vspace{10ex plus1ex minus1ex}%
+% \gdef\sectioningname{#1}% grab the subsec's name
+% {\raggedright\large\bfseries\thesection.\thesubsection\ #1}%
+% \nopagebreak\vspace*{1em}\par\noindent\trim@spaces}
+
+% --------OPTIONAL SUBSECTION
+%
+% JH 2012-Jan-28 \newcommand{\subsectionoptional}[1]{\subsection[#1\protect$^*\protect$]{#1}}
+\newcommand{\subsectionoptional}[1]{\subsection[#1\protect\raisebox{1pt}{*}]{#1}}
+%
+% for clearing out (needs twoside document option).
+\newcommand{\clearemptydoublepage}{%
+  \clearpage{\pagestyle{empty}\cleardoublepage}}
+
+%==================== TOPICS ============================
+% For applications sections.
+% 
+\newcommand{\topic}[1]{\clearpage\vspace*{.25in}\topicsection*{#1}
+   \renewcommand{\announcesectioninginanswerfile}{%
+      \sectioninginanswerfiletopicstyle}
+  % renew definition of exercise formatting (perhaps undone in Chapter)
+  \setcounter{theorem}{0}  % hack to make exercise numbering correct
+  \renewcommand{\exercise@makelabel}{} % 
+  \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{##1}}}
+  \renewcommand{\ansparams}{{\Currentlabel}}
+  \thispagestyle{empty}
+  \gdef\sectioningname{#1}%
+  \markright{Topic: #1}
+  \addcontentsline{toc}{section}{Topic: #1}
+  % \vspace*{15pt}\noindent\fancyfont{Topic}\par
+  % \vspace*{10pt}\noindent{\Large\bfseries #1}\vspace{20pt}
+  % \par\@afterindentfalse\nobreak 
+}
+
+
+
+%============ Spacing and dashes
+% from ltugboat.cls 2000-Apr-27 for making dashes (It is Robin's).
+% Really for 10 pt only.
+\def\thinskip{\hskip 0.16667em\relax}
+\def\endash{--}
+\def\emdash{\endash-}
+\def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
+\def\dash{\d@sh\nobreak\endash}
+\def\Dash{\d@sh\nobreak\emdash}
+\def\ldash{\d@sh\empty{\hbox{\endash}\nobreak}}
+\def\rdash{\d@sh\nobreak\endash}
+\def\Ldash{\d@sh\empty{\hbox{\emdash}\nobreak}}
+\def\Rdash{\d@sh\nobreak\emdash}
+
+
+
+%============ Cross References
+%  The reference should know what type of object it is.  That is, 
+% I should be able to say \ref[named]{#1} instead of what's below.
+% But I can't find a style file that does that.  So this is a hack.
+\newcommand{\nearbydefinition}[1]{Definition~\ref{#1}}
+\newcommand{\nearbyfigure}[1]{Figure~\ref{#1}}
+\newcommand{\nearbylemma}[1]{Lemma~\ref{#1}}
+\newcommand{\nearbyexample}[1]{Example~\ref{#1}}
+\newcommand{\nearbycounterexample}[1]{Counterexample~\ref{#1}}
+\newcommand{\nearbytheorem}[1]{Theorem~\ref{#1}}
+\newcommand{\nearbycorollary}[1]{Corollary~\ref{#1}}
+\newcommand{\nearbyexercise}[1]{Exercise~\ref{#1}}
+\newcommand{\nearbyremark}[1]{Remark~\ref{#1}}
+\newcommand{\nearbynotice}[1]{Notice~\ref{#1}}
+\newcommand{\nearbynote}[1]{Note~\ref{#1}}
+% (`appendrefs' is elsewhere, in the footnote material.)
+
+%============ Appendix
+
+% the word under discussion
+\newcommand{\startword}[1]{\medskip\par\noindent\textbf{#1}\hspace*{.5em plus .2em minus .05em}}
+
+%=========== Cover
+% space between graphics and determinants on the cover
+\newcommand{\covgraphsep}{2.5ex}
+
+
+
+% The hrefout package allows me to specify on the command line if I want
+% to have hyperreffed output.
+% \ifhrefout %
+  \usepackage[
+                colorlinks=true,
+                linkcolor=darkcolor,citecolor=darkcolor,filecolor=darkcolor,urlcolor=darkcolor,
+                naturalnames=false,  % if true, toc Three.IV.2 link no work 
+                % hypertexnames=false, % 
+                % hyperindex=false, % if true, pages are ten off
+                plainpages=false,pdfpagelabels,  % HO says on ctt 2001-dec
+                pdfpagemode=UseNone,pdfstartview=FitH,
+                pdftitle={Linear Algebra},
+                pdfauthor={Jim Hefferon, Saint Michael's College, Vermont USA,
+                           http://joshua.smcvt.edu/linearalgebra},
+                pdfsubject={linear algebra},
+                pdfkeywords={linear algebra, mathematics, free, textbook}]{hyperref}
+% \fi
+
+% \usepackage[capitalise]{cleveref}  % nameinlink option not in my LaTeX yet?
+
+% ==================== Cover
+\newcommand{\covergraphic}{%
+\par\noindent\makebox[0pt][c]{\contourlength{1.4pt}
+  \rule{5.7in}{0em}
+  \fontsize{260pt}{8pt}
+  {\fontfamily{qzc}\itshape\selectfont \contour{darkcolor}{\textcolor{lightcolor}{Linear}}}
+}  \\[-2.15in] 
+\noindent\makebox[0pt][c]{\rule{8.5in}{0pt}%
+  \makebox[0pt][l]{\contourlength{0.6pt} %
+  \fontsize{65pt}{10pt}
+  {\fontfamily{qzc}\itshape\selectfont \contour{flourishcolor}{\textcolor{white}{Algebra}}}
+  }
+}
+}
+
+\newcommand{\coverauthor}{%
+\noindent\makebox[0em][l]{\makebox[8.5in]{%
+\begin{tabular}{r}
+{\Large Jim Hef{}feron}  \\[1ex]
+{\large \url{http://joshua.smcvt.edu/linearalgebra}}
+\end{tabular}}}
+}
+
+\endinput
