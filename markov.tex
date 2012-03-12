@@ -23,21 +23,24 @@ to state $s_2$ and a $0.5$ chance of moving to $s_4$.
 The boundary states are a bit different; 
 a player never leaves state~$s_0$ or state~$s_5$.
 
-Let $p_{i}(n)$ be the probability that the player is in state $s_i$
+Let $p_{i}(n)$ be the probability that the player is in state $s_{i}$
 after $n$ flips.
 Then, for instance, we have that the probability of being in state~$s_0$ 
 after flip~$n+1$ is
 $p_{0}(n+1)=p_{0}(n)+0.5\cdot p_{1}(n)$.
 This matrix equation summarizes.
 \begin{equation*}
-  \begin{dmat}{D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}}
-      1.  &.5  &0.  &0.  &0.   &0.  \\ 
-      0.  &0.  &.5  &0.  &0.   &0.  \\ 
-      0.  &.5  &0.  &.5  &0.   &0.  \\ 
-      0.  &0.  &.5  &0.  &.5   &0.  \\ 
-      0.  &0.  &0.  &.5  &0.   &0.  \\ 
-      0.  &0.  &0.  &0.  &.5   &1.   
-   \end{dmat}
+  % breqn didn't like this:
+  % \begin{dmat}{D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}}
+    \begin{mat}
+      1.0  &0.5  &0.0  &0.0  &0.0   &0.0  \\ 
+      0.0  &0.0  &0.5  &0.0  &0.0   &0.0  \\ 
+      0.0  &0.5  &0.0  &0.5  &0.0   &0.0  \\ 
+      0.0  &0.0  &0.5  &0.0  &0.5   &0.0  \\ 
+      0.0  &0.0  &0.0  &0.5  &0.0   &0.0  \\ 
+      0.0  &0.0  &0.0  &0.0  &0.5   &1.0 
+   \end{mat}  
+   % \end{dmat}
    \colvec{p_{0}(n) \\ 
         p_{1}(n) \\
         p_{2}(n) \\
@@ -52,36 +55,53 @@ This matrix equation summarizes.
         p_{5}(n+1)}
 \end{equation*}
 With the initial condition that the player starts with 
-three dollars, calculation gives this.
+three dollars, these are components of the resulting vectors.
 \begin{center}
   \begin{tabular}{@{}c|cccccc@{}}
     $n=0$
-    &$n=1$
-    &$n=2$
-    &$n=3$
-    &$n=4$
-    &$\cdots$
+    &\multicolumn{1}{c}{$n=1$}
+    &\multicolumn{1}{c}{$n=2$}
+    &\multicolumn{1}{c}{$n=3$}
+    &\multicolumn{1}{c}{$n=4$}
+    &\multicolumn{1}{c}{$\cdots$}
     &$n=24$ \\ 
     \hline  
-    $\colvec{
+    $\begin{array}{l}
              0 \\ 0    \\  0   \\  1    \\  0    \\  0
-           }$
-    &$\dcolvec[1]{
-       0      \\  0    \\  .5  \\  0    \\  .5    \\  0
-         }$
-    &$\dcolvec[2]{
-      0      \\  .25  \\ 0    \\ .5    \\  0     \\  .25
-         }$
-    &$\dcolvec[3]{
-        .125   \\   0   \\ .375 \\ 0     \\ .25    \\  .25
-          }$
-    &$\dcolvec[4]{
-        .125   \\ .1875 \\ 0    \\ .3125 \\ 0      \\ .375
-          }$
-    &$\cdots$
-    &$\dcolvec[5]{
-        .39600 \\ .00276   \\ 0    \\ .00447 \\ 0  \\ .59676
-          }$
+     \end{array}$
+    % breqn again
+    % &$\dcolvec[1]{
+    %    0      \\  0    \\  0.5  \\  0    \\  0.5    \\  0
+    %      }$
+    % &$\dcolvec[2]{
+    %   0      \\  .25  \\ 0    \\ .5    \\  0     \\  .25
+    %      }$
+    % &$\dcolvec[3]{
+    %     .125   \\   0   \\ .375 \\ 0     \\ .25    \\  .25
+    %       }$
+    % &$\dcolvec[4]{
+    %     .125   \\ .1875 \\ 0    \\ .3125 \\ 0      \\ .375
+    %       }$
+    % &$\cdots$
+    % &$\dcolvec[5]{
+    %     .39600 \\ .00276   \\ 0    \\ .00447 \\ 0  \\ .59676
+    %       }$
+    &$\begin{array}{l}
+       0      \\  0    \\  0.5  \\  0    \\  0.5    \\  0
+      \end{array}$
+    &$\begin{array}{l}
+      0      \\  0.25  \\ 0    \\ 0.5    \\  0     \\  0.25
+      \end{array}$
+    &$\begin{array}{l}
+        0.125   \\   0   \\ 0.375 \\ 0     \\ 0.25    \\  0.25
+       \end{array}$
+    &$\begin{array}{l}
+        0.125   \\ 0.1875 \\ 0    \\ 0.3125 \\ 0      \\ 0.375
+       \end{array}$
+    &  % $\cdots$
+    &$\begin{array}{l}
+        0.39600 \\ 0.00276   \\ 0    \\ 0.00447 \\ 0  \\ 0.59676
+      \end{array}$
   \end{tabular}  
 \end{center}
 This exploration suggests that the game is not likely to go on 
@@ -126,16 +146,20 @@ They asked about
 two thousand men, ``At what level are you,
 and at what level was your father when you were fourteen years old?''
 Here the Markov model assumption about history
-seems reasonable\Dash 
+may seem reasonable\Dash 
+we may guess that
 while a parent's occupation has a direct influence on the occupation of the 
 child, the grandparent's occupation likely has no such direct influence.
-This summarizes their conclusions.
+This summarizes the study's conclusions.
 \begin{equation*}
-  \begin{dmat}{D{.}{.}{2}D{.}{.}{2}D{.}{.}{2}}
+  % breqn again
+  % \begin{dmat}{D{.}{.}{2}D{.}{.}{2}D{.}{.}{2}}
+  \begin{mat}
     .60  &.29  &.16  \\
     .26  &.37  &.27  \\
-    .14  &.34  &.57  
-  \end{dmat}
+    .14  &.34  &.57
+  \end{mat}  
+  % \end{dmat}
   \colvec{p_{U}(n) \\ p_{M}(n) \\ p_{L}(n)}
   =\colvec{p_{U}(n+1) \\ p_{M}(n+1) \\ p_{L}(n+1)}
 \end{equation*} 
@@ -149,35 +173,56 @@ becoming middle class.
 With the initial distribution of the respondent's fathers given below, 
 this table gives the next five generations.
 \begin{center}
+  % breqn again
   \begin{tabular}{c|ccccc}
     $n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  \\ \hline
-    $\dcolvec[2]{
+    $\begin{array}{l}
                .12 \\ .32  \\ .56
-       }$
-    &$\dcolvec[2]{
+      \end{array}$
+    &$\begin{array}{l}
                .23 \\ .34  \\ .42
-       }$
-    &$\dcolvec[2]{
+       \end{array}$
+    &$\begin{array}{l}
                .29 \\ .34  \\ .37  
-       }$
-    &$\dcolvec[2]{
+       \end{array}$
+    &$\begin{array}{l}
                .31 \\ .34  \\ .35  
-       }$
-    &$\dcolvec[2]{
+       \end{array}$
+    &$\begin{array}{l}
                .32 \\ .33 \\ .34  
-       }$
-    &$\dcolvec[2]{
+       \end{array}$
+    &$\begin{array}{l}
                .33 \\ .33  \\ .34  
-       }$
+       \end{array}$
+    % $\dcolvec[2]{
+    %            .12 \\ .32  \\ .56
+    %    }$
+    % &$\dcolvec[2]{
+    %            .23 \\ .34  \\ .42
+    %    }$
+    % &$\dcolvec[2]{
+    %            .29 \\ .34  \\ .37  
+    %    }$
+    % &$\dcolvec[2]{
+    %            .31 \\ .34  \\ .35  
+    %    }$
+    % &$\dcolvec[2]{
+    %            .32 \\ .33 \\ .34  
+    %    }$
+    % &$\dcolvec[2]{
+    %            .33 \\ .33  \\ .34  
+    %    }$
   \end{tabular}
 \end{center}
 
 One more example.
-At the end of each American baseball season 
+In professional American baseball there are two leagues, the
+American League and the National League.
+At the end of the annual season 
 the team winning the American League
 and the team winning the National League play the World Series.
 % what are these? (we follow [Brunner] but see also [Woodside]).
-The winner is the first team to win four games.
+The winner is the first team to take four games.
 That means that a series is in one of twenty-four states: 
 $0$-$0$ (no games won yet by either team), 
 $1$-$0$ (one game won for the American League
@@ -215,7 +260,8 @@ Note that evenly-matched teams are likely to have a long series\Dash there
 is a probability of $0.625$ that the series goes at least six games.
 
 \begin{center}\small
-\begin{tabular}{@{}rc|ccccccc@{}}
+\newcommand{\markovspacer}{\hspace{.8em}}
+\begin{tabular}{@{}r|c@{\markovspacer}c@{\markovspacer}c@{\markovspacer}c@{\markovspacer}c@{\markovspacer}c@{\markovspacer}c@{\markovspacer}c@{}}
       &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\ \hline
   $\begin{array}{@{}c@{}}
     0-0 \\
@@ -243,7 +289,7 @@ is a probability of $0.625$ that the series goes at least six games.
     4-3 \\
     3-4 
   \end{array}$
-  &$\begin{aligncolondecimal}{0}
+  &$\begin{array}{l}
      1 \\
      0 \\
      0 \\
@@ -268,8 +314,8 @@ is a probability of $0.625$ that the series goes at least six games.
      0 \\
      0 \\
      0 
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{1}
+   \end{array}$
+  &$\begin{array}{l}
         0           \\
         0.5         \\
         0.5         \\
@@ -294,8 +340,8 @@ is a probability of $0.625$ that the series goes at least six games.
         0           \\
         0           \\
         0              
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{2}
+   \end{array}$
+  &$\begin{array}{l}
         0           \\
         0           \\
         0           \\
@@ -320,8 +366,8 @@ is a probability of $0.625$ that the series goes at least six games.
         0           \\
         0           \\
         0              
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{3}
+   \end{array}$
+  &$\begin{array}{l}
         0            \\
         0            \\
         0            \\
@@ -346,8 +392,8 @@ is a probability of $0.625$ that the series goes at least six games.
         0            \\
         0            \\
         0              
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{4}
+   \end{array}$
+  &$\begin{array}{l}
         0              \\
         0              \\
         0              \\
@@ -372,8 +418,8 @@ is a probability of $0.625$ that the series goes at least six games.
         0              \\
         0              \\
         0                      
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{4}
+   \end{array}$
+  &$\begin{array}{l}
         0              \\
         0              \\
         0              \\
@@ -398,8 +444,8 @@ is a probability of $0.625$ that the series goes at least six games.
         0              \\
         0              \\
         0                      
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{5}
+   \end{array}$
+  &$\begin{array}{l}
         0               \\
         0               \\
         0               \\
@@ -424,8 +470,8 @@ is a probability of $0.625$ that the series goes at least six games.
         0.15625         \\
         0               \\
         0                      
-   \end{aligncolondecimal}$
-  &$\begin{aligncolondecimal}{5}
+   \end{array}$
+  &$\begin{array}{l}
         0             \\
         0             \\
         0             \\
@@ -450,7 +496,216 @@ is a probability of $0.625$ that the series goes at least six games.
         0.15625       \\
         0.15625       \\
         0.15625        
-   \end{aligncolondecimal}$
+   \end{array}$
+  % f-ing breqn
+  % &$\begin{aligncolondecimal}{0}
+  %    1 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 \\
+  %    0 
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{1}
+  %       0           \\
+  %       0.5         \\
+  %       0.5         \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0              
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{2}
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0.25        \\
+  %       0.5         \\
+  %       0.25        \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0           \\
+  %       0              
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{3}
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0.125        \\
+  %       0.375        \\
+  %       0.375        \\
+  %       0.125        \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0            \\
+  %       0              
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{4}
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0.0625         \\
+  %       0.25           \\
+  %       0.375          \\
+  %       0.25           \\
+  %       0.0625         \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0                      
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{4}
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0.0625         \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0.0625         \\
+  %       0.125          \\
+  %       0.3125         \\
+  %       0.3125         \\
+  %       0.125          \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0              \\
+  %       0                      
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{5}
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0.0625          \\
+  %       0               \\
+  %       0               \\
+  %       0               \\
+  %       0.0625          \\
+  %       0.125           \\
+  %       0               \\
+  %       0               \\
+  %       0.125           \\
+  %       0.15625         \\
+  %       0.3125          \\
+  %       0.15625         \\
+  %       0               \\
+  %       0                      
+  %  \end{aligncolondecimal}$
+  % &$\begin{aligncolondecimal}{5}
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0.0625        \\
+  %       0             \\
+  %       0             \\
+  %       0             \\
+  %       0.0625        \\
+  %       0.125         \\
+  %       0             \\
+  %       0             \\
+  %       0.125         \\
+  %       0.15625       \\
+  %       0             \\
+  %       0.15625       \\
+  %       0.15625       \\
+  %       0.15625        
+  %  \end{aligncolondecimal}$
 \end{tabular}
 \end{center}
 
@@ -781,41 +1036,77 @@ octave:7> v5=F*v4
            \textit{W}  \\
            \textit{Z}  
         \end{tabular}
-        &$\begin{aligncolondecimal}{3}
+        &$\colvec[l]{
            0.787  \\
            0      \\
            0      \\
            0      \\
            0.021
-         \end{aligncolondecimal}$
-        &$\begin{aligncolondecimal}{3}
+         }$
+        &$\colvec[l]{
            0      \\
            0.966  \\
            0.063  \\
            0      \\
            0.009
-         \end{aligncolondecimal}$
-        &$\begin{aligncolondecimal}{3}
+         }$
+        &$\colvec[l]{
            0      \\
            0.034  \\
            0.937  \\
            0.074  \\
            0.005
-         \end{aligncolondecimal}$
-        &$\begin{aligncolondecimal}{3}
+         }$
+        &$\colvec[l]{
            0.111  \\
            0      \\
            0      \\
            0.612  \\
            0.010
-         \end{aligncolondecimal}$
-        &$\begin{aligncolondecimal}{3}
+         }$
+        &$\colvec[l]{
            0.102  \\
            0      \\
            0      \\
            0.314  \\
            0.954    
-         \end{aligncolondecimal}$
+         }$
+        % breqn
+        % &$\begin{aligncolondecimal}{3}
+        %    0.787  \\
+        %    0      \\
+        %    0      \\
+        %    0      \\
+        %    0.021
+        %  \end{aligncolondecimal}$
+        % &$\begin{aligncolondecimal}{3}
+        %    0      \\
+        %    0.966  \\
+        %    0.063  \\
+        %    0      \\
+        %    0.009
+        %  \end{aligncolondecimal}$
+        % &$\begin{aligncolondecimal}{3}
+        %    0      \\
+        %    0.034  \\
+        %    0.937  \\
+        %    0.074  \\
+        %    0.005
+        %  \end{aligncolondecimal}$
+        % &$\begin{aligncolondecimal}{3}
+        %    0.111  \\
+        %    0      \\
+        %    0      \\
+        %    0.612  \\
+        %    0.010
+        %  \end{aligncolondecimal}$
+        % &$\begin{aligncolondecimal}{3}
+        %    0.102  \\
+        %    0      \\
+        %    0      \\
+        %    0.314  \\
+        %    0.954    
+        %  \end{aligncolondecimal}$
       \end{tabular}
     \end{center}
     For example, a firm in the Northeast region will be in the West region

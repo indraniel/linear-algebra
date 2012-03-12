@@ -251,43 +251,6 @@ geometry.zip  local           mh.zip        tabu
 
 
 
-% Before you get the book going you need to have the graphics available.
-% First, invoke MetaPost on the file \texttt{dotprod.mp}.
-% On my system `\texttt{mpost dotprod.mp}' does the job.
-% It produces a file \texttt{dotprod.1}.
-% This file is very simple; it contains only one graphic,
-% the dot in dot product, and so if anything will work it should be this.
-
-% Next invoke MetaPost on the five chapter files 
-% \verb!mpost ch1.mp!, \ldots, \verb!mpost ch5.mp!, 
-% along with \verb!mpost appen! and \verb!mpost voting!.
-% You'll get files whose names are \texttt{ch1.1}, \texttt{ch1.2}, etc.
-% There should be a lot of them.
-
-% If that works then you are on a roll.
-% Run \LaTeX\ on the book.
-% On my system the command `\verb!pdflatex book!' works.
-% The first time through should produce an alarming number of warning messages.
-% Do it a second time.
-% The number of messages should drop; what's happened is that the first time
-% through \LaTeX\ warned you about cross-references while it was saving them
-% to a file, and the second time through it found them in the file so it
-% did not warn you that they were not found.
-% Make the index \verb!makeindex -s book.isty -p odd book.idx!.
-% \LaTeX\ the book again. 
-% At this point, I can read the book using the \textit{Acrobat Reader} program, 
-% with `\verb!acroread book.pdf!'.
-
-% To get the answers, do the same steps on 
-% \textit{jhanswer.tex}.
-% That is, `\verb!pdflatex jhanswer!' done twice,
-% %followed by `\verb!dvips -Pwww -ojhanswer.ps jhanswer!', 
-% followed by `\verb!acroread jhanswer.pdf!' works for me.
-
-% If you are a really lucky person, and you are using a unix-ish system
-% (oops, being redundant!) then you could try running the script
-% `\verb!make_book_for_web.sh!', which wraps together all of the above steps.
-
 
 
 \subsubsection{When Good Systems Do Things That Are Bad}
@@ -361,7 +324,17 @@ Not very elegant, I know, and once I accidentally left out the
 
 
 
-% \subsubsection{Options}
+
+\subsubsection{Options}
+
+I have a number of versions.  
+If you like Knuth's Computer Modern Roman more than the Concrete/Euler 
+combination that is the default then edit
+\verb!bookjh.sty! to make the change.
+Now run \verb!./make_book_for_web.sh!.
+
+
+
 % I have set up a few options.
 
 % You can set the DVI driver from the command line with
