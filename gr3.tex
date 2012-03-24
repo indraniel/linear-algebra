@@ -1119,18 +1119,18 @@ the matching lower-case greek letter names the rows.
 \begin{equation*}
   A=
     \begin{mat}
-      \makebox[2.25cm]{$\cdots$\ $\alpha_1$\ $\cdots$}   \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\alpha_2$\ $\cdots$}   \\[.5ex]
-      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\alpha_1$\ $\cdots$}}                  \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\alpha_m$\ $\cdots$}   
+      \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}   \\[.5ex]
+      \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_2$\ $\cdots$}   \\[.5ex]
+      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}}                  \\[.5ex]
+      \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_m$\ $\cdots$}   
     \end{mat}
   \qquad
   B=
     \begin{mat}
-      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_1$\ $\cdots$}  \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_2$\ $\cdots$}  \\[.5ex]
-      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\beta_1$\ $\cdots$}}   \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\beta}_m$\ $\cdots$}  
+      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_1$\ $\cdots$}  \\[.5ex]
+      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_2$\ $\cdots$}  \\[.5ex]
+      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\beta}_1$\ $\cdots$}}   \\[.5ex]
+      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_m$\ $\cdots$}  
     \end{mat}
 \end{equation*}
 
@@ -1150,7 +1150,7 @@ argue that if being able to reduce the first matrix to the second in some
 number $t\geq 0$ of operations implies that each row of the second is a linear
 combination of the rows of the first, then being able to reduce the first to
 the second in $t+1$ operations implies the same thing.
-Together, these prove the result because  
+Together these prove the result because  
 the base step shows that it is true in the zero operations case,
 and then the inductive step
 implies that it is true in the one operation case, and then the inductive step
@@ -1161,30 +1161,33 @@ We proceed by induction on the minimum number of row operations that take a
 first matrix $A$ to a second one $B$.
 In the base step, that
 zero reduction operations suffice, the two matrices are equal and each 
-row of $B$ is obviously a combination of
+row of $B$ is trivially a combination of
 $A$'s rows: $\vec{\beta}_i
   =0\cdot\vec{\alpha}_1+\cdots+1\cdot\vec{\alpha}_i+\cdots+0\cdot\vec{\alpha}_m$.
 
 For the inductive step, assume the inductive hypothesis:~with $t\geq 0$,
-if \( B \) can be derived from \( A \) in \( t \) or fewer operations 
-then \( B\)'s rows are linear combinations of $A$'s rows.
+any matrix that can be derived from \( A \) in \( t \) or fewer operations 
+then has rows that are linear combinations of $A$'s rows.
 Suppose that reducing from \( A \) to \( B \) requires $t+1$ operations.
-Because there are more than zero operations, 
-there must be a next-to-last matrix $G$  
+There must be a next-to-last matrix~$G$  
 so that $A\longrightarrow\cdots\longrightarrow G\longrightarrow B$.
-This \( G \) is only $t$ operations away from \( A \) and so the inductive
-hypothesis applies to it. 
+The inductive hypothesis applies to this \( G \) 
+because it is only $t$ operations away from \( A \). 
 That is, each row of \( G \)
 is a linear combination of the rows of \( A \).
 
-If the operation taking \( G \) to \( B \) is a row swap then
+Now, if the operation taking \( G \) to \( B \) is a row swap then
 the rows of $B$ are just the rows of $G$ reordered, and thus each row of $B$
-is also a linear combination of the rows of $A$.
-The other two possibilities for this operation, that it multiplies a 
-row by a scalar and that it adds a multiple of one row to another, both result
-in the rows of $B$ being linear combinations of the rows of $G$.
-But therefore, by the Linear Combination Lemma, each row of $B$ is a linear
-combination of the rows of $A$.
+is a linear combination of the rows of $G$.
+If the operation taking $G$ to $B$ is multiplication of some row~$i$ by a 
+scalar~$c$
+then the rows of $B$ are a linear combination of the rows of~$G$; in 
+particular, $\vec{\beta}_i=c\vec{\gamma}_i$.
+And if the operation is adding a multiple of one row to another then
+clearly 
+the rows of $B$ are linear combinations of the rows of $G$.
+In all three cases the Linear Combination Lemma applies to show that 
+each row of $B$ is a linear combination of the rows of $A$.
 
 With both a base step and an inductive step,  
 the proposition follows by the principle of mathematical induction.
@@ -1218,18 +1221,18 @@ The methods of the proof show that there are three sets of linear
 relationships. 
 \begin{equation*}
   \begin{aligned}
-     \delta_1 &=0\cdot\alpha_1+1\cdot\alpha_2         \\
-     \delta_2 &=1\cdot\alpha_1+0\cdot\alpha_2
+     \vec{\delta}_1 &=0\cdot\vec{\alpha}_1+1\cdot\vec{\alpha}_2         \\
+     \vec{\delta}_2 &=1\cdot\vec{\alpha}_1+0\cdot\vec{\alpha}_2
   \end{aligned}
   \qquad
   \begin{aligned}
-     \gamma_1 &=0\cdot\alpha_1+1\cdot\alpha_2         \\
-     \gamma_2 &=(1/2)\alpha_1+0\cdot\alpha_2
+     \vec{\gamma}_1 &=0\cdot\vec{\alpha}_1+1\cdot\vec{\alpha}_2         \\
+     \vec{\gamma}_2 &=(1/2)\vec{\alpha}_1+0\cdot\vec{\alpha}_2
   \end{aligned}
   \qquad
   \begin{aligned}
-     \beta_1 &=(-1/2)\alpha_1+1\cdot\alpha_2        \\
-     \beta_2 &=(1/2)\alpha_1+0\cdot\alpha_2
+     \vec{\beta}_1 &=(-1/2)\vec{\alpha}_1+1\cdot\vec{\alpha}_2        \\
+     \vec{\beta}_2 &=(1/2)\vec{\alpha}_1+0\cdot\vec{\alpha}_2
   \end{aligned}
 \end{equation*}
 \end{example}
@@ -1285,38 +1288,41 @@ no nonzero row is a linear combination of the other nonzero rows.
 \end{lemma}
 
 \begin{proof}
-Let $R$ be in echelon form.
-If we have a non-\( \vec{0} \) row written as a combination
+Let $R$ be in echelon form and consider the  non-\( \vec{0} \)  rows.
+First observe that
+if we have a row written as a combination
 of the others
-$\rho_i=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+
-               c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m$
-then we can rewrite that as
+$\vec{\rho}_i=c_1\vec{\rho}_1+\cdots+c_{i-1}\vec{\rho}_{i-1}+
+               c_{i+1}\vec{\rho}_{i+1}+\cdots+c_m\vec{\rho}_m$
+then we can rewrite that equation as
 \begin{equation*}
-   \vec{0}=c_1\rho_1+\cdots+c_{i-1}\rho_{i-1}+c_i\rho_i+
-               c_{i+1}\rho_{i+1}+\cdots+c_m\rho_m
+   \vec{0}=c_1\vec{\rho}_1+\cdots+c_{i-1}\vec{\rho}_{i-1}+c_i\vec{\rho}_i+
+               c_{i+1}\vec{\rho}_{i+1}+\cdots+c_m\vec{\rho}_m
   \tag{$*$}
 \end{equation*}
 where not all the coefficients are zero; specifically, $c_i=-1$.
 The converse holds also:~given equation~($*$) where some $c_i\neq 0$ then we 
-could express $\rho_i$ as a combination of the other rows by 
-moving $c_i\rho_i$ to the left side and dividing by $c_i$.
-Therefore, we will have proved the theorem if we
+could express $\vec{\rho}_i$ as a combination of the other rows by 
+moving $c_i\vec{\rho}_i$ to the left side and dividing by $c_i$.
+Therefore we will have proved the theorem if we
 show that in~($*$) all of the coefficients are~$0$.
-For that, we use induction on the row index~$i$.
+For that we use induction on the row index~$i$.
 
-The base case is the first row~$i=1$.
-Equation~($*$) defines an equation among the column $\ell_1$ entries of those 
-rows
-(recall our notation that $\ell_i$ is the column number of 
-the leading entry in row~$i$).
+The base case is the first row~$i=1$
+(if there is no such nonzero row, so $R$ is the zero matrix, then the
+lemma holds vacuously).
+Recall our notation that $\ell_i$ is the column number of 
+the leading entry in row~$i$.
+Equation~($*$) applied to the entries of those rows from column~$\ell_1$ 
+gives this.
 \begin{equation*}
   0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_1}
 \end{equation*}
 The matrix is in echelon form so
 every row after the first has a zero in that column 
 $r_{2,\ell_1}=\cdots=r_{m,\ell_1}=0$.
-Thus $c_1=0$ because, as the leading entry
-in the row, $r_{1,\ell_1}\neq 0$.
+Thus $c_1=0$ because $r_{1,\ell_1}\neq 0$, as it
+leads the row.
 
 The inductive step is to prove the implication:~if 
 for each row index $k\in\set{1,\ldots,i}$ the coefficient $c_k$ is $0$
