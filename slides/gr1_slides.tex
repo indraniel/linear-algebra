@@ -1,0 +1,132 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \usepackage{linear_algebra}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Solving Linear Systems] % (optional, use only with long paper titles)
+{Solving Linear Systems}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+% {\def\protect{\global\let\YesIMeanThisRef}\ref}
+% \AtBeginDocument{\def\ref{\protect\YesIMeanThisRef}}
+\usepackage{xparse}% http://ctan.org/pkg/xparse
+
+\makeatletter
+\NewDocumentCommand{\reff}{s m}{%
+  \IfBooleanTF{#1}% Check for starred variant
+    {\beamer@origref{#2}}% \reff*
+    {\hyperlink{#2}{\beamer@origref{#2}}}% \reff
+}
+\makeatother
+
+
+\subject{Solving Linear Systems}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+% \AtBeginDocument{\makeatletter
+% \let\ref\@refstar
+% \makeatother}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+
+
+
+% ..... One.I.1 .....
+\section{Gauss' method}
+\begin{frame}{Linear systems} 
+\dfn[\reff*{def:linearcombination}]
+\ExecuteMetaData[../gr1.tex]{def:linearcombination}
+% \booktheorem{def:linearcombination}
+\end{frame}
+
+
+%...........................
+\begin{frame}
+\dfn[\reff*{def:linearcombination}]
+\ExecuteMetaData[../gr1.tex]{def:linearequations}
+  
+\end{frame}
+
+
+
+%...........................
+\begin{frame}{Gauss' method}
+\thm
+\ExecuteMetaData[../gr1.tex]{th:gaussmethod}
+
+\end{frame}
+
+
+
+%...........................
+\begin{frame}
+\pf
+\ExecuteMetaData[../gr1.tex]{pf:gaussmethod}
+\dfn{1.2}
+\ExecuteMetaData[../gr1.tex]{def:gaussmethod}
+
+\end{frame}
+
+
+
+
+
+
+
+
+% ..... One.I.2 .....
+\section{Describing the solution set}
+\begin{frame}
+\frametitle{Classifying solution sets} 
+
+\end{frame}
+
+
+
+% ..... One.I.3 .....
+\section{$\text{General}=\text{Particular}+\text{Homogeneous}$}
+\begin{frame}
+\frametitle{Form of solution sets} 
+
+\end{frame}
+
+
+
+
+
+
+
+
+%...........................
+% \begin{frame}
+% 
+% \end{frame}
+\end{document}
