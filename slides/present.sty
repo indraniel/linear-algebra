@@ -16,6 +16,7 @@
 % % \DeclareGraphicsRule{*}{mps}{}{} 
 
 
+
 \newcommand{\centergraphic}[2][]{\begin{center}\includegraphics[#1]{#2}\end{center}}
 
 % This is for putting figures inside a paragraph
@@ -57,46 +58,65 @@
 % }
 % \makeatother
 
-% \usepackage[overlay,absolute]{textpos}
-\usepackage{marginnote}
-\usepackage{rotating}
-\newcommand{\bookref}[1]{\ref{#1}}
-\newcommand{\booktheorem}[1]{\marginpar{\begin{sideways}Theorem~\bookref{#1}\end{sideways}}}
+\usepackage{xparse}% http://ctan.org/pkg/xparse
+% \NewDocumentCommand{\reff}{s m}{%
+%   \IfBooleanTF{#1}% Check for starred variant
+%     {\beamer@origref{#2}}% \reff*
+%     {\hyperlink{#2}{\beamer@origref{#2}}}% \reff
+% }
+\NewDocumentCommand{\reff}{s m}{%
+  \beamer@origref{#2}
+  % \IfBooleanTF{#1}% Check for starred variant
+  %   {\beamer@origref{#2}}% \reff*
+  %   {\hyperlink{#2}{\beamer@origref{#2}}}% \reff
+}
+\AtBeginDocument{\makeatletter
+\let\ref\reff
+\makeatother}
+
+% {\def\protect{\global\let\YesIMeanThisRef}\ref}
+% \AtBeginDocument{\def\ref{\protect\YesIMeanThisRef}}
+
+\newcommand{\bookref}[1]{\reff*{#1}}
 % \exm  For examples
 %  optional argument: example title  \exm[Fischer's ]
 \newcommand{\prewordspace}{.5em}
-\newcommand{\postwordspace}{0em plus.1em minus.0em}
-\newcommand{\exm}[1][]{\par\noindent{\color{labelcolor}\textit{Example}}\hspace{\postwordspace}%
-\ifx #1\relax%
-\else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
+\newcommand{\postwordspace}{-.5em plus.1em minus.0em}
 
-% \newcommand{\dfn}[1][]{\par\noindent{\color{labelcolor}\llap{#2 }\textit{Definition}}\hspace{\postwordspace}%
-% \ifx #1\relax%
-% \else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
-
-\usepackage{trimspaces}
-\newcommand{\dfn}[1][]{\par\noindent%
+\newcommand{\ex}[1][]{\par\noindent%
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{#1}\hspace{\prewordspace}}}\fi %
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
+{\textcolor{labelcolor}{\textit{Example}}\hspace{\postwordspace}}}
+
+\newcommand{\df}[1][]{\par\noindent%
+\ifx #1\relax %
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
 {\textcolor{labelcolor}{\textit{Definition}}\hspace{\postwordspace}}}
 
-\newcommand{\thm}[1][]{\par\noindent{\color{labelcolor}\textit{Theorem}}\hspace{\postwordspace}%
-\ifx #1\relax%
-\else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
-\newcommand{\lem}[1][]{\par\noindent{\color{labelcolor}\textit{Lemma}}\hspace{\postwordspace}%
-\ifx #1\relax%
-\else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
-\newcommand{\cor}[1][]{\par\noindent{\color{labelcolor}\textit{Corollary}}\hspace{\postwordspace}%
-\ifx #1\relax%
-\else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
-\newcommand{\rem}[1][]{\par\noindent{\color{labelcolor}\textit{Remark}}\hspace{\postwordspace}%
-\ifx #1\relax%
-\else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
-\newcommand{\pf}[1][]{\par\noindent{\color{labelcolor}\textit{Pf}}\hspace{\postwordspace}%
-\ifx #1\relax%
-\else{\color{labelcolor}[\textsc{#1}]}\hspace{\postwordspace}\fi}
+\renewcommand{\th}[1][]{\par\noindent%  \th is thorn
+\ifx #1\relax %
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
+{\textcolor{labelcolor}{\textit{Theorem}}\hspace{\postwordspace}}}
 
+\newcommand{\co}[1][]{\par\noindent%
+\ifx #1\relax %
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
+{\textcolor{labelcolor}{\textit{Corollary}}\hspace{\postwordspace}}}
+
+\newcommand{\re}[1][]{\par\noindent%
+\ifx #1\relax %
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
+{\textcolor{labelcolor}{\textit{Remark}}\hspace{\postwordspace}}}
+
+\newcommand{\pf}[1][]{\par\noindent%
+\ifx #1\relax %
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
+{\textcolor{labelcolor}{\textit{Proof}}\hspace{\postwordspace}}}
+
+% Some misc definitions
+\renewcommand{\qedsymbol}{{\scshape\small QED}}
 \renewcommand{\definend}[1]{\textcolor{red}{\textit{#1}}}
+
 
 % Make \section{..} show a page all alone.
 \AtBeginSection{
