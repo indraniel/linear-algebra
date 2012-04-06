@@ -71,47 +71,48 @@
   %   {\hyperlink{#2}{\beamer@origref{#2}}}% \reff
 }
 \AtBeginDocument{\makeatletter
-\let\ref\reff
+\let\ref\reff  % make all references like \ref*{..}
 \makeatother}
 
 % {\def\protect{\global\let\YesIMeanThisRef}\ref}
 % \AtBeginDocument{\def\ref{\protect\YesIMeanThisRef}}
 
 \newcommand{\bookref}[1]{\reff*{#1}}
-% \exm  For examples
-%  optional argument: example title  \exm[Fischer's ]
 \newcommand{\prewordspace}{.5em}
-\newcommand{\postwordspace}{-.5em plus.1em minus.0em}
+\newcommand{\postwordspace}{0em plus.1em minus.0em}
 
+% Text headers: Example, Definition, etc.
+% Each comes with an optional argument into which you can put a 
+% string that is a \label{..} from the book. For instance: \th[th:GaussMethod].
 \newcommand{\ex}[1][]{\par\noindent%
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
-{\textcolor{labelcolor}{\textit{Example}}\hspace{\postwordspace}}}
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi%
+{\textcolor{labelcolor}{\textit{Example}} \hspace{\postwordspace}}}
 
 \newcommand{\df}[1][]{\par\noindent%
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
-{\textcolor{labelcolor}{\textit{Definition}}\hspace{\postwordspace}}}
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi%
+{\textcolor{labelcolor}{\textit{Definition}} \hspace{\postwordspace}}}
 
 \renewcommand{\th}[1][]{\par\noindent%  \th is thorn
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
-{\textcolor{labelcolor}{\textit{Theorem}}\hspace{\postwordspace}}}
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi%
+{\textcolor{labelcolor}{\textit{Theorem}} \hspace{\postwordspace}}}
 
 \newcommand{\co}[1][]{\par\noindent%
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
-{\textcolor{labelcolor}{\textit{Corollary}}\hspace{\postwordspace}}}
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi%
+{\textcolor{labelcolor}{\textit{Corollary}} \hspace{\postwordspace}}}
 
 \newcommand{\re}[1][]{\par\noindent%
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
-{\textcolor{labelcolor}{\textit{Remark}}\hspace{\postwordspace}}}
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi%
+{\textcolor{labelcolor}{\textit{Remark}} \hspace{\postwordspace}}}
 
 \newcommand{\pf}[1][]{\par\noindent%
 \ifx #1\relax %
-\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi %
-{\textcolor{labelcolor}{\textit{Proof}}\hspace{\postwordspace}}}
+\else{\llap{\textcolor{labelnumcolor}{\bookref{#1}}\hspace{\prewordspace}}}\fi%
+{\textcolor{labelcolor}{\textit{Proof}} \hspace{\postwordspace}}}
 
 % Some misc definitions
 \renewcommand{\qedsymbol}{{\scshape\small QED}}

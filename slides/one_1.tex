@@ -60,17 +60,82 @@
 % ..... One.I.1 .....
 \section{Gauss' method}
 \begin{frame}{Linear systems} 
-\df[df:linearcombination]
+\df[def:linearcombination]
 \ExecuteMetaData[../gr1.tex]{df:linearcombination}
-% \booktheorem{def:linearcombination}
+
+\ex This is a linear combination of $x$, $y$, and $z$.
+\begin{equation*}
+   (1/4)x+y-z
+\end{equation*}
 \end{frame}
 
 
 %...........................
 \begin{frame}
-\df[df:linearcombination]
+\df[def:linearcombination]
 \ExecuteMetaData[../gr1.tex]{df:linearequations}
-  
+\ex 
+There are three linear equations in this linear system.
+\begin{equation*}
+  \begin{linsys}{3}
+   (1/4)x  &+  &y  &-  &z  &=  &0  \\
+        x  &+  &4y &+  &2z &=  &12  \\
+       2x  &-  &3y &-  &z  &=  &3  
+  \end{linsys}  
+\end{equation*}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}{Solving a linear system}
+\ex 
+Given a system
+\begin{equation*}
+  \begin{linsys}{3}
+   (1/4)x  &+  &y  &-  &z  &=  &0  \\
+        x  &+  &4y &+  &2z &=  &12  \\
+       2x  &-  &3y &-  &z  &=  &3  
+  \end{linsys}  
+\end{equation*}
+we transform it to one whose solution we can easily find.
+\pause We can start by clearing the fractions.
+\begin{eqnarray*}
+  &\grstep{4\rho_1}
+  &\begin{linsys}{3}
+        x  &+  &4y &-  &4z  &=  &0  \\
+        x  &+  &4y &+  &2z &=  &12  \\
+       2x  &-  &3y &-  &z  &=  &3  
+  \end{linsys}  
+\end{eqnarray*}
+\pause Use the first row to act on the rows below, eliminating the $x$~terms.
+\begin{eqnarray*}
+  &\grstep[-2\rho_1+\rho_3]{-1\rho_1+\rho_2}
+  &\begin{linsys}{3}
+        x  &+  &4y   &-  &4z  &=  &0  \\
+           &   &     &+  &6z  &=  &12  \\
+           &   &-11y &+  &7z  &=  &3  
+  \end{linsys} 
+\end{eqnarray*} 
+\end{frame}\begin{frame}
+Swap to bring a $y$ term to the second row.
+\begin{eqnarray*}
+  &\grstep{\rho_2\leftrightarrow\rho_3}
+  &\begin{linsys}{3}
+        x  &+  &4y   &-  &4z  &=  &0  \\
+           &   &-11y &+  &7z  &=  &3  \\
+           &   &     &   &6z  &=  &12  
+  \end{linsys}  
+\end{eqnarray*}
+\pause We can solve the bottom row:
+$z=2$.
+\pause
+The shape of the transformed system 
+lets us solve for $y$ by substituting in the next row up:
+$-11y+7(2)=3$ shows that $y=1$.
+\pause
+The shape also lets us solve for $x$ by substituting into the
+first row: $x+4(1)-4(2)=0$ gives that $x=4$. 
 \end{frame}
 
 
@@ -80,6 +145,8 @@
 \th[th:GaussMethod]
 \ExecuteMetaData[../gr1.tex]{th:GaussMethod}
 
+\df[df:GaussMethod]
+\ExecuteMetaData[../gr1.tex]{df:GaussMethod}
 \end{frame}
 
 
@@ -87,11 +154,94 @@
 %...........................
 \begin{frame}
 \pf[th:GaussMethod]
-\ExecuteMetaData[../gr1.tex]{pf:GaussMethod}
-\df[df:GaussMethod]
-\ExecuteMetaData[../gr1.tex]{df:GaussMethod}
+We cover one of the three.
+The other two are similar.
 
+\ExecuteMetaData[../gr1.tex]{pf:GaussMethod}
 \end{frame}
+
+
+
+%...........................
+\begin{frame}{Systems without a unique solution}
+\ex
+This system has no solution.
+\begin{equation*}
+  \begin{linsys}{3}
+        x  &+  &y  &+  &z  &=  &6  \\
+        x  &+  &2y &+  &z  &=  &8  \\
+       2x  &+  &3y &+  &2z &=  &13  
+  \end{linsys}    
+\end{equation*}
+On the left side the sum of the first two equals the third,
+while on the right that is not so.
+So there is no triple of reals that makes all three 
+equations true.
+\pause
+Gauss' Method makes the inconsistency clear.
+\begin{equation*}
+  \grstep[-2\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+  \begin{linsys}{3}
+        x  &+  &y  &+  &z  &=  &6  \\
+           &   &y  &   &   &=  &2  \\
+           &   &y  &   &   &=  &1  
+  \end{linsys}    
+  \;\grstep{-\rho_2+\rho_3}\;
+  \begin{linsys}{3}
+        x  &+  &y  &+  &z  &=  &6  \\
+           &   &y  &   &   &=  &2  \\
+           &   &   &   &0  &=  &-1  
+  \end{linsys}    
+\end{equation*}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}
+\ex
+This system has infinitely many solutions.
+\begin{equation*}
+  \begin{linsys}{3}
+        x  &-  &y  &+  &z  &=  &4  \\
+        x  &+  &y  &-  &2z &=  &-1   
+  \end{linsys} 
+  \;\grstep{-\rho_1+\rho_2}\;   
+  \begin{linsys}{3}
+        x  &-  &y  &+  &z  &=  &4  \\
+           &   &2y &-  &3z &=  &-5   
+  \end{linsys} 
+\end{equation*}
+Taking $z=0$ gives the solution $(3/2,-5/2,0)$.
+Taking $z=-1$ gives $(1,-4,-1)$.
+
+\pause
+\ex
+Another system with infinitely many solutions.
+\begin{eqnarray*}
+  \begin{linsys}{3}
+        -x   &-  &y  &+  &3z  &=  &3  \\
+         x   &   &   &+  &z   &=  &3  \\
+        3x   &-  &y  &+  &7z  &=  &15   
+  \end{linsys} 
+  &\grstep[3\rho_1+\rho_3]{-\rho_1+\rho_2}   
+  &\begin{linsys}{3}
+        -x   &-  &y   &+  &3z  &=  &3  \\
+             &   &-y  &+  &4z  &=  &6  \\
+             &   &-4y &+  &16z &=  &24   
+  \end{linsys}                                \\
+  &\grstep{-4\rho_2+\rho_3}
+  &\begin{linsys}{3}
+        -x   &-  &y  &+  &3z  &=  &3  \\
+             &   &-y  &+  &4z  &=  &6  \\
+             &   &   &   &0    &=  &0   
+  \end{linsys} 
+\end{eqnarray*}
+Taking $z=0$ gives the solution $(3,-6,0)$.
+Taking $z=1$ gives $(2,-2,1)$.
+\end{frame}
+
+
 
 
 
