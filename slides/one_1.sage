@@ -60,3 +60,9 @@ eqn = [x-y+2*z+3*w==14, 2*x-2*y-z+2*w==6, -3*z+2*w==0]
 s = solve(eqn, x,y,z,w); 
 print s
 
+print ".. two eqs, four vars, already echelon form .."
+var('x,y,z,w')
+eqn = [-2*x+y-z+w==3/2, 2*z-w==1/2]
+s = solve(eqn, [x,z]); 
+print s
+

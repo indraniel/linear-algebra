@@ -114,10 +114,11 @@ no vectors that are linear combinations of the others in that set.
 
 \begin{definition}
 \label{def:LinInd}
-A subset of a vector space is
+A multiset subset of a vector space is
 \definend{linearly independent}\index{linearly independent}%
 \index{sets!dependent, independent}
-if none of its elements is a linear combination of the others.
+if none of its elements is a linear combination of the 
+others.\appendrefs{multisets}\spacefactor=1000
 Otherwise it is \definend{linearly dependent}\index{linearly dependent}.
 \end{definition}
 
@@ -148,7 +149,7 @@ a finite set is dependent or independent.
 
 \begin{lemma}   \label{le:LDIffANonTrivLinRel}
 A subset \( S \) of a vector space is linearly independent if and only if 
-among distinct \( \vec{s}_1,\dots,\vec{s}_n\in S \) 
+among the elements \( \vec{s}_1,\dots,\vec{s}_n\in S \) 
 the only linear relationship 
 \begin{equation*}
    c_1\vec{s}_1+\dots+c_n\vec{s}_n=\zero
@@ -159,7 +160,7 @@ is the trivial one \( c_1=0,\dots,\,c_n=0 \).
 
 \begin{proof}
 % This is a direct consequence of the observation above.
-If the set \( S \) is linearly independent then no vector
+If \( S \) is linearly independent then no vector
 $\vec{s}_i$ 
 is a linear combination of other vectors from $S$
 so there is no linear relationship where some of the $\vec{s}\,$'s have 
@@ -208,7 +209,7 @@ we can satisfy
 with \( c_1=1 \) and \( c_2=-2 \).
 \end{example}
 
-\begin{remark}  \label{rem:StaticsLIAndLD}
+\begin{example}  \label{ex:StaticsLIAndLD}
 Recall the Statics example that began this book.
 We first set the unknown-mass objects at \( 40 \)~cm and \( 15 \)~cm and
 got a balance,
@@ -225,7 +226,7 @@ of the
 $\rowvec{40 &15}$ information\Dash that is, $\rowvec{20 &7.5}$ is in the 
 span of the set $\set{\rowvec{40 &15}}$\Dash and so we would be trying to 
 solve a two-unknowns problem with what is essentially one piece of information.
-\end{remark}
+\end{example}
 
 \begin{example}
 The set \( \set{1+x,1-x} \) is linearly independent in \( \polyspace_2 \), the
@@ -291,7 +292,7 @@ where not all of the scalars are zero (the fact that some
 of the scalars are zero doesn't matter).
 \end{example}
 
-\begin{remark}  \label{rem:WhyLIIsNonTrivLinRel}
+% \begin{remark}  \label{rem:WhyLIIsNonTrivLinRel}
 That example illustrates why, 
 although \nearbydefinition{def:LinInd} is a clearer
 statement of what independence is,
@@ -308,7 +309,7 @@ This person would have to go on to try
 to find the dependence $c_1=0$, \( c_3=1/2 \).
 \nearbylemma{le:LDIffANonTrivLinRel} 
 gets the same conclusion with only one computation.
-\end{remark}
+% \end{remark}
 
 \begin{example} \label{ex:EmSetLI}
 The empty subset\index{sets!empty} of a vector space is linearly independent.
@@ -344,12 +345,38 @@ set, specifically,
 the zero vector is a combination of the empty set.
 \end{example}
 
+\begin{remark}\cite{Velleman} \label{rem:WhyLIUsesMultiset}
+\nearbydefinition{def:LinInd} specifies that when we 
+are considering whether some $S$ is linearly independent, we must
+consider it as a multiset.
+This is not the most important point about linear independence so 
+we will typically not mention it and instead will 
+follow the standard convention of referring to a linearly independent or 
+dependent ``set.''
+However, rather than ignore the point altogether
+here is an example showing that we can need the
+distinction between set and multiset.
+In the next chapter we will look at functions.
+Let the function $\map{f}{\polyspace_1}{\Re}$ be given by
+$f(a+bx)=a$ (for instance, $f(1+2x)=1$). 
+Consider the subset $B=\set{1,1+x}$ of the domain.
+The images of the elements are $f(1)=1$ and~$f(1+x)=1$.
+In a set repeated elements collapse to be one element 
+so these images form the set $\set{1}$,
+which is linearly independent.
+But 
+in a multiset repeated elements do not collapse so the images form a linearly 
+dependent multiset~$\set{1,1}$.
+The second case is the correct one:~$B$ is linearly independent but its image 
+under~$f$ is linearly dependent.
+\end{remark}
+
 The above examples, especially \nearbyexample{ex:StaticsLIAndLD},
 underline the discussion that begins this section.
 The next result 
 says that given a finite set,
 we can produce a linearly independent subset
-by discarding what \nearbyremark{rem:StaticsLIAndLD}
+by discarding what \nearbyremark{ex:StaticsLIAndLD}
 calls ``repeats.''
 
 
