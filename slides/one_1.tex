@@ -420,6 +420,104 @@ This column vector has three components.
 
 
 
+% ..........
+\begin{frame}{Vector operations}
+\df[df:VectorSum]
+\ExecuteMetaData[../gr1.tex]{df:VectorSum}
+\df[df:VectorScalarMultiplication]
+\ExecuteMetaData[../gr1.tex]{df:VectorScalarMultiplication}
+\ex
+\begin{equation*}
+  3\colvec{1 \\2}-2\colvec{0 \\ 1}=\colvec{3 \\ 4}
+\end{equation*}
+\end{frame}
+
+
+% ..........
+\begin{frame}{Matrix notation for linear systems}
+\ex
+We can simplify the clerical load in reducing this system
+\begin{equation*}
+  \begin{linsys}{3}
+       -3x   &   &   &+  &2z  &=  &-1  \\
+         x   &-  &2y &+  &2z  &=  &-5/3  \\
+        -x   &-  &4y &+  &6z  &=  &-13/3   
+  \end{linsys} 
+\end{equation*}
+by writing it as a \definend{augmented matrix}.
+\begin{eqnarray*}
+    \begin{amat}[r]{3}
+     -3  &0  &2  &-1  \\
+      1  &-2 &2  &-5/3  \\
+     -1  &-4 &6  &-13/3
+    \end{amat}
+  &\grstep[-(1/3)\rho_1+\rho_3]{(1/3)\rho_1+\rho_2}
+  &\begin{amat}[r]{3}
+     -3  &0  &2    &-1  \\
+      0  &-2 &8/3  &-2  \\
+      0  &-4 &16/3 &-4
+    \end{amat}                      \\
+  &\grstep{-2\rho_2+\rho_3}
+  &\begin{amat}[r]{3}
+     -3  &0  &2    &-1  \\
+      0  &-2 &8/3  &-2  \\
+      0  &0  &0    &0
+    \end{amat}  
+\end{eqnarray*}
+The two nonzero rows give
+$-3x+2z=-1$ and $-2y+(8/3)z=-2$.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+Solving
+$-3x+2z=-1$ and $-2y+(8/3)z=-2$
+for the leading variables
+gives 
+$y=1+(4/3)z$ and $x=(1/3)+(2/3)z$.
+\pause
+We can write the solution set in vector notation.
+\begin{equation*}
+  \set{\colvec{x \\ y \\ z}=\colvec{1/3 \\ 1 \\ 0}+\colvec{2/3 \\ 4/3 \\ 1}z 
+                 \suchthat z\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\ex
+We can reduce this system
+\begin{equation*}
+  \begin{linsys}{4}
+    x &+  &2y  &- &z  &  &  &= &2 \\
+   2x &-  &y   &- &2z &+ &w &= &5
+  \end{linsys}
+\end{equation*}
+using the augmented matrix notation
+\begin{eqnarray*}
+    \begin{amat}[r]{4}
+      1  &2  &-1  &0  &2  \\
+      2  &-1 &-2  &1  &5  
+    \end{amat}
+  &\grstep{-2\rho_1+\rho_2}
+  &\begin{amat}[r]{4}
+      1  &2  &-1  &0  &2  \\
+      0  &-5 &0   &1  &1  
+    \end{amat}
+\end{eqnarray*}
+to get this vector description of the solution set.
+\begin{equation*}
+  \set{\colvec{12/5 \\ -1/5 \\ 0 \\ 0}
+       +\colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+      \suchthat z,w\in\Re}
+\end{equation*}
+\end{frame}
+
 
 
 

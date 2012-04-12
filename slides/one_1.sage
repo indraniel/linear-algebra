@@ -66,3 +66,21 @@ eqn = [-2*x+y-z+w==3/2, 2*z-w==1/2]
 s = solve(eqn, [x,z]); 
 print s
 
+print ".. first augmented matrix example .."
+M = matrix(QQ,[[-3,0,2,-1], [1,-2,2,-5/3], [-1,-4,6,-13/3] ])
+gauss_method(M,rescale_leading_entry=False)
+# print M.echelon_form()
+var('x,y,z')
+eqn = [-3*x+2*z==-1, x-2*y+2*z==-5/3, -x-4*y+6*z==-13/3]
+s = solve(eqn, x,y); 
+print s
+
+print ".. second augmented matrix example .."
+M = matrix(QQ,[[1,2,-1,0,2], [2,-1,-2,1,5], ])
+gauss_method(M,rescale_leading_entry=False)
+# print M.echelon_form()
+var('x,y,z,w')
+eqn = [x+2*y-z==2, 2*x-y-2*z+w==5]
+s = solve(eqn, x,y); 
+print s
+

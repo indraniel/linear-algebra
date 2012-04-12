@@ -1709,28 +1709,45 @@ satisfies the first system if and only if it satisfies the
 third.
 So we can describe the solution set  
 $\set{(x,y,z)\suchthat\text{$2x+z=3$ and $x-y-z=1$ and $3x-y=4$}}$
-as
-$\set{(x,y,z)\suchthat\text{$2x+z=3$ and $-y-3z/2=-1/2$}}$.
-However, this second description is not optimal.
-It has two equations instead of three 
-but it still has some hard to understand interaction among the variables.
+in this way.
+\begin{equation*}
+  \set{(x,y,z)\suchthat\text{$2x+z=3$ and $-y-3z/2=-1/2$}}
+  \tag{$*$}
+\end{equation*}
+This description is better because 
+it has two equations instead of three 
+but it is not optimal
+because it still has some hard to understand interactions among the variables.
 
-To improve the description, use the 
+To improve it, use the 
 variable that does not lead any equation, $z$, to describe
 the variables that do lead, $x$ and $y$.
 The second equation gives
 $y=(1/2)-(3/2)z$ 
 and the first equation gives
 $x=(3/2)-(1/2)z$.
-Thus the solution set is this.   
+Thus we can describe the solution set in this way.   
 \begin{equation*}
   \set{ (x,y,z)=
        ((3/2)-(1/2)z,(1/2)-(3/2)z,z)\suchthat z\in\Re}
-  \tag{$*$}
+  \tag{$**$}
 \end{equation*}
-For instance, $(1/2,-5/2,2)$ is a solution because taking $z=2$ gives
-a first component of $1/2$ and a second component of $-5/2$.
 \end{example}
+
+Compared with ($*$), 
+the advantage of ($**$) 
+is that $z$ can be any real number.
+This makes the job of deciding which tuples are in the solution set 
+much easier.
+For instance, taking $z=2$ shows that $(1/2,-5/2,2)$ is a solution.
+
+\begin{definition} \label{df:FreeVars}
+%<*df:FreeVars>
+In an echelon form linear system the variables that are not leading
+are   
+\definend{free}.\index{echelon form!free variable}\index{free variable}
+%</df:FreeVars>
+\end{definition}
 
 \begin{example}   \label{ex:Parametrize2}
 Reduction of a linear system can end with more than one variable free.
@@ -1769,22 +1786,11 @@ The solution set
    \set{(2-2z+2w,-1+z-w,z,w)\suchthat z,w\in\Re}
   \tag{$**$}
 \end{equation*}
-has the leading variables in terms of the others.
+has the leading variables in terms of the free variables.
 \end{example}
 
-The advantage of the descriptions ($*$) and ($**$) 
-it is that the variables 
-can be any real number.
-This makes the job of deciding which tuples are in the solution set 
-into an easy one.
-For instance, in the prior example taking 
-$z=1$ and $w=2$ gives the solution $(4,-2,1,2)$.
-In contrast, $(3,-2,1,2)$ is not a solution since the first component
-of any solution must be $2$ minus twice the third component plus
-twice the fourth.
-
 \begin{example}    \label{ex:Parametrize1}
-The leading variables need not be the first ones.
+The list of leading variables may skip over some columns.
 After this reduction
 \begin{eqnarray*}
   \begin{linsys}{4}
@@ -1808,8 +1814,8 @@ After this reduction
          &   &    &   &    &   &0   &=  &0  
    \end{linsys}
 \end{eqnarray*}
-$x$ and $z$ lead.
-The solution set, described with the non-leading variables, is
+$x$ and $z$ are the leading variables, not $x$ and~$y$.
+The free variables are $y$ and~$w$ and so we can describe the solution set as
 $\set{ (y,y,2-3w,w)\suchthat y,w\in\Re }$.
 For instance, \( (1,1,2,0) \) satisfies the system\Dash take 
 $y=1$ and $w=0$.
@@ -1817,17 +1823,9 @@ The four-tuple \( (1,0,5,4) \) is not a solution
 since its first coordinate does not equal its second.
 \end{example}
 
-\begin{definition} \label{df:FreeVars}
-%<*df:FreeVars>
-In an echelon form linear system the variables that are not leading
-are   
-\definend{free}.\index{echelon form!free variable}\index{free variable}
-%</df:FreeVars>
-\end{definition}
-
 %<*df:Parameter>
-The variable that we use to describe a family of solutions
-is a \definend{parameter}.\index{parameter}% 
+A variable that we use to describe a family of solutions
+is a \definend{parameter}.\index{parameter}  
 %</df:Parameter>
 We say that the solution set in the prior example 
 is \definend{parametrized\/}\index{parametrized} 
@@ -1838,7 +1836,7 @@ In the prior example
 $y$ and~$w$ are free because in the echelon form system they
 do not lead while
 they are parameters because of how 
-we use them to describe the set of solutions.
+we used them to describe the set of solutions.
 Had we instead 
 rewritten the second equation as $w=2/3-(1/3)z$ then
 the free variables would still be $y$ and~$w$ but the parameters 
@@ -2046,7 +2044,8 @@ involves adding the vectors, and
 also multiplying them by real numbers, such as the \( z \) and $w$.
 We need to define these operations.
 
-\begin{definition}
+\begin{definition} \label{df:VectorSum}
+%<*df:VectorSum>
 The \definend{vector sum}\index{vector!sum}\index{sum!vector} of
 \( \vec{u} \) and \( \vec{v} \) is the vector of the sums.
 \begin{equation*}
@@ -2057,6 +2056,7 @@ The \definend{vector sum}\index{vector!sum}\index{sum!vector} of
    =
   \colvec{u_1+v_1 \\ \vdotswithin{u_1+v_1} \\ u_n+v_n}
 \end{equation*}
+%</df:VectorSum>
 \end{definition}
 
 Note that the vectors must have the same number of entries for 
@@ -2065,7 +2065,8 @@ This entry-by-entry addition works for any pair of matrices, not just vectors,
 provided that they have the same number of rows and 
 columns.\index{matrix!sum}\index{sum!matrix}
 
-\begin{definition}
+\begin{definition} \label{df:VectorScalarMultiplication}
+%<*df:VectorScalarMultiplication>
 The \definend{scalar multiplication\/}\index{vector!scalar multiple}%
 \index{scalar multiple!vector} of the real number
 \( r \) and the vector \( \vec{v} \) is the vector of the multiples.
@@ -2075,6 +2076,7 @@ The \definend{scalar multiplication\/}\index{vector!scalar multiple}%
   =
   \colvec{rv_1 \\ \vdotswithin{rv_1} \\ rv_n}
 \end{equation*}
+%</df:VectorScalarMultiplication>
 \end{definition}
 
 As with the addition operation, the entry-by-entry scalar multiplication
