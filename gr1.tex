@@ -3192,7 +3192,7 @@ We will know exactly what can and cannot happen in a reduction.
 
 
 
-\subsection{General = Particular + Homogeneous}
+\subsection{\texorpdfstring{$\text{General}=\text{Particular}+\text{Homogeneous}$}{General=Particular+Homogeneous}}
 In the prior subsection the descriptions of solution sets
 all fit a pattern.
 They have a vector that is a particular solution 
@@ -3250,10 +3250,12 @@ as a particular solution
 so that we can shorten $\vec{p}+c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$
 to $c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$.
 
-\begin{definition}
+\begin{definition} \label{df:HomogeneousEquation}
+%<*df:HomogeneousEquation>
 A linear equation is \definend{homogeneous}\index{homogeneous equation}%
 \index{linear equation!homogeneous} if it has a constant of zero, so
 it can be put in the form $a_1x_1+a_2x_2+\,\cdots\,+a_nx_n=0$.
+%</df:HomogeneousEquation>
 \end{definition}
 
 \begin{example}  \label{ex:FirstExHomoSys}
@@ -3308,10 +3310,12 @@ Nonhomogeneous systems can be inconsistent.
 But a homogeneous system must be consistent since there is always at least
 one solution, the vector of zeros.
 
-\begin{definition}
+\begin{definition} \label{df:ZeroVector}
+%<*df:ZeroVector>
 A column or row vector of all zeros is a 
 \definend{zero vector}\index{zero vector}\index{vector!zero}, 
 denoted \( \zero \).
+%</df:ZeroVector>
 \end{definition}
 
 \noindent There are many different zero vectors, e.g., the
@@ -3388,8 +3392,8 @@ make sense only when \( w \) is a nonnegative multiple of $3$).
 % \nearbytheorem{th:GenEqPartPlusHomo}.
 % The first lemma deals with unrestricted combinations.
 
-\begin{lemma}
-\label{le:HomoSltnSpanVecs}
+\begin{lemma} \label{le:HomoSltnSpanVecs}
+%<*le:HomoSltnSpanVecs>
 For any  homogeneous linear system there exist
 vectors $\vec{\beta}_1$, \ldots, $\vec{\beta}_k$ such that the 
 solution set of the system is
@@ -3398,126 +3402,153 @@ solution set of the system is
 \end{equation*}
 where $k$ is the
 number of free variables in an echelon form version of the system.
+%</le:HomoSltnSpanVecs>
 \end{lemma}
 
-Before the proof, recall how back substitution happens.
-Imagine that we have brought a system to this echelon form.
+We will make two points before the proof.
+The first point is that the basic idea of the proof is straightforward.
+Consider a system of homogeneous equations in echelon form.
 \begin{equation*}
-  \begin{linsys}{4}
-     x  &+  &2y  &-  &z  &+  &2w &=  &0  \\
-        &   &-3y &+  &z  &   &   &=  &0  \\
-        &   &    &   &   &   &-w &=  &0  
+  \begin{linsys}{5}
+     x  &+  &y   &+  &2z  &+  &s  &+  &t  &=  &0  \\
+        &   &y   &+  &z  &+  &s  &-  &t  &=  &0  \\
+        &   &    &   &   &   &s  &+  &t  &=  &0  
   \end{linsys}
 \end{equation*}
-% We next perform back-substitution to 
-% express each variable in terms of the free variable $z$.
-Working from the bottom, we first get that \( w \) is \( 0\cdot z \), 
-then that \( y \) is \( (1/3)\cdot z \), and then
-substituting those two back into the top equation
-\( x+2((1/3)z)-z+2(0)=0 \) gives \( x=(1/3)\cdot z \).
-So, back substitution gives a parametrization of the solution set by
-starting at the bottom equation and using the free variables as the
-parameters to work row-by-row to the top.
-The proof below follows this pattern.
- 
-That is, 
-this proof simply checks the bookkeeping  
-to show that back substitution can't fail,
-say, by leading to a division by zero.
-So the argument below, while detailed, doesn't give us any new insights.
-Nevertheless, we have written it out for two reasons.
-One is that we need to be sure that the
-computational procedure works.
-The other is that the row-by-row nature of
-back substitution leads naturally to a proof by
+Start at the bottom, expressing its leading variable in terms of the 
+free variables with $s=-t$.
+For the next row up,
+substitute the expression
+giving $s$ as a combination of free variables
+$y+z+(-t)-t=0$ and solve for its leading variable
+$y=-z+2t$.
+Iterate: on the next row up, substitute expressions derived from prior rows
+$x+(-z+2t)+2z+(-t)+t=0$
+and solve for the leading variable
+$x=-z-2t$.
+Now to finish, write the solution in vector notation
+\begin{equation*}
+  \colvec{x \\ y \\ z \\ s \\ t}
+  =\colvec{-1 \\ -1 \\ 1 \\ 0 \\ 0}z
+   +\colvec{-2 \\ 2 \\ 0 \\ -1 \\ 1}t 
+  \qquad z,t\in\Re
+\end{equation*}
+and recognize that the $\vec{\beta}_1$ and $\vec{\beta}_2$ 
+of the lemma are the 
+vectors associated with the free variables $z$ and~$t$.
+
+The prior paragraph is a sketch, not a proof; in a proof we would have to 
+be careful to cover all the possibilities such as the possibility of
+an equation like $u=0$ that has a leading variable but no free
+variables.
+And, the argument would have to hold no matter how many equations the
+system has.
+
+The second point we will make about the proof concerns the style of that
+proof.
+The above sketch moves row-by-row up the system, using the equations
+derived for the earlier rows to do the next row.
+This suggests a proof by
 mathematical induction.\appendrefs{mathematical induction}%
 \index{mathematical induction}\index{proof techniques!induction}%
 \index{induction}%
-This is an important and non-obvious proof style that we shall
-use a number of times.
-% Doing an induction argument here gives us a chance to 
-% see one in a setting where the proof material straightforward 
-% and so we can highlight the technique.
+Induction is an important and non-obvious proof technique that we shall
+use a number of times in this book.
 
-Mathematical induction has two steps, a base step and
+We prove a statement by mathematical induction using two steps, a base step and
 an inductive step.
-In the base step here will focus only on the
-bottom-most non-`\( 0=0 \)' equation, and show that we can  
-write its leading variable in terms of its other variables.
-Then the inductive step will be to
+In the base step we establish that the statement is true for some first 
+instance, here that for the bottom equation we can  
+write the leading variable in terms of the free variables.
+In the inductive step we must verify an implication, that if the statement
+is true for all prior cases then it follows for the present case also.
+Here we will 
 argue that if we can express the leading variables from the
 bottom-most \( t \) rows in terms of the free variables then
 we can express the leading variable of the next row up\Dash the \( t+1 \)-th
 row from the bottom\Dash in terms of the free variables.
-Those two steps together prove the theorem 
-because by the base step the theorem is true for the bottom equation, 
+Those two steps together prove the statement 
+because by the base step it is true for the bottom equation, 
 and by the inductive step the fact that it is true for the bottom
 equation shows that 
-it is true for the next one up, and then another application of
+it is true for the next one up. 
+Then another application of
 the inductive step implies that it is true for the third equation up,
 etc.
 
 \begin{proof}
+%<*pf:HomoSltnSpanVecs0>
 Apply Gauss' method to get to echelon form.
-We may get some `\( 0=0 \)' equations 
+We may get some \( 0=0 \) equations 
 (if the entire
-system consists of such equations then the theorem is trivially true)
+system consists of such equations then the result is trivially true)
 but
 because the system is homogeneous we cannot get any contradictory equations.
-We will argue by induction 
-that each leading variable can be expressed in terms of
+We will use induction to show this statement:
+each leading variable can be expressed in terms of
 free variables.
-That will prove the result because 
-we can use those free variables as the parameters,
-so the $\vec{\beta}$'s are the vectors of coefficients of the
-free variables 
-(as in \nearbyexample{ex:SolnChemProb}). 
+That will finish the proof because 
+we can then use the free variables as the parameters and
+the $\vec{\beta}$'s are the vectors of coefficients of those
+free variables. 
+%</pf:HomoSltnSpanVecs0>
 
-For the base step, consider the bottom-most
-equation.
-Call it equation~$m$
+%<*pf:HomoSltnSpanVecs1>
+For the base step, consider the bottommost equation that is not \( 0=0 \).
+Call it equation~$m$ so 
+we have 
 \begin{equation*}
   a_{m,\ell_m}x_{\ell_m}+a_{m,\ell_m+1}x_{\ell_m+1}+\cdots+a_{m,n}x_n=0
 \end{equation*}
 where \( a_{m,\ell_m}\neq 0 \).
-(The `$\ell$' stands for `leading' 
-so that $a_{m,\ell_m}$ means ``the coefficient
-from the row~$m$ of the variable leading row~$m$.'')
-Either there are variables in this equation other than the leading one
-$x_{\ell_m}$ or else there are not.
-If there are other variables $x_{\ell_{m}+1}$, etc., then they must be
-free variables of the system because this is the bottom row. 
-Move these to the right and divide by $a_{m,\ell_m}$
+%</pf:HomoSltnSpanVecs1>
+(The `$\ell$' means ``leading'' so that $x_{\ell_m}$ is the leading variable
+in row~$m$.) 
+%<*pf:HomoSltnSpanVecs2>
+This is the bottom row so 
+any variables $x_{\ell_{m}+1}$, \ldots{} to the right of the
+leading variable in this equation  must be
+free variables. 
+Move these to the right side and divide by $a_{m,\ell_m}$
 \begin{equation*}
   x_{\ell_m}
   =(-a_{m,\ell_m+1}/a_{m,\ell_m})x_{\ell_m+1}+\cdots+(-a_{m,n}/a_{m,\ell_m})x_n
 \end{equation*}
-to express the leading variable in terms of the free variables.
-If there are no free variables in this equation 
-then \( x_{\ell_m}=0 \) (see the
-``tricky point'' following this proof).
+to express the leading variable in terms of free variables.
+%</pf:HomoSltnSpanVecs2>
+(If there are no variables to the right of $x_{l_m}$  
+then \( x_{\ell_m}=0 \); 
+see the
+``tricky point'' following this proof.)
 
-For the inductive step we assume
+%<*pf:HomoSltnSpanVecs3>
+For the inductive step assume
 that for the \( m \)-th equation,
-and for the \text{\( (m-1) \)-th}
-equation, \ldots, up to and including the \text{\( (m-t) \)-th} equation
+and the \text{\( (m-1) \)-th}
+equation, etc., up to and including the \text{\( (m-t) \)-th}~equation
 (where \( 0\leq t<m \)), 
 we can
 express the leading variable in terms of free variables.
-To prove that the same is true for the next equation up, 
-the \( (m-(t+1)) \)-th equation, we take each variable that leads
-in a lower-down equation \( x_{\ell_m},\ldots,x_{\ell_{m-t}} \) and substitute
+We must verify that this statement also holds for the next equation up, 
+the \( (m-(t+1)) \)-th equation.
+As in the earlier sketch, take each variable that leads
+in a lower-down equation \( x_{\ell_m} \), \ldots, \( x_{\ell_{m-t}} \) 
+and substitute
 its expression in terms of free variables.
+(We only need do this for the leading variables from lower-down equations
+because the system is in echelon form and so in this equation none of 
+the variables leading higher up equations appear.)
 The result has the form
 \begin{equation*}
   a_{m-(t+1),\ell_{m-(t+1)}}x_{\ell_{m-(t+1)}}+
-    \text{sums of multiples of free variables}=0
+    \text{\textit{--a linear combination of free variables--}}=0
 \end{equation*}
-where \( a_{m-(t+1),\ell_{m-(t+1)}}\neq 0 \).
+with \( a_{m-(t+1),\ell_{m-(t+1)}}\neq 0 \).
 Move the free variables to
-the right-hand side (again see the ``tricky point'') and divide by
+the right side and divide by
 \( a_{m-(t+1),\ell_{m-(t+1)}} \) to end with
 \( x_{\ell_{m-(t+1)}} \) expressed in terms of free variables.
+%</pf:HomoSltnSpanVecs3>
 
 Because we have shown both the base step and the inductive step, by the
 principle of mathematical induction the proposition is true.
@@ -3538,7 +3569,7 @@ fits the pattern of the other solution sets: in the proof above,
 we derive the solution set by taking the \( c \)'s to be the free variables
 and if there is a unique solution then there are no free variables.
 
-The proof incidentally shows, 
+Note that the proof shows, 
 as discussed after \nearbyexample{ex:Parametrize1}, that 
 we can always parametrize solution sets
 using the free variables.
@@ -3852,10 +3883,10 @@ has either no solutions or else has infinitely many, as with these.
 \end{equation*} 
 \end{example}
 
-The word singular means ``departing from general expectation''
-(people often, naively, expect that systems 
-with the same number of variables as equations will have a unique solution).
-Thus, we can think of it as connoting 
+We use the word singular because it means ``departing from general expectation''
+and people often, naively, expect that systems 
+with the same number of variables as equations will have a unique solution.
+Thus, we can think of the word as connoting 
 ``troublesome,'' or at least ``not ideal.''
 (That `singular' applies those systems that do not have one solution 
 is ironic, but it is the standard term.)

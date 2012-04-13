@@ -522,10 +522,114 @@ to get this vector description of the solution set.
 
 
 % ..... One.I.3 .....
-\section{$\text{General}=\text{Particular}+\text{Homogeneous}$}
+\section{\texorpdfstring{$\text{General}=\text{Particular}+\text{Homogeneous}$}{General=Particular+Homogeneous}}
+
 \begin{frame}
 \frametitle{Form of solution sets} 
+\ex
+This system
+\begin{equation*}
+  \begin{linsys}{4}
+    x &+  &2y  &- &z  &  &  &= &2 \\
+   2x &-  &y   &- &2z &+ &w &= &5
+  \end{linsys}
+\end{equation*}
+has solutions of this form. 
+\begin{equation*}
+     \colvec{x  \\  y  \\  z  \\  w}
+     =
+     \colvec{12/5 \\ -1/5 \\ 0 \\ 0}
+       +\colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+   \qquad
+   z,w\in\Re
+\end{equation*}
+Taking $z=w=0$ shows that the first vector is a particular solution of the
+system.
+\pause
+We will show every solution has this form
+\begin{equation*}
+\underbracket[.7pt]{
+  \colvec{12/5 \\ -1/5 \\ 0 \\ 0}
+  }_{\text{\shortstack{\rule{0pt}{2ex}particular \\  solution}}}
+  +\underbracket[.7pt]{
+       \colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+  }_{\text{\shortstack{\rule{0pt}{2ex}homogeneous \\  solution}}}
+\end{equation*}
+(we will describe homogeneous below).
+\end{frame}
 
+
+
+% ..........
+\begin{frame}
+\df[df:HomogeneousEquation]
+\ExecuteMetaData[../gr1.tex]{df:HomogeneousEquation}
+
+\ex
+Consider the system of homogeneous equations derived from the above system
+by changing the constants to $0$'s.
+\begin{equation*}
+  \begin{linsys}{4}
+    x &+  &2y  &- &z  &  &  &= &0 \\
+   2x &-  &y   &- &2z &+ &w &= &0
+  \end{linsys}
+\end{equation*}
+The same Gauss's Method steps reduce it to echelon form.
+\begin{equation*}
+    \begin{amat}[r]{4}
+      1  &2  &-1  &0  &0  \\
+      2  &-1 &-2  &1  &0  
+    \end{amat}
+  \;\grstep{-2\rho_1+\rho_2}\;
+  \begin{amat}[r]{4}
+      1  &2  &-1  &0  &0  \\
+      0  &-5 &0   &1  &0  
+    \end{amat}
+\end{equation*}
+The vector description of the solution set
+\begin{equation*}
+  \set{
+       \colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+      \suchthat z,w\in\Re}
+\end{equation*}
+is the same as earlier except that the particular solution is the
+vector of zeros.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\df[df:ZeroVector]
+\ExecuteMetaData[../gr1.tex]{df:ZeroVector}
+\ex
+The two-tall zero vector is $\zero=\binom{0}{0}$. 
+\pause
+\lm[le:HomoSltnSpanVecs]
+\ExecuteMetaData[../gr1.tex]{le:HomoSltnSpanVecs}
+
+\pause\medskip
+The proof uses mathematical induction to
+show that for any echelon form system of homogeneous equations
+we can describe the solution set in this way.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\pf[le:HomoSltnSpanVecs]
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs0}
+\pause
+
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs1}
+\pause
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs2}
+\end{frame}\begin{frame}
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs3}\qed
 \end{frame}
 
 
