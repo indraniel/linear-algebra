@@ -2007,6 +2007,8 @@ A matrix with a single row is a
 \definend{row vector}\index{row!vector}\index{vector!row}.
 The entries of a vector are its
 \definend{components}\index{component}\index{vector!component}.
+A column or row vector whose components are all zeros is a 
+\definend{zero vector}.\index{zero vector}\index{vector!zero}
 %</df:vector>
 \end{definition}
 
@@ -2024,6 +2026,11 @@ with a third component of \( 7 \).
   \vec{v}=
   \colvec[r]{ 1  \\  3  \\ 7}
 \end{equation*}
+A zero vector is denoted \( \zero \).
+There are many different zero vectors, e.g., the
+one-tall zero vector, the two-tall zero vector, etc.
+Nonetheless we will usually say ``the'' zero vector, expecting 
+that the size will be clear from the context.
 
 \begin{definition}
 The linear equation
@@ -3227,6 +3234,7 @@ A zero-element solution set fits the pattern because there is no
 particular solution and so there are no sums of that form.
 
 \begin{theorem} \label{th:GenEqPartPlusHomo}
+%<*th:GenEqPartPlusHomo>
 Any linear system's 
 solution set has the form 
 \begin{equation*}
@@ -3237,6 +3245,7 @@ where \( \vec{p} \) is any particular solution
 and where the number of vectors 
 $\vec{\beta}_1$, \ldots, $\vec{\beta}_k$ equals
 the number of free variables that the system has after a Gaussian reduction.
+%</th:GenEqPartPlusHomo>
 \end{theorem}
 
 The solution description has two parts, 
@@ -3254,7 +3263,7 @@ to $c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$.
 %<*df:HomogeneousEquation>
 A linear equation is \definend{homogeneous}\index{homogeneous equation}%
 \index{linear equation!homogeneous} if it has a constant of zero, so
-it can be put in the form $a_1x_1+a_2x_2+\,\cdots\,+a_nx_n=0$.
+that it can be written as $a_1x_1+a_2x_2+\,\cdots\,+a_nx_n=0$.
 %</df:HomogeneousEquation>
 \end{definition}
 
@@ -3308,20 +3317,8 @@ Studying the associated homogeneous system has a great advantage over
 studying the original system.
 Nonhomogeneous systems can be inconsistent.
 But a homogeneous system must be consistent since there is always at least
-one solution, the vector of zeros.
+one solution, the zero vector.
 
-\begin{definition} \label{df:ZeroVector}
-%<*df:ZeroVector>
-A column or row vector of all zeros is a 
-\definend{zero vector}\index{zero vector}\index{vector!zero}, 
-denoted \( \zero \).
-%</df:ZeroVector>
-\end{definition}
-
-\noindent There are many different zero vectors, e.g., the
-one-tall zero vector, the two-tall zero vector, etc.
-Nonetheless we will usually say ``the'' zero vector, expecting 
-that the size will be clear from the context.
 
 \begin{example} \label{ex:HomoZeroOnlySol}
 Some homogeneous systems have the zero vector as their only solution.
@@ -3407,6 +3404,7 @@ number of free variables in an echelon form version of the system.
 
 We will make two points before the proof.
 The first point is that the basic idea of the proof is straightforward.
+%<*ex:HomoSystemGivesSpanningSet>
 Consider a system of homogeneous equations in echelon form.
 \begin{equation*}
   \begin{linsys}{5}
@@ -3436,16 +3434,13 @@ Now to finish, write the solution in vector notation
 and recognize that the $\vec{\beta}_1$ and $\vec{\beta}_2$ 
 of the lemma are the 
 vectors associated with the free variables $z$ and~$t$.
+%</ex:HomoSystemGivesSpanningSet>
 
-The prior paragraph is a sketch, not a proof; in a proof we would have to 
-be careful to cover all the possibilities such as the possibility of
-an equation like $u=0$ that has a leading variable but no free
-variables.
-And, the argument would have to hold no matter how many equations the
-system has.
+The prior paragraph is a sketch, not a proof; for instance,
+a proof would have to hold no matter how many equations are in the
+system.
 
-The second point we will make about the proof concerns the style of that
-proof.
+The second point we will make about the proof concerns its style.
 The above sketch moves row-by-row up the system, using the equations
 derived for the earlier rows to do the next row.
 This suggests a proof by
@@ -3506,7 +3501,7 @@ where \( a_{m,\ell_m}\neq 0 \).
 in row~$m$.) 
 %<*pf:HomoSltnSpanVecs2>
 This is the bottom row so 
-any variables $x_{\ell_{m}+1}$, \ldots{} to the right of the
+any variables $x_{\ell_{m}+1}$, \ldots{} after the
 leading variable in this equation  must be
 free variables. 
 Move these to the right side and divide by $a_{m,\ell_m}$
@@ -3541,17 +3536,17 @@ the variables leading higher up equations appear.)
 The result has the form
 \begin{equation*}
   a_{m-(t+1),\ell_{m-(t+1)}}x_{\ell_{m-(t+1)}}+
-    \text{\textit{--a linear combination of free variables--}}=0
+    \text{\textit{a linear combination of free variables}}=0
 \end{equation*}
 with \( a_{m-(t+1),\ell_{m-(t+1)}}\neq 0 \).
 Move the free variables to
 the right side and divide by
 \( a_{m-(t+1),\ell_{m-(t+1)}} \) to end with
 \( x_{\ell_{m-(t+1)}} \) expressed in terms of free variables.
-%</pf:HomoSltnSpanVecs3>
 
 Because we have shown both the base step and the inductive step, by the
 principle of mathematical induction the proposition is true.
+%</pf:HomoSltnSpanVecs3>
 \end{proof}
 
 We say that the set
@@ -3579,12 +3574,14 @@ by considering the particular solution part of the
 solution set's description.
 
 \begin{lemma}  \label{th:GenEqPartHomo}
+%<*th:GenEqPartHomo>
 For a linear system, where $\vec{p}\/$ is any particular solution,
 the solution set equals this set.
 \begin{equation*}
   \set{\vec{p}+\vec{h} \suchthat \text{ \( \vec{h} \) satisfies the
                                 associated homogeneous system}     }
 \end{equation*}
+%</th:GenEqPartHomo>
 \end{lemma}
 
 \begin{proof}
@@ -3592,40 +3589,40 @@ We will show mutual set inclusion, that any solution to the system is in
 the above set and that anything in the set is a solution to the 
 system.\appendrefs{equality of sets}
 
+%<*pf:GenEqPartHomo0>
 For set inclusion the first way, that if a vector solves the system
 then it is in the set described above, 
 assume that \( \vec{s} \) solves the system.
 Then \( \vec{s}-\vec{p} \) solves the associated
 homogeneous system since for each equation index \( i \),
-\begin{equation*}
-  \begin{split}
-  a_{i,1}(s_1-p_1)+\cdots+a_{i,n}(s_n-p_n)
-  &=(a_{i,1}s_1+\cdots+a_{i,n}s_n)       \\
-  &\quad -(a_{i,1}p_1+\cdots+a_{i,n}p_n)  \\
-  &=d_i-d_i                 \\
-  &=0
-  \end{split}
-\end{equation*}
+\begin{multline*}
+  a_{i,1}(s_1-p_1)+\cdots+a_{i,n}(s_n-p_n) \\
+  =(a_{i,1}s_1+\cdots+a_{i,n}s_n)       
+  -(a_{i,1}p_1+\cdots+a_{i,n}p_n)  
+  =d_i-d_i                 
+  =0
+\end{multline*}
 where \( p_j \) and \( s_j \) are the \( j \)-th components of
 \( \vec{p} \) and \( \vec{s} \).
 Express \( \vec{s} \) in the required \( \vec{p}+\vec{h} \) form
 by writing \( \vec{s}-\vec{p} \) as \( \vec{h} \).
+%</pf:GenEqPartHomo0>
 
+%<*pf:GenEqPartHomo1>
 For set inclusion the other way, take a vector of the form $\vec{p}+\vec{h}$,
 where \( \vec{p} \) solves the system and \( \vec{h} \) solves the
-associated homogeneous system, and note that $\vec{p}+\vec{h}$ 
+associated homogeneous system and note that $\vec{p}+\vec{h}$ 
 solves the given system: for any equation index $i$, 
-\begin{equation*}
-  \begin{split}
-  a_{i,1}(p_1+h_1)+\cdots+a_{i,n}(p_n+h_n)
-  &=(a_{i,1}p_1+\cdots+a_{i,n}p_n)      \\
-  &\quad+(a_{i,1}h_1+\cdots+a_{i,n}h_n)  \\
-  &=d_i+0                                \\
-  &=d_i
-  \end{split}
-\end{equation*}
+\begin{multline*}
+  a_{i,1}(p_1+h_1)+\cdots+a_{i,n}(p_n+h_n)  \\
+  =(a_{i,1}p_1+\cdots+a_{i,n}p_n)      
+   +(a_{i,1}h_1+\cdots+a_{i,n}h_n)  
+  =d_i+0                                
+  =d_i
+\end{multline*}
 where \( p_j \) and \( h_j \) are the \( j \)-th components of 
 \( \vec{p} \) and \( \vec{h} \).
+%</pf:GenEqPartHomo1>
 \end{proof}
 
 The two lemmas above together establish \nearbytheorem{th:GenEqPartPlusHomo}.
@@ -3734,24 +3731,28 @@ general solution set is empty\Dash there are no vectors of the form
 $\vec{p}+\vec{h}$ because there are no $\vec{p}\:$'s.
 \end{example}
 
-\begin{corollary}
+\begin{corollary} \label{co:ThreeKindsSolutionSets}
+%<*co:ThreeKindsSolutionSets>
 Solution sets of linear systems are either empty, have one element, or
 have infinitely many elements.
+%</co:ThreeKindsSolutionSets>
 \end{corollary}
 
 \begin{proof}
+%<*pf:ThreeKindsSolutionSets>
 We've seen examples of all three happening so we need only prove
 that there are no other possibilities.
 
 First, notice a homogeneous system with
 at least one  non-\( \zero \) solution $\vec{v}$ has infinitely many
-solutions because the set of multiples $s\vec{v}$
-is infinite\Dash if $s\neq 1$ then $s\vec{v}\neq\vec{v}$ because
-$s\vec{v}-\vec{v}=(s-1)\vec{v}$ is
+solutions.
+This is because the set of multiples of $\vec{v}$
+is infinite\Dash if $s,t\in\Re$ are unequal then $s\vec{v}\neq t\vec{v}$ because
+$s\vec{v}-t\vec{v}=(s-t)\vec{v}$ is
 non-$\zero$, since any non-$0$ component of $\vec{v}$ when 
-rescaled by the factor $s-1$ will give a non-$0$ value.
+rescaled by the non-$0$ factor $s-t$ will give a non-$0$ value.
 
-Now, apply \nearbylemma{th:GenEqPartHomo} to conclude that a solution set
+Now apply \nearbylemma{th:GenEqPartHomo} to conclude that a solution set
 \begin{equation*}
   \set{\vec{p}+\vec{h}\suchthat
     \text{\( \vec{h} \) solves the associated homogeneous system}}
@@ -3761,12 +3762,14 @@ or has one element (if there is a \( \vec{p} \) and the homogeneous system
 has the unique solution \( \zero \)), or is infinite (if there is a
 \( \vec{p} \) and the homogeneous system has a non-$\zero$ solution,
 and thus by the prior paragraph has infinitely many solutions).
+%</pf:ThreeKindsSolutionSets>
 \end{proof}
 
 This table summarizes the factors affecting the size of a
 general solution.
 
 \medskip
+%<*table:KindsSolutionSets>
 \begin{center} 
 \begin{tabular}{r@{}c}
   &\hspace*{2.5em}\begin{tabular}{c} 
@@ -3794,6 +3797,7 @@ general solution.
    \end{tabular}
 \end{tabular}
 \end{center}
+%</table:KindsSolutionSets>
 \medskip
 
 The dimension on the top of the table is the simpler one.
@@ -3815,7 +3819,8 @@ reduces to an echelon form system where every variable leads its row
 which will happen if and only if
 the associated homogeneous system has a unique solution.
 
-\begin{definition}
+\begin{definition} \label{df:Nonsingular}
+%<*df:Nonsingular>
 A square matrix is \definend{nonsingular}\index{nonsingular!matrix}
 \index{matrix!nonsingular}
 if it is the matrix of coefficients of a
@@ -3825,6 +3830,7 @@ It is
 that is,
 if it is the matrix of coefficients of a homogeneous system with 
 infinitely many solutions.
+%</df:Nonsingular>
 \end{definition}
 
 \begin{example}
