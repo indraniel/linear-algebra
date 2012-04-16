@@ -1,0 +1,388 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+\DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../gr2} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Linear Geometry] % (optional, use only with long paper titles)
+{One.II Linear Geometry}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Linear Geometry}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+\begin{frame}{Geometry} 
+We can draw two-unknkown equations as lines.
+Then the three possibilities for solution sets become clear.
+\pause
+\begin{center} % had to copy because the graphics are in a different dir
+  \begin{minipage}[b]{1.35in}
+    \raisebox{-2pt}[8pt][0pt]{\small \begin{tabular}{@{}l}
+      \small \textit{Unique solution}
+    \end{tabular}}
+    \begin{center}
+      \includegraphics{../ch1.3} \\[.75ex]
+      \small $\begin{linsys}{2}
+                         3x  &+  &2y  &=  &7   \\
+                         x   &-  &y   &=  &-1
+                       \end{linsys}$
+    \end{center}
+  \end{minipage}
+  \hspace*{0em}
+  \begin{minipage}[b]{1.35in}
+    \raisebox{-2pt}[8pt][0pt]{\small \begin{tabular}{@{}l}
+      \small \textit{No solutions}
+    \end{tabular}}
+    \begin{center}
+      \includegraphics{../ch1.4} \\[.75ex]
+      \small $\begin{linsys}{2}
+                         3x  &+  &2y  &=  &7   \\
+                         3x  &+  &2y  &=  &4
+                       \end{linsys}$
+    \end{center}
+  \end{minipage}
+  \hspace*{0em}
+  \begin{minipage}[b]{1.35in}
+    \raisebox{-2pt}[8pt][0pt]{\small \begin{tabular}[t]{@{}l}
+      \textit{Infinitely many} \\
+      \textit{solutions}
+    \end{tabular}}
+    \begin{center}
+      \includegraphics{../ch1.5}         \\[.75ex]
+      \small $ \begin{linsys}{2}
+                         3x  &+  &2y  &=  &7   \\
+                         6x  &+  &4y  &=  &14
+                       \end{linsys}$
+    \end{center}
+  \end{minipage}
+\end{center}
+The geometry is pretty, and helps us understand what is happening.
+\end{frame}
+
+
+
+% ..... One.II.1 .....
+\section{Vectors in space}
+\begin{frame}{Vectors}
+A \definend{vector} is an object that can be specified completely by
+giving its magnitude and its direction.
+We can draw a vector as having some length and pointing in some direction.
+\centergraphic{../ch1.8}
+\pause
+Two vectors with the same magnitude and
+same direction, such as all of these, are equal.  
+\centergraphic{../ch1.12}
+Think of a vector as representing a displacement so each of the 
+above is a displacement of one over and two up.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+Denote the vector that extends from $(a_1,a_2)$ to $(b_1,b_2)$ by
+\begin{equation*}
+  \colvec{b_1-a_1 \\ b_2-a_2}
+\end{equation*}
+so the ``one over, two up'' vector would be written in this way.
+\begin{equation*}
+  \colvec{1 \\ 2}
+\end{equation*}
+We often draw the vector
+\begin{equation*}
+  \vec{v}=\colvec{v_1 \\ v_2}
+\end{equation*}
+as starting at the origin and extending to $(v_1,v_2)$ and we may refer to it
+as ``the point $\vec{v}\,$''
+so that we may call each of these $\Re^2$.
+\begin{equation*}  
+   \set{(x_1,x_2)\suchthat x_1,x_2\in\Re}
+   \qquad
+   \set{\colvec{x_1 \\ x_2}\suchthat x_1,x_2\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+These definitions extend to higher dimensions.
+The vector that
+starts at \( (a_1,\ldots,a_n) \) and ends at \( (b_1,\ldots,b_n) \) 
+is represented by this column
+\begin{equation*}
+  \colvec{b_1-a_1 \\ \vdotswithin{b_1-a_1} \\ b_n-a_n}
+\end{equation*}
+and two vectors are equal if they have the same representation.
+Also, 
+we aren't too careful about distinguishing between a point and the vector 
+which, when it starts at the origin, ends at that point. 
+\begin{equation*}
+  \Re^n=
+  \set{\colvec{v_1 \\ \vdotswithin{v_1} \\ v_n}\suchthat v_1,\ldots,v_n\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+% ..........
+\begin{frame}{Vector operations}
+Scalar multiplication affects the length of a vector but not its direction.
+\centergraphic{../ch1.13}
+For the vector sum: 
+where \( \vec{v} \) and \( \vec{w} \) represent displacements,
+\( \vec{v}+\vec{w}\/ \) represents those displacements combined,
+as shown in these two.
+\begin{center}
+\includegraphics{../ch1.14}
+\qquad
+\includegraphics{../ch1.15}
+\end{center}
+The second drawing is the \definend{parallelogram rule}.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}{Lines}
+In $\Re^2$, the line through \( (1,2) \) and \( (3,1) \)
+is comprised of the vectors in this set.
+\begin{center}
+  {$\displaystyle   
+     \set{ \colvec[r]{1 \\ 2}+t\colvec[r]{2 \\ -1}\suchthat t\in\Re}
+  $}
+  \qquad
+  \vcenteredhbox{\includegraphics{../ch1.16}}
+\end{center}
+% That description expresses this picture.
+% \centergraphic{../ch1.16}
+The vector associated with the parameter \( t \)
+\begin{equation*}
+  \colvec[r]{2 \\ -1}
+\end{equation*}
+is a \definend{direction vector}\index{vector!direction}%
+\index{direction vector} for the line.
+In higher dimensions lines work the same way.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}{Planes}
+In $\Re^3$, 
+the plane through the points
+\( (1,0,5) \), \( (2,1,-3) \), and \( (-2,4,0.5) \) consists of
+(endpoints of) the vectors in
+\begin{equation*}
+  \set{ \colvec[r]{1 \\ 0 \\ 5}
+         +t\colvec[r]{1 \\ 1 \\ -8}
+         +s\colvec[r]{-3 \\ 4 \\ -4.5}
+       \suchthat t,s\in\Re      }
+\end{equation*}
+The column vectors associated with the parameters
+\begin{equation*}
+  \colvec[r]{1 \\ 1 \\ -8}
+  =
+  \colvec[r]{2 \\ 1 \\ -3}
+  -
+  \colvec[r]{1 \\ 0 \\ 5}
+  \qquad
+  \colvec[r]{-3 \\ 4 \\ -4.5}
+  =
+  \colvec[r]{-2 \\ 4 \\ 0.5}
+  -
+  \colvec[r]{1 \\ 0 \\ 5}
+\end{equation*}
+have their whole bodies in the plane.
+
+\pause
+A set of the form
+$\set{\vec{p}+t_1\vec{v}_1+t_2\vec{v}_2+\cdots+t_k\vec{v}_k
+             \suchthat t_1,\ldots ,t_k\in\Re}$
+where \( \vec{v}_1,\ldots,\vec{v}_k\in\Re^n \) 
+and $k\leq n$ is a
+\definend{\( k \)-dimensional linear surface}\index{linear surface}
+(or \definend{\( k \)-flat}\index{flat}).
+\end{frame}
+
+
+
+
+% ..... One.II.2 .....
+\section{Length and angle measures}
+\begin{frame}{Length} 
+\df[df:Length]
+\ExecuteMetaData[../gr2.tex]{df:Length}
+\ex
+The length of
+\begin{equation*}
+  \colvec[r]{-1 \\ -2 \\-3}
+\end{equation*}
+is $\sqrt{1+4+9}=\sqrt{14}$.
+
+\pause
+For any nonzero vector $\vec{v}$, the vector with the same direction
+and length one is $\vec{v}/\norm{\vec{v}}$.
+We say that this
+\definend{normalizes}\index{normalize}\index{vector!normalize}
+$\vec{v}$ to length one. 
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Dot product} 
+\df[df:DotProduct]
+\ExecuteMetaData[../gr2.tex]{df:DotProduct}
+
+\ex
+The dot product of two vectors
+\begin{equation*}
+  \colvec{1 \\ 1 \\ -1}\dotprod\colvec{3 \\ -3 \\ 4}
+  =3-3-4=-4
+\end{equation*}
+is a scalar, not a vector.
+
+\pause
+The dot product of a vector with itself 
+$\vec{v}\dotprod\vec{v}=v_1^2+\cdots+v_n^2$
+is the square of the vector's length.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Triangle Inequality} 
+\th[th:TriangleInequality]
+\ExecuteMetaData[../gr2.tex]{th:TriangleInequality}
+
+This is the source of the familiar saying, 
+``The shortest distance between two points is in a straight line.''
+\centergraphic{../ch1.23}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\pf[th:TriangleInequality]
+\ExecuteMetaData[../gr2.tex]{pf:TriangleInequality0}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ExecuteMetaData[../gr2.tex]{pf:TriangleInequality1}
+\qed
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Cauchy-Schwartz Inequality} 
+\co[th:CauchySchwartz]
+\ExecuteMetaData[../gr2.tex]{co:CauchySchwartzInequality}
+\pause
+\pf[th:CauchySchwartz]
+\ExecuteMetaData[../gr2.tex]{pf:CauchySchwartzInequality}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Angle measure} 
+\df
+The \definend{angle} between two vectors $\vec{u},\vec{v}\in\Re^n$
+is this.
+\begin{equation*}
+  \theta
+  =
+  \arccos(\,\frac{\vec{u}\dotprod\vec{v}}{
+         \norm{\vec{u}\,}\,\norm{\vec{v}\,} }\,)
+\end{equation*}
+
+We will motivate that definition with
+two vectors in \( \Re^3 \). 
+\centergraphic{../ch1.21}
+Put them at the origin and in the 
+plane that they determine, consider the triangle formed by
+\( \vec{u} \), \( \vec{v} \), and \( \vec{u}-\vec{v} \).
+\end{frame}\begin{frame}
+\centergraphic{../ch1.22}
+Apply the Law of Cosines:
+$\norm{\vec{u}-\vec{v}\,}^2
+  =
+  \norm{\vec{u}\,}^2+\norm{\vec{v}\,}^2-
+    2\,\norm{\vec{u}\,}\,\norm{\vec{v}\,}\cos\theta$ 
+where \( \theta \) is the angle that we want to find.
+The left side gives 
+\begin{multline*}
+(u_1-v_1)^2+(u_2-v_2)^2+(u_3-v_3)^2  \\
+     =(u_1^2-2u_1v_1+v_1^2)+(u_2^2-2u_2v_2+v_2^2)+(u_3^2-2u_3v_3+v_3^2)
+\end{multline*}
+while the right side gives this.
+\begin{equation*}
+(u_1^2+u_2^2+u_3^2)+(v_1^2+v_2^2+v_3^2)-
+     2\,\norm{\vec{u}\,}\,\norm{\vec{v}\,}\cos\theta
+\end{equation*}
+Canceling squares $u_1^2$ \ldots{}, $v_3^2$ and dividing by $2$ gives 
+the formula.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+Note that two vectors are orthogonal if and only if their dot product is zero.  
+\end{frame}
+
+
+
+
+%...........................
+% \begin{frame}
+% 
+% \end{frame}
+\end{document}

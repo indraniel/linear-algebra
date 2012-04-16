@@ -1,0 +1,707 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \usepackage{linear_algebra}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../gr1}
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Solving Linear Systems] % (optional, use only with long paper titles)
+{Solving Linear Systems}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Solving Linear Systems}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+% \AtBeginDocument{\makeatletter
+% \let\ref\@refstar
+% \makeatother}
+% \usepackage{xparse}% http://ctan.org/pkg/xparse
+
+% \makeatletter
+% \NewDocumentCommand{\reff}{s m}{%
+%   \IfBooleanTF{#1}% Check for starred variant
+%     {\beamer@origref{#2}}% \reff*
+%     {\hyperlink{#2}{\beamer@origref{#2}}}% \reff
+% }
+% \makeatother
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+
+
+
+% ..... One.I.1 .....
+\section{Gauss' method}
+\begin{frame}{Linear systems} 
+\df[def:linearcombination]
+\ExecuteMetaData[../gr1.tex]{df:linearcombination}
+
+\ex This is a linear combination of $x$, $y$, and $z$.
+\begin{equation*}
+   (1/4)x+y-z
+\end{equation*}
+\end{frame}
+
+
+%...........................
+\begin{frame}
+\df[def:linearcombination]
+\ExecuteMetaData[../gr1.tex]{df:linearequations}
+\ex 
+There are three linear equations in this linear system.
+\begin{equation*}
+  \begin{linsys}{3}
+   (1/4)x  &+  &y  &-  &z  &=  &0  \\
+        x  &+  &4y &+  &2z &=  &12  \\
+       2x  &-  &3y &-  &z  &=  &3  
+  \end{linsys}  
+\end{equation*}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}{Solving a linear system}
+\ex 
+To find the solution of this system
+\begin{equation*}
+  \begin{linsys}{3}
+   (1/4)x  &+  &y  &-  &z  &=  &0  \\
+        x  &+  &4y &+  &2z &=  &12  \\
+       2x  &-  &3y &-  &z  &=  &3  
+  \end{linsys}  
+\end{equation*}
+we transform it to one whose solution is easy.
+\pause We can start by clearing the fractions.
+\begin{eqnarray*}
+  &\grstep{4\rho_1}
+  &\begin{linsys}{3}
+        x  &+  &4y &-  &4z  &=  &0  \\
+        x  &+  &4y &+  &2z &=  &12  \\
+       2x  &-  &3y &-  &z  &=  &3  
+  \end{linsys}  
+\end{eqnarray*}
+\pause Use the first row to act on the rows below, eliminating the $x$~terms.
+\begin{eqnarray*}
+  &\grstep[-2\rho_1+\rho_3]{-1\rho_1+\rho_2}
+  &\begin{linsys}{3}
+        x  &+  &4y   &-  &4z  &=  &0  \\
+           &   &     &+  &6z  &=  &12  \\
+           &   &-11y &+  &7z  &=  &3  
+  \end{linsys} 
+\end{eqnarray*} 
+\end{frame}\begin{frame}
+Swap to bring a $y$ term to the second row.
+\begin{eqnarray*}
+  &\grstep{\rho_2\leftrightarrow\rho_3}
+  &\begin{linsys}{3}
+        x  &+  &4y   &-  &4z  &=  &0  \\
+           &   &-11y &+  &7z  &=  &3  \\
+           &   &     &   &6z  &=  &12  
+  \end{linsys}  
+\end{eqnarray*}
+\pause We can solve the bottom row:
+$z=2$.
+\pause
+The shape of the transformed system 
+lets us solve for $y$ by substituting into the second row:
+$-11y+7(2)=3$ shows that $y=1$.
+\pause
+The shape also lets us solve for $x$ by substituting into the
+first row: $x+4(1)-4(2)=0$ gives that $x=4$. 
+
+\df[df:EchelonForm]
+\ExecuteMetaData[../gr1.tex]{df:EchelonForm}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}
+\ex 
+\begin{eqnarray*}
+  \begin{linsys}{4}
+    2x  &-  &3y  &-  &z  &+ &2w &=  &-2  \\
+     x  &   &    &+  &3z &+ &1w &=  &6  \\
+    2x  &-  &3y  &-  &z  &+ &3w &=  &-3  \\
+        &   &y   &+  &z  &- &2w &=  &4  
+  \end{linsys}  
+  &\grstep[-\rho_1+\rho_3]{(-1/2)\rho_1+\rho_2}
+  &\begin{linsys}{4}
+    2x  &-  &3y      &-  &z      &+  &2w &=  &-2  \\
+        &   &(3/2)y  &+  &(7/2)z &   &   &=  &7  \\
+        &   &        &   &       &   &w  &=   &-1  \\
+        &   &y       &+  &z      &-  &2w  &=  &4  
+  \end{linsys}                                       \\
+  &\grstep{(-2/3)\rho_2+\rho_4}
+  &\begin{linsys}{4}
+    2x  &-  &3y      &-  &z      &+  &2w &=  &-2  \\
+        &   &(3/2)y  &+  &(7/2)z &   &   &=  &7  \\
+        &   &        &   &       &   &w  &=   &-1  \\
+        &   &        &-  &(4/3)z &- &2w  &=  &-2/3  
+  \end{linsys}                                         \\
+  &\grstep{\rho_3\leftrightarrow\rho_4}
+  &\begin{linsys}{4}
+    2x  &-  &3y      &-  &z      &+  &2w &=  &-2  \\
+        &   &(3/2)y  &+  &(7/2)z &   &   &=  &7  \\
+        &   &        &-  &(4/3)z &- &2w  &=  &-2/3 \\ 
+        &   &        &   &       &   &w  &=   &-1  
+  \end{linsys}  
+\end{eqnarray*}
+The fourth equation says $w=-1$.
+Substituting back into the third equation gives $z=2$.
+Then back substitution into the second and first rows gives
+$y=0$ and $x=1$.
+The unique solution is $(1,0,2,-1)$.
+\end{frame}
+
+
+
+%...........................
+\begin{frame}{Gauss' method}
+\th[th:GaussMethod]
+\ExecuteMetaData[../gr1.tex]{th:GaussMethod}
+
+\df[df:GaussMethod]
+\ExecuteMetaData[../gr1.tex]{df:GaussMethod}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}
+\pf[th:GaussMethod]
+We cover one of the three.
+The other two are similar.
+
+\ExecuteMetaData[../gr1.tex]{pf:GaussMethod}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}{Systems without a unique solution}
+\ex
+This system has no solution.
+\begin{equation*}
+  \begin{linsys}{3}
+        x  &+  &y  &+  &z  &=  &6  \\
+        x  &+  &2y &+  &z  &=  &8  \\
+       2x  &+  &3y &+  &2z &=  &13  
+  \end{linsys}    
+\end{equation*}
+On the left side the sum of the first two equals the third,
+while on the right that is not so.
+So there is no triple of reals that makes all three 
+equations true.
+\pause
+Gauss' Method makes the inconsistency clear.
+\begin{equation*}
+  \grstep[-2\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+  \begin{linsys}{3}
+        x  &+  &y  &+  &z  &=  &6  \\
+           &   &y  &   &   &=  &2  \\
+           &   &y  &   &   &=  &1  
+  \end{linsys}    
+  \;\grstep{-\rho_2+\rho_3}\;
+  \begin{linsys}{3}
+        x  &+  &y  &+  &z  &=  &6  \\
+           &   &y  &   &   &=  &2  \\
+           &   &   &   &0  &=  &-1  
+  \end{linsys}    
+\end{equation*}
+\end{frame}
+
+
+
+%...........................
+\begin{frame}
+\ex
+This system has infinitely many solutions.
+\begin{equation*}
+  \begin{linsys}{3}
+        x  &-  &y  &+  &z  &=  &4  \\
+        x  &+  &y  &-  &2z &=  &-1   
+  \end{linsys} 
+  \;\grstep{-\rho_1+\rho_2}\;   
+  \begin{linsys}{3}
+        x  &-  &y  &+  &z  &=  &4  \\
+           &   &2y &-  &3z &=  &-5   
+  \end{linsys} 
+\end{equation*}
+Taking $z=0$ gives the solution $(3/2,-5/2,0)$.
+Taking $z=-1$ gives $(1,-4,-1)$.
+
+\pause
+\ex
+Another system with infinitely many solutions.
+\begin{eqnarray*}
+  \begin{linsys}{3}
+        -x   &-  &y  &+  &3z  &=  &3  \\
+         x   &   &   &+  &z   &=  &3  \\
+        3x   &-  &y  &+  &7z  &=  &15   
+  \end{linsys} 
+  &\grstep[3\rho_1+\rho_3]{-\rho_1+\rho_2}   
+  &\begin{linsys}{3}
+        -x   &-  &y   &+  &3z  &=  &3  \\
+             &   &-y  &+  &4z  &=  &6  \\
+             &   &-4y &+  &16z &=  &24   
+  \end{linsys}                                \\
+  &\grstep{-4\rho_2+\rho_3}
+  &\begin{linsys}{3}
+        -x   &-  &y  &+  &3z  &=  &3  \\
+             &   &-y  &+  &4z  &=  &6  \\
+             &   &   &   &0    &=  &0   
+  \end{linsys} 
+\end{eqnarray*}
+Taking $z=0$ gives $(3,-6,0)$ while
+taking $z=1$ gives $(2,-2,1)$.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+% ..... One.I.2 .....
+\section{Describing the solution set}
+\begin{frame}{Parametrizing} 
+We've seen that this system has infinitely many solutions
+\begin{equation*}
+  \begin{linsys}{3}
+        -x   &-  &y  &+  &3z  &=  &3  \\
+         x   &   &   &+  &z   &=  &3  \\
+        3x   &-  &y  &+  &7z  &=  &15   
+  \end{linsys} 
+  \;\grstep[3\rho_1+\rho_3]{-\rho_1+\rho_2}   
+  \;\grstep{-4\rho_2+\rho_3}\;
+  \begin{linsys}{3}
+        -x   &-  &y  &+  &3z  &=  &3  \\
+             &   &-y  &+  &4z  &=  &6  \\
+             &   &   &   &0    &=  &0   
+  \end{linsys} 
+\end{equation*}
+Use the second row to express $y$ in terms of~$z$ as 
+$y=-6+4z$. 
+\pause 
+Now substitute into the first row $-x-(-6+4z)+3z=3$
+to 
+express $x$ also in terms of~$z$ with
+$x=3-z$.
+
+\pause
+\df[df:FreeVars]
+\ExecuteMetaData[../gr1.tex]{df:FreeVars}
+
+\ExecuteMetaData[../gr1.tex]{df:Parameter}
+We shall routinely parametrize linear systems using the free variables.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ex
+\begin{eqnarray*}
+  \begin{linsys}{4}
+         x   &-  &y  &+  &2z  &+  &3w &=  &14  \\
+        2x   &-  &2y &-  &z   &+  &2w &=  &6  \\
+             &   &   &-  &3z  &+  &2w &=  &0   
+  \end{linsys} 
+  &\grstep{-2\rho_1+\rho_2}
+  &\begin{linsys}{4}
+         x   &-  &y  &+  &2z  &+  &3w &=  &14  \\
+             &   &   &-  &5z  &-  &4w &=  &-22  \\
+             &   &   &-  &3z  &+  &2w &=  &0   
+  \end{linsys}                                   \\
+  &\grstep{-(3/5)\rho_2+\rho_3}
+  &\begin{linsys}{4}
+         x   &-  &y  &+  &2z  &+  &3w      &=  &14  \\
+             &   &   &-  &5z  &-  &4w      &=  &-22  \\
+             &   &   &   &    &   &(22/5)w &=  &66/5   
+  \end{linsys}                                  
+\end{eqnarray*}
+The leading variables are $x$, $w$, and $z$, so we parametrize with $y$.
+The bottom row gives $w=3$ and substituting that into the next
+row up gives $z=2$.
+\pause
+The top equation is $x-y+2\cdot 2+3\cdot 3=14$, so 
+we have $x=1-y$.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ex
+This system has already been brought to echelon form.
+\begin{equation*}
+  \begin{linsys}{4}
+   -2x  &+  &y  &-  &z   &+   &w  &= &3/2  \\
+        &   &   &   &2z  &-   &w  &= &1/2 
+  \end{linsys} 
+\end{equation*}
+The leading variables are $x$ and $z$ so we will 
+parametrize the solution set with $y$ and $w$.
+\pause
+The second row gives $z=1/4+(1/2)w$.
+\pause
+Substituting back into the first row gives
+$-2x+y-((1/4)+(1/2)w)+w=3/2$,
+and solving for $x$ leaves
+$x=-(7/8)+(1/2)y+(1/4)w$.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}{Matrices and vectors}
+\df[df:matrix]
+\ExecuteMetaData[../gr1.tex]{df:matrix}
+
+\pause
+\ex
+This is a $\nbym{2}{3}$ matrix
+\begin{equation*}
+  B=
+  \begin{mat}[r]
+    1  &-2  &3  \\
+    4  &-5  &6
+  \end{mat}
+\end{equation*}
+because it has $2$~rows and $3$~columns.
+The entry in row~$2$ and column~$1$ is
+\( b_{2,1}=4 \).
+
+\pause
+\df[df:vector]
+\ExecuteMetaData[../gr1.tex]{df:vector}
+
+\pause
+\ex
+This column vector has three components.
+\begin{equation*}
+  \vec{v}=\colvec{-1  \\ -0.5  \\ 0}
+\end{equation*}
+The two-tall zero vector is $\zero=\binom{0}{0}$. 
+\end{frame}
+
+
+
+% ..........
+\begin{frame}{Vector operations}
+\df[df:VectorSum]
+\ExecuteMetaData[../gr1.tex]{df:VectorSum}
+\df[df:VectorScalarMultiplication]
+\ExecuteMetaData[../gr1.tex]{df:VectorScalarMultiplication}
+\ex
+\begin{equation*}
+  3\colvec{1 \\2}-2\colvec{0 \\ 1}=\colvec{3 \\ 4}
+\end{equation*}
+\end{frame}
+
+
+% ..........
+\begin{frame}{Matrix notation for linear systems}
+\ex
+We can simplify the clerical load in reducing this system
+\begin{equation*}
+  \begin{linsys}{3}
+       -3x   &   &   &+  &2z  &=  &-1  \\
+         x   &-  &2y &+  &2z  &=  &-5/3  \\
+        -x   &-  &4y &+  &6z  &=  &-13/3   
+  \end{linsys} 
+\end{equation*}
+by writing it as an \definend{augmented matrix}.
+\begin{eqnarray*}
+    \begin{amat}[r]{3}
+     -3  &0  &2  &-1  \\
+      1  &-2 &2  &-5/3  \\
+     -1  &-4 &6  &-13/3
+    \end{amat}
+  &\grstep[-(1/3)\rho_1+\rho_3]{(1/3)\rho_1+\rho_2}
+  &\begin{amat}[r]{3}
+     -3  &0  &2    &-1  \\
+      0  &-2 &8/3  &-2  \\
+      0  &-4 &16/3 &-4
+    \end{amat}                      \\
+  &\grstep{-2\rho_2+\rho_3}
+  &\begin{amat}[r]{3}
+     -3  &0  &2    &-1  \\
+      0  &-2 &8/3  &-2  \\
+      0  &0  &0    &0
+    \end{amat}  
+\end{eqnarray*}
+The two nonzero rows give
+$-3x+2z=-1$ and $-2y+(8/3)z=-2$.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+Solving
+$-3x+2z=-1$ and $-2y+(8/3)z=-2$
+for the leading variables
+gives 
+$y=1+(4/3)z$ and $x=(1/3)+(2/3)z$.
+\pause
+We can write the solution set in vector notation.
+\begin{equation*}
+  \set{\colvec{x \\ y \\ z}=\colvec{1/3 \\ 1 \\ 0}+\colvec{2/3 \\ 4/3 \\ 1}z 
+                 \suchthat z\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\ex
+We can reduce this system
+\begin{equation*}
+  \begin{linsys}{4}
+    x &+  &2y  &- &z  &  &  &= &2 \\
+   2x &-  &y   &- &2z &+ &w &= &5
+  \end{linsys}
+\end{equation*}
+using the augmented matrix notation
+\begin{eqnarray*}
+    \begin{amat}[r]{4}
+      1  &2  &-1  &0  &2  \\
+      2  &-1 &-2  &1  &5  
+    \end{amat}
+  &\grstep{-2\rho_1+\rho_2}
+  &\begin{amat}[r]{4}
+      1  &2  &-1  &0  &2  \\
+      0  &-5 &0   &1  &1  
+    \end{amat}
+\end{eqnarray*}
+to get this vector description of the solution set.
+\begin{equation*}
+  \set{\colvec{12/5 \\ -1/5 \\ 0 \\ 0}
+       +\colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+      \suchthat z,w\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+
+% ..... One.I.3 .....
+\section{\texorpdfstring{$\text{General}=\text{Particular}+\text{Homogeneous}$}{General=Particular+Homogeneous}}
+
+\begin{frame}
+\frametitle{Form of solution sets} 
+\ex
+This system
+\begin{equation*}
+  \begin{linsys}{4}
+    x &+  &2y  &- &z  &  &  &= &2 \\
+   2x &-  &y   &- &2z &+ &w &= &5
+  \end{linsys}
+\end{equation*}
+has solutions of this form. 
+\begin{equation*}
+     \colvec{x  \\  y  \\  z  \\  w}
+     =
+     \colvec{12/5 \\ -1/5 \\ 0 \\ 0}
+       +\colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+   \qquad
+   z,w\in\Re
+\end{equation*}
+Taking $z=w=0$ shows that the first vector is a particular solution of the
+system.
+\pause
+We will show that every solution has this form.
+\begin{equation*}
+\underbracket[.7pt]{
+  \colvec{12/5 \\ -1/5 \\ 0 \\ 0}
+  }_{\text{\shortstack{\rule{0pt}{2ex}particular \\  solution}}}
+  +\underbracket[.7pt]{
+       \colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+  }_{\text{\shortstack{\rule{0pt}{2ex}homogeneous \\  solution}}}
+\end{equation*}
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\df[df:HomogeneousEquation]
+\ExecuteMetaData[../gr1.tex]{df:HomogeneousEquation}
+
+\ex
+Consider the system of homogeneous equations derived from the above system
+by changing the constants to $0$'s.
+\begin{equation*}
+  \begin{linsys}{4}
+    x &+  &2y  &- &z  &  &  &= &0 \\
+   2x &-  &y   &- &2z &+ &w &= &0
+  \end{linsys}
+\end{equation*}
+The same Gauss's Method steps reduce it to echelon form.
+\begin{equation*}
+    \begin{amat}[r]{4}
+      1  &2  &-1  &0  &0  \\
+      2  &-1 &-2  &1  &0  
+    \end{amat}
+  \;\grstep{-2\rho_1+\rho_2}\;
+  \begin{amat}[r]{4}
+      1  &2  &-1  &0  &0  \\
+      0  &-5 &0   &1  &0  
+    \end{amat}
+\end{equation*}
+The vector description of the solution set
+\begin{equation*}
+  \set{
+       \colvec{1 \\ 0 \\ 1 \\ 0}z
+       +\colvec{-2/5 \\ 1/5 \\ 0 \\ 1}w
+      \suchthat z,w\in\Re}
+\end{equation*}
+is the same as earlier but with a particular solution that is the
+zero vector.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\lm[le:HomoSltnSpanVecs]
+\ExecuteMetaData[../gr1.tex]{le:HomoSltnSpanVecs}
+\ex
+Consider this system of homogeneous equations.
+\begin{equation*}
+  \begin{linsys}{5}
+     x  &+  &y   &+  &z  &+  &w  &=  &0  \\
+        &   &y   &-  &z  &+  &w  &=  &0  
+  \end{linsys}
+\end{equation*}
+With the bottom equation express the leading variable $y$ in terms of the
+free variables 
+$y=z-w$.
+Move up to the equation above, substitute 
+$x+(z-w)+z+w=0$, and solve for the leading variable
+$x=-2z$.
+\pause
+To finish write the solution in vector notation.
+\begin{equation*}
+  \colvec{x \\ y \\ z \\ w}
+    =\colvec{-2 \\ 1 \\ 1 \\ 0}z
+     +\colvec{0 \\ -1 \\ 0 \\ 1}w
+    \qquad z,w\in\Re
+\end{equation*}
+and recognize $\vec{\beta}_1$ and $\vec{\beta}_2$ as the vectors associated
+with $z$ and~$w$.
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\pf[le:HomoSltnSpanVecs]
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs0}
+\pause
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs1}
+\pause
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs2}
+\end{frame}\begin{frame}
+\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs3}\qed
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\lm[th:GenEqPartHomo]
+\ExecuteMetaData[../gr1.tex]{th:GenEqPartHomo}
+\pause
+\pf[th:GenEqPartHomo]
+\ExecuteMetaData[../gr1.tex]{pf:GenEqPartHomo0}
+\end{frame}\begin{frame}
+\ExecuteMetaData[../gr1.tex]{pf:GenEqPartHomo1}
+\qed
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\th[th:GenEqPartPlusHomo]
+\ExecuteMetaData[../gr1.tex]{th:GenEqPartPlusHomo}
+\pf
+This follows from the prior two lemmas.\qed
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\co[co:ThreeKindsSolutionSets]
+\ExecuteMetaData[../gr1.tex]{co:ThreeKindsSolutionSets}
+\pause
+\pf[co:ThreeKindsSolutionSets]
+\ExecuteMetaData[../gr1.tex]{pf:ThreeKindsSolutionSets}
+\qed
+\end{frame}
+
+
+
+% ..........
+\begin{frame}{Summary: Kinds of Solution Sets}
+\ExecuteMetaData[../gr1.tex]{table:KindsSolutionSets}
+\pause
+An interesting special case is when there are the same number of
+equations as unknowns.
+This distinguishes between the table's columns.
+
+\df[df:Nonsingular]
+\ExecuteMetaData[../gr1.tex]{df:Nonsingular}
+\end{frame}
+
+
+
+
+
+%...........................
+% \begin{frame}
+% 
+% \end{frame}
+\end{document}
