@@ -332,19 +332,22 @@ gives a reduction from \( A \) to \( C \).
 %</pf:ReducesToIsEqRel2>
 \end{proof}
 
-\begin{definition}
-Two matrices that are inter-reducible by the elementary row operations
+\begin{definition} \label{df:RowEquivalence}
+%<*df:RowEquivalence>
+Two matrices that are inter-reducible by elementary row operations
 are \definend{row equivalent}.\index{matrix!row equivalence}%
 \index{row equivalence}\index{equivalence relation!row equivalence}
+%</df:RowEquivalence>
 \end{definition}
 
+%<*RowEquivalanceClasses>
 The diagram below shows the collection of all matrices as a box.
 Inside that box, each matrix lies in some class.
 Matrices are in the same class if and only if they are interreducible.
 The classes are disjoint\Dash no matrix is in two distinct classes.
 We have partitioned the collection of matrices into 
 \definend{row equivalence classes}.\appendrefs{partitions and class representatives}\index{partition!row equivalence classes}
-
+%</RowEquivalanceClasses>
 \begin{center}
   \includegraphics{ch1.27}
 \end{center}
@@ -1113,11 +1116,14 @@ The crucial observation is that row operations combine the rows linearly.
 % The meaning is unchanged, but the next result's statement makes
 % a more formal definition in order.)
 
-\begin{lemma}[Linear Combination Lemma] \index{Linear Combination Lemma}
+\begin{lemma}[Linear Combination Lemma] \label{lm:LinearCombinationLemma} \index{Linear Combination Lemma}
+%<*lm:LinearCombinationLemma>
 A linear combination of linear combinations is a linear combination.
+%</lm:LinearCombinationLemma>
 \end{lemma}
 
 \begin{proof}
+%<*pf:LinearCombinationLemma>
 Given the linear combinations 
 $c_{1,1}x_1+\dots+c_{1,n}x_n$ through $c_{m,1}x_1+\dots+c_{m,n}x_n$,
 consider a combination of those
@@ -1132,33 +1138,40 @@ Distributing those $d$'s and regrouping gives
   % d_mc_{1,1}x_1+\dots+d_mc_{1,n}x_n         \\
   =(d_1c_{1,1}+\dots+d_mc_{m,1})x_1\,+\dots+\,(d_1c_{1,n}+\dots+d_mc_{m,n})x_n
 \end{equation*}
-which is a linear combination of the $x$'s.
+which is also a linear combination of the $x$'s.
+%</pf:LinearCombinationLemma>
 \end{proof}
 
-In this subsection we will use the convention
-that, where an upper case roman letter names the matrix then
+%<*MatrixsRowsNamedWithGreekLetter>
+Here we will use the convention
+that where an upper case roman letter names the matrix, then
 the matching lower-case greek letter names the rows.
-\begin{equation*}
-  A=
-    \begin{mat}
-      \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}   \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_2$\ $\cdots$}   \\[.5ex]
-      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}}                  \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_m$\ $\cdots$}   
-    \end{mat}
-  \qquad
-  B=
-    \begin{mat}
-      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_1$\ $\cdots$}  \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_2$\ $\cdots$}  \\[.5ex]
-      \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\beta}_1$\ $\cdots$}}   \\[.5ex]
-      \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_m$\ $\cdots$}  
-    \end{mat}
-\end{equation*}
+Thus the rows of a matrix~$A$ are~$\alpha_1$, $\alpha_2$, \ldots{} and 
+$B$ has rows~$\beta_1$, $\beta_2$, etc. 
+%</MatrixsRowsNamedWithGreekLetter>
+% \begin{equation*}
+%   A=
+%     \begin{mat}
+%       \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}   \\[.5ex]
+%       \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_2$\ $\cdots$}   \\[.5ex]
+%       \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}}                  \\[.5ex]
+%       \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_m$\ $\cdots$}   
+%     \end{mat}
+%   \qquad
+%   B=
+%     \begin{mat}
+%       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_1$\ $\cdots$}  \\[.5ex]
+%       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_2$\ $\cdots$}  \\[.5ex]
+%       \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\beta}_1$\ $\cdots$}}   \\[.5ex]
+%       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_m$\ $\cdots$}  
+%     \end{mat}
+% \end{equation*}
 
 \begin{corollary} \label{cor:RowsOfEqMatsLinCombos}
+%<*co:RowsOfEqMatsLinCombos>
 Where one matrix reduces to another, each row of the second
 is a linear combination of the rows of the first.
+%</co:RowsOfEqMatsLinCombos>
 \end{corollary}
 
 The proof 
@@ -1179,6 +1192,7 @@ implies that it is true in the one operation case, and then the inductive step
 applied again gives that it is therefore true for two operations, etc.
 
 \begin{proof}
+%<*pf:RowsOfEqMatsLinCombos0>
 We proceed by induction on the minimum number of row operations that take a
 first matrix $A$ to a second one $B$.
 In the base step, that
@@ -1186,7 +1200,9 @@ zero reduction operations suffice, the two matrices are equal and each
 row of $B$ is trivially a combination of
 $A$'s rows: $\vec{\beta}_i
   =0\cdot\vec{\alpha}_1+\cdots+1\cdot\vec{\alpha}_i+\cdots+0\cdot\vec{\alpha}_m$.
+%</pf:RowsOfEqMatsLinCombos0>
 
+%<*pf:RowsOfEqMatsLinCombos1>
 For the inductive step, assume the inductive hypothesis:~with $t\geq 0$,
 any matrix that can be derived from \( A \) in \( t \) or fewer operations 
 then has rows that are linear combinations of $A$'s rows.
@@ -1197,8 +1213,10 @@ The inductive hypothesis applies to this \( G \)
 because it is only $t$ operations away from \( A \). 
 That is, each row of \( G \)
 is a linear combination of the rows of \( A \).
+%</pf:RowsOfEqMatsLinCombos1>
 
-Now, if the operation taking \( G \) to \( B \) is a row swap then
+%<*pf:RowsOfEqMatsLinCombos2>
+If the operation taking \( G \) to \( B \) is a row swap then
 the rows of $B$ are just the rows of $G$ reordered, and thus each row of $B$
 is a linear combination of the rows of $G$.
 If the operation taking $G$ to $B$ is multiplication of some row~$i$ by a 
@@ -1213,6 +1231,7 @@ each row of $B$ is a linear combination of the rows of $A$.
 
 With both a base step and an inductive step,  
 the proposition follows by the principle of mathematical induction.
+%</pf:RowsOfEqMatsLinCombos2>
 \end{proof}
 
 \begin{example}
@@ -1305,11 +1324,14 @@ What Gauss' linear elimination method eliminates is linear
 relationships among the rows.
 
 \begin{lemma}      \label{le:EchFormNoLinCombo}
+%<*lm:EchFormNoLinCombo>
 In an echelon form matrix,
 no nonzero row is a linear combination of the other nonzero rows.
+%</lm:EchFormNoLinCombo>
 \end{lemma}
 
 \begin{proof}
+%<*pf:EchFormNoLinCombo0>
 Let $R$ be in echelon form and consider the  non-\( \vec{0} \)  rows.
 First observe that
 if we have a row written as a combination
@@ -1329,24 +1351,28 @@ moving $c_i\vec{\rho}_i$ to the left side and dividing by $c_i$.
 Therefore we will have proved the theorem if we
 show that in~($*$) all of the coefficients are~$0$.
 For that we use induction on the row index~$i$.
+%</pf:EchFormNoLinCombo0>
 
+%<*pf:EchFormNoLinCombo1>
 The base case is the first row~$i=1$
 (if there is no such nonzero row, so $R$ is the zero matrix, then the
 lemma holds vacuously).
 Recall our notation that $\ell_i$ is the column number of 
 the leading entry in row~$i$.
-Equation~($*$) applied to the entries of those rows from column~$\ell_1$ 
+Equation~($*$) applied to the entries of the rows from column~$\ell_1$ 
 gives this.
 \begin{equation*}
   0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_1}
 \end{equation*}
 The matrix is in echelon form so
-every row after the first has a zero in that column 
+every row after the first has a zero entry in that column 
 $r_{2,\ell_1}=\cdots=r_{m,\ell_1}=0$.
 Thus $c_1=0$ because $r_{1,\ell_1}\neq 0$, as it
 leads the row.
+%</pf:EchFormNoLinCombo1>
 
-The inductive step is to prove the implication:~if 
+%<*pf:EchFormNoLinCombo2>
+The inductive step is to prove this implication:~if 
 for each row index $k\in\set{1,\ldots,i}$ the coefficient $c_k$ is $0$
 then $c_{i+1}$ is also $0$. 
 Consider the entries from column~$\ell_{i+1}$ in equation~($*$). 
@@ -1356,17 +1382,21 @@ Consider the entries from column~$\ell_{i+1}$ in equation~($*$).
 By the inductive hypothesis the coefficients $c_1$, \ldots $c_i$ are
 all $0$ so the equation reduces to 
 $0=c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}$.
-The matrix is in echelon form
-so $r_{i+2,\ell_{i+1}}=\cdots=r_{m,\ell_{i+1}}=0$ and $r_{i+1,\ell_{i+1}}\neq 0$.
+As in the base case, because the matrix is in echelon form
+$r_{i+2,\ell_{i+1}}=\cdots=r_{m,\ell_{i+1}}=0$ and $r_{i+1,\ell_{i+1}}\neq 0$.
 Thus $c_{i+1}=0$.
+%</pf:EchFormNoLinCombo2>
 \end{proof}
 
 \begin{theorem}
 \label{th:ReducedEchelonFormIsUnique}
+%<*th:ReducedEchelonFormIsUnique>
 Each matrix is row equivalent to a unique reduced echelon form matrix.
+%</th:ReducedEchelonFormIsUnique>
 \end{theorem}
 
 \begin{proof} \cite{Yuster}
+%<*pf:ReducedEchelonFormIsUnique0>
 Fix a number of rows \( m \).
 We will proceed by induction on the number of columns \( n \).
 
@@ -1375,14 +1405,18 @@ If this is the zero matrix then its unique echelon form is the zero matrix.
 If instead it has any nonzero entries then when the matrix is brought to 
 reduced echelon form, it must have at least one nonzero entry, so it has a
 \( 1 \), in the first row. 
-In either case, its reduced echelon form is unique.
+Either way, its reduced echelon form is unique.
+%</pf:ReducedEchelonFormIsUnique0>
 
+%<*pf:ReducedEchelonFormIsUnique1>
 For the inductive step we assume that \( n>1 \) and that all \( m \)~row
 matrices with fewer than \( n \) columns have a unique reduced echelon form.
 Consider a \( \nbym{m}{n} \) matrix \( A \) and suppose that 
 \( B \) and \( C \) are two reduced echelon form matrices derived from \( A \).
 We will show that these two must be equal.
+%</pf:ReducedEchelonFormIsUnique1>
 
+%<*pf:ReducedEchelonFormIsUnique2>
 Let \( \hat{A} \) be the matrix consisting of the first \( n-1 \) columns of
 \( A \).
 Observe that 
@@ -1394,9 +1428,11 @@ echelon form will also bring \( \hat{A} \) to reduced echelon form.
 By the inductive hypothesis this reduced echelon form of \( \hat{A} \)
 is unique, so if \( B \) and \( C \) differ then the difference must 
 occur in their \( n \)-th columns.
+%</pf:ReducedEchelonFormIsUnique2>
 
 We finish the inductive step, and the argument,
 by showing that the two cannot differ only in that column.
+%<*pf:ReducedEchelonFormIsUnique3>
 Consider a homogeneous system of equations for which \( A \) is the
 matrix of coefficients.  
 \begin{equation*}
@@ -1408,7 +1444,7 @@ matrix of coefficients.
   \end{linsys}
   \tag{$*$}
 \end{equation*}
-By \nearbytheorem{th:GaussMethod}
+By Theorem~One.I.\ref{th:GaussMethod}
 %the first theorem of this chapter 
 the set of solutions to that system
 is the same as the set of solutions to this system
@@ -1432,6 +1468,8 @@ and to this one.
   \end{linsys}
   \tag{$\mathord{*}\mathord{*}\mathord{*}$}
 \end{equation*}
+%</pf:ReducedEchelonFormIsUnique3>
+%<*pf:ReducedEchelonFormIsUnique4>
 Suppose that \( B  \) and \( C \) differ only in column~\( n \), in row~\( i \).
 Subtract row~\( i \) of ($\mathord{*}\mathord{*}\mathord{*}$) from 
 row~\( i \) of ($**$).
@@ -1446,6 +1484,7 @@ That's a contradiction, because with the first \( n-1 \)~columns of
 \( B \) and \( C \) equal, the leading \( 1 \)'s in the 
 \( n \)-th column would have to be in the same row.
 So \( B=C \).
+%</pf:ReducedEchelonFormIsUnique4>
 \end{proof}
 
 That result answers the two questions that we posed in the introduction
@@ -1475,13 +1514,15 @@ so partitions the set of all matrices into row equivalence classes.
 got room to show two.)
 We have proved there is one and only one reduced echelon form matrix in
 each row equivalence class.
+%<*ReducedEchelonFormIsCanonicalForm>
 So the reduced echelon form is a
-{\em canonical form}\appendrefs{canonical representatives}%
+canonical form\appendrefs{canonical representatives}
 \index{canonical form!for row equivalence}%
 \index{representative!for row equivalence classes}%
 for row equivalence:
 the reduced echelon form matrices are
 representatives of the classes.
+%</ReducedEchelonFormIsCanonicalForm>
 \begin{center}
   \includegraphics{ch1.31}
 \end{center}
