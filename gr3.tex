@@ -113,8 +113,10 @@ by combining upwards.
 \end{equation*}
 The answer is \( x=1 \), \( y=1 \), and \( z=2 \).
 \end{example}
+%<*Pivoting>
 Using one entry to clear out the rest of a column is
 \definend{pivoting}\index{pivoting} on that entry.
+%</Pivoting>
 
 Note that the row combination operations in the first stage move left to right,
 from column one to column three, 
@@ -148,23 +150,29 @@ don't interact, so we can combine multiple ones into a single step.
 The answer is $x=5/2$ and $y=2$.
 \end{example}
 
+%<*GaussJordanReduction>
 This extension of Gauss' method is 
 \definend{Gauss-Jordan reduction}.\index{linear equation!solution of!Gauss-Jordan}\index{Gauss-Jordan}\index{Gauss' method!Gauss-Jordan}
+%</GaussJordanReduction>
 % It goes past echelon form to a more refined, more specialized,
 % matrix form.
 
 \begin{definition}\label{def:RedEchForm}
+%<*df:RedEchForm>
 A matrix or linear system is in
 \definend{reduced echelon form\/}\index{echelon form!reduced}\index{reduced echelon form}
 if, in addition to being in echelon form, each leading entry is a
 one and is the only nonzero entry in its column.
+%</df:RedEchForm>
 \end{definition}
 
 \noindent
+%<*CostRedEchForm>
 The cost of using Gauss-Jordan reduction to solve a system 
 is the additional arithmetic.
 The benefit is that we can just read off the solution set
 from the reduced echelon form.
+%</CostRedEchForm>
 
 In any echelon form, reduced or not, we can read off 
 when the system has an empty
@@ -235,10 +243,13 @@ we can get from one to another by row operations.
 The rest of this subsection develops this relationship.
 
 \begin{lemma} \label{le:RowOpsRev}
+%<*lm:RowOpsRev>
 Elementary row operations are reversible.
+%</lm:RowOpsRev>
 \end{lemma}
 
 \begin{proof}
+%<*pf:RowOpsRev>
 For any matrix \( A \),
 the effect of swapping rows is reversed by swapping them back,
 multiplying a row by a nonzero \( k \) is undone by multiplying by
@@ -261,6 +272,7 @@ is undone by subtracting the same multiple of row \( i \) from row \( j \).
      \;\grstep{-k\rho_i+\rho_j}
       A                          
 \end{equation*}
+%</pf:RowOpsRev>
 (We need the $i\neq j$ condition;
 see \nearbyexercise{exer:INotJMakesRowOpsRev}.)
 \end{proof}
@@ -278,17 +290,22 @@ inter-reducible.
   \includegraphics{ch1.28}
 \end{center}
 
+%<*EquivMatrices>
 We say 
 that matrices that reduce to each other are `equivalent with respect
 to the relationship of row reducibility'.
-The next result verifies this statement using the definition of 
+The next result justifies this using the definition of 
 an equivalence.\appendrefs{equivalence relations}
+%</EquivMatrices>
 
-\begin{lemma}
+\begin{lemma} \label{lm:ReducesToIsEqRel}
+%<*lm:ReducesToIsEqRel>
 Between matrices, `reduces to' is an equivalence re\-la\-tion.
+%</lm:ReducesToIsEqRel>
 \end{lemma}
 
 \begin{proof}
+%<*pf:ReducesToIsEqRel0>
 We must check the conditions
 (i)~reflexivity, that any matrix reduces to itself,
 (ii)~symmetry, that if \( A \) reduces to \( B \) then
@@ -296,18 +313,23 @@ We must check the conditions
 and (iii)~transitivity, that if \( A \) reduces to \( B \) and
       \( B \) reduces to \( C \) then \( A \) reduces to
       \( C \).
+%</pf:ReducesToIsEqRel0>
 
+%<*pf:ReducesToIsEqRel1>
 Reflexivity is easy; any  matrix reduces to itself in zero row operations.
 
-That the relationship is symmetric is \nearbylemma{le:RowOpsRev}\Dash if
+The relationship is symmetric by the prior lemma\Dash if
 \( A \) reduces to \( B \) by some row operations
 then also \( B \) reduces to \( A \) by reversing those operations.
+%</pf:ReducesToIsEqRel1>
 
+%<*pf:ReducesToIsEqRel2>
 For transitivity, suppose that \( A \) reduces to \( B \) and
 that \( B \) reduces to \( C \).
 Following the reduction steps from $A \rightarrow\cdots\rightarrow B$
 with those from  $B \rightarrow\cdots\rightarrow C$ 
 gives a reduction from \( A \) to \( C \).
+%</pf:ReducesToIsEqRel2>
 \end{proof}
 
 \begin{definition}

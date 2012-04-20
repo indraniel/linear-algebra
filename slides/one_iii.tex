@@ -1,0 +1,262 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../gr3} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Reduced Echelon Form] % (optional, use only with long paper titles)
+{One.III Reduced Echelon Form}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Reduced Echelon Form}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... One.III.1 .....
+\section{Gauss-Jordan reduction}
+\begin{frame}{Pivoting}
+\ex
+Here is an extension of Gauss's Method with some advantages.
+\begin{eqnarray*}
+  \begin{linsys}{3}
+    x  &+  &y  &-  &z  &=  &2   \\
+   2x  &-  &y  &   &   &=  &-1  \\
+    x  &-  &2y &+  &2z &=  &-1 
+  \end{linsys}
+  &\grstep[-1\rho_1+\rho_3]{-2\rho_1+\rho_2}
+  &\begin{linsys}{3}
+    x  &+  &y  &-  &z  &=  &2   \\
+       &-  &3y &   &2z &=  &-5  \\
+       &-  &3y &+  &3z &=  &-3 
+  \end{linsys}                         \\
+  &\grstep{-1\rho_2+\rho_3}
+  &\begin{linsys}{3}
+    x  &+  &y  &-  &z  &=  &2   \\
+       &-  &3y &   &2z &=  &-5  \\
+       &   &   &   &z  &=  &2 
+  \end{linsys}
+\end{eqnarray*}
+Instead of doing back substitution, we continue using the row operations.
+\pause
+First make all the leading entries one.
+\begin{eqnarray*}
+  % \begin{linsys}{3}
+  %   x  &+  &y  &-  &z  &=  &2   \\
+  %      &-  &3y &   &2z &=  &-5  \\
+  %      &   &   &   &z  &=  &2 
+  % \end{linsys}
+  &\grstep{(-1/3)\rho_2}
+  &\begin{linsys}{3}
+    x  &+  &y  &-  &z      &=  &2   \\
+       &   &y  &-  &(2/3)z &=  &5/3  \\
+       &   &   &   &z      &=  &2 
+  \end{linsys}
+\end{eqnarray*}
+\end{frame}\begin{frame}
+\noindent Finish by eliminating upwards with the leading entries.
+\begin{equation*}
+  \begin{linsys}{3}
+    x  &+  &y  &-  &z      &=  &2   \\
+       &   &y  &-  &(2/3)z &=  &5/3  \\
+       &   &   &   &z      &=  &2 
+  \end{linsys} \;
+  \grstep[(2/3)\rho_3+\rho_2]{\rho_3+\rho_1}\;
+  \begin{linsys}{3}
+    x  &+  &y  &   &       &=  &4   \\
+       &   &y  &   &       &=  &3  \\
+       &   &   &   &z      &=  &2 
+  \end{linsys}
+  \;\grstep{-\rho_2+\rho_1}\;
+  \begin{linsys}{3}
+    x  &   &   &   &       &=  &1   \\
+       &   &y  &   &       &=  &3  \\
+       &   &   &   &z      &=  &2 
+  \end{linsys}
+\end{equation*}
+Now we can read off the solution.
+
+\pause\medskip
+\ExecuteMetaData[../gr3.tex]{Pivoting}
+\end{frame}
+
+
+
+% ..........
+\begin{frame}
+\ex
+With this system
+\begin{equation*}
+  \begin{linsys}{4}
+    x  &-  &y  &   &   &-  &2w  &=  &2   \\
+    x  &+  &y  &+  &3z &+  &w   &=  &1  \\
+       &-  &y  &+  &z  &-  &w   &=  &0 
+  \end{linsys}
+\end{equation*}
+we can rewrite in matrix notation
+and do Gauss's Method.
+\begin{equation*}
+  \grstep{-1\rho_1+\rho_2}\,
+  \begin{amat}{4}
+    1  &-1  &0  &-2  &2  \\
+    0  &2   &3  &3   &1   \\
+    0  &-1  &1  &-1  &0  
+  \end{amat}                         
+  \,\grstep{(1/2)\rho_2+\rho_3}\,
+  \begin{amat}{4}
+    1  &-1  &0    &-2   &2  \\
+    0  &2   &3    &3    &1   \\
+    0  &0   &5/2  &1/2  &-1/2  
+  \end{amat}                         
+\end{equation*}
+We can combine the operations making the leading entries to one. 
+\begin{equation*}
+  \grstep[(2/5)\rho_3]{(1/2)\rho_2}\,
+  \begin{amat}{4}
+    1  &-1  &0    &-2    &2  \\
+    0  &1   &3/2  &3/2   &-1/2   \\
+    0  &0   &1    &1/5   &-1/5  
+  \end{amat}                         
+\end{equation*}
+Now eliminate upwards.
+\begin{equation*}
+  \grstep{-(3/2)\rho_3+\rho_2}\,
+  \begin{amat}{4}
+    1  &-1  &0    &-2    &2  \\
+    0  &1   &0    &6/5   &-1/5   \\
+    0  &0   &1    &1/5   &-1/5  
+  \end{amat}                           
+  \,\grstep{\rho_2+\rho_1}\,
+  \begin{amat}{4}
+    1  &0   &0    &-4/5  &9/5  \\
+    0  &1   &0    &6/5   &-1/5   \\
+    0  &0   &1    &1/5   &-1/5  
+  \end{amat}                         
+\end{equation*}
+\end{frame}\begin{frame}
+\noindent The final augmented matrix
+\begin{equation*}
+  \begin{amat}{4}
+    1  &0   &0    &-4/5  &9/5  \\
+    0  &1   &0    &6/5   &-1/5   \\
+    0  &0   &1    &1/5   &-1/5  
+  \end{amat}                         
+\end{equation*}
+gives this description of the solution set.
+\begin{equation*}
+  \set{\colvec{9/5 \\ -1/5 \\ -1/5 \\ 0} 
+       +\colvec{4/5  \\ -6/5 \\ -1/5 \\ 1}w
+       \suchthat w\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Gauss-Jordan reduction}
+\ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+
+\df[def:RedEchForm]
+\ExecuteMetaData[../gr3.tex]{df:RedEchForm}
+
+\pause\medskip
+\ExecuteMetaData[../gr3.tex]{CostRedEchForm}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Row operations reverse}
+\lm[le:RowOpsRev]
+\ExecuteMetaData[../gr3.tex]{lm:RowOpsRev}
+\pause
+\pf[le:RowOpsRev]
+\ExecuteMetaData[../gr3.tex]{pf:RowOpsRev}
+(The $i\neq j$ condition prevents subtracting a row from itself.)
+\qed
+
+\pause\medskip
+\ExecuteMetaData[../gr3.tex]{EquivMatrices}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Row operations reverse}
+\lm[lm:ReducesToIsEqRel]
+\ExecuteMetaData[../gr3.tex]{lm:ReducesToIsEqRel}
+
+\pause
+\pf[pf:ReducesToIsEqRel0]
+\ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel0}
+\end{frame}\begin{frame}
+\ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel1}
+
+\pause
+\ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel2}
+\qed
+\end{frame}
+
+
+
+
+% ..... One.III.2 .....
+\section{Linear Combination Lemma}
+\begin{frame}{Length} 
+% \df[df:Length]
+% \ExecuteMetaData[../gr2.tex]{df:Length}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Dot product} 
+\end{frame}
+
+
+
+
+%...........................
+% \begin{frame}
+% 
+% \end{frame}
+\end{document}
