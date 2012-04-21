@@ -1055,27 +1055,6 @@ and only one reduced echelon form matrix.
 The ideas that appear here will reappear, and be further developed, in the
 next chapter.
 
-The underlying theme here is that one way to understand a
-mathematical situation is by being able to classify the cases that can happen.
-We have met this theme several times already.
-We have classified solution sets of linear systems into the no-elements, 
-one-element, and infinitely-many elements cases.
-We have also classified linear systems with the same number of equations 
-as unknowns into the nonsingular and singular cases.
-We adopted these classifications because they give us a way to understand
-the situations that we were investigating.
-Here, where we are investigating row equivalence, we know that the set of all
-matrices breaks into the row equivalence classes.
-When we finish the proof here, we will have a way to understand each of those
-classes\Dash we can think of its matrices 
-as derived by row operations from the
-unique reduced echelon form matrix in that class.
-
-Put in more operational terms,
-after that proof we will (as promised in this section's opening) have a
-way to decide if one matrix can be derived from another by row reduction.
-We apply the Gauss-Jordan procedure to both and see whether
-or not they come to the same reduced echelon form.
 
 % Here is an informal argument that the reduced 
 % echelon form version of a matrix is unique.
@@ -1100,9 +1079,58 @@ or not they come to the same reduced echelon form.
 % Before we go to the proof, we finish this subsection by 
 % rephrasing our work in a terminology that will be enlightening.
 
-To understand how row operations act to transform one matrix into another,
-we consider the effect that they have on the parts of a matrix.
-The crucial observation is that row operations combine the rows linearly.
+The crucial observation is 
+how row operations act to transform one matrix into another:
+they combine the rows linearly.
+
+\begin{example}
+In this reduction
+\begin{multline*}
+  \begin{amat}{2}
+    2  &1  &0  \\
+    1  &3  &5
+  \end{amat}
+  \;\grstep{-(1/2)\rho_1+\rho_2}\;
+  \begin{amat}{2}
+    2  &1    &0  \\
+    0  &5/2  &5
+  \end{amat}
+  \;\grstep[(2/5)\rho_2]{(1/2)\rho_1}\;
+  \begin{amat}{2}
+    1  &1/2  &0  \\
+    0  &1    &2
+  \end{amat}                        \\
+  \grstep{-(1/2)\rho_2+\rho_1}\;
+  \begin{amat}{2}
+    1  &0    &-1  \\
+    0  &1    &2
+  \end{amat}                       
+\end{multline*}
+denoting those matrices $A\rightarrow D\rightarrow G\rightarrow B$
+and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
+\begin{eqnarray*}
+  \left(\begin{array}{l}
+    \alpha_1 \\
+    \alpha_2
+  \end{array}\right)
+  &\grstep{-(1/2)\rho_1+\rho_2}
+  &\left(\begin{array}{l}
+    \delta_1=\alpha_1 \\
+    \delta_2=-(1/2)\alpha_1+\alpha_2
+  \end{array}\right)                          \\
+  &\grstep[(2/5)\rho_2]{(1/2)\rho_1}
+  &\left(\begin{array}{l}
+    \gamma_1=(1/2)\alpha_1 \\
+    \gamma_2=-(1/5)\alpha_1+(2/5)\alpha_2
+  \end{array}\right)                          \\
+  &\grstep{-(1/2)\rho_2+\rho_1}
+  &\left(\begin{array}{l}
+    \beta_1=(3/5)\alpha_1-(1/5)\alpha_2  \\
+    \beta_2=-(1/5)\alpha_1+(2/5)\alpha_2
+  \end{array}\right)                         
+\end{eqnarray*} 
+Gauss's method acts by systemmatically developing linear combinations of rows.
+\end{example}
 
 % \begin{definition}
 % A \definend{linear combination}\index{linear combination} of 
@@ -1124,8 +1152,9 @@ A linear combination of linear combinations is a linear combination.
 
 \begin{proof}
 %<*pf:LinearCombinationLemma>
-Given the linear combinations 
-$c_{1,1}x_1+\dots+c_{1,n}x_n$ through $c_{m,1}x_1+\dots+c_{m,n}x_n$,
+Given the set  
+$c_{1,1}x_1+\dots+c_{1,n}x_n$ through $c_{m,1}x_1+\dots+c_{m,n}x_n$
+of linear combinations of the $x$'s,
 consider a combination of those
 \begin{equation*}
   d_1(c_{1,1}x_1+\dots+c_{1,n}x_n)\,+\dots+\,d_m(c_{m,1}x_1+\dots+c_{m,n}x_n)
@@ -1142,30 +1171,6 @@ which is also a linear combination of the $x$'s.
 %</pf:LinearCombinationLemma>
 \end{proof}
 
-%<*MatrixsRowsNamedWithGreekLetter>
-Here we will use the convention
-that where an upper case roman letter names the matrix, then
-the matching lower-case greek letter names the rows.
-Thus the rows of a matrix~$A$ are~$\alpha_1$, $\alpha_2$, \ldots{} and 
-$B$ has rows~$\beta_1$, $\beta_2$, etc. 
-%</MatrixsRowsNamedWithGreekLetter>
-% \begin{equation*}
-%   A=
-%     \begin{mat}
-%       \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}   \\[.5ex]
-%       \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_2$\ $\cdots$}   \\[.5ex]
-%       \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_1$\ $\cdots$}}                  \\[.5ex]
-%       \makebox[2.25cm]{$\cdots$\ $\vec{\alpha}_m$\ $\cdots$}   
-%     \end{mat}
-%   \qquad
-%   B=
-%     \begin{mat}
-%       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_1$\ $\cdots$}  \\[.5ex]
-%       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_2$\ $\cdots$}  \\[.5ex]
-%       \vdotswithin{\makebox[2.25cm]{$\cdots$\ $\vec{\beta}_1$\ $\cdots$}}   \\[.5ex]
-%       \makebox[2.25cm]{$\cdots$\ $\smash[b]{\vec{\beta}}_m$\ $\cdots$}  
-%     \end{mat}
-% \end{equation*}
 
 \begin{corollary} \label{cor:RowsOfEqMatsLinCombos}
 %<*co:RowsOfEqMatsLinCombos>
@@ -1516,7 +1521,7 @@ We have proved there is one and only one reduced echelon form matrix in
 each row equivalence class.
 %<*ReducedEchelonFormIsCanonicalForm>
 So the reduced echelon form is a
-canonical form\appendrefs{canonical representatives}
+canonical form\appendrefs{canonical representatives}\spacefactor=1000
 \index{canonical form!for row equivalence}%
 \index{representative!for row equivalence classes}%
 for row equivalence:
@@ -1526,14 +1531,34 @@ representatives of the classes.
 \begin{center}
   \includegraphics{ch1.31}
 \end{center}
-We can answer questions about the classes by translating them
+
+The underlying theme here is that one way to understand a
+mathematical situation is by being able to classify the cases that can happen.
+We have seen this theme several times already.
+We classified solution sets of linear systems into the no-elements, 
+one-element, and infinitely-many elements cases.
+We also classified linear systems with the same number of equations 
+as unknowns into the nonsingular and singular cases.
+These classifications helped us understand
+the situations that we were investigating.
+Here, where we are investigating row equivalence, we know that the set of all
+matrices breaks into the row equivalence classes
+and we now have a way to put our finger on each of those
+classes\Dash we can think of the matrices in a class 
+as derived by row operations from the
+unique reduced echelon form matrix in that class.
+
+Put in more operational terms, uniqueness of reduced echelon form
+lets us
+answer questions about the classes by translating them
 into questions about the representatives.
+For instance, we now (as promised in this section's opening) can
+decide whether one matrix can be derived from another by row reduction.
+We apply the Gauss-Jordan procedure to both and see if
+they yield the same reduced echelon form.
 
 \begin{example}  \label{ex:MatsNotRowEq}
-We can decide if matrices are interreducible
-by seeing if Gauss-Jordan reduction produces the same
-reduced echelon form result.
-Thus, these are not row equivalent
+These matrices are not row equivalent
 \begin{equation*}
   \begin{mat}[r]
     1  &-3  \\
@@ -1571,7 +1596,7 @@ Any nonsingular \( \nbyn{3} \) matrix Gauss-Jordan reduces to this.
 \end{example}
 
 \begin{example} \label{ex:RowEqClassTwoTwoMats}
-We can describe the classes by listing all possible
+We can describe all the classes by listing all possible
 reduced echelon form matrices.
 Any $\nbyn{2}$ matrix lies in one of these:~the class of matrices
 row equivalent to this,

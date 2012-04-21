@@ -17,3 +17,15 @@ eqn = [x-y-2*w==2, x+y+3*z+w==1, -1*y+z-w==0]
 s = solve(eqn, x,y,z); 
 print s
 
+
+print "==== Linear Combinations ===="
+print ".. first .."
+M = matrix(QQ,[[1,3,5], [2,4,8]])
+gauss_jordan(M)
+# print M.echelon_form()
+
+print ".. first .."
+M = matrix(QQ,[[2,1,0], [1,3,5]])
+gauss_jordan(M)
+# print M.echelon_form()
+
