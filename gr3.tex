@@ -1129,8 +1129,61 @@ and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
     \beta_2=-(1/5)\alpha_1+(2/5)\alpha_2
   \end{array}\right)                         
 \end{eqnarray*} 
-Gauss's method acts by systemmatically developing linear combinations of rows.
 \end{example}
+
+\begin{example}
+This also holds if there is a row swap, also.
+With this \( A \), \( D \), \( G \), and \( B \)
+\begin{equation*}
+    \begin{mat}[r]
+       0  &2  \\
+       1  &1
+     \end{mat}
+    \grstep{\rho_1\leftrightarrow\rho_2}
+    \begin{mat}[r]
+       1  &1  \\
+       0  &2
+     \end{mat}                  
+    \grstep{(1/2)\rho_2}
+    \begin{mat}[r]
+       1  &1  \\
+       0  &1
+     \end{mat}                   
+    \grstep{-\rho_2+\rho_1}
+    \begin{mat}[r]
+       1  &0  \\
+       0  &1
+     \end{mat}
+\end{equation*}
+we get these linear
+relationships. 
+\begin{multline*}
+  \left(\begin{array}{l}
+    \vec{\alpha}_1 \\
+    \vec{\alpha}_2
+  \end{array}\right)
+  \,\grstep{\rho_1\leftrightarrow\rho_2}\,
+  \left(\begin{array}{l}
+     \vec{\delta}_1 =\vec{\alpha}_2   \\
+     \vec{\delta}_2 =\vec{\alpha}_1
+  \end{array}\right)                                                 
+  \,\grstep{(1/2)\rho_2}\,
+  \left(\begin{array}{l}
+     \vec{\gamma}_1 =\vec{\alpha}_2  \\
+     \vec{\gamma}_2 =(1/2)\vec{\alpha}_1
+  \end{array}\right)                                               \\
+  \,\grstep{-\rho_2+\rho_1}\,
+  \left(\begin{array}{l}
+     \vec{\beta}_1 =(-1/2)\vec{\alpha}_1+1\cdot\vec{\alpha}_2   \\
+     \vec{\beta}_2 =(1/2)\vec{\alpha}_1
+  \end{array}\right)
+\end{multline*}
+\end{example}
+
+In summary, 
+Gauss's Method systemmatically finds a suitable 
+sequence of linear combinations 
+of the rows.
 
 % \begin{definition}
 % A \definend{linear combination}\index{linear combination} of 
@@ -1239,56 +1292,12 @@ the proposition follows by the principle of mathematical induction.
 %</pf:RowsOfEqMatsLinCombos2>
 \end{proof}
 
-\begin{example}
-In the reduction
-\begin{equation*}
-    \begin{mat}[r]
-       0  &2  \\
-       1  &1
-     \end{mat}
-    \grstep{\rho_1\leftrightarrow\rho_2}
-    \begin{mat}[r]
-       1  &1  \\
-       0  &2
-     \end{mat}                  
-    \grstep{(1/2)\rho_2}
-    \begin{mat}[r]
-       1  &1  \\
-       0  &1
-     \end{mat}                   
-    \grstep{-\rho_2+\rho_1}
-    \begin{mat}[r]
-       1  &0  \\
-       0  &1
-     \end{mat}
-\end{equation*}
-call the matrices \( A \), \( D \), \( G \), and \( B \).
-The methods of the proof show that there are three sets of linear
-relationships. 
-\begin{equation*}
-  \begin{aligned}
-     \vec{\delta}_1 &=0\cdot\vec{\alpha}_1+1\cdot\vec{\alpha}_2         \\
-     \vec{\delta}_2 &=1\cdot\vec{\alpha}_1+0\cdot\vec{\alpha}_2
-  \end{aligned}
-  \qquad
-  \begin{aligned}
-     \vec{\gamma}_1 &=0\cdot\vec{\alpha}_1+1\cdot\vec{\alpha}_2         \\
-     \vec{\gamma}_2 &=(1/2)\vec{\alpha}_1+0\cdot\vec{\alpha}_2
-  \end{aligned}
-  \qquad
-  \begin{aligned}
-     \vec{\beta}_1 &=(-1/2)\vec{\alpha}_1+1\cdot\vec{\alpha}_2        \\
-     \vec{\beta}_2 &=(1/2)\vec{\alpha}_1+0\cdot\vec{\alpha}_2
-  \end{aligned}
-\end{equation*}
-\end{example}
-
-The prior result gives us the insight that Gauss' method works by taking
+We now have the insight that Gauss's Method builds 
 linear combinations of the rows.
-But to what end; why do we go to echelon form as a particularly simple, or
-basic, version of a linear system?
-The answer, of course, is that echelon form is suitable for back substitution,
-because we have isolated the variables.
+But of course we go to echelon form as a particularly simple, or
+basic, version of a linear system because
+echelon form is suitable for back substitution,
+since is has isolated the variables.
 For instance, in this matrix
 \begin{equation*}
   R=\begin{mat}[r]
@@ -1299,7 +1308,8 @@ For instance, in this matrix
   \end{mat}
 \end{equation*}
 $x_1$ has been removed from $x_5$'s equation.
-That is, Gauss' method has made $x_5$'s row independent of $x_1$'s row.
+That is, Gauss' method has made $x_5$'s row independent of $x_1$'s row, 
+in some sense.
 
 % Independence of a collection of row vectors, or of any kind of vectors, 
 % will be precisely defined and explored in the next chapter.
