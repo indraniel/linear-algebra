@@ -1079,7 +1079,7 @@ next chapter.
 % Before we go to the proof, we finish this subsection by 
 % rephrasing our work in a terminology that will be enlightening.
 
-The crucial observation is 
+The crucial observation concerns 
 how row operations act to transform one matrix into another:
 they combine the rows linearly.
 
@@ -1108,7 +1108,7 @@ In this reduction
 \end{multline*}
 denoting those matrices $A\rightarrow D\rightarrow G\rightarrow B$
 and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
-\begin{eqnarray*}
+\begin{eqnarray*}  % multline looks worse
   \left(\begin{array}{l}
     \alpha_1 \\
     \alpha_2
@@ -1132,7 +1132,7 @@ and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
 \end{example}
 
 \begin{example}
-This also holds if there is a row swap, also.
+This also holds if there is a row swap.
 With this \( A \), \( D \), \( G \), and \( B \)
 \begin{equation*}
     \begin{mat}[r]
@@ -1294,10 +1294,11 @@ the proposition follows by the principle of mathematical induction.
 
 We now have the insight that Gauss's Method builds 
 linear combinations of the rows.
-But of course we go to echelon form as a particularly simple, or
-basic, version of a linear system because
-echelon form is suitable for back substitution,
-since is has isolated the variables.
+But of course the goal is to end in echelon form since it is 
+a particularly
+basic version of a linear system, because
+echelon form is suitable for back substitution
+as it has isolated the variables.
 For instance, in this matrix
 \begin{equation*}
   R=\begin{mat}[r]
@@ -1418,8 +1419,8 @@ We will proceed by induction on the number of columns \( n \).
 The base case is that the matrix has \( n=1 \) column.
 If this is the zero matrix then its unique echelon form is the zero matrix. 
 If instead it has any nonzero entries then when the matrix is brought to 
-reduced echelon form, it must have at least one nonzero entry, so it has a
-\( 1 \), in the first row. 
+reduced echelon form it must have at least one nonzero entry, so it has a
+\( 1 \) in the first row. 
 Either way, its reduced echelon form is unique.
 %</pf:ReducedEchelonFormIsUnique0>
 
@@ -1462,7 +1463,7 @@ matrix of coefficients.
 By Theorem~One.I.\ref{th:GaussMethod}
 %the first theorem of this chapter 
 the set of solutions to that system
-is the same as the set of solutions to this system
+is the same as the set of solutions to $B$'s system
 \begin{equation*}
   \begin{linsys}{4}
     b_{1,1}x_1  &+  &b_{1,2}x_2  &+  &\cdots  &+  &b_{1,n}x_n  &=  &0  \\
@@ -1472,7 +1473,7 @@ is the same as the set of solutions to this system
   \end{linsys}
   \tag{$**$}
 \end{equation*}
-and to this one.
+and to $C$'s.
 \begin{equation*}
   \quad
   \begin{linsys}{4}
@@ -1485,20 +1486,23 @@ and to this one.
 \end{equation*}
 %</pf:ReducedEchelonFormIsUnique3>
 %<*pf:ReducedEchelonFormIsUnique4>
-Suppose that \( B  \) and \( C \) differ only in column~\( n \), in row~\( i \).
+With \( B  \) and \( C \) different only in column~\( n \), suppose 
+that they differ in row~\( i \).
 Subtract row~\( i \) of ($\mathord{*}\mathord{*}\mathord{*}$) from 
-row~\( i \) of ($**$).
-Since \( B \) and \( C \) agree on their first \( n-1\)~columns the 
-result is the equation 
+row~\( i \) of ($**$)
+to get the equation 
 \( (b_{i,n}-c_{i,n})\cdot x_n=0 \).
-Because \( b_{i,n}\neq c_{i,n} \) we know that $x_n=0$.
+We've assumed that \( b_{i,n}\neq c_{i,n} \) so the system 
+solution includes that $x_n=0$.
 Thus in ($**$) and~($\mathord{*}\mathord{*}\mathord{*}$)
-the \( n \)-th column has a leading \( 1 \), or else 
+the \( n \)-th column contains a leading entry, or else 
 the variable \( x_n \) would be free.
-That's a contradiction, because with the first \( n-1 \)~columns of
-\( B \) and \( C \) equal, the leading \( 1 \)'s in the 
-\( n \)-th column would have to be in the same row.
-So \( B=C \).
+That's a contradiction because with \( B \) and \( C \) equal on 
+the first \( n-1 \)~columns, the leading entries in the 
+\( n \)-th column would have to be in the same row,
+and with both matrices in reduced echelon form, both leading entries would
+have to be $1$.
+Thus \( B=C \).
 %</pf:ReducedEchelonFormIsUnique4>
 \end{proof}
 
