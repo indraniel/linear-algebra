@@ -1,0 +1,466 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../vs1} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Definition of Vector Space] % (optional, use only with long paper titles)
+{Two.I Definition of Vector Space}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Definition of Vector Space}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Two.I.1 .....
+\section{Definition and examples}
+\begin{frame}{Vector space}
+\df[def:VecSpace]
+\ExecuteMetaData[../vs1.tex]{df:VectorSpace0}
+
+\pause
+\ExecuteMetaData[../vs1.tex]{df:VectorSpace1}
+
+\pause
+\ExecuteMetaData[../vs1.tex]{df:VectorSpace2}
+\end{frame}
+
+
+
+% ..........
+% \begin{frame}
+% A \definend{vector space}\index{vector space!definition}
+% (over \( \Re \)) consists of a set \( V \) along with
+% two operations `+' and `\( \cdot \)' subject to these conditions.
+
+% Where \( \vec{v},\vec{w}\in V \), 
+% \begin{enumerate}
+% \item
+% their \definend{vector sum}\index{vector!sum}\index{sum!vector}%
+%      \index{addition!vector}
+%      \( \vec{v}+\vec{w} \) is an element of \( V\/\).
+% \end{enumerate}
+% If \( \vec{u},\vec{v},\vec{w}\in V \) then 
+% \begin{enumerate}
+% \setcounter{enumi}{1}
+% \item \( \vec{v}+\vec{w}=\vec{w}+\vec{v} \) and 
+% \item \( (\vec{v}+\vec{w})+\vec{u}=\vec{v}+(\vec{w}+\vec{u}) \).
+% \end{enumerate}
+% \begin{enumerate}
+% \setcounter{enumi}{3}
+% \item There is a \definend{zero vector}\index{zero vector}%
+%          \index{vector!zero}
+%     \( \zero\in V \) such that
+%     \( \vec{v}+\zero=\vec{v}\, \) for all \( \vec{v}\in V\/ \).
+% \item Each \( \vec{v}\in V \) has an
+%     \definend{additive inverse}\index{additive inverse}%
+%     \index{inverse!additive}
+%     \( \vec{w}\in V \) such that \( \vec{w}+\vec{v}=\zero \).
+% \end{enumerate}
+% If \( r,s \) are \definend{scalars\/},\index{scalar}
+% members of \( \Re \),
+% and \( \vec{v},\vec{w}\in V \) then 
+% \begin{enumerate}
+% \setcounter{enumi}{5}
+% \item each
+% \definend{scalar multiple}\index{scalar multiple!vector}%
+%      \index{vector!scalar multiple}
+%      \( r\cdot\vec{v} \) is in \( V \).
+% \end{enumerate}
+% If \( r,s\in\Re \) and \( \vec{v},\vec{w}\in V \) then
+% \begin{enumerate}
+% \setcounter{enumi}{6}
+% \item \( (r+s)\cdot\vec{v}=r\cdot\vec{v}+s\cdot\vec{v} \), 
+% \item \( r\cdot(\vec{v}+\vec{w})
+%                =r\cdot\vec{v}+r\cdot\vec{w} \),
+% \item \( (rs)\cdot\vec{v} =r\cdot(s\cdot\vec{v}) \),
+% \item \( 1\cdot\vec{v}=\vec{v} \).
+% \end{enumerate}
+% \end{frame}
+
+
+
+% ..........
+\begin{frame}
+\ex
+Consider this reduced echelon form matrix.
+\begin{equation*}
+  A=\begin{mat}[r]
+    1  &2  \\
+    0  &0  
+  \end{mat}
+\end{equation*}
+In any matrix row-equivalent to $A$ each row must be a multiple of
+the vector $\rowvec{1  &2}$.
+We will verify that this set of row vectors
+\begin{equation*}
+  V=\set{\rowvec{a  &2a}\suchthat a\in\Re}
+\end{equation*}
+is a vector space under the natural operations of addition
+\begin{equation*}
+  \rowvec{a_1 &2a_1}+\rowvec{a_2 &2a_2}
+  =
+  \rowvec{a_1+a_2 &2a_1+a_2}
+\end{equation*}
+and scalar multiplication.
+\begin{equation*}
+  r\rowvec{a_1 &a_2}
+  =
+  \rowvec{ra_1 &ra_2}
+\end{equation*}
+For that we will check each of the conditions.
+(This first time through, we verify these at length.)
+\end{frame}\begin{frame}
+We first check \definend{closure under addition}~(1),
+that the sum of two members of $V$
+is also a member of $V$.
+Take $\vec{v}$ and  $\vec{w}$ to be members of $V$ so that
+\begin{equation*}
+  \vec{v}=\rowvec{v_1 &2v_1}
+  \qquad
+  \vec{w}=\rowvec{w_1 &2w_1}  
+\end{equation*}
+and note that their sum
+\begin{equation*}
+  \vec{v}+\vec{w}=
+  \rowvec{v_1+w_1 &2v_1+2w_1}
+\end{equation*} 
+is also a member of $V$, because its second entry is twice its first.
+
+\pause
+Condition~(2), commutativity of addition, is easy.
+The first sum is 
+\begin{equation*}
+  \vec{v}+\vec{w}=\rowvec{v_1+w_1 &2(v_1+w_1)}
+\end{equation*}
+and the second sum is
+\begin{equation*}
+  \vec{w}+\vec{v}
+  =
+  \rowvec{w_1+v_1 &2(w_1+v_1)}  
+\end{equation*}
+and the two are equal because the sum of real numbers
+$v_1+w_1$ equals the sum of real numbers $w_1+v_1$.
+\end{frame}\begin{frame}
+Condition~(3), associativity of addition, is like the prior one.
+The left side is 
+\begin{equation*}
+  (\vec{v}+\vec{w})+\vec{u}=\rowvec{(v_1+w_1)+u_1 &(2v_1+2w_1)+2u_1}
+\end{equation*}
+while the right side is this.
+\begin{equation*}
+  \vec{v}+(\vec{w}+\vec{u})
+  =
+  \rowvec{v_1+(w_1+u_1) &2v_1+(2w_1+2u_1)}  
+\end{equation*}
+The two are equal because real number addition is associative 
+$(v_1+w_1)+u_1=v_1+(w_1+u_1)$.
+
+\pause
+For condition~(4) we just produce the member of $V$ with the desired 
+property. 
+So consider the vector of $0$'s.
+Note that it is a member of $V$ since its second component is twice its first,
+and note that it is the \definend{identity element}
+with respect to addition. 
+\begin{align*}
+  \vec{v}+\zero
+  &=\rowvec{v_1 &2v_1}+\rowvec{0  &0}     \\
+  &=\rowvec{v_1 &2v_1}    \\
+  &=\vec{v}
+\end{align*}
+\end{frame}\begin{frame}
+Condition~(5), \definend{existence of an additive inverse}, is also a matter of 
+producing the desired element.
+Given a member $\vec{v}=\rowvec{v_1 &2v_1}$ of $V$, consider
+$\vec{w}=\rowvec{w_1 &2w_1}$ where $w_1=-v_1$.
+Note that $\vec{w}\in V$ and note also that it 
+additively cancels $\vec{v}$.
+\begin{equation*}
+  \vec{w}+\vec{v}=\rowvec{-v_1 &-2v_1}+\rowvec{v_1 &2v_1}=\zero
+\end{equation*}
+
+\pause
+Next we verify the conditions for scalar multiplication.
+First, condition~(6) is \definend{closure under scalar multiplication}.
+We consider a scalar $r\in\Re$ and a vector $\vec{v}=\rowvec{v_1 &2v_2}\in V$.
+The scalar multiple $r\vec{v}=\rowvec{rv_1 &r2v_1}$ is also a member
+of $V$ because the second component is twice the first.
+
+\pause
+Condition~(7) is that 
+\definend{real number addition distributes over scalar multiplication}.
+Let the scalars be $r,s\in\Re$ and 
+let the vector be $\vec{v}=\rowvec{v_1 &2v_1}\in V$.
+Then $(r+s)\vec{v}=\rowvec{(r+s)v_1 &(r+2)2v_1}$,
+which equals $\rowvec{rv_1 &2rv_1}+\rowvec{sv_1 &2sv_1}=r\vec{v}+s\vec{v}$.
+\end{frame}\begin{frame}
+For 
+\definend{distributivity of vector addition over scalar multiplication}~(8),
+let the scalar be $r\in\Re$ and 
+let the vectors be $\vec{v},\vec{w}\in V$.
+Then $r(\vec{v}+\vec{w})=\rowvec{rv_1 &2rv_1}+\rowvec{rw_1 &2rw_1}$,
+which equals $\rowvec{rv_1+rw_1 &2rv_1+2rw_1}$,
+which equals 
+$r\rowvec{v_1 &2v_1}+r\rowvec{w_1 &2w_1}=r\vec{v}+r\vec{w}$.
+
+\pause
+For condition~(9) take $r,s\in\Re$ and $\vec{v}=\rowvec{v_1 &2v_1}\in V$.
+The left side is $(rs)\rowvec{v_1 &2v_1}=\rowvec{(rs)v_1 &(rs)2v_1}$, while the
+right side is 
+$r(s\rowvec{v_1 &2v_1})=r\rowvec{sv_1 &s2v_1}=\rowvec{r(sv_1) &r(s2v_1)}$.
+The two are equal because, as they are real number multiplications,
+$(rs)v_1=r(sv_1)$ and $(rs)2v_1=r(s2v_1)$.   
+
+\pause
+The final condition is straightforward:
+for any $\vec{v}\in V$ we have
+$1\vec{v}=1\rowvec{v_1 &2v_1}=\rowvec{1\cdot v_1 &1\cdot 2v_1}=\vec{v}$.
+
+\pause\medskip
+Thus the set
+$V=\set{\rowvec{a  &2a}\suchthat a\in\Re}$
+is a vector space under the natural addition and scalar multiplication 
+operations.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ex
+The set $\Re^3$ is a vector space under the usual vector addition and
+scalar multiplication operations.
+\begin{equation*}
+  \colvec{v_1 \\ v_2 \\ v_3}
+  +\colvec{w_1 \\ w_2 \\ w_3}
+  =\colvec{v_1+w_1 \\ v_2+w_2 \\ v_3+w_3}
+  \quad\text{and}\quad
+  r\colvec{v_1 \\ v_2 \\ v_3}
+  =\colvec{rv_1 \\ rv_2 \\ rv_3}
+\end{equation*}
+To verify that we will check the conditions (more briefly than 
+for the prior example).
+
+\pause
+Condition~(1) is closure under addition.
+This is clear because the only condition for membership
+in the set $\Re^3$ is to be a three-tall vector of reals, and the sum of
+two three-tall vectors of reals is also a three-tall vector of reals.
+
+\pause
+Condition~(2) is routine
+\begin{equation*}
+  \vec{v}+\vec{w}
+  =
+  \colvec{v_1 \\ v_2 \\ v_3}
+  +\colvec{w_1 \\ w_2 \\ w_3}
+  =\colvec{v_1+w_1 \\ v_2+w_2 \\ v_3+w_3}
+  =
+  \colvec{w_1 \\ w_2 \\ w_3}
+  +\colvec{v_1 \\ v_2 \\ v_3}
+  =\vec{w}+\vec{v}
+\end{equation*}
+\end{frame}\begin{frame}
+Condition~(3) is also a direct consequence of the related
+real number property.
+\begin{multline*}
+  (\vec{v}+\vec{w})+\vec{u}
+  =
+  \colvec{v_1+w_1 \\ v_2+w_2 \\ v_3+w_3}
+  +\colvec{u_1 \\ u_2 \\ u_3}
+  =\colvec{v_1+w_1+u_1 \\ v_2+w_2+u_2 \\ v_3+w_3+u_3}        \\
+  =
+  \colvec{v_1 \\ v_2 \\ v_3}
+  +\colvec{w_1+u_1 \\ w_2+u_2 \\ w_3+u_3}
+  =\vec{v}+(\vec{w}+\vec{u})
+\end{multline*}
+
+\pause
+For condition~(4) take the vector of $0$'s.
+\begin{equation*}
+  \colvec{0  \\ 0 \\ 0}+\colvec{v_1 \\ v_2 \\ v_3}=\colvec{v_1 \\ v_2 \\ v_3}
+\end{equation*}
+For condition~(5), given $\vec{v}\in\Re^3$, use  $\vec{w}=-1\vec{v}$
+as the additive inverse.
+\begin{equation*}
+  \colvec{-v_1  \\ -v_2 \\ -v_3}+\colvec{v_1 \\ v_2 \\ v_3}=\colvec{0 \\ 0 \\ 0}
+\end{equation*}
+\end{frame}\begin{frame}
+Condition~(6) is closure under scalar multiplication.
+Let the scalar be $r\in\Re$ and the vector be $\vec{v}\in\Re^3$.
+Then $r\vec{v}$ is a three-tall vector of reals, so $r\vec{v}\in\Re^3$.
+
+\pause
+Conditions~(7)
+\begin{equation*}
+  (r+s)\colvec{v_1 \\ v_2 \\ v_3}
+  =\colvec{(r+s)v_1 \\ (r+s)v_2 \\ (r+s)v_3}
+  =\colvec{rv_1+sv_1 \\ rv_2+sv_2 \\ rv_3+sv_3}
+  =\colvec{rv_1 \\ rv_2 \\ rv_3}
+  +\colvec{sv_1 \\ sv_2 \\ sv_3}
+  =r\vec{v}+s\vec{v}  
+\end{equation*}
+and~(8)
+\begin{equation*}
+  r(\vec{v}+\vec{w})
+  =r(\colvec{v_1 \\ v_2 \\ v_3}+\colvec{w_1 \\ w_2 \\ w_3})
+  =r\colvec{v_1+w_1 \\ v_2+w_2 \\ v_3+w_3}
+  =\colvec{rv_1+rw_1 \\ rv_2+rw_2 \\ rv_3+rw_3}
+  % =\colvec{rv_1 \\ rv_2 \\ rv_3}
+  % +\colvec{rw_1 \\ rw_2 \\ rw_3}
+  =r\vec{v}+r\vec{w}  
+\end{equation*}
+are straightforward.
+\end{frame}\begin{frame}
+Condition~(9) is similar.
+\begin{equation*}
+  (rs)\colvec{v_1 \\ v_2 \\ v_3}
+  =\colvec{(rs)v_1 \\ (rs)v_2 \\ (rs)v_3}
+  =r\colvec{sv_1 \\ sv_2 \\ sv_3}
+  =r\vec{v}(s\vec{v})  
+\end{equation*}
+And~(10) is also easy.
+\begin{equation*}
+  1\vec{v}
+  =1\colvec{v_1 \\ v_2 \\ v_3}
+  =\colvec{1\cdot v_1 \\ 1\cdot v_2 \\ 1\cdot v_3}
+  =\colvec{v_1 \\ v_2 \\ v_3}
+  =\vec{v} 
+\end{equation*}
+
+\pause\medskip
+So the set $\Re^3$ is a vector space under the usual operations
+of vector addition and scalar-vector multiplication.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ex
+The set 
+$\polyspace_2=\set{a_0+a_1x+a_2x^2 \suchthat a_0,a_1,a_2\in\Re}$
+of quadratic polynomials
+is a vector space under the usual operations of polynomial addition
+\begin{equation*}
+  (a_0+a_1x+a_2x^2)+(b_0+b_1x+b_2x^2)=(a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2
+\end{equation*}
+and scalar multiplication.
+\begin{equation*} 
+r\cdot (a_0+a_1x+a_2x^2)=(ra_0)+(ra_1)x+(ra_2)x^2
+\end{equation*}
+
+
+\pause
+\ex
+The set of $\nbyn{3}$ matrices
+\begin{equation*}
+  \matspace_{\nbyn{3}}=\set{\begin{mat}
+                            a_{1,1}  &a_{1,2} &a_{1,3} \\
+                            a_{2,1}  &a_{2,2} &a_{2,3} \\
+                            a_{3,1}  &a_{3,2} &a_{3,3}
+                          \end{mat} 
+                         \suchthat a_{i,j}\in\Re}
+\end{equation*}
+is a vector space under the usual matrix addition and scalar multiplication.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+The empty set cannot be made a vector space, regardless of which operations
+we use, because it ahs no element to be the zero element.
+
+\pause
+\ex
+The set consisting only of the two-tall vector of $0$'s
+\begin{equation*}
+  V=\set{\colvec{0  \\  0}}
+\end{equation*}
+is a vector space (under the usual vector addition and scalar multiplication
+operations).
+
+\df[df:TrivialVectorSpace]
+\ExecuteMetaData[../vs1.tex]{df:TrivialVectorSpace}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\lm[lm:ElementaryPropertiesOfVectorSpaces]
+\ExecuteMetaData[../vs1.tex]{lm:ElementaryPropertiesOfVectorSpaces}
+
+\pause
+\pf
+\ExecuteMetaData[../vs1.tex]{pf:ElementaryPropertiesOfVectorSpaces0}
+
+\pause
+\ExecuteMetaData[../vs1.tex]{pf:ElementaryPropertiesOfVectorSpaces1}
+
+\pause
+\ExecuteMetaData[../vs1.tex]{pf:ElementaryPropertiesOfVectorSpaces2}
+\qed
+\end{frame}
+
+
+
+
+
+
+
+\section{Subspaces and spanning sets}
+\begin{frame}
+\end{frame}
+
+
+
+%...........................
+% \begin{frame}
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
