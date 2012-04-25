@@ -33,7 +33,7 @@ But it is not just a collection of all of the three-tall column vectors;
 only some of them are in the set.
 
 We want the results about linear combinations to apply anywhere that linear
-combinations are sensible. 
+combinations make sense. 
 We shall call any such set a \definend{vector space}.
 Our results, instead of being phrased as
 ``Whenever we have a collection in which we can sensibly take linear 
@@ -2238,7 +2238,7 @@ statements are equivalent.
   \qquad
   (3)\!\iff\!(1)
 \end{equation*}
-We will show these statements are equivalent by establishing that
+We will prove the equivalence by establishing that
 \( (1)\implies (3)\implies (2)\implies (1)\).
 This strategy is suggested by the observation that
 \( (1)\implies (3) \) and \( (3)\implies (2) \) are easy and so we need only
@@ -2278,70 +2278,81 @@ The checks for the scalar multiplication conditions are similar; see
 \nearbyexercise{exer:SubspIffClosed}.
 \end{proof}
 
-We will usually show that a subset is a subspace with \( (2)\implies (1) \).
+We will usually verify that a subset is a subspace with \( (2)\implies (1) \).
 
 \begin{remark}
 At the start of this chapter we introduced vector spaces as collections in
-which linear combinations are ``sensible.''
-The above result speaks to this.
-
-The vector space definition has ten conditions but eight of them, the
-conditions not about closure, simply ensure that referring to the
-operations as an `addition' and a `scalar multiplication' is sensible.
-The proof above checks that these eight
-are inherited from the
-surrounding vector space provided that the nonempty set $S$ satisfies
-\nearbytheorem{th:SubspIffClosed}'s statement~(2) 
-(e.g., commutativity of addition in $S$ follows right from
-commutativity of addition in $V$).
-So, in this context, this meaning of ``sensible'' is automatically
-satisfied.
-
-In assuring us that this first meaning of the word is met, the result draws
-our attention to the second meaning of ``sensible.''
-It has to do with the two remaining conditions, the closure conditions.
-Above, the two separate closure conditions inherent in statement~(1) 
-combine in statement~(2) into the single condition of closure under all
-linear combinations of two vectors, which then extends in statement~(3) to
-closure under combinations of any number of vectors.
-The latter two statements say that we can always make sense of 
+which linear combinations ``make sense.''
+% The vector space definition has ten conditions but eight of them, the
+% conditions not about closure, simply ensure that referring to the
+% operations by the names `addition' and `scalar multiplication' is sensible.
+% For instance, calling an operation `$+$' would not
+% be odd unless it is commutative, as in condition~(2). 
+% The proof above checks that the subspace satisfies these 
+% eight non-closure conditions because they hold in the
+% surrounding vector space, provided that the nonempty set $S$ satisfies
+% \nearbytheorem{th:SubspIffClosed}'s statement~(2) 
+% (e.g., commutativity of addition in $S$ follows right from
+% commutativity of addition in $V$).
+% There is a second way in which we can regard vector spaces as structures in 
+% which linear combinations are ``sensible.''
+% It has to do with the closure conditions.
+\nearbytheorem{th:SubspIffClosed}'s statements (1)-(3) 
+say that we can always make sense of 
 an expression like
-$r_1\vec{s}_1+r_2\vec{s}_2$, without restrictions on the $r$'s\Dash such 
-expressions are ``sensible'' in that the vector described is defined 
-and is in the set~$S$.
+$r_1\vec{s}_1+r_2\vec{s}_2$\Dash without restrictions on the $r$'s\Dash
+in that the vector described is in the set~$S$.
 
-This second meaning suggests that a good way to think of
-a vector space is as a collection of unrestricted linear combinations.
-The next two examples take some spaces and describe them in this way.
-In these examples we parametrize, just as we did in Chapter One 
-to describe the solution set of a homogeneous linear system.
+For a contrast, consider the set $T$ of two-tall vectors whose entries add to
+a number greater than or equal to zero.
+Here we cannot just write a linear combination such as $2\vec{t}_1-3\vec{t}_2$
+and be sure the result is an element of $T$,
+that is, $T$ doesn't satisfy statement~(2).
 \end{remark}
 
+\nearbylemma{th:SubspIffClosed} suggests that a good way to think of
+a vector space is as a collection of unrestricted linear combinations.
+The next two examples take some spaces and recasts their
+descriptions to be in that form.
+
 \begin{example}
-This subset of $\Re^3$
+We can show that this plane through the origin subset of $\Re^3$
 \begin{equation*}
   S=\set{\colvec{x \\ y \\ z}\suchthat x-2y+z=0}
 \end{equation*}
 is a subspace under the usual addition and scalar multiplication
-operations of column vectors (the check that it is nonempty and closed under
-linear combinations of two vectors is just like the one in 
-\nearbyexample{ex:PlaneSubspRThree}).
-To parametrize, we can take $x-2y+z=0$ to be a one-equation linear system and 
-expressing the leading
+operations of column vectors by checking that it is nonempty and closed under
+linear combinations of two vectors as in 
+\nearbyexample{ex:PlaneSubspRThree}.
+But there is another way.
+Think of  $x-2y+z=0$  as a one-equation linear system and paramatrize it
+by expressing the leading
 variable in terms of the free variables $x=2y-z$.
 \begin{equation*}
      S
      =\set{\colvec{2y-z \\ y \\ z}\suchthat y,z\in\Re}
      =\set{y\colvec[r]{2 \\ 1 \\ 0}+
             z\colvec[r]{-1 \\ 0 \\ 1}\suchthat y,z\in\Re}
+    \tag{*}
 \end{equation*}
-This describes the subspace as the collection of unrestricted 
-linear combinations of those two vectors.
-Of course, in either description, this is a plane through the origin.
+Now, to show that this is a subspace consider
+$r_1\vec{s}_1+r_2\vec{s}_2$.
+Each $\vec{s}_i$ is a linear combination of the two vectors in ($*$)
+so this is a linear combination of linear combinations.
+\begin{equation*}
+  r_1(y_1\colvec[r]{2 \\ 1 \\ 0}+
+            z_1\colvec[r]{-1 \\ 0 \\ 1})
+  +
+  r_2(y_2\colvec[r]{2 \\ 1 \\ 0}+
+            z_2\colvec[r]{-1 \\ 0 \\ 1})
+\end{equation*}
+The Linear Combination Lemma, Lemma~One.III.\ref{lm:LinearCombinationLemma},
+shows that this is a linear combination of the two vectors
+and so \nearbytheorem{th:SubspIffClosed}'s statement~(2) is satisified.
 \end{example}
 
 \begin{example} \label{ex:ParamSubspace}
-This is a subspace of the \( \nbyn{2} \) matrices
+This is a subspace of the \( \nbyn{2} \) matrices $\matspace_{\nbyn{2}}$.
 \begin{equation*}
   L=\set{\begin{mat}
          a  &0  \\
@@ -2349,7 +2360,6 @@ This is a subspace of the \( \nbyn{2} \) matrices
        \end{mat}
        \suchthat a+b+c=0}
 \end{equation*}
-(checking that it is nonempty and closed under linear combinations is easy).
 To parametrize, express the condition as $a=-b-c$.
 \begin{equation*}
   L
@@ -2370,10 +2380,13 @@ To parametrize, express the condition as $a=-b-c$.
 \end{equation*}
 As above, we've described the subspace as a collection of unrestricted linear
 combinations.
+To show it is a subspace, note that a linear combination of vectors from
+$L$ is a linear combination of linear combinations and so statement~(2)
+is true.
 \end{example}
 
-Parametrization is easy, but important.
-We shall use it often.
+% Parametrization is easy, but important.
+% We shall use it often.
 
 \begin{definition} \label{df:Span}
 %<*df:Span>
