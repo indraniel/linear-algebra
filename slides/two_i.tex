@@ -452,7 +452,222 @@ operations).
 
 
 \section{Subspaces and spanning sets}
+
+% ..........
+\begin{frame}{Subspace}
+\df[df:Subspace]
+\ExecuteMetaData[../vs1.tex]{df:Subspace}
+
+\pause\medskip
+\ExecuteMetaData[../vs1.tex]{ProperSubspace}
+
+\pause
+\ex
+In the vector space $\Re^2$, the line $y=2x$ 
+\begin{equation*}
+  S=\set{\colvec{a \\ 2a} \suchthat a\in\Re}
+   =\set{\colvec{1 \\ 2}a \suchthat a\in\Re}
+\end{equation*}
+is a subspace.
+The operations, as required by the definition, are the ones from $\Re^2$.
+We can check all the conditions to show it is a vector space, but the next
+result gives an easier way.
+
+\pause
+\ex
+This subset of $\matspace_{\nbyn{2}}$ is a subspace. 
+\begin{equation*}
+  S=\set{\begin{mat}
+           a  &b  \\
+           a  &b
+         \end{mat} \suchthat a,b\in\Re}
+   =\set{\begin{mat}
+           1  &0  \\
+           1  &0
+         \end{mat}a
+         +\begin{mat}
+           0  &1  \\
+           0  &1
+          \end{mat}b
+         \suchthat a,b\in\Re}
+\end{equation*}
+As above, addition and scalar multiplication are the same as in 
+$\matspace_{\nbyn{2}}$.
+\end{frame}
+
+
+
+
+% ..........
 \begin{frame}
+\ex
+This is not a subspace of $\Re^3$.
+\begin{equation*}
+  T=\set{\colvec{x  \\ y  \\ z}\suchthat x+y+z=1}
+\end{equation*}
+It is a subset of $\Re^3$ but it is not a vector space.
+One condition that it violates is that it is not closed under vector addition:
+here are two elements of $T$ that sum to a vector that is not an element of 
+$T$. 
+\begin{equation*}
+  \colvec{1  \\ 0  \\ 0}
+  +\colvec{0 \\ 1 \\ 0}
+  =\colvec{1 \\ 1 \\ 0}
+\end{equation*}
+(Another reason that it is not a vector space is that it does not contain 
+the zero vector.)
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\lm[th:SubspIffClosed]
+\ExecuteMetaData[../vs1.tex]{lm:SubspIffClosed}
+
+\pause\medskip
+\ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed0}
+\end{frame}\begin{frame}
+\pf[th:SubspIffClosed]
+\ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed1}
+
+\pause
+The conditions for scalar multiplication are similar.
+\qed
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ex
+The vector space of quadratic polynomials
+$\polyspace_2=\set{a_0+a_1x+a_2x^2\suchthat a_0,a_1,a_2\in\Re}$ has a subspace
+comprised of the linear polynomials
+$L=\set{b_0+b_1x\suchthat b_0,b_1\in\Re}$.
+To verify that, take scalars $r,s\in\Re$ and consider a linear combination.
+\begin{equation*}
+  r(b_0+b_1x)+s(c_0+c_1x)=(rb_0+sc_0)+(rb_1+sc_1)x
+\end{equation*}
+The right side is a linear polynomial with real coefficients, and so is a 
+member of $L$.
+Thus $L$ is closed under linear combinations.
+
+\pause
+\ex
+Another subspace of $\polyspace_2$ is the set of quadratic polynomials
+with all three coefficients equal.
+\begin{equation*}
+  M=\set{a+ax+ax^2\suchthat a\in\Re}
+   =\set{(1+x+x^2)a\suchthat a\in\Re}
+\end{equation*}
+Verify that it is a subspace by taking two scalars $r,s\in\Re$
+and considering a linear combination of polynomials with all 
+three coefficients the same.
+\begin{equation*}
+  r(a+ax+ax^2)+s(b+bx+bx^2)
+  =(ra+sb)+(ra+sb)x+(ra+sb)x^2
+\end{equation*}
+The result is a quadratic polynomial with all three coefficents the same, 
+and so $M$ is closed under linear combinations.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+The above examples of subspace paramatrize the description.
+
+\ex
+This set is a plane inside of $\Re^3$.
+\begin{equation*}
+  P=\set{\colvec{x  \\ y  \\ z}\suchthat 2x-y+z=0}
+\end{equation*}
+We could
+verify that it is a subspace by checking that it is closed under 
+linear combination as above.
+
+\pause
+That's easier if we first paramatrize the one-equation linear system
+$2x-y+z=0$ using the free variables $y$ and~$z$.
+\begin{equation*}
+  P=\set{\colvec{(1/2)y-(1/2)z  \\ y  \\ z}\suchthat y,z\in\Re}  
+   =\set{\colvec{1/2 \\ 1 \\ 0}y+\colvec{-1/2 \\ 0 \\ 1 }z\suchthat y,z\in\Re}  
+\end{equation*}
+\pause
+Now members of $P$ are described as a linear combination of those two vectors.
+Verifying that $P$ is closed then involves taking a linear combination of 
+linear combinations, which makes a linear combination.
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}{Span}
+\df[df:Span]
+\ExecuteMetaData[../vs1.tex]{df:Span}
+
+\medskip
+\ExecuteMetaData[../vs1.tex]{NotationForSpan}
+
+\pause
+\ex
+Inside the vector space of all two-wide row vectors, the span of this 
+one-element set
+\begin{equation*}
+  S=\set{\rowvec{1  &2}}
+\end{equation*}
+is this.
+\begin{equation*}
+  \spanof{S}
+  =\set{\rowvec{a &2a}\suchthat a\in\Re}
+  =\set{\rowvec{1 &2}a\suchthat a\in\Re}
+\end{equation*}
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\ex
+This is a subset of $\Re^3$.
+\begin{equation*}
+  S=\set{\colvec{1 \\ -1 \\ 0},
+         \colvec{1 \\ 1 \\ 0}}
+\end{equation*}
+Any vector in the $xy$-plane is a member of the span $\spanof{S}$;
+for instance, this system has a solution.
+\begin{equation*}
+  \colvec{3 \\ 2 \\ 0}=\colvec{1 \\ -1 \\ 0}c_1
+                       +\colvec{1 \\ 1 \\ 0}c_2
+\end{equation*}
+\pause
+But vectors not in the $xy$-plane are not in the span; for instance,
+this system does not have a solution.
+\begin{equation*}
+  \colvec{-1 \\ -2 \\ -3}=\colvec{1 \\ -1 \\ 0}c_1
+                       +\colvec{1 \\ 1 \\ 0}c_2
+\end{equation*}
+(just consider the third components).
+\end{frame}
+
+
+
+
+% ..........
+\begin{frame}
+\lm[le:SpanIsASubsp]
+\ExecuteMetaData[../vs1.tex]{lm:SpanIsASubsp}
+
+\pause
+\pf
+\ExecuteMetaData[../vs1.tex]{pf:SpanIsASubsp}
+\qed
 \end{frame}
 
 
