@@ -60,19 +60,24 @@ We will prove that in the next section.
 % the former contains $\vec{v}$.
 
 \begin{lemma}  \label{le:VecInSpanIffSpanUnchByAddVec}
+%<*lm:VecInSpanIffSpanUnchByAddVec>
 If \( S \) is a subset of a vector space $V$  and 
 $\vec{v}\in V$ then
 $\spanof{S}=\spanof{S\union\set{\vec{v}}}$
 if and only if
 $\vec{v}\in\spanof{S}$.
+%</lm:VecInSpanIffSpanUnchByAddVec>
 \end{lemma}
 
 \begin{proof}
+%<*pf:VecInSpanIffSpanUnchByAddVec0>
 The left to right implication is easy.
 If $\spanof{S}=\spanof{S\union\set{\vec{v}}}$
-then, since \( \vec{v}\in\spanof{S\union\set{\vec{v}}} \),
+then since \( \vec{v}\in\spanof{S\union\set{\vec{v}}} \),
 the equality of the two sets gives that \( \vec{v}\in\spanof{S} \).
+%</pf:VecInSpanIffSpanUnchByAddVec0>
 
+%<*pf:VecInSpanIffSpanUnchByAddVec1>
 For the right to left implication assume that \( \vec{v}\in \spanof{S} \) to
 show that \( \spanof{S}=\spanof{S\union\set{\vec{v}}} \) by 
 mutual set inclusion.
@@ -89,6 +94,7 @@ distributing \( d_0 \) results in
 a linear combination of vectors from \( S \).
 Hence each member of $\spanof{S\union\set{\vec{v}}}$ is also 
 a member of $\spanof{S}$.
+%</pf:VecInSpanIffSpanUnchByAddVec1>
 \end{proof}
 
 \begin{example}
@@ -112,18 +118,19 @@ a spanning set is minimal
 if and only if it contains
 no vectors that are linear combinations of the others in that set.
 
-\begin{definition}
-\label{def:LinInd}
+\begin{definition}\label{def:LinInd}
+%<*df:LinInd>
 A multiset subset of a vector space is
 \definend{linearly independent}\index{linearly independent}%
 \index{sets!dependent, independent}
 if none of its elements is a linear combination of the 
-others.\appendrefs{multisets}\spacefactor=1000
+others.\appendrefs{multisets}\spacefactor=1000\ 
 Otherwise it is \definend{linearly dependent}\index{linearly dependent}.
+%</df:LinInd>
 \end{definition}
 
-Here is an important observation:
-although this way of writing one vector as a combination of the others
+%<*LinInd>
+Although this way of writing one vector as a combination of the others
 \begin{equation*}
    \vec{s}_0=\lincombo{c}{\vec{s}}
 \end{equation*}
@@ -143,11 +150,13 @@ one side of the equation we will instead say that
 \index{relationship!linear} 
 and write the relationship
 with all of the vectors on the same side.
+%</LinInd>
 The next result rephrases the linear independence definition in this style.
 It gives what is usually the easiest way to compute whether
 a finite set is dependent or independent.
 
 \begin{lemma}   \label{le:LDIffANonTrivLinRel}
+%<*lm:LDIffANonTrivLinRel>
 A subset \( S \) of a vector space is linearly independent if and only if 
 among the elements \( \vec{s}_1,\dots,\vec{s}_n\in S \) 
 the only linear relationship 
@@ -156,10 +165,11 @@ the only linear relationship
    \qquad c_1,\dots,c_n\in\Re
 \end{equation*}
 is the trivial one \( c_1=0,\dots,\,c_n=0 \).
+%</lm:LDIffANonTrivLinRel>
 \end{lemma}
 
 \begin{proof}
-% This is a direct consequence of the observation above.
+%<*pf:LDIffANonTrivLinRel>
 If \( S \) is linearly independent then no vector
 $\vec{s}_i$ 
 is a linear combination of other vectors from $S$
@@ -175,6 +185,7 @@ Subtracting $\vec{s}_i$ from both sides
 gives a relationship
 involving a nonzero coefficient,
 the \( -1 \) in front of \( \vec{s}_i \).
+%</pf:LDIffANonTrivLinRel>
 \end{proof}
 
 \begin{example}  \label{ex:StaticsLIAndLD}
@@ -346,29 +357,32 @@ the zero vector is a combination of the empty set.
 \end{example}
 
 \begin{remark}\cite{Velleman} \label{rem:WhyLIUsesMultiset}
-\nearbydefinition{def:LinInd} specifies that when we 
-are considering whether some $S$ is linearly independent, we must
+\nearbydefinition{def:LinInd} says that when we 
+decide whether some $S$ is linearly independent, we must
 consider it as a multiset.
-This is not the most important point about linear independence so 
-we will typically not mention it and instead will 
-follow the standard convention of referring to a linearly independent or 
-dependent ``set.''
-However, rather than ignore the point altogether
-here is an example showing that we can need the
-distinction between set and multiset.
+Here is an example showing that we can need multiset rather than set
+(recall that in a set repeated elements collapse so that the set 
+$\set{0,1,0}$ equals the set $\set{0,1}$, whereas in a multiset they
+do not collapse so that the multiset $\set{0,1,0}$ contains the element 
+$0$ twice).
 In the next chapter we will look at functions.
 Let the function $\map{f}{\polyspace_1}{\Re}$ be given by
-$f(a+bx)=a$ (for instance, $f(1+2x)=1$). 
+$f(a+bx)=a$; for instance, $f(1+2x)=1$. 
 Consider the subset $B=\set{1,1+x}$ of the domain.
 The images of the elements are $f(1)=1$ and~$f(1+x)=1$.
-In a set repeated elements collapse to be one element 
-so these images form the set $\set{1}$,
+Because in a set repeated elements collapse to be a single element 
+these images form the one-element set $\set{1}$,
 which is linearly independent.
-But 
-in a multiset repeated elements do not collapse so the images form a linearly 
+But in a multiset repeated elements do not collapse so 
+these images form a linearly 
 dependent multiset~$\set{1,1}$.
 The second case is the correct one:~$B$ is linearly independent but its image 
 under~$f$ is linearly dependent.
+
+Most of the time we won't need the set-multiset distinction and  
+we will typically 
+follow the standard convention of referring to a linearly independent or 
+dependent ``set.''
 \end{remark}
 
 The above examples, especially \nearbyexample{ex:StaticsLIAndLD},
@@ -380,17 +394,21 @@ by discarding what \nearbyremark{ex:StaticsLIAndLD}
 calls ``repeats.''
 
 
-\begin{theorem}
-\label{th:AlwaysAnLDSubset}
+\begin{theorem} \label{th:AlwaysAnLDSubset}
+%<*th:AlwaysAnLDSubset>
 In a vector space,
 any finite subset has a linearly independent subset with the same span.
+%</th:AlwaysAnLDSubset>
 \end{theorem}
 
 \begin{proof}
+%<*pf:AlwaysAnLDSubset0>
 If the set  \( S=\set{ \vec{s}_1,\dots,\vec{s}_n} \) is linearly independent
 then $S$ itself satisfies the statement, so 
 assume that it is linearly dependent.
+%</pf:AlwaysAnLDSubset0>
 
+%<*pf:AlwaysAnLDSubset1>
 By the definition of dependence,
 there is a vector \( \vec{s}_i \) that is a linear combination of
 the others.
@@ -399,7 +417,9 @@ Discard it:
 define the set \( S_1=S-\set{\vec{v}_1} \).
 By \nearbylemma{le:VecInSpanIffSpanUnchByAddVec}, the span does not
 shrink \( \spanof{S_1}=\spanof{S} \).
+%</pf:AlwaysAnLDSubset1>
 
+%<*pf:AlwaysAnLDSubset2>
 Now, if \( S_1 \) is linearly independent then we are finished.
 Otherwise iterate the prior paragraph: 
 take a vector $\vec{v}_2$ 
@@ -413,6 +433,7 @@ and the empty set is linearly independent.
 (Formally, this argument uses
 induction on $n$, the number of elements in the starting set.
 \nearbyexercise{exer:FillIndDetProofSetHasLISub} asks for the details.)
+%</pf:AlwaysAnLDSubset2>
 \end{proof}
 
 \begin{example}  \label{ex:ShrinkSetSameSpan}
@@ -496,16 +517,22 @@ how linear independence and dependence, which are properties of sets, interact
 with the subset relation between sets.
 
 \begin{lemma}  \label{le:SubsetPreserveLI}
+%<*lm:SubsetPreserveLI>
 Any subset of a linearly independent set is also linearly independent.
 Any superset of a linearly dependent set is also linearly dependent.
+%</lm:SubsetPreserveLI>
 \end{lemma}
 
 \begin{proof}
+%<*pf:SubsetPreserveLI>
 This is clear.
+%</pf:SubsetPreserveLI>
 \end{proof}
 
+%<*SubsetPreserveLI>
 Restated, independence is preserved by subset 
 and dependence is preserved by superset.
+%</SubsetPreserveLI>
 
 Those are two of the four possible cases.
 The third case, whether linear dependence is preserved by the subset operation,
@@ -600,20 +627,25 @@ linearly independent set may  have a superset that is independent.
 We can characterize when the superset is one and when it is the other.
 
 \begin{lemma} \label{le:SUnionXiLIIffXiNotInSpan}
+%<*lm:SUnionXiLIIffXiNotInSpan>
 If \( S \) is a linearly independent subset of a vector space \( V \) then
 for any \( \vec{v}\in V \) with \( \vec{v}\not\in S \), the set
 $S\union\set{\vec{v}}$ is linearly dependent
 if and only if
 $\vec{v}\in\spanof{S}$.
+%</lm:SUnionXiLIIffXiNotInSpan>
 \end{lemma}
 
 \begin{proof}
+%<*pf:SUnionXiLIIffXiNotInSpan0>
 The right-to-left implication is clear: if \( \vec{v}\in\spanof{S} \) then
 \( \vec{v}=\lincombo{c}{\vec{s}} \) where each \( \vec{s}_i\in S \) and
 \( c_i\in\Re \), and so \( \zero=(-1)\vec{v}+\lincombo{c}{\vec{s}} \)
 is a nontrivial linear relationship among elements of
 \( S\union\set{\vec{v}} \).
+%</pf:SUnionXiLIIffXiNotInSpan0>
 
+%<*pf:SUnionXiLIIffXiNotInSpan1>
 The other implication requires the assumption that \( S \) is linearly
 independent.
 Suppose that
@@ -625,6 +657,7 @@ or else it would be a nontrivial relationship among members of \( S \).
 Rewrite this equation as
 \( \vec{v}=-(c_1/c_0)\vec{s}_1-\dots-(c_n/c_0)\vec{s}_n \) to get
 that \( \vec{v}\in\spanof{S} \).
+%</pf:SUnionXiLIIffXiNotInSpan1>
 \end{proof}
 
 \noindent
@@ -633,21 +666,24 @@ Both say, roughly, that $\vec{v}$ is a ``repeat'' if it is in the
 span of $S$.
 However, note the additional hypothesis here of linear independence.)
 
-\begin{corollary}
-\label{cor:LDMeansLC}
+\begin{corollary} \label{cor:LDMeansLC}
+%<*co:LDMeansLC>
 A subset \( S=\set{\vec{s}_1,\dots,\vec{s}_n} \) of a vector space
 is linearly dependent if and only if some \( \vec{s_i} \)
 is a linear combination of the vectors 
 \( \vec{s}_1 \), \ldots, \( \vec{s}_{i-1} \)
 listed before it.
+%</co:LDMeansLC>
 \end{corollary}
 
 \begin{proof}
+%<*pf:LDMeansLC>
 Consider \( S_0=\set{} \), \( S_1=\set{\vec{s_1}} \),
 \( S_2=\set{\vec{s}_1,\vec{s}_2 } \), etc.
 Some index \( i\geq 1 \) is the first one with
 \( S_{i-1}\union\set{\vec{s}_i } \)
 linearly dependent, and there \( \vec{s}_i\in\spanof{ S_{i-1} } \).
+%</pf:LDMeansLC>
 \end{proof}
 
 We can restate \nearbylemma{le:SUnionXiLIIffXiNotInSpan}
@@ -675,6 +711,7 @@ a linearly independent sets is maximal if and only if it
 spans the 
 entire space, because then no vector exists that is not already in the span.
 
+%<*IndependenceAndSubsetTable>
 This table summarizes the interaction between the properties of independence
 and dependence and the relations of subset and superset.
 \medskip
@@ -692,6 +729,7 @@ and dependence and the relations of subset and superset.
      % \cline{2-3}
    \end{tabular}
 \end{center}
+%</IndependenceAndSubsetTable>
 \medskip
 In developing this table we've uncovered an
 intimate relationship between linear independence and span.
