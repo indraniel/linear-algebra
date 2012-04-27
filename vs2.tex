@@ -390,7 +390,7 @@ underline the discussion that begins this section.
 The next result 
 says that given a finite set,
 we can produce a linearly independent subset
-by discarding what \nearbyremark{ex:StaticsLIAndLD}
+by discarding what \nearbyexample{ex:StaticsLIAndLD}
 calls ``repeats.''
 
 
@@ -625,6 +625,53 @@ may have a superset that is dependent.
 And, in general, a  
 linearly independent set may  have a superset that is independent.
 We can characterize when the superset is one and when it is the other.
+
+\begin{lemma} 
+If $\vec{v}$ is a member of the vector space $V$ and $S$ is a subset
+of $V$
+then $\spanof{S}\subseteq \spanof{S\union\set{\vec{v}}}$.
+If $\vec{v}\not\in S$ then:
+(1)~$\spanof{S}\subsetneq \spanof{S\union\set{\vec{v}}}$ if and only if 
+  $\vec{v}\not\in \spanof{S}$
+and 
+(2)~if $S$ is linearly independent then adjoining $\vec{v}$ to $S$ gives a
+  linearly independent set if and only if $\vec{v}\not\in \spanof{S}$.
+\end{lemma}
+
+\begin{proof}
+We have $\spanof{S}\subseteq \spanof{S\union\set{\vec{v}}}$ because an
+element of $\spanof{S}$ is a linear combination of elements of $S$,
+so is a linear combination of elements of $S\union\set{\vec{v}}$,
+and therefore is an element of $\spanof{S\union\set{\vec{v}}}$.
+
+Now assume $\vec{v}\not\in S$.
+
+For~(1), one direction of the if and only if is easy: if 
+$\vec{v}\not\in \spanof{S}$
+then because $\vec{v}\in\spanof{S\union\set{\vec{v}}}$ we have that
+$\spanof{S}\neq\spanof{S\union\set{\vec{v}}}$. 
+For the other direction, if $\vec{v}\in\spanof{S}$ then $\vec{v}$ is a linear
+combination of elements of $S$ so
+since any member of $\spanof{S\union\set{\vec{v}}}$ has the form
+$d_1\vec{s}_1+\cdots+d_n\vec{s}_n+d_{n+1}\vec{v}$, expanding
+$\vec{v}$ to its linear combination in terms of members of $S$ makes it a 
+linear combination of members of $S$, and therefore a member of $\spanof{S}$.  
+
+For~(2), assume first that $\vec{v}\in \spanof{S}$.
+Then $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n$ and adjoining $\vec{v}$
+to $S$ gives this linearly dependendence among members of 
+the multiset $S\union\set{\vec{v}}$:
+$c_1\vec{s}_1+\cdots+c_n\vec{s}_n-\vec{v}=\zero$.
+If $\vec{v}\not\in\spanof{S}$ then assuming that 
+\( S\union\set{\vec{v}} \) is linearly dependent gives a
+nontrivial \( c_0\vec{v}+\lincombo{c}{\vec{s}}=\zero \)
+and the linear independence of $S$ implies that \( c_0\neq 0 \) 
+or else this would be a nontrivial relationship among members of \( S \).
+Rewrite this equation as
+\( \vec{v}=-(c_1/c_0)\vec{s}_1-\dots-(c_n/c_0)\vec{s}_n \) to get
+that \( \vec{v}\in\spanof{S} \).
+\end{proof}
+
 
 \begin{lemma} \label{le:SUnionXiLIIffXiNotInSpan}
 %<*lm:SUnionXiLIIffXiNotInSpan>
