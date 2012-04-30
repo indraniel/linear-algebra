@@ -15,7 +15,17 @@ print s
 # gauss_jordan(M1)
 
 print ".. second .."
-var('c1,c2,a,b')
-eqn = [c1-c2==a, -c1+c2==b]
-s = solve(eqn, [b,a]); 
+var('r1,r2,a,b')
+eqn = [r1+r2==a, -r1+r2==b]
+s = solve(eqn, r1,r2); 
 print s
+
+print ".. third .."
+var('r1,r2,r3,a,b,c')
+eqn = [r1+r2+2*r3==a, -r1+r2==b, r3==c]
+s = solve(eqn, r1,r2,r3); 
+print s
+
+print ".. fourth .."
+M = matrix(QQ,[[2,3,1,0,0], [2,3,4,-1,0]])
+gauss_method(M)

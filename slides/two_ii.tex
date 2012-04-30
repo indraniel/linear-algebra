@@ -117,8 +117,8 @@ The nonzero rows of this matrix form a linearly independent set.
     0 &0  &0   &0
   \end{mat}
 \end{equation*}
-We showed in Lemma~One.III.\ref{le:EchFormNoLinCombo} that for any
-echelon from matrix the nonzero
+We showed in Lemma~One.III.\ref{le:EchFormNoLinCombo} that in any
+echelon form matrix the nonzero
 rows make a linearly independent set. 
 
 \ex
@@ -169,18 +169,26 @@ The span $\spanof{S}$ is the subset of
 linear polynomials $\set{a+bx\suchthat a,b\in\Re}$.
 (The span is a subset of the linear polynomials because no member of
 $S$ has a quadratic term.
-To see that the span equals the linear polynomials, solve
-the equation $a+bx=c_1(1-x)+c_2(1+x)$ to get $a=c_1-c_2$ and 
-$b=-c_1+c_2$.)  
+To see that the span is all of the set of linear polynomials, consider 
+a linear polynomial $a+bx$ and use
+the equation $a+bx=r_1(1-x)+r_2(1+x)$ to get a linear system
+that solves as $r_2=(1/2)a+(1/2)b$ and 
+$r_1=(1/2)a-(1/2)b$.)  
 
 \pause
 If we add a linear polynomial $S_1=S\union\set{2+2x}$
 then the span is unchanged $\spanof{S}=\spanof{S_1}$.
+This is because span of $S$ is all of the linear polynomials 
+and the new 
+member does not add any quadratic terms.
 
 \pause
-We can enlarge the span by adding a quadratic polynomial
-$S_2=S\union\set{2+x^2}$.
-The span of $S_2$ is all of $\polyspace_2$.
+If we add a quadratic polynomial 
+$S_2=S\union\set{2+x^2}$ then we enlarge the span: 
+the span of $S_2$ is all of $\polyspace_2$.
+To see this, consider a quadratic $a+bx+cx^2$ and use  
+$a+bx+cx^2=r_1(1-x)+r_2(1+x)+r_3(2+x^2)$ to get a linear system
+that has the solution $r_3=c$, $r_2=(1/2)a+(1/2)b$ and $r_1=(1/2)a-(1/2)b-c$.
 \end{frame}
 
 
@@ -213,6 +221,35 @@ The span of $S_2$ is all of $\polyspace_2$.
 \pf
 \ExecuteMetaData[../vs2.tex]{pf:LDMeansLC}
 \qed
+\end{frame}\begin{frame}
+\ex
+Consider this subset of $\Re^2$. 
+\begin{equation*}
+  \set{\colvec{2 \\ 2},
+       \colvec{3 \\ 3},
+       \colvec{1 \\ 4},
+       \colvec{0 \\ -1} }
+\end{equation*}
+The linear relationship gives a linear system.
+\begin{multline*}
+       r_1\colvec{2 \\ 2}
+       +r_2\colvec{3 \\ 3}
+       +r_3\colvec{1 \\ 4}
+       +r_4\colvec{0 \\ -1}
+       =\colvec{0 \\ 0}                            \\
+   \implies
+   \begin{linsys}{4}
+      2r_1 &+ &3r_2 &+ &r_3  &  &    &=  &0 \\
+      2r_1 &+ &3r_2 &+ &4r_3 &- &r_4 &=  &0 
+    \end{linsys}                                    
+\end{multline*}
+\begin{equation*}
+    \grstep{-\rho_1+\rho_2}
+    \begin{linsys}{4}
+      2r_1 &+ &3r_2 &+ &r_3  &  &    &=  &0 \\
+           &  &     &+ &3r_3 &- &r_4 &=  &0 
+    \end{linsys}
+\end{equation*}
 \end{frame}
 
 
