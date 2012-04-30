@@ -7,6 +7,7 @@
 \usepackage{../linalgjh}
 \usepackage{present}
 \usepackage{xr}\externaldocument{../vs2} % read refs from .aux file
+\usepackage{xr}\externaldocument{../gr3} % read refs from .aux file
 \usepackage{catchfilebetweentags}
 \usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
 \makeatletter
@@ -76,7 +77,117 @@
 
 %..........
 \begin{frame}
-\th[th:AlwaysAnLDSubset]
+\ex 
+This set of vectors in the plane $\Re^2$ is linearly independent.
+\begin{equation*}
+  \set{\colvec{1 \\ 0},
+       \colvec{0 \\ 1}}
+\end{equation*}
+The only solution to this equation
+\begin{equation*}
+  c_1\colvec{1 \\ 0}+c_2\colvec{0 \\ 1}=\colvec{0 \\ 0}
+\end{equation*}
+is the trivial solution $c_1=0$, $c_2=0$.
+\pause
+\ex In the vector space of cubic polynomials 
+$\polyspace_3=\set{a_0+a_1x+a_2x^2+a_3x^3\suchthat a_i\in\Re}$ the set
+$\set{1-x,1+x^2}$ is linearly independent.
+The equation
+$c_0(1-x)+c_1(1+x^2)=0$ leads to this linear system
+\begin{equation*}
+  \begin{linsys}{2}
+    c_0 &- &c_1 &=  &0 \\
+    c_0 &+ &c_1 &=  &0
+  \end{linsys}
+\end{equation*}
+which has only the trivial solution.
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\ex
+The nonzero rows of this matrix form a linearly independent set.
+\begin{equation*}
+  \begin{mat}[r]
+    2 &0  &1   &-1  \\
+    0 &1  &-3  &1/2  \\
+    0 &0  &0   &5    \\
+    0 &0  &0   &0
+  \end{mat}
+\end{equation*}
+We showed in Lemma~One.III.\ref{le:EchFormNoLinCombo} that for any
+echelon from matrix the nonzero
+rows make a linearly independent set. 
+
+\ex
+This subset of $\Re^3$ is linearly dependent.
+\begin{equation*}
+  \set{\colvec{1  \\ 1 \\ 3}, 
+       \colvec{-1 \\ 1 \\ 0},
+       \colvec{1  \\ 3 \\ 6}}
+\end{equation*}
+One way to show that is to spot that the third vector is twice the first plus 
+the second.
+Another way is to solve the linear system
+\begin{equation*}
+  \begin{linsys}{3}
+    c_1  &-  &c_2  &+  &c_3    &=  &0  \\
+    c_1  &+  &c_2  &+  &3c_3   &=  &0  \\
+    3c_1 &   &     &+  &6c_3   &=  &0
+  \end{linsys}
+\end{equation*}
+and note that there are more solutions than just the trivial one.
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\lm[lm:ExpandSpanByAddingNonRepeat]
+\ExecuteMetaData[../vs2.tex]{lm:ExpandSpanByAddingNonRepeat}
+
+\pause
+\pf
+\ExecuteMetaData[../vs2.tex]{pf:ExpandSpanByAddingNonRepeat0}
+
+\pause
+\ExecuteMetaData[../vs2.tex]{pf:ExpandSpanByAddingNonRepeat1}
+\end{frame}\begin{frame}
+\ExecuteMetaData[../vs2.tex]{pf:ExpandSpanByAddingNonRepeat2}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\ex 
+In $\polyspace_2$ consider the set $S=\set{1-x,1+x}$.
+The span $\spanof{S}$ is the subset of
+linear polynomials $\set{a+bx\suchthat a,b\in\Re}$.
+(The span is a subset of the linear polynomials because no member of
+$S$ has a quadratic term.
+To see that the span equals the linear polynomials, solve
+the equation $a+bx=c_1(1-x)+c_2(1+x)$ to get $a=c_1-c_2$ and 
+$b=-c_1+c_2$.)  
+
+\pause
+If we add a linear polynomial $S_1=S\union\set{2+2x}$
+then the span is unchanged $\spanof{S}=\spanof{S_1}$.
+
+\pause
+We can enlarge the span by adding a quadratic polynomial
+$S_2=S\union\set{2+x^2}$.
+The span of $S_2$ is all of $\polyspace_2$.
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\co[th:AlwaysAnLDSubset]
 \ExecuteMetaData[../vs2.tex]{th:AlwaysAnLDSubset}
 
 \pause
@@ -95,54 +206,6 @@
 
 %..........
 \begin{frame}
-\lm[le:SubsetPreserveLI]
-\ExecuteMetaData[../vs2.tex]{lm:SubsetPreserveLI}
-
-\pause
-\pf
-\ExecuteMetaData[../vs2.tex]{pf:SubsetPreserveLI}
-\qed
-
-\pause
-\ExecuteMetaData[../vs2.tex]{SubsetPreserveLI}
-\end{frame}
-
-
-
-%..................
-\begin{frame}
-\lm[le:VecInSpanIffSpanUnchByAddVec]
-\ExecuteMetaData[../vs2.tex]{lm:VecInSpanIffSpanUnchByAddVec}
-
-\pause
-\pf
-\ExecuteMetaData[../vs2.tex]{pf:VecInSpanIffSpanUnchByAddVec0}
-
-\pause
-\ExecuteMetaData[../vs2.tex]{pf:VecInSpanIffSpanUnchByAddVec1}
-\qed
-\end{frame}
-
-
-
-%..................
-\begin{frame}
-\lm[le:SUnionXiLIIffXiNotInSpan]
-\ExecuteMetaData[../vs2.tex]{lm:SUnionXiLIIffXiNotInSpan}
-
-\pause
-\pf
-\ExecuteMetaData[../vs2.tex]{pf:SUnionXiLIIffXiNotInSpan0}
-
-\pause
-\ExecuteMetaData[../vs2.tex]{pf:SUnionXiLIIffXiNotInSpan1}
-\qed
-\end{frame}
-
-
-
-%..................
-\begin{frame}
 \co[cor:LDMeansLC]
 \ExecuteMetaData[../vs2.tex]{co:LDMeansLC}
 
@@ -154,8 +217,17 @@
 
 
 
+
 %..................
 \begin{frame}{Linear independence and subset}
+\lm[le:SubsetPreserveLI]
+\ExecuteMetaData[../vs2.tex]{lm:SubsetPreserveLI}
+
+\pf
+\ExecuteMetaData[../vs2.tex]{pf:SubsetPreserveLI}
+\qed
+
+\pause
 \ExecuteMetaData[../vs2.tex]{IndependenceAndSubsetTable}
 \end{frame}
 
