@@ -27,5 +27,9 @@ s = solve(eqn, r1,r2,r3);
 print s
 
 print ".. fourth .."
-M = matrix(QQ,[[2,3,1,0,0], [2,3,4,-1,0]])
+M = matrix(QQ,[[2,3,1,0,1,0], [2,3,4,-1,-1,0]])
 gauss_method(M)
+var('r1,r2,r3,r4,r5')
+eqn = [2*r1+3*r2+r3+r5==0, 2*r1+3*r2+4*r3-r4-r5==0]
+s = solve(eqn, [r1,r3]); 
+print s

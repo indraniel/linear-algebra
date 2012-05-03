@@ -209,6 +209,78 @@ that has the solution $r_3=c$, $r_2=(1/2)a+(1/2)b$ and $r_1=(1/2)a-(1/2)b-c$.
 \ExecuteMetaData[../vs2.tex]{pf:AlwaysAnLDSubset2}
 \qed
 \end{frame}
+\begin{frame}
+\ex
+Consider this subset of $\Re^2$. 
+\begin{equation*}
+  S=\set{\vec{s}_1,\vec{s}_2,\vec{s}_3,\vec{s}_4,\vec{s}_5}
+   =\set{\colvec{2 \\ 2},
+       \colvec{3 \\ 3},
+       \colvec{1 \\ 4},
+       \colvec{0 \\ -1},
+       \colvec{1 \\ -1} }
+\end{equation*}
+The linear relationship
+\begin{equation*}
+       r_1\colvec{2 \\ 2}
+       +r_2\colvec{3 \\ 3}
+       +r_3\colvec{1 \\ 4}
+       +r_4\colvec{0 \\ -1}
+       +r_5\colvec{1 \\ -1}
+       =\colvec{0 \\ 0}
+  \tag{*}
+\end{equation*}
+gives a system of equations.
+\begin{multline*}
+   \begin{linsys}{5}
+      2r_1 &+ &3r_2 &+ &r_3  &  &    &+ &r_5 &=  &0 \\
+      2r_1 &+ &3r_2 &+ &4r_3 &- &r_4 &- &r_5 &=  &0 
+    \end{linsys}                                           \\                 
+    \grstep{-\rho_1+\rho_2}\;
+    \begin{linsys}{5}
+      2r_1 &+ &3r_2 &+ &r_3   &  &    &+ &r_5  &=  &0 \\
+           &  &     &+ &3r_3 &- &r_4  &- &2r_5 &=  &0 
+    \end{linsys}
+\end{multline*}
+\end{frame}
+\begin{frame}
+\noindent
+Paramatrize by expressing the leading variables
+$r_1$ and $r_3$ in terms of the free variables.
+\begin{equation*}
+  \set{\colvec{r_1 \\ r_2 \\ r_3 \\ r_4 \\ r_5}
+       =\colvec{-3/2 \\ 1 \\ 0 \\ 0 \\ 0}r_2
+        +\colvec{-1/6 \\ 0 \\ 1/3 \\ 1 \\ 0}r_4
+        +\colvec{-5/6 \\ 0 \\ 2/3 \\ 0 \\ 1}r_5
+       \suchthat r_2,r_4,r_5\in\Re}
+\end{equation*}
+\pause
+In ($*$) set $r_5=1$ and set the other two parameters to $0$.
+\begin{equation*}
+       -\frac{5}{6}\cdot\colvec{2 \\ 2}
+       +0\cdot\colvec{3 \\ 3}
+       +\frac{2}{3}\cdot\colvec{1 \\ 4}
+       +0\cdot\colvec{0 \\ -1}
+       +1\cdot\colvec{1 \\ -1}
+       =\colvec{0 \\ 0}                          
+\end{equation*}
+This shows  
+$\vec{s}_5$ is in the span of the set $\set{\vec{s}_1,\vec{s}_3}$.
+\pause
+Similarly, setting $r_4=1$ and the other parameters to~$0$ shows
+$\vec{s}_4$ is in the span of the set $\set{\vec{s}_1,\vec{s}_3}$.
+Also, setting $r_2=1$ and the other parameters to~$0$ shows
+$\vec{s}_2$ is in the span of the same set.
+\pause
+So we can omit the vectors $\vec{s}_2$, $\vec{s}_4$, $\vec{s}_5$
+associated with the free variables without shrinking the span.  
+\end{frame}
+\begin{frame}
+The set $\set{\vec{s}_1,\vec{s}_3}$ is linearly independent
+and so we cannot omit any members without shrinking the span.
+(In ($*$) note that $\vec{s}_2$ is linearly dependent on $\vec{s}_1$
+and $r_2$ did not end as a leading variable.)
+\end{frame}
 
 
 
@@ -221,35 +293,6 @@ that has the solution $r_3=c$, $r_2=(1/2)a+(1/2)b$ and $r_1=(1/2)a-(1/2)b-c$.
 \pf
 \ExecuteMetaData[../vs2.tex]{pf:LDMeansLC}
 \qed
-\end{frame}\begin{frame}
-\ex
-Consider this subset of $\Re^2$. 
-\begin{equation*}
-  \set{\colvec{2 \\ 2},
-       \colvec{3 \\ 3},
-       \colvec{1 \\ 4},
-       \colvec{0 \\ -1} }
-\end{equation*}
-The linear relationship gives a linear system.
-\begin{multline*}
-       r_1\colvec{2 \\ 2}
-       +r_2\colvec{3 \\ 3}
-       +r_3\colvec{1 \\ 4}
-       +r_4\colvec{0 \\ -1}
-       =\colvec{0 \\ 0}                            \\
-   \implies
-   \begin{linsys}{4}
-      2r_1 &+ &3r_2 &+ &r_3  &  &    &=  &0 \\
-      2r_1 &+ &3r_2 &+ &4r_3 &- &r_4 &=  &0 
-    \end{linsys}                                    
-\end{multline*}
-\begin{equation*}
-    \grstep{-\rho_1+\rho_2}
-    \begin{linsys}{4}
-      2r_1 &+ &3r_2 &+ &r_3  &  &    &=  &0 \\
-           &  &     &+ &3r_3 &- &r_4 &=  &0 
-    \end{linsys}
-\end{equation*}
 \end{frame}
 
 
@@ -265,7 +308,15 @@ The linear relationship gives a linear system.
 \qed
 
 \pause
+\medskip
+This table summarizes the cases.
 \ExecuteMetaData[../vs2.tex]{IndependenceAndSubsetTable}
+\medskip
+
+An example of the lower left is that the set $S$ of all vectors in the
+space $\Re^2$ is linearly dependent but the subset $S_1$ consisting of only the 
+unit vector on the $x$-axis is independent.
+By interchanging $S_1$ with $S$ that's also an example of the upper right.
 \end{frame}
 
 
