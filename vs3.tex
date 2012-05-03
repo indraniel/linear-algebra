@@ -16,17 +16,22 @@ In this section we will name this idea and study its properties.
 
 \subsection{Basis}
 \begin{definition} \label{def:basis}
+%<*df:basis>
 A \definend{basis}\index{basis!definition}\index{vector space!basis} 
 for a vector
 space is a sequence of vectors that form a set that is linearly independent 
 and that spans the space.
+%</df:basis>
 \end{definition}
 
+%<*BasisNotation>
 We denote a basis with angle brackets
 \( \sequence{\vec{\beta}_1,\vec{\beta}_2,\ldots} \)
-to signify that this collection is a 
-sequence,\appendrefs{sequences}\spacefactor=1000 meaning that the 
+because this is a 
+sequence,\appendrefs{sequences}\spacefactor=1000\ %
+meaning that the 
 order of the elements is significant.
+%</BasisNotation>
 Bases are different if they contain the same elements but in different
 orders.
 % (The requirement that a basis be ordered will be needed, for
@@ -218,12 +223,13 @@ exists, that for each $x,y$ there is a $c_1,c_2$, but
 in fact the calculation also shows that the combination is 
 unique:~$c_1$ must be $(y-x)/2$ and $c_2$ must be $2x-y$.
  
-\begin{theorem}
-\label{th:BasisIffUniqueRepWRT}
+\begin{theorem} \label{th:BasisIffUniqueRepWRT}
+%<*th:BasisIffUniqueRepWRT>
 In any vector space, a subset is a basis\index{basis}
 if and only if each vector in the
 space can be expressed as a linear combination of elements of the subset 
 in a unique way.
+%</th:BasisIffUniqueRepWRT>
 \end{theorem}
 
 \noindent We consider linear combinations to be the same if they differ 
@@ -233,6 +239,7 @@ summands or in the addition or deletion of terms of the form
 
 
 \begin{proof}
+%<*pf:BasisIffUniqueRepWRT0>
 A sequence is a basis if and only if its vectors form a set
 that spans and that is linearly independent.
 And, a
@@ -242,11 +249,13 @@ Thus we need only show
 that a spanning subset is linearly independent 
 if and only if every vector in the space
 is a linear combination of elements from the subset in at most one way.
+%</pf:BasisIffUniqueRepWRT0>
 
+%<*pf:BasisIffUniqueRepWRT1>
 Consider two expressions of a vector as a linear combination of the
 members of the subset.
 We can rearrange the two sums and if necessary
-add some \( 0\vec{\beta}_i \) terms so that the two sums
+add some \( 0\cdot\vec{\beta}_i \) terms so that the two sums
 combine the same \( \vec{\beta} \)'s in the same order:
 \( \vec{v}=\lincombo{c}{\vec{\beta}} \) and 
 \( \vec{v}=\lincombo{d}{\vec{\beta}} \). 
@@ -264,10 +273,11 @@ each coefficient in the lower equation is zero is
 the same thing as asserting that \( c_i=d_i \) for each \( i \),
 that is, that every vector is expressible as a linear combination of
 the \( \vec{\beta} \)'s in a unique way.
+%</pf:BasisIffUniqueRepWRT1>
 \end{proof}
 
-\begin{definition}
-\label{def:RepresentingVectors}
+\begin{definition} \label{def:RepresentingVectors}
+%<*df:RepresentingVectors>
 In a vector space with basis $B$
 the \definend{representation of \( \vec{v} \) with respect to \( B \)}%
 \index{representation!of a vector}\index{vector!representation of} is
@@ -284,6 +294,7 @@ where
 The \( c \)'s are the
 \definend{coordinates of \( \vec{v} \) with respect to \( B \)}%
 \index{coordinates!with respect to a basis}.
+%</df:RepresentingVectors>
 \end{definition}
 
 \nearbydefinition{def:basis} requires that a basis is a sequence,
@@ -1259,13 +1270,15 @@ Before we start, we first
 limit our attention to spaces where at least one basis has only finitely
 many members.
 
-\begin{definition}
+\begin{definition} \label{df:FiniteDimensional}
+%<*df:FiniteDimensional>
 A vector space is \definend{finite-dimensional\/}%
 \index{vector space!finite dimensional}\index{finite-dimensional vector space}
 if it has a basis with only finitely many vectors.
+%</df:FiniteDimensional>
 \end{definition}
 
-\noindent A space that is not finite-dimensional is
+\noindent One space that is not finite-dimensional is
 the set of polynomials with real coefficients
 \nearbyexample{ex:PolysOfAllFiniteDegrees} 
 (this space is not spanned by any finite subset since that would contain
@@ -1318,7 +1331,8 @@ Replace it with the vector that we've expressed as the combination
 and the result is another basis for \( \Re^3 \).
 \end{example}
 
-\begin{lemma}[Exchange Lemma]
+\begin{lemma}[Exchange Lemma] \label{lm:ExchangeLemma}
+%<*lm:ExchangeLemma>
 Assume that 
 \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) is a basis for a
 vector space, and that for the vector \( \vec{v} \)
@@ -1326,9 +1340,11 @@ the relationship \( \vec{v}=\lincombo{c}{\vec{\beta}} \)
 has \( c_i\neq 0 \).
 Then exchanging \( \vec{\beta}_i \) for \( \vec{v} \) yields another
 basis for the space.
+%</lm:ExchangeLemma>
 \end{lemma}
 
 \begin{proof}
+%<*pf:ExchangeLemma0>
 Call the outcome of the exchange 
 \( \hat{B}=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_{i-1},\vec{v},
                        \vec{\beta}_{i+1},\dots,\vec{\beta}_n}  \).
@@ -1350,7 +1366,9 @@ Because we assumed that $c_i$ is nonzero, $d_i=0$.
 Using this in equation~$(*)$ above gives that all of the other $d$'s are also
 zero.
 Therefore $\hat{B}$ is linearly independent.
+%</pf:ExchangeLemma0>
 
+%<*pf:ExchangeLemma1>
 We finish by showing that $\hat{B}$ has the same span as $B$.
 Half of this argument, that $\spanof{\smash{\hat{B}}}\subseteq\spanof{B}$, 
 is easy; we can write any member 
@@ -1376,15 +1394,18 @@ combination of the members of $\hat{B}$, and recognize,
 as in the first half of this argument, that the result is a linear
 combination of linear combinations of members of $\hat{B}$, and hence is in 
 $\spanof{\smash{\hat{B}}}$.
+%</pf:ExchangeLemma1>
 \end{proof}
 
-\begin{theorem}
-\label{th:AllBasesSameSize}
+\begin{theorem} \label{th:AllBasesSameSize}
+%<*th:AllBasesSameSize>
 In any finite-dimensional vector space, all 
 bases have the same number of elements.\index{basis}
+%</th:AllBasesSameSize>
 \end{theorem}
 
 \begin{proof}
+%<*pf:AllBasesSameSize0>
 Fix a vector space with at least one finite basis.
 Choose, from among all of this space's bases,
 one \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) of minimal size.
@@ -1393,7 +1414,9 @@ We will show that any other basis
 also has the same number of members, $n$.
 Because \( B \) has minimal size, \( D \) has no fewer than \( n \) vectors.
 We will argue that it cannot have more than \( n \) vectors.
+%</pf:AllBasesSameSize0>
 
+%<*pf:AllBasesSameSize1>
 The basis \( B \) spans the space and \( \vec{\delta}_1 \) is in the space,
 so \( \vec{\delta}_1 \) is a nontrivial linear combination of elements of
 \( B \).
@@ -1401,7 +1424,9 @@ By the Exchange Lemma, we can swap \( \vec{\delta}_1 \) for a
 vector from \( B \), resulting in a basis \( B_1 \), where one element is
 \( \vec{\delta} \) and all of the \( n-1 \) other elements 
 are \( \vec{\beta} \)'s.
+%</pf:AllBasesSameSize1>
 
+%<*pf:AllBasesSameSize2>
 The prior paragraph forms the basis step for an induction argument.
 The inductive step starts with a basis \( B_k \) (for \( 1\leq k<n \))
 containing \( k \) members of \( D \) and \( n-k \) members of \( B \).
@@ -1416,7 +1441,9 @@ set \( D \).
 Exchange \( \vec{\delta}_{k+1} \) for \( \vec{\beta}_i \) to get a new basis
 \( B_{k+1} \) with one \( \vec{\delta} \) more and one \( \vec{\beta} \)
 fewer than the previous basis \( B_k \).
+%</pf:AllBasesSameSize2>
 
+%<*pf:AllBasesSameSize3>
 Repeat the inductive step until no \( \vec{\beta} \)'s remain, so
 that \( B_n \) contains  
 $\vec{\delta}_1,\dots,\vec{\delta}_n$.
@@ -1425,11 +1452,14 @@ any \( \vec{\delta}_{n+1} \) that remains would be in the span of
 \( B_n \) (since it is a basis) 
 and hence would be a linear combination of the other $\vec{\delta}$'s, 
 contradicting that $D$ is linearly independent.
+%</pf:AllBasesSameSize3>
 \end{proof}
 
-\begin{definition}
+\begin{definition}  \label{df:Dimension}
+%<*df:Dimension>
 The \definend{dimension}\index{dimension}\index{vector space!dimension}
 of a vector space is the number of vectors in any of its bases.
+%</df:Dimension>
 \end{definition}
 
 \begin{example}
@@ -1455,15 +1485,18 @@ rest of this book we assume that all vector spaces are  finite-dimensional.
 An instance of this is that in the next result the word `space' 
 means `finite-dimensional vector space'.
 
-\begin{corollary}
-\label{cor:NoLiSetGreatDim}
+\begin{corollary} \label{cor:NoLiSetGreatDim}
+%<*co:NoLiSetGreatDim>
 No linearly independent set can have a size greater than the dimension of the
 enclosing space.
+%</co:NoLiSetGreatDim>
 \end{corollary}
 
 \begin{proof}
+%<*pf:NoLiSetGreatDim>
 The above proof never uses that \( D \) spans the space,
 only that it is linearly independent.
+%</pf:NoLiSetGreatDim>
 \end{proof}
 
 \begin{example} \label{ex:RefSubSpDiagram}
@@ -1486,10 +1519,13 @@ There are no subspaces somehow, say, between lines and planes.
 \end{example}
 
 \begin{corollary} \label{cor:LIExpBas}
+%<*co:LIExpBas>
 Any linearly independent set can be expanded to make a basis.
+%</co:LIExpBas>
 \end{corollary}
 
 \begin{proof}
+%<*pf:LIExpBas>
 If a linearly independent set 
 is not already a basis then it must not span the space.
 Adding to the set a vector that is not in the span 
@@ -1497,13 +1533,17 @@ will preserves linear independence.
 Keep adding until the resulting set does span the space, 
 which the prior corollary
 shows will happen after only a finite number of steps.
+%</pf:LIExpBas>
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}  \label{co:SpanningSetShrinksToABasis}
+%<*co:SpanningSetShrinksToABasis>
 Any spanning set can be shrunk to a basis.
+%</co:SpanningSetShrinksToABasis>
 \end{corollary}
 
 \begin{proof}
+%<*pf:SpanningSetShrinksToABasis>
 Call the spanning set \( S \).
 If \( S \) is empty then it is already a basis (the space must be a trivial
 space).
@@ -1520,16 +1560,19 @@ if \( \spanof{B_2}=\spanof{S} \) then we are done.
 
 We can repeat this process until the spans are equal,
 which must happen in at most finitely many steps.
+%</pf:SpanningSetShrinksToABasis>
 \end{proof}
 
-\begin{corollary}
-\label{cor:NVecsRNSpanIffLI}
+\begin{corollary} \label{cor:NVecsRNSpanIffLI}
+%<*co:NVecsRNSpanIffLI>
 In an \( n \)-dimensional space, a set composed of \( n \) vectors is linearly 
 independent if and
 only if it spans the space.
+%</co:NVecsRNSpanIffLI>
 \end{corollary}
 
 \begin{proof}
+%<*pf:NVecsRNSpanIffLI>
 First we will
 show that a subset with \( n \) vectors is linearly independent if and only
 if it is a basis.
@@ -1545,6 +1588,7 @@ Again, `if' is trivial.
 `Only if'
 holds because any spanning set can be shrunk to a basis, but a basis has
 \( n \) elements and so this shrunken set is just the one we started with.
+%</pf:NVecsRNSpanIffLI>
 \end{proof}
 
 The main result of this subsection, that all of 

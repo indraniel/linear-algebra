@@ -1,0 +1,229 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../vs3} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Basis and Dimension] % (optional, use only with long paper titles)
+{Two.III Basis and Dimension}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Basis and Dimension}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Two.III.1 .....
+\section{Basis}
+%..........
+\begin{frame}{Definition of basis}
+\df[def:basis]
+\ExecuteMetaData[../vs3.tex]{df:basis}
+
+\pause\medskip
+\ExecuteMetaData[../vs3.tex]{BasisNotation}
+
+\pause
+\ex
+This is a basis for $\Re^2$.
+\begin{equation*}
+  \sequence{\colvec{1 \\ -1},
+            \colvec{1 \\ 1}
+           }
+\end{equation*}
+It is linearly independent.
+\begin{equation*}
+  c_1\colvec{1 \\ -1}+c_2\colvec{1 \\ 1}=\colvec{0 \\ 0}
+  \implies
+  \begin{linsys}{2}
+    c_1 &+ &c_2 &= &0  \\
+   -c_1 &+ &c_2 &= &0
+  \end{linsys}
+  \implies
+  c_1=0,\,c_2=0
+\end{equation*}
+And it spans $\Re^2$ since
+\begin{equation*}
+  c_1\colvec{1 \\ -1}+c_2\colvec{1 \\ 1}=\colvec{x \\ y}
+  \implies
+  \begin{linsys}{2}
+    c_1 &+ &c_2 &= &x  \\
+   -c_1 &+ &c_2 &= &y
+  \end{linsys}
+\end{equation*}
+has the solution $c_1=(1/2)x-(1/2)y$
+and $c_2=(1/2)x+(1/2)y$.
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\th[th:BasisIffUniqueRepWRT]
+\ExecuteMetaData[../vs3.tex]{th:BasisIffUniqueRepWRT}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:BasisIffUniqueRepWRT0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../vs3.tex]{pf:BasisIffUniqueRepWRT1}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\df[def:RepresentingVectors]
+\ExecuteMetaData[../vs3.tex]{df:RepresentingVectors}
+\end{frame}
+
+
+
+\section{Dimension}
+%..........
+\begin{frame}{Definition of dimension}
+\df[df:FiniteDimensional]
+\ExecuteMetaData[../vs3.tex]{df:FiniteDimensional}
+\end{frame}
+
+
+
+%..........
+\begin{frame}{Exchange Lemma}
+\lm[lm:ExchangeLemma]
+\ExecuteMetaData[../vs3.tex]{lm:ExchangeLemma}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:ExchangeLemma0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../vs3.tex]{pf:ExchangeLemma1}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}{All of a spaces bases are the same size}
+\th[th:AllBasesSameSize]
+\ExecuteMetaData[../vs3.tex]{th:AllBasesSameSize}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize0}
+
+\pause
+\ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize1}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize2}
+
+\pause
+\ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize3}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}{Definition of dimension}
+\df[df:Dimension]
+\ExecuteMetaData[../vs3.tex]{df:Dimension}
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\co[cor:NoLiSetGreatDim]
+\ExecuteMetaData[../vs3.tex]{co:NoLiSetGreatDim}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:NoLiSetGreatDim}
+\qed
+
+\pause
+\medskip
+\co[cor:LIExpBas]
+\ExecuteMetaData[../vs3.tex]{co:LIExpBas}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:LIExpBas}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\co[co:SpanningSetShrinksToABasis]
+\ExecuteMetaData[../vs3.tex]{co:SpanningSetShrinksToABasis}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:SpanningSetShrinksToABasis}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\co[cor:NVecsRNSpanIffLI]
+\ExecuteMetaData[../vs3.tex]{co:NVecsRNSpanIffLI}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:NVecsRNSpanIffLI}
+\qed
+\end{frame}
+
+
+
+%...........................
+% \begin{frame}
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
