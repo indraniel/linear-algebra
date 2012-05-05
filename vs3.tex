@@ -2274,11 +2274,13 @@ combinations of rows.
 Therefore, the right setting in which to study row operations in general,
 and Gauss' method in particular, is the following vector space.
 
-\begin{definition}
+\begin{definition} \label{df:RowSpace}
+%<*df:RowSpace>
 The \definend{row space\/}\index{matrix!row space}\index{row space}
 of a matrix is the span of the set of its rows.
 The \definend{row rank\/}\index{row!rank}\index{matrix!row rank}\index{row rank}
 is the dimension of the row space, the number of linearly independent rows.
+%</df:RowSpace>
 \end{definition}
 
 \begin{example}
@@ -2301,6 +2303,7 @@ $\set{c\cdot\rowvec{2 &3}\suchthat c\in\Re }$.
 \end{example}
 
 \begin{lemma}     \label{le:RowSpUnchByGR}
+%<*lm:RowSpUnchByGR>
 If two matrices \( A \) and \( B \) are related by a row operation
 \begin{equation*}
   A\grstep{\rho_i\leftrightarrow\rho_j}B 
@@ -2312,9 +2315,11 @@ If two matrices \( A \) and \( B \) are related by a row operation
 (for $i\neq j$ and $k\neq 0$) then their row spaces are equal.
 Hence, row-equivalent matrices have the same row space and therefore
 the same row rank.
+%</lm:RowSpUnchByGR>
 \end{lemma}
 
 \begin{proof}
+%<*pf:RowSpUnchByGR0>
 Corollary One.III.\ref{cor:RowsOfEqMatsLinCombos} 
 shows that when \mbox{$A\longrightarrow B$} then each row of $B$
 is a linear combination of the rows of \( A \).
@@ -2324,7 +2329,9 @@ Then $\rowspace{B}\subseteq\rowspace{A}$ follows because a member of the
 set $\rowspace{B}$ is a linear combination of the rows of $B$, so it
 is a combination of combinations of the rows of $A$,
 and so by the Linear Combination Lemma is also a member of $\rowspace{A}$.
+%</pf:RowSpUnchByGR0>
 
+%<*pf:RowSpUnchByGR1>
 For the other set containment, 
 recall Lemma One.III.\ref{le:RowOpsRev}, that row operations are reversible,
 that 
@@ -2332,6 +2339,7 @@ that
 \mbox{$B\longrightarrow A$}.
 Then 
 $\rowspace{A}\subseteq\rowspace{B}$ follows as in the previous paragraph. 
+%</pf:RowSpUnchByGR1>
 % Thus the two sets are equal.
 \end{proof}
 
@@ -2340,15 +2348,19 @@ But of course, Gauss' method performs the row operations systematically,
 with the goal of echelon form.
 
 \begin{lemma}  \label{le:RowsEchMatLI}
+%<*lm:RowsEchMatLI>
 The nonzero rows of an echelon form matrix make up a linearly independent
 set.
+%</lm:RowsEchMatLI>
 \end{lemma}
 
 \begin{proof}
+%<*pf:RowsEchMatLI>
 Lemma~One.III.\ref{le:EchFormNoLinCombo}
-states that in an echelon form matrix, no nonzero row is
+says that no nonzero row of an echelon form matrix is
 a linear combination of the other rows.
 This is restates that result in this chapter's terminology.
+%</pf:RowsEchMatLI>
 \end{proof}
 
 Thus, in the language of this chapter,
@@ -2386,12 +2398,14 @@ since the two row spaces are equal.
 Using this technique, we can also find bases for spans 
 not directly involving row vectors.
 
-\begin{definition}
+\begin{definition} \label{df:ColumnSpace}
+%<*df:ColumnSpace>
 The \definend{column space\/}\index{column space}\index{matrix!column space}
 of a matrix is the span of the set of its columns.
 The \definend{column rank\/}\index{column!rank}\index{rank!column}
 is the dimension of the column space, the number of linearly independent
 columns.
+%</df:ColumnSpace>
 \end{definition}
 
 Our interest in column spaces stems from our study of linear systems.
@@ -2450,12 +2464,14 @@ Now turn the rows back to columns.
 The result is a basis for the column space of the given matrix.
 \end{example}
 
-\begin{definition}
+\begin{definition} \label{df:Transpose}
+%<*df:Transpose>
 The \definend{transpose}\index{transpose}\index{matrix!transpose}
 of a matrix is the result of interchanging the rows and
 columns of that matrix.
 That is, column~\( j \) of the matrix \( A \) is row~\( j \)
 of \( \trans{A} \), and vice versa.
+%</df:Transpose>
 \end{definition}
 \noindent So we can summarize the prior example as ``transpose,
 reduce, and transpose back.''
@@ -2517,10 +2533,13 @@ It is this observation that
 makes next result surprising.
 
 \begin{lemma} \label{le:RowOpsNoChngColRnk}
+%<*lm:RowOpsNoChngColRnk>
 Row operations do not change the column rank.
+%</lm:RowOpsNoChngColRnk>
 \end{lemma}
 
 \begin{proof}
+%<*pf:RowOpsNoChngColRnk>
 Restated, if $A$ reduces to $B$ 
 then the column rank of $B$ equals the column rank of $A$.
 
@@ -2540,6 +2559,7 @@ among columns,
    =\colvec[r]{0 \\ 0 \\ \vdotswithin{0} \\ 0}
 \end{equation*}
 row operations leave unchanged the set of solutions \( (c_1,\ldots,c_n) \).
+%</pf:RowOpsNoChngColRnk>
 \end{proof}
 
 Another way, besides the prior result, to state that 
@@ -2576,11 +2596,14 @@ we can find bases for the row and column spaces
 in essentially the same way: by taking the parts of the 
 matrix, the rows or columns, containing the leading entries.
 
-\begin{theorem}
+\begin{theorem} \label{th:RowRankEqualsColumnRank}
+%<*th:RowRankEqualsColumnRank>
 The row rank and column rank of a matrix are equal.
+%</th:RowRankEqualsColumnRank>
 \end{theorem}
 
 \begin{proof}
+%<*pf:RowRankEqualsColumnRank0>
 Bring the matrix to reduced echelon form.
 At that point, the 
 row rank equals the number of leading entries since that equals the
@@ -2592,11 +2615,14 @@ basis, and that set is linearly independent and spans the set of
 columns.
 Hence, in the reduced echelon form matrix, the row rank equals the column
 rank, because each equals the number of leading entries.
+%</pf:RowRankEqualsColumnRank0>
 
+%<*pf:RowRankEqualsColumnRank1>
 But \nearbylemma{le:RowSpUnchByGR} and \nearbylemma{le:RowOpsNoChngColRnk} 
 show that the row rank and column rank are not changed
 by using row operations to get to reduced echelon form.
 Thus the row rank and the column rank of the original matrix are also equal.
+%</pf:RowRankEqualsColumnRank1>
 \end{proof}
 
 \begin{definition}
@@ -2609,8 +2635,8 @@ Our third and final point is that the concepts that
 we've seen arising naturally in the study of
 vector spaces are exactly the ones that we have studied with linear systems.
 
-\begin{theorem}
-\label{th:RankVsSoltnSp}
+\begin{theorem}  \label{th:RankVsSoltnSp}
+%<*tm:RankVsSoltnSp>
 For linear systems with \( n \) unknowns and with matrix of coefficients
 \( A \), the statements
 \begin{tfae}
@@ -2619,6 +2645,7 @@ For linear systems with \( n \) unknowns and with matrix of coefficients
      dimension \( n-r \)
 \end{tfae}
 are equivalent.
+%</tm:RankVsSoltnSp>
 \end{theorem}
 
 \par\noindent So if the system has at least one particular solution 
@@ -2627,11 +2654,13 @@ solutions, the number of parameters equals $n-r$, the number of variables
 minus the rank of the matrix of coefficients. 
 
 \begin{proof}
+%<*pf:RankVsSoltnSp>
 The rank of \( A \) is \( r \) if and only if Gaussian reduction on \( A \)
 ends with \( r \) nonzero rows.
 That's true if and only if echelon form matrices row equivalent to \( A \)
 have \( r \)-many leading variables.
 That in turn holds if and only if there are \( n-r \) free variables.
+%</pf:RankVsSoltnSp>
 \end{proof}
 
 \begin{remark}\cite{Munkres}  \label{rem:MunkresCommment}
@@ -2644,7 +2673,8 @@ Where there are \( r \) independent equations, the general solution involves
 \( n-r \) parameters.
 \end{remark}
 
-\begin{corollary}
+\begin{corollary} \label{co:EquivToNonsingular}
+%<*co:EquivToNonsingular>
 Where the matrix $A$ is \( \nbyn{n} \), the statements
 \begin{tfae}
   \item the rank of \( A \) is \( n \)
@@ -2655,9 +2685,11 @@ Where the matrix $A$ is \( \nbyn{n} \), the statements
     only one solution
 \end{tfae}
 are equivalent.
+%</co:EquivToNonsingular>
 \end{corollary}
 
 \begin{proof}
+%<*pf:EquivToNonsingular>
 Clearly \( \text{(1)}\iff\text{(2)}\iff\text{(3)}\iff\text{(4)} \).
 The last, \( \text{(4)}\iff\text{(5)} \), holds because a set of \( n \)
 column vectors is linearly independent if and only if it is a basis for
@@ -2670,6 +2702,7 @@ column vectors is linearly independent if and only if it is a basis for
 \end{equation*}
 has a unique solution for all choices of \( d_1,\dots,d_n\in\Re \) if and only
 if the vectors of \( a \)'s form a basis.
+%</pf:EquivToNonsingular>
 \end{proof}
 
 
