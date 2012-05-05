@@ -89,6 +89,26 @@ And it spans $\Re^2$ since
 has the solution $c_1=(1/2)x-(1/2)y$
 and $c_2=(1/2)x+(1/2)y$.
 \end{frame}
+\begin{frame}
+\ex
+This is a basis for $\Re^3$.
+\begin{equation*}
+  \stdbasis_3=
+  \sequence{
+            \colvec{1 \\ 0 \\ 0},
+            \colvec{0 \\ 1 \\ 0},
+            \colvec{0 \\ 0 \\ 1}
+            }
+\end{equation*}
+Calculus books sometimes call those $\vec{\i}$, $\vec{\j}$, and $\vec{k}$.
+
+\pause
+\df[df:StandardBasis]
+\ExecuteMetaData[../vs3.tex]{df:StandardBasis}
+
+\medskip\noindent
+Checking that $\stdbasis_n$ is a basis for $\Re^n$ is routine.
+\end{frame}
 
 
 
@@ -116,11 +136,95 @@ and $c_2=(1/2)x+(1/2)y$.
 
 
 
+
+%..........
+\begin{frame}
+\ex
+In the vector space of linear polynomials 
+$\polyspace_1=\set{a+bx\suchthat a,b\in\Re}$
+one basis is $B=\sequence{1+x,1-x}$.
+
+Check that is it a basis by verifying that it is
+linearly independent
+\begin{equation*}
+  0=c_1(1+x)+c_2(1-x)
+  \implies
+  0=c_1+c_2,\;0=c_1-c_2
+  \implies 
+  c_1=c_2=0
+\end{equation*}
+and that it spans the space.
+\begin{equation*}
+  a+bx=c_1(1+x)+c_2(1-x)
+  % \implies
+  % a=c_1+c_2,\;b=c_1-c_2
+  \implies 
+  c_1=(a+b)/2,\;c_2=(a-b)/2
+\end{equation*}
+\pause
+Note that the solutions to those systems are unique.
+For instance, the polynomial $3+4x$ has a unique expression
+as a combination of the two basis vectors.
+\begin{equation*}
+  3+4x=(7/2)\cdot(1+x)+(-1/2)\cdot(1-x)
+\end{equation*}
+We write this.
+\begin{equation*}
+  \rep{3+4x}{B}=\colvec{7/2 \\ -1/2}
+\end{equation*}
+\end{frame}
+
+
 \section{Dimension}
 %..........
 \begin{frame}{Definition of dimension}
 \df[df:FiniteDimensional]
 \ExecuteMetaData[../vs3.tex]{df:FiniteDimensional}
+
+\medskip
+\ex
+The space 
+$\Re^3$
+is finite-dimensional since it has a basis with three elements $\stdbasis_3$.
+
+\pause
+\ex
+The space of quadratic polynomials $\polyspace_2$ has at least one
+basis with finitely many elements, $\sequence{1,x,x^2}$, so it is
+finite-dimensional. 
+
+\pause
+\ex
+The space $\matspace_{\nbyn{2}}$ of $\nbyn{2}$ matrices is finite-dimensional.
+Here is one basis with finitely many members.
+\begin{equation*}
+  \sequence{
+    \begin{mat}
+      1 &0 \\
+      0 &0
+    \end{mat},
+    \begin{mat}
+      1 &1 \\
+      0 &0
+    \end{mat},
+    \begin{mat}
+      1 &1 \\
+      1 &0
+    \end{mat},
+    \begin{mat}
+      1 &1 \\
+      1 &1
+    \end{mat}
+        }
+\end{equation*}
+
+\pause
+\no
+From this point on, we will restrict our attention to 
+vector spaces that are finite-dimensional.
+All the later examples, definitions, and theorems
+carry this presumption of the spaces
+even if they don't explicitly state that.
 \end{frame}
 
 
@@ -142,7 +246,7 @@ and $c_2=(1/2)x+(1/2)y$.
 
 
 %..........
-\begin{frame}{All of a spaces bases are the same size}
+\begin{frame}{All of a space's bases are the same size}
 \th[th:AllBasesSameSize]
 \ExecuteMetaData[../vs3.tex]{th:AllBasesSameSize}
 
@@ -167,8 +271,65 @@ and $c_2=(1/2)x+(1/2)y$.
 \begin{frame}{Definition of dimension}
 \df[df:Dimension]
 \ExecuteMetaData[../vs3.tex]{df:Dimension}
-\end{frame}
 
+\pause\medskip
+\ex
+The vector space $\Re^n$ has dimension~$n$ because that is how many members
+are in $\stdbasis_n$.
+
+\pause
+\ex
+The vector space $\polyspace_2$ has dimension~$3$ because one of 
+its bases is $\sequence{1,x,x^2}$.
+\pause
+More generally, $\polyspace_n$ has dimension~$n+1$.
+
+\pause
+\ex
+The vector space $\matspace_{\nbym{n}{m}}$ has dimension $nm$.
+A natural basis consists of matrices with a single~$1$ and the other
+entries~$0$'s.
+\end{frame}
+\begin{frame}
+\ex
+The solution set of this system
+\begin{equation*}
+  \begin{linsys}{4}
+    x  &-  &y  &+  &z  &  &   &=  &0  \\
+   -x  &+  &2y &-  &z  &+ &2w &=  &0  \\
+   -x  &+  &3y &-  &z  &+ &4w &=  &0  
+  \end{linsys}
+\end{equation*}
+is a vector space (this is easy to check for any homogeneous system).
+Solving the system
+\begin{equation*}
+  \begin{amat}[r]{4}
+    1  &-1  &1  &0  &0  \\
+   -1  &2   &-1 &2  &0  \\
+    1  &3   &-1 &4  &0  
+  \end{amat}
+  \;\grstep[\rho_1+\rho_3]{\rho_1+\rho_2}\;
+  \grstep{-2\rho_2+\rho_3}\;
+  \begin{amat}[r]{4}
+    1  &-1  &1  &0  &0  \\
+    0  &1   &0  &2  &0  \\
+    0  &0   &0  &0  &0  
+  \end{amat}
+\end{equation*}
+and parametrizing
+\begin{equation*}
+  \set{\colvec{x \\ y \\ z \\ w}
+      =\colvec{-1 \\ 0 \\ 1 \\ 0}\cdot z
+       +\colvec{-2 \\ -2 \\ 0 \\ 1}\cdot w
+      \suchthat z,w\in\Re}
+\end{equation*}
+gives a basis for the space, a sequence of those two vectors.
+% \begin{equation*}
+%   B=\sequence{\colvec{-1 \\ 0 \\ 1 \\ 0},
+%               \colvec{-2 \\ 1 \\ 0 \\ 1}
+%              }
+% \end{equation*}
+\end{frame}
 
 
 %..........
@@ -203,6 +364,11 @@ and $c_2=(1/2)x+(1/2)y$.
 \pf
 \ExecuteMetaData[../vs3.tex]{pf:SpanningSetShrinksToABasis}
 \qed
+
+\pause\medskip
+\re
+This is an example of a result that assumes the vector spaces are
+finite-dimensional without specifically saying so.
 \end{frame}
 
 
