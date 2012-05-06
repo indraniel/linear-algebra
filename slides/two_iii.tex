@@ -7,6 +7,7 @@
 \usepackage{../linalgjh}
 \usepackage{present}
 \usepackage{xr}\externaldocument{../vs3} % read refs from .aux file
+\usepackage{xr}\externaldocument{../gr1} % read refs from .aux file
 \usepackage{xr}\externaldocument{../gr3} % read refs from .aux file
 \usepackage{catchfilebetweentags}
 \usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
@@ -145,7 +146,7 @@ In the vector space of linear polynomials
 $\polyspace_1=\set{a+bx\suchthat a,b\in\Re}$
 one basis is $B=\sequence{1+x,1-x}$.
 
-Check that is it a basis by verifying that it is
+Check that is a basis by verifying that it is
 linearly independent
 \begin{equation*}
   0=c_1(1+x)+c_2(1-x)
@@ -174,6 +175,22 @@ We write this.
   \rep{3+4x}{B}=\colvec{7/2 \\ -1/2}
 \end{equation*}
 \end{frame}
+\begin{frame}
+\ex 
+With respect to $\Re^3$'s standard basis $\stdbasis_3$ the vector
+\begin{equation*}
+  \vec{v}
+  =\colvec{2 \\ -3 \\ 1/2}
+\end{equation*}
+has this representation.
+\begin{equation*}
+  \rep{\vec{v}}{\stdbasis_3}=\colvec{2 \\ -3 \\ 1/2}
+\end{equation*}
+In general, any $\vec{w}\in\Re^n$ 
+has $\rep{\vec{w}}{\stdbasis_n}=\vec{w}$.
+\end{frame}
+
+
 
 
 \section{Dimension}
@@ -268,6 +285,65 @@ even if they don't explicitly state that.
 
 
 
+
+%..........
+\begin{frame}
+\ex
+Each of these is a basis for $\polyspace_2$.
+\begin{align*}
+  &B_0=\sequence{1,1+x,1+x+x^2}       \\
+  &B_1=\sequence{1+x+x^2,1+x,1}       \\
+  &B_2=\sequence{x^2,1+x,1-x}         \\
+  &B_3=\sequence{1,x,x^2}
+\end{align*}
+Each has two elements.
+
+\pause
+\ex
+Here are two different bases for $\matspace_{\nbyn{2}}$. 
+\begin{align*}
+  &B_0=\sequence{
+    \begin{mat}[r]
+      1 &0 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &1 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &1 \\
+      1 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &1 \\
+      1 &1
+    \end{mat}
+          }                 \\
+  &B_1=\sequence{
+    \begin{mat}[r]
+      1 &0 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      0 &1 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      0 &0 \\
+      1 &0
+    \end{mat},
+    \begin{mat}[r]
+      0 &0 \\
+      0 &1
+    \end{mat}
+          }                 
+\end{align*}
+Each has four elements.
+\end{frame}
+
+
+
 %..........
 \begin{frame}{Definition of dimension}
 \df[df:Dimension]
@@ -343,6 +419,11 @@ gives a basis for the space, a sequence of those two vectors.
 \ExecuteMetaData[../vs3.tex]{pf:NoLiSetGreatDim}
 \qed
 
+\pause\medskip
+\re
+This is an example of a result that assumes the vector spaces are
+finite-dimensional without specifically saying so.
+
 \pause
 \medskip
 \co[cor:LIExpBas]
@@ -365,11 +446,6 @@ gives a basis for the space, a sequence of those two vectors.
 \pf
 \ExecuteMetaData[../vs3.tex]{pf:SpanningSetShrinksToABasis}
 \qed
-
-\pause\medskip
-\re
-This is an example of a result that assumes the vector spaces are
-finite-dimensional without specifically saying so.
 \end{frame}
 
 
@@ -408,13 +484,8 @@ finite-dimensional without specifically saying so.
 \begin{frame}
 \ExecuteMetaData[../vs3.tex]{pf:RowSpUnchByGR1}
 \qed
-\end{frame}
 
-
-
-
-%..........
-\begin{frame}
+\pause
 \lm[le:RowSpUnchByGR]
 \ExecuteMetaData[../vs3.tex]{lm:RowsEchMatLI}
 
@@ -428,9 +499,70 @@ finite-dimensional without specifically saying so.
 
 
 %..........
+\begin{frame}
+\ex
+The matrix before Gauss's Method and the matrix after have equal row
+spaces.
+\begin{equation*}
+  M=
+  \begin{mat}[r]
+    1 &2  &1 &0 &3 \\
+   -1 &-2 &2 &2 &0 \\
+    2 &4  &5 &2 &9 
+  \end{mat}
+  \;\grstep[-2\rho_1+\rho_3]{\rho_1+\rho_2}
+  \;\grstep{-\rho_2+\rho_3}\;
+  \begin{mat}[r]
+    1 &2  &1 &0 &3 \\
+    0 &0  &3 &2 &3 \\
+    0 &0  &0 &0 &0 
+  \end{mat}
+\end{equation*}
+The nonzero rows of the latter matrix form a basis for $\rowspace{M}$.
+\begin{equation*}
+  B=\sequence{\rowvec{1 &2  &1 &0 &3},\,
+          \rowvec{0 &0  &3 &2 &3}
+          }
+\end{equation*}
+The row rank is $2$.
+
+So Gauss's Method produces a basis for the row space of a matrix.
+It has found the ``repeat'' information, that $M$'s third
+row is three times the first plus the second, and eliminated that extra row.
+\end{frame}
+
+
+
+
+%..........
 \begin{frame}{Column space}
 \df[df:ColumnSpace]
 \ExecuteMetaData[../vs3.tex]{df:ColumnSpace}
+
+\pause
+\ex
+This system
+\begin{equation*}
+  \begin{linsys}{2}
+  2x &+ &3y     &= &d_1  \\
+  -x &+ &(1/2)y &= &d_2
+  \end{linsys}
+\end{equation*}
+has a solution for those $d_1,d_2\in\Re$ that we can find to satisfy
+this vector equation.
+\begin{equation*}
+  x\cdot\colvec{2 \\ -1}+y\cdot\colvec{3 \\ 1/2}
+  =\colvec{d_1 \\ d_2}
+  \qquad x,y\in\Re
+\end{equation*}
+That is, the system has a solution if and only if the vector on the right
+is in the column space of this matrix.
+\begin{equation*}
+  \begin{mat}
+    2  &3  \\
+    -1 &1/2
+  \end{mat}
+\end{equation*}
 \end{frame}
 
 
@@ -440,6 +572,62 @@ finite-dimensional without specifically saying so.
 \begin{frame}{Transpose}
 \df[df:Transpose]
 \ExecuteMetaData[../vs3.tex]{df:Transpose}
+
+\pause
+\ex
+To find a basis for the column space of a matrix
+\begin{equation*}
+  \begin{mat}
+    2  &3  \\
+    -1 &1/2
+  \end{mat}
+\end{equation*}
+we can temporarily transpose
+\begin{equation*}
+  \trans{\begin{mat}
+    2  &3  \\
+    -1 &1/2
+  \end{mat}}
+  =
+  \begin{mat}
+    2  &-1  \\
+    3 &1/2
+  \end{mat}
+\end{equation*}
+linearly reduce 
+\begin{equation*}
+  \begin{mat}
+    2  &-1  \\
+    3 &1/2
+  \end{mat}
+  \;\grstep{(-3/2)\rho_1+\rho_2}
+  \begin{mat}
+    2  &-1  \\
+    0  &2
+  \end{mat}
+\end{equation*}
+and transpose back.
+\begin{equation*}
+  \trans{\begin{mat}
+    2  &-1  \\
+    0  &2
+  \end{mat}}
+  =
+  \begin{mat}
+    2  &0  \\
+    -1 &2
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+\noindent
+This basis
+\begin{equation*}
+  B=\sequence{\colvec{2 \\ -1},
+              \colvec{0 \\ 2}
+            }
+\end{equation*}
+shows that the column space is the entire vector space $\Re^2$. 
 \end{frame}
 
 
@@ -471,8 +659,42 @@ finite-dimensional without specifically saying so.
 \pause
 \ExecuteMetaData[../vs3.tex]{pf:RowRankEqualsColumnRank1}
 \qed
+
+\pause
+\df[df:Rank]
+\ExecuteMetaData[../vs3.tex]{df:Rank}
 \end{frame}
 
+
+
+
+%..........
+\begin{frame}
+\ex
+The column rank of this matrix 
+\begin{equation*}
+  \begin{mat}
+    2 &-1 &3 &1 &0 &1  \\
+    3 &0  &1 &1 &4 &-1 \\
+    4 &-2 &6 &2 &0 &2  \\
+    1 &0  &3 &0 &0 &2 
+  \end{mat}
+\end{equation*}
+is $3$.  
+Its largest set of linearly independent columns is size~$3$
+because that's the size of its largest set of linearly independent rows.
+\begin{equation*}
+  \grstep[-2\rho_1+\rho_3 \\ -(1/2)\rho_1+\rho_4]{-(3/2)\rho_1+\rho_2}
+  \;\grstep{-(1/3)\rho_2+\rho_4}
+  \;\grstep{\rho_3\leftrightarrow\rho_4}
+  \begin{mat}
+    2 &-1   &3    &1    &0     &1    \\
+    0 &3/2  &-7/2 &-1/2 &4     &-5/2 \\
+    0 &0    &8/3  &-1/3 &-4/3  &7/3   \\
+    0 &0    &0    &0    &0     &0 
+  \end{mat}
+\end{equation*}
+\end{frame}
 
 
 
