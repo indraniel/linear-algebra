@@ -62,16 +62,228 @@
 
 %..........
 \begin{frame}
-We proved these in the context of studying isomorphisms.
+\ex
+The function $\map{h}{\polyspace_2}{\Re^2}$ given by
+\begin{equation*}
+  h(a+bx+cx^2)
+  =
+  \colvec{a+c \\ 0}
+\end{equation*}
+is a homomorphism.
+To check that we need to verify that it respects the addition and
+scalar multiplication operations.
+
+\pause
+Addition is routine.
+\begin{gather*}
+  h(\,(a_1+b_1x+c_1x^2)+(a_2+b_2x+c_2x^2)\,)      \\
+  \begin{align*}
+    \qquad
+    &=h(\,(a_1+a_2)+(b_1+b_2)x+(c_1+c_2)x^2\,)     \\
+    &=\colvec{a_1+a_2+c_1+c_2 \\ 0}                 \\
+    &=\colvec{a_1+c_1 \\ 0}+\colvec{a_2+c_2 \\ 0}   \\
+    &=h(a_1+b_1x+c_1x^2)+h(a_2+b_2x+c_2x^2)       
+  \end{align*}
+\end{gather*}
+\pause
+So is scalar multiplication.
+\begin{equation*}
+  r\cdot h(a+bx+cx^2)
+  =r\cdot\colvec{a+c \\ 0}  
+  =\colvec{ra+rc \\ 0}
+  =h(\,r(a+bx+cx^2)\,)
+\end{equation*}
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\ex
+Of these two maps $\map{h,g}{\Re^2}{\Re}$
+the first is linear while the second is not.
+\begin{equation*}
+  \colvec{x \\ y}\mapsunder{h} 2x-3y
+  \qquad
+  \colvec{x \\ y}\mapsunder{g} 2x-3y+1
+\end{equation*}
+
+\pause
+The map $h$ respects addition
+\begin{multline*}
+  h(\colvec{x_1 \\ y_1}+\colvec{x_2 \\ y_2})
+  =h(\colvec{x_1+x_2 \\ y_1+y_2})             
+  =2(x_1+x_2)-3(y_1+y_2)                    \\
+  =(2x_1-3y_1)+(2x_2-3y_2)
+  =h(\colvec{x_1 \\ y_1})+h(\colvec{x_2 \\ y_2})
+\end{multline*}
+and scalar multiplication.
+\begin{equation*}
+  r\cdot h(\colvec{x \\ y})
+  =r\cdot(2x-3y)
+  =2rx-3ry
+  =(2r)x-(3r)y
+  =h(r\cdot\colvec{x \\ y})
+\end{equation*}
+
+\pause
+This example shows that $g$ does not respect addition.
+\begin{equation*} 
+  g(\colvec{1 \\ 4}+\colvec{5 \\ 6})=-17
+  \quad\text{while}\quad
+  g(\colvec{1 \\ 4})+g(\colvec{5 \\ 6})=-16
+\end{equation*}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+We proved these two in the context of studying isomorphisms.
 
 \lm[le:HomoSendsZeroToZero]
 \ExecuteMetaData[../map2.tex]{lm:HomoSendsZeroToZero}
 
-\pause
 \lm[le:HomoPreserveLinCombo]
 \ExecuteMetaData[../map2.tex]{lm:HomoPreserveLinCombo}
+
+\pause
+\medskip
+\ex
+Between any two vector spaces the zero map $\map{Z}{V}{W}$, defined by
+$Z(\vec{v})=\zero_W$ is a homomorphism.
+The check is: 
+$Z(c_1\vec{v}_1+c_2\vec{v}_2)=\zero_W
+   =\zero_W+\zero_W=c_1Z(\vec{v}_1)+c_2Z(\vec{v}_2)$.
 \end{frame}
 
+
+
+
+%..........
+\begin{frame}
+\ex
+The \definend{inclusion map} $\map{\iota}{\Re^2}{\Re^3}$
+\begin{equation*}
+  \iota(\colvec{x  \\ y})
+  =\colvec{x \\ y \\ z}
+\end{equation*}
+is a homomorphism.
+Here is the check.
+\begin{align*}
+  \iota(c_1\colvec{x_1 \\ y_1}+c_2\colvec{x_2 \\ y_2})
+  &=\iota(\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2})       \\
+  &=\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ 0}      \\
+  &=\colvec{c_1x_1 \\ c_1y_1 \\ 0}
+   +\colvec{c_2x_2 \\ c_2y_2 \\ 0}                    \\
+  &=c_1\iota(\colvec{x_1 \\ y_1})+c_2\iota(\colvec{x_2 \\ y_2})
+\end{align*}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex
+Consider 
+the function $\map{h}{\polyspace_1}{\polyspace_1}$ defined below.
+\begin{equation*}
+  h(a+bx)=b+bx
+\end{equation*}
+Here are two examples of the action of this function: $h(1+2x)=2+2x$
+and $h(3-x)=-1-x$. 
+
+\pause
+This function is linear.
+The verification is straightforward.
+\begin{align*}
+  h(\,c_1(a_1+b_1x)+c_2(a_2+b_2x)\,)
+  &=h(\,(c_1a_1+c_2a_2)+(c_1b_1+c_2b_2)x\,)       \\
+  &=(c_1b_1+c_2b_2)+(c_1b_1+c_2b_2)x          \\
+  &=(c_1b_1+c_1b_1x)+(c_2b_2+c_2b_2x)         \\
+  &=c_1h(a_1+b_1x)+c_2h(a_2+b_2x)
+\end{align*}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex
+The derivative map $\map{d/dx}{\polyspace_2}{\polyspace_1}$
+is given by $d/dx\,(ax^2+bx+c)=2ax+b$.
+For instance, $d/dx\,(3x^2-2x+4)=6x-2$
+and $d/dx\,(x^2+1)=2x$.
+
+\pause
+This is a homomorphism.
+\begin{gather*}
+  d/dx\,\big(\,r_1(a_1x^2+b_1x+c_1)+r_2(a_2x^2+b_2x+c_2)\,\big)  \hspace*{5em}         \\
+  \begin{align*} 
+    &=d/dx\,\big(\,(r_1a_1+r_2a_2)x^2+(r_1b_1+r_2b_2)x+(r_1c_1+r_2c_2)\,\big)   \\
+    &=2(r_1a_1+r_2a_2)x+(r_1b_1+r_2b_2)   \\
+    &=(2r_1a_1x+r_1b_1)+(2r_2a_2x+r_2b_2)   \\
+    &=r_1\cdot d/dx\,(a_1x^2+b_1x+c_1)
+      +r_2\cdot d/dx\,(a_2x^2+b_2x+c_2)
+  \end{align*}
+\end{gather*}
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+The \definend{trace} of a square matrix 
+is the sum down the uppper-left to lower-right diagonal
+Thus
+$\map{\trace}{\matspace_{\nbyn{2}}}{\Re}$
+is this.
+\begin{equation*}
+  \begin{mat}
+    a &b \\
+    c &d
+  \end{mat}
+  =a+b
+\end{equation*}
+This map is linear.
+\begin{align*}
+  \trace(
+  r_1\begin{mat}
+    a_1 &b_1 \\
+    c_1 &d_1
+  \end{mat}
+  +
+  r_2\begin{mat}
+    a_2 &b_2 \\
+    c_2 &d_2
+  \end{mat}
+  )
+  &=\trace(
+    \begin{mat}
+      r_1a_1+r_2a_2 &r_1b_1+r_2b_2 \\
+      r_1c_1+r_2c_2 &r_1d_1+r_2d_2
+    \end{mat}
+    )                                       \\
+  &=(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)         \\
+  &=r_1(a_1+d_1)+r_2(a_2+d_2)               \\
+  &=r_1\trace(
+    \begin{mat}
+      a_1 &b_1 \\
+      c_1 &d_1
+    \end{mat}
+    )
+    +
+    r_2\trace(
+    \begin{mat}
+      a_2 &b_2 \\
+      c_2 &d_2
+    \end{mat}
+    ) 
+\end{align*}
+\end{frame}
 
 
 
