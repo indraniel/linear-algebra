@@ -220,16 +220,16 @@ and $d/dx\,(x^2+1)=2x$.
 
 \pause
 This is a homomorphism.
-\begin{gather*}
+\begin{multline*}
   d/dx\,\big(\,r_1(a_1x^2+b_1x+c_1)+r_2(a_2x^2+b_2x+c_2)\,\big)  \hspace*{5em}         \\
-  \begin{align*} 
+  \begin{aligned} 
     &=d/dx\,\big(\,(r_1a_1+r_2a_2)x^2+(r_1b_1+r_2b_2)x+(r_1c_1+r_2c_2)\,\big)   \\
     &=2(r_1a_1+r_2a_2)x+(r_1b_1+r_2b_2)   \\
     &=(2r_1a_1x+r_1b_1)+(2r_2a_2x+r_2b_2)   \\
     &=r_1\cdot d/dx\,(a_1x^2+b_1x+c_1)
       +r_2\cdot d/dx\,(a_2x^2+b_2x+c_2)
-  \end{align*}
-\end{gather*}
+  \end{aligned}
+\end{multline*}
 \end{frame}
 
 
@@ -309,8 +309,93 @@ This map is linear.
 
 %..........
 \begin{frame}
+\ex 
+One basis of the space of quadratic polynomials $\polyspace_2$
+is $B=\sequence{x^2,x,1}$.
+We can define a map $\map{\text{eval}_3}{\polyspace_2}{\Re}$ 
+by specifying its action on that basis
+\begin{equation*}
+  x^2\mapsunder{\text{eval}_3}9
+  \quad
+  x\mapsunder{\text{eval}_3}3
+  \quad
+  1\mapsunder{\text{eval}_3}1
+\end{equation*}
+and then extending linearly.
+\begin{equation*}
+  \text{eval}_3(ax^2+bx+c)=a\cdot\text{eval}_3(x^2)
+                          +b\cdot\text{eval}_3(x)
+                          +c\cdot\text{eval}_3(1)
+          =9a+3b+c
+\end{equation*}
+\pause
+The action of this map on the basis elements is to plug the value~$3$ in for
+$x$. 
+That remains true when we extend linearly, so
+$\text{eval}_3(\,p(x)\,)=p(3)$.
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex
+Consider the standard basis $\stdbasis_2$ for the vector space $\Re^2$.
+We can specify a rotation of the two basis vectors as here.
+\begin{equation*}
+  \colvec{1 \\ 0}\mapsto\colvec[r]{\cos\theta \\ \sin\theta}
+  \quad
+  \colvec{0 \\ 1}\mapsto\colvec[r]{-\sin\theta \\ \cos\theta}
+  \qquad
+  \vcenteredhbox{\includegraphics{asy/three_ii_rotate.pdf}}
+\end{equation*}
+\pause
+We get a homomorphism $\map{t_{\theta}}{\Re^2}{\Re^2}$ by extending
+that linearly.
+\begin{align*}
+  t_{\theta}(\colvec{x \\ y})
+  &=
+  t_{\theta}(x\cdot\colvec{1 \\ 0}+y\cdot\colvec{0 \\ 1})  \\
+  &=
+  x\cdot t_{\theta}(\colvec{1 \\ 0})+y\cdot t_{\theta}(\colvec{0 \\ 1})  \\
+  &=x\cdot\colvec[r]{\cos\theta \\ \sin\theta}
+    +y\cdot\colvec[r]{-\sin\theta \\ \cos\theta}  \\
+  &=\colvec{x\cos\theta-y\sin\theta \\ x\sin\theta+y\cos\theta}
+\end{align*}
+\pause
+This homomorphism is both one-to-one and onto, so it is an automorphism.
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
 \df[df:LinearTransformation]
 \ExecuteMetaData[../map2.tex]{df:LinearTransformation}
+
+\pause
+\ex
+For any vector space $V$ the \definend{identity} map $\map{\textrm{id}}{V}{V}$
+given by $\vec{v}\mapsto\vec{v}$ is a linear transformation.
+The check is easy.
+
+\pause
+\ex
+In $\Re^3$ the function $t$ that acts in this way
+\begin{equation*}
+  \colvec{x \\ y \\ z}\mapsunder{t}\colvec{-x \\ y \\ z}
+\end{equation*}
+is a transformation.
+We have this.
+\begin{multline*}
+  t(r_1\colvec{x_1 \\ y_1 \\ z_1}+r_2\colvec{x_2 \\ y_2 \\ z_2})
+  =t(\colvec{r_1x_1+r_2x_2 \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2})  
+  =\colvec{-(r_1x_1+r_2x_2) \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2}    \\
+  =r_1\colvec{-x_1 \\ y_1 \\ z_1}+r_2\colvec{-x_2 \\ y_2 \\ z_2}  
+  =r_1t(\colvec{x_1 \\ y_1 \\ z_1})+r_2t(\colvec{x_2 \\ y_2 \\ z_2}) 
+\end{multline*}
 \end{frame}
 
 
@@ -351,6 +436,82 @@ This map is linear.
 \begin{frame}{Range space}
 \df[df:RangeSpace]
 \ExecuteMetaData[../map2.tex]{df:RangeSpace}
+
+\pause
+\ex
+Projection $\map{\pi}{\Re^3}{\Re^2}$ onto the $xy$-plane
+\begin{equation*}
+  \colvec{x \\ y \\ z}\mapsto\colvec{x \\ y}
+\end{equation*}
+is a linear map (the check is easy).
+The range space
+\begin{equation*}
+  \rangespace{\pi}
+  =\set{\colvec{x \\ y \\ 0}\suchthat x,y\in\Re}
+\end{equation*}
+is two-dimensional so the rank of $\pi$ is $2$.
+\end{frame}
+\begin{frame}
+\ex
+The derivative map
+$\map{d/dx}{\Re^4}{\Re^4}$
+is linear.
+Its range is $\rangespace{d/dx}=\set{a_0+a_1x+a_2x^2\suchthat a_i\in\Re}$.
+(Verifying that every member of that space is the derivative of a fourth
+degree polynomial is easy.)
+Thus the rank of the derivative is $3$. 
+
+\pause
+\ex
+This map is linear; the check is routine.
+\begin{equation*}
+  \begin{mat}
+    a &b \\
+    c &d
+  \end{mat}
+  \mapsunder{h}
+  \colvec{a+b  \\ 2a+2b}
+\end{equation*}
+The rangespace is this line through the origin
+\begin{equation*}
+  \set{\colvec{t \\ 2t} \suchthat t\in\Re}
+\end{equation*}
+(every member of that set is the image 
+\begin{equation*}
+  \colvec{t \\ 2t}
+  =
+  h(
+    \begin{mat}
+      t  &0 \\
+      0   &0
+    \end{mat}\
+   )
+\end{equation*}
+of some matrix).
+The rank of this map is $1$.
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{Inverse image}
+\centergraphic{../ch3.5}
+\ExecuteMetaData[../map2.tex]{InverseImage}
+
+\ex
+Consider the projection map $\map{\pi}{\Re^2}{\Re}$ defined by
+\begin{equation*}
+  \pi(\colvec{x \\ y})
+  =x
+\end{equation*}
+that just ``forgets'' the second component.
+The check that $\pi$ is a homomorphism is routine.
+\end{frame}
+\begin{frame}
+This function is many-to-one; for example many vectors are mapped
+to the member $2$ of the codomain.
+\centergraphic{asy/three_ii_proj.pdf}
 \end{frame}
 
 
