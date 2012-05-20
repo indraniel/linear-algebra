@@ -170,14 +170,14 @@ The \definend{inclusion map} $\map{\iota}{\Re^2}{\Re^3}$
   =\colvec{x \\ y \\ z}
 \end{equation*}
 is a homomorphism.
-Here is the check.
+Here is the verification.
 \begin{align*}
-  \iota(c_1\colvec{x_1 \\ y_1}+c_2\colvec{x_2 \\ y_2})
+  \iota(c_1\cdot\colvec{x_1 \\ y_1}+c_2\cdot\colvec{x_2 \\ y_2})
   &=\iota(\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2})       \\
   &=\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2 \\ 0}      \\
   &=\colvec{c_1x_1 \\ c_1y_1 \\ 0}
    +\colvec{c_2x_2 \\ c_2y_2 \\ 0}                    \\
-  &=c_1\iota(\colvec{x_1 \\ y_1})+c_2\iota(\colvec{x_2 \\ y_2})
+  &=c_1\cdot\iota(\colvec{x_1 \\ y_1})+c_2\cdot\iota(\colvec{x_2 \\ y_2})
 \end{align*}
 \end{frame}
 
@@ -197,14 +197,15 @@ and $h(3-x)=-1-x$.
 
 \pause
 This function is linear.
-The verification is straightforward.
-\begin{align*}
-  h(\,c_1(a_1+b_1x)+c_2(a_2+b_2x)\,)
-  &=h(\,(c_1a_1+c_2a_2)+(c_1b_1+c_2b_2)x\,)       \\
-  &=(c_1b_1+c_2b_2)+(c_1b_1+c_2b_2)x          \\
-  &=(c_1b_1+c_1b_1x)+(c_2b_2+c_2b_2x)         \\
-  &=c_1h(a_1+b_1x)+c_2h(a_2+b_2x)
-\end{align*}
+\begin{multline*}
+  h(\,c_1\cdot (a_1+b_1x)+c_2\cdot(a_2+b_2x)\,)                  \\
+  \begin{aligned}
+    &=h(\,(c_1a_1+c_2a_2)+(c_1b_1+c_2b_2)x\,)       \\
+    &=(c_1b_1+c_2b_2)+(c_1b_1+c_2b_2)x          \\
+    &=(c_1b_1+c_1b_1x)+(c_2b_2+c_2b_2x)         \\
+    &=c_1\cdot h(a_1+b_1x)+c_2\cdot h(a_2+b_2x)
+  \end{aligned}
+\end{multline*}
 \end{frame}
 
 
@@ -217,11 +218,10 @@ The derivative map $\map{d/dx}{\polyspace_2}{\polyspace_1}$
 is given by $d/dx\,(ax^2+bx+c)=2ax+b$.
 For instance, $d/dx\,(3x^2-2x+4)=6x-2$
 and $d/dx\,(x^2+1)=2x$.
-
 \pause
-This is a homomorphism.
+It is a homomorphism.
 \begin{multline*}
-  d/dx\,\big(\,r_1(a_1x^2+b_1x+c_1)+r_2(a_2x^2+b_2x+c_2)\,\big)  \hspace*{5em}         \\
+  d/dx\,\big(\,r_1(a_1x^2+b_1x+c_1)+r_2(a_2x^2+b_2x+c_2)\,\big)  \hspace*{5em}  \\
   \begin{aligned} 
     &=d/dx\,\big(\,(r_1a_1+r_2a_2)x^2+(r_1b_1+r_2b_2)x+(r_1c_1+r_2c_2)\,\big)   \\
     &=2(r_1a_1+r_2a_2)x+(r_1b_1+r_2b_2)   \\
@@ -237,7 +237,7 @@ This is a homomorphism.
 %..........
 \begin{frame}
 The \definend{trace} of a square matrix 
-is the sum down the uppper-left to lower-right diagonal
+is the sum down the uppper-left to lower-right diagonal.
 Thus
 $\map{\trace}{\matspace_{\nbyn{2}}}{\Re}$
 is this.
@@ -248,41 +248,43 @@ is this.
   \end{mat}
   =a+b
 \end{equation*}
-This map is linear.
-\begin{align*}
-  \trace(
-  r_1\begin{mat}
+It is linear.
+\begin{multline*}
+  \trace(\,
+  r_1\cdot\begin{mat}
     a_1 &b_1 \\
     c_1 &d_1
   \end{mat}
   +
-  r_2\begin{mat}
+  r_2\cdot\begin{mat}
     a_2 &b_2 \\
     c_2 &d_2
   \end{mat}
-  )
-  &=\trace(
-    \begin{mat}
-      r_1a_1+r_2a_2 &r_1b_1+r_2b_2 \\
-      r_1c_1+r_2c_2 &r_1d_1+r_2d_2
-    \end{mat}
-    )                                       \\
-  &=(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)         \\
-  &=r_1(a_1+d_1)+r_2(a_2+d_2)               \\
-  &=r_1\trace(
-    \begin{mat}
-      a_1 &b_1 \\
-      c_1 &d_1
-    \end{mat}
-    )
-    +
-    r_2\trace(
-    \begin{mat}
-      a_2 &b_2 \\
-      c_2 &d_2
-    \end{mat}
-    ) 
-\end{align*}
+  \,)                                              \\
+  \begin{aligned}
+    &=\trace(
+      \begin{mat}
+        r_1a_1+r_2a_2 &r_1b_1+r_2b_2 \\
+        r_1c_1+r_2c_2 &r_1d_1+r_2d_2
+      \end{mat}
+      )                                       \\
+    &=(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)         \\
+    &=r_1(a_1+d_1)+r_2(a_2+d_2)               \\
+    &=r_1\cdot\trace(
+      \begin{mat}
+        a_1 &b_1 \\
+        c_1 &d_1
+      \end{mat}
+      )
+      +
+      r_2\cdot\trace(
+      \begin{mat}
+        a_2 &b_2 \\
+        c_2 &d_2
+      \end{mat}
+      )
+  \end{aligned} 
+\end{multline*}
 \end{frame}
 
 
@@ -384,18 +386,18 @@ The check is easy.
 
 \pause
 \ex
-In $\Re^3$ the function $t$ that acts in this way
+In $\Re^3$ the function $f_{yz}$  
 \begin{equation*}
   \colvec{x \\ y \\ z}\mapsunder{t}\colvec{-x \\ y \\ z}
 \end{equation*}
-is a transformation.
-We have this.
+that reflects vectors over the $yz$-plane is a linear
+transformation.
 \begin{multline*}
-  t(r_1\colvec{x_1 \\ y_1 \\ z_1}+r_2\colvec{x_2 \\ y_2 \\ z_2})
-  =t(\colvec{r_1x_1+r_2x_2 \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2})  
+  f_{yz}(r_1\colvec{x_1 \\ y_1 \\ z_1}+r_2\colvec{x_2 \\ y_2 \\ z_2})
+  =f_{yz}(\colvec{r_1x_1+r_2x_2 \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2})  
   =\colvec{-(r_1x_1+r_2x_2) \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2}    \\
   =r_1\colvec{-x_1 \\ y_1 \\ z_1}+r_2\colvec{-x_2 \\ y_2 \\ z_2}  
-  =r_1t(\colvec{x_1 \\ y_1 \\ z_1})+r_2t(\colvec{x_2 \\ y_2 \\ z_2}) 
+  =r_1f_{yz}(\colvec{x_1 \\ y_1 \\ z_1})+r_2f_{yz}(\colvec{x_2 \\ y_2 \\ z_2}) 
 \end{multline*}
 \end{frame}
 
@@ -440,11 +442,11 @@ We have this.
 
 \pause
 \ex
-Projection $\map{\pi}{\Re^3}{\Re^2}$ onto the $xy$-plane
+Projection $\map{\pi}{\Re^3}{\Re^2}$
 \begin{equation*}
   \colvec{x \\ y \\ z}\mapsto\colvec{x \\ y}
 \end{equation*}
-is a linear map (the check is easy).
+is a linear map; the check is routine.
 The range space
 \begin{equation*}
   \rangespace{\pi}
@@ -457,7 +459,7 @@ is two-dimensional so the rank of $\pi$ is $2$.
 The derivative map
 $\map{d/dx}{\Re^4}{\Re^4}$
 is linear.
-Its range is $\rangespace{d/dx}=\set{a_0+a_1x+a_2x^2\suchthat a_i\in\Re}$.
+Its range is $\rangespace{d/dx}=\set{a_0+a_1x+a_2x^2+a_3x^3\suchthat a_i\in\Re}$.
 (Verifying that every member of that space is the derivative of a fourth
 degree polynomial is easy.)
 Thus the rank of the derivative is $3$. 
@@ -488,7 +490,7 @@ The rangespace is this line through the origin
     \end{mat}\
    )
 \end{equation*}
-of some matrix).
+of a $\nbyn{2}$ matrix).
 The rank of this map is $1$.
 \end{frame}
 
@@ -528,6 +530,45 @@ so $\vec{u}+\vec{v}$ is a ``$5$-vector.''
 
 %..........
 \begin{frame}
+\ex
+Consider $\map{h}{\polyspace_2}{\Re^2}$
+\begin{equation*}
+  ax^2+bx+c\mapsto\colvec{b \\ b}
+\end{equation*}
+and consider these three members of the range.
+\begin{equation*}
+  \vec{w}_1=\colvec{1 \\ 1},\;
+  \vec{w}_2=\colvec{-1 \\ -1},\;   
+  \vec{w}_3=\colvec{0 \\ 0}
+\end{equation*}
+\pause
+The inverse image of $\vec{w}_1$ is 
+$h^{-1}(\vec{w}_1)=\set{a_1x^2+x+c_1\suchthat a_1,c_1\in\Re^2}$.
+Think of these as ``$\vec{w}_1$~vectors.''
+Some examples are $3x^2+x+1$, $3x^2+x-4$, and $-2x^2+x$.
+\pause
+The inverse image of $\vec{w}_2$ is 
+$h^{-1}(\vec{w}_2)=\set{a_2x^2-x+c_2\suchthat a_2,c_2\in\Re^2}$;
+these are ``$\vec{w}_2$~vectors.''
+The vectors from the domain associated with $\vec{w}_3$ are members of the set
+$h^{-1}(\vec{w}_3)=\set{a_3x^2+c_3\suchthat a_3,c_3\in\Re^2}$.
+
+\pause
+As in the prior example, any $\vec{v}_1\in h^{-1}(\vec{w}_1)$
+plus any $\vec{v}_2\in h^{-1}(\vec{w}_2)$
+totals to a $\vec{v}_3\in h^{-1}(\vec{w}_3)$. 
+This is
+because $h$ is a homomorphism, so 
+$h(\vec{v}_1+\vec{v}_2)=h(\vec{v}_1)+h(\vec{v}_2)=\vec{w}_1+\vec{w}_2=\vec{w}_3$.
+That is, the sum of a ``$\vec{w}_1$~vector'' with a
+``$\vec{w}_2$~vector'' is mapped by $h$ to $\vec{w}_3$. 
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
 \lm[le:NullspIsSubSp]
 \ExecuteMetaData[../map2.tex]{lm:NullspIsSubSp}
 
@@ -544,6 +585,15 @@ so $\vec{u}+\vec{v}$ is a ``$5$-vector.''
 \begin{frame}{Null space}
 \df[df:NullSpace]
 \ExecuteMetaData[../map2.tex]{df:NullSpace}
+
+\pause
+\medskip
+\no 
+Strictly, the nullspace of the codomain is not $\zero_{W}$, it is 
+$\set{\zero_{W}}$.
+Thus the nullspace should properly be
+given as $h^{-1}(\set{\zero_{W}})$.
+But authors often state it as above.
 \end{frame}
 
 
