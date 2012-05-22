@@ -38,9 +38,9 @@ path vec2=(0,0)--(-4,5);
 path vec3=(0,0)--(-4,5);
 
 // Axes
-axes3(xlabel="x",ylabel="y",zlabel="", 
+axes3(xlabel="",ylabel="",zlabel="", 
       min=(-0.2,-0.2,-0.2),
-      max=(5,10,6),
+      max=(5,9.5,4.5),
       AXISPEN,
       arrow=None);
 // Parallelogram of vectors in the plane
@@ -48,21 +48,30 @@ draw(path3(plane_endpt[0]--plane_endpt[2]),VECTORPEN+gray(0.9));
 draw(path3(plane_endpt[1]--plane_endpt[2]),VECTORPEN+gray(0.9));
 
 for(int i=0; i < 3; ++i) {
-  draw(path3(plane_vec[i]),VECTORPEN+color[i]+gray(0.95),Arrow3(DefaultHead2,VECTORHEADSIZE));
+  draw(path3(plane_vec[i]),VECTORPEN+color[i]+gray(0.95),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 }
+label(Label("{\tiny $\vec{w}_1$}"),path3(plane_vec[0]));
+label(Label("{\tiny $\vec{w}_2$}"),path3(plane_vec[1]),NW);
+label(Label("{\tiny $\vec{w}_3=\vec{w}_1+\vec{w}_2$}",Relative(0.6)),path3(plane_vec[2]),N);
 
 // Draw inverse image sets
 triple inv_image_pt;
-real starting_hgt[]={12,10,12};  //  how high above the plane vector starts the inverse image
+real starting_hgt[]={8,8};  //  how high above the plane vector starts the inverse image
 starting_hgt.push(starting_hgt[0]+starting_hgt[1]);
+path3 domain_vec[];
 for (int i=0; i<3; ++i) {
-  for(int j=0; j < 4; ++j) {
+  for(int j=0; j < 5; ++j) {
     inv_image_pt=(xpart(plane_endpt[i]), ypart(plane_endpt[i]), (j+starting_hgt[i])/6);
     dot(inv_image_pt,inverse_image_pen+color[i]);
     inv_image_pt=(xpart(plane_endpt[i]), ypart(plane_endpt[i]), (-j+starting_hgt[i])/6);
     dot(inv_image_pt,inverse_image_pen+color[i]);
   }
   // this gives an endpoint to the vector that is 0.15 ps points from end
-  path3 domain_vec=(0,0,0)--(xpart(plane_endpt[i]),ypart(plane_endpt[i]),starting_hgt[i]/6);
-  draw((0,0,0)--arcpoint(reverse(domain_vec),.15),VECTORPEN,arrow=Arrow3(DefaultHead2,VECTORHEADSIZE));
+  domain_vec[i]=(0,0,0)--(xpart(plane_endpt[i]),ypart(plane_endpt[i]),starting_hgt[i]/6);
+  draw((0,0,0)--arcpoint(reverse(domain_vec[i]),.15),VECTORPEN+color[i],arrow=Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 }
+label(Label("{\tiny $\vec{v}_1$}"),domain_vec[0]);
+label(Label("{\tiny $\vec{v}_2$}"),domain_vec[1],NW);
+label(Label("{\tiny $\vec{v}_3$}",Relative(0.6)),domain_vec[2],SE);
+draw(point(domain_vec[0],1)--point(domain_vec[2],1),VECTORPEN+gray(.7));
+draw(point(domain_vec[1],1)--point(domain_vec[2],1),VECTORPEN+gray(.7));
