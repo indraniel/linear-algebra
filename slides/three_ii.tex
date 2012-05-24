@@ -508,9 +508,20 @@ The rank of this map is $1$.
 
 %..........
 \begin{frame}{Homomorphisms organize the domain}
+When we move from studying isomorphisms to studying homomorphisms, we dropped 
+the requirements that the maps be onto and one-to-one.
+We've seen that dropping the onto condition has no effect in the sense
+that any homomorphism $\map{h}{V}{W}$ is onto some vector space,
+namely $\rangespace{h}$.
+
+\pause
+We next consider the effect of dropping the one-to-one condition,
+so that for vectors $\vec{w}\in W$
+in the range there may be many vectors $\vec{v}\in V$ mapped to $\vec{w}$. 
 \centergraphic{../ch3.5}
 \ExecuteMetaData[../map2.tex]{InverseImage}
-
+\end{frame}
+\begin{frame}
 \ex
 Consider the projection map $\map{\pi}{\Re^2}{\Re}$.
 \begin{equation*}
@@ -518,28 +529,33 @@ Consider the projection map $\map{\pi}{\Re^2}{\Re}$.
   =x
 \end{equation*}
 The check that $\pi$ is a homomorphism is routine.
-\end{frame}
-\begin{frame}
+
+\pause
 We can identify the codomain $\Re$ with the $x$-axis in $\Re^2$.
-Here the $2\in\Re$ is in red.
+Here is a member of the range, drawn in red.
 \centergraphic{asy/three_ii_proj1.pdf}
 \pause
-Many vectors in the domain $\Re^2$ are mapped to $2$.
-Here are a few elements of $\pi^{-1}(2)$.
+Here also are a few elements of $\pi^{-1}(2)$.
 These are associated by $\pi$ with $2$, so they
-are in red.
+are also in red.
 \centergraphic{asy/three_ii_proj2.pdf}
-Where colors aren't available we can call these 
+As an alternative to using colors we can refer to these as 
 ``$2$~vectors.''
 \end{frame}\begin{frame}
 These are some ``$3$-vectors,'' inverse images of $3$.
 \centergraphic{asy/three_ii_proj3.pdf}
 \pause
 The definition of addition preservation is that
-where $\pi(\vec{u})=2$ and $\pi(\vec{v})=3$
-then $\pi(\vec{u}+\vec{v})=\pi(\vec{u})+\pi(\vec{v})=5$
-so $\vec{u}+\vec{v}$ is a ``$5$-vector.''
+$\pi(\vec{u}+\vec{v})=\pi(\vec{u})+\pi(\vec{v})$.
+Therefore
+where $\pi(\vec{u})=2$ and $\pi(\vec{v})=3$,
+the vector sum $\vec{u}+\vec{v}$ will be mapped by $\pi$ to $5$.
 \centergraphic{asy/three_ii_proj5.pdf}
+Thus, we can understand the definition of addition preservation as:
+red plus blue makes purple\Dash a ``$2$ vector'' plus a
+``$3$~vector'' sums to a ``$5$~vector.''
+\pause
+Preservation of scalar multiplication has a similar interpretation.
 \end{frame}
 
 
@@ -547,7 +563,24 @@ so $\vec{u}+\vec{v}$ is a ``$5$-vector.''
 
 %..........
 \begin{frame}
-\centergraphic{asy/three_ii_1vec.png}
+The same analysis holds for any homomorphism.
+
+\ex
+The projection $\map{\pi}{\Re^3}{\Re^2}$ is a linear map.
+As above we can identify the codomain with the $xy$-plane inside of
+$\Re^3$.
+\only<1>{\centergraphic{asy/three_ii_3dproj1.png}}
+\only<2>{\centergraphic{asy/three_ii_3dproj2.png}}
+\only<3->{\centergraphic{asy/three_ii_3dproj3.png}}
+In the $xy$-plane, red plus blue makes purple as shown by the parallelogram.
+\pause
+Consider the inverse image sets; the diagram shows some of the infinitely 
+many points in each $\pi^{-1}(\vec{w}_i)$.
+\pause
+If we take a $\vec{v}_1\in\pi^{-1}(\vec{w}_1)$ 
+and a $\vec{v}_2\in\pi^{-1}(\vec{w}_2)$
+then they sum to a
+$\vec{v}_3\in\pi^{-1}(\vec{w}_3)$.
 \end{frame}
 
 
@@ -555,6 +588,8 @@ so $\vec{u}+\vec{v}$ is a ``$5$-vector.''
 
 %..........
 \begin{frame}
+This also holds when the spaces are not ones that we can conveniently draw.
+
 \ex
 Consider $\map{h}{\polyspace_2}{\Re^2}$
 \begin{equation*}
@@ -575,18 +610,35 @@ Some examples are $3x^2+x+1$, $3x^2+x-4$, and $-2x^2+x$.
 The inverse image of $\vec{w}_2$ is 
 $h^{-1}(\vec{w}_2)=\set{a_2x^2-x+c_2\suchthat a_2,c_2\in\Re^2}$;
 these are ``$\vec{w}_2$~vectors.''
-The vectors from the domain associated with $\vec{w}_3$ are members of the set
+The ``$\vec{w}_3$~vectors'' are members of the set
 $h^{-1}(\vec{w}_3)=\set{a_3x^2+c_3\suchthat a_3,c_3\in\Re^2}$.
 
 \pause
-As in the prior example, any $\vec{v}_1\in h^{-1}(\vec{w}_1)$
+As above, any $\vec{v}_1\in h^{-1}(\vec{w}_1)$
 plus any $\vec{v}_2\in h^{-1}(\vec{w}_2)$
-totals to a $\vec{v}_3\in h^{-1}(\vec{w}_3)$. 
-This is
-because $h$ is a homomorphism, so 
-$h(\vec{v}_1+\vec{v}_2)=h(\vec{v}_1)+h(\vec{v}_2)=\vec{w}_1+\vec{w}_2=\vec{w}_3$.
-That is, the sum of a ``$\vec{w}_1$~vector'' with a
-``$\vec{w}_2$~vector'' is mapped by $h$ to $\vec{w}_3$. 
+equals a $\vec{v}_3\in h^{-1}(\vec{w}_3)$:
+a quadratic with an $x$~coefficient of $1$ 
+plus a quadratic with an $x$~coefficent of $-1$
+equals a quadratic with an $x$~coefficient of~$0$.
+That is, a ``$\vec{w}_1$~vector'' plus a
+``$\vec{w}_2$~vector'' is a ``$\vec{w}_3$~vector.'' 
+\end{frame}
+
+
+
+\begin{frame}
+In each of those examples, because there is a homomorphism
+$\map{h}{V}{W}$ we can view the domain $V$ as organized into the 
+inverse images $h^{-1}(\vec{w})$ for each $\vec{w}\in\rangespace{h}$.
+
+It is ``organized'' because these inverse image sets 
+reflect the structure of the range
+in that a ``$\vec{w}_1$~vector'' plus a ``$\vec{w}_2$~vector'' 
+equals a ``$\vec{w}_1+\vec{w}_2$~vector.''
+
+\pause
+Vector spaces have a distinguished element, namely $\vec{0}$.
+We next consider $h^{-1}(\zero)$.
 \end{frame}
 
 
@@ -611,14 +663,44 @@ That is, the sum of a ``$\vec{w}_1$~vector'' with a
 \df[df:NullSpace]
 \ExecuteMetaData[../map2.tex]{df:NullSpace}
 
+\centergraphic{../ch3.10}
 \pause
-\medskip
 \no 
 Strictly, the nullspace of the codomain is not $\zero_{W}$, it is 
 $\set{\zero_{W}}$.
-Thus the nullspace should properly be
-given as $h^{-1}(\set{\zero_{W}})$.
-But authors often state it as above.
+Thus we should perhaps write the nullspace 
+as $h^{-1}(\set{\zero_{W}})$.
+
+But we have defined the two sets $h^{-1}(\vec{w})$
+and $h^{-1}(\set{\vec{w}})$ to be equal
+and writing it the first way is easier.
+
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex
+The derivative function $\map{d/dx}{\polyspace_2}{\polyspace_1}$
+is linear.
+\begin{equation*}
+  \nullspace{d/dx}=\set{ax^2+bx+c \suchthat
+                                  2ax+b=0}
+\end{equation*}
+The polynomial $ax+b$ equals the zero polynomial
+only if they have the same constant coefficient (which implies that 
+$b=0$), 
+the same coefficient of~$x$ (which implies that $a=0$), and the same
+coefficient of~$x^2$ (which gives no restriction).
+Thus the nullspace is this, and the nullity is $1$. 
+\begin{equation*}
+  \nullspace{d/dx}=\set{ax^2+bx+c \suchthat
+                                  a=0,\, b=0,\, c\in\Re}
+                  =\set{c\suchthat c\in\Re}
+\end{equation*}
+
 \end{frame}
 
 

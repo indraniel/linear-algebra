@@ -96,3 +96,20 @@ struct HSL {
     return rgb(r,g,b);
   }
 }
+
+
+// vec_outline  draw a vector's outline, filled in white
+// usage:
+//   pen inverse_image_pen=linecap(1)
+//                         +linewidth(1.5pt);
+//   pen inverse_image_fill_pen=linecap(1)
+//                              +linewidth(1pt);
+//   path vec=(0,0)--(2,0);
+//   picture p=vec_outline(vec,inverse_image_pen+color,inverse_image_fill_pen+white);
+//  add(p);
+picture vec_outline(path p, pen exterior, pen interior) {
+  picture pic;
+  draw(pic,p,exterior,arrow=Arrow(DefaultHead,VECTORHEADSIZE),PenMargin(-1,0));
+  draw(pic,p,interior,arrow=Arrow(DefaultHead,VECTORHEADSIZE),PenMargin(-3/4,1/4));
+  return pic;
+}
