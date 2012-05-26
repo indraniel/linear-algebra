@@ -10,10 +10,10 @@ The equation
   =h(c_1\cdot\vec{\beta}_1+\dots+c_n\cdot\vec{\beta}_n)
   =c_1\cdot h(\vec{\beta}_1)+\dots +c_n\cdot h(\vec{\beta}_n)
 \tag*{}\end{equation*}
-describes how
-from the value of the map on the vectors $\vec{\beta}_i$ in a basis we
-can extend linearly to 
-get the value of the map on any vector $\vec{v}$ at all.
+describes how we get the value of the map on any vector $\vec{v}$
+by starting 
+from the value of the map on the vectors $\vec{\beta}_i$ in a basis 
+and extending linearly.
 % We just need to  
 % find the $c$'s to express $\vec{v}$ with respect to the basis.
 
@@ -64,8 +64,9 @@ with this action.
     \mapsunder{h}
   \colvec[r]{1 \\ 2 \\ 0}
 \end{equation*}
-To compute the action of this map on any vector at all from the domain,
-we first express $h(\vec{\beta}_1)$
+To compute the action of this map on any vector at all from the domain
+we first express, with respect to the codomain's basis, 
+$h(\vec{\beta}_1)$
 \begin{equation*}
   \colvec[r]{1 \\ 1 \\ 1}=
          0\colvec[r]{1 \\ 0 \\ 0}
@@ -74,7 +75,7 @@ we first express $h(\vec{\beta}_1)$
   \quad\text{so}\quad
    \rep{ h(\vec{\beta}_1) }{D}=\colvec[r]{0 \\ -1/2 \\ 1}_D           
 \end{equation*}
-and $h(\vec{\beta}_2)$
+and $h(\vec{\beta}_2)$.
 \begin{equation*}
   \colvec[r]{1 \\ 2 \\ 0}=
         1\colvec[r]{1 \\ 0 \\ 0}
@@ -83,7 +84,6 @@ and $h(\vec{\beta}_2)$
   \quad\text{so}\quad
   \rep{ h(\vec{\beta}_2) }{D}=\colvec[r]{1 \\ -1 \\ 0}_D
 \end{equation*}
-with respect to the codomain's basis.
 Then for any member $\vec{v}$ of the domain
 we can compute $h(\vec{v})$ using the $h(\vec{\beta}_i)$'s.
 \begin{align*}
@@ -151,6 +151,7 @@ representing the $h(\vec{\beta}_i)$'s.
 \end{equation*}
 
 \begin{definition} \label{def:MatRepMap}
+%<*df:MatRepMap>
 Suppose that \( V \) and \( W \) are vector spaces of dimensions \( n \) and
 \( m \) with bases \( B \) and \( D \),
 and that \( \map{h}{V}{W} \) is a linear map.
@@ -171,6 +172,7 @@ then
 is the \definend{matrix representation of \( h \) with respect to \( B, D \)}.%
 \index{representation!of a matrix}\index{matrix!representation}%
 \index{homomorphism!matrix representing}
+%</df:MatRepMap>
 \end{definition}
 
 \noindent In that matrix the number of columns~$n$ is the 
@@ -224,6 +226,7 @@ shows that this is the matrix representing $h$ with respect to the bases.
 \end{example}
 
 \begin{theorem} \label{th:MatMultRepsFuncAppl}
+%<*th:MatMultRepsFuncAppl>
 Assume that \( V \) and \( W \) are vector spaces
 of dimensions \( n \) and \( m \)
 with bases \( B \) and \( D \),
@@ -245,15 +248,18 @@ then the representation of the image of $\vec{v}$ is this.
           \vdots \\
           h_{m,1}c_1+h_{m,2}c_2+\dots+h_{m,n}c_n}_D
 \end{equation*}
+%</th:MatMultRepsFuncAppl>
 \end{theorem}
 
 \begin{proof}
-This formalizes \nearbyexample{ex:TypLinMapRepByMat}; 
-see \nearbyexercise{exer:MatVecMultRepLinMap}.
+%<*pf:MatMultRepsFuncAppl>
+This formalizes \nearbyexample{ex:TypLinMapRepByMat}.
+See \nearbyexercise{exer:MatVecMultRepLinMap}.
+%</pf:MatMultRepsFuncAppl>
 \end{proof}
 
-\begin{definition}
-\label{def:MatrixVecProd}
+\begin{definition} \label{def:MatrixVecProd}
+%<*df:MatrixVecProd>
 The \definend{matrix-vector product}\index{multiplication!matrix-vector}%
 \index{matrix!matrix-vector product}
 of a \( \nbym{m}{n} \) matrix and a
@@ -267,6 +273,7 @@ of a \( \nbym{m}{n} \) matrix and a
              \vdots \\ 
              a_{m,1}c_1+a_{m,2}c_2+\dots+a_{m,n}c_n}
 \end{equation*}
+%</df:MatrixVecProd>
 \end{definition}
 
 % the product of the matrix $\rep{h}{B,D}$ with the vector $\rep{\vec{v}}{B}$ 
@@ -1870,13 +1877,15 @@ there are no other limitations:~the
 \( \nbym{2}{3} \) matrix represents a map from any
 three-dimensional space to any two-dimensional space. 
 
-\begin{theorem}
-\label{th:MatIsLinMap}\index{homomorphism!matrix representing}
+\begin{theorem} \label{th:MatIsLinMap}\index{homomorphism!matrix representing}
+%<*th:MatIsLinMap>
 Any matrix represents a homomorphism between vector spaces of
 appropriate dimensions, with respect to any pair of bases.
+%</th:MatIsLinMap>
 \end{theorem}
 
 \begin{proof}
+%<*pf:MatIsLinMap0>
 For the matrix
 \begin{equation*}
   H=\generalmatrix{h}{n}{m}
@@ -1886,6 +1895,8 @@ fix any \( n \)-dimensional domain space $V$ and  any
 Also fix bases
 \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and
 \( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \) for those spaces.
+%</pf:MatIsLinMap0>
+%<*pf:MatIsLinMap1>
 Define a function \( \map{h}{V}{W} \) by:~where $\vec{v}$ in the domain
 has the representation
 \begin{equation*}
@@ -1908,9 +1919,11 @@ $(h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
   (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
 (This is well-defined by the uniqueness of the representation  
 \( \rep{\vec{v}}{B} \).)
+%</pf:MatIsLinMap1>
 
+%<*pf:MatIsLinMap2>
 Observe that the definition simply makes \( h \) 
-the map is represented with respect to \( B,D \) by the matrix \( H \).
+the map that is represented with respect to \( B,D \) by the matrix \( H \).
 So to finish we need only check that the defined map \( h \) is linear.
 If $\vec{v}, \vec{u}\in V$ are such that
 \begin{equation*}
@@ -1927,7 +1940,8 @@ and \( c,d\in\Re \) then the calculation
          +h_{m,n}(cv_n+du_n)\bigr)\cdot\vec{\delta}_m  \\
   &=c\cdot h(\vec{v})+d\cdot h(\vec{u})
 \end{align*}
-supplies this check.
+supplies that check.
+%</pf:MatIsLinMap2>
 \end{proof}
 
 \begin{example} \label{ex:CngBasesChgMap}
@@ -2003,11 +2017,14 @@ give us information
 about the associated maps.
 
 \begin{theorem} \label{th:RankMatEqRankMap}
+%<*th:RankMatEqRankMap>
 \index{rank}\index{homomorphism!rank}\index{matrix!rank}
 The rank of a matrix equals the rank of any map that it represents.
+%</th:RankMatEqRankMap>
 \end{theorem}
 
 \begin{proof}
+%<*pf:RankMatEqRankMap0>
 Suppose that the matrix \( H \) is \( \nbym{m}{n} \). 
 Fix domain and codomain spaces $V$ and $W$ of dimension $n$ and~$m$ with
 bases \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and \( D \).
@@ -2022,11 +2039,15 @@ to these bases whose range space
 \end{align*}
 is the span $\spanof{\set{h(\vec{\beta}_1),\dots,h(\vec{\beta}_n)}}$.
 The rank of the map $h$ is the dimension of this range space.
+%</pf:RankMatEqRankMap0>
 
+%<*pf:RankMatEqRankMap1>
 The rank of the matrix is the dimension of its column space,
 the span of the set of its columns
 $\spanof{\set{\rep{h(\vec{\beta}_1)}{D},\dots,\rep{h(\vec{\beta}_n)}{D}}}$.
+%</pf:RankMatEqRankMap1>
 
+%<*pf:RankMatEqRankMap2>
 To see that the two spans have the same dimension, recall 
 from the proof of Lemma~I.\ref{lem:EqDimImpIso} that if we fix a basis then
 representation with respect to that basis gives an isomorphism 
@@ -2034,13 +2055,14 @@ $\map{\mbox{Rep}_D}{W}{\Re^m}$.
 Under this isomorphism there is a linear relationship among members of the
 range space if and only if the same relationship holds in the
 column space, e.g,
-$\zero=c_1h(\vec{\beta}_1)+\dots+c_nh(\vec{\beta}_n)$ if and only if
-$\zero=c_1\rep{h(\vec{\beta}_1)}{D}+\dots+c_n\rep{h(\vec{\beta}_n)}{D}$.
+$\zero=c_1\cdot h(\vec{\beta}_1)+\dots+c_n\cdot h(\vec{\beta}_n)$ if and only if
+$\zero=c_1\cdot\rep{h(\vec{\beta}_1)}{D}+\dots+c_n\cdot\rep{h(\vec{\beta}_n)}{D}$.
 Hence, a subset of the range space is linearly independent if and only if the
 corresponding subset of the column space is linearly independent.
 Therefore the size of the largest linearly independent subset of the
 range space equals the size of the largest linearly independent subset of the
 column space, and so the two spaces have the same dimension.
+%</pf:RankMatEqRankMap2>
 \end{proof}
 
 \begin{example}
@@ -2061,14 +2083,17 @@ any map represented by this matrix has a two-dimensional range space.
 \end{example}
 
 \begin{corollary} \label{cor:MatDescsMap}
+%<*co:MatDescsMap>
 Let $h$ be a linear map represented by a matrix $H$.
 Then $h$ is onto if and only if the rank of $H$ equals the number 
 of its rows, 
 and $h$ is one-to-one if and only if the rank of $H$ equals the number of
 its columns.
+%</co:MatDescsMap>
 \end{corollary}
 
 \begin{proof}
+%<*pf:MatDescsMap0>
 For the onto half, the dimension of the range space of $h$ is the rank of $h$,
 which equals the rank of $H$ by the theorem.
 Since the dimension of the codomain of $h$ equals the number of rows in $H$,
@@ -2081,7 +2106,9 @@ of the codomain
 whose size is equal to the dimension of the codomain, and thus so this 
 basis for the range space must also be 
 a basis for the codomain).
+%</pf:MatDescsMap0>
 
+%<*pf:MatDescsMap1>
 For the other half, 
 a linear map is one-to-one if and only if it is an isomorphism
 between its domain and its range, that is, if and only if its domain has the
@@ -2089,17 +2116,20 @@ same dimension as its range.
 But the number of columns in $h$ is the dimension of $h$'s domain, and
 by the theorem the rank of $H$ equals the dimension of 
 $h$'s range.
+%</pf:MatDescsMap1>
 \end{proof}
 
 The above results settle the apparent ambiguity in our use of the same
 word `rank' to apply both to matrices and to maps.
 
-\begin{definition}
+\begin{definition}  \label{df:NonsingularMap}
+%<*df:NonsingularMap>
 A linear map that is one-to-one and onto is 
 \definend{nonsingular}\index{homomorphism!nonsingular}%
 \index{nonsingular!homomorphism}, otherwise it is 
 \definend{singular}\index{homomorphism!singular}%
 \index{singular!homomorphism}.
+%</df:NonsingularMap>
 \end{definition}
 
 \begin{remark}
@@ -2118,10 +2148,12 @@ The next result justifies our dual use of the term.
 \begin{corollary} \label{cor:NonsingMatIffNonsingMap}
 \index{homomorphism!nonsingular}\index{matrix!nonsingular}
 \index{nonsingular}
+%<*co:NonsingMatIffNonsingMap>
 A square matrix represents nonsingular maps if and only if it is a nonsingular
 matrix.
 Thus, a matrix represents isomorphisms if and only if it is square and
 nonsingular. 
+%</co:NonsingMatIffNonsingMap>
 \end{corollary}
 
 \begin{proof}
