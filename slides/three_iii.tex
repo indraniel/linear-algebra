@@ -59,7 +59,6 @@ the domain.
 Now for any linear map $\map{h}{V}{W}$ consider the 
 action of $h$ on the basis elements
 $h(\vec{\beta}_1)$, \ldots, $h(\vec{\beta}_n)$. 
-
 \pause
 Using those, we can calculate 
 the action of $h$ on any $\vec{v}\in V$.
@@ -70,7 +69,7 @@ the action of $h$ on any $\vec{v}\in V$.
 \end{equation*}
 This section develops a scheme to easily do those calculations.
 
-\pause
+\pause\medskip
 \ex
 Let the domain be $V=\polyspace_2$ with the basis
 $B_{V}=\sequence{1,1+x,1+x+x^2}$.
@@ -85,7 +84,7 @@ We are developing a scheme to compute the action of this map $h$
 on any member 
 $\vec{v}=c_1\cdot\vec{\beta}_1+c_2\cdot\vec{\beta}_2+c_3\cdot\vec{\beta}_3$
 of the domain.
-Specifically, we want to detail the mechanics of calculating
+We want to detail the mechanics of calculating
 $\rep{h(\vec{v})}{B_{w}}$ from the 
 $\rep{h(\vec{\beta}_i)}{B_{V}}$.
 \end{frame}
@@ -177,6 +176,10 @@ input vector.
 \begin{frame}{Matrix representation of a linear map}
 \df[def:MatRepMap]
 \ExecuteMetaData[../map3.tex]{df:MatRepMap}
+
+\pause
+\medskip
+We often omit the subscript on the matrix.
 \end{frame}
 \begin{frame}
 \ex
@@ -347,6 +350,82 @@ $\rep{\pi(\vec{v})}{D}$ and $\rep{\pi(\vec{v})}{\stdbasis_{2}}$.
 \section{Any Matrix Represents a Linear Map}
 %..........
 \begin{frame}
+\ex
+The prior subsection shows how to start with a linear map and produce its matrix
+representation.
+Suppose instead that we start with a matrix.
+\begin{equation*}
+  M=\begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+\end{equation*}
+We want to check that its application represents a linear map.
+\pause
+Fix a domain and codomain, and bases.
+\begin{equation*}
+  \stdbasis_2\subset\Re^2
+  \quad
+  \sequence{1-x,1+x}\subset\polyspace_1
+\end{equation*}
+We will produce a function $\map{m}{\Re^2}{\polyspace_1}$
+that is represented by the matrix $M$ with respect to these bases.
+Then we will verify that $m$ is linear.
+
+\pause
+We define $m$ in this way: 
+first represent $\vec{u}, \vec{v}\in\Re^2$ with respect to the domain basis,
+then multiply by $M$, and then take the resulting representations
+with respect to the codomain basis and covert over to members of the codomain.
+\pause
+Note that there is one and only one function~$m$ defined in this way, because
+the representation of a vector with respect to a basis can be done in
+one and only one way.
+\end{frame}
+\begin{frame}
+Now we will show that the map is linear 
+$m(c\cdot\vec{u}+d\cdot\vec{v})=c\cdot m(\vec{u})+d\cdot m(\vec{v})$.
+Let $\vec{u},\vec{v}\in\Re^2$ be elements of the domain. 
+Because the domain basis is $\stdbasis_2$ 
+the vectors are represented by themselves.
+We multiply by $M$.
+\begin{align*}
+  \begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+  \left(c\cdot\colvec{u_1 \\ u_2}+d\cdot\colvec{v_1 \\ v_2}\right)
+  &=
+  \begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}                              
+  \colvec{cu_1+dv_1 \\ cu_2+dv_2}    \\
+  &=
+  \colvec{1(cu_1+dv_1)+2(cu_2+dv_2) \\ 3(cu_1+dv_1)+4(cu_2+dv_2)}   \\ 
+  &=
+  \colvec{1cu_1+2cu_2 \\ 3cu_1+4cu_2}  
+  +
+  \colvec{1dv_1+2dv_2 \\ 3dv_1+4dv_2}     \\              
+  &=
+  c\cdot\begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+  \colvec{u_1 \\ u_2}
+  +
+  d\cdot\begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+  \colvec{v_1 \\ v_2}
+\end{align*}
+The result is $c\cdot\rep{m(\vec{u})}{D}+d\rep{m(\vec{v})}{D}$.
+We finish by using the basis $D$ for the codomain to convert the representations
+to vectors in~$\polyspace_1$.
+\end{frame}
+
+\begin{frame}
 \th[th:MatIsLinMap]
 \ExecuteMetaData[../map3.tex]{th:MatIsLinMap}
 \pause
@@ -371,11 +450,11 @@ $\rep{\pi(\vec{v})}{D}$ and $\rep{\pi(\vec{v})}{\stdbasis_{2}}$.
 \pause
 \pf
 \ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap0}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap1}
 
 \pause
+\ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap1}
+\end{frame}
+\begin{frame}
 \ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap2}
 \qed
 \end{frame}
@@ -414,7 +493,7 @@ $\rep{\pi(\vec{v})}{D}$ and $\rep{\pi(\vec{v})}{\stdbasis_{2}}$.
 \ExecuteMetaData[../map3.tex]{co:NonsingMatIffNonsingMap}
 \pause
 \pf
-Immediate from the prior result
+Immediate from the prior result.
 \qed
 \end{frame}
 
