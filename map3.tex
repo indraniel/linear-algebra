@@ -2129,15 +2129,15 @@ A linear map that is one-to-one and onto is
 \index{nonsingular!homomorphism}, otherwise it is 
 \definend{singular}\index{homomorphism!singular}%
 \index{singular!homomorphism}.
+That is, a linear map is nonsingular if and only if it is an isomorphism.
 %</df:NonsingularMap>
 \end{definition}
 
 \begin{remark}
 Some authors use `nonsingular' as a synonym for one-to-one  
-while others use it the way that we have here, as a synonym for
-isomorphism.
-The difference is slight because a one-to-one map is onto its
-range space.
+while others use it the way that we have here.
+The difference is slight because any map is onto its
+range space, so a one-to-one map is an isomorphism with its range.
 \end{remark}
 
 In the first chapter we defined a matrix to be nonsingular 
@@ -2145,19 +2145,83 @@ if it is square and is
 the matrix of coefficients of a linear system with a unique solution.
 The next result justifies our dual use of the term.
 
-\begin{corollary} \label{cor:NonsingMatIffNonsingMap}
+\begin{lemma} \label{cor:NonsingMatIffNonsingMap}
 \index{homomorphism!nonsingular}\index{matrix!nonsingular}
 \index{nonsingular}
 %<*co:NonsingMatIffNonsingMap>
+A nonsingular linear map is represented by a square matrix.
 A square matrix represents nonsingular maps if and only if it is a nonsingular
 matrix.
 Thus, a matrix represents isomorphisms if and only if it is square and
-nonsingular. 
+nonsingular.
 %</co:NonsingMatIffNonsingMap>
-\end{corollary}
+\end{lemma}
 
 \begin{proof}
-Immediate from the prior result.
+Assume that the map $\map{h}{V}{W}$ is nonsingular.
+\nearbycorollary{cor:MatDescsMap} says that
+for any matrix $H$ representing that map, because $h$ is onto the number of rows
+of $H$ equals the rank of $H$ 
+and because $h$ is one-to-one the number of columns of~$H$
+is also equal to the rank of~$H$.
+Thus $H$ is square. 
+
+Next assume that $H$ is square, $\nbyn{n}$.
+For any map~$\map{h}{V}{W}$ represented by this matrix with respect to 
+some $B,D$, 
+the dimension of the domain~$V$ 
+equals the number of columns in~$H$ and the dimension of the codomain~$W$ 
+equals the number of rows, so each is~$n$. 
+
+
+As in the proof of \nearbytheorem{th:MatIsLinMap},
+we note that each $\vec{v}\in V$ is represented with respect to its basis
+$B$ by one and only one 
+column vector and 
+each $\vec{w}\in W$ is represented with respect to its basis $D$
+by one and only one column vector, 
+and then $h$ is the map whose action
+is: for any $\vec{v}\in V$ expressed with respect to $B$ as
+$\vec{v}=v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n$, then 
+$\vec{w}=h(\vec{v})$ is
+$(h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
+  +\dots+
+  (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
+That is, $h$ associates this domain vector $\vec{v}$ with this 
+codomain vector $\vec{w}$.
+\begin{equation*}
+  \rep{\vec{v}}{B}=\colvec{v_1 \\ \vdots \\ v_n}
+  \qquad
+  \rep{\vec{w}}{D}=\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n  \\ \vdots \\ h_{m,1}v_1+\dots+h_{m,n}v_n}
+   =H\vec{v}
+\end{equation*}
+We want to know when there is on and only one vector $\vec{v}$
+mapped by $h$ to $\vec{w}$,
+so we fix $\vec{w}$ ask if there is a representatation of a $\vec{v}$
+associated by $H$ with the representation of $\vec{w}$.
+That is, we consider the linear system
+defined by the matrix-vector product
+\begin{equation*}
+  H\cdot\rep{\vec{v}}{B}=\rep{\vec{w}}{D}
+  \qquad
+  \begin{linsys}{3}
+    h_{1,1}v_1 &+ &\cdots &+ &h_{1,n}v_n &= &w_1  \\
+    h_{2,1}v_1 &+ &\cdots &+ &h_{2,n}v_n &= &w_2  \\
+             &  &        & &          &\vdotswithin{=} & \\
+    h_{n,1}v_1 &+ &\cdots &+ &h_{n,n}v_n &= &w_n
+  \end{linsys}
+\end{equation*}
+where the $w_i$ are fixed and
+the $v_j$ are unknowns.
+Now, $H$ is nonsingular if and only if 
+for all $w_1$, \ldots, $w_n$ this system has a solution and the 
+solution is unique.
+This is true if and only if the map $h$ is onto and one-to-one
+(if the system has a solution for each $n$-tuple $w_1$, \ldots, $w_n$ 
+then the map is onto and
+if the system has no more than one solution for each $n$-tuple then $h$
+is one-to-one).
+This is true if and only if $h$ is an isomorphism. 
 \end{proof}
 
 \begin{example}
@@ -2663,7 +2727,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
     with respect to those bases, the map is represented by a diagonal matrix 
     with no zeroes on the diagonal.
     \begin{answer}
-      This is immediate from \nearbycorollary{cor:NonsingMatIffNonsingMap}.
+      This is immediate from \nearbylemma{cor:NonsingMatIffNonsingMap}.
     \end{answer}
   \item 
     Describe geometrically the action on \( \Re^2 \) of

@@ -445,6 +445,41 @@ to vectors in~$\polyspace_1$.
 
 %..........
 \begin{frame}
+We will close this subsection by connecting properties of a linear map
+with properties of any associated matrix.
+
+\ex
+We claim that a map $\map{h}{V}{W}$ is the zero map if and only
+if it is represented, with respect to any bases, by the zero matrix.
+
+\pause
+First assume it is the zero map.
+Then for any bases $B,D$ we have $h(\vec{\beta}_i)=\zero_W$, which is 
+represented with respect to $D$ by the zero vector.
+Thus $h$ is represented by the zero matrix.
+
+\pause
+Now assume that there are bases $B,D$ such that $\rep{h}{B,D}$ is the zero
+matrix.
+Then for each $\vec{\beta}_i$ we have that $\rep{h(\vec{\beta}_1)}{D}$ is a
+column vector of zeros, and so $h(\vec{\beta}_i)$ is $\zero_W$.
+Extending linearly, we have that $h$ maps each $\vec{v}\in V$ to $\zero_W$,
+and $h$ is the zero map.  
+
+\pause
+\medskip
+One thing this example does not illustrate is that typically a linear map
+will have many different matrices representing it, with respect to 
+the many different pairs of bases~$B,D$.
+A matrix property that derives from the map will be shared across
+all these representing matrices. 
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
 \th[th:RankMatEqRankMap]
 \ExecuteMetaData[../map3.tex]{th:RankMatEqRankMap}
 \pause
@@ -457,6 +492,52 @@ to vectors in~$\polyspace_1$.
 \begin{frame}
 \ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap2}
 \qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex 
+The range of the linear transformation $\map{t}{\Re^2}{\Re^2}$
+given by
+\begin{equation*}
+  \colvec{a \\ b}\mapsto\colvec{2a-b \\ 2a-b}
+\end{equation*}
+is the line~$x=y$.
+Thus the map $t$'s rank is~$1$.
+
+Represent $t$ first with respect the standard bases $\stdbasis_2,\stdbasis_2$
+and then with respect to these.
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1}, \colvec{-1 \\ 1}},
+  \,
+  D=\sequence{\colvec{1/2 \\ 0}, \colvec{0 \\ 1/3}}
+\end{equation*}
+The standard basis case is easy.  This is the other calculation.
+\begin{equation*}
+  \rep{\colvec{1 \\ 1}}{D}=\colvec{2 \\ 3}
+  \quad
+  \rep{\colvec{-3 \\ -3}}{D}=\colvec{-6 \\ -9}
+\end{equation*}
+\pause
+We end with these two representations, matrices of rank~$1$.
+\begin{equation*}
+  \rep{t}{\stdbasis_2,\stdbasis_2}
+  =
+  \begin{mat}
+    2  &-1  \\
+    2  &-1  
+  \end{mat}
+  \qquad
+  \rep{t}{}
+  =
+  \begin{mat}
+    2  &-6  \\
+    3  &-9  
+  \end{mat}
+\end{equation*}
 \end{frame}
 
 
