@@ -2867,6 +2867,99 @@ if the vectors of \( a \)'s form a basis.
       \end{exparts}  
     \end{answer}
   \recommended \item  
+    Decide if the vector is in the column space of the matrix.
+    \begin{exparts*}
+      \partsitem \( \begin{mat}[r]
+                   2  &1  \\
+                   2  &5
+                 \end{mat} \),~\( \colvec[r]{1 \\ -3}  \)
+      \partsitem \( \begin{mat}[r]
+                   4  &-8 \\
+                   2  &-4
+                 \end{mat} \),~\( \colvec[r]{0 \\ 1}  \)
+      \partsitem \( \begin{mat}[r]
+                   1  &-1  &1  \\
+                   1  &1   &-1 \\
+                  -1  &-1  &1
+                \end{mat} \),~\( \colvec[r]{2 \\ 0 \\ 0}  \)
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem Yes;
+          we are asking if there are scalars \( c_1 \) and \( c_2 \) such that
+          \begin{equation*}
+            c_1\colvec[r]{2 \\ 2}+c_2\colvec[r]{1 \\ 5}=\colvec[r]{1 \\ -3}
+          \end{equation*}
+          which gives rise to a linear system
+          \begin{equation*}
+            \begin{linsys}{2}
+              2c_1  &+  &c_2  &=  &1  \\
+              2c_1  &+  &5c_2 &=  &-3
+            \end{linsys}
+            \;\grstep{-\rho_1+\rho_2}\;
+            \begin{linsys}{2}
+              2c_1  &+  &c_2  &=  &1  \\
+                    &   &4c_2 &=  &-4
+            \end{linsys}
+          \end{equation*}
+          and Gauss' method produces \( c_2=-1 \) and \( c_1=1 \). 
+          That is, there is indeed such a pair of scalars and so the vector
+          is indeed in the column space of the matrix.
+        \partsitem No;
+          we are asking if there are scalars $c_1$ and $c_2$
+          such that 
+          \begin{equation*}
+            c_1\colvec[r]{4 \\ 2}+c_2\colvec[r]{-8 \\ -4}=\colvec[r]{0 \\ 1}
+          \end{equation*}
+          and one way to proceed is to consider the resulting linear system
+          \begin{equation*}
+            \begin{linsys}{2}
+              4c_1  &-  &8c_2  &=  &0  \\
+              2c_1  &-  &4c_2  &=  &1
+            \end{linsys}
+          \end{equation*}
+          that is easily seen to have no solution.
+          Another way to proceed is to note
+          that any linear combination of the columns on the left
+          has a second component half as big as its first component, 
+          but the  vector on the right does not meet that criterion.
+        \partsitem Yes; we can simply observe that the vector
+          is the first column minus the second.
+          Or, failing that, setting up the relationship among the columns 
+          \begin{equation*}
+            c_1\colvec[r]{1 \\ 1 \\ -1}
+             +c_2\colvec[r]{-1 \\ 1 \\ -1}
+             +c_3\colvec[r]{1 \\ -1 \\ 1}
+             =\colvec[r]{2 \\ 0 \\ 0}
+          \end{equation*}
+          and considering the resulting linear system
+          \begin{equation*}
+            \begin{linsys}{3}
+              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
+              c_1  &+  &c_2  &-  &c_3  &=  &0  \\
+             -c_1  &-  &c_2  &+  &c_3  &=  &0    
+            \end{linsys}
+            \;\grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+            \begin{linsys}{3}
+              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
+                   &   &2c_2 &-  &2c_3 &=  &-2  \\
+                   &   &-2c_2&+  &2c_3 &=  &2    
+            \end{linsys}
+            \;\grstep{\rho_2+\rho_3}\;
+            \begin{linsys}{3}
+              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
+                   &   &2c_2 &-  &2c_3 &=  &-2  \\
+                   &   &     &   &0    &=  &0    
+            \end{linsys}
+          \end{equation*}
+          gives the additional information (beyond that there is at least one
+          solution) that there are infinitely many solutions.
+          Parametrizing gives $c_2=-1+c_3$ and $c_1=1$, and so taking $c_3$ to 
+          be zero gives a particular solution of $c_1=1$, $c_2=-1$, and
+          $c_3=0$ (which is, of course, the observation made at the start).
+      \end{exparts}  
+    \end{answer}
+  \recommended \item  
     Find a basis for the row space of this matrix.
     \begin{equation*}
       \begin{mat}[r]

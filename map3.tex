@@ -1851,31 +1851,119 @@ for any matrix there is an associated linear map.
 
 \subsectionoptional{Any Matrix Represents a Linear Map}
 
+%<*MapDefinedByMat0>
 The prior subsection shows that
 the action of a linear map $h$ is described by a matrix $H$,
 with respect to appropriate bases, in this way.
 \begin{equation*}
  \vec{v}=\colvec{v_1 \\ \vdots \\ v_n}_B
-  \;\overset{h}{\underset{H}{\longmapsto}}\;
+  \quad\overset{h}{\underset{H}{\longmapsto}}\quad
+  h(\vec{v})=
   \colvec{h_{1,1}v_1+\dots+h_{1,n}v_n \\ 
                      \vdots                      \\
                      h_{m,1}v_1+\dots+h_{m,n}v_n}_D
-  =h(\vec{v})
+  \tag{$*$}
 \end{equation*}
-In this subsection, we will show the converse, that
+Here we will show the converse, that
 each matrix represents a linear map.
+%</MapDefinedByMat0>
 
-Recall that, in the definition of the matrix representation of a linear map,
-the number of columns of the matrix is the dimension of the map's
-domain and the number of rows of the matrix is the dimension of the 
-map's codomain.
-Thus, for instance,
-a \( \nbym{2}{3} \) matrix cannot represent a map with domain \( \Re^5 \) 
-or codomain~\( \Re^4 \).
-The next result says that beyond this restriction on the dimensions 
-there are no other limitations:~the
-\( \nbym{2}{3} \) matrix represents a map from any
-three-dimensional space to any two-dimensional space. 
+%<*MapDefinedByMat1>
+So we start with a matrix
+\begin{equation*}
+  H=\generalmatrix{h}{n}{m}
+\end{equation*}
+and we will describe how it defines a map~$h$.
+We require that the map be represented by the matrix so 
+first note that in ($*$) the dimension of the map's domain is the
+number of columns~$n$ of the matrix 
+and the dimension of the codomain is the number of rows~$m$.
+Thus, for $h$'s domain 
+fix an \( n \)-dimensional vector space $V$ and for the
+codomain fix an \( m \)-dimensional space $W$.
+Also fix bases
+\( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and
+\( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \) for those spaces.
+%</MapDefinedByMat1>
+
+%<*MapDefinedByMat2>
+Now let \( \map{h}{V}{W} \) be:~where $\vec{v}$ in the domain
+has the representation
+\begin{equation*}
+  \rep{\vec{v}}{B}
+    =\colvec{v_1 \\ \vdots \\ v_n}_B
+\end{equation*}
+then its image \( h(\vec{v}) \) is the member the codomain 
+with this representation.
+\begin{equation*}
+  \rep{\,h(\vec{v})\,}{D}
+    =\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n \\ \vdots \\ 
+                   h_{m,1}v_1+\dots+h_{m,n}v_n}_D
+\end{equation*}
+That is, to compute the action of $h$ on 
+any $\vec{v}\in V$, first express $\vec{v}$ with respect to the
+basis
+$\vec{v}=v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n$ and then 
+$h(\vec{v})=
+ (h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
+  +\dots+
+  (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
+%</MapDefinedByMat2>
+
+%<*MapDefinedByMat3>
+Above we have made some arbitrary choices, for instance $V$ can be any
+$n$-dimensional space and $B$ could be any basis for $V$,
+so $H$ does not define a unique function.
+However, note also that  
+once we have fixed $V$, $B$, $W$, and $D$ then 
+$h$ is well-defined\appendrefs{well-defined}\spacefactor=1000
+since $\vec{v}$ has a unique representation with respect to the basis $B$
+by Theorem~II.\ref{th:BasisIffUniqueRepWRT} and the calculation of 
+$\vec{w}$ from its representation is also uniquely determined.
+%</MapDefinedByMat3>
+
+\begin{example}
+Consider this matrix.
+\begin{equation*}
+  H=
+  \begin{mat}
+    1 &2 \\
+    3 &4 \\
+    5 &6
+  \end{mat}
+\end{equation*}
+It is $\nbym{3}{2}$ so any map that it defines must carry a dimension~$2$
+domain to a dimension~$3$ codomain.
+Let the domain and codomain be $\Re^2$ and $\polyspace_2$, with these
+bases.
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1}, \colvec{1 \\ -1}}
+  \qquad
+  D=\sequence{x^2, x^2+x, x^2+x+1}
+\end{equation*}
+Let $\map{h}{\Re^2}{\polyspace_2}$ be the function defined by~$H$ and
+we will compute the image under $h$ of this member of the domain.
+\begin{equation*}
+  \vec{v}=\colvec{-3 \\ 2}
+\end{equation*}
+We have
+\begin{equation*}
+  \rep{h(\vec{v})}{D}
+  =H\cdot\rep{\vec{v}}{B}
+  =
+  \begin{mat}
+    1  &2  \\
+    3  &4  \\
+    5 &6
+  \end{mat}
+  \colvec{-1/2 \\ -5/2}
+  =\colvec{-11/2 \\ -23/2 \\ -35/2}
+\end{equation*}
+From its representation computation of $\vec{w}$ is routine
+$(-11/2)(x^2)-(23/2)(x^2+x)-(35/2)(x^2+x+1)
+=(-69/2)x^2-(58/2)x-(35/2)$.  
+\end{example}
+
 
 \begin{theorem} \label{th:MatIsLinMap}\index{homomorphism!matrix representing}
 %<*th:MatIsLinMap>
@@ -1885,46 +1973,9 @@ appropriate dimensions, with respect to any pair of bases.
 \end{theorem}
 
 \begin{proof}
-%<*pf:MatIsLinMap0>
-For the matrix
-\begin{equation*}
-  H=\generalmatrix{h}{n}{m}
-\end{equation*}
-fix any \( n \)-dimensional domain space $V$ and  any
-\( m \)-dimensional codomain space $W$.
-Also fix bases
-\( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \) and
-\( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \) for those spaces.
-%</pf:MatIsLinMap0>
-%<*pf:MatIsLinMap1>
-Define a function \( \map{h}{V}{W} \) by:~where $\vec{v}$ in the domain
-has the representation
-\begin{equation*}
-  \rep{\vec{v}}{B}
-    =\colvec{v_1 \\ \vdots \\ v_n}_B
-\end{equation*}
-then its image \( h(\vec{v}) \) is the member the codomain represented 
-in this way.
-\begin{equation*}
-  \rep{\,h(\vec{v})\,}{D}
-    =\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n \\ \vdots \\ 
-                   h_{m,1}v_1+\dots+h_{m,n}v_n}_D
-\end{equation*}
-That is, for any $\vec{v}$ in the domain, express it with respect to the
-basis as
-$\vec{v}=v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n$ and then 
-$h(\vec{v})$ is
-$(h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
-  +\dots+
-  (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
-(This is well-defined by the uniqueness of the representation  
-\( \rep{\vec{v}}{B} \).)
-%</pf:MatIsLinMap1>
-
-%<*pf:MatIsLinMap2>
-Observe that the definition simply makes \( h \) 
-the map that is represented with respect to \( B,D \) by the matrix \( H \).
-So to finish we need only check that the defined map \( h \) is linear.
+%</pf:MatIsLinMap>
+We must check that for any matrix $H$ and any domain and codomain bases $B,D$,
+the defined map \( h \) is linear.
 If $\vec{v}, \vec{u}\in V$ are such that
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ \vdots \\ v_n}
@@ -1941,12 +1992,13 @@ and \( c,d\in\Re \) then the calculation
   &=c\cdot h(\vec{v})+d\cdot h(\vec{u})
 \end{align*}
 supplies that check.
-%</pf:MatIsLinMap2>
+%</pf:MatIsLinMap>
 \end{proof}
 
 \begin{example} \label{ex:CngBasesChgMap}
-The map that the matrix represents depends on the domain and
-codomain bases that we choose.
+Even if the domain and codomain are the same, the map that the 
+matrix represents depends on the 
+bases that we choose.
 If
 \begin{equation*}
   H=
@@ -2145,19 +2197,20 @@ if it is square and is
 the matrix of coefficients of a linear system with a unique solution.
 The next result justifies our dual use of the term.
 
-\begin{lemma} \label{cor:NonsingMatIffNonsingMap}
+\begin{lemma} \label{le:NonsingMatIffNonsingMap}
 \index{homomorphism!nonsingular}\index{matrix!nonsingular}
 \index{nonsingular}
-%<*co:NonsingMatIffNonsingMap>
+%<*le:NonsingMatIffNonsingMap>
 A nonsingular linear map is represented by a square matrix.
 A square matrix represents nonsingular maps if and only if it is a nonsingular
 matrix.
 Thus, a matrix represents isomorphisms if and only if it is square and
 nonsingular.
-%</co:NonsingMatIffNonsingMap>
+%</le:NonsingMatIffNonsingMap>
 \end{lemma}
 
 \begin{proof}
+%<*pf:NonsingMatIffNonsingMap0>
 Assume that the map $\map{h}{V}{W}$ is nonsingular.
 \nearbycorollary{cor:MatDescsMap} says that
 for any matrix $H$ representing that map, because $h$ is onto the number of rows
@@ -2165,64 +2218,22 @@ of $H$ equals the rank of $H$
 and because $h$ is one-to-one the number of columns of~$H$
 is also equal to the rank of~$H$.
 Thus $H$ is square. 
+%</pf:NonsingMatIffNonsingMap0>
 
+%<*pf:NonsingMatIffNonsingMap1>
 Next assume that $H$ is square, $\nbyn{n}$.
-For any map~$\map{h}{V}{W}$ represented by this matrix with respect to 
-some $B,D$, 
-the dimension of the domain~$V$ 
-equals the number of columns in~$H$ and the dimension of the codomain~$W$ 
-equals the number of rows, so each is~$n$. 
-
-
-As in the proof of \nearbytheorem{th:MatIsLinMap},
-we note that each $\vec{v}\in V$ is represented with respect to its basis
-$B$ by one and only one 
-column vector and 
-each $\vec{w}\in W$ is represented with respect to its basis $D$
-by one and only one column vector, 
-and then $h$ is the map whose action
-is: for any $\vec{v}\in V$ expressed with respect to $B$ as
-$\vec{v}=v_1\vec{\beta}_1+\dots+v_n\vec{\beta}_n$, then 
-$\vec{w}=h(\vec{v})$ is
-$(h_{1,1}v_1+\dots+h_{1,n}v_n)\cdot\vec{\delta}_1
-  +\dots+
-  (h_{m,1}v_1+\dots+h_{m,n}v_n)\cdot\vec{\delta}_m$.
-That is, $h$ associates this domain vector $\vec{v}$ with this 
-codomain vector $\vec{w}$.
-\begin{equation*}
-  \rep{\vec{v}}{B}=\colvec{v_1 \\ \vdots \\ v_n}
-  \qquad
-  \rep{\vec{w}}{D}=\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n  \\ \vdots \\ h_{m,1}v_1+\dots+h_{m,n}v_n}
-   =H\vec{v}
-\end{equation*}
-We want to know when there is on and only one vector $\vec{v}$
-mapped by $h$ to $\vec{w}$,
-so we fix $\vec{w}$ ask if there is a representatation of a $\vec{v}$
-associated by $H$ with the representation of $\vec{w}$.
-That is, we consider the linear system
-defined by the matrix-vector product
-\begin{equation*}
-  H\cdot\rep{\vec{v}}{B}=\rep{\vec{w}}{D}
-  \qquad
-  \begin{linsys}{3}
-    h_{1,1}v_1 &+ &\cdots &+ &h_{1,n}v_n &= &w_1  \\
-    h_{2,1}v_1 &+ &\cdots &+ &h_{2,n}v_n &= &w_2  \\
-             &  &        & &          &\vdotswithin{=} & \\
-    h_{n,1}v_1 &+ &\cdots &+ &h_{n,n}v_n &= &w_n
-  \end{linsys}
-\end{equation*}
-where the $w_i$ are fixed and
-the $v_j$ are unknowns.
-Now, $H$ is nonsingular if and only if 
-for all $w_1$, \ldots, $w_n$ this system has a solution and the 
-solution is unique.
-This is true if and only if the map $h$ is onto and one-to-one
-(if the system has a solution for each $n$-tuple $w_1$, \ldots, $w_n$ 
-then the map is onto and
-if the system has no more than one solution for each $n$-tuple then $h$
-is one-to-one).
-This is true if and only if $h$ is an isomorphism. 
+The matrix~$H$ is nonsingular if and only if its row rank is~$n$,
+which is true if and only if $H$'s rank is~$n$ 
+by Theorem~Two.III.\ref{th:RowRankEqualsColumnRank},
+which is true if and only if $h$'s rank is~$n$
+by \nearbytheorem{th:RankMatEqRankMap},
+which is true if and only if $h$ is an isomorphism 
+by Theorem~I.\ref{th:NDimSpaceIsoRN}.
+(The last holds because the domain of $h$ is $n$-dimensional as it is the
+number of columns in $H$.)
+%</pf:NonsingMatIffNonsingMap1>
 \end{proof}
+
 
 \begin{example}
 Any map from \( \Re^2 \) to \( \polyspace_1 \) represented 
@@ -2263,99 +2274,45 @@ And, we shall see how to find the matrix that represents a map's inverse.
 
 
 \begin{exercises}
-  \recommended \item  
-    Decide if the vector is in the column space of the matrix.
-    \begin{exparts*}
-      \partsitem \( \begin{mat}[r]
-                   2  &1  \\
-                   2  &5
-                 \end{mat} \),~\( \colvec[r]{1 \\ -3}  \)
-      \partsitem \( \begin{mat}[r]
-                   4  &-8 \\
-                   2  &-4
-                 \end{mat} \),~\( \colvec[r]{0 \\ 1}  \)
-      \partsitem \( \begin{mat}[r]
-                   1  &-1  &1  \\
-                   1  &1   &-1 \\
-                  -1  &-1  &1
-                \end{mat} \),~\( \colvec[r]{2 \\ 0 \\ 0}  \)
-    \end{exparts*}
-    \begin{answer}
-      \begin{exparts}
-        \partsitem Yes;
-          we are asking if there are scalars \( c_1 \) and \( c_2 \) such that
-          \begin{equation*}
-            c_1\colvec[r]{2 \\ 2}+c_2\colvec[r]{1 \\ 5}=\colvec[r]{1 \\ -3}
-          \end{equation*}
-          which gives rise to a linear system
-          \begin{equation*}
-            \begin{linsys}{2}
-              2c_1  &+  &c_2  &=  &1  \\
-              2c_1  &+  &5c_2 &=  &-3
-            \end{linsys}
-            \;\grstep{-\rho_1+\rho_2}\;
-            \begin{linsys}{2}
-              2c_1  &+  &c_2  &=  &1  \\
-                    &   &4c_2 &=  &-4
-            \end{linsys}
-          \end{equation*}
-          and Gauss' method produces \( c_2=-1 \) and \( c_1=1 \). 
-          That is, there is indeed such a pair of scalars and so the vector
-          is indeed in the column space of the matrix.
-        \partsitem No;
-          we are asking if there are scalars $c_1$ and $c_2$
-          such that 
-          \begin{equation*}
-            c_1\colvec[r]{4 \\ 2}+c_2\colvec[r]{-8 \\ -4}=\colvec[r]{0 \\ 1}
-          \end{equation*}
-          and one way to proceed is to consider the resulting linear system
-          \begin{equation*}
-            \begin{linsys}{2}
-              4c_1  &-  &8c_2  &=  &0  \\
-              2c_1  &-  &4c_2  &=  &1
-            \end{linsys}
-          \end{equation*}
-          that is easily seen to have no solution.
-          Another way to proceed is to note
-          that any linear combination of the columns on the left
-          has a second component half as big as its first component, 
-          but the  vector on the right does not meet that criterion.
-        \partsitem Yes; we can simply observe that the vector
-          is the first column minus the second.
-          Or, failing that, setting up the relationship among the columns 
-          \begin{equation*}
-            c_1\colvec[r]{1 \\ 1 \\ -1}
-             +c_2\colvec[r]{-1 \\ 1 \\ -1}
-             +c_3\colvec[r]{1 \\ -1 \\ 1}
-             =\colvec[r]{2 \\ 0 \\ 0}
-          \end{equation*}
-          and considering the resulting linear system
-          \begin{equation*}
-            \begin{linsys}{3}
-              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
-              c_1  &+  &c_2  &-  &c_3  &=  &0  \\
-             -c_1  &-  &c_2  &+  &c_3  &=  &0    
-            \end{linsys}
-            \;\grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}\;
-            \begin{linsys}{3}
-              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
-                   &   &2c_2 &-  &2c_3 &=  &-2  \\
-                   &   &-2c_2&+  &2c_3 &=  &2    
-            \end{linsys}
-            \;\grstep{\rho_2+\rho_3}\;
-            \begin{linsys}{3}
-              c_1  &-  &c_2  &+  &c_3  &=  &2  \\
-                   &   &2c_2 &-  &2c_3 &=  &-2  \\
-                   &   &     &   &0    &=  &0    
-            \end{linsys}
-          \end{equation*}
-          gives the additional information (beyond that there is at least one
-          solution) that there are infinitely many solutions.
-          Parametrizing gives $c_2=-1+c_3$ and $c_1=1$, and so taking $c_3$ to 
-          be zero gives a particular solution of $c_1=1$, $c_2=-1$, and
-          $c_3=0$ (which is, of course, the observation made at the start).
-      \end{exparts}  
-    \end{answer}
+\recommended \item
+   Let $h$ be the linear map defined by this matrix on the domain~$\polyspace_1$
+   and codomain~$\Re^2$
+   with respect to the given bases.
+   \begin{equation*}
+     H=
+     \begin{mat}
+       2  &1  \\
+       4  &2
+     \end{mat}
+     \quad
+     B=\sequence{1+x,x},\,
+     D=\sequence{\colvec{1 \\ 1},\colvec{1 \\ 0}}
+   \end{equation*}
+   What is the image under $h$ of the vector $\vec{v}=2x-1$?
+   \begin{answer}
+     With respect to $B$ the vector's representation is this.
+     \begin{equation*}
+       \rep{2x-1}{B}=\colvec{-1 \\ 3}
+     \end{equation*}
+     Using the matrix-vector product we can compute $\rep{h(\vec{v})}{D}$
+     \begin{equation*}
+       \rep{h(2x-1)}{D}
+       =
+       \begin{mat}
+         2  &1  \\
+         4  &2
+       \end{mat}
+       \colvec{-1 \\ 3}_B
+       =
+       \colvec{1 \\ 2}_D
+     \end{equation*}
+     From that representation we can compute 
+     $h(\vec{v})$.
+     \begin{equation*}
+       h(2x-1)=1\cdot\colvec{1 \\ 1}+2\cdot\colvec{1 \\ 0}
+       =\colvec{3 \\ 1}
+     \end{equation*}
+   \end{answer}
  \recommended \item 
    Decide if each vector lies in the range of the map from \( \Re^3 \)
    to \( \Re^2 \) represented with respect to the standard bases by the matrix.
@@ -2646,6 +2603,79 @@ And, we shall see how to find the matrix that represents a map's inverse.
          \partsitem One plus one equals two. 
       \end{exparts}
     \end{answer}
+  \item This is an alternative proof of 
+    \nearbylemma{le:NonsingMatIffNonsingMap}.
+    Given an $\nbyn{n}$ matrix $H$,
+    fix a domain~$V$ and codomain~$W$
+    of appropriate dimension~$n$, and bases $B,D$ for those
+    spaces, and consider
+    the map~$h$ represented by the matrix.  
+    \begin{exparts}
+      \partsitem
+        Show that $h$ is onto if and only if there is at least one
+        $\rep{\vec{v}}{B}$ associated by $H$ with each $\rep{\vec{w}}{D}$.  
+      \partsitem
+        Show that $h$ is one-to-one if and only if there is at most one
+        $\rep{\vec{v}}{B}$ associated by $H$ with each $\rep{\vec{w}}{D}$.  
+      \partsitem
+        Consider the linear system
+        $H\cdot\rep{\vec{v}}{B}=\rep{\vec{w}}{D}$.
+        Show that $H$ is nonsingular if and only if 
+        there is exactly one solution~$\rep{\vec{v}}{B}$ for each
+        $\rep{\vec{w}}{D}$.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          The defined map $h$ is onto if and only if 
+          for every $\vec{w}\in W$ there is a 
+          $\vec{v}\in V$ such that $h(\vec{v})=\vec{w}$.
+          Since for every vector there is exactly one representation,
+          converting to representations gives that $h$ is onto 
+          if and only if for every
+          representation $\rep{\vec{w}}{D}$ there is a
+          representation $\rep{\vec{v}}{B}$ such that
+          $H\cdot\rep{\vec{v}}{B}=\rep{\vec{w}}{D}$.
+       \partsitem
+          This is just like the prior part.
+       \partsitem 
+          As described at the start of this subsection, by definition
+          the map $h$ defined by the matrix $H$  
+          associates this domain vector $\vec{v}$ with this 
+          codomain vector $\vec{w}$.
+          \begin{equation*}
+            \rep{\vec{v}}{B}=\colvec{v_1 \\ \vdots \\ v_n}
+            \qquad
+            \rep{\vec{w}}{D}
+               =
+               H\cdot\rep{\vec{v}}{B}
+               =\colvec{h_{1,1}v_1+\dots+h_{1,n}v_n  \\ 
+                          \vdots \\ 
+                       h_{m,1}v_1+\dots+h_{m,n}v_n}
+          \end{equation*}
+          Fix $\vec{w}\in W$ and 
+          consider the linear system
+          defined by the above equation.
+          \begin{equation*}
+            % H\cdot\rep{\vec{v}}{B}=\rep{\vec{w}}{D}
+            % \qquad
+            \begin{linsys}{3}
+              h_{1,1}v_1 &+ &\cdots &+ &h_{1,n}v_n &= &w_1  \\
+              h_{2,1}v_1 &+ &\cdots &+ &h_{2,n}v_n &= &w_2  \\
+                       &  &        & &          &\vdotswithin{=} & \\
+              h_{n,1}v_1 &+ &\cdots &+ &h_{n,n}v_n &= &w_n
+            \end{linsys}
+          \end{equation*}
+          (Again, here the $w_i$ are fixed and
+           the $v_j$ are unknowns.)
+          Now, $H$ is nonsingular if and only if 
+          for all $w_1$, \ldots, $w_n$ this system has a solution and the 
+          solution is unique.
+          By the first two parts of this exercise 
+          this is true if and only if the map $h$ is onto and one-to-one.
+          This in turn is true if and only if $h$ is an isomorphism. 
+       \end{exparts}
+      \end{answer}
   \recommended \item  
     Because
     the rank of a matrix equals the rank of any map it represents, if
@@ -2727,7 +2757,7 @@ And, we shall see how to find the matrix that represents a map's inverse.
     with respect to those bases, the map is represented by a diagonal matrix 
     with no zeroes on the diagonal.
     \begin{answer}
-      This is immediate from \nearbylemma{cor:NonsingMatIffNonsingMap}.
+      This is immediate from \nearbylemma{le:NonsingMatIffNonsingMap}.
     \end{answer}
   \item 
     Describe geometrically the action on \( \Re^2 \) of
