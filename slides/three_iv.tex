@@ -1,0 +1,310 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../map4} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Matrix Operations] % (optional, use only with long paper titles)
+{Three.IV Matrix Operations}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Matrix Operations}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Three.IV.1 .....
+\section{Sums and Scalar Products}
+%..........
+\begin{frame}{Definition of matrix sum and scalar multiple}
+\df[def:SumScalarProdMats]
+\ExecuteMetaData[../map4.tex]{df:SumScalarProdMats}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\th[th:MatOpsRepMapOps]
+\ExecuteMetaData[../map4.tex]{th:MatOpsRepMapOps}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\df[df:ZeroMatrix]
+\ExecuteMetaData[../map4.tex]{df:ZeroMatrix}
+\end{frame}
+
+
+
+% ..... Three.IV.2 .....
+\section{Matrix Multiplication}
+%..........
+\begin{frame}
+\lm[lm:CompositionOfLinearMapsIsLinear]
+\ExecuteMetaData[../map4.tex]{lm:CompositionOfLinearMapsIsLinear}
+
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{pf:CompositionOfLinearMapsIsLinear}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{Definition of matrix multiplication}
+\df[def:MatMult]
+\ExecuteMetaData[../map4.tex]{df:MatMult}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{Matrix multiplication represents composition}
+\th[th:MatMultRepComp]
+\ExecuteMetaData[../map4.tex]{th:MatMultRepComp}
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{th:MatMultRepComp}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{Arrow diagrams}
+% \ExecuteMetaData[../map4.tex]{MatMultArrowDiag0}
+This pictures the relationship between maps and matrices.
+\centergraphic{../ch3.20}
+\pause
+\ExecuteMetaData[../map4.tex]{MatMultArrowDiag1}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\th[th:MatMultWellBehaved]
+\ExecuteMetaData[../map4.tex]{th:MatMultWellBehaved}
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{pf:MatMultWellBehaved0}
+
+\pause
+\ExecuteMetaData[../map4.tex]{pf:MatMultWellBehaved1}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\df[df:ZeroMatrix]
+\ExecuteMetaData[../map4.tex]{df:ZeroMatrix}
+\end{frame}
+
+
+
+% ..... Three.IV.2 .....
+\section{Mechanics of Matrix Multiplication}
+%..........
+\begin{frame}
+\df[df:UnitMatrix]
+\ExecuteMetaData[../map4.tex]{df:UnitMatrix}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\lm[lm:ColsAndRowsInMatrixMult]
+\ExecuteMetaData[../map4.tex]{lm:ColsAndRowsInMatrixMult}
+\end{frame}
+\begin{frame}
+\pf
+\ExecuteMetaData[../map4.tex]{pf:ColsAndRowsInMatrixMult}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\df[df:MainDiagonal]
+\ExecuteMetaData[../map4.tex]{df:MainDiagonal}
+\pause
+\df[df:IdentityMatrix]
+\ExecuteMetaData[../map4.tex]{df:IdentityMatrix}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\df[df:DiagonalMatrix]
+\ExecuteMetaData[../map4.tex]{df:DiagonalMatrix}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\df[df:PermutationMatrix]
+\ExecuteMetaData[../map4.tex]{df:PermutationMatrix}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\df[df:ElementaryReductionMatrices]
+\ExecuteMetaData[../map4.tex]{df:ElementaryReductionMatrices}
+\end{frame}
+
+
+
+
+\begin{frame}
+\lm[GrByMatMult]
+\ExecuteMetaData[../map4.tex]{lm:GrByMatMult}
+\pf
+Clear.
+\qed
+\co[cor:ReducViaMatrices]
+\ExecuteMetaData[../map4.tex]{co:ReducViaMatrices}
+\end{frame}
+
+
+
+% ..... Three.IV.3 .....
+\section{Inverses}
+%..........
+\begin{frame}{Definition of matrix inverse}
+\df[df:MatrixInverse]
+\ExecuteMetaData[../map4.tex]{df:MatrixInverse}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\lm[le:LeftAndRightInvEqual]
+\ExecuteMetaData[../map4.tex]{lm:LeftAndRightInvEqual}
+\pause
+\th[th:MatrixInvertibleIffNonsingular]
+\ExecuteMetaData[../map4.tex]{th:MatrixInvertibleIffNonsingular}
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{pf:MatrixInvertibleIffNonsingular}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\lm[lem:ProdInvIsInv]
+\ExecuteMetaData[../map4.tex]{lm:ProdInvIsInv}
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{pf:ProdInvIsInv0}
+
+\pause
+\ExecuteMetaData[../map4.tex]{pf:ProdInvIsInv1}
+\qed
+
+\pause
+Here is the arrow diagram for matrix inverses.
+\centergraphic{../ch3.21}
+\end{frame}
+
+
+
+
+\begin{frame}
+\lm[lem:ComputeInvMat]
+\ExecuteMetaData[../map4.tex]{lm:ComputeInvMat}
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{pf:ComputeInvMat0}
+
+\pause
+\ExecuteMetaData[../map4.tex]{pf:ComputeInvMat1}
+
+\pause
+\ExecuteMetaData[../map4.tex]{pf:ComputeInvMat2}
+\qed  
+\end{frame}
+
+
+
+
+\begin{frame}
+\co[cor:TwoByTwoInv]
+\ExecuteMetaData[../map4.tex]{co:TwoByTwoInv}
+\pause
+\pf
+\ExecuteMetaData[../map4.tex]{pf:TwoByTwoInv}
+\qed  
+\end{frame}
+
+
+%...........................
+% \begin{frame}
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
