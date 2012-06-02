@@ -52,84 +52,81 @@
 \section{Sums and Scalar Products}
 %..........
 \begin{frame}{Representing operations on linear functions}
-Recall that for two functions with the same domain and codomain 
-$\map{g,h}{V}{W}$ the sum $g+h$ is defined by 
-$(g+h)\,(\vec{v}_1+\vec{v}_2)=g(\vec{v}_1+\vec{v}_2)+h(\vec{v}_1+\vec{v}_2)$.
-The scalar multiple of a function $r\cdot f$ is also defined in the natural
-way by $r\cdot g\,(\vec{v})=r\cdot(g(\vec{v}))$.
-We want to see how the function representations\Dash the matrices\Dash
-combine.
+Recall the operations on linear functions of scalar multiplication
+and addition defined by: for  
+$\map{f,g}{V}{W}$, where $r\in\Re$
+the scalar multiple $r\cdot f$ function does this
+\begin{equation*}
+  \vec{v}\mapsunder{r\cdot f} r\cdot (f(\vec{v}))
+\end{equation*}
+and the sum of the two functions does this.
+\begin{equation*}
+  \vec{v}\mapsunder{f+g} f(\vec{v})+g(\vec{v})
+\end{equation*}
+Here we will see how the matrix representations $\rep{f}{B,D}$ and 
+$\rep{g}{B,D}$
+combine to give $\rep{r\cdot f}{B,D}$
+and $\rep{f+g}{B,D}$.
 
 \pause
 \ex
-Suppose that $\map{f}{V}{W}$ is linear maps represented with respect to 
-some bases~$B$ by this matrix.
+Suppose that $\map{f}{V}{W}$ is the linear map represented with respect to 
+some bases~$B,D$ by this matrix.
 \begin{equation*}
   F=
-  \rep{f}{B,D}
+  \rep{f}{B,D}=
   \begin{mat}
     2  &1  \\
     3  &4  
   \end{mat}
-\end{equation*}
-\pause
-This is the difference between the actions of the functions
-$f$ and $5f$.
-\begin{equation*}
-  \vec{v}\mapsunder{f}\vec{w}
-  \qquad
-  \vec{v}\mapsunder{5f}5\cdot\vec{w}
 \end{equation*}
 We will find the matrix representing the function $5f$.
 That is, we will show how to produce the matrix representation of $5f$
 from the matrix representation~F of~$f$. 
 \end{frame}
 \begin{frame}
-Consider the representatives.
+Consider representations of vectors from the domain and codomain.
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
   \quad
-  \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}=\colvec{2v_1+v_2 \\ 3v_1+4v_2} 
+  \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}
+  % =\colvec{2v_1+v_2 \\ 3v_1+4v_2} 
 \end{equation*}
 \pause
 Since $5\vec{w}=5\cdot(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
 =5w_1\vec{\delta}_1+5w_2\vec{\delta}_2$,
 application of the function $\map{5f}{V}{W}$
-transforms the representation to this.
+yields this representation of the codomain vector.
 \begin{equation*}
   \rep{5f(\vec{v})}{D}
   =\rep{5\vec{w}}{D}=\colvec{5w_1 \\ 5w_2} 
 \end{equation*}
-In short, it multiplies each entry by $5$.
+So moving from the function $f$ to the function~$5f$
+has the effect on the representations of vectors that it
+transforms the codomain vector by multipling each entry by $5$.
 \end{frame}
 \begin{frame}
-We want $\rep{5f}{B,D}$, the matrix that produces this transformation.
-So we want the entries $a,b,c,d\in\Re$ that make this 
-true for all $v_1,v_2\in\Re$.
-\begin{equation*}
+In this example the action of the function is represented as here.  
+\begin{equation*}\
+  \rep{f}{B,D}\cdot \rep{\vec{v}}{B}=
   \begin{mat}
     2  &1 \\
     3  &4
   \end{mat}
   \colvec{v_1 \\ v_2}
   =\colvec{2v_1+v_2 \\ 3v_1+4v_2}
-  \qquad
-  \begin{mat}
-    a  &b \\
-    c  &c
-  \end{mat}
-  \colvec{v_1 \\ v_2}
-  =\colvec{5(2v_1+v_2) \\ 5(3v_1+4v_2)}
 \end{equation*}
 \pause
-If it holds for all pairs $v_1,v_2$ then it holds for the particular
-pair $v_1=1$ and $v_2=0$,
-which gives the conclusion that $a=10$ and $c=15$.
-It also holds for $v_1=0$ and $v_2=1$, which gives
-$b=15$ and $c=20$.
-
-\pause
-Therefore, to represent $5f$
+We want the matrix 
+that makes this 
+true.
+\begin{equation*}
+  \rep{5f}{B,D}\cdot
+  \colvec{v_1 \\ v_2}
+  =\colvec{5(2v_1+v_2) \\ 5(3v_1+4v_2)}
+  =\colvec{10v_1+5v_2 \\  15v_1+20v_2}
+\end{equation*}
+Therefore, at least in this example
 \begin{equation*}
   \rep{5f}{B,D}
   =
@@ -138,7 +135,9 @@ Therefore, to represent $5f$
     15 &20
   \end{mat}
 \end{equation*}
-we multiply all the entries in~$F$ by $5$.
+so going from the function $f$ to the 
+function~$5f$ has the effect on the representation~$F$ of  
+multiplying all the entries by $5$.
 \end{frame}
 
 
@@ -167,26 +166,28 @@ We want the matrix representing the function $f+g$.
 If $f(\vec{v})=\vec{u}$ and $g(\vec{v})=\vec{w}$ then
 $f+g$ does this.
 \begin{align*}
-  v_1\vec{\beta}_1+v_2\vec{\beta}_2
+  \vec{v}
   &\mapsunder{f+g}
-  u_1\vec{\delta}_1+u_2\vec{\delta}_2
+  \vec{u}+\vec{v}                      \\
+  &\qquad =u_1\vec{\delta}_1+u_2\vec{\delta}_2
   +
   w_1\vec{\delta}_1+w_2\vec{\delta}_2   \\
   &\qquad=(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2
 \end{align*}
-That is, the effect of the addition of the functions on the representations
+Thus for any $\vec{v}$, the effect on the representatives 
 \begin{equation*}
   \rep{f(\vec{v})}{D}=\colvec{u_1 \\ u_2}
   \quad
   \rep{g(\vec{v})}{D}=\colvec{w_1 \\ w_2}
 \end{equation*}
-is to add the column vectors.
+of adding the functions is to add the column vectors.
 \begin{equation*}
   \rep{(f+g)\,(\vec{v})}{D}=\colvec{u_1+w_1 \\ u_2+w_2}
 \end{equation*}
 \end{frame}
 \begin{frame}
-So we have this action on the representatives.
+The particular functions in this example have 
+this action on the representations.
 \begin{align*}
   \rep{f(\vec{v})}{D}=
   \begin{mat}
@@ -204,27 +205,25 @@ So we have this action on the representatives.
   \colvec{v_1 \\ v_2}
   =\colvec{5v_1+8v_2 \\ 7v_1+6v_2}
 \end{align*}
-and we want the matrix with this effect.
+So we want the matrix with this effect.
 \begin{equation*}
-  \rep{(f+g)\,(\vec{v})}{D}=
-  \begin{mat}
-    a  &b  \\
-    c  &d  
-  \end{mat}
+  \rep{(f+g)\,(\vec{v})}{D}
   \colvec{v_1 \\ v_2}
   =\colvec{7v_1+9v_2 \\ 10v_1+10v_2}
 \end{equation*}
 \pause
-Since that equation must hold for all pairs $v_1,v_2$, we can specialize it
-to $v_1=1$, $v_2=0$ to get $a=7$ and $c=10$.
-Similarly, setting $v_1=0$, $v_2=1$ gives
-$b=9$, $d=10$.
-
+Thus
+\begin{equation*}
+  \rep{f+g}{B,D}=
+  \begin{mat}
+    7  &9  \\
+    10  &10  
+  \end{mat}
+\end{equation*}
 \pause
-Therefore,
-in this example at least,
-the representation of $f+g$ is the entry-by-entry sum of the
-representation of $f$ and the representation of~$g$.  
+and at least in this example
+the representation of the sum function is the entry-by-entry sum of the
+representations of the two functions.  
 \end{frame}
 
 \begin{frame}{Definition of matrix sum and scalar multiple}
@@ -282,20 +281,40 @@ $B+C$, $C+B$.
 
 \pause
 \pf
-The proof just generalizes the two examples that started this section.
+We can generalize the two examples that started this section.
 See \nearbyexercise{exer:CorrspMapMatOps}.
 \qed
 
-\end{frame}
-
-
-
-
-%..........
-\begin{frame}
+\pause
+\medskip
 \df[df:ZeroMatrix]
 \ExecuteMetaData[../map4.tex]{df:ZeroMatrix}
+
+\pause
+\medskip
+\ex
+The zero matrix is the identity element for matrix addition.
+\begin{equation*}
+  \begin{mat}
+    3 &1 &2 \\
+    5 &0 &9
+  \end{mat}
+  +
+  \begin{mat}
+    0 &0 &0 \\
+    0 &0 &0
+  \end{mat}
+  =
+  \begin{mat}
+    3 &1 &2 \\
+    5 &0 &9
+  \end{mat}
+\end{equation*}
+This reflects the fact that a zero matrix represents a zero function
+$\map{Z}{V}{W}$, which is the identity elements for
+function addition. 
 \end{frame}
+
 
 
 
@@ -303,6 +322,10 @@ See \nearbyexercise{exer:CorrspMapMatOps}.
 \section{Matrix Multiplication}
 %..........
 \begin{frame}
+Besides scalar multiplication and addition, another operation that 
+we can perform on functions is composition.
+
+\pause
 \lm[lm:CompositionOfLinearMapsIsLinear]
 \ExecuteMetaData[../map4.tex]{lm:CompositionOfLinearMapsIsLinear}
 
@@ -310,6 +333,107 @@ See \nearbyexercise{exer:CorrspMapMatOps}.
 \pf
 \ExecuteMetaData[../map4.tex]{pf:CompositionOfLinearMapsIsLinear}
 \qed
+
+\pause
+\medskip
+We will see how the matrix
+representations of the two functions combine to make
+the matrix representation of their composition.
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex
+Consider two linear functions $\map{h}{V}{W}$ and $\map{g}{W}{X}$
+represented as here.
+\begin{equation*}
+  H=
+  \rep{h}{B,C}=
+  \begin{mat}
+    3 &1 \\
+    2 &5 \\
+    4 &6
+  \end{mat}
+  \qquad
+  G=
+  \rep{g}{C,D}=
+  \begin{mat}
+    8 &7 &11 \\
+    9 &10 &12 
+  \end{mat}
+\end{equation*}
+(The sizes of the matrices show that 
+$V$ has dimension~$2$, 
+$W$ has dimension~$3$, 
+and $X$ has dimension~$2$.)
+
+We want to see how these two matrices combine to represent the map
+$\map{\composed{g}{h}}{V}{X}$.
+
+\pause
+We will compute the action of $\composed{g}{h}$ by first computing the action
+of~$h$ on a vector~$\vec{v}\in V$.
+\begin{equation*}
+  \rep{h(\vec{v})}{C}
+  =\rep{h}{B,C}\cdot\rep{\vec{v}}{B}
+  =
+  \begin{mat}
+    3 &1 \\
+    2 &5 \\
+    4 &6
+  \end{mat}
+  \colvec{v_1 \\ v_2}  
+  =
+  \colvec{3v_1+v_2 \\ 2v_1+5v_2 \\ 4v_1+6v_2}
+\end{equation*}
+\end{frame}
+\begin{frame}
+Apply $g$ to that.
+\begin{multline*}
+  \rep{g}{C,D}\cdot \rep{h(\vec{v})}{C}
+  =
+  \begin{mat}
+    8 &7 &11 \\
+    9 &10 &12     
+  \end{mat}
+  \colvec{3v_1+v_2 \\ 2v_1+5v_2 \\ 4v_1+6v_2}                \\
+  =
+  \colvec{8(3v_1+v_2)+7(2v_1+5v_2)+11(4v_1+6v_2)  \\
+          9(3v_1+v_2)+10(2v_1+5v_2)+12(4v_1+6v_2)}
+\end{multline*}
+Gather terms.
+\begin{equation*}
+  =\colvec{(8\cdot 3+7\cdot 2+11\cdot 4)v_1+(8\cdot 1+7\cdot 5+11\cdot 6)v_2 \\
+           (9\cdot 3+10\cdot 2+12\cdot 4)v_1+(9\cdot 1+10\cdot 5+12\cdot 6)v_2}
+\end{equation*}
+Rewrite that as a matrix-vector multiplication.
+\begin{equation*}
+  \begin{mat}
+    8\cdot 3+7\cdot 2+11\cdot 4 &8\cdot 1+7\cdot 5+11\cdot 6 \\
+    9\cdot 3+10\cdot 2+12\cdot 4 &9\cdot 1+10\cdot 5+12\cdot 6
+  \end{mat}
+  \colvec{v_1 \\ v_2}
+\end{equation*}
+Here is the combination.
+\begin{equation*}
+  \begin{mat}
+    8 &7 &11 \\
+    9 &10 &12 
+  \end{mat}
+  \begin{mat}
+    3 &1 \\
+    2 &5 \\
+    4 &6
+  \end{mat}
+  =
+  \begin{mat}
+    8\cdot 3+7\cdot 2+11\cdot 4 &8\cdot 1+7\cdot 5+11\cdot 6 \\
+    9\cdot 3+10\cdot 2+12\cdot 4 &9\cdot 1+10\cdot 5+12\cdot 6
+  \end{mat}
+\end{equation*}
 \end{frame}
 
 
@@ -319,6 +443,62 @@ See \nearbyexercise{exer:CorrspMapMatOps}.
 \begin{frame}{Definition of matrix multiplication}
 \df[def:MatMult]
 \ExecuteMetaData[../map4.tex]{df:MatMult}
+\ex
+\begin{equation*}
+  \begin{mat}
+    3 &1 &6 \\
+    2 &5 &9
+  \end{mat}
+  \begin{mat}
+    2 &0  &4 \\
+    1 &-3 &5 \\
+    4 &2  &7
+  \end{mat}
+  =
+  \begin{mat}
+    31  &9  &59  \\
+    45  &3  &96
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+\ex
+This product is not defined.
+\begin{equation*}
+  \begin{mat}
+    1  &3  &-1 \\
+    0  &0  &0  \\
+    2  &0  &0
+  \end{mat}
+  \begin{mat}
+    5  &7  &1 \\
+    2  &2  &0 
+  \end{mat}
+\end{equation*}
+
+\pause
+\ex
+Square matrices of the same size have a defined product.
+\begin{equation*}
+  \begin{mat}
+    1  &3  &-1 \\
+    0  &0  &0  \\
+    2  &0  &0
+  \end{mat}
+  \begin{mat}
+    5  &7  &1 \\
+    2  &2  &0 \\
+    1  &-1 &2 
+  \end{mat}
+  =
+  \begin{mat}
+    11  &14  &-5  \\
+     0  &0   &0   \\
+    10  &14  &2
+  \end{mat}
+\end{equation*}
+This reflects the fact that we can compose two
+functions from a space to itself $\map{f,g}{V}{V}$.
 \end{frame}
 
 
@@ -330,7 +510,10 @@ See \nearbyexercise{exer:CorrspMapMatOps}.
 \ExecuteMetaData[../map4.tex]{th:MatMultRepComp}
 \pause
 \pf
-\ExecuteMetaData[../map4.tex]{th:MatMultRepComp}
+\ExecuteMetaData[../map4.tex]{pf:MatMultRepComp0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../map4.tex]{pf:MatMultRepComp1}
 \qed
 \end{frame}
 
@@ -348,6 +531,64 @@ This pictures the relationship between maps and matrices.
 
 
 
+\begin{frame}{Matrix multiplication is not commutative}
+Composition of function is not a commutative operation\Dash $\cos(x^2)$
+is different than $\cos^2(x)$.
+This also holds in the special case of 
+composition of linear functions.
+\pause
+\ex
+Changing the order in which we multiply these matrices
+\begin{equation*}
+  \begin{mat}
+    3  &3  \\
+    0  &4
+  \end{mat}
+  \begin{mat}
+    -2  &6  \\
+    6   &5
+  \end{mat}
+  =
+  \begin{mat}
+    12  &33 \\
+    24  &20
+  \end{mat}
+\end{equation*}
+changes the result.
+\begin{equation*}
+  \begin{mat}
+    -2  &6  \\
+    6   &5
+  \end{mat}
+  \begin{mat}
+    3  &3  \\
+    0  &4
+  \end{mat}
+  =
+  \begin{mat}
+     -6  &18   \\
+     18  &38  
+  \end{mat}
+\end{equation*}
+\pause
+\ex
+The product of these matrices
+\begin{equation*}
+  \begin{mat}
+    3  &4  \\
+    0  &2
+  \end{mat}
+  \qquad
+  \begin{mat}
+    8  &12  &0 \\
+   -4  &0  &1/2
+  \end{mat}
+\end{equation*}
+is defined in one order and not defined in the other.
+\end{frame}
+
+
+
 
 %..........
 \begin{frame}
@@ -360,15 +601,6 @@ This pictures the relationship between maps and matrices.
 \pause
 \ExecuteMetaData[../map4.tex]{pf:MatMultWellBehaved1}
 \qed
-\end{frame}
-
-
-
-
-%..........
-\begin{frame}
-\df[df:ZeroMatrix]
-\ExecuteMetaData[../map4.tex]{df:ZeroMatrix}
 \end{frame}
 
 
