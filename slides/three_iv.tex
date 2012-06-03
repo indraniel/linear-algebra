@@ -964,6 +964,55 @@ Some $\nbyn{3}$ examples.
 
 
 \begin{frame}
+\ex Multiplying on the left by the $\nbyn{3}$ matrix
+$M_{2}(1/2)$
+has the effect of the row operation $(1/2)\rho_2$. 
+\begin{equation*}
+  \begin{mat}
+    1 &0   &0 \\
+    0 &1/2 &0 \\
+    0 &0   &1
+  \end{mat}
+  \begin{mat}
+    1  &3  &0  \\
+    0  &2  &5  \\
+    0  &0  &0
+  \end{mat}
+  =
+  \begin{mat}
+    1  &3  &0  \\
+    0  &1  &5/2  \\
+    0  &0  &0
+  \end{mat}
+\end{equation*}
+\pause
+\ex
+Left multiplication by $C_{1,3}(-2)$ performs the
+row operation $-2\rho_1+\rho_3$.
+\begin{equation*}
+  \begin{mat}[r]
+    1 &0   &0 \\
+    0 &1   &0 \\
+    -2 &0   &1
+  \end{mat}
+  \begin{mat}[r]
+    1  &3  &0  \\
+    0  &2  &5  \\
+    2  &1  &1
+  \end{mat}
+  =
+  \begin{mat}[r]
+    1  &3  &0  \\
+    0  &2  &5  \\
+    0  &-5 &1
+  \end{mat}
+\end{equation*}
+\end{frame}
+
+
+
+
+\begin{frame}
 \lm[GrByMatMult]
 \ExecuteMetaData[../map4.tex]{lm:GrByMatMult}
 \pf
@@ -971,6 +1020,84 @@ Clear.
 \qed
 \co[cor:ReducViaMatrices]
 \ExecuteMetaData[../map4.tex]{co:ReducViaMatrices}
+
+\pause
+\ex
+We can bring this augmented matrix to echelon form with matrix multiplication.
+\begin{equation*}
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    2  &-2  &-1 &6 \\
+    0  &3   &1  &5 
+  \end{amat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+We first perform $-2\rho_1+\rho_2$ via left multiplication by $C_{1,2}(-2)$.
+\begin{equation*}
+  \begin{mat}
+    1  &0  &0  \\
+    0  &1  &0  \\
+   -2  &0  &1
+  \end{mat}
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    2  &-2  &-1 &6  \\
+    0  &3   &1  &5 
+  \end{amat}
+  =
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    0  &0   &-5 &-2 \\
+    0  &3   &1  &5 
+  \end{amat}
+\end{equation*}
+\pause
+Now we swap rows $2$ and $3$ with $P_{2,3}$
+\begin{equation*}
+  \begin{mat}
+    1  &0  &0  \\
+    0  &0  &1  \\
+    0  &1  &0
+  \end{mat}
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    0  &0   &-5 &-2 \\
+    0  &3   &1  &5 
+  \end{amat}
+  =
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    0  &3   &1  &5 \\
+    0  &0   &-5 &-2 
+  \end{amat}
+\end{equation*}
+\pause
+When writing them out in full, remember that the matrix used first appears
+to the right of the matrix used second.
+\begin{equation*}
+  \begin{mat}
+    1  &0  &0  \\
+    0  &0  &1  \\
+    0  &1  &0
+  \end{mat}
+  \begin{mat}
+    1  &0  &0  \\
+    0  &1  &0  \\
+   -2  &0  &1
+  \end{mat}
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    2  &-2  &-1 &6  \\
+    0  &3   &1  &5 
+  \end{amat}
+  =
+  \begin{amat}{3}
+    1  &-1  &2  &4 \\
+    0  &3   &1  &5 \\
+    0  &0   &-5 &-2 
+  \end{amat}
+\end{equation*}
 \end{frame}
 
 
