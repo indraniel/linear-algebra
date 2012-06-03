@@ -7,6 +7,7 @@
 \usepackage{../linalgjh}
 \usepackage{present}
 \usepackage{xr}\externaldocument{../map4} % read refs from .aux file
+\usepackage{xr}\externaldocument{../map2} % read refs from .aux file
 \usepackage{catchfilebetweentags}
 \usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
 \makeatletter
@@ -103,7 +104,7 @@ yields this representation of the codomain vector.
 \end{equation*}
 So moving from the function $f$ to the function~$6f$
 has the effect on the representations of vectors that it
-transforms the codomain vector by multipling each entry by $6$.
+transforms the codomain vector by multiplying each entry by $6$.
 \end{frame}
 \begin{frame}
 In this example the action of the function is represented as here.  
@@ -778,7 +779,7 @@ Rescaling the unit matrix rescales the result.
 \pause
 Taking the product with an identity matrix returns the multiplicand. 
 \ex
-Multipication by an identity from the left
+Multiplication by an identity from the left
 \begin{equation*}
   \begin{mat}
     1  &0 \\
@@ -1104,10 +1105,70 @@ to the right of the matrix used second.
 
 % ..... Three.IV.3 .....
 \section{Inverses}
+\begin{frame}{Function inverses}
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview0}
+
+\pause
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview1}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview2}
+
+\pause
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview3}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview4}
+
+\pause
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview5}
+
+\pause
+\medskip
+\ExecuteMetaData[../map4.tex]{FunctionInverseReview6}
+\end{frame}
+
+
+
 %..........
 \begin{frame}{Definition of matrix inverse}
 \df[df:MatrixInverse]
 \ExecuteMetaData[../map4.tex]{df:MatrixInverse}
+\pause
+\ex
+This matrix 
+\begin{equation*}
+  H=
+  \begin{mat}
+    2  &5  \\
+    1  &3
+  \end{mat}
+\end{equation*}
+has a two-sided inverse.
+\begin{equation*}
+  H^{-1}=
+  \begin{mat}
+    3   &-5  \\
+    -1  &2
+  \end{mat}
+\end{equation*}
+To check that we can multiply in both orders.  
+Here is one order; the other is just as easy to check.
+\begin{equation*}
+  \begin{mat}
+    2  &5  \\
+    1  &3
+  \end{mat}
+  \begin{mat}
+    3   &-5  \\
+    -1  &2
+  \end{mat}
+  =
+  \begin{mat}
+    1  &0  \\
+    0  &1
+  \end{mat}
+\end{equation*}
 \end{frame}
 
 
@@ -1168,12 +1229,152 @@ Here is the arrow diagram for matrix inverses.
 
 
 \begin{frame}
+\ex
+This matrix is nonsingular and so invertible.
+\begin{equation*}
+  A=
+  \begin{mat}
+    1  &3  &1  \\
+    2  &0  &-1 \\
+    1  &2  &0
+  \end{mat}
+\end{equation*}
+To ease the calculation called for in the Lemma, we write 
+the matrix~$A$ next to the $\nbyn{3}$ identity and as we Gauss-Jordan 
+reduce~$A$ we apply those operations to~$I$.
+\begin{align*}
+  \begin{pmat}{rrr|rrr}
+    1  &3  &1  &1  &0  &0  \\
+    2  &0  &-1 &0  &1  &0  \\
+    1  &2  &0  &0  &0  &1
+  \end{pmat}
+  &\grstep[-\rho_1+\rho_3]{-2\rho_1+\rho_2}
+  \begin{pmat}{rrr|rrr}
+    1  &3  &1  &1  &0  &0  \\
+    0  &-6 &-3 &-2  &1  &0  \\
+    0  &-1 &-1 &-1  &0  &1
+  \end{pmat}                                \\
+  &\grstep{-1/6\rho_2+\rho_3}
+  \begin{pmat}{rrr|rrr}
+    1  &3  &1    &1     &0     &0  \\
+    0  &-6 &-3   &-2    &1     &0  \\
+    0  &0  &-1/2 &-2/3  &-1/6  &1
+  \end{pmat}                                \\
+  &\grstep[-2\rho_3]{-1/6\rho_2}
+  \begin{pmat}{rrr|rrr}
+    1  &3  &1    &1     &0     &0  \\
+    0  &1  &1/2  &1/3   &-1/6  &0  \\
+    0  &0  &1    &4/3   &1/3   &-2
+  \end{pmat}                                
+\end{align*}
+\end{frame}
+\begin{frame}
+\begin{align*}
+  \begin{pmat}{rrr|rrr}
+    1  &3  &1    &1     &0     &0  \\
+    0  &1  &1/2  &1/3   &-1/6  &0  \\
+    0  &0  &1    &4/3   &1/3   &-2
+  \end{pmat}                                
+  &\grstep[-(1/2)\rho_3+\rho_2]{-\rho_3+\rho_1}    
+  \begin{pmat}{rrr|rrr}
+    1  &3  &0    &-1/3  &-1/3  &2  \\
+    0  &1  &0    &-1/3  &-1/3  &1  \\
+    0  &0  &1    &4/3   &1/3   &-2
+  \end{pmat}                                \\
+  &\grstep{-3\rho_2+\rho_1}    
+  \begin{pmat}{rrr|rrr}
+    1  &0  &0    &2/3   &2/3   &-1  \\
+    0  &1  &0    &-1/3  &-1/3  &1  \\
+    0  &0  &1    &4/3   &1/3   &-2
+  \end{pmat}                                
+\end{align*}
+We have calculated that this matrix is the inverse.
+\begin{equation*}
+  A^{-1}=
+  \begin{mat}
+    2/3   &2/3   &-1  \\
+   -1/3   &-1/3  &1   \\
+    4/3   &1/3   &-2
+  \end{mat}                                 
+\end{equation*}
+\end{frame}
+\begin{frame}
+Finding the inverse of a matrix $A$
+is a lot of work but once we have it then solving linear
+systems $A\vec{x}=\vec{b}$ is easy. 
+\ex
+The linear system
+\begin{equation*}
+  \begin{linsys}{3}
+    x  &+  &3y  &+  &z  &=  &2   \\
+   2x  &   &    &-  &z  &=  &12  \\
+    x  &+  &2y  &   &   &=  &4
+  \end{linsys}
+\end{equation*}
+is this matrix equation.
+\begin{equation*}
+  \begin{mat}
+    1  &3  &1  \\
+    2  &0  &-1 \\
+    1  &2  &0
+  \end{mat}
+  \colvec{x \\ y  \\ z}
+  =
+  \colvec{2  \\ 12  \\ 4}
+\end{equation*}
+Solve it by multiplying both sides from the left by 
+the inverse that we found earlier.
+\begin{equation*}
+  % \begin{mat}
+  %   1  &0  &0  \\
+  %   0  &1  &0 \\
+  %   0  &0  &1
+  % \end{mat}
+  \colvec{x \\ y  \\ z}
+  =
+  \begin{mat}
+    2/3   &2/3   &-1  \\
+   -1/3   &-1/3  &1   \\
+    4/3   &1/3   &-2
+  \end{mat}                                 
+  \colvec{2  \\ 12  \\ 4}
+  =
+  \colvec{16/3 \\ -2/3 \\ -4/3}
+\end{equation*}
+\end{frame}
+
+
+
+
+\begin{frame}{The inverse of a $\nbyn{2}$ matrix}
 \co[cor:TwoByTwoInv]
 \ExecuteMetaData[../map4.tex]{co:TwoByTwoInv}
 \pause
 \pf
 \ExecuteMetaData[../map4.tex]{pf:TwoByTwoInv}
-\qed  
+\qed
+\pause  
+\ex
+\begin{equation*}
+  \begin{mat}
+    2  &4  \\
+   -1  &1
+  \end{mat}^{-1}
+  =
+  \frac{1}{6}
+  \begin{mat}
+    1  &-4  \\
+    1  &2
+  \end{mat}
+  =
+  \begin{mat}
+    1/6  &-2/3  \\
+    1/6  &1/3
+  \end{mat}
+\end{equation*}
+\pause
+The $\nbyn{3}$ formula is much more complicated. 
+We will cover it in the next chapter.
 \end{frame}
 
 
