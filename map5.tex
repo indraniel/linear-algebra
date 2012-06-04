@@ -60,6 +60,7 @@ described so that
 the domain space vectors are represented with respect to $B$ and
 the codomain space vectors are represented with respect to $D$. 
 \index{arrow diagram}
+%<*ChangeRepresentationOfVectorArrowDiagram>
 \begin{equation*}
   \begin{CD}
     V_{\wrt{B}}                      \\
@@ -69,8 +70,10 @@ the codomain space vectors are represented with respect to $D$.
 \end{equation*}
 (The diagram is
 vertical to fit with the ones in the next subsection.)
+%</ChangeRepresentationOfVectorArrowDiagram>
 
-\begin{definition}
+\begin{definition}  \label{df:ChangeOfBasisMatrix}
+%<*df:ChangeOfBasisMatrix>
 The \definend{change of basis matrix}\index{vector!representation of}%
 \index{matrix!change of basis}\index{basis!change of}
 for bases \( B,D\subset V \) is the representation of the identity
@@ -84,26 +87,36 @@ map  \( \map{\identity}{V}{V} \) with respect to those bases.
   \end{pmat}
 \end{equation*}
 %\( B=\basis{\beta}{n} \).
+%</df:ChangeOfBasisMatrix>
 \end{definition}
 
+\begin{remark}
+Perhaps a better name would be `change of representation matrix' but this
+one is standard.  
+\end{remark}
+
 \begin{lemma}  \label{le:ChBasisMatDoesChBases}
+%<*lm:ChBasisMatDoesChBases>
 Left-multiplication by the change of basis matrix for \( B,D \)
 converts a representation with respect to \( B \) to one with respect to
 \( D \).
 Conversely, if left-multiplication by a matrix changes bases 
 $M\cdot\rep{\vec{v}}{B}=\rep{\vec{v}}{D}$
 then $M$ is a change of basis matrix.
+%</lm:ChBasisMatDoesChBases>
 \end{lemma}
 
 \begin{proof}
-For the first sentence, 
+%<*pf:ChBasisMatDoesChBases>
+The first sentence holds 
 because matrix-vector multiplication represents a map application
 \( \rep{\identity}{B,D}\cdot\rep{\vec{v}}{B}=\rep{\,\identity(\vec{v})\,}{D}
   =\rep{\vec{v}}{D} \) for each \( \vec{v} \). 
-For the second,
+For the second sentence,
 with respect to $B,D$ the matrix $M$ represents a linear
 map whose action is to map each vector to itself, and is therefore
 the identity map.
+%</pf:ChBasisMatDoesChBases>
 \end{proof}
 
 \begin{example}
@@ -162,16 +175,21 @@ We finish this subsection by recognizing that
 the change of basis matrices form a familiar set.
 
 \begin{lemma}    \label{le:NonSingIsChBasis}
+%<*lm:NonSingIsChBasis>
 A matrix changes bases if and only if it is nonsingular.
+%</lm:NonSingIsChBasis>
 \end{lemma}
 
 \begin{proof}
+%<*pf:NonSingIsChBasis0>
 For the `only if' direction, 
 if left-multiplication by a matrix changes bases then
 the matrix represents an invertible function,
 simply because we can invert the function by changing the bases back.
 Such a matrix is itself invertible, and so is nonsingular.
+%</pf:NonSingIsChBasis0>
 
+%<*pf:NonSingIsChBasis1>
 To finish we will show that any nonsingular matrix $M$ 
 performs a change of basis operation from any given starting basis $B$ 
 to some ending basis.
@@ -188,7 +206,9 @@ $M={R_1}^{-1}\cdots {R_r}^{-1}$.
 (We've combined ${R_r}^{-1}I$ to make ${R_r}^{-1}$; 
 because $r\geq 1$ we can always make the $I$ disappear in this way,
 which we need to do because it isn't an elementary matrix.)
+%</pf:NonSingIsChBasis1>
 
+%<*pf:NonSingIsChBasis2>
 Thus, we will be done if we show that elementary matrices 
 change a given basis to another basis, for then 
 ${R_r}^{-1}$ changes $B$ to some other basis $B_r$, and
@@ -250,7 +270,9 @@ separately; here are the three cases.
        \vdots  \\
        c_n  }
 \end{equation*}
-Applying a row-multiplication matrix
+%</pf:NonSingIsChBasis2>
+%<*pf:NonSingIsChBasis3>
+Applying a row-multiplication matrix~$M_{i}(k)$
 changes a representation with respect to
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_n } \)
 to one with respect to
@@ -265,6 +287,8 @@ to one with respect to
 We can easily see that the second one is a basis, given that the first is a 
 basis and that $k\neq 0$ is a restriction in the definition of a 
 row-multiplication matrix.
+%</pf:NonSingIsChBasis3>
+%<*pf:NonSingIsChBasis4>
 Similarly, left-multiplication by a row-swap matrix $P_{i,j}$
 changes a representation with respect to the basis
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_j,
@@ -279,6 +303,8 @@ into one with respect to this basis
     c_1\cdot\vec{\beta}_1+\dots+c_j\cdot\vec{\beta}_j+\dots
                +c_i\cdot\vec{\beta}_i+\dots+c_n\cdot\vec{\beta}_n=\vec{v}     
 \end{multline*}
+%</pf:NonSingIsChBasis4>
+%<*pf:NonSingIsChBasis5>
 And, a representation with respect to
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_i,\dots,\vec{\beta}_j,
   \dots,\vec{\beta}_n } \)
@@ -295,11 +321,14 @@ $C_{i,j}(k)$ into a representation with respect to
 \end{multline*}
 (the definition of reduction matrices specifies that \( i\neq j \) and
 \( k\neq 0 \)).
+%</pf:NonSingIsChBasis5>
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}  \label{co:MatrixNonsingularIffChangesBasis}
+%<*co:MatrixNonsingularIffChangesBasis>
 A matrix is nonsingular if and only if it represents the identity map
 with respect to some pair of bases.
+%</co:MatrixNonsingularIffChangesBasis>
 \end{corollary}
 
 %\begin{proof}
@@ -1029,6 +1058,7 @@ $\rep{h}{B,D}$ to $\rep{h}{\hat{B},\hat{D}}$.
 
 That is, we want the relationship between the matrices in this 
 arrow diagram.\index{arrow diagram}
+%<*ChangeRepresentationOfMapArrowDiagram>
 \begin{equation*}
   \begin{CD}
     V_{\wrt{B}}                   @>h>H>        W_{\wrt{D}}       \\
@@ -1051,6 +1081,7 @@ This equation summarizes.
    \hat{H}=
    \rep{\identity}{D,\hat{D}}\cdot H\cdot \rep{\identity}{\hat{B},B}
 \tag*{\text{($*$})}\end{equation*}
+%</ChangeRepresentationOfMapArrowDiagram>
 (To compare this equation with the sentence before it, remember to read the
 equation from right to left because we read
 function composition from right to left and matrix multiplication 
@@ -1193,19 +1224,21 @@ shows that a matrix changes bases if and only if it is nonsingular.
 That gives us another version of the above  arrow diagram
 and equation~($*$) from the start of this subsection.
 
-\begin{definition}
-\label{def:MatEquiv}
+\begin{definition}  \label{def:MatEquiv}
+%<*df:MatEquiv>
 Same-sized matrices \( H \) and \( \hat{H} \) are
 \definend{matrix equivalent\/}\index{matrix equivalence!definition}%
 \index{matrix!equivalent}\index{equivalence relation!matrix equivalence}
 if there are nonsingular matrices \( P \) and \( Q \) such that
 $\hat{H}=PHQ$.
+%</df:MatEquiv>
 \end{definition}
 
-\begin{corollary}
-\label{le:MatEqIsSameMap}
+\begin{corollary} \label{le:MatEqIsSameMap}
+%<*co:MatEqIsSameMap>
 Matrix equivalent matrices represent the same map, with respect to appropriate
 pairs of bases.
+%</co:MatEqIsSameMap>
 \end{corollary}
 
 \nearbyexercise{exer:MatEqIsEqRel} checks that
@@ -1270,10 +1303,10 @@ a set of representatives
 for the matrix equivalence classes.\appendrefs{class representatives}%
 \index{representative!of matrix equivalence classes}
 
-\begin{theorem}
-\label{th:CanonFormForMatEquiv}
+\begin{theorem}  \label{th:CanonFormForMatEquiv}
 \index{matrix equivalence!canonical form}
 \index{canonical form!for matrix equivalence}
+%<*th:CanonFormForMatEquiv>
 Any \( \nbym{m}{n} \) matrix of rank \( k \) is matrix equivalent to
 the \( \nbym{m}{n} \) matrix that is all zeros except that
 the first \( k \) diagonal entries are ones.
@@ -1288,8 +1321,10 @@ the first \( k \) diagonal entries are ones.
       0  &0      &\ldots &0  &0  &\ldots  &0
     \end{mat}
 \end{equation*}
+%</th:CanonFormForMatEquiv>
 \end{theorem}
 
+%<*BlockPartialIdentityForm>
 \noindent This is a 
 \definend{block partial-identity}\index{matrix!block} 
 form.
@@ -1299,14 +1334,17 @@ form.
       Z  &Z
     \end{pmat}
 \end{equation*}
+%</BlockPartialIdentityForm>
 
 \begin{proof}
+%<*pf:CanonFormForMatEquiv>
 As discussed above, Gauss-Jordan reduce the given matrix
 and combine all the reduction matrices used there to make \( P \).
 Then use the leading entries to do column reduction and
 finish by swapping columns to put the leading ones on the diagonal.
 Combine the reduction matrices used for those column operations into
 \( Q \). 
+%</pf:CanonFormForMatEquiv>
 \end{proof}
 
 \begin{example}
@@ -1416,16 +1454,21 @@ right-multipliers together as $Q$ to get the $PHQ$ equation.
 \end{equation*}
 \end{example}
 
-\begin{corollary}
+\begin{corollary}  \label{co:MatrixEquivalentIffSameRank}
+%<*co:MatrixEquivalentIffSameRank>
 Two same-sized matrices are matrix equivalent if and only if they
 have the same rank.
-That is, the matrix equivalence classes are
-characterized\index{characterizes} by rank.
+%</co:MatrixEquivalentIffSameRank>
 \end{corollary}
 
+That is, the matrix equivalence classes are
+characterized\index{characterizes} by rank.
+
 \begin{proof}
+%<*pf:MatrixEquivalentIffSameRank>
 Two same-sized matrices with the same rank
 are equivalent to the same block partial-identity matrix.
+%</pf:MatrixEquivalentIffSameRank>
 \end{proof}
 
 \begin{example}
