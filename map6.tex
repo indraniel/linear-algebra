@@ -38,30 +38,36 @@ of a vector \( \vec{v} \) into a line $\ell$.
 % We darken a point on the line if someone at that point
 % looking straight up or down (that is, looking orthogonal to the line)
 % will see \( \vec{v} \).
+%<*PictureOrthogonalProjectionIntoALine0>
 This picture shows someone walking out on the line 
 until they are at a point $\vec{p}\/$ such that
-the tip of $\vec{v}$ is directly overhead, where their line of sight is
-not parallel to the $y$-axis but is instead orthogonal to the line.
+the tip of $\vec{v}$ is directly above them, where ``above'' does not mean
+parallel to the $y$-axis but instead means orthogonal to the line.
+%</PictureOrthogonalProjectionIntoALine0>
 \begin{center}  \small
   \includegraphics{ch3.28}
 \end{center}
+%<*PictureOrthogonalProjectionIntoALine1>
 Since we can describe the line as the span of some
 vector $\ell=\set{c\cdot\vec{s}\suchthat c\in\Re}$,
 this person has found the coefficient $c_{\vec{p}}\,$
-with the property that $\vec{v}-c_{\vec{p}}\cdot\vec{s}\,$ is orthogonal
-to $c_{\vec{p}}\,\vec{s}$.
+with the property that $\vec{v}-c_{\vec{p}}\vec{s}\,$ is orthogonal
+to $c_{\vec{p}}\vec{s}$.
+%</PictureOrthogonalProjectionIntoALine1>
 \begin{center}  \small
   \includegraphics{ch3.29}
 \end{center}
+%<*PictureOrthogonalProjectionIntoALine2>
 To solve for this coefficient, observe that because 
-$\vec{v}-c_{\vec{p}}\,\vec{s}\,$ is orthogonal to a scalar multiple 
+$\vec{v}-c_{\vec{p}}\vec{s}\,$ is orthogonal to a scalar multiple 
 of $\vec{s}$, it must be orthogonal to $\vec{s}\,$ itself.
 Then 
-$(\vec{v}-c_{\vec{p}}\,\vec{s})\dotprod \vec{s}=0$ gives that
+$(\vec{v}-c_{\vec{p}}\vec{s})\dotprod \vec{s}=0$ gives that
 $c_{\vec{p}}=\vec{v}\dotprod \vec{s}/\vec{s}\dotprod \vec{s}$.
+%</PictureOrthogonalProjectionIntoALine2>
 
-\begin{definition}
-\label{def:ProjIntoLine}
+\begin{definition}  \label{def:ProjIntoLine}
+%<*df:ProjIntoLine>
 The \definend{orthogonal projection of \( \vec{v} \) into the line
 spanned by a nonzero \( \vec{s}\, \)}\index{projection!orthogonal}%
 \index{projection!into a line} is this vector.
@@ -69,6 +75,7 @@ spanned by a nonzero \( \vec{s}\, \)}\index{projection!orthogonal}%
   \proj{\vec{v}}{\spanof{\vec{s}\,}}=
   \frac{ \vec{v}\dotprod\vec{s} }{ \vec{s}\dotprod\vec{s} }\cdot\vec{s}
 \end{equation*}
+%</df:ProjIntoLine>
 \end{definition}
 
 % \noindent \nearbyexercise{exer:LineProjFormIndOfVec} checks that the 
@@ -733,7 +740,8 @@ The prior subsection suggests
 that projecting into the line spanned by \( \vec{s} \)
 decomposes a vector $\vec{v}$ into two parts
 \begin{center}  \small
-  \begin{tabular}{@{}c@{}}\includegraphics{ch3.35}\end{tabular}
+  \vcenteredhbox{\includegraphics{ch3.35}}
+  % \begin{tabular}{@{}c@{}}\includegraphics{ch3.35}\end{tabular}
    \qquad
    $\displaystyle \vec{v}=\proj{\vec{v}}{\spanof{\vec{s}\,}}
              \,+\,\left(\vec{v}-\proj{\vec{v}}{\spanof{\vec{s}\,}}\right)$
@@ -741,20 +749,25 @@ decomposes a vector $\vec{v}$ into two parts
 that are orthogonal and so are not-interacting.
 We will now develop that suggestion.
 
-\begin{definition}
+\begin{definition}  \label{df:MutuallyOrthogonal}
+%<*df:MutuallyOrthogonal>
 Vectors \( \vec{v}_1,\dots,\vec{v}_k\in\Re^n \) are
 \definend{mutually orthogonal\/}\index{orthogonal!mutually}
 when any two are orthogonal:~if \( i\neq j \) then
 the dot product \( \vec{v}_i\dotprod\vec{v}_j \) is zero.
+%</df:MutuallyOrthogonal>
 \end{definition}
 
 \begin{theorem} \label{th:OrthoIsInd}
+%<*th:OrthoIsInd>
 If the vectors in a set \( \set{\vec{v}_1,\dots,\vec{v}_k}\subset\Re^n \)
 are mutually orthogonal and nonzero then that set is linearly
 independent.
+%</th:OrthoIsInd>
 \end{theorem}
 
 \begin{proof}
+%<*pf:OrthoIsInd>
 Consider a linear relationship
 \( c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k=\zero \).
 If $i\in \set{1,..\,,k}$ then taking the dot product of \( \vec{v}_i \)  
@@ -765,20 +778,24 @@ with both sides of the equation
    c_i\cdot(\vec{v}_i\dotprod\vec{v}_i)
    &=0
 \end{align*}
-shows, since \( \vec{v}_i\neq\zero \), that \( c_i\neq 0 \). 
+shows, since \( \vec{v}_i\neq\zero \), that \( c_i= 0 \). 
+%</pf:OrthoIsInd>
 \end{proof}
 
-\begin{corollary}
-\label{cor:OrthAndBigEnoughIsBasis}
+\begin{corollary}  \label{cor:OrthAndBigEnoughIsBasis}
+%<*co:OrthAndBigEnoughIsBasis>
 In a $k$~dimensional vector space,
 if the vectors in a size~\( k \) set
 are mutually orthogonal
 and nonzero then that set is a basis for the space.
+%</co:OrthAndBigEnoughIsBasis>
 \end{corollary}
 
 \begin{proof}
+%<*pf:OrthAndBigEnoughIsBasis>
 Any linearly independent size~\( k \) subset of a
 $k$~dimensional space is a basis. 
+%</pf:OrthAndBigEnoughIsBasis>
 \end{proof}
 
 Of course, the converse of \nearbycorollary{cor:OrthAndBigEnoughIsBasis} 
@@ -823,10 +840,12 @@ By the corollary $\sequence{\vec{\kappa}_1,\vec{\kappa}_2}$
 is a basis for $\Re^2$.
 \end{example}
 
-\begin{definition}
+\begin{definition}  \label{df:OrthogonalBasis}
+%<*df:OrthogonalBasis>
 An \definend{orthogonal basis\/}%
 \index{orthogonal!basis}\index{basis!orthogonal}
 for a vector space is a basis of mutually orthogonal vectors.
+%</df:OrthogonalBasis>
 \end{definition}
 
 % The next result gives a way to produce an orthogonal basis 
@@ -879,6 +898,7 @@ Again, the corollary gives the result is a basis for $\Re^3$.
 \begin{theorem}[Gram-Schmidt orthogonalization]
 \index{orthogonalization}\index{basis!orthogonalization}
 \label{th:GramSchmidt}
+%<*th:GramSchmidt>
 If \( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \)
 is a basis for a subspace of \( \Re^n \) then the vectors
 \begin{align*}
@@ -898,6 +918,7 @@ is a basis for a subspace of \( \Re^n \) then the vectors
 \end{align*}
 form an orthogonal basis for the
 same subspace.
+%</th:GramSchmidt>
 \end{theorem}
 
 \begin{remark}
@@ -906,6 +927,7 @@ definition of orthogonality for any other spaces.
 \end{remark}
 
 \begin{proof}
+%<*pf:GramSchmidt0>
 We will use induction to check that each \( \vec{\kappa}_i \) is nonzero,
 is in the span of $\sequence{\vec{\beta}_1,\ldots\,\vec{\beta}_i}$,
 and is orthogonal to all preceding vectors
@@ -916,18 +938,24 @@ Then with
 \( \sequence{\vec{\kappa}_1,\ldots\,\vec{\kappa}_k} \) 
 is a basis for the same space as is
 \( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \).
+%</pf:GramSchmidt0>
 
+%<*pf:GramSchmidt1>
 We shall only cover the cases up to \( i=3 \), to give the
 sense of the argument.
 The remaining details are \nearbyexercise{exer:GramSchmidt}.
+%</pf:GramSchmidt1>
 
+%<*pf:GramSchmidt2>
 The \( i=1 \) case is trivial; setting \( \vec{\kappa}_1 \) equal to 
 \( \vec{\beta}_1 \) 
 makes it a nonzero vector since $\vec{\beta}_1$ is a member of a basis, 
 it is obviously in the span of $\vec{\beta}_1$,
 and the `orthogonal to all preceding vectors' condition
 is satisfied vacuously.
+%</pf:GramSchmidt2>
 
+%<*pf:GramSchmidt3>
 In the \( i=2 \) case the expansion
 \begin{equation*}
   \vec{\kappa}_2=\vec{\beta}_2
@@ -954,7 +982,9 @@ And, $\vec{\kappa}_2$ is orthogonal to the only preceding vector
       -\proj{\vec{\beta}_2}{\spanof{\vec{\kappa}_1}})=0
 \end{equation*}
 because this projection is orthogonal.
+%</pf:GramSchmidt3>
 
+%<*pf:GramSchmidt4>
 The \( i=3 \) case is the same as the $i=2$ case except for one detail.
 As in the $i=2$ case, expand the definition. 
 \begin{align*}
@@ -987,6 +1017,8 @@ $\vec{\beta}$'s.
 Finally, 
 the calculation below shows that 
 $\vec{\kappa}_3$ is orthogonal to $\vec{\kappa}_1$.
+%</pf:GramSchmidt4>
+%<*pf:GramSchmidt5>
 (There is a difference between this calculation and the one in the $i=2$ case.
 Here the second line has two kinds of terms.
 As happened for $i=2$, 
@@ -1006,6 +1038,7 @@ in the line spanned by \( \vec{\kappa}_2 \).)
 \end{align*}
 A similar check shows that $\vec{\kappa}_3$ is also 
 orthogonal to $\vec{\kappa}_2$.
+%</pf:GramSchmidt5>
 \end{proof}
 
 Beyond having the vectors in the basis be orthogonal, we can also

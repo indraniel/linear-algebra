@@ -1,0 +1,174 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../map6} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Projection] % (optional, use only with long paper titles)
+{Three.VI Projection}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Projection}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Three.VI.1 .....
+\section{Orthogonal Projection Into a Line}
+%..........
+\begin{frame}
+\ExecuteMetaData[../map6.tex]{PictureOrthogonalProjectionIntoALine0}
+\begin{center}
+  \includegraphics{../ch3.28}
+  \hspace*{0.6in}
+  \includegraphics{../ch3.29}      
+\end{center}
+\pause
+\ExecuteMetaData[../map6.tex]{PictureOrthogonalProjectionIntoALine1}
+
+\pause
+\ExecuteMetaData[../map6.tex]{PictureOrthogonalProjectionIntoALine2}
+\end{frame}
+\begin{frame}
+\df[df:ProjIntoLine]
+\ExecuteMetaData[../map6.tex]{df:ProjIntoLine}
+\end{frame}
+
+
+
+% ..... Three.VI.2 .....
+\section{Gram-Schmidt Orthogonalization}
+%..........
+\begin{frame}{Mutually orthogonal vectors}
+The prior subsection suggests that
+projecting a vector $\vec{v}$ into the line spanned by \( \vec{s} \)
+decomposes $\vec{v}$ into two parts
+\begin{center}  \small
+  \vcenteredhbox{\includegraphics{../ch3.35}}
+   \qquad
+   $\displaystyle \vec{v}=\proj{\vec{v}}{\spanof{\vec{s}\,}}
+             \,+\,\left(\vec{v}-\proj{\vec{v}}{\spanof{\vec{s}\,}}\right)$
+\end{center}
+that are orthogonal and so are not-interacting.
+We will now develop that suggestion.
+\pause
+\df[df:MutuallyOrthogonal]
+\ExecuteMetaData[../map6.tex]{df:MutuallyOrthogonal}
+\end{frame}
+
+
+
+
+\begin{frame}
+\th[th:OrthoIsInd]
+\ExecuteMetaData[../map6.tex]{th:OrthoIsInd}
+\pause
+\pf
+\ExecuteMetaData[../map6.tex]{pf:OrthoIsInd}
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}
+\co[cor:OrthAndBigEnoughIsBasis]
+\ExecuteMetaData[../map6.tex]{co:OrthAndBigEnoughIsBasis}
+
+\pause
+\pf
+\ExecuteMetaData[../map6.tex]{pf:OrthAndBigEnoughIsBasis}
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}
+\df[df:OrthogonalBasis]
+\ExecuteMetaData[../map6.tex]{df:OrthogonalBasis}
+\end{frame}
+
+
+
+
+\begin{frame}
+\th[th:GramSchmidt]
+\ExecuteMetaData[../map6.tex]{th:GramSchmidt}
+
+\pause
+\pf
+\ExecuteMetaData[../map6.tex]{pf:GramSchmidt0}
+
+\pause
+\ExecuteMetaData[../map6.tex]{pf:GramSchmidt1}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../map6.tex]{pf:GramSchmidt2}
+
+\pause
+\ExecuteMetaData[../map6.tex]{pf:GramSchmidt3}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../map6.tex]{pf:GramSchmidt4}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../map6.tex]{pf:GramSchmidt5}
+\qed
+\end{frame}
+
+
+
+
+
+% % ..... Three.VI.3 .....
+% \section{Projection Into a Subspace}
+% %..........
+% \begin{frame}
+% \end{frame}
+
+
+
+
+%...........................
+% \begin{frame}
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
