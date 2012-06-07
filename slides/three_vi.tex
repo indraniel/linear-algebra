@@ -69,6 +69,32 @@
 
 
 \begin{frame}
+Note two things about orthogonal projection.
+\begin{enumerate}
+\item 
+We have an idea of `angle' in $\Re^n$ but we have not given such a 
+definition in some other spaces.
+This section's results will stick to spaces in which we have 
+covered `orthogonal,' namely the real spaces.
+
+\pause
+\item 
+We have decomposed $\vec{v}$ into two parts.
+\centergraphic{../ch3.29}
+Intuitively, some of $\vec{v}$ lies with the line and that gives
+the first part $c_{\vec{p}}\vec{s}$.
+The part of $\vec{v}$ that lies with a line orthogonal to 
+the given line is $\vec{v}-c_{\vec{p}}\vec{s}$.
+What's compelling about pairing these two parts 
+is that they don't interact in that the projection of one into the line
+spanned by the other is the zero vector.
+\end{enumerate}
+\end{frame}
+
+
+
+
+\begin{frame}
 \df[def:ProjIntoLine]
 \ExecuteMetaData[../map6.tex]{df:ProjIntoLine}
 
@@ -82,16 +108,17 @@ The projection of this $\Re^3$ vector into the line
 is this vector.
 \begin{equation*}
   \frac{\colvec{1 \\ -2 \\ 1}\dotprod\colvec{3 \\ 1 \\ 1}}{\colvec{3 \\ 1 \\ 1}\dotprod\colvec{3 \\ 1 \\ 1}}\cdot\colvec{3 \\ 1 \\ 1}
-  =\colvec{1/3 \\ 1/6 \\ 1/5}
+  =\colvec{1/3 \\ 1/6 \\ 1/6}
 \end{equation*}
 \end{frame}
 \begin{frame}
-The picture 
+\noindent This picture of that projection
 \centergraphic{asy/three_vi_3dprojtoline.png}
 brings out that the projection vector is quite short:
 $\norm{\vec{v}}=\sqrt(6)\approx 2.45$ while 
 $\norm{\proj{\vec{v}}{\spanof{\vec{s}\,}}}=\sqrt{1/6}\approx 0.41$.  
-The vector has hardly any component in the direction of the line.
+Only a small part of the vector $\vec{v}$ lies in the direction of the 
+line~$L$.
 \end{frame}
 
 
@@ -114,8 +141,23 @@ We will now develop that suggestion.
 \pause
 \df[df:MutuallyOrthogonal]
 \ExecuteMetaData[../map6.tex]{df:MutuallyOrthogonal}
+\ex
+The vectors of the standard basis $\stdbasis_3\subset\Re^3$
+are mutually orthogonal.
+\begin{equation*}
+  \colvec{1 \\ 0 \\ 0}, \colvec{0 \\ 1 \\ 0}, \colvec{0 \\ 0 \\ 1}
+\end{equation*}
+This remains true if we rotate this basis.
 \end{frame}
-
+\begin{frame}
+\ex
+These two vectors in $\Re^2$ are mutually orthogonal.
+\begin{center}
+  $\displaystyle \colvec{1 \\ 1},\,\colvec{1 \\ -1}$
+  \hspace*{.4in}
+  \vcenteredhbox{\includegraphics{asy/three_vi_2dmutuallyortho.pdf}}
+\end{center}
+\end{frame}
 
 
 
@@ -126,12 +168,7 @@ We will now develop that suggestion.
 \pf
 \ExecuteMetaData[../map6.tex]{pf:OrthoIsInd}
 \qed
-\end{frame}
-
-
-
-
-\begin{frame}
+\pause
 \co[cor:OrthAndBigEnoughIsBasis]
 \ExecuteMetaData[../map6.tex]{co:OrthAndBigEnoughIsBasis}
 
@@ -139,12 +176,8 @@ We will now develop that suggestion.
 \pf
 \ExecuteMetaData[../map6.tex]{pf:OrthAndBigEnoughIsBasis}
 \qed
-\end{frame}
 
-
-
-
-\begin{frame}
+\pause
 \df[df:OrthogonalBasis]
 \ExecuteMetaData[../map6.tex]{df:OrthogonalBasis}
 \end{frame}
@@ -175,6 +208,51 @@ We will now develop that suggestion.
 \begin{frame}
 \ExecuteMetaData[../map6.tex]{pf:GramSchmidt5}
 \qed
+\end{frame}
+
+
+
+\begin{frame}
+\ex  
+This is a basis for $\Re^3$.
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1 \\ 2}, 
+    \colvec{-1 \\ 2 \\ 1}, 
+    \colvec{0 \\ 3 \\ -1}}
+\end{equation*}
+We produce the new basis by starting with $\vec{\beta}_1$.
+\begin{equation*}
+    \vec{\kappa}_1=\colvec{1 \\ 1 \\ 2}
+\end{equation*}
+\pause
+The next step is 
+$\vec{\kappa}_2=\vec{\beta}_2-\proj{\vec{\beta}_2}{\spanof{\vec{\kappa}_1}}$.
+\begin{equation*}
+  \colvec{-1 \\ 2 \\ 1}-
+  \frac{\colvec{-1 \\ 2 \\ 1}\dotprod\colvec{1 \\ 1 \\ 2}}{\colvec{1 \\ 1 \\ 2}\dotprod\colvec{1 \\ 1 \\ 2}}\cdot\colvec{1 \\ 1 \\ 2}
+  =\colvec{-3/2 \\ 3/2 \\ 0}
+\end{equation*}
+\end{frame}
+\begin{frame}
+The third step is 
+$\vec{\kappa}_3=\vec{\beta}_3-\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}
+                               -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}}$.
+\begin{equation*}
+  \colvec{0 \\ 3 \\ -1}-
+  \frac{\colvec{0 \\ 3 \\ -1}\dotprod\colvec{1 \\ 1 \\ 2}}{\colvec{1 \\ 1 \\ 2}\dotprod\colvec{1 \\ 1 \\ 2}}\cdot\colvec{1 \\ 1 \\ 2}
+  -\frac{\colvec{0 \\ 3 \\ -1}\dotprod\colvec{-3/2 \\ 3/2 \\ 0}}{\colvec{-3/2 \\ 3/2 \\ 0}\dotprod\colvec{-3/2 \\ 3/2 \\ 0}}\cdot\colvec{-3/2 \\ 3/2 \\ 0}
+  =\colvec{4/3 \\ 4/3 \\ -4/3}
+\end{equation*}
+\pause
+The members of this basis are mutually orthogonal.
+\begin{equation*}
+  K=\sequence{\colvec{1 \\ 1 \\ 2},
+              \colvec{-3/2 \\ 3/2 \\ 0},
+              \colvec{4/3 \\ 4/3 \\ -4/3}}
+\end{equation*}
+We could go on to 
+make this basis even more like $\stdbasis_3$ by normalizing all
+of its members to have length~$1$, making an \definend{orthonormal} basis.
 \end{frame}
 
 

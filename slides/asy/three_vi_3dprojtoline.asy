@@ -2,7 +2,7 @@
 import jh;
 real height; height=3cm; size(0,height);
 import settings;
-settings.render=-7;  // fewer jaggies but very slow
+settings.render=-10;  // fewer jaggies but very slow
 settings.maxtile=(10,10);
 
 import three;
@@ -18,7 +18,7 @@ pen dotted_line_pen=linecap(1)
   +linetype(new real[] {0,4});
 
 // Axes
-axes3(xlabel="",ylabel="",zlabel="", 
+axes3(xlabel="{\tiny x}",ylabel="{\tiny y}",zlabel="{\tiny z}", 
       min=(-2.75,-1.75,-1),
       max=(4.75,1.25,1),
       AXISPEN,
