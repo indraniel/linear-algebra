@@ -54,7 +54,7 @@
 %..........
 \begin{frame}{Nonsingular matrices}
 An \( \nbyn{n} \) matrix \( T \) is nonsingular if and only if
-each of these holds:
+each of these holds:%
 \ExecuteMetaData[../det1.tex]{EquivalentOfNonsingular}
 In this chapter we will give a formula that determines whether a
 matrix is nonsingular.
@@ -72,7 +72,8 @@ matrix is nonsingular.
 
 \begin{frame}
 We will define the determinant function not by listing how 
-to compute it (because that has no clear connection to its purpose)
+to compute it (because that turns out to have 
+no immediately clear connection to its purpose)
 but instead by some of its properties.
 Then we will show that only one function with those properties exists.
 \end{frame}
@@ -117,7 +118,80 @@ Then we will show that only one function with those properties exists.
 
 
 
+\begin{frame}
+We can compute the determinant of a matrix using Gauss's Method
+(presuming that the determinant function exists, which we will
+cover later).
 
+\ex  On this matrix the Gauss's Method steps on the first column are 
+is $-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
+These leave the determinant unchanged by property~(1).
+\begin{equation*}
+  \begin{vmat}
+    1  &3  &-2 \\
+    2  &0  &4  \\
+    3  &-1 &5
+  \end{vmat}
+  =
+  \begin{vmat}
+    1  &3   &-2 \\
+    0  &-6  &-8  \\
+    0  &-10 &-11
+  \end{vmat}
+\end{equation*}
+\pause
+On the second column we do $-(5/3)\rho_2+\rho_3$.
+Again, property~(1) says the determinant is unchanged.
+\begin{equation*}
+  =
+  \begin{vmat}
+    1  &3   &-2 \\
+    0  &-6  &-8  \\
+    0  &0   &-7/3
+  \end{vmat}
+\end{equation*}
+\pause
+By the prior lemma we find the determinant by taking the product down the
+diagonal.
+\begin{equation*}
+  =1\cdot(-6)\cdot(-7/3)=14
+\end{equation*}
+\end{frame}
+\begin{frame}
+\ex
+This matrix requires a row swap, which changes the sign of the determinant.
+\begin{equation*}
+  \begin{vmat}
+    0  &3  &1 \\
+    1  &2  &0 \\
+    1  &5  &2
+  \end{vmat}
+  =
+  -\begin{vmat}
+    1  &2  &0 \\
+    0  &3  &1 \\
+    1  &5  &2
+  \end{vmat}
+\end{equation*}
+Performing $-\rho_1+\rho_3$
+\begin{equation*}
+  =-\begin{vmat}
+    1  &2  &0 \\
+    0  &3  &1 \\
+    0  &3  &2
+  \end{vmat}
+\end{equation*}
+and $-\rho_2+\rho_3$
+\begin{equation*}
+  =-\begin{vmat}
+    1  &2  &0 \\
+    0  &3  &1 \\
+    0  &0  &1
+  \end{vmat}
+\end{equation*}
+and then multiplying down the diagonal gives that the determinant
+of the original matrix is $-3$.
+\end{frame}
 
 
 
@@ -135,6 +209,79 @@ Then we will show that only one function with those properties exists.
 
 % ..... Four.I.3 .....
 \section{The Permutation Expansion}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{DifferentGaussMethodReductions}
+\end{frame}
+\begin{frame}
+That the above computation gives a consistent result for these two
+ways to do a reduction on one matrix does not ensure that determinants
+always give a well-defined value.
+The way that we have given to compute determinant values does not
+plainly eliminate the possibility that there might be, say,
+two reductions of some $\nbyn{7}$~matrix that lead to different 
+determinant value outputs.
+In that case we would not have a function, since the definition of a
+function is that for each input there must be exactly one output. 
+
+\pause
+To show that determinants are well-defined 
+we will give an alternative way to compute
+the value of a determinant. 
+This new way is less useful in practice since it 
+makes the computations awkward and slow, which is why we didn't start with it.
+But it is useful for theory since it makes the proof that we need easier.
+\end{frame}
+
+
+
+\begin{frame}{The determinant function is not linear}
+\ex
+The determinant function is not linear.
+Here,
+the second matrix is twice the first but the determinant does not double.
+\begin{equation*}
+  \begin{vmat}
+    3  &-3  &9 \\
+    1  &-1   &7 \\
+    2  &4   &0
+  \end{vmat}
+  =-72
+  \quad
+  \begin{vmat}
+    6  &-6  &18 \\
+    2  &-2   &14 \\
+    4  &8   &0
+  \end{vmat}
+  =-576
+\end{equation*}
+Instead, the determinant scales one row at a time:   
+\begin{equation*}
+  \begin{vmat}
+    3  &-3  &9 \\
+    1  &-1   &7 \\
+    2  &4   &0
+  \end{vmat}
+  =3\cdot
+  \begin{vmat}
+    1  &-1  &3 \\
+    1  &-1   &7 \\
+    2  &4   &0
+  \end{vmat}
+\end{equation*}
+by property~(3) of \nearbydefinition{def:Det}
+\begin{equation*}
+  =6\cdot
+  \begin{vmat}
+    1  &-1  &3 \\
+    1  &-1   &7 \\
+    1  &2   &0
+  \end{vmat}
+  =6\cdot(-12)
+\end{equation*}
+\end{frame}
+
+
+
 %..........
 \begin{frame}{Multilinear}
 \lm[lem:DetsMultilinear]
@@ -165,7 +312,7 @@ Then we will show that only one function with those properties exists.
 \pause
 Recall Definition~Three.IV.\ref{df:PermutationMatrix},
 that a \definend{permutation matrix}
-is square, with all of its entries~$0$'s except for
+is square and all of its entries are~$0$'s except for
 a single~$1$ in each row and column.
 
 \ExecuteMetaData[../det1.tex]{NotationForPermutationMatrices}

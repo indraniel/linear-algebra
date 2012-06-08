@@ -61,10 +61,8 @@ is trivial for \( \nbyn{1} \) matrices.
   \end{mat} 
   \quad\text{is nonsingular iff}\quad
   a \neq 0
-\end{equation*}
-As part of our development of the method for  
-computing matrix inverses, in 
-Corollary~Three.IV.\ref{cor:TwoByTwoInv} we gave the formula for 
+\end{equation*} 
+Corollary~Three.IV.\ref{cor:TwoByTwoInv} gives the formula for 
 the inverse of a $\nbyn{2}$ matrix. 
 \begin{equation*}
      \begin{mat}
@@ -1268,12 +1266,12 @@ if there is an $\nbyn{n}$ determinant function then it is unique.
 
 \begin{proof}
 %<*pf:DetFcnIsUnique>
-For any $\nbyn{n}$ matrix 
-we can perform Gauss' method on the 
+Perform Gauss' method on the 
 matrix, keeping track of how the sign alternates on row swaps, and then 
-multiply down the diagonal of the echelon form result.
+get the value by
+multiplying down the diagonal of the echelon form result.
 By the definition and the lemma,
-all $\nbyn{n}$ determinant functions must return the same value on the matrix.
+all $\nbyn{n}$ determinant functions must return this value on the matrix.
 %</pf:DetFcnIsUnique>
 \end{proof}
 
@@ -1876,20 +1874,20 @@ In the rest of the section we will do that.
 
 
 \subsection{The Permutation Expansion}
+%<*DifferentGaussMethodReductions>
 The prior subsection defines a function to be a determinant if it
-satisfies four conditions, and
+satisfies four conditions and
 shows that there is at most one $\nbyn{n}$ determinant function for
 each $n$.
 What is left is to show that for each $n$ such a function exists.
 
-How could such a function not exist?
-After all, we have no difficulty computing determinants. 
-We just start with a square matrix,
-use Gauss' method, and end by multiplying down the diagonal to
-get a number.
+But, we easily compute determinants: 
+use Gauss' method, keeping track of the sign changes from row swaps, 
+and end by multiplying down the diagonal.
+So how could such a function not exist?
 
-The difficulty is that we must show that 
-the computation gives a well-defined result.
+The difficulty is to show that 
+the computation gives a well-defined\Dash that is, unique\Dash result.
 Consider these two Gauss' method reductions
 of the same matrix, the first without any row swap
 \begin{equation*}
@@ -1920,11 +1918,11 @@ and the second with one.
     0  &2/3
   \end{mat}
 \end{equation*}
-Both
-calculations yield the determinant $-2$ 
+Both yield the determinant $-2$ 
 since in the second one
-we must keep track of the fact that the row swap changes the sign of the result
-of multiplying down the diagonal.
+we note that the row swap changes the sign of the result
+we get by multiplying down the diagonal.
+%</DifferentGaussMethodReductions>
 To illustrate how a computation that is like the ones that we are doing could 
 fail to be well-defined, 
 suppose that \nearbydefinition{def:Det} did not include condition~(2). 
@@ -1938,7 +1936,13 @@ function that satisfies conditions (1), (3), (4), and also this
 altered second condition. 
 
 Of course, observing that \nearbydefinition{def:Det} does the right thing
-with these two reductions of a single matrix is not enough.
+with these two reductions of the above matrix is not enough.
+That is, the way that we have given to compute determinant values does not
+plainly eliminate the possibility that there might be, say,
+two reductions of some $\nbyn{7}$~matrix that lead to different 
+determinant value outputs.
+In that case we would not have a function, since the definition of a
+function is that for each input there must be exactly one output. 
 In the rest of this 
 section we will show that there is never a conflict.
 
@@ -1955,9 +1959,11 @@ section we will show that there is never a conflict.
 % So the development below will not proceed in this way.
 % \end{remark}
 
-To do this we will define an alternative way to compute
-the value of a determinant, one that makes it easier to 
-prove that the conditions are satisfied.
+To do this we will define an alternative way to find
+the value of a determinant.
+(This new way is less useful in practice since it 
+makes the computations awkward and slow, which is why we didn't start with it.
+But it is useful for theory and it makes the proof that we need easier.)
 The key idea is in   
 property~(3) of \nearbydefinition{def:Det}.
 It shows that the determinant function is not linear.
