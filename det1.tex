@@ -18,8 +18,9 @@ is singular.
 
 In our work since then the value of this distinction has been a theme.
 For instance, we now know that an 
-\( \nbyn{n} \) matrix \( T \) is nonsingluar if and only if
+\( \nbyn{n} \) matrix \( T \) is nonsingular if and only if
 each of these holds:
+%<*EquivalentOfNonsingular>
 \begin{itemize}
    \item any system \( T\vec{x}=\vec{b} \) has a solution 
           and that solution is unique;
@@ -30,6 +31,7 @@ each of these holds:
    \item any map that \( T \) represents is an isomorphism;
    \item an inverse matrix \( T^{-1} \) exists.
 \end{itemize}
+%</EquivalentOfNonsingular>
 So when we look at a particular square matrix, one of the first things
 that we ask is whether it is  
 nonsingular.
@@ -50,6 +52,7 @@ we will often simply say `matrix' in place of `square matrix'.
 
 
 \section{Def{}inition}
+%<*DeterminantIntro>
 Determining nonsingularity
 is trivial for \( \nbyn{1} \) matrices.
 \begin{equation*}
@@ -93,6 +96,7 @@ function
 $\map{\det_{\nbyn{n}}}{\matspace_{\nbyn{n}}}{\Re}$ 
 such that an $\nbyn{n}$ matrix $T$ is nonsingular if and
 only if $\det_{\nbyn{n}}(T)\neq 0$.
+%</DeterminantIntro>
 (We usually omit the subscript \( \nbyn{n} \) because 
 the size of \( T \) tells us which determinant function we mean.)
 
@@ -1012,8 +1016,8 @@ and also describe formulas that compute this function.
 from the start we will say `\( \det(T) \)' instead of
 `if there is a unique determinant function then \( \det(T) \)'.)
 
-\begin{definition}
-\label{def:Det}
+\begin{definition}  \label{def:Det}
+%<*df:Det>
 A \( \nbyn{n} \) \definend{determinant\/}\index{determinant!definition}%
 \index{matrix!determinant} is a function
 \( \map{\det}{\matspace_{\nbyn{n}}}{\Re} \) such that
@@ -1047,9 +1051,11 @@ A \( \nbyn{n} \) \definend{determinant\/}\index{determinant!definition}%
 \end{enumerate}
 (the $\vec{\rho}\,$'s are the rows of the matrix).
 We often write \( \deter{T} \) for \( \det (T) \).
+%</df:Det>
 \end{definition}
 
 \begin{remark}  \label{rem:SwapRowsRedun}
+%<*re:SwapRowsRedun>
 Property~(2) is redundant since
 \begin{equation*}
    T\;\grstep{\rho_i+\rho_j}
@@ -1060,6 +1066,7 @@ Property~(2) is redundant since
 \end{equation*}
 swaps rows \( i \) and~\( j \).
 We have listed it only for convenience.
+%</re:SwapRowsRedun>
 \end{remark}
 
 \begin{remark}
@@ -1078,25 +1085,32 @@ shows that we do not need it here.
 % diagonal.)
 
 \begin{lemma}   \label{le:IdenRowsDetZero}
+%<*lm:IdenRowsDetZero>
 A matrix with two identical rows has a determinant of zero.
 A matrix with a zero row has a determinant of zero.
 A matrix is nonsingular if and only if its determinant is nonzero.
 The determinant of an echelon form matrix is the product down its diagonal.
+%</lm:IdenRowsDetZero>
 \end{lemma}
 
 \begin{proof}
+%<*pf:IdenRowsDetZero0>
 To verify the first sentence, swap the two equal rows.
 The sign of the determinant changes but the matrix is the same
 and so its determinant is the same.
 Thus the determinant is zero.
+%</pf:IdenRowsDetZero0>
 
+%<*pf:IdenRowsDetZero1>
 The second sentence follows from property~(3).
 Multiply the zero row by two.
 That doubles the determinant but it also
 leaves the row unchanged and hence 
 leaves the determinant unchanged. 
 Thus the determinant must be zero.
+%</pf:IdenRowsDetZero1>
 
+%<*pf:IdenRowsDetZero2>
 For the third sentence, 
 where $T \rightarrow\cdots\rightarrow\hat{T}$ is the
 Gauss-Jordan reduction, by the definition
@@ -1107,7 +1121,9 @@ A nonsingular $T$ Gauss-Jordan reduces to an identity matrix
 and so has a nonzero determinant.
 A singular $T$ reduces to a $\hat{T}$ with a zero row;
 by the second sentence of this lemma its determinant is zero.
+%</pf:IdenRowsDetZero2>
 
+%<*pf:IdenRowsDetZero3>
 The fourth sentence has two cases.
 If the echelon form matrix is singular then
 it has a zero row.
@@ -1116,7 +1132,9 @@ the product down its diagonal is zero.
 By the third sentence the determinant is zero and
 therefore this matrix's determinant equals the
 product down its diagonal.
+%</pf:IdenRowsDetZero3>
 
+%<*pf:IdenRowsDetZero4>
 If the echelon form matrix is nonsingular then none of its diagonal entries
 is zero so we can use property~(3) to get $1$'s on the diagonal
 (again, the vertical bars \( \deter{\cdots} \) indicate the determinant
@@ -1153,6 +1171,7 @@ using property~(1) of the definition, leaves the identity matrix.
 \end{equation*}
 So in this case also, the determinant
 is the product down the diagonal. 
+%</pf:IdenRowsDetZero4>
 \end{proof}
 
 That gives us a way to compute the value of a determinant
@@ -1240,18 +1259,22 @@ if one exists then we know what value it gives to the matrix \Dash
 if there is a function with properties (1)-(4) then on the above 
 matrix the function must return $5$.
 
-\begin{lemma}
+\begin{lemma} \label{lm:DetFcnIsUnique}
+%<*lm:DetFcnIsUnique>
 For each $n$, 
 if there is an $\nbyn{n}$ determinant function then it is unique.
+%</lm:DetFcnIsUnique>
 \end{lemma}
 
 \begin{proof}
+%<*pf:DetFcnIsUnique>
 For any $\nbyn{n}$ matrix 
 we can perform Gauss' method on the 
 matrix, keeping track of how the sign alternates on row swaps, and then 
 multiply down the diagonal of the echelon form result.
 By the definition and the lemma,
 all $\nbyn{n}$ determinant functions must return the same value on the matrix.
+%</pf:DetFcnIsUnique>
 \end{proof}
 
 The `if there is an $\nbyn{n}$ determinant function' 
@@ -1991,12 +2014,16 @@ for \( \vec{v}, \vec{w}\in V \) and \( k\in\Re \).
 \end{definition}
 
 \begin{lemma}  \label{lem:DetsMultilinear}
+%<*lm:DetsMultilinear>
 Determinants are multilinear.
+%</lm:DetsMultilinear>
 \end{lemma}
 
 \begin{proof}
+%<*pf:DetsMultilinear0>
 Property~(2) here is just condition~(3) in \nearbydefinition{def:Det}
 so we need only verify property~(1).
+%</pf:DetsMultilinear0>
 % \begin{equation*}
 %   \det(\vec{\rho}_1,\dots,\vec{v}+\vec{w},
 %       \dots,\vec{\rho}_n)
@@ -2004,6 +2031,7 @@ so we need only verify property~(1).
 %   +\det(\vec{\rho}_1,\dots,\vec{w},\dots,\vec{\rho}_n)
 % \end{equation*}
 
+%<*pf:DetsMultilinear1>
 There are two cases.
 If the set of other rows
 \(
@@ -2012,7 +2040,9 @@ If the set of other rows
 \)
 is linearly dependent then all three matrices are singular and so all
 three determinants are zero and the equality is trivial.
+%</pf:DetsMultilinear1>
 
+%<*pf:DetsMultilinear2>
 Therefore assume that the set of other rows is linearly independent.
 This set has $n-1$ members so we can make a basis by 
 adding one more vector
@@ -2055,6 +2085,8 @@ The $i$-th row becomes this.
   (v_2+w_2)\vec{\rho}_2+\cdots+(v_i+w_i)\vec{\beta}
             +\dots+(v_n+w_n)\vec{\rho}_n 
 \end{equation*}
+%</pf:DetsMultilinear2>
+%<*pf:DetsMultilinear3>
 Next add $-(v_2+w_2)\vec{\rho}_2$, etc., to eliminate 
 all of the terms from the other rows.
 Apply the definition of determinant's condition~(3).
@@ -2077,6 +2109,7 @@ That is, start with the operations
 of adding $v_1\vec{\rho}_1$ to $v_i\vec{\beta}$ 
 and $w_1\vec{\rho}_1$ to $w_i\vec{\rho}_1$, etc.,
 to get the expansions of $\vec{v}$ and $\vec{w}$.
+%</pf:DetsMultilinear3>
 \end{proof}
 
 Multilinearity allows us to expand a determinant into a sum of
@@ -2334,14 +2367,13 @@ By factoring out the scalars we can further reduce the
 determinants that we must compute to those
 one-entry-per-row-and-column matrices where all the entries are $1$'s.
 
-\begin{definition}
-A square matrix whose entries are $0$ except for
-one $1$ in each row and column is a
+Recall Definition~Three.IV.\ref{df:PermutationMatrix}, that
+a square matrix whose entries are~$0$'s except for
+a single~$1$ in each row and column is a
 \definend{permutation matrix}.\index{permutation matrix}%
 \index{matrix!permutation}
-\end{definition}
-
-We next introduce a notation for permutation matrices.
+%<*NotationForPermutationMatrices>
+We now introduce a notation for permutation matrices.
 Let $\iota_j$ be the row vector that is all $0$'s except for a $1$ in its 
 $j$-th entry, so that the four-wide $\iota_2$ is $\rowvec{0 &1 &0 &0}$.
 We can construct permutation matrices by 
@@ -2365,11 +2397,14 @@ $\iota$'s.
      0  &0  &0  &1
   \end{mat}
 \end{equation*}
+%</NotationForPermutationMatrices>
 
-\begin{definition}
+\begin{definition}  \label{df:permutation}
+%<*df:permutation>
 An \definend{\( n \)-permutation}\index{permutation}
-is an arrangement of the numbers 
+is a sequence consisting of the numbers 
 $1$, \ldots, $n$.
+%</df:permutation>
 \end{definition}
 
 \begin{example} \label{ex:AllTwoThreePerms}
@@ -2438,7 +2473,8 @@ $\iota_{\phi_5(2)}=\iota_1$, and $\iota_{\phi_5(3)}=\iota_2$.\begin{equation*}
 \end{equation*}
 \end{example}
 
-\begin{definition}
+\begin{definition} \label{df:PermutationExpansion}
+%<*df:PermutationExpansion>
 The \definend{permutation expansion}\index{determinant!permutation expansion}%
 \index{permutation expansion}
 for determinants is
@@ -2461,7 +2497,9 @@ for determinants is
    \end{array}
 \end{equation*}
 where \( \phi_1,\ldots,\phi_k \) are all of the \( n \)-permutations.
+%</df:PermutationExpansion>
 \end{definition}
+%<*SummationForPermutationExpansion>
 This formula is often written in 
 \definend{summation 
 notation}\index{summation notation!for permutation expansion}
@@ -2474,6 +2512,7 @@ notation}\index{summation notation!for permutation expansion}
 read aloud as,
 ``the sum, over all permutations \( \phi \), of terms having the form
 \( t_{1,\phi(1)}t_{2,\phi(2)}\cdots t_{n,\phi(n)} \deter{P_{\phi}} \).''
+%</SummationForPermutationExpansion>
 
 
 \begin{example}
@@ -2540,17 +2579,21 @@ We will just state the result here and
 defer its proof to the following subsection.
 
 
-\begin{theorem}
-\index{determinant!exists} \label{th:DetsExist}
+\begin{theorem} \label{th:DetsExist}
+\index{determinant!exists} 
+%<*th:DetsExist>
 For each $n$ there is an $\nbyn{n}$ determinant function.
+%</th:DetsExist>
 \end{theorem}
 
 Also in the next subsection is the proof of this
 result (these two proofs share some features).
 
-\begin{theorem}
+\begin{theorem}  \label{th:DeterminantOfAMatrixEqualsDeterminantOfTranspose}
 \index{transpose!determinant}
+%<*th:DeterminantOfAMatrixEqualsDeterminantOfTranspose>
 The determinant of a matrix equals the determinant of its transpose.
+%</th:DeterminantOfAMatrixEqualsDeterminantOfTranspose>
 \end{theorem}
 
 Because of this theorem,
@@ -2560,16 +2603,20 @@ sign, etc.),
 all of the results also hold in terms of columns.
 
 \begin{corollary} \label{cor:ColSwapChgSign} \label{cor:DetsMultiInCols}
+%<*co:ColSwapChgSign>
   A matrix with two equal columns is singular.
   Column swaps change the sign of a determinant.
   Determinants are multilinear in their columns.
+%</co:ColSwapChgSign>
 \end{corollary}
 
 \begin{proof}
+%<*pf:ColSwapChgSign>
 For the first statement, 
 transposing the matrix results in a matrix with the same determinant,
 and with two equal rows, and hence a determinant of zero.
-We can prove the other two in the same way.
+Prove the other two in the same way.
+%</pf:ColSwapChgSign>
 \end{proof}
 
 We finish this subsection with a summary:
@@ -3438,7 +3485,8 @@ an even number of swaps and the other with an odd number of swaps.
 So the critical step will be a way to calculate whether the 
 number of swaps that it takes could be even or odd.
 
-\begin{definition}
+\begin{definition} \label{df:Inversion}
+%<*df:Inversion>
 Two rows of a permutation matrix
 \begin{equation*}
   \begin{mat}
@@ -3452,6 +3500,7 @@ Two rows of a permutation matrix
 such that \( k>j \) are in an \definend{inversion}\index{inversion}%
 \index{permutation!inversions}
 of their natural order.
+%</df:Inversion>
 \end{definition}
 
 \begin{example}
@@ -3475,11 +3524,14 @@ has three inversions: \( \iota_3 \) precedes \( \iota_1 \),
 \end{example}
 
 \begin{lemma} \label{le:SwapsChangeSgn}
+%<*lm:SwapsChangeSgn>
 A row-swap in a permutation matrix changes the number of 
 inversions from even to odd, or from odd to even.
+%</lm:SwapsChangeSgn>
 \end{lemma}
 
 \begin{proof}
+%<*pf:SwapsChangeSgn0>
 Consider a swap of rows $j$ and $k$, where $k>j$.
 If the two rows are adjacent
 \begin{equation*}
@@ -3505,7 +3557,9 @@ either removing or producing one inversion depending on whether
 \( \phi(j)>\phi(k) \) or not.
 Consequently, the total number of inversions changes from odd to even 
 or from even to odd.
+%</pf:SwapsChangeSgn0>
 
+%<*pf:SwapsChangeSgn1>
 If the rows are not adjacent then we can swap them 
 via a sequence of adjacent swaps, first bringing row~$k$ up
 \begin{equation*}
@@ -3532,6 +3586,8 @@ via a sequence of adjacent swaps, first bringing row~$k$ up
      \vdots
    \end{mat}
 \end{equation*}
+%</pf:SwapsChangeSgn1>
+%<*pf:SwapsChangeSgn2>
 and then bringing row~$j$ down.
 \begin{equation*}
   \grstep{\rho_{j+1}\swap\rho_{j+2}}\;\;
@@ -3553,28 +3609,34 @@ inversions from odd to even or from even to odd.
 There are an odd number \( (k-j)+(k-j-1) \) of them.
 The total change in the number of inversions 
 is from even to odd or from odd to even.
+%</pf:SwapsChangeSgn2>
 \end{proof}
 
-\begin{corollary}
-\label{cor:ParityInversEqParitySwaps}
+\begin{corollary}  \label{cor:ParityInversEqParitySwaps}
+%<*co:ParityInversEqParitySwaps>
 If a permutation matrix has an odd number of inversions then swapping
 it to the identity takes an odd number of swaps.
 If it has an even number of inversions then swapping to the
 identity takes an even number of swaps.
+%</co:ParityInversEqParitySwaps>
 \end{corollary}
 
 \begin{proof}
+%<*pf:ParityInversEqParitySwaps>
 The identity matrix has zero inversions.
 To change an odd number to zero requires an odd number of swaps,
 and to change an even number to zero requires an even number of swaps.
+%</pf:ParityInversEqParitySwaps>
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{df:Signum}
+%<*df:Signum>
 The \definend{signum}\index{permutation!signum}\index{signum}%
 \index{sgn!see{signum}}
 of a permutation \( \sgn(\phi) \)
 is \( -1 \) if the number of inversions in \( P_\phi \) is odd and is
 \( +1 \) if the number of inversions is even.
+%</df:Signum>
 \end{definition}
 
 \begin{example}
@@ -3600,6 +3662,7 @@ so
 while \( \sgn(\phi_2)=-1 \) because there is one.
 \end{example}
 
+%<*DefiningDFunction>
 We still have not shown that the determinant function is
 well-defined because we have not considered row operations 
 on permutation matrices other than row swaps.
@@ -3620,17 +3683,23 @@ is clearly well-defined\Dash  just count them.
 Therefore, we will finish showing that an~$\nbyn{n}$ determinant function 
 exists by showing  that this $d$
 satisfies the conditions in the determinant's definition.
+%</DefiningDFunction>
 
-\begin{lemma}
+\begin{lemma} \label{lm:DeterminantsExist}
 \index{determinant!exists}
+%<*lm:DeterminantsExist>
 The function \( d \) above is a determinant.
 Hence determinants exist for every $n$.
+%</lm:DeterminantsExist>
 \end{lemma}
 
 \begin{proof}
-We'll must check that it has the four properties
+%<*pf:DeterminantsExist0>
+We must check that it has the four properties
 from the definition.
+%</pf:DeterminantsExist0>
 
+%<*pf:DeterminantsExist1>
 Property~(4) is easy; where $I$ is the $\nbyn{n}$ identity, in
 \begin{equation*}
   d(I)=
@@ -3641,7 +3710,9 @@ Property~(4) is easy; where $I$ is the $\nbyn{n}$ identity, in
 all of the terms in the summation are zero
 except for the product down the diagonal,
 which is one.
+%</pf:DeterminantsExist1>
 
+%<*pf:DeterminantsExist2>
 For property~(3) consider $d(\hat{T})$ where 
 \( T\smash[b]{\grstep{k\rho_i}}\hat{T} \).
 \begin{multline*}
@@ -3660,7 +3731,9 @@ Factor out the~\( k \) to get the desired equality.
                                  \sgn(\phi)                 
   =k\cdot d(T)
 \end{equation*}
+%</pf:DeterminantsExist2>
 
+%<*pf:DeterminantsExist3>
 For~(2) suppose that 
 \( T\;\smash[b]{\grstep{\rho_i\swap\rho_j}}\;\hat{T} \).
 We must show this is the negative of $d(T)$.
@@ -3692,6 +3765,8 @@ of $d(\hat{T})$ giving the term
        &                &\vdots                   &
   \end{mat}
 \end{equation*}
+%</pf:DeterminantsExist3>
+%<*pf:DeterminantsExist4>
 It is the result of the $\rho_i\swap\rho_j$ operation performed on this
 matrix.
 \begin{equation*}
@@ -3721,7 +3796,9 @@ $\hat{t}_{i,\phi(i)}=t_{j,\phi(i)}=t_{j,\sigma(j)}$
 and $\hat{t}_{j,\phi(j)}=t_{i,\phi(j)}=t_{i,\sigma(i)}$. 
 But the two terms are negatives of each other
 since \( \sgn(\phi)=-\sgn(\sigma) \) by \nearbylemma{le:SwapsChangeSgn}.
+%</pf:DeterminantsExist4>
 
+%<*pf:DeterminantsExist5>
 Now, any permutation $\phi$ can be derived from some 
 other permutation $\sigma$ by such a swap,
 in one and only one way.
@@ -3744,8 +3821,10 @@ taken once and only once.
                                  \cdot\bigl(-\sgn(\sigma)\bigr)        
 \end{align*}
 Thus \( d(\hat{T})=-d(T) \).
+%</pf:DeterminantsExist5>
 
-To do property~(1) suppose that
+%<*pf:DeterminantsExist6>
+For property~(1) suppose that
 \( T\;\smash[b]{\grstep{k\rho_i+\rho_j}}\;\hat{T} \)
 and consider the effect of a row combination.
 \begin{align*}
@@ -3792,6 +3871,8 @@ Do the algebra.
              +d(T)          
      \end{aligned}
 \end{align*}
+%</pf:DeterminantsExist6>
+%<*pf:DeterminantsExist7>
 Finish by observing that the terms
 \( t_{1,\phi(1)}\cdots t_{i,\phi(i)} \cdots t_{i,\phi(j)}\cdots t_{n,\phi(n)}
    \sgn(\phi)  \) add to zero:
@@ -3801,6 +3882,7 @@ except that row~$j$ of $S$ is a copy of row~$i$ of $T$
 and so $S$ has two equal rows, rows~$i$ and~$j$.
 Since we have already shown that $d$ changes sign on row swaps,
 as in \nearbylemma{le:IdenRowsDetZero} we conclude that $d(S)=0$.
+%</pf:DeterminantsExist7>
 \end{proof}
 
 We have now shown that determinant functions exist for each size.
@@ -3851,12 +3933,15 @@ remaining from the prior subsection.
 % shows that they are inverses. 
 % \end{example}
 
-\begin{theorem}
+\begin{theorem} \label{th:DetMatrixEqualsDetTrans}
 \index{transpose!determinant}
+%<*th:DetMatrixEqualsDetTrans>
 The determinant of a matrix equals the determinant of its transpose.
+%</th:DetMatrixEqualsDetTrans>
 \end{theorem}
 
 \begin{proof}
+%<*pf:DetMatrixEqualsDetTrans0>
 Call the matrix \( T \) and denote the entries of \( \trans{T} \) with
 \( s \)'s so that \( t_{i,j}=s_{j,i} \).
 Substitution gives this
@@ -3885,6 +3970,8 @@ $s_{1,\phi^{-1}(1)}\cdots s_{n,\phi^{-1}(n)}$.
   =\sum_{\phi^{-1}}
      s_{1,\phi^{-1}(1)}\cdots s_{n,\phi^{-1}(n)} \sgn(\phi^{-1})
 \end{equation*}
+%</pf:DetMatrixEqualsDetTrans0>
+%<*pf:DetMatrixEqualsDetTrans1>
 \nearbyexercise{exer:PermInvFacts}
 shows that \( \sgn(\phi^{-1})=\sgn(\phi) \).
 Since every permutation is the inverse of another,
@@ -3895,6 +3982,7 @@ a sum over all inverses $\phi^{-1}$ is a sum over all permutations
   =\deter{\trans{T}}
 \end{equation*}
 as required.
+%</pf:DetMatrixEqualsDetTrans1>
 \end{proof}
 
 

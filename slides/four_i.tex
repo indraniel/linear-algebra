@@ -1,0 +1,332 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compatii\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../det1} % read refs from .aux file
+\usepackage{xr}\externaldocument{../map4} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Determinants] % (optional, use only with long paper titles)
+{Four.I Determinants; Definition}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Determinants}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Four.I.1,2 .....
+\section{Properties of Determinants}
+%..........
+\begin{frame}{Nonsingular matrices}
+An \( \nbyn{n} \) matrix \( T \) is nonsingular if and only if
+each of these holds:
+\ExecuteMetaData[../det1.tex]{EquivalentOfNonsingular}
+In this chapter we will give a formula that determines whether a
+matrix is nonsingular.
+\end{frame}
+
+
+
+
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{DeterminantIntro}  
+\end{frame}
+
+
+
+
+\begin{frame}
+We will define the determinant function not by listing how 
+to compute it (because that has no clear connection to its purpose)
+but instead by some of its properties.
+Then we will show that only one function with those properties exists.
+\end{frame}
+
+
+
+
+\begin{frame}{Definition of determinant}
+\df[def:Det]
+\ExecuteMetaData[../det1.tex]{df:Det}
+
+\pause 
+\re[rem:SwapRowsRedun] 
+\ExecuteMetaData[../det1.tex]{re:SwapRowsRedun}
+\end{frame}
+
+
+
+
+\begin{frame}{Consequences of the definition}
+\lm[le:IdenRowsDetZero]
+\ExecuteMetaData[../det1.tex]{lm:IdenRowsDetZero}
+
+\pause 
+\pf 
+\ExecuteMetaData[../det1.tex]{pf:IdenRowsDetZero0}
+
+\pause
+\ExecuteMetaData[../det1.tex]{pf:IdenRowsDetZero1}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:IdenRowsDetZero2}
+
+\pause
+\ExecuteMetaData[../det1.tex]{pf:IdenRowsDetZero3}  
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:IdenRowsDetZero4}
+\qed
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{The $\nbyn{n}$ determinant is unique}
+\lm[lm:DetFcnIsUnique]
+\ExecuteMetaData[../det1.tex]{lm:DetFcnIsUnique}
+
+\pause 
+\pf 
+\ExecuteMetaData[../det1.tex]{pf:DetFcnIsUnique}
+\qed
+\end{frame}
+
+
+
+% ..... Four.I.3 .....
+\section{The Permutation Expansion}
+%..........
+\begin{frame}{Multilinear}
+\lm[lem:DetsMultilinear]
+\ExecuteMetaData[../det1.tex]{lm:DetsMultilinear}
+
+\pause
+\pf
+\ExecuteMetaData[../det1.tex]{pf:DetsMultilinear0}
+
+\pause
+\ExecuteMetaData[../det1.tex]{pf:DetsMultilinear1}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DetsMultilinear2}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DetsMultilinear3}
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}{Permutation matrices}
+\df[df:permutation]
+\ExecuteMetaData[../det1.tex]{df:permutation}
+
+\pause
+Recall Definition~Three.IV.\ref{df:PermutationMatrix},
+that a \definend{permutation matrix}
+is square, with all of its entries~$0$'s except for
+a single~$1$ in each row and column.
+
+\ExecuteMetaData[../det1.tex]{NotationForPermutationMatrices}
+\end{frame}
+
+
+
+
+\begin{frame}{Permutation expansion}
+\df[df:PermutationExpansion]
+\ExecuteMetaData[../det1.tex]{df:PermutationExpansion}
+
+\pause
+\medskip
+\ExecuteMetaData[../det1.tex]{SummationForPermutationExpansion}
+\end{frame}
+
+
+
+
+\begin{frame}
+\th[th:DetsExist]
+\ExecuteMetaData[../det1.tex]{th:DetsExist}
+
+\pause
+\th[th:DeterminantOfAMatrixEqualsDeterminantOfTranspose]
+\ExecuteMetaData[../det1.tex]{th:DeterminantOfAMatrixEqualsDeterminantOfTranspose}
+
+\pause
+\co[cor:ColSwapChgSign]
+\ExecuteMetaData[../det1.tex]{co:ColSwapChgSign}
+\pause
+\pf
+\ExecuteMetaData[../det1.tex]{pf:ColSwapChgSign}
+\qed
+\end{frame}
+
+
+
+
+% ..... Four.I.4 .....
+\section{Determinants Exist}
+%..........
+\begin{frame}{Inversion}
+\df[df:Inversion]
+\ExecuteMetaData[../det1.tex]{df:Inversion}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\lm[le:SwapsChangeSgn]
+\ExecuteMetaData[../det1.tex]{lm:SwapsChangeSgn}
+
+\pause
+\pf
+\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn1}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn2}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{Signum}
+\df[df:Signum]
+\ExecuteMetaData[../det1.tex]{df:Signum}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\co[cor:ParityInversEqParitySwaps]
+\ExecuteMetaData[../det1.tex]{co:ParityInversEqParitySwaps}
+
+\pause
+\pf
+\ExecuteMetaData[../det1.tex]{pf:ParityInversEqParitySwaps}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{Determinants exist}
+\ExecuteMetaData[../det1.tex]{DefiningDFunction}
+\end{frame}
+\begin{frame}
+\lm[lm:DeterminantsExist]
+\ExecuteMetaData[../det1.tex]{lm:DeterminantsExist}
+
+\pf
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist0}
+
+\pause
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist1}
+% \end{frame}
+% \begin{frame}
+
+\pause
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist2}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist3}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist4}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist5}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist6}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist7}
+\qed
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}{The determinant of the transpose}
+\th[th:DetMatrixEqualsDetTrans]
+\ExecuteMetaData[../det1.tex]{th:DetMatrixEqualsDetTrans}
+
+\pf
+\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans1}
+\qed
+\end{frame}
+
+
+
+% % ..... Four.I.2 .....
+% \section{}
+% %..........
+% \begin{frame}
+% \end{frame}
+
+
+
+
+%...........................
+% \begin{frame}
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
