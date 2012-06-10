@@ -236,9 +236,7 @@ But it is useful for theory since it makes the proof that we need easier.
 
 \begin{frame}{The determinant function is not linear}
 \ex
-The determinant function is not linear.
-Here,
-the second matrix is twice the first but the determinant does not double.
+The second matrix is twice the first but the determinant does not double.
 \begin{equation*}
   \begin{vmat}
     3  &-3  &9 \\
@@ -246,7 +244,7 @@ the second matrix is twice the first but the determinant does not double.
     2  &4   &0
   \end{vmat}
   =-72
-  \quad
+  \qquad
   \begin{vmat}
     6  &-6  &18 \\
     2  &-2   &14 \\
@@ -254,36 +252,38 @@ the second matrix is twice the first but the determinant does not double.
   \end{vmat}
   =-576
 \end{equation*}
-Instead, the determinant scales one row at a time:   
-\begin{equation*}
+Instead, by property~(3) of \nearbydefinition{def:Det}
+the determinant scales one row at a time:   
+\begin{align*}
   \begin{vmat}
     3  &-3  &9 \\
     1  &-1   &7 \\
     2  &4   &0
   \end{vmat}
-  =3\cdot
+  &=3\cdot
   \begin{vmat}
     1  &-1  &3 \\
     1  &-1   &7 \\
     2  &4   &0
-  \end{vmat}
-\end{equation*}
-by property~(3) of \nearbydefinition{def:Det}
-\begin{equation*}
-  =6\cdot
+  \end{vmat}           \\
+  &=6\cdot
   \begin{vmat}
     1  &-1  &3 \\
     1  &-1   &7 \\
     1  &2   &0
-  \end{vmat}
-  =6\cdot(-12)
-\end{equation*}
+  \end{vmat}           
+  % &=6\cdot(-12)
+\end{align*}
 \end{frame}
 
 
 
 %..........
 \begin{frame}{Multilinear}
+\df[def:multilinear]
+\ExecuteMetaData[../det1.tex]{df:Multilinear}
+
+
 \lm[lem:DetsMultilinear]
 \ExecuteMetaData[../det1.tex]{lm:DetsMultilinear}
 
@@ -304,17 +304,192 @@ by property~(3) of \nearbydefinition{def:Det}
 
 
 
+\begin{frame}
+Multilinearity lets us break a determinant apart into a sum of 
+very simple determinants.
 
-\begin{frame}{Permutation matrices}
-\df[df:permutation]
-\ExecuteMetaData[../det1.tex]{df:permutation}
+\ex
+We can expand this determinant
+\begin{equation*}
+  \begin{vmat}
+    1 &2 \\
+    3 &4
+  \end{vmat}
+\end{equation*}
+along the first row
+\begin{equation*}
+  =\begin{vmat}
+    1 &0 \\
+    3 &4
+  \end{vmat}
+  +\begin{vmat}
+    0 &2 \\
+    3 &4
+  \end{vmat}
+\end{equation*}
+and the second row.
+\begin{equation*}
+  =\begin{vmat}
+    1 &0 \\
+    3 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 \\
+    0 &4
+  \end{vmat}
+  +\begin{vmat}
+    0 &2 \\
+    3 &0
+  \end{vmat}
+  +\begin{vmat}
+    0 &2 \\
+    0 &4
+  \end{vmat}
+\end{equation*}
+We have four matrices, each with a single nonzero entry in each row.
+
+\pause 
+The first and last determinants are $0$ because the matrices are
+nonsingular (since one row is a multple of the other).
+We are left with the two matrices in which there is one entry from the starting
+matrix from each row and column.
+\end{frame}
+
+
+
+
+\begin{frame}
+\ex
+Similarly we can break this determinant 
+\begin{equation*}
+  \begin{vmat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{vmat}
+\end{equation*}
+into a sum of determinants of matrices having one entry from the 
+starting matrix in each row.   
+\begin{equation*}
+  =\begin{vmat}
+    1 &0 &0 \\
+    4 &0 &0 \\
+    7 &0 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    4 &0 &0 \\
+    0 &8 &0
+  \end{vmat}
+  +\cdots+
+  \begin{vmat}
+    0 &0 &3 \\
+    0 &0 &6 \\
+    0 &8 &0
+  \end{vmat}
+  +\begin{vmat}
+    0 &0 &3 \\
+    0 &0 &6 \\
+    0 &0 &9
+  \end{vmat}
+\end{equation*}
+We have a number of matrices, each all $0$'s except that each row has a single
+entry from the original matrix.
 
 \pause
+For any of these determinants, if two rows have their original matrix entry 
+in the same column then the determant is~$0$,
+since if either entry is $0$ then the matrix has a zero row while if neither
+is~$0$ then each row is a multiple of the other.
+\pause
+Therefore, we are left with a sum of determinants, each all $0$'s but
+for a single entry from the original matrix in each row and column. 
+\end{frame}
+\begin{frame}
+\vspace*{-3ex}
+\begin{align*}
+  \begin{vmat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{vmat}
+  &=\begin{vmat}
+    1 &0 &0 \\
+    0 &5 &0 \\
+    0 &0 &9
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    0 &0 &6 \\
+    0 &8 &0
+  \end{vmat}            \\
+  &\quad+\begin{vmat}
+    0 &2 &0 \\
+    4 &0 &0 \\
+    0 &0 &9
+  \end{vmat}
+  +\begin{vmat}
+    0 &2 &0 \\
+    0 &0 &6 \\
+    7 &0 &0
+  \end{vmat}         \\
+  &\quad+\begin{vmat}
+    0 &0 &3 \\
+    4 &0 &0 \\
+    0 &8 &0
+  \end{vmat}
+  +\begin{vmat}
+    0 &0 &3 \\
+    0 &5 &0 \\
+    7 &0 &0
+  \end{vmat}            \\
+  &=45\cdot\begin{vmat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+    0 &0 &1
+  \end{vmat}
+  +48\cdot\begin{vmat}
+    1 &0 &0 \\
+    0 &0 &1 \\
+    0 &1 &0
+  \end{vmat}            \\
+  &\quad+72\cdot\begin{vmat}
+    0 &1 &0 \\
+    1 &0 &0 \\
+    0 &0 &1
+  \end{vmat}
+  +84\cdot\begin{vmat}
+    0 &1 &0 \\
+    0 &0 &1 \\
+    1 &0 &0
+  \end{vmat}         \\
+  &\quad+96\cdot\begin{vmat}
+    0 &0 &1 \\
+    1 &0 &0 \\
+    0 &1 &0
+  \end{vmat}
+  +105\cdot\begin{vmat}
+    0 &0 &1 \\
+    0 &1 &0 \\
+    1 &0 &0
+  \end{vmat}
+\end{align*}
+\end{frame}
+
+
+
+
+\begin{frame}{Permutation matrices}
 Recall Definition~Three.IV.\ref{df:PermutationMatrix},
 that a \definend{permutation matrix}
 is square and all of its entries are~$0$'s except for
 a single~$1$ in each row and column.
 
+\pause
+\df[df:permutation]
+\ExecuteMetaData[../det1.tex]{df:permutation}
+
+\pause
 \ExecuteMetaData[../det1.tex]{NotationForPermutationMatrices}
 \end{frame}
 
@@ -334,14 +509,16 @@ a single~$1$ in each row and column.
 
 
 \begin{frame}
+The proof of these two theorems is in the next subsection.
+
 \th[th:DetsExist]
 \ExecuteMetaData[../det1.tex]{th:DetsExist}
 
-\pause
 \th[th:DeterminantOfAMatrixEqualsDeterminantOfTranspose]
 \ExecuteMetaData[../det1.tex]{th:DeterminantOfAMatrixEqualsDeterminantOfTranspose}
 
 \pause
+\medskip
 \co[cor:ColSwapChgSign]
 \ExecuteMetaData[../det1.tex]{co:ColSwapChgSign}
 \pause
@@ -388,6 +565,20 @@ a single~$1$ in each row and column.
 \begin{frame}{Signum}
 \df[df:Signum]
 \ExecuteMetaData[../det1.tex]{df:Signum}
+\pause
+\ex The permutation $\map{\phi}{\set{1,2,3}}{\set{1,2,3}}$
+given by $\phi(1)=3$, $\phi(2)=2$, and $\phi(3)=1$ has three inversions:
+\begin{equation*}
+  P_{\phi}=
+  \begin{mat}
+    0 &0 &1 \\
+    0 &1 &0 \\
+    1 &0 &0
+  \end{mat}
+\end{equation*}
+$\iota_3$ is before $\iota_2$, $\iota_3$ is before $\iota_1$, and 
+$\iota_2$ is before $\iota_1$.
+So the signum of $\phi$ is $-1$.
 \end{frame}
 
 
