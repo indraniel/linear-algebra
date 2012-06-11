@@ -2385,11 +2385,11 @@ We now introduce a notation for permutation matrices.
 Let $\iota_j$ be the row vector that is all $0$'s except for a $1$ in its 
 $j$-th entry, so that the four-wide $\iota_2$ is $\rowvec{0 &1 &0 &0}$.
 We can construct permutation matrices by 
-permuting, that is, scrambling, the numbers $1$, $2$, \ldots, $n$,
+permuting the numbers $1$, $2$, \ldots, $n$,
 and using them as indices on the $\iota$'s.
 For instance, to get a \( \nbyn{4} \) permutation
-matrix, we can scramble the numbers from $1$ to $4$ into 
-this sequence \( \sequence{3,2,1,4} \) and take the corresponding 
+matrix, we can permute the numbers from $1$ to $4$ into 
+the sequence \( \sequence{3,2,1,4} \) and take the corresponding 
 $\iota$'s.
 \begin{equation*}
    \begin{mat}
@@ -2410,8 +2410,11 @@ $\iota$'s.
 \begin{definition}  \label{df:permutation}
 %<*df:permutation>
 An \definend{\( n \)-permutation}\index{permutation}
-is a sequence consisting of the numbers 
-$1$, \ldots, $n$.
+is a function on the first~$n$ positive integers
+$\map{\phi}{\set{1,\ldots,n}}{\set{1,\ldots,n}}$
+that is one-to-one and onto.
+Alternatively, we may denote it as the sequence 
+$\sequence{\phi(1),\phi(2),\ldots,\phi(n)}$.
 %</df:permutation>
 \end{definition}
 
@@ -3495,8 +3498,12 @@ number of swaps that it takes could be even or odd.
 
 \begin{definition} \label{df:Inversion}
 %<*df:Inversion>
-Two rows of a permutation matrix
+In a permutation $\phi=\sequence{\ldots,k,\ldots,j,\ldots}$
+elements such that $k>j$ are in an 
+\definend{inversion} of their natural order.
+Similarly, in a permutation matrix two rows
 \begin{equation*}
+  P_{\phi}=
   \begin{mat}
     \vdots          \\
     \iota_{k} \\
@@ -3505,9 +3512,8 @@ Two rows of a permutation matrix
     \vdots
   \end{mat}
 \end{equation*}
-such that \( k>j \) are in an \definend{inversion}\index{inversion}%
+such that \( k>j \) are in an \definend{inversion}.\index{inversion}%
 \index{permutation!inversions}
-of their natural order.
 %</df:Inversion>
 \end{definition}
 
@@ -3642,7 +3648,7 @@ and to change an even number to zero requires an even number of swaps.
 The \definend{signum}\index{permutation!signum}\index{signum}%
 \index{sgn!see{signum}}
 of a permutation \( \sgn(\phi) \)
-is \( -1 \) if the number of inversions in \( P_\phi \) is odd and is
+is \( -1 \) if the number of inversions in \( \phi \) is odd and is
 \( +1 \) if the number of inversions is even.
 %</df:Signum>
 \end{definition}

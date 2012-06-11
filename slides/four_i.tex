@@ -1,5 +1,5 @@
 % see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
-\makeatletter\let\ifGm@compatii\relax\makeatother 
+\makeatletter\let\ifGm@compote\relax\makeatother 
 \documentclass[10pt,t,serif,professionalfont]{beamer}
 \PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames}{color}
@@ -71,11 +71,21 @@ matrix is nonsingular.
 
 
 \begin{frame}
-We will define the determinant function not by listing how 
-to compute it (because that turns out to have 
-no immediately clear connection to its purpose)
-but instead by some of its properties.
+We will define the determinant function not by listing 
+some of its properties.
+Those properties are convenient for computing the value of the determinant
+on an input square matrix. 
 Then we will show that only one function with those properties exists.
+
+\pause
+\medskip
+\no
+The first section of the text algebraically motivates the 
+determinant definition. 
+The next section will give a geometric motivation.
+In this section, beyond defining the determinant, 
+we will show how to compute it
+and give some key results.
 \end{frame}
 
 
@@ -123,9 +133,10 @@ We can compute the determinant of a matrix using Gauss's Method
 (presuming that the determinant function exists, which we will
 cover later).
 
-\ex  On this matrix the Gauss's Method steps on the first column are 
-is $-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
-These leave the determinant unchanged by property~(1).
+\ex  On this matrix the Gauss's Method reduces the first column  with 
+$-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
+Property~(1) says these
+leave the determinant unchanged.
 \begin{equation*}
   \begin{vmat}
     1  &3  &-2 \\
@@ -140,8 +151,8 @@ These leave the determinant unchanged by property~(1).
   \end{vmat}
 \end{equation*}
 \pause
-On the second column we do $-(5/3)\rho_2+\rho_3$.
-Again, property~(1) says the determinant is unchanged.
+Reduce the second column with $-(5/3)\rho_2+\rho_3$.
+Again, by property~(1) the determinant stays the same.
 \begin{equation*}
   =
   \begin{vmat}
@@ -203,6 +214,14 @@ of the original matrix is $-3$.
 \pf 
 \ExecuteMetaData[../det1.tex]{pf:DetFcnIsUnique}
 \qed
+
+\pause
+\medskip
+So if there is a function mapping $\matspace_{\nbyn{n}}$ to $\Re$ with 
+the four properties of the definition then there is only one such
+function.
+The next two subsections show that for each~$n$ a determinant function 
+exists.
 \end{frame}
 
 
@@ -216,12 +235,12 @@ of the original matrix is $-3$.
 That the above computation gives a consistent result for these two
 ways to do a reduction on one matrix does not ensure that determinants
 always give a well-defined value.
-The way that we have given to compute determinant values does not
+Our algorithm for computing determinant values does not
 plainly eliminate the possibility that there might be, say,
 two reductions of some $\nbyn{7}$~matrix that lead to different 
-determinant value outputs.
-In that case we would not have a function, since the definition of a
-function is that for each input there must be exactly one output. 
+determinant outputs.
+In that case there would exist no determinant function, 
+since functions must have that for each input there is exactly one output. 
 
 \pause
 To show that determinants are well-defined 
@@ -305,7 +324,7 @@ the determinant scales one row at a time:
 
 
 \begin{frame}
-Multilinearity lets us break a determinant apart into a sum of 
+Multilinearity lets us break a determinant into a sum of 
 very simple determinants.
 
 \ex
@@ -350,9 +369,9 @@ We have four matrices, each with a single nonzero entry in each row.
 
 \pause 
 The first and last determinants are $0$ because the matrices are
-nonsingular (since one row is a multple of the other).
-We are left with the two matrices in which there is one entry from the starting
-matrix from each row and column.
+nonsingular (since one row is a multiple of the other).
+We are left with the two matrices in which there is 
+one entry from each row and column from the starting matrix.
 \end{frame}
 
 
@@ -360,7 +379,7 @@ matrix from each row and column.
 
 \begin{frame}
 \ex
-Similarly we can break this determinant 
+Similarly we can start to evaluate this determinant 
 \begin{equation*}
   \begin{vmat}
     1 &2 &3 \\
@@ -368,8 +387,9 @@ Similarly we can break this determinant
     7 &8 &9
   \end{vmat}
 \end{equation*}
-into a sum of determinants of matrices having one entry from the 
-starting matrix in each row.   
+by breaking it into
+a sum of determinants of matrices having one entry in each row from the 
+starting matrix.   
 \begin{equation*}
   =\begin{vmat}
     1 &0 &0 \\
@@ -393,17 +413,18 @@ starting matrix in each row.
     0 &0 &9
   \end{vmat}
 \end{equation*}
-We have a number of matrices, each all $0$'s except that each row has a single
+This gives a number of matrices, 
+each all $0$'s except that each row has a single
 entry from the original matrix.
 
 \pause
 For any of these determinants, if two rows have their original matrix entry 
-in the same column then the determant is~$0$,
+in the same column then the determinant is~$0$,
 since if either entry is $0$ then the matrix has a zero row while if neither
 is~$0$ then each row is a multiple of the other.
 \pause
-Therefore, we are left with a sum of determinants, each all $0$'s but
-for a single entry from the original matrix in each row and column. 
+Therefore, the above reduces to a sum of determinants, each all $0$'s but
+for a single entry in each row and column from the original matrix. 
 \end{frame}
 \begin{frame}
 \vspace*{-3ex}
@@ -482,8 +503,8 @@ for a single entry from the original matrix in each row and column.
 \begin{frame}{Permutation matrices}
 Recall Definition~Three.IV.\ref{df:PermutationMatrix},
 that a \definend{permutation matrix}
-is square and all of its entries are~$0$'s except for
-a single~$1$ in each row and column.
+is square and all entries are~$0$ except for
+a~$1$ in each row and column.
 
 \pause
 \df[df:permutation]
@@ -536,6 +557,10 @@ The proof of these two theorems is in the next subsection.
 \begin{frame}{Inversion}
 \df[df:Inversion]
 \ExecuteMetaData[../det1.tex]{df:Inversion}
+\pause
+\ex The permutation $\phi=\sequence{3,2,1}$ has three inversions:
+$3$ is before $2$, $3$ is before $1$, and 
+$2$ is before $1$.
 \end{frame}
 
 
@@ -565,9 +590,11 @@ The proof of these two theorems is in the next subsection.
 \begin{frame}{Signum}
 \df[df:Signum]
 \ExecuteMetaData[../det1.tex]{df:Signum}
+
 \pause
-\ex The permutation $\map{\phi}{\set{1,2,3}}{\set{1,2,3}}$
-given by $\phi(1)=3$, $\phi(2)=2$, and $\phi(3)=1$ has three inversions:
+\ex The permutation
+$\phi=\sequence{3,2,1}$
+associated with this matrix 
 \begin{equation*}
   P_{\phi}=
   \begin{mat}
@@ -576,9 +603,17 @@ given by $\phi(1)=3$, $\phi(2)=2$, and $\phi(3)=1$ has three inversions:
     1 &0 &0
   \end{mat}
 \end{equation*}
-$\iota_3$ is before $\iota_2$, $\iota_3$ is before $\iota_1$, and 
-$\iota_2$ is before $\iota_1$.
-So the signum of $\phi$ is $-1$.
+has three inversions
+$3$ is before $2$, $3$ is before $1$, and 
+$2$ is before $1$.
+So the signum is $\sgn(\phi)=-1$.
+
+\pause
+\ex
+The permutation $\psi=\sequence{3,2,4,1}$
+has four inversions: $3$ is before $2$ and~$1$,
+$2$ is before~$1$, and $4$ is before~$1$.
+So $\sgn(\psi)=+1$.
 \end{frame}
 
 
@@ -648,6 +683,23 @@ So the signum of $\phi$ is $-1$.
 \begin{frame}
 \ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans1}
 \qed
+
+\pause
+\ex
+We know the formula for $\nbyn{2}$~matrices.
+\begin{equation*}
+  \begin{vmat}
+    a  &b  \\
+    c  &d
+  \end{vmat}
+  =ad-bc
+  \qquad
+  \begin{vmat}
+    a  &c  \\
+    b  &d
+  \end{vmat}
+  =ad-cb
+\end{equation*}
 \end{frame}
 
 
