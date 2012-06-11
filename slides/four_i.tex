@@ -71,9 +71,10 @@ matrix is nonsingular.
 
 
 \begin{frame}
-We will define the determinant function not by listing 
+We will define the determinant function by listing 
 some of its properties.
-Those properties are convenient for computing the value of the determinant
+We are interested in these properties 
+because they are convenient for computing the value of the determinant
 on an input square matrix. 
 Then we will show that only one function with those properties exists.
 
@@ -82,7 +83,7 @@ Then we will show that only one function with those properties exists.
 \no
 The first section of the text algebraically motivates the 
 determinant definition. 
-The next section will give a geometric motivation.
+The section after this will give a geometric motivation.
 In this section, beyond defining the determinant, 
 we will show how to compute it
 and give some key results.
@@ -135,7 +136,7 @@ cover later).
 
 \ex  On this matrix the Gauss's Method reduces the first column  with 
 $-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
-Property~(1) says these
+Property~(1) says that these row operations
 leave the determinant unchanged.
 \begin{equation*}
   \begin{vmat}
@@ -162,7 +163,8 @@ Again, by property~(1) the determinant stays the same.
   \end{vmat}
 \end{equation*}
 \pause
-By the prior lemma we find the determinant by taking the product down the
+By the prior lemma we can now 
+find the determinant by taking the product down the
 diagonal.
 \begin{equation*}
   =1\cdot(-6)\cdot(-7/3)=14
@@ -324,8 +326,8 @@ the determinant scales one row at a time:
 
 
 \begin{frame}
-Multilinearity lets us break a determinant into a sum of 
-very simple determinants.
+Use multilinearity to break a determinant into a sum of 
+simple determinants.
 
 \ex
 We can expand this determinant
@@ -501,17 +503,39 @@ for a single entry in each row and column from the original matrix.
 
 
 \begin{frame}{Permutation matrices}
-Recall Definition~Three.IV.\ref{df:PermutationMatrix},
-that a \definend{permutation matrix}
-is square and all entries are~$0$ except for
-a~$1$ in each row and column.
+\ExecuteMetaData[../det1.tex]{NotationForPermutationMatrices}
 
 \pause
 \df[df:permutation]
 \ExecuteMetaData[../det1.tex]{df:permutation}
 
 \pause
-\ExecuteMetaData[../det1.tex]{NotationForPermutationMatrices}
+\ex[ex:AllTwoThreePerms]
+\ExecuteMetaData[../det1.tex]{ex:AllTwoThreePerms}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{AssociatePermutationWithPermutationMatrix}
+
+\ex
+Associated with the $4$-permutation $\psi=\sequence{2,4,3,1}$ is the
+matrix whose rows are the matching $\iota$'s.
+\begin{equation*}
+  P_{\psi}
+  =
+  \begin{mat}
+    \iota_2 \\
+    \iota_4 \\
+    \iota_3 \\
+    \iota_1
+  \end{mat}
+  =
+  \begin{mat}
+    0 &1 &0 &0 \\
+    0 &0 &0 &1 \\
+    0 &0 &1 &0 \\
+    1 &0 &0 &0
+  \end{mat}
+\end{equation*}
 \end{frame}
 
 
@@ -525,12 +549,69 @@ a~$1$ in each row and column.
 \medskip
 \ExecuteMetaData[../det1.tex]{SummationForPermutationExpansion}
 \end{frame}
+\begin{frame}
+\ex
+Recall that there are two $2$-permutations
+\( \phi_1=\sequence{1,2} \) and \( \phi_2=\sequence{2,1} \).
+So for the $\nbyn{2}$ case, the sum over all permutations has two terms.
+
+\pause
+These are the associated permutation matrices
+\begin{equation*}
+  P_{\phi_1}=
+  \begin{mat}
+    1 &0 \\
+    0 &1
+  \end{mat}
+  \qquad
+  P_{\phi_2}=
+  \begin{mat}
+    0 &1 \\
+    1 &0
+  \end{mat}
+\end{equation*}
+\pause
+giving this expansion.
+\begin{align*}
+  \begin{vmat}
+    t_{1,1}  &t_{1,2} \\
+    t_{2,1}  &t_{2,2}
+  \end{vmat}
+  &=
+  t_{1,1}t_{2,2}
+  \begin{vmat}
+    1  &0 \\
+    0  &1
+  \end{vmat}               
+  +
+  t_{1,2}t_{2,1}
+  \begin{vmat}
+    0  &1 \\
+    1  &0
+  \end{vmat}               \\
+  &=
+  t_{1,1}t_{2,2}\cdot 1
+  +
+  t_{1,2}t_{2,1}\cdot (-1)
+\end{align*}
+The determinant $\deter{P_{\phi_2}}$ equals $-1$ because we can bring that to 
+the identitiy matrix with one row swap.
+\pause
+Renaming the matrix entries gives the familiar $\nbyn{2}$ formula.
+\begin{equation*}
+  \begin{vmat}
+    a  &b  \\
+    c  &d
+  \end{vmat}
+  =ad-bc
+\end{equation*}
+\end{frame}
 
 
 
 
 \begin{frame}
-The proof of these two theorems is in the next subsection.
+Proofs for these two theorems are in the next subsection.
 
 \th[th:DetsExist]
 \ExecuteMetaData[../det1.tex]{th:DetsExist}
@@ -561,6 +642,20 @@ The proof of these two theorems is in the next subsection.
 \ex The permutation $\phi=\sequence{3,2,1}$ has three inversions:
 $3$ is before $2$, $3$ is before $1$, and 
 $2$ is before $1$.
+\end{frame}
+\begin{frame}
+\ex
+Here there are two inversions:
+\begin{equation*}
+  \begin{mat}
+    0 &1 &0 &0 \\
+    1 &0 &0 &0 \\
+    0 &0 &0 &1 \\
+    0 &0 &1 &0
+  \end{mat}
+\end{equation*}
+row one is inverted with respect to row~two and row~three is inverted with 
+respect to row~four.
 \end{frame}
 
 
