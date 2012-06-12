@@ -58,14 +58,9 @@ This parallelogram is defined by the two vectors.
 \df[df:Box]
 \ExecuteMetaData[../det2.tex]{df:Box}
 
-\pause
-The box like the span, except that the scalars are limited to the unit 
+\medskip
+The box is like the span, except that the scalars are limited to the unit 
 interval. 
-
-\pause
-\no
-In this section we consider the determinant as a function of the columns
-of the matrix.
 \end{frame}
 \begin{frame}{Area of a two dimensional box}
 \centergraphic{../ch4.31}
@@ -85,38 +80,149 @@ That area equals the value of the determinant.
   \end{vmat}
   =x_1y_2-x_2y_1
 \end{equation*}
-This is no coincidence.
-The properties from the definition of determinants 
+\end{frame}
+\begin{frame}
+We will argue here that
+the properties of determinants 
 make good postulates for a function 
-that measures the size of the box
-defined by the columns of the matrix.  
+that gives the size of the box formed by the columns of the matrix.  
+
+\pause
+In line with the above use of column vectors,
+in this section we consider the determinant as a function of the columns
+of the matrix.
+Note that because the determinant of a matrix equals 
+the determinant of its transpose, we can change the determinant properties
+from statements about rows to statements about columns.
+For instance, the first property as given earlier says that a
+determinant is unaffected by a row operation $k\rho_i+\rho_j$ (with $i\neq j$).
+By transposing we have the property that a determinant
+does not change under combinations of columns. 
 \end{frame}
 
 
 
+
 \begin{frame}{Definition of determinant reinterpreted}
-Consider property~(3) from the definition of determinant,
-that $\det{\ldots,k\vec{v}_i,\ldots}=k\det{\ldots,\vec{v}_i,\ldots}$.
-This meshes perfectly with the intuition that the determinant of
-a matrix gives the size of the box formed by the columns of the matrix.
-If we scale a column by a factor~$k$ then the size of the box
+Recall property~(3) from the definition of determinant,
+that rescaling a column rescales the entire determinant
+$\det(\ldots,k\vec{v}_i,\ldots)=k\det(\ldots,\vec{v}_i,\ldots)$.
+This fits with the idea that the determinant
+gives the size of the box formed by the columns of the matrix:
+if we scale a column by a factor~$k$ then the size of the box
 scales by that factor. 
 \begin{center}
   \includegraphics{../ch4.32}
   \qquad
   \includegraphics{../ch4.33}
 \end{center}
+% \end{frame}
+% \begin{frame}
+
+\pause
+Property~(1) says that the determinant is unaffected by 
+combining columns.
+The picture 
+\begin{center}
+  \includegraphics{../ch4.34}
+  \quad
+  \includegraphics{../ch4.35}
+\end{center}   
+shows that the box
+formed by $\vec{v}$ and~$k\vec{v}+\vec{w}$ 
+is more slanted than the original box but the two have
+the same base and height, and hence the same area.
+\end{frame}
+\begin{frame}
+As we noted after the definition, property~(2) is a consequence of the 
+other properties so we leave it aside for the moment.  
+
+Property~(4) says that the determinant of the identity matrix is~$1$.
+\centergraphic{../ch4.36}
+\end{frame}
+
+
+
+
+\begin{frame}{Orientation}
+\re[re:PropertyTwoGivesSign] 
+Although property~(2) is redundant it says something notable.
+Consider these two.
+\begin{center} \small
+  \begin{tabular}{c@{\hspace*{8em}}c}
+    \includegraphics{../ch4.37}  
+      &\includegraphics{../ch4.38}  \\[.25ex]
+    \ $\begin{vmat}[r]
+        4  &1   \\
+        2  &3
+      \end{vmat}=10$
+      &\ $\begin{vmat}[r]
+          1  &4   \\
+          3  &2
+        \end{vmat}=-10$
+  \end{tabular}
+\end{center}
+Swapping changes the sign;
+on the left we take $\vec{u}$ first in the matrix and then follow the
+counterclockwise arc to $\vec{v}$,
+following the counterclockwise arc and
+and get a positive size, while
+on the right following the clockwise arc gives a negative size.
+The sign returned by the size function, the determinant, reflects the 
+\definend{orientation}\index{box!orientation}\index{orientation} 
+or \definend{sense}\index{box!sense}\index{sense} of the box.
+\pause
+We see the same thing if we use Property~(3) with a negative scalar.
+\end{frame}
+\begin{frame}{Aside about orientation}
+Suppose that in three space 
+starting with these two vectors we want to form a box 
+with positive size.
+\begin{equation*}
+  \vec{v}_1=\colvec{1 \\ 4 \\ 1},\,
+  \vec{v}_2=\colvec{-2 \\ 3 \\ 1}
+  %\vec{v}_3=\colvec{0 \\ -1 \\ 2}
+  \qquad
+  \vcenteredhbox{\includegraphics{asy/four_ii_orientation.png}}
+\end{equation*}
+Those two vectors form a plane, which divides three-space in two halves.
+The $\vec{v}_3$ shown is on the side of the plane containing vectors
+with this property: if a person at the tip looks down at the box and traces
+out the parallelogram from $\zero$, to $\vec{v}_1$, to $\vec{v}_1+\vec{v}_2$,
+to $\vec{v}_2$, and back to $\zero$ then their trace looks to them
+to be counterclockwise.
+Any such vector will make a positive-sized box.
+\end{frame}
+\begin{frame}
+The vector shown is this.
+\begin{equation*}
+  \vec{v}_3=\colvec{0 \\ -1 \\ 2}
+  \qquad
+  \begin{vmat}
+    1 &-2 &0 \\
+    4 &3 &-1 \\
+    1 &1 &2
+  \end{vmat}=25
+\end{equation*}
+\pause
+Any vector on the other side of the plane,
+such as $-\vec{v}_3$, will have the same trace look clockwise and will
+give a negative determinant.
+\begin{equation*}
+  \begin{vmat}
+    1 &-2 &0 \\
+    4 &3 &1 \\
+    1 &1 &-2
+  \end{vmat}=-25
+\end{equation*}
 \end{frame}
 
 
 
 
 
-
-
-
 %...........................
-% \begin{frame}
+% \begin{frame}g
 % \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
 % \df[def:RedEchForm]
 % 
