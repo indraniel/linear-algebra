@@ -1,0 +1,124 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compote\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../det2} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Geometry of Determinants] % (optional, use only with long paper titles)
+{Four.II Geometry of Determinants}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Geometry of Determinants}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Four.II .....
+\section{Determinants as size functions}
+%..........
+\begin{frame}{Box}
+This parallelogram is defined by the two vectors.
+\centergraphic{../ch4.30}
+
+\df[df:Box]
+\ExecuteMetaData[../det2.tex]{df:Box}
+
+\pause
+The box like the span, except that the scalars are limited to the unit 
+interval. 
+
+\pause
+\no
+In this section we consider the determinant as a function of the columns
+of the matrix.
+\end{frame}
+\begin{frame}{Area of a two dimensional box}
+\centergraphic{../ch4.31}
+\begin{align*}
+  \text{box area}
+  &=\text{rectangle area}-\text{area of $A$}-\cdots-\text{area of F} \\
+  &=(x_1+x_2)(y_1+y_2)-x_2y_1-x_1y_1/2        \\
+    &\quad-x_2y_2/2-x_2y_2/2-x_1y_1/2-x_2y_1         \\
+  &=x_1y_2-x_2y_1        
+\end{align*}
+\pause
+That area equals the value of the determinant.
+\begin{equation*}
+  \begin{vmat}
+    x_1  &x_2  \\
+    y_1  &y_2
+  \end{vmat}
+  =x_1y_2-x_2y_1
+\end{equation*}
+This is no coincidence.
+The properties from the definition of determinants 
+make good postulates for a function 
+that measures the size of the box
+defined by the columns of the matrix.  
+\end{frame}
+
+
+
+\begin{frame}{Definition of determinant reinterpreted}
+Consider property~(3) from the definition of determinant,
+that $\det{\ldots,k\vec{v}_i,\ldots}=k\det{\ldots,\vec{v}_i,\ldots}$.
+This meshes perfectly with the intuition that the determinant of
+a matrix gives the size of the box formed by the columns of the matrix.
+If we scale a column by a factor~$k$ then the size of the box
+scales by that factor. 
+\begin{center}
+  \includegraphics{../ch4.32}
+  \qquad
+  \includegraphics{../ch4.33}
+\end{center}
+\end{frame}
+
+
+
+
+
+
+
+
+%...........................
+% \begin{frame}
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
