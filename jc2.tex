@@ -3,6 +3,7 @@
 %  2001-Jun-12
 \section{Similarity}
 \index{similarity|(}
+%<*SimilarityMotiviation0>
 We've defined two matrices \( H \) and \( \hat{H} \) to be
 matrix equivalent if there are nonsingular \( P \) and \( Q \)
 such that \( \hat{H}=PHQ \).
@@ -17,7 +18,9 @@ pairs of bases, $B,D$ and $\hat{B},\hat{D}$.
     V_{\wrt{\hat{B}}}             @>h>\hat{H}>  W_{\wrt{\hat{D}}}
   \end{CD}
 \end{equation*}
+%</SimilarityMotiviation0>
 
+%<*SimilarityMotiviation1>
 We now consider the special case
 where the codomain equals the domain and in particular we add the requirement
 that the codomain's basis equals the domain's basis,
@@ -30,20 +33,16 @@ $B,B$ and $D,D$.\index{arrow diagram}
     V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
   \end{CD}
 \end{equation*}
-% To move from the lower left to the lower right we can either go straight
-% over, or up, over, and then down. 
 In matrix terms, 
-% \begin{equation*}
 \(\rep{t}{D,D}
   =\rep{\identity}{B,D}\;\rep{t}{B,B}\;\bigl(\rep{\identity}{B,D}\bigr)^{-1} \).
-% \end{equation*}
-% (recall that a representation of composition like this one reads right to
-% left).
+%</SimilarityMotiviation1>
 
 
 
 \subsection{Definition and Examples}
-\begin{definition}
+\begin{definition} \label{df:Similar}
+%<*df:Similar>
 The matrices  \( T \) and $S$ are 
 \definend{similar}\index{matrix!similarity}%
 \index{equivalence relation!matrix similarity}\index{similar matrices}
@@ -51,6 +50,7 @@ if there is a nonsingular \( P \) such that
 $
   T=PSP^{-1}
 $.
+%</df:Similar>
 \end{definition}
 
 \noindent Since nonsingular matrices are square, 
@@ -870,7 +870,8 @@ Beyond that, the representatives should be as simple as possible and
 the partial identities are simple in that they consist mostly of zero entries. 
 The simplest extension of the partial identity form is the diagonal form.
 
-\begin{definition}
+\begin{definition} \label{df:Diagonalizable}
+%<*df:Diagonalizable>
 A transformation is \definend{diagonalizable}\index{diagonalizable|(}%
 \index{transformation!diagonalizable}
 if it has a diagonal representation
@@ -878,6 +879,7 @@ with respect to the same basis for the codomain as for the domain.
 A \definend{diagonalizable matrix}\index{matrix!diagonalizable}
 is one that is similar to a diagonal matrix:~\( T \) is diagonalizable
 if there is a nonsingular \( P \) such that \( PTP^{-1} \) is diagonal.
+%</df:Diagonalizable>
 \end{definition}
 
 \begin{example} \label{ex:DiagTwoByTwo}
@@ -942,17 +944,19 @@ a matrix can be diagonalized then the diagonal matrix is the canonical
 representative of its similarity class. 
 % We now characterize which maps can be diagonalized.
 
-\begin{corollary}
-\label{cor:DiagIffBasisOfEigens}
+\begin{lemma} \label{lm:DiagIffBasisOfEigens}
+%<*lm:DiagIffBasisOfEigens>
 A transformation \( t \) is diagonalizable if and only if
 there is a basis
 \( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n } \)
 and scalars \( \lambda_1,\ldots,\lambda_n \) such that
 \( t(\vec{\beta}_i)=\lambda_i\vec{\beta}_i \)
 for each \( i \).
-\end{corollary}
+%</lm:DiagIffBasisOfEigens>
+\end{lemma}
 
 \begin{proof}
+%<*pf:DiagIffBasisOfEigens>
 Consider a diagonal representation matrix.
 \begin{equation*}
    \rep{t}{B,B}=
@@ -983,6 +987,7 @@ The product of the diagonal matrix and the representation vector
 \end{equation*}
 has the 
 stated action.
+%</pf:DiagIffBasisOfEigens>
 \end{proof}
 
 \begin{example}     \label{ex:DiagUpperTrian}
@@ -1111,7 +1116,7 @@ gives us this diagonalization.
 \end{example}
 
 In the next subsection, we will expand on that example by considering 
-more closely the property of \nearbycorollary{cor:DiagIffBasisOfEigens}.
+more closely the property of \nearbylemma{lm:DiagIffBasisOfEigens}.
 This includes seeing another way, 
 the way that we will routinely use, to find the $\lambda$'s.
 
@@ -2005,9 +2010,10 @@ the way that we will routinely use, to find the $\lambda$'s.
 
 \subsection{Eigenvalues and Eigenvectors}
 In this subsection we will focus on the
-property of \nearbycorollary{cor:DiagIffBasisOfEigens}.
+property of \nearbylemma{lm:DiagIffBasisOfEigens}.
 
 \begin{definition} \label{def:Eigen}
+%<*df:Eigen>
 A transformation \( \map{t}{V}{V} \) has a scalar
 \definend{eigenvalue}\index{eigenvalue, eigenvector!of a transformation}%
 \index{transformation!eigenvalue, eigenvector}
@@ -2017,6 +2023,7 @@ such that
 $
   t(\vec{\zeta})=\lambda\cdot\vec{\zeta}
 $.
+%</df:Eigen>
 \end{definition}
 
 \noindent (``Eigen'' is German for ``characteristic of'' or ``peculiar to.'' 
@@ -2083,12 +2090,14 @@ This map also has an eigenvalue of \( 0 \) associated with eigenvectors of
 the form \( c-cx \) where \( c\neq 0 \).
 \end{example}
 
-\begin{definition}
+\begin{definition}  \label{df:EigenOfMatrix}
+%<*df:EigenOfMatrix>
 A square matrix \( T \) has a scalar
 \definend{eigenvalue}\index{eigenvalue, eigenvector!of a matrix}
 \( \lambda \) associated with the nonzero
 \definend{eigenvector} \( \vec{\zeta} \) if
 \( T\vec{\zeta}=\lambda\cdot\vec{\zeta} \).
+%</df:EigenOfMatrix>
 \end{definition}
 
 Although this extension from maps to matrices is natural, 
@@ -2301,7 +2310,8 @@ Then plug in $\lambda_2$
 where \( b\neq 0 \).
 \end{example}
 
-\begin{definition}
+\begin{definition} \label{df:CharacteristicPoly}
+%<*df:CharacteristicPoly>
 The \definend{characteristic polynomial of a square matrix}\index{characteristic polynomial}%
 \index{matrix!characteristic polynomial}
 \( T \) is the
@@ -2313,6 +2323,7 @@ The \definend{characteristic polynomial of a transformation}
 \( t \) is the characteristic polynomial
 of any matrix representatation
 \( \rep{t}{B,B} \).\index{transformation!characteristic polynomial}
+%</df:CharacteristicPoly>
 \end{definition}
 
 \noindent \nearbyexercise{exer:CharPolyTransWellDefed} checks that the 
@@ -2321,14 +2332,18 @@ well-defined, that is, that the characteristic polynomial is the same
 no matter which basis~$B$ we use for the representation.
 
 \begin{lemma} \label{le:MapNonTrivSpHasEigen}
+%<*lm:MapNonTrivSpHasEigen>
 A linear transformation on a nontrivial vector space has at least one
 eigenvalue.
+%</lm:MapNonTrivSpHasEigen>
 \end{lemma}
 
 \begin{proof}
+%<*pf:MapNonTrivSpHasEigen>
 Any root of the characteristic polynomial is an eigenvalue.
 Over the complex numbers, any polynomial of degree one or greater
 has a root.
+%</pf:MapNonTrivSpHasEigen>
 \end{proof}
 
 \begin{remark}
@@ -2338,14 +2353,18 @@ we've changed to using scalars that are complex.
 
 % Notice the familiar form of the sets of eigenvectors in the above examples.
 
-\begin{definition}
-The \definend{eigenspace of a transformation $t$ associated with the eigenvalue $\lambda$}\index{eigenspace}\index{transformation!eigenspace}
+\begin{definition} \label{df:Eigenspace}
+%<*df:Eigenspace>
+The \definend{eigenspace of a transformation~$t$ associated 
+with the 
+eigenvalue~$\lambda$}\index{eigenspace}\index{transformation!eigenspace}
 is
 $
   V_{\lambda}=\set{\vec{\zeta}\suchthat t(\vec{\zeta}\,)=\lambda\vec{\zeta}\,}
               % \union\set{\zero\,}
 $.
 The eigenspace of a matrix is analogous.
+%</df:Eigenspace>
 \end{definition}
 
 % \begin{remark}
@@ -2357,10 +2376,13 @@ The eigenspace of a matrix is analogous.
 % \end{remark}
 
 \begin{lemma}  \label{le:EigSpaceIsSubSp}
+%<*lm:EigSpaceIsSubSp>
 An eigenspace is a subspace.
+%</lm:EigSpaceIsSubSp>
 \end{lemma}
 
 \begin{proof}
+%<*pf:EigSpaceIsSubSp>
 An eigenspace is nonempty because it contains the zero
 vector since for any linear transformation $t(\zero)=\zero$, which equals
 $\lambda\zero$. 
@@ -2376,6 +2398,7 @@ that the combination is also in $V_{\lambda}$
 (despite that the zero vector isn't an eigenvector, 
 the second equality holds even if some \( \vec{\zeta}_i \) is \( \zero \) since
 \( t(\zero)=\lambda\cdot\zero=\zero \)).
+%</pf:EigSpaceIsSubSp>
 \end{proof}
 
 \begin{example}
@@ -2449,13 +2472,15 @@ yields another member of $V_1$.
 The next result speaks to the situation where the vectors come from
 different eigenspaces.
 
-\begin{theorem}
-\label{th:DistEValueGivesLIEvecs}
+\begin{theorem}  \label{th:DistEValueGivesLIEvecs}
+%<*th:DistEValueGivesLIEvecs>
 For any set of distinct eigenvalues of a map or matrix, a set of associated
 eigenvectors, one per eigenvalue, is linearly independent.
+%</th:DistEValueGivesLIEvecs>
 \end{theorem}
 
 \begin{proof}
+%<*pf:DistEValueGivesLIEvecs0>
 We will use induction on the number of eigenvalues.
 If there is no eigenvalue then the set of associated vectors is empty,
 and is linearly independent.
@@ -2463,7 +2488,9 @@ If there is
 only one eigenvalue then the set of associated eigenvectors is
 a singleton set with a non-$\zero$ member, 
 and so is linearly independent.
+%</pf:DistEValueGivesLIEvecs0>
 
+%<*pf:DistEValueGivesLIEvecs1>
 For induction assume that the theorem is true for any set of \( k \)
 distinct eigenvalues. 
 Consider distinct eigenvalues 
@@ -2492,6 +2519,7 @@ All of the eigenvalues are distinct so
 \( c_1,\,\dots,\,c_k \) are all \( 0 \).
 With that, \( c_{k+1} \) must be \( 0 \) because
 we are left with the equation \( \zero=c_{k+1}\vec{v}_{k+1} \).
+%</pf:DistEValueGivesLIEvecs1>
 \end{proof}
 
 \begin{example}
@@ -2520,7 +2548,7 @@ An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
 
 \begin{proof}
 Form a basis of eigenvectors.
-Apply \nearbycorollary{cor:DiagIffBasisOfEigens}.
+Apply \nearbylemma{lm:DiagIffBasisOfEigens}.
 \end{proof}
 
 

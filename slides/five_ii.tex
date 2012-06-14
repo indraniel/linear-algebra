@@ -1,0 +1,166 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compote\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../jc2} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\usepackage{polynom}  % for polynomial long division
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Similarity] % (optional, use only with long paper titles)
+{Five.II Similarity}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Similarity}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+\begin{frame}
+\vspace*{-2ex}
+\ExecuteMetaData[../jc2.tex]{SimilarityMotiviation0}  
+\pause  
+\ExecuteMetaData[../jc2.tex]{SimilarityMotiviation1}  
+\end{frame}
+
+
+
+
+% ..... Five.II.1 .....
+\section{Definition and Examples}
+\begin{frame}{Similar matrices}
+\df[df:Similar]
+\ExecuteMetaData[../jc2.tex]{df:Similar}  
+\end{frame}
+
+
+
+
+% ..... Five.II.2 .....
+\section{Diagonalizability}
+\begin{frame}{Diagonalizable matrix}
+\df[df:Diagonalizable]
+\ExecuteMetaData[../jc2.tex]{df:Diagonalizable}  
+
+\pause
+\pf
+\ExecuteMetaData[../jc2.tex]{df:Diagonalizable}  
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}
+\lm[lm:DiagIffBasisOfEigens]
+\ExecuteMetaData[../jc2.tex]{lm:DiagIffBasisOfEigens}  
+
+\pause
+\pf
+\ExecuteMetaData[../jc2.tex]{pf:DiagIffBasisOfEigens}  
+\qed
+\end{frame}
+
+
+
+
+% ..... Five.II.3 .....
+\section{Eigenvalues and Eigenvectors}
+\begin{frame}{Eigenvalues and eigenvectors}
+\df[def:Eigen]
+\ExecuteMetaData[../jc2.tex]{df:Eigen}  
+
+\pause
+\df[df:EigenOfMatrix]
+\ExecuteMetaData[../jc2.tex]{df:EigenOfMatrix}  
+\end{frame}
+
+
+
+
+\begin{frame}{Characteristic polynomial}
+\df[df:CharacteristicPoly]
+\ExecuteMetaData[../jc2.tex]{df:CharacteristicPoly}
+
+\pause
+\lm[le:MapNonTrivSpHasEigen] 
+\ExecuteMetaData[../jc2.tex]{lm:MapNonTrivSpHasEigen}
+
+\pause
+\pf
+\ExecuteMetaData[../jc2.tex]{pf:MapNonTrivSpHasEigen}
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}{Eigenspace}
+\df[df:Eigenspace]
+\ExecuteMetaData[../jc2.tex]{df:Eigenspace}
+
+\pause
+\lm[le:EigSpaceIsSubSp] 
+\ExecuteMetaData[../jc2.tex]{lm:EigSpaceIsSubSp}
+
+\pause
+\pf
+\ExecuteMetaData[../jc2.tex]{pf:EigSpaceIsSubSp}
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}
+\th[th:DistEValueGivesLIEvecs]
+\ExecuteMetaData[../jc2.tex]{th:DistEValueGivesLIEvecs}
+
+\pause
+\pf
+\ExecuteMetaData[../jc2.tex]{pf:DistEValueGivesLIEvecs0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../jc2.tex]{pf:DistEValueGivesLIEvecs1}
+\qed
+\end{frame}
+
+
+
+
+%...........................
+% \begin{frame}g
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}
