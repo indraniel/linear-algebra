@@ -60,6 +60,155 @@
 \begin{frame}{Similar matrices}
 \df[df:Similar]
 \ExecuteMetaData[../jc2.tex]{df:Similar}  
+
+\ex
+Consider the derivative map $\map{d/dx}{\polyspace_2}{\polyspace_2}$.
+Fix the basis $B=\sequence{1,x,x^2}$ 
+and the basis $D=\sequence{1,1+x,1+x+x^2}$.
+In this arrow diagram we will first get $S$, and then calculate $T$ from it.
+\begin{equation*}
+  \begin{CD}
+    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+  \end{CD}
+\end{equation*}
+\pause
+The action of $d/dx$ on the 
+elements of the basis $B$ is $1\mapsto 0$, $x\mapsto 1$, and $x^2\mapsto 2x$.
+\begin{equation*}
+  \rep{d/dx(1)}{B}=\colvec{0 \\ 0 \\ 0}
+  \quad
+  \rep{d/dx(x)}{B}=\colvec{1 \\ 0 \\ 0}
+  \quad
+  \rep{d/dx(x^2)}{B}=\colvec{0 \\ 2 \\ 0}
+\end{equation*}
+\end{frame}
+\begin{frame}
+So we have this matrix representation of the map.
+\begin{equation*}
+  S=\rep{d/dx}{B,B}=
+  \begin{mat}
+    0 &1 &0 \\
+    0 &0 &2 \\
+    0 &0 &0
+  \end{mat}
+\end{equation*}
+\pause
+Recall that the matrix changing bases from $B$ to $D$ is $\rep{\identity}{B,D}$.
+We find these by eye
+\begin{equation*}
+  \rep{1}{D}=\colvec{1 \\ 0 \\ 0}
+  \quad
+  \rep{x}{D}=\colvec{-1 \\ 1 \\ 0}
+  \quad
+  \rep{x^2}{D}=\colvec{0 \\ -1 \\ 1}
+\end{equation*}
+to get this.
+\begin{equation*}
+  P=
+  \begin{mat}
+    1 &-1 &0  \\
+    0 &1  &-1 \\
+    0 &0  &1
+  \end{mat}
+  \qquad
+  P^{-1}=
+  \begin{mat}
+    1 &1  &1  \\
+    0 &1  &1 \\
+    0 &0  &1
+  \end{mat}
+\end{equation*}
+Now, by following the arrow diagram we have $T=PSP^{-1}$.
+\begin{equation*}
+  T=
+  \begin{mat}
+    0 &1 &-1 \\
+    0 &0 &2  \\
+    0 &0 &0
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+We underline what the arrow diagram says 
+\begin{equation*}
+  \begin{CD}
+    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+  \end{CD}
+\end{equation*}
+by calculating $T$ directly.
+The effect of the map on the basis elements is 
+$d/dx(1)=0$, $d/dx(1+x)=1$, and $d/dx(1+x+x^2)=1+2x$.
+Representating of those with respect to $D$
+\begin{equation*}
+  \rep{0}{D}=\colvec{0 \\ 0 \\ 0}
+  \quad
+  \rep{1}{D}=\colvec{1 \\ 0 \\ 0}
+  \quad
+  \rep{1+2x}{D}=\colvec{-1 \\ 2 \\ 0}
+\end{equation*}
+gives the same matrix $\rep{d/dx}{D,D}$ as we found above.
+\end{frame}
+\begin{frame}
+We don't need to consider the underlying maps.
+We can just multiply matrices.  
+
+\ex
+Where 
+\begin{equation*}
+  S=
+  \begin{mat}
+    0 &-1 &-2 \\
+    2 &3 &2   \\
+    4 &5 &2
+  \end{mat}
+  \qquad
+  P=
+  \begin{mat}
+    1 &1 &0 \\
+   -1 &1 &0   \\
+    0 &0 &3
+  \end{mat}
+\end{equation*}
+(note that $P$ is nonsingular) we can compute this $T=PSP^{-1}$.
+\begin{equation*}
+  T=
+  \begin{mat}
+    2   &0   &0 \\
+    3   &1   &4/3 \\
+   27/2 &3/2 &2
+  \end{mat}
+\end{equation*}
+
+\pause
+\ex[ex:OnlyZeroSimToZero]
+\ExecuteMetaData[../jc2.tex]{ex:OnlyZeroSimToZero}  
+\end{frame}
+
+
+
+\begin{frame}{Similarity is an equivalence}
+\nearbyexercise{exer:SimIsEquivRel} checks that
+similarity is an equivalence relation.
+
+\pause
+Since matrix similarity is a special case of matrix equivalence, 
+if two matrices are similar then they are matrix equivalent.
+What about the converse:~must any two matrix equivalent square matrices be 
+similar?
+No; the matrix equivalence class
+of an identity consists of all nonsingular matrices of that size. 
+
+\pause
+So some matrix equivalence classes
+split into two or more similarity classes\Dash similarity gives a finer
+partition than does equivalence.
+This pictures some matrix equivalence classes subdivided into
+similarity classes.
+\centergraphic{../ch5.4} 
 \end{frame}
 
 
@@ -67,14 +216,48 @@
 
 % ..... Five.II.2 .....
 \section{Diagonalizability}
-\begin{frame}{Diagonalizable matrix}
+\begin{frame}
 \df[df:Diagonalizable]
 \ExecuteMetaData[../jc2.tex]{df:Diagonalizable}  
 
-\pause
-\pf
-\ExecuteMetaData[../jc2.tex]{df:Diagonalizable}  
-\qed
+\ex
+This matrix
+\begin{equation*}
+  \begin{mat}
+    6 &-1  &-1 \\
+    2 &11  &-1 \\
+   -6 &-5  &7
+  \end{mat}
+\end{equation*}
+is diagonalizable by using this
+\begin{equation*}
+  P=
+  \begin{mat}
+    1/2 &1/4  &1/4 \\
+   -1/2 &1/4  &1/4 \\
+   -1/2 &-3/4 &1/4
+  \end{mat}
+  \quad
+  P^{-1}
+  \begin{mat}
+    1 &-1 &0 \\
+    0 &1 &-1 \\
+    2 &1 &1
+  \end{mat}
+\end{equation*}
+to get this $T=PSP^{-1}$.
+\begin{equation*}
+  T=
+  \begin{mat}
+    4 &0 &0 \\
+    0 &8 &0 \\
+    0 &0 &12
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+\ex  
+\ExecuteMetaData[../jc2.tex]{ex:NotDiagonalizable}  
 \end{frame}
 
 
