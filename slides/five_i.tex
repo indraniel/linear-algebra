@@ -1,0 +1,183 @@
+% see: https://groups.google.com/forum/?fromgroups#!topic/comp.text.tex/s6z9Ult_zds
+\makeatletter\let\ifGm@compote\relax\makeatother 
+\documentclass[10pt,t,serif,professionalfont]{beamer}
+\PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{../linalgjh}
+\usepackage{present}
+\usepackage{xr}\externaldocument{../jc1} % read refs from .aux file
+\usepackage{catchfilebetweentags}
+\usepackage{etoolbox} % from http://tex.stackexchange.com/questions/40699/input-only-part-of-a-file-using-catchfilebetweentags-package
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+  {}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\usepackage{polynom}  % for polynomial long division
+
+\mode<presentation>
+{
+  \usetheme{boxes}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{} 
+}
+\addheadbox{filler}{\ }  % create extra space at top of slide 
+\hypersetup{colorlinks=true,linkcolor=blue} 
+
+\title[Complex Vector Spaces] % (optional, use only with long paper titles)
+{Five.I Complex Vector Spaces}
+
+\author{\textit{Linear Algebra} \\ {\small Jim Hef{}feron}}
+\institute{
+  \texttt{http://joshua.smcvt.edu/linearalgebra}
+}
+\date{}
+
+
+\subject{Complex Vector Spaces}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================
+% \begin{frame}{Reduced Echelon Form} 
+% \end{frame}
+
+
+
+% ..... Five.I .....
+\section{Chapter Five.  Similarity}
+%..........
+\begin{frame}
+\ExecuteMetaData[../jc1.tex]{ReasonForShiftToComplexNumbers}  
+\end{frame}
+
+
+
+
+\section{Review of Factoring and Complex Numbers}
+\begin{frame}{Division Theorem for Polynomials}
+\ExecuteMetaData[../jc1.tex]{PolynomialReview}  
+
+\pause
+\ex
+\begin{equation*}
+  \only<2>{\polylongdiv[stage=1]{3x^3+2x^2-x+4}{x^2+x}}
+  \only<3>{\polylongdiv[stage=2]{3x^3+2x^2-x+4}{x^2+x}}
+  \only<4>{\polylongdiv[stage=3]{3x^3+2x^2-x+4}{x^2+x}}
+  \only<5>{\polylongdiv[stage=4]{3x^3+2x^2-x+4}{x^2+x}}
+  \only<6>{\polylongdiv[stage=5]{3x^3+2x^2-x+4}{x^2+x}}
+  \only<7->{\polylongdiv[stage=6]{3x^3+2x^2-x+4}{x^2+x}}
+\end{equation*}
+\only<8->{So, $3x^3+2x^2-x+4=(x^2+x)\cdot(3x)+4$.}
+\end{frame}
+
+
+
+
+\begin{frame}
+\th[th:EuclidForPolys]
+\ExecuteMetaData[../jc1.tex]{th:EuclidForPolys}  
+\pause
+\co[co:PolyDividedByLinearPolyIsConstant]
+\ExecuteMetaData[../jc1.tex]{co:PolyDividedByLinearPolyIsConstant}  
+
+\pause
+\pf
+\ExecuteMetaData[../jc1.tex]{co:PolyDividedByLinearPolyIsConstant}  
+\qed
+
+\pause
+\ExecuteMetaData[../jc1.tex]{PolynomialFactor}  
+
+\co[co:RootOfPolyIsAssocLinearFactor]
+\ExecuteMetaData[../jc1.tex]{co:RootOfPolyIsAssocLinearFactor}
+
+\pause
+\pf  
+\ExecuteMetaData[../jc1.tex]{pf:RootOfPolyIsAssocLinearFactor}  
+\qed
+\end{frame}
+
+
+
+
+\begin{frame}{Cubics and higher factor}
+\th[th:CubicsAndHigherFactor]
+\ExecuteMetaData[../jc1.tex]{th:CubicsAndHigherFactor}
+
+\pause
+\co[co:RealPolysFactorIntoLinearsAndQuads]  
+\ExecuteMetaData[../jc1.tex]{co:RealPolysFactorIntoLinearsAndQuads}
+\end{frame}
+
+
+
+
+\begin{frame}{Complex numbers}
+\ExecuteMetaData[../jc1.tex]{ComplexNumbers}
+
+\pause
+\th[th:FundThmAlg]\textcolor{blue}{[Fundamental Theorem of Algebra]}  
+\ExecuteMetaData[../jc1.tex]{th:FundThmAlg}
+\end{frame}
+
+
+
+
+\section{Complex Representations}
+\begin{frame}
+\ExecuteMetaData[../jc1.tex]{ComplexOperations}  
+
+With those rules for scalars, all of
+the operations that we've covered
+for real vector spaces carry over unchanged.
+
+\ex
+\begin{equation*}
+  \begin{mat}
+    2-i  &1+i \\
+    i    &4
+  \end{mat}
+  \begin{mat}
+    0    &3+3i \\
+    1-i  &2
+  \end{mat}
+  =
+  \begin{mat}
+    2    &9+3i \\
+    4-4i &5+3i
+  \end{mat}
+\end{equation*}
+\end{frame}
+
+
+
+\begin{frame}
+We shall carry over unchanged from the previous work 
+everything else that we can.
+For instance, we shall call this
+\begin{equation*}
+   \sequence{\colvec{1+0i \\ 0+0i \\ \vdots \\ 0+0i},
+             \dots,
+             \colvec{0+0i \\ 0+0i \\ \vdots \\ 1+0i}}
+\end{equation*}
+the \definend{standard basis\/}\index{basis!standard}%
+\index{basis!standard over the complex numbers} 
+for \( \C^n \) as a vector space over $\C$
+and again denote it \( \stdbasis_n \).
+\end{frame}
+
+
+%...........................
+% \begin{frame}g
+% \ExecuteMetaData[../gr3.tex]{GaussJordanReduction}
+% \df[def:RedEchForm]
+% 
+% \end{frame}
+\end{document}

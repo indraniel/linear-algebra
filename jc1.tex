@@ -47,6 +47,7 @@ representation that is nearly diagonal.
 
 \section{Complex Vector Spaces}
 \index{vector space!over complex numbers}
+%<*ReasonForShiftToComplexNumbers>
 This chapter requires that we factor polynomials,
 but many polynomials do not factor over the real numbers.
 For instance,
@@ -64,7 +65,8 @@ Any real number is a complex number and
 in this chapter most of the examples use
 only real numbers.
 Nonetheless, the critical theorems require that the scalars be complex so
-the first section below is a quick review of complex numbers.
+the first section is a quick review of complex numbers.
+%</ReasonForShiftToComplexNumbers>
 
 In this book, our approach is to shift to this more general context 
 of taking scalars to be complex only for the 
@@ -81,10 +83,11 @@ Delightful presentations that take this approach from the start are in
 
 
 
-\subsectionoptional{Factoring and Complex Numbers; A Review}
+\subsectionoptional{Review of Factoring and Complex Numbers}
 \textit{This subsection is a review only and we take the main results as known.
   For proofs, see \cite{BirkhoffMaclane} or \cite{Ebbinghaus}.}
 
+%<*PolynomialReview>
 We consider a \definend{polynomial}\index{polynomial} 
 $p(x)=c_nx^n+\dots+c_1x+c_0$ with 
 \definend{leading coefficient}\index{polynomial!leading coefficent} 
@@ -101,10 +104,11 @@ $-\infty$.
 Just as integers have a division operation\Dash e.g., 
 `\( 4 \) goes \( 5 \) times into \( 21 \) with remainder \( 1 \)'\Dash so 
 do polynomials.
+%</PolynomialReview>
 
-\begin{theorem}[Division Theorem for Polynomials]
-\label{th:EuclidForPolys}
+\begin{theorem}[Division Theorem for Polynomials] \label{th:EuclidForPolys}
 \index{division theorem}\index{polynomial!division theorem}
+%<*th:EuclidForPolys>
 Let \( c(x) \) be a polynomial.
 If \( m(x) \) is a non-zero polynomial then there are \definend{quotient} and
 \definend{remainder} polynomials \( q(x) \) and \( r(x) \) such that
@@ -112,6 +116,7 @@ If \( m(x) \) is a non-zero polynomial then there are \definend{quotient} and
   c(x)=m(x)\cdot q(x)+r(x)
 \end{equation*}
 where the degree of \( r(x) \) is strictly less than the degree of \( m(x) \).
+%</th:EuclidForPolys>
 \end{theorem}
 
 \begin{remark}
@@ -138,38 +143,47 @@ If \( c(x)=2x^3-3x^2+4x \) and \( m(x)=x^2+1 \) then \( q(x)=2x-3 \) and
 Note that \( r(x) \) has a lower degree than \( m(x) \).
 \end{example}
 
-\begin{corollary}
+\begin{corollary} \label{co:PolyDividedByLinearPolyIsConstant}
+%<*co:PolyDividedByLinearPolyIsConstant>
 The remainder when \( c(x) \) is divided by \( x-\lambda \) is the constant
 polynomial \( r(x)=c(\lambda) \).
+%</co:PolyDividedByLinearPolyIsConstant>
 \end{corollary}
 
 \begin{proof}
+%<*pf:PolyDividedByLinearPolyIsConstant>
 The remainder must be a constant polynomial
 because it is of degree less than the divisor \( x-\lambda \), 
 To determine the constant,
 take $m(x)$ from the theorem to be $x-\lambda$ and 
 substitute \( \lambda\/ \) for $x$ to get
 \( c(\lambda)=(\lambda-\lambda)\cdot q(\lambda)+r(x) \). 
+%</pf:PolyDividedByLinearPolyIsConstant>
 \end{proof}
 
+%<*PolynomialFactor>
 If a divisor \( m(x) \) goes into a dividend \( c(x) \) evenly,
 meaning that \( r(x) \) is the zero polynomial,
 then \( m(x) \) is a \definend{factor\/} of \( c(x) \).
 Any \definend{root\/} of the factor (any \( \lambda\in\Re \) such that
 \( m(\lambda)=0 \)) is a root of \( c(x) \) since
 \( c(\lambda)=m(\lambda)\cdot q(\lambda)=0 \).
-% The prior corollary immediately yields the following converse.
+%</PolynomialFactor>
 
-\begin{corollary}
+\begin{corollary}  \label{co:RootOfPolyIsAssocLinearFactor}
+%<*co:RootOfPolyIsAssocLinearFactor>
 If \( \lambda \) is a root of the polynomial \( c(x) \)
 then \( x-\lambda \) divides \( c(x) \) evenly, that is, 
 $x-\lambda$ is a factor of $c(x)$.
+%</co:RootOfPolyIsAssocLinearFactor>
 \end{corollary}
 
 \begin{proof}
+%<*pf:RootOfPolyIsAssocLinearFactor>
 By the above corollary $c(x)=(x-\lambda)\cdot q(x)+c(\lambda)$.
 Since $\lambda$ is a root, 
 $c(\lambda)=0$ so $x-\lambda$ is a factor.  
+%</pf:RootOfPolyIsAssocLinearFactor>
 \end{proof}
 
 Finding the roots and factors of a high-degree polynomial can be hard.
@@ -185,18 +199,22 @@ has no real number roots).
 A polynomial that cannot be factored into two lower-degree polynomials
 with real number coefficients is \definend{irreducible over the reals}.
 
-\begin{theorem}
+\begin{theorem}  \label{th:CubicsAndHigherFactor}
+%<*th:CubicsAndHigherFactor>
 Any constant or linear polynomial is irreducible over the reals.
 A quadratic polynomial is irreducible over the reals if and only if its
 discriminant is negative.
 No cubic or higher-degree polynomial is irreducible over the reals.
+%</th:CubicsAndHigherFactor>
 \end{theorem}
 
-\begin{corollary}
+\begin{corollary}  \label{co:RealPolysFactorIntoLinearsAndQuads}
+%<*co:RealPolysFactorIntoLinearsAndQuads>
 Any polynomial with real coefficients can be factored into linear and
 irreducible quadratic polynomials.
 That factorization is unique; any two factorizations have the same powers of
 the same factors.
+%</co:RealPolysFactorIntoLinearsAndQuads>
 \end{corollary}
 
 Note the analogy with the prime factorization of integers.
@@ -214,6 +232,7 @@ By uniqueness, if \( c(x)=m(x)\cdot q(x) \) then where
 we know that \( q(x)=(x-3)(x+2) \).
 \end{example}
 
+%<*ComplexNumbers>
 While \( x^2+1 \) has no real roots and so doesn't factor over the real
 numbers, if we imagine a root\Dash traditionally denoted \( i \) 
 so that \( i^2+1=0 \)\Dash then \( x^2+1 \) factors into a product of linears
@@ -223,13 +242,15 @@ So we adjoin this root \( i \) to the reals and close the new system with
 respect to addition, multiplication, etc.\ (i.e., we also add
 \( 3+i \), and \( 2i \), and \( 3+2i \), etc., putting in all linear
 combinations of $1$ and $i$).
-We then get a new structure, the \definend{complex numbers}\index{complex numbers}
+We then get a new structure, the 
+\definend{complex numbers}\index{complex numbers}
 \( \C \).
 
 In $\C$ we can factor (obviously, at least some) quadratics that would be
 irreducible if we were to stick to the real numbers.
 Surprisingly, in \( \C \) we can not only factor \( x^2+1 \)
 and its close relatives, we can factor any quadratic.
+%</ComplexNumbers>
 %Any quadratic polynomial factors over the complex numbers.
 \begin{equation*}
    ax^2+bx+c=
@@ -251,9 +272,11 @@ into the product of two first degree polynomials.
 
 \begin{theorem}[Fundamental Theorem of Algebra] \label{th:FundThmAlg}
 \hspace*{0em plus2em}
+%<*th:FundThmAlg>
 Polynomials with complex coefficients factor into linear
 polynomials with complex coefficients.
 The factorization is unique.
+%</th:FundThmAlg>
 \end{theorem}
 
 
@@ -267,6 +290,7 @@ The factorization is unique.
 
 
 \subsection{Complex Representations}
+%<*ComplexOperations>
 Recall the definitions of the complex number addition
 \begin{equation*}
    (a+bi)\,+\,(c+di)=(a+c)+(b+d)i                  
@@ -276,6 +300,7 @@ and multiplication.
      (a+bi)(c+di) &=ac+adi+bci+bd(-1)  \\
                   &=(ac-bd)+(ad+bc)i
 \end{align*}
+%</ComplexOperations>
 
 \begin{example}
 For instance,
@@ -312,8 +337,8 @@ bookkeeping.
 \end{multline*}
 \end{example}
 
-Everything else from prior chapters that we can, 
-we shall also carry over unchanged.
+We shall also carry over unchanged from the previous chapters
+everything that we can. 
 For instance, we shall call this
 \begin{equation*}
    \sequence{\colvec{1+0i \\ 0+0i \\ \vdots \\ 0+0i},
