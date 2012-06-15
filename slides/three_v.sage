@@ -2,14 +2,15 @@
 # Calculations for Chapter Three section V slides for Linear Algebra, Hefferon
 
 # load "gauss_method.sage"
+load "coordinates_wrt.sage"
 
-def coordinates_wrt(v,basis_sequence):
-    """Print the coordinates of the vector v wrt the basis basis_sequence
-    """
-    A=matrix(QQ, basis_sequence).transpose(); # Sage takes the vectors as rows by default
-    c=A.solve_right(v)
-    print "coordinates of ",v,"wrt basis is",c
-    return c
+# def coordinates_wrt(v,basis_sequence):
+#     """Print the coordinates of the vector v wrt the basis basis_sequence
+#     """
+#     A=matrix(QQ, basis_sequence).transpose(); # Sage takes the vectors as rows by default
+#     c=A.solve_right(v)
+#     print "coordinates of ",v,"wrt basis is",c
+#     return c
 
 print "==== find coordinates wrt basis ===="
 e1=vector([1,0,0])

@@ -209,6 +209,11 @@ partition than does equivalence.
 This pictures some matrix equivalence classes subdivided into
 similarity classes.
 \centergraphic{../ch5.4} 
+
+\pause
+We naturally want a canonical form to represent the similarity classes.
+Some classes, but not all,
+are represented by a diagonal form.
 \end{frame}
 
 
@@ -238,7 +243,7 @@ is diagonalizable by using this
    -1/2 &-3/4 &1/4
   \end{mat}
   \quad
-  P^{-1}
+  P^{-1}=
   \begin{mat}
     1 &-1 &0 \\
     0 &1 &-1 \\
@@ -285,6 +290,300 @@ to get this $T=PSP^{-1}$.
 \pause
 \df[df:EigenOfMatrix]
 \ExecuteMetaData[../jc2.tex]{df:EigenOfMatrix}  
+
+\no
+Similar matrices have the same eigenvalues, because
+eigenvalues of a map are also the eigenvalues of matrices representing
+that map.
+But similar matrices can have different eigenvectors.
+% \end{frame}
+% \begin{frame}
+\ex
+Recall the example from the prior subsection that these two are similar.
+\begin{equation*}
+  S=
+  \begin{mat}
+    6 &-1  &-1 \\
+    2 &11  &-1 \\
+   -6 &-5  &7
+  \end{mat}
+  \quad
+  T=
+  \begin{mat}
+    4 &0 &0 \\
+    0 &8 &0 \\
+    0 &0 &12
+  \end{mat}
+\end{equation*}
+since $T=PSP^{-1}$ for this $P$.
+\begin{equation*}
+  P=
+  \begin{mat}
+    1/2 &1/4  &1/4 \\
+   -1/2 &1/4  &1/4 \\
+   -1/2 &-3/4 &1/4
+  \end{mat}
+  \quad
+  P^{-1}=
+  \begin{mat}
+    1 &-1 &0 \\
+    0 &1 &-1 \\
+    2 &1 &1
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+Fix the vector space $\C^3$ and suppose that $\map{t}{\C^3}{\C^3}$ is the
+transformation represented by $T$ with respect to the standard basis
+$T=\rep{t}{\stdbasis_3,\stdbasis_3}$.
+Then this is the action of $t$.
+\begin{equation*}
+  \colvec{x \\ y \\ z}\mapsunder{t}\colvec{4x \\ 8y  \\ 12z}
+\end{equation*}
+\pause
+By eye we see that the  
+eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, $\lambda_3=12$
+and where
+\begin{equation*}
+  V_1=\set{\colvec{1 \\ 0 \\ 0}a\suchthat a\in\Re},\quad
+  V_2=\set{\colvec{0 \\ 1 \\ 0}b\suchthat b\in\Re},\quad
+  V_3=\set{\colvec{0 \\ 0 \\ 1}c\suchthat c\in\Re}
+\end{equation*}
+any nonzero member of~$V_1$ is an eigenvector associated with the eigenvalue
+$\lambda_1=4$, etc.
+\begin{equation*}
+  \vec{v}_1=\colvec{100 \\ 0 \\ 0}\mapsunder{t}\colvec{400 \\ 0 \\ 0}=t(\vec{v}_1)
+\end{equation*}
+\end{frame}
+\begin{frame}
+Recall that $T=PSP^{-1}$, which we can picture as  
+\begin{equation*}
+  \begin{CD}
+    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+  \end{CD}
+\end{equation*}
+where $P$ is the matrix that changes basis from $B$ to~$D$.
+In this example we have fixed $D=\stdbasis_3$ so we next find~$B$.
+We know that $P=\rep{\identity}{B,D}$ so its first column is 
+$\rep{\identity(\vec{\beta}_1)}{D}=\rep{\vec{\beta}_1}{\stdbasis_3}=\vec{\beta}_1$, and the same holds for its other columns.
+\begin{equation*}
+  B=\sequence{\colvec{1/2 \\ -1/2 \\ -1/2},
+              \colvec{1/4 \\ 1/4 \\ -3/4},
+              \colvec{1/4 \\ 1/4 \\ 1/4}}
+\end{equation*}
+\end{frame}
+\begin{frame}
+Now, we know that the transformation~$t$ has eigenvalues of $4$, $8$, and~$12$.
+We know for instance that there is $\vec{v}_1$ such that 
+$t(\vec{v}_1)=4\vec{v}_1$.
+Since it represents the transformation, the matrix~$S$ also has that behavior.
+\begin{equation*}
+  S\cdot\rep{\vec{v}_1}{B}=
+  \begin{mat}
+    6 &-1  &-1 \\
+    2 &11  &-1 \\
+   -6 &-5  &7
+  \end{mat}
+  \colvec{100 \\ 0 \\ 200}
+  =
+  \colvec{400 \\ 0  \\ 800}
+  =4\rep{\vec{v}_1}{B}
+\end{equation*}
+\pause
+Note in particular that
+\begin{equation*}
+  \begin{mat}
+    4 &0 &0 \\
+    0 &8 &0 \\
+    0 &0 &12
+  \end{mat}
+  \colvec{100 \\ 0 \\ 0}
+  =
+  \colvec{400 \\ 0  \\ 0}
+  \quad\text{but}\quad
+  \begin{mat}
+    6 &-1  &-1 \\
+    2 &11  &-1 \\
+   -6 &-5  &7
+  \end{mat}
+  \colvec{100 \\ 0 \\ 0}
+  \neq
+  \colvec{400 \\ 0  \\ 0}
+\end{equation*}
+so this is a case where similar matrices, which must share eigenvalues,
+do not share the eigenvectors associated with those eigenvalues.
+\end{frame}
+
+
+
+
+\begin{frame}{Computing eigenvalues and eigenvectors}
+\ex
+We will find the eigenvalues and associated eigenvectors of this matrix.
+\begin{equation*}
+  T=
+  \begin{mat}
+    0 &5 &7 \\
+   -2 &7 &7 \\
+   -1 &1 &4
+  \end{mat}
+\end{equation*}
+We want to find scalars~$x$ such that $T\vec{\zeta}=x\vec{\zeta}$ for 
+some nonzero $\vec{\zeta}$.
+Bring the terms to the left side.
+\begin{equation*}
+  \begin{mat}
+    0 &5 &7 \\
+   -2 &7 &7 \\
+   -1 &1 &4
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  -x\colvec{z_1 \\ z_2 \\ z_3}
+  =\colvec{0 \\ 0 \\ 0}
+\end{equation*}
+and factor.
+\begin{equation*}
+  \begin{mat}
+    0-x &5   &7 \\
+   -2   &7-x &7 \\
+   -1   &1   &4-x
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  =
+  \colvec{0 \\ 0 \\ 0}
+  \tag{*}
+\end{equation*}
+This homogeneous system has nonzero solutions if and only if the 
+matrix is nonsingular, that is, has a determinant of zero.
+\end{frame}
+\begin{frame}
+Some computation gives the determinant and its factors.
+\begin{equation*}
+  0=
+  \begin{vmat}
+    0-x &5   &7 \\
+   -2   &7-x &7 \\
+   -1   &1   &4-x
+  \end{vmat}
+  =
+  x^3 - 11x^2 + 38x - 40
+  =(x - 5)(x - 4)(x - 2)
+\end{equation*}
+So the eigenvalues are $\lambda_1=5$, $\lambda_2=4$, and $\lambda_3=2$.
+
+\pause
+To find the eigenvectors associated with the eigenvalue of $5$ 
+specialize equation~($*$) for $x=5$.
+\begin{equation*}
+  \begin{mat}
+   -5   &5   &7 \\
+   -2   &2   &7 \\
+   -1   &1   &-1
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  =
+  \colvec{0 \\ 0 \\ 0}
+\end{equation*}
+Gauss's Method gives this solution set.
+\begin{equation*}
+  V_5=\set{\colvec{1 \\ 1 \\ 0}z_2\suchthat z_2\in\C}
+\end{equation*}
+\end{frame}
+\begin{frame}
+Similarly, to find the eigenvectors associated with the eigenvalue of~$4$ 
+specialize equation~($*$) for $x=4$.
+\begin{equation*}
+  \begin{mat}
+   -4   &5   &7 \\
+   -2   &3   &7 \\
+   -1   &1   &0
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  =
+  \colvec{0 \\ 0 \\ 0}
+\end{equation*}
+Gauss's Method gives this.
+\begin{equation*}
+  V_4=\set{\colvec{-7 \\ -7 \\ 1}z_3\suchthat z_3\in\C}
+\end{equation*}
+\pause
+Specializing~($*$) for~$x=2$
+\begin{equation*}
+  \begin{mat}
+   -2   &5   &7 \\
+   -2   &5   &7 \\
+   -1   &1   &2
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  =
+  \colvec{0 \\ 0 \\ 0}
+\end{equation*}
+gives this.
+\begin{equation*}
+  V_2=\set{\colvec{1 \\ -1 \\ 1}z_3\suchthat z_3\in\C}
+\end{equation*}
+\end{frame}
+
+
+
+
+\begin{frame}
+\ex 
+If the matrix is either upper diagonal or lower diagonal
+then the polynomial is easy to factor.
+\begin{equation*}
+  T=
+  \begin{mat}
+    2 &1 &0 \\
+    0 &3 &1 \\
+    0 &0 &2
+  \end{mat}
+\end{equation*}
+The value of the determinant is easy.
+\begin{equation*}
+  0=
+  \begin{vmat}
+    2-x &1   &0 \\
+    0   &3-x &1 \\
+    0   &0   &2-x
+  \end{vmat}
+  =(3-x)(2-x)^2
+  \tag{*}
+\end{equation*}
+The vectors associated with $\lambda_1=3$
+\begin{equation*}
+  \begin{mat}
+    -1  &1   &0 \\
+    0   &0   &1 \\
+    0   &0   &-1
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  =
+  \colvec{0 \\ 0 \\ 0}
+\end{equation*}
+are here.
+\begin{equation*}
+  V_3=\set{\colvec{1 \\ 1 \\ 0}z_2\suchthat z_2\in\C}
+\end{equation*}
+\end{frame}
+\begin{frame}
+The vectors associated with $\lambda_2=2$
+\begin{equation*}
+  \begin{mat}
+    0  &1   &0 \\
+    0   &1   &1 \\
+    0   &0   &0
+  \end{mat}
+  \colvec{z_1 \\ z_2 \\ z_3}
+  =
+  \colvec{0 \\ 0 \\ 0}
+\end{equation*}
+are here.
+\begin{equation*}
+  V_2=\set{\colvec{1 \\ 0 \\ 0}z_1\suchthat z_1\in\C}
+\end{equation*}  
 \end{frame}
 
 
@@ -302,6 +601,11 @@ to get this $T=PSP^{-1}$.
 \pf
 \ExecuteMetaData[../jc2.tex]{pf:MapNonTrivSpHasEigen}
 \qed
+
+\pause
+\no
+This result is why we switched from working with real number scalars
+to scalars that are complex.
 \end{frame}
 
 
