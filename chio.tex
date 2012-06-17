@@ -4,7 +4,231 @@
 \topic{Chi\`o's Method}
 \index{Chi\`o's method|(}
 
-Lagrange's expansion formula for evaluating determinants is recursive because
+When doing Gauss's Method on a matrix that contains only integers
+\begin{equation*}
+  A=
+  \begin{mat}
+    2 &1 &1 \\
+    3 &4 &-1 \\
+    1 &5 &1 
+  \end{mat}
+\end{equation*}
+people often prefer to keep it that way.
+Instead of the row operations $-(3/2)\rho_1+\rho_2$ and
+$-(1/2)\rho_1+\rho_3$ they may start by multiplying the rows below the first
+by~$2$
+\begin{equation*}
+  \grstep[2\rho_3]{2\rho_2}
+  \begin{mat}
+    2 &1 &1 \\
+    6 &8 &-2 \\
+    2 &10 &2 
+  \end{mat}
+  \tag{*}
+\end{equation*}
+and then complete the eliminatation in the first column.
+\begin{equation*}
+  \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}
+  \begin{mat}
+    2 &1 &1 \\
+    0 &5 &-5 \\
+    0 &8 &0 
+  \end{mat}
+  \tag{**}
+\end{equation*}
+(This is easier for mental calculations but it also has the advantage
+that on a computer integer arithmetic 
+avoids issues from floating point calculations \cite{Kahan}.)
+
+Observe that we can easily apply Laplace's expansion to the first column of that
+matrix, and then we get the determinant of $A$ by 
+remembering to divide the determinant in ($**$) by $4$ because of~($*$).
+
+The issue with this way of computing determinants is knowing 
+the entries of the minor.
+This $\nbyn{3}$ case shows the pattern.
+\begin{equation*}
+  A=
+  \begin{mat}
+    a_{1,1} &a_{1,2} &a_{1,3}  \\
+    a_{2,1} &a_{2,2} &a_{2,3}  \\
+    a_{3,1} &a_{3,2} &a_{3,3}  
+  \end{mat}
+\end{equation*}
+Rescale all rows except the first.
+\begin{equation*}
+  \grstep[a_{1,1}\rho_3]{a_{1,1}\rho_2}
+  \begin{mat}
+    a_{1,1}       &a_{1,2}       &a_{1,3}        \\
+    a_{2,1}a_{1,1} &a_{2,2}a_{1,1} &a_{2,3}a_{1,1}   \\
+    a_{3,1}a_{1,1} &a_{3,2}a_{1,1} &a_{3,3}a_{1,1}   
+  \end{mat}
+\end{equation*}
+Eliminate down the first column.
+\begin{equation*}
+  \grstep[-a_{3,1}\rho_1+\rho_3]{-a_{2,1}\rho_1+\rho_2}
+  \begin{mat}
+    a_{1,1}       &a_{1,2}       &a_{1,3}       \\
+    a_{2,1}a_{1,1}-a_{2,1}a_{1,1} 
+       &a_{2,2}a_{1,1}-a_{2,1}a_{1,2} 
+       &a_{2,3}a_{1,1}-a_{2,1}a_{1,3}               \\
+    a_{3,1}a_{1,1}-a_{3,1}a_{1,1} 
+       &a_{3,2}a_{1,1}-a_{3,1}a_{1,2} 
+       &a_{3,3}a_{1,1}-a_{3,1}a_{1,3}                   
+  \end{mat}
+\end{equation*}
+This is the result.
+\begin{equation*}
+  \grstep[-a_{3,1}\rho_1+\rho_3]{-a_{2,1}\rho_1+\rho_2}
+  \begin{mat}
+    a_{1,1}       &a_{1,2}       &a_{1,3}       \\
+    0 
+       &a_{2,2}a_{1,1}-a_{2,1}a_{1,2} 
+       &a_{2,3}a_{1,1}-a_{2,1}a_{1,3}               \\
+    0 
+       &a_{3,2}a_{1,1}-a_{3,1}a_{1,2} 
+       &a_{3,3}a_{1,1}-a_{3,1}a_{1,3}                   
+  \end{mat}
+\end{equation*}
+Its determinant is 
+is $a_{1,1}$ times the determinant of the $1,1$ minor.
+
+We can remember the elements of that minor because each is a determinant.
+For instance, the entry in the upper left of that minor, the
+$2,2$~entry above, is the determinant of the matrix of these
+four elements of $A$.
+\begin{equation*}
+  \begin{mat}
+    \highlight{$a_{1,1}$} &\highlight{$a_{1,2}$} &a_{1,3}  \\
+    \highlight{$a_{2,1}$} &\highlight{$a_{2,2}$} &a_{2,3}  \\
+    a_{3,1}               &a_{3,2}               &a_{3,3}  
+  \end{mat}
+\end{equation*}
+And the $3,2$ entry from~($**$) if the determinant of the matrix 
+of these elements of $A$.
+\begin{equation*}
+  \begin{mat}
+    \highlight{$a_{1,1}$} &\highlight{$a_{1,2}$} &a_{1,3}  \\
+    a_{2,1}               &a_{2,2}               &a_{2,3}  \\
+    \highlight{$a_{3,1}$} &\highlight{$a_{3,2}$} &a_{3,3}  
+  \end{mat}
+\end{equation*}
+
+So where $A$ is~$\nbyn{n}$, we define Chi\`o's matrix $C_A$ to be the
+$\nbyn{(n-1)}$ matrix whose $i,j$ entry is the determinant
+\begin{equation*}
+  \begin{vmat}
+    a_{1,1}  &a_{1,j} \\
+    a_{i,1}    &a_{i,j}
+  \end{vmat}
+\end{equation*}
+where $1<i,j\leq n$.
+\definend{Chi\`o's method} for finding the determinant of $A$ is that
+$a_{1,1}^{n-2}\det(A)=\det(C_A)$.
+
+We will compute the determinant of this $\nbyn{3}$ matrix.
+\begin{equation*}
+  A=
+  \begin{mat}
+    2 &1 &1 \\
+    3 &4 &-1 \\
+    1 &5 &1 
+  \end{mat}
+\end{equation*}
+This is Chi\`o's matrix.
+\begin{equation*}
+  C=
+  \begin{mat}
+    \begin{vmat}
+      2 &1 \\
+      3 &4
+    \end{vmat}
+   &
+   \begin{vmat}
+     2 &1 \\
+     3 &-1
+   \end{vmat}        \\
+   \begin{vmat}
+     2 &1 \\
+     1 &5
+   \end{vmat}
+   &
+   \begin{vmat}
+     2 &1 \\
+     1 &1
+   \end{vmat}
+  \end{mat}
+  =
+  \begin{mat}
+    5  &-5  \\
+    9  &1
+  \end{mat}
+\end{equation*}
+Chi\`o's formula 
+$a_{1,1}^{n-2}\det(A)=\det(C)$ gives $2\cdot\det(A)=50$
+so $\det(A)=25$.
+
+For a larger determinant we must do multiple steps.
+But each step involves only $\nbyn{2}$ determinants, 
+and so it may be done mentally.
+\begin{equation*}
+  A=
+  \begin{mat}
+    3  &0  &1  &1  \\
+    1  &2  &0  &1  \\
+    2  &-1 &0  &3  \\
+    1  &0  &0  &1
+  \end{mat} 
+\end{equation*}
+By Chi\`o, $3^2\det(A)=det(C)$ where $C$ is this.
+\begin{equation*}
+  \begin{mat}
+    \begin{vmat}
+      3 &0 \\
+      1 &2
+    \end{vmat}
+    &\begin{vmat}
+     3 &1 \\
+     1 &0 
+    \end{vmat}
+    &\begin{vmat}
+     3 &1 \\
+     1 &1
+    \end{vmat}                \\
+    \begin{vmat}
+     3 &0 \\
+     2 &-1
+    \end{vmat}
+    &\begin{vmat}
+     3 &1 \\
+     2 &0
+    \end{vmat}
+    &\begin{vmat}
+     3 &1 \\
+     2 &3
+    \end{vmat}             \\
+    \begin{vmat}
+     3 &0 \\
+     1 &0
+    \end{vmat}
+    &\begin{vmat}
+     3 &1 \\
+     1 &0
+    \end{vmat}
+    &\begin{vmat}
+     3 &1 \\
+     1 &1
+    \end{vmat}
+  \end{mat}
+  =
+  \begin{mat}
+    6  &-1  &2 \\
+   -3 &-2  &7 \\
+    0  &-1  &2
+  \end{mat}
+\end{equation*}
+
+Laplace's expansion formula for evaluating determinants is recursive because
 it reduces the calculation of an~$\nbyn{n}$ determinant to the evaluation
 of a number of $\nbyn{(n-1)}$~ones.
 
