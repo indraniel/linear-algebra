@@ -18,35 +18,36 @@ Instead of the row operations $-(3/2)\rho_1+\rho_2$ and
 $-(1/2)\rho_1+\rho_3$ they may start by multiplying the rows below the first
 by~$2$
 \begin{equation*}
-  \grstep[2\rho_3]{2\rho_2}
+  \grstep[2\rho_3]{2\rho_2}\;
   \begin{mat}
     2 &1 &1 \\
     6 &8 &-2 \\
     2 &10 &2 
   \end{mat}
-  \tag{*}
+  \tag{$*$}
 \end{equation*}
-and then complete the eliminatation in the first column.
+and then the elimination in the first column goes this way.
 \begin{equation*}
-  \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}
+  \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}\;
   \begin{mat}
     2 &1 &1 \\
     0 &5 &-5 \\
     0 &8 &0 
   \end{mat}
-  \tag{**}
+  \tag{$**$}
 \end{equation*}
-(This is easier for mental calculations but it also has the advantage
-that on a computer integer arithmetic 
-avoids issues from floating point calculations \cite{Kahan}.)
+An all-integer approach is easier for mental calculations. 
+And, using integer arithmetic on a computer
+avoids some sticky issues involving floating point calculations \cite{Kahan}.
+So there are sound reasons to study this approach.
 
-Observe that we can easily apply Laplace's expansion to the first column of that
-matrix, and then we get the determinant of $A$ by 
-remembering to divide the determinant in ($**$) by $4$ because of~($*$).
+Another reason comes from
+observing that we can easily apply Laplace's expansion to the 
+first column of~($**$), and then we get the determinant of $A$ by 
+remembering to divide by $4$ because of~($*$).
 
-The issue with this way of computing determinants is knowing 
-the entries of the minor.
-This $\nbyn{3}$ case shows the pattern.
+Here is the general $\nbyn{3}$ case of this approach to finding the determinant.
+Rescale all rows except the first.
 \begin{equation*}
   A=
   \begin{mat}
@@ -54,32 +55,17 @@ This $\nbyn{3}$ case shows the pattern.
     a_{2,1} &a_{2,2} &a_{2,3}  \\
     a_{3,1} &a_{3,2} &a_{3,3}  
   \end{mat}
-\end{equation*}
-Rescale all rows except the first.
-\begin{equation*}
-  \grstep[a_{1,1}\rho_3]{a_{1,1}\rho_2}
+  \;\grstep[a_{1,1}\rho_3]{a_{1,1}\rho_2}\;
   \begin{mat}
     a_{1,1}       &a_{1,2}       &a_{1,3}        \\
     a_{2,1}a_{1,1} &a_{2,2}a_{1,1} &a_{2,3}a_{1,1}   \\
     a_{3,1}a_{1,1} &a_{3,2}a_{1,1} &a_{3,3}a_{1,1}   
   \end{mat}
 \end{equation*}
-Eliminate down the first column.
+This rescales the determinant by $a_{1,1}^2$.
+Now eliminate down the first column.
 \begin{equation*}
-  \grstep[-a_{3,1}\rho_1+\rho_3]{-a_{2,1}\rho_1+\rho_2}
-  \begin{mat}
-    a_{1,1}       &a_{1,2}       &a_{1,3}       \\
-    a_{2,1}a_{1,1}-a_{2,1}a_{1,1} 
-       &a_{2,2}a_{1,1}-a_{2,1}a_{1,2} 
-       &a_{2,3}a_{1,1}-a_{2,1}a_{1,3}               \\
-    a_{3,1}a_{1,1}-a_{3,1}a_{1,1} 
-       &a_{3,2}a_{1,1}-a_{3,1}a_{1,2} 
-       &a_{3,3}a_{1,1}-a_{3,1}a_{1,3}                   
-  \end{mat}
-\end{equation*}
-This is the result.
-\begin{equation*}
-  \grstep[-a_{3,1}\rho_1+\rho_3]{-a_{2,1}\rho_1+\rho_2}
+   \grstep[-a_{3,1}\rho_1+\rho_3]{-a_{2,1}\rho_1+\rho_2}\;
   \begin{mat}
     a_{1,1}       &a_{1,2}       &a_{1,3}       \\
     0 
@@ -90,12 +76,18 @@ This is the result.
        &a_{3,3}a_{1,1}-a_{3,1}a_{1,3}                   
   \end{mat}
 \end{equation*}
-Its determinant is 
-is $a_{1,1}$ times the determinant of the $1,1$ minor.
+Let the $1,1$ minor be $C$.
+By Laplace the determinant of the above matrix is $a_{1,1}\det(C)$.
+We have $a_{1,1}^2\det(A)=a_{1,1}\det(C)$ and if $a_{1,1}\neq 0$
+then this $\nbyn{3}$ case gives $det(A)=\det(C)/a_{1,1}$.
 
-We can remember the elements of that minor because each is a determinant.
-For instance, the entry in the upper left of that minor, the
-$2,2$~entry above, is the determinant of the matrix of these
+To expand this approach to $\nbyn{n}$ matrices with $n>3$ 
+we must see how to find the entries of the minor.
+The pattern is: each element of the minor is a 
+$\nbyn{2}$~determinant.
+For instance, the entry in the minor's upper left
+$a_{2,2}a_{1,1}-a_{2,1}a_{1,2}$, which is the $2,2$~entry in the above matrix,
+is the determinant of the matrix of these
 four elements of $A$.
 \begin{equation*}
   \begin{mat}
@@ -104,8 +96,9 @@ four elements of $A$.
     a_{3,1}               &a_{3,2}               &a_{3,3}  
   \end{mat}
 \end{equation*}
-And the $3,2$ entry from~($**$) if the determinant of the matrix 
-of these elements of $A$.
+And the minor's lower left, the $3,2$ entry from above, 
+is the determinant of the matrix 
+of these four.
 \begin{equation*}
   \begin{mat}
     \highlight{$a_{1,1}$} &\highlight{$a_{1,2}$} &a_{1,3}  \\
@@ -114,20 +107,26 @@ of these elements of $A$.
   \end{mat}
 \end{equation*}
 
-So where $A$ is~$\nbyn{n}$, we define Chi\`o's matrix $C_A$ to be the
+So, where $A$ is~$\nbyn{n}$ for $n\geq 3$, we let Chi\`o's matrix $C$ be the
 $\nbyn{(n-1)}$ matrix whose $i,j$ entry is the determinant
 \begin{equation*}
   \begin{vmat}
-    a_{1,1}  &a_{1,j} \\
-    a_{i,1}    &a_{i,j}
+    a_{1,1}  &a_{1,j+1} \\
+    a_{i+1,1}    &a_{i+1,j+1}
   \end{vmat}
 \end{equation*}
 where $1<i,j\leq n$.
-\definend{Chi\`o's method} for finding the determinant of $A$ is that
-$a_{1,1}^{n-2}\det(A)=\det(C_A)$.
+\definend{Chi\`o's method}\index{Chi\`o's formula} 
+for finding the determinant of $A$ is that
+if $a_{1,1}\neq 0$ then
+$\det(A)=\det(C)/a_{1,1}^{n-2}$.
 
-We will compute the determinant of this $\nbyn{3}$ matrix.
-\begin{equation*}
+By the way,
+nothing in Chi\`o's formula requires that the numbers be integers; it applies
+to reals as well. 
+
+We illustrate by finding the determinant of this $\nbyn{3}$ matrix.
+\begin{equation*} 
   A=
   \begin{mat}
     2 &1 &1 \\
@@ -147,7 +146,7 @@ This is Chi\`o's matrix.
    \begin{vmat}
      2 &1 \\
      3 &-1
-   \end{vmat}        \\
+   \end{vmat}        \\[3ex]      
    \begin{vmat}
      2 &1 \\
      1 &5
@@ -164,13 +163,14 @@ This is Chi\`o's matrix.
     9  &1
   \end{mat}
 \end{equation*}
-Chi\`o's formula 
-$a_{1,1}^{n-2}\det(A)=\det(C)$ gives $2\cdot\det(A)=50$
-so $\det(A)=25$.
+Chi\`o's formula for $\nbyn{3}$ matrices
+$det(A)=\det(C)/a_{1,1}$ gives $\det(A)=(50/2)=25$.
 
-For a larger determinant we must do multiple steps.
-But each step involves only $\nbyn{2}$ determinants, 
-and so it may be done mentally.
+For a larger determinant we must do multiple steps
+but each involves only $\nbyn{2}$ determinants and so 
+we can often only write down some
+intermediate information.
+For instance, given this $\nbyn{4}$ matrix
 \begin{equation*}
   A=
   \begin{mat}
@@ -180,8 +180,11 @@ and so it may be done mentally.
     1  &0  &0  &1
   \end{mat} 
 \end{equation*}
-By Chi\`o, $3^2\det(A)=det(C)$ where $C$ is this.
+we can find Chi\`o's matrix by mentally doing each of the 
+$\nbyn{2}$ calculations and only noting the
+$\nbyn{3}$ result. 
 \begin{equation*}
+  C_3=
   \begin{mat}
     \begin{vmat}
       3 &0 \\
@@ -194,7 +197,7 @@ By Chi\`o, $3^2\det(A)=det(C)$ where $C$ is this.
     &\begin{vmat}
      3 &1 \\
      1 &1
-    \end{vmat}                \\
+    \end{vmat}                \\[3ex]
     \begin{vmat}
      3 &0 \\
      2 &-1
@@ -206,7 +209,7 @@ By Chi\`o, $3^2\det(A)=det(C)$ where $C$ is this.
     &\begin{vmat}
      3 &1 \\
      2 &3
-    \end{vmat}             \\
+    \end{vmat}             \\[3ex]
     \begin{vmat}
      3 &0 \\
      1 &0
@@ -227,15 +230,87 @@ By Chi\`o, $3^2\det(A)=det(C)$ where $C$ is this.
     0  &-1  &2
   \end{mat}
 \end{equation*}
+We should also note that the determinant of this is 
+$a_{1,1}^{4-2}=3^2$ times the determinant of the $\nbyn{4}$ matrix~$A$.
+
+We can finish by repeating the process with the $\nbyn{3}$ matrix.
+This is Chi\`o's matrix of it; note that the determinant of this matrix
+is $6$~times the determinant of~$C_3$.
+\begin{equation*}
+  C_2=
+  \begin{mat}    
+    \begin{vmat}
+      6 &-1 \\
+     -3 &-2 
+    \end{vmat}
+    &\begin{vmat}
+      6 &2 \\
+     -3 &7
+    \end{vmat}           \\[3ex]
+    \begin{vmat}
+      6 &-1 \\
+      0 &-1
+    \end{vmat}
+    &\begin{vmat}
+      6 &2 \\
+      0 &2
+    \end{vmat}          
+  \end{mat}
+  =
+  \begin{mat}
+    -15 &48 \\
+    -6 &12
+  \end{mat}
+\end{equation*}
+The determinant of $C_2$ is $108$.
+Dividing to get back to the original matrix gives
+$\det(A)=108/(3^2\cdot 6)=2$.
 
 Laplace's expansion formula for evaluating determinants is recursive because
 it reduces the calculation of an~$\nbyn{n}$ determinant to the evaluation
 of a number of $\nbyn{(n-1)}$~ones.
-
-The formula we see here is similar in spirit but it reduces an~$\nbyn{n}$
+Chi\`o's formula is also recursive, so it is similar in spirit, 
+but it reduces an~$\nbyn{n}$
 determinant to a single~$\nbyn{(n-1)}$ determinant, the calculation
 of which requires a number of $\nbyn{2}$ determinants.
+However, for large matrices Gauss's method is better than either; for instance,
+it takes roughly half as many operations as Chi\`o's 
+method~\cite{FullerLogan}.
 
+
+\begin{exercises}
+  \item 
+    Use Chi\`o's Method to find each determinant.
+    \begin{exparts*}
+      \partsitem 
+        $
+        \begin{vmat}
+          1  &2  &3  \\
+          4  &5  &6  \\
+          7  &8  &9  
+        \end{vmat}
+        $
+      \partsitem 
+        $
+        \begin{vmat}
+          2  &1  &4  &0  \\
+          0  &1  &4  &0  \\
+          1  &1  &1  &1  \\
+          0  &2  &1  &1  
+        \end{vmat}
+        $
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts*}
+        \partsitem 
+        \partsitem 
+      \end{exparts*} 
+    \end{answer}
+  \item What if $a_{1,1}$ is zero?
+  \item count the operations involved in Sarrus's formula and 
+   Chi\`o's formula for the $\nbyn{3}$ case.
+  \item Prove Chi\`o's Formula.
+    \begin{answer}
 Consider an $\nbyn{n}$ matrix.
 \begin{equation*}
   A=
@@ -339,83 +414,13 @@ The Laplace expansion down the final column of the above matrix
 gives that its determinant is $(-1)^{n+n}a_{n,n}\det(C)$.
 
 Setting the two equal and
-cancelling gives $a_{n,n}^{n-2}\det(A)=\det(C)$. 
+cancelling gives $a_{n,n}^{n-2}\det(A)=\det(C)$.       
+    \end{answer}
+\end{exercises}
 
-The terms in Chi\`o's matrix~$C$ are easy to remember 
-as determinants of $\nbyn{2}$~matrices.
-For instance
-in this $\nbyn{4}$ matrix the $c_{1,2}$ entry $a_{1,2}a_{4,4}-a_{1,4}a_{4,2}$
-comes from
-taking the determinant of the $\nbyn{2}$ matrix of shaded terms.
-\begin{equation*}
-  \begin{mat}
-    a_{1,1} &\highlight{$a_{1,2}$} &a_{1,3} &\highlight{$a_{1,4}$}  \\
-    a_{2,1} &a_{2,2}               &a_{2,3} &a_{2,4}  \\
-    a_{3,1} &a_{3,2}               &a_{3,3} &a_{3,4}  \\
-    a_{4,1} &\highlight{$a_{4,2}$} &a_{4,3} &\highlight{$a_{4,4}$}  
-  \end{mat}
-\end{equation*}
-
-We will compute the determinant of this $\nbyn{3}$ matrix by this
-method.
-\begin{equation*}
-  A=
-  \begin{mat}
-    2 &1 &1 \\
-    3 &4 &-1 \\
-    1 &5 &1 
-  \end{mat}
-\end{equation*}
-Note that $a_{3,3}=1$, which is an especially convenient term for 
-this method.
-We form the $3,3$ minor.
-\begin{equation*}
-  C=
-  \begin{mat}
-    \begin{vmat}
-      2 &1 \\
-      1 &1
-    \end{vmat}
-   &
-   \begin{vmat}
-     1 &1 \\
-     5 &1
-   \end{vmat}        \\
-   \begin{vmat}
-     3 &-1 \\
-     1 &1
-   \end{vmat}
-   &
-   \begin{vmat}
-     4 &-1 \\
-     5 &1
-   \end{vmat}
-  \end{mat}
-  =
-  \begin{mat}
-    1  &-4  \\
-    4  &9
-  \end{mat}
-\end{equation*}
-Here Chi\`o's formula is 
-$a_{n,n}^{n-2}\det(A)=\det(C)=1\cdot\det(A)=25$
-so $\det(A)=25$.
-
-Because this method leads to $\nbyn{2}$ determinants, it makes feasible
-mentally doing some determinants that would be unwieldy with Gauss's 
-method or the Laplace expansion.
-But for large matrices doing computations with this method is 
-known to take twice as many operations as Gauss's method.
-
-Note that this method will, if $A$ has integer entries, 
-return a integer determinant for $C$.  
-This is useful for mental calculations, and also useful for 
-avoiding some stick issues with computer calculations using
-floating point numbers.
-\url{http://www.cs.berkeley.edu/~wkahan/MathH110/chio.pdf} 
-
-This material is derived from \cite{FullerLogan}.
-
+\announcecomputercode
+This implements Chi\`o's method \cite{ChessMaster}.
+It is in the computer language Python. 
 % http://stackoverflow.com/a/10037087/238366
 \begin{lstlisting}
 from itertools import product, islice
@@ -429,49 +434,7 @@ def det(M,prod=1):
     return det([[M[x][y]-M[x][0]*(M[0][y]/M[0][0]) for x,y in islice(it,dim-1)] for i in xrange(dim-1)],prod)
 \end{lstlisting}
 
-See also http://www.cs.berkeley.edu/~wkahan/MathH110/chio.pdf
-\begin{exercises}
-  \item 
-    Use Cramer's Rule to solve each for each of the variables.
-    \begin{exparts*}
-      \partsitem $\begin{linsys}{2}
-                    x  &- &y  &=  &4  \\
-                   -x  &+ &2y &=  &-7
-                  \end{linsys}$
-      \partsitem $\begin{linsys}{2}
-                    -2x  &+  &y  &=  &-2 \\
-                      x  &-  &2y &=  &-2  
-                  \end{linsys}$
-    \end{exparts*}
-    \begin{answer}
-      \begin{exparts*}
-        \partsitem 
-          \begin{equation*}
-            x=
-             \frac{ \begin{vmat}[r]
-                       4  &-1  \\
-                      -7  &2   
-                    \end{vmat}  }{
-                    \begin{vmat}[r]
-                       1  &-1  \\
-                      -1  &2 
-                    \end{vmat}  }
-            =\frac{1}{1}=1
-            \qquad
-            y=
-             \frac{ \begin{vmat}[r]
-                       1  &4  \\
-                      -1  &-7   
-                    \end{vmat}  }{
-                    \begin{vmat}[r]
-                       1  &-1  \\
-                      -1  &2 
-                    \end{vmat}  }
-            =\frac{-3}{1}=-3
-          \end{equation*}
-        \partsitem $x=2$, $y=2$
-      \end{exparts*} 
-    \end{answer}
-\end{exercises}
+
+
 \index{Chi\`o's method|)}
 \endinput
