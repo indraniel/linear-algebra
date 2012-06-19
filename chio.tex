@@ -1,6 +1,6 @@
 % Chapter 4, Topic _Linear Algebra_ Jim Hefferon
 %  http://joshua.smcvt.edu/linalg.html
-%  2001-Jun-12
+%  2012-Jun-18
 \topic{Chi\`o's Method}
 \index{Chi\`o's method|(}
 
@@ -15,7 +15,7 @@ When doing Gauss's Method on a matrix that contains only integers
 \end{equation*}
 people often prefer to keep it that way.
 Instead of the row operations $-(3/2)\rho_1+\rho_2$ and
-$-(1/2)\rho_1+\rho_3$ they may start by multiplying the rows below the first
+$-(1/2)\rho_1+\rho_3$ they may start by multiplying the rows below the top one
 by~$2$
 \begin{equation*}
   \grstep[2\rho_3]{2\rho_2}\;
@@ -26,7 +26,7 @@ by~$2$
   \end{mat}
   \tag{$*$}
 \end{equation*}
-and then the elimination in the first column goes this way.
+and then the elimination in the first column goes like this.
 \begin{equation*}
   \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}\;
   \begin{mat}
@@ -39,15 +39,15 @@ and then the elimination in the first column goes this way.
 An all-integer approach is easier for mental calculations. 
 And, using integer arithmetic on a computer
 avoids some sticky issues involving floating point calculations \cite{Kahan}.
-So there are sound reasons to study this approach.
+So there are sound reasons to take this approach.
 
 Another reason comes from
 observing that we can easily apply Laplace's expansion to the 
-first column of~($**$), and then we get the determinant of $A$ by 
+first column of~($**$) and then we get the determinant of $A$ by 
 remembering to divide by $4$ because of~($*$).
 
 Here is the general $\nbyn{3}$ case of this approach to finding the determinant.
-Rescale all rows except the first.
+First rescale all rows except the top one.
 \begin{equation*}
   A=
   \begin{mat}
@@ -76,13 +76,13 @@ Now eliminate down the first column.
        &a_{3,3}a_{1,1}-a_{3,1}a_{1,3}                   
   \end{mat}
 \end{equation*}
-Let the $1,1$ minor be $C$.
+Let $C$ be the $1,1$ minor.
 By Laplace the determinant of the above matrix is $a_{1,1}\det(C)$.
-We have $a_{1,1}^2\det(A)=a_{1,1}\det(C)$ and if $a_{1,1}\neq 0$
+We thus have $a_{1,1}^2\det(A)=a_{1,1}\det(C)$ and if $a_{1,1}\neq 0$
 then this $\nbyn{3}$ case gives $det(A)=\det(C)/a_{1,1}$.
 
 To expand this approach to $\nbyn{n}$ matrices with $n>3$ 
-we must see how to find the entries of the minor.
+we must see how to compute the minor's entries.
 The pattern is: each element of the minor is a 
 $\nbyn{2}$~determinant.
 For instance, the entry in the minor's upper left
@@ -134,7 +134,7 @@ We illustrate by finding the determinant of this $\nbyn{3}$ matrix.
     1 &5 &1 
   \end{mat}
 \end{equation*}
-This is Chi\`o's matrix.
+We derive this Chi\`o's matrix.
 \begin{equation*}
   C=
   \begin{mat}
@@ -163,12 +163,12 @@ This is Chi\`o's matrix.
     9  &1
   \end{mat}
 \end{equation*}
-Chi\`o's formula for $\nbyn{3}$ matrices
+The formula for $\nbyn{3}$ matrices
 $det(A)=\det(C)/a_{1,1}$ gives $\det(A)=(50/2)=25$.
 
 For a larger determinant we must do multiple steps
 but each involves only $\nbyn{2}$ determinants and so 
-we can often only write down some
+we can often write down only some
 intermediate information.
 For instance, given this $\nbyn{4}$ matrix
 \begin{equation*}
@@ -263,7 +263,7 @@ is $6$~times the determinant of~$C_3$.
   \end{mat}
 \end{equation*}
 The determinant of $C_2$ is $108$.
-Dividing to get back to the original matrix gives
+We have
 $\det(A)=108/(3^2\cdot 6)=2$.
 
 Laplace's expansion formula for evaluating determinants is recursive because
@@ -302,139 +302,190 @@ method~\cite{FullerLogan}.
     \end{exparts*}
     \begin{answer}
       \begin{exparts*}
-        \partsitem 
-        \partsitem 
+        \partsitem Chi\`o's matrix is
+        \begin{equation*}
+          C=
+          \begin{mat}
+            -3 &-6 \\
+            -6 &-12
+          \end{mat}
+        \end{equation*}
+        and its determinant is $0$
+        \partsitem Start with
+        \begin{equation*}
+          C_3=
+          \begin{mat}
+            2 &8  &0 \\
+            1 &-2 &2 \\
+            4 &2  &2
+          \end{mat}
+        \end{equation*}
+        and then the next step
+        \begin{equation*}
+          C_2=
+          \begin{mat}
+            -12 &4 \\
+            -28 &4
+          \end{mat}
+        \end{equation*}
+        with determinant $\det(C_2)=64$. 
+        The determinant of the original matrix is thus $64/(2^2\cdot 2^1)=8$
       \end{exparts*} 
     \end{answer}
   \item What if $a_{1,1}$ is zero?
-  \item count the operations involved in Sarrus's formula and 
-   Chi\`o's formula for the $\nbyn{3}$ case.
+    \begin{answer}
+      The same construction as was used for the $\nbyn{3}$~case above shows
+      that in place of $a_{1,1}$ we can select any nonzero entry~$a_{i,j}$.
+      Entry $c_{p,q}$ of Chi\`o's matrix is the value of this determinant
+      \begin{equation*}
+        \begin{vmat}
+          a_{1,1}    &a_{1,q+1} \\
+          a_{p+1,1}  &a_{p+1,q+1}
+        \end{vmat}
+      \end{equation*}
+      where $p+1\neq i$ and $q+1\neq j$.
+    \end{answer}
+  \item The \definend{Rule of Sarrus}\index{Sarrus, Rule of}\index{Rule of Sarrus}
+    is a mnemonic that students often learn in prior courses 
+    for the $\nbyn{3}$ determinant formula.
+    On the right of the matrix copy the first two columns. 
+    \begin{equation*}
+      \begin{array}{ccc|cc}
+        a &b &c &a &b \\
+        d &e &f &d &e \\
+        g &h &i &g &h
+      \end{array}
+    \end{equation*}
+    The determinant is the sum of the
+    three upper-left to lower-right diagonals minus the
+    three lower-left to upper-right diagonals
+    $aei+bfg+cdh-gec-hfa-idb$.
+   Count the operations involved in Sarrus's formula and 
+   Chi\`o's formula for the $\nbyn{3}$ case and see which uses fewer.
+   \begin{answer}
+     Sarrus's formula uses $12$~multiplications and $5$ additions (including
+     the subtractions).
+     Chi\`o's formula uses two multiplications and an addition
+     (which is actually a subtraction)
+     for each of the four $\nbyn{2}$~determinants, and another two
+     multiplications and an addition for the $\nbyn{2}$~Chio's determinant, as
+     well as a final division by $a_{1,1}$.
+     That's eleven multiplication/divisions and five addition/subtractions.
+     So Chi\`o is the winner.
+   \end{answer}
   \item Prove Chi\`o's Formula.
     \begin{answer}
-Consider an $\nbyn{n}$ matrix.
-\begin{equation*}
-  A=
-  \begin{mat}
-    a_{1,1}  &a_{1,2}   &\cdots &a_{1,n-1}  &a_{1,n} \\
-    a_{2,1}  &a_{2,2}   &\cdots &a_{2,n-1}  &a_{2,n} \\
-            &\vdots                         \\
-    a_{n-1,1} &a_{n-1,2} &\cdots &a_{n-1,n-1} &a_{n-1,n}  \\ 
-    a_{n,1}  &a_{n,2}   &\cdots &a_{n,n-1}  &a_{n,n} 
-  \end{mat}
-\end{equation*}
-Consider the element in the lower right~$a_{n,n}$.
-
-First rescale every row but the last by~$a_{n,n}$.
-\begin{equation*}
-  % \grstep[a_{n,n}\rho_2 \\ \vdots \\ a_{n,n}\rho_{n-1}]{a_{n,n}\rho_1}
-  \begin{mat}
-    a_{1,1}a_{n,n}   &a_{1,2}a_{n,n}  &\cdots &a_{1,n-1}a_{n,n}  &a_{1,n}a_{n,n} \\
-    a_{2,1}a_{n,n}   &a_{2,2}a_{n,n}  &\cdots &a_{2,n-1}a_{n,n}  &a_{2,n}a_{n,n} \\
+      Consider an $\nbyn{n}$ matrix.
+      \begin{equation*}
+        A=
+        \begin{mat}
+           a_{1,1}  &a_{1,2}   &\cdots &a_{1,n-1}  &a_{1,n} \\
+           a_{2,1}  &a_{2,2}   &\cdots &a_{2,n-1}  &a_{2,n} \\
                   &\vdots                         \\
-    a_{n-1,1}a_{n,n} &a_{n-1,2}a_{n,n} &\cdots &a_{n-1,n-1}a_{n,n} &a_{n-1,n}a_{n,n}  \\ 
-    a_{n,1}        &a_{n,2}        &\cdots &a_{n,n-1}         &a_{n,n} 
-  \end{mat}
-  % \tag{*}
-\end{equation*}
-That rescales the determinant by a factor of~$a_{n,n}^{n-1}$. 
+           a_{n-1,1} &a_{n-1,2} &\cdots &a_{n-1,n-1} &a_{n-1,n}  \\ 
+           a_{n,1}  &a_{n,2}   &\cdots &a_{n,n-1}  &a_{n,n} 
+        \end{mat}
+      \end{equation*}
+      Rescale every row but the first by~$a_{1,1}$.
+      \begin{equation*}
+        \grstep[a_{1,1}\rho_3 \\ \vdots \\ a_{1,1}\rho_{n}]{a_{1,1}\rho_2}\;
+        \begin{mat}
+          a_{1,1}         &a_{1,2}        &\cdots &a_{1,n-1}        &a_{1,n} \\
+          a_{2,1}a_{1,1}   &a_{2,2}a_{1,1}  &\cdots &a_{2,n-1}a_{1,1}  &a_{2,n}a_{1,1} \\
+                        &\vdots                         \\
+          a_{n-1,1}a_{1,1} &a_{n-1,2}a_{1,1} &\cdots &a_{n-1,n-1}a_{1,1} &a_{n-1,n}a_{1,1}\\
+          a_{n,1}a_{1,1}  &a_{n,2}a_{1,1}   &\cdots &a_{n,n-1}a_{1,1}  &a_{n,n}a_{1,1} 
+        \end{mat}
+      \end{equation*}
+      That rescales the determinant by a factor of~$a_{1,1}^{n-1}$. 
 
-Next use $a_{n,n}$ to eliminate the other entries 
-in the final column by performing the row operation 
-$-a_{i,n}\rho_n+\rho_i$ on each row~$i\neq n$.
-These row operations don't change the determinant. 
-\begin{equation*}
-  % \grstep[-a_{2,n}\rho_n+\rho_2 \\ \vdots \\ -a_{n-1,n}\rho_n+\rho_{n-1}]{-a_{1,n}\rho_n+\rho_1}
-  \begin{mat}
-    a_{1,1}a_{n,n}-a_{1,n}a_{n,1}   
-        % &a_{1,2}a_{n,n}-a_{1,n}a_{n,2}  
-        &\cdots 
-        % &a_{1,n-1}a_{n,n}-a_{1,n}a_{n,n-1}  
-        &a_{1,n}a_{n,n}-a_{1,n}a_{n,n} 
-        \\
-    a_{2,1}a_{n,n}-a_{2,n}a_{n,1}   
-        % &a_{2,2}a_{n,n}-a_{2,n}a_{n,2}  
-        &\cdots 
-        % &a_{2,n-1}a_{n,n}-a_{2,n}a_{n,n-1}  
-        &a_{2,n}a_{n,n}-a_{2,n}a_{n,n}    
-        \\
-        \vdots                         \\
-    a_{n-1,1}a_{n,n}-a_{n-1,n}a_{n,1} 
-       % &a_{n-1,2}a_{n,n}-a_{n-1,n}a_{n,2} 
-       &\cdots 
-       % &a_{n-1,n-1}a_{n,n}-a_{n-1,n}a_{n,n-1} 
-       &a_{n-1,n}a_{n,n}-a_{n-1,n}a_{n,n}  
-       \\ 
-    a_{n,1}        
-       % &a_{n,2}        
-       &\cdots 
-       % &a_{n,n-1}         
-       &a_{n,n} 
-  \end{mat}
-  % \tag{**}
-\end{equation*}
-The matrix is too wide to show more but entries but for instance 
-the first row's second entry is $a_{1,2}a_{n,n}-a_{1,n}a_{n,2}$, 
-its third entry is $a_{1,3}a_{n,n}-a_{1,n}a_{n,3}$, \ldots, and 
-entry~$n-1$ is $a_{1,n-1}a_{n,n}-a_{1,n}a_{n,n-1}$.
+      Next perform the row operation 
+      $-a_{i,1}\rho_1+\rho_i$ on each row~$i>1$.
+      These row operations don't change the determinant. 
+      \begin{equation*}
+        \grstep[-a_{3,1}\rho_1+\rho_3 \\ \vdotswithin{-a_{3,1}\rho_1+\rho_3} \\ -a_{n,1}\rho_1+\rho_n]{-a_{2,1}\rho_1+\rho_2}\;
+        \begin{mat}
+          a_{1,1}
+              &a_{1,2}  
+              &\cdots 
+              &a_{1,n-1}  
+              &a_{1,n} 
+              \\
+          0   
+              &a_{2,2}a_{1,1}-a_{2,1}a_{1,2}  
+              &\cdots 
+              &a_{2,n-1}a_{n,n}-a_{2,n-1}a_{1,n-1}  
+              &a_{2,n}a_{n,n}-a_{2,n}a_{1,n}    
+              \\
+              \vdots                         \\
+          0 
+             &a_{n,2}a_{1,1}-a_{n,1}a_{1,2} 
+             &\cdots 
+             &a_{n,n-1}a_{1,1}-a_{n,1}a_{1,n-1} 
+             &a_{n,n}a_{1,1}-a_{n,1}a_{1,n}  
+        \end{mat}
+      \end{equation*}
+      The determinant of this matrix is 
+      $a_{1,1}^{n-1}$~times the determinant of~$A$.
 
-The final column's non-bottom entries $a_{1,n}$,\ldots, $a_{n-1,n}$ are all zeros. 
-\begin{equation*}
-  % \grstep[-a_{2,n}\rho_n+\rho_2 \\ \vdots \\ -a_{n-1,n}\rho_n+\rho_{n-1}]{-a_{1,n}\rho_n+\rho_1}
-  \begin{mat}
-    a_{1,1}a_{n,n}-a_{1,n}a_{n,1}   
-        % &a_{1,2}a_{n,n}-a_{1,n}a_{n,2}  
-        &\cdots 
-        &a_{1,n-1}a_{n,n}-a_{1,n}a_{n,n-1}  
-        &0                              \\
-    a_{2,1}a_{n,n}-a_{2,n}a_{n,1}   
-        % &a_{2,2}a_{n,n}-a_{2,n}a_{n,2}  
-        &\cdots 
-        &a_{2,n-1}a_{n,n}-a_{2,n}a_{n,n-1}  
-        &0                              \\
-        \vdots                         \\
-    a_{n-1,1}a_{n,n}-a_{n-1,n}a_{n,1} 
-       % &a_{n-1,2}a_{n,n}-a_{n-1,n}a_{n,2} 
-       &\cdots 
-       &a_{n-1,n-1}a_{n,n}-a_{n-1,n}a_{n,n-1} 
-       &0                                 \\ 
-    a_{n,1}        
-       % &a_{n,2}        
-       &\cdots 
-       &a_{n,n-1}         
-       &a_{n,n} 
-  \end{mat}
-  %\tag{*}
-\end{equation*}
-And, we've kept track so we know that the determinant of this matrix is 
-$a_{n,n}^{n-1}$~times the determinant of~$A$.
+      Denote by~$C$ the $1,1$ minor of the matrix,
+      that is, the submatrix consisting of the first $n-1$ rows and columns.
+      The Laplace expansion down the final column of the above matrix  
+      gives that its determinant is $(-1)^{1+1}a_{1,1}\det(C)$.
 
-Denote by~$C$ the $n,n$ minor of the matrix,
-that is, the submatrix consisting of the first $n-1$ rows and columns.
-The Laplace expansion down the final column of the above matrix  
-gives that its determinant is $(-1)^{n+n}a_{n,n}\det(C)$.
-
-Setting the two equal and
-cancelling gives $a_{n,n}^{n-2}\det(A)=\det(C)$.       
+      If $a_{1,1}\neq 0$ then setting the two equal and 
+      cancelling gives $\det(A)=\det(C)/a_{n,n}^{n-2}$.       
     \end{answer}
 \end{exercises}
 
 \announcecomputercode
-This implements Chi\`o's method \cite{ChessMaster}.
-It is in the computer language Python. 
-% http://stackoverflow.com/a/10037087/238366
+This implements Chi\`o's method.
+It is in the computer language Python but to make it as readable as
+possible the code avoids some Python facilities.
+Note the recursive call in the final line of 
+\lstinline!chio_det!. 
 \begin{lstlisting}
-from itertools import product, islice
+#!/usr/bin/python
+# chio.py
+#  Calculate a determinant using Chio's method.
+# Jim Hefferon; PD
+# For demonstration only; does not handle the M[0][0]=0 case!
 
-def det(M,prod=1):
-    dim = len(M)
-    if dim == 1:
-        return prod * M.pop().pop()
-    it = product(xrange(1,dim),repeat=2)
-    prod *= M[0][0]
-    return det([[M[x][y]-M[x][0]*(M[0][y]/M[0][0]) for x,y in islice(it,dim-1)] for i in xrange(dim-1)],prod)
+def det_two(a,b,c,d):
+    """Return the determinant of the 2x2 matrix [[a,b], [c,d]]"""
+    return a*d-b*c
+
+def chio_mat(M):
+    """Return the Chio matrix as a list of the rows
+        M  nxn matrix, list of rows"""
+    dim=len(M)
+    C=[]
+    for row in range(1,dim):
+        C.append([])
+        for col in range(1,dim):  
+            C[-1].append(det_two(M[0][0], M[0][col], M[row][0], M[row][col]))
+    return C
+
+def chio_det(M,show=None):
+    """Find the determinant of M by Chio's method
+        M  mxm matrix, list of rows"""
+    dim=len(M)
+    key_elet=M[0][0]
+    if dim==1:
+        return key_elet
+    return chio_det(chio_mat(M))/(key_elet**(dim-2))
+
+
+if __name__=='__main__':
+    M=[[2,1,1], [3,4,-1], [1,5,1]]
+    print "M=",M
+    print "Chio det is", chio_det(M)
 \end{lstlisting}
-
-
-
+This is the result of calling the program from my command line.
+\begin{lstlisting}
+$ python chio.py
+M=[[2, 1, 1], [3, 4, -1], [1, 5, 1]]
+Chio det is 25
+\end{lstlisting}
 \index{Chi\`o's method|)}
 \endinput

@@ -24941,116 +24941,123 @@ ans = 0.017398
 \subsection{Topic: Chi\`o's Method}
 \begin{ans}{1}
       \begin{exparts*}
-        \partsitem
-        \partsitem
+        \partsitem Chi\`o's matrix is
+        \begin{equation*}
+          C=
+          \begin{mat}
+            -3 &-6 \\
+            -6 &-12
+          \end{mat}
+        \end{equation*}
+        and its determinant is $0$
+        \partsitem Start with
+        \begin{equation*}
+          C_3=
+          \begin{mat}
+            2 &8  &0 \\
+            1 &-2 &2 \\
+            4 &2  &2
+          \end{mat}
+        \end{equation*}
+        and then the next step
+        \begin{equation*}
+          C_2=
+          \begin{mat}
+            -12 &4 \\
+            -28 &4
+          \end{mat}
+        \end{equation*}
+        with determinant $\det(C_2)=64$.
+        The determinant of the original matrix is thus $64/(2^2\cdot 2^1)=8$
       \end{exparts*}
     
 \end{ans}
+\begin{ans}{2}
+      The same construction as was used for the $\nbyn{3}$~case above shows
+      that in place of $a_{1,1}$ we can select any nonzero entry~$a_{i,j}$.
+      Entry $c_{p,q}$ of Chi\`o's matrix is the value of this determinant
+      \begin{equation*}
+        \begin{vmat}
+          a_{1,1}    &a_{1,q+1} \\
+          a_{p+1,1}  &a_{p+1,q+1}
+        \end{vmat}
+      \end{equation*}
+      where $p+1\neq i$ and $q+1\neq j$.
+    
+\end{ans}
+\begin{ans}{3}
+     Sarrus's formula uses $12$~multiplications and $5$ additions (including
+     the subtractions).
+     Chi\`o's formula uses two multiplications and an addition
+     (which is actually a subtraction)
+     for each of the four $\nbyn{2}$~determinants, and another two
+     multiplications and an addition for the $\nbyn{2}$~Chio's determinant, as
+     well as a final division by $a_{1,1}$.
+     That's eleven multiplication/divisions and five addition/subtractions.
+     So Chi\`o is the winner.
+   
+\end{ans}
 \begin{ans}{4}
-Consider an $\nbyn{n}$ matrix.
-\begin{equation*}
-  A=
-  \begin{mat}
-    a_{1,1}  &a_{1,2}   &\cdots &a_{1,n-1}  &a_{1,n} \\
-    a_{2,1}  &a_{2,2}   &\cdots &a_{2,n-1}  &a_{2,n} \\
-            &\vdots                         \\
-    a_{n-1,1} &a_{n-1,2} &\cdots &a_{n-1,n-1} &a_{n-1,n}  \\
-    a_{n,1}  &a_{n,2}   &\cdots &a_{n,n-1}  &a_{n,n}
-  \end{mat}
-\end{equation*}
-Consider the element in the lower right~$a_{n,n}$.
-
-First rescale every row but the last by~$a_{n,n}$.
-\begin{equation*}
-  % \grstep[a_{n,n}\rho_2 \\ \vdots \\ a_{n,n}\rho_{n-1}]{a_{n,n}\rho_1}
-  \begin{mat}
-    a_{1,1}a_{n,n}   &a_{1,2}a_{n,n}  &\cdots &a_{1,n-1}a_{n,n}  &a_{1,n}a_{n,n} \\
-    a_{2,1}a_{n,n}   &a_{2,2}a_{n,n}  &\cdots &a_{2,n-1}a_{n,n}  &a_{2,n}a_{n,n} \\
+      Consider an $\nbyn{n}$ matrix.
+      \begin{equation*}
+        A=
+        \begin{mat}
+           a_{1,1}  &a_{1,2}   &\cdots &a_{1,n-1}  &a_{1,n} \\
+           a_{2,1}  &a_{2,2}   &\cdots &a_{2,n-1}  &a_{2,n} \\
                   &\vdots                         \\
-    a_{n-1,1}a_{n,n} &a_{n-1,2}a_{n,n} &\cdots &a_{n-1,n-1}a_{n,n} &a_{n-1,n}a_{n,n}  \\
-    a_{n,1}        &a_{n,2}        &\cdots &a_{n,n-1}         &a_{n,n}
-  \end{mat}
-  % \tag{*}
-\end{equation*}
-That rescales the determinant by a factor of~$a_{n,n}^{n-1}$.
+           a_{n-1,1} &a_{n-1,2} &\cdots &a_{n-1,n-1} &a_{n-1,n}  \\
+           a_{n,1}  &a_{n,2}   &\cdots &a_{n,n-1}  &a_{n,n}
+        \end{mat}
+      \end{equation*}
+      Rescale every row but the first by~$a_{1,1}$.
+      \begin{equation*}
+        \grstep[a_{1,1}\rho_3 \\ \vdots \\ a_{1,1}\rho_{n}]{a_{1,1}\rho_2}\;
+        \begin{mat}
+          a_{1,1}         &a_{1,2}        &\cdots &a_{1,n-1}        &a_{1,n} \\
+          a_{2,1}a_{1,1}   &a_{2,2}a_{1,1}  &\cdots &a_{2,n-1}a_{1,1}  &a_{2,n}a_{1,1} \\
+                        &\vdots                         \\
+          a_{n-1,1}a_{1,1} &a_{n-1,2}a_{1,1} &\cdots &a_{n-1,n-1}a_{1,1} &a_{n-1,n}a_{1,1}\\
+          a_{n,1}a_{1,1}  &a_{n,2}a_{1,1}   &\cdots &a_{n,n-1}a_{1,1}  &a_{n,n}a_{1,1}
+        \end{mat}
+      \end{equation*}
+      That rescales the determinant by a factor of~$a_{1,1}^{n-1}$.
 
-Next use $a_{n,n}$ to eliminate the other entries
-in the final column by performing the row operation
-$-a_{i,n}\rho_n+\rho_i$ on each row~$i\neq n$.
-These row operations don't change the determinant.
-\begin{equation*}
-  % \grstep[-a_{2,n}\rho_n+\rho_2 \\ \vdots \\ -a_{n-1,n}\rho_n+\rho_{n-1}]{-a_{1,n}\rho_n+\rho_1}
-  \begin{mat}
-    a_{1,1}a_{n,n}-a_{1,n}a_{n,1}
-        % &a_{1,2}a_{n,n}-a_{1,n}a_{n,2}
-        &\cdots
-        % &a_{1,n-1}a_{n,n}-a_{1,n}a_{n,n-1}
-        &a_{1,n}a_{n,n}-a_{1,n}a_{n,n}
-        \\
-    a_{2,1}a_{n,n}-a_{2,n}a_{n,1}
-        % &a_{2,2}a_{n,n}-a_{2,n}a_{n,2}
-        &\cdots
-        % &a_{2,n-1}a_{n,n}-a_{2,n}a_{n,n-1}
-        &a_{2,n}a_{n,n}-a_{2,n}a_{n,n}
-        \\
-        \vdots                         \\
-    a_{n-1,1}a_{n,n}-a_{n-1,n}a_{n,1}
-       % &a_{n-1,2}a_{n,n}-a_{n-1,n}a_{n,2}
-       &\cdots
-       % &a_{n-1,n-1}a_{n,n}-a_{n-1,n}a_{n,n-1}
-       &a_{n-1,n}a_{n,n}-a_{n-1,n}a_{n,n}
-       \\
-    a_{n,1}
-       % &a_{n,2}
-       &\cdots
-       % &a_{n,n-1}
-       &a_{n,n}
-  \end{mat}
-  % \tag{**}
-\end{equation*}
-The matrix is too wide to show more but entries but for instance
-the first row's second entry is $a_{1,2}a_{n,n}-a_{1,n}a_{n,2}$,
-its third entry is $a_{1,3}a_{n,n}-a_{1,n}a_{n,3}$, \ldots, and
-entry~$n-1$ is $a_{1,n-1}a_{n,n}-a_{1,n}a_{n,n-1}$.
+      Next perform the row operation
+      $-a_{i,1}\rho_1+\rho_i$ on each row~$i>1$.
+      These row operations don't change the determinant.
+      \begin{equation*}
+        \grstep[-a_{3,1}\rho_1+\rho_3 \\ \vdotswithin{-a_{3,1}\rho_1+\rho_3} \\ -a_{n,1}\rho_1+\rho_n]{-a_{2,1}\rho_1+\rho_2}\;
+        \begin{mat}
+          a_{1,1}
+              &a_{1,2}
+              &\cdots
+              &a_{1,n-1}
+              &a_{1,n}
+              \\
+          0
+              &a_{2,2}a_{1,1}-a_{2,1}a_{1,2}
+              &\cdots
+              &a_{2,n-1}a_{n,n}-a_{2,n-1}a_{1,n-1}
+              &a_{2,n}a_{n,n}-a_{2,n}a_{1,n}
+              \\
+              \vdots                         \\
+          0
+             &a_{n,2}a_{1,1}-a_{n,1}a_{1,2}
+             &\cdots
+             &a_{n,n-1}a_{1,1}-a_{n,1}a_{1,n-1}
+             &a_{n,n}a_{1,1}-a_{n,1}a_{1,n}
+        \end{mat}
+      \end{equation*}
+      The determinant of this matrix is
+      $a_{1,1}^{n-1}$~times the determinant of~$A$.
 
-The final column's non-bottom entries $a_{1,n}$,\ldots, $a_{n-1,n}$ are all zeros.
-\begin{equation*}
-  % \grstep[-a_{2,n}\rho_n+\rho_2 \\ \vdots \\ -a_{n-1,n}\rho_n+\rho_{n-1}]{-a_{1,n}\rho_n+\rho_1}
-  \begin{mat}
-    a_{1,1}a_{n,n}-a_{1,n}a_{n,1}
-        % &a_{1,2}a_{n,n}-a_{1,n}a_{n,2}
-        &\cdots
-        &a_{1,n-1}a_{n,n}-a_{1,n}a_{n,n-1}
-        &0                              \\
-    a_{2,1}a_{n,n}-a_{2,n}a_{n,1}
-        % &a_{2,2}a_{n,n}-a_{2,n}a_{n,2}
-        &\cdots
-        &a_{2,n-1}a_{n,n}-a_{2,n}a_{n,n-1}
-        &0                              \\
-        \vdots                         \\
-    a_{n-1,1}a_{n,n}-a_{n-1,n}a_{n,1}
-       % &a_{n-1,2}a_{n,n}-a_{n-1,n}a_{n,2}
-       &\cdots
-       &a_{n-1,n-1}a_{n,n}-a_{n-1,n}a_{n,n-1}
-       &0                                 \\
-    a_{n,1}
-       % &a_{n,2}
-       &\cdots
-       &a_{n,n-1}
-       &a_{n,n}
-  \end{mat}
-  %\tag{*}
-\end{equation*}
-And, we've kept track so we know that the determinant of this matrix is
-$a_{n,n}^{n-1}$~times the determinant of~$A$.
+      Denote by~$C$ the $1,1$ minor of the matrix,
+      that is, the submatrix consisting of the first $n-1$ rows and columns.
+      The Laplace expansion down the final column of the above matrix
+      gives that its determinant is $(-1)^{1+1}a_{1,1}\det(C)$.
 
-Denote by~$C$ the $n,n$ minor of the matrix,
-that is, the submatrix consisting of the first $n-1$ rows and columns.
-The Laplace expansion down the final column of the above matrix
-gives that its determinant is $(-1)^{n+n}a_{n,n}\det(C)$.
-
-Setting the two equal and
-cancelling gives $a_{n,n}^{n-2}\det(A)=\det(C)$.
+      If $a_{1,1}\neq 0$ then setting the two equal and
+      cancelling gives $\det(A)=\det(C)/a_{n,n}^{n-2}$.
     
 \end{ans}
 \subsection{Topic: Projective Geometry}
