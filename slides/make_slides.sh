@@ -1,11 +1,14 @@
 #!/bin/bash
 # make_slides.sh
-#  Build the beamer slides for Linear Algebra by Jim Hefferon
+#  On Linux build the beamer slides for Linear Algebra by Jim Hefferon
 # See http://joshua.smcvt.edu/linearalgebra .
 #
 # Run with 
-#  cd book/slides
+#  cd linear-algebra/slides
 #  ./make_slides.sh 2>&1 | tee make_slides.log
+# (you may need to put in "chmod u+x ./make_slides.sh" the first time).
+# Warning: running this script takes minutes, not seconds.  Perhaps 20 mins.
+# In particular, "asy -f png four_ii_orientation_neg" takes a long time.
 #
 # 2012-Jun-15 Jim Hefferon
 
@@ -16,7 +19,7 @@ cd asy
 echo "================="
 echo " creating pdf graphics with Asymptote"
 echo "================="
-declare -a pdf_out_files=("three_ii_proj1" "three_ii_proj2" "three_ii_proj3" "three_ii_proj5" "three_vi_2dmutuallyortho" "four_ii_2dtransedsize0" "four_ii_2dtransedsize1")
+declare -a pdf_out_files=("three_ii_rotate" "three_ii_proj1" "three_ii_proj2" "three_ii_proj3" "three_ii_proj5" "three_vi_2dmutuallyortho" "four_ii_2dtransedsize0" "four_ii_2dtransedsize1")
 cmd="asy -f pdf filename"  # will substitute for "filename"
 
 for i in ${pdf_out_files[@]}
@@ -28,7 +31,7 @@ do
 done
 
 # Create all the graphics that will be .png files
-echo "\n================="
+echo "================="
 echo " creating png graphics with Asymptote"
 echo "   (some of these take minutes for a single file to compile)"
 echo "================="
@@ -47,7 +50,7 @@ done
 cd ..
 
 # Make the slides
-echo "\n================="
+echo "================="
 echo " creating beamer slides with pdflatex"
 echo "================="
 declare -a beamer_files=("one_i" "one_ii" "one_iii" "two_i" "two_ii" "two_iii" "three_i" "three_ii" "three_iii" "three_iv" "three_v" "three_vi" "four_i" "four_ii" "four_iii" "five_i" "five_ii")
