@@ -42,6 +42,24 @@ var('x,y,z,w')
 eqn = [x+y+w==1, 2*x-y+2*z==0]
 s = solve(eqn, x,y); 
 print s
+
+
+
+
+print "==== General = Particular + Homogeneous ===="
+
+print ".. This matrix is singular .."
+M = matrix(QQ,[[2,-1,0], [0,1,1], [1,2,0]])
+gauss_method(M,rescale_leading_entry=False)
+ 
+
+print ".. Find solution to associated homogeneous system .."
+M = matrix(QQ,[[1,2,0,-1], [0,3,1,1], [-1,1,2,0]])
+gauss_method(M,rescale_leading_entry=False)
+var('x,y,z')
+eqn = [x+2*y==-1, 3*y+z==1, -x+y+2*z==0]
+s = solve(eqn, x,y); 
+print s
  
 
 # M = matrix(QQ,[[1,-1,1,4], [1,1,-2,-1]])
