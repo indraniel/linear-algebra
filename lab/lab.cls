@@ -49,7 +49,7 @@
              Scale=0.88]{ul9r8a.pfb}  % Luxi Mono Regular
 % font for code listings
 \newfontfamily\listingsfont[Path=fonts/,
-                                  Scale=1.08]{ProggyClean.ttf}
+                                  Scale=1]{ProggyClean.ttf}
 \newfontfamily\listingsinlinefont[Path=fonts/,
                                   Scale=MatchLowercase]{ProggyClean.ttf}
 \newfontfamily\luximono[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
@@ -57,6 +57,9 @@
                         BoldFont = ul9b8a.pfb]{ul9r8a.pfb}
 \newfontfamily\berasans[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
                         BoldFont = fvsb8a.pfb]{fvsr8a.pfb}
+\newfontfamily\berasansx[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
+                        BoldFont = fvsb8a.pfb,
+                        Scale = MatchLowercase]{fvsr8a.pfb}
 
 
 \usepackage[math-style=upright]{unicode-math} % see http://tex.stackexchange.com/questions/50995/font-mixup-with-neo-euler-and-fontspec
@@ -66,14 +69,40 @@
              Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/]{msbm10.pfb}	
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
 \RequirePackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Lab Manual for Linear Algebra},    % title
+    pdfauthor={Jim Hefferon},     % author
+    pdfsubject={Linear Algebra},   % subject of the document
+    pdfcreator={xelatex},   % creator of the document
+    pdfproducer={xelatex}, % producer of the document
+    pdfkeywords={Linear Algebra} {textbook} {Sage} {Free},  % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
 % \RequirePackage{color}
 \RequirePackage[usenames,dvipsnames]{xcolor}
+  \definecolor{darkcolor}{HTML}{193E9A}  % 
+  \definecolor{boldcolor}{HTML}{0034B7}  % 
+  \definecolor{lightcolor}{HTML}{DAE4FC} % {799FFC}  % 
+  \definecolor{bgcolor}{HTML}{FCFFDC}  %  
+  \definecolor{flourishcolor}{HTML}{F80018}  %
+
 \RequirePackage{graphicx}
 \RequirePackage{url}
 \RequirePackage{lipsum}
 
 %------------------------- code listings
-\definecolor{latexcolor}{HTML}{BCD4CE}   
+\definecolor{pythoncolor}{HTML}{BCD4CE}   
 \definecolor{latexrulecolor}{HTML}{E6E6E6}   
 \definecolor{rulecolor}{HTML}{3D2B22}   
 \definecolor{shellcolor}{HTML}{D1A298}  
@@ -84,7 +113,7 @@
   \lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
   \@empty\z@\@empty
 \makeatother
-\lstloadlanguages{TeX,bash}
+\lstloadlanguages{TeX,bash,Python}
 \lstset{basicstyle=\listingsfont,
    lineskip=-.25ex,
    % aboveskip=\medskipamount,
@@ -95,7 +124,7 @@
    numberfirstline=true,           % first line gets numbered always
    numbers=left,                   % where to put the line-numbers
    numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
-   stepnumber=2,                   % the step between two line-numbers.
+   stepnumber=1,                   % the step between two line-numbers.
    numbersep=5pt,                  % how far the line-numbers are from the code
    backgroundcolor=\color{latexcolor},  % choose the background color. You must add \usepackage{color}
    showspaces=false,               % show spaces adding particular underscores
@@ -107,6 +136,9 @@
 }
 \lstdefinestyle{inline}{basicstyle=\listingsinlinefont,texcl=true}
 \lstdefinestyle{shell}{backgroundcolor=\color{shellcolor}}
+\lstdefinestyle{python}{backgroundcolor=\color{pythoncolor},
+  language=Python,
+  }
 \lstdefinestyle{latex}{
   language=[LaTeX]TeX,                % the language of the code
 }
@@ -179,17 +211,64 @@
 % \savebox{\chapterrule}{\setlength{\fboxsep}{0pt}\colorbox{red}{dddd\makebox[.5\textwidth]{\rule{0em}{6pt}}}}
 % \colorbox{red}{\makebox[0em][l]{\rule[-.15in]{\textwidth}{.6pt}}}}
 
-\renewcommand{\chapter}{\@startsection
-{chapter}%                   % the name
-{0}%                         % the level
-{0em}%                       % the indent
-{-2.5\baselineskip}%            % the before skip
-{2.0\baselineskip}%          % the after skip
-{\noindent\makebox[0em][l]{\raisebox{-7.5pt}{\setlength{\fboxsep}{0pt}\colorbox{red}{\makebox[\textwidth][l]{\rule{0em}{0.6pt}}}}}\berasans\Huge\bfseries}} % the style
+% \renewcommand{\chapter}{\@startsection
+% {chapter}%                   % the name
+% {1}%                         % the level
+% {0em}%                       % the indent
+% {-4in}%            % the before skip was: {-2.5\baselineskip}
+% {2.0\baselineskip}%          % the after skip
+% {\noindent\makebox[0em][l]{\raisebox{-7.5pt}{\setlength{\fboxsep}{0pt}\colorbox{red}{\makebox[\textwidth][l]{\rule{0em}{0.6pt}}}}}\berasans\Huge\bfseries}} % the style
+
+%---------------------------------------------
+% Modified slightly from ../bookconcretejh.sty
+% for clearing out (needs twoside document option).
+\newcommand{\clearemptydoublepage}{%
+  \clearpage{\pagestyle{empty}\cleardoublepage}}
+
+\def\@makechapterhead#1{\clearemptydoublepage
+  % Grab the name of the chapter.  Has to go here, not in \chapter, since
+  % that macro does not take an argument.
+  % \gdef\sectioningname{#1} 
+  % Below here is where the chapter heading is formatted
+  \vspace*{80pt plus 10pt minus 8pt} % was 50\p@ 
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        % \huge\bfseries \@chapapp\space \thechapter
+        {\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth]{\rule{0em}{0.6pt}}}} \\[-5ex]
+        % \selectfont\Large\textcolor{boldcolor}{\fancyfont{ \@chapapp{} \thechapter}}
+        \par\nobreak
+        \vskip 0\p@
+      \fi
+    \par
+    \vskip 0\p@ \fi %was 20\p@
+    \interlinepenalty\@M
+    % \Huge \bfseries \usefont{T1}{fvs}{b}{n}\Huge\textcolor{black}{#1}\par\nobreak
+    {\berasans\Huge\bfseries #1}
+    \vspace{40pt plus 5pt minus 3pt}
+    % \vskip 50\p@  % was 30\p@
+  }}
+
+% For starred chaters
+\def\@makeschapterhead#1{%
+  \vspace*{75pt plus 10pt minus 8pt} % was: \vspace*{50\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    % \usefont{T1}{fvs}{b}{n}\Huge\textcolor{black}{#1} \\[-1.75ex] 
+    {\berasans\Huge\bfseries #1} \\[-1.75ex]
+    {\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth]{\rule{0em}{0.6pt}}}}\par\nobreak
+    \vspace{40pt plus 5pt minus 3pt}
+    % \vskip 40\p@
+  }}
+%---------------------------------------------
+
+
+
 
 \renewcommand{\section}{\@startsection
 {section}%                   % the name
-{1}%                         % the level
+{2}%                         % the level
 {0em}%                       % the indent
 {-2.5\baselineskip}%            % the before skip
 {0.5\baselineskip}%          % the after skip
@@ -197,11 +276,11 @@
 
 \renewcommand{\subsection}{\@startsection
 {subsection}%                   % the name
-{2}%                         % the level
+{3}%                         % the level
 {0em}%                       % the indent
 {-1\baselineskip}%            % the before skip
 {-0.8em}%          % the after skip
-{\berasans\bfseries}} % the style
+{\berasansx\bfseries}} % the style
 % \renewcommand{\thesub}{}
 
 % What depth has numbering shown in toc?
@@ -227,7 +306,9 @@
 \def\Rdash{\d@sh\nobreak\emdash}
 
 \usepackage{../linalgjh}
-
 \AtBeginDocument{\def\Re{\mathbb{R}}}
+
+\newcommand{\keyboardkey}[1]{\textit{$\langle$#1$\rangle$}}
 \newcommand{\sage}{Sage}
+\newcommand{\python}{Python}
 
