@@ -120,13 +120,12 @@
    % belowskip=\medskipamount,
    showstringspaces=false,
    xleftmargin=0pt,                      
-   backgroundcolor=\color{latexcolor},
    numberfirstline=true,           % first line gets numbered always
    numbers=left,                   % where to put the line-numbers
    numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
    stepnumber=1,                   % the step between two line-numbers.
    numbersep=5pt,                  % how far the line-numbers are from the code
-   backgroundcolor=\color{latexcolor},  % choose the background color. You must add \usepackage{color}
+   backgroundcolor=\color{pythoncolor},  % choose the background color. You must add \usepackage{color}
    showspaces=false,               % show spaces adding particular underscores
    showstringspaces=false,         % underline spaces within strings
    showtabs=false,                 % show tabs within strings adding particular underscores
