@@ -307,7 +307,7 @@
 \usepackage{../linalgjh}
 \AtBeginDocument{\def\Re{\mathbb{R}}}
 
-\newcommand{\keyboardkey}[1]{\textit{$\langle$#1$\rangle$}}
+\newcommand{\keyboardkey}[1]{\textit{$\langle$#1\,$\rangle$}}
 \newcommand{\sage}{Sage}
 \newcommand{\python}{Python}
 

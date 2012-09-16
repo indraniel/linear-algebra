@@ -45,6 +45,7 @@ will read your code, evaluate it, and print the result.
 So the prompt lets you try things.
 We will see below how to write and run entire \python{} programs
 but for the moment we will stick to the experiment. 
+(You can get out of the prompt with \textit{\keyboardkey{Ctrl}-D}.)
 
 Try entering these expressions (double star is exponentiation).
 \begin{lstlisting}[style=python]
@@ -167,7 +168,7 @@ Above we saw a string, consisting of text between single quotes.
 You can use either single quotes or double quotes, as long as you use
 the same at both ends of the string. 
 Here, \lstinline[style=inline]!x! and \lstinline[style=inline]!y!
-are double-quoted, which makes sense because they contain apostrope's. 
+are double-quoted, which makes sense because they contain apostrophe's. 
 \begin{lstlisting}[style=python]
 >>> x="I'm Popeye the sailor man"
 >>> y="I yam what I yam and that's all what I yam"
@@ -252,6 +253,12 @@ You can count from the back by using negative indices.
 >>> a[-1]
 'gamma'
 \end{lstlisting}
+You can add to a list.
+\begin{lstlisting}[style=python]
+>>> c.append('epsilon')
+>>> c
+['delta', 'epsilon']  
+\end{lstlisting}
 
 A \textit{tuple} is like a list in that it is ordered.
 \begin{lstlisting}[style=python]
@@ -335,7 +342,7 @@ while the second has more than two branches.
 -1
 \end{lstlisting}
 
-A speciality of computers is iteration, looping through the same steps.
+A specialty of computers is iteration, looping through the same steps.
 \begin{lstlisting}[style=python]
 >>> for i in range(5):
 ...     print i,"squared is",i**2
@@ -447,7 +454,7 @@ Hello, Jim
 \sage{} uses this aspect of \python{} a great deal.
 
 
-\subsection{Objects and libraries}
+\subsection{Objects and modules}
 In Mathematics, the real numbers is a set associated with some operations
 such as addition and multiplication.
 \python{} is \textit{object-oriented}, which means that we can similarly bundle
@@ -476,8 +483,8 @@ with \lstinline[style=inline]!a! you write
 \lstinline[style=inline]!a.hello()! 
 (a function bundled in this way is called a method).
 
-You won't be writing your own classes, but you will be using ones from
-extensive libraries of code that others have written, including the
+You won't be writing your own classes here but you will be using ones from
+the extensive libraries of code that others have written, including the
 code for \sage. 
 For instance, \python{} has a library, or \textit{module}, for math.
 \begin{lstlisting}[style=python]
@@ -489,29 +496,28 @@ For instance, \python{} has a library, or \textit{module}, for math.
 >>> math.cos(math.pi)
 -1.0
 \end{lstlisting}
-The \lstinline[style=inline]!import! statement gets the library and makes
-its objects available.
+The \lstinline[style=inline]!import! statement gets the module and makes
+its contents available.
 
 Another library is for random numbers.
 \begin{lstlisting}[style=python]
 >>> import random
->>> random.randint()
 >>> while (random.randint(1,10) != 1):
-...     print "wrong, guess again."
+...     print "wrong"
 ... 
-wrong, guess again.
-wrong, guess again.
+wrong
+wrong
 \end{lstlisting}
 
 
 
 \subsection{Programs}
-The read-eval-print loop is great for small-scale experiments.
-If you need to write more than four or five lines, though, you will
-want to put it in a separate file and run it as a program.
+The read-eval-print loop is great for small-scale experiments but
+for more than four or five lines you 
+want to put your work in a separate file and run it as a standalone program.
 
-To write the code use a text editor; one example is 
-\pgm{emacs}\footnote{It may come with your operating system, or see \protect\url{http://www.gnu.org/software/emacs}.}).
+To write the code, use a text editor; one example is 
+\pgm{Emacs}\footnote{It may come with your operating system or see \protect\url{http://www.gnu.org/software/emacs}.}).
 You should try to use an editor with support for \python{} such as 
 syntax highlighting, where the editor colors text according to what part
 it is of the language.
@@ -536,8 +542,8 @@ Run it under \python{} (for instance, from the command line
 run \lstinline[style=inline]!python test.py!) and you should see
 output like \lstinline[style=inline]!the month number is 9!.
 
-Here is a small game, which involves some \python{} constructs that
-we haven't covered but that are easy to figure out.
+Here is a small game (it has some \python{} constructs that
+you haven't seen but that are simple to figure out).
 \begin{lstlisting}[style=python]
 # guessing_game.py
 """guessing_game
@@ -582,9 +588,8 @@ file as a whole and for the function.
 Go to the directory containing \path{guessing_game.py} and start \python{}.
 At the prompt type in \lstinline[style=inline]!import guessing_game!.
 You will play through a round of the game (there is a way to avoid this
-but it doesn't matter for this point), and then type
+but it doesn't matter for this point) and then type
 \lstinline[style=inline]!help("guessing_game")!.
-You will see help on the program that includes this.
 \begin{lstlisting}
 DESCRIPTION
     A toy game for demonstration.
@@ -593,18 +598,87 @@ FUNCTIONS
     test_guess(guess)
         Decide if the guess is correct and print a message. 
 \end{lstlisting}
-Obviously, \python{} got those from the documentation strings.
-In \python{} (including in \sage), people try to always include documentation
+Obviously, \python{} got this help from your documentation strings.
+In \python{}, and also in \sage, people try to always include documentation
 that is accessible from the \lstinline[style=inline]!help! command.
+
+
 
 
 %----------------------------------
 \section{\sage}
+Much of this book involves learning what \sage{} can do, so this is a very
+brief walk-through of preliminaries.
+First, install \sage{} (your system may supply it or you can
+follow the directions at
+\href{http://www.sagemath.org}{www.sagemath.org}).
 
 \subsection{Command line}
+We start with \sage's prompt, which is like \python's but adapted to 
+mathematical work.
+From a command line call \lstinline[style=inline]!sage!.
+There is some initial text and then a prompt.
+\begin{lstlisting}[style=python]
+sage:  
+\end{lstlisting}
+(Leave the prompt by typing \lstinline[style=inline]!exit!
+and \keyboardkey{Enter}.)
+
+Experiment with some expressions.
+\begin{lstlisting}[style=python]
+sage: 2**3                                                                           
+8
+sage: 2^3
+8
+sage: 3*1+4*2
+11
+sage: 5 == 3+3
+False
+sage: sin(pi/3)
+1/2*sqrt(3)
+\end{lstlisting}
+The second shows that \sage{} provides a convenient shortcut for exponentiation.
+The fourth shows that \sage{} sometimes returns exact results, rather than an
+approximation.
+If you prefer the approximation then you can get that. 
+\begin{lstlisting}[style=python]
+sage: sin(pi/3).numerical_approx()
+0.866025403784439
+sage: sin(pi/3).n()
+0.866025403784439  
+\end{lstlisting}
+The \lstinline[style=inline]!n()! is an abbreviation for the
+\lstinline[style=inline]!numerical_approx()!.
+
 
 \subsection{Script}
+You can group \sage{} commands together in a file.
+This way you can test the commands, 
+and also reuse them without having to retype.
+
+Create a file with the extension \path{sage} such as \path{sage_try.sage}.
+\begin{lstlisting}[style=python]
+def normal_curve(upper_limit):
+    """Approximate area under the Normal curve from 0 to upper_limit.
+    """
+    stdev=1.0
+    mu=0.0
+    area=numerical_integral((1/sqrt(2*pi)*e^(-0.5*(x)^2)),
+                            0,upper_limit)    
+    print "area is",area[0]
+\end{lstlisting}
+Bring in the commands in this way.
+\begin{lstlisting}[style=python]
+sage: load "sage_try.sage"
+sage: normal_curve(1.0)   
+area is 0.341344746069  
+\end{lstlisting}
+
 
 \subsection{Notebook}
-
+\sage{} also offers a browser-based interface, where you can set up
+worksheets that can be run alone or with other people, where you can easily
+view plots integrated with the text, and many other nice features.
+We won't be using that interface, just in a desire to keep the attention
+on the Linear Algebra, but it is a very nice environment. 
 \endinput
