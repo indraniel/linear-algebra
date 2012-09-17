@@ -101,6 +101,8 @@
 \RequirePackage{url}
 \RequirePackage{lipsum}
 
+
+\usepackage{sagetex} % has to come before listings because defines some stuff
 %------------------------- code listings
 \definecolor{pythoncolor}{HTML}{BCD4CE}   
 \definecolor{latexrulecolor}{HTML}{E6E6E6}   
@@ -308,6 +310,6 @@
 \AtBeginDocument{\def\Re{\mathbb{R}}}
 
 \newcommand{\keyboardkey}[1]{\textit{$\langle$#1\,$\rangle$}}
-\newcommand{\sage}{Sage}
+\newcommand{\Sage}{Sage}
 \newcommand{\python}{Python}
 
