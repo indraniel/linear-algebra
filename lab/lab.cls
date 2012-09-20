@@ -169,6 +169,8 @@
 \pagestyle{followingpage}
 \AtBeginDocument{\thispagestyle{firstpage}}
 
+% Bibliography
+\usepackage[square,colon]{natbib}
 % Change the look of footnotes
 \usepackage[perpage,para]{footmisc}
 % Change horiz room between fn mark and fn hskip from .5em 
@@ -311,5 +313,6 @@
 
 \newcommand{\keyboardkey}[1]{\textit{$\langle$#1\,$\rangle$}}
 \newcommand{\Sage}{Sage}
+\newcommand{\Sagecmd}[1]{\textit{#1}}
 \newcommand{\python}{Python}
 
