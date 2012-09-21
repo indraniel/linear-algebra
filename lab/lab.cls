@@ -74,20 +74,20 @@
     unicode=false,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
-    pdffitwindow=false,     % window fit to page when opened
+    pdffitwindow=true,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
     pdftitle={Lab Manual for Linear Algebra},    % title
     pdfauthor={Jim Hefferon},     % author
     pdfsubject={Linear Algebra},   % subject of the document
     pdfcreator={xelatex},   % creator of the document
     pdfproducer={xelatex}, % producer of the document
-    pdfkeywords={Linear Algebra} {textbook} {Sage} {Free},  % list of keywords
+    pdfkeywords={Linear Algebra} {textbook} {Sage} {Free} {Hefferon},  % list of keywords
     pdfnewwindow=true,      % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links
-    citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
+    linkcolor=blue,          % color of internal links
+    citecolor=blue,        % color of links to bibliography
+    filecolor=blue,      % color of file links
+    urlcolor=blue           % color of external links
 }
 % \RequirePackage{color}
 \RequirePackage[usenames,dvipsnames]{xcolor}
@@ -139,13 +139,18 @@
 \lstdefinestyle{shell}{backgroundcolor=\color{shellcolor}}
 \lstdefinestyle{python}{backgroundcolor=\color{pythoncolor},
   language=Python,
+  identifierstyle=\listingsfont,
+  commentstyle=\listingsfont,
+  stringstyle=\listingsfont,
+  keywordstyle=\listingsfont,
   }
 \lstdefinestyle{latex}{
   language=[LaTeX]TeX,                % the language of the code
 }
 
 % Page layout
-\RequirePackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\RequirePackage[left=1in,right=1in,top=1in,bottom=1in,
+                head=13.6pt]{geometry}
 
 \RequirePackage{fancyhdr}
 \fancypagestyle{preface}{%
@@ -160,9 +165,10 @@
 }
 \fancypagestyle{followingpage}{%
   \fancyhf{} % clear all six fields
-  \fancyhead[RE,LO]{\LaTeX{} tutorial}
-  \fancyhead[LE,RO]{page \thepage}
-  \renewcommand{\headrulewidth}{1pt}
+  \fancyhead[RE]{\textit{\leftmark}}
+  \fancyhead[LO]{\textit{SECTION: \rightmark}}
+  \fancyhead[LE,RO]{\textit{PAGE \thepage}}
+  \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
 
@@ -315,4 +321,5 @@
 \newcommand{\Sage}{Sage}
 \newcommand{\Sagecmd}[1]{\textit{#1}}
 \newcommand{\python}{Python}
+\newcommand{\inlinecode}[1]{\hspace{0.1em}\lstinline[style=inline]!#1!\hspace{0.1em}}
 
