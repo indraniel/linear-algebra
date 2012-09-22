@@ -206,8 +206,8 @@ sage: N
 [ 1 -2  0| 1]
 [ 2 -1  1|-2]  
 \end{lstlisting}
-Here, $M^\prime$ is unchanged by routine, while you saved the returned 
-changed matrix as $N$.
+Here, $M^\prime$ is unchanged by the routine, while $N$ is the returned 
+changed matrix.
 The other two routines of this kind are \Sagecmd{with\_swapped\_rows} 
 and \Sagecmd{with\_added\_multiple\_of\_row}.
 
@@ -215,7 +215,7 @@ and \Sagecmd{with\_added\_multiple\_of\_row}.
 
 
 \subsection{Nonsingular and singular systems}
-Resorting to \Sagecmd{solve} after doing the row operations is awkward.
+Resorting to \Sagecmd{solve} after going through the row operations is artless.
 \Sage{} will give reduced row echelon form straight from the augmented matrix.
 \begin{lstlisting}
 sage: M_prime.rref()
@@ -225,8 +225,8 @@ sage: M_prime.rref()
 \end{lstlisting}
 
 In that example the matrix~$M$ on the left is nonsingular because it is 
-square and because Gauss's Method leads to echelon forms where every
-column on the left has a leading variable.
+square and because Gauss's Method leads to echelon forms where every one of
+$M$'s columns has a leading variable.
 The next example starts with a different square matrix, a 
 singular matrix, and consequently leads to 
 echelon form systems where there are columns on the left 
@@ -244,15 +244,15 @@ sage: M_prime.rref()
 [ 0  1  2| 1]
 [ 0  0  0| 0]  
 \end{lstlisting}
-Recall that the case of a starting matrix on the left that is singular 
+Recall that the singular case  
 has two subcases.
 The first happens above: because in echelon form
 every row that is all zeros on the
-left has an entry in the right-hand column that is also zero,
-that system has infinitely many solutions.
-In contrast, using the same starting matrix,
+left has an entry on the right that is also zero,
+the system has infinitely many solutions.
+In contrast, with the same starting matrix
 the example below has a row that is zeros on the left but is nonzero
-on the right, and so the system has no solution.
+on the right and so the system has no solution.
 \begin{lstlisting}
 sage: v = vector(QQ, [0, 1, 2])             
 sage: M_prime = M.augment(v, subdivide=True)
@@ -261,14 +261,16 @@ sage: M_prime.rref()
 [ 0  1  2| 0]
 [ 0  0  0| 1]
 \end{lstlisting}
-Of course, the difference between the subcases
-has to do with the relations among elements of 
-the rows and elements of the vector.
+The difference between the subcases
+has to do with the relationships among  
+the rows of~$M$ and the relationships among the rows of the vector.
 In both cases, the relationship among the rows of the matrix~$M$
 is that the first two rows add to the third.
-In the first case the vector shares that relationship while in the second
+In the first case the vector has the same relationship while in the second
 it does not.
-The easy way to ensure that a zero row on the left is associated with a zero
+
+The easy way to ensure that a zero row in the matrix 
+on the left is associated with a zero
 entry in the vector on the right is to make the vector have all zeros, that is,
 to consider the homogeneous system associated with~$M$.
 \begin{lstlisting}
@@ -303,11 +305,8 @@ sage: M_prime.rref()
 [ 0  1  2| 0]
 [ 0  0  0| 1]  
 \end{lstlisting}
-Since in a linear system the 
-free variables are associated with columns on the left of the augmented 
-matrix that do not have 
-a leading entry, because column~$2$ is not in the list of pivots we know the
-system is singular.
+Because column~$2$ is not in the list of pivots we know that the
+system is singular before we see it in echelon form.
 
 We can use this observation to write a routine that decides if a 
 square matrix is nonsingular.
@@ -329,21 +328,26 @@ sage: N = Matrix(QQ, [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 sage: check_nonsingular(N)                                   
 \end{lstlisting}
 Actually, \Sage{} matrices already have a method \Sagecmd{is\_singular}
-but this illustrates writing routines to extend the system.
+but this illustrates how you can write routines to extend \Sage.
 
 
 
-\subsection{Parametrizing}
+\subsection{Parametrization}
 You can use \Sagecmd{solve} to give the solution set of a system
 with infinitely many solutions.
 Start with the square matrix of coefficients from above,
-where the top two rows add to the bottom row.
+where the top two rows add to the bottom row,
 and adjoin a vector satisfying the same relationship to get
 a system with infinitely many solutions.
+Then convert that to a system of equations.
 \begin{lstlisting}
 sage: M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]])    
 sage: v = vector(QQ, [1, 0, 1])                            
 sage: M_prime = M.augment(v, subdivide=True)               
+sage: M_prime                  
+[1 1 1|1]
+[1 2 3|0]
+[2 3 4|1]
 sage: eqns = [x+y+z == 1, x+2*y+3*z == 0, 2*x+3*y+4*z == 1]
 sage: solve(eqns, x, y)   
 [[x == z + 2, y == -2*z - 1]]  
@@ -351,7 +355,7 @@ sage: solve(eqns, x, y, z)
 [[x == r1 + 2, y == -2*r1 - 1, z == r1]]
 \end{lstlisting}
 The first of the two \Sagecmd{solve} calls asks \Sage{} 
-to solve for only $x$ and~$y$ and so the solution is in terms of~$z$.
+to solve only for $x$ and~$y$ and so the solution is in terms of~$z$.
 In the second call \Sage{} produces a parameter of its own.   
 
 
@@ -360,14 +364,11 @@ In the second call \Sage{} produces a parameter of its own.
 %========================================
 \section{Automation}
 
-We finish with two routines that automate the by-hand row reductions that 
-the text asks for in the homework exercises.
-We use the matrix capabilities of \Sage{} to both describe 
-and perform the row operations needed to bring a matrix to 
-either echelon form or reduced echelon form. 
-Note that these are naive implementations of Gauss's Method that do not try to 
-work under stressful conditions such as
-very small leading entries\Dash they are just for fun.
+We finish by showing two routines to automate the by-hand row reductions 
+of the kind that the text has in the homework.
+These use the matrix capabilities of \Sage{} to both describe 
+and perform the row operations that bring a matrix to 
+echelon form or to reduced echelon form. 
 
 \subsection{Loading and running}
 The source file of the script is below, at the end. 
@@ -459,10 +460,13 @@ sage: gauss_jordan(M2)
 [0 0 0 0]
 \end{lstlisting}
 
-These routines illustrate perfectly the point made in the Preface, 
+These are naive implementations of Gauss's Method that do not try to 
+work under stressful conditions, such as
+very small leading entries\Dash they are just for fun.
+But they do illustrate perfectly the point made in the Preface, 
 since a person
-builds intuition doing a reasonable number of reductions by hand and
-at that point automation can take over.
+builds intuition by doing a reasonable number of reasonably hard Gauss's Method
+reductions by hand, and at that point automation can take over.
 
 \textit{Code comment:} lines~50 and~88 are too long
 for this page so they end with a 

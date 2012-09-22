@@ -1,7 +1,7 @@
 \chapter{\python{} and \Sage{}}
 
-You need to learn enough \Sage{} to cover the Linear Algebra
-in this manual.
+You need to learn enough \Sage{} to work through the Linear Algebra in
+this manual.
 \Sage{} uses the computer language \python{} so you need to start with that.
 
 
@@ -11,26 +11,27 @@ in this manual.
 \python{} is a popular computer language, often used for scripting,
 that is appealing for its simple style and powerful libraries,
 and because it is Free Software.
-The significance of `scripting' is that \Sage{} uses it in this way,
+The significance for us of `scripting' is that \Sage{} uses it in this way,
 as a glue to bring together separate parts.
 
-\python's home page is \href{http://www.python.org}{\url{www.python.org}}.
-Download and installation instructions are there, as well as 
-an excellent tutorial.
-Here we will acquaint you with enough \python{} to get started, possibly
+If your operating system doesn't provide \python{} then go to the home 
+page \href{http://www.python.org}{\url{www.python.org}} and follow its
+download and installation instructions.
+Also at that site is \python's excellent tutorial.
+Below we will only acquaint you with enough \python{} to get started, possibly
 even if you have no programming experience whatsoever.
 
 \smallskip
 \textit{Note.}
 There is a new version of \python{}, called \python~3, with some differences.
-% For instance, \lstinline[style=inline]!print! works a bit differently.
+% For instance, \inlinecode{print} works a bit differently.
 Here we stick to the older version 
 because that is what \Sage{} uses.
 
 
 \subsection{Basics}
 Start \python, for instance by entering 
-\lstinline[style=inline]!python!
+\inlinecode{python}
 at a command line.
 You'll get a couple of lines of 
 information followed by three greater-than
@@ -76,7 +77,7 @@ before you use it; for instance you would have to declare
 that $i$ is an integer before you could set $i=1$.
 In contrast, \python{} deduces the type of a variable 
 based on what you do to it\Dash above we assigned $1$ to $i$ 
-so \python{} deduced that it must be an integer.
+so \python{} figured that it must be an integer.
 Further, we can change how we use the variable and \python{} will 
 go along; here we change what is in $x$ from an integer to a string.
 \begin{lstlisting}[style=python]
@@ -98,7 +99,7 @@ TypeError: cannot concatenate 'str' and 'int' objects
 \end{lstlisting}
 The error message's bottom line is the useful one.
 
-The hash mark \lstinline[style=inline]!#! makes the rest of a line a comment.
+The hash mark \inlinecode{\#} makes the rest of a line a comment.
 \begin{lstlisting}[style=python]
 >>> t=2.2
 >>> d=(0.5)*9.8*(t**2)  # d in meters
@@ -125,7 +126,7 @@ The examples above show addition, subtraction, multiplication,
 and exponentiation. 
 Division is a bit awkward.
 \python{} was originally designed to have the division bar
-\lstinline[style=inline]!/! mean real number division 
+\inlinecode{/} mean real number division 
 when at least one of the numbers is real.
 However between two integers the division bar was taken to mean 
 a quotient, as in ``$2$ goes into $5$ with quotient~$2$ and remainder~$1$.''
@@ -138,18 +139,18 @@ a quotient, as in ``$2$ goes into $5$ with quotient~$2$ and remainder~$1$.''
 2
 \end{lstlisting}
 This was a mistake and one of the changes in \python~3
-is that the quotient operation will be \lstinline[style=inline]!//!
+is that the quotient operation will be \inlinecode{//}
 while the single-slash operator will be real division in all cases.
 But for now, the simplest thing is to make sure that at least one
 number in a division is real.
 \begin{lstlisting}[style=python]
->>> x=5.2
+>>> x=5
 >>> y=2
 >>> (1.0*x)/y
-2.6
+2.5
 \end{lstlisting}
-Incidentally, do the remainder or modulus operation  
-with a percent character:~\lstinline[style=inline]!5 % 2! returns 1.
+Incidentally, do the remainder operation (sometimes called `modulus')  
+with a percent character:~\inlinecode{5 \% 2} returns 1.
 
 Variables can also represent truth values; these are \textit{Booleans}.
 \begin{lstlisting}[style=python]
@@ -158,24 +159,24 @@ Variables can also represent truth values; these are \textit{Booleans}.
 True
 \end{lstlisting}
 You need the initial capital:
-\lstinline[style=inline]!True!
-or \lstinline[style=inline]!False!, not
-\lstinline[style=inline]!true!
-or \lstinline[style=inline]!false!.
+\inlinecode{True}
+or \inlinecode{False}, not
+\inlinecode{true}
+or \inlinecode{false}.
  
-Above we saw a string, consisting of text between single quotes.
+Above we saw a string consisting of text between single quotes.
 You can use either single quotes or double quotes, as long as you use
 the same at both ends of the string. 
-Here, \lstinline[style=inline]!x! and \lstinline[style=inline]!y!
-are double-quoted, which makes sense because they contain apostrophe's. 
+Here \inlinecode{x} and \inlinecode{y}
+are double-quoted, which makes sense because they contain apostrophes. 
 \begin{lstlisting}[style=python]
 >>> x="I'm Popeye the sailor man"
 >>> y="I yam what I yam and that's all what I yam"
 >>> x+', '+y
 "I'm Popeye the sailor man, I yam what I yam and that's all what I yam"
 \end{lstlisting}
-The \lstinline[style=inline]!+! operation concatenates strings.
-Inside a double-quoted string you can use \lstinline[style=inline]!\n! to
+The \inlinecode{+} operation concatenates strings.
+Inside a double-quoted string you can use slash-\textit{n} \inlinecode{\\n} to
 get a newline.
 
 A string marked by three sets of quotes can contain line breaks.
@@ -194,7 +195,7 @@ A string marked by three sets of quotes can contain line breaks.
 \end{lstlisting}
 The triple dots at the start of each line is a prompt that \python's
 read-eval-print loop gives when what you have typed is not complete.
-One use for these strings is as documentation in a program.
+One use for triple-quoted strings is as documentation in a program.
 
 A \python{} \textit{dictionary} is a finite function, that is, it is a finite
 set of ordered pairs $\langle\text{key},\text{value}\rangle$ subject 
@@ -203,16 +204,17 @@ to the restriction that no key is repeated.
 >>> english_words={'one':1, 'two':2, 'three':3}
 >>> english_words['four']=4  
 \end{lstlisting}
-So dictionaries are a simple database.
+Dictionaries are a simple database.
 But the fact that a dictionary is a set means that the elements come in 
-no usable order.
+no particular order.
 \begin{lstlisting}[style=python]
 >>> english_words
 {'four': 4, 'three': 3, 'two': 2, 'one': 1}
 \end{lstlisting}
-(In particular, they do not just come in the reverse of the order
+(Don't be mislead by this example, 
+they do not always just come in the reverse of the order
 in which you entered them.)
-And, an assignment to an existing key replaces the previous value. 
+If you assign to an existing key then that will replace the previous value. 
 \begin{lstlisting}[style=python]
 >>> english_words['one']=5
 >>> english_words
@@ -231,7 +233,7 @@ While dictionaries are unordered, a \python{} \textit{list} is ordered.
 >>> a+b+c
 ['alpha', 'beta', 'gamma', 'delta']
 \end{lstlisting}
-Get an element of the list by specifying its index, its place in the list,
+Get an element from a list by specifying its index, its place in the list,
 inside square brackets.
 Also, specifying two indices separated by a colon will get a \textit{slice} 
 of the list. 
@@ -258,6 +260,38 @@ You can add to a list.
 >>> c
 ['delta', 'epsilon']  
 \end{lstlisting}
+Lists can contain anything, including other lists.
+\begin{lstlisting}
+>>> x = 4
+>>> a = ['alpha', ['beta', x]]
+>>> a
+['alpha', ['beta', 4]]  
+\end{lstlisting}
+
+The function \inlinecode{range} returns a list of numbers.
+\begin{lstlisting}[style=python]
+ >>> range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> range(1,10)
+[1, 2, 3, 4, 5, 6, 7, 8, 9] 
+\end{lstlisting}
+Observe that by default \inlinecode{range} starts at $0$, which
+makes sense because sequences are zero-indexed.
+Observe also that $9$ is the highest number in the sequence 
+\inlinecode{range(10)}.
+This is defined so that \inlinecode{range(10)+range(10,20)} is the
+same as \inlinecode{range(20)}.
+
+One of the most common things you'll do with a list is to run through
+it performing some action on each entry.
+\python{} has a shortcut called \textit{list comprehension}.
+\begin{lstlisting}
+>>> a = [2**i for i in range(4)]
+>>> a
+[1, 2, 4, 8]
+>>> [i-1 for i in a]
+[0, 1, 3, 7]
+\end{lstlisting}
 
 A \textit{tuple} is like a list in that it is ordered.
 \begin{lstlisting}[style=python]
@@ -267,7 +301,7 @@ A \textit{tuple} is like a list in that it is ordered.
 >>> a[0]
 0
 \end{lstlisting}
-Unlike a list, however, a tuple cannot change.
+However, unlike a list a tuple cannot change.
 \begin{lstlisting}[style=python]
 >>> a[0]=3
 Traceback (most recent call last):
@@ -289,6 +323,13 @@ TypeError: unhashable type: 'list'
 {('Jim', 2138): 1}
 \end{lstlisting}
 
+\python{} has a special value \inlinecode{None} that serves
+where there is no sensible value.
+For instance, in a \python{} program \inlinecode{None} might be the
+value of a the variable \inlinecode{name} 
+before the program gets a chance to ask the
+person for their name.  
+
 
 
 \subsection{Flow of control}
@@ -307,17 +348,17 @@ statement execution, with a twist.
 The twist is that while many languages use braces or some other syntax to
 mark a block of code, \python{} uses indentation.
 (We shall always indent with four spaces.)
-Here, the single-line block \lstinline[style=inline]!y=1! is executed if $x$
+Here, the single-line block \inlinecode{y=1} is executed if $x$
 equals $0$, otherwise $y$ is set to~$0$. 
 
 Notice also that ``is equal to'' is represented by a double equals
-\lstinline[style=inline]!==!. 
-Single equals is the assignment
-operation so that \lstinline[style=inline]!x=4! 
+\inlinecode{==}. 
+We have already seen that single equals is the assignment
+operation so that \inlinecode{x=4} 
 means ``$x$ is assigned the value~$4$.'' 
 
 There are two variants on the above.
-The first has only one branch and so forgoes the \lstinline[style=inline]!else!
+The first has only one branch and so forgoes the \inlinecode{else}
 \begin{lstlisting}[style=python]
 >>> x=4
 >>> y=0
@@ -352,15 +393,7 @@ A specialty of computers is iteration, looping through the same steps.
 3 squared is 9
 4 squared is 16
 \end{lstlisting}
-The function \lstinline[style=inline]!range! returns a list of numbers.
-\begin{lstlisting}[style=python]
- >>> range(10)
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
->>> range(1,10)
-[1, 2, 3, 4, 5, 6, 7, 8, 9] 
-\end{lstlisting}
-Observe that by default \lstinline[style=inline]!range! starts at $0$.
-This makes sense because sequences are zero-indexed.
+A \inlinecode{for} loop often involves a \inlinecode{range}.
 \begin{lstlisting}[style=python]
 >>> x=[4,0,3,0]
 >>> for i in range(len(x)):
@@ -374,17 +407,13 @@ item 1 is zero
 item 2 is nonzero
 item 3 is zero  
 \end{lstlisting}
-(We could instead have written \lstinline[style=inline]!for c in x:! since
-the \lstinline[style=inline]!for! loop can iterate over any sequence, not just
-over a sequence of integers.) 
-Observe also that $9$ is the highest number in the sequence 
-\lstinline[style=inline]!range(10)!.
-This is defined so that \lstinline[style=inline]!range(10)+range(10,20)! is the
-same as \lstinline[style=inline]!range(20)!.
+We could instead have written \inlinecode{for c in x:} since
+the \inlinecode{for} loop can iterate over any sequence, not just
+over a sequence of integers.
 
-A \lstinline[style=inline]!for! loop is designed to execute a certain
+A \inlinecode{for} loop is designed to execute a certain
 number of times.
-The natural construct for a loop that will run an uncertain number of times
+The natural way to write a loop that will run an uncertain number of times
 is this.
 \begin{lstlisting}[style=python]
 >>> n = 27
@@ -401,12 +430,22 @@ i= 1
 i= 2
 i= 3  
 \end{lstlisting}
-(The listing takes $111$ steps to finish; the \textit{Collatz conjecture} is 
-that for any starting~$n$ this \lstinline[style=inline]!while! loop will 
-terminate.)
+(This listing is incomplete; it takes $111$ steps to finish.)\footnote{The 
+\protect\textit{Collatz conjecture} is 
+that for any starting~$n$ this loop will 
+terminate, but this is not known.}
 
-The \lstinline[style=inline]!break! command will leave a loop.
-
+The \inlinecode{break} command gets you out of a loop right away.
+\begin{lstlisting}
+>>> for i in range(10):
+...     if (i == 3):
+...         break
+...     print "i is",i
+... 
+i is 0
+i is 1
+i is 2  
+\end{lstlisting}
 
 
 \subsection{Functions}
@@ -437,7 +476,7 @@ Functions organize code into blocks which may be
 run a number of different times or which may belong together conceptually. 
 In a \python{} program the great majority of code is in functions. 
 
-At the end of the \lstinline[style=inline]!def! line in parentheses are
+At the end of the \inlinecode{def} line in parentheses are
 the function's \textit{parameters}, which can take values 
 passed in by the caller.
 Functions can have \textit{optional parameters} that have a default value.
@@ -451,6 +490,11 @@ Hello, Fred
 Hello, Jim  
 \end{lstlisting}
 \Sage{} uses this aspect of \python{} a great deal.
+
+Functions can contain multiple \inlinecode{return} statements.
+They always \inlinecode{return} something; 
+if a function never executes a \inlinecode{return} then it will
+produce \inlinecode{None}.
 
 
 \subsection{Objects and modules}
@@ -475,11 +519,11 @@ Hello Jim
 So, \python{} has 
 objects\Dash bundles of code and data.
 You work with them by using the \textit{dot notation}, meaning that
-to get the age data bundled with \lstinline[style=inline]!a!
-you write \lstinline[style=inline]!a.age!, and to 
-call the \lstinline[style=inline]!hello! function bundled
-with \lstinline[style=inline]!a! you write
-\lstinline[style=inline]!a.hello()! 
+to get the age data bundled with \inlinecode{a}
+you write \inlinecode{a.age}, and to 
+call the \inlinecode{hello} function bundled
+with \inlinecode{a} you write
+\inlinecode{a.hello()} 
 (a function bundled in this way is called a method).
 
 You won't be writing your own classes here but you will be using ones from
@@ -495,7 +539,7 @@ For instance, \python{} has a library, or \textit{module}, for math.
 >>> math.cos(math.pi)
 -1.0
 \end{lstlisting}
-The \lstinline[style=inline]!import! statement gets the module and makes
+The \inlinecode{import} statement gets the module and makes
 its contents available.
 
 Another library is for random numbers.
@@ -538,8 +582,8 @@ current = datetime.datetime.now()  # get a datetime object
 print "the month number is", current.month
 \end{lstlisting}
 Run it under \python{} (for instance, from the command line
-run \lstinline[style=inline]!python test.py!) and you should see
-output like \lstinline[style=inline]!the month number is 9!.
+run \inlinecode{python test.py}) and you should see
+output like \inlinecode{the month number is 9}.
 
 Here is a small game (it has some \python{} constructs that
 you haven't seen but that are simple to figure out).
@@ -585,10 +629,10 @@ Guess an integer between 1 and 10: 7
 As above, note the triple-quoted documentation strings both for the 
 file as a whole and for the function.
 Go to the directory containing \path{guessing_game.py} and start \python{}.
-At the prompt type in \lstinline[style=inline]!import guessing_game!.
+At the prompt type in \inlinecode{import guessing_game}.
 You will play through a round of the game (there is a way to avoid this
 but it doesn't matter for this point) and then type
-\lstinline[style=inline]!help("guessing_game")!.
+\inlinecode{help("guessing_game")}.
 \begin{lstlisting}
 DESCRIPTION
     A toy game for demonstration.
@@ -599,7 +643,7 @@ FUNCTIONS
 \end{lstlisting}
 Obviously, \python{} got this help from your documentation strings.
 In \python{}, and also in \Sage, people try to always include documentation
-that is accessible from the \lstinline[style=inline]!help! command.
+that is accessible from the \inlinecode{help} command.
 
 
 
@@ -616,9 +660,9 @@ follow the directions at
 \Sage's command line is like \python's but adapted to 
 mathematical work.
 First, start \Sage;
-for instance, enter \lstinline[style=inline]!sage! in a terminal window.
+for instance, enter \inlinecode{sage} in a terminal window.
 There is some initial text and then a prompt.
-(Leave the prompt by typing \lstinline[style=inline]!exit!
+(Leave the prompt by typing \inlinecode{exit}
 and \keyboardkey{Enter}.)
 \begin{lstlisting}[style=python]
 sage:  
@@ -647,8 +691,8 @@ sage: sin(pi/3).numerical_approx()
 sage: sin(pi/3).n()
 0.866025403784439  
 \end{lstlisting}
-The function \lstinline[style=inline]!n()! is an abbreviation for 
-\lstinline[style=inline]!numerical_approx()!.
+The function \inlinecode{n()} is an abbreviation for 
+\inlinecode{numerical_approx()}.
 
 
 \subsection{Script}
@@ -680,7 +724,7 @@ area is 0.341344746069
 worksheets that can be run alone or with other people, where you can easily
 view plots integrated with the text, and many other nice features.
 
-From the \lstinline[style=inline]!sage! prompt run \lstinline[style=inline]!notebook()!.
+From the \inlinecode{sage} prompt run \inlinecode{notebook()}.
 Work through the tutorial.
 \endinput
 
