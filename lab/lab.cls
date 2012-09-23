@@ -46,7 +46,7 @@
              SmallCapsFont = sfocc10]{sform10.pfb}
 \setsansfont{Computer Modern Sans Serif Demi Condensed}
 \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
-             Scale=0.88]{ul9r8a.pfb}  % Luxi Mono Regular
+             Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
 % font for code listings
 \newfontfamily\listingsfont[Path=fonts/,
                                   Scale=1]{ProggyClean.ttf}
@@ -68,6 +68,7 @@
 \setmathfont[range=\mathbb,
              Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/]{msbm10.pfb}	
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
+
 \RequirePackage{hyperref}
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
@@ -89,6 +90,8 @@
     filecolor=blue,      % color of file links
     urlcolor=blue           % color of external links
 }
+
+
 % \RequirePackage{color}
 \RequirePackage[usenames,dvipsnames]{xcolor}
   \definecolor{darkcolor}{HTML}{193E9A}  % 
@@ -292,16 +295,19 @@
 {\berasansx\bfseries}} % the style
 % \renewcommand{\thesub}{}
 
-% What depth has numbering shown in toc?
+% Depth to with sections numbering is shown?
 \setcounter{secnumdepth}{0}
 
 % Table of Contents
 \RequirePackage{tocloft}
-\setcounter{tocdepth}{2}
-
-\newcommand{\pgm}[1]{\texttt{#1}}
-\newcommand{\pkg}[1]{\textit{#1}}
-
+\setcounter{tocdepth}{0}
+\tocloftpagestyle{empty}
+\setlength{\cftbeforetoctitleskip}{10ex}  % page head vert sizes
+\setlength{\cftaftertoctitleskip}{3ex}
+\renewcommand{\cfttoctitlefont}{\berasans\Large\bfseries} % font in page head
+\renewcommand{\cftchapdotsep}{\cftdotsep} 
+\setlength{\cftchapnumwidth}{0em}  % omit chapter numbers
+\renewcommand{\cftchappresnum}[1]{\relax}
 % Dashes, lifted from ltugboat.cls
 \def\thinskip{\hskip 0.16667em\relax}
 \def\endash{--}
@@ -317,9 +323,12 @@
 \usepackage{../linalgjh}
 \AtBeginDocument{\def\Re{\mathbb{R}}}
 
+\newcommand{\pgm}[1]{\texttt{#1}}
+\newcommand{\pkg}[1]{\textit{#1}}
 \newcommand{\keyboardkey}[1]{\textit{$\langle$#1\,$\rangle$}}
 \newcommand{\Sage}{Sage}
-\newcommand{\Sagecmd}[1]{\textit{#1}}
+\newcommand{\Sagecmd}[1]{\texttt{#1}}
 \newcommand{\python}{Python}
+\newcommand{\pythoncmd}[1]{\texttt{#1}}
 \newcommand{\inlinecode}[1]{\hspace{0.1em}\lstinline[style=inline]!#1!\hspace{0.1em}}
 
