@@ -1,16 +1,24 @@
 \documentclass{lab}
 
-\includeonly{preface,
-             sageintro,
-             gauss,
+\includeonly{% preface,
+             % sageintro,
+             % gauss,
              % matrices,
-             % spaces,
+             spaces,
              % maps,
              % geometry,
              % determinants,
              % eigenvalues,
              % pagerank
-  }
+}
+ 
+% 2012-Sep-26 JH \bullet too big, and causes unicodemath to complain: 
+\newcommand{\smblkcircle}{\scalebox{3}{.}}  
+\AtBeginDocument{
+\newlength{\hgtcdot}\settoheight{\hgtcdot}{$\cdot$}
+\newlength{\wdtcdot}\settowidth{\wdtcdot}{$\cdot$}
+\renewcommand{\dotprod}{\mathbin{\raisebox{.5\hgtcdot}{%
+          \makebox[\wdtcdot]{$\scalebox{2}{.}$}}}}}
 
 \begin{document}
 \frontmatter
@@ -22,7 +30,7 @@
 \include{sageintro}
 \include{gauss}
 % \include{matrices}
-% \include{spaces}
+\include{spaces}
 % \include{maps}
 % \include{geometry}
 % \include{determinants}

@@ -30,6 +30,7 @@
 % --- Class structure: main code part
 % ---
 
+\usepackage{../linalgjh}
 % Set the fonts
 \usepackage{conc}
 
@@ -47,6 +48,18 @@
 \setsansfont{Computer Modern Sans Serif Demi Condensed}
 \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
              Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
+% \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
+%                Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
+% \setmonofont[Path=fonts/tmp/,
+%              Scale=MatchLowercase]{lmmono10-regular.otf}  % Latin Modern Mono Regular
+% \setmonofont[Path=fonts/tmp/,
+%              Scale=MatchLowercase]{texgyrecursor-regular.otf}  % TeX Gyre Cursor Regular
+% \setmonofont[Path=fonts/tmp/,
+%              Scale=MatchLowercase]{VerilySerifMono.otf}  % Verily Serif Mono
+% \setmonofont[
+%              Scale=MatchLowercase]{Andale Mono}  
+\setmonofont[
+             Scale=MatchLowercase]{Courier New}  
 % font for code listings
 \newfontfamily\listingsfont[Path=fonts/,
                                   Scale=1]{ProggyClean.ttf}
@@ -60,6 +73,10 @@
 \newfontfamily\berasansx[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
                         BoldFont = fvsb8a.pfb,
                         Scale = MatchLowercase]{fvsr8a.pfb}
+\newfontfamily\latinmodernmono[Path=fonts/tmp/,
+              Scale=MatchLowercase]{lmmono10-regular.otf}
+\newfontfamily\texgyrecursor[Path=fonts/tmp/,
+              Scale=MatchLowercase]{texgyrecursor-bold.otf}
 
 
 \usepackage[math-style=upright]{unicode-math} % see http://tex.stackexchange.com/questions/50995/font-mixup-with-neo-euler-and-fontspec
@@ -67,12 +84,16 @@
 \AtBeginDocument{\DeclareMathAlphabet\mathbf{U}{eur}{b}{n}} % fontspec manual p. 11; doesn't seem to do anything.
 \setmathfont[range=\mathbb,
              Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/]{msbm10.pfb}	
+
+\newfontfamily\lcircleone[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/latxfont/]{lcircle1.pfb}
+\newcommand{\lcircleonedot}{\lcircleone \char"119}
+
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
 
 \RequirePackage{hyperref}
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
-    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    % unicode=false,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
     pdffitwindow=true,     % window fit to page when opened
@@ -90,7 +111,8 @@
     filecolor=blue,      % color of file links
     urlcolor=blue           % color of external links
 }
-
+% Change the font for URL's
+\def\UrlFont{\normalfont}
 
 % \RequirePackage{color}
 \RequirePackage[usenames,dvipsnames]{xcolor}
