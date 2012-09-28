@@ -1,7 +1,7 @@
 \chapter{Vector spaces}
 
-\Sage{} can work with vector spaces, for example by finding a basis for
-a given space.
+\Sage{} can operate with vector spaces, for example by finding a basis for
+a space.
 
 
 
@@ -9,7 +9,7 @@ a given space.
 %========================================
 \section{Real $n$-spaces}
 
-To create a vector space $\Re^n$, use \Sage's shortcut.
+Start by creating a real vector space~$\Re^n$.
 \begin{lstlisting}
 sage: V = RR^3
 sage: V
@@ -27,7 +27,7 @@ False
 
 Consider the plane through the origin in $\Re^3$ described by the equation
 $x-2y+2z=0$.
-It is a subspace of $\Re^3$ and we can describe it as a span in this way.
+It is a subspace of $\Re^3$ and we can describe it as a span.
 \begin{equation*}
   W=\set{\colvec{x \\ y \\ z}
     \suchthat x=2y-2z}
@@ -40,16 +40,9 @@ sage: V = RR^3
 sage: v1 = vector(RR, [2, 1, 0])
 sage: v2 = vector(RR, [-2, 0, 1])
 sage: W = V.span([v1, v2])
-sage: W
-Vector space of degree 3 and dimension 2 over Real Field with 53 bits 
-   of precision
-Basis matrix:
-[  1.00000000000000  0.000000000000000 -0.500000000000000]
-[ 0.000000000000000   1.00000000000000   1.00000000000000]
 \end{lstlisting}
-(Some of the output in this chapter is edited to fit the page width.)
-
-You can test for membership.
+And you can check that it is the desired space by doing some membership
+tests.
 \begin{lstlisting}
 sage: v3 = vector(RR, [0, 1, 1])
 sage: v3 in W
@@ -59,7 +52,8 @@ sage: v4 in W
 False  
 \end{lstlisting}
 
-For a second look at this, create a subspace of $\Re^4$.
+For a closer look at what's happening here, create a subspace of $\Re^4$.
+(Some of the output in this chapter is edited to fit the page width.)
 \begin{lstlisting}
 sage: V = RR^4
 sage: V
@@ -73,15 +67,15 @@ Basis matrix:
 [  1.00000000000000  0.000000000000000 -0.500000000000000  
     0.000000000000000]
 \end{lstlisting}
-Notice that \Sage{} has identified the dimension of the subspace and found
+\Sage{} has identified the dimension of the subspace and found
 a basis containing one vector (it prefers the vector with a leading~$1$).
 \Sage{} also mentions the ``Real Field'' because we could take scalars
 from other number systems\Dash in the book's final chapter the scalars are
 from the complex numbers\Dash but we will here stick with real numbers.
 The ``53 bits of precision'' refers to the fact that \Sage{} is using
-this computer's built-in model of real numbers, technically 
-IEEE~754 double-precision binary floating-point numbers 
-(if you have programmed then you may know this number model as binary64).  
+this computer's built-in model of real numbers.\footnote{This computer uses
+IEEE~754 double-precision binary floating-point numbers;  
+if you have programmed then you may know this number model as binary64.}  
 
 As earlier, the membership set relation works here.
 \begin{lstlisting}
@@ -106,9 +100,8 @@ sage: W.basis()
 (1.00000000000000, -1.00000000000000)
 ]  
 \end{lstlisting}
-Notice that \Sage{} does not simply always 
-give you back the linearly independent
-set that you gave it.
+
+Here is another example.
 \begin{lstlisting}
 sage: V=RR^3               
 sage: v1 = vector(RR, [1, -1, 0]) 
@@ -125,10 +118,8 @@ sage: W.basis()
 (0.000000000000000, 1.00000000000000, 0.000000000000000)
 ]
 \end{lstlisting}
-Here, \Sage{} has taken the vectors from the spanning set as rows of a matrix,
-brought that matrix to reduced echelon form, and reports the nonzero 
-rows (transposed to column vectors and so printed with parentheses) 
-as the members of the basis.
+Adding a linearly dependent vector $\vec{v}_3$ to the spanning
+set doesn't change the space.
 \begin{lstlisting}
 sage: v3 = vector(RR, [2, 3, 0])
 sage: W_prime = V.span([v1, v2, v3])
@@ -139,17 +130,41 @@ sage: W_prime.basis()
 ]  
 \end{lstlisting}
 
-This is a \textit{canonical basis} for the space.
+In the prior example, notice that \Sage{} does not simply
+give you back the linearly independent
+vectors that you gave it.
+Instead, \Sage{} takes the vectors from the spanning set 
+as the rows of a matrix,
+brings that matrix to reduced echelon form, and reports the nonzero 
+rows (transposed to column vectors and so printed with parentheses) 
+as the members of the basis.
 Because each matrix has one and only one reduced echelon form, each 
-vector subspace of real $n$-space has one and only one canonical
-basis. 
+vector subspace of real $n$-space has one and only one such
+basis;
+this is a \textit{canonical basis} for the space.
+
+\Sage{} will show you that it keeps the canonical basis as defining the
+space. 
+\begin{lstlisting}
+sage: W
+Vector space of degree 3 and dimension 2 over Real Field with 53 bits 
+    of precision
+Basis matrix:
+[ 1.00000000000000 0.000000000000000 0.000000000000000]
+[0.000000000000000  1.00000000000000 0.000000000000000]
+sage: W_prime
+Vector space of degree 3 and dimension 2 over Real Field with 53 bits 
+    of precision
+Basis matrix:
+[ 1.00000000000000 0.000000000000000 0.000000000000000]
+[0.000000000000000  1.00000000000000 0.000000000000000]  
+\end{lstlisting}
 
 
 
 \subsection{Space equality}
 
 You can test spaces for equality.
-Make three spaces, the first two equal and the third different.
 \begin{lstlisting}
 sage: V = RR^4
 sage: v1 = vector(RR, [1, 0, 0, 0])
@@ -195,36 +210,82 @@ False
 \end{lstlisting}
 
 This illustrates a point about algorithms.
-While \Sage{} could check for equality of two spans in the way we
-did above, by checking whether every member of the first spanning set is in the
-second space and vice versa, in fact \Sage{} does something different.
-For each space it maintains the canonical basis, which it shows if we 
-ask to see the space.
-\begin{lstlisting}
-sage: W12                                                                      
-Vector space of degree 4 and dimension 2 over Real Field with 53 bits 
-    of precision
-Basis matrix:
-[ 1.00000000000000 0.000000000000000 0.000000000000000 
-    0.000000000000000]
-[0.000000000000000  1.00000000000000 0.000000000000000 
-    0.000000000000000]
-sage: W13
-Vector space of degree 4 and dimension 2 over Real Field with 53 bits 
-    of precision
-Basis matrix:
-[ 1.00000000000000 0.000000000000000 0.000000000000000 
-    0.000000000000000]
-[0.000000000000000  1.00000000000000 0.000000000000000 
-    0.000000000000000]  
-\end{lstlisting}
-Now \Sage{} checks for equality of the two spaces 
+\Sage{} could check for equality of two spans 
+by checking whether every member of the first spanning set is in the
+second space and vice versa (since the two spanning sets are finite). 
+But \Sage{} does something different.
+For each space it maintains the canonical basis
+and it checks for equality of the two spaces
 just by checking that they have the same canonical bases.
-
-These two algorithms for checking equality 
+These two algorithms 
 have the same external behavior, in that both report correctly whether the
 two spaces are equal, but the second is faster.
 Finding the fastest way to do jobs is an important research area of computing.
+
+
+\subsection{Space operations}
+\Sage{} finds the intersection of two spaces.
+Consider these members of $\Re^3$.
+\begin{equation*}
+  \vec{v}_1=\colvec{1 \\ 0 \\ 0}
+  \quad \vec{v}_2=\colvec{0 \\ 1 \\ 0}
+  \quad \vec{v}_3=\colvec{0 \\ 0 \\ 3}
+\end{equation*}
+We form two spans the $xy$-plane $W_{12}=\spanof{\vec{v}_1, \vec{v}_2}$ 
+and the $yz$-plane $W_{23}=\spanof{\vec{v}_2, \vec{v}_3}$.
+The intersection of these two is the $y$-axis. 
+\begin{lstlisting}
+sage: V=RR^3
+sage: v1 =  vector(RR, [1, 0, 0])
+sage: v2 =  vector(RR, [0, 1, 0])
+sage: W12 = V.span([v1, v2])
+sage: W12.basis()
+[
+(1.00000000000000, 0.000000000000000, 0.000000000000000),
+(0.000000000000000, 1.00000000000000, 0.000000000000000)
+]
+sage: v3 = vector(RR, [0, 0, 2])
+sage: W23 = V.span([v2, v3])
+sage: W23.basis()
+[
+(0.000000000000000, 1.00000000000000, 0.000000000000000),
+(0.000000000000000, 0.000000000000000, 1.00000000000000)
+]
+sage: W = W12.intersection(W23)
+sage: W.basis()
+[
+(0.000000000000000, 1.00000000000000, 0.000000000000000)
+]
+\end{lstlisting}
+
+Remember that the span of the empty set is the trivial space.
+\begin{lstlisting}
+sage: v3 = vector(RR, [1, 1, 1])
+sage: W3 = V.span([v3])
+sage: W3.basis()
+[
+(1.00000000000000, 1.00000000000000, 1.00000000000000)
+]
+sage: W4 = W12.intersection(W3)
+sage: W4.basis()
+[
+
+]
+\end{lstlisting}
+
+\Sage{} will also find the sum of spaces, the span of their union.
+\begin{lstlisting}
+sage: W5 = W12 + W3
+sage: W5.basis()
+[
+(1.00000000000000, 0.000000000000000, 0.000000000000000),
+(0.000000000000000, 1.00000000000000, 0.000000000000000),
+(0.000000000000000, 0.000000000000000, 1.00000000000000)
+]
+sage: W5 == V
+True
+\end{lstlisting}
+
 
 
 
@@ -233,8 +294,8 @@ Finding the fastest way to do jobs is an important research area of computing.
 %========================================
 \section{Other spaces}
 
-We can extend these computations to
-vector spaces that aren't a subspace of some $\Re^n$
+You can extend these computations to
+vector spaces that aren't a subspace of some $\Re^n$.
 Just find a subspace of $\Re^n$ that matches the given one.
 
 Consider this vector space set of quadratic polynomials
@@ -243,12 +304,12 @@ Consider this vector space set of quadratic polynomials
   \set{ a_2x^2+a_1x+a_0\suchthat a_2-a_1=a_0}           
    =\set{ (a_1+a_0)x^2+a_1x+a_0 \suchthat a_1,a_0\in\Re}
 \end{equation*}
-It is just like this subspace of $\Re^3$.
+It is matches\footnote{The textbook's chapter on Maps Between Spaces makes precise this idea of ``matches.''}
+this subspace of $\Re^3$.
 \begin{equation*}
   \set{\colvec{a_1+a_0 \\ a_1 \\ a_0}\suchthat a_1,a_0\in\Re}
   =\set{\colvec{1 \\ 1 \\ 0}a_1+\colvec{1 \\ 0 \\ 1}a_0\suchthat a_1,a_0\in\Re}
 \end{equation*}
-\Sage{} lets us represent this.
 \begin{lstlisting}
 sage: V=RR^3
 sage: v1 = vector(RR, [1, 1, 0])
@@ -268,14 +329,14 @@ Similarly you can represent this space of $\nbyn{2}$ matrices
          c  &d
        \end{mat}\suchthat \text{$a-b+c=0$ and $b+d=0$}}
 \end{equation*}
-by finding a space just like it.
-First rewrite the given space in this way.
+by finding a real $n$-space just like it.
+Rewrite the given space
 \begin{equation*}
   \set{\begin{mat}
          a  &b \\
          c  &d
        \end{mat}\suchthat \text{$a=-c-d$ and $b=-d$}}
-  \set{\begin{mat}
+  =\set{\begin{mat}
          -1  &0 \\
           1  &0
        \end{mat}c
@@ -286,7 +347,7 @@ First rewrite the given space in this way.
        \end{mat}d
        \suchthat c,d\in\Re}
 \end{equation*}
-Here is a natural matching real space.
+and then here is a natural matching real space.
 \begin{lstlisting}
 sage: V = RR^4
 sage: v1 = vector(RR, [-1, 0, 1, 0])

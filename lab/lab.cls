@@ -190,14 +190,15 @@
 }
 \fancypagestyle{followingpage}{%
   \fancyhf{} % clear all six fields
-  \fancyhead[RE]{\textit{\leftmark}}
-  \fancyhead[LO]{\textit{SECTION: \rightmark}}
-  \fancyhead[LE,RO]{\textit{PAGE \thepage}}
+  \fancyhead[RE]{{\berasansx \nouppercase{\leftmark}}}
+  \fancyhead[LO]{{\berasansx Section: \nouppercase{\rightmark}}}
+  \fancyhead[LE,RO]{{\berasansx Page \thepage}}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
 
 \pagestyle{followingpage}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername:\ #1}{}}
 \AtBeginDocument{\thispagestyle{firstpage}}
 
 % Bibliography
@@ -328,8 +329,11 @@
 \setlength{\cftaftertoctitleskip}{3ex}
 \renewcommand{\cfttoctitlefont}{\berasans\Large\bfseries} % font in page head
 \renewcommand{\cftchapdotsep}{\cftdotsep} 
+\setlength{\cftbeforechapskip}{.5ex}   % vert space between chap lines
 \setlength{\cftchapnumwidth}{0em}  % omit chapter numbers
 \renewcommand{\cftchappresnum}[1]{\relax}
+
+
 % Dashes, lifted from ltugboat.cls
 \def\thinskip{\hskip 0.16667em\relax}
 \def\endash{--}
