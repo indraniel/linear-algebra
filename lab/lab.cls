@@ -97,7 +97,7 @@
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
     pdffitwindow=true,     % window fit to page when opened
-    % pdfstartview={FitH},    % fits the width of the page to the window
+    pdfstartview={FitH},    % fits the width of the page to the window
     pdftitle={Lab Manual for Linear Algebra},    % title
     pdfauthor={Jim Hefferon},     % author
     pdfsubject={Linear Algebra},   % subject of the document
@@ -325,11 +325,11 @@
 \RequirePackage{tocloft}
 \setcounter{tocdepth}{0}
 \tocloftpagestyle{empty}
-\setlength{\cftbeforetoctitleskip}{10ex}  % page head vert sizes
-\setlength{\cftaftertoctitleskip}{3ex}
+\setlength{\cftbeforetoctitleskip}{20ex}  % page head vert sizes
+\setlength{\cftaftertoctitleskip}{5ex}
 \renewcommand{\cfttoctitlefont}{\berasans\Large\bfseries} % font in page head
 \renewcommand{\cftchapdotsep}{\cftdotsep} 
-\setlength{\cftbeforechapskip}{.5ex}   % vert space between chap lines
+\setlength{\cftbeforechapskip}{.2ex}   % vert space between chap lines
 \setlength{\cftchapnumwidth}{0em}  % omit chapter numbers
 \renewcommand{\cftchappresnum}[1]{\relax}
 

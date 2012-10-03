@@ -51,6 +51,15 @@ B = matrix(QQ, [[5, 6, 7], [8, 9, 10]])
 print "B=\n",B
 print "A*B=\n",A*B
 
+A = matrix(QQ, [[1, 2], [3, 4]])
+print "same-sized A=\n",A
+B = matrix(QQ, [[4, 5], [6, 7]])
+print "B=\n",B
+print "A*B=\n",A*B
+print "B*A=\n",B*A
+
+
+
 print "  matrix inverse"
 A = matrix(QQ, [[1, 3, 1], [2, 1, 0], [4, -1, 0]])
 print "A=\n",A
