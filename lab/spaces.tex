@@ -1,4 +1,4 @@
-\chapter{Vector spaces}
+\chapter{Vector Spaces}
 
 \Sage{} can operate with vector spaces, for example by finding a basis for
 a space.
@@ -160,6 +160,27 @@ Basis matrix:
 [0.000000000000000  1.00000000000000 0.000000000000000]  
 \end{lstlisting}
 
+If you are quite keen on your own basis then \Sage{} will
+accomodate you.
+\begin{lstlisting}
+sage: V = RR^3
+sage: v1 = vector(RR, [1, 2, 3])
+sage: v2 = vector(RR, [2, 1, 3])
+sage: W = V.span_of_basis([v1, v2])
+sage: W.basis()
+[
+(1.00000000000000, 2.00000000000000, 3.00000000000000),
+(2.00000000000000, 1.00000000000000, 3.00000000000000)
+]
+sage: W
+Vector space of degree 3 and dimension 2 over Real Field with 53 bits 
+    of precision
+User basis matrix:
+[1.00000000000000 2.00000000000000 3.00000000000000]
+[2.00000000000000 1.00000000000000 3.00000000000000]
+\end{lstlisting}
+
+
 
 
 \subsection{Space equality}
@@ -231,7 +252,7 @@ Consider these members of $\Re^3$.
   \quad \vec{v}_2=\colvec{0 \\ 1 \\ 0}
   \quad \vec{v}_3=\colvec{0 \\ 0 \\ 3}
 \end{equation*}
-We form two spans the $xy$-plane $W_{12}=\spanof{\vec{v}_1, \vec{v}_2}$ 
+We form two spans, the $xy$-plane $W_{12}=\spanof{\vec{v}_1, \vec{v}_2}$ 
 and the $yz$-plane $W_{23}=\spanof{\vec{v}_2, \vec{v}_3}$.
 The intersection of these two is the $y$-axis. 
 \begin{lstlisting}
@@ -296,7 +317,7 @@ True
 
 You can extend these computations to
 vector spaces that aren't a subspace of some $\Re^n$.
-Just find a subspace of $\Re^n$ that matches the given one.
+Just find a real space that matches the given one.
 
 Consider this vector space set of quadratic polynomials
 (under the usual operations of polynomial addition and scalar multiplication).
@@ -304,7 +325,8 @@ Consider this vector space set of quadratic polynomials
   \set{ a_2x^2+a_1x+a_0\suchthat a_2-a_1=a_0}           
    =\set{ (a_1+a_0)x^2+a_1x+a_0 \suchthat a_1,a_0\in\Re}
 \end{equation*}
-It is matches\footnote{The textbook's chapter on Maps Between Spaces makes precise this idea of ``matches.''}
+It matches\footnote{The textbook's chapter on Maps Between Spaces makes 
+``matches'' precise.}
 this subspace of $\Re^3$.
 \begin{equation*}
   \set{\colvec{a_1+a_0 \\ a_1 \\ a_0}\suchthat a_1,a_0\in\Re}

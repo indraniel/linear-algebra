@@ -73,10 +73,10 @@
 \newfontfamily\berasansx[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
                         BoldFont = fvsb8a.pfb,
                         Scale = MatchLowercase]{fvsr8a.pfb}
-\newfontfamily\latinmodernmono[Path=fonts/tmp/,
-              Scale=MatchLowercase]{lmmono10-regular.otf}
-\newfontfamily\texgyrecursor[Path=fonts/tmp/,
-              Scale=MatchLowercase]{texgyrecursor-bold.otf}
+% \newfontfamily\latinmodernmono[Path=fonts/tmp/,
+%               Scale=MatchLowercase]{lmmono10-regular.otf}
+% \newfontfamily\texgyrecursor[Path=fonts/tmp/,
+%               Scale=MatchLowercase]{texgyrecursor-bold.otf}
 
 
 \usepackage[math-style=upright]{unicode-math} % see http://tex.stackexchange.com/questions/50995/font-mixup-with-neo-euler-and-fontspec
@@ -85,8 +85,8 @@
 \setmathfont[range=\mathbb,
              Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/]{msbm10.pfb}	
 
-\newfontfamily\lcircleone[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/latxfont/]{lcircle1.pfb}
-\newcommand{\lcircleonedot}{\lcircleone \char"119}
+% \newfontfamily\lcircleone[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/latxfont/]{lcircle1.pfb}
+% \newcommand{\lcircleonedot}{\lcircleone \char"119}
 
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
 
@@ -97,13 +97,13 @@
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
     pdffitwindow=true,     % window fit to page when opened
-    pdfstartview={FitH},    % fits the width of the page to the window
+    % pdfstartview={FitH},    % fits the width of the page to the window
     pdftitle={Lab Manual for Linear Algebra},    % title
     pdfauthor={Jim Hefferon},     % author
     pdfsubject={Linear Algebra},   % subject of the document
     pdfcreator={xelatex},   % creator of the document
     pdfproducer={xelatex}, % producer of the document
-    pdfkeywords={Linear Algebra} {textbook} {Sage} {Free} {Hefferon},  % list of keywords
+    pdfkeywords={Linear Algebra} {mathematics} {textbook} {Sage} {Free} {Hefferon},  % list of keywords
     pdfnewwindow=true,      % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=blue,          % color of internal links
