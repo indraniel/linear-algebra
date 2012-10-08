@@ -64,9 +64,9 @@
                   \setlength{\itemsep}{.7ex plus .25ex minus .15ex}
                   \setlength{\itemindent}{0em}
                   \setlength{\listparindent}{\parindent}
-                  \setlength{\topsep}{0ex plus 5pt}
-                  \setlength{\partopsep}{0ex plus 5pt}
-                  \setlength{\labelsep}{1em}
+                  \setlength{\topsep}{.3ex plus .5ex minus .1ex}
+                  \setlength{\partopsep}{0ex plus .5ex minus .1ex}
+                  \setlength{\labelsep}{.8em}
                   \setlength{\labelwidth}{0em}
                   \setlength{\abovedisplayskip}{3pt plus2pt minus3pt}%
                   \setlength{\belowdisplayskip}{\abovedisplayskip}
@@ -84,8 +84,13 @@
 %   \renewenvironment{ans}[1]{\item[#1]}{%
 %   }
 % \fi
-\renewenvironment{ans}[1]{\begin{answerlist}%
-  \item[\hyperref{book.pdf}{exercise}{#1}{#1}\hypertarget{ans.#1}{}]}{%
+\renewenvironment{ans}[1]{%
+  \begin{answerlist}%
+    \ifinsidetopic
+      \item[\hyperref{book.pdf}{exercise}{\thesubsection.#1}{#1}\hypertarget{ans.\thesubsection.#1}{}]
+    \else
+      \item[\hyperref{book.pdf}{exercise}{#1}{#1}\hypertarget{ans.#1}{}]
+    \fi }{%
   \end{answerlist}
 }
 
@@ -224,10 +229,38 @@
 % % \begin{answerlist}\item[]
 % }
 
-% \renewcommand{\section}{\@startsection%
-%     {section}{1}{0em}{-12ex plus1ex minus2ex}{1em}%
-%     {\raggedright\Large\bfseries}}
+\renewcommand{\section}{\@startsection%
+    {section}{1}{0em}{-10ex plus1ex minus2ex}{4ex}%
+    {\usefont{T1}{fvs}{b}{n}\Large}}
 
+\renewcommand{\topicsection}{\@startsection%
+     {section}{1}{0em}{-10ex plus1ex minus2ex}{4ex}%
+     {\usefont{T1}{fvs}{b}{n}\Large \makebox[2.9em][r]{Topic: }}}
+
+\renewcommand{\topic}[1]{\topicsection*{#1}
+   \stepcounter{section} % increment the section so exercises can have unique hyper reference 
+   \renewcommand{\announcesectioninginanswerfile}{%
+      \sectioninginanswerfiletopicstyle}
+  \insidetopictrue % Handle hyperref-ing of exercise in topic way 
+  % renew definition of exercise formatting (perhaps undone in Chapter)
+  \setcounter{theorem}{0}  % hack to make exercise numbering correct
+  \renewcommand{\exercise@makelabel}{} % 
+  % JH testing 2012-Oct-05 \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{##1}}}
+  \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\Currentlabel}}%
+  % \typeout{!!! in Topic next exercise defed \Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel !!!!}
+  }
+  \renewcommand{\ansparams}{{\Currentlabel}}
+  \thispagestyle{empty}
+  \gdef\sectioningname{#1}%
+  \markright{Topic: #1}
+  \addcontentsline{toc}{section}{Topic: #1}
+  % \vspace*{15pt}\noindent\fancyfont{Topic}\par
+  % \vspace*{10pt}\noindent{\Large\bfseries #1}\vspace{20pt}
+  % \par\@afterindentfalse\nobreak 
+  % \typeout{+++++++++ value of the chapter section subsection is \thechapter.\thesection +++++++}
+}
+
+% 
 % \renewcommand{\subsection}{\secdef\anssubseccmda\anssubseccmdb}
 
 % \newcommand{\anssubseccmda}[2][?]{%
@@ -241,8 +274,18 @@
 % \vspace{4ex plus1ex minus.5ex}\pagebreak[3]\vspace*{1ex plus1ex minus.25ex}%
 % {\flushleft\large\bfseries #1}%
 % \nopagebreak\vspace{1ex plus .5ex minus.5ex} % \nopagebreak\begin{answerlist}\item[]}
+% \renewcommand{\section}{\secdef\seca\secb}
+% \newcommand{\seca}[1]{\clearpage {\raggedright\Large\bfseries #1}}
+% \newcommand{\secb}[1]{\clearpage {\raggedright\Large\bfseries #1}}
+
+\renewcommand{\@seccntformat}[1]{\relax}
 
 %end PAGE LAYOUT
+
+% Table of Contents
+\usepackage{tocloft}
+
+\renewcommand{\numberline}[1]{\relax}
 
 % Resolve References
 \input{book.aux}

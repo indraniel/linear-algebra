@@ -422,6 +422,7 @@
 \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
    % Redefine the way exercises are handled, back from 
    % how Topics handle them 
+  \insidetopicfalse % Handle exercise hyperref-ing differently
    \renewcommand{\announcesectioninginanswerfile}{%
      \sectioninginanswerfilechapterstyle}
    \renewcommand{\ansparams}{{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}}
@@ -648,8 +649,33 @@
 % command which takes a single argument but all the others must be declarations.
 % \def\SetSectioningName#1{\gdef\sectioningname{#1}%
 %   \typeout{SUBSECTION\space START:\space\sectioningname}}
+% \def\@startsection#1#2#3#4#5#6{%
+%   \announcesectioningtoanswerfile{#2}{#8}
+%   \if@noskipsec \leavevmode \fi
+%   \par
+%   \@tempskipa #4\relax
+%   \@afterindenttrue
+%   \ifdim \@tempskipa <\z@
+%     \@tempskipa -\@tempskipa \@afterindentfalse
+%   \fi
+%   \if@nobreak
+%     \everypar{}%
+%   \else
+%     \addpenalty\@secpenalty\addvspace\@tempskipa
+%   \fi 
+%   \@ifstar
+%     {\@ssect{#3}{#4}{#5}{#6}}%
+%     {\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+%
+% I grab the name of the section below and gdef it to \sectioningname.
+\newcommand{\writesectiontoanswerfile}{%
+      % \typeout{------ Name of this section: \nameofthissection ----------}
+      \Writetofile{\ans@fn}{\protect\section\protect{\nameofthissection\protect}}
+      % \Writetofile{\ans@fn}{\protect\section*\protect{\protect}}%
+}
 
-\renewcommand{\section}{\@startsection%
+\renewcommand{\section}{%
+     \@startsection%
      {section}{1}{0em}{-14ex plus1ex minus2ex}{1em}%
      {\usefont{T1}{fvs}{b}{n}\Large}}
 
@@ -682,6 +708,8 @@
 % \subsecheader{#2}}
 
 % \newcommand{\subseccmdb}[1]{\subsecheader{#1}}
+\gdef\nameofthissection{}
+% \@sect{NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE}[ARG1]{ARG2}
 \def\@sect#1#2#3#4#5#6[#7]#8{%
   \ifnum #2>\c@secnumdepth
     \let\@svsec\@empty
@@ -697,7 +725,14 @@
           \interlinepenalty \@M #8\@@par}%
     \endgroup
     \csname #1mark\endcsname{#7}%
-    % JH 2012-Mar-10 define sectioningname for answer file
+    % JH 2012-Oct-07 write name of book section to answer file
+    \ifnum #2=1
+      \gdef\nameofthissection{#8}
+      \Writetofile{\ans@fn}{\protect\section\protect{#8\protect}}
+    \fi
+    % JH 2012-Mar-10 define sectioningname for answer file; it is actually the
+    % subsection name and gets written to the answer file when \begin{exercises}
+    % is called
     % \Writetofile{\ans@fn}{\expandafter\protect\csname #1\endcsname\protect{#8\protect}}
     \gdef\sectioningname{#8}
     \addcontentsline{toc}{#1}{%
@@ -740,12 +775,17 @@
 % For applications sections.
 % 
 \newcommand{\topic}[1]{\clearpage\vspace*{.25in}\topicsection*{#1}
+   \stepcounter{section} % increment the section so exercises can have unique hyper reference 
    \renewcommand{\announcesectioninginanswerfile}{%
       \sectioninginanswerfiletopicstyle}
+  \insidetopictrue % Handle hyperref-ing of exercise in topic way 
   % renew definition of exercise formatting (perhaps undone in Chapter)
   \setcounter{theorem}{0}  % hack to make exercise numbering correct
   \renewcommand{\exercise@makelabel}{} % 
-  \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{##1}}}
+  % JH testing 2012-Oct-05 \renewcommand{\exercise@deflabel}[1]{\textbf{\arabic{##1}}}
+  \renewcommand{\exercise@deflabel}[1]{\hyperdef{exercise}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{}\hyperref{./jhanswer.pdf}{ans}{\Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel}{\textbf{\Currentlabel}}%
+  % \typeout{!!! in Topic next exercise defed \Englishnumber{\value{chapter}}.\Roman{section}.\arabic{subsection}.\Currentlabel !!!!}
+  }
   \renewcommand{\ansparams}{{\Currentlabel}}
   \thispagestyle{empty}
   \gdef\sectioningname{#1}%
@@ -754,6 +794,7 @@
   % \vspace*{15pt}\noindent\fancyfont{Topic}\par
   % \vspace*{10pt}\noindent{\Large\bfseries #1}\vspace{20pt}
   % \par\@afterindentfalse\nobreak 
+  % \typeout{+++++++++ value of the chapter section subsection is \thechapter.\thesection +++++++}
 }
 
 

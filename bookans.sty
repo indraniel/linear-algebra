@@ -143,6 +143,12 @@
                                   \leaders\hbox to .707em{\hss.\hss}\hfill}}
 
 
+% \ifinsidetopic
+% The topic exercises and answers are formatted differently and this
+% flag tells the hyperref stuff which to do
+\newif\ifinsidetopic %
+
+
 % \announcesectioninginanswerfile
 %  This command writes to the answer file something saying that 
 % a new section/topic has occurred, and its answers are about to come.
@@ -171,14 +177,23 @@
          \protect}}
   \fi}
 % the way it is done inside of Topics
+% \newcommand{\sectioninginanswerfiletopicstyle}{%
+%   \Writetofile{\ans@fn}{\protect\subsection\protect{%
+%                 Topic:
+%                 \sectioningname
+%                 \protect}}
+%   \ifsingleanswerfile\relax\else
+%      \Writetofile{\otherans@fn}{\protect\subsection\protect{%
+%                 Topic:
+%                 \sectioningname
+%                 \protect}}
+%   \fi} %
 \newcommand{\sectioninginanswerfiletopicstyle}{%
-  \Writetofile{\ans@fn}{\protect\subsection\protect{%
-                Topic:
+  \Writetofile{\ans@fn}{\protect\topic\protect{%
                 \sectioningname
                 \protect}}
   \ifsingleanswerfile\relax\else
-     \Writetofile{\otherans@fn}{\protect\subsection\protect{%
-                Topic:
+     \Writetofile{\otherans@fn}{\protect\topic\protect{%
                 \sectioningname
                 \protect}}
   \fi} %
@@ -249,8 +264,15 @@
 % small size, then call the exerciselist environment, and finish by
 % again encouraging a page break.  
 %   1999-Oct-23 jh
+
+% Count how far this exercise is from the start of the exercise set.  
+% Used for hyperreferences to answer file and back. 
+% 2012-Oct-08 JH
+\newcounter{exercise@itemcount}  
+
 \newenvironment{exercises}{%
   \bigbreak
+  \setcounter{exercise@itemcount}{0}   % reset for each exercise set
   \noindent\shortstack{\textbf{Exercises}\\ \rule{0pt}{.25ex}}\nopagebreak
   \announcesectioninginanswerfile % note the section change in the answer file
   \begingroup\@beginparpenalty 10000
