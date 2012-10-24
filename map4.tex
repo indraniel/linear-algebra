@@ -48,9 +48,9 @@ associated by $f$.
   \rep{\vec{w}}{D}
   =\colvec{w_1 \\ w_2}
 \end{equation*}
-The representation above 
-says that $\vec{w}=w_1\vec{\delta}_1+w_2\vec{\delta}_2$
-(where the basis $D$ is $\sequence{\vec{\delta}_1,\vec{\delta}_2}$).
+Where the basis $D$ is $\sequence{\vec{\delta}_1,\vec{\delta}_2}$
+the representation above 
+says that $\vec{w}=w_1\vec{\delta}_1+w_2\vec{\delta}_2$.
 Since
 $5\vec{w}=5\cdot(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
 =(5w_1)\vec{\delta}_1+(5w_2)\vec{\delta}_2$
@@ -60,28 +60,16 @@ representation.
   \rep{5\vec{w}}{D}
   =\colvec{5w_1 \\ 5w_2}
 \end{equation*}
-So, changing the map from $f$ to $5f$ has the effect 
+Changing the map from $f$ to $5f$ has the effect 
 of changing the representation of the codomain vector by multiplying its
 entries by $5$.
 
-That gives us the relationship between the
-representation of the action of $f$ and
-the representation of the action of $5f$.
+So \( \rep{5f}{B,D} \) is this matrix.
 \begin{equation*}
-  \begin{mat}[r]
-    1  &0  \\
-    1  &1
-  \end{mat}
-  \colvec{v_1 \\ v_2}
-  =
-   \colvec{v_1 \\ v_1+v_2}
-  \qquad
   \rep{5f}{B,D}\cdot\colvec{v_1 \\ v_2}
   =
    \colvec{5v_1 \\ 5v_1+5v_2}
-\end{equation*}
-Clearly
-\begin{equation*}
+  \qquad  
   \rep{5f}{B,D}
   =
     \begin{mat}[r]
@@ -89,17 +77,16 @@ Clearly
       5  &5
     \end{mat}
 \end{equation*}
-and so going from the matrix representing $f$ to 
+Therefore going from the matrix representing $f$ to 
 the matrix representing $5f$ just means multiplying all the entries 
 by $5$.
 \end{example}
 
-We can also consider how to compute the representation of the sum of two maps
-from the representation of those maps.
+Consider also how to compute the representation of the sum of two maps.
 
 \begin{example}
 Suppose that two linear maps with the same domain and codomain 
-\( \map{f,g}{\Re^2}{\Re^3} \) are represented 
+\( \map{f,g}{\Re^2}{\Re^2} \) are represented 
 with respect to some bases $B$ and~$D$ by these matrices.
 \begin{equation*}
   \rep{f}{B,D}=
@@ -115,10 +102,10 @@ with respect to some bases $B$ and~$D$ by these matrices.
     \end{mat}
 \end{equation*}
 Recall the definition of the sum of two functions: if
-$f$~takes $\vec{v}\mapsto\vec{u}$ and 
-$g$~takes $\vec{v}\mapsto\vec{w}$ then
-$f+g$ is the function that takes $\vec{v}\mapsto\vec{u}+\vec{w}$.
-Note that where these are the representations of the vectors 
+$f$~does $\vec{v}\mapsto\vec{u}$ and 
+$g$~does $\vec{v}\mapsto\vec{w}$ then
+$f+g$ is the function $\vec{v}\mapsto\vec{u}+\vec{w}$.
+If these are the representations of the vectors 
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
   \quad
@@ -126,7 +113,7 @@ Note that where these are the representations of the vectors
   \quad
   \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}
 \end{equation*}
-we have
+where $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$ then we have
 $\vec{u}+\vec{w}=(u_1\vec{\delta}_1+u_2\vec{\delta}_2)
   +(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
   =(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2$
@@ -137,7 +124,7 @@ and so this is the representation of the vector sum.
 % Thus the effect of adding the functions on the representations
 % of the vectors is to add them entry-by-entry.
 
-Hence, since these represent the actions of $f$ and~$g$
+Since these represent the actions of $f$ and~$g$
 \begin{equation*}
     \begin{mat}
        1  &3  \\
@@ -187,29 +174,54 @@ multiplication operations on vectors.
 \begin{theorem}  \label{th:MatOpsRepMapOps}
 %<*th:MatOpsRepMapOps>
 Let \( \map{h,g}{V}{W} \) be linear maps represented with respect to
-bases \( B,D \) by the matrices \( H \) and \( G \), and let $r$ be a scalar.
-Then the map \( \map{h+g}{V}{W} \) is represented with respect to \( B,D \)
-by \( H+G \), and the map
-\( \map{r\cdot h}{V}{W} \) is represented with respect to \( B,D \) by
-\( rH \).
+bases \( B,D \) by the matrices \( H \) and \( G \) and let $r$ be a scalar.
+Then with respect to \( B,D \) the map 
+\( \map{r\cdot h}{V}{W} \) is represented by
+\( rH \)
+and the map
+\( \map{h+g}{V}{W} \) is represented
+by \( H+G \).
 %</th:MatOpsRepMapOps>
 \end{theorem}
 
 \begin{proof}
-\nearbyexercise{exer:CorrspMapMatOps}; generalize the examples above.
+This is \nearbyexercise{exer:CorrspMapMatOps}.
+Generalize the examples above.
 \end{proof}
 
 \begin{remark}
-Recall Remark~III.\ref{rem:NotSurprising} following 
-Theorem~III.\ref{th:MatMultRepsFuncAppl}.
-That theorem says that matrix-vector 
-multiplication represents the application of a linear map and
-the remark notes that the theorem
-simply justifies the definition of matrix-vector multiplication.
-In some sense the theorem has to hold, because if it didn't then we
-would adjust the definition to make the theorem hold.
-The above theorem is another example of such a result; it shows that
-our definition of the operations is sensible.
+These two operations are simple.
+However we did not define them this way
+because they are simple.
+We defined them
+this way because they reflect the operations of function scalar multiplication
+and function addition.
+Their simplicity is a pleasant bonus.
+
+In the next subsection we will define another operation, matrix multiplication. 
+Based on the above two operations 
+a person's first thought may be to take an entry-by-entry product of 
+two matrices.
+While in theory we could define whatever matrix operations 
+we like, our program here is to instead be practical and
+define the new operation so that it
+combines the entries in the way that represents 
+function composition.
+That is, we are defining matrix operations by referencing function
+operations.
+
+We can express this point another way.
+Recall Theorem~III.\ref{th:MatMultRepsFuncAppl},
+which says that matrix-vector 
+multiplication represents the application of a linear map.
+Following it, Remark~III.\ref{rem:NotSurprising} notes that 
+the theorem
+justifies the definition of matrix-vector multiplication,
+and so in some sense the theorem must hold.
+If the definition was such that the theorem didn't hold
+then we would adjust the definition until it did hold.
+The above \nearbytheorem{th:MatOpsRepMapOps} 
+is another example of such a result.
 \end{remark}
 
 A special case of scalar multiplication is multiplication by zero.
@@ -491,7 +503,7 @@ no matter what domain and codomain bases we use.
     \( \map{t_1,\dots,t_6}{\Re^2}{\Re^2} \)
     there are scalars \( c_1,\dots,c_6\in\Re \) such that
     \( c_1t_1+\dots+c_6t_6 \) is the zero map.
-    (\textit{Hint:}~this is a bit of a misleading question.)
+    (\textit{Hint:}~the six is slightly misleading.)
     \begin{answer}
       Fix bases and represent the transformations with
       \( \nbyn{2} \) matrices.
