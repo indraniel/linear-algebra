@@ -8,14 +8,16 @@
 import sys, os, re, pprint
 import pexpect
 
-DEBUG = False
+SAGE_CALL = 'sage'
+
+DEBUG = True
 
 def usage(s):
     if s:
         print "ERROR: ",s
     print "Usage:"
     print "  Run lines from a file as a Sage session and collect the results"
-    print "   ",sys.argv[0]+" "+"<input file with Sage lines>"+"<output file>"
+    print "   ",sys.argv[0]+" "+"<input file with Sage lines>"+" <output file>"
 
 
 def _open_input(fn):
@@ -35,9 +37,10 @@ def _open_output(fn):
         sys.exit(2)
 
 SAGE_PROMPT = 'sage: '
-def feed_lines(lines):
+SAGE_ERROR = '------------------------------------------------------------'
+def feed_lines(lines,fn_in):
     r = []  # the responses
-    child = pexpect.spawn('sage')
+    child = pexpect.spawn(SAGE_CALL)
     child.expect(SAGE_PROMPT)
     for line in lines:
         line = line.rstrip("\n")
@@ -46,11 +49,16 @@ def feed_lines(lines):
         if child.after:
             r.append(child.after.rstrip("\n"))
         child.sendline(line)
-        child.expect(SAGE_PROMPT)
-        if DEBUG:
-            print "child.before is ", child.before
-            print "child.after is ", child.after
-        r.append(child.before)
+        dex = child.expect([SAGE_ERROR,SAGE_PROMPT])
+        if (dex == 0):
+            print "ERROR running sage from file",fn_in
+            print "context:\n",child.before
+            sys.exit(10)
+        elif (dex == 1):
+            r.append(child.before)
+            if DEBUG:
+                print "child.before is ", child.before
+                print "child.after is ", child.after
     child.sendline('exit')
     r[-1] = r[-1].rstrip("\n")  
     return r
@@ -64,7 +72,7 @@ def process_lines(fn_in,fn_out):
     sage_lines = f_in.readlines()
     f_in.close()
     # Get the lines
-    response_lines = feed_lines(sage_lines)
+    response_lines = feed_lines(sage_lines,fn_in)
     if DEBUG:
         print "response lines is \n",("".join(response_lines))
     # Put them in the output
@@ -84,5 +92,5 @@ if __name__ == '__main__':
     except:
         usage('you must supply an output filename')
         sys.exit(1)
-    out_lines = process_lines(fn_in,fn_out)
+    process_lines(fn_in,fn_out)
     sys.exit(0)
