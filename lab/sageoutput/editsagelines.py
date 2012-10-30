@@ -141,7 +141,7 @@ def process_lines(fn_in,fn_edit,fn_out):
     sage_lines = f_in.readlines()
     f_in.close()
     f_edit = _open_input(fn_edit)
-    edits = "\n".join(f_edit.readlines())
+    edits = f_edit.read().strip()
     # print "edits is ",edits
     f_edit.close()
     # Get the lines

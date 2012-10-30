@@ -12,16 +12,29 @@
 
 % --- Class structure: declaration of options part
 % ---
-% This class extends the article class
+
+\RequirePackage{etoolbox}
+% Package options: final, notfinal
+%  Do not generate the Sage output fresh, but instead take it from the 
+% .result files.
+\newtoggle{generatesagelab}  % from etoolbox
+\toggletrue{generatesagelab}                        
+\DeclareOption{generatesage}{\toggletrue{generatesagelab}}   % default 
+\DeclareOption{notgeneratesage}{\togglefalse{generatesagelab}}
+
+% This class extends the book class
 % Read all the documentclass options; pass them to book
-%\DeclareOption*{\InputIfFileExists{\CurrentOption.tut}{}{%
-%    \PassOptionsToClass{\CurrentOption}{report}}
 \PassOptionsToClass{11pt}{book}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 
 % --- Class structure: execution of options part
 % ---
 \ProcessOptions \relax
+\iftoggle{generatesagelab}{%
+  \PassOptionsToPackage{generatesage}{sageoutput}
+}{%
+  \PassOptionsToPackage{notgeneratesage}{sageoutput}
+}
 
 % --- Class structure: declaration of options part
 % ---
@@ -89,6 +102,9 @@
 % \newcommand{\lcircleonedot}{\lcircleone \char"119}
 
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
+
+% Have the Sage output generated on the fly to guarantee accuracy
+\RequirePackage{python/sageoutput}
 
 \RequirePackage{hyperref}
 \hypersetup{

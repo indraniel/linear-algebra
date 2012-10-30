@@ -33,13 +33,41 @@
 % no more than 15 \newwrites are allowed (and the previous version created a new
 % every time \@writemodule was called.
 
+% Adapted for use as sageoutput.sty.  Not for general purpose so I won't
+% post it separate from the book at http://joshua.smcvt.edu/linearalgebra .
+% 2012-Oct-30  Jim Hefferon jhefferon@smcvt.edu
+
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
 \ProvidesPackage{sageoutput}[2012/10/29 v0.3 Sage output in LaTeX]
 \RequirePackage{etoolbox}
+% Package options: generatesage, notgeneratesage
+%  Generate the Sage output fresh, or take it from the .result files.
+\newtoggle{generatesageoutput}  % from etoolbox
+\toggletrue{generatesageoutput}
+\DeclareOption{generatesage}{\toggletrue{generatesageoutput}}  % default
+\DeclareOption{notgeneratesage}{\togglefalse{generatesageoutput}}
+
+\ProcessOptions\relax
+\iftoggle{generatesageoutput}{%
+  \typeout{SAGEOUTPUT: generatesageoutput is on}
+  \RequirePackage{ifplatform}
+  \ifwindows
+    \typeout{SAGEOUTPUT: I don't know that Sage output can be generated under Windows.}
+  \fi
+  \ifshellescape
+    \relax
+  \else
+    \AtBeginDocument{\typeout{SAGEOUTPUT: Warning!  You asked to generate Sage output with your option to the documentclass but for that you must call XeLaTeX with -shell-escape.}}
+  \fi
+}{%
+  \relax
+}
+
 \RequirePackage{verbatim}
 \RequirePackage{listings}
 \RequirePackage{color}
 
+% Set up the output
 \newwrite\@outsage
 \newwrite\@outedit
 \newwrite\@module
@@ -49,6 +77,7 @@
 \newcounter{@PythonEnvironmentCounter}
 \setcounter{@PythonEnvironmentCounter}{1}
 \newcommand{\@outname}{\jobname\arabic{@PythonEnvironmentCounter}}
+\newcommand{\@subdirname}{sageoutput/}  % files for Sage output
 
 \begingroup \catcode `|=0 \catcode `[=1
 \catcode`]=2 \catcode `\{=12 \catcode `\}=12
@@ -58,51 +87,51 @@
 \def\sageoutput{\kernel@ifnextchar [{\@sageoutput}{\@sageoutput[]}}
 
 \def\@sageoutput[#1]{%
-\gdef\@sageinclude{#1}
+% \gdef\@sageinclude{#1}
 % Save edit information to the edit file
-\immediate\openout\@outedit=\@outname.edit
+\immediate\openout\@outedit=\@subdirname\@outname.edit
 \immediate\write\@outedit{#1}
 \immediate\closeout\@outedit
 % Save sage commands
-\immediate\openout\@outsage=\@outname.sagecmd
+\immediate\openout\@outsage=\@subdirname\@outname.sagecmd
 \newlinechar='15
 \begingroup \catcode`\^^M=12 %
 \let\do\@makeother\dospecials\obeyspaces%
 \@xpython}
 
 \def\endsageoutput{%
-\endgroup
-\immediate\closeout\@outsage
-\@writemodule
-% \immediate\write18{cat \@sageinclude\space\@outname.sagecmd | /usr/bin/env python > \@outname.py.out 2> \@outname.py.err; echo -n $? > \@outname.rc}
-\immediate\write18{./runsagelines.py \@outname.sagecmd \@outname.out 2> \@outname.run.err; echo -n $? > \@outname.runsagelines.rc}
-\immediate\write18{./editsagelines.py \@outname.out \@outname.edit \@outname.result 2> \@outname.edit.err; echo -n $? > \@outname.editsagelines.rc}
-\lstinputlisting{\@outname.result}
+  \endgroup
+  \immediate\closeout\@outsage
+\iftoggle{generatesageoutput}{% Run Python scripts to generate Sage output
+  % \typeout{SAGEOUTPUT: Running shell escape commands}
+  \immediate\write18{\@subdirname runsagelines.py \@subdirname\@outname.sagecmd \@subdirname\@outname.out 2> \@subdirname\@outname.run.err; echo -n $? > \@subdirname\@outname.runsagelines.rc}
+  \immediate\write18{\@subdirname editsagelines.py \@subdirname\@outname.out \@subdirname\@outname.edit \@subdirname\@outname.result 2> \@subdirname\@outname.edit.err; echo -n $? > \@subdirname\@outname.editsagelines.rc}}{}
 
-% Read the return code from runsagelines.
-\immediate\openin\@retcode=\@outname.runsagelines.rc
-\immediate\read\@retcode to \rc
-\immediate\closein\@retcode
-% If the return code isn't zero then include
-% the traceback.
-\ifnumequal{\rc}{0}{}{%
-    \begingroup
-        \color{red} Trouble running job \arabic{@PythonEnvironmentCounter}.
-        \verbatiminput{\@outname.run.err}
-    \endgroup
-}
-% Read the return code from editsagelines.
-\immediate\openin\@retcode=\@outname.editsagelines.rc
-\immediate\read\@retcode to \rc
-\immediate\closein\@retcode
-% If the return code isn't zero then include
-% the traceback.
-\ifnumequal{\rc}{0}{}{%
-    \begingroup
-        \color{red} Trouble editing job \arabic{@PythonEnvironmentCounter}.
-        \verbatiminput{\@outname.edit.err}
-    \endgroup
-}
+\lstinputlisting{\@subdirname\@outname.result}
+
+\iftoggle{generatesageoutput}{%
+  % Read the return code from runsagelines.
+  \immediate\openin\@retcode=\@subdirname\@outname.runsagelines.rc
+  \immediate\read\@retcode to \rc
+  \immediate\closein\@retcode
+  % If the return code isn't zero then include the traceback.
+  \ifnumequal{\rc}{0}{}{%
+      \begingroup
+          \color{red} Trouble running job \arabic{@PythonEnvironmentCounter}.
+          \verbatiminput{\@subdirname\@outname.run.err}
+      \endgroup
+  }
+  % Read the return code from editsagelines.
+  \immediate\openin\@retcode=\@subdirname\@outname.editsagelines.rc
+  \immediate\read\@retcode to \rc
+  \immediate\closein\@retcode
+  % If the return code isn't zero then include the traceback.
+  \ifnumequal{\rc}{0}{}{%
+      \begingroup
+          \color{green} Trouble editing job \arabic{@PythonEnvironmentCounter}.
+          \verbatiminput{\@subdirname\@outname.edit.err}
+      \endgroup
+  }}{}
 
 \immediate\stepcounter{@PythonEnvironmentCounter}
 }

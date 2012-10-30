@@ -8,9 +8,9 @@
 import sys, os, re, pprint
 import pexpect
 
-SAGE_CALL = 'sage'
+SAGE_CALL = 'sage'  # command line string to call Sage
 
-DEBUG = True
+DEBUG = False
 
 def usage(s):
     if s:
@@ -44,6 +44,8 @@ def feed_lines(lines,fn_in):
     child.expect(SAGE_PROMPT)
     for line in lines:
         line = line.rstrip("\n")
+        if not(line):
+            continue
         if DEBUG:
             print "line is",line
         if child.after:
