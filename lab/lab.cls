@@ -104,11 +104,11 @@
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
 
 % Have the Sage output generated on the fly to guarantee accuracy
-\RequirePackage{python/sageoutput}
+\RequirePackage{sageoutput/sageoutput}
 
 \RequirePackage{hyperref}
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
+    bookmarks=false,         % show bookmarks bar?
     % unicode=false,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
@@ -137,6 +137,16 @@
   \definecolor{lightcolor}{HTML}{DAE4FC} % {799FFC}  % 
   \definecolor{bgcolor}{HTML}{FCFFDC}  %  
   \definecolor{flourishcolor}{HTML}{F80018}  %
+
+% Fix bug in xetex: prevent color changes on pages with Sage graphics;
+% see http://tex.stackexchange.com/questions/60315/text-appearing-bold-on-some-pages-with-images
+\usepackage{eso-pic}
+\AddToShipoutPicture{%
+% \makeatletter%
+\special{pdf: put @thispage <</Group << /S /Transparency /I true /CS /DeviceRGB>> >>}%
+% \makeatother%
+}
+
 
 \RequirePackage{graphicx}
 \RequirePackage{url}
