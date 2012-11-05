@@ -16,6 +16,7 @@ SAGE_CMD_EXTENSION = 'sagecmd'  # Typically from prior run of this pgm
 SAGE_CMD_NEWFILE_EXTENSION = 'sagecmdnew' # From current run of this pgm
 SAGE_UNEDITED_OUTPUT_EXTENSION = 'out_unedited'
 SAGE_EDIT_EXTENSION = 'edit'
+SAGE_EDIT_NEWFILE_EXTENSION = 'editnew'
 SAGE_RESULT_EXTENSION = 'result'
 ERROR_EXTENSION = 'err'
 RETURN_CODE_EXTENSION = 'rc'
@@ -53,13 +54,25 @@ def diff(outname):
     """Return True if the two files outname.SAGE_CMD_NEWFILE_EXTENSION
     and outname.SAGE_CMD_EXTENSION differ.
     """
+    # Test the sage commands
     sage_cmds_fn = outname+'.'+SAGE_CMD_EXTENSION
     if not(os.path.isfile(sage_cmds_fn)):
         return True
     sage_cmds_f = open(sage_cmds_fn, 'r')
     sage_cmds = sage_cmds_f.read()  
     new_sage_cmds = get_new_sage_cmds(outname)
-    return sage_cmds != new_sage_cmds
+    # Test the edits
+    edits_fn = outname+'.'+SAGE_EDIT_EXTENSION
+    if not(os.path.isfile(edits_fn)):
+        return True
+    edits_f = open(edits_fn, 'r')
+    edits = edits_f.read()
+    edits_f.close()
+    edits_new_fn = outname+'.'+SAGE_EDIT_NEWFILE_EXTENSION
+    edits_new_f = open(edits_new_fn, 'r')
+    edits_new = edits_new_f.read()
+    edits_new_f.close()
+    return ((sage_cmds != new_sage_cmds) or (edits != edits_new))
 
 
 # ======= execute routines ==============
@@ -153,23 +166,19 @@ def edit_line(source,edit,fn):
         try:
             line_no, split_point, padding = int(edit_ready[1]), int(edit_ready[2]), int(edit_ready[3])
         except Exception, e:
-            print usage("with edit command "+edit+
-                        " for Sage file "+fn)
+            print "ERROR with edit command "+edit+" for Sage file "+fn
             print e
             sys.exit(10)
         # print "edit_line: line_no, split_point, padding",line_no, split_point, padding
         try:
             line = r[line_no]
         except Exception, e:
-            print usage("with edit command "+edit+
-                        " for Sage file "+fn)
+            print "ERROR with edit command "+edit+" for Sage file "+fn
             print e
             sys.exit(10)
         # print "line is ",line
         if not(isinstance(line,type(''))):
-            print usage("with edit command "+edit+
-                        " for Sage file "+fn+
-                        "\n  line number "+str(line_no)+" is not a string")
+            print "ERROR with edit command "+edit+" for Sage file "+fn+"\n  line number "+str(line_no)+" is not a string"
             sys.exit(10)
         if split_point < len(line.strip()):
             lines = [line[:split_point]," "*padding+line[split_point:]]
@@ -234,6 +243,12 @@ def edit_sage_lines(sage_output,outname):
     f_out.close()
     return finish
 
+# ======== clean up ==================================
+def clean_up(outname):
+    """Erase files no longer needed.
+    """
+    pass
+
 
 # ====================================
 def main(argv=None):
@@ -249,6 +264,7 @@ def main(argv=None):
             if DEBUG:
                 print "\n\n\n++there is a difference outname=",outname
             shutil.copy2(outname+'.'+SAGE_CMD_NEWFILE_EXTENSION,outname+'.'+SAGE_CMD_EXTENSION)
+            shutil.copy2(outname+'.'+SAGE_EDIT_NEWFILE_EXTENSION,outname+'.'+SAGE_EDIT_EXTENSION)
             if DEBUG:
                 print "++copy done"
             sage_output = run_sage_lines(outname)

@@ -9,7 +9,7 @@ Next we explore operations that we can do on vector spaces.
 \section{Left/right}
 \Sage{} represents linear
 maps differently than the book does.
-Rather than quarrel with our tools, below we will do it
+Rather than quarrel with the tool, below we will do it
 \Sage's way.
 
 Consider the application of a linear map 
@@ -29,13 +29,13 @@ the map application gives this.
   =\colvec{4 \\ -2 \\ 3}
 \end{equation*}
 
-To represent it we must fix bases. 
+To represent the map application we first fix bases. 
 In this example
 we use the canonical bases $\stdbasis_2\subset\Re^2$ 
 and~$\stdbasis_3\subset\Re^3$.
-With respect to the bases the book finds  
+Then with respect to the bases the book finds  
 a matrix~$T=\rep{t}{\stdbasis_2,\stdbasis_3}$ 
-and a vector $\vec{w}=\rep{\vec{v}}{\stdbasis_2}$,
+and a column vector $\vec{w}=\rep{\vec{v}}{\stdbasis_2}$,
 and represents $t(\vec{v})$ 
 with the product $T\vec{w}$.
 \begin{equation*}
@@ -51,10 +51,10 @@ with the product $T\vec{w}$.
 That is, the book is write right: its notation puts the vector on the right 
 of the matrix.
 
-This choice is a matter of taste and many authors instead
+However, this choice is a matter of taste and many authors instead
 use a row vector that multiplies a matrix from the left.
-\Sage{} falls in this camp.
-\Sage{} represents the map application in this way.
+\Sage{} is in this camp and
+represents the map application in this way.
 \begin{equation*}
   \rowvec{1 &3}
   \begin{mat}
@@ -64,7 +64,7 @@ use a row vector that multiplies a matrix from the left.
   =
   \rowvec{4 &-2 &3}
 \end{equation*}
-Obviously the difference is cosmetic but can be confusing.
+Obviously the difference is cosmetic but can cause confusion.
 The translation is that, compared to the book's representation $T\vec{w}$,
 \Sage{} prefers the transpose
 $\trans{(T\vec{w})}=\trans{\vec{w}}\;\trans{T}$.
@@ -79,12 +79,6 @@ We will see two different ways to define a linear transformation.
 
 \subsection{Symbolically}
 We first define a map that takes two inputs and returns three outputs.
-% \begin{lstlisting}
-% sage: a, b = var('a, b')   
-% T_symbolic(a, b) = [a+b, a-b, b]         
-% sage: T_symbolic       
-% (a, b) |--> (a + b, a - b, b)                
-% \end{lstlisting}
 \begin{sageoutput}
 a, b = var('a, b')   
 T_symbolic(a, b) = [a+b, a-b, b]         
@@ -94,23 +88,12 @@ We have not yet defined a domain and codomain
 so this not a function\Dash instead it is a prototype for a function.
 Make an instance of a function by applying $T_{\textit{symbolic}}$ on a 
 particular domain and codomain.
-\begin{sageoutput}[d,0,2;s,7,68,60;s,8,70,60]
+\begin{sageoutput}[d,0,2;s,7,68,62;s,8,70,62]
 a, b = var('a, b')   
 T_symbolic(a, b) = [a+b, a-b, b]         
 T = linear_transformation(RR^2, RR^3, T_symbolic)
 T                                              
 \end{sageoutput}
-% \begin{lstlisting}
-% sage: T = linear_transformation(RR^2, RR^3, T_symbolic)
-% sage: T                                                
-% Vector space morphism represented by the matrix:
-% [ 1.00000000000000  1.00000000000000 0.000000000000000]
-% [ 1.00000000000000 -1.00000000000000  1.00000000000000]
-% Domain: Vector space of dimension 2 over Real Field with 53 bits of 
-%     precision
-% Codomain: Vector space of dimension 3 over Real Field with 53 bits of 
-%     precision
-% \end{lstlisting}
 \noindent Note the left/right issue again: \Sage's matrix is the transpose of
 the matrix that the book would use.
 
@@ -343,47 +326,80 @@ and then computed this.
 %========================================
 \section{Operations}
 
-Consider the set of all linear maps from some 
-fixed vector space domain~$D$ to a fixed codomain~$C$. 
-The set of linear transformations has some natural operations, including
+Consider the set of linear maps from some 
+Fix some vector space domain~$D$ and codomain~$C$ and consider the
+set of all linear transformations between them. 
+This set has some natural operations, including
 addition and scalar multiplication.
 \Sage{} can work with those operations.
 
 \subsection{Addition}
-First create two functions. 
-\begin{sageoutput}
-f_symbolic(x,y) = [x-y, x+2*y, 3*x]  
-g_symbolic(x,y) = [y, 2*x-y, y]  
+% First create two functions. 
+% \begin{sageoutput}
+% f_symbolic(x,y) = [x-y, x+2*y, 3*x]  
+% g_symbolic(x,y) = [y, 2*x-y, y]  
+% \end{sageoutput}
+% We can add these two and with that new function make a linear 
+% transformation.
+% \begin{sageoutput}[d,0,2;s,9,68,62;s,10,70,62]
+% f_symbolic(x,y) = [x-y, x+2*y, 3*x]  
+% g_symbolic(x,y) = [y, 2*x-y, y]  
+% f_symbolic+g_symbolic
+% h = linear_transformation(RR^2, RR^3, f_symbolic+g_symbolic)
+% h
+% \end{sageoutput}
+% We could instead make two linear transformations and then add.
+% \begin{sageoutput}[d,0,2;s,9,68,62;s,10,70,62]
+% f_symbolic(x,y) = [x-y, x+2*y, 3*x]  
+% g_symbolic(x,y) = [y, 2*x-y, y]  
+% f = linear_transformation(RR^2, RR^3, f_symbolic)
+% g = linear_transformation(RR^2, RR^3, g_symbolic)
+% h = f + g
+% h
+% \end{sageoutput}
+Recall that matrix addition is defined so that the representation of
+the sum of two linear transformations is the matrix sum of the representatives.
+\Sage{} can illustrate.
+\begin{sageoutput}[s,6,68,62;s,7,70,62;s,14,68,62;s,15,70,62;s,20,68,62;s,21,70,62]
+M = matrix(RR, [[1, 2], [3, 4]])
+m = linear_transformation(RR^2, RR^2, M)
+m
+N = matrix(RR, [[5, -1], [0, 7]])
+n = linear_transformation(RR^2, RR^2, N)
+n
+m+n
+M+N
 \end{sageoutput}
-We can add these two and with that new function make a linear 
-transformation.
-\begin{sageoutput}[d,0,2;s,9,68,62;s,10,70,62]
-f_symbolic(x,y) = [x-y, x+2*y, 3*x]  
-g_symbolic(x,y) = [y, 2*x-y, y]  
-f_symbolic+g_symbolic
-h = linear_transformation(RR^2, RR^3, f_symbolic+g_symbolic)
-h
+\noindent Similarly, linear map scalar multiplication is reflected by 
+matrix scalar multiplication.
+\begin{sageoutput}[d,0,2;s,6,68,62;s,7,70,62]
+M = matrix(RR, [[1, 2], [3, 4]])
+m = linear_transformation(RR^2, RR^2, M)
+m*3
+M*3  
 \end{sageoutput}
-We could instead make two linear transformations and then add.
-\begin{sageoutput}[d,0,2;s,9,68,62;s,10,70,62]
-f_symbolic(x,y) = [x-y, x+2*y, 3*x]  
-g_symbolic(x,y) = [y, 2*x-y, y]  
-f = linear_transformation(RR^2, RR^3, f_symbolic)
-g = linear_transformation(RR^2, RR^3, g_symbolic)
-h = f + g
-h
-\end{sageoutput}
-
-
 
 
 
 \subsection{Composition}
-
-\subsection{Inverse}
-
-
-
+The composition of linear maps gives rise to matrix multiplication.
+\Sage{} uses the star \inlinecode{*} to denote composition of linear maps.
+\begin{sageoutput}[s,6,68,62;s,7,70,62;s,14,68,62;s,15,70,62;s,26,68,62;s,27,70,62]
+M = matrix(RR, [[1, 2], [3, 4]])
+m = linear_transformation(RR^2, RR^2, M)
+m
+N = matrix(RR, [[5, -1], [0, 7]])
+n = linear_transformation(RR^2, RR^2, N)
+n
+M*N
+N*M
+m*n
+\end{sageoutput}
+Note the left/right issue.
+Remember that $\composed{m}{n}$ is the map $\vec{v}\mapsto m(n(\vec{v}))$, 
+so that $n$ is applied first. 
+\Sage{} puts the representing vector on the left, so 
+$N$ must come left-most: $\vec{w}\;N\cdot M=\vec{w}(NM)$.
 
 \endinput
 

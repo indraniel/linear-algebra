@@ -88,8 +88,8 @@
 
 \def\@sageoutput[#1]{%
 % \gdef\@sageinclude{#1}
-% Save edit information to the edit file
-\immediate\openout\@outedit=\@subdirname\@outname.edit
+% Save edit information to the new edit file
+\immediate\openout\@outedit=\@subdirname\@outname.editnew
 \immediate\write\@outedit{#1}
 \immediate\closeout\@outedit
 % Save sage commands
@@ -106,31 +106,20 @@
   % \typeout{SAGEOUTPUT: Running shell escape commands}
   % \immediate\write18{\@subdirname runsagelines.py \@subdirname\@outname.sagecmd \@subdirname\@outname.out 2> \@subdirname\@outname.run.err; echo -n $? > \@subdirname\@outname.runsagelines.rc}
   % \immediate\write18{\@subdirname editsagelines.py \@subdirname\@outname.out \@subdirname\@outname.edit \@subdirname\@outname.result 2> \@subdirname\@outname.edit.err; echo -n $? > \@subdirname\@outname.editsagelines.rc}}{}
-  \immediate\write18{\@subdirname runsage.py \@subdirname\@outname. 2> \@subdirname\@outname.edit.err; echo -n $? > \@subdirname\@outname.editsagelines.rc}}{}
+  \immediate\write18{\@subdirname runsage.py \@subdirname\@outname. 2> \@subdirname\@outname.err; echo -n $? > \@subdirname\@outname.rc}}{}
 
 \lstinputlisting{\@subdirname\@outname.result}
 
 \iftoggle{generatesageoutput}{%
-  % Read the return code from runsagelines.
-  \immediate\openin\@retcode=\@subdirname\@outname.runsagelines.rc
+  % Read the return code from runsage.
+  \immediate\openin\@retcode=\@subdirname\@outname.rc
   \immediate\read\@retcode to \rc
   \immediate\closein\@retcode
   % If the return code isn't zero then include the traceback.
   \ifnumequal{\rc}{0}{}{%
       \begingroup
           \color{red} Trouble running job \arabic{@PythonEnvironmentCounter}.
-          \verbatiminput{\@subdirname\@outname.run.err}
-      \endgroup
-  }
-  % Read the return code from editsagelines.
-  \immediate\openin\@retcode=\@subdirname\@outname.editsagelines.rc
-  \immediate\read\@retcode to \rc
-  \immediate\closein\@retcode
-  % If the return code isn't zero then include the traceback.
-  \ifnumequal{\rc}{0}{}{%
-      \begingroup
-          \color{green} Trouble editing job \arabic{@PythonEnvironmentCounter}.
-          \verbatiminput{\@subdirname\@outname.edit.err}
+          \verbatiminput{\@subdirname\@outname.err}
       \endgroup
   }}{}
 
