@@ -93,7 +93,7 @@
 \immediate\write\@outedit{#1}
 \immediate\closeout\@outedit
 % Save sage commands
-\immediate\openout\@outsage=\@subdirname\@outname.sagecmd
+\immediate\openout\@outsage=\@subdirname\@outname.sagecmdnew
 \newlinechar='15
 \begingroup \catcode`\^^M=12 %
 \let\do\@makeother\dospecials\obeyspaces%
@@ -104,8 +104,9 @@
   \immediate\closeout\@outsage
 \iftoggle{generatesageoutput}{% Run Python scripts to generate Sage output
   % \typeout{SAGEOUTPUT: Running shell escape commands}
-  \immediate\write18{\@subdirname runsagelines.py \@subdirname\@outname.sagecmd \@subdirname\@outname.out 2> \@subdirname\@outname.run.err; echo -n $? > \@subdirname\@outname.runsagelines.rc}
-  \immediate\write18{\@subdirname editsagelines.py \@subdirname\@outname.out \@subdirname\@outname.edit \@subdirname\@outname.result 2> \@subdirname\@outname.edit.err; echo -n $? > \@subdirname\@outname.editsagelines.rc}}{}
+  % \immediate\write18{\@subdirname runsagelines.py \@subdirname\@outname.sagecmd \@subdirname\@outname.out 2> \@subdirname\@outname.run.err; echo -n $? > \@subdirname\@outname.runsagelines.rc}
+  % \immediate\write18{\@subdirname editsagelines.py \@subdirname\@outname.out \@subdirname\@outname.edit \@subdirname\@outname.result 2> \@subdirname\@outname.edit.err; echo -n $? > \@subdirname\@outname.editsagelines.rc}}{}
+  \immediate\write18{\@subdirname runsage.py \@subdirname\@outname. 2> \@subdirname\@outname.edit.err; echo -n $? > \@subdirname\@outname.editsagelines.rc}}{}
 
 \lstinputlisting{\@subdirname\@outname.result}
 

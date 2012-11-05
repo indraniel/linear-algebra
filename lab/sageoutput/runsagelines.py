@@ -39,6 +39,10 @@ def _open_output(fn):
 SAGE_PROMPT = 'sage: '
 SAGE_ERROR = '------------------------------------------------------------'
 def feed_lines(lines,fn_in):
+    """Feed the lines as commands to a Sage session
+     lines  list of strings
+     fn_in  name of input file, for error messages
+    """
     r = []  # the responses
     child = pexpect.spawn(SAGE_CALL)
     child.expect(SAGE_PROMPT)
