@@ -1,0 +1,210 @@
+\chapter{Geometry of Linear Maps}
+
+\Sage{} can illustrate the geometric effect of linear maps.
+Here we focus on transformations of the plane~$\Re^2$.  
+
+
+
+
+%========================================
+\section{Lines map to lines}
+The pictures in this chapter are 
+based on the observation that linear maps send lines to lines.
+
+Consider a domain space~$\Re^d$ and codomain space~$\Re^c$, along with
+the linear map~$h$.
+We get a line in the domain by fixing a vector of slopes~$\vec{m}\in\Re^d$
+and a vector of offsets from the origin~$\vec{b}$ and taking the set 
+$\ell = \set{\vec{v}=\vec{m}\cdot s +\vec{b}\suchthat s\in\Re}$.
+Then the image of this line~$h(\ell)$ is the set 
+$\set{h(\vec{m}s+\vec{b})\suchthat s\in\Re}
+=\set{h(\vec{m})s+h(\vec{b})\suchthat s\in\Re}$.
+This is a line in the codomain~$\Re^c$ with the vector of 
+slopes~$h(\vec{m})$ and the vector of offsets~$h(\vec{b})$. 
+
+For example, consider the transformation $\map{t}{\Re^2}{\Re^2}$ 
+that rotates vectors counterclockwise by $\pi/6$
+\begin{equation*}
+  \rep{t}{\stdbasis_2,\stdbasis_2}
+  =
+  \begin{mat}
+    \cos(\pi/6)  &-\sin(\pi/6) \\
+    \sin(\pi/6)  &\cos(\pi/6)
+  \end{mat}
+  = 
+  \begin{mat}
+    \sqrt{3}/2   &-1/2 \\
+    1/2          &\sqrt{3}/2
+  \end{mat}
+\end{equation*}
+(remember that this differs from the matrix given in the book because 
+\Sage{} has vectors multiply from the left).
+The plane line $y=3x+2$ is this set.
+\begin{equation*}
+  \ell=\set{\colvec{x \\ y}=\colvec{3 \\ 1}\cdot s+\colvec{2 \\ 0}\suchthat s\in\Re}
+\end{equation*}
+The rotated line is this set.
+\begin{equation*}
+  h(\ell)
+  =
+  \set{\colvec{x \\ y}=\frac{1}{2}\colvec{3\sqrt{3}+1 \\ -3+\sqrt{3}}\cdot s
+                                  +\colvec{\sqrt{3} \\ 1}\suchthat s\in\Re}
+\end{equation*}
+\begin{sageoutput}
+s = var('s')
+ell = parametric_plot((3*s+2,1*s), (s, -10, 10))
+ell.set_axes_range(-4, 4, -4, 4)
+ell.save("sageoutput/plot_action0.png", figsize=2.5, fontsize=7)
+\end{sageoutput}
+\begin{center}
+  \includegraphics{sageoutput/plot_action0.png}
+\end{center}
+
+
+
+So the routine finds the effect of the map 
+\begin{equation*}
+  \rowvec{x &y}
+  \begin{mat}
+    a &b  \\
+    c &d
+  \end{mat}
+\end{equation*}
+on the four corners of the 
+square 
+\begin{equation*}
+  \colvec{0 \\ 0}\mapsunder{t}\colvec{0 \\ 0}\quad
+  \colvec{1 \\ 0}\mapsunder{t}\colvec{a \\ b}\quad
+  \colvec{1 \\ 1}\mapsunder{t}\colvec{a+c \\ b+d}\quad
+  \colvec{0 \\ 1}\mapsunder{t}\colvec{c \\ d}
+\end{equation*}
+and plots four line segments.
+
+
+
+
+%========================================
+\section{The unit square}
+Consider a linear transformation $\map{t}{\Re^2}{\Re^2}$ applied to
+this unit square resting in the first quadrant.
+\begin{center}
+  \includegraphics{sageoutput/plot_action1.png}
+\end{center}
+This code generates that picture.
+\begin{sageoutput}
+load "plot_action.sage"
+p = plot_square_action(1,0,0,1) 
+p.set_axes_range(-0.5, 1.5, -0.5, 1.5) 
+p.save("sageoutput/plot_action1.png")
+\end{sageoutput}
+\noindent The routine \inlinecode{plot_square_action(a, b, c, d)}
+(whose code is at the end of this chapter)
+shows the effect of the matrix
+\begin{equation*}
+  \rep{t}{\stdbasis_2,\stdbasis_2}=
+  \begin{mat}
+    a &b \\
+    c &d
+  \end{mat}
+\end{equation*}
+on a unit square.
+The code above gives this routine 
+the identity matrix, so it plots the square unchanged.
+
+This routine is based on the observation that linear maps send lines to lines.
+Consider the effect of the map $\map{h}{\Re^n}{\Re^m}$ 
+on the line $\ell = \set{\vec{v}=\vec{m}\cdot s +\vec{b}\suchthat s\in\Re}$.
+The image is the set 
+$\set{h(\vec{m}s+\vec{b})\suchthat s\in\Re}
+=\set{h(\vec{m})s+h(\vec{b})\suchthat s\in\Re}$, which is a line in $\Re^m$. 
+So the routine finds the effect of the map 
+\begin{equation*}
+  \rowvec{x &y}
+  \begin{mat}
+    a &b  \\
+    c &d
+  \end{mat}
+\end{equation*}
+on the four corners of the 
+square 
+\begin{equation*}
+  \colvec{0 \\ 0}\mapsunder{t}\colvec{0 \\ 0}\quad
+  \colvec{1 \\ 0}\mapsunder{t}\colvec{a \\ b}\quad
+  \colvec{1 \\ 1}\mapsunder{t}\colvec{a+c \\ b+d}\quad
+  \colvec{0 \\ 1}\mapsunder{t}\colvec{c \\ d}
+\end{equation*}
+and plots four line segments.
+
+For example, this code
+\begin{sageoutput}
+load "plot_action.sage"
+q = plot_square_action(1,0,0,1) 
+p = plot_square_action(1,2,3,4) 
+q.set_axes_range(-6, 6, -1, 6) 
+p.set_axes_range(-6, 6, -1, 6) 
+q.save("sageoutput/plot_action2.png")
+p.save("sageoutput/plot_action3.png")
+\end{sageoutput}
+\noindent generates these pictures showing the effect of the 
+matrix.\footnote{The remaining examples in this chapter omit the 
+fiddly lines that load, save, set the axis ranges, etc.}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action2.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action3.png}}
+\end{equation*}
+The colors are there to show that transformations can change
+orientations.
+Suppose that we take the natural order of colors to be red, orange, 
+green, and then blue.
+Then the domain square is a counterclockwise shape, while the transformed
+square is clockwise.
+
+Transformation acts uniformily?
+
+
+Recall that any matrix $T$ factors as $H=PBQ$, 
+where $P$ and $Q$ are nonsingular and $B$ is a partial-identity matrix.
+Recall also that nonsingular matrices
+factor into elementary matrices
+$PBQ=T_nT_{n-1}\cdots T_jBT_{j-1}\cdots T_1$,
+which are matrices that
+come from the identity $I$ after one Gaussian step
+\begin{equation*}
+  I\grstep{k\rho_i}M_i(k) 
+  \qquad 
+  I\grstep{\rho_i\leftrightarrow\rho_j}P_{i,j}  
+  \qquad
+  I\grstep{k\rho_i+\rho_j}C_{i,j}(k) 
+\end{equation*}
+for $i\neq j$, $k\neq 0$.
+So if we understand the effect of a linear map described
+by a partial-identity matrix and the effect of the linear maps
+described by the elementary matrices then we will in some sense
+understand the effect of any linear map.
+(To understand them we mean to give a description of their geometric effect;
+the pictures below stick to transformations of $\Re^2$ for ease of drawing
+but the principles extend for maps from any $\Re^n$ to any $\Re^m$.)
+
+
+
+
+
+
+
+\section{Maps preserve lines through the origin}
+
+
+
+
+
+\lstinputlisting{plot_action.sage}
+
+\begin{center}
+  \includegraphics{sageoutput/plot_action1.png}
+\end{center}
+
+\endinput
+
+
+TODO:
