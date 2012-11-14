@@ -1,7 +1,9 @@
 \chapter{Geometry of Linear Maps}
 
-\Sage{} can illustrate the geometric effect of linear maps.
-Here we focus on transformations of the plane~$\Re^2$.  
+\Sage{} can illustrate the geometric effect of linear transformations.
+The graphis here picture transformations of the plane~$\Re^2$
+because those fit on the paper but the principles extend to 
+higher-dimensional spaces.
 
 
 
@@ -12,16 +14,18 @@ The pictures in this chapter are
 based on the observation that under a linear map, the image of a line
 in the domain is a line in the range.
 
-We first verify that.
-Consider a domain space~$\Re^d$ and codomain space~$\Re^c$, along with
+To verify that,
+consider a domain space~$\Re^d$ and codomain space~$\Re^c$, along with
 the linear map~$h$.
 We get a line in the domain by fixing a vector of slopes~$\vec{m}\in\Re^d$
 and a vector of offsets from the origin~$\vec{b}\in\Re^d$, 
 and then considering the set 
 $\ell = \set{\vec{v}=\vec{m}\cdot s +\vec{b}\suchthat s\in\Re}$.
-The image of~$\ell$ is the set 
-$h(\ell)=\set{h(\vec{m}\cdot s+\vec{b})\suchthat s\in\Re}
-=\set{h(\vec{m})\cdot s+h(\vec{b})\suchthat s\in\Re}$.
+The image of~$\ell$ is this set. 
+\begin{equation*}
+  h(\ell)=\set{h(\vec{m}\cdot s+\vec{b})\suchthat s\in\Re}
+  =\set{h(\vec{m})\cdot s+h(\vec{b})\suchthat s\in\Re}
+\end{equation*}
 This is a line in the codomain~$\Re^c$ with the vector of 
 slopes~$h(\vec{m})$ and the vector of offsets~$h(\vec{b})$. 
 
@@ -72,21 +76,9 @@ t_ell.save("sageoutput/plot_action0a.png", fontsize=7)
   \quad\mapsvia{t}\quad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action0a.png}}
 \end{equation*}
-(The limits of $10$ and~$-10$ on the parameter~$s$ are arbitrary, just
+(The limits on the parameter~$s$ of $10$ and~$-10$ are arbitrary, just
 chosen to be large enough that the line segment covers the entire 
 domain and codomain intervals shown, from $-4$ to~$4$.)
-
-So lines map to lines.
-\begin{equation*}
-\set{\vec{v}=\vec{m}\cdot s +\vec{b}\suchthat s\in\Re}
-\quad\longrightarrow\quad
-\set{h(\vec{m})\cdot s+h(\vec{b})\suchthat s\in\Re}  
-\end{equation*}
-We'll note also that lines through the origin map to lines
-through the origin:
-if $\vec{b}=\zero$ then 
-$h(\vec{b})$ is $\zero$, since any linear map sends the zero vector
-in the domain to the zero vector in the codomain. 
 
 
 
@@ -118,7 +110,7 @@ transformation.
     c &d
   \end{mat}
   =
-  \colvec{ax+cy \\ bx+dy}
+  \rowvec{ax+cy &bx+dy}
 \end{equation*}
 The routine's source is at the end of this chapter but
 the observation above  
@@ -151,7 +143,7 @@ matrix.\footnote{The remaining examples in this chapter omit the
 fiddly lines that load, save, set the axis ranges, etc.}
 \begin{equation*}
   \vcenteredhbox{\includegraphics{sageoutput/plot_action2.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action2a.png}}
 \end{equation*}
 The colors are there to show that transformations can change
@@ -161,8 +153,8 @@ green, and blue.
 Then the domain square is a counterclockwise shape, while the transformed
 square is clockwise.
 
-We can build up to an understanding of complex actions by 
-first seeing simple ones.
+We can develop an understanding of complex actions by 
+building from simple ones.
 This transformation doubles the $x$~components of all vectors. 
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
@@ -175,82 +167,153 @@ p.save("sageoutput/plot_action3a.png")
 \end{sageoutput}
 \begin{equation*}
   \vcenteredhbox{\includegraphics{sageoutput/plot_action3.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 2 &0 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \quad\mapsvia{\big (\begin{smallmatrix} 2 &0 \\ 0 &1 \end{smallmatrix}\big )}\quad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action3a.png}}
 \end{equation*}
-This transformation triples the $y$~components and multiplies 
-$x$~components by $-1$. 
+\noindent
+Linear maps send the zero vector to the zero vector so 
+the new shape is also anchored at the origin.
+But it has been stretched horizontally: it has the same orientation
+as the starting square, but twice the area.
+
+If we triple the $x$~coordinate then we get a similar shape but with
+three times the area of the starting one.
+What about if we take $-1$~times the x-coordinate?
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_square_action(1,0,0,1) 
 q.set_axes_range(-4, 4, -1, 4) 
 q.save("sageoutput/plot_action4.png")
-p = plot_square_action(-1,0,0,3) 
+p = plot_square_action(-1,0,0,1) 
 p.set_axes_range(-4, 4, -1, 4) 
 p.save("sageoutput/plot_action4a.png")
 \end{sageoutput}
 \begin{equation*}
   \vcenteredhbox{\includegraphics{sageoutput/plot_action4.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} -1 &0 \\ 0 &3 \end{smallmatrix}\big )}\quad
+  \quad\mapsvia{\big (\begin{smallmatrix} -1 &0 \\ 0 &1 \end{smallmatrix}\big )}\quad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action4a.png}}
 \end{equation*}
-Note that the colors show that this transformation changes
-the orientation.
+\noindent
+It changes the orientation.
+We say that the above shape has an \textit{oriented area}
+of $-1$.
+The motivation for the sign is:~we start with the right-hand figure 
+from the example before this one
+and slide the orange side in from the right, from $2$ to~$1$, to~$0$ and
+then to~$-1$.
+The area falls from~$2$ to~$1$, to~$0$, and it is in some way natural
+to assign the figure above an area measure of~$-1$.
+The prefix `oriented' is just there to distinguish this idea from the
+usual idea of 
+area.\footnote{The oriented area is the same as the 
+\protect\textit{determinant} of the matrix, which the book covers in the
+Chapter Four.}
+The usual area is the absolute value of the oriented area.
+
+The next transformation combines action in two axes, 
+tripling the $y$~components and multiplying 
+$x$~components by $-1$. 
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_square_action(1,0,0,1) 
+q.set_axes_range(-4, 4, -1, 4) 
+q.save("sageoutput/plot_action5.png")
+p = plot_square_action(-1,0,0,3) 
+p.set_axes_range(-4, 4, -1, 4) 
+p.save("sageoutput/plot_action5a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action5.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} -1 &0 \\ 0 &3 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action5a.png}}
+\end{equation*}
+The colors show that this transformation also changes
+the orientation, so the new shape has an oriented area of~$-3$.
+
+What if we change the orientation twice?
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_square_action(1,0,0,1) 
+q.set_axes_range(-4, 4, -4, 2) 
+q.save("sageoutput/plot_action6.png")
+p = plot_square_action(-2,0,0,-3) 
+p.set_axes_range(-4, 4, -4, 2) 
+p.save("sageoutput/plot_action6a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action6.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} -2 &0 \\ 0 &-3 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action6a.png}}
+\end{equation*}
+The colors are the same as the original shape's counterclockwise
+red, orange, green, and blue.
+Thus the new shape has an oriented area of~$6$.
 
 We next show the effect of putting in off-diagonal entries.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_square_action(1,0,0,1) 
 q.set_axes_range(-4, 4, -1, 4) 
-q.save("sageoutput/plot_action5.png")
+q.save("sageoutput/plot_action7.png")
 p = plot_square_action(1,0,2,1) 
 p.set_axes_range(-4, 4, -1, 4) 
-p.save("sageoutput/plot_action5a.png")
+p.save("sageoutput/plot_action7a.png")
 \end{sageoutput}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action5.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action5a.png}}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action7.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action7a.png}}
 \end{equation*}
-This transformation is a \textit{skew}.\footnote{The word means ``to distort from a symmetrical form.''}
-The line segment sides of the square map to line segments, but they are no
-longer at right angles.
+This transformation is a \textit{skew}\footnote{The word skew means ``to distort from a symmetrical form.''}
+(or \textit{shear}).
+The line segment sides of the original square 
+map to line segments, but these sides are not at right angles.
 The action
 \begin{equation*}
   \colvec{x \\ y} \mapsto \colvec{x+2y \\ y}
 \end{equation*}
 means that 
 a vector with a $y$~component of~$1$ is shifted right by~$2$ while
-a vector with a $y$~component of~$2$ is shifted right by~$4$.
-Vectors are shifted depending on how far they are above or below the
+a vector with a $y$~component of~$2$ is shifted right by~$4$, so
+vectors are shifted depending on how far they are above or below the
 $x$-axis.
+This transformation preserves orientation and the shape has a base of~$1$
+with a height of~$1$ so its oriented area is~$1$.
 
-The other off-diagonal entry has much the same effect.
+Putting a nonzero value in the other off-diagonal entry,
+the upper right, has much the same effect except that it skews parallel
+to the $y$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_square_action(1,0,0,1) 
 q.set_axes_range(-4, 4, -3, 2) 
-q.save("sageoutput/plot_action6.png")
+q.save("sageoutput/plot_action8.png")
 p = plot_square_action(1,-2,0,1) 
 p.set_axes_range(-4, 4, -3, 2) 
-p.save("sageoutput/plot_action6a.png")
+p.save("sageoutput/plot_action8a.png")
 \end{sageoutput}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action6.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &-2 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action6a.png}}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action8.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &-2 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action8a.png}}
 \end{equation*}
 The action
 \begin{equation*}
   \colvec{x \\ y} \mapsto \colvec{x \\ -2x+y}
 \end{equation*}
-means that a vector are shifted depending on how far they are from the
+means that vectors are shifted depending on how far they are from the
 $x$~axis.
 For instance, a vector with an $x$~component of~$1$ is shifted by~$-2$.
+The oriented area of this shape is~$1$.
 
 
 
-\subsection{Turing's matrix factorization PA=LDU}
+
+\subsection{Turing's factorization PA=LDU}
+We will now see how the action of any matrix can be decomposed into 
+the actions shown in the prior section.
+This will give us a complete geometric description of any linear map.
+
 Recall that the row operations of Gauss's Method can be done with
 matrix multiplication.
 For instance, multiplication from the left by this matrix has the effect of the
@@ -273,11 +336,30 @@ row operation $2\rho_1+\rho_2$.
     0 &-3  &2
   \end{mat}
 \end{equation*}
-Thus, assuming that we don't need any row swaps, we can follow the 
-Gauss's Method steps to bring a matrix to echelon form with a sequence of left 
-multiplications.
-Here we tack on an additional matrix to perform $-\rho_2+\rho_3$
-and produce echelon form.
+
+In general, as described in the book, the  
+\definend{elementary reduction matrices}
+come in three types $M_i(k)$, $P_{i,j}$, and~$C_{i,j}(k)$, and
+arise from applying a row operation to an identity matrix.
+\begin{center}
+$I\grstep{k\rho_i}M_i(k)$ for \( k\neq 0 \)
+\qquad
+\( I\grstep{\rho_i\leftrightarrow\rho_j}P_{i,j} \) for \( i\neq j \)
+\qquad
+\( I\grstep{k\rho_i+\rho_j}C_{i,j}(k) \) for \( i\neq j \)
+\end{center}
+With these we can use matrix multiplication to do Gauss's Methd:
+for a matrix~$H$ we can do row scaling~\( k\rho_i \) 
+with \( M_i(k)H \), 
+we can swap rows \( \rho_i\leftrightarrow\rho_j \) with \( P_{i,j}H \), 
+and we can add a multiple of one row to another
+\( k\rho_i+\rho_j \) with \( C_{i,j}(k)H \). 
+The prior paragraph used the $\nbyn{3}$
+matrix $C_{1,2}(2)$.
+
+We can continue the process from the equation above
+and use $C_{2,3}(-1)$ to perform $-\rho_2+\rho_3$,
+producing echelon form.
 \begin{equation*}
   \begin{mat}
     1 &0  &0 \\
@@ -302,24 +384,71 @@ and produce echelon form.
   \end{mat}
   \tag{$*$}
 \end{equation*}
+As in this example, using matrix multiplication alone
+we can do Gauss's Method and produce echelon form.
+One way to express this is that
+equation~($*$) is a factorization of the starting matrix into a product of
+some elementary matrices and an echelon form matrix.  
 
-When the book first covered Gauss's method, the operations involved 
-using a row to work on a row below it.
-Matrices that perform those operations are \textit{lower triangular}
+Observe further that if the starting matrix is such that
+we don't need to do any row swapping then 
+we can stick elementary
+operations that involve only using a row to work on a row below it,
+that is,
+\( k\rho_i+\rho_j \) where $j>i$. 
+The elementary
+matrices that perform those operations are \textit{lower triangular}
 since all of their nonzero entries are in the lower left.
-Matrices with all of their nonzero entries in the upper right are 
-\textit{upper triangular}.
-The echelon form 
-matrix in ($*$)~above is upper triangular. 
- 
-We can perform column operations that are just like the row operations
-to eliminate entries in the above matrix.
-Here we take $-1/3$ times the first column and add to the second column.
+(Matrices with all of their nonzero entries in the upper right are 
+\textit{upper triangular}.)
+Thus our factorization so far is into a product of lower triangular elementary
+matrices and an echelon form matrix.
+
+We can factor further.
+We can use a diagonal matrix to ensure that the 
+leading entries of the nonzero rows of the echelon form matrix are~$1$'s.
+Here we've done that additional step to equation~($*$).
 \begin{equation*}
   \begin{mat}
-    3 &1  &4 \\ 
-    0 &3  &0 \\
-    0 &0  &2
+    1/3 &0   &0 \\
+    0   &1/3 &0 \\
+    0   &0   &1/2  
+  \end{mat}
+  \begin{mat}
+    1 &0  &0 \\
+    0 &1  &0 \\
+    0 &-1 &1
+  \end{mat}
+  \begin{mat}
+    1 &0 &0 \\
+    2 &1 &0 \\
+    0 &0 &1
+  \end{mat}
+  \begin{mat}
+    3 &1 &4 \\
+   -6 &1 &-8 \\
+    0 &-3 &2
+  \end{mat}
+  =
+  \begin{mat}
+    1 &1/3  &4/3 \\ 
+    0 &1  &0 \\
+    0 &0  &1
+  \end{mat}
+  \tag{$**$}
+\end{equation*}
+ 
+We can use matrix multiplication to factor all the way to a 
+block partial identity
+matrix.
+The idea is to use column operations.
+Here we use right-multiplication on the right-hand side of~($**$) to 
+add $-1/3$ times the first column to the second column.
+\begin{equation*}
+  \begin{mat}
+    1 &1/3  &4/3 \\ 
+    0 &1  &0 \\
+    0 &0  &1
   \end{mat}
   \begin{mat}
     1  &-1/3  &0  \\
@@ -328,13 +457,13 @@ Here we take $-1/3$ times the first column and add to the second column.
   \end{mat}
   =
   \begin{mat}
-    3 &0  &4 \\ 
-    0 &3  &0 \\
-    0 &0  &2
+    1 &0  &4 \\ 
+    0 &1  &0 \\
+    0 &0  &1
   \end{mat}
 \end{equation*}
-We now add $-4/3$~times the first column to the third column,
-to finish with a diagonal matrix.
+Adding $-4/3$~times the first column to the third column
+leave us with an identity matrix.
 \begin{equation*}
   \begin{mat}
     3 &1  &4 \\ 
@@ -348,224 +477,199 @@ to finish with a diagonal matrix.
   \end{mat}
   =
   \begin{mat}
-    3 &0  &0 \\ 
-    0 &3  &0 \\
-    0 &0  &2
+    1 &0  &0 \\ 
+    0 &1  &0 \\
+    0 &0  &1
   \end{mat}
+   \tag{$*{*}*$}
 \end{equation*}
-Thus, where there are no swaps needed, we can write this equation involving
-matrices.
+Thus, if we start with a matrix $A$ that does not require any row swaps, 
+we get this matrix equation.
 \begin{equation*}
   L_1L_2\cdots L_k\cdot A\cdot U_1U_2\cdot U_r = D
 \end{equation*}
-where $D$ is diagonal, the $L_i$ are lower-triangular row operation matrices,
-and the $U_j$ are upper-tirangular column operation matrices. 
+Here $D$ is a partial identity matrix, 
+the $L_i$ are lower-triangular row combination matrices,
+and the $U_j$ are upper-triangular column combination matrices. 
 
-Now, we are interested in transformations of real space so we assume all
+We are focused on transformations so we assume all of these
 matrices are square.
 All of the row operations can be undone (for instance, $2\rho_1+\rho_2$
 is undone with $-2\rho_1+\rho_2$), so each of those lower triangular matrices
-has a lower-triangular inverse.
-$A\cdot U_1U_2\cdots U_r = L_k^{-1}\cdots L_1^{-1}D$. 
-Likewise, each of the upper-triangular matrices has an inverse and it is
-upper-triangular.
-Hence, if no swaps are required in Gauss's Method reduction of $A$ then we have
-this factorization 
-$A = L_k^{-1}\cdots L_1^{-1}\cdot D\cdot U_r^{-1}\cdots U_1^{-1}$.
-To ensure that no swaps are required we can pre-swap with a permutation matrix.
+has an inverse.
+Likewise, each of the upper-triangular matrices has an inverse.
+Therefore, 
+if we don't need any swaps in a Gauss-Jordan reduction of $A$ then we have
+this factorization.
+\begin{equation*} 
+  A = L_k^{-1}\cdots L_1^{-1}\cdot D\cdot U_r^{-1}\cdots U_1^{-1}
+\end{equation*}
+To fix the swap issue we can pre-swap.
+That is, before we factor the starting matrix we can first swap its rows
+with a permutation matrix~$P$.
 \begin{equation*}
   P\cdot A = L_k^{-1}\cdots L_1^{-1}\cdot D\cdot U_r^{-1}\cdots U_1^{-1}
   \tag{$**$}
 \end{equation*}
-The product of the $L$'s is lower-triangular and the product of the
-$U$'s is upper-triangular so this result is often known as $PA=LDU$.
-However, we'll leave the $L$'s and $U$'s uncombined.
+A product of lower triangular matrices is lower-triangular,
+and a product of upper triangular matrices is 
+upper-triangular
+so we could combine all the $L$'s and all the $U$'s, and
+this result is often known as $PA=LDU$.
 
-Recall that any matrix $T$ factors as $H=PBQ$, 
-where $P$ and $Q$ are nonsingular and $B$ is a partial-identity matrix.
-Recall also that nonsingular matrices
-factor into elementary matrices
-$PBQ=T_nT_{n-1}\cdots T_jBT_{j-1}\cdots T_1$,
-which are matrices that
-come from the identity $I$ after one Gaussian step
+We illustrate with the generic $\nbyn{2}$ transformation of $\Re^2$ represented 
+with respect to the standard basis in this way.
 \begin{equation*}
-  I\grstep{k\rho_i}M_i(k) 
-  \qquad 
-  I\grstep{\rho_i\leftrightarrow\rho_j}P_{i,j}  
-  \qquad
-  I\grstep{k\rho_i+\rho_j}C_{i,j}(k) 
-\end{equation*}
-for $i\neq j$, $k\neq 0$.
-So if we understand the effect of a linear map described
-by a partial-identity matrix and the effect of the linear maps
-described by the elementary matrices then we will in some sense
-understand the effect of any linear map.
-(To understand them we mean to give a description of their geometric effect;
-the pictures below stick to transformations of $\Re^2$ for ease of drawing
-but the principles extend for maps from any $\Re^n$ to any $\Re^m$.)
-
-
-
-
-
-
-
-\section{The upper half circle}
-One of the defining properties of a linear map is that 
-$h(r\cdot\vec{v})=r\cdot h(\vec{v})$.
-This equation means that the action of $h$ on any line through the origin
-$\ell=\set{r\cdot \vec{v}\suchthat r\in\Re}$ is determined by the action
-of $h$ on any nonzero vector in that line.
-
-For instance we can describe the line~$y=2x$ in this way.
-\begin{equation*}
-  \set{r\cdot\colvec{1 \\ 2}\suchthat r\in\Re}
-\end{equation*}
-If $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
-\begin{equation*}
-  \rep{t}{\stdbasis_2,stdbasis_2}
-  =
+  T=
   \begin{mat}
     1 &2 \\
     3 &4
   \end{mat}
 \end{equation*}
-then here is the effect of $t$ on one vector in the line.
+Gauss's Method is straightforward.
 \begin{equation*}
-  \colvec{1 \\ 2}\mapsunder{t}\colvec{7 \\ 10}
+  \begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+  \grstep{-3\rho_1+\rho_2}  
+  \begin{mat}
+    1 &2 \\
+    0 &-2
+  \end{mat}
+  \grstep{-(1/2)\rho_2}  
+  \begin{mat}
+    1 &2 \\
+    0 &1
+  \end{mat}
+  \grstep{-2\chi_1+\chi_2}  
+  \begin{mat}
+    1 &0 \\
+    0 &1
+  \end{mat}
 \end{equation*}
-And here is the effect of $t$ on other members of the line.
+(We use $\chi_i$ for the columns.)
+This is the associated factorization.
 \begin{equation*}
-  \colvec{2 \\ 4}\mapsunder{t}\colvec{14 \\ 20}
-  \qquad
-  \colvec{-3 \\ -6}\mapsunder{t}\colvec{-21 \\ -30}
-  \qquad
-  \colvec{r \\ 2r}\mapsunder{t}\colvec{7r \\ 10r}
+  \begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+  =
+  \begin{mat}
+   1 &0 \\
+   3 &1 
+  \end{mat}
+  \begin{mat}
+    1 &0 \\
+    0 &-2
+  \end{mat}
+  \begin{mat}
+    1 &2 \\
+    0 &1
+  \end{mat}
 \end{equation*}
-So $t$'s action on the entire line is uniform.
-
-This means that one way to describe a transformation's action is to pick 
-one nonzero element from each line through the origin and describe where
-the transformation maps those elements.
-An easy way to select one nonzero element from each line through the
-origin is to take the upper half circle.
-\begin{equation*}
-  U=\set{\colvec{x \\ y}
-         \suchthat 
-         \text{$x=\cos(t)$, $y=\sin(t)$, $0\leq t<\pi$}}
-  \qquad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action10.png}}  
-\end{equation*}
-As with the unit square that began this chapter we produce this 
-graph by using a routine that draws the effect of an arbitrary 
-matrix on the circle, and giving that routine the identity matrix. 
-(As earlier, we will use the colors to track the directionality in a set of
-before and after pictures.)
+The product is as expected.
 \begin{sageoutput}
-load "plot_action.sage"
-p = plot_circle_action(1,0,0,1)  # identity matrix
-p.set_axes_range(-1.5, 1.5, -0.5, 1.5) 
-p.save("sageoutput/plot_action10.png")
+L = matrix(QQ, [[1, 0], [3, 1]])
+D = matrix(QQ, [[1, 0], [0, -2]])
+U = matrix(QQ, [[1, 2], [0, 1]])
+L*D*U  
 \end{sageoutput}
 
-Using this visualization approach, here 
-is the transformation doubles the $x$~components of all vectors. 
+We got into this to understand the geometric effect of the transformation.
+\begin{equation*}
+  \rowvec{x &y}
+  \begin{mat}
+   1 &2 \\
+   3 &4 
+  \end{mat}
+\end{equation*}
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
-q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-2, 2, -1, 2) 
-q.save("sageoutput/plot_action11.png")
-p = plot_circle_action(2,0,0,1) 
-p.set_axes_range(-2, 2, -1, 2) 
-p.save("sageoutput/plot_action11a.png")
+q = plot_square_action(1,0,0,1) 
+q.set_axes_range(-4, 4, -1, 6) 
+q.save("sageoutput/plot_action20.png")
+p = plot_square_action(1,2,3,4) 
+p.set_axes_range(-4, 4, -1, 6) 
+p.save("sageoutput/plot_action20a.png")
 \end{sageoutput}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action11.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 2 &0 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action11a.png}}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action20.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 3 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action20a.png}}
 \end{equation*}
-And here is the
-transformation that triples the $y$~components and multiplies 
-$x$~components by $-1$. 
-Note that it changes the orientation.
+\noindent We expand it according to the above factorization 
+\begin{equation*}
+  \rowvec{x &y}
+  \begin{mat}
+   1 &0 \\
+   3 &1 
+  \end{mat}
+  \begin{mat}
+    1 &0 \\
+    0 &-2
+  \end{mat}
+  \begin{mat}
+    1 &2 \\
+    0 &1
+  \end{mat}  
+\end{equation*}
+and look at the effect of the three component matrices.
+The first matrix is a skew parallel to the $x$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
-q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-2, 2, -4, 4) 
-q.save("sageoutput/plot_action12.png")
-p = plot_circle_action(-1,0,0,3) 
-p.set_axes_range(-2, 2, -4, 4) 
-p.save("sageoutput/plot_action12a.png")
+q = plot_square_action(1,0,0,1) 
+q.set_axes_range(-4, 4, -1, 4) 
+q.save("sageoutput/plot_action21.png")
+p = plot_square_action(1,0,3,1) 
+p.set_axes_range(-4, 4, -1, 4) 
+p.save("sageoutput/plot_action21a.png")
 \end{sageoutput}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action12.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} -1 &0 \\ 0 &3 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action12a.png}}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action21.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 3 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action21a.png}}
 \end{equation*}
-
-Here is the first skew
-transformation. 
+\noindent
+The second matrix rescales, and changes the orientation.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
-q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-2, 2, -3, 3) 
-q.save("sageoutput/plot_action13.png")
-p = plot_circle_action(1,0,2,1) 
-p.set_axes_range(-2, 2, -3, 3) 
-p.save("sageoutput/plot_action13a.png")
+q = plot_square_action(1,0,0,1) 
+q.set_axes_range(-4, 4, -3, 2) 
+q.save("sageoutput/plot_action22.png")
+p = plot_square_action(1,0,0,-2) 
+p.set_axes_range(-4, 4, -3, 2) 
+p.save("sageoutput/plot_action22a.png")
 \end{sageoutput}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action13.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action13a.png}}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action22.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 0 &-2 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action22a.png}}
 \end{equation*}
-\noindent Here is the second skew
-transformation. 
+\noindent
+Finally, the third matrix is a skew parallel to the $y$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
-q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-3, 3, -2, 2) 
-q.save("sageoutput/plot_action14.png")
-p = plot_circle_action(1,3,0,1) 
-p.set_axes_range(-3, 3, -2, 2) 
-p.save("sageoutput/plot_action14a.png")
+q = plot_square_action(1,0,0,1) 
+q.set_axes_range(-4, 4, -1, 4) 
+q.save("sageoutput/plot_action23.png")
+p = plot_square_action(1,2,0,1) 
+p.set_axes_range(-4, 4, -1, 4) 
+p.save("sageoutput/plot_action23a.png")
 \end{sageoutput}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action14.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &3 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action14a.png}}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action23.png}}
+  \quad\mapsvia{\big (\begin{smallmatrix} 1 &2 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action23a.png}}
 \end{equation*}
+  
 
-And here is the generic map.
-\begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
-q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-2, 2, -4, 6) 
-q.save("sageoutput/plot_action15.png")
-p = plot_circle_action(1,2,3,4) 
-p.set_axes_range(-2, 2, -4, 6) 
-p.save("sageoutput/plot_action15a.png")
-\end{sageoutput}
-\begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action15.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &3 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action15a.png}}
-\end{equation*}
-
-
-These circles maps to ellipses.
-In general, ellipses map to ellipses, so we have seen the special case
-of circles.
-The argument is here.
-Consider a vector 
-\begin{equation*}
-  \vec{v}=\colvec{x \\ y}
-\end{equation*}
-that lies on an ellipse.
-We can parametrize to get $x(t)=m\cos(t)$, $y(t)=n\sin(t)$ with 
-$0\leq t< 2\pi$.
-
-
+Note that the lower-triangular and upper-triangular matrices do not
+change the orientation.
+So, absent any row swaps, 
+any orientation changing happens when one of the diagonal entries is 
+negative, 
 
 
 

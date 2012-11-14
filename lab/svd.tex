@@ -1,0 +1,186 @@
+\chapter{Singular Value Decomposition}
+
+
+Recall from the Geometry chapter that under a linear
+map $\map{h}{\Re^d}{\Re^c}$ lines map to lines.
+\begin{equation*}
+\set{\vec{v}=\vec{m}\cdot s +\vec{b}\suchthat s\in\Re}
+\quad\longrightarrow\quad
+\set{h(\vec{m})\cdot s+h(\vec{b})\suchthat s\in\Re}  
+\end{equation*}
+A special case of that happens when $\vec{b}=\zero$.
+Because a linear map sends the zero vector in the domain to the 
+zero vector in the codomain, $h(\vec{b})=\zero$, so for any linear map
+on real spaces,
+a line throught the origin maps to a line through the origin.
+
+
+
+\section{The upper half circle}
+One of the defining properties of a linear map is that 
+$h(r\cdot\vec{v})=r\cdot h(\vec{v})$.
+This equation means that the action of $h$ on any line through the origin
+$\ell=\set{r\cdot \vec{v}\suchthat r\in\Re}$ is determined by the action
+of $h$ on any nonzero vector in that line.
+
+For instance we can describe the line~$y=2x$ in this way.
+\begin{equation*}
+  \set{r\cdot\colvec{1 \\ 2}\suchthat r\in\Re}
+\end{equation*}
+If $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
+\begin{equation*}
+  \rep{t}{\stdbasis_2,stdbasis_2}
+  =
+  \begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+\end{equation*}
+then here is the effect of $t$ on one vector in the line.
+\begin{equation*}
+  \colvec{1 \\ 2}\mapsunder{t}\colvec{7 \\ 10}
+\end{equation*}
+And here is the effect of $t$ on other members of the line.
+\begin{equation*}
+  \colvec{2 \\ 4}\mapsunder{t}\colvec{14 \\ 20}
+  \qquad
+  \colvec{-3 \\ -6}\mapsunder{t}\colvec{-21 \\ -30}
+  \qquad
+  \colvec{r \\ 2r}\mapsunder{t}\colvec{7r \\ 10r}
+\end{equation*}
+So $t$'s action on the entire line is uniform.
+
+This means that one way to describe a transformation's action is to pick 
+one nonzero element from each line through the origin and describe where
+the transformation maps those elements.
+An easy way to select one nonzero element from each line through the
+origin is to take the upper half circle.
+\begin{equation*}
+  U=\set{\colvec{x \\ y}
+         \suchthat 
+         \text{$x=\cos(t)$, $y=\sin(t)$, $0\leq t<\pi$}}
+  \qquad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action10.png}}  
+\end{equation*}
+As with the unit square that began this chapter we produce this 
+graph by using a routine that draws the effect of an arbitrary 
+matrix on the circle, and giving that routine the identity matrix. 
+(As earlier, we will use the colors to track the directionality in a set of
+before and after pictures.)
+\begin{sageoutput}
+load "plot_action.sage"
+p = plot_circle_action(1,0,0,1)  # identity matrix
+p.set_axes_range(-1.5, 1.5, -0.5, 1.5) 
+p.save("sageoutput/plot_action10.png")
+\end{sageoutput}
+
+Using this visualization approach, here 
+is the transformation doubles the $x$~components of all vectors. 
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -1, 2) 
+q.save("sageoutput/plot_action11.png")
+p = plot_circle_action(2,0,0,1) 
+p.set_axes_range(-2, 2, -1, 2) 
+p.save("sageoutput/plot_action11a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action11.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 2 &0 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action11a.png}}
+\end{equation*}
+And here is the
+transformation that triples the $y$~components and multiplies 
+$x$~components by $-1$. 
+Note that it changes the orientation.
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -4, 4) 
+q.save("sageoutput/plot_action12.png")
+p = plot_circle_action(-1,0,0,3) 
+p.set_axes_range(-2, 2, -4, 4) 
+p.save("sageoutput/plot_action12a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action12.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} -1 &0 \\ 0 &3 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action12a.png}}
+\end{equation*}
+
+Here is the first skew
+transformation. 
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -3, 3) 
+q.save("sageoutput/plot_action13.png")
+p = plot_circle_action(1,0,2,1) 
+p.set_axes_range(-2, 2, -3, 3) 
+p.save("sageoutput/plot_action13a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action13.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action13a.png}}
+\end{equation*}
+\noindent Here is the second skew
+transformation. 
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-3, 3, -2, 2) 
+q.save("sageoutput/plot_action14.png")
+p = plot_circle_action(1,3,0,1) 
+p.set_axes_range(-3, 3, -2, 2) 
+p.save("sageoutput/plot_action14a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action14.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &3 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action14a.png}}
+\end{equation*}
+
+And here is the generic map.
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -4, 6) 
+q.save("sageoutput/plot_action15.png")
+p = plot_circle_action(1,2,3,4) 
+p.set_axes_range(-2, 2, -4, 6) 
+p.save("sageoutput/plot_action15a.png")
+\end{sageoutput}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action15.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &3 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{sageoutput/plot_action15a.png}}
+\end{equation*}
+
+
+
+\section{Circles map to ellipses}
+These circles maps to ellipses.
+In general, ellipses map to ellipses, so we have seen the special case
+of circles.
+The argument is here.
+Consider a vector 
+\begin{equation*}
+  \vec{v}=\colvec{x \\ y}
+\end{equation*}
+that lies on an ellipse.
+We can parametrize to get $x(t)=m\cos(t)$, $y(t)=n\sin(t)$ with 
+$0\leq t< 2\pi$.
+
+
+
+
+
+\section{Source of plot\_action.sage}
+\lstinputlisting{plot_action.sage}
+
+\endinput
+
+
+TODO:
