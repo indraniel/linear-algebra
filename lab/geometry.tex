@@ -79,6 +79,8 @@ t_ell.save("sageoutput/plot_action0a.png", fontsize=7)
 (The limits on the parameter~$s$ of $10$ and~$-10$ are arbitrary, just
 chosen to be large enough that the line segment covers the entire 
 domain and codomain intervals shown, from $-4$ to~$4$.)
+For example, the vector that ends at $(2,0)$ is rotated to the vector
+that ends at $(\sqrt{3},1)$.
 
 
 
@@ -599,7 +601,7 @@ p.save("sageoutput/plot_action20a.png")
   \quad\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 3 &1 \end{smallmatrix}\big )}\quad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action20a.png}}
 \end{equation*}
-\noindent We expand it according to the above factorization 
+\noindent We can expand it using the above factorization 
 \begin{equation*}
   \rowvec{x &y}
   \begin{mat}
@@ -616,6 +618,11 @@ p.save("sageoutput/plot_action20a.png")
   \end{mat}  
 \end{equation*}
 and look at the effect of the three component matrices.
+We will do this first by looking at the effect of the three transformations
+$L$, $D$, and~$U$, separately.
+After that we will look at the cumulative effect: that of~$L$, then~$LD$, 
+then~$LDU$.
+
 The first matrix is a skew parallel to the $x$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
@@ -664,12 +671,65 @@ p.save("sageoutput/plot_action23a.png")
   \vcenteredhbox{\includegraphics{sageoutput/plot_action23a.png}}
 \end{equation*}
   
-
 Note that the lower-triangular and upper-triangular matrices do not
 change the orientation.
 So, absent any row swaps, 
 any orientation changing happens when one of the diagonal entries is 
-negative, 
+negative.
+(\textit{Comment.}
+This matrix does not require any row swaps.
+However, if a matrix does require row swaps then the situation is 
+more subtle.
+Each row swap toggles the orientation, from counterclockwise to clockwise or
+from clockwise to counterclockwise.
+Thus
+if the matrix requires an odd number of swaps then the orientation changes,
+but with an even number of swaps the orientation stays the same.)
+
+Now for the cumulative effect.
+For example, the cuulative effect of the maps on the 
+unit square's upper right corner is here.
+\begin{equation*}
+  \colvec{1 \\ 1}
+  \mapsunder{L}
+  \colvec{4 \\ 1}
+  \mapsunder{D}
+  \colvec{4 \\ -2}
+  \mapsunder{U}
+  \colvec{4 \\ 6}
+\end{equation*}
+
+\begin{sageoutput}[d,5,6;d,7,9;d,10,12;d,13,15;d,16,18]
+L = matrix(QQ, [[1, 0], [3, 1]])
+D = matrix(QQ, [[1, 0], [0, -2]])
+U = matrix(QQ, [[1, 2], [0, 1]])
+LD = L*D
+LDU = LD*U  
+load "plot_action.sage"
+p = plot_square_action(1,0,0,1) 
+p.set_axes_range(-4, 4, -2, 6) 
+p.save("sageoutput/plot_action24.png")
+p = plot_square_action(L[0][0], L[0][1], L[1][0], L[1][1]) 
+p.set_axes_range(-4, 4, -2, 6) 
+p.save("sageoutput/plot_action24a.png")
+p = plot_square_action(LD[0][0], LD[0][1], LD[1][0], LD[1][1]) 
+p.set_axes_range(-4, 4, -2, 6) 
+p.save("sageoutput/plot_action24b.png")
+p = plot_square_action(LDU[0][0], LDU[0][1], LDU[1][0], LDU[1][1]) 
+p.set_axes_range(-4, 4, -2, 6) 
+p.save("sageoutput/plot_action24c.png")
+\end{sageoutput}
+\begin{center}
+  \begin{tabular}{rcl}
+    \vcenteredhbox{\includegraphics{sageoutput/plot_action24.png}}
+    &$\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 3 &1 \end{smallmatrix}\big )}$
+    &\vcenteredhbox{\includegraphics{sageoutput/plot_action24a.png}}  \\
+    &$\mapsvia{\big (\begin{smallmatrix} 1 &0 \\ 0 &-2 \end{smallmatrix}\big )}$
+    &\vcenteredhbox{\includegraphics{sageoutput/plot_action24b.png}}  \\
+    &$\mapsvia{\big (\begin{smallmatrix} 1 &2 \\ 0 &1 \end{smallmatrix}\big )}$
+    &\vcenteredhbox{\includegraphics{sageoutput/plot_action24c.png}} 
+  \end{tabular} 
+\end{center}
 
 
 

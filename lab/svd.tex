@@ -1,35 +1,21 @@
 \chapter{Singular Value Decomposition}
 
-
-Recall from the Geometry chapter that under a linear
-map $\map{h}{\Re^d}{\Re^c}$ lines map to lines.
-\begin{equation*}
-\set{\vec{v}=\vec{m}\cdot s +\vec{b}\suchthat s\in\Re}
-\quad\longrightarrow\quad
-\set{h(\vec{m})\cdot s+h(\vec{b})\suchthat s\in\Re}  
-\end{equation*}
-A special case of that happens when $\vec{b}=\zero$.
-Because a linear map sends the zero vector in the domain to the 
-zero vector in the codomain, $h(\vec{b})=\zero$, so for any linear map
-on real spaces,
-a line throught the origin maps to a line through the origin.
-
-
-
-\section{The upper half circle}
+Recall that a line through the origin in $\Re^n$ is 
+$\set{r\cdot \vec{v}\suchthat r\in\Re}$. 
 One of the defining properties of a linear map is that 
 $h(r\cdot\vec{v})=r\cdot h(\vec{v})$.
-This equation means that the action of $h$ on any line through the origin
-$\ell=\set{r\cdot \vec{v}\suchthat r\in\Re}$ is determined by the action
+So the action of $h$ on any 
+line through the origin
+is determined by the action
 of $h$ on any nonzero vector in that line.
 
-For instance we can describe the line~$y=2x$ in this way.
+For instance consider the line~$y=2x$ in the plane.
 \begin{equation*}
   \set{r\cdot\colvec{1 \\ 2}\suchthat r\in\Re}
 \end{equation*}
 If $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
 \begin{equation*}
-  \rep{t}{\stdbasis_2,stdbasis_2}
+  \rep{t}{\stdbasis_2,\stdbasis_2}
   =
   \begin{mat}
     1 &2 \\
@@ -48,13 +34,15 @@ And here is the effect of $t$ on other members of the line.
   \qquad
   \colvec{r \\ 2r}\mapsunder{t}\colvec{7r \\ 10r}
 \end{equation*}
-So $t$'s action on the entire line is uniform.
+The map $t$'s action on the line is uniform.
 
-This means that one way to describe a transformation's action is to pick 
+
+\section{Unit circle}
+The above means that one way to describe a transformation's action is to pick 
 one nonzero element from each line through the origin and describe where
 the transformation maps those elements.
 An easy way to select one nonzero element from each line through the
-origin is to take the upper half circle.
+origin is to take the upper half unit circle.
 \begin{equation*}
   U=\set{\colvec{x \\ y}
          \suchthat 
@@ -62,11 +50,11 @@ origin is to take the upper half circle.
   \qquad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action10.png}}  
 \end{equation*}
-As with the unit square that began this chapter we produce this 
+We produce the above 
 graph by using a routine that draws the effect of an arbitrary 
-matrix on the circle, and giving that routine the identity matrix. 
-(As earlier, we will use the colors to track the directionality in a set of
-before and after pictures.)
+matrix on the unit circle, and giving that routine the identity matrix. 
+The colors will keep track the directionality in the set of
+before and after pictures below.
 \begin{sageoutput}
 load "plot_action.sage"
 p = plot_circle_action(1,0,0,1)  # identity matrix
@@ -74,7 +62,7 @@ p.set_axes_range(-1.5, 1.5, -0.5, 1.5)
 p.save("sageoutput/plot_action10.png")
 \end{sageoutput}
 
-Using this visualization approach, here 
+Here 
 is the transformation doubles the $x$~components of all vectors. 
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
@@ -161,19 +149,80 @@ p.save("sageoutput/plot_action15a.png")
 
 
 \section{Circles map to ellipses}
-These circles maps to ellipses.
-In general, ellipses map to ellipses, so we have seen the special case
-of circles.
-The argument is here.
-Consider a vector 
-\begin{equation*}
-  \vec{v}=\colvec{x \\ y}
-\end{equation*}
-that lies on an ellipse.
-We can parametrize to get $x(t)=m\cos(t)$, $y(t)=n\sin(t)$ with 
-$0\leq t< 2\pi$.
+These pictures show the circles mapping to ellipses.
+Recall that an ellipse in $\Re^2$ has a \textit{major axis} axis, 
+the longer one, and a 
+\textit{minor axis}.\footnote{Ellipses have a couple of special cases.
+If the two axes have the same length then the ellipse is a circle.
+If an axis has length zero then the ellipse is a line segment.}
+We write $\sigma_1$ for half the length of the major axis, 
+the distance from the center to the furthest-away point on the ellipse.
+We write $\sigma_2$ for the length of the semi-minor axis.
+These two axes are orthogonal.
+\begin{sageoutput}
+plot.options['axes_pad'] = 0.05
+plot.options['fontsize'] = 7
+plot.options['dpi'] = 500
+plot.options['aspect_ratio'] = 1
+sigma_1=3
+sigma_2=1
+E = ellipse((0,0), sigma_1, sigma_2)
+E.save("sageoutput/svd01.png", figsize=3.5)
+\end{sageoutput}
+\begin{center}
+  \includegraphics{sageoutput/svd01.png}
+\end{center}
+
+% transformationellipses map to ellipses and we have seen the special case
+% of circles.)\footnote{The proof of this is harder than you may expect.
+% Assuming $Ax^2+Bxy+Cy^2+Dx+Ey+F=0$  and
+% substituting $a\hat{x}+c\hat{y}$ and~$b\hat{x}+d\hat{y}$ for $x$ and~$y$
+% easily gives that the inverse of a conic is a conic.
+% But assuming that the conic is an ellipse, so that the discriminant
+% $B^2-4AC$ is less than~$0$,
+% does not readily give that the discriminant of the inverse is less than~$0$.}
+
+In general, under any linear map $\map{t}{\Re^n}{\Re^m}$ the 
+unit sphere maps to a hyperellipse.
+This is a version of the \textit{Singular Value Decomposition} of
+matrices:
+for any linear map $\map{t}{\Re^m}{\Re^n}$ there are bases
+$B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_m}$ for the domain and
+$D=\sequence{\vec{\delta}_1,\ldots,\vec{\delta}_n}$ for the codomain
+such that $t(\vec{\beta}_i)=\sigma_i\vec{\delta}_i$.
+
+Here is the example of the generic $\nbyn{2}$~matrix.
+\begin{sageoutput}
+plot.options['axes_pad'] = 0.05
+plot.options['fontsize'] = 7
+plot.options['dpi'] = 500
+plot.options['aspect_ratio'] = 1
+M = matrix(RDF, [[1, 2], [3, 4]])
+M.SVD()
+beta_1 = vector(RR, [-0.404553584834, -0.914514295677])
+beta_2 = vector(RR, [-0.914514295677, 0.404553584834])
+delta_1 = vector(RR, [-0.576048436766, -0.81741556047])
+delta_2 = vector(RR, [0.81741556047, -0.576048436766])
+M*beta_1
+M*beta_2
+C = circle((0,0), 1)
+P = C + plot(beta_1) + plot(beta_2)
+P.save("sageoutput/svd02a.png", figsize=2)
+Q = C + plot(M*beta_1,color='red') + plot(delta_1) 
+Q = Q + plot(M*beta_2,color='red') + plot(delta_2)
+Q.save("sageoutput/svd02b.png", figsize=4.5)
+\end{sageoutput}
+\begin{center}
+  \vcenteredhbox{\includegraphics{sageoutput/svd02a.png}}
+  \qquad
+  \vcenteredhbox{\includegraphics{sageoutput/svd02b.png}}
+\end{center}
 
 
+
+\begin{center}
+  \includegraphics{asy/ellipsoid.pdf}
+\end{center}
 
 
 
