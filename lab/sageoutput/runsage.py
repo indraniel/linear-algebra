@@ -21,7 +21,7 @@ SAGE_RESULT_EXTENSION = 'result'
 ERROR_EXTENSION = 'err'
 RETURN_CODE_EXTENSION = 'rc'
 
-DEBUG = False
+DEBUG = True
 
 class RunsageError(Exception):
     def __init__(self, msg):
@@ -77,6 +77,8 @@ def diff(outname):
 
 # ======= execute routines ==============
 SAGE_PROMPT = 'sage: '
+SAGE_CONTINUE = '....: '
+SAGE_CONTINUE_INITIAL = '....:    '
 SAGE_ERROR = '------------------------------------------------------------'
 def feed_lines(lines,fn_in):
     """Feed the lines as commands to a Sage session
@@ -85,26 +87,34 @@ def feed_lines(lines,fn_in):
     """
     r = []  # the responses
     child = pexpect.spawn(SAGE_CALL)
-    child.expect(SAGE_PROMPT)
-    for line in lines:
+    child.expect(SAGE_PROMPT, timeout=120)
+    for i, line in enumerate(lines):
         line = line.rstrip("\n")
-        if not(line):
+        if (not(line) and (i+1 >= len(lines))):  # drop trailing line
             continue
         if DEBUG:
             print "line is",line
         if child.after:
             r.append(child.after.rstrip("\n"))
         child.sendline(line)
-        dex = child.expect([SAGE_ERROR,SAGE_PROMPT])
+        dex = child.expect([SAGE_ERROR,SAGE_CONTINUE_INITIAL,SAGE_PROMPT,SAGE_CONTINUE])
         if (dex == 0):
             print "ERROR running sage from file",fn_in
             print "context:\n",child.before
             sys.exit(10)
         elif (dex == 1):
+            try:
+                r.append(child.before[3:])
+            except:
+                r.append(child.before)
+            if DEBUG:
+                print "    initial: child.before is ", child.before
+                print "    child.after is ", child.after
+        else:
             r.append(child.before)
-            # if DEBUG:
-            #     print "child.before is ", child.before
-            #     print "child.after is ", child.after
+            if DEBUG:
+                print "    continuing: child.before is ", child.before
+                print "    child.after is ", child.after
     child.sendline('exit')
     r[-1] = r[-1].rstrip("\n")  
     return r
