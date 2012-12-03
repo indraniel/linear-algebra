@@ -21,7 +21,7 @@ SAGE_RESULT_EXTENSION = 'result'
 ERROR_EXTENSION = 'err'
 RETURN_CODE_EXTENSION = 'rc'
 
-DEBUG = True
+DEBUG = False
 
 class RunsageError(Exception):
     def __init__(self, msg):
@@ -78,7 +78,7 @@ def diff(outname):
 # ======= execute routines ==============
 SAGE_PROMPT = 'sage: '
 SAGE_CONTINUE = '....: '
-SAGE_CONTINUE_INITIAL = '....:    '
+# SAGE_CONTINUE_INITIAL = '....:    '
 SAGE_ERROR = '------------------------------------------------------------'
 def feed_lines(lines,fn_in):
     """Feed the lines as commands to a Sage session
@@ -97,19 +97,11 @@ def feed_lines(lines,fn_in):
         if child.after:
             r.append(child.after.rstrip("\n"))
         child.sendline(line)
-        dex = child.expect([SAGE_ERROR,SAGE_CONTINUE_INITIAL,SAGE_PROMPT,SAGE_CONTINUE])
+        dex = child.expect([SAGE_ERROR,SAGE_PROMPT,SAGE_CONTINUE])
         if (dex == 0):
             print "ERROR running sage from file",fn_in
             print "context:\n",child.before
             sys.exit(10)
-        elif (dex == 1):
-            try:
-                r.append(child.before[3:])
-            except:
-                r.append(child.before)
-            if DEBUG:
-                print "    initial: child.before is ", child.before
-                print "    child.after is ", child.after
         else:
             r.append(child.before)
             if DEBUG:

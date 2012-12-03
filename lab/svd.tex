@@ -373,16 +373,16 @@ U
 Sigma
 V  
 \end{sageoutput}
-The number of singular values is the rank of the matrix.
-Here \Sage{} gets a $\sigma_2$ that is not quite zero because of numerical 
-issues. 
-\begin{sageoutput}
-M = matrix(RDF, [[0, 1, 2], [0, 2, 4]])
-U,Sigma,V = M.SVD()
-U
-Sigma
-V  
-\end{sageoutput}
+% The number of singular values is the rank of the matrix.
+% Here \Sage{} gets a $\sigma_2$ that is not quite zero because of numerical 
+% issues. 
+% \begin{sageoutput}
+% M = matrix(RDF, [[0, 1, 2], [0, 2, 4]])
+% U,Sigma,V = M.SVD()
+% U
+% Sigma
+% V  
+% \end{sageoutput}
 
 The product $U\Sigma\trans{V}$ simplifies.
 To see how,
@@ -457,8 +457,8 @@ $\trans{\vec{v}}_2$.
   \end{mat}
   \tag{$*{*}*$}
 \end{align*}
-We'll look at the first term.
-Right multiplication by the $1,1$~unit matrix picks out the first column of
+In the first term
+right multiplication by the $1,1$~unit matrix picks out the first column of
 $U$ and left multiplication by the $1,1$~unit matrix picks out first row of
 $V$ so those are the only parts that remain after the product.
 In short, we get this.
@@ -482,7 +482,7 @@ In short, we get this.
   \end{mat}
   =\vec{u}_1\trans{\vec{v}}_1
 \end{equation*}
-In this way equation~($*{*}*$) simplifies to
+Thus, equation~($*{*}*$) simplifies to
 $U\Sigma \trans{V}=\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1
    +\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2$.
 Cases other than~$\nbyn{2}$ simplify in the same way.
@@ -496,8 +496,24 @@ $M=\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1
    +\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2
    +\cdots$
 where the vectors have unit size and the $\sigma_i$'s decrease in size.
-So if we have data as a matrix then we could hope to compress it
+
+Suppose that the matrix is $\nbyn{n}$.
+If we need to store it or transmit it then we need to work with 
+$n^2$ real numbers.
+For instance, if $n=500$ then we have $50^2=250\,000$~reals.
+If we instead express the matrix as a sum 
+then each term requires 
+$n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
+more real for $\sigma_i$.
+So saving all the terms would require $500*(2*500+1)=500\,500$~reals,
+which is not a savings.
+But, if we store only some of the terms, say the first $50$ of them then
+it would be a savings:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
+$500^2$~size of the full matrix.
+Thus, if we have data as a matrix then we could hope to compress it
 with that formula by dropping terms with small $\sigma$'s.  
+The question is whether we lose too much of the the information by only 
+retaining the information associated with $10\%$ of the singular values.
 
 We will illustrate with image compression.
 Meet Lenna.
@@ -509,149 +525,111 @@ This top third of a pinup is a standard test image
 
 We will use the Python Image Library for help in reading the figure, 
 getting the color value at each pixel, etc.
-This is a detour from Linear Algebra but in the image operations in 
-the code below are clear to read.
-\begin{sageoutput}
-import Image
-lena_img = Image.open("Lenna.png")
-lena_img = lena_img.convert("RGB")
-lena_img_rows, lena_img_cols = lena_img.size
-\end{sageoutput}
-We now have the image as a $\nbyn{512}$ array of pixels.
-Each pixel is a triple 
+The code is in a function that is listed at the end of this chapter,
+\inlinecode{img_squeeze}.
+It takes three arguments, the names of the input and output functions, and
+a real number between $0$ and $1$ which determines the percentage 
+of the singular values to include in the sum before the cutoff.
+
+This function takes the input data into a format where each
+pixel is a triple 
 $(\text{red}, \text{green},\text{blue})$ of integers that range from 
 $0$ to~$255$.
-Here we get the RGB triple for the pixel at location~$x=100$ and~$y=50$,
-counting from the upper left of the picture and starting at $x=0$, 
-$y=0$. 
-\begin{sageoutput}[d,0,4]
-import Image
-lena_img = Image.open("Lenna.png")
-lena_img = lena_img.convert("RGB")
-lena_img_rows, lena_img_cols = lena_img.size
-lena_img.getpixel((int(100), int(50)))
-\end{sageoutput}
-\noindent (The \inlinecode{int} function is a 
-technicality: the Image module's \inlinecode{getpixel} function 
-expects that the two numbers are Python integers, not a \Sage{}
-integers.)
-
-To use the \inlinecode{SVD} function we need \Sage{} matrices.
-\Sage{} matrices are not mutable so we cannot build them up an entry at a time.
-Instead we fetch the pixel color data into  
+It uses those numbers to build 
 three Python arrays \inlinecode{rd}, \inlinecode{gr},
-and \inlinecode{bl}.
-Then we put that data as a whole 
-into three \Sage{} matrices,\inlinecode{RD},
-\inlinecode{GR} and~\inlinecode{BL}.
-\begin{sageoutput}[d,0,4]
-import Image
-lena_img = Image.open("Lenna.png")
-lena_img = lena_img.convert("RGB")
-lena_img_rows, lena_img_cols = lena_img.size
-rd, gr, bl = [], [], []
-for row in range(lena_img_rows):
-    rd.append([])
-    gr.append([])
-    bl.append([])
-    for col in range(lena_img_cols):
-        r, g, b = lena_img.getpixel((int(row),int(col)))
-        rd[row].append(r)
-        gr[row].append(g)
-        bl[row].append(b)
+and \inlinecode{bl}, which then initialize 
+three \Sage{} matrices \inlinecode{RD},
+\inlinecode{GR}, and~\inlinecode{BL}.
 
-RD, GR, BL = matrix(RDF, rd), matrix(RDF, gr), matrix(RDF, bl)
-\end{sageoutput}
-
-Now we take the Singular Value Decomposition of the three matrices.
+The next step finds the Singular Value Decomposition of those three.
 Just out of curiosity, we have a peek at the eight largest singular
-values in the red matrix, and the eight smallest.
-\begin{sageoutput}[d,0,16]
-import Image
-lena_img = Image.open("Lenna.png")
-lena_img = lena_img.convert("RGB")
-lena_img_rows, lena_img_cols = lena_img.size
-rd, gr, bl = [], [], []
-for row in range(lena_img_rows):
-    rd.append([])
-    gr.append([])
-    bl.append([])
-    for col in range(lena_img_cols):
-        r, g, b = lena_img.getpixel((int(row),int(col)))
-        rd[row].append(r)
-        gr[row].append(g)
-        bl[row].append(b)
-
-RD, GR, BL = matrix(RDF, rd), matrix(RDF, gr), matrix(RDF, bl)
-U_RD,Sigma_RD,V_RD = RD.SVD()
-U_GR,Sigma_GR,V_GR = GR.SVD()
-U_BL,Sigma_BL,V_BL = BL.SVD()
-for i in range(8):
-    print "sigma_GR",i,"=",Sigma_GR[i][i]
-
-for i in range(Sigma_GR.nrows()-8,Sigma_GR.nrows()):
-    print "sigma_GR",i,"=",Sigma_GR[i][i]
-
-\end{sageoutput}
+values in the red matrix, the singular value where we make the cutoff,
+and the eight smallest.
+\begin{lstlisting}
+sigma_RD 0 = 93233.7882139
+sigma_RD 1 = 11193.1186308
+sigma_RD 2 = 8660.12549856
+sigma_RD 3 = 7054.38662024
+sigma_RD 4 = 5916.89456484
+sigma_RD 5 = 5742.14618029
+sigma_RD 6 = 4125.16604075
+sigma_RD 7 = 3879.15303685
+  :
+sigma_RD 51 = 606.389279688
+  :
+sigma_RD 504 = 0.547288023466
+sigma_RD 505 = 0.470266870056
+sigma_RD 506 = 0.1988515109
+sigma_RD 507 = 1.02472345283e-11
+sigma_RD 508 = 1.02472345283e-11
+sigma_RD 509 = 1.02472345283e-11
+sigma_RD 510 = 1.02472345283e-11
+sigma_RD 511 = 2.32533986491e-12  
+\end{lstlisting}
 The large singular values are much larger than the small singular values,
-even setting aside those singular values that are zero except for numberical
-issues.
+even setting aside the ones at the end
+that are zero except for numerical issues.
 
-
-Finally, for each matrix we will compute 
+Finally, for each matrix we compute the sum
 $\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1+\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2
-   +\cdots$.
-We have set the cutoff point at the fiftieth singular value, just because it
-is close to ten percent of the total.
+   +\cdots$
+up through some cutoff index.\footnote{The code asks for the transpose of the
+\protect\inlinecode{U_RD.column(i)}, etc., which may seem to be a mistake.
+Remember that \protect\Sage{} favors rows for vectors, so this is how we
+make the $\vec{u}$ vector a column, while $\vec{v}$ is already a row.
+Because of this operation on the vector, the first time you run this
+code in a \protect\Sage{} session you may get a depreciation warning.}
 
-\begin{sageoutput}[d,0,19]
-import Image
-lena_img = Image.open("Lenna.png")
-lena_img = lena_img.convert("RGB")
-lena_img_rows, lena_img_cols = lena_img.size
-rd, gr, bl = [], [], []
-for row in range(lena_img_rows):
-    rd.append([])
-    gr.append([])
-    bl.append([])
-    for col in range(lena_img_cols):
-        r, g, b = lena_img.getpixel((int(row),int(col)))
-        rd[row].append(r)
-        gr[row].append(g)
-        bl[row].append(b)
+We want to see how badly the image degrades for various cutoffs.
+The tradeoff is that each term costs about $2\cdot 512$ real numbers to store
+or transmit and we want to substantially 
+beat the original image's $512\cdot 512$.
+Thus we want to give the function a parameter of a good bit 
+less than $50\%$.
 
-RD, GR, BL = matrix(RDF, rd), matrix(RDF, gr), matrix(RDF, bl)
-U_RD,Sigma_RD,V_RD = RD.SVD()
-U_GR,Sigma_GR,V_GR = GR.SVD()
-U_BL,Sigma_BL,V_BL = BL.SVD()
-a=[]
-for i in range(lena_img_rows): #
-    a.append([])
-    for j in range(lena_img_cols):
-        a[i].append(0)
+The code below sets it to $10\%$.
+This image is $\nbyn{512}$  so that will sum the terms associated
+with the first $51$ singular 
+values.\footnote{The function takes a very long time to run, in part because
+the code is intended to be simple rather than fast.
+Consequently, in the function source there are some status lines that
+help convince a person executing the code that it is still working; here
+that busy-work output is omitted.}  
+\begin{lstlisting}
+sage: load "img_squeeze.sage"                                 
+sage: img_squeeze("Lenna.png", "Lena_squeezed.png", 0.10)
+\end{lstlisting}
 
-A_RD, A_GR, A_BL = matrix(RDF,a), matrix(RDF,a), matrix(RDF,a)
-for i in range(50): #
-    sigma_i = Sigma_RD[i][i]
-    u_i = matrix(RDF, U_RD.column(i).transpose())
-    v_i = matrix(RDF, V_RD.column(i))
-    A_RD = copy(A_RD)+sigma_i*u_i*v_i
-    sigma_i = Sigma_GR[i][i]
-    u_i = matrix(RDF, U_GR.column(i).transpose())
-    v_i = matrix(RDF, V_GR.column(i))
-    A_GR = copy(A_GR)+sigma_i*u_i*v_i
-    sigma_i = Sigma_BL[i][i]
-    u_i = matrix(RDF, U_BL.column(i).transpose())
-    v_i = matrix(RDF, V_BL.column(i))
-    A_BL = copy(A_BL)+sigma_i*u_i*v_i
-\end{sageoutput}
- 
+Below is the squeezed image, with the contributions of
+$10\%$ of the singular values.
+The image quality is less than the 
+original.
+The colors are not as good, the edges are not sharp, and there are 
+a few artifacts, including a horizontal line across the top of 
+Lenna's forehead and another halfway up her hat.
+But certainly the image is entirely recognizable.
+Again, the advantage is that this image takes only $20\%$ of the storage
+or transmission requirements.
+
+Experimenting with the percentage value shows that setting
+the parameter to $20\%$ is enough to make the output image hard to tell
+from the original.
+
+\begin{center}
+  \includegraphics{Lena_squeezed.png}
+\end{center}
+
 
 
 
 
 \section{Source of plot\_action.sage}
 \lstinputlisting{plot_action.sage}
+
+\section{Source of img\_squeeze.sage}
+\lstinputlisting{img_squeeze.sage}
+
+
 
 \endinput
 
