@@ -505,9 +505,9 @@ If we instead express the matrix as a sum
 then each term requires 
 $n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
 more real for $\sigma_i$.
-So saving all the terms would require $500*(2*500+1)=500\,500$~reals,
+So keeping all the terms would require $500*(2*500+1)=500\,500$~reals,
 which is not a savings.
-But, if we store only some of the terms, say the first $50$ of them then
+But if we store only some of the terms, say the first $50$ of them, then
 it would be a savings:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
 $500^2$~size of the full matrix.
 Thus, if we have data as a matrix then we could hope to compress it
@@ -520,9 +520,129 @@ Meet Lenna.
 This top third of a pinup is a standard test image
 \cite{wiki:Lenna}.
 \begin{center}
-  \includegraphics{Lenna.png} % from http://en.wikipedia.org/wiki/File:Lenna.png
+  \includegraphics[width=.95\textwidth]{Lenna.png} % from http://en.wikipedia.org/wiki/File:Lenna.png
 \end{center}
 
+The code we will use is in the \inlinecode{img_squeeze} function 
+that is listed at the end of this chapter.
+in that code we have a peek at the eight largest singular
+values (in the red matrix):
+  $93233.7882139$, 
+  $11193.1186308$, 
+  $8660.12549856$, 
+  $7054.38662024$, 
+  $5916.89456484$, 
+  $5742.14618029$, 
+  $4125.16604075$, and
+  $3879.15303685$.
+The code also reports 
+the singular value where we make the cutoff $606.389279688$,
+and the eight smallest:
+  $0.547288023466$, 
+  $0.470266870056$, 
+  $0.1988515109$, 
+with five more that are so small they are essentially 
+zero.\footnote{These are four values of $1.02472345283\protect\times 10^{-11}$
+and one of $2.32533986491\protect\times 10^{-12}$.}
+% \begin{lstlisting}
+% sigma_RD 0 = 93233.7882139
+% sigma_RD 1 = 11193.1186308
+% sigma_RD 2 = 8660.12549856
+% sigma_RD 3 = 7054.38662024
+% sigma_RD 4 = 5916.89456484
+% sigma_RD 5 = 5742.14618029
+% sigma_RD 6 = 4125.16604075
+% sigma_RD 7 = 3879.15303685
+%   :
+% sigma_RD 51 = 606.389279688
+%   :
+% sigma_RD 504 = 0.547288023466
+% sigma_RD 505 = 0.470266870056
+% sigma_RD 506 = 0.1988515109
+% sigma_RD 507 = 1.02472345283e-11
+% sigma_RD 508 = 1.02472345283e-11
+% sigma_RD 509 = 1.02472345283e-11
+% sigma_RD 510 = 1.02472345283e-11
+% sigma_RD 511 = 2.32533986491e-12  
+% \end{lstlisting}
+The large singular values are much larger than the small singular values,
+even setting aside the ones at the end
+that are zero but for numerical issues.
+
+We want to see how badly the image degrades for various cutoffs.
+The code below sets it to $10\%$.
+This image is $\nbyn{512}$  so that will sum the terms associated
+with the first $51$ singular 
+values.
+\begin{lstlisting}
+sage: load "img_squeeze.sage"                                 
+sage: img_squeeze("Lenna.png", "Lena_squeezed.png", 0.10)
+\end{lstlisting}
+Below is the squeezed image.
+\begin{center}
+  \includegraphics[width=.95\textwidth]{Lena_squeezed.png}
+\end{center}
+It definitely shows loss;
+its image quality is less than the original.
+The colors are not as good, the edges are not sharp, and there are 
+a few artifacts, including a horizontal line across the top of 
+Lenna's forehead and another halfway up her hat.
+But certainly the image is entirely recognizable.
+Its advantage is that it has only $20\%$ of the storage
+and transmission requirements of the original image.
+
+Where the image is $\nbyn{n}$, every additional term adds to the
+storage and transmission requirements by about $2n$ reals.
+The original image requires $n^2$ reals we want to choose percentage values 
+less than $0.50$.
+On the other hand, higher values give better fidelity.
+So selecting an optimal percentage parameter is an engineering decision
+of making the tradoff.
+ 
+Experimenting with percentage value shows that setting
+the parameter to $20\%$ is enough to make the output image hard to tell
+from the original.
+For a final contrast, below is the picture of Suzy from this manual's cover, 
+on the left 
+as the camera took it and on the right squeezed with a cutoff of $0.20$.
+\begin{center}
+  \vcenteredhbox{\includegraphics[width=.4\textwidth]{suzy_cover.png}}
+  \quad
+  \vcenteredhbox{\includegraphics[width=.4\textwidth]{suzy_cover_squeezed.png}}
+\end{center}
+
+
+
+\section{Source of plot\_action.sage}
+
+The \inlinecode{plot_circle_action}
+routine that we call above takes the four entries of the $\nbyn{2}$
+matrix and returns a list of graphics.
+Other parameters are the number of colors, and a flag giving whether
+to plot a full circle or whether to plot just the top half circle (this
+is the default).
+
+This routine determines the list of colors and 
+calls a helper \inlinecode{color_circle_list}, 
+given below, which returns a list of graphics.
+Finally, this routine plots those graphics.
+\lstinputlisting[firstline=37,lastline=49]{plot_action.sage}
+
+The helper does the heavy lifting.
+It produces a parametrized curve $(x(t),y(t))$, and uses \Sage's
+\inlinecode{parametric_plot} function to get the resulting graphic.
+\lstinputlisting[firstline=4,lastline=35]{plot_action.sage}
+If this routine is plotting the upper half circle then it adds a
+small empty circle at the end to show that the image of $(-1,0)$
+is not part of the graph.
+
+The global variable \inlinecode{CIRCLE_THICKNESS} sets the thickness of 
+the plotted curve, in points (a printer's unit, here $1/72$~inch).
+Similarly \inlinecode{DOT_SIZE} sets the size of the small empty circle.
+
+
+
+\section{Source of img\_squeeze.sage}
 We will use the Python Image Library for help in reading the figure, 
 getting the color value at each pixel, etc.
 The code is in a function that is listed at the end of this chapter,
@@ -530,6 +650,7 @@ The code is in a function that is listed at the end of this chapter,
 It takes three arguments, the names of the input and output functions, and
 a real number between $0$ and $1$ which determines the percentage 
 of the singular values to include in the sum before the cutoff.
+\lstinputlisting[firstline=1,lastline=8]{img_squeeze.sage}
 
 This function takes the input data into a format where each
 pixel is a triple 
@@ -540,95 +661,34 @@ three Python arrays \inlinecode{rd}, \inlinecode{gr},
 and \inlinecode{bl}, which then initialize 
 three \Sage{} matrices \inlinecode{RD},
 \inlinecode{GR}, and~\inlinecode{BL}.
+\lstinputlisting[firstline=8,lastline=23]{img_squeeze.sage}
 
 The next step finds the Singular Value Decomposition of those three.
 Just out of curiosity, we have a peek at the eight largest singular
 values in the red matrix, the singular value where we make the cutoff,
 and the eight smallest.
-\begin{lstlisting}
-sigma_RD 0 = 93233.7882139
-sigma_RD 1 = 11193.1186308
-sigma_RD 2 = 8660.12549856
-sigma_RD 3 = 7054.38662024
-sigma_RD 4 = 5916.89456484
-sigma_RD 5 = 5742.14618029
-sigma_RD 6 = 4125.16604075
-sigma_RD 7 = 3879.15303685
-  :
-sigma_RD 51 = 606.389279688
-  :
-sigma_RD 504 = 0.547288023466
-sigma_RD 505 = 0.470266870056
-sigma_RD 506 = 0.1988515109
-sigma_RD 507 = 1.02472345283e-11
-sigma_RD 508 = 1.02472345283e-11
-sigma_RD 509 = 1.02472345283e-11
-sigma_RD 510 = 1.02472345283e-11
-sigma_RD 511 = 2.32533986491e-12  
-\end{lstlisting}
-The large singular values are much larger than the small singular values,
-even setting aside the ones at the end
-that are zero except for numerical issues.
+\lstinputlisting[firstline=24,lastline=36]{img_squeeze.sage}
 
 Finally, for each matrix we compute the sum
 $\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1+\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2
    +\cdots$
-up through some cutoff index.\footnote{The code asks for the transpose of the
+up through some cutoff index.
+\lstinputlisting[firstline=37,lastline=56]{img_squeeze.sage}
+The code asks for the transpose of the
 \protect\inlinecode{U_RD.column(i)}, etc., which may seem to be a mistake.
 Remember that \protect\Sage{} favors rows for vectors, so this is how we
 make the $\vec{u}$ vector a column, while $\vec{v}$ is already a row.
 Because of this operation on the vector, the first time you run this
-code in a \protect\Sage{} session you may get a depreciation warning.}
+code in a \protect\Sage{} session you may get a depreciation warning.
 
-We want to see how badly the image degrades for various cutoffs.
-The tradeoff is that each term costs about $2\cdot 512$ real numbers to store
-or transmit and we want to substantially 
-beat the original image's $512\cdot 512$.
-Thus we want to give the function a parameter of a good bit 
-less than $50\%$.
-
-The code below sets it to $10\%$.
-This image is $\nbyn{512}$  so that will sum the terms associated
-with the first $51$ singular 
-values.\footnote{The function takes a very long time to run, in part because
+To finish, we put the data in the \path{.PNG} format and save it to 
+disk.\lstinputlisting[firstline=57,lastline=66]{img_squeeze.sage}
+This part of the routine function takes a very long time to run, in part because
 the code is intended to be simple rather than fast.
 Consequently, in the function source there are some status lines that
-help convince a person executing the code that it is still working; here
-that busy-work output is omitted.}  
-\begin{lstlisting}
-sage: load "img_squeeze.sage"                                 
-sage: img_squeeze("Lenna.png", "Lena_squeezed.png", 0.10)
-\end{lstlisting}
-
-Below is the squeezed image, with the contributions of
-$10\%$ of the singular values.
-The image quality is less than the 
-original.
-The colors are not as good, the edges are not sharp, and there are 
-a few artifacts, including a horizontal line across the top of 
-Lenna's forehead and another halfway up her hat.
-But certainly the image is entirely recognizable.
-Again, the advantage is that this image takes only $20\%$ of the storage
-or transmission requirements.
-
-Experimenting with the percentage value shows that setting
-the parameter to $20\%$ is enough to make the output image hard to tell
-from the original.
-
-\begin{center}
-  \includegraphics{Lena_squeezed.png}
-\end{center}
-
-
-
-
-
-\section{Source of plot\_action.sage}
-\lstinputlisting{plot_action.sage}
-
-\section{Source of img\_squeeze.sage}
-\lstinputlisting{img_squeeze.sage}
-
+help convince a person executing the code that it is still working; 
+those busy-work lines are left out of 
+some of the earlier output listings.
 
 
 \endinput

@@ -1,9 +1,9 @@
 # plot_action.sage
-# Show the action of a 2x2 matrix on the top half of a unit circle
+# 2012-Dec-04 JH
 
 DOT_SIZE = .02
 CIRCLE_THICKNESS = 2
-def color_circle_list(a, b, c, d, colors, full_circle = False):
+def color_circle_list(a, b, c, d, colors, full_circle=False):
     """Return list of graph instances for the action of a 2x2 matrix on 
     half of the unit circle.  That circle is broken into chunks each
     colored a different color.
@@ -19,13 +19,13 @@ def color_circle_list(a, b, c, d, colors, full_circle = False):
     t = var('t')
     n = len(colors)
     for i in range(n):
-    	color = colors[i]
+        color = colors[i]
         x(t) = a*cos(t)+b*sin(t)
         y(t) = c*cos(t)+d*sin(t)
         g = parametric_plot((x(t), y(t)), 
                             (t, p*i/n, p*(i+1)/n), 
                             color = color, thickness=CIRCLE_THICKNESS)
-    	r.append(g)
+        r.append(g)
         r.append(circle((x(p*i/n), y(p*i/n)), DOT_SIZE, color=color))
     if not(full_circle):    # show (x,y)=(-1,0) is omitted
         r.append(circle((x(pi), y(pi)), 2*DOT_SIZE, color='black', 
@@ -34,18 +34,16 @@ def color_circle_list(a, b, c, d, colors, full_circle = False):
                         fill = 'true'))
     return r
 
-def plot_circle_action(a, b, c, d, n = 12, full_circle = False, show_unit_circle = False):
+def plot_circle_action(a, b, c, d, n = 12, full_circle = False):
     """Show the action of the matrix with entries a, b, c, d on half
     of the unit circle, as the circle and the output curve, broken into 
     a number of colors.
      a, b, c, d  reals  Entries are upper left, ur, ll, lr.
      n = 12  positive integer  Number of colors.
+     full_circle=False  boolean  Show whole circle, or top half
     """
     colors = rainbow(n)
     G = Graphics()  # holds graph parts until they are to be shown
-    if show_unit_circle:
-        for f_part in color_circle_list(1,0,0,1,colors,full_circle):
-            G += f_part
     for g_part in color_circle_list(a,b,c,d,colors,full_circle):
         G += g_part
     return plot(G)    
