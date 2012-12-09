@@ -1,4 +1,5 @@
 \chapter{Singular Value Decomposition}
+\label{chap:SingularValueDecomposition}
 
 Recall that a line through the origin in $\Re^n$ is 
 $\set{r\cdot \vec{v}\suchthat r\in\Re}$. 
@@ -100,8 +101,7 @@ p.save("sageoutput/plot_action12a.png")
   \vcenteredhbox{\includegraphics{sageoutput/plot_action12a.png}}
 \end{equation*}
 
-Here is the first skew
-transformation. 
+Here is a skew transformation. 
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
@@ -116,7 +116,7 @@ p.save("sageoutput/plot_action13a.png")
   \quad\mapsunder{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
   \vcenteredhbox{\includegraphics{sageoutput/plot_action13a.png}}
 \end{equation*}
-\noindent Here is the second skew
+\noindent Here is a  second skew
 transformation. 
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
@@ -337,7 +337,7 @@ $\vec{\delta}_1$ to be $\vec{w}/\norm{\vec{w}}$.
 So consider~$Q$.
 First observe that there is a unique plane that touches the ellipsoid
 only at~$\vec{w}$ since if there were another $\hat{Q}$ then $t^{-1}(\hat{Q})$
-would be a second plane that only touches the sphere at~$\vec{v}$, which is
+would be a second plane that touches the sphere only at~$\vec{v}$, which is
 impossible.
 To see that $Q$ is perpendicular to~$\vec{w}$ consider a sphere
 centered at the origin whose radius is $\norm{\vec{w}}$.
@@ -491,7 +491,7 @@ Cases other than~$\nbyn{2}$ simplify in the same way.
 
 \section{Application: data compression}
 
-We now can write any matrix as a sum
+We can write any matrix as a sum
 $M=\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1
    +\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2
    +\cdots$
@@ -506,7 +506,7 @@ then each term requires
 $n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
 more real for $\sigma_i$.
 So keeping all the terms would require $500*(2*500+1)=500\,500$~reals,
-which is not a savings.
+which is twice the data of the original matrix.
 But if we store only some of the terms, say the first $50$ of them, then
 it would be a savings:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
 $500^2$~size of the full matrix.
@@ -515,7 +515,8 @@ with that formula by dropping terms with small $\sigma$'s.
 The question is whether we lose too much of the the information by only 
 retaining the information associated with $10\%$ of the singular values.
 
-We will illustrate with image compression.
+To ilustrate that we can succeed while retaining at least some aspects of data
+we will do image compression.
 Meet Lenna.
 This top third of a pinup is a standard test image
 \cite{wiki:Lenna}.
@@ -525,7 +526,7 @@ This top third of a pinup is a standard test image
 
 The code we will use is in the \inlinecode{img_squeeze} function 
 that is listed at the end of this chapter.
-in that code we have a peek at the eight largest singular
+In that code we have a peek at the eight largest singular
 values (in the red matrix):
   $93233.7882139$, 
   $11193.1186308$, 
@@ -542,8 +543,9 @@ and the eight smallest:
   $0.470266870056$, 
   $0.1988515109$, 
 with five more that are so small they are essentially 
-zero.\footnote{These are four values of $1.02472345283\protect\times 10^{-11}$
-and one of $2.32533986491\protect\times 10^{-12}$.}
+zero.\footnote{These are four values of 
+$1.024\,723\,452\,83\protect\times 10^{-11}$
+and one of $2.325\,339\,864\,91\protect\times 10^{-12}$.}
 % \begin{lstlisting}
 % sigma_RD 0 = 93233.7882139
 % sigma_RD 1 = 11193.1186308
@@ -588,16 +590,17 @@ The colors are not as good, the edges are not sharp, and there are
 a few artifacts, including a horizontal line across the top of 
 Lenna's forehead and another halfway up her hat.
 But certainly the image is entirely recognizable.
-Its advantage is that it has only $20\%$ of the storage
-and transmission requirements of the original image.
 
-Where the image is $\nbyn{n}$, every additional term adds to the
-storage and transmission requirements by about $2n$ reals.
-The original image requires $n^2$ reals we want to choose percentage values 
+Where the image is $\nbyn{n}$, every additional term in the summation
+adds to the storage and transmission requirements by about $2n$ reals.
+The original image requires $n^2$ reals so we want to choose percentage values 
 less than $0.50$.
 On the other hand, higher values give better fidelity.
 So selecting an optimal percentage parameter is an engineering decision
 of making the tradoff.
+The above image has the advantage is that it needs only $20\%$ of the storage
+and transmission requirements of the original image.
+% The quality may (or may not) be acceptable, depending on the application.
  
 Experimenting with percentage value shows that setting
 the parameter to $20\%$ is enough to make the output image hard to tell
@@ -645,26 +648,26 @@ Similarly \inlinecode{DOT_SIZE} sets the size of the small empty circle.
 \section{Source of img\_squeeze.sage}
 We will use the Python Image Library for help in reading the figure, 
 getting the color value at each pixel, etc.
-The code is in a function that is listed at the end of this chapter,
-\inlinecode{img_squeeze}.
-It takes three arguments, the names of the input and output functions, and
+The function
+\inlinecode{img_squeeze}
+takes three arguments, the names of the input and output functions, and
 a real number between $0$ and $1$ which determines the percentage 
 of the singular values to include in the sum before the cutoff.
 \lstinputlisting[firstline=1,lastline=8]{img_squeeze.sage}
 
-This function takes the input data into a format where each
+This function first brings the input data to a format where each
 pixel is a triple 
 $(\text{red}, \text{green},\text{blue})$ of integers that range from 
 $0$ to~$255$.
-It uses those numbers to build 
+It uses those numbers to gradually build 
 three Python arrays \inlinecode{rd}, \inlinecode{gr},
-and \inlinecode{bl}, which then initialize 
+and \inlinecode{bl}, which then initialize the 
 three \Sage{} matrices \inlinecode{RD},
 \inlinecode{GR}, and~\inlinecode{BL}.
-\lstinputlisting[firstline=8,lastline=23]{img_squeeze.sage}
+\lstinputlisting[firstline=9,lastline=23]{img_squeeze.sage}
 
 The next step finds the Singular Value Decomposition of those three.
-Just out of curiosity, we have a peek at the eight largest singular
+Out of curiosity, we have a peek at the eight largest singular
 values in the red matrix, the singular value where we make the cutoff,
 and the eight smallest.
 \lstinputlisting[firstline=24,lastline=36]{img_squeeze.sage}
@@ -672,7 +675,7 @@ and the eight smallest.
 Finally, for each matrix we compute the sum
 $\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1+\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2
    +\cdots$
-up through some cutoff index.
+up through the cutoff index.
 \lstinputlisting[firstline=37,lastline=56]{img_squeeze.sage}
 The code asks for the transpose of the
 \protect\inlinecode{U_RD.column(i)}, etc., which may seem to be a mistake.
@@ -684,7 +687,7 @@ code in a \protect\Sage{} session you may get a depreciation warning.
 To finish, we put the data in the \path{.PNG} format and save it to 
 disk.\lstinputlisting[firstline=57,lastline=66]{img_squeeze.sage}
 This part of the routine function takes a very long time to run, in part because
-the code is intended to be simple rather than fast.
+the code is intended to be easy to read rather than fast.
 Consequently, in the function source there are some status lines that
 help convince a person executing the code that it is still working; 
 those busy-work lines are left out of 
@@ -697,3 +700,5 @@ some of the earlier output listings.
 TODO:
 1) mention Sage matrices are not mutable in matrix introduction.
 Is mutable discussed in Intro?
+
+2) Need int() fcns?  copy() fcn?

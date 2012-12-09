@@ -78,7 +78,6 @@ def diff(outname):
 # ======= execute routines ==============
 SAGE_PROMPT = 'sage: '
 SAGE_CONTINUE = '....: '
-# SAGE_CONTINUE_INITIAL = '....:    '
 SAGE_ERROR = '------------------------------------------------------------'
 def feed_lines(lines,fn_in):
     """Feed the lines as commands to a Sage session
@@ -87,14 +86,18 @@ def feed_lines(lines,fn_in):
     """
     r = []  # the responses
     child = pexpect.spawn(SAGE_CALL)
+    if DEBUG:
+        child.logfile =  sys.stdout
     child.expect(SAGE_PROMPT, timeout=120)
     for i, line in enumerate(lines):
         line = line.rstrip("\n")
         if (not(line) and (i+1 >= len(lines))):  # drop trailing line
             continue
         if DEBUG:
-            print "line is",line
+            print "line is",pprint.pformat(line)
         if child.after:
+            if DEBUG:
+                print "appending child.after: ",pprint.pformat(child.after)
             r.append(child.after.rstrip("\n"))
         child.sendline(line)
         dex = child.expect([SAGE_ERROR,SAGE_PROMPT,SAGE_CONTINUE])
@@ -105,10 +108,10 @@ def feed_lines(lines,fn_in):
         else:
             r.append(child.before)
             if DEBUG:
-                print "    continuing: child.before is ", child.before
+                print "    continuing: child.before is ", pprint.pformat(child.before)
                 print "    child.after is ", child.after
     child.sendline('exit')
-    r[-1] = r[-1].rstrip("\n")  
+    r[-1] = r[-1].rstrip("\n")
     return r
 
 def run_sage_lines(outname):
@@ -121,6 +124,11 @@ def run_sage_lines(outname):
     f_in = _open_input(fn_in)
     sage_lines = f_in.readlines()
     f_in.close()
+    # Strip leading and trailing blank lines
+    if not(sage_lines[0].strip()):
+        sage_lines = sage_lines[1:]
+    if not(sage_lines[-1].strip()):
+        sage_lines = sage_lines[:-1]
     # Get the lines
     response_lines = feed_lines(sage_lines,fn_in)
     response = "".join(response_lines)
@@ -145,6 +153,8 @@ def edit_line(source,edit,fn):
     edit_ready = edit_ready.split(',')
     if DEBUG:
         print "edit_line: edit_ready is",edit_ready
+        print "source to edit is:"
+        pprint.pprint(r)
     if not(len(edit_ready)) >= 1:
         print usage("for edit command "+edit+" for Sage file "+fn)
         sys.exit(10)

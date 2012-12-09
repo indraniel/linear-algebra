@@ -63,5 +63,4 @@ def img_squeeze(fn_in, fn_out, percent):
                  int(A_GR[row][col]), 
                  int(A_BL[row][col]))
             img_squoze.putpixel((int(row), int(col)), p)
-    print "about to save: ",fn_out
     img_squoze.save(fn_out)
