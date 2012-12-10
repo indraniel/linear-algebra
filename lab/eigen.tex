@@ -43,14 +43,6 @@ half circle, at $(-1,0)$, by the
 same amount as it does the vector ending at $(1,0)$. 
 This is because a linear map has the same action on 
 all vectors that lie on the same line through the origin.
-% \begin{sageoutput}
-% v = vector(RR, [-1,0])
-% M = matrix(RR, [[2, 2], [0, 2]])
-% w = v*M
-% w.norm(), v.norm() 
-% angle = arccos(w*v/(w.norm()*v.norm())) 
-% angle 
-% \end{sageoutput}
 But intermediate vectors are not resized and rotated by the same
 amount.
 Here is the next of the twelve points on the half-circle.
@@ -99,6 +91,8 @@ We can see it on the graphic above labelled~($*$), where the green input
 vector lies on the $y$-axis and so does its green image.
 It is resized but it isn't rotated.
 
+
+
 \subsection{Generic matrix}
 We can do the same analysis for our usual generic $\nbyn{2}$~matrix.
 Here is its action on the unit circle.
@@ -126,9 +120,10 @@ ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', edgecolor='blue', ticks=ticks)
 p.save("sageoutput/plot_action113.png", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
-\begin{center}
+\begin{equation*}
   \vcenteredhbox{\includegraphics{sageoutput/plot_action113.png}}
-\end{center}
+  \tag{**}
+\end{equation*}
 This graph has two interesting points, where $y=0$ and where 
 $y=\pi$.
 In the second case
@@ -148,18 +143,41 @@ evs
 evs[0] 
 evs[1]
 \end{sageoutput}
-Explain the \inlinecode{RDF} and the \inlinecode{left}.
+\noindent
+(A matrix has the same eigenvalues whether we are taking multiplication 
+by vectors to come from the left $\vec{v}M$ or from the 
+right~$M\vec{v}$.  
+But the eigenvectors will be different. 
+The \Sage{} operation \inlinecode{eigenvectors_left} covers the 
+$\vec{v}M$ case and naturally \inlinecode{eigenvectors_right}
+covers the other.)
 
 The first information that \Sage{} gives, \inlinecode{evs[0]}, 
 is that the set of vectors with a basis consisting of the single unit
-vector with endpoint $(-0.909376709132, 0.415973557919)$ is an
-eigenspace associated with the eigenvalue $-0.372281323269$.
+vector with endpoint approximately $(-0.91, 0.42)$  is an
+eigenspace associated with the eigenvalue approximately $-0.37$.
 \Sage{} also finds with \inlinecode{evs[1]} that a second eigenspace
-has a basis consisting of the vector with endpoint
-$(-0.565767464969, -0.824564840132)$, associated with the
-eigenvalue~$5.37228132327$. 
+has a basis consisting of the vector with endpoint around
+$(-0.57, -0.82)$, associated with the
+eigenvalue about~$5.37$. 
 
-We can draw those two as before and after pictures.
+\Sage{} will tell us which of those vectors is which on the graph 
+labelled~($**$).
+\begin{sageoutput}
+M = matrix(RDF, [[1, 2], [3, 4]])
+evs = M.eigenvectors_left()
+v = vector(RDF, evs[0][1][0])
+angle_v = atan2(v[1], v[0]) 
+n(angle_v/pi) 
+\end{sageoutput}
+(Remember that the \inlinecode{n()} function gives the numerical value of
+the argument.)
+So the eigenspace listed first is the one associated with the right-hand
+of the two interesting points in ($**$), the vector that is turned by
+$\pi$.
+That fits with the fact that the eigenvalue is a negative number.
+
+\Sage{} can draw before and after pictures for the two eigenvectors.
 \begin{sageoutput}[d,0,3]
 load "plot_action.sage"  
 M = matrix(RDF, [[1, 2], [3, 4]])
@@ -167,8 +185,8 @@ evs = M.eigenvectors_left()
 p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red']) 
 p2 = plot_before_after_action(1,2,3,4, [evs[1][1][0]], ['blue']) 
 p = p1+p2
-p.set_axes_range(-4, 1, -4, 1) 
-p.save("sageoutput/plot_action114.png", figsize=3.5)
+p.set_axes_range(-4, 1, -4.5, 1) 
+p.save("sageoutput/plot_action114.png", figsize=3.25)
 \end{sageoutput}
 \noindent
 Each before vector is a unit vector, so it is easy to pick it from among the
@@ -179,27 +197,119 @@ The after vector is scaled from the before vector.
 \end{equation*}
 
 
-\subsection{Characteristic polynomial}
+% \subsection{Points}
+% Another natural picture to draw is the action of linear maps on 
+% some points.
+
+% We start with the action of the linear transformation $\map{t}{\Re^2}{\Re^2}$
+% represented with respect to the standard bases by our generic matrix with
+% entries $1$, $2$, $3$, and $4$.
+% \begin{sageoutput}
+% load "plot_action.sage"
+% plot.options['figsize']=4.5
+% g = point_grid(3, 3)
+% p = plot_point_action(1, 2, 3, 4, g)
+% p.save("sageoutput/plot_action110.png")  
+% \end{sageoutput}
+% \begin{center}
+%   \includegraphics{"sageoutput/plot_action110.png"}
+% \end{center}
+% This picture shows that the eigenspace associated with the eigenvector
+% having the largest absolute value is attractive.
+% This is the \textit{power method}:
+
+% \begin{sageoutput}
+% load "plot_action.sage"
+% plot.options['figsize']=4.5
+% g = point_grid(5, 5)
+% p = plot_point_action(2, 2, 0, 2, g)
+% p.save("sageoutput/plot_action111.png")  
+% \end{sageoutput}
+% \begin{center}
+%   \includegraphics{"sageoutput/plot_action111.png"}
+% \end{center}
 
 
 
-\subsection{Attraction}
-Another natural picture to draw is the action of linear maps on 
-some points.
 
-We start with the action of the linear transformation $\map{t}{\Re^2}{\Re^2}$
-represented with respect to the standard bases by the generic matrix with
-entries $1$, $2$, $3$, and $4$.
+\section{Polynomials}
+
+\Sage{} will find characteristic and minimal polynomials.
 \begin{sageoutput}
-load "plot_action.sage"
-plot.options['figsize']=4.5
-g = point_grid(3, 3)
-p = plot_point_action(1, 2, 3, 4, g)
-p.save("sageoutput/plot_action110.png")  
+M =  matrix(RDF, [[1, 2], [3, 4]]) 
+poly = M.charpoly()
+poly.factor()
+poly.roots()
 \end{sageoutput}
-\begin{center}
-  \includegraphics{"sageoutput/plot_action110.png"}
-\end{center}
+
+The characteristic polynomial and minimal polynomial differ only when 
+the characteristic polynomial has repeated roots.
+\begin{sageoutput}
+M =  matrix(RDF, [[2, 2, 3], [0, 4, -1], [0, 0, 2]]) 
+M.charpoly()
+M.minpoly()
+M.charpoly().factor()
+M.minpoly().factor()
+\end{sageoutput}
+\noindent
+Note here that \Sage{} has trouble there telling whether $2$ is a repeated 
+root.
+If we do an exact calculation using 
+rational numbers then we get the right answer.  
+\begin{sageoutput}
+M =  matrix(QQ, [[2, 2, 3], [0, 4, -1], [0, 0, 2]]) 
+M.charpoly()
+M.minpoly()
+M.charpoly().factor()
+M.minpoly().factor()
+\end{sageoutput}
+
+
+
+
+\section{Diagonalization and Jordan form}
+
+\Sage{} will tell us if two matrices are similar.
+\begin{sageoutput}
+S =  matrix(QQ, [[2, -3], [1, -1]]) 
+T =  matrix(QQ, [[0, -1], [1,  1]]) 
+S.is_similar(T)
+U =  matrix(QQ, [[1, 2], [3,  4]]) 
+S.is_similar(U)
+\end{sageoutput}
+\noindent
+% We can even get a transformation.
+% \begin{sageoutput}
+% S =  matrix(QQ, [[2, -3], [1, -1]]) 
+% T =  matrix(QQ, [[0, -1], [1,  1]]) 
+% S.is_similar(T, transformation=True)
+% \end{sageoutput}
+
+We can determine if a matrix is diagonalizable.
+\begin{sageoutput}
+M =  matrix(QQ, [[4, -2], [1, 1]])  
+M.is_diagonalizable()
+\end{sageoutput}
+\noindent
+To diagonalize the matrix put it in Jordan form.
+\begin{sageoutput}
+M =  matrix(QQ, [[2, -2, 2], [0, 1, 1], [-4, 8, 3]])  
+M.jordan_form()
+\end{sageoutput}
+\noindent \Sage{} will even furnish an appropriate transformation matrix.
+\begin{sageoutput}[d,0,1]
+M =  matrix(QQ, [[2, -2, 2], [0, 1, 1], [-4, 8, 3]])  
+JF, T = M.jordan_form(transformation=True)
+JF
+T
+T*JF*T^(-1)
+\end{sageoutput}
+
+We can find the Jordan form of any matrix.
+\begin{sageoutput}
+M =  matrix(QQ, [[2, -1], [1, 4]])  
+M.jordan_form()
+\end{sageoutput}
 
 
 
