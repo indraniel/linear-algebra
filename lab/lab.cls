@@ -105,6 +105,8 @@
 
 % Have the Sage output generated on the fly to guarantee accuracy
 \RequirePackage{sageoutput/sageoutput}
+% The same for python output 
+\RequirePackage{sageoutput/python}
 
 \RequirePackage{hyperref}
 \hypersetup{
