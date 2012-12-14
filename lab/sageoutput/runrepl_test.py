@@ -5,6 +5,7 @@
 import sys, os, re, pprint, argparse
 import unittest, runrepl
 
+
 class difftest(unittest.TestCase):
     """Test the diff routine
     """
@@ -200,7 +201,6 @@ class feed_linestest(unittest.TestCase):
                 self.fail("expected final blank line to be stripped")
 
 
-
 class internal_edit_linetest(unittest.TestCase):
     """Test the _edit_line routine
     """
@@ -214,12 +214,12 @@ class internal_edit_linetest(unittest.TestCase):
         """See if it works at all"""
         try:
             result = runrepl._edit_line(self.source,'d,0,1',self.fn_output)
-            print "result is", pprint.pformat(result)
+            # print "result is", pprint.pformat(result)
         except Exception, e:
             self.fail(str(e))
         try:
             result = runrepl._edit_line(self.source,'s,0,5,10',self.fn_output)
-            print "result is", pprint.pformat(result)
+            # print "result is", pprint.pformat(result)
         except Exception, e:
             self.fail(str(e))
 
@@ -249,7 +249,7 @@ class internal_edit_linetest(unittest.TestCase):
         self.failUnlessEqual(result[0][2],"xyz")
         # Each line is a single string, split not 0th line
         result = runrepl._edit_line(self.source,'s,1,5,10',self.fn_output)
-        print "result is ",pprint.pformat(result)
+        # print "result is ",pprint.pformat(result)
         self.failUnlessEqual(result[0],self.source[0])
         self.failUnlessEqual(result[2:],self.source[2:])
         self.failUnlessEqual(result[1][0],self.source[1][0][:5])
@@ -258,8 +258,97 @@ class internal_edit_linetest(unittest.TestCase):
         self.failUnlessRaises(runrepl.RunreplError,runrepl._edit_line,self.source,'s,5,10,15',self.fn_output)
 
 
+class edit_linestest(unittest.TestCase):
+    """Test the edit_lines routine
+    """
+    # source to edit
+    source = [['0123456789'], ['abcdef'], ['kkmm']]
+    # File names
+    fn_prefix = 'runrepl_test_testfile'
+    fn_output = fn_prefix+'.'+runrepl.UNEDITED_OUTPUT_EXTENSION
+
+    def testBasic(self):
+        """See if it works at all"""
+        try:
+            result = runrepl.edit_lines(self.source,['d,0,1'],self.fn_output)
+            # print "result is", pprint.pformat(result)
+        except Exception, e:
+            self.fail(str(e))
+        # More than one edit command
+        try:
+            result = runrepl.edit_lines(self.source,['d,0,1','s,1,5,10'],self.fn_output)
+            # print "result is", pprint.pformat(result)
+        except Exception, e:
+            self.fail(str(e))
+
+    def testResult(self):
+        """See if it returns the required result"""
+        # Delete a line
+        result = runrepl.edit_lines(self.source,['d,0,1'],self.fn_output)
+        expected = [elet[0] for elet in self.source[1:]]  # strip list
+        self.failUnlessEqual(result,expected)
+        # Split a line
+        result = runrepl.edit_lines(self.source,['s,0,5,10'],self.fn_output)
+        _first_line = self.source[0][0]
+        _new_first_line = "\n".join([_first_line[:5], " "*10+_first_line[5:]])
+        expected = [_new_first_line] + [elet[0] for elet in self.source[1:]]  
+        self.failUnlessEqual(result,expected)
+        # Split an already split line
+        source = self.source[:]
+        first_line = self.source[0][0]
+        new_first_line = [first_line[:6], " "*4+first_line[6:]]
+        source[0] = new_first_line
+        result = runrepl.edit_lines(source,['s,0,5,10'],self.fn_output)
+        # print "result is",pprint.pformat(result)
+        _new_first_line = [new_first_line[0][:5], " "*10+new_first_line[0][5:]] + new_first_line[1:]
+        expected = ["\n".join(_new_first_line)] + [elet[0] for elet in source[1:]]  
+        self.failUnlessEqual(result,expected)
+
+
+class edit_outputtest(unittest.TestCase):
+    """Test the edit_output routine
+    """
+    # source to edit
+    source = "0123456789\nabcdef\nkkmm"
+    # File names
+    fn_prefix = 'runrepl_test_testfile'
+    fn_output = fn_prefix+'.'+runrepl.UNEDITED_OUTPUT_EXTENSION
+    fn_edits = fn_prefix+'.'+runrepl.EDITS_EXTENSION
+    fn_result = fn_prefix+'.'+runrepl.RESULT_EXTENSION
+
+    def _writeAndFlush(self,source,edits):
+        """Take in strings to write to source file and edit command file, 
+        opens, writes and flushes, and closes.
+          source  string
+          edits  string
+        """
+        f_output = open(self.fn_output,'w')
+        f_output.write(source)
+        f_output.flush()
+        f_output.close()
+        f_edits = open(self.fn_edits,'w')
+        f_edits.write(edits)
+        f_edits.flush()
+        f_edits.close()
+
+    def testBasic(self):
+        """See if it works at all"""
+        try:
+            self._writeAndFlush(self.source,"d,0,1")
+            result = runrepl.edit_output(self.fn_prefix)
+            # print "result is", pprint.pformat(result)
+        except Exception, e:
+            self.fail(str(e))
+        # Two edit commands 
+        try:
+            self._writeAndFlush(self.source,"d,2,3;s,0,5,10")
+            result = runrepl.edit_output(self.fn_prefix)
+            # print "result is", pprint.pformat(result)
+        except Exception, e:
+            self.fail(str(e))
+
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(internal_edit_linetest)
-    unittest.TextTestRunner(verbosity=2).run(suite)
-    # unittest.main()
+    # suite = unittest.TestLoader().loadTestsFromTestCase(edit_outputtest)
+    # unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()

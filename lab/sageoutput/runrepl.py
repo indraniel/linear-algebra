@@ -13,14 +13,14 @@ SAGE_CALL = 'sage'  # command line string to call Sage
 PYTHON_CALL = 'python' # command line string to call Python
 DIFF_CALL = 'diff'  # command line string to call the diff program
 
-# Filename extensions added to be processed.
-#
+# ========== Filename extensions ============================
 # The CMDS_EXTENSION file is the list of commands to feed to the repl.
 # Before this pgm runs the repl, it tests if the list in  CMDS_NEW_EXTENSION
 # is any different and if not, does not call the repl.
 #
 # The EDITS_EXTENSION file holds the edits to do.  The same diff is done
 # with the EDITS_NEW_EXTENSION.
+
 CMDS_EXTENSION = 'cmds'  # Typically from prior run of this pgm
 CMDS_NEW_EXTENSION = 'cmdsnew' # From current run of this pgm
 UNEDITED_OUTPUT_EXTENSION = 'out_unedited' # Result of running prior thru repl
@@ -30,11 +30,13 @@ RESULT_EXTENSION = 'result' # Result of editing output
 ERROR_EXTENSION = 'err'  # Any error traceback
 RETURN_CODE_EXTENSION = 'rc'  # System return code
 
+
 # =============== What to feed expect =========================
 # Have to get pyexpect to run either repl.  It has to react to 
 # the prompts, and has to spot an error.
 # This is not a general program so I won't get fancy, and only make 
 # it work for the two similar cases of Sage and Python.
+
 SAGE_PROMPT = 'sage: '
 SAGE_CONTINUE = '....: '
 SAGE_ERROR = '------------------------------------------------------------'
@@ -55,7 +57,7 @@ EXPECT_INFO = {'sage': SAGE_DATA,
                'python': PYTHON_DATA}
 EXPECT_TIMEOUT = 120
 
-DEBUG = True
+DEBUG = False
 
 
 class RunreplError(Exception):
@@ -198,31 +200,32 @@ def feed_lines(outname,repl):
     f_out.close()
     return responses
 
-def run_sage_lines(outname):
-    """Read the lines from the input file and feed them to a Sage session.
-    Collect the outputs.  Return as one string, probably with \r\n's. 
-    """
-    fn_in = outname+'.'+SAGE_CMD_EXTENSION
-    fn_out = outname+'.'+SAGE_UNEDITED_OUTPUT_EXTENSION
-    # Get the lines
-    f_in = _open_input(fn_in)
-    sage_lines = f_in.readlines()
-    f_in.close()
-    # Strip leading and trailing blank lines
-    if not(sage_lines[0].strip()):
-        sage_lines = sage_lines[1:]
-    if not(sage_lines[-1].strip()):
-        sage_lines = sage_lines[:-1]
-    # Get the lines
-    response_lines = feed_lines(sage_lines,fn_in)
-    response = "".join(response_lines)
-    if DEBUG:
-        print "response lines is \n",pprint.pformat(response_lines)
-    # Put them in the output
-    f_out = _open_output(fn_out)
-    f_out.write(response)
-    f_out.close()
-    return response
+# def run_lines(outname):
+#     """Read the lines from the input file and feed them to a Sage session.
+#     Collect the outputs.  Return as one string, probably with \r\n's. 
+#       outname  string  prefix of files
+#     """
+#     # Get the lines
+#     fn_in = outname+'.'+SAGE_CMD_EXTENSION
+#     f_in = _open_input(fn_in)
+#     cmd_lines = f_in.readlines()
+#     f_in.close()
+#     # Strip leading and trailing blank lines
+#     if not(sage_lines[0].strip()):
+#         sage_lines = sage_lines[1:]
+#     if not(sage_lines[-1].strip()):
+#         sage_lines = sage_lines[:-1]
+#     # Get the lines
+#     response_lines = feed_lines(sage_lines,fn_in)
+#     response = "".join(response_lines)
+#     if DEBUG:
+#         print "response lines is \n",pprint.pformat(response_lines)
+#     # Put them in the output
+#     fn_out = outname+'.'+SAGE_UNEDITED_OUTPUT_EXTENSION
+#     f_out = _open_output(fn_out)
+#     f_out.write(response)
+#     f_out.close()
+#     return response
 
 # ======= edit routines ==============
 def _edit_line(source,edit,fn):
@@ -235,9 +238,10 @@ def _edit_line(source,edit,fn):
     r = source[:]
     edit_lst = edit.rstrip(";\n ")   # drop trailing semicolon
     edit_lst = edit_lst.split(',')
+    edit_lst = [entry.strip() for entry in edit_lst]  # strip whitespace
     if DEBUG:
-        print "edit_line: edit_lst is",edit_lst
-        print "source to edit is:", pprint.pformat(r)
+        print "_edit_line: edit_lst is",edit_lst
+        print "    source to edit is:", pprint.pformat(r)
     if not(len(edit_lst)) >= 1:
         raise RunreplError("bad edit command "+edit+" for file "+fn)
     if (edit_lst[0] == 'd'):  # will delete lines
@@ -252,7 +256,7 @@ def _edit_line(source,edit,fn):
                 raise RunreplError("delete argument out of bounds in edit "+edit+" for file "+fn)
     elif (edit_lst[0] == 's'): # split line
         if DEBUG:
-            print "  edit: splitting line with "+edit
+            print "  _edit_line: splitting line with "+edit
         try:
             line_no, split_point, padding = int(edit_lst[1]), int(edit_lst[2]), int(edit_lst[3])
         except Exception, e:
@@ -260,6 +264,8 @@ def _edit_line(source,edit,fn):
         # print "edit_line: line_no, split_point, padding",line_no, split_point, padding
         try:
             line_lst = r[line_no]
+            if DEBUG:
+                print "  _edit_line: line_no="+str(line_no)+" and line_lst is "+pprint.pformat(line_lst)
         except Exception, e:
             raise RunreplError("line number argument out of bounds in split command "+edit+" for "+fn)
         if line_lst is None:
@@ -267,129 +273,85 @@ def _edit_line(source,edit,fn):
         text = line_lst[0]
         if split_point < len(text):
             lines = [text[:split_point]] + [" "*padding+text[split_point:]] + line_lst[1:]
+            if DEBUG:
+                print "  _edit_line: lines is "+pprint.pformat(lines)
             r[line_no] = lines
+            if DEBUG:
+                print "  _edit_line: r is now "+pprint.pformat(r)
     else:
         raise RunreplError("unknown starting letter edit command "+edit+" for "+fn)
     return r
 
-# =============== editing ====================
-def edit_line(source,edit,fn):
-    """Execute one edit.  Return array of lines.
-      source  list  elets are: a list of strings (representing lines of text)  
-                or None (meaning line has been deleted)
-      edit  edit command, line of text
+def edit_lines(source,edit_cmds,fn):
+    """Go through the edit commands one at a time
+      source  list   elets are: a list of strings (representing lines of text)
+                      or None (representing deleted line)
+      edit_cmds  list of strings  edit commands
+      fn  string file name for error message
     """
-    r = source[:]
-    edit_ready = edit.rstrip(";\n ")   # drop trailing semicolon
-    edit_ready = edit_ready.split(',')
-    if DEBUG:
-        print "edit_line: edit_ready is",edit_ready
-        print "  source to edit is:", pprint.pformat(r)
-    if not(len(edit_ready)) >= 1:
-        print usage("for edit command "+edit+" for Sage file "+fn)
-        sys.exit(20)
-    if (edit_ready[0] == 'd'):  # delete lines
-        try:
-            start, end = int(edit_ready[1]), int(edit_ready[2])
-        except Exception, e:
-            print usage("edit command "+edit+
-                        " for Sage file "+fn)
-            print e
-            sys.exit(10)
-        for line_no in range(start,end):
-            try:
-                r[line_no] = None
-            except Exception, e:
-                print usage("with edit command "+edit+
-                            " for Sage file "+fn)
-                print e
-                sys.exit(10)
-    elif (edit_ready[0] == 's'): # split line
-        try:
-            line_no, split_point, padding = int(edit_ready[1]), int(edit_ready[2]), int(edit_ready[3])
-        except Exception, e:
-            print "ERROR with edit command "+edit+" for Sage file "+fn
-            print e
-            sys.exit(10)
-        # print "edit_line: line_no, split_point, padding",line_no, split_point, padding
-        try:
-            line = r[line_no]
-        except Exception, e:
-            print "ERROR with edit command "+edit+" for Sage file "+fn
-            print e
-            sys.exit(10)
-        # print "line is ",line
-        if not(isinstance(line,type(''))):
-            print "ERROR with edit command "+edit+" for Sage file "+fn+"\n  line number "+str(line_no)+" is not a string"
-            sys.exit(10)
-        if split_point < len(line.strip()):
-            lines = [line[:split_point]," "*padding+line[split_point:]]
-            r[line_no] = lines
-            # print "now r is\n",pprint.pformat(r)
-    else:
-        print usage("on edit command "+edit+" for Sage file "+fn+
-                    "\n  Edit command should start with d or s")
-        sys.exit(10)
+    s = source[:]
+    for edit in edit_cmds:
+        if DEBUG:
+            print "==== edit_lines: doing edit",edit
+            print "\n"+pprint.pformat(s)
+        if edit.strip():
+            s = _edit_line(s,edit,fn)
+    # Concatenate into an array of lines
+    r = []
+    for line in s:  # line was a single line in output
+        if DEBUG:
+            print "edit_lines: line is "+pprint.pformat(line)
+        if line is None:
+            continue
+        else:
+            r.append("\n".join(line)) 
     return r
 
-def edit_lines(sage_lines,edits,fn_in):
-    """Go through the edit commands one at a time
+def edit_output(outname):
+    """Read the lines from the file of repl output and from the file of
+    edits, and make the changes. 
+      outname  string  Prefix name of the files
     """
-    r = sage_lines[:]
-    # Split the edit lines into separate lines
-    m = re.compile(";")
-    edit_lines = m.sub("\n", edits.rstrip())
-    for edit in edit_lines.split("\n"):
-        if DEBUG:
-            print "doing edit",edit
-            print "====\n"+pprint.pformat(r)
-        if edit.strip():
-            r =  edit_line(r, edit, fn_in)
-    # Make into an array of lines
-    s = []
-    for dex, i in enumerate(r):
-        if i is None:
-            continue
-        elif isinstance(i,type('')):
-            s.append(i)
-        else:
-            # print "i is ",i
-            s.append("\n".join(i)) 
-    # print "s=",pprint.pformat(s)
-    # print "s done"
-    return s
-
-def edit_sage_lines(sage_output,outname):
-    """Read the lines from the input file and the edit file and make the changes
-    in the order called for.  Collect the outputs. 
-      sage_output  strings  Sage session, probably with embedded \r\n's
-      outname  string  Prefix name of this job, from sageoutputs.sty
-    """
-    edit_fn = outname+'.'+SAGE_EDIT_EXTENSION
-    out_fn = outname+'.'+SAGE_RESULT_EXTENSION
+    # Get the source information
+    fn_source = outname+'.'+UNEDITED_OUTPUT_EXTENSION
+    f_source = _open_input(fn_source)
+    source_lines = f_source.readlines()
+    f_source.close()
+    if not(source_lines[0].strip()): # strip empty first and last line
+        source_lines = source_lines[1:]
+    if not(source_lines[-1].strip()):
+        source_lines = source_lines[:-1]
+    source = [[line.strip()] for line in source_lines] # for editing need list of strings 
+    if DEBUG:
+        print "edit_output: source lines are \n",pprint.pformat(source)
     # Get the edit information
-    f_edit = _open_input(edit_fn)
+    fn_edit = outname+'.'+EDITS_EXTENSION
+    f_edit = _open_input(fn_edit)
     edits = f_edit.read().strip()
     f_edit.close()
-    # Edit the lines
-    sage_lines = sage_output.splitlines()
+    edit_cmds = edits.split(";")
+    edit_cmds = [cmd.strip() for cmd in edit_cmds] # omit whitespace in cmd
     if DEBUG:
-        print "  sage_lines is \n",pprint.pformat(sage_lines)
-    response_lines = edit_lines(sage_lines, edits, outname)
+        print "edit_output: edit_cmds are \n",pprint.pformat(edit_cmds)
+    # Edit the lines
+    response_lines = edit_lines(source, edit_cmds, outname)
     if DEBUG:
         print "  response_lines is \n",pprint.pformat(response_lines)
     finish = "\n".join(response_lines)
-    # Put them in the output
-    f_out = _open_output(out_fn)
-    f_out.write(finish)
-    f_out.close()
+    # Put them in the result file
+    fn_result = outname+'.'+RESULT_EXTENSION
+    f_result = _open_output(fn_result)
+    f_result.write(finish)
+    f_result.close()
     return finish
+
 
 # ======== clean up ==================================
 def clean_up(outname):
     """Erase files no longer needed.
     """
-    pass
+    for extension in [UNEDITED_OUTPUT_EXTENSION, ERROR_EXTENSION, RETURN_CODE_EXTENSION]:
+        os.remove(outname+'.'+extension)
 
 
 # ====================================
@@ -397,9 +359,12 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
     arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("repl",default="sage",choices=['python','sage'],
+                            help='REPL to use')
     arg_parser.add_argument("outname",help="sageoutput.sty's @outname: labnn")
     args = arg_parser.parse_args()
     outname = args.outname.rstrip(". \n\r")
+    repl = args.repl
     # Main program logic
     try:
         if diff(outname):
@@ -407,18 +372,18 @@ def main(argv=None):
                 print "\n\n\n++there is a difference outname=",outname
             shutil.copy2(outname+'.'+SAGE_CMD_NEWFILE_EXTENSION,outname+'.'+SAGE_CMD_EXTENSION)
             shutil.copy2(outname+'.'+SAGE_EDIT_NEWFILE_EXTENSION,outname+'.'+SAGE_EDIT_EXTENSION)
+            # if DEBUG:
+            #     print "++copy done"
+            unedited_output = feed_lines(outname, repl)
             if DEBUG:
-                print "++copy done"
-            sage_output = run_sage_lines(outname)
-            if DEBUG:
-                print "++sage_output:\n", pprint.pformat(sage_output)
-            result = edit_sage_lines(sage_output,outname)
+                print "++unedited_output:\n", pprint.pformat(unedited_output)
+            result = edit_output(outname)
             if DEBUG:
                 print "++edit output:\n", pprint.pformat(result)
         else:
             if DEBUG:
                 print "\n\n\n++there is no difference outname=",outname
-    except RunsageError, err:
+    except RunreplError, err:
         print >>sys.stderr, err.msg
         print >>sys.stderr, "for help use --help"
         return 2
