@@ -104,9 +104,10 @@
 % \RequirePackage[pdfpagemode=FullScreen]{hyperref}
 
 % Have the Sage output generated on the fly to guarantee accuracy
-\RequirePackage{sageoutput/sageoutput}
+% \RequirePackage{sageoutput/sageoutput}
 % The same for python output 
-\RequirePackage{sageoutput/python}
+% \RequirePackage{sageoutput/python}
+\RequirePackage{reploutput}
 
 \RequirePackage{hyperref}
 \hypersetup{
