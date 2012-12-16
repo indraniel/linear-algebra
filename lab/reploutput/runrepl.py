@@ -37,27 +37,27 @@ RETURN_CODE_EXTENSION = 'rc'  # System return code
 # This is not a general program so I won't get fancy, and only make 
 # it work for the two similar cases of Sage and Python.
 
-SAGE_PROMPT = 'sage: '
-SAGE_CONTINUE = '....: '
+SAGE_PROMPT = r'sage: '  # I have tried a begin of line ^ but it doesn't work
+SAGE_CONTINUE = r'\.\.\.\.: '
 SAGE_ERROR = '------------------------------------------------------------'
 SAGE_DATA = {'prompt': SAGE_PROMPT, 
              'prompt_continue': SAGE_CONTINUE,
              'error': SAGE_ERROR,
              'start_cmd': 'sage',
              'exit_cmd': 'exit'}
-PYTHON_PROMPT = '>>> '
-PYTHON_CONTINUE = '... '
-PYTHON_ERROR = 'Traceback (most recent call last):'
+PYTHON_PROMPT = r'>>> '
+PYTHON_CONTINUE = r'\.\.\. '
+PYTHON_ERROR = '^Traceback'
 PYTHON_DATA = {'prompt': PYTHON_PROMPT, 
                'prompt_continue': PYTHON_CONTINUE,
-               'error': re.compile("\r\nTr"), # start of PYTHON_ERROR
+               'error': PYTHON_ERROR,
                'start_cmd': 'python',
                'exit_cmd': chr(4)}
 EXPECT_INFO = {'sage': SAGE_DATA,
                'python': PYTHON_DATA}
 EXPECT_TIMEOUT = 120
 
-DEBUG = True
+DEBUG = False
 
 
 class RunreplError(Exception):
@@ -143,30 +143,7 @@ def _feed_lines(lines,repl,fn_in):
                 print "  _feed_lines: child.after=",pprint.pformat(child.after)
             r.append(child.after)
         child.sendline(line)
-        # dex = child.expect([prompt, prompt_continue]) # does not stop if repl raises an exception
-        dex = child.expect([error, prompt, prompt_continue])
-        # If a Traceback happens then I have to do a kludge.  I keep
-        # issuing child.expect and gathering the results (up to a limit 
-        # that just prevents a runaway).
-        if DEBUG:
-            print "Traceback running",repl,"from file",fn_in
-            print "  input line number", str(i)
-            print "  line is",pprint.pformat(line)
-            print "  child.after != prompt?",str(child.after != prompt)
-            print "    child.before:\n---->", pprint.pformat(child.before)
-            print "    child.after:\n----->", pprint.pformat(child.after)
-        j = 0
-        while ((child.after != prompt)
-               and (j < 1000)):
-            # child.sendline('')
-            if DEBUG:
-                print "  now child.before=",pprint.pformat(child.before)
-                print "  now child.after=",pprint.pformat(child.after)
-            r.append(child.before)
-            r.append(child.after)
-            dex = child.expect([prompt, prompt_continue])
-            j += 1
-        # else:
+        dex = child.expect([prompt, prompt_continue])
         r.append(child.before)
         if DEBUG:
             print "  _feed_lines continuing: child.before is ", pprint.pformat(child.before)

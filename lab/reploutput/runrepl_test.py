@@ -109,22 +109,22 @@ class internal_feed_linestest(unittest.TestCase):
     fn_cmds = fn_prefix+'.'+runrepl.CMDS_EXTENSION
     fn_cmds_new = fn_prefix+'.'+runrepl.CMDS_NEW_EXTENSION
 
-    # def testBasic(self):
-    #     """See if it works at all"""
-    #     for repl in ['python', 'sage']:
-    #         try:
-    #             runrepl._feed_lines(self.lines,repl,'dummy_filename')
-    #         except Exception, e:
-    #             self.fail(str(e))
+    def testBasic(self):
+        """See if it works at all"""
+        for repl in ['python', 'sage']:
+            try:
+                runrepl._feed_lines(self.lines,repl,'dummy_filename')
+            except Exception, e:
+                self.fail(str(e))
 
-    # def testContinuationPrompt(self):
-    #     """See if the '...' prompt works at all"""
-    #     lines = ['for i in range(9):','    print str(i)','','2+3']
-    #     for repl in ['python', 'sage']:
-    #         try:
-    #             runrepl._feed_lines(lines,repl,'dummy_filename')
-    #         except Exception, e:
-    #             self.fail(str(e))
+    def testContinuationPrompt(self):
+        """See if the '...' prompt works at all"""
+        lines = ['for i in range(9):','    print str(i)','','2+3']
+        for repl in ['python', 'sage']:
+            try:
+                runrepl._feed_lines(lines,repl,'dummy_filename')
+            except Exception, e:
+                self.fail(str(e))
 
     # Should it raise an exception if the repl fails?  I think no, but
     # this tests if yes.
@@ -140,7 +140,7 @@ class internal_feed_linestest(unittest.TestCase):
         for repl in ['python', 'sage']:
             try:
                 result = runrepl._feed_lines(lines, repl, 'dummy_filename')
-                print "result is",pprint.pformat(result)
+                # print "result is",pprint.pformat(result)
             except Exception, e: 
                 self.fail(str(e))
 
@@ -350,6 +350,6 @@ class edit_outputtest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(internal_feed_linestest)
-    unittest.TextTestRunner(verbosity=2).run(suite)
-    # unittest.main()
+    # suite = unittest.TestLoader().loadTestsFromTestCase(internal_feed_linestest)
+    # unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
