@@ -98,86 +98,133 @@ based on what you do to it\Dash above we assigned $1$ to $i$
 so \python{} figured that it must be an integer.
 Further, we can change how we use the variable and \python{} will 
 go along; here we change what is in $x$ from an integer to a string.
-\begin{lstlisting}[style=python]
->>> x = 1
->>> x
-1
->>> x = 'a'
->>> x
-'a'
-\end{lstlisting}
+\begin{pythonoutput}
+x = 1
+x
+x = 'a'
+x
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> x = 1
+% >>> x
+% 1
+% >>> x = 'a'
+% >>> x
+% 'a'
+% \end{lstlisting}
 
-\python{} complains by raising an \textit{error}.
-Here we are trying to combine a string and an integer. 
-\begin{lstlisting}[style=python]
->>> 'a'+1
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: cannot concatenate 'str' and 'int' objects
-\end{lstlisting}
-The error message's bottom line is the useful one.
+\python{} complains by \textit{raising an exeception} and giving an error 
+message.
+For instance, we cannot combine a string and an integer. 
+\begin{pythonoutput}
+'a'+1
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> 'a'+1
+% Traceback (most recent call last):
+%   File "<stdin>", line 1, in <module>
+% TypeError: cannot concatenate 'str' and 'int' objects
+% \end{lstlisting}
+\noindent The error message's bottom line is the useful one.
 
-The hash mark \inlinecode{\#} makes the rest of a line a comment.
-\begin{lstlisting}[style=python]
->>> t = 2.2
->>> d = (0.5) * 9.8 * (t**2)  # d in meters
->>> d
-23.716000000000005
-\end{lstlisting}
-(Comments are more useful in a program than at the prompt.)
+Make a comment of the rest of the line with a hash mark \inlinecode{\#}.
+\begin{pythonoutput}
+t = 2.2
+d = (0.5) * 9.8 * (t**2)  # d in meters
+d
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> t = 2.2
+% >>> d = (0.5) * 9.8 * (t**2)  # d in meters
+% >>> d
+% 23.716000000000005
+% \end{lstlisting}
+\noindent (Comments are more useful in a program than at the prompt.)
 Programmers often comment an entire line by starting 
 that line with a hash. 
 
-As in the listing above, we can represent real 
+As in the listing above, we can get real 
 numbers 
-and even complex numbers.
-\begin{lstlisting}[style=python]
->>> 5.774 * 3
-17.322
->>> (3+2j) - (1-4j)
-(2+6j)
-\end{lstlisting}
-Notice that \python{} uses `$j$' for the square
-root of $-1$, not the `$i$' traditional in mathematics.
+and even complex numbers.\footnote{Of course these aren't actually 
+real numbers, instead they are floating point numbers, a system that
+models the reals and is built into your computer's hardware.
+In the prior example the distinction leaks through
+since its bottom line ends in $000000000005$, marking where
+the computer's binary approximation does not perfectly match
+the real that you expect.
+Similarly \protect\python's integers aren't the integers that you studied
+in grade school since there is a largest one (give \python{} the 
+command \protect\inlinecode{import sys} followed by 
+\protect\inlinecode{sys.maxint}). 
+However, while the issue of representation is fascinating\protect\Dash
+see \protect\cite{PythonTeam12a} and \protect\cite{Goldberg91}\protect\Dash
+we shall ignore it and just call them integers and reals.}
+\begin{pythonoutput}
+5.774 * 3
+(3+2j) - (1-4j)
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> 5.774 * 3
+% 17.322
+% >>> (3+2j) - (1-4j)
+% (2+6j)
+% \end{lstlisting}
+\noindent As engineers do, \python{} uses~$j$ for the square
+root of~$-1$, not~$i$ as is traditional in Mathematics.
 
 The examples above show addition, subtraction, multiplication, 
 and exponentiation. 
-Division is a bit awkward.
+Division has an awkward point.
 \python{} was originally designed to have the division bar
 \inlinecode{/} mean real number division 
-when at least one of the numbers is real.
+when at least one of the two numbers is real.
 However between two integers the division bar was taken to mean 
 a quotient, as in ``$2$ goes into $5$ with quotient~$2$ and remainder~$1$.''
-\begin{lstlisting}[style=python]
->>> 5.2 / 2.0
-2.6
->>> 5.2 / 2
-2.6
->>> 5 / 2
-2
-\end{lstlisting}
-This proved to be a mistake. 
+\begin{pythonoutput}
+5.2 / 2.0
+5.2 / 2
+5 / 2
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> 5.2 / 2.0
+% 2.6
+% >>> 5.2 / 2
+% 2.6
+% >>> 5 / 2
+% 2
+% \end{lstlisting}
+Experience shows this was a mistake. 
 One of the changes in \python~3
-is that the quotient operation will be \inlinecode{//}
-while the single-slash operator will be real division in all cases.
-In \python~2 the simplest thing is to make sure that at least one
+is that the quotient operation has become \inlinecode{//}
+while the single-slash operator is always real division.
+In the \python~2 we are using, you must make sure that at least one
 number in a division is real.
-\begin{lstlisting}[style=python]
->>> x = 5
->>> y = 2
->>> (1.0*x) / y
-2.5
-\end{lstlisting}
-Incidentally, do the remainder operation (sometimes called `modulus')  
-with a percent character:~\inlinecode{5 \% 2} returns 1.
+\begin{pythonoutput}
+x = 5
+y = 2
+(1.0*x) / y
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> x = 5
+% >>> y = 2
+% >>> (1.0*x) / y
+% 2.5
+% \end{lstlisting}
+\noindent Incidentally, 
+the integer remainder operation (sometimes called `modulus')  
+uses a percent character:~\inlinecode{5 \% 2} returns 1.
 
 Variables can also represent truth values; these are \textit{Booleans}.
-\begin{lstlisting}[style=python]
->>> yankees_stink = True
->>> yankees_stink
-True
-\end{lstlisting}
-You need the initial capital:
+\begin{pythonoutput}
+yankees_stink = True
+yankees_stink
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> yankees_stink = True
+% >>> yankees_stink
+% True
+% \end{lstlisting}
+\noindent You need the initial capital:
 \inlinecode{True}
 or \inlinecode{False}, not
 \inlinecode{true}
@@ -188,168 +235,173 @@ You can use either single quotes or double quotes, as long as you use
 the same at both ends of the string. 
 Here \inlinecode{x} and \inlinecode{y}
 are double-quoted, which makes sense because they contain apostrophes. 
-\begin{lstlisting}[style=python]
->>> x = "I'm Popeye the sailor man"
->>> y = "I yam what I yam and that's all what I yam"
->>> x + ', ' + y
-"I'm Popeye the sailor man, I yam what I yam and that's all what I yam"
-\end{lstlisting}
-The \inlinecode{+} operation concatenates strings.
-Inside a double-quoted string you can use slash-\textit{n} \inlinecode{\\n} to
+\begin{pythonoutput}
+x = "I'm Popeye the sailor man"
+y = "I yam what I yam and that's all what I yam"
+x + ', ' + y
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> x = "I'm Popeye the sailor man"
+% >>> y = "I yam what I yam and that's all what I yam"
+% >>> x + ', ' + y
+% "I'm Popeye the sailor man, I yam what I yam and that's all what I yam"
+% \end{lstlisting}
+\noindent The \inlinecode{+} operation concatenates strings.
+Inside a double-quoted string use slash-\textit{n} \inlinecode{\\n} to
 get a newline.
 
 A string marked by three sets of quotes can contain line breaks.
-\begin{lstlisting}[style=python]
->>> """THE ROAD TO WISDOM
-... 
-... The road to wisdom?
-... -- Well, it's plain
-... and simple to express:
-... Err
-... and err
-... and err again
-... but less
-... and less
-... and less. --Piet Hein"""
-\end{lstlisting}
-The triple dots at the start of each line is a prompt that \python's
-read-eval-print loop gives when what you have typed is not complete.
-One use for triple-quoted strings is as documentation in a program;
-we'll see that below.
+\begin{pythonoutput}
+a = """THE ROAD TO WISDOM
+ 
+The road to wisdom?
+-- Well, it's plain
+and simple to express:
+Err
+and err
+and err again
+but less
+and less
+and less. --Piet Hein"""
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> """THE ROAD TO WISDOM
+% ... 
+% ... The road to wisdom?
+% ... -- Well, it's plain
+% ... and simple to express:
+% ... Err
+% ... and err
+% ... and err again
+% ... but less
+% ... and less
+% ... and less. --Piet Hein"""
+% \end{lstlisting}
+\noindent 
+The three dots at the start of lines after the first
+is \python's
+read-eval-print prompt telling you that what you have typed is not complete.
+We'll see below that a common use for
+triple-quoted strings is as documentation.
 
-A \python{} \textit{dictionary} is a finite function, that is, it is a finite
-set of ordered pairs $\langle\text{key},\text{value}\rangle$ subject 
-to the restriction that no key can be repeated.
-\begin{lstlisting}[style=python]
->>> english_words = {'one': 1, 'two': 2, 'three': 3}
->>> english_words['one']
-1
->>> english_words['four'] = 4  
-\end{lstlisting}
+A \python{} \textit{dictionary} is a finite function.
+That is, it is a finite
+set of ordered pairs $\langle\textit{key},\textit{value}\rangle$ subject 
+to the restriction that no key can be used twice.
 Dictionaries are a simple database.
-But the fact that a dictionary is a set means that the elements come in 
+\begin{pythonoutput}
+english_words = {'one': 1, 'two': 2, 'three': 3}
+english_words['one']
+english_words['four'] = 4  
+english_words
+\end{pythonoutput}
+% \begin{lstlisting}[style=python]
+% >>> english_words = {'one': 1, 'two': 2, 'three': 3}
+% >>> english_words['one']
+% 1
+% >>> english_words['four'] = 4  
+% \end{lstlisting}
+\noindent Don't be mislead by this example, 
+the words do not always just come in the reverse of the order
+in which you entered them.
+A dictionary's elements will be listed in 
 no apparently-sensible order.
-\begin{lstlisting}[style=python]
->>> english_words
-{'four': 4, 'three': 3, 'two': 2, 'one': 1}
-\end{lstlisting}
-(Don't be mislead by this example, 
-they do not always just come in the reverse of the order
-in which you entered them.)
+
 If you assign to an existing key then that will replace the previous value. 
-\begin{lstlisting}[style=python]
->>> english_words['one'] = 5
->>> english_words
-{'four': 4, 'three': 3, 'two': 2, 'one': 5}
-\end{lstlisting}
+\begin{pythonoutput}[d,0,1]
+english_words = {'one': 1, 'two': 2, 'three': 3, 'four': 4}
+english_words['one'] = 5
+english_words
+\end{pythonoutput}
+\noindent 
 Dictionaries are central to \python, in part because looking up values 
 in a dictionary is very fast.
 
-While dictionaries are unordered, a \python{} \textit{list} is ordered.
-\begin{lstlisting}[style=python]
->>> a=['alpha', 'beta', 'gamma']
->>> b=[]
->>> c=['delta']
->>> a
-['alpha', 'beta', 'gamma']
->>> a+b+c
-['alpha', 'beta', 'gamma', 'delta']
-\end{lstlisting}
+While dictionaries are unordered, a \textit{list} is ordered.
+\begin{pythonoutput}
+a = ['alpha', 'beta', 'gamma']
+b = []
+c = ['delta']
+a
+a+b+c
+\end{pythonoutput}
+\noindent
 Get an element from a list by specifying its index, its place in the list,
 inside square brackets.
-Lists are zero-offset indexed, that is, the initial element of the
-list is numbered $0$.
-You can count from the back by using negative indices.
-\begin{lstlisting}[style=python]
->>> a[0]
-'alpha'
->>> a[1]
-'beta'
->>> a[-1]
-'gamma'
-\end{lstlisting}
-Also, specifying two indices separated by a colon will get a \textit{slice} 
+Lists are \textit{zero-offset} indexed, that is, the initial element of the
+list is numbered~$0$.
+Count from the back by using negative indices.
+\begin{pythonoutput}[d,0,1]
+a = ['alpha', 'beta', 'gamma']
+a[0]
+a[1]
+a[-1]
+\end{pythonoutput}
+\noindent
+Specifying two indices separated by a colon gets a \textit{slice} 
 of the list. 
-\begin{lstlisting}[style=python]
->>> a[1:3]
-['beta', 'gamma']
->>> a[1:2]
-['beta']
-\end{lstlisting}
+\begin{pythonoutput}[d,0,1]
+a = ['alpha', 'beta', 'gamma']
+a[1:3]
+a[1:2]
+\end{pythonoutput}
+\noindent
 You can add to a list.
-\begin{lstlisting}[style=python]
->>> c.append('epsilon')
->>> c
-['delta', 'epsilon']  
-\end{lstlisting}
+\begin{pythonoutput}[d,0,1]
+c = ['delta']
+c.append('epsilon')
+c
+\end{pythonoutput}
+\noindent
 Lists can contain anything, including other lists.
-\begin{lstlisting}
->>> x = 4
->>> a = ['alpha', ['beta', x]]
->>> a
-['alpha', ['beta', 4]]  
-\end{lstlisting}
+\begin{pythonoutput}
+x = 4
+a = ['alpha', [True, x]]
+a
+\end{pythonoutput}
 
 The function \pythoncmd{range} returns a list of numbers.
-\begin{lstlisting}[style=python]
- >>> range(10)
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
->>> range(1,10)
-[1, 2, 3, 4, 5, 6, 7, 8, 9] 
-\end{lstlisting}
-Observe that by default \pythoncmd{range} starts at $0$, which
-is convenient because lists are zero-indexed.
-Observe also that $9$ is the highest number in the sequence 
+\begin{pythonoutput}
+range(10)
+range(1,10)
+\end{pythonoutput}
+\noindent
+By default \pythoncmd{range} starts at $0$, which
+is good because lists are zero-indexed.
+Observe also that $9$ is the highest number in the list
 given by \inlinecode{range(10)}.
 This makes \inlinecode{range(10)+range(10,20)} give 
 the same list as \inlinecode{range(20)}.
 
-One of the most common things you'll do with a list is to run through
-it performing some action on each entry.
-\python{} has a shortcut for this called \textit{list comprehension}.
-\begin{lstlisting}
->>> a = [2**i for i in range(4)]
->>> a
-[1, 2, 4, 8]
->>> [i-1 for i in a]
-[0, 1, 3, 7]
-\end{lstlisting}
-This is a special form of a loop; we'll see more on loops below.
-
 A \textit{tuple} is like a list in that it is ordered.
-\begin{lstlisting}[style=python]
->>> a = (0, 1, 2)
->>> a
-(0, 1, 2)
->>> a[0]
-0
-\end{lstlisting}
-However, unlike a list a tuple cannot change.
-\begin{lstlisting}[style=python]
->>> a[0] = 3
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: 'tuple' object does not support item assignment
-\end{lstlisting}
-That is an advantage sometimes:
-because tuples cannot change they can be keys in dictionaries, while
+\begin{pythonoutput}
+a = ('fee', 'fie', 'foe', 'fum')
+a
+a[0]
+\end{pythonoutput}
+\noindent
+However it is unlike a list 
+in that a tuple is not \textit{mutable}\Dash it cannot change.
+\begin{pythonoutput}[d,0,1]
+a = ('fee', 'fie', 'foe', 'fum')
+a[0] = 'phooey'
+\end{pythonoutput}
+\noindent
+One reason this is useful is that because of it
+tuples can be keys in dictionaries while
 list cannot.
-\begin{lstlisting}[style=python]
->>> a = ['Jim', 2138]
->>> b = ('Jim', 2138)
->>> d = {a: 1}
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: unhashable type: 'list'
->>> d = {b: 1}
->>> d
-{('Jim', 2138): 1}
-\end{lstlisting}
+\begin{pythonoutput}
+a = ['Jim', 2138]
+b = ('Jim', 2138)
+d = {a: 'active'}
+d = {b: 'active'}
+d
+\end{pythonoutput}
 
-\python{} has a special value \inlinecode{None} for you to use
-where there is no sensible value.
+\python{} has a special value \inlinecode{None} for
+when there is no sensible value for a variable.
 For instance, if your program keeps track of a person's address and
-includes a variable \pythoncmd{appt\_no} then \inlinecode{None} is
+includes a variable \pythoncmd{apartment} then \inlinecode{None} is
 the right value for that variable when the person does not live in an
 apartment.
 
@@ -358,78 +410,70 @@ apartment.
 \subsection{Flow of control}
 \python{} supports the traditional ways of affecting the order of 
 statement execution, with a twist.
-\begin{lstlisting}[style=python]
->>> x = 4
->>> if (x == 0):
-...     y = 1
-... else:
-...     y = 0
-... 
->>> y
-0
-\end{lstlisting}
+\begin{pythonoutput}
+x = 4
+if (x == 0):
+    y = 1
+else:
+    y = 0
+
+y
+\end{pythonoutput}
+\noindent
 The twist is that while many languages use braces or some other syntax to
 mark a block of code, \python{} uses indentation.
-(We shall always indent with four spaces.)
+(Always indent with four spaces.)
 Here, \python{} executes the single-line block \inlinecode{y = 1} if $x$
 equals $0$, otherwise \python{} sets $y$ to~$0$. 
 
 Notice also that double equals \inlinecode{==} means ``is equal to.'' 
-We have already seen that single equals is the assignment
+In contrast, we have already seen that single equals is the assignment
 operation so that \inlinecode{x = 4} 
 means ``$x$ is assigned the value~$4$.'' 
 
-\python{} has two variants on the \pythoncmd{if} statement.
-The first has only one branch
-\begin{lstlisting}[style=python]
->>> x = 4
->>> y = 0
->>> if (x == 0):
-...     y = 1
-... 
->>> y
-0
-\end{lstlisting}
-while the second has more than two branches.
-\begin{lstlisting}[style=python]
->>> x = 2
->>> if (x == 0):
-...     y = 1
-... elif (x == 1):
-...     y = 0
-... else:
-...     y = -1
-... 
->>> y
--1
-\end{lstlisting}
+\python{} has two variants on the above \pythoncmd{if} statement.
+It could have only one branch
+\begin{pythonoutput}
+x = 4
+y = 0
+if (x == 0):
+    y = 1
 
-A specialty of computers is iteration, looping through the same steps.
-\begin{lstlisting}[style=python]
->>> for i in range(5):
-...     print i, "squared is", i**2
-... 
-0 squared is 0
-1 squared is 1
-2 squared is 4
-3 squared is 9
-4 squared is 16
-\end{lstlisting}
+y
+\end{pythonoutput}
+or it could have more than two branches.
+\begin{pythonoutput}
+x = 2
+if (x == 0):
+    y = 1
+elif (x == 1):
+    y = 0
+else:
+    y = -1
+
+y
+\end{pythonoutput}
+
+Computers excel at iteration, looping through the same steps.
+\begin{pythonoutput}
+for i in range(5):
+    print i, "squared is", i**2
+
+\end{pythonoutput}
+\noindent
 A \pythoncmd{for} loop often involves a \pythoncmd{range}.
-\begin{lstlisting}[style=python]
->>> x=[4,0,3,0]
->>> for i in range(len(x)):
-...     if (x[i] == 0):
-...         print "item",i,"is zero"
-...     else:
-...         print "item",i,"is nonzero"
-... 
-item 0 is nonzero
-item 1 is zero
-item 2 is nonzero
-item 3 is zero  
-\end{lstlisting}
-We could instead have written \inlinecode{for c in x:} since
+\begin{pythonoutput}
+x = [4, 0, 3, 0]
+for i in range(len(x)):
+    if (x[i] == 0):
+        print "item",i,"is zero"
+    else:
+        print "item",i,"is nonzero"
+
+\end{pythonoutput}
+An experienced \python{} person who was not trying to illustrate 
+\pythoncmd{range}
+would instead writte \inlinecode{for c in x:} since
 the \pythoncmd{for} loop can iterate over any sequence, not just
 a sequence of integers.
 
@@ -437,21 +481,18 @@ A \pythoncmd{for} loop is designed to execute a certain
 number of times.
 The natural way to write a loop that will run an uncertain number of times
 is \pythoncmd{while}.
-\begin{lstlisting}[style=python]
->>> n = 27
->>> i = 0
->>> while (n != 1):
-...     if (n%2 == 0):
-...         n = n / 2
-...     else:
-...         n = 3*n + 1
-...     i = i + 1
-...     print "i=", i
-... 
-i= 1
-i= 2
-i= 3  
-\end{lstlisting}
+\begin{pythonoutput}[d,12,121]
+n = 27
+i = 0
+while (n != 1):
+    if (n%2 == 0):
+        n = n / 2
+    else:
+        n = 3*n + 1
+    i = i + 1
+    print "i=", i
+ 
+\end{pythonoutput}
 (This listing is incomplete; it takes $111$ steps to finish.)\footnote{The 
 \protect\textit{Collatz conjecture} is 
 that for any starting~$n$ this loop will 
@@ -459,16 +500,23 @@ terminate, but this is not known.}
 Note that ``not equal'' is \lstinline[style=inline]@!=@. 
 
 The \inlinecode{break} command gets you out of a loop right away.
-\begin{lstlisting}
->>> for i in range(10):
-...     if (i == 3):
-...         break
-...     print "i is", i
-... 
-i is 0
-i is 1
-i is 2  
-\end{lstlisting}
+\begin{pythonoutput}
+for i in range(10):
+    if (i == 3):
+        break
+    print "i is", i
+
+\end{pythonoutput}
+
+A common loop construct is to run through a list
+performing an action on each entry.
+\python{} has a shortcut for this, \textit{list comprehension}.
+\begin{pythonoutput}
+a = [2**i for i in range(4)]
+a
+[i-1 for i in a]
+\end{pythonoutput}
+
 
 
 \subsection{Functions}
@@ -701,18 +749,25 @@ sage:
 \end{lstlisting}
 
 Experiment with some expressions.
-\begin{lstlisting}[style=python]
-sage: 2**3                                                                           
-8
-sage: 2^3
-8
-sage: 3*1 + 4*2
-11
-sage: 5 == 3+3
-False
-sage: sin(pi/3)
-1/2*sqrt(3)
-\end{lstlisting}
+% \begin{lstlisting}[style=python]
+% sage: 2**3                                                                           
+% 8
+% sage: 2^3
+% 8
+% sage: 3*1 + 4*2
+% 11
+% sage: 5 == 3+3
+% False
+% sage: sin(pi/3)
+% 1/2*sqrt(3)
+% \end{lstlisting}
+\begin{sageoutput}
+2**3                                                                      
+2^3
+3*1 + 4*2
+5 == 3+3
+sin(pi/3)
+\end{sageoutput}
 The second expression 
 shows that \Sage{} provides a convenient shortcut for exponentiation.
 The fourth shows that \Sage{} sometimes returns exact results rather than an
