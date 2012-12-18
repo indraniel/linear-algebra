@@ -248,50 +248,43 @@ and \Sagecmd{with\_added\_multiple\_of\_row}.
 \subsection{Nonsingular and singular systems}
 Resorting to \Sagecmd{solve} after going through the row operations is artless.
 \Sage{} will give reduced row echelon form straight from the augmented matrix.
-\begin{lstlisting}
-sage: M_prime.rref()
-[    1     0     0|-13/6]
-[    0     1     0|  1/3]
-[    0     0     1|  4/3]
-\end{lstlisting}
+\begin{sageoutput}
+M = matrix(QQ, [[1/2, 1, -1], [1, -2, 0], [2 ,-1, 1]])
+v = vector(QQ, [0, 1, -2])
+M_prime = M.augment(v, subdivide=True) 
+M_prime.rref()
+\end{sageoutput}
 
 In that example the matrix~$M$ on the left is nonsingular because it is 
-square and because Gauss's Method leads to echelon forms where every one of
+square and because Gauss's Method produces echelon forms where every one of
 $M$'s columns has a leading variable.
 The next example starts with a different square matrix, a 
 singular matrix, and consequently leads to 
 echelon form systems where there are columns on the left 
 that do not have a leading variable. 
-\begin{lstlisting}
-sage: M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]])    
-sage: v = vector(QQ, [0, 1, 1]) 
-sage: M_prime = M.augment(v, subdivide=True)
-sage: M_prime
-[1 1 1|0]
-[1 2 3|1]
-[2 3 4|1]
-sage: M_prime.rref()
-[ 1  0 -1|-1]
-[ 0  1  2| 1]
-[ 0  0  0| 0]  
-\end{lstlisting}
-Recall that the singular case  
-has two subcases.
-The first happens above: because in echelon form
+\begin{sageoutput}
+M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]])    
+v = vector(QQ, [0, 1, 1]) 
+M_prime = M.augment(v, subdivide=True)
+M_prime
+M_prime.rref()
+\end{sageoutput}
+\noindent
+Recall that the singular case has two subcases.
+The first is above: because in echelon form
 every row that is all zeros on the
 left has an entry on the right that is also zero,
 the system has infinitely many solutions.
 In contrast, with the same starting matrix
 the example below has a row that is zeros on the left but is nonzero
 on the right and so the system has no solution.
-\begin{lstlisting}
-sage: v = vector(QQ, [0, 1, 2])             
-sage: M_prime = M.augment(v, subdivide=True)
-sage: M_prime.rref()                        
-[ 1  0 -1| 0]
-[ 0  1  2| 0]
-[ 0  0  0| 1]
-\end{lstlisting}
+\begin{sageoutput}[d,0,1]
+M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]])    
+v = vector(QQ, [0, 1, 2])             
+M_prime = M.augment(v, subdivide=True)
+M_prime.rref()                        
+\end{sageoutput}
+\noindent
 The difference between the subcases
 has to do with the relationships among  
 the rows of~$M$ and the relationships among the rows of the vector.
@@ -304,43 +297,49 @@ The easy way to ensure that a zero row in the matrix
 on the left is associated with a zero
 entry in the vector on the right is to make the vector have all zeros, that is,
 to consider the homogeneous system associated with~$M$.
-\begin{lstlisting}
-sage: v = zero_vector(QQ, 3)
-sage: v
-(0, 0, 0)
-sage: M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]]) 
-sage: M_prime = M.augment(v, subdivide=True)
-sage: M_prime
-[1 1 1|0]
-[1 2 3|0]
-[2 3 4|0]
-sage: M_prime.rref()
-[ 1  0 -1| 0]
-[ 0  1  2| 0]
-[ 0  0  0| 0]
-\end{lstlisting}
+\begin{sageoutput}
+v = zero_vector(QQ, 3)
+v
+M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]]) 
+M_prime = M.augment(v, subdivide=True)
+M_prime
+M_prime.rref()
+\end{sageoutput}
 
 You can get the numbers of the columns having leading entries with 
 the \Sagecmd{pivots} method
 (there is a complementary \Sagecmd{nonpivots}).
-\begin{lstlisting}
-sage: v = vector(QQ, [0, 1, 2])
-sage: M_prime                  
-[1 1 1|0]
-[1 2 3|1]
-[2 3 4|2]
-sage: M_prime.pivots()         
-(0, 1, 3)
-sage: M_prime.rref()
-[ 1  0 -1| 0]
-[ 0  1  2| 0]
-[ 0  0  0| 1]  
-\end{lstlisting}
+\begin{sageoutput}[d,0,3]
+M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]]) 
+v = vector(QQ, [0, 1, 2])
+M_prime = M.augment(v, subdivide=True)
+M_prime                  
+M_prime.pivots()         
+M_prime.rref()
+\end{sageoutput}
+\noindent
 Because column~$2$ is not in the list of pivots we know that the
 system is singular before we see it in echelon form.
 
 We can use this observation to write a routine that decides if a 
 square matrix is nonsingular.
+% The return here causes an error I don't understand from runrepl.
+% \begin{sageoutput}
+% def check_nonsingular(mat):  
+%     if not(mat.is_square()):
+%         print "ERROR: mat should be square"
+%         return
+%     p = mat.pivots()
+%     for col in range(mat.ncols()):
+%         if not(col in p):
+%             print "nonsingular"
+%             break
+         
+% N = Matrix(QQ, [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+% check_nonsingular(N)                                
+% N = Matrix(QQ, [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+% check_nonsingular(N)                                   
+% \end{sageoutput}
 \begin{lstlisting}
 sage: def check_nonsingular(mat):
 ....:     if not(mat.is_square()):
@@ -358,8 +357,12 @@ nonsingular
 sage: N = Matrix(QQ, [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 sage: check_nonsingular(N)                                   
 \end{lstlisting}
+\noindent
 Actually, \Sage{} matrices already have a method \Sagecmd{is\_singular}
 but this illustrates how you can write routines to extend \Sage.
+
+
+
 
 
 
@@ -371,20 +374,16 @@ where the top two rows add to the bottom row,
 and adjoin a vector satisfying the same relationship to get
 a system with infinitely many solutions.
 Then convert that to a system of equations.
-\begin{lstlisting}
-sage: M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]])    
-sage: v = vector(QQ, [1, 0, 1])                            
-sage: M_prime = M.augment(v, subdivide=True)               
-sage: M_prime                  
-[1 1 1|1]
-[1 2 3|0]
-[2 3 4|1]
-sage: eqns = [x+y+z == 1, x+2*y+3*z == 0, 2*x+3*y+4*z == 1]
-sage: solve(eqns, x, y)   
-[[x == z + 2, y == -2*z - 1]]  
-sage: solve(eqns, x, y, z)                                 
-[[x == r1 + 2, y == -2*r1 - 1, z == r1]]
-\end{lstlisting}
+\begin{sageoutput}
+M = matrix(QQ, [[1, 1, 1], [1, 2, 3], [2 , 3, 4]])    
+v = vector(QQ, [1, 0, 1])                            
+M_prime = M.augment(v, subdivide=True)               
+M_prime
+var('x,y,z')          
+eqns = [x+y+z == 1, x+2*y+3*z == 0, 2*x+3*y+4*z == 1]
+solve(eqns, x, y)   
+solve(eqns, x, y, z)                                 
+\end{sageoutput}
 The first of the two \Sagecmd{solve} calls asks \Sage{} 
 to solve only for $x$ and~$y$ and so the solution is in terms of~$z$.
 In the second call \Sage{} produces a parameter of its own.   
@@ -405,102 +404,112 @@ echelon form or to reduced echelon form.
 The source file of the script is below, at the end. 
 First here are a few sample calls.
 Start \Sage{} in the directory containing the file \path{gauss_method.sage}.
-\begin{lstlisting}
-sage: load "gauss_method.sage"
-sage: M = matrix(QQ, [[1/2, 1, 4], [2, 4, -1], [1, 2, 0]])          
-sage: v = vector(QQ, [-2, 5, 4])
-sage: M_prime = M.augment(v, subdivide=True)  
-sage: gauss_method(M_prime)
-[1/2   1   4| -2]
-[  2   4  -1|  5]
-[  1   2   0|  4]
- take -4 times row 1 plus row 2
- take -2 times row 1 plus row 3
-[1/2   1   4| -2]
-[  0   0 -17| 13]
-[  0   0  -8|  8]
- take -8/17 times row 2 plus row 3
-[  1/2     1     4|   -2]
-[    0     0   -17|   13]
-[    0     0     0|32/17]
-\end{lstlisting}
+\begin{sageoutput}
+load "gauss_method.sage"
+M = matrix(QQ, [[1/2, 1, 4], [2, 4, -1], [1, 2, 0]])          
+v = vector(QQ, [-2, 5, 4])
+M_prime = M.augment(v, subdivide=True)  
+gauss_method(M_prime)
+\end{sageoutput}
+% \begin{lstlisting}
+% sage: load "gauss_method.sage"
+% sage: M = matrix(QQ, [[1/2, 1, 4], [2, 4, -1], [1, 2, 0]])          
+% sage: v = vector(QQ, [-2, 5, 4])
+% sage: M_prime = M.augment(v, subdivide=True)  
+% sage: gauss_method(M_prime)
+% [1/2   1   4| -2]
+% [  2   4  -1|  5]
+% [  1   2   0|  4]
+%  take -4 times row 1 plus row 2
+%  take -2 times row 1 plus row 3
+% [1/2   1   4| -2]
+% [  0   0 -17| 13]
+% [  0   0  -8|  8]
+%  take -8/17 times row 2 plus row 3
+% [  1/2     1     4|   -2]
+% [    0     0   -17|   13]
+% [    0     0     0|32/17]
+% \end{lstlisting}
 
-The remaining examples skip the extra steps to make an augmented matrix. 
-\begin{lstlisting}
-sage: M1 = matrix(QQ, [[2, 0, 1, 3], [-1, 1/2, 3, 1], [0, 1, 7, 5]])
-sage: gauss_method(M1)
-[  2   0   1   3]
-[ -1 1/2   3   1]
-[  0   1   7   5]
- take 1/2 times row 1 plus row 2
-[  2   0   1   3]
-[  0 1/2 7/2 5/2]
-[  0   1   7   5]
- take -2 times row 2 plus row 3
-[  2   0   1   3]
-[  0 1/2 7/2 5/2]
-[  0   0   0   0]  
-\end{lstlisting}
+Because the matrix has rational number elements the operations are 
+exact\Dash without floating point issues.
 
-The script has a routine to go all the way to reduced echelon form.
-\begin{lstlisting}
-sage: M2 = matrix(QQ,
-....:             [[1, 2, 3, 4], [1, 2, 3, 4],
-....:              [2, 4, -1, 5], [1, 2, 0, 4]])
-sage: gauss_jordan(M2)            
-[ 1  2  3  4]
-[ 1  2  3  4]
-[ 2  4 -1  5]
-[ 1  2  0  4]
- take -1 times row 1 plus row 2
- take -2 times row 1 plus row 3
- take -1 times row 1 plus row 4
-[ 1  2  3  4]
-[ 0  0  0  0]
-[ 0  0 -7 -3]
-[ 0  0 -3  0]
- swap row 2 with row 3
-[ 1  2  3  4]
-[ 0  0 -7 -3]
-[ 0  0  0  0]
-[ 0  0 -3  0]
- take -3/7 times row 2 plus row 4
-[  1   2   3   4]
-[  0   0  -7  -3]
-[  0   0   0   0]
-[  0   0   0 9/7]
- swap row 3 with row 4
-[  1   2   3   4]
-[  0   0  -7  -3]
-[  0   0   0 9/7]
-[  0   0   0   0]
- take -1/7 times row 2
- take 7/9 times row 3
-[  1   2   3   4]
-[  0   0   1 3/7]
-[  0   0   0   1]
-[  0   0   0   0]
- take -4 times row 3 plus row 1
- take -3/7 times row 3 plus row 2
-[1 2 3 0]
-[0 0 1 0]
-[0 0 0 1]
-[0 0 0 0]
- take -3 times row 2 plus row 1
-[1 2 0 0]
-[0 0 1 0]
-[0 0 0 1]
-[0 0 0 0]
-\end{lstlisting}
+The remaining examples skip the steps to make an augmented matrix. 
+\begin{sageoutput}[d,0,1]
+load "gauss_method.sage"
+M1 = matrix(QQ, [[2, 0, 1, 3], [-1, 1/2, 3, 1], [0, 1, 7, 5]])
+gauss_method(M1)
+\end{sageoutput}
 
-These are naive implementations of Gauss's Method that do not try to 
-work under stressful conditions, such as
-very small leading entries\Dash they are just for fun.
-But they do illustrate perfectly the point made in the Preface, 
+The script also has a routine to go all the way to reduced echelon form.
+\begin{sageoutput}[d,0,1]
+load "gauss_method.sage"
+r1 = [1, 2, 3, 4]
+r2 = [1, 2, 3, 4]
+r3 = [2, 4, -1, 5]
+r4 = [1, 2, 0, 4]
+M2 = matrix(QQ, [r1, r2, r3, r4])
+gauss_jordan(M2)            
+\end{sageoutput}
+% \begin{lstlisting}
+% sage: M2 = matrix(QQ,
+% ....:             [[1, 2, 3, 4], [1, 2, 3, 4],
+% ....:              [2, 4, -1, 5], [1, 2, 0, 4]])
+% sage: gauss_jordan(M2)            
+% [ 1  2  3  4]
+% [ 1  2  3  4]
+% [ 2  4 -1  5]
+% [ 1  2  0  4]
+%  take -1 times row 1 plus row 2
+%  take -2 times row 1 plus row 3
+%  take -1 times row 1 plus row 4
+% [ 1  2  3  4]
+% [ 0  0  0  0]
+% [ 0  0 -7 -3]
+% [ 0  0 -3  0]
+%  swap row 2 with row 3
+% [ 1  2  3  4]
+% [ 0  0 -7 -3]
+% [ 0  0  0  0]
+% [ 0  0 -3  0]
+%  take -3/7 times row 2 plus row 4
+% [  1   2   3   4]
+% [  0   0  -7  -3]
+% [  0   0   0   0]
+% [  0   0   0 9/7]
+%  swap row 3 with row 4
+% [  1   2   3   4]
+% [  0   0  -7  -3]
+% [  0   0   0 9/7]
+% [  0   0   0   0]
+%  take -1/7 times row 2
+%  take 7/9 times row 3
+% [  1   2   3   4]
+% [  0   0   1 3/7]
+% [  0   0   0   1]
+% [  0   0   0   0]
+%  take -4 times row 3 plus row 1
+%  take -3/7 times row 3 plus row 2
+% [1 2 3 0]
+% [0 0 1 0]
+% [0 0 0 1]
+% [0 0 0 0]
+%  take -3 times row 2 plus row 1
+% [1 2 0 0]
+% [0 0 1 0]
+% [0 0 0 1]
+% [0 0 0 0]
+% \end{lstlisting}
+
+These are naive implementations of Gauss's Method that are just for fun.
+(For instance they don't handle real numbers, just rationals.)
+But they do illustrate the point made in this manual's Preface, 
 since a person
 builds intuition by doing a reasonable number of reasonably hard Gauss's Method
 reductions by hand, and at that point automation can take over.
 
+
+\subsection{Source of \protect\path{gauss_method.sage}}
 \textit{Code comment:} lines~50 and~88 are too long
 for this page so they end with a 
 slash~\inlinecode{\\} to make \python{} continue on the

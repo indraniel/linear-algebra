@@ -144,10 +144,11 @@ def _feed_lines(lines,repl,fn_in):
             r.append(child.after)
         child.sendline(line)
         dex = child.expect([prompt, prompt_continue])
-        r.append(child.before)
         if DEBUG:
-            print "  _feed_lines continuing: child.before is ", pprint.pformat(child.before)
-            # print "    child.after is ", pprint.pformat(child.after)
+            print "  _feed_lines sent the line: dex=", str(dex)
+            print "   appended to r is child.before:", pprint.pformat(child.before)
+            print "    child.after is ", pprint.pformat(child.after)
+        r.append(child.before)
     if DEBUG:
         print "  _feed_lines after loop: child.before is ", pprint.pformat(child.before)
         print "    child.after is ", pprint.pformat(child.after)
