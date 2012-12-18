@@ -238,7 +238,11 @@ def _edit_line(source,edit,fn):
             raise RunreplError("trying to split deleted line number "+str(line_no)+" with command "+edit+" for "+fn)
         text = line_lst[0]
         if split_point < len(text):
-            lines = [text[:split_point]] + [" "*padding+text[split_point:]] + line_lst[1:]
+            if padding >= 0:
+                insert_line = [" "*padding+text[split_point:]]
+            else:
+                insert_line = []  # omit it if padding is less than 0
+            lines = [text[:split_point]] + insert_line + line_lst[1:]
             if DEBUG:
                 print "  _edit_line: lines is "+pprint.pformat(lines)
             r[line_no] = lines

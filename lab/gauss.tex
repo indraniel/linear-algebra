@@ -1,64 +1,89 @@
 \chapter{Gauss's Method}
 
 \Sage{} can solve linear systems in a number of ways.
-Here you will enter systems of linear equations,
-both as equations and in the matrix form.
-You will use those to solve the systems. 
+The first way is to use a general system solver, one not specialized to linear
+systems.
+The second way is to leverage the special advantages of linear systems.
+We'll see both. 
 
 
 
 \section{Systems}
-To enter a system of equations you must first enter single equations, so 
-you must enter variables.
+To enter a system of equations you must first enter single equations.
+So you must start with variables.
 We have seen one kind of variable in giving commands like these.
-\begin{lstlisting}[style=python]
-sage: x = 3
-sage: 7*x
-21  
-\end{lstlisting}
+\begin{sageoutput}
+x = 3
+7*x
+\end{sageoutput}
 Here $x$ is the name of a location to hold values.
-For variables in equations we want something different; in the equation
-$C=2\pi\cdot r$ the two variables do not necessarily have fixed values, nor
-are they associated with a location in the computer's memory. 
-To illustrate the difference enter this.
-\begin{lstlisting}
-sage: y
-\end{lstlisting}
-The response is \inlinecode{NameError: name 'y' is not defined} because
+Variables in equations are something different; in the equation
+$C=2\pi\cdot r$ the two variables do not have fixed values, nor
+are they tied to a location in the computer's memory. 
+
+To illustrate the difference enter an unassigned 
+variable.\footnote{These output blocks are taken directly from \protect\Sage{}
+without any by-hand copying and pasting.
+This has the advantage that 
+there is no chance of confusion caused by author-introduced differences
+between what is shown in this manual and what \protect\Sage{} actually does.
+But it has two drawbacks.
+First, \protect\Sage{} puts out some lines too long to fit in the block.
+Sometimes these lines will be split and have their tail 
+carried to the next line, as here, 
+while sometimes they will be truncated if the extra characters are unimportant.
+The second drawback is that \protect\Sage{} occasionally gives 
+system-specific responses, as in the line here giving the directory.
+Naturally the response on your system will show your directory.
+This is the first time in this manual 
+that the issue of these artifacts appears; we won't note them again.}
+\begin{sageoutput}[s,1,71,67;s,2,70,66]
+y
+\end{sageoutput}
+\noindent
 \Sage{} defaults to expecting that
-$y$ is the name of a location that holds a value.
-Instead, you need to
-declare to the system that something is a symbolic variable.
-\begin{lstlisting}
-sage: var('x,y')
-sage: x
-x
-\end{lstlisting}
+$y$ is the name of a location to hold a value.
+Before you use it as a symbolic variable, you must first
+warn the system.
+\begin{sageoutput}
+var('x,y')
+y
+2*y
+k = 3
+2*k
+\end{sageoutput}
+\noindent
+Because we haven't told \Sage{} otherwise, it takes $k$ as a location to hold
+values and it evaluates \inlinecode{2*k}.
+But it does not evaluate \inlinecode{2*y} because $y$ is a symbolic variable.
+
 With that, a system of equations is a list.
-\begin{lstlisting}
-sage: var('x,y,z')                                  
-(x, y, z)
-sage: eqns = [x-y+2*z == 4, 2*x+2*y == 12, x-4*z==5]
-sage: solve(eqns, x,y,z)                            
-[[x == 5, y == 1, z == 0]]
-\end{lstlisting}
-Note that you must write double equals \inlinecode{==} instead of 
-the assignment operator \inlinecode{=} and also that
-you must write \inlinecode{2*x}
-instead of  
-\inlinecode{2x}.
-Either mistake will give you  
+\begin{sageoutput}
+var('x,y,z')                                  
+eqns = [x-y+2*z == 4, 2*x+2*y == 12, x-4*z==5]
+\end{sageoutput}
+\noindent
+You must write double equals \inlinecode{==} in the equations instead of 
+the assignment operator \inlinecode{=}.
+Also, you must write \inlinecode{2*x}
+instead of \inlinecode{2x}.
+Either mistake will trigger a  
 \inlinecode{SyntaxError: invalid syntax}.
+
+Solve the system with \Sage's general-purpose solver.
+\begin{sageoutput}[d,0,2]
+var('x,y,z')                                  
+eqns = [x-y+2*z == 4, 2*x+2*y == 12, x-4*z==5]
+solve(eqns, x,y,z)                            
+\end{sageoutput}
 
 You can put a parameter in the right side and solve for the variables
 in terms of the parameter.
-\begin{lstlisting}
-sage: var('x,y,z,a')                                
-(x, y, z, a)
-sage: eqns = [x-y+2*z == a, 2*x+2*y == 12, x-4*z==5]
-sage: solve(eqns, x,y,z)  
-[[x == 2/5*a + 17/5, y == -2/5*a + 13/5, z == 1/10*a - 2/5]] 
-\end{lstlisting}
+\begin{sageoutput}
+var('x,y,z,a')                                
+eqns = [x-y+2*z == a, 2*x+2*y == 12, x-4*z==5]
+solve(eqns, x,y,z) 
+\end{sageoutput}
 
 
 
@@ -66,58 +91,59 @@ sage: solve(eqns, x,y,z)
 The \textit{solve} routine is general-purpose but 
 for the special case of linear systems matrix notation is the best tool.
  
-Most of your matrices have entries that are fractions.
+Most of the matrices in the book
+have entries that are fractions so here we stick
+to those.
 \Sage{} uses `QQ' for the rational numbers,
-`RR' for the reals,
+`RR' or 'RDF' for real numbers,
 `CC' for the complex numbers,
 and
 `ZZ' for the integers.
-Also, you enter a row of the matrix as a list, and
-you enter the entire matrix as a list of rows.
-\begin{lstlisting}
-sage: M = matrix(QQ, [[1, 2, 3], [4, 5, 6], [7 ,8, 9]])
-sage: M
-[1 2 3]
-[4 5 6]
-[7 8 9]
-sage: M[1,2]
-6
-sage: M.nrows()
-3
-sage: M.ncols()
-3
-\end{lstlisting}
-\Sage{} lists are zero-indexed, so \inlinecode{M[1,2]} asks
+
+Enter a row of the matrix as a list, and
+enter the entire matrix as a list of rows.
+\begin{sageoutput}
+M = matrix(QQ, [[1, 2, 3], [4, 5, 6], [7 ,8, 9]])
+M
+M[1,2]
+M.nrows()
+M.ncols()
+\end{sageoutput}
+\noindent
+\Sage{} lists are zero-indexed, as with \python{} lists, 
+so \inlinecode{M[1,2]} asks
 for the entry in the second row and third column. 
 
 Enter a vector in much the same way.
-\begin{lstlisting}
-sage: v = vector(QQ, [2/3, -1/3, 1/2])
-sage: v
-(2/3, -1/3, 1/2)
-sage: v[1]
--1/3
-\end{lstlisting}
-This is a column vector; 
+\begin{sageoutput}
+v = vector(QQ, [2/3, -1/3, 1/2])
+v
+v[1]
+\end{sageoutput}
+\noindent
+\Sage{} does not worry too much about the distinction between row and column
+vectors.
+Note however that
 it appears with rounded brackets so that 
 it looks different than a one-row matrix.
-Augment the matrix with this vector.
-\begin{lstlisting}
-sage: M_prime = M.augment(v)
-sage: M_prime
-[ 1  2  3 10]
-[ 4  5  6 11]
-[ 7  8  9 12]  
-\end{lstlisting}
-Have \Sage{} remember the distinction between the two parts 
+
+You can augment a matrix with a vector.
+\begin{sageoutput}
+M = matrix(QQ, [[1, 2, 3], [4, 5, 6], [7 ,8, 9]])
+v = vector(QQ, [2/3, -1/3, 1/2])
+M_prime = M.augment(v)
+M_prime
+\end{sageoutput}
+\noindent
+You can use an optional argument to
+have \Sage{} remember the distinction between the two parts 
 of $M^\prime$.
-\begin{lstlisting}
-sage: M_prime = M.augment(v,subdivide=True)
-sage: M_prime                              
-[ 1  2  3|10]
-[ 4  5  6|11]
-[ 7  8  9|12] 
-\end{lstlisting}
+\begin{sageoutput}[d,0,2]
+M = matrix(QQ, [[1, 2, 3], [4, 5, 6], [7 ,8, 9]])
+v = vector(QQ, [2/3, -1/3, 1/2])
+M_prime = M.augment(v,subdivide=True)
+M_prime                              
+\end{sageoutput}
 
 
 
@@ -125,88 +151,93 @@ sage: M_prime
 Computers are good for jobs that are tedious and error-prone.
 Row operations are both.
 
-First enter an example matrix.
-\begin{lstlisting}
-sage: M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
-sage: v = vector(QQ, [2, 1, -1/2])                        
-sage: M_prime = M.augment(v, subdivide=True)              
-sage: M_prime                                             
-[   0    2    1|   2]
-[   2    0    4|   1]
-[   2 -1/2    3|-1/2]
-\end{lstlisting}
+% First enter an example matrix.
+\begin{sageoutput}
+M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
+v = vector(QQ, [2, 1, -1/2])                        
+M_prime = M.augment(v, subdivide=True)              
+M_prime                                             
+\end{sageoutput}
+\noindent
 Swap the top rows (remember that row indices start at zero).
-\begin{lstlisting}
-sage: M_prime.swap_rows(0,1)
-sage: M_prime
-[   2    0    4|   1]
-[   0    2    1|   2]
-[   2 -1/2    3|-1/2]
-\end{lstlisting}
+\begin{sageoutput}[d,0,3]
+M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
+v = vector(QQ, [2, 1, -1/2])                        
+M_prime = M.augment(v, subdivide=True)              
+M_prime.swap_rows(0,1)
+M_prime
+\end{sageoutput}
+\noindent
 Rescale the top row.
-\begin{lstlisting}
-sage: M_prime.rescale_row(0, 1/2)
-sage: M_prime
-[   1    0    2| 1/2]
-[   0    2    1|   2]
-[   2 -1/2    3|-1/2]  
-\end{lstlisting}
+\begin{sageoutput}[d,0,4]
+M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
+v = vector(QQ, [2, 1, -1/2])                        
+M_prime = M.augment(v, subdivide=True)              
+M_prime.swap_rows(0,1)
+M_prime.rescale_row(0, 1/2)
+M_prime
+\end{sageoutput}
+\noindent
 Get a new  bottom row by adding $-2$~times the top to the current bottom
 row.
-\begin{lstlisting}
-sage: M_prime.add_multiple_of_row(2,0,-2)
-sage: M_prime
-[   1    0    2| 1/2]
-[   0    2    1|   2]
-[   0 -1/2   -1|-3/2]  
-\end{lstlisting}
+\begin{sageoutput}[d,0,5]
+M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
+v = vector(QQ, [2, 1, -1/2])                        
+M_prime = M.augment(v, subdivide=True)              
+M_prime.swap_rows(0,1)
+M_prime.rescale_row(0, 1/2)
+M_prime.add_multiple_of_row(2,0,-2)
+M_prime
+\end{sageoutput}
+\noindent
 Finish by finding echelon form.
-\begin{lstlisting}
-sage: M_prime.add_multiple_of_row(2,1,1/4)
-sage: M_prime                             
-[   1    0    2| 1/2]
-[   0    2    1|   2]
-[   0    0 -3/4|  -1]  
-\end{lstlisting}
-(By the way,
+\begin{sageoutput}[d,0,6]
+M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
+v = vector(QQ, [2, 1, -1/2])                        
+M_prime = M.augment(v, subdivide=True)              
+M_prime.swap_rows(0,1)
+M_prime.rescale_row(0, 1/2)
+M_prime.add_multiple_of_row(2,0,-2)
+M_prime.add_multiple_of_row(2,1,1/4)
+M_prime                             
+\end{sageoutput}
+\noindent
+By the way,
 \Sage{} would have given us echelon form in a single operation 
 had we run the command
-\inlinecode{M_prime.echelon_form()}.)
+\inlinecode{M_prime.echelon_form()}.
 
 Now by-hand back substitution gives the solution, or we can 
 use \Sagecmd{solve}.
-\begin{lstlisting}
-sage: var('x,y,z')
-sage: eqns=[-3/4*z == -1, 2*y+z == 2, x+2*z == 1/2]
-sage: solve(eqns, x, y, z)
-[[x == (-13/6), y == (1/3), z == (4/3)]]
-\end{lstlisting}
+\begin{sageoutput}[d,0,7]
+M = matrix(QQ, [[0, 2, 1], [2, 0, 4], [2 ,-1/2, 3]])
+v = vector(QQ, [2, 1, -1/2])                        
+M_prime = M.augment(v, subdivide=True)              
+M_prime.swap_rows(0,1)
+M_prime.rescale_row(0, 1/2)
+M_prime.add_multiple_of_row(2,0,-2)
+M_prime.add_multiple_of_row(2,1,1/4)
+var('x,y,z')
+eqns=[-3/4*z == -1, 2*y+z == 2, x+2*z == 1/2]
+solve(eqns, x, y, z)
+\end{sageoutput}
 
-% Needed?
 The operations \Sagecmd{swap\_rows},
 \Sagecmd{rescale\_rows}, and \Sagecmd{add\_multiple\_of\_row}
 changed the matrix $M^\prime$.
 \Sage{} has related commands that return a changed matrix
 but leave the starting matrix unchanged.
-\begin{lstlisting}
-sage: M = matrix(QQ, [[1/2, 1, -1], [1, -2, 0], [2 ,-1, 1]])
-sage: v = vector(QQ, [0, 1, -2])
-sage: M_prime = M.augment(v, subdivide=True) 
-sage: M_prime
-[1/2   1  -1|  0]
-[  1  -2   0|  1]
-[  2  -1   1| -2]
-sage: N = M_prime.with_rescaled_row(0,2)
-sage: M_prime
-[1/2   1  -1|  0]
-[  1  -2   0|  1]
-[  2  -1   1| -2]
-sage: N      
-[ 1  2 -2| 0]
-[ 1 -2  0| 1]
-[ 2 -1  1|-2]  
-\end{lstlisting}
-Here, $M^\prime$ is unchanged by the routine, while $N$ is the returned 
+\begin{sageoutput}
+M = matrix(QQ, [[1/2, 1, -1], [1, -2, 0], [2 ,-1, 1]])
+v = vector(QQ, [0, 1, -2])
+M_prime = M.augment(v, subdivide=True) 
+M_prime
+N = M_prime.with_rescaled_row(0,2)
+M_prime
+N      
+\end{sageoutput}
+\noindent
+Here, $M^\prime$ is unchanged by the routine while $N$ is the returned 
 changed matrix.
 The other two routines of this kind are \Sagecmd{with\_swapped\_rows} 
 and \Sagecmd{with\_added\_multiple\_of\_row}.
