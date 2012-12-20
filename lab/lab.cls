@@ -108,6 +108,13 @@
 % The same for python output 
 % \RequirePackage{sageoutput/python}
 \RequirePackage{reploutput}
+% Make a file for improved graphics
+% \RequirePackage{append}
+% \newcommand{\graphicsfn}{reploutput/improvedgraphics.sage}
+% \immediate\openout\appendwrite=\graphicsfn\relax
+% \immediate\write\appendwrite{\filecontent #2}%
+% \immediate\closeout\appendwrite
+
 
 \RequirePackage{hyperref}
 \hypersetup{
