@@ -34,11 +34,10 @@ def color_circle_list(a, b, c, d, colors, full_circle=False):
                         fill = 'true'))
     return r
 
-NUM_CIRCLE_PTS =  12
-def plot_circle_action(a, b, c, d, n = NUM_CIRCLE_PTS, full_circle = False):
+
+def plot_circle_action(a, b, c, d, n = 12, full_circle = False):
     """Show the action of the matrix with entries a, b, c, d on half
-    of the unit circle, as the circle and the output curve, broken into 
-    a number of colors.
+    of the unit circle, broken into a number of colors.
      a, b, c, d  reals  Entries are upper left, ur, ll, lr.
      n = 12  positive integer  Number of colors.
      full_circle=False  boolean  Show whole circle, or top half
@@ -48,6 +47,7 @@ def plot_circle_action(a, b, c, d, n = NUM_CIRCLE_PTS, full_circle = False):
     for g_part in color_circle_list(a,b,c,d,colors,full_circle):
         G += g_part
     return plot(G)    
+
 
 SQUARE_THICKNESS = 1.75  # How thick to draw the curves
 ZORDER = 5    # Draw the graph over the axes

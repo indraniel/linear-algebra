@@ -35,118 +35,211 @@ And here is the effect of $t$ on other members of the line.
   \qquad
   \colvec{r \\ 2r}\mapsunder{t}\colvec{7r \\ 10r}
 \end{equation*}
-The map $t$'s action on the line is uniform.
+So this condition in the definition of linear map imposes a simple
+uniformity on its action on lines through the origin.
+
+
 
 
 \section{Unit circle}
-The above means that one way to describe a transformation's action is to pick 
-one nonzero element from each line through the origin and describe where
-the transformation maps those elements.
-An easy way to select one nonzero element from each line through the
-origin is to take the upper half unit circle.
+Consider transformations of the plane $\Re^2$.
+Because of $t(r\cdot\vec{v})=r\cdot t(\vec{v})$,
+one way to describe a transformation's action is to pick 
+a set containing one nonzero vector from each line through the origin,
+describe where the transformation maps those elements.
+
+A natural set that contains one nonzero element from each line through the
+origin is the upper half unit circle.
+\begin{sagesilent}
+load "plot_action.sage"
+p = plot_circle_action(1,0,0,1) 
+p.set_axes_range(-1.5, 1.5, -0.5, 1.5) 
+p.save("graphics/svd000.png")
+\end{sagesilent}
 \begin{equation*}
   U=\set{\colvec{x \\ y}
          \suchthat 
          \text{$x=\cos(t)$, $y=\sin(t)$, $0\leq t<\pi$}}
   \qquad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action10.png}}  
+  \vcenteredhbox{\includegraphics{graphics/svd000.png}}  
 \end{equation*}
-We produce the above 
-graph by using a routine that draws the effect of an arbitrary 
-matrix on the unit circle, and giving that routine the identity matrix. 
-The colors will keep track the directionality in the set of
-before and after pictures below.
+The above 
+graph came from  using a routine that draws the effect of a transformation 
+on the unit circle
+and then specifying the identity transformation.
 \begin{sageoutput}
 load "plot_action.sage"
 p = plot_circle_action(1,0,0,1)  # identity matrix
 p.set_axes_range(-1.5, 1.5, -0.5, 1.5) 
-p.save("sageoutput/plot_action10.png")
+p.save("graphics/svd000.png")
 \end{sageoutput}
+Its source code is 
+at the end of this chapter but in short 
+\inlinecode{plot_circle_action(a,b,c,d)}
+multiplies points on 
+the unit circle by this matrix.
+\begin{equation*}
+  \begin{mat}
+    a &b \\
+    c &d
+  \end{mat}
+\end{equation*}
+The colors are for the 
+before and after pictures below.
 
-Here 
-is the transformation doubles the $x$~components of all vectors. 
+Here is the effect of 
+the transformation 
+\begin{equation*}
+  \colvec{x \\ y} \mapsto \colvec{2x \\ y}
+\end{equation*}
+that doubles the $x$~component of input vectors. 
+It shows before and after, the upper half circle domain
+and the output codomain.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -1, 2) 
-q.save("sageoutput/plot_action11.png")
+q.save("graphics/svd001a.png")
 p = plot_circle_action(2,0,0,1) 
 p.set_axes_range(-2, 2, -1, 2) 
-p.save("sageoutput/plot_action11a.png")
+p.save("graphics/svd001b.png")
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -1, 2) 
+q.save("graphics/svd001a.png")
+p = plot_circle_action(2,0,0,1) 
+p.set_axes_range(-2, 2, -1, 2) 
+p.save("graphics/svd001b.png")
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action11.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd001a.png}}
   \quad\mapsunder{\big (\begin{smallmatrix} 2 &0 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action11a.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd001b.png}}
 \end{equation*}
-And here is the
-transformation that triples the $y$~components and multiplies 
-$x$~components by $-1$. 
 
-Note that it changes the orientation: the input circle moves 
-counterclockwise from red to orange, then green, blue, indigo, and violet
-but the output does the opposite. 
+The next before and after picture shows
+the effect of the transformation 
+\begin{equation*}
+  \colvec{x \\ y} \mapsto \colvec{-x \\ 3y}
+\end{equation*}
+that triples the $y$~component and multiplies the 
+$x$~component by $-1$. 
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -4, 4) 
-q.save("sageoutput/plot_action12.png")
+q.save("graphics/svd002a.png")
 p = plot_circle_action(-1,0,0,3) 
 p.set_axes_range(-2, 2, -4, 4) 
-p.save("sageoutput/plot_action12a.png")
+p.save("graphics/svd002b.png")
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -4, 4) 
+q.save("graphics/svd002a.png")
+p = plot_circle_action(-1,0,0,3) 
+p.set_axes_range(-2, 2, -4, 4) 
+p.save("graphics/svd002b.png")
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action12.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd002a.png}}
   \quad\mapsunder{\big (\begin{smallmatrix} -1 &0 \\ 0 &3 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action12a.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd002b.png}}
 \end{equation*}
+Now the colors come in.
+The input circle moves 
+counterclockwise from red to orange, then to green, blue, indigo, and 
+finally to violet.
+But the output does the opposite: to move from red to violet you
+move clockwise.
+This transformation changes the \textit{orientation} 
+(or \textit{sense}) of the curve. 
 
-Here is a skew transformation. 
+The next transformation is a skew.
+\begin{equation*}
+  \colvec{x \\ y} \mapsto \colvec{x+2y \\ y}
+\end{equation*}
+The output's first component is affected
+by the input vector's distance from the $y$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-2, 2, -3, 3) 
-q.save("sageoutput/plot_action13.png")
+q.set_axes_range(-2, 3, -1, 2) 
+q.save("graphics/svd003a.png")
 p = plot_circle_action(1,0,2,1) 
-p.set_axes_range(-2, 2, -3, 3) 
-p.save("sageoutput/plot_action13a.png")
+p.set_axes_range(-2, 3, -1, 2) 
+p.save("graphics/svd003b.png")
 \end{sageoutput}
-\begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action13.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action13a.png}}
-\end{equation*}
-\noindent Here is a  second skew
-transformation. 
-\begin{sageoutput}[d,0,4;d,5,7]
+\begin{sagesilent}
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-3, 3, -2, 2) 
-q.save("sageoutput/plot_action14.png")
-p = plot_circle_action(1,3,0,1) 
-p.set_axes_range(-3, 3, -2, 2) 
-p.save("sageoutput/plot_action14a.png")
-\end{sageoutput}
+q.set_axes_range(-2, 3, -1, 2) 
+q.save("graphics/svd003a.png")
+p = plot_circle_action(1,0,2,1) 
+p.set_axes_range(-2, 3, -1, 2) 
+p.save("graphics/svd003b.png")
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action14.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &3 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action14a.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd003a.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &0 \\ 2 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{graphics/svd003b.png}}
 \end{equation*}
 
-And here is the generic map.
+Here is another skew.
+In this case the output's 
+second component is affected by the input's distance from 
+the $x$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
-q.set_axes_range(-2, 2, -4, 6) 
-q.save("sageoutput/plot_action15.png")
-p = plot_circle_action(1,2,3,4) 
-p.set_axes_range(-2, 2, -4, 6) 
-p.save("sageoutput/plot_action15a.png")
+q.set_axes_range(-2, 2, -2, 2) 
+q.save("graphics/svd004a.png")
+p = plot_circle_action(1,1/2,0,1) 
+p.set_axes_range(-2, 2, -2, 2) 
+p.save("graphics/svd004b.png")
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 2, -2, 2) 
+q.save("graphics/svd004a.png")
+p = plot_circle_action(1,1/2,0,1) 
+p.set_axes_range(-2, 2, -2, 2) 
+p.save("graphics/svd004b.png")
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action15.png}}
-  \quad\mapsunder{\big (\begin{smallmatrix} 1 &3 \\ 0 &1 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action15a.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd004a.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &1/2 \\ 0 &1 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{graphics/svd004b.png}}
+\end{equation*}
+
+And here is a generic transformation.
+It changes orientation also.
+\begin{sageoutput}[d,0,4;d,5,7]
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 4, -3, 6) 
+q.save("graphics/svd005a.png")
+p = plot_circle_action(1,2,3,4) 
+p.set_axes_range(-2, 4, -3, 6) 
+p.save("graphics/svd005b.png")
+\end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-2, 4, -3, 6) 
+q.save("graphics/svd005a.png",figsize=3)
+p = plot_circle_action(1,2,3,4) 
+p.set_axes_range(-2, 4, -3, 6) 
+p.save("graphics/svd005b.png",figsize=3)
+\end{sagesilent}
+\begin{equation*}
+  \vcenteredhbox{\includegraphics{graphics/svd005a.png}}
+  \quad\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
+  \vcenteredhbox{\includegraphics{graphics/svd005b.png}}
 \end{equation*}
 
 
@@ -163,19 +256,30 @@ Write $\sigma_1$ for the length of the semi-major axis,
 the distance from the center to the furthest-away point on the ellipse,
 and write $\sigma_2$ for the length of the semi-minor axis.
 \begin{sageoutput}[d,0,4]
-plot.options['axes_pad'] = 0.05
-plot.options['fontsize'] = 7
-plot.options['dpi'] = 600
+plot.options['axes_pad'] = 0.5
+plot.options['fontsize'] = 5
+plot.options['dpi'] = 1200
 plot.options['aspect_ratio'] = 1
 sigma_1=3
 sigma_2=1
 E = ellipse((0,0), sigma_1, sigma_2)
-E.save("sageoutput/svd01.png", figsize=3.5)
+E.save("graphics/svd100.png")
 \end{sageoutput}
+\begin{sagesilent}
+plot.options['axes_pad'] = 0.5
+plot.options['fontsize'] = 5
+plot.options['dpi'] = 1200
+plot.options['aspect_ratio'] = 1
+sigma_1=3
+sigma_2=1
+E = ellipse((0,0), sigma_1, sigma_2)
+# E.save("graphics/svd100.png", axes_pad=0.075, dpi=1200, fontsize=7, ticks=([-3,-2,-1,1,2,3],[-1,1]), figsize=2.5)
+E.save("graphics/svd100.png", axes_pad=0.075, dpi=1200, fontsize=7, figsize=2.5)
+\end{sagesilent}
 \begin{center}
-  \includegraphics{sageoutput/svd01.png}
+  \includegraphics{graphics/svd100.png}
 \end{center}
-The two axes are orthogonal.
+In an ellipse the two axes are orthogonal.
 In the above graph the major axis lies along the $x$-axis while the
 minor axis lies along the $y$-axis.
 
@@ -189,22 +293,37 @@ $D=\sequence{\vec{\delta}_1,\ldots,\vec{\delta}_n}$ for the codomain
 such that $t(\vec{\beta}_i)=\sigma_i\vec{\delta}_i$, where the
 \textit{singular values}
 $\sigma_i$ are scalars.
-The next section states that result more fully and sketches the proof
-but first we illustrate the central idea by using the generic matrix.
-Here is its action again, this time on a full circle.
+The next section sketches a proof
+but we first illustrate this result by using an example matrix.
+\Sage{} will find the two bases $B$ and~$D$ and will picture how the 
+vectors $\vec{\beta}_i$ 
+are mapped to the $\sigma_i\vec{delta}_i$.
+
+So consider again the generic matrix.
+Here is its action again, this time shown
+on a full circle.
 \begin{sageoutput}[d,0,4;d,5,7]
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1,full_circle=True) 
 q.set_axes_range(-2, 2, -5, 6) 
-q.save("sageoutput/plot_action16.png")
+q.save("graphics/svd101a.png")
 p = plot_circle_action(1,2,3,4,full_circle=True) 
-p.set_axes_range(-3, 3, -5, 6) 
-p.save("sageoutput/plot_action16a.png")
+p.set_axes_range(-4, 4, -5, 6) 
+p.save("graphics/svd101b.png")
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1,full_circle=True) 
+q.set_axes_range(-2, 2, -5, 6) 
+q.save("graphics/svd101a.png", dpi=1200)
+p = plot_circle_action(1,2,3,4,full_circle=True) 
+p.set_axes_range(-4, 4, -5, 6) 
+p.save("graphics/svd101b.png", dpi=1200)
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action16.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd101a.png}}
   \quad\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action16a.png}}
+  \vcenteredhbox{\includegraphics{graphics/svd101b.png}}
   \tag{$*$}
 \end{equation*}
 \Sage{} will find the SVD of this example matrix.
@@ -217,7 +336,7 @@ V
 U*Sigma*(V.transpose())
 \end{sageoutput}
 \noindent 
-The Singular Value Decomposition describes $M$ as the product of
+The Singular Value Decomposition has $M$ as the product of
 three matrices, $U\Sigma\trans{V}$.
 The basis vectors $\vec{\beta}_1$, $\vec{\beta}_2$, $\vec{\delta}_1$, 
 and~$\vec{\delta}_2$ are the columns of $U$ and~$V$. 
@@ -225,30 +344,51 @@ The singular values are the diagonal entries of~$\Sigma$.
 \Sage{} will plots the effect of the transformation
 on the basis vectors for the domain so we can compare those with the
 basis vectors for the codomain.
-\begin{sageoutput}[d,0,2]
+\begin{sageoutput}[d,0,2;d,6,10]
 M = matrix(RDF, [[1, 2], [3, 4]])
 U,Sigma,V = M.SVD()
-beta_1 = vector(RR, [U[0][0], U[1][0]])
-beta_2 = vector(RR, [U[0][1], U[1][1]])
-delta_1 = vector(RR, [V[0][0], V[1][0]])
-delta_2 = vector(RR, [V[0][1], V[1][1]])
+beta_1 = vector(RDF, [U[0][0], U[1][0]])
+beta_2 = vector(RDF, [U[0][1], U[1][1]])
+delta_1 = vector(RDF, [V[0][0], V[1][0]])
+delta_2 = vector(RDF, [V[0][1], V[1][1]])
 plot.options['axes_pad'] = 0.05
 plot.options['fontsize'] = 7
 plot.options['dpi'] = 600
 plot.options['aspect_ratio'] = 1
 C = circle((0,0), 1)
 P = C + plot(beta_1) + plot(beta_2)
-P.save("sageoutput/svd02a.png", figsize=2, axes_pad=0.05)
+P.save("graphics/svd102a.png")
 image_color=Color(1,0.5,0.5)   # color for t(beta_1), t(beta_2)
 Q = C + plot(beta_1*M, width=3, color=image_color) 
-Q = Q + plot(delta_1,width=1.4,color='blue') 
-Q = Q + plot(beta_2*M,width=3,color=image_color) 
-Q = Q + plot(delta_2,width=1.4,color='blue')
-Q.save("sageoutput/svd02b.png", figsize=4.467, axes_pad=0.05)
+Q = Q + plot(delta_1,width=1.4, color='blue') 
+Q = Q + plot(beta_2*M,width=3, color=image_color) 
+Q = Q + plot(delta_2,width=1.4, color='blue')
+Q.save("graphics/svd102b.png")
 \end{sageoutput}
-In the picture below, the domain's 
-blue $\vec{\beta}$'s on the left map to the light red vectors on the
-right.
+\begin{sagesilent}
+M = matrix(RDF, [[1, 2], [3, 4]])
+U,Sigma,V = M.SVD()
+beta_1 = vector(RDF, [U[0][0], U[1][0]])
+beta_2 = vector(RDF, [U[0][1], U[1][1]])
+delta_1 = vector(RDF, [V[0][0], V[1][0]])
+delta_2 = vector(RDF, [V[0][1], V[1][1]])
+plot.options['axes_pad'] = 0.05
+plot.options['fontsize'] = 7
+plot.options['dpi'] = 600
+plot.options['aspect_ratio'] = 1
+C = circle((0,0), 1)
+P = C + plot(beta_1) + plot(beta_2)
+P.save("graphics/svd102a.png", dpi=1200, figsize=2, axes_pad=0.05)
+image_color=Color(1,0.5,0.5)   # color for t(beta_1), t(beta_2)
+Q = C + plot(beta_1*M, width=3,arrowsize=18, color=image_color) 
+Q = Q + plot(delta_1,width=1.4,color='blue') 
+Q = Q + plot(beta_2*M,width=3,arrowsize=18,color=image_color) 
+Q = Q + plot(delta_2,width=1.4,color='blue')
+Q.save("graphics/svd102b.png", dpi=1200, figsize=4.467, axes_pad=0.05)
+\end{sagesilent}
+In the picture below the domain's 
+blue $\vec{\beta}$'s on the left map to the codomain's light red 
+$t(\vec{\beta})$'s on the right.
 Also on the right, in blue, are the $\vec{\delta}$'s.
 The red $t(\vec{\beta}_1)$ does look to be about $5.5$ times $\vec{\delta}_1$,
 and $t(\vec{\beta}_2)$ does look something like $0.4$ times~$\vec{\delta}_2$. 
@@ -256,7 +396,7 @@ and $t(\vec{\beta}_2)$ does look something like $0.4$ times~$\vec{\delta}_2$.
   % \setlength{\fboxsep}{0in} % used to set box heights by eye; surrounded each picture env with a fbox
   \setlength{\unitlength}{1in}
   \begin{picture}(1.35,1.35)
-    \put(0,1.825){\includegraphics{sageoutput/svd02a.png}}
+    \put(0,1.825){\includegraphics{graphics/svd102a.png}}
     \put(.3,1.9){\scriptsize $\vec{\beta}_1$}
     \put(0,2.7){\scriptsize $\vec{\beta}_2$}
   \end{picture}
@@ -264,25 +404,25 @@ and $t(\vec{\beta}_2)$ does look something like $0.4$ times~$\vec{\delta}_2$.
   \raisebox{2.65in}{$\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}$}
   \qquad
   \begin{picture}(2.45,3.15)
-    % \vcenteredhbox{\includegraphics{sageoutput/svd02b.png}}
-    \put(0,0){\includegraphics{sageoutput/svd02b.png}}
+    \put(0,0){\includegraphics{graphics/svd102b.png}}
     \put(1.25,2){\scriptsize $\vec{\delta}_1$}
     \put(2.3,2.1){\scriptsize $\vec{\delta}_2$}
   \end{picture}
   \tag*{\raisebox{2.5in}{($**$)}}
 \end{equation*}
 Note also that the two bases are \textit{orthonormal}\Dash the unit circles help
-us see that the bases are comprised of unit vectors, and further,
+us see that the bases are comprised of unit vectors and further,
 the two members of each basis are orthogonal.
 
 Compare this diagram to the one before it 
-labelled ($*$), which shows the effect of the matrix
+labelled~($*$), which shows the effect of the matrix
 on the unit circle.
-We used the whole circle in ($*$) to spotlight the ellipse, 
-to make it easier to see that in ($**$)
+We used the whole circle in~($*$) to spotlight the ellipse and 
+to make clearer that in~($**$)
 the longest red vector is a
 semi-major axis of that ellipse and the shortest red vector is a 
 semi-minor axis.
+
 
 
 \section{Proof sketch}
@@ -291,12 +431,12 @@ semi-minor axis.
 adapted from \cite{BlankKrikorianSpring89},
 is a sketch because it uses results that a typical reader has only 
 seen in a less general version and because it relies on material from the
-book that is in an optional section.
+book that is optional.
 In addition, we'll consider only the case of a nonsingular matrix and map;
 it shows the main idea, which is the point of a sketch.}
 
 Consider an~$\nbyn{n}$ matrix~$T$ that is nonsingular, and the
-nonsingular transformation~$\map{t}{\Re^n}{\Re^n}$ that is represented by
+nonsingular transformation~$\map{t}{\Re^n}{\Re^n}$ represented by
 $T$ with respect to the standard bases.
 
 Recall the Extreme Value Theorem from Calculus~I: for a continuous
@@ -305,7 +445,7 @@ the image $f(D)$ is also a closed and bounded
 set (see \cite{wiki:ExtremeValueThm}).
 A generalization of that result gives that because the unit sphere in $\Re^n$
 is closed and bounded then its image under~$t$ is closed and bounded.
-The image is in fact an ellipsoid, although we won't prove it,
+Although we won't prove this, the image is in fact an ellipsoid
 so we will call it that. 
 
 Because the ellipsoid is closed and bounded it has a point furthest from the
@@ -333,12 +473,13 @@ With that we will have an argument by induction: we start constructing the
 bases~$B$ and~$D$ by taking $\vec{\beta}_1$ to be~$\vec{v}$, taking
 $\sigma_1$ to be the length $\norm{\vec{w}}$, and taking
 $\vec{\delta}_1$ to be $\vec{w}/\norm{\vec{w}}$.
+Then we proceed by considering the restriction of $t$ to~$P$.
 
 So consider~$Q$.
 First observe that there is a unique plane that touches the ellipsoid
 only at~$\vec{w}$ since if there were another $\hat{Q}$ then $t^{-1}(\hat{Q})$
-would be a second plane that touches the sphere only at~$\vec{v}$, which is
-impossible.
+would be a second plane, besides~$P$, 
+that touches the sphere only at~$\vec{v}$, which is impossible.
 To see that $Q$ is perpendicular to~$\vec{w}$ consider a sphere
 centered at the origin whose radius is $\norm{\vec{w}}$.
 This sphere has a plane tangent at the endpoint of~$\vec{w}$, 
@@ -348,7 +489,7 @@ Because $\vec{w}$ ends at a point on the ellipsoid furthest from the origin,
 the ellipsoid is entirely contained in the sphere, so this plane touches
 the ellipsoid only at~$\vec{w}$.
 Therefore, from the second sentence of this paragraph, this plane is~$Q$. 
-That ends the proof.
+That ends the argument.
 
 
 
@@ -457,9 +598,9 @@ $\trans{\vec{v}}_2$.
   \end{mat}
   \tag{$*{*}*$}
 \end{align*}
-In the first term
+In the first term,
 right multiplication by the $1,1$~unit matrix picks out the first column of
-$U$ and left multiplication by the $1,1$~unit matrix picks out first row of
+$U$, and left multiplication by the $1,1$~unit matrix picks out first row of
 $V$ so those are the only parts that remain after the product.
 In short, we get this.
 \begin{equation*}
@@ -498,24 +639,23 @@ $M=\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1
 where the vectors have unit size and the $\sigma_i$'s decrease in size.
 
 Suppose that the matrix is $\nbyn{n}$.
-If we need to store it or transmit it then we need to work with 
-$n^2$ real numbers.
+To store or transmit it we need to work with $n^2$ real numbers.
 For instance, if $n=500$ then we have $50^2=250\,000$~reals.
-If we instead express the matrix as a sum 
-then each term requires 
+To express the matrix as a sum, 
+each term requires 
 $n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
 more real for $\sigma_i$.
 So keeping all the terms would require $500*(2*500+1)=500\,500$~reals,
 which is twice the data of the original matrix.
-But if we store only some of the terms, say the first $50$ of them, then
-it would be a savings:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
+But if you keep only some of the terms, say the first $50$ of them, then
+you would save:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
 $500^2$~size of the full matrix.
-Thus, if we have data as a matrix then we could hope to compress it
-with that formula by dropping terms with small $\sigma$'s.  
-The question is whether we lose too much of the the information by only 
-retaining the information associated with $10\%$ of the singular values.
+Thus, if you have data as a matrix then you can hope to compress it
+with that summation formula by dropping terms with small $\sigma$'s.  
+The issue is whether you lose too much of the the information by only 
+retaining the information associated with some of the singular values.
 
-To ilustrate that we can succeed while retaining at least some aspects of data
+To ilustrate that you can succeed in retaining at least some aspects of data
 we will do image compression.
 Meet Lenna.
 This top third of a pinup is a standard test image
@@ -524,10 +664,12 @@ This top third of a pinup is a standard test image
   \includegraphics[width=.95\textwidth]{Lenna.png} % from http://en.wikipedia.org/wiki/File:Lenna.png
 \end{center}
 
-The code we will use is in the \inlinecode{img_squeeze} function 
-that is listed at the end of this chapter.
+The code we will use is in the \inlinecode{img_squeeze} routine 
+listed at the end of this chapter.
+The code breaks the picture into three matrices, for the red data, the 
+green data, and the blue data.
 In that code we have a peek at the eight largest singular
-values (in the red matrix):
+values in the red matrix:
   $93233.7882139$, 
   $11193.1186308$, 
   $8660.12549856$, 
@@ -536,9 +678,10 @@ values (in the red matrix):
   $5742.14618029$, 
   $4125.16604075$, and
   $3879.15303685$.
-The code also reports 
-the singular value where we make the cutoff $606.389279688$,
-and the eight smallest:
+We retain the terms for the largest $10\%$ of the singular values. 
+The code reports that
+the singular value where we make that cutoff is $606.389279688$.
+It also gives the eight smallest:
   $0.547288023466$, 
   $0.470266870056$, 
   $0.1988515109$, 
@@ -569,23 +712,22 @@ and one of $2.325\,339\,864\,91\protect\times 10^{-12}$.}
 % \end{lstlisting}
 The large singular values are much larger than the small singular values,
 even setting aside the ones at the end
-that are zero but for numerical issues.
+that are zero except for numerical issues.
 
 We want to see how badly the image degrades for various cutoffs.
-The code below sets it to $10\%$.
+The code below sets it at $10\%$.
 This image is $\nbyn{512}$  so that will sum the terms associated
 with the first $51$ singular 
 values.
 \begin{lstlisting}
 sage: load "img_squeeze.sage"                                 
-sage: img_squeeze("Lenna.png", "Lena_squeezed.png", 0.10)
+sage: img_squeeze("Lenna.png", "Lenna_squeezed.png", 0.10)
 \end{lstlisting}
 Below is the squeezed image.
 \begin{center}
-  \includegraphics[width=.95\textwidth]{Lena_squeezed.png}
+  \includegraphics[width=.95\textwidth]{Lenna_squeezed.png}
 \end{center}
-It definitely shows loss;
-its image quality is less than the original.
+It definitely shows loss.
 The colors are not as good, the edges are not sharp, and there are 
 a few artifacts, including a horizontal line across the top of 
 Lenna's forehead and another halfway up her hat.
@@ -595,9 +737,8 @@ Where the image is $\nbyn{n}$, every additional term in the summation
 adds to the storage and transmission requirements by about $2n$ reals.
 The original image requires $n^2$ reals so we want to choose percentage values 
 less than $0.50$.
-On the other hand, higher values give better fidelity.
-So selecting an optimal percentage parameter is an engineering decision
-of making the tradoff.
+The tradeoff is that higher values give better fidelity.
+So selecting an optimal percentage parameter is an engineering decision.
 The above image has the advantage is that it needs only $20\%$ of the storage
 and transmission requirements of the original image.
 % The quality may (or may not) be acceptable, depending on the application.
@@ -629,7 +770,7 @@ This routine determines the list of colors and
 calls a helper \inlinecode{color_circle_list}, 
 given below, which returns a list of graphics.
 Finally, this routine plots those graphics.
-\lstinputlisting[firstline=37,lastline=49]{plot_action.sage}
+\lstinputlisting[firstline=38,lastline=48]{plot_action.sage}
 
 The helper does the heavy lifting.
 It produces a parametrized curve $(x(t),y(t))$, and uses \Sage's
