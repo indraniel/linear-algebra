@@ -88,7 +88,7 @@ def color_square_list(a, b, c, d, colors):
                     thickness = SQUARE_THICKNESS*1.25, fill =  True))
     return r
 
-def plot_square_action(a, b, c, d, show_unit_square = False):
+def plot_square_action(a, b, c, d):
     """Show the action of the matrix with entries a, b, c, d on half
     of the unit circle, as the circle and the output curve, broken into  
     colors.
@@ -96,9 +96,6 @@ def plot_square_action(a, b, c, d, show_unit_square = False):
     """
     colors = ['red', 'orange', 'green', 'blue']  
     G = Graphics()        # hold graph parts until they are to be shown
-    if show_unit_square:
-        for f_part in color_square_list(1,0,0,1,colors):
-            G += f_part
     for g_part in color_square_list(a,b,c,d,colors):
         G += g_part
     p = plot(G)
