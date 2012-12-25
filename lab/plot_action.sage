@@ -175,9 +175,9 @@ def before_after_list(a, b, c, d, pts, colors=None):
                             thickness=BA_THICKNESS))
         else:
             r.append(arrow((0,0), (x,y), color=color, 
-                     width=BA_THICKNESS))
+                     width=BA_THICKNESS, arrowsize=10*BA_THICKNESS))
             r.append(arrow((0,0), (f_x,f_y), color=color, 
-                     width=BA_THICKNESS))
+                     width=BA_THICKNESS, arrowsize=10*BA_THICKNESS))
     return r
 
 def plot_before_after_action(a, b, c, d, pts, colors=None):

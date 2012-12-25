@@ -1,7 +1,7 @@
 \chapter{\python{} and \Sage{}}
 
 To work through the Linear Algebra in this manual
-you need to be acquainted with how to run \Sage. 
+you must be acquainted with running \Sage. 
 \Sage{} uses the computer language \python{} so we'll start with that.
 
 
@@ -60,24 +60,12 @@ Try entering these expressions (double star is exponentiation).
 1 + 2*3
 2**3  
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> 2 - (-1)
-% 3
-% >>> 1 + 2*3
-% 7
-% >>> 2**3
-% 8  
-% \end{lstlisting}
 
 Part of \python's appeal is that doing simple things tend to be easy.
 Here is how you print something to the screen.
 \begin{pythonoutput}
 print 1, "plus", 2, "equals", 3
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> print 1, "plus", 2, "equals", 3
-% 1 plus 2 equals 3
-% \end{lstlisting}
 Often you can debug just by putting in commands to print things, 
 and having a straightforward print operator helps with that. 
 
@@ -88,11 +76,6 @@ and the second line uses that.
 i = 1
 i + 1
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> i = 1
-% >>> i + 1
-% 2
-% \end{lstlisting}
 In some programming languages you must declare the `type' of a variable
 before you use it; for instance you would have to declare 
 that $i$ is an integer before you could set $i=1$.
@@ -107,14 +90,6 @@ x
 x = 'a'
 x
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> x = 1
-% >>> x
-% 1
-% >>> x = 'a'
-% >>> x
-% 'a'
-% \end{lstlisting}
 
 \python{} lets you assign multiple values simultaneously.
 \begin{pythonoutput}
@@ -123,8 +98,8 @@ first_day
 last_day   
 \end{pythonoutput}
 \noindent
-\python{} computes the right side, left to right, and those values are
-assigned to the variables on the left.
+\python{} computes the right side, left to right, and then assigns 
+those values to the variables on the left.
 We will often use this construct.
 
 \python{} complains by \textit{raising an exception} and giving an error 
@@ -133,12 +108,6 @@ For instance, we cannot combine a string and an integer.
 \begin{pythonoutput}
 'a'+1
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> 'a'+1
-% Traceback (most recent call last):
-%   File "<stdin>", line 1, in <module>
-% TypeError: cannot concatenate 'str' and 'int' objects
-% \end{lstlisting}
 \noindent The error message's bottom line is the useful one.
 
 Make a comment of the rest of the line with a hash mark \inlinecode{\#}.
@@ -147,12 +116,6 @@ t = 2.2
 d = (0.5) * 9.8 * (t**2)  # d in meters
 d
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> t = 2.2
-% >>> d = (0.5) * 9.8 * (t**2)  # d in meters
-% >>> d
-% 23.716000000000005
-% \end{lstlisting}
 \noindent (Comments are more useful in a program than at the prompt.)
 Programmers often comment an entire line by starting 
 that line with a hash. 
@@ -177,14 +140,9 @@ we shall ignore it and just call them integers and reals.}
 5.774 * 3
 (3+2j) - (1-4j)
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> 5.774 * 3
-% 17.322
-% >>> (3+2j) - (1-4j)
-% (2+6j)
-% \end{lstlisting}
 \noindent As engineers do, \python{} uses~$j$ for the square
-root of~$-1$, not~$i$ as is traditional in Mathematics.
+root of~$-1$, not~$i$ as is traditional in Mathematics.\footnote{Athough
+\protect\Sage{} lets you use $i$.}
 
 The examples above show addition, subtraction, multiplication, 
 and exponentiation. 
@@ -199,14 +157,6 @@ a quotient, as in ``$2$ goes into $5$ with quotient~$2$ and remainder~$1$.''
 5.2 / 2
 5 / 2
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> 5.2 / 2.0
-% 2.6
-% >>> 5.2 / 2
-% 2.6
-% >>> 5 / 2
-% 2
-% \end{lstlisting}
 Experience shows this was a mistake. 
 One of the changes in \python~3
 is that the quotient operation has become \inlinecode{//}
@@ -218,12 +168,6 @@ x = 5
 y = 2
 (1.0*x) / y
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> x = 5
-% >>> y = 2
-% >>> (1.0*x) / y
-% 2.5
-% \end{lstlisting}
 \noindent Incidentally, 
 the integer remainder operation (sometimes called `modulus')  
 uses a percent character:~\inlinecode{5 \% 2} returns 1.
@@ -233,11 +177,6 @@ Variables can also represent truth values; these are \textit{Booleans}.
 yankees_stink = True
 yankees_stink
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> yankees_stink = True
-% >>> yankees_stink
-% True
-% \end{lstlisting}
 \noindent You need the initial capital:
 \inlinecode{True}
 or \inlinecode{False}, not
@@ -254,12 +193,6 @@ x = "I'm Popeye the sailor man"
 y = "I yam what I yam and that's all what I yam"
 x + ', ' + y
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> x = "I'm Popeye the sailor man"
-% >>> y = "I yam what I yam and that's all what I yam"
-% >>> x + ', ' + y
-% "I'm Popeye the sailor man, I yam what I yam and that's all what I yam"
-% \end{lstlisting}
 \noindent The \inlinecode{+} operation concatenates strings.
 Inside a double-quoted string use slash-\textit{n} \inlinecode{\\n} to
 get a newline.
@@ -278,19 +211,6 @@ but less
 and less
 and less. --Piet Hein"""
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> """THE ROAD TO WISDOM
-% ... 
-% ... The road to wisdom?
-% ... -- Well, it's plain
-% ... and simple to express:
-% ... Err
-% ... and err
-% ... and err again
-% ... but less
-% ... and less
-% ... and less. --Piet Hein"""
-% \end{lstlisting}
 \noindent 
 The three dots at the start of lines after the first
 is \python's
@@ -301,7 +221,7 @@ triple-quoted strings is as documentation.
 A \python{} \textit{dictionary} is a finite function.
 That is, it is a finite
 set of ordered pairs $\langle\textit{key},\textit{value}\rangle$ subject 
-to the restriction that no key can be used twice.
+to the restriction that no key can appear twice.
 Dictionaries are a simple database.
 \begin{pythonoutput}
 english_words = {'one': 1, 'two': 2, 'three': 3}
@@ -309,12 +229,6 @@ english_words['one']
 english_words['four'] = 4  
 english_words
 \end{pythonoutput}
-% \begin{lstlisting}[style=python]
-% >>> english_words = {'one': 1, 'two': 2, 'three': 3}
-% >>> english_words['one']
-% 1
-% >>> english_words['four'] = 4  
-% \end{lstlisting}
 \noindent Don't be mislead by this example, 
 the words do not always just come in the reverse of the order
 in which you entered them.
@@ -764,7 +678,7 @@ All of \Sage's built-in routines do this.
 %----------------------------------
 \section{\Sage}
 Learning what \Sage{} can do is the goal of much of this book 
-so this is only a very brief walk-through of preliminaries.
+so this is only a brief walk-through of preliminaries.
 See also \citep{SageTeam12} for a more broad-based introduction.
 
 First, if your system does not already supply it then install \Sage{} 

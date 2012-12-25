@@ -1,33 +1,56 @@
 \chapter{Eigenvalues}
 
-Consider again the action of a skew map on the unit circle.
-\begin{sageoutput}[d,0,4;d,5,7]
+In Chapter~\ref{chap:SingularValueDecomposition} on 
+Singular Value Decomposition we studied how
+transformations resize vectors; the maximum resizing factors
+are the singular values.
+In this chapter we consider another geometric effect.
+
+
+\section{Turning}
+Consider again the geometry of the action of a skew map on the unit circle.
+\begin{sageoutput}
 load "plot_action.sage"  
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -3, 3) 
-q.save("sageoutput/plot_action100a.png")
+q.save("graphics/eigen000a.png")
 p = plot_circle_action(2,2,0,2) 
 p.set_axes_range(-3, 3, -3, 3) 
-p.save("sageoutput/plot_action100b.png")
+p.save("graphics/eigen000b.png")
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"  
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-3, 3, -3, 3) 
+q.save("graphics/eigen000a.png",dpi=1200)
+p = plot_circle_action(2,2,0,2) 
+p.set_axes_range(-3, 3, -3, 3) 
+p.save("graphics/eigen000b.png",dpi=1200)
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action100a.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen000a.png}}
   \quad\mapsunder{\big (\begin{smallmatrix} 2 &2 \\ 0 &2 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action100b.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen000b.png}}
   \tag{$*$}
 \end{equation*}
-There are twelve colors;
-on the left they begin with red at $(x,y)=(1,0)$
-while on the right they begin with red at $(1,2)$.
+There are twelve colors.
+On the left the curve begins with red at $(x,y)=(1,0)$
+while on the right it begins with red at $(1,2)$.
 Here are the before and after vectors for that red point.
 \begin{sageoutput}[d,0,1;d,2,4]
 load "plot_action.sage"  
 p = plot_before_after_action(2,2,0,2, [(1,0)], ['red']) 
 p.set_axes_range(-0.5, 2, -0.5, 2) 
-p.save("sageoutput/plot_action101.png", ticks=([1,2],[1,2]))
+p.save("graphics/eigen001.png", ticks=([1,2],[1,2]))
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"  
+p = plot_before_after_action(2,2,0,2, [(1,0)], ['red']) 
+p.set_axes_range(-0.5, 2, -0.5, 2) 
+p.save("graphics/eigen001.png", ticks=([1,2],[1,2]), figsize=2, dpi=1200)
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action101.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen001.png}}
 \end{equation*}
 The matrix's action on the red vector is to both resize and rotate.
 \begin{sageoutput}
@@ -38,14 +61,14 @@ w.norm(), v.norm()
 angle = arccos(w*v/(w.norm()*v.norm())) 
 angle 
 \end{sageoutput}
-\noindent The map resizes and rotates the vector at the other end of the 
+\noindent The map resizes and rotates the violet vector at the other end of the 
 half circle, at $(-1,0)$, by the
-same amount as it does the vector ending at $(1,0)$. 
+same amount as it does the red vector ending at $(1,0)$. 
 This is because a linear map has the same action on 
 all vectors that lie on the same line through the origin.
 But intermediate vectors are not resized and rotated by the same
 amount.
-Here is the next of the twelve points on the half-circle.
+Here is the second of the twelve points on the half-circle.
 \begin{sageoutput}
 v = vector(RR, [cos(pi/12),sin(pi/12)])
 M = matrix(RR, [[2, 2], [0, 2]])
@@ -54,12 +77,6 @@ w.norm(), v.norm()
 angle = arccos(w*v/(w.norm()*v.norm())) 
 angle 
 \end{sageoutput}
-
-In Chapter~\ref{chap:SingularValueDecomposition} on 
-Singular Value Decomposition we studied how
-transformations resize vectors; the maximum resizing factors
-are the singular values.
-In this chapter we consider the turning.
 
 \Sage{} will show us the rotation of each of the twelve points 
 under the transformation.
@@ -73,23 +90,32 @@ number and returns that many vectors evenly spaced around the half-circle.
 We can use those two to make a graph.
 \begin{sageoutput}[d,0,1]
 load "plot_action.sage"  
-NUM_CIRCLE_PTS
-angles = find_angles(2,2,0,2,NUM_CIRCLE_PTS)
+angles = find_angles(2,2,0,2,12)
 angles[0:2]
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', edgecolor='blue', ticks=ticks)
 p.set_axes_range(0, pi, 0, pi) 
-p.save("sageoutput/plot_action103.png", figsize=2.5, tick_formatter=pi)
+p.save("graphics/eigen002.png", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"  
+angles = find_angles(2,2,0,2,12)
+angles[0:2]
+ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
+p = scatter_plot(angles, marker='.', edgecolor='blue', ticks=ticks)
+p.set_axes_range(0, pi, 0, pi) 
+p.save("graphics/eigen002.png", figsize=2.5, tick_formatter=pi, dpi=1200)
+\end{sagesilent}
 \begin{center}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action103.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen002.png}}
 \end{center}
 The most interesting point on this graph is where the angle is $0$\Dash
 for this transformation there is a input vector that does not turn at all.
 It is the vector halfway around the circle, with endpoint~$(0,1)$. 
-We can see it on the graphic above labelled~($*$), where the green input
-vector lies on the $y$-axis and so does its green image.
+We can see it above on this chapter's first graphic, labeled~($*$), 
+where the green input vector lies on the $y$-axis and so does its green image.
 It is resized but it isn't rotated.
+
 
 
 
@@ -100,28 +126,43 @@ Here is its action on the unit circle.
 load "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -5, 5) 
-q.save("sageoutput/plot_action110a.png")
+q.save("graphics/eigen100a.png")
 p = plot_circle_action(1,2,3,4) 
 p.set_axes_range(-3, 3, -5, 5) 
-p.save("sageoutput/plot_action110b.png")
+p.save("graphics/eigen100b.png")
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"
+q = plot_circle_action(1,0,0,1) 
+q.set_axes_range(-3, 3, -5, 5) 
+q.save("graphics/eigen100a.png",dpi=1200)
+p = plot_circle_action(1,2,3,4) 
+p.set_axes_range(-3, 3, -5, 5) 
+p.save("graphics/eigen100b.png",dpi=1200)
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action110a.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen100a.png}}
   \quad\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action110b.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen100b.png}}
 \end{equation*}
 This graphs the angle between the each before arrow and its associated after
 arrows.
 \begin{sageoutput}[d,0,1]
 load "plot_action.sage"  
-# vecs = circle_points(1000)
 angles = find_angles(1,2,3,4,1000)
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
-p = scatter_plot(angles, marker='.', edgecolor='blue', ticks=ticks)
-p.save("sageoutput/plot_action113.png", figsize=2.5, tick_formatter=pi)
+p = scatter_plot(angles, marker='.', ticks=ticks)
+p.save("graphics/eigen101.png", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"  
+angles = find_angles(1,2,3,4,1000)
+ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
+p = scatter_plot(angles, marker='.', markersize=10, edgecolor='blue', ticks=ticks)
+p.save("graphics/eigen101.png", figsize=2.5, tick_formatter=pi, dpi=1200)
+\end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action113.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen101.png}}
   \tag{**}
 \end{equation*}
 This graph has two interesting points, where $y=0$ and where 
@@ -131,9 +172,10 @@ the angle of $\pi$~radians means that the vector remains on the
 same line through the origin but is multiplied by a negative scalar.
 In both places the vector is not turned at all, only resized.
 
-Vectors that are not turned by a transformation~$t$ but are only resized 
-are \textit{eigenvectors} for~$t$, and the amount by which it is 
-resized is the \textit{eigenvalue} associated with that vector.
+A vectors that is not turned by a transformation~$t$ but instead
+is purely resized 
+is an \textit{eigenvectors} for~$t$, and the amount by which it is 
+resized is the \textit{eigenvalue} for that vector.
 For a fixed eigenvalue~$\lambda$, the set of vectors associated with
 it is an \textit{eigenspace}.
 \begin{sageoutput}[s,3,59,13]
@@ -144,13 +186,13 @@ evs[0]
 evs[1]
 \end{sageoutput}
 \noindent
-(A matrix has the same eigenvalues whether we are taking multiplication 
+A matrix has the same eigenvalues whether we are taking multiplication 
 by vectors to come from the left $\vec{v}M$ or from the 
 right~$M\vec{v}$.  
 But the eigenvectors will be different. 
 The \Sage{} operation \inlinecode{eigenvectors_left} covers the 
 $\vec{v}M$ case and naturally \inlinecode{eigenvectors_right}
-covers the other.)
+covers the other.
 
 The first information that \Sage{} gives, \inlinecode{evs[0]}, 
 is that the set of vectors with a basis consisting of the single unit
@@ -162,7 +204,7 @@ $(-0.57, -0.82)$, associated with the
 eigenvalue about~$5.37$. 
 
 \Sage{} will tell us which of those vectors is which on the graph 
-labelled~($**$).
+labeled~($**$).
 \begin{sageoutput}
 M = matrix(RDF, [[1, 2], [3, 4]])
 evs = M.eigenvectors_left()
@@ -186,14 +228,24 @@ p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red'])
 p2 = plot_before_after_action(1,2,3,4, [evs[1][1][0]], ['blue']) 
 p = p1+p2
 p.set_axes_range(-4, 1, -4.5, 1) 
-p.save("sageoutput/plot_action114.png", figsize=3.25)
+p.save("graphics/eigen102.png", figsize=3.25)
 \end{sageoutput}
+\begin{sagesilent}
+load "plot_action.sage"  
+M = matrix(RDF, [[1, 2], [3, 4]])
+evs = M.eigenvectors_left()  
+p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red']) 
+p2 = plot_before_after_action(1,2,3,4, [evs[1][1][0]], ['blue']) 
+p = p1+p2
+p.set_axes_range(-4, 1, -4.5, 1) 
+p.save("graphics/eigen102.png", figsize=3.25, dpi=1200)
+\end{sagesilent}
 \noindent
 Each before vector is a unit vector, so it is easy to pick it from among the
 two.
 The after vector is scaled from the before vector.
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{sageoutput/plot_action114.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen102.png}}
 \end{equation*}
 
 
@@ -232,9 +284,9 @@ The after vector is scaled from the before vector.
 
 
 
-\section{Polynomials}
+\section{Matrix polynomials}
 
-\Sage{} will find characteristic and minimal polynomials.
+\Sage{} will find characteristic and minimal polynomials of a matrix.
 \begin{sageoutput}
 M =  matrix(RDF, [[1, 2], [3, 4]]) 
 poly = M.charpoly()
@@ -296,7 +348,11 @@ To diagonalize the matrix put it in Jordan form.
 M =  matrix(QQ, [[2, -2, 2], [0, 1, 1], [-4, 8, 3]])  
 M.jordan_form()
 \end{sageoutput}
-\noindent \Sage{} will even furnish an appropriate transformation matrix.
+\noindent 
+Note the \inlinecode{-+-+-} lines that break the matrix into its component
+blocks.
+
+\Sage{} will even give you an appropriate transformation matrix.
 \begin{sageoutput}[d,0,1]
 M =  matrix(QQ, [[2, -2, 2], [0, 1, 1], [-4, 8, 3]])  
 JF, T = M.jordan_form(transformation=True)
@@ -315,18 +371,18 @@ M.jordan_form()
 
 \section{Source of find\_angles}
 This routine uses a formula for the angel between two vectors that 
-always gives a positive value, that is, it is the unoriented angle.
+always gives a positive value, that is, it is the angle without orientiation.
 That's fine for purpose here, which is to use the graph to 
 roughly locate places where the action of the matrix does not turn the
 vector. 
-\lstinputlisting[firstline=200, lastline=221]{plot_action.sage}
+\lstinputlisting[firstline=197, lastline=218]{plot_action.sage}
 
 
 \section{Source of plot\_before\_after\_action}
-The only perhaps unexpected point in this routine, and the helper routine
-before it, is that if the vector is not mapped very far then the helper
+The only perhaps unexpected point in this routine and its helper routine
+is that if the vector is not mapped very far then the helper
 routine does not show an arrow but instead shows a circle.
-\lstinputlisting[firstline=157, lastline=198]{plot_action.sage}
+\lstinputlisting[firstline=154, lastline=195]{plot_action.sage}
 
 
 \endinput
