@@ -122,14 +122,14 @@
     % unicode=false,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
-    pdffitwindow=true,     % window fit to page when opened
+    % pdffitwindow=true,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
     pdftitle={Lab Manual for Linear Algebra},    % title
     pdfauthor={Jim Hefferon},     % author
     pdfsubject={Linear Algebra},   % subject of the document
-    pdfcreator={xelatex},   % creator of the document
+    pdfcreator={Jim Hefferon},   % creator of the document
     pdfproducer={xelatex}, % producer of the document
-    pdfkeywords={Linear Algebra} {mathematics} {textbook} {Sage} {Free} {Hefferon},  % list of keywords
+    pdfkeywords={Linear Algebra} {mathematics} {textbook} {Sage} {Free} {Hefferon} {lab},  % list of keywords
     pdfnewwindow=true,      % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=blue,          % color of internal links
