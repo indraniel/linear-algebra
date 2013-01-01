@@ -21,7 +21,7 @@ we naturally ask what is possible when the two bases are also equal
 so that we have $\rep{t}{B,B}$\Dash
 we will find a canonical form for matrix similarity.
 
-We began
+We began this chapter
 by noting that while a partial identity matrix is the canonical form
 for the $B,D$ case, in the $B,B$ case there are some matrix similarity
 classes without one.
@@ -54,13 +54,12 @@ This is Jordan canonical form.
 
 
 \subsectionoptional{Polynomials of Maps and Matrices}\index{polynomial!of map, matrix}
-Recall that the set of square matrices
+Recall that the set of square matrices~\( \matspace_{\nbyn{n}} \)
 is a vector space under entry-by-entry addition and scalar multiplication,
 and that 
 %the unit matrices\Dash all entries are zero except
 %for a single entry, which is one\Dash form a basis, so 
-this space 
-\( \matspace_{\nbyn{n}} \) has dimension \( n^2 \).
+this space has dimension \( n^2 \).
 Thus, for any \( \nbyn{n} \) matrix $T$ the
 \( n^2+1 \)-member set \( \set{I,T,T^2,\dots,T^{n^2} } \) is linearly
 dependent and so there are scalars \( c_0,\dots,c_{n^2} \),
@@ -87,11 +86,12 @@ and verifying that \( 0T^4+0T^3+1T^2-2T-1I \) equals the zero matrix is easy.
 \end{example}
 
 \begin{definition}
-For any polynomial \( f(x)=c_nx^n+\dots+c_1x+c_0 \),
-where \( t \) is a linear transformation then \( f(t) \) is the
-transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on the same space, and
-where \( T \) is a square matrix then \( f(T) \) is
-the matrix \( c_nT^n+\dots+c_1T+c_0I \).
+Let \( t \) be a linear transformation of a vector space~\( V \)
+and let \( T \) be a square matrix.
+Where \( f(x)=c_nx^n+\dots+c_1x+c_0 \) is a polynomial,
+\( f(t) \) is the
+transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on~\( V \) and
+\( f(T) \) is the matrix \( c_nT^n+\dots+c_1T+c_0I \).
 \end{definition}
 
 \noindent The polynomial of the matrix represents the polynomial of the map:~if 
@@ -109,12 +109,14 @@ We shall follow this convention.
 \end{remark}
 
 Consider again \nearbyexample{ex:PolySendRotMatToZ}.
-Although $T\in\matspace_{\nbyn{2}}$, which is a dimension~four space,
-we exhibited a polynomial of $T$ that gave the zero matrix
-and was of degree less than four. 
+The space $\matspace_{\nbyn{2}}$ has dimension four, so we know that for any
+\( \nbyn{2} \) matrix there is a fourth degree polynomial \( f  \) such that
+\( f(T) \) equals the zero matrix. 
+But for that \( T \)  
+we exhibited a polynomial of degree less than four that gave the zero matrix. 
 So for any particular map or matrix,
-degree~$n^2$ will suffice but there may be a smaller degree polynomial that
-works.
+degree~$n^2$ will suffice but there may be a polynomial of
+smaller degree that works.
 
 \begin{definition}
 The \definend{minimal polynomial}\index{polynomial!minimal}%
@@ -156,7 +158,7 @@ minimal degree and are thus of equal degree,
 and both have a leading one.
 In their difference \( d(x)=m(x)-\hat{m}(x) \) the leading terms cancel.
 So $d$ is of smaller degree than $m$ and $\hat{m}$.
-If $d$ were to have a leading coefficent that is nonzero then we could divide
+If $d$ were to have a leading coefficient that is nonzero then we could divide
 by it to get a polynomial that takes the map or matrix to zero and
 has leading coefficient one.
 This would contradict the choice of $m$ and $\hat{m}$ as of minimal degree. 
@@ -1997,7 +1999,7 @@ if whenever \( \vec{m}\in M \) then \( t(\vec{m})\in M \)
  
 Recall that Lemma~III.\ref{le:RangeAndNullChains} shows that for any
 transformation~$t$ on an $n$~dimensional space
-the rangespaces of iterates are stable 
+the range spaces of iterates are stable 
 \begin{equation*}
   \rangespace{t^n}=\rangespace{t^{n+1}}=\cdots=\genrangespace{t}
 \end{equation*} 
@@ -2006,7 +2008,7 @@ as are the null spaces.
   \nullspace{t^n}=\nullspace{t^{n+1}}=\cdots=\gennullspace{t}
 \end{equation*} 
 Thus,
-the generalized null space $\gennullspace{t}$ and the generalized rangespace
+the generalized null space $\gennullspace{t}$ and the generalized range space
 $\genrangespace{t}$ are $t$~invariant.
 % For the generalized null space, if $\vec{v}\in\gennullspace{t}$ then
 % $t^n(\vec{v})=\zero$ where $n$ is the dimension of the underlying space
@@ -2241,26 +2243,19 @@ Now for the promised third, and final, step to the main result.
 \begin{lemma}
 If a linear transformation \( \map{t}{V}{V} \) has the 
 characteristic polynomial
-\( (x-\lambda_1)^{p_1}\dots(x-\lambda_j)^{p_j} \) then
+\( (x-\lambda_1)^{p_1}\dots(x-\lambda_k)^{p_k} \) then
 (1)~\( V=\gennullspace{t-\lambda_1}\directsum\cdots
-             \directsum\gennullspace{t-\lambda_j} \) 
+             \directsum\gennullspace{t-\lambda_k} \) 
 and
 (2)~\( \dim(\gennullspace{t-\lambda_i})=p_i  \).
 \end{lemma}
 
 \begin{proof}
-We start by proving that
-\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j}=\set{\zero} \)
-when \( i\neq j \).
-This shows that the bases for the generalized null spaces, when concatenated,
-form a linearly independent subset of the space~$V$.
-We will then show that clause~(2) holds because with that, since
-the degree \( p_1+\cdots+p_k \) of the
-characteristic polynomial equals the dimension of the space~$V$,
-we will have proved clause~(1) also.
+This argument consists of proving
+two preliminary claims, followed by proofs of clauses~(1) and~(2).
 
-So consider
-\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j} \)
+The first claim is that
+\( \gennullspace{t-\lambda_i}\intersection\gennullspace{t-\lambda_j}=\set{\zero} \)
 when \( i\neq j \).
 By \nearbylemma{le:tInvIfftMinLambdaInv}
 both \( \gennullspace{t-\lambda_i} \) and 
@@ -2286,7 +2281,64 @@ is the trivial space
 the only transformation that is without any eigenvalues is 
 the transformation on the trivial space).
 
-To prove clause~(2), decompose \( V \) as 
+The second claim is that 
+\( \gennullspace{t-\lambda_i} \subseteq \genrangespace{t-\lambda_j} \),
+where \( i\neq j \).
+To verify it we will show that \( t-\lambda_j \) is one-to-one on
+\( \gennullspace{t-\lambda_i} \) so that, 
+since \( \gennullspace{t-\lambda_i} \) is \( t-\lambda_j \) invariant
+by \nearbylemma{le:tInvIfftMinLambdaInv},
+the map \( t-\lambda_j \) is an automorphism of the subspace
+\( \gennullspace{t-\lambda_i} \),
+and therefore that 
+\( \gennullspace{t-\lambda_i} \)  is a subset of each
+\( \rangespace{t-\lambda_j} \), \( \rangespace{(t-\lambda_j)^2} \), etc.
+For the verification that the map is one-to-one
+suppose that \( \vec{v}\in\gennullspace{t-\lambda_i} \) is in the 
+null space of \( t-\lambda_j \), aiming to show that \( \vec{v}=\zero \).
+Consider the map 
+\( [(t-\lambda_i)-(t-\lambda_j)]^n \).
+On the one hand, the only
+vector that \( (t-\lambda_i)-(t-\lambda_j)=\lambda_i-\lambda_j \) maps to 
+zero is the zero vector.
+On the other hand, as in the proof of 
+\nearbylemma{le:PolyMapsFactor} we can 
+apply the binomial expansion to get this.
+\begin{equation*}
+  (t-\lambda_i)^n(\vec{v})
+    +\binom{n}{1}(t-\lambda_i)^{n-1}(t-\lambda_j)^1(\vec{v})
+    +\binom{n}{2}(t-\lambda_i)^{n-2}(t-\lambda_j)^2(\vec{v})
+    +\cdots 
+\end{equation*}
+The first term is zero because \( \vec{v}\in\gennullspace{t-\lambda_i} \)
+while the remaining terms are zero because
+\( \vec{v} \) is in the null space of \( t-\lambda_j \).
+Therefore \( \vec{v}=\zero \). 
+
+With those two preliminary claims done 
+we can prove clause~(1), that the space is the direct sum of the
+generalized null spaces.
+By Corollary~III.\ref{GenRngNullDirSumToSp} the space is the direct sum
+\( V=\gennullspace{t-\lambda_1}\directsum\genrangespace{t-\lambda_1} \).
+By the second claim
+\( \gennullspace{t-\lambda_2}\subseteq\genrangespace{t-\lambda_1} \)
+and so we can get a basis for \( \genrangespace{t-\lambda_1} \) by
+starting with a basis for \( \gennullspace{t-\lambda_2} \) and adding
+extra basis elements taken from
+\( \genrangespace{t-\lambda_1}\intersection\genrangespace{t-\lambda_2} \). 
+Thus \( V=\gennullspace{t-\lambda_1}\directsum\gennullspace{t-\lambda_2}
+          \directsum 
+       (\genrangespace{t-\lambda_1}\intersection\genrangespace{t-\lambda_2}) \).
+Continuing in this way we get this.
+\begin{equation*}
+  V=\gennullspace{t-\lambda_1}\directsum\cdots\directsum\genrangespace{t-\lambda_k}
+          \directsum 
+       (\genrangespace{t-\lambda_1}\intersection\cdots\intersection\genrangespace{t-\lambda_k})
+\end{equation*}
+The first claim above shows that the final space is trivial. 
+
+We finish by verifying clause~(2).
+Decompose \( V \) as 
 \( \gennullspace{t-\lambda_i}\directsum\genrangespace{t-\lambda_i} \)
 %with basis $B=\cat{B_{\mathscr{N}}}{B_{\mathscr{R}}}$
 and apply \nearbylemma{le:InvCompSubspSplitTrans}.
@@ -2305,14 +2357,14 @@ and apply \nearbylemma{le:InvCompSubspSplitTrans}.
 \nearbylemma{le:DetIsProdOfSubDets} says that
 \( \deter{T-xI}=\deter{T_1-xI}\cdot\deter{T_2-xI} \).
 By the uniqueness clause of the Fundamental Theorem of Algebra, 
+Theorem~I.\ref{th:FundThmAlg},
 the determinants of the blocks have the same factors as the
 characteristic polynomial
-\( \deter{T_1-xI}=(x-\lambda_1)^{q_1}\cdots(x-\lambda_z)^{q_z} \)
+\( \deter{T_1-xI}=(x-\lambda_1)^{q_1}\cdots(x-\lambda_z)^{q_k} \)
 and
-\( \deter{T_2-xI}=(x-\lambda_1)^{r_1}\cdots(x-\lambda_z)^{r_z} \),
+\( \deter{T_2-xI}=(x-\lambda_1)^{r_1}\cdots(x-\lambda_z)^{r_k} \),
 where
-\( q_1+r_1=p_1 \), \dots, \( q_z+r_z=p_z \).
-Theorem~I.\ref{th:FundThmAlg}.
+\( q_1+r_1=p_1 \), \dots, \( q_k+r_k=p_k \).
 We will finish by establishing that (i)~$q_j=0$ for all $j\neq i$,
 and (ii)~$q_i=p_i$.
 Together these prove clause~(2) because they show that the degree of 
@@ -2367,8 +2419,8 @@ Given an \( \nbyn{n} \) matrix \( T \), consider the linear map
 with respect to the standard bases.
 Use the prior lemma to write
 \( \C^n=\gennullspace{t-\lambda_1}\directsum\cdots
-        \directsum\gennullspace{t-\lambda_z} \)
-where \( \lambda_1 \), \ldots, \(\lambda_z \) are the eigenvalues of \( t \).
+        \directsum\gennullspace{t-\lambda_k} \)
+where \( \lambda_1 \), \ldots, \(\lambda_k \) are the eigenvalues of \( t \).
 Because each \( \gennullspace{t-\lambda_i} \)  is \( t \) invariant,
 \nearbylemma{le:InvCompSubspSplitTrans} and the prior lemma show
 that \( t \) is represented by a matrix that is all zeroes except for square

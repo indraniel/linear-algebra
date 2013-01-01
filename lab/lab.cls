@@ -59,8 +59,8 @@
              ItalicFont = sfoti10.pfb,
              SmallCapsFont = sfocc10]{sform10.pfb}
 \setsansfont{Computer Modern Sans Serif Demi Condensed}
-\setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
-             Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
+% \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
+%              Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
 % \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
 %                Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
 % \setmonofont[Path=fonts/tmp/,

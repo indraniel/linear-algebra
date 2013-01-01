@@ -779,6 +779,17 @@ A \definend{\( t \)-string basis}\index{basis!string}\index{string!basis}
 is a basis that is a concatenation of \( t \)-strings.
 \end{definition}
 
+\begin{example}
+Consider differentiation \( \map{d/dx}{\polyspace_2}{\polyspace_2} \).
+The sequence
+\( \sequence{x^2, 2x, 2, 0} \)
+is a \( d/dx \)-string of length~\( 4 \).
+The sequence
+\( \sequence{x^2, 2x, 2} \)
+is a \( d/dx \)-string of length~\( 3 \)
+that is a basis for \( \polyspace_2\).
+\end{example}
+
 Note that the strings cannot form a basis under concatenation
 if they are not disjoint because a basis cannot have a repeated vector. 
 
@@ -796,19 +807,21 @@ length equal to the index of nilpotency of $t$.
 \end{lemma}
 
 \begin{proof}
-Suppose not.
-Those strings cannot be longer; if the index is
-\( k \) then \( t^k \) sends any vector\Dash including those starting the
-string\Dash to \( \zero \).
-So suppose instead that there is a transformation $t$ of index~$k$ 
-on some space, such that the space has a $t$-string basis where 
-all of the strings are shorter than length \( k \).
+Assume the space has a basis of $t$-strings and that $t$'s index of
+nilpotency is $k$.
+We cannot have that the longest string in that basis is longer than
+$t$'s index of nilpotency:
+\( t^k \) sends any vector, including the vector starting the longest
+string, to \( \zero \).
+So suppose instead that the space has a $t$-string basis~$B$ where 
+all of the strings are shorter than length~\( k \).
 Because $t$ has index~$k$, there is a vector \( \vec{v} \) 
 such that \( t^{k-1}(\vec{v})\neq\zero \).
-Represent $\vec{v}$ as a linear combination of basis elements 
+Represent $\vec{v}$ as a linear combination of elements from~$B$ 
 and apply \( t^{k-1} \).
-We are supposing that \( t^{k-1} \) sends each basis element to \( \zero \)
-but that it does not send \( \vec{v} \) to \( \zero \).
+We are supposing that \( t^{k-1} \) maps each element of~$B$ to \( \zero \),
+and therefore each summand in the linear combination to $\zero$,
+but also that it does not map \( \vec{v} \) to \( \zero \).
 That is impossible. 
 \end{proof}
 
@@ -819,9 +832,10 @@ nilpotent map has an associated string basis.
 % all zeros except for blocks of subdiagonal ones, is immediate,
  %as in \nearbyexample{ThirdNilMap}.
 
-Looking for a counterexample, a nilpotent map without an associated
-string basis that is disjoint, will suggest the idea for the proof.
-Consider the map \( \map{t}{\C^5}{\C^5} \) with this action.
+We first see main idea of the argument by considering an example.
+If we want to construct a counterexample, a nilpotent map without an associated
+disjoint string basis, we would something like 
+the map \( \map{t}{\C^5}{\C^5} \) with this action.
 \begin{center}
   \begin{minipage}{1in}
   $\begin{strings}{ccccc}
@@ -848,20 +862,19 @@ Consider the map \( \map{t}{\C^5}{\C^5} \) with this action.
     0  &0  &0  &1  &0
   \end{mat}$
 \end{center}
-These three 
-strings aren't disjoint. 
-The first two strings $\vec{e}_1\mapsto\vec{e}_3\mapsto\zero$ and 
-$\vec{e}_1\mapsto\vec{e}_3\mapsto\zero$ overlap, even after omitting $\zero$.
-But that doesn't mean that there is no  
-$t$-string basis;
-it only means that \( \stdbasis_5 \) is not one.
+The action on the basis shows that this map is nilpotent but this is not
+a disjoint string basis, because the first two of the
+three strings aren't disjoint. 
+However, the fact that this basis isn't disjoint doesn't mean there is no
+disjoint string basis.
+To produce a such a basis for this map
+we will first find the number and lengths of its strings.
 
-To find a basis we first find 
-the number and lengths of its strings.
 Since $t$'s index of nilpotency is two,
 \nearbylemma{le:LongestTowerIsIndex} says that 
 at least one string in the basis has length two.
-Thus the map must act on a string basis in one of these two ways.
+There are five basis elements so if there is a disjoint string basis then
+the map must act on it in one of these two ways.
 \begin{equation*}
   \begin{strings}{ccccc}
     \vec{\beta}_1 &\mapsto &\vec{\beta}_2 &\mapsto &\zero  \\
@@ -882,23 +895,26 @@ null space of dimension three since that's how many basis vectors are
 mapped to zero. 
 A transformation with the right-hand action has a null space of
 dimension four.
-Using the matrix representation above, calculation of $t$'s null space
+Thus, using the matrix representation above, we can determine which of the 
+two possible shapes is right by calculating $t$'s null space.
 \begin{equation*}
   \nullspace{t}=
   \set{\colvec{x \\ -x \\ z \\ 0 \\ r}\suchthat x,z,r\in\C }
 \end{equation*}
-shows that it is three-dimensional,
-meaning that we want the left-hand action.
+It is three-dimensional,
+meaning that this~\( t \) has the left-hand action, since in the 
+right-hand action the number of basis vectors mapped to zero
+is~\( 4 \).
 
-To produce a string basis, first
+To produce a string basis first
 pick \( \vec{\beta}_2 \) and \( \vec{\beta}_4 \) from
-\( \rangespace{t}\intersection\nullspace{t} \)
+\( \rangespace{t}\intersection\nullspace{t} \).
 \begin{equation*}
   \vec{\beta}_2=\colvec[r]{0 \\ 0 \\ 1 \\ 0 \\ 0}\qquad
   \vec{\beta}_4=\colvec[r]{0 \\ 0 \\ 0 \\ 0 \\ 1}
 \end{equation*}
-(other choices are possible, just be sure that 
-\( \set{\vec{\beta}_2,\vec{\beta}_4} \) is linearly independent).
+(Other choices are possible, just be sure that the set
+\( \set{\vec{\beta}_2,\vec{\beta}_4} \) is linearly independent.)
 For \( \vec{\beta}_5 \) pick a vector from \( \nullspace{t} \)
 that is not in the span of \( \set{ \vec{\beta}_2,\vec{\beta}_4 } \).
 \begin{equation*}
@@ -911,8 +927,10 @@ Finally, take \( \vec{\beta}_1 \) and \( \vec{\beta}_3 \) such that
   \vec{\beta}_1=\colvec[r]{0 \\ 1 \\ 0 \\ 0 \\ 0}\qquad
   \vec{\beta}_3=\colvec[r]{0 \\ 0 \\ 0 \\ 1 \\ 0}
 \end{equation*}
-Now, with respect to \( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_5} \),
-the matrix of $t$ is as desired.
+Therefore, we have a string basis
+\( B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_5} \)
+and with respect to that basis
+the matrix of $t$ has blocks of subdiagonal~$1$'s.
 \begin{equation*}
   \rep{t}{B,B}=
   \begin{pmat}{rr|rr|r}
@@ -931,8 +949,8 @@ While the basis is not unique, the number
 and the length of the strings is determined by \( t \).
 \end{theorem}
 
-This illustrates the argument below, which describes three kinds of
-basis vectors (we shown them in squares if they are in the 
+This illustrates the proof, which describes three kinds of
+basis vectors (shown in squares if they are in the 
 null space and in circles if they are not).
 \begin{equation*}
    \begin{strings}{ccccccccccccccccccc}
