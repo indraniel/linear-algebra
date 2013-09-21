@@ -2,7 +2,7 @@
 %  http://joshua.smcvt.edu/linalg.html
 %  2012-Jun-18
 \topic{Chi\`o's Method}
-\index{Chi\`o's Method|(}
+\index{Chi\`o's method|(}
 
 When doing Gauss's Method on a matrix that contains only integers
 \begin{equation*}
@@ -13,9 +13,8 @@ When doing Gauss's Method on a matrix that contains only integers
     1 &5 &1 
   \end{mat}
 \end{equation*}
-people often prefer to keep it that way.
-Instead of the row operations $-(3/2)\rho_1+\rho_2$ and
-$-(1/2)\rho_1+\rho_3$ they may start by multiplying the rows below the top one
+people often like to keep it that way.
+To avoid fractions they may start by multiplying the lower rows
 by~$2$
 \begin{equation*}
   \grstep[2\rho_3]{2\rho_2}\;
@@ -26,7 +25,7 @@ by~$2$
   \end{mat}
   \tag{$*$}
 \end{equation*}
-and then the elimination in the first column goes like this.
+and then elimination in the first column goes like this.
 \begin{equation*}
   \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}\;
   \begin{mat}
@@ -36,10 +35,10 @@ and then the elimination in the first column goes like this.
   \end{mat}
   \tag{$**$}
 \end{equation*}
-An all-integer approach is easier for mental calculations. 
+This all-integer approach is easier for mental calculations. 
 And, using integer arithmetic on a computer
 avoids some sticky issues involving floating point calculations \cite{Kahan}.
-So there are sound reasons to take this approach.
+So there are sound reasons for this approach.
 
 Another reason comes from
 observing that we can easily apply Laplace's expansion to the 
@@ -47,7 +46,7 @@ first column of~($**$) and then we get the determinant of $A$ by
 remembering to divide by $4$ because of~($*$).
 
 Here is the general $\nbyn{3}$ case of this approach to finding the determinant.
-First rescale all rows except the top one.
+First, assuming $a_{1,1}\neq 0$, we can rescale the lower rows.
 \begin{equation*}
   A=
   \begin{mat}
@@ -78,8 +77,8 @@ Now eliminate down the first column.
 \end{equation*}
 Let $C$ be the $1,1$ minor.
 By Laplace the determinant of the above matrix is $a_{1,1}\det(C)$.
-We thus have $a_{1,1}^2\det(A)=a_{1,1}\det(C)$ and if $a_{1,1}\neq 0$
-then this $\nbyn{3}$ case gives $det(A)=\det(C)/a_{1,1}$.
+We thus have $a_{1,1}^2\det(A)=a_{1,1}\det(C)$ and since $a_{1,1}\neq 0$
+this $\nbyn{3}$ case gives $det(A)=\det(C)/a_{1,1}$.
 
 To expand this approach to $\nbyn{n}$ matrices with $n>3$ 
 we must see how to compute the minor's entries.
@@ -116,16 +115,15 @@ $\nbyn{(n-1)}$ matrix whose $i,j$ entry is the determinant
   \end{vmat}
 \end{equation*}
 where $1<i,j\leq n$.
-\definend{Chi\`o's Method}\index{Chi\`o's formula} 
+\definend{Chi\`o's method}\index{Chi\`o's method} 
 for finding the determinant of $A$ is that
 if $a_{1,1}\neq 0$ then
 $\det(A)=\det(C)/a_{1,1}^{n-2}$.
-
-By the way,
+(By the way,
 nothing in Chi\`o's formula requires that the numbers be integers; it applies
-to reals as well. 
+to reals as well.)
 
-We illustrate by finding the determinant of this $\nbyn{3}$ matrix.
+To illustrate, we  finding the determinant of this $\nbyn{3}$ matrix.
 \begin{equation*} 
   A=
   \begin{mat}
@@ -167,9 +165,9 @@ The formula for $\nbyn{3}$ matrices
 $det(A)=\det(C)/a_{1,1}$ gives $\det(A)=(50/2)=25$.
 
 For a larger determinant we must do multiple steps
-but each involves only $\nbyn{2}$ determinants and so 
-we can often write down only some
-intermediate information.
+but each involves only $\nbyn{2}$ determinants. 
+So we can often calculate the determinant just by writing down only some
+intermediate information on scrap paper.
 For instance, given this $\nbyn{4}$ matrix
 \begin{equation*}
   A=
@@ -180,8 +178,8 @@ For instance, given this $\nbyn{4}$ matrix
     1  &0  &0  &1
   \end{mat} 
 \end{equation*}
-we can find Chi\`o's matrix by mentally doing each of the 
-$\nbyn{2}$ calculations and only noting the
+find Chi\`o's matrix by mentally doing each of the 
+$\nbyn{2}$ calculations and only writing down the
 $\nbyn{3}$ result. 
 \begin{equation*}
   C_3=
@@ -230,12 +228,11 @@ $\nbyn{3}$ result.
     0  &-1  &2
   \end{mat}
 \end{equation*}
-We should also note that the determinant of this is 
+Also note that the determinant of this is 
 $a_{1,1}^{4-2}=3^2$ times the determinant of the $\nbyn{4}$ matrix~$A$.
 
-We can finish by repeating the process with the $\nbyn{3}$ matrix.
-This is Chi\`o's matrix of it; note that the determinant of this matrix
-is $6$~times the determinant of~$C_3$.
+Finish the calculation by repeating the process.
+Here is Chi\`o's matrix of $C_3$.
 \begin{equation*}
   C_2=
   \begin{mat}    
@@ -262,17 +259,19 @@ is $6$~times the determinant of~$C_3$.
     -6 &12
   \end{mat}
 \end{equation*}
+Note that the determinant of this matrix
+is $6$~times the determinant of~$C_3$.
 The determinant of $C_2$ is $108$.
-We have
+So
 $\det(A)=108/(3^2\cdot 6)=2$.
 
 Laplace's expansion formula for evaluating determinants is recursive because
 it reduces the calculation of an~$\nbyn{n}$ determinant to the evaluation
 of a number of $\nbyn{(n-1)}$~ones.
-Chi\`o's formula is also recursive, so it is similar in spirit, 
+Chi\`o's formula is also recursive, 
 but it reduces an~$\nbyn{n}$
-determinant to a single~$\nbyn{(n-1)}$ determinant, the calculation
-of which requires a number of $\nbyn{2}$ determinants.
+determinant to a single~$\nbyn{(n-1)}$ determinant, calculated
+from a number of $\nbyn{2}$ determinants.
 However, for large matrices Gauss's Method is better than either; for instance,
 it takes roughly half as many operations as Chi\`o's 
 Method~\cite{FullerLogan}.
@@ -346,7 +345,7 @@ Method~\cite{FullerLogan}.
       where $p+1\neq i$ and $q+1\neq j$.
     \end{answer}
   \item The \definend{Rule of Sarrus}\index{Sarrus, Rule of}\index{Rule of Sarrus}
-    is a mnemonic that students often learn in prior courses 
+    is a mnemonic that students often learn 
     for the $\nbyn{3}$ determinant formula.
     On the right of the matrix copy the first two columns. 
     \begin{equation*}

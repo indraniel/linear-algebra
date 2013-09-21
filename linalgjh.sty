@@ -34,7 +34,11 @@
 }{%
 \end{array}}
 
-
+% Sometimes a system has a column with no + or - in it.  LaTeX skips the space 
+% in that column, and I'd like to put in a box of the right width there.
+\newsavebox\boxofmathplus 
+\sbox{\boxofmathplus}{$+$}
+\newcommand{\spaceforemptycolumn}{\makebox[\wd\boxofmathplus]{\ }}
 
 %--------grstep
 % For denoting a Gauss' reduction step.
@@ -198,9 +202,12 @@
 
 % emptyset
 \renewcommand{\emptyset}{\varnothing}
-% sets
+% sets 
+% TODO: use braket.sty?
 \newcommand{\setspacing}{0.1em}  % space between opening bbrace and set elet, and closing brace and set elet.  Note: \,=\thinspace=0.16667em
-\newcommand{\set}[1]{\mbox{$\{\hspace{\setspacing}#1\hspace{\setspacing}\}$}} \newcommand{\suchthat}{\bigm|}
+\newcommand{\set}[1]{\mbox{$\{\hspace{\setspacing}#1\hspace{\setspacing}\}$}} 
+% \newcommand{\suchthat}{\bigm|}
+\newcommand{\suchthat}{\mid}
 \newcommand{\union}{\cup}
 \newcommand{\intersection}{\cap}
 

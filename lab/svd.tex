@@ -23,11 +23,13 @@ If $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
     3 &4
   \end{mat}
 \end{equation*}
-then here is the effect of $t$ on one vector in the line.
+then here is the effect of $t$ on one vector in the line
+(calculating with the vector on the left $\vec{v}T$).
 \begin{equation*}
-  \colvec{1 \\ 2}\mapsunder{t}\colvec{7 \\ 10}
+  \vec{v}=\colvec{1 \\ 2}\mapsunder{t}\colvec{7 \\ 10}
 \end{equation*}
-And here is the effect of $t$ on other members of the line.
+The map $t$ has twice the effect on $2\vec{v}$, three times the
+effect on $3\vec{v}$, etc.
 \begin{equation*}
   \colvec{2 \\ 4}\mapsunder{t}\colvec{14 \\ 20}
   \qquad
@@ -297,7 +299,7 @@ The next section sketches a proof
 but we first illustrate this result by using an example matrix.
 \Sage{} will find the two bases $B$ and~$D$ and will picture how the 
 vectors $\vec{\beta}_i$ 
-are mapped to the $\sigma_i\vec{delta}_i$.
+are mapped to the $\sigma_i\vec{\delta}_i$.
 
 So consider again the generic matrix.
 Here is its action again, this time shown
@@ -341,7 +343,7 @@ three matrices, $U\Sigma\trans{V}$.
 The basis vectors $\vec{\beta}_1$, $\vec{\beta}_2$, $\vec{\delta}_1$, 
 and~$\vec{\delta}_2$ are the columns of $U$ and~$V$. 
 The singular values are the diagonal entries of~$\Sigma$.
-\Sage{} will plots the effect of the transformation
+\Sage{} will plot the effect of the transformation
 on the basis vectors for the domain so we can compare those with the
 basis vectors for the codomain.
 \begin{sageoutput}[d,0,2;d,6,10]
@@ -445,7 +447,7 @@ the image $f(D)$ is also a closed and bounded
 set (see \cite{wiki:ExtremeValueThm}).
 A generalization of that result gives that because the unit sphere in $\Re^n$
 is closed and bounded then its image under~$t$ is closed and bounded.
-Although we won't prove this, the image is in fact an ellipsoid
+Although we won't prove this, the image is an ellipsoid
 so we will call it that. 
 
 Because the ellipsoid is closed and bounded it has a point furthest from the
@@ -463,7 +465,7 @@ The tangent plane~$P$ has the property that
 the set of vectors whose bodies lie in~$P$
 are the set of vectors perpendicular to $\vec{v}$.
 That is, if in the picture above we slide $P$ along the vector~$\vec{v}$ to
-the origin then we have the subspace of $\Re^n$ of vectors perpendicular
+the origin then we clearly have the subspace of $\Re^n$ of vectors perpendicular
 to~$\vec{v}$.
 This subspace has dimension~$n-1$. 
 We will argue below 
@@ -477,7 +479,8 @@ Then we proceed by considering the restriction of $t$ to~$P$.
 
 So consider~$Q$.
 First observe that there is a unique plane that touches the ellipsoid
-only at~$\vec{w}$ since if there were another $\hat{Q}$ then $t^{-1}(\hat{Q})$
+only at~$\vec{w}$ since if there were another then its inverse image
+under $t$
 would be a second plane, besides~$P$, 
 that touches the sphere only at~$\vec{v}$, which is impossible.
 To see that $Q$ is perpendicular to~$\vec{w}$ consider a sphere
@@ -647,6 +650,7 @@ $n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
 more real for $\sigma_i$.
 So keeping all the terms would require $500*(2*500+1)=500\,500$~reals,
 which is twice the data of the original matrix.
+
 But if you keep only some of the terms, say the first $50$ of them, then
 you would save:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
 $500^2$~size of the full matrix.
@@ -715,7 +719,7 @@ even setting aside the ones at the end
 that are zero except for numerical issues.
 
 We want to see how badly the image degrades for various cutoffs.
-The code below sets it at $10\%$.
+The code below sets the cutoff at $0.10$.
 This image is $\nbyn{512}$  so that will sum the terms associated
 with the first $51$ singular 
 values.
@@ -735,20 +739,23 @@ But certainly the image is entirely recognizable.
 
 Where the image is $\nbyn{n}$, every additional term in the summation
 adds to the storage and transmission requirements by about $2n$ reals.
-The original image requires $n^2$ reals so we want to choose percentage values 
+The original image requires $n^2$ reals so we want to choose a cutoff value 
 less than $0.50$.
-The tradeoff is that higher values give better fidelity.
-So selecting an optimal percentage parameter is an engineering decision.
-The above image has the advantage is that it needs only $20\%$ of the storage
-and transmission requirements of the original image.
-% The quality may (or may not) be acceptable, depending on the application.
+The above image with a cutoff of $0.10$ has the advantage is that it needs 
+only $20\%$ of the storage
+and transmission requirements of the original image
+but its quality may not be acceptable.
+That is, selecting a cutoff parameter is an engineering decision where
+on a fidelity versus resource-consumption continuum 
+you choose a value appropriate for your application.
  
 Experimenting with percentage value shows that setting
-the parameter to $20\%$ is enough to make the output image hard to tell
+the cutoff parameter to $0.20$ is enough to make the output image hard to tell
 from the original.
-For a final contrast, below is the picture of Suzy from this manual's cover, 
-on the left 
-as the camera took it and on the right squeezed with a cutoff of $0.20$.
+For a final contrast, below we use this cutoff on the picture of Suzy 
+from this manual's cover.
+On the left is the original image
+and on the right it is squeezed using $0.20$.
 \begin{center}
   \vcenteredhbox{\includegraphics[width=.4\textwidth]{suzy_cover.png}}
   \quad
@@ -787,8 +794,7 @@ Similarly \inlinecode{DOT_SIZE} sets the size of the small empty circle.
 
 
 \section{Source of img\_squeeze.sage}
-We will use the Python Image Library for help in reading the figure, 
-getting the color value at each pixel, etc.
+We will use the Python Image Library for reading the figure.
 The function
 \inlinecode{img_squeeze}
 takes three arguments, the names of the input and output functions, and

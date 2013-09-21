@@ -18,10 +18,17 @@
 % \typeout{DVI DRIVER IN BOOKJH IS \dvidrv}
 
 % Set page margins, etc.
-\usepackage[paper=letterpaper,
-            textwidth=345pt,textheight=598pt,  % LaTeX defaults
-            % top=1in,bottom=1in % squeeze a lot on the paper
+\usepackage[papersize={7.5in,9.25in},
+            textwidth=345pt, % textheight=550pt,  % LaTeX defaults
+            inner=.8in, top=.85in, bottom=.85in, %,bottom=1in % squeeze a lot on the paper
+            headsep=12pt,
+            bindingoffset=0.25in,
             ]{geometry}
+% For US letterpaper, that is, for printing on a US printer
+% \usepackage[paper=letterpaper,
+%             textwidth=345pt,textheight=598pt,  % LaTeX defaults
+%             % top=1in,bottom=1in % squeeze a lot on the paper
+%             ]{geometry}
 
 % \usepackage[\dvidrv]{xcolor}
 \usepackage{xcolor}
@@ -146,7 +153,8 @@
   \renewcommand{\footrulewidth}{0pt}
   \lfoot{}
   \rfoot{}
-  \cfoot{\fancyplain{}{-- \thepage{} --}}
+  \cfoot{}
+  % \cfoot{\fancyplain{}{-- \thepage{} --}}
 }
 
 % Chapters start with an empty page (includes first page of toc)
@@ -322,7 +330,7 @@
 }
 \lstdefinestyle{inline}{basicstyle=\ttfamily\small}
 
-
+\usepackage{upquote}
 
 
 %================================================================
@@ -678,9 +686,14 @@
      \@startsection%
      {section}{1}{0em}{-14ex plus1ex minus2ex}{1em}%
      {\usefont{T1}{fvs}{b}{n}\Large}}
+% changed from this 2013 Sep 16 
+% \renewcommand{\section}{%
+%      \@startsection%
+%      {section}{1}{0em}{-14ex plus1ex minus2ex}{1em}%
+%      {\usefont{T1}{fvs}{b}{n}\Large}}
 
 \newcommand{\topicsection}{\@startsection%
-     {section}{1}{0em}{-12ex plus1ex minus2ex}{3em}%
+     {section}{1}{0em}{-10ex plus1ex minus1ex}{3em}% was: -12ex plus1ex minus2ex
      {\raggedright\makebox[0em][l]{%
          \raisebox{6ex}{%
              \raisebox{-.25ex}{\makebox[0em][l]{\setlength{\fboxsep}{0pt}\colorbox{flourishcolor}{\makebox[\textwidth][r]{\rule{0em}{0.8pt}}}}}%
@@ -693,7 +706,7 @@
 %      {\raggedright\large\bfseries}}
 % \renewcommand{\subsection}{\jh@subsection}
 \renewcommand{\subsection}{\@startsection
-   {subsection}{2}{0em}{-10ex plus1ex minus1ex}{1em}%
+   {subsection}{2}{0em}{-10ex plus1ex minus1ex}{2ex}%
    {\raggedright\usefont{T1}{fvs}{b}{n}\large}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 % \renewcommand{\subsection}[1]{\gdef\sectioningname{#1}\@startsection%
@@ -851,9 +864,9 @@
   \usepackage[
                 colorlinks=true,
                 linkcolor=darkcolor,citecolor=darkcolor,filecolor=darkcolor,urlcolor=darkcolor,
-                naturalnames=true,  % if true, toc Three.IV.2 link no work 
-                hypertexnames=false, % 
-                hyperindex=false, % if true, pages are correct but links are to a page ten too early.
+                naturalnames=false,  
+                hypertexnames=false, % if true, index links works but a chapter 3 link to 2.6 will go to chapter 1's 2.6 
+                hyperindex=false, % if true, page numbers are correct but links are to a page ten too early.
                 plainpages=false, % These three from http://stackoverflow.com/a/1455672/238366
                 pdfpagelabels, 
                 pagebackref, % HO says on ctt 2001-dec, to make page links in index point to the same-numbered page in mainmatter
@@ -862,7 +875,7 @@
                 pdfauthor={Jim Hefferon, Saint Michael's College, Vermont USA,
                            http://joshua.smcvt.edu/linearalgebra},
                 pdfsubject={linear algebra},
-                pdfkeywords={linear algebra, mathematics, free, textbook}]{hyperref}
+                pdfkeywords={linear algebra, mathematics, free, textbook, hefferon}]{hyperref}
 % \fi
 
 % \usepackage[capitalise]{cleveref}  % nameinlink option not in my LaTeX yet?
@@ -870,8 +883,9 @@
 % ==================== Cover
 \newcommand{\covergraphic}{%
 \par\noindent\makebox[0pt][c]{\contourlength{1.4pt}
-  \rule{5.7in}{0em}
-  \fontsize{260pt}{8pt}
+  \rule{4.65in}{0em}
+  % \fontsize{260pt}{8pt}
+  \fontsize{235pt}{8pt}
   {\fontfamily{qzc}\itshape\selectfont \contour{darkcolor}{\textcolor{lightcolor}{Linear}}}
 }  \\[0.05in] 
 % }  \\[-2.15in] 
@@ -881,9 +895,9 @@
 %   {\fontfamily{qzc}\itshape\selectfont \contour{flourishcolor}{\textcolor{white}{Algebra}}}
 %   }
 % }
-\noindent\makebox[0pt][c]{\rule{8.65in}{0pt}%
-  \makebox[0pt][l]{\contourlength{1pt} %
-  \fontsize{65pt}{10pt}
+\noindent\makebox[0pt][c]{\rule{7.4in}{0pt} % \rule{8.65in}{0pt}%
+  \makebox[0pt][l]{\contourlength{0.9pt} %
+  \fontsize{55pt}{6pt}  % \fontsize{65pt}{10pt}
   {\fontfamily{qzc}\itshape\selectfont \contour{flourishcolor}{\textcolor{white}{Algebra}}}
   }
 }
