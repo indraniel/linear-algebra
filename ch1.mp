@@ -471,7 +471,7 @@ beginfig(17) % line in R3 thru (1,2,3) and (5,5,5)
   drawarrow z5--z4 withcolor shading_color;
   drawarrow z3--z4;
 %  label.lrt(btex {\scriptsize $\colvec{1 \\ 1 \\ 1}$} etex,.5[z3,z4]);
-  \label.ulft(btex  {\scriptsize $\set{ \colvec{1 \\ 2 \\ 1}
+  \label.lrt(btex  {\scriptsize $\set{ \colvec{1 \\ 2 \\ 1}
                   +t\cdot\colvec{1 \\ 1 \\ 1}
                    \suchthat t\in\Re}$} etex,z2);
 endfig;
