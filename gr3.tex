@@ -1,5 +1,5 @@
 % Chapter 1, Section 3 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-09
 \section{Reduced Echelon Form}
 After developing the mechanics of Gauss's Method, 
@@ -56,8 +56,8 @@ will follow from this.
 
 
 \subsection{Gauss-Jordan Reduction}%
-Gaussian elimination coupled with back-substitution
-solves linear systems but it is not the only method possible.
+% Gaussian elimination coupled with back-substitution
+% solves linear systems but it is not the only method possible.
 Here is an extension of Gauss's Method that has some advantages.
 
 \begin{example} \label{exm:GJRedReadOffSol}
@@ -69,7 +69,7 @@ To solve
     x  &   &   &-  &z   &=  &-1  
   \end{linsys}
 \end{equation*}
-we can start as usual by going to echelon form.
+we can start as usual by reducing it to echelon form.
 \begin{equation*}
   \grstep{-\rho_1+\rho_3}
     \begin{amat}[r]{3}
@@ -170,11 +170,12 @@ one and is the only nonzero entry in its column.
 %<*CostRedEchForm>
 The cost of using Gauss-Jordan reduction to solve a system 
 is the additional arithmetic.
-The benefit is that we can just read off the solution set
+But it has the benefit that we can just read off the solution set
 from the reduced echelon form.
 %</CostRedEchForm>
 
-In any echelon form, reduced or not, we can read off 
+More specifically, 
+in any echelon form, reduced or not, we can read off 
 when the system has an empty
 solution set because there is a contradictory equation.
 We can read off 
@@ -184,14 +185,14 @@ variable is the leading variable in some row.
 And, we can read off when the system has an infinite solution set because 
 there is no contradiction and at least one variable is free.
 
-In reduced echelon form we can read off not just the size of the  
+However, in reduced echelon form we can read off not just the size of the  
 solution set but also its description.
 We have no trouble describing the solution set when it is empty, of course.
 \nearbyexample{exm:GJRedReadOffSol} and~\ref{exm:GJRedReadOffSolTwo} 
 show how in a single element solution set case the single element is
 in the column of constants.
 The next example shows how to read the parametrization
-of an infinite solution set from reduced echelon form.
+of an infinite solution set.
 
 \begin{example}
 \begin{multline*}
@@ -277,14 +278,14 @@ is undone by subtracting the same multiple of row \( i \) from row \( j \).
 see \nearbyexercise{exer:INotJMakesRowOpsRev}.)
 \end{proof}
 
-Again, the point of view that we are developing, buttressed now by this lemma,
+Again, the point of view that we are developing, supported now by the lemma,
 is that the term `reduces to' is misleading:~where
 \( A\longrightarrow B \), we shouldn't think of \( B \) as
-``after'' \( A \) or ``simpler than'' $A$.
-Instead we should think of them as inter-reducible or interrelated.
-Below is a picture of the idea.
+after~\( A \) or simpler than~$A$.
+Instead we should think of the two matrices as interrelated.
+Below is a picture.
 It shows the matrices from the start of this section and their
-reduced echelon form version in a cluster as
+reduced echelon form version in a cluster, as
 inter-reducible. 
 \begin{center}  
   \includegraphics{ch1.28}
@@ -292,9 +293,9 @@ inter-reducible.
 
 %<*EquivMatrices>
 We say 
-that matrices that reduce to each other are `equivalent with respect
-to the relationship of row reducibility'.
-The next result justifies this using the definition of 
+that matrices that reduce to each other are equivalent with respect
+to the relationship of row reducibility.
+The next result justifies this, using the definition of 
 an equivalence.\appendrefs{equivalence relations}
 %</EquivMatrices>
 
@@ -316,7 +317,7 @@ and (iii)~transitivity, that if \( A \) reduces to \( B \) and
 %</pf:ReducesToIsEqRel0>
 
 %<*pf:ReducesToIsEqRel1>
-Reflexivity is easy; any  matrix reduces to itself in zero row operations.
+Reflexivity is easy; any  matrix reduces to itself in zero-many operations.
 
 The relationship is symmetric by the prior lemma\Dash if
 \( A \) reduces to \( B \) by some row operations
@@ -334,7 +335,7 @@ gives a reduction from \( A \) to \( C \).
 
 \begin{definition} \label{df:RowEquivalence}
 %<*df:RowEquivalence>
-Two matrices that are inter-reducible by elementary row operations
+Two matrices that are interreducible by elementary row operations
 are \definend{row equivalent}.\index{matrix!row equivalence}%
 \index{row equivalence}\index{equivalence relation!row equivalence}
 %</df:RowEquivalence>
@@ -342,7 +343,7 @@ are \definend{row equivalent}.\index{matrix!row equivalence}%
 
 %<*RowEquivalanceClasses>
 The diagram below shows the collection of all matrices as a box.
-Inside that box, each matrix lies in some class.
+Inside that box each matrix lies in a class.
 Matrices are in the same class if and only if they are interreducible.
 The classes are disjoint\Dash no matrix is in two distinct classes.
 We have partitioned the collection of matrices into 
@@ -351,8 +352,9 @@ We have partitioned the collection of matrices into
 \begin{center}
   \includegraphics{ch1.27}
 \end{center}
-\noindent One of the classes in this partition is the
-cluster of matrices from the start of this section shown above,
+\noindent One of the classes is the
+cluster of interrelated 
+matrices from the start of this section pictured earlier,
 expanded to include all of the nonsingular $\nbyn{2}$ matrices. 
 
 The next subsection proves that the reduced echelon form of a matrix is 
@@ -929,35 +931,6 @@ class.
       as $B$ and $B$ has the same sum of entries as $C$ then 
       $A$ has the same as $C$.
     \end{answer}
- \item \cite{Cleary}
-  Consider the set of students in a class.  
-  Which of the following relationships are equivalence relations?  
-  Explain each answer in at least a sentence.
-  \begin{exparts}
-    \item  Two students $x$ and $y$ are related 
-      if $x$ has taken at least as many 
-      math classes as $y$.
-    \item Students $x$ and $y$ are related if $x$ and $y$ have names 
-      that start with the same letter.
-  \end{exparts}
-  \begin{answer}
-    To be an equivalence, each relation must be reflexive, symmetric, and
-    transitive.
-    \begin{exparts}
-      \item This relation 
-        is not symmetric because if $x$ has taken $4$~classes and $y$
-        has taken $3$ then $x$ is related to $y$ but $y$ is not related
-        to $x$.
-      \item This is reflexive because $x$'s name starts with the same
-        letter as does $x$'s.
-        It is symmetric because if $x$'s name starts with the same letter 
-        as $y$'s then $y$'s starts with the same letter as does~$x$'s.
-        And it is transitive because if $x$'s name starts with the same letter
-        as does~$y$'s and $y$'s name starts with the same letter as 
-        does $z$'s then $x$'s starts with the same letter as does $z$'s.
-        So it is an equivalence.
-    \end{exparts}
-  \end{answer}
  \item \label{exer:INotJMakesRowOpsRev}
    The proof of \nearbylemma{le:RowOpsRev} contains a reference to the 
    $i\neq j$ condition on the row combination operation.
@@ -1027,6 +1000,118 @@ class.
         form $-k(ka_{i,j}+a_{i,j})+ka_{i,j}+a_{i,j}$.)
     \end{exparts}
    \end{answer}
+ \item \cite{Cleary}
+  Consider the set of students in a class.  
+  Which of the following relationships are equivalence relations?  
+  Explain each answer in at least a sentence.
+  \begin{exparts}
+    \item  Two students $x, y$ are related 
+      if $x$ has taken at least as many 
+      math classes as $y$.
+    \item Students $x, y$ are related if they have names 
+      that start with the same letter.
+  \end{exparts}
+  \begin{answer}
+    To be an equivalence, each relation must be reflexive, symmetric, and
+    transitive.
+    \begin{exparts}
+      \item This relation 
+        is not symmetric because if $x$ has taken $4$~classes and $y$
+        has taken $3$ then $x$ is related to $y$ but $y$ is not related
+        to $x$.
+      \item This is reflexive because $x$'s name starts with the same
+        letter as does $x$'s.
+        It is symmetric because if $x$'s name starts with the same letter 
+        as $y$'s then $y$'s starts with the same letter as does~$x$'s.
+        And it is transitive because if $x$'s name starts with the same letter
+        as does~$y$'s and $y$'s name starts with the same letter as 
+        does $z$'s then $x$'s starts with the same letter as does $z$'s.
+        So it is an equivalence.
+    \end{exparts}
+  \end{answer}
+  \item
+  Show that each of these is an equivalence on the set of $\nbyn{2}$
+  matrices.
+  Describe the equivalence classes.
+  \begin{exparts}
+    \item Two matrices are related if they have the same product down the
+      diagonal, that is, if the product of the entries in the upper left and
+      lower right are equal.
+    \item Two matrices are related if they both have at least one entry 
+      that is a~$1$,
+      or if neither does.
+  \end{exparts}
+  \begin{answer}
+    For each we must check the three conditions of reflexivity, symmetry, and
+    transitivity.
+    \begin{exparts}
+      \item Any matrix clearly has the same product down the diagonal as
+        itself, so the relation is reflexive.
+        The relation is symmmetric because if $A$ has the same product down
+        its diagonal as does~$B$,
+        if $a_{1,1}\cdot a_{2,2}=b_{1,1}\cdot b_{2,2}$, 
+        then $B$ has the same product as does~$A$.
+ 
+        Transitivity is similar: suppose that $A$'s product is~$r$ and 
+        that it equals $B$'s product.
+        Suppose also that $B$'s product equals $C$'s.
+        Then all three have a product of~$r$, and $A$'s equals~$C$'s.
+
+        There is an equivalence class for each real number, namely the 
+        class contains all $\nbyn{2}$ matrices whose product down the
+        diagonal is that real.
+      \item For reflexivity, if the matrix $A$ has a~$1$ entry then it is 
+        related to itself while if it does not then it is also related to 
+        itself.
+        Symmetry also has two cases: suppose that $A$ and~$B$ are related.
+        If $A$ has a~$1$ entry then so does~$B$, and thus $B$ is related to~$A$.
+        If $A$ has no~$1$ then neither does $B$, and again $B$ is related to
+        $A$.
+ 
+        For transitivity, suppose that $A$ is related to~$B$ and $B$ to~$C$.
+        If $A$ has a~$1$ entry then so does~$B$, and because $B$ is related
+        to~$C$, therefore so does~$C$,
+        and hence $A$ is related to~$C$.
+        Likewise, if $A$ has no~$1$ then neither does~$B$, and consequently
+        neither does~$C$, giving the conclusion that $A$ is related to~$C$. 
+
+        There are exactly two equivalence classes, one containing any
+        $\nbyn{2}$ matrix that has at least one entry that is a~$1$,
+        and the other containing all the matrices that have no $1$'s.
+    \end{exparts}
+  \end{answer}
+  \item Show that each is not an equivalence on the
+    set of $\nbyn{2}$ matrices.
+    \begin{exparts}
+      \item Two matrices $A,B$ are related if $a_{1,1}=-b_{1,1}$.
+      \item Two matrices are related if the sum of their entries are
+        within $5$, that is, $A$ is related to~$B$ if
+        $\absval{(a_{1,1}+\cdots+a_{2,2})-(b_{1,1}+\cdots+b_{2,2})}<5$.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \item This relation is not reflexive.
+          For instance, any matrix with an upper-left entry of~$1$ is not
+          related to itself.
+        \item This relation is not transitive.
+          For these three, $A$ is related to~$B$, and $B$ is related to~$C$,
+          but $A$ is not related to~$C$.
+          \begin{equation*}
+            A=\begin{mat}
+              0 &0 \\
+              0 &0
+            \end{mat},\quad
+            B=\begin{mat}
+              4 &0 \\
+              0 &0
+            \end{mat},\quad
+            C=\begin{mat}
+              8 &0 \\
+              0 &0
+            \end{mat},\quad
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
 \end{exercises}
 
 
@@ -1049,10 +1134,10 @@ class.
 
 
 \subsection{The Linear Combination Lemma}
-We will close this section and this chapter by proving 
+We will close this chapter by proving 
 that every matrix is row equivalent to one
 and only one reduced echelon form matrix.
-The ideas that appear here will reappear, and be further developed, in the
+The ideas here will reappear, and be further developed, in the
 next chapter.
 
 
@@ -1081,10 +1166,11 @@ next chapter.
 
 The crucial observation concerns 
 how row operations act to transform one matrix into another:
-they combine the rows linearly.
+they combine the rows linearly, that is, the new rows are
+linear combinations of the old rows.
 
 \begin{example}
-In this reduction
+Consider this reduction.
 \begin{multline*}
   \begin{amat}{2}
     2  &1  &0  \\
@@ -1106,7 +1192,7 @@ In this reduction
     0  &1    &2
   \end{amat}                       
 \end{multline*}
-denoting those matrices $A\rightarrow D\rightarrow G\rightarrow B$
+Denoting those matrices $A\rightarrow D\rightarrow G\rightarrow B$
 and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
 \begin{eqnarray*}  % multline looks worse
   \left(\begin{array}{l}
@@ -1132,7 +1218,8 @@ and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
 \end{example}
 
 \begin{example}
-This also holds if there is a row swap.
+The fact that Gaussian operations combine rows linearly 
+also holds if there is a row swap.
 With this \( A \), \( D \), \( G \), and \( B \)
 \begin{equation*}
     \begin{mat}[r]
@@ -1232,72 +1319,80 @@ is a linear combination of the rows of the first.
 %</co:RowsOfEqMatsLinCombos>
 \end{corollary}
 
-The proof 
-uses induction.\appendrefs{mathematical induction}\spacefactor=1000 %
-Before we proceed, here is an outline of the argument.
-For the base step, we
-will verify that the proposition is true when reduction 
-can be done in zero row operations.
-For the inductive step, we will 
-argue that if being able to reduce the first matrix to the second in some
-number $t\geq 0$ of operations implies that each row of the second is a linear
-combination of the rows of the first, then being able to reduce the first to
-the second in $t+1$ operations implies the same thing.
-Together these prove the result because  
-the base step shows that it is true in the zero operations case,
-and then the inductive step
-implies that it is true in the one operation case, and then the inductive step
-applied again gives that it is therefore true for two operations, etc.
+% The proof 
+% uses induction. % \appendrefs{mathematical induction}\spacefactor=1000 %
+% Before we proceed, here is an outline of the argument.
+% For the base step, we
+% will verify that the proposition is true when reduction 
+% can be done in zero row operations.
+% For the inductive step, we will 
+% argue that if being able to reduce the first matrix to the second in some
+% number $t\geq 0$ of operations implies that each row of the second is a linear
+% combination of the rows of the first, then being able to reduce the first to
+% the second in $t+1$ operations implies the same thing.
+% Together these prove the result because  
+% the base step shows that it is true in the zero operations case,
+% and then the inductive step
+% implies that it is true in the one operation case, and then the inductive step
+% applied again gives that it is therefore true for two operations, etc.
 
 \begin{proof}
 %<*pf:RowsOfEqMatsLinCombos0>
-We proceed by induction on the minimum number of row operations that take a
-first matrix $A$ to a second one $B$.
-In the base step, that
-zero reduction operations suffice, the two matrices are equal and each 
+For any two interreducible  matrices $A$ and~$B$ there is some
+minimum number of row operations that will take one to the other.
+We proceed by induction on that number. 
+
+In the base step, that we can go from the first to the second using
+zero reduction operations, the two matrices are equal.
+Then each 
 row of $B$ is trivially a combination of
-$A$'s rows: $\vec{\beta}_i
+$A$'s rows $\vec{\beta}_i
   =0\cdot\vec{\alpha}_1+\cdots+1\cdot\vec{\alpha}_i+\cdots+0\cdot\vec{\alpha}_m$.
 %</pf:RowsOfEqMatsLinCombos0>
 
 %<*pf:RowsOfEqMatsLinCombos1>
-For the inductive step, assume the inductive hypothesis:~with $t\geq 0$,
-any matrix that can be derived from \( A \) in \( t \) or fewer operations 
-then has rows that are linear combinations of $A$'s rows.
-Suppose that reducing from \( A \) to \( B \) requires $t+1$ operations.
-There must be a next-to-last matrix~$G$  
+For the inductive step assume the inductive hypothesis:~with $k\geq 0$,
+any matrix that can be derived from \( A \) in \( k \) or fewer operations 
+has rows that are linear combinations of $A$'s rows.
+Consider a matrix~$B$ such that reducing \( A \) to~\( B \) 
+requires $k+1$ operations.
+In that reduction there is a next-to-last matrix~$G$,  
 so that $A\longrightarrow\cdots\longrightarrow G\longrightarrow B$.
 The inductive hypothesis applies to this \( G \) 
-because it is only $t$ operations away from \( A \). 
+because it is only $k$ steps away from \( A \). 
 That is, each row of \( G \)
 is a linear combination of the rows of \( A \).
 %</pf:RowsOfEqMatsLinCombos1>
 
 %<*pf:RowsOfEqMatsLinCombos2>
-If the operation taking \( G \) to \( B \) is a row swap then
-the rows of $B$ are just the rows of $G$ reordered, and thus each row of $B$
-is a linear combination of the rows of $G$.
-If the operation taking $G$ to $B$ is multiplication of some row~$i$ by a 
-scalar~$c$
-then the rows of $B$ are a linear combination of the rows of~$G$; in 
-particular, $\vec{\beta}_i=c\vec{\gamma}_i$.
-And if the operation is adding a multiple of one row to another then
-clearly 
-the rows of $B$ are linear combinations of the rows of $G$.
-In all three cases the Linear Combination Lemma applies to show that 
-each row of $B$ is a linear combination of the rows of $A$.
+We will verify that the rows of~$B$ are linear combinations of the rows
+of~$G$.
+Then the Linear Combination Lemma, \nearbylemma{lm:LinearCombinationLemma},
+applies to show that the rows of~$B$ are linear combinations of the rows
+of~$A$.
 
-With both a base step and an inductive step,  
-the proposition follows by the principle of mathematical induction.
+If the row operation taking \( G \) to~\( B \) is a swap then
+the rows of $B$ are just the rows of $G$ reordered and each row of $B$
+is a linear combination of the rows of $G$.
+If the operation taking $G$ to~$B$ is multiplication of a row by a 
+scalar~$c\rho_i$
+then $\vec{\beta}_i=c\vec{\gamma}_i$ and the other rows are unchanged.
+Finally, if the row operation is adding a multiple of one row to 
+another $r\rho_i+\rho_j$ 
+then only row~$j$ of $B$ differs from the matching row of~$G$, and 
+$\vec{\beta}_j=r\gamma_i+\gamma_j$, 
+which is indeed a linear combinations of the rows of $G$.
 %</pf:RowsOfEqMatsLinCombos2>
+
+Because we have proved both a base step and an inductive step,  
+the proposition follows by the principle of mathematical induction.
 \end{proof}
 
 We now have the insight that Gauss's Method builds 
 linear combinations of the rows.
-But of course the goal is to end in echelon form since it is 
+But of course its goal is to end in echelon form, since that is 
 a particularly
-basic version of a linear system, because
-echelon form is suitable for back substitution
+basic version of a linear system,
 as it has isolated the variables.
 For instance, in this matrix
 \begin{equation*}
@@ -1309,34 +1404,11 @@ For instance, in this matrix
   \end{mat}
 \end{equation*}
 $x_1$ has been removed from $x_5$'s equation.
-That is, Gauss's Method has made $x_5$'s row independent of $x_1$'s row, 
-in some sense.
+That is, Gauss's Method has made $x_5$'s row in some way independent 
+of $x_1$'s row.
 
-% Independence of a collection of row vectors, or of any kind of vectors, 
-% will be precisely defined and explored in the next chapter.
-% But a first take on it is that we can show that, say, the third row above
-% is not comprised of the other rows, that
-% $\rho_3\neq c_1\rho_1+c_2\rho_2+c_4\rho_4$.
-% For, suppose that there are scalars $c_1$, $c_2$, and $c_4$ such that this
-% relationship holds.
-% \begin{align*}
-%   \rowvec{0  &0  &0  &3  &3  &0}
-%   &=c_1\rowvec{2 &3 &7 &8 &0 &0}             \\
-%   &\quad\hbox{}+c_2\rowvec{0 &0 &1 &5 &1 &1} \\
-%   &\quad\hbox{}+c_4\rowvec{0 &0 &0 &0 &2 &1}
-% \end{align*}
-% The first row's leading entry is in the first column and narrowing our
-% consideration of the above relationship to consideration only of the entries
-% from the first column $0=2c_1+0c_2+0c_4$ gives that $c_1=0$.
-% The second row's leading entry is in the third column and the equation of
-% entries in that column $0=7c_1+1c_2+0c_4$, along with the knowledge that
-% $c_1=0$, gives that $c_2=0$.
-% Now, to finish, the third row's leading entry is in the fourth column and the
-% equation of entries in that column $3=8c_1+5c_2+0c_4$, along with $c_1=0$ and
-% $c_2=0$, gives an impossibility.
-
-The following result makes this precise.
-What Gauss's linear elimination method eliminates is linear
+The following result makes this intuition precise.
+What Gauss's Method eliminates is linear
 relationships among the rows.
 
 \begin{lemma}      \label{le:EchFormNoLinCombo}
@@ -1348,7 +1420,7 @@ no nonzero row is a linear combination of the other nonzero rows.
 
 \begin{proof}
 %<*pf:EchFormNoLinCombo0>
-Let $R$ be in echelon form and consider the  non-\( \vec{0} \)  rows.
+Let $R$ be an echelon form matrix and consider its  non-\( \vec{0} \)  rows.
 First observe that
 if we have a row written as a combination
 of the others
@@ -1361,46 +1433,48 @@ then we can rewrite that equation as
   \tag{$*$}
 \end{equation*}
 where not all the coefficients are zero; specifically, $c_i=-1$.
-The converse holds also:~given equation~($*$) where some $c_i\neq 0$ then we 
+The converse holds also:~given equation~($*$) where some $c_i\neq 0$ we 
 could express $\vec{\rho}_i$ as a combination of the other rows by 
-moving $c_i\vec{\rho}_i$ to the left side and dividing by $c_i$.
+moving $c_i\vec{\rho}_i$ to the left and dividing by $-c_i$.
 Therefore we will have proved the theorem if we
 show that in~($*$) all of the coefficients are~$0$.
-For that we use induction on the row index~$i$.
+For that we use induction on the row number~$i$.
 %</pf:EchFormNoLinCombo0>
 
 %<*pf:EchFormNoLinCombo1>
 The base case is the first row~$i=1$
-(if there is no such nonzero row, so $R$ is the zero matrix, then the
+(if there is no such nonzero row, so that $R$ is the zero matrix, then the
 lemma holds vacuously).
-Recall our notation that $\ell_i$ is the column number of 
-the leading entry in row~$i$.
-Equation~($*$) applied to the entries of the rows from column~$\ell_1$ 
-gives this.
+Let $\ell_i$ be the column number of the leading entry in row~$i$.
+Consider the entry of each row that is in column~$\ell_1$.
+Equation~($*$) gives this.
 \begin{equation*}
   0=c_1r_{1,\ell_1}+c_2r_{2,\ell_1}+\cdots+c_mr_{m,\ell_1}
+  \tag{$**$}
 \end{equation*}
 The matrix is in echelon form so
 every row after the first has a zero entry in that column 
 $r_{2,\ell_1}=\cdots=r_{m,\ell_1}=0$.
-Thus $c_1=0$ because $r_{1,\ell_1}\neq 0$, as it
+Thus equation~($**$) shows that $c_1=0$, because $r_{1,\ell_1}\neq 0$ as it
 leads the row.
 %</pf:EchFormNoLinCombo1>
 
 %<*pf:EchFormNoLinCombo2>
-The inductive step is to prove this implication:~if 
-for each row index $k\in\set{1,\ldots,i}$ the coefficient $c_k$ is $0$
-then $c_{i+1}$ is also $0$. 
-Consider the entries from column~$\ell_{i+1}$ in equation~($*$). 
+The inductive step is much the same as the base step.
+Again consider equation~($*$).
+We will prove that if the coefficient $c_i$ is $0$
+for each row index $i\in\set{1,\ldots,k}$ 
+then $c_{k+1}$ is also $0$. 
+We focus on the entries from column~$\ell_{k+1}$. 
 \begin{equation*}
-  0=c_1r_{1,\ell_{i+1}}+\cdots+c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}
+  0=c_1r_{1,\ell_{k+1}}+\cdots+c_{k+1}r_{k+1,\ell_{k+1}}+\cdots+c_mr_{m,\ell_{k+1}}
 \end{equation*}
-By the inductive hypothesis the coefficients $c_1$, \ldots $c_i$ are
-all $0$ so the equation reduces to 
-$0=c_{i+1}r_{i+1,\ell_{i+1}}+\cdots+c_mr_{m,\ell_{i+1}}$.
-As in the base case, because the matrix is in echelon form
-$r_{i+2,\ell_{i+1}}=\cdots=r_{m,\ell_{i+1}}=0$ and $r_{i+1,\ell_{i+1}}\neq 0$.
-Thus $c_{i+1}=0$.
+By the inductive hypothesis $c_1$, \ldots $c_k$ are
+all $0$ so this reduces to the equation
+$0=c_{k+1}r_{k+1,\ell_{k+1}}+\cdots+c_mr_{m,\ell_{k+1}}$.
+The matrix is in echelon form so the entries
+$r_{k+2,\ell_{k+1}}$, \ldots, $r_{m,\ell_{k+1}}$ are all~$0$.
+Thus $c_{k+1}=0$, because $r_{k+1,\ell_{k+1}}\neq 0$ as it is the leading entry.
 %</pf:EchFormNoLinCombo2>
 \end{proof}
 
@@ -1417,16 +1491,16 @@ Fix a number of rows \( m \).
 We will proceed by induction on the number of columns \( n \).
 
 The base case is that the matrix has \( n=1 \) column.
-If this is the zero matrix then its unique echelon form is the zero matrix. 
+If this is the zero matrix then its echelon form is the zero matrix. 
 If instead it has any nonzero entries then when the matrix is brought to 
-reduced echelon form it must have at least one nonzero entry, so it has a
+reduced echelon form it must have at least one nonzero entry, which must be a
 \( 1 \) in the first row. 
 Either way, its reduced echelon form is unique.
 %</pf:ReducedEchelonFormIsUnique0>
 
 %<*pf:ReducedEchelonFormIsUnique1>
 For the inductive step we assume that \( n>1 \) and that all \( m \)~row
-matrices with fewer than \( n \) columns have a unique reduced echelon form.
+matrices having fewer than~\( n \) columns have a unique reduced echelon form.
 Consider an \( \nbym{m}{n} \) matrix \( A \) and suppose that 
 \( B \) and \( C \) are two reduced echelon form matrices derived from \( A \).
 We will show that these two must be equal.
@@ -1443,7 +1517,7 @@ any sequence of row operations that bring \( A \) to reduced
 echelon form will also bring \( \hat{A} \) to reduced echelon form.
 By the inductive hypothesis this reduced echelon form of \( \hat{A} \)
 is unique, so if \( B \) and \( C \) differ then the difference must 
-occur in their \( n \)-th columns.
+occur in column~\( n \).
 %</pf:ReducedEchelonFormIsUnique2>
 
 We finish the inductive step, and the argument,
@@ -1510,7 +1584,10 @@ That result answers the two questions that we posed in the introduction
 to this section: do any two echelon form versions of a linear system 
 have the same number of free variables, and if so are they
 exactly the same variables?
-We get from any echelon form version to the reduced echelon form by pivoting up,
+We get from any echelon form version to the reduced echelon form by 
+eliminating up,
+so any echelon form version of a system has the same free variables as the
+reduced echelon form, 
 and so uniqueness of reduced echelon form implies that the same variables 
 are free in all echelon form version of a system.
 Thus both questions are answered ``yes.''
@@ -1519,7 +1596,7 @@ that, say, we could solve the system
 one way and get $y$ and $z$ free but solve it
 another way and get $y$ and $w$ free.
 
-We end this section with a recap.
+We close with a recap.
 In Gauss's Method we start with a matrix and then
 derive a sequence of other matrices.
 We defined two matrices to be related if we can derive one from the other.
@@ -1545,15 +1622,14 @@ representatives of the classes.
   \includegraphics{ch1.31}
 \end{center}
 
-The underlying theme here is that one way to understand a
+The underlying idea here is that one way to understand a
 mathematical situation is by being able to classify the cases that can happen.
-We have seen this theme several times already.
+We have seen this several times already.
 We classified solution sets of linear systems into the no-elements, 
 one-element, and infinitely-many elements cases.
 We also classified linear systems with the same number of equations 
 as unknowns into the nonsingular and singular cases.
-These classifications helped us understand
-the situations that we were investigating.
+
 Here, where we are investigating row equivalence, we know that the set of all
 matrices breaks into the row equivalence classes
 and we now have a way to put our finger on each of those
@@ -1565,7 +1641,7 @@ Put in more operational terms, uniqueness of reduced echelon form
 lets us
 answer questions about the classes by translating them
 into questions about the representatives.
-For instance, we now (as promised in this section's opening) can
+For instance, as promised in this section's opening, we now can
 decide whether one matrix can be derived from another by row reduction.
 We apply the Gauss-Jordan procedure to both and see if
 they yield the same reduced echelon form.
