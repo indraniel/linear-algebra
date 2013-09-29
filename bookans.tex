@@ -3319,7 +3319,7 @@
     \begin{exparts}
       \item Any matrix clearly has the same product down the diagonal as
         itself, so the relation is reflexive.
-        The relation is symmmetric because if $A$ has the same product down
+        The relation is symmetric because if $A$ has the same product down
         its diagonal as does~$B$,
         if $a_{1,1}\cdot a_{2,2}=b_{1,1}\cdot b_{2,2}$,
         then $B$ has the same product as does~$A$.
@@ -3923,22 +3923,90 @@
 \begin{ans}{1}
       These answers are from \textit{Octave}.
       \begin{exparts}
-        \partsitem With the external use of steel as $17\,789$ and the
-          external use of autos as $21\,243$, we get $s=25\,952$, $a=30\,312$.
-        \partsitem $s=25\,857$, $a=30\,596$
-        \partsitem $s=25\,984$, $a=30\,597$
+        \partsitem With the external use of steel as $17,789$ and the
+          external use of autos as $21,243$ we get $s=25,952$, $a=30,312$.
+        \partsitem $s=25,857$, $a=30,596$
+        \partsitem $s=25,984$, $a=30,597$
       \end{exparts}
     
 \end{ans}
 \begin{ans}{2}
-      Octave gives these answers.
-      \begin{exparts}
-        \partsitem $s=24\,244$, $a=30\,307$
-        \partsitem $s=24\,267$, $a=30\,673$
-      \end{exparts}
+      This \textit{Sage} session
+\begin{lstlisting}
+sage: var('a,s')
+(a, s)
+sage: eqns=[(20053/25448)*s - (2664/30346)*a == 17589,
+....:       (-48/25448)*s + (21316/30346)*a == 21243]
+sage: solve(eqns, s, a)
+[[s == (2745320544312/106830469), a == (6476293881123/213660938)]]
+sage: s_by_s = (5395/25448)*2745320544312/106830469
+sage: s_by_s
+582010544505/106830469
+sage: n(s_by_s)
+5447.98267716114
+sage: s_by_a = (2664/30346)*6476293881123/213660938
+sage: n(s_by_a)
+2660.93449955743
+sage: a_by_s = (48/25448)*2745320544312/106830469
+sage: n(a_by_s)
+48.4713936058822
+sage: a_by_a = (9030/30346)*6476293881123/213660938
+sage: n(a_by_a)
+9019.60905818451
+\end{lstlisting}
+      gives this table.
+      \begin{center}
+        \begin{tabular}{r|rrrr}
+         \multicolumn{1}{c}{\ }  %put the | in the right place
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}}
+                                \textit{used by} \\[-.65ex] \textit{steel}
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}}
+                                \textit{used by} \\[-.65ex] \textit{auto}
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}}
+                                \textit{used by} \\[-.65ex] \textit{others}
+                              \end{tabular}}
+         &\textit{total}                                                \\
+         \cline{2-5}
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{steel} \end{tabular}
+           &$5\,448$  &$2\,661$  &$17\,589$     &$25\,698$                          \\
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{auto} \end{tabular}
+           &$48$      &$9\,020$  &$21\,243$     &$30\,311$
+        \end{tabular}
+      \end{center}
+      For comparison here is the original table.
+      \begin{center}
+        \begin{tabular}{r|rrrr}
+         \multicolumn{1}{c}{\ }  %put the | in the right place
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}}
+                                \textit{used by} \\[-.65ex] \textit{steel}
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}}
+                                \textit{used by} \\[-.65ex] \textit{auto}
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}}
+                                \textit{used by} \\[-.65ex] \textit{others}
+                              \end{tabular}}
+         &\textit{total}                                                \\
+         \cline{2-5}
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{steel} \end{tabular}
+           &$5\,395$  &$2\,664$  &$17\,389$     &$25\,448$                          \\
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{auto} \end{tabular}
+           &$48$      &$9\,030$  &$21\,268$     &$30\,346$
+        \end{tabular}
+      \end{center}
     
 \end{ans}
 \begin{ans}{3}
+      \textit{Octave} gives these answers.
+      \begin{exparts}
+        \partsitem $s=24,244$, $a=30,307$
+        \partsitem $s=24,267$, $a=30,673$
+      \end{exparts}
+    
+\end{ans}
+\begin{ans}{4}
       \begin{exparts}
         \partsitem
           These are the equations.
@@ -3948,7 +4016,7 @@
 	       -(0/18.69)s   &+   &(9.87/4.27)a &= &11.35
 	    \end{linsys}
 	  \end{equation*}
-          Octave gives $s=20.66$ and $a=16.41$.
+          \textit{Octave} gives $s=20.66$ and $a=16.41$.
 	\partsitem
           These are the ratios.
 	  \begin{center}
@@ -3965,7 +4033,8 @@
             \end{tabular}
           \end{center}
 	\partsitem
-          Octave gives (in billions of 1947 dollars) $s=24.82$ and $a=23.63$.
+          \textit{Octave} gives (in billions of 1947 dollars)
+          $s=24.82$ and $a=23.63$.
           In billions of 1958 dollars that is $s=32.26$ and $a=30.71$.
       \end{exparts}
     

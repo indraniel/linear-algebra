@@ -1048,15 +1048,15 @@ beginfig(30) % equiv relation; two specific row-equiv mats
   path p[]; partition;
   label(btex {\scriptsize \ldots} etex,z13);
   x14=.65[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-  label.rt(btex {\tiny       $\bigl(\begin{smallmatrix}
+  label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
                                 1  &3  \\
                                 2  &7
-                              \end{smallmatrix}\bigr)$} etex,z14);
+                              \end{smallmatrix}\Bigr)$} etex,z14);
   x15=.7[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-  label.rt(btex {\tiny       $\bigl(\begin{smallmatrix}
+  label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
                                 1  &3  \\
                                 0  &1
-                              \end{smallmatrix}\bigr)$} etex,z15);
+                              \end{smallmatrix}\Bigr)$} etex,z15);
 endfig;
 
 
@@ -1084,10 +1084,10 @@ beginfig(31) % equiv relation; canonical reps shown, incl 2x2 identity
     label(btex {\scriptsize $\star$} etex,z16);
   x17=.28[x0,x1]; y17=.6[y0,y3];    % middle
     label(btex {\scriptsize $\star$} etex,z17);
-    label.bot(btex {\tiny $\bigl(\begin{smallmatrix}
+    label.bot(btex {\tiny $\Bigl(\begin{smallmatrix}
                                 1  &0  \\
                                 0  &1
-                              \end{smallmatrix}\bigr)$} etex,z17);
+                              \end{smallmatrix}\Bigr)$} etex,z17);
 endfig;
 
 
