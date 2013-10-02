@@ -1272,7 +1272,12 @@ beginfig(34) % two lines, meet at good angle
   pickup pensquare scaled line_width_light;
   draw xaxis; updown_ticks(6,(-1w,0v),(1w,0v));
   draw yaxis; sidetoside_ticks(6,(0w,-1v),(0w,1v));
-    
+
+  % make bbox bigger than picture
+  pickup pencircle scaled 0pt;
+  drawdot((1w,-1.55v)); drawdot((1w,4.55v));
+  pickup pensquare scaled line_width_light;
+  
   z0=(-197w,100v); z1=(203w,-100v); %on first line x+2y=3
   z2=(201w/3,100v); z3=(-199w/3,-100v); % on second line 3x-2y=1
 
@@ -1552,31 +1557,31 @@ beginfig(38);
   draw_resistor_path(z0,z2);
     label.ulft(btex {\small \renewcommand{\arraystretch}{.9}
               \circuitfont\begin{tabular}[t]{@{}r@{}}
-                  $5$ ohm    
+                  $5$ % ohm    
               \end{tabular}} etex,
              .5[z0,z2]-(.5*.707)*(zigheight,-zigheight));
   draw_resistor_path(z0,z3);
     label.urt(btex {\small \renewcommand{\arraystretch}{.9}
               \circuitfont\begin{tabular}[t]{@{}l@{}}
-                  $2$ ohm    
+                  $2$ % ohm    
               \end{tabular}} etex,
              .5[z0,z3]+(.5*.707)*(zigheight,zigheight));
   draw_resistor_path(z2,z3);
     label.top(btex {\small \renewcommand{\arraystretch}{.9}
               \circuitfont\begin{tabular}[b]{@{}c@{}}
-                  $50$ ohm    
+                  $50$ % ohm    
               \end{tabular}} etex,
              .5[z2,z3]);
   draw_resistor_path(z2,z1);
     label.llft(btex {\small \renewcommand{\arraystretch}{.9}
               \circuitfont\begin{tabular}[t]{@{}r@{}}
-                  $10$ ohm    
+                  $10$ % ohm    
               \end{tabular}} etex,
              .5[z2,z1]-(.5*.707)*(zigheight,zigheight));
   draw_resistor_path(z3,z1);
     label.lrt(btex {\small \renewcommand{\arraystretch}{.9}
               \circuitfont\begin{tabular}[t]{@{}l@{}}
-                  $4$ ohm    
+                  $4$ % ohm    
               \end{tabular}} etex,
              .5[z3,z1]+(.5*.707)*(zigheight,-zigheight));
   draw z1--circuit_lower_right;
@@ -2024,7 +2029,10 @@ beginfig(46); % circuit diagram of car's battery and lights
     switch_gap=.5battery_shortline_length;
   % four corners of the circuit
   z2=(0,fullheight);  z3=(fullwidth,fullheight); 
-  z0=(0,0);           z1=(fullwidth,0);
+  z0=(0,0);           z1=(fullwidth,0);  
+  % make bbox bigger than picture
+  pickup pencircle scaled 0pt; drawdot(z2+(0v,0.1w));
+ 
   %
   pickup pencircle scaled line_width_light;
   draw z2--1.02[z2,z3];  % top line
@@ -2034,7 +2042,7 @@ beginfig(46); % circuit diagram of car's battery and lights
                 \circuitfont\begin{tabular}{@{}l}
                    12V \\
 	        \end{tabular}} etex,
-	      .5[z0,z2]);
+	      .5[z0,z2]+(0v,.1w));
   z5=.2[z3,z1];
   draw_bulb_path(z3,z5); % right-hand wire
     label.rt(btex {\small\renewcommand{\arraystretch}{.9}
@@ -2056,7 +2064,7 @@ beginfig(46); % circuit diagram of car's battery and lights
                 \circuitfont\begin{tabular}{@{}l}
                    Door \\ Actuated \\ Switch
 	        \end{tabular}} etex,
-		z14);
+		z14-(0.1v,0w));
   draw z8--z1; % end of right wire
   %
   numeric split_wires_percent; % how far from top to split for sep bulb wires 
@@ -2099,7 +2107,7 @@ beginfig(46); % circuit diagram of car's battery and lights
                 \circuitfont\begin{tabular}[b]{@{}l}
                    Brake \\ Actuated \\ Switch
 	        \end{tabular}} etex,
-		z38);
+		z38-(0.1v,0w));
   % main lights
   path post;
   post=fullcircle scaled 2pt;
