@@ -51,64 +51,6 @@ We will prove that in the next section.
 
 
 \subsection{Definition and Examples}
-% \begin{lemma}  \label{le:VecInSpanIffSpanUnchByAddVec}
-% %<*lm:VecInSpanIffSpanUnchByAddVec>
-% If \( S \) is a subset of a vector space $V$  and 
-% $\vec{v}\in V$ then
-% $\spanof{S}=\spanof{S\union\set{\vec{v}}}$
-% if and only if
-% $\vec{v}\in\spanof{S}$.
-% %</lm:VecInSpanIffSpanUnchByAddVec>
-% \end{lemma}
-
-% \begin{proof}
-% %<*pf:VecInSpanIffSpanUnchByAddVec0>
-% The left to right implication is easy.
-% If $\spanof{S}=\spanof{S\union\set{\vec{v}}}$
-% then since \( \vec{v}\in\spanof{S\union\set{\vec{v}}} \),
-% the equality of the two sets gives that \( \vec{v}\in\spanof{S} \).
-% %</pf:VecInSpanIffSpanUnchByAddVec0>
-
-% %<*pf:VecInSpanIffSpanUnchByAddVec1>
-% For the right to left implication assume that \( \vec{v}\in \spanof{S} \) to
-% show that \( \spanof{S}=\spanof{S\union\set{\vec{v}}} \) by 
-% mutual set inclusion.
-% The inclusion \( \spanof{S}\subseteq\spanof{S\union\set{\vec{v}}} \) is
-% obvious.
-% For \( \spanof{S}\supseteq\spanof{S\union\set{\vec{v}}} \),
-% write an element of \( \spanof{S\union\set{\vec{v}}} \) as
-% \( d_0\vec{v}+d_1\vec{s}_1+\dots+d_m\vec{s}_m \)
-% and substitute \( \vec{v} \)'s expansion
-% as a linear combination of members of the same set
-% \( d_0(c_0\vec{t}_0+\dots+c_k\vec{t}_k)+d_1\vec{s}_1+\dots+d_m\vec{s}_m \).
-% This is a linear combination of linear combinations and so 
-% distributing \( d_0 \) results in
-% a linear combination of vectors from \( S \).
-% Hence each member of $\spanof{S\union\set{\vec{v}}}$ is also 
-% a member of $\spanof{S}$.
-% %</pf:VecInSpanIffSpanUnchByAddVec1>
-% \end{proof}
-
-% \begin{example}
-% In \( \Re^3 \), where
-% \begin{equation*}
-%   \vec{v}_1=\colvec{1 \\ 0 \\ 0}\quad
-%   \vec{v}_2=\colvec{0 \\ 1 \\ 0}\quad
-%   \vec{v}_3=\colvec{2 \\ 1 \\ 0}
-% \end{equation*}
-% the spans \( \spanof{\set{\vec{v}_1,\vec{v}_2}} \) and
-% \( \spanof{\set{\vec{v}_1,\vec{v}_2,\vec{v}_3}} \) are equal since
-% \( \vec{v}_3 \) is in the span \( \spanof{\set{\vec{v}_1,\vec{v}_2}} \).
-% \end{example}
-
-% The lemma says that if we have a spanning set 
-% then we can remove a $\vec{v}$ to get a new set $S$ 
-% with the same span if and only if
-% $\vec{v}$ is a linear combination of vectors from $S$.
-% Thus, under the second sense described in this section's opening, 
-% a spanning set is minimal
-% if and only if it contains
-% no vectors that are linear combinations of the others in that set.
 
 We saw ``repeats'' in the first chapter.
 There, Gauss's Method turned them into 
@@ -117,27 +59,26 @@ $0=0$ equations.
 \begin{example}  \label{ex:StaticsLIAndLD}
 Recall the \hyperlink{ex:Statics}{Statics example} from
 Chapter One's opening.
-We first got a balance with the unknown-mass objects 
-at \( 40 \)~cm and \( 15 \)~cm 
-and then got another balance at \( -50 \)~cm and \( 25 \)~cm.
-With those two we computed the values of the unknown masses.
+We got two balances with the pair of unknown-mass objects, one 
+at \( 40 \)~cm and \( 15 \)~cm and another 
+at \( -50 \)~cm and \( 25 \)~cm, and
+we then computed the value of those masses.
 Had we instead gotten the second balance at
 \( 20 \)~cm and \( 7.5 \)~cm
-then we would not have been able to solve for the unknown values.
-Instead Gauss's Method on the resulting two-equations, two-unknowns system
-would have yielded a $0=0$ equation, along with an
-equation containing a free variable.
-Intuitively, the problem would have been that \( \rowvec{20 &7.5} \) is half of 
+then Gauss's Method on the resulting two-equations, two-unknowns system
+would not have yielded a solution, it would have yielded a $0=0$ equation 
+along with an equation containing a free variable.
+Intuitively, the problem is that \( \rowvec{20 &7.5} \) is half of 
 $\rowvec{40 &15}$, that is,
 $\rowvec{20 &7.5}$ is in the span of the set $\set{\rowvec{40 &15}}$
-and so is repeated information.
+and so is repeated data.
 We would have been trying to 
 solve a two-unknowns problem with essentially only one piece of information.
 \end{example}
  
 We take $\vec{v}$ to be a ``repeat''
 of the vectors in a set~$S$ if $\vec{v}\in\spanof{S}$ so
-that it depends on, is expressible in terms of, 
+that it depends on, that is, is expressible in terms of, 
 elements of the set 
 $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n$.
 
@@ -177,7 +118,7 @@ combinations of vectors from~$S$.
 Thus $\vec{w}\in\spanof{S}$.
 \end{proof}
 
-The discussion at the section's start involved removing vectors instead of
+The discussion at the section's opening involved removing vectors instead of
 adding them. 
 
 \begin{corollary}  \label{cor:OmitVecNotShrinkSpanIffVecIsDep}
@@ -228,8 +169,8 @@ we can rewrite to isolate \( \vec{s}_i \).
               +(-c_{i-1}/c_i)\vec{s}_{i-1}+(-c_{i+1}/c_i)\vec{s}_{i+1}
               +\dots+(-c_n/c_i)\vec{s}_n
 \end{equation*}
-When we don't want to single out any vector by writing it alone on
-one side of the equation we will instead say that
+When we don't want to single out any vector
+we will instead say that
 \( \vec{s}_0,\vec{s}_1,\dots,\vec{s}_n \) are in a
 \definend{linear relationship}\index{linear relationship}%
 \index{relationship!linear} 
@@ -241,14 +182,6 @@ a finite set is dependent or independent.
 
 \begin{lemma}   \label{le:LDIffANonTrivLinRel}
 %<*lm:LDIffANonTrivLinRel>
-% A subset \( S \) of a vector space is linearly independent if and only if 
-% among the elements \( \vec{s}_1,\dots,\vec{s}_n\in S \) 
-% the only linear relationship 
-% \begin{equation*}
-%    c_1\vec{s}_1+\dots+c_n\vec{s}_n=\zero
-%    \qquad c_1,\dots,c_n\in\Re
-% \end{equation*}
-% is the trivial one \( c_1=0,\dots,\,c_n=0 \).
 A subset \( S \) of a vector space is linearly independent if and only if 
 among its elements  
 the only linear relationship 
@@ -263,8 +196,8 @@ is the trivial one \( c_1=0,\dots,\,c_n=0 \).
 If \( S \) is linearly independent then no vector
 $\vec{s}_i$ 
 is a linear combination of other vectors from $S$
-so there is no linear relationship where some of the $\vec{s}\,$'s have 
-nonzero coefficients.
+so there is no linear relationship where some of the
+$\vec{s}\,$'s have nonzero coefficients.
 
 If \( S \) is not linearly independent then some \( \vec{s}_i \) is a linear
 combination 
@@ -348,7 +281,7 @@ The rows of this matrix
   \end{mat}
 \end{equation*}
 form a linearly independent set.
-This is easy to check in this case, but also 
+This is easy to check for this case but also 
 recall that Lemma~One.III.\ref{le:EchFormNoLinCombo}
 shows that the rows of any echelon form matrix form
 a linearly independent set.
@@ -406,16 +339,10 @@ In any vector space, any subset containing the zero vector is linearly
 dependent.
 One example is, in the space $\polyspace_2$ of quadratic polynomials, 
 the subset $\set{1+x,x+x^2,0}$.
-
-This subset is linearly 
+It is linearly 
 dependent because 
 $0\cdot\vec{v}_1+0\cdot\vec{v}_2+1\cdot\zero=\zero$ is a nontrivial
 relationship, since not all of the coefficients are zero.
-% Another way to see that this subset is
-% linearly dependent is to go straight to \nearbydefinition{def:LinInd}:~we
-% can express the third member of the subset
-% as a linear combination of the 
-% first two $c_1\vec{v}_1+c_2\vec{v}_2=\zero$ if $c_1=0$ and $c_2=0$.
 
 A subtler way to see that this subset is dependent is to remember that
 the zero vector is equal to the trivial sum, 
@@ -455,149 +382,6 @@ under~$f$ is linearly dependent.
 % dependent ``set.''
 \end{remark}
 
-% This section began with a discussion and example 
-% about when a set contains ``repeat'' elements, ones that we can 
-% omit without shrinking the span.
-% The next result characterizes when this happens.
-% It supports the
-% definition of linearly independent set because it says that
-% such a set is a minimal spanning set in that we cannot 
-% omit any element without changing the span.
-
-% \begin{lemma} \label{lm:ShrinkSpanByRemovingNonRepeat}
-% %<*lm:ShrinkSpanByRemovingNonRepeat>
-% If $\vec{v}$ is a member of a vector space $V$ and $S\subseteq V$ 
-% then $\spanof{S-\set{\vec{v}}}\subseteq \spanof{S}$.
-% Also: (1)~if $\vec{v}\in S$ then
-% $\spanof{S-\set{\vec{v}}}=\spanof{S}$ if and only if 
-%   $\vec{v}\in\spanof{S-\set{\vec{v}}}$
-% and 
-% (2)~the condition that 
-% removal of any $\vec{v}\in S$ shrinks the span 
-% $\spanof{S-\set{\vec{v}}}\neq \spanof{S}$
-% holds if and only if $S$ is linearly independent. 
-% %</lm:ShrinkSpanByRemovingNonRepeat>
-% \end{lemma}
-
-% \begin{proof}
-% %<*pf:ShrinkSpanByRemovingNonRepeat0>
-% First, $\spanof{S-\set{\vec{v}}}\subseteq \spanof{S}$ 
-% because an element of $\spanof{S-\set{\vec{v}}}$ 
-% is a linear combination of elements of $S-\set{\vec{v}}$,
-% and so is a linear combination of elements of $S$,
-% and so is an element of $\spanof{S}$.
-% %</pf:ShrinkSpanByRemovingNonRepeat0>
-
-% %<*pf:ShrinkSpanByRemovingNonRepeat1>
-% For statement~(1), one half of the if and only if is easy: 
-% if $\vec{v}\not\in\spanof{S-\set{\vec{v}}}$ then
-% $\spanof{S-\set{\vec{v}}}\neq \spanof{S}$ since the set on the right
-% contains $\vec{v}$ while the set on the left does not.
-% %</pf:ShrinkSpanByRemovingNonRepeat1>
-
-% %<*pf:ShrinkSpanByRemovingNonRepeat2>
-% The other half of the if and only if assumes that 
-% $\vec{v}\in\spanof{S-\set{\vec{v}}}$,
-% so that it is a combination 
-% $\vec{v}=c_1\vec{s}_1+\cdots +c_n\vec{s}_n$ of members of 
-% $S-\set{\vec{v}}$.
-% To show that $\spanof{S-\set{\vec{v}}}= \spanof{S}$, by the first paragraph
-% we need only show that each element of $\spanof{S}$ 
-% is an element of
-% $\spanof{S-\set{\vec{v}}}$.
-% So consider a linear combination
-% $d_1\vec{s}_{n+1}+\cdots+d_m\vec{s}_{n+m}+d_{m+1}\vec{v}\in\spanof{S}$ 
-% (we can assume that each $\vec{s}_{n+j}$ is unequal to $\vec{v}$).
-% Substitute for $\vec{v}$
-% \begin{equation*}
-%   d_1\vec{s}_{n+1}+\cdots+d_m\vec{s}_{n+m}+d_{m+1}(c_1\vec{s}_1+\cdots +c_n\vec{s}_n)
-% \end{equation*}
-% to get a linear combination of linear combinations of members of 
-% $\spanof{S-\set{\vec{v}}}$, which 
-% is a member of $\spanof{S-\set{\vec{v}}}$.
-% %</pf:ShrinkSpanByRemovingNonRepeat2>
-
-% %<*pf:ShrinkSpanByRemovingNonRepeat3>
-% For statement~(2) assume first that $S$ is linearly
-% independent and that $\vec{v}\in S$.
-% If removal of $\vec{v}$ did not shrink the span, so that
-% $\vec{v}\in\spanof{S-\set{\vec{v}}}$, then 
-% we would have $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n$, 
-% which would be a linear dependence
-% among members of $S$, contradicting that $S$ is independent.
-% Hence $\vec{v}\not\in\spanof{S-\set{\vec{v}}}$
-% and the two sets are not equal.
-% %</pf:ShrinkSpanByRemovingNonRepeat3>
-
-% %<*pf:ShrinkSpanByRemovingNonRepeat4>
-% Do the other half of this if and only if statement by assuming
-% that $S$ is not linearly independent, so that some linear dependence 
-% $\vec{s}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n$ holds among its members
-% (with no $\vec{s}_i$ equal to $\vec{s}$).
-% Then $\vec{s}\in\spanof{S-\set{\vec{s}}}$ and by statement~(1) its
-% removal will not shrink the span
-% $\spanof{S-\set{\vec{s}}}= \spanof{S}$.
-% %</pf:ShrinkSpanByRemovingNonRepeat4>
-% \end{proof}
-
-% We can also express that in terms of adding vectors rather than of omitting 
-% them.
-
-% \begin{lemma}  \label{lm:ExpandSpanByAddingNonRepeat}
-% %<*lm:ExpandSpanByAddingNonRepeat>
-% If $\vec{v}$ is a member of the vector space $V$ and $S$ is a subset
-% of $V$
-% then $\spanof{S}\subseteq \spanof{S\union\set{\vec{v}}}$.
-% Also:
-% (1)~adding $\vec{v}$ to $S$ does not increase the span 
-%   $\spanof{S}=\spanof{S\union\set{\vec{v}}}$ if and only if 
-%   $\vec{v}\in \spanof{S}$,
-% and 
-% (2)~if $S$ is linearly independent then adjoining $\vec{v}$ to $S$ gives a
-%   set that is also
-%   linearly independent if and only if $\vec{v}\not\in \spanof{S}$.  
-% %</lm:ExpandSpanByAddingNonRepeat>
-% \end{lemma}
-
-% \begin{proof}
-% %<*pf:ExpandSpanByAddingNonRepeat0>
-% The first sentence and statement~(1) are translations of the first
-% sentence and statement~(1) from the prior result.
-% %</pf:ExpandSpanByAddingNonRepeat0>
-
-% %<*pf:ExpandSpanByAddingNonRepeat1>
-% For statement~(2) assume that $S$ is linearly independent.
-% Suppose first that $\vec{v}\not\in\spanof{S}$. 
-% If adjoining $\vec{v}$ to $S$ 
-% resulted in a nontrivial linear relationship
-% \( \lincombo{c}{\vec{s}}+c_{n+1}\vec{v}=\zero \)
-% then because the linear independence of $S$ implies that \( c_{n+1}\neq 0 \) 
-% (or else the equation would be a nontrivial 
-% relationship among members of \( S \)),
-% we could rewrite the relationship as
-% \( \vec{v}=-(c_1/c_{n+1})\vec{s}_1-\dots-(c_n/c_{n+1})\vec{s}_n \) to get
-% the contradiction 
-% that \( \vec{v}\in\spanof{S} \).
-% Therefore if $\vec{v}\not\in\spanof{S}$ then 
-% the only linear relationship is trivial. 
-% %</pf:ExpandSpanByAddingNonRepeat1>
-
-% %<*pf:ExpandSpanByAddingNonRepeat2>
-% Conversely, if we suppose that $\vec{v}\in \spanof{S}$
-% then there is a dependence 
-% $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n$ ($\vec{s}_i\in S$)
-% inside of
-% $S$ with $\vec{v}$ adjoined.
-% %</pf:ExpandSpanByAddingNonRepeat2>
-% \end{proof}
-
-
-
-
-
-
-
-% ====================
 
 \begin{corollary} \label{cor:LiSetMinSpanSet}
 A set $S$ is linearly independent if and only if
@@ -649,71 +433,6 @@ to get $\vec{v}\in\spanof{S}$
 \end{proof}
 
 
-% ====================
-
-
-
-
-
-% \begin{lemma} \label{lm:ExpandSpanByAddingNonRepeat}
-% %<*lm:ExpandSpanByAddingNonRepeat>
-% If $\vec{v}$ is a member of the vector space $V$ and $S$ is a subset
-% of $V$
-% then $\spanof{S}\subseteq \spanof{S\union\set{\vec{v}}}$.
-% Also:
-% (1)~adding $\vec{v}$ to a set strictly increases the span 
-%   $\spanof{S}\subsetneq \spanof{S\union\set{\vec{v}}}$ if and only if 
-%   $\vec{v}\not\in \spanof{S}$,
-% and 
-% (2)~if $S$ is linearly independent then adjoining $\vec{v}$ to $S$ gives a
-%   set that is also
-%   linearly independent if and only if $\vec{v}\not\in \spanof{S}$.
-% %</lm:ExpandSpanByAddingNonRepeat>
-% \end{lemma}
-
-% \begin{proof}
-% %<*pf:ExpandSpanByAddingNonRepeat0>
-% First, $\spanof{S}\subseteq \spanof{S\union\set{\vec{v}}}$ because an
-% element of $\spanof{S}$ is a linear combination of elements of $S$,
-% and so is a linear combination of elements of $S\union\set{\vec{v}}$,
-% and so is an element of $\spanof{S\union\set{\vec{v}}}$.
-% %</pf:ExpandSpanByAddingNonRepeat0>
-
-% %<*pf:ExpandSpanByAddingNonRepeat1>
-% For statement~(1), one half of the if and only if is easy: if 
-% $\vec{v}\not\in \spanof{S}$
-% then because $\vec{v}\in\spanof{S\union\set{\vec{v}}}$ we have that
-% $\spanof{S}\neq\spanof{S\union\set{\vec{v}}}$. 
-% Conversely, if $\vec{v}\in\spanof{S}$ then 
-% for any $\vec{w}\in\spanof{S\union\set{\vec{v}}}$ we can write
-% $\vec{w}=d_{0}\vec{v}+d_1\vec{s}_1+\cdots+d_n\vec{s}_n$, and expanding
-% $\vec{v}$ as a linear combination of members of $S$ 
-% gives $\vec{w}$ as a 
-% linear combination of members of $S$, and therefore as 
-% a member of $\spanof{S}$.  
-% %</pf:ExpandSpanByAddingNonRepeat1>
-
-% %<*pf:ExpandSpanByAddingNonRepeat2>
-% For statement~(2) assume that $S$ is linearly independent.
-% Assume first that $\vec{v}\not\in\spanof{S}$. 
-% If adjoining $\vec{v}$ to $S$ 
-% resulted in a nontrivial linear relationship
-% \( \lincombo{c}{\vec{s}}+c_{n+1}\vec{v}=\zero \)
-% then because the linear independence of $S$ implies that \( c_{n+1}\neq 0 \) 
-% (or else the equation would be a nontrivial 
-% relationship among members of \( S \)),
-% we could rewrite the relationship as
-% \( \vec{v}=-(c_1/c_{n+1})\vec{s}_1-\dots-(c_n/c_{n+1})\vec{s}_n \) to get
-% the contradiction 
-% that \( \vec{v}\in\spanof{S} \).
-% Therefore if $\vec{v}\not\in\spanof{S}$ then 
-% the only linear relationship is trivial. 
-% Conversely, if we assume that $\vec{v}\in \spanof{S}$
-% then $\vec{v}=c_1\vec{s}_1+\cdots+c_n\vec{s}_n$ and so there is a dependence  
-% among the members of 
-% $S$ with $\vec{v}$ adjoined.
-% %</pf:ExpandSpanByAddingNonRepeat2>
-% \end{proof}
 
 \begin{example} \label{ex:LinindSetsAndSuper}
 This subset of $\Re^3$ is linearly independent.
@@ -736,9 +455,9 @@ independent.
          \colvec{0 \\ 1 \\ 0}} \)      
 \end{center}
 We got the
-dependent superset by adding a vector in the $x$-axis
-and so the span did not grow, 
-while we got the independent superset by adding a vector 
+dependent superset by adding a vector from the $x$-axis
+and so the span did not grow.
+We got the independent superset by adding a vector 
 that isn't in $\spanof{S}$, because it has a nonzero $y$~component,
 causing the span to grow.
 
@@ -776,7 +495,7 @@ Finally, consider this independent set
           \colvec{0 \\ 0 \\ 1}        } 
 \end{equation*}
 with \( \spanof{S}=\Re^3 \).  
-Here is a linearly dependent superset
+We can get a linearly dependent superset.
 \begin{center}
      dependent:
      \( \set{
@@ -785,7 +504,7 @@ Here is a linearly dependent superset
          \colvec{0 \\ 0 \\ 1},
          \colvec{2 \\ -1 \\ 3} } \)     
 \end{center}
-but there is no linearly independent superset os $S$.
+But there is no linearly independent superset os $S$.
 One way to see that is to note that
 for any vector that we would add to $S$, the equation
 \begin{equation*}
@@ -797,14 +516,8 @@ for any vector that we would add to $S$, the equation
 has a solution $c_1=x$, $c_2=y$, and $c_3=z$.
 Another way to see it is that
 we cannot add any vectors from outside of the span $\spanof{S}$ because that
-span is all of $\Re^3$.
+span is $\Re^3$.
 \end{example}
-
-% \nearbylemma{lm:ExpandSpanByAddingNonRepeat} says that
-% if we have a set that is linearly dependent then we can, without changing
-% the span,  
-% discard what \nearbyexample{ex:StaticsLIAndLD}
-% calls ``repeat'' vectors.
 
 \begin{corollary} \label{th:AlwaysAnLDSubset}
 %<*th:AlwaysAnLDSubset>
@@ -821,7 +534,7 @@ assume that it is linearly dependent.
 %</pf:AlwaysAnLDSubset0>
 
 %<*pf:AlwaysAnLDSubset1>
-By the definition of dependence, $S$ contains
+By the definition of dependent, $S$ contains
 a vector $\vec{v}_1$ that is a linear combination of
 the others.
 Define the set \( S_1=S-\set{\vec{v}_1} \).
@@ -846,6 +559,10 @@ induction on the number of elements in $S$.
 \nearbyexercise{exer:FillIndDetProofSetHasLISub} asks for the details.)
 \end{proof}
 
+Thus if we have a set that is linearly dependent then we can, without changing
+the span, pare down by   
+discarding what we have called ``repeat'' vectors.
+
 \begin{example}  \label{ex:ShrinkSetSameSpan}
 This set spans \( \Re^3 \) (the check is routine)
 but is not linearly independent. 
@@ -856,7 +573,8 @@ but is not linearly independent.
      \colvec[r]{0 \\ -1 \\ 1},
      \colvec[r]{3 \\ 3 \\ 0}  }
 \end{equation*}
-We will find vectors to drop to get a subset that is independent but that
+We will calculate which vectors to drop in order
+to get a subset that is independent but
 has the same span.
 This linear relationship
 \begin{equation*}
@@ -884,7 +602,7 @@ whose solution set has this parametrization.
      \suchthat c_3,c_5\in\Re }
 \end{equation*}
 Set $c_5=1$ and~$c_3=0$ 
-to get this instance of ($*$).
+to get an instance of ($*$).
 \begin{equation*}
   -3\cdot\colvec[r]{1 \\ 0 \\ 0}
   -\frac{3}{2}\cdot\colvec[r]{0 \\ 2 \\ 0}
@@ -910,13 +628,6 @@ shows we can discard $S$'s third vector without shrinking the span.
 \end{equation*}
 The check that it is linearly independent is routine.
 \end{example}
-
-% The general method is: 
-% given a finite set of vectors, first
-% write the system to express a linear relationship,
-% apply Gauss's Method, and then
-% discard the vectors 
-% associated with free variables. 
 
 \begin{corollary} \label{cor:LDMeansLC}
 %<*co:LDMeansLC>
@@ -1570,7 +1281,7 @@ a spanning set is minimal if and only if it is linearly independent.
      Prove that a polynomial gives rise to the zero function if and only if
      it is the zero polynomial.
      (\textit{Comment.}
-     This question is not a Linear Algebra matter, but we often use the result.
+     This question is not a Linear Algebra matter but we often use the result.
      A polynomial gives rise to a function in the natural 
      way:~$x\mapsto c_nx^n+\dots+c_1x+c_0$.)
      \begin{answer}
@@ -1642,7 +1353,7 @@ a spanning set is minimal if and only if it is linearly independent.
      \end{exparts}  
     \end{answer}
   \recommended \item
-    Is there a set of four vectors in \( \Re^3 \), any three of which
+    Is there a set of four vectors in \( \Re^3 \) such that any three 
     form a linearly independent set?
     \begin{answer}
       Yes; here is one.
@@ -1662,7 +1373,7 @@ a spanning set is minimal if and only if it is linearly independent.
       examples.  
     \end{answer}
   \item  
-    In \( \Re^4 \), what is the biggest linearly independent
+    In \( \Re^4 \) what is the biggest linearly independent
     set you can find?
     The smallest?
     The biggest linearly dependent set?
