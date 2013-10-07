@@ -17,7 +17,7 @@ pdflatex "\def\hrefout{yes}\input book"
 
 # edit jhanswer.tex to set \input to bookans
 # # pdflatex "\def\dvidrv{pdftex}\def\pbsifont{yes}\def\hrefout{yes}\input jhanswer"
-pdflatex "\def\hrefout{yes}\input jhanswer"
+# pdflatex "\def\hrefout{yes}\input jhanswer"
 # # pdflatex "\def\dvidrv{pdftex}\def\pbsifont{yes}\def\hrefout{yes}\input jhanswer"
-pdflatex "\def\hrefout{yes}\input jhanswer"
+# pdflatex "\def\hrefout{yes}\input jhanswer"
 # dvips -Pwww -ojhanswer.ps jhanswer
