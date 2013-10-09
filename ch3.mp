@@ -704,13 +704,15 @@ beginfig(16) % flip over a line map
   z0=(3w,2v); 
   z2=(2w,3v); 
   pickup pencircle scaled line_width_dark;
+  draw (-.5w,-.5v)--(3w,3v) dashed withdots scaled .5;
+  label.ulft(btex {\scriptsize $\ell$} etex,0.5[(0w,0v),(3w,3v)]);
   z3=(-.5w,-.5v) shifted codomainshift; z4=(3w,3v) shifted codomainshift;
   draw z3--z4 dashed withdots scaled .5; 
   drawarrow (0w,0v)--z0;
     label.rt(btex {\scriptsize $\vec{u}$} etex,z0);
   drawarrow ((0w,0v)--z2) shifted codomainshift;
     picture pa;  % in case the line ell hits this label
-    pa = thelabel.rt(btex {\scriptsize $f_{\ell}(\vec{u})$} etex,
+    pa = thelabel.urt(btex {\scriptsize $f_{\ell}(\vec{u})$} etex,
                    z2 shifted codomainshift);
     unfill bbox pa; draw pa;
 
