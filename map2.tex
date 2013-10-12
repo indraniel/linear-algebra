@@ -1,5 +1,5 @@
 % Chapter 3, Section 2 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-11
 \section{Homomorphisms}
 The definition of isomorphism has two conditions.
@@ -27,7 +27,7 @@ we can think of these maps as describing how spaces are alike.
 %<*df:Homo>
 A function between vector spaces \( \map{h}{V}{W} \) that 
 preserves\index{preserves structure}\index{structure! preservation} 
-the operations of addition
+addition
 \begin{center}
   if \( \vec{v}_1,\vec{v}_2\in V \) then
       \( h(\vec{v}_1+\vec{v}_2)=h(\vec{v}_1)+h(\vec{v}_2) \)
@@ -81,7 +81,7 @@ the zero vector in $\Re^2$.
 \end{example}
 
 \begin{example} \label{exam:TwoMapsHomoNotIso}
-Of course, the domain and codomain 
+The domain and codomain 
 can be other than spaces of column vectors.
 Both of these are homomorphisms;
 the verifications are straightforward.
@@ -118,21 +118,23 @@ These two suggest why we use the term `linear map'.
       3x+2y-4.5z
     \end{equation*}
     is linear, that is, is a homomorphism.
+    The check is easy.
     In contrast, the map \( \map{\hat{g}}{\Re^3}{\Re} \) given by
     \begin{equation*}
       \colvec{x \\ y \\ z}
         \mapsunder{\hat{g}}
       3x+2y-4.5z+1
     \end{equation*}
-    is not.
+    is not linear.
+    To show this we need only produce a single
+    linear combination that the map does not preserve.
+    Here is one.
     \begin{equation*}
       \hat{g}(\colvec[r]{0 \\ 0 \\ 0}+\colvec[r]{1 \\ 0 \\ 0})=4
       \qquad
       \hat{g}(\colvec[r]{0 \\ 0 \\ 0})
       +\hat{g}(\colvec[r]{1 \\ 0 \\ 0})=5
     \end{equation*}
-    To show that a map is not linear we need only produce a single
-    linear combination that the map does not preserve.
   \item The first of these two maps 
     \( \map{t_1,t_2}{\Re^3}{\Re^2} \)
     is linear while the second is not.
@@ -148,35 +150,32 @@ These two suggest why we use the term `linear map'.
     Finding a linear combination that the second map does not 
     preserve is easy. 
 \end{enumerate}
-The homomorphisms have 
-coordinate functions that are linear combinations of the arguments.
+% The homomorphisms have 
+% coordinate functions that are linear combinations of the arguments.
 % See also \nearbyexercise{exer:GrpahNotALine}.
 \end{example}
 
-Any isomorphism is a
-homomorphism, since an isomorphism is a 
-homomorphism that is also a correspondence.
 So one way to think of `homomorphism' 
-is as a generalization of `isomorphism'
+is that we are generalizing `isomorphism' (by dropping the condition that
+the map is a correspondence),
 motivated by the observation that many of the properties of
-isomorphisms have only to do with the map's structure preservation property
-and not to do with being a correspondence.
-The next two results are examples of that thinking.
-The proof for each given in the prior section
-does not use one-to-one-ness or onto-ness  
-and therefore applies here.
+isomorphisms have only to do with the map's structure-preservation property.
+The next two results are examples of this motivation.
+In the prior section we saw a proof for each that only uses preservation of
+addition and preservation of scalar multiplication,
+and therefore applies to homomorphisms.
 
 \begin{lemma}       \label{le:HomoSendsZeroToZero}
 %<*lm:HomoSendsZeroToZero>
-A homomorphism sends a zero vector to a zero vector.
+A homomorphism sends the zero vector to the zero vector.
 %</lm:HomoSendsZeroToZero>
 \end{lemma}
 
 \begin{lemma}  \label{le:HomoPreserveLinCombo}
 %<*lm:HomoPreserveLinCombo>
-For any map 
+The following are equivalent for any map 
 \( \map{f}{V}{W} \) 
-between vector spaces, the following are equivalent.
+between vector spaces.
 \begin{tfae}
   \item 
       $f$ is a homomorphism 
@@ -212,23 +211,24 @@ is linear since it satisfies item~(2).
 \end{example}
 
 However,
-some of the things that we have seen for isomorphisms fail to hold for
-homomorphisms in general.
-One example is the proof of Lemma~I.\ref{lem:IsoImpliesSameDim}, 
+some things that hold for isomorphisms fail to hold for
+homomorphisms.
+One example is in the proof of Lemma~I.\ref{lem:IsoImpliesSameDim}, 
 which shows that an isomorphism between spaces gives 
 a correspondence between their bases.
 Homomorphisms do not give any such correspondence;
 \nearbyexample{ex:RThreeHomoRTwoFirst} shows this and another example is
 the zero map between two nontrivial spaces. 
-Instead, for homomorphisms a weaker but still very useful result holds.
+Instead, for homomorphisms we have a weaker but still very useful result.
 
 \begin{theorem} \label{th:HomoDetActOnBasis}
 %<*th:HomoDetActOnBasis>
 A homomorphism is determined by its action on a basis:~if
+$V$ is a vector space with basis
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
-is a basis of a vector space \( V \) and
-\( \vec{w}_1,\dots,\vec{w}_n \) are elements of
-a vector space \( W \)  (perhaps not distinct elements) then
+and $W$ is a vector space with elements
+\( \vec{w}_1,\dots,\vec{w}_n \) 
+(perhaps not distinct elements) then
 there exists a homomorphism from \( V \) to \( W \) sending each
 \( \vec{\beta}_i \) to \( \vec{w}_i \), and that homomorphism is unique.
 %</th:HomoDetActOnBasis>
@@ -236,46 +236,61 @@ there exists a homomorphism from \( V \) to \( W \) sending each
 
 \begin{proof}
 %<*pf:HomoDetActOnBasis0>
-We will define the map by 
-associating each $\vec{\beta}_i$ with $\vec{w}_i$
-and then extending linearly to all of the domain.
-That is, given the input $\vec{v}$, we find its coordinates with
-respect to the basis
-\( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \) and define
-the associated output by using the same $c_i$ coordinates
+For any input $\vec{v}\in V$ let its expression with
+respect to the basis be
+\( \vec{v}=c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n \). 
+Define
+the associated output by using the same coordinates
 $h(\vec{v})=c_1\vec{w}_1+\dots+c_n\vec{w}_n$.
-This is a well-defined function because, with respect to the basis,
+This is well defined because, with respect to the basis,
 the representation of each domain vector \( \vec{v} \) is unique.
 %</pf:HomoDetActOnBasis0>
 
 %<*pf:HomoDetActOnBasis1>
-This map is a homomorphism since it preserves linear combinations;
+This map is a homomorphism 
+because it preserves linear combinations:
 where \( \vec{v_1}=c_1\vec{\beta}_1+\cdots+c_n\vec{\beta}_n \) and
-\( \vec{v_2}=d_1\vec{\beta}_1+\cdots+d_n\vec{\beta}_n \) then
-we have this.
+\( \vec{v_2}=d_1\vec{\beta}_1+\cdots+d_n\vec{\beta}_n \), here
+is the calculation.
 \begin{align*}
   h(r_1\vec{v}_1+r_2\vec{v}_2)
-  &=h((r_1c_1+r_2d_1)\vec{\beta}_1+\dots+(r_1c_n+r_2d_n)\vec{\beta}_n)  \\
+  &=h(\,(r_1c_1+r_2d_1)\vec{\beta}_1+\dots+(r_1c_n+r_2d_n)\vec{\beta}_n\,)  \\
   &=(r_1c_1+r_2d_1)\vec{w}_1+\dots+(r_1c_n+r_2d_n)\vec{w}_n   \\
   &=r_1h(\vec{v}_1)+r_2h(\vec{v}_2)
 \end{align*}
 %</pf:HomoDetActOnBasis1>
 
 %<*pf:HomoDetActOnBasis2>
-This map is unique since if \( \map{\hat{h}}{V}{W} \) 
-is another homomorphism satisfying that \( \hat{h}(\vec{\beta}_i)=\vec{w}_i \) 
-for each \( i \),
-then \( h \) and \( \hat{h} \) agree on all of the vectors in the domain. 
+This map is unique because if \( \map{\hat{h}}{V}{W} \) 
+is another homomorphism satisfying that \( h^\prime(\vec{\beta}_i)=\vec{w}_i \) 
+for each \( i \)
+then \( h \) and \( h^\prime \) agree on all of the vectors in the domain. 
 \begin{multline*}
-  \hat{h}(\vec{v})
-  =\hat{h}(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)  
-  =c_1\hat{h}(\vec{\beta}_1)+\dots+c_n\hat{h}(\vec{\beta}_n)  \\  
+  h^\prime(\vec{v})
+  =h^\prime(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)  
+  =c_1 h^\prime(\vec{\beta}_1)+\dots+c_n h^\prime(\vec{\beta}_n)  \\  
   =c_1\vec{w}_1+\dots+c_n\vec{w}_n 
   =h(\vec{v})
 \end{multline*}
-Thus, $h$ and $\hat{h}$ are the same map.
+They have the same action so they are the same function.
 %</pf:HomoDetActOnBasis2>
 \end{proof}
+
+\begin{definition}
+Let $V$ and~$W$ be vector spaces and 
+let  
+$B=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$ 
+be a basis for~$V$.  
+A function defined on that basis $\map{f}{B}{W}$
+is \definend{extended linearly}\index{extended linearly}\index{function!extended linearly}\index{linear extension of a function}
+to a function $\map{\hat{f}}{V}{W}$ if
+for all $\vec{v}\in V$ such that
+$\vec{v}=c_1\vec{\beta}_1+\cdots+c_n\vec{\beta}_n$,
+the action of the map is
+$\hat{f}(\vec{v})=c_1\cdot f(\vec{\beta}_1)
+  +\cdots+c_n\cdot f(\vec{\beta}_n)$.
+\end{definition}
+
 
 \begin{example}
 If we specify a map \( \map{h}{\Re^2}{\Re^2} \)
@@ -296,16 +311,11 @@ the value of $h$ on this argument
 is a direct consequence of the value of $h$ on the basis vectors.
 \end{example}
 
-So we can construct a homomorphism 
-by selecting a basis for the 
-domain and specifying where the map sends those basis vectors.
-The prior lemma shows that we can always extend the action on the map 
-linearly to the entire domain.
 Later in this chapter we shall develop a convenient scheme for computations 
 like this one, using matrices.
 
-Just as the isomorphisms of a space with itself are useful and interesting, 
-so too are the homomorphisms of a space with itself.
+% Just as the isomorphisms of a space with itself are useful and interesting, 
+% so too are the homomorphisms of a space with itself.
 
 \begin{definition} \label{df:LinearTransformation}
 %<*df:LinearTransformation>
@@ -316,16 +326,17 @@ A linear map from a space into itself \( \map{t}{V}{V} \) is a
 
 \begin{remark}
 In this book we use `linear transformation' only in the case where 
-the codomain equals the domain but it is often used instead as a
+the codomain equals the domain.
+However, be aware that other sources may instead use it as a
 synonym for `homomorphism'.
 \end{remark}
 
 \begin{example}
 The map on $\Re^2$ that projects all vectors down to the $x$-axis
+is a linear transformation.
 \begin{equation*}
   \colvec{x \\ y}\mapsto\colvec{x \\ 0}
 \end{equation*}
-is a linear transformation.
 \end{example}
 
 \begin{example}
@@ -353,7 +364,7 @@ The matrix transpose operation
   \end{mat}
 \end{equation*}
 is a linear transformation of \( \matspace_{\nbyn{2}} \).
-(Transpose is one-to-one and onto and so in fact it is
+(Transpose is one-to-one and onto and so is in fact 
 an automorphism.)
 \end{example}
 
@@ -369,8 +380,7 @@ For instance, for these maps from \( \Re^2 \) to itself
    \mapsunder{g}
   \colvec{0 \\ 5x}
 \end{equation*}
-the linear combination \( 5f-2g \) is also a map from 
-$R^2$ to itself.
+the linear combination \( 5f-2g \) is also a transformation of~$R^2$.
 \begin{equation*}
   \colvec{x \\ y}
    \mapsunder{5f-2g}
@@ -387,8 +397,8 @@ from \( V \) to \( W \).
 \end{lemma}
 
 %<*SpLinFcns>
-\noindent We denote the space of linear maps by
-\( \linmaps{V}{W} \)\index{linear maps!space of}.
+\noindent We denote the space of linear maps from $V$ to~$W$ by
+\( \linmaps{V}{W} \).\index{linear maps!space of}
 %</SpLinFcns>
 
 \begin{proof}
@@ -397,7 +407,7 @@ This set is non-empty because it contains the zero homomorphism.
 So to show that it is a subspace we need only check that it is 
 closed under the operations.
 Let \( \map{f,g}{V}{W} \) be linear. 
-Then the sum of the two is linear
+Then the operation of function addition is preserved
 \begin{align*}
    (f+g)(c_1\vec{v}_1+c_2\vec{v}_2)
    &=f(c_1\vec{v}_1+c_2\vec{v}_2) + 
@@ -406,7 +416,7 @@ Then the sum of the two is linear
    +c_1g(\vec{v}_1)+c_2g(\vec{v}_2)   \\
    &=c_1\bigl(f+g\bigr)(\vec{v}_1)+c_2\bigl(f+g\bigr)(\vec{v}_2)
 \end{align*}
-and any scalar multiple of a map is also linear.
+as is the operation of scalar multiplication of a function.
 \begin{align*}
    (r\cdot f)(c_1\vec{v}_1+c_2\vec{v}_2)
    &=r(c_1f(\vec{v}_1)+c_2f(\vec{v}_2))  \\
@@ -417,22 +427,21 @@ Hence \( \linmaps{V}{W} \) is a subspace.
 \end{proof}
 
 We started this section by 
-defining homomorphisms as a generalization of isomorphisms,
-isolating the structure preservation property.
-Some of the properties of isomorphisms carried over unchanged
-while we adapted others.
+defining `homomorphism' as a generalization of `isomorphism',
+by isolating the structure preservation property.
+Some of the points about isomorphisms carried over unchanged, while
+we adapted others.
 
-However, if we thereby get an impression that 
-the idea of 
-`homomorphism' is in some way secondary to
-that of `isomorphism' then that is mistaken.
+Note, however, that the idea of 
+`homomorphism' is in no way somehow secondary to
+that of `isomorphism'.
 In the rest of this chapter we shall work mostly with homomorphisms.
 This is
 partly because any statement made about homomorphisms is automatically true 
 about isomorphisms but more because, 
 while the isomorphism concept is more natural, 
-experience shows that the homomorphism concept 
-is more fruitful and more central to further progress.
+our experience will show that the homomorphism concept 
+is more fruitful and more central to progress.
 
 \begin{exercises}
   \recommended \item
