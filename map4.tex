@@ -1,26 +1,22 @@
 % Chapter 3, Section 4 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \section{Matrix Operations}
 The prior section shows how matrices represent linear maps.
-When we see a new idea, a good strategy  
-is to explore how it interacts with things
-that we already understand.
-In the first subsection below
-we will see how the representation of a scalar product $r\cdot f$ relates 
+We now explore how this representation interacts with things
+that we already know.
+First we will see how 
+the representation of a scalar product $r\cdot f$ of a linear map relates 
 to the representation of $f$, and
-also how the representation of the 
-sum of two maps $f+g$ relates to the representations of $f$ and $g$.
-In the later subsections we will explore the representation of 
-linear map composition and inverse.
+also how the representation of a 
+sum $f+g$ relates to the representations of the two summands.
+Later we will do the same comparison for the map operations of 
+composition and inverse.
 
 
 
 
 \subsection{Sums and Scalar Products}
-
-We start with an example showing the relationship between the representation
-of a function and the representation of a scalar multiple of that function.
 
 \begin{example}
 Let \( \map{f}{V}{W} \) be a linear function 
@@ -33,14 +29,11 @@ represented with respect to some bases by this matrix.
       1  &1
     \end{mat}
 \end{equation*}
-Consider the scalar multiple map $\map{5f}{V}{W}$.
-We want to see how to compute $\rep{5f}{B,D}$ from $\rep{f}{B,D}$.
+Consider the map that is the scalar multiple $\map{5f}{V}{W}$.
+We want to relate $\rep{5f}{B,D}$ to $\rep{f}{B,D}$.
 
-The difference between the functions is that
-if $f$ takes $\vec{v}\mapsto \vec{w}$ 
-then $5f$ takes $\vec{v}\mapsto 5\vec{w}$.
-So consider the representations of the domain and codomain vectors that are
-associated by $f$.
+Suppose that this function $f$ takes $\vec{v}\mapsto \vec{w}$. 
+Consider the representations.
 \begin{equation*}
   \rep{\vec{v}}{B}
   =\colvec{v_1 \\ v_2}
@@ -48,9 +41,11 @@ associated by $f$.
   \rep{\vec{w}}{D}
   =\colvec{w_1 \\ w_2}
 \end{equation*}
-Where the basis $D$ is $\sequence{\vec{\delta}_1,\vec{\delta}_2}$
-the representation above 
-says that $\vec{w}=w_1\vec{\delta}_1+w_2\vec{\delta}_2$.
+Where the codomain space basis is $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$
+that representation gives  
+that that the output vector is $\vec{w}=w_1\vec{\delta}_1+w_2\vec{\delta}_2$.
+
+The action of the map $5f$ is $\vec{v}\mapsto 5\vec{w}$.
 Since
 $5\vec{w}=5\cdot(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
 =(5w_1)\vec{\delta}_1+(5w_2)\vec{\delta}_2$
@@ -60,11 +55,11 @@ representation.
   \rep{5\vec{w}}{D}
   =\colvec{5w_1 \\ 5w_2}
 \end{equation*}
-Changing the map from $f$ to $5f$ has the effect 
-of changing the representation of the codomain vector by multiplying its
-entries by $5$.
+Thus going from the map from $f$ to the map $5f$ changes
+the representation of the output by multiplying each
+entry by $5$.
 
-So \( \rep{5f}{B,D} \) is this matrix.
+Because of that, \( \rep{5f}{B,D} \) is this matrix.
 \begin{equation*}
   \rep{5f}{B,D}\cdot\colvec{v_1 \\ v_2}
   =
@@ -77,17 +72,16 @@ So \( \rep{5f}{B,D} \) is this matrix.
       5  &5
     \end{mat}
 \end{equation*}
-Therefore going from the matrix representing $f$ to 
-the matrix representing $5f$ just means multiplying all the entries 
+Therefore, going from the matrix representing $f$ to 
+the one representing $5f$ just means multiplying all the matrix entries 
 by $5$.
 \end{example}
 
-Consider also how to compute the representation of the sum of two maps.
-
 \begin{example}
+We can do a similar exploration for the sum of two maps.
 Suppose that two linear maps with the same domain and codomain 
 \( \map{f,g}{\Re^2}{\Re^2} \) are represented 
-with respect to some bases $B$ and~$D$ by these matrices.
+with respect to bases $B$ and~$D$ by these matrices.
 \begin{equation*}
   \rep{f}{B,D}=
     \begin{mat}
@@ -96,24 +90,24 @@ with respect to some bases $B$ and~$D$ by these matrices.
     \end{mat}
   \qquad
   \rep{g}{B,D}=
-    \begin{mat}
+    \begin{mat}[r]
       -2  &-1 \\
        2  &4
     \end{mat}
 \end{equation*}
-Recall the definition of the sum of two functions: if
+Recall the definition of sum: if
 $f$~does $\vec{v}\mapsto\vec{u}$ and 
 $g$~does $\vec{v}\mapsto\vec{w}$ then
-$f+g$ is the function $\vec{v}\mapsto\vec{u}+\vec{w}$.
-If these are the representations of the vectors 
+$f+g$ is the function whose action is $\vec{v}\mapsto\vec{u}+\vec{w}$.
+Let these be the representations of the one input and two output vectors. 
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
-  \quad
+  \qquad
   \rep{\vec{u}}{D}=\colvec{u_1 \\ u_2}
   \quad
   \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}
 \end{equation*}
-where $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$ then we have
+Where $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$ we have
 $\vec{u}+\vec{w}=(u_1\vec{\delta}_1+u_2\vec{\delta}_2)
   +(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
   =(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2$
@@ -121,10 +115,8 @@ and so this is the representation of the vector sum.
 \begin{equation*}
   \rep{\vec{u}+\vec{w}}{D}=\colvec{u_1+w_1 \\ u_2+w_2}
 \end{equation*}
-% Thus the effect of adding the functions on the representations
-% of the vectors is to add them entry-by-entry.
-
-Since these represent the actions of $f$ and~$g$
+Since these represent the actions of of the maps $f$ and~$g$ on the 
+input~$\vec{v}$
 \begin{equation*}
     \begin{mat}
        1  &3  \\
@@ -140,7 +132,7 @@ Since these represent the actions of $f$ and~$g$
     \colvec{v_1 \\ v_2}
     =\colvec{-2v_1-v_2   \\ 2v_1+4v_2}  
 \end{equation*}
-this represents the action of $f+g$.
+this represents the action of the map $f+g$.
 \begin{equation*}
   \rep{f+g}{B,D}\cdot\colvec{v_1 \\ v_2}
   =
@@ -148,9 +140,9 @@ this represents the action of $f+g$.
 \end{equation*}
 Therefore, we 
 compute the matrix representing the function sum by adding the entries of 
-the two matrices representing the functions.
+the matrices representing the functions.
 \begin{equation*} 
-    \rep{f+g}{B,D}
+    \rep{f+g}{B,D}=
     \begin{mat}
        -1  &2  \\
         4  &4 
@@ -168,8 +160,12 @@ same-sized matrices is their entry-by-entry sum.
 %</df:SumScalarProdMats>
 \end{definition}
 
-These operations extend the first chapter's addition and scalar
-multiplication operations on vectors.
+These operations extend the first chapter's operations of addition and scalar
+multiplication of vectors.
+
+We need a result that proves these matrix 
+operations do what the examples suggest that 
+they do.
 
 \begin{theorem}  \label{th:MatOpsRepMapOps}
 %<*th:MatOpsRepMapOps>
@@ -186,42 +182,39 @@ by \( H+G \).
 
 \begin{proof}
 This is \nearbyexercise{exer:CorrspMapMatOps}.
-Generalize the examples above.
+Generalize the examples.
 \end{proof}
 
 \begin{remark}
-These two operations are simple.
-However we did not define them this way
-because they are simple.
+These two matrix operations are simple.
+But, we did not define them this way because they are simple.
 We defined them
-this way because they reflect the operations of function scalar multiplication
-and function addition.
-Their simplicity is a pleasant bonus.
+this way because they represent function addition
+and function scalar multiplication. 
+Simplicity is only a pleasant bonus.
 
 In the next subsection we will define another operation, matrix multiplication. 
-Based on the above two operations 
-a person's first thought may be to take an entry-by-entry product of 
-two matrices.
-While in theory we could define whatever matrix operations 
-we like, our program here is to instead be practical and
-define the new operation so that it
-combines the entries in the way that represents 
-function composition.
-That is, we are defining matrix operations by referencing function
+A first thought may be to define it to be the entry-by-entry product of 
+the two matrices.
+While in theory we could do whatever we please, 
+we will instead be practical and 
+combine the entries to represent function composition.
+That is, we define matrix operations by referencing function
 operations.
 
-We can express this point another way.
+We can express this program in another way.
 Recall Theorem~III.\ref{th:MatMultRepsFuncAppl},
 which says that matrix-vector 
 multiplication represents the application of a linear map.
 Following it, Remark~III.\ref{rem:NotSurprising} notes that 
 the theorem
-justifies the definition of matrix-vector multiplication,
-and so in some sense the theorem must hold.
-If the definition was such that the theorem didn't hold
-then we would adjust the definition until it did hold.
+justifies the definition of matrix-vector multiplication
+and so in some sense the theorem must hold\Dash if  
+the theorem didn't hold
+then we would adjust the definition until the theorem did hold.
 The above \nearbytheorem{th:MatOpsRepMapOps} 
 is another example of such a result.
+It justifies the given definition of the matrix operations. 
 \end{remark}
 
 A special case of scalar multiplication is multiplication by zero.
@@ -639,8 +632,8 @@ no matter what domain and codomain bases we use.
 
 \subsection{Matrix Multiplication}
 After representing addition and scalar multiplication of linear maps
-in the prior subsection, the natural next map operation to consider 
-is composition.
+in the prior subsection, the natural next operation to consider 
+is function composition.
 
 \begin{lemma} \label{lm:CompositionOfLinearMapsIsLinear}
 %<*lm:CompositionOfLinearMapsIsLinear>
@@ -649,7 +642,7 @@ The composition of linear maps is linear.
 \end{lemma}
 
 \begin{proof}
-\textit{(This argument has appeared earlier, 
+\textit{(Note: this argument has already appeared, 
 as part of the proof of Theorem~I.\ref{th:IsoEquivRel}.)}  
 %<*pf:CompositionOfLinearMapsIsLinear>
 Let $\map{h}{V}{W}$ and $\map{g}{W}{U}$ be linear. 
@@ -663,13 +656,14 @@ The calculation
                    +c_2\cdot (\composed{g}{h})(\vec{v}_2)
 \end{multline*}
 shows that $\map{\composed{g}{h}}{V}{U}$
-preserves linear combinations.
+preserves linear combinations, and so is linear.
 %</pf:CompositionOfLinearMapsIsLinear>
 \end{proof}
 
-To see how the representation of the 
+As we did with the operation of matrix addition and scalar multiplication,
+we will see how the representation of the 
 composite relates to the representations
-of the compositors, consider an example.
+of the compositors by first considering an example.
 
 \begin{example} \label{ex:RepCompLinMaps}
 Let $\map{h}{\Re^4}{\Re^2}$ and $\map{g}{\Re^2}{\Re^3}$,
@@ -682,7 +676,7 @@ and let these be the representations.
        4  &6  &8  &2  \\
        5  &7  &9  &3
     \end{mat}_{B,C}
-  \qquad
+  \quad
   G=\rep{g}{C,D}
   =\begin{mat}[r]
        1  &1  \\
@@ -737,7 +731,7 @@ Distributing and regrouping on the $v$'s gives
                 (1\cdot8+0\cdot9)v_3+
                 (1\cdot2+0\cdot3)v_4}_D
 \end{equation*}
-which we recognize as the result of this matrix-vector product.
+which is this matrix-vector product.
 \begin{equation*}
   =
   \begin{mat}
@@ -747,8 +741,7 @@ which we recognize as the result of this matrix-vector product.
   \end{mat}_{B,D}
   \colvec{v_1 \\ v_2 \\ v_3 \\ v_4}_D
 \end{equation*}
-Thus
-the matrix representing $\composed{g}{h}$ has the rows of $G$
+The matrix representing $\composed{g}{h}$ has the rows of $G$
 combined with the columns of $H$.
 \end{example}
 
@@ -764,7 +757,8 @@ matrix~\( G \) and the \( \nbym{r}{n} \) matrix~\( H \) is the
   =
   g_{i,1}h_{1,j}+g_{i,2}h_{2,j}+\dots+g_{i,r}h_{r,j}
 \end{equation*}
-that is, the \( i,j \)-th entry of the product is the dot product of the
+that is, where
+the \( i,j \)-th entry of the product is the dot product of the
 \( i \)-th row of the first matrix with the \( j \)-th column of the second.
 \begin{equation*}
     GH=
@@ -788,22 +782,6 @@ that is, the \( i,j \)-th entry of the product is the dot product of the
 \end{equation*}
 %</df:MatMult>
 \end{definition}
-
-\begin{example}
-The matrices from \nearbyexample{ex:RepCompLinMaps} combine in this way.
-\begin{equation*}
-   \begin{mat}
-    1\cdot4+1\cdot5  &1\cdot6+1\cdot7  &1\cdot8+1\cdot9  &1\cdot2+1\cdot3 \\
-    0\cdot4+1\cdot5  &0\cdot6+1\cdot7  &0\cdot8+1\cdot9  &0\cdot2+1\cdot3 \\
-    1\cdot4+0\cdot5  &1\cdot6+0\cdot7  &1\cdot8+0\cdot9  &1\cdot2+0\cdot3
-    \end{mat}               
-   =\begin{mat}[r]
-      9  &13  &17  &5  \\
-      5  &7   &9   &3  \\
-      4  &6   &8   &2
-    \end{mat}
-\end{equation*}
-\end{example}
 
 \begin{example}
 \begin{equation*}
@@ -831,9 +809,36 @@ The matrices from \nearbyexample{ex:RepCompLinMaps} combine in this way.
 \end{equation*}
 \end{example}
 
-We next check that our
-definition of the matrix-matrix multiplication operation
-does what we intend.
+\begin{example}
+The matrices from \nearbyexample{ex:RepCompLinMaps} combine in this way.
+\begin{multline*}
+  \begin{mat}[r]
+       1  &1  \\
+       0  &1  \\
+       1  &0
+    \end{mat}               
+  \begin{mat}[r]
+       4  &6  &8  &2  \\
+       5  &7  &9  &3
+    \end{mat}  \\
+   \begin{split}
+     &=\begin{mat}
+      1\cdot4+1\cdot5  &1\cdot6+1\cdot7  &1\cdot8+1\cdot9  &1\cdot2+1\cdot3 \\
+      0\cdot4+1\cdot5  &0\cdot6+1\cdot7  &0\cdot8+1\cdot9  &0\cdot2+1\cdot3 \\
+      1\cdot4+0\cdot5  &1\cdot6+0\cdot7  &1\cdot8+0\cdot9  &1\cdot2+0\cdot3
+      \end{mat}               \\
+     &=\begin{mat}[r]
+        9  &13  &17  &5  \\
+        5  &7   &9   &3  \\
+        4  &6   &8   &2
+      \end{mat}
+    \end{split}
+\end{multline*}
+\end{example}
+
+% We next verify that our
+% definition of the matrix-matrix multiplication operation
+% does what we intend.
 
 \begin{theorem}  \label{th:MatMultRepComp}
 %<*th:MatMultRepComp>
@@ -850,7 +855,7 @@ Let \( \map{h}{V}{W} \) and \( \map{g}{W}{X} \) be represented by
 \( H \) and \( G \) with respect to bases
 \( B\subset V \), \( C\subset W \), and \( D\subset X \), of sizes
 \( n \), \( r \), and \( m \).
-For any \( \vec{v}\in V \), the \( k \)-th component of
+For any \( \vec{v}\in V \) the \( k \)-th component of
 \( \rep{\,h(\vec{v})\,}{C} \) is
 \begin{equation*}
   h_{k,1}v_1+\cdots+h_{k,n}v_n
@@ -904,8 +909,7 @@ have the same effect
   \vec{v}\mapsunder{h}h(\vec{v})\mapsunder{g}g(h(\vec{v}))
 \end{equation*}
 (this is just the definition of composition).
-Below the arrows, the matrices indicate that the product
-does the same thing\Dash multiplying
+Below the arrows, the matrices indicate that multiplying
 $GH$ into the column vector $\rep{\vec{v}}{B}$ has the same
 effect as  multiplying the column vector first by $H$ 
 and then multiplying the result by $G$.
@@ -913,7 +917,7 @@ and then multiplying the result by $G$.
    \rep{\composed{g}{h}}{B,D}
    =GH
    \qquad
-   \rep{g}{C,D}\,\rep{h}{B,C}=GH
+   \rep{g}{C,D}\;\rep{h}{B,C}=GH
 \end{equation*}
 %</MatMultArrowDiag1>
 
@@ -933,8 +937,8 @@ this product is not defined.
 \end{equation*}
 \end{example}
 
-One way to understand why the combination in the prior example is undefined
-has to do with the underlying maps. 
+The combination in the prior example is undefined because of
+the underlying maps. 
 We require that the sizes match 
 because we want that the underlying
 function composition is possible.
@@ -944,26 +948,27 @@ function composition is possible.
   \text{dimension \( r \) space}
   \;\stackrel{g}{\longrightarrow}\;
   \text{dimension \( m \) space}
+  \tag{$*$}
 \end{equation*}
 Thus, matrix product combines an $\nbym{m}{r}$ matrix~$G$
 with an $\nbym{r}{n}$ matrix~$F$ to yield the
 $\nbym{m}{n}$ result~$GF$.
-Briefly,
-`$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$'.
+Briefly:
+$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$.
 
 \begin{remark}
-The order in which these things are written can be confusing.
-In the prior
-equation, the number written first $m$ is the dimension of
+The order in which we write things can be confusing.
+In `$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$'
+the number written first $m$ is the dimension of
 $g$'s codomain and is thus the number that appears last in the
-map dimension description above.
+map dimension description~($*$).
 The explanation is that while $h$ is done first
-and then $g$, 
-we write the composition as $\composed{g}{h}$,
-from the notation `$g(h(\vec{v}))$'. 
+and is followed by $g$, 
+we write the composition as $\composed{g}{h}$, with $g$ on the left,
+from the notation $g(h(\vec{v}))$. 
 (Some people try to lessen confusion by reading 
 `$\composed{g}{h}$' aloud as ``$g$ following $h$.'')
-That right to left order carries over to matrices:~$\composed{g}{h}$
+That carries over to matrices, so that $\composed{g}{h}$
 is represented by $GH$.
 \end{remark}
 
@@ -1074,21 +1079,22 @@ isn't even defined.
 
 \begin{remark}
 The fact that
-matrix multiplication is not commutative can be puzzling at first, 
+matrix multiplication is not commutative can seem odd at first, 
 perhaps because most
-operations that people see in prior mathematics courses are commutative.
-But matrix multiplication represents function composition, which
+mathematical operations in prior courses are commutative.
+But matrix multiplication represents function composition
+and function composition
 is not commutative: if
 \( f(x)=2x \) and \( g(x)=x+1 \) then \( \composed{g}{f}(x)=2x+1 \)
 while \( \composed{f}{g}(x)=2(x+1)=2x+2 \).
-(True, this \( g \) is not linear and we might have hoped that linear functions
-would commute but this shows that the failure of commutativity for
-matrix multiplication fits into a larger context.)
+% (True, this \( g \) is not linear and we might have hoped that linear functions
+% would commute but this shows that the failure of commutativity for
+% matrix multiplication fits into a larger context.)
 \end{remark}
 
 Except for the lack of commutativity,
 matrix multiplication is algebraically well-behaved.
-Below are some nice properties and more are in
+The next result gives some nice properties and more are in
 \nearbyexercise{exer:NicePropsMatMult} and
 \nearbyexercise{exer:MoreNicePropsMatMult}.
 
@@ -1121,22 +1127,23 @@ For instance, the first one goes
     =f(g(\vec{v}))+f(h(\vec{v}))
     =\composed{f}{g}(\vec{v})+\composed{f}{h}(\vec{v}) \) 
 (the third equality uses the linearity of $f$).
+Right-distributivity goes the same way.
 %</pf:MatMultWellBehaved1>
 \end{proof}
 
 \begin{remark} 
-We could instead prove that result by slogging through the indices.
+We could instead prove that result by slogging through indices.
 For example, for associativity
-the \( i,j \)-th entry of \( (FG)H \) is
+the \( i,j \) entry of \( (FG)H \) is
 \begin{align*}
    \MoveEqLeft (f_{i,1}g_{1,1}+f_{i,2}g_{2,1}+\dots+f_{i,r}g_{r,1})h_{1,j}         \\
    &+(f_{i,1}g_{1,2}+f_{i,2}g_{2,2}+\dots+f_{i,r}g_{r,2})h_{2,j}   \\
    &\vdotswithin{+}                                       \\
    &+(f_{i,1}g_{1,s}+f_{i,2}g_{2,s}+\dots+f_{i,r}g_{r,s})h_{s,j}
 \end{align*}
-(where \( F \), \( G \), and \( H \) are \( \nbym{m}{r} \),
-\( \nbym{r}{s} \), and \( \nbym{s}{n} \) matrices),
-distribute
+where \( F \), \( G \), and \( H \) are \( \nbym{m}{r} \),
+\( \nbym{r}{s} \), and \( \nbym{s}{n} \) matrices.
+Distribute
 \begin{align*}
    \MoveEqLeft f_{i,1}g_{1,1}h_{1,j}+f_{i,2}g_{2,1}h_{1,j}+
             \dots+f_{i,r}g_{r,1}h_{1,j}                  \\ 
@@ -1155,23 +1162,21 @@ and regroup around the \( f \)'s
 \end{align*}
 to get the \( i,j \) entry of \( F(GH) \).
 
-Contrast the two ways of verifying associativity.
-The argument just above is hard to understand in that while
+Contrast the two proofs.
+The index-heavy argument is hard to understand in that while
 the calculations are easy to check, the arithmetic seems unconnected to any
 idea.
 The argument in the proof 
-is shorter and says why this property ``really'' holds.
+is shorter and also says why this property ``really'' holds.
 This illustrates the comments made at the start of
-the chapter on vector spaces\Dash at least some 
-of the time an argument from higher-level constructs is clearer.
+the chapter on vector spaces\Dash at least sometimes 
+an argument from higher-level constructs is clearer.
 \end{remark}
 
-We have now seen how to construct 
-the representation of the composition of two linear maps
-from the representations of the two maps.
-We have called the combination the product of the two matrices.
-We
-will explore this operation more in the next subsection.
+We have now seen how to 
+represent the composition of linear maps.
+The next subsection will continue to 
+explore this operation.
 
 \begin{exercises}
   \recommended \item 
@@ -2156,14 +2161,13 @@ will explore this operation more in the next subsection.
 
 
 \subsection{Mechanics of Matrix Multiplication}
-In this subsection we consider matrix multiplication as a mechanical process, 
+We can consider matrix multiplication as a mechanical process, 
 putting aside for the moment any implications about the underlying maps.
 
-The striking thing about matrix multiplication is the
-way rows and columns combine.
+The striking thing about this operation is the
+way that rows and columns combine.
 The \( i,j \) entry of the matrix product is the dot product of
-row~$i$ of the left matrix with column~$j$
-of the right one.
+row~$i$ of the left matrix with column~$j$ of the right one.
 For instance,
 here a second row and a third column combine to make a $2,3$~entry.
 \begin{equation*}
@@ -2187,17 +2191,17 @@ here a second row and a third column combine to make a $2,3$~entry.
     \end{mat}
 \end{equation*}
 We can view this as the left matrix acting
-by multiplying its rows, one at a time, into the columns of the right matrix.
-Or, another perspective 
-is that the right matrix uses its columns to
-act on the left matrix's rows.
+by multiplying its rows into the columns of the right matrix.
+Or, it
+is the right matrix using its columns to
+act on the rows of the left matrix.
 Below, we will examine actions from the left and from the right for some
 simple matrices.
 
-The action of a zero matrix is easy.
+Simplest is the zero matrix.
 
 \begin{example}
-Multiplying by an appropriately-sized zero matrix
+Multiplying by a zero matrix
 from the left or from the right
 results in a zero matrix.
 \begin{equation*}
@@ -2231,7 +2235,7 @@ results in a zero matrix.
 \end{equation*}
 \end{example}
 
-The next easiest to understand matrices, after the zero matrices,
+The next easiest matrices
 are the ones with a single nonzero entry.
 
 \begin{definition}  \label{df:UnitMatrix}
@@ -2288,7 +2292,7 @@ the multiplicand and copies it into column~\( j \) of the result.
 \end{example}
 
 \begin{example}
-Rescaling these matrices simply rescales the result. 
+Rescaling unit matrices simply rescales the result. 
 This is the action from the left of the matrix that is twice the one in the
 prior example.
 \begin{equation*}
@@ -2308,34 +2312,34 @@ prior example.
        0  &0
     \end{mat}
 \end{equation*}
-And this is the action of the matrix that is $-3$~times the one 
-from the prior example.
-\begin{equation*}
-    \begin{mat}[r]
-       1  &2  &3  \\
-       4  &5  &6  \\
-       7  &8  &9
-    \end{mat}
-    \begin{mat}[r]
-       0  &-3 \\
-       0  &0  \\
-       0  &0
-    \end{mat}
-  =
-    \begin{mat}[r]
-       0  &-3  \\
-       0  &-12 \\
-       0  &-21
-    \end{mat}
-\end{equation*}
+% And this is the action of the matrix that is $-3$~times the one 
+% above.
+% \begin{equation*}
+%     \begin{mat}[r]
+%        1  &2  &3  \\
+%        4  &5  &6  \\
+%        7  &8  &9
+%     \end{mat}
+%     \begin{mat}[r]
+%        0  &-3 \\
+%        0  &0  \\
+%        0  &0
+%     \end{mat}
+%   =
+%     \begin{mat}[r]
+%        0  &-3  \\
+%        0  &-12 \\
+%        0  &-21
+%     \end{mat}
+% \end{equation*}
 \end{example}
 
 Next in complication are matrices with two nonzero entries.
+
+\begin{example}
 There are two cases.
 If a left-multiplier has entries in different rows then their actions 
 don't interact.
-
-\begin{example}
 \begin{align*}
     \begin{mat}[r]
        1  &0  &0  \\
@@ -2380,11 +2384,8 @@ don't interact.
        0  &0  &0
     \end{mat}
 \end{align*}
-\end{example}
-
-\par\noindent But if the left-multiplier's nonzero entries are in the same row
+But if the left-multiplier's nonzero entries are in the same row
 then that row of the result is a combination.
-\begin{example}
 \begin{align*}
     \begin{mat}[r]
        1  &0  &2  \\
@@ -2433,9 +2434,6 @@ then that row of the result is a combination.
 
 \par\noindent Right-multiplication acts in the same way, but with columns.
 
-These observations about simple matrices
-extend to arbitrary ones.
-
 \begin{example}
 Consider the columns of the product of two $\nbyn{2}$~matrices.
 \begin{equation*}
@@ -2459,7 +2457,7 @@ by the corresponding column of $H$.
   G\colvec{h_{1,1} \\ h_{2,1}}  
   =
   \colvec{g_{1,1}h_{1,1}+g_{1,2}h_{2,1} \\ g_{2,1}h_{1,1}+g_{2,2}h_{2,1}}
-  \qquad
+  \quad
   G\colvec{h_{1,2}  \\ h_{2,2}}    
   =\colvec{g_{1,1}h_{1,2}+g_{1,2}h_{2,2} \\ g_{2,1}h_{1,2}+g_{2,2}h_{2,2}} 
 \end{equation*}
@@ -2530,7 +2528,7 @@ product of the rows of~$G$ with the entire matrix~$H$.
     \rowvec{g_{2,1}h_{1,1}+g_{2,2}h_{2,1}  &g_{2,1}h_{1,2}+g_{2,2}h_{2,2}} 
   \end{mat}
 \end{align*}
-We will leave the more general check as an exercise.
+We leave the more general check as an exercise.
 %</pf:ColsAndRowsInMatrixMult>
 \end{proof}
 
@@ -2631,9 +2629,9 @@ and from the right.
 of the set of $\nbyn{n}$ matrices with
 respect to the operation of matrix multiplication.
 
-We next see two ways to generalize the identity matrix.
-The first is that if we relax the ones to arbitrary reals then
-the resulting matrix will rescale whole rows or columns.
+We can generalize the identity matrix
+by relaxing the ones to arbitrary reals. 
+The resulting matrix rescales whole rows or columns.
 
 \begin{definition}  \label{df:DiagonalMatrix}
 %<*df:DiagonalMatrix>
@@ -2688,8 +2686,8 @@ From the right such a matrix rescales the columns.
 \end{equation*}
 \end{example}
 
-The second generalization of identity matrices is that 
-we can put a single one in each row and column
+We can also generalize identity matrices by 
+putting a single one in each row and column
 in ways other than putting them down the diagonal.
 
 \begin{definition}  \label{df:PermutationMatrix}
@@ -2744,11 +2742,12 @@ From the right they permute columns.
 
 We finish this subsection by applying these observations to get matrices 
 that perform Gauss's Method and Gauss-Jordan reduction.
+We have already
+seen how to produce a matrix that rescales rows, and a row swapper.
 
 \begin{example}
-We have seen how to produce a matrix that will rescale rows.
-Multiplying by this diagonal matrix rescales the second row of
-the other matrix by a factor of three.
+Multiplying by this matrix rescales the second row 
+by three.
 \begin{equation*}
     \begin{mat}[r]
       1  &0  &0  \\
@@ -2767,9 +2766,10 @@ the other matrix by a factor of three.
       1  &0    &2  &0
     \end{mat}
 \end{equation*}
-We have seen how to produce a matrix that will swap rows.
-Multiplying by this permutation matrix swaps the 
-first and third rows.
+\end{example}
+
+\begin{example}
+This multiplication swaps the first and third rows.
 \begin{equation*}
     \begin{mat}[r]
       0  &0  &1  \\
@@ -2962,7 +2962,8 @@ Now back substitution will give the solution.
 
 \begin{example}
 Gauss-Jordan reduction works the same way.
-For the matrix ending the prior example, first adjust the leading entries
+For the matrix ending the prior example, first turn the leading entries
+to ones,
 \begin{equation*}
     \begin{mat}[r]
        1  &0  &0  \\
@@ -2981,7 +2982,7 @@ For the matrix ending the prior example, first adjust the leading entries
        0    &0    &1   &3
     \end{amat}
 \end{equation*}
-and to finish, clear the third column and then the second column.
+then clear the third column, and then the second column.
 \begin{equation*}
     \begin{mat}[r]
        1  &-6 &0  \\
@@ -3020,11 +3021,12 @@ is in reduced echelon form.
 \end{corollary}
 
 Until now we have taken the point of view that our primary objects of study
-are vector spaces and the maps between them, and
+are vector spaces and the maps between them, and we seemed to 
 have adopted matrices only for computational convenience.
-This subsection show that this isn't the whole story.
-Understanding matrices operations by how the entries combine can
-be useful also. 
+This subsection show that this isn't the entire story.
+
+Understanding matrices operations by understanding 
+the mechanics of how the entries combine is also useful. 
 In the rest of this book we shall continue to focus on maps as the primary
 objects but we will be pragmatic\Dash if the matrix point of view gives some
 clearer idea then we will go with it.
@@ -3164,6 +3166,52 @@ clearer idea then we will go with it.
           \end{equation*}
       \end{exparts}   
     \end{answer}
+  \item Produce each.
+    \begin{exparts}
+      \partsitem a $\nbyn{3}$ matrix that, acting from the left,
+         swaps rows one and two
+      \partsitem a $\nbyn{2}$ matrix that, acting from the right,
+         swaps column one and two
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem This matrix swaps row one and row three.
+          \begin{equation*}
+            \begin{mat}
+              0  &1 &0 \\
+              1  &0 &0 \\
+              0  &0 &1
+            \end{mat}
+            \begin{mat}
+              a &b &c \\
+              d &e &f \\
+              g &h &i
+            \end{mat}
+            =
+            \begin{mat}
+              d &e &f \\
+              a &b &c \\
+              g &h &i
+            \end{mat}         
+          \end{equation*}
+        \partsitem This matrix swaps column one and two.
+          \begin{equation*}
+            \begin{mat}
+              a  &b  \\
+              c  &d
+            \end{mat}
+            \begin{mat}
+              0  &1  \\
+              1  &0   
+            \end{mat}
+            =
+            \begin{mat}
+              b  &a  \\
+              d  &c
+            \end{mat}
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
   \recommended \item
     This table gives the number of hours of each 
     type done by each worker, and the associated pay rates.
@@ -3196,6 +3244,23 @@ clearer idea then we will go with it.
       The pay due each person appears in the matrix product of the two
       arrays. 
     \end{answer}
+  \item 
+    Find the product of this matrix with its transpose.
+    \begin{equation*}
+      \begin{mat}
+        \cos\theta  &-\sin\theta  \\
+        \sin\theta  &\cos\theta
+      \end{mat}
+    \end{equation*}
+    \begin{answer}
+      The product is the identity matrix (recall that
+      $\cos^2\theta+\sin^2\theta =1$).
+      An explanation is that the given matrix represents, with respect to
+      the standard bases, a rotation in \( \Re^2 \) of \( \theta \)
+      radians while the transpose represents a rotation of \( -\theta \)
+      radians.
+      The two cancel.  
+     \end{answer}
   \recommended \item 
     The need to take linear combinations of rows and columns in tables of 
     numbers arises often in practice.
@@ -3255,23 +3320,6 @@ clearer idea then we will go with it.
           by trips involving two roads.
       \end{exparts}  
    \end{answer}
-  \item 
-    Find the product of this matrix with its transpose.
-    \begin{equation*}
-      \begin{mat}
-        \cos\theta  &-\sin\theta  \\
-        \sin\theta  &\cos\theta
-      \end{mat}
-    \end{equation*}
-    \begin{answer}
-      The product is the identity matrix (recall that
-      $\cos^2\theta+\sin^2\theta =1$).
-      An explanation is that the given matrix represents, with respect to
-      the standard bases, a rotation in \( \Re^2 \) of \( \theta \)
-      radians while the transpose represents a rotation of \( -\theta \)
-      radians.
-      The two cancel.  
-     \end{answer}
   \recommended \item 
     Prove that the diagonal matrices form a subspace of
     \( \matspace_{\nbyn{n}} \).
@@ -3909,7 +3957,7 @@ inverse of a linear map.
 
 %<*FunctionInverseReview1>
 We first recall some things about
-inverses.\appendrefs{function inverses}\spacefactor=1000\  
+inverses. % \appendrefs{function inverses}\spacefactor=1000 
 % Some functions have no inverse, or have an inverse on the left side 
 %or right side only.
 % 
@@ -3970,17 +4018,22 @@ then we would have
   \colvec{x \\ y \\ z}
 \end{equation*}
 for all of the infinitely many $z$'s.
-But no function can send a single argument to more than one value.
+But a function~$f$ cannot send a single argument $\binom{x}{y}$ to 
+more than one value.
 % \end{example}
-(An example of a function with no inverse on either side
-is the zero transformation on $\Re^2$.)
+
+So a function can have a right inverse but no left inverse, or a left inverse
+but no right inverse.
+A function can also fail to have an inverse on either side; one example 
+is the zero transformation on $\Re^2$.
 %</FunctionInverseReview3>
+
 
 %<*FunctionInverseReview4>
 Some functions have a 
 \definend{two-sided inverse},\index{function!two-sided inverse} 
 another function
-that is the inverse of the first both from the left and from the right.
+that is the inverse both from the left and from the right.
 For instance, the map given by 
 $\vec{v}\mapsto 2\cdot \vec{v}$ has the two-sided inverse 
 $\vec{v}\mapsto (1/2)\cdot\vec{v}$.  
@@ -3989,9 +4042,9 @@ $\vec{v}\mapsto (1/2)\cdot\vec{v}$.
 The appendix shows that a function
 has a two-sided inverse if and only if it is both one-to-one and onto.
 The appendix also shows that if a function $f$ has a two-sided inverse then 
-it is unique, and so we call it 
+it is unique, so we call it 
 `the'~inverse\index{inverse function}\index{function!inverse}
-and denote it $f^{-1}$.
+and write $f^{-1}$.
 %</FunctionInverseReview4>
 
 %<*FunctionInverseReview5>
@@ -4009,12 +4062,11 @@ to find the relationship between $\rep{h}{B,D}$ and $\rep{h^{-1}}{D,B}$.
 %<*df:MatrixInverse>
 A matrix \( G \) is a \definend{left inverse matrix}\index{inverse!left}
 of the matrix \( H \) if \( GH \) is the identity matrix.
-It is a \definend{right inverse matrix}\index{inverse!right}
+It is a \definend{right inverse}\index{inverse!right}
 if \( HG \) is the identity.
 A matrix $H$ with a two-sided inverse is an \definend{invertible matrix}.
-That two-sided inverse is
-\definend{the inverse matrix}\index{inverse} and
-is denoted \( H^{-1} \).\index{matrix!inverse, definition}
+That two-sided inverse
+is denoted \( H^{-1} \).\index{inverse}\index{matrix!inverse, definition}
 %</df:MatrixInverse>
 \end{definition}
 
@@ -4038,8 +4090,8 @@ A matrix is invertible if and only if it is nonsingular.
 %<*pf:MatrixInvertibleIffNonsingular>
 \textit{(For both results.)}
 Given a matrix $H$, fix spaces of appropriate dimension for the domain
-and codomain.
-Fix bases for these spaces.
+and codomain and
+fix bases for these spaces.
 With respect to these bases, $H$ represents a map $h$.
 The statements are true about the map and therefore they are true about the
 matrix.
@@ -4049,7 +4101,7 @@ matrix.
 \begin{lemma} \label{lem:ProdInvIsInv}
 %<*lm:ProdInvIsInv>
 A product of invertible matrices is invertible:~if
-\( G \) and \( H \) are invertible and if \( GH \) is defined then
+\( G \) and \( H \) are invertible and \( GH \) is defined then
 \( GH \) is invertible and \( (GH)^{-1}=H^{-1}G^{-1} \).
 %</lm:ProdInvIsInv>
 \end{lemma}
@@ -4057,11 +4109,11 @@ A product of invertible matrices is invertible:~if
 \begin{proof}
 % \textit{(This is just like the prior proof except that it requires two maps.)}
 %<*pf:ProdInvIsInv0>
-Because the two matrices are invertible they are square.
-Because their product is defined they must be square of the same dimension,
+Because the two matrices are invertible they are square, and
+because their product is defined they must both be 
 $\nbyn{n}$.
-So by fixing a basis for $\Re^n$\Dash we can use the standard 
-basis\Dash we get maps  
+Fix bases\Dash the natural choice is the standard 
+basis\Dash to get maps  
 $\map{g,h}{\Re^n}{\Re^n}$ that are associated with the matrices,
 $G=\rep{g}{\stdbasis_n,\stdbasis_n}$ and
 $H=\rep{h}{\stdbasis_n,\stdbasis_n}$.
@@ -4086,22 +4138,22 @@ and
   =gg^{-1}
   =\identity
 \).
-the matrices representing the maps reflect this equality.
+The matrices representing the maps reflect this equality.
 %</pf:ProdInvIsInv1>
 \end{proof}
 
 This is the arrow diagram\index{arrow diagram} giving the relationship
 between map inverses and matrix inverses. 
 It is a special case
-of the diagram for function composition and matrix multiplication.
+of the diagram relating function composition to matrix multiplication.
 \smallskip
 \begin{center}
     \includegraphics{ch3.21}
 \end{center}
 
-Beyond its place in our general program of 
+Beyond its place in our program of 
 seeing how to represent map operations, 
-another reason for our interest in inverses comes from solving
+another reason for our interest in inverses comes from 
 linear systems.
 A linear system is equivalent to a matrix equation, as here.
 \begin{equation*}
@@ -4117,26 +4169,22 @@ A linear system is equivalent to a matrix equation, as here.
   \colvec{x_1 \\ x_2}
   =
   \colvec[r]{3 \\ 2}
-\tag*{($*$)}\end{equation*}
+ % \tag*{($*$)}
+\end{equation*}
 By fixing spaces and bases 
 (for instance, $\Re^2,\Re^2$ with the standard bases),
 we take the matrix $H$ to represent a map $h$.
 The matrix equation then becomes this linear map equation.
 \begin{equation*}
   h(\vec{x})=\vec{d}
-  \tag*{($**$)}
+  % \tag*{($**$)}
 \end{equation*}
-Asking for a solution to ($*$) is the same as  
-asking in ($**$)
-for the domain vector $\vec{x}$ that $h$ maps to the result 
-$\vec{d}\,$.
-If we had a left inverse map~$g$ then  
+If we had a left inverse map~$g$ then 
 we could apply it to both sides
-$\composed{g}{h}(\vec{x})=g(\vec{d})$,
-which simplifies to
+$\composed{g}{h}(\vec{x})=g(\vec{d})$ to get
 $\vec{x}=g(\vec{d})$.
-In terms of the matrices,
-we multiply $\rep{g}{C,B}\cdot\rep{\vec{d}}{C}$
+Restating in terms of the matrices,
+we want to multiply by the inverse matrix $\rep{g}{C,B}\cdot\rep{\vec{d}}{C}$
 to get $\rep{\vec{x}}{B}$.
 
 \begin{example}  \label{ex:InverseByLinSys}
@@ -4166,9 +4214,9 @@ by using Gauss's Method to solve the resulting linear system.
      \end{linsys}
 \end{equation*}
 Answer: \( m=1/3 \), \( n=1/3 \), \( p=2/3 \), and \( q=-1/3 \).
-This matrix is actually the two-sided inverse of $H$;
-the check is easy.
-With it we can solve the system~($*$) above.
+(This matrix is actually the two-sided inverse of $H$;
+the check is easy.)
+With it, we can solve the system from the prior example.
 \begin{equation*}
   \colvec{x \\ y}
   =\begin{mat}[r]
@@ -4181,7 +4229,7 @@ With it we can solve the system~($*$) above.
 \end{example}
 
 \begin{remark}
-Why do this when we have
+Why do inverse matrices when we have
 Gauss's Method?
 % takes less arithmetic
 % (this assertion can be made precise by counting the 
@@ -4189,12 +4237,12 @@ Gauss's Method?
 % as computer algorithm designers do)? 
 Beyond the conceptual appeal of representing the map inverse operation,
 solving linear systems this way has 
-at least two advantages.
+two advantages.
 
 First, once we have done the work of finding an inverse then 
 solving a system with the
 same coefficients but different constants is fast:~if
-we change the entries on the right of the system~($*$) 
+we change the constants on the right of the system above
 then we get a related problem
 \begin{equation*}
     \begin{mat}[r]
@@ -4222,7 +4270,8 @@ that our inverse method solves quickly.
 
 Another advantage of inverses is that we can 
 explore a system's sensitivity to changes in the constants.
-For example, tweaking the $3$ on the right of the system~($*$) to
+For example, tweaking the $3$ on the right of the prior example's 
+system to
 \begin{equation*}
     \begin{mat}[r]
        1  &1  \\
@@ -4230,7 +4279,7 @@ For example, tweaking the $3$ on the right of the system~($*$) to
     \end{mat}
   \colvec{x_1 \\ x_2}
   =
-  \colvec[r]{3.01 \\ 2}
+  \colvec[l]{3.01 \\ 2}
 \end{equation*}
 and solving with the inverse
 \begin{equation*}
@@ -4238,7 +4287,7 @@ and solving with the inverse
        1/3  &1/3  \\
        2/3  &-1/3
     \end{mat}
-  \colvec[r]{3.01 \\ 2}
+  \colvec[l]{3.01 \\ 2}
   =
   \colvec{(1/3)(3.01)+(1/3)(2) \\ (2/3)(3.01)-(1/3)(2)}
 \end{equation*}
@@ -4246,20 +4295,20 @@ shows that the first component of the solution
 changes by \( 1/3 \) of the tweak, while
 the second component moves by \( 2/3 \) of the tweak.
 This is \definend{sensitivity analysis}\index{sensitivity analysis}.
-For instance, we could use it to decide how accurately
+We could use it to decide how accurately
 we must specify the data in a linear model to ensure that the solution has
 a desired accuracy.
 \end{remark}
 
-We finish by describing the computational procedure
-that we shall use to find the inverse matrix.
+% We finish by describing the computational procedure
+% that we shall use to find the inverse matrix.
 
 \begin{lemma} \label{lem:ComputeInvMat}
 %<*lm:ComputeInvMat>
 A matrix $H$ is invertible if and only if it can be written as the product of
 elementary reduction matrices.
 We can compute the inverse by applying to the 
-identity matrix the same row steps, in the same order, as we use to
+identity matrix the same row steps, in the same order, that 
 Gauss-Jordan reduce $H$. 
 %</lm:ComputeInvMat>
 \end{lemma}
@@ -4278,23 +4327,22 @@ with elementary matrices.
 
 %<*pf:ComputeInvMat1>
 For the first sentence of the result, note that
-elementary matrices are invertible (because elementary row operations
-are reversible) and that their inverses are also
-elementary.
+elementary matrices are invertible because elementary row operations
+are reversible, and that their inverses are also elementary.
 Apply $R_r^{-1}$ from the left to both sides of ($*$). 
 Then apply
 $R_{r-1}^{-1}$, etc.
 The result gives $H$ as the product of
-elementary matrices $H=R_1^{-1}\cdots R_r^{-1}\cdot I$
-(the $I$ here covers the trivial $r=0$ case).
+elementary matrices $H=R_1^{-1}\cdots R_r^{-1}\cdot I$.
+(The $I$ there covers the case $r=0$.)
 %</pf:ComputeInvMat1>
 
 %<*pf:ComputeInvMat2>
 For the second sentence,
-rewrite ($*$) as $(R_r\cdot R_{r-1}\dots R_1)\cdot H=I$
-to recognize that 
+group~($*$) as $(R_r\cdot R_{r-1}\dots R_1)\cdot H=I$
+and recognize what's in the parentheses as the inverse 
 $H^{-1}=R_r\cdot R_{r-1}\dots R_1\cdot I$.
-Restated, applying $R_1$ to the identity, 
+Restated: applying $R_1$ to the identity, 
 followed by $R_2$, etc., yields the inverse of $H$.
 %</pf:ComputeInvMat2>
 \end{proof}
@@ -4307,9 +4355,9 @@ To find the inverse of
        2  &-1
     \end{mat}
 \end{equation*}
-we do Gauss-Jordan reduction, meanwhile performing the same operations on
+do Gauss-Jordan reduction, meanwhile performing the same operations on
 the identity.
-For clerical convenience we write the matrix and the identity side-by-side,
+For clerical convenience we write the matrix and the identity side-by-side
 and do the reduction steps together.
 \begin{eqnarray*}
     \begin{pmat}{rr|rr}
@@ -4377,7 +4425,7 @@ This one happens to start with a row swap.
 \end{example}
 
 \begin{example}
-We can detect
+This algorithm detects
 a non-invertible matrix when the left half won't
 reduce to the identity.
 \begin{equation*}
@@ -4396,8 +4444,8 @@ reduce to the identity.
 With this procedure we can give a formula for 
 the inverse of a general $\nbyn{2}$ matrix, 
 which is worth memorizing.
-But larger matrices have more complex formulas so 
-we will wait for more explanation in the next chapter.
+% But larger matrices have more complex formulas so 
+% we will wait for more explanation in the next chapter.
 
 \begin{corollary} \label{cor:TwoByTwoInv}
 %<*co:TwoByTwoInv>
@@ -4424,30 +4472,30 @@ This computation is
 %</pf:TwoByTwoInv>
 \end{proof}
 
-We have seen here, as in the Mechanics of Matrix Multiplication subsection,
-that we can exploit the correspondence between
+We have seen in this subsection, 
+as in the subsection on Mechanics of Matrix Multiplication,
+how to exploit the correspondence between
 linear maps and matrices.
-So we can fruitfully study both maps and matrices, translating back and forth
-to whichever helps the most.
+We can fruitfully study both maps and matrices, translating back and forth
+to use whichever is handiest.
 
-Over this whole 
-section we have developed an algebra system for matrices.
-We can compare it with the familiar algebra system for the real numbers.
-Here we are working not with numbers but with matrices.
-We have matrix addition and subtraction operations, 
-and they work in much the same
-way as the real number operations, except that they only combine same-sized
+Over the course of 
+this entire section we have developed an algebra system for matrices.
+We can compare it with the familiar algebra of real numbers.
+Matrix addition and subtraction 
+work in much the same
+way as the real number operations except that they only combine same-sized
 matrices.
-We have scalar multiplication, which is in some ways another extension
+Scalar multiplication is in some ways an extension
 of real number multiplication.
 We also have a matrix multiplication operation 
-and a multiplicative inverse.
-These operations are somewhat like the familiar real number ones
+and its inverse
+that are somewhat like the familiar real number operations
 (associativity, and distributivity over addition, for example), but
 there are differences (failure of commutativity). 
-This matrix system provides an example that algebra
-systems other than the 
-elementary real number system can be interesting and useful.
+This section provides an example that algebra
+systems other than the usual
+real number one can be interesting and useful.
 
 
 \begin{exercises}
