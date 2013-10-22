@@ -1020,10 +1020,10 @@ beginfig(25) % (2,2,1) and its projection
 
   pickup pencircle scaled (line_width_light);
   drawarrow z0--z1;
-    label.rt(btex \raisebox{0ex}[0pt][0pt]{\scriptsize $\colvec[r]{1 \\ 2 \\ 2}$} etex,z1);
+    label.rt(btex \raisebox{0ex}[0pt][0pt]{\tiny $\colvec[r]{1 \\ 2 \\ 2}$} etex,z1);
   pickup pencircle scaled (line_width_dark);
   drawarrow z0--z2;
-    %label.lrt(btex {\scriptsize $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);
+    %label.lrt(btex {\tiny $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);
   draw_action_arrow((z1+(1pt,0))--(z2+(1pt,0)));
   % shift so y-axis is on TeX's baseline (to line this pic with #26)
   show ypart(llcorner currentpicture);
@@ -1065,7 +1065,7 @@ beginfig(26) % (2,2,-1) and its projection
 
   pickup pencircle scaled (line_width_light);
   drawarrow z0--z1;
-    label.rt(btex \raisebox{0ex}[0pt][0pt]{\scriptsize $\colvec[r]{1 \\ 2 \\ -1}$} etex,z1);
+    label.rt(btex \raisebox{0ex}[0pt][0pt]{\tiny $\colvec[r]{1 \\ 2 \\ -1}$} etex,z1);
   pickup pencircle scaled (line_width_dark);
   drawarrow z0--z2;
     %label.lrt(btex {\scriptsize $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);

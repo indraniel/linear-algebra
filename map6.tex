@@ -4,12 +4,12 @@
 \section{Projection}
 \index{projection}
 \noindent\textit{This section is optional.
-     It is only required for
-     the last two sections of Chapter Five.}
+     It is a prerequisite only for 
+     the final two sections of Chapter Five, and some Topics.}
 
-We have described the projection \( \pi \) from $\Re^3$ into its
-\( xy \)-plane subspace as a `shadow map'.
-This shows why,
+We have described projection from $\Re^3$ into its
+\( xy \)-plane subspace as a shadow map.
+This shows why
 but it also shows that some shadows fall upward.
 \begin{center}  \small
   \raisebox{20.8163bp}{\includegraphics{ch3.25}}
@@ -18,12 +18,20 @@ but it also shows that some shadows fall upward.
 \end{center}
 \vspace*{1ex}  % graphic is poorly drawn and sticks down into text
 So perhaps a better description is:~the projection of $\vec{v}$
-is the $\vec{p}$ in the plane with the property that 
-someone standing on $\vec{p}$ and looking directly up or down sees
-$\vec{v}$.
+is the vector $\vec{p}$ in the plane with the property that 
+someone standing on $\vec{p}$ and looking straight up or 
+down\Dash that is, looking orthogonally to the plane\Dash
+sees the tip of $\vec{v}$.
 In this section we will generalize this to other projections,
-both orthogonal and non-orthogonal.
+orthogonal and non-orthogonal.
 
+% The first subsection develops orthogonal projection of a vector
+% into a line, which is used often in applications.
+% The second subsection shows how the definition of orthogonal
+% projection into a line allows us to calculate especially convenient bases
+% for vector spaces, again something that often appears in applications.
+% The final subsection completely generalizes projection, orthogonal or not, 
+% into any subspace at all.
 
 
 
@@ -39,7 +47,7 @@ of a vector \( \vec{v} \) into a line $\ell$.
 % looking straight up or down (that is, looking orthogonal to the line)
 % will see \( \vec{v} \).
 %<*PictureOrthogonalProjectionIntoALine0>
-This picture shows someone walking out on the line 
+This shows a figure walking out on the line 
 until they are at a point $\vec{p}\/$ such that
 the tip of $\vec{v}$ is directly above them, where ``above'' does not mean
 parallel to the $y$-axis but instead means orthogonal to the line.
@@ -48,9 +56,9 @@ parallel to the $y$-axis but instead means orthogonal to the line.
   \includegraphics{ch3.28}
 \end{center}
 %<*PictureOrthogonalProjectionIntoALine1>
-Since we can describe the line as the span of some
+Since the line is the span of some
 vector $\ell=\set{c\cdot\vec{s}\suchthat c\in\Re}$,
-this person has found the coefficient $c_{\vec{p}}\,$
+we have a coefficient $c_{\vec{p}}\,$
 with the property that $\vec{v}-c_{\vec{p}}\vec{s}\,$ is orthogonal
 to $c_{\vec{p}}\vec{s}$.
 %</PictureOrthogonalProjectionIntoALine1>
@@ -81,17 +89,14 @@ spanned by a nonzero \( \vec{s}\, \)}\index{projection!orthogonal}%
 % \noindent \nearbyexercise{exer:LineProjFormIndOfVec} checks that the 
 % outcome of the calculation depends only on the line and not on which vector 
 % \( \vec{s}\, \) we used to describe that line.
-
-\begin{remark}
-That definition says `spanned by \( \vec{s}\, \)'
-instead the more formal `the span of the set \( \set{\vec{s}\,} \)'.
-This more casual phrase is common.
-\end{remark}
+\noindent (That says `spanned by \( \vec{s}\, \)'
+instead the more formal `span of the set \( \set{\vec{s}\,} \)'.
+This more casual phrase is common.)
 
 \begin{example}
 To orthogonally project
 the vector $\binom{2}{3}$ into the line \( y=2x \),
-we first pick a direction vector for the line.
+first pick a direction vector for the line.
 \begin{equation*}
   \vec{s}=\colvec[r]{1 \\ 2}
 \end{equation*}
@@ -120,7 +125,7 @@ into the \( y \)-axis is
 which matches our intuitive expectation.
 \end{example}
 
-The picture above with the stick figure walking out on the line until 
+The picture above showing the figure walking out on the line until 
 $\vec{v}$'s tip is overhead is one way to think of the orthogonal projection of
 a vector into a line.
 We finish this subsection with two other ways.
@@ -163,14 +168,14 @@ So we can think of the orthogonal projection of \( \vec{v} \)
 into the line spanned by \( \vec{s}\, \)  as 
 the part of \( \vec{v}\, \) that lies in the direction of \( \vec{s} \).
 
-Still another useful way to think of orthogonal projection 
-is to have the person stand not on the line but on the vector.
-This person holds a rope with a loop over the line $\ell$.
+Still another useful way to think of orthogonal projection into a line
+is to have the person stand on the vector, not the line.
+This person holds a rope looped over the line.
+As they pull, the loop slides on the line.
 \begin{center}  \small
   \includegraphics{ch3.33}
 \end{center}
-When they pull the rope tight, the loop slides on $\ell$ until 
-the rope is orthogonal to that line.
+When it is tight, the rope is orthogonal to the line.
 That is, we can think of the projection \( \vec{p}\, \) as being the vector 
 in the line that is closest to \( \vec{v} \)
 (see \nearbyexercise{exer:ProjMinimizesDist}). 
@@ -202,17 +207,9 @@ the sub's shifted position.
 \end{equation*}
 The distance between  $\vec{v}$ and $\vec{p}$ is about
 \( 0.63 \)~miles. 
-The ship will not be in range.
+The ship will never be in range.
 \end{example}
 
-This subsection has developed a natural projection map, orthogonal projection
-into a line.
-As suggested by the examples, we use it often in applications.
-The next subsection shows how the definition of orthogonal
-projection into a line gives us a way to calculate especially convenient bases
-for vector spaces, again something that we often see in applications.
-The final subsection completely generalizes projection, orthogonal or not, 
-into any subspace at all.
 
 \begin{exercises}
   \recommended \item
@@ -730,15 +727,15 @@ into any subspace at all.
 
 \subsectionoptional{Gram-Schmidt Orthogonalization}
 \index{Gram-Schmidt process|(}
-\noindent\textit{This subsection is optional.
-     We only need the work done here in the final two sections
-     of Chapter Five.
-     Also, this subsection requires material from the previous subsection, 
-     which itself was optional.}
+% \noindent\textit{This subsection is optional.
+%      It is a prerequisite only for the final two sections
+%      of Chapter Five.
+%      Also, this subsection requires material from the previous subsection, 
+%      which itself was optional.}
 
-The prior subsection suggests 
-that projecting into the line spanned by \( \vec{s} \)
-decomposes a vector $\vec{v}$ into two parts
+The prior subsection suggests
+that projecting $\vec{v}$ into the line spanned by \( \vec{s} \)
+decomposes that vector into two parts
 \begin{center}  \small
   \vcenteredhbox{\includegraphics{ch3.35}}
   % \begin{tabular}{@{}c@{}}\includegraphics{ch3.35}\end{tabular}
@@ -746,8 +743,8 @@ decomposes a vector $\vec{v}$ into two parts
    $\displaystyle \vec{v}=\proj{\vec{v}}{\spanof{\vec{s}\,}}
              \,+\,\left(\vec{v}-\proj{\vec{v}}{\spanof{\vec{s}\,}}\right)$
 \end{center}
-that are orthogonal and so are not-interacting.
-We will now develop that suggestion.
+that are orthogonal and so are ``non-interacting.''
+We now develop that suggestion.
 
 \begin{definition}  \label{df:MutuallyOrthogonal}
 %<*df:MutuallyOrthogonal>
@@ -768,17 +765,15 @@ independent.
 
 \begin{proof}
 %<*pf:OrthoIsInd>
-Consider a linear relationship
-\( c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k=\zero \).
-If $i\in \set{1,..\,,k}$ then taking the dot product of \( \vec{v}_i \)  
+Consider
+\( \zero=c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k \).
+For $i\in \set{1,..\,,k}$, taking the dot product of \( \vec{v}_i \)  
 with both sides of the equation
-\begin{align*}
-   \vec{v}_i\dotprod (c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k)
-   &=\vec{v}_i\dotprod\zero   \\
-   c_i\cdot(\vec{v}_i\dotprod\vec{v}_i)
-   &=0
-\end{align*}
-shows, since \( \vec{v}_i\neq\zero \), that \( c_i= 0 \). 
+$\vec{v}_i\dotprod (c_1\vec{v}_1+c_2\vec{v}_2+\dots+c_k\vec{v}_k)
+   =\vec{v}_i\dotprod\zero$,
+which gives   
+$c_i\cdot(\vec{v}_i\dotprod\vec{v}_i)=0$,
+shows that \( c_i= 0 \) since \( \vec{v}_i\neq\zero \). 
 %</pf:OrthoIsInd>
 \end{proof}
 
@@ -816,9 +811,10 @@ are not orthogonal.
   \qquad %\hspace*{3em}
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.36}\end{tabular}
 \end{center}
-However, we can derive from $B$
-a new basis for the same space that does have mutually orthogonal members.
-For the first member of the new basis we simply use $\vec{\beta}_1$.
+We will derive from $B$
+a new basis for the space $\sequence{\vec{\kappa}_1,\vec{\kappa}_2}$
+consisting of mutually orthogonal vectors.
+The first member of the new basis is just $\vec{\beta}_1$.
 \begin{equation*}
   \vec{\kappa}_1=\colvec[r]{4 \\ 2}
 \end{equation*}
@@ -836,7 +832,7 @@ of $\vec{\beta}_2$ that is orthogonal to $\vec{\kappa}_1$.
    \qquad
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.37}\end{tabular}
 \end{center} 
-By the corollary $\sequence{\vec{\kappa}_1,\vec{\kappa}_2}$ 
+By the corollary $\sequence{\vec{\kappa}_1,\vec{\kappa}_2}$
 is a basis for $\Re^2$.
 \end{example}
 
@@ -853,7 +849,7 @@ for a vector space is a basis of mutually orthogonal vectors.
 % We first see an example.
 
 \begin{example} \label{ex:OrthoBasisForReThree}
-To turn this basis for $\Re^3$
+To produce from this basis for $\Re^3$
 \begin{equation*}
   B=\sequence{
            \colvec[r]{1 \\ 1 \\ 1},
@@ -861,21 +857,21 @@ To turn this basis for $\Re^3$
            \colvec[r]{1 \\ 0 \\ 3}
             }
 \end{equation*}
-into an orthogonal basis we take the first vector as it is.
+an orthogonal basis, start by taking the first vector unchanged.
 \begin{equation*}
    \vec{\kappa}_1=\colvec[r]{1 \\ 1 \\ 1}
 \end{equation*}
-We get \( \vec{\kappa}_2 \) by starting with
-$\vec{\beta}_2$ and
-subtracting the part in the direction of \( \vec{\kappa}_1 \).
+Get \( \vec{\kappa}_2 \) by subtracting from
+$\vec{\beta}_2$ 
+its part in the direction of \( \vec{\kappa}_1 \).
 \begin{equation*}
    \vec{\kappa}_2=\colvec[r]{0 \\ 2 \\ 0}
                    -\proj{\colvec[r]{0 \\ 2 \\ 0}}{\spanof{\vec{\kappa}_1}}
                  =\colvec[r]{0 \\ 2 \\ 0}-\colvec[r]{2/3 \\ 2/3 \\ 2/3}
                  =\colvec[r]{-2/3 \\ 4/3 \\ -2/3}
 \end{equation*}
-We get $\vec{\kappa}_3$  
-by taking $\vec{\beta}_3$ and subtracting the part 
+Find $\vec{\kappa}_3$  
+by subtracting from $\vec{\beta}_3$ the part 
 in the direction of \( \vec{\kappa}_1 \) and also the part 
 in the direction of \( \vec{\kappa}_2 \).
 \begin{equation*}
@@ -884,7 +880,7 @@ in the direction of \( \vec{\kappa}_2 \).
                    -\proj{\colvec[r]{1 \\ 0 \\ 3}}{\spanof{\vec{\kappa}_2}}
                  =\colvec[r]{-1 \\ 0 \\ 1}
 \end{equation*}
-Again, the corollary gives the result is a basis for $\Re^3$.
+As above, the corollary gives that the result is a basis for $\Re^3$.
 \begin{equation*}
   \sequence{
            \colvec[r]{1 \\ 1 \\ 1},
@@ -923,7 +919,7 @@ same subspace.
 
 \begin{remark}
 This is restricted to $\Re^n$ only because we have not given a 
-definition of orthogonality for any other spaces.
+definition of orthogonality for other spaces.
 \end{remark}
 
 \begin{proof}
@@ -933,24 +929,23 @@ is in the span of $\sequence{\vec{\beta}_1,\ldots\,\vec{\beta}_i}$,
 and is orthogonal to all preceding vectors
 \( \vec{\kappa}_1\dotprod\vec{\kappa}_i= \cdots
    =\vec{\kappa}_{i-1}\dotprod\vec{\kappa}_{i}=0 \).
-Then with
-\nearbycorollary{cor:OrthAndBigEnoughIsBasis} we will have that
+Then 
+\nearbycorollary{cor:OrthAndBigEnoughIsBasis} gives that
 \( \sequence{\vec{\kappa}_1,\ldots\,\vec{\kappa}_k} \) 
-is a basis for the same space as is
-\( \sequence{\vec{\beta}_1,\ldots\vec{\beta}_k} \).
+is a basis for the same space as is the starting basis.
 %</pf:GramSchmidt0>
 
 %<*pf:GramSchmidt1>
 We shall only cover the cases up to \( i=3 \), to give the
 sense of the argument.
-The remaining details are \nearbyexercise{exer:GramSchmidt}.
+The full argument is \nearbyexercise{exer:GramSchmidt}.
 %</pf:GramSchmidt1>
 
 %<*pf:GramSchmidt2>
-The \( i=1 \) case is trivial; setting \( \vec{\kappa}_1 \) equal to 
+The \( i=1 \) case is trivial; taking \( \vec{\kappa}_1 \) to be 
 \( \vec{\beta}_1 \) 
 makes it a nonzero vector since $\vec{\beta}_1$ is a member of a basis, 
-it is obviously in the span of $\vec{\beta}_1$,
+it is obviously in the span of $\sequence{\vec{\beta}_1}$,
 and the `orthogonal to all preceding vectors' condition
 is satisfied vacuously.
 %</pf:GramSchmidt2>
@@ -974,7 +969,7 @@ shows that $\vec{\kappa}_2\neq \zero$ or else this
 would be a non-trivial linear dependence among the \( \vec{\beta} \)'s
 (it is nontrivial because the coefficient of $\vec{\beta}_2$ is $1$).
 It also shows that 
-$\vec{\kappa}_2$ is in the span of the first two $\vec{\beta}$'s.
+$\vec{\kappa}_2$ is in the span of $\sequence{\vec{\beta}_1,\vec{\beta}_2}$.
 And, $\vec{\kappa}_2$ is orthogonal to the only preceding vector
 \begin{equation*}
    \vec{\kappa}_1\dotprod\vec{\kappa}_2=
@@ -1019,29 +1014,29 @@ the calculation below shows that
 $\vec{\kappa}_3$ is orthogonal to $\vec{\kappa}_1$.
 %</pf:GramSchmidt4>
 %<*pf:GramSchmidt5>
-(There is a difference between this calculation and the one in the $i=2$ case.
-Here the second line has two kinds of terms.
-As happened for $i=2$, 
-the first term is~$0$ because this projection is orthogonal.
-But here the second term is~$0$ because \( \vec{\kappa}_1 \) is orthogonal
-to \( \vec{\kappa}_2 \) and so is orthogonal to any vector
-in the line spanned by \( \vec{\kappa}_2 \).)
 \begin{align*}
    \vec{\kappa}_1\dotprod\vec{\kappa}_3
-   &=\vec{\kappa}_1\dotprod\bigl(\vec{\beta}_3
+   &=\vec{\kappa}_1\dotprod\bigl(\;\vec{\beta}_3
       -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}
-      -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}}\bigr) \\
+      -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}}\;\bigr) \\
    &=\vec{\kappa}_1\dotprod\bigl(\vec{\beta}_3
           -\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_1}}\bigr)
     -\vec{\kappa}_1\dotprod\proj{\vec{\beta}_3}{\spanof{\vec{\kappa}_2}} \\
    &=0
 \end{align*}
+(Here is the difference with the $i=2$ case:
+as happened for $i=2$ 
+the first term is~$0$ because this projection is orthogonal,
+but here the second term in the second line
+is~$0$ because \( \vec{\kappa}_1 \) is orthogonal
+to \( \vec{\kappa}_2 \) and so is orthogonal to any vector
+in the line spanned by \( \vec{\kappa}_2 \).)
 A similar check shows that $\vec{\kappa}_3$ is also 
 orthogonal to $\vec{\kappa}_2$.
 %</pf:GramSchmidt5>
 \end{proof}
 
-Beyond having the vectors in the basis be orthogonal, we can also
+In addition to having the vectors in the basis be orthogonal, we can also
 \definend{normalize}\index{normalize} each vector by dividing
 by its length, to end with an 
 \definend{orthonormal basis}.\index{basis!orthonormal}%
@@ -1063,7 +1058,7 @@ produces this orthonormal basis.
 \noindent Besides its intuitive appeal, and its analogy with the 
 standard basis $\stdbasis_n$ for $\Re^n$, an orthonormal basis also simplifies
 some computations.
-An example is in \nearbyexercise{exer:OrthoRepEasy}.
+\nearbyexercise{exer:OrthoRepEasy} is an example.
 
 
 
@@ -2023,8 +2018,8 @@ An example is in \nearbyexercise{exer:OrthoRepEasy}.
 
 
 \subsectionoptional{Projection Into a Subspace}
-\noindent\textit{This subsection is optional.
-     It also uses material from the 
+\noindent\textit{This subsection 
+     uses material from the 
      optional earlier subsection on Combining Subspaces.}
 
 The prior subsections
@@ -2036,21 +2031,19 @@ we will follow this decomposition idea.
 
 \begin{definition}
 \label{def:ProjIntoMAlongN}
-For any direct sum \( V=M\directsum N \) and any \( \vec{v}\in V \),
+Let a vector space be a direct sum \( V=M\directsum N \).
+Then for any \( \vec{v}\in V \) 
+with $\vec{v}=\vec{m}+\vec{n}$ where \( \vec{m}\in M,\,\vec{n}\in N \),
 the \definend{projection of \( \vec{v} \) into \( M \) along \( N \)}%
 \index{projection!into a subspace}\index{projection!along a subspace}
 is
-\begin{equation*}
-  \proj{\vec{v}\,}{M,N}=\vec{m}
-\end{equation*}
-where \( \vec{v}=\vec{m}+\vec{n} \) with \( \vec{m}\in M,\,\vec{n}\in N \).
+$\proj{\vec{v}\,}{M,N}=\vec{m}$.
 \end{definition}
 
-We can apply this definition in spaces where we don't have a ready definition
+This definition applies in spaces where we don't have a ready definition
 of orthogonal.
 (Definitions of orthogonality for spaces other than the $\Re^n$
-are perfectly possible but we 
-haven't seen any in this book.)
+are perfectly possible but we haven't seen any in this book.)
 
 \begin{example} \label{ex:OrthProjOne}
 The space \( \matspace_{\nbyn{2}} \) of $\nbyn{2}$ matrices is the
@@ -2097,7 +2090,7 @@ into $M$ along $N$, we first fix bases for the two subspaces.
     \end{mat}
                    }
 \end{equation*}
-The concatenation of these
+Their concatenation
 \begin{equation*}
   B=\cat{B_{M}}{B_{N}}=\sequence{
     \begin{mat}[r]
@@ -2179,7 +2172,11 @@ fix this plane subspace of $\Re^3$ and its basis.
                 \colvec[r]{1 \\ 0 \\ 0},
                 \colvec[r]{0 \\ 2 \\ 1} }
 \end{equation*}
-Compare the projections along these
+We will compare the projections of this element of~$\Re^3$
+\begin{equation*}
+  \vec{v}=\colvec[r]{2 \\ 2 \\ 5}
+\end{equation*}
+into $M$ along these two subspaces
 (verification that \( \Re^3=M\directsum N \) and 
 \( \Re^3=M\directsum \hat{N} \) is routine).
 \begin{equation*}
@@ -2187,44 +2184,38 @@ Compare the projections along these
   \qquad
   \hat{N}=\set{k\colvec[r]{0 \\ 1 \\ -2}\suchthat k\in\Re}
 \end{equation*}
-The projections are different because
-they have different effects on this vector.
-\begin{equation*}
-  \vec{v}=\colvec[r]{2 \\ 2 \\ 5}
-\end{equation*}
-For the first one we find a basis for $N$
+Here are natural bases for $N$ and $\hat{N}$.
 \begin{equation*}
   B_N=\sequence{
                 \colvec[r]{0 \\ 0 \\ 1} }
+  \qquad
+  B_{\hat{N}}=\sequence{
+                \colvec[r]{0 \\ 1 \\ -2} }
 \end{equation*}
-and represent $\vec{v}$ with respect to the concatenation $\cat{B_M}{B_N}$. 
+To project into $M$ along~$N$,
+represent $\vec{v}$ with respect to the concatenation $\cat{B_M}{B_N}$
 \begin{equation*}
   \colvec[r]{2 \\ 2 \\ 5}=
   2\cdot\colvec[r]{1 \\ 0 \\ 0}+
   1\cdot\colvec[r]{0 \\ 2 \\ 1}+
   4\cdot\colvec[r]{0 \\ 0 \\ 1}
 \end{equation*}
-We find the projection of $\vec{v}$ into $M$ along $N$ by
-dropping the $N$ component. 
+and drop the $N$ term. 
 \begin{equation*}
   \proj{\vec{v}\,}{M,N}
   =2\cdot\colvec[r]{1 \\ 0 \\ 0}+
   1\cdot\colvec[r]{0 \\ 2 \\ 1}
   =\colvec[r]{2 \\ 2 \\ 1}
 \end{equation*}
-For $\hat{N}$, this basis is natural. 
-\begin{equation*}
-  B_{\hat{N}}=\sequence{
-                \colvec[r]{0 \\ 1 \\ -2} }
-\end{equation*}
-Representing $\vec{v}$ with respect to the concatenation  
+To project into~$M$ along~$\hat{N}$
+represent $\vec{v}$ with respect to $\cat{B_M}{B_{\hat{N}}}$
 \begin{equation*}
   \colvec[r]{2 \\ 2 \\ 5}=
   2\cdot\colvec[r]{1 \\ 0 \\ 0}
   +(9/5)\cdot\colvec[r]{0 \\ 2 \\ 1}
   -(8/5)\cdot\colvec[r]{0 \\ 1 \\ -2}
 \end{equation*}
-and then keeping only the $M$ part gives this. 
+and omit the $\hat{N}$ part. 
 \begin{equation*}
   \proj{\vec{v}\,}{M,\hat{N}}
   =
@@ -2232,7 +2223,7 @@ and then keeping only the $M$ part gives this.
   +(9/5)\cdot\colvec[r]{0 \\ 2 \\ 1}
   =\colvec[r]{2 \\ 18/5 \\ 9/5}
 \end{equation*}
-Therefore projection along different subspaces may yield different results.
+So projecting along different subspaces can give different results.
 
 These pictures compare the two maps.
 Both show that the projection is indeed `into' the plane and
@@ -2242,17 +2233,17 @@ Both show that the projection is indeed `into' the plane and
   \qquad
   \begin{tabular}{@{}c@{}}\includegraphics{ch3.39}\end{tabular}
 \end{center}
-Notice that the projection along $N$ is not orthogonal\Dash there are
+Notice that the projection along $N$ is not orthogonal since there are
 members of the plane $M$ that are not orthogonal to the dotted line.
 But the projection along $\hat{N}$ is orthogonal. 
 \end{example}
 
 A natural question is:~what is the relationship between the projection 
-operation defined above, and the operation of orthogonal projection
+operation defined in this subsection and the operation of orthogonal projection
 into a line? 
 The second picture above suggests the answer\Dash orthogonal projection into
-a line is a special case of the projection defined above; it is just 
-projection along a subspace perpendicular to the line.
+a line is a special case of this subsection's projection; 
+it is just projection along a subspace perpendicular to the line.
 \begin{center}  \small
   \includegraphics{ch3.40}
 \end{center}
@@ -2317,17 +2308,17 @@ calculating the solution set of a homogeneous linear system.
   \quad\Longrightarrow\quad
   P^\perp=\set{k\colvec[r]{-3 \\ -2 \\ 1}\suchthat k\in\Re}
 \end{equation*}
-Instead of the term orthogonal complement,
-this is sometimes called the line \definend{normal}\index{normal} %
-to the plane.
+% Instead of the term orthogonal complement,
+% this is sometimes called the line \definend{normal}\index{normal} %
+% to the plane.
 \end{example}
 
 \begin{example} \label{ex:OrthoCompTwo}
 Where \( M \) is the \( xy \)-plane subspace of \( \Re^3 \),
 what is \( M^\perp \)?
 A common first reaction is that \( M^\perp \) is the \( yz \)-plane, but
-that's not right.
-Some vectors from the \( yz \)-plane are not perpendicular to every
+that's not right because
+some vectors from the \( yz \)-plane are not perpendicular to every
 vector in the \( xy \)-plane.
 \begin{center}  \small
     {\small $\colvec[r]{1 \\ 1 \\ 0} \not\perp \colvec[r]{0 \\ 3 \\ 2}$}
@@ -2360,7 +2351,7 @@ prior example and taking the natural basis for the $xy$-plane gives this.
 % The next result justifies the second sentence.
 
 \begin{lemma} \label{le:OrthoProjWellDefd}
-If $M$ is a subspace of $\Re^n$ then
+If $M$ is a subspace of $\Re^n$ then its
 orthogonal complement $M^\perp$ is also a subspace.
 The space is the direct sum of the two \( \Re^n=M\directsum M^\perp \).
 And, for any $\vec{v}\in\Re^n$,
@@ -2372,7 +2363,7 @@ vector in $M$.
 First, the orthogonal complement $M^\perp$ is a subspace of $\Re^n$ because,
 as noted in the prior two examples, it is a null space.
  
-Next,
+Next, to show that the space is the direct sum of the two,
 start with  any basis \( B_M=\sequence{\vec{\mu}_1,\dots,\vec{\mu}_k} \) 
 for \( M \) and expand it to a basis
 %\( B=\sequence{\vec{\mu}_1,\dots,\vec{\mu}_k,
@@ -2386,12 +2377,12 @@ with the same number of members~$k$ as $B_M$, and
 \( \sequence{\vec{\kappa}_{k+1},\dots,\vec{\kappa}_n} \).
 The first is a basis for $M$ so if we show that the second is a
 basis for \( M^\perp \) then we will have that
-the entire space is the direct sum of the two subspaces. 
+the entire space is the direct sum. 
 
 \nearbyexercise{exer:OrthoRepEasy} from the prior subsection 
 proves this about any orthogonal basis:~each vector $\vec{v}$ 
 in the space is the sum of its orthogonal projections
-onto the lines spanned by the basis vectors.
+into the lines spanned by the basis vectors.
 \begin{equation*}
   \vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
            +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}
@@ -2426,12 +2417,12 @@ Therefore equation~($*$) gives that $\vec{w}$ is a linear combination of
 Thus this is a basis for $M^\perp$ and
 $\Re^n$ is the direct sum of the two.
 
-The final sentence of the statement of this result 
+The final sentence of this result 
 is proved in much the same way.
 Write $\vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
            +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}$.
 Then $\proj{\vec{v}\,}{M}$ keeps only the $M$ part and
-dropping the $M^\perp$ part
+drops the $M^\perp$ part
 $\proj{\vec{v}\,}{M}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_{k+1}}}
                        +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_k}}$.
 Therefore $\vec{v}-\proj{\vec{v}\,}{M}$ consists of a linear combination
@@ -2448,17 +2439,17 @@ let \( M \) be a subspace of \( \Re^n \) with basis
 \( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_k} \). 
 If \( A \) is the matrix whose columns are the \( \vec{\beta} \)'s
 then $\proj{\vec{v}\,}{M}=c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$
-where the coefficients $c_i$ are the entries of the vector
+where the coefficients $c_i$ are entries of the vector
 $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 That is, 
 $\proj{\vec{v}\,}{M}=A(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 \end{theorem}
 
 \begin{proof}
-The vector \( \proj{\vec{v}}{M} \) is a member of \( M \) and so it is a
+The vector \( \proj{\vec{v}}{M} \) is a member of \( M \) and so is a
 linear combination of basis vectors
 \( c_1\cdot\vec{\beta}_1+\dots+c_k\cdot\vec{\beta}_k \).
-Since $A$'s columns are the $\vec{\beta}$'s, that can be expressed 
+Since $A$'s columns are the $\vec{\beta}$'s that can be expressed 
 as:~there is a \( \vec{c}\in\Re^k \) such that
 \( \proj{\vec{v}\,}{M}=A\vec{c} \).
 % (this is expressed compactly with matrix
@@ -3110,7 +3101,7 @@ Note, as a check, that this result is indeed in $P$.
       The proof of \nearbylemma{le:OrthoProjWellDefd} shows that
       each vector $\vec{v}\in\Re^n$ 
       is the sum of its orthogonal projections
-      onto the lines spanned by the basis vectors.
+      into the lines spanned by the basis vectors.
       \begin{equation*}
         \vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
                  +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}
@@ -3215,7 +3206,7 @@ Note, as a check, that this result is indeed in $P$.
           $M$ and the second half is a basis for $M^\perp$.
           The proof also checks that
           each vector in the space is the sum of its orthogonal projections 
-          onto the lines spanned by these basis vectors.
+          into the lines spanned by these basis vectors.
           \begin{equation*}
              \vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
                           +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}
