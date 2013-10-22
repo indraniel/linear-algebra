@@ -1,24 +1,24 @@
 % Chapter 3, Section 5 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \section{Change of Basis}
 \index{change of basis|(}
 Representations vary with the bases.
 For instance, 
-$\vec{e}_1\in\Re^2$ has two different representations
+with respect to the bases $\stdbasis_2$ and
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
+\end{equation*}
+$\vec{e}_1\in\Re^2$ has these different representations.
 \begin{equation*}
   \rep{\vec{e}_1}{\stdbasis_2}=\colvec{1 \\ 0}
   \qquad
   \rep{\vec{e}_1}{B}=\colvec{1/2 \\ 1/2}
 \end{equation*}
-with respect to the standard basis and this one.
-\begin{equation*}
-  B=\sequence{\colvec{1 \\ 1},\colvec{1 \\ -1}}
-\end{equation*}
-The same is true for maps;
+The same holds for maps:
 with respect to the basis pairs $\stdbasis_2,\stdbasis_2$ and $\stdbasis_2,B$, 
 the identity map
-has two different representations.
+has these representations.
 \begin{equation*}
   \rep{\text{id}}{\stdbasis_2,\stdbasis_2}=
    \begin{mat}[r]
@@ -32,12 +32,9 @@ has two different representations.
      1/2  &-1/2
    \end{mat}
 \end{equation*}
-With our point of view that the objects of our studies are vectors and
-maps, by fixing bases 
-we are adopting a scheme of tags or names for these objects that are
-convenient for calculations.
-We will now see how to translate among these names, so we will
-see exactly how the representations vary as the bases vary.
+This section shows how to translate among the representations.
+That is, 
+we will compute how the representations vary as the bases vary.
 
 
 
@@ -55,7 +52,8 @@ In converting
 $\rep{\vec{v}}{B}$ to $\rep{\vec{v}}{D}$
 the underlying vector $\vec{v}$ doesn't change.
 Thus,  
-this translation is accomplished by the identity map on the space,
+the translation between these two ways of expressing the vector
+is accomplished by the identity map on the space,
 described so that
 the domain space vectors are represented with respect to $B$ and
 the codomain space vectors are represented with respect to $D$. 
@@ -68,7 +66,7 @@ the codomain space vectors are represented with respect to $D$.
     V_{\wrt{D}}
   \end{CD}
 \end{equation*}
-(The diagram is
+(This diagram is
 vertical to fit with the ones in the next subsection.)
 %</ChangeRepresentationOfVectorArrowDiagram>
 
@@ -91,9 +89,11 @@ map  \( \map{\identity}{V}{V} \) with respect to those bases.
 \end{definition}
 
 \begin{remark}
-Perhaps a better name would be `change of representation matrix' but this
-one is standard.  
+A better name would be `change of representation matrix' but the above name
+is standard.  
 \end{remark}
+
+The next result supports the definition.
 
 \begin{lemma}  \label{le:ChBasisMatDoesChBases}
 %<*lm:ChBasisMatDoesChBases>
@@ -109,7 +109,7 @@ then $M$ is a change of basis matrix.
 \begin{proof}
 %<*pf:ChBasisMatDoesChBases>
 The first sentence holds 
-because matrix-vector multiplication represents a map application
+because matrix-vector multiplication represents a map application and so
 \( \rep{\identity}{B,D}\cdot\rep{\vec{v}}{B}=\rep{\,\identity(\vec{v})\,}{D}
   =\rep{\vec{v}}{D} \) for each \( \vec{v} \). 
 For the second sentence,
@@ -149,17 +149,16 @@ the change of basis matrix is this.
         3/2  &1/2
     \end{mat}
 \end{equation*}
-For instance, if we 
-finding the representations of
-$\vec{e}_2$ 
+For instance, this 
+is the representation of $\vec{e}_2$
 \begin{equation*}
   \rep{\colvec[r]{0 \\ 1} }{B}
   =\colvec[r]{1 \\ -2}
-  \qquad
-  \rep{\colvec[r]{0 \\ 1} }{D}
-  =\colvec[r]{1/2 \\ 1/2}
+  % \qquad
+  % \rep{\colvec[r]{0 \\ 1} }{D}
+  % =\colvec[r]{1/2 \\ 1/2}
 \end{equation*}
-then the matrix will do the conversion. 
+and the matrix does the conversion. 
 \begin{equation*}
     \begin{mat}[r]
        -1/2  &-1/2  \\
@@ -169,10 +168,11 @@ then the matrix will do the conversion.
   =
   \colvec[r]{1/2 \\ 1/2}
 \end{equation*}
+Checking that vector on the right is $\rep{\vec{e}_2 }{D}$ is easy.
 \end{example}
 
-We finish this subsection by recognizing that 
-the change of basis matrices form a familiar set.
+We finish this subsection by recognizing 
+the change of basis matrices as a familiar set.
 
 \begin{lemma}    \label{le:NonSingIsChBasis}
 %<*lm:NonSingIsChBasis>
@@ -186,36 +186,40 @@ For the `only if' direction,
 if left-multiplication by a matrix changes bases then
 the matrix represents an invertible function,
 simply because we can invert the function by changing the bases back.
-Such a matrix is itself invertible, and so is nonsingular.
+Because it represents a function that is invertible, 
+the matrix itself is invertible, 
+and so is nonsingular.
 %</pf:NonSingIsChBasis0>
 
 %<*pf:NonSingIsChBasis1>
-To finish we will show that any nonsingular matrix $M$ 
+For `if' we will show that any nonsingular matrix $M$ 
 performs a change of basis operation from any given starting basis $B$ 
+(having~$n$ vectors, where the matrix is $\nbyn{n}$) 
 to some ending basis.
-Because the matrix is nonsingular it will Gauss-Jordan reduce to the
-identity.
+
+% The matrix is nonsingular so it will Gauss-Jordan reduce to the
+% identity.
 If the matrix is the identity~$I$ then the statement is obvious.
-Otherwise there are elementary reduction matrices such that
+Otherwise because the matrix is nonsingular 
+Corollary~IV.\ref{cor:ReducViaMatrices} says
+there are elementary reduction matrices such that
 $R_r\cdots R_1\cdot M=I$ with $r\geq 1$.
 Elementary matrices are invertible and their inverses are also elementary
 so multiplying both sides of that equation from the left 
 by ${R_r}^{-1}$, then by ${R_{r-1}}^{-1}$, etc., gives 
 $M$ as a product of elementary matrices
 $M={R_1}^{-1}\cdots {R_r}^{-1}$.
-(We've combined ${R_r}^{-1}I$ to make ${R_r}^{-1}$; 
-because $r\geq 1$ we can always make the $I$ disappear in this way,
-which we need to do because it isn't an elementary matrix.)
+% (We've combined ${R_r}^{-1}I$ to make ${R_r}^{-1}$; 
+% because $r\geq 1$ we can always have the $I$ disappear in this way.)
 %</pf:NonSingIsChBasis1>
 
 %<*pf:NonSingIsChBasis2>
-Thus, we will be done if we show that elementary matrices 
-change a given basis to another basis, for then 
-${R_r}^{-1}$ changes $B$ to some other basis $B_r$, and
-${R_{r-1}}^{-1}$ changes $B_r$ to some $B_{r-1}$, etc., and
-the net effect is that $M$ changes $B$ to $B_1$.
-We will prove this by covering the three types of elementary matrices
-separately; here are the three cases.
+We will be done if we show that elementary matrices 
+change a given basis to another basis, since then 
+${R_r}^{-1}$ changes $B$ to some other basis $B_r$ and
+${R_{r-1}}^{-1}$ changes $B_r$ to some $B_{r-1}$, etc.
+We will cover the three types of elementary matrices
+separately; recall the notation for the three.
 \begin{equation*}
   M_{i}(k)
     \colvec{
@@ -284,8 +288,8 @@ to one with respect to
     c_1\cdot\vec{\beta}_1+\dots+kc_i\cdot(1/k)\vec{\beta}_i+\dots
                                   +c_n\cdot\vec{\beta}_n=\vec{v}     
 \end{multline*}
-We can easily see that the second one is a basis, given that the first is a 
-basis and that $k\neq 0$ is a restriction in the definition of a 
+The second one is a basis because the first is a 
+basis and because of the $k\neq 0$ restriction in the definition of a 
 row-multiplication matrix.
 %</pf:NonSingIsChBasis3>
 %<*pf:NonSingIsChBasis4>
@@ -319,8 +323,8 @@ $C_{i,j}(k)$ into a representation with respect to
     c_1\cdot\vec{\beta}_1+\dots+c_i\cdot(\vec{\beta}_i-k\vec{\beta}_j)+\dots
           +(kc_i+c_j)\cdot\vec{\beta}_j+\dots+c_n\cdot\vec{\beta}_n=\vec{v} 
 \end{multline*}
-(the definition of reduction matrices specifies that \( i\neq j \) and
-\( k\neq 0 \)).
+(the definition of $C_{i,j}(k)$ specifies that 
+\( i\neq j \) and \( k\neq 0 \)).
 %</pf:NonSingIsChBasis5>
 \end{proof}
 
@@ -331,39 +335,14 @@ with respect to some pair of bases.
 %</co:MatrixNonsingularIffChangesBasis>
 \end{corollary}
 
-%\begin{proof}
-%One direction of the double implication is easy:~if a matrix represents the
-%identity map then it must be square and, 
-%because the identity map has a rank equal to the dimension
-%of its domain, it must have a rank equal to the number of its
-%columns, and so must be nonsingular.
-
-%For the other implication we must show that if a vector space 
-%$V$ is $n$-dimensional and $H$ is a
-%nonsingular $\nbyn{n}$ matrix, then there are bases $B$ and $D$ such
-%that $H=\rep{\text{id}}{B,D}$.
-
-%Fix any starting basis $B$.
-%Write $H$ as a product of elementary reduction matrices
-%$H=R_1\cdots R_r$.
-%By the previous result, we have that $R_r$ is the change of basis matrix
-%from the basis $B$ to some other basis $B_r$.
-%Similarly, the previous result gives that $R_{r-1}$ is the change of basis
-%matrix from $B_r$ to some $B_{r-1}$, etc.
-%Thus
-%\begin{equation*}
-%  H=R_1\cdots R_r=\rep{\text{id}}{B_2,B_1}\cdots\rep{\text{id}}{B,B_r}
-%     =\rep{\text{id}}{B,B_1}
-%\end{equation*}
-%and we are finished on recognizing that $B_1$ is the required basis $D$.
-%\end{proof}
-
-In the next subsection we will
-see how to translate among representations of 
-maps, that is, how to change
-$\rep{h}{B,D}$ to $\rep{h}{\hat{B},\hat{D}}$.
-The above corollary is a special case of this, where the domain and range are
-the same space, and where the map is the identity map.
+% Just as this subsection shows how to translate among representations of
+% vectors 
+% the next subsection will
+% show how to translate among representations of 
+% maps, that is, how to change
+% $\rep{h}{B,D}$ to $\rep{h}{\hat{B},\hat{D}}$.
+% The above corollary is a special case of this, where the domain and range are
+% the same space and where the map is the identity map.
 
 
 \begin{exercises}
@@ -453,36 +432,6 @@ the same space, and where the map is the identity map.
                  \end{mat} \)
       \end{exparts*}  
     \end{answer}
-  \item 
-    For the bases in \nearbyexercise{exer:ChngeBasMatsRTwo}, 
-    find the change of basis matrix in the other direction, from $D$ to $B$.
-    \begin{answer}
-       One way to go is to find 
-       $\rep{\vec{\delta}_1}{B}$ and $\rep{\vec{\delta}_2}{B}$,
-       and then concatenate them into the columns of the desired 
-       change of basis matrix.
-       Another way is to find the inverse of the matrices that answer
-       \nearbyexercise{exer:ChngeBasMatsRTwo}. 
-       \begin{exparts*}
-        \partsitem
-          $\begin{mat}[r]
-            0  &1  \\
-            1  &0
-          \end{mat}$
-        \partsitem \( \begin{mat}[r]
-            1  &1  \\
-            2  &4
-          \end{mat} \)
-        \partsitem \( \begin{mat}[r]
-            2  &-1/2  \\
-            -1 &1/2
-          \end{mat} \)
-        \partsitem \( \begin{mat}[r]
-            2  &1  \\
-            1  &1
-          \end{mat} \)
-      \end{exparts*} 
-    \end{answer}
   \recommended \item
     Find the change of basis matrix for each \( B,D\subseteq\polyspace_2 \).
     \begin{exparts*}
@@ -520,6 +469,36 @@ the same space, and where the map is the identity map.
       E.g., for the first column of the first matrix,
       $1=0\cdot x^2+1\cdot 1+0\cdot x$.
      \end{answer}
+  \item 
+    For the bases in \nearbyexercise{exer:ChngeBasMatsRTwo}, 
+    find the change of basis matrix in the other direction, from $D$ to $B$.
+    \begin{answer}
+       One way to go is to find 
+       $\rep{\vec{\delta}_1}{B}$ and $\rep{\vec{\delta}_2}{B}$,
+       and then concatenate them into the columns of the desired 
+       change of basis matrix.
+       Another way is to find the inverse of the matrices that answer
+       \nearbyexercise{exer:ChngeBasMatsRTwo}. 
+       \begin{exparts*}
+        \partsitem
+          $\begin{mat}[r]
+            0  &1  \\
+            1  &0
+          \end{mat}$
+        \partsitem \( \begin{mat}[r]
+            1  &1  \\
+            2  &4
+          \end{mat} \)
+        \partsitem \( \begin{mat}[r]
+            2  &-1/2  \\
+            -1 &1/2
+          \end{mat} \)
+        \partsitem \( \begin{mat}[r]
+            2  &1  \\
+            1  &1
+          \end{mat} \)
+      \end{exparts*} 
+    \end{answer}
   \recommended \item 
     Decide if each changes bases on \( \Re^2 \).
     To what basis is \( \stdbasis_2 \) changed?
@@ -1050,13 +1029,12 @@ the same space, and where the map is the identity map.
 The first subsection shows how to convert the representation
 of a vector with respect to one basis to the representation of that
 same vector with respect to another basis.
-Here we will see how to
+We next
 convert the representation of a map  with
-respect to one pair of bases  to the representation of that
-map with respect to a different pair, how to change
+respect to one pair of bases  to the representation 
+with respect to a different pair\Dash we convert from
 $\rep{h}{B,D}$ to $\rep{h}{\hat{B},\hat{D}}$.
-
-That is, we want the relationship between the matrices in this 
+Here is the 
 arrow diagram.\index{arrow diagram}
 %<*ChangeRepresentationOfMapArrowDiagram>
 \begin{equation*}
@@ -1066,26 +1044,25 @@ arrow diagram.\index{arrow diagram}
     V_{\wrt{\hat{B}}}             @>h>\hat{H}>  W_{\wrt{\hat{D}}}
   \end{CD}
 \end{equation*}
-To move from the lower-left of this diagram 
+To move from the lower-left
 to the lower-right we can either go straight over, or
 else up to $V_B$ then over to $W_D$ and then down.
 So 
 we can calculate $\hat{H}=\rep{h}{\hat{B},\hat{D}}$ 
-either by simply using $\hat{B}$ and $\hat{D}$,
+either by directly using $\hat{B}$ and $\hat{D}$,
 or else by first changing bases with $\rep{\identity}{\hat{B},B}$ 
 then multiplying by \( H=\rep{h}{B,D} \)
 and then changing bases with $\rep{\identity}{D,\hat{D}}$.
-
-This equation summarizes.
 \begin{equation*}
    \hat{H}=
    \rep{\identity}{D,\hat{D}}\cdot H\cdot \rep{\identity}{\hat{B},B}
 \tag*{\text{($*$})}\end{equation*}
 %</ChangeRepresentationOfMapArrowDiagram>
-(To compare this equation with the sentence before it, remember to read the
-equation from right to left because we read
-function composition from right to left and matrix multiplication 
-represents composition.)
+% (To compare the equation with the sentence before it
+% remember to read its right hand side
+% from right to left, because we read
+% function composition from right to left and matrix multiplication 
+% represents composition).
 
 \begin{example}
 The matrix
@@ -1102,12 +1079,12 @@ The matrix
 \end{equation*}
 represents, with respect to \( \stdbasis_2,\stdbasis_2 \),
 the transformation \( \map{t}{\Re^2}{\Re^2} \) that rotates vectors
-\( \pi/6 \) radians counterclockwise.
+through the counterclockwise angle of \( \pi/6 \) radians.
 \begin{center}
   \includegraphics{ch3.22}
 \end{center}
-We can translate that to a representation 
-with respect to
+Translate $T$ to a representation 
+with respect to these
 \begin{equation*}
   \hat{B}=\sequence{
               \colvec[r]{1 \\ 1}
@@ -1128,7 +1105,7 @@ by using the arrow diagram and formula~($*$) above.
    \hat{T}=
    \rep{\identity}{\stdbasis_2,\hat{D}}\cdot T\cdot \rep{\identity}{\hat{B},\stdbasis_2}
 \end{equation*}
-Note that $\rep{\identity}{\stdbasis_2,\hat{D}}$ is
+Note that we can compute $\rep{\identity}{\stdbasis_2,\hat{D}}$ as
 the matrix inverse of $\rep{\identity}{\hat{D},\stdbasis_2}$.
 \begin{align*}
    \rep{t}{\hat{B},\hat{D}}
@@ -1149,7 +1126,7 @@ the matrix inverse of $\rep{\identity}{\hat{D},\stdbasis_2}$.
      (1+\sqrt{3})/6  &\sqrt{3}/3
   \end{mat}
 \end{align*}
-Although the new matrix is messier,
+The matrix is messier but
 the map that it represents is the same. 
 For instance, to replicate the effect of $t$ in the picture, 
 start with $\hat{B}$,
@@ -1166,17 +1143,16 @@ apply $\hat{T}$,
   =
   \colvec[r]{(11+3\sqrt{3})/6 \\ (1+3\sqrt{3})/6}_{\hat{D}}
 \end{equation*}
-and check it against $\hat{D}$
+and check it against $\hat{D}$.
 \begin{equation*}
   \frac{11+3\sqrt{3}}{6}\cdot\colvec[r]{-1 \\ 0}
   +\frac{1+3\sqrt{3}}{6}\cdot\colvec[r]{2 \\ 3}
   =\colvec[r]{(-3+\sqrt{3})/2 \\ (1+3\sqrt{3})/2}
 \end{equation*}
-and it gives the same outcome as above.
 \end{example}
 
 \begin{example} \label{ex:DiagizedMat}
-We may make the matrix simpler by changing bases.
+Changing bases can make the matrix simpler.
 On \( \Re^3 \) the map
 \begin{equation*}
   \colvec{x \\ y \\ z}\mapsunder{t}\colvec{y+z \\ x+z \\ x+y}
@@ -1190,14 +1166,13 @@ is represented with respect to the standard basis in this way.
     1  &1  &0
   \end{mat}
 \end{equation*}
-Represented with respect to
+Representing it with respect to
 \begin{equation*}
   B=\sequence{\colvec[r]{1 \\ -1 \\ 0},
                              \colvec[r]{1 \\ 1 \\ -2},
                              \colvec[r]{1 \\ 1 \\ 1}}
 \end{equation*} 
-gives a matrix 
-that is diagonal.
+gives a matrix that is diagonal.
 \begin{equation*} 
   \rep{t}{B,B}=
   \begin{mat}[r]
@@ -1208,21 +1183,23 @@ that is diagonal.
 \end{equation*}
 \end{example}
 
-Naturally we usually prefer basis changes that make the
-representation easier to understand.
+Naturally we usually prefer 
+representations that are easier to understand.
 We say that a map or matrix
 has been \definend{diagonalized}\index{matrix!diagonalized}
-when its representation is diagonal with respect to $B,B$, that is,
-with respect to equal starting
-and ending bases. 
-In Chapter Five we shall see which maps and matrices are diagonalizable.
-In the rest of this subsection we consider the easier case 
-where representations are with respect to $B,D$, which are  
-possibly different starting and ending bases.
+when we find a basis~$B$ such that 
+the representation is diagonal
+with respect to $B,B$, that is,
+with respect to the same starting basis as ending basis.
+Chapter Five finds which maps and matrices are diagonalizable.
+
+The rest of this subsection develops the easier case 
+of finding two bases $B,D$ such that a representation is simple. 
 Recall that the prior subsection 
-shows that a matrix changes bases if and only if it is nonsingular.
-That gives us another version of the above  arrow diagram
-and equation~($*$) from the start of this subsection.
+shows that a matrix is a change of basis matrix 
+if and only if it is nonsingular.
+% That gives us another version of the above  arrow diagram
+% and equation~($*$) from the start of this subsection.
 
 \begin{definition}  \label{def:MatEquiv}
 %<*df:MatEquiv>
@@ -1241,45 +1218,48 @@ pairs of bases.
 %</co:MatEqIsSameMap>
 \end{corollary}
 
+\begin{proof}
+This is immediate from equation~($*$) above. 
+\end{proof}
+
 \nearbyexercise{exer:MatEqIsEqRel} checks that
 matrix equivalence is an equivalence relation.
 Thus it  partitions\index{partition!matrix equivalence classes} 
 the set of matrices into matrix equivalence classes.
 \begin{center}
-  \raisebox{.4in}{\begin{tabular}{l}
+  \raisebox{.5in}{\begin{tabular}{l}
                     All matrices:
                   \end{tabular}}
   \includegraphics{ch3.23}
-  \raisebox{.4in}{\begin{tabular}{l}
+  \raisebox{.3in}{\begin{tabular}{l}
                      $H$ matrix equivalent \\ to $\hat{H}$
                   \end{tabular}}
 \end{center}
-We can get some insight into the classes by comparing matrix equivalence
+We can get insight into the classes by comparing matrix equivalence
 with row equivalence
 (remember that matrices are row equivalent when they can be reduced to each
 other by row operations).
 In $\hat{H}=PHQ$, the matrices $P$ and $Q$ are nonsingular and 
-thus we can write each as a product of elementary reduction matrices
-(\nearbylemma{lem:ComputeInvMat}).
+thus each is a product of elementary reduction matrices
+by Lemma~IV.\ref{lem:ComputeInvMat}.
 Left-multiplication by the reduction matrices making up $P$
-has the effect of performing row operations.
+performs row operations.
 Right-multiplication by the reduction matrices making up $Q$
 performs column operations.
-Therefore, matrix equivalence is a generalization of row equivalence\Dash two
+Hence, matrix equivalence is a generalization of row equivalence\Dash two
 matrices are row equivalent if one can be converted to the other by
 a sequence of row reduction steps, while
 two matrices are matrix equivalent if one can be converted to the other by a 
 sequence of row reduction steps followed by a sequence of column reduction
 steps. 
 
-Thus, if matrices are row equivalent then they are also
-matrix equivalent (since we can take $Q$ to be the identity matrix and so 
-perform no column operations).
+Consequently, if matrices are row equivalent then they are also
+matrix equivalent since we can take $Q$ to be the identity matrix.
 The converse, however, does not hold:
 two matrices can be matrix equivalent but not row equivalent.
 
 \begin{example}
-These two
+These two are matrix equivalent
 \begin{equation*} 
   \begin{mat}[r]
     1  &0  \\
@@ -1291,16 +1271,16 @@ These two
     0  &0
   \end{mat}
 \end{equation*}
-are matrix equivalent because the second reduces to the first by
+because the second reduces to the first by
 the column operation of taking $-1$ times the first column and adding
 to the second.
 They are not row equivalent because they have different reduced echelon
-forms (in fact, both are already in reduced form).
+forms (both are already in reduced form).
 \end{example}
 
-We will close this section by finding 
+We close this section by giving
 a set of representatives
-for the matrix equivalence classes.\appendrefs{class representatives}%
+for the matrix equivalence classes. % \appendrefs{class representatives}%
 \index{representative!of matrix equivalence classes}
 
 \begin{theorem}  \label{th:CanonFormForMatEquiv}
@@ -1338,17 +1318,17 @@ form.
 
 \begin{proof}
 %<*pf:CanonFormForMatEquiv>
-As discussed above, Gauss-Jordan reduce the given matrix
-and combine all the reduction matrices used there to make \( P \).
+Gauss-Jordan reduce the given matrix
+and combine all the row reduction matrices to make \( P \).
 Then use the leading entries to do column reduction and
-finish by swapping columns to put the leading ones on the diagonal.
-Combine the reduction matrices used for those column operations into
+finish by swapping the columns to put the leading ones on the diagonal.
+Combine the column reduction matrices into
 \( Q \). 
 %</pf:CanonFormForMatEquiv>
 \end{proof}
 
 \begin{example}
-We illustrate the proof by finding the $P$ and $Q$ for this matrix. 
+We illustrate the proof by finding $P$ and $Q$ for this matrix. 
 \begin{equation*}
     \begin{mat}[r]
        1  &2  &1  &-1  \\
@@ -1427,7 +1407,7 @@ Finish by swapping columns.
     \end{mat}
 \end{equation*}
 Finally, combine the left-multipliers together as $P$ and the
-right-multipliers together as $Q$ to get the $PHQ$ equation.
+right-multipliers together as $Q$ to get $PHQ$.
 \begin{equation*}
     \begin{mat}[r]
        1  &-1 &0    \\
@@ -1456,13 +1436,12 @@ right-multipliers together as $Q$ to get the $PHQ$ equation.
 
 \begin{corollary}  \label{co:MatrixEquivalentIffSameRank}
 %<*co:MatrixEquivalentIffSameRank>
-Two same-sized matrices are matrix equivalent if and only if they
+Matrix equivalence classes are
+characterized\index{characterizes} by rank:
+two same-sized matrices are matrix equivalent if and only if they
 have the same rank.
 %</co:MatrixEquivalentIffSameRank>
 \end{corollary}
-
-That is, the matrix equivalence classes are
-characterized\index{characterizes} by rank.
 
 \begin{proof}
 %<*pf:MatrixEquivalentIffSameRank>
@@ -1472,62 +1451,51 @@ are equivalent to the same block partial-identity matrix.
 \end{proof}
 
 \begin{example}
-%Now that we know that the block partial-identity matrices form
-%canonical representatives of the matrix-equivalence classes, we can
-%see what the classes look like and how many classes there are.
 The $\nbyn{2}$ matrices have
 only three possible ranks:~zero, one, or~two.
-Thus there are three matrix-equivalence classes.
+Thus there are three matrix equivalence classes.
 \index{partition!matrix equivalence classes}
 \begin{center} % make an exercise comparing these classes with the ones for row-equivalence?
-  \raisebox{.4in}{\begin{tabular}{l}
+  \raisebox{.5in}{\begin{tabular}{l}
                     All $\nbyn{2}$ matrices:
                   \end{tabular}}
   \includegraphics{ch3.24}
-  \raisebox{.4in}{\begin{tabular}{l}
+  \raisebox{.3in}{\begin{tabular}{l}
                     Three equivalence \\ classes
                   \end{tabular}}
 \end{center}
 Each class consists of all of the $\nbyn{2}$ matrices with the same rank. 
-There is only one rank~zero matrix so that class has only
-one member. 
-The other two classes have infinitely many members.
+There is only one rank~zero matrix. 
+The other two classes have infinitely many members; we've shown only the
+canonical representative.
 \end{example}
 
-In this subsection
-we have seen how to change the representation of a map with
-respect to a first pair of bases to one with respect to a second pair.
-That led to a definition describing when matrices are equivalent in
-this way.
-Finally we noted that,
-with the proper choice of (possibly different) starting and ending bases, any
-map can be represented in block partial-identity form.
-
-One of the nice things about this representation is that,
-in some sense, we can completely understand the map when we express it
+One nice thing about the representative in
+\nearbytheorem{th:CanonFormForMatEquiv} is that we can completely 
+understand the linear map when it is expressed 
 in this way:
-if the bases are
+where the bases are
 \( B=\sequence{\vec{\beta}_1,\dots,\vec{\beta}_n} \)
 and
 \( D=\sequence{\vec{\delta}_1,\dots,\vec{\delta}_m} \)
-then the map sends
+then the map's action is
 \begin{equation*}
   c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k+c_{k+1}\vec{\beta}_{k+1}+\dots
      +c_n\vec{\beta}_n
-  \;\longmapsto\;
-  c_1\vec{\delta}_1+\dots+c_k\vec{\delta}_k+\zero+\dots+\zero
+  \;\mapsto\;
+  c_1\vec{\delta}_1+\dots+c_k\vec{\delta}_k+\zero+\cdots+\zero
 \end{equation*}
-where \( k \) is the map's rank.
-Thus, we can understand any linear map as a kind of projection.
+where \( k \) is the rank.
+Thus we can view any linear map as a projection.
 \begin{equation*}
   \colvec{c_1 \\ \vdots \\ c_k \\ c_{k+1} \\ \vdots \\ c_n}_B
-  \;\mapsto\;
+  \quad\longmapsto\quad
   \colvec{c_1 \\ \vdots \\ c_k \\ 0 \\ \vdots \\ 0}_D
 \end{equation*}
-Of course, ``understanding'' a map expressed in this way 
-requires that we understand the relationship between \( B \) and \( D \).
-Nonetheless,
-this is a good classification of linear maps.
+% Of course, ``understanding'' a map expressed in this way 
+% requires that we understand the relationship between \( B \) and \( D \).
+% Nonetheless,
+% this is a good classification of linear maps.
 
 \begin{exercises}
   \recommended \item 
@@ -1566,7 +1534,7 @@ this is a good classification of linear maps.
       \end{exparts}  
     \end{answer}
   \recommended \item
-    Find the canonical representative of the matrix-equivalence class of
+    Find the canonical representative of the matrix equivalence class of
     each matrix.
     \begin{exparts*}
       \partsitem \( \begin{mat}[r]
@@ -1855,7 +1823,7 @@ this is a good classification of linear maps.
       Only a zero matrix has rank zero.  
     \end{answer}
   \recommended \item \label{exer:MatEqIsEqRel}
-    Show that matrix-equivalence is an equivalence relation.
+    Show that matrix equivalence is an equivalence relation.
     \begin{answer}
       For reflexivity, to show that any matrix is matrix equivalent to
       itself, 
@@ -1888,7 +1856,7 @@ this is a good classification of linear maps.
     transformations on \( \Re^1 \)?
     \( \Re^3 \)?
     \begin{answer}
-      There are two matrix-equivalence classes of \( \nbyn{1} \)
+      There are two matrix equivalence classes of \( \nbyn{1} \)
       matrices\Dash those of rank zero and those of rank one.
       The  \( \nbyn{3} \) matrices fall into four matrix equivalence
       classes.
@@ -2066,15 +2034,15 @@ this is a good classification of linear maps.
       \end{answer}
   \item 
     \begin{exparts}
-      \partsitem If two matrices are matrix-equivalent and invertible,
+      \partsitem If two matrices are matrix equivalent and invertible,
         must their
-        inverses be matrix-equivalent?
-      \partsitem If two matrices have matrix-equivalent inverses, must the two
-        be matrix-equivalent?
-      \partsitem If two matrices are square and matrix-equivalent, must their
-        squares be matrix-equivalent?
-      \partsitem If two matrices are square and have matrix-equivalent squares,
-        must they be matrix-equivalent?
+        inverses be matrix equivalent?
+      \partsitem If two matrices have matrix equivalent inverses, must the two
+        be matrix equivalent?
+      \partsitem If two matrices are square and matrix equivalent, must their
+        squares be matrix equivalent?
+      \partsitem If two matrices are square and have matrix equivalent squares,
+        must they be matrix equivalent?
     \end{exparts}
     \begin{answer}
       \begin{exparts}
