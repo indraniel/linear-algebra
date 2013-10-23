@@ -2238,12 +2238,14 @@ members of the plane $M$ that are not orthogonal to the dotted line.
 But the projection along $\hat{N}$ is orthogonal. 
 \end{example}
 
-A natural question is:~what is the relationship between the projection 
-operation defined in this subsection and the operation of orthogonal projection
-into a line? 
-The second picture above suggests the answer\Dash orthogonal projection into
+We have seen two projection operations,
+orthogonal projection into a line
+as well as this subsections's projection into an~$M$ and along an~$N$, and  
+we naturally ask whether they are related.
+The right-hand picture above suggests the 
+answer\Dash orthogonal projection into
 a line is a special case of this subsection's projection; 
-it is just projection along a subspace perpendicular to the line.
+it is projection along a subspace perpendicular to the line.
 \begin{center}  \small
   \includegraphics{ch3.40}
 \end{center}
@@ -2287,7 +2289,7 @@ these two conditions.
   \qquad
   \colvec[r]{0 \\ 1 \\ 2}\dotprod\colvec{v_1 \\ v_2 \\ v_3}=0
 \end{equation*}
-We can express those conditions more compactly as a linear system.
+Those conditions give a linear system.
 \begin{equation*}
   P^\perp
     =\set{\colvec{v_1 \\ v_2 \\ v_3}\suchthat \begin{mat}[r]
@@ -2299,7 +2301,7 @@ We can express those conditions more compactly as a linear system.
 \end{equation*}
 We are thus left with finding the null space of the map represented 
 by the matrix, that is, with 
-calculating the solution set of a homogeneous linear system.
+calculating the solution set of the homogeneous linear system.
 \begin{equation*}
   \begin{linsys}{3}
     v_1 &  &    &+ &3v_3 &= &0 \\
@@ -2316,7 +2318,7 @@ calculating the solution set of a homogeneous linear system.
 \begin{example} \label{ex:OrthoCompTwo}
 Where \( M \) is the \( xy \)-plane subspace of \( \Re^3 \),
 what is \( M^\perp \)?
-A common first reaction is that \( M^\perp \) is the \( yz \)-plane, but
+A common first reaction is that \( M^\perp \) is the \( yz \)-plane but
 that's not right because
 some vectors from the \( yz \)-plane are not perpendicular to every
 vector in the \( xy \)-plane.
@@ -2354,7 +2356,7 @@ prior example and taking the natural basis for the $xy$-plane gives this.
 If $M$ is a subspace of $\Re^n$ then its
 orthogonal complement $M^\perp$ is also a subspace.
 The space is the direct sum of the two \( \Re^n=M\directsum M^\perp \).
-And, for any $\vec{v}\in\Re^n$,
+And, for any $\vec{v}\in\Re^n$
 the vector $\vec{v}-\proj{\vec{v}\,}{M}$ is perpendicular to every
 vector in $M$. 
 \end{lemma}
@@ -2417,7 +2419,7 @@ Therefore equation~($*$) gives that $\vec{w}$ is a linear combination of
 Thus this is a basis for $M^\perp$ and
 $\Re^n$ is the direct sum of the two.
 
-The final sentence of this result 
+The final sentence of the lemma
 is proved in much the same way.
 Write $\vec{v}=\proj{\vec{v}\,}{\spanof{\vec{\kappa}_1}}
            +\dots+\proj{\vec{v}\,}{\spanof{\vec{\kappa}_n}}$.
@@ -2429,17 +2431,19 @@ Therefore $\vec{v}-\proj{\vec{v}\,}{M}$ consists of a linear combination
 of elements of $M^\perp$ and so is perpendicular to every vector in $M$.
 \end{proof}
 
-We can find the orthogonal projection into a subspace by 
-following the steps of the proof but the next result gives a 
-convenient formula.
+Given a subspace, we could compute the orthogonal projection into 
+that subspace by following the steps of that proof: finding a basis,
+expanding it to a basis for the entire space, applying Gram-Schmidt
+to get an orthogonal basis, and projecting into each linear subspace. 
+However we will instead use a convenient formula.
 
 \begin{theorem} \label{th:OrthProjMat}
-Let $\vec{v}$ be a vector in $\Re^n$ and 
-let \( M \) be a subspace of \( \Re^n \) with basis
-\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_k} \). 
-If \( A \) is the matrix whose columns are the \( \vec{\beta} \)'s
-then $\proj{\vec{v}\,}{M}=c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$
-where the coefficients $c_i$ are entries of the vector
+Let \( M \) be a subspace of \( \Re^n \) with basis
+\( \sequence{\vec{\beta}_1,\dots,\vec{\beta}_k} \) and 
+let \( A \) be the matrix whose columns are the \( \vec{\beta} \)'s.
+Then for any $\vec{v}\in\Re^n$ the orthogonal projection is 
+$\proj{\vec{v}\,}{M}=c_1\vec{\beta}_1+\dots+c_k\vec{\beta}_k$,
+where the coefficients $c_i$ are the entries of the vector
 $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 That is, 
 $\proj{\vec{v}\,}{M}=A(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
@@ -2449,27 +2453,30 @@ $\proj{\vec{v}\,}{M}=A(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 The vector \( \proj{\vec{v}}{M} \) is a member of \( M \) and so is a
 linear combination of basis vectors
 \( c_1\cdot\vec{\beta}_1+\dots+c_k\cdot\vec{\beta}_k \).
-Since $A$'s columns are the $\vec{\beta}$'s that can be expressed 
-as:~there is a \( \vec{c}\in\Re^k \) such that
+Since $A$'s columns are the $\vec{\beta}$'s, 
+there is a \( \vec{c}\in\Re^k \) such that
 \( \proj{\vec{v}\,}{M}=A\vec{c} \).
 % (this is expressed compactly with matrix
 % multiplication as in
 % \nearbyexample{ex:OrthoCompOne} and~\ref{ex:OrthoCompTwo}).
-The vector \( \vec{v}-\proj{\vec{v}\,}{M} \) is perpendicular to each member
-of the basis so we have this.
+To find $\vec{c}$ note that
+the vector \( \vec{v}-\proj{\vec{v}\,}{M} \) is perpendicular to each member
+of the basis so 
  % (again, expressed compactly).
 \begin{equation*}
   \zero
   =\trans{A}\bigl( \vec{v}-A\vec{c} \bigr) 
   =\trans{A}\vec{v}-\trans{A}A\vec{c}
 \end{equation*}
-Solving for \( \vec{c} \) (showing that \( \trans{A}A \) is invertible is an
-exercise)
+and solving gives this
+(showing that \( \trans{A}A \) is invertible is an
+exercise).
 \begin{equation*}
   \vec{c}=\bigl( \trans{A}A\bigr)^{-1}\trans{A}\cdot\vec{v}
 \end{equation*}
-gives the formula for the projection matrix as 
-$\proj{\vec{v}\,}{M}=A\cdot\vec{c}$.
+Therefore 
+$\proj{\vec{v}\,}{M}=A\cdot\vec{c}=A(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$,
+as required.
 \end{proof}
 
 \begin{example}

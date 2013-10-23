@@ -11,7 +11,7 @@
 
 Scientists are often presented with a system that 
 has no solution and they must find an answer anyway. 
-More precisely stated, they must
+More precisely, they must
 find a best answer.
 
 For instance, 
@@ -24,9 +24,10 @@ intermediate numbers.
      \textit{number of heads}  &16  &34  &51
   \end{tabular}
 \end{center}
-In an experiment we can expect that samples will vary \Dash here, sometimes
+% In an experiment we expect that samples will vary. 
+Here, sometimes
 the experimental ratio of heads to flips  
-overestimates this penny's long-term ratio
+overestimates this penny's long-term ratio of 50-50
 and sometimes it underestimates.
 So we expect that the system derived from the experiment has no solution. 
 \begin{equation*}
@@ -37,12 +38,12 @@ So we expect that the system derived from the experiment has no solution.
   \end{linsys}
 \end{equation*}
 That is, the vector of data that we collected is not in the subspace
-where in theory we should find it.
+where theory has it.
 \begin{equation*}
   \colvec{16 \\ 34 \\ 51}\not\in
     \set{ m\colvec{30 \\ 60 \\ 90}  \suchthat m\in\Re}
 \end{equation*}
-We have to do something, so we look for the~$m$ that most nearly works.
+However, we have to do something so we look for the~$m$ that most nearly works.
 An orthogonal projection of the data vector into the line subspace
 gives this best guess.
 \begin{equation*}
@@ -52,7 +53,7 @@ gives this best guess.
   =\frac{7110}{12600}\cdot \colvec[r]{30 \\ 60 \\ 90}
 \end{equation*}
 The estimate (\( m=7110/12600\approx 0.56 \)) is a bit more than one half,
-but not much, 
+but not much more than half, 
 so probably the penny is fair enough. 
 
 The line with the slope \( m\approx 0.56 \)
@@ -82,65 +83,12 @@ of heads to flips.
 We can also handle cases where the line need not
 pass through the origin.
 
-For example, the different denominations of US\ money have different average 
-times in circulation.\cite{FedReserve}
-(The $\$2$~bill is a special case because 
-Americans mistakenly believe that 
-it is collectible and do not circulate these bills.)
-How long should a $\$25$~bill last?
-\begin{center}  \small
-  \begin{tabular}{r|cccccc}
-     \textit{denomination}          
-        &$1$   &$5$    &$10$     &$20$     &$50$     &$100$ \\
-      \hline
-     \textit{average life (mos)}  
-        &$22.0$ &$15.9$  &$18.3$   &$24.3$   &$55.4$   &$88.8$  \\
-  \end{tabular}
-\end{center}
-The data plot below looks roughly linear.
-It isn't a perfect line, i.e.,
-the linear system with equations $b+1m=1.5$, \ldots, $b+100m=20$ has no 
-solution, but we can again use orthogonal projection 
-to find a best approximation.
-Consider the matrix of coefficients of that linear system and also its
-vector of constants, the experimentally-determined values.
-\begin{equation*}
-  A=
-  \begin{mat}[r]
-    1  &1  \\
-    1  &5  \\
-    1  &10  \\
-    1  &20  \\
-    1  &50  \\
-    1  &100  
-  \end{mat}
-  \qquad
-  \vec{v}=\colvec[r]{22.0 \\ 15.9 \\ 18.3 \\ 24.3 \\ 55.4 \\ 88.8}
-\end{equation*}
-The ending result in the subsection on Projection into a Subspace says
-that coefficients $b$ and $m$ so that the linear combination
-of the columns of $A$ is as close as possible to the vector $\vec{v}$ 
-are the entries of $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
-Some calculation
-gives an intercept of $b=14.16$ and a slope
-of $m= 0.75$.
-\begin{center}  \small
-  \includegraphics{ch3.44}
-\end{center}
-Plugging $x=25$ into the equation of the line shows that such a 
-bill should last about two and three-quarters years.
-
-We close by considering 
+Here is
 the progression of world record times for the men's mile race \cite{Oakley}.
-In the early 1900's many people wondered when
+In the early 1900's many people wondered when, or if, 
 this record would fall below the four minute mark.
 Here are the times that were in force on January first
 of each decade through the first half of that century.
-(Restricting ourselves to the times at the start of 
-each decade reduces the data entry burden 
-and gives much the same result.
-There are different sequences of times from competing standards
-bodies but these are from \cite{WikipediaMensMile}.)
 \begin{center} \small
   \begin{tabular}{r|ccccccccc}
     \textit{year} &$1870$ &$1880$ &$1890$  &$1900$  
@@ -150,8 +98,44 @@ bodies but these are from \cite{WikipediaMensMile}.)
         &$255.6$  &$252.6$  &$250.4$ &$246.4$ &$241.4$
   \end{tabular}  
 \end{center}
-We can use this to predict the date for $240$ seconds, and 
-we can then compare to the actual date.
+We can use this to give a circa 1950 prediction of the date for $240$ seconds, 
+and then compare that to the actual date.
+(There are different sequences of times from competing standards
+bodies but these are from \cite{WikipediaMensMile}.
+Restricting to the times at the start of 
+each decade reduces the data entry burden, smooths the data to some extent, 
+and gives much the same result as entering all of the dates and records.)
+
+As with the penny data, these numbers do not line in a perfect line.
+That is, this system does not have an exact solution for the slope
+and intercept.
+\begin{equation*}
+  \begin{linsys}{2}
+    b &+  &1870m  &=  &268.8 \\ 
+    b &+  &1880m  &=  &264.5 \\ 
+      &   &       &\vdots     \\
+    b &+  &1950m  &=  &241.4  
+  \end{linsys}
+\end{equation*}
+We find a best approximation by using orthogonal projection.
+Write the linear system's matrix of coefficients amd also its
+vector of constants, the world record times.
+\begin{equation*}
+  A=
+  \begin{mat}
+    1  &1870  \\
+    1  &1880  \\
+    \vdots  &\vdots \\
+    1  &1950  
+  \end{mat}
+  \qquad
+  \vec{v}=\colvec{268.8 \\ 264.5 \\ \vdots \\ 241.4}
+\end{equation*}
+The ending result in the subsection on Projection into a Subspace 
+gives the formula for the $b$ and $m$ so that the linear combination
+of the columns of $A$ is as close as possible to the vector $\vec{v}$. 
+They are the entries of 
+the vector $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 
 %\begin{center}
 %  \begin{tabular}{r|ccccccc}
@@ -166,37 +150,164 @@ we can then compare to the actual date.
 %      $246.4$  &$241.4$  &$234.5$  &$231.1$  &$229.0$  &$226.3$ &$223.1$
 %  \end{tabular}
 
-\textit{Sage} gives the slope and intercept.
-% see mile.sage
+\textit{Sage} can do the computation for us.
 \begin{lstlisting}
-sage: data=[[1870,268.8], [1880,264.5], [1890,258.4],   
-....:  [1900,255.6], [1910,255.6], [1920,252.6],   
-....:  [1930,250.4], [1940,246.4], [1950,241.4]] 
-sage: var('slope,intercept')
-(slope, intercept)
-sage: model(x) = slope*x+intercept
-sage: find_fit(data,model)
-[intercept == 837.0872267857003, 
-  slope == -0.30483333572258886]
+sage: year = [1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950]
+sage: secs = [268.8, 264.5, 258.4, 255.6, 255.6, 252.6, 250.4, 246.4, 241.4]
+sage: var('m, b, t')
+(m, b, t)
+sage: model(t) = m*t+b
+sage: data = zip(year, secs)
+sage: fit = find_fit(data, model, solution_dict=True)
+sage: model.subs(fit)
+t |--> -0.30483333572258886*t + 837.0872267857003
+sage: p = plot(model.subs(fit),(t,1870,1960))+points(data,size=25,color='red')
+sage: p.save('four_minute_mile.pdf')
 \end{lstlisting}
-(People in the year $0$ didn't run very fast!)
-Plotting the data and the line
-\begin{lstlisting}
-sage: points(data)
-....:  +plot(model(intercept=find_fit(data,model)[0].rhs(),
-....:    slope=find_fit(data,model)[1].rhs()),
-....:    (x,1860,1960),color='red',figsize=3,fontsize=7)  
-\end{lstlisting}
-gives this graph.  
+
+
+
+% % see mile.sage
+% \begin{lstlisting}
+% sage: data=[[1870,268.8], [1880,264.5], [1890,258.4],   
+% ....:  [1900,255.6], [1910,255.6], [1920,252.6],   
+% ....:  [1930,250.4], [1940,246.4], [1950,241.4]] 
+% sage: var('slope,intercept')
+% (slope, intercept)
+% sage: model(x) = slope*x+intercept
+% sage: find_fit(data,model)
+% [intercept == 837.0872267857003, 
+%   slope == -0.30483333572258886]
+% \end{lstlisting}
+% (People in the year~$0$ didn't run very fast!)
+% Plotting the data and the line
+% \begin{lstlisting}
+% sage: points(data)
+% ....:  +plot(model(intercept=find_fit(data,model)[0].rhs(),
+% ....:    slope=find_fit(data,model)[1].rhs()),
+% ....:    (x,1860,1960),color='red',data=25)  
+% \end{lstlisting}
+% gives this graph.  
 \begin{center}
   % black and white
   % \scannedpicture{four_minute_mile_greyscale}
   % or the color version: 
-  \includegraphics{four_minute_mile.png}
+  \includegraphics[width=0.5\textwidth]{four_minute_mile.pdf}
 \end{center}
 Note that the progression is surprisingly linear.
-We predict $1958.73$; the actual date of Roger Bannister's
-record was 1954-May-06.
+From the slope and intercept we predict $1958.73$; 
+the actual date of Roger Bannister's record was 1954-May-06.
+
+The final example
+compares team salaries from US major league baseball 
+against the number of wins the team had, for the year 2002.
+In this year the Oakland Athletics 
+used mathematical techniques to optimize the players that they fielded
+for the money that they could spend, as told in  
+the film \textit{Moneyball}.
+(Salaries are in millions of dollars and the number of wins
+is out of 180 games). 
+
+To do the computations we use \textit{Sage}. 
+% http://ask.sagemath.org/question/768/fitting-a-curve-to-a-straight-line?answer=1271#1271
+% by Joaquim Puig on 2011-Sep-27; gathered on 2013-Oct-23 JH
+\begin{lstlisting}
+sage: sal = [40, 40, 39, 42, 45, 42, 62, 34, 41, 57, 58, 63, 47, 75, 57, 78, 80, 50, 60, 93, 
+  77, 55, 95, 103, 79, 76, 108, 126, 95, 106]
+sage: wins = [103, 94, 83, 79, 78, 72, 99, 55, 66, 81, 80, 84, 62, 97, 73, 95, 93, 56, 67, 101, 
+  78, 55, 92, 98, 74, 67, 93, 103, 75, 72]
+sage: var('a, b, t')
+(a, b, t)
+sage: model(t) = a*t+b
+sage: data = zip(sal,wins)
+sage: fit = find_fit(data, model, solution_dict=True)
+sage: model.subs(fit)
+t |--> 0.7447786021698546*t + 7.230396324572004
+sage: plot(model.subs(fit),(t,50,110))+points(data,size=25,color='red')
+\end{lstlisting}
+
+The graph is below.
+The team in the upper left, who paid little for many wins, is
+the Oakland A's.
+
+\begin{center}  \small
+  \includegraphics[width=0.5\textwidth]{moneyball.pdf}
+\end{center}
+
+Note that in contrast to the penny and mile graphs, 
+here judging the line by eye would be error-prone.
+So the equations give us a certainty about the `best' in best fit.
+In addition, the model's equation tells us roughly that 
+by spending an additional million dollars
+a team owner could expect to buy $3/4$ of a win.
+
+
+% For example, the different denominations of US\ money have different average 
+% times in circulation.\cite{FedReserve}
+% (The $\$2$~bill is a special case because 
+% Americans mistakenly believe that 
+% it is collectible and do not circulate these bills.)
+% \begin{lstlisting}
+% sage: x = [1, 5, 10, 20, 50, 100]
+% sage: y = [5.9, 4.9, 4.2, 7.7, 3.7, 15.0]
+% sage: var('a, b, t') 
+% (a, b, t)
+% sage: model(t) = a*t+b
+% sage: data = zip(x,y)
+% sage: fit = find_fit(data, model, solution_dict=True)
+% sage: model.subs(fit)                                
+% t |--> 0.08650137692301652*t + 4.2184573359365265
+% sage: plot(model.subs(fit),(t,0,100))+points(data,size=20,color='red')
+% \end{lstlisting}  
+% How long should a $\$25$~bill last?
+
+% \begin{center}  \small
+%   \includegraphics[width=0.5\textwidth]{denom.png}
+% \end{center}
+
+
+% \begin{center}  \small
+%   \begin{tabular}{r|cccccc}
+%      \textit{denomination}          
+%         &$1$   &$5$    &$10$     &$20$     &$50$     &$100$ \\
+%       \hline
+%      \textit{average life (mos)}  
+%         &$22.0$ &$15.9$  &$18.3$   &$24.3$   &$55.4$   &$88.8$  \\
+%   \end{tabular}
+% \end{center}
+% The data plot below looks roughly linear.
+% It isn't a perfect line, i.e.,
+% the linear system with equations $b+1m=1.5$, \ldots, $b+100m=20$ has no 
+% solution, but we can again use orthogonal projection 
+% to find a best approximation.
+% Consider the matrix of coefficients of that linear system and also its
+% vector of constants, the experimentally-determined values.
+% \begin{equation*}
+%   A=
+%   \begin{mat}[r]
+%     1  &1  \\
+%     1  &5  \\
+%     1  &10  \\
+%     1  &20  \\
+%     1  &50  \\
+%     1  &100  
+%   \end{mat}
+%   \qquad
+%   \vec{v}=\colvec[r]{22.0 \\ 15.9 \\ 18.3 \\ 24.3 \\ 55.4 \\ 88.8}
+% \end{equation*}
+% The ending result in the subsection on Projection into a Subspace says
+% that coefficients $b$ and $m$ so that the linear combination
+% of the columns of $A$ is as close as possible to the vector $\vec{v}$ 
+% are the entries of $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
+% Some calculation
+% gives an intercept of $b=14.16$ and a slope
+% of $m= 0.75$.
+% \begin{center}  \small
+%   \includegraphics{ch3.44}
+% \end{center}
+% Plugging $x=25$ into the equation of the line shows that such a 
+% bill should last about two and three-quarters years.
+
 
 %
 %

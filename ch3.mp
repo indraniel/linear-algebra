@@ -2106,23 +2106,23 @@ beginfig(42) % least squares coin flip
   % the axes
   pickup pensquare scaled line_width_light
   draw z0--z1;  % flips axis (x-axis)
-    label.lrt(btex {\small \textit{flips}} etex,z1);
+    label.lrt(btex {\scriptsize \textit{flips}} etex,z1);
     updown_ticks(9,(10w,0v),(10w,0v));
-    label.bot(btex {\scriptsize 30} etex,(30w,0v));
-    label.bot(btex {\scriptsize 60} etex,(60w,0v));
-    label.bot(btex {\scriptsize 90} etex,(90w,0v));
+    label.bot(btex {\scriptscriptsize 30} etex,(30w,0v));
+    label.bot(btex {\scriptscriptsize 60} etex,(60w,0v));
+    label.bot(btex {\scriptscriptsize 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
-    label.ulft(btex {\small \textit{heads}} etex,z2);
+    label.ulft(btex {\scriptsize \textit{heads}} etex,z2);
     sidetoside_ticks(6,(0w,10v),(0w,10v));
-    label.lft(btex {\scriptsize 30} etex,(0w,30v));
-    label.lft(btex {\scriptsize 60} etex,(0w,60v));
+    label.lft(btex {\scriptscriptsize 30} etex,(0w,30v));
+    label.lft(btex {\scriptscriptsize 60} etex,(0w,60v));
 
   % the line
   pickup pencircle scaled line_width_light;
   z3=(100w,0.56428571*100v); % 7110/12600
   draw z0--z3 dashed evenly scaled .707;
 
-  pickup pencircle scaled line_width_dark;
+  pickup pencircle scaled 1.2pt;
   % the points 
   drawpoint((30w,16v));  drawpoint((60w,34v));  drawpoint((90w,51v));
 endfig;
@@ -2174,6 +2174,7 @@ beginfig(43) % least squares coin flip
     x31=x30; y31=y30-exag*(y30-51v);
     x33=x32=x31-carryover; y32=y31; y33=y30;
     draw z30--z33; draw z31--z32;
+  pickup pencircle scaled 1.2pt;
   drawpoint(z11);  drawpoint(z21);  drawpoint(z31);
 endfig;
 
@@ -2193,18 +2194,18 @@ beginfig(44) % least squares money denom vs life
   % the axes
   pickup pensquare scaled line_width_light
   draw z0--z1;  % denom axis (x-axis)
-    label.lrt(btex {\small \textit{denom}} etex,z1);
+    label.lrt(btex {\scriptsize \textit{denom}} etex,z1);
     updown_ticks(10,(10w,0v),(10w,0v));
-    label.bot(btex {\scriptsize 10} etex,(10w,0v));
-    label.bot(btex {\scriptsize 30} etex,(30w,0v));
-    label.bot(btex {\scriptsize 50} etex,(50w,0v));
-    label.bot(btex {\scriptsize 70} etex,(70w,0v));
-    label.bot(btex {\scriptsize 90} etex,(90w,0v));
+    label.bot(btex {\scriptscriptsize 10} etex,(10w,0v));
+    label.bot(btex {\scriptscriptsize 30} etex,(30w,0v));
+    label.bot(btex {\scriptscriptsize 50} etex,(50w,0v));
+    label.bot(btex {\scriptscriptsize 70} etex,(70w,0v));
+    label.bot(btex {\scriptscriptsize 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
-    label.ulft(btex {\small \textit{life (yrs)}} etex,z2);
+    label.ulft(btex {\scriptsize \textit{life (yrs)}} etex,z2);
     sidetoside_ticks(8,(0w,1v),(0w,1v));
-    label.lft(btex {\scriptsize 4} etex,(0w,4v));
-    label.lft(btex {\scriptsize 8} etex,(0w,8v));
+    label.lft(btex {\scriptscriptsize 4} etex,(0w,4v));
+    label.lft(btex {\scriptscriptsize 8} etex,(0w,8v));
 
   % the line
   pickup pencircle scaled line_width_light;
@@ -2212,7 +2213,7 @@ beginfig(44) % least squares money denom vs life
   z4=(0w,(14.1582/12)*v);
   draw z4--z3 dashed evenly scaled .707; % .7[white,black];
 
-  pickup pencircle scaled line_width_dark;
+  pickup pencircle scaled 1.2pt;
   % the points
   z10=(1w,(22/12)*v);
   z11=(5w,(15.9/12)*v);
