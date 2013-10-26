@@ -1,41 +1,47 @@
 % Chapter 3, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Geometry of Linear Maps} 
 \index{Geometry of Linear Maps|(}
 %The geometry of linear maps %$\map{h}{\Re^n}{\Re^m}$ 
 %is appealing both for its simplicity and for its usefulness.
-The pictures below contrast the nonlinear maps
-\( f_1(x)=e^x \) and \( f_2(x)=x^2 \) with the linear maps
+These pairs of pictures contrast the geometric action of the nonlinear maps
+\( f_1(x)=e^x \) and \( f_2(x)=x^2 \) 
+\begin{center}
+  \includegraphics{ch3.46}
+  \hspace*{4em}
+  \includegraphics{ch3.47}
+\end{center}
+with the linear maps
 \( h_1(x)=2x \) and \( h_2(x)=-x \).
-Each shows the domain $\Re^1$ on the left 
-mapped to the codomain $\Re^1$ on the right. 
+\begin{center}
+  \includegraphics{ch3.48}
+  \hspace*{4em}
+  \includegraphics{ch3.49}
+\end{center}
+Each of the four pictures shows the domain $\Re$ on the left 
+mapped to the codomain $\Re$ on the right. 
 Arrows trace where each map sends
 $x=0$, $x=1$, $x=2$, $x=-1$, and $x=-2$.
 
-Note how the nonlinear maps distort
+The nonlinear maps distort
 the domain in transforming it into the range.
 For instance,
 \( f_1(1) \) is further from
-$f_1(2)$ than it is from $f_1(0)$ \Dash  the map spreads
-the domain out unevenly so that in moving from domain to range  
-an interval near $x=2$ spreads apart more 
-than is an interval near $x=0$.
-\begin{center}
-  \includegraphics{ch3.46}
-  \hspace*{3em}
-  \includegraphics{ch3.47}
-\end{center}
+$f_1(2)$ than it is from $f_1(0)$ \Dash  this map spreads
+the domain out unevenly so that a domain interval near $x=2$ is 
+spread apart more 
+than is a domain interval near $x=0$.
 The linear maps are nicer, more regular, 
 in that for each map all of the domain 
 spreads by the same factor.
-\begin{center}
-  \includegraphics{ch3.48}
-  \hspace*{3em}
-  \includegraphics{ch3.49}
-\end{center}
+The map~$f_1$ on the left spreads all intervals apart to be twice as wide 
+while on the right~$f_2$ keeps intervals the same length but reverses
+their orientation, as with the rising interval from $1$ to $2$ 
+being transformed 
+to the falling interval from $-1$ to~$-2$.
 
-The only linear maps from $\Re^1$ to $\Re^1$ are multiplications by a scalar but
+The only linear maps from $\Re$ to $\Re$ are multiplications by a scalar but
 in higher dimensions more can happen. 
 For instance, this linear transformation of $\Re^2$
 rotates vectors counterclockwise.\index{rotation}\index{linear map!rotation}
@@ -49,16 +55,18 @@ is also not simply a rescaling.
  \includegraphics{ch3.51}
 \end{center}
 
-Nonetheless, even in higher dimensions the linear maps behave nicely.
-Consider a linear map $\map{h}{\Re^n}{\Re^m}$
-We will use the standard bases to represent it by a matrix $H$.
-Recall that any such $H$ factors as $H=PBQ$, 
+Despite this additional variety, 
+even in higher dimensions linear maps behave nicely.
+Consider a linear $\map{h}{\Re^n}{\Re^m}$ and
+use the standard bases to represent it by a matrix $H$.
+Recall that $H$ factors into $H=PBQ$ 
 where $P$ and $Q$ are nonsingular and $B$ is a partial-identity matrix.
 Recall also that nonsingular matrices
 factor into elementary matrices\index{matrix!elementary reduction}\index{elementary!matrix}
-$PBQ=T_nT_{n-1}\cdots T_jBT_{j-1}\cdots T_1$,
+$PBQ=T_nT_{n-1}\cdots T_sBT_{s-1}\cdots T_1$,
 which are matrices that
-come from the identity $I$ after one Gaussian step
+come from the identity $I$ after one Gaussian row operation,
+so each $T$ matrix is one of these three kinds
 \begin{equation*}
   I\grstep{k\rho_i}M_i(k) 
   \qquad 
@@ -66,13 +74,12 @@ come from the identity $I$ after one Gaussian step
   \qquad
   I\grstep{k\rho_i+\rho_j}C_{i,j}(k) 
 \end{equation*}
-for $i\neq j$, $k\neq 0$.
-So if we understand the effect of a linear map described
+with $i\neq j$, $k\neq 0$.
+So if we understand the geometric effect of a linear map described
 by a partial-identity matrix and the effect of the linear maps
 described by the elementary matrices then we will in some sense
-understand the effect of any linear map.
-(To understand them we mean to give a description of their geometric effect;
-the pictures below stick to transformations of $\Re^2$ for ease of drawing
+completely understand the effect of any linear map.
+(The pictures below stick to transformations of $\Re^2$ for ease of drawing
 but the principles extend for maps from any $\Re^n$ to any $\Re^m$.)
 
 The geometric effect of the linear transformation represented by a  
@@ -83,7 +90,7 @@ partial-identity matrix is projection.
       1  &0  &0   \\
       0  &1  &0   \\
       0  &0  &0   
-    \end{mat}_{\stdbasis_3,\stdbasis_3}}
+    \end{mat}} % _{\stdbasis_3,\stdbasis_3}}
   \qquad
   \colvec{x \\ y  \\ 0}
 \end{equation*}
@@ -100,7 +107,7 @@ component goes the other way, here to the left.
 \begin{center}
   \includegraphics{ch3.53}
 \end{center}
-Either of these is a 
+Either of these stretches is a 
 \definend{dilation}.\index{dilation}\index{linear map!dilation}
 
 A transformation represented by a $P_{i,j}$ matrix
@@ -120,19 +127,20 @@ For instance $C_{1,2}(2)$ performs $2\rho_1+\rho_2$.
   \xrightarrow{\tiny\begin{mat}[r]
                 1  &0  \\
                 2  &1  
-          \end{mat}_{\stdbasis_2,\stdbasis_2}}
+          \end{mat}}  % _{\stdbasis_2,\stdbasis_2}}
    \quad\colvec{x \\ 2x+y}
 \end{equation*}
 In the picture below, 
 the vector $\vec{u}$ with the first component of $1$ is affected less 
-than the vector $\vec{v}$ with the first component of $2$\Dash 
-$h(\vec{u})$ is only $2$ higher than $\vec{u}$ while 
+than the vector $\vec{v}$ with the first component of $2$.
+The vector $\vec{u}$ is mapped to a
+$h(\vec{u})$ that is only $2$ higher than $\vec{u}$ while 
 $h(\vec{v})$ is $4$ higher than $\vec{v}$.
 \begin{center}
   \includegraphics{ch3.55}
 \end{center}
 Any vector with a first component of $1$ would be affected 
-in the same way as $\vec{u}$;
+in the same way as $\vec{u}$:
 it would slide up by $2$.
 And any vector with a first component of $2$ would slide up $4$, 
 as was $\vec{v}$.
@@ -142,19 +150,19 @@ $C_{i,j}(k)$ affects vectors depending on their $i$-th component.
 Another way to see this point is to consider the action of this map 
 on the unit square.
 In the next picture,
-vectors with a first component of $0$, like the origin, are not pushed 
+vectors with a first component of $0$, such as the origin, are not pushed 
 vertically at all but vectors with a positive first component slide up.
 Here, all vectors with a first component of $1$, the entire 
 right side of the square, slide to the same extent.
 In general, vectors on the same vertical line slide by the same amount,
 by twice their first component.
-The shape of the result, a rhombus, has the same base and height as the square
+The resulting shape has the same base and height as the square
 (and thus the same area) but the right angle corners are gone.
 \begin{center}
   \includegraphics{ch3.56}
 \end{center}
 
-For contrast the next picture shows the effect of the map represented by 
+For contrast, the next picture shows the effect of the map represented by 
 $C_{2,1}(1)$.
 Here vectors are affected according to their  
 second component:
@@ -162,66 +170,70 @@ $\binom{x}{y}$ slides horizontally by twice $y$.
 \begin{center}
   \includegraphics{ch3.57}
 \end{center}
-%In general, for any $C_{i,j}(k)$, the
-%sliding happens in such a way that vectors with the same $i$-th component
-%are slid by the same amount.
+In general, for any $C_{i,j}(k)$, the
+sliding happens so that vectors with the same $i$-th component
+are slid by the same amount.
 This kind of map is a 
-\definend{skew}.\index{skew}\index{linear map!skew}
+\definend{shear}.\index{shear}\index{linear map!shear}
 
-With that, we understand the geometric effect of the four types 
-of components in the expansion
-$H=T_nT_{n-1}\cdots T_jBT_{j-1}\cdots T_1$,
-and so, in some sense, we have an understanding  
-of the action of any matrix $H$.
+With that we understand the geometric effect of the four types 
+of matrices on the right-hand side of
+$H=T_nT_{n-1}\cdots T_jBT_{j-1}\cdots T_1$
+and so in some sense we understand  
+the action of any matrix~$H$.
+Thus, even in higher dimensions the geometry of linear maps is easy: it 
+is built by putting
+together a number of components, each of which acts in a simple way.
 
-We will illustrate the usefulness of our understanding in two ways.
-The first is that we will use it to prove something about linear maps. 
+We will apply this understanding in two ways.
+The first way is to prove something general about 
+the geometry of linear maps. 
 Recall that under a linear map, the image of a subspace is a subspace
 and thus the linear transformation $h$ represented by $H$ maps lines 
 through the origin to lines through the origin.
 (The dimension of the image space cannot be greater than 
 the dimension of the domain space, so a line can't map onto, say, a plane.)
-We will show that $h$ maps any line, 
-not just one through the origin, 
+We will show that $h$ maps any line\Dash not just one through the origin\Dash 
 to a line.
 The proof is simple:
 the partial-identity projection $B$ and the elementary $T_i$'s
-each turn a line input into a line output 
-(verifying the four cases is \nearbyexercise{exer:ImageLinSurIsLinSur}).
+each turn a line input into a line output; 
+verifying the four cases is \nearbyexercise{exer:ImageLinSurIsLinSur}.
 Therefore their composition also preserves lines.
 % Thus, by understanding its components we can understand arbitrary square 
 % matrices $H$, in the sense that we can prove things about them.
 
-The second way that we will illustrate the usefulness of
-our understanding is to apply it to Calculus.
+The second way that we will apply 
+the geometric understanding of linear maps 
+is to elucidate a point from Calculus.
 Below is a picture
 of the action of the one-variable real function \( y(x)=x^2+x \).
-As we noted 
-at that start of this Topic, overall the geometric effect of this map is
+As with the nonlinear functions pictured earlier, 
+the geometric effect of this map is
 irregular in that at different domain points it has different effects; for
-example as the domain point $x$ goes from $2$ to $-2$, the associated range
-point $f(x)$ at first decreases, then pauses instantaneously,
+example as the input~$x$ goes from $2$ to $-2$, the associated output~$f(x)$ 
+at first decreases, then pauses for an instant,
 and then increases.
 \begin{center}
   \includegraphics{ch3.58}
 \end{center}
-But in Calculus we focus less on the map overall, and more 
+But in Calculus we focus less on the map overall and more 
 on the local effect of the map.
-The picture below looks closely at what this map
+Below we look closely at what this map
 does near $x=1$.
 The derivative is $dy/dx=2x+1$
 so that near \( x=1 \) 
 we have \( \Delta y\approx 3\cdot\Delta x \).
 %; in other words, \( (1.001^2+1.001)-(1^2+1)\approx 3\cdot (0.001) \).
 That is, in a neighborhood of $x=1$,
-in carrying the domain to the codomain this map causes it to grow by
+in carrying the domain over this map causes it to grow by
 a factor of $3$ \Dash  it is, locally, 
 approximately, a dilation.
 %The map $y$ is locally regular.
-The picture below shows a small interval 
+The picture below shows this as a small interval 
 in the domain $(1-\Delta x\,..\,1+\Delta x)$
 carried over to an interval in the codomain $(2-\Delta y\,..\,2+\Delta y)$
-that is three times as wide $\Delta y \approx 3\cdot \Delta x$.
+that is three times as wide. % $\Delta y \approx 3\cdot \Delta x$.
 \begin{center}
   \includegraphics{ch3.59}
 \end{center}
@@ -230,13 +242,12 @@ that is three times as wide $\Delta y \approx 3\cdot \Delta x$.
 % stated:~the derivative $3$ is the slope of the 
 % line tangent to the graph at the point $(1,2)$.)
 
-In higher dimensions the idea is the same but more can happen than in the 
-$\Re^1$-to-$\Re^1$ scalar multiplication case.
+In higher dimensions the core idea is the same but more can happen.
 For a function \( \map{y}{\Re^n}{\Re^m} \) and a point \( \vec{x}\in\Re^n \),
 the derivative is defined to be the 
 linear map \( \map{h}{\Re^n}{\Re^m} \) that best approximates
 how \( y \) changes near \( y(\vec{x}) \).
-So the geometry studied above directly applies to the derivatives.
+So the geometry described above directly applies to the derivative.
 %Calculus considers the map 
 %that locally approximates the change \( \Delta x\mapsto 3\cdot\Delta x \)
 %(instead of the actual change map
@@ -258,10 +269,10 @@ So the geometry studied above directly applies to the derivatives.
 %easy about \( \Delta x\mapsto 3\cdot\Delta x \) is that
 %it is linear.
 
-We will close this Topic by remarking how
-this point of view makes clear an often misunderstood but very important 
+We close by remarking how
+this point of view makes clear an often misunderstood  
 result about derivatives, the Chain Rule.
-Recall that, with suitable conditions on the two functions,
+Recall that, under suitable conditions on the two functions,
 the derivative of the composition is this.
 \begin{equation*}
   \frac{d\,(\composed{g}{f})}{dx}(x) = 
@@ -271,7 +282,7 @@ For instance the derivative of $\sin(x^2+3x)$ is
 $\cos(x^2+3x)\cdot(2x+3)$.
 
 Where does this come from?
-Consider the $\map{f,g}{\Re^1}{\Re^1}$ picture. 
+Consider $\map{f,g}{\Re}{\Re}$. 
 \begin{center}
   \includegraphics{ch3.60}
 \end{center}
@@ -291,8 +302,8 @@ the map expressing how a function changes near a point is a linear map,
 and is represented by a matrix.
 The Chain Rule multiplies the matrices.
 
-Thus, the geometry of linear maps $\map{h}{\Re^n}{\Re^m}$ 
-is appealing both for its simplicity and for its usefulness.
+% Thus, the geometry of linear maps $\map{h}{\Re^n}{\Re^m}$ 
+% is appealing both for its simplicity and for its usefulness.
 
 \begin{exercises}
   \item 

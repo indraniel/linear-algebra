@@ -1,17 +1,17 @@
 % Topic from _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2012-Feb-12
 \topic{Magic Squares}
 \index{magic squares|(}
 A Chinese legend tells the story of a  
 flood by the Lo river.
-The people offered sacrifices to appease the river.
-But each time a turtle emerged, 
+People offered sacrifices to appease the river.
+Each time a turtle emerged, 
 walked around the sacrifice, and returned to the water.
 Fuh-Hi, % (2858-2738~BC)
 the founder of Chinese civilization,
 interpreted this to mean that
-the river was still annoyed.  
+the river was still cranky.  
 Fortunately, a child noticed 
 that on its shell the turtle had the pattern on the left below, which is today
 called Lo Shu (``river scroll'').
@@ -35,19 +35,19 @@ the river's anger cooled.
 A square matrix is 
 \definend{magic}\index{magic square}\index{matrix!magic square}
 if each row, column, and diagonal add to the same
-value, the matrix's \definend{magic number}.
+number, the matrix's \definend{magic number}.
 
-Another example of a magic square appears in the engraving
-\textit{Melencolia I} by Albrecht D\"urer.
+Another magic square appears in the engraving
+\textit{Melencolia I} by D\"urer.
 % (http://en.wikipedia.org/wiki/Melencolia_I)
 \begin{center}
-  \includegraphics[height=2.5in]{Melencolia.jpg} % wikipedia http://upload.wikimedia.org/wikipedia/commons/1/14/Melencolia_I_%28Durero%29.jpg
+  \includegraphics[height=2.20in]{Melencolia.jpg} % wikipedia http://upload.wikimedia.org/wikipedia/commons/1/14/Melencolia_I_%28Durero%29.jpg
 \end{center}
 One interpretation is that it depicts melancholy, a depressed state.
 The figure, genius,
 has a wealth of fascinating things to explore including
 the compass, the geometrical solid, the scale, and the hourglass.
-But the figure is unmoved; all of these things lie unused.
+But the figure is unmoved; all of the things lie unused.
 One of the potential delights, in the upper right,
 is a $\nbyn{4}$ matrix whose
 rows, columns, and diagonals add to~$34$.
@@ -67,11 +67,12 @@ date of the engraving.
 
 The above two squares are arrangements of $\interval{1}{n^2}$.
 They are \definend{normal}\index{magic square!normal}.
-The $\nbyn{1}$ square whose sole entry is $1$ is normal, there is
-no normal $\nbyn{2}$ magic square by \nearbyexercise{exer:TwoByTwoMagicSqUnique},
+The $\nbyn{1}$ square whose sole entry is $1$ is normal, 
+\nearbyexercise{exer:TwoByTwoMagicSqUnique} shows that there is
+no normal $\nbyn{2}$ magic square,
 and there are normal magic squares of every other size; 
 see \cite{WikipediaMagicSquare}.
-Finding the number of normal magic squares of each size is an unsolved
+Finding how many normal magic squares there are of each size is an unsolved
 problem;
 see \cite{OnlineEncyclopedia}.
  
@@ -91,7 +92,7 @@ system has the unique solution $a=b=c=d=s/2$.
 So the set of $\nbyn{2}$ magic squares
 is a one-dimensional subspace of $\matspace_{\nbyn{2}}$.
 
-In general, a sum of two same-sized magic squares is magic and a 
+A sum of two same-sized magic squares is magic and a 
 scalar multiple of a magic square is magic so the set of 
 $\nbyn{n}$ magic squares
 $\magicsquares_n$ is a vector space, a subspace of $\matspace_{\nbyn{n}}$.
@@ -99,7 +100,7 @@ This Topic shows that for $n\geq 3$ the
 dimension of
 $\magicsquares_n$ is $n^2-n$.
 The set $\magicsquares_{n,0}$ of $\nbyn{n}$~magic squares with magic number~$0$ 
-is another subspace, and we will find the formula for its dimension also:
+is another subspace and we will verify the formula for its dimension also:
 $n^2-2n-1$ when $n\geq 3$.
 
 We will first prove that $\dim\magicsquares_n=\dim\magicsquares_{n,0}+1$.
@@ -123,12 +124,20 @@ Here the domain is $\magicsquares_n$, the range space is
 $\Re$ and the null space is $\magicsquares_{n,0}$,
 so we have that $\dim\magicsquares_n=1+\dim\magicsquares_{n,0}$.
 
-We will finish by showing that   
+We will finish by finding the dimension of the vector space
+$\magicsquares_{n,0}$. 
+For $n=1$ the dimension is clearly $0$.
+\nearbyexercise{exer:DimTwoMagicSqsMagicSumZero} shows 
+that $\dim\magicsquares_{n,0}$ is also $0$
+for $n=2$.
+
+That leaves showing that   
 $\dim\magicsquares_{n,0}=n^2-2n-1$ for $n\geq 3$. 
-(For $n=1$ the dimension is clearly $0$.
-\nearbyexercise{exer:DimTwoMagicSqsMagicSumZero} shows it is also $0$
-for $n=2$.)
-If the rows, columns, and diagonals of a matrix
+The fact that the squares in this vector space are magic 
+gives us a linear system of restrictions, and the 
+fact that they have magic number zero makes this system homogeneous: for 
+instance consider the $\nbyn{3}$ case.
+The restriction that the rows, columns, and diagonals of 
 \begin{equation*}
     \begin{mat}
       a &b &c \\
@@ -136,7 +145,7 @@ If the rows, columns, and diagonals of a matrix
       g &h &i
     \end{mat}
 \end{equation*}
-add to zero then we have an $\nbym{(2n+2)}{n^2}$ linear system.
+add to zero gives this $\nbym{(2n+2)}{n^2}$ linear system.
 \begin{equation*}
   \begin{linsys}{9}
     a &+ &b &+ &c &  &  &  &  &  &  &  &  &  &  &  &  &= &0 \\ 
@@ -149,6 +158,9 @@ add to zero then we have an $\nbym{(2n+2)}{n^2}$ linear system.
       &  &  &  &c &  &  &+ &e &  &  &+ &g &  &  &  &  &= &0    
   \end{linsys}
 \end{equation*}
+We will find the dimension of the space by finding the number of 
+free variables in the linear system.
+
 The matrix of coefficients for the particular cases of $n=3$ and~$n=4$
 are below, with the rows and columns numbered to help in reading
 the proof.
@@ -214,18 +226,24 @@ So consider this linear relationship.
    \tag{*}
 \end{equation*}
 
-Now it gets messy.
-In the final two rows, in the first~$n$ columns, is a subrow that 
+Now we get dirty.
+Focus on the lower left of the tables.
+Observe that in the final two rows, in the first~$n$ columns, is a subrow that 
 is all zeros except that it starts with a one in column~$1$
 and a subrow that is all zeros except that it ends with a one
 in column~$n$.
-With $\vec{\rho}_1$ not in ($*$), each of those columns contains only 
-two ones and so we can conclude that $c_{2n+1}=-c_{n+1}$ as well as that
+
+First, with $\vec{\rho}_1$ omitted, both column~$1$ and column~$n$ contain only 
+two ones.
+Since the only rows in~($*$) with nonzero column~$1$ entries 
+are rows $\vec{\rho}_{n+1}$ and $\vec{\rho}_{2n+1}$, which have ones, 
+we must have $c_{2n+1}=-c_{n+1}$.
+Likewise considering the $n$-th entries of the vectors in~($*$) gives that
 $c_{2n+2}=-c_{2n}$.
 
 Next consider the columns between those two\Dash
-in the $n=3$ illustration above this includes only the second column while 
-in the $n=4$~matrix it includes both the second and third columns.
+in the $n=3$ table this includes only column~$2$ while 
+in the $n=4$~table it includes both columns~$2$ and~$3$.
 Each such column has a single one.
 That is, for each column index $j\in\setinterval{2}{n-2}$
 the column consists of only zeros except for a one in row~$n+j$, 
@@ -245,7 +263,7 @@ there is at least one column between column~$n+1$ and column~$2n-1$.
 In at least one of those columns a one appears in $\vec{\rho}_{2n+1}$.
 If a one also appears in that column in $\vec{\rho}_{2n+2}$ then we have 
 $c_2=-(c_{2n+1}+c_{2n+2})$ 
-(recall that $c_{n+j}=0$ for $j\in\setinterval{2}{n-2}$).
+since $c_{n+j}=0$ for $j\in\setinterval{2}{n-2}$.
 If a one does not appear in that column in $\vec{\rho}_{2n+2}$
 then we have $c_2=-c_{2n+1}$.
 In either case $c_2=0$, and thus 

@@ -1,5 +1,5 @@
 % Chapter 3, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Line of Best Fit}
 \index{least squares|(}
@@ -24,12 +24,11 @@ intermediate numbers.
      \textit{number of heads}  &16  &34  &51
   \end{tabular}
 \end{center}
-% In an experiment we expect that samples will vary. 
-Here, sometimes
-the experimental ratio of heads to flips  
-overestimates this penny's long-term ratio of 50-50
-and sometimes it underestimates.
-So we expect that the system derived from the experiment has no solution. 
+Because of the randomness in this experiment we expect that 
+the samples will vary so that the ratio of heads to flips 
+fluctuates around a penny's long-term ratio of 50-50.
+So the system for the experiment likely has no solution, and
+that's what happened. 
 \begin{equation*}
   \begin{linsys}{1}
     30m  &=  &16    \\
@@ -118,7 +117,7 @@ and intercept.
   \end{linsys}
 \end{equation*}
 We find a best approximation by using orthogonal projection.
-Write the linear system's matrix of coefficients amd also its
+Write the linear system's matrix of coefficients and also its
 vector of constants, the world record times.
 \begin{equation*}
   A=
@@ -132,9 +131,10 @@ vector of constants, the world record times.
   \vec{v}=\colvec{268.8 \\ 264.5 \\ \vdots \\ 241.4}
 \end{equation*}
 The ending result in the subsection on Projection into a Subspace 
-gives the formula for the $b$ and $m$ so that the linear combination
-of the columns of $A$ is as close as possible to the vector $\vec{v}$. 
-They are the entries of 
+gives the formula for the the coefficients 
+$b$ and $m$ that make the linear combination
+of $A$'s columns as close as possible to $\vec{v}$. 
+Those coefficients are the entries of 
 the vector $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 
 %\begin{center}
@@ -206,24 +206,24 @@ used mathematical techniques to optimize the players that they fielded
 for the money that they could spend, as told in  
 the film \textit{Moneyball}.
 (Salaries are in millions of dollars and the number of wins
-is out of 180 games). 
+is out of 162 games). 
 
-To do the computations we use \textit{Sage}. 
+To do the computations we again use \textit{Sage}. 
 % http://ask.sagemath.org/question/768/fitting-a-curve-to-a-straight-line?answer=1271#1271
 % by Joaquim Puig on 2011-Sep-27; gathered on 2013-Oct-23 JH
 \begin{lstlisting}
 sage: sal = [40, 40, 39, 42, 45, 42, 62, 34, 41, 57, 58, 63, 47, 75, 57, 78, 80, 50, 60, 93, 
-  77, 55, 95, 103, 79, 76, 108, 126, 95, 106]
+....: 77, 55, 95, 103, 79, 76, 108, 126, 95, 106]
 sage: wins = [103, 94, 83, 79, 78, 72, 99, 55, 66, 81, 80, 84, 62, 97, 73, 95, 93, 56, 67, 101, 
-  78, 55, 92, 98, 74, 67, 93, 103, 75, 72]
+....: 78, 55, 92, 98, 74, 67, 93, 103, 75, 72]
 sage: var('a, b, t')
 (a, b, t)
 sage: model(t) = a*t+b
 sage: data = zip(sal,wins)
 sage: fit = find_fit(data, model, solution_dict=True)
 sage: model.subs(fit)
-t |--> 0.7447786021698546*t + 7.230396324572004
-sage: plot(model.subs(fit),(t,50,110))+points(data,size=25,color='red')
+t |--> 0.26349812514202064*t + 63.064776427950136
+sage: plot(model.subs(fit),(t,30,130))+points(data,size=25,color='red')
 \end{lstlisting}
 
 The graph is below.
@@ -239,7 +239,8 @@ here judging the line by eye would be error-prone.
 So the equations give us a certainty about the `best' in best fit.
 In addition, the model's equation tells us roughly that 
 by spending an additional million dollars
-a team owner could expect to buy $3/4$ of a win.
+a team owner can expect to buy $1/4$ of a win
+(and that expectation is not very sure, thank goodness).
 
 
 % For example, the different denominations of US\ money have different average 

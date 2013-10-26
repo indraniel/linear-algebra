@@ -2503,7 +2503,7 @@ beginfig(51) % projection to xz-axis
   save xz_plane; path xz_plane;
     xz_plane = z10--z11--z12--z13--cycle; 
   pickup pencircle scaled line_width_light;
-  draw (xz_plane shifted codomain_shift) dashed evenly withcolor lightgray;
+  draw (xz_plane shifted codomain_shift) dashed evenly withcolor darkgray;
 
   % the axes (can't use routines, because need shift)
   save xmin, xmax, ymin, ymax, zmin, zmax;
