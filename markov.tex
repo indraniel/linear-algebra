@@ -1,5 +1,5 @@
 % Chapter 3, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Markov Chains}
 \index{Markov chains|(}
@@ -20,7 +20,7 @@ In the game the player moves from state to state.
 For instance,
 a player now in state $s_3$ has on the next flip a $0.5$ chance of moving
 to state $s_2$ and a $0.5$ chance of moving to $s_4$.
-The boundary states are a bit different; 
+The boundary states are different; 
 a player never leaves state~$s_0$ or state~$s_5$.
 
 Let $p_{i}(n)$ be the probability that the player is in state $s_{i}$
@@ -54,10 +54,32 @@ This matrix equation summarizes.
         p_{4}(n+1) \\
         p_{5}(n+1)}
 \end{equation*}
-With the initial condition that the player starts with 
-three dollars, these are components of the resulting vectors.
+
+We can use \textit{Sage} to compute the evolution of this game. 
+\begin{lstlisting}
+sage: M = matrix(RDF, [[1.0, 0.5, 0.0, 0.0, 0.0, 0.0],
+....:                  [0.5, 0.0, 0.5, 0.0, 0.0, 0.0],
+....:                  [0.0, 0.5, 0.0, 0.5, 0.0, 0.0],
+....:                  [0.0, 0.0, 0.5, 0.0, 0.5, 0.0],
+....:                  [0.0, 0.0, 0.0, 0.5, 0.0, 0.5],
+....:                  [0.0, 0.0, 0.0, 0.0, 0.5, 1.0]])
+sage: M = M.transpose()
+sage: v0 = vector(RDF, [0.0, 0.0, 0.0, 1.0, 0.0, 0.0])
+sage: v1 = v0*M
+sage: v1
+(0.0, 0.0, 0.5, 0.0, 0.5, 0.0)
+sage: v2 = v1*M
+sage: v2
+(0.0, 0.25, 0.0, 0.5, 0.0, 0.25)  
+\end{lstlisting}
+Two notes: \textit{Sage} can use various number systems to 
+make the matrix entries and here we have used Real Double Float; 
+\textit{Sage} likes to do matrix multiplication from the right, 
+as $\vec{v}\hspace{.1em}M$ instead of our usual $M\vec{v}$, 
+so we needed to take the matrix's transpose.
+These are components of the resulting vectors.
 \begin{center}
-  \begin{tabular}{@{}c|cccccc@{}}
+  \begin{tabular}{@{}c|ccccc@{\hspace*{5em}}c@{}}
     $n=0$
     &\multicolumn{1}{c}{$n=1$}
     &\multicolumn{1}{c}{$n=2$}
@@ -104,10 +126,10 @@ three dollars, these are components of the resulting vectors.
       \end{array}$
   \end{tabular}  
 \end{center}
-This exploration suggests that the game is not likely to go on 
-for long, with the player quickly moving to an ending state.
-For instance, after the fourth flip there is a $0.50$~probability that 
-the game is already over.
+This game is not likely to go on 
+for long since the player quickly moves to an ending state.
+For instance, after the fourth flip there is already a $0.50$~probability that 
+the game is over.
 % (Because a player who enters either of the boundary states never leaves, they
 % are said to be \definend{absorbtive}.)\index{state!absorbtive}
 
@@ -170,8 +192,23 @@ a child of a middle class worker has a $0.37$~chance of being middle
 class, and 
 a child of a lower class worker has a $0.27$ probability of
 becoming middle class.
-With the initial distribution of the respondent's fathers given below, 
-this table gives the next five generations.
+
+\textit{Sage} will compute the successive stages of this system
+(the current class distribution is $\vec{v}_0$).
+\begin{lstlisting}
+sage: M = matrix(RDF, [[0.60, 0.29, 0.16],
+....:                  [0.26, 0.37, 0.27],
+....:                  [0.14, 0.34, 0.57]])
+sage: M = M.transpose()
+sage: v0 = vector(RDF, [0.12, 0.32, 0.56])
+sage: v0*M
+(0.2544, 0.3008, 0.4448)
+sage: v0*M^2
+(0.31104, 0.297536, 0.391424)
+sage: v0*M^3
+(0.33553728, 0.2966432, 0.36781952)  
+\end{lstlisting}
+This table gives the next five generations.
 \begin{center}
   % breqn again
   \begin{tabular}{c|ccccc}
@@ -253,8 +290,8 @@ An especially interesting special case is when the teams are
 evenly matched, $p=0.50$.
 This table below lists the
 resulting components of the $n=0$ through $n=7$ vectors.
-(The code to generate this table in the computer algebra system
-Octave follows the exercises.)
+% (The code to generate this table in the computer algebra system
+% Octave follows the exercises.)
 
 Note that evenly-matched teams are likely to have a long series\Dash there
 is a probability of $0.625$ that the series goes at least six games.
@@ -2160,52 +2197,52 @@ octave:6> gplot z
 \end{exercises}
 
 
-\announcecomputercode
-This script \textit{markov.m} for the computer algebra system Octave 
-generated the table of World Series outcomes.
-(The hash character \texttt{\#} marks the rest of a line as a comment.)
-\begin{lstlisting}
-# Octave script file to compute chance of World Series outcomes.
-function w = markov(p,v)
-  q = 1-p;
-  A=[0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-0
-     p,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-0
-     q,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-1_
-     0,p,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 2-0
-     0,q,p,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-1
-     0,0,q,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-2__
-     0,0,0,p,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 3-0
-     0,0,0,q,p,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 2-1
-     0,0,0,0,q,p, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-2_
-     0,0,0,0,0,q, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-3
-     0,0,0,0,0,0, p,0,0,0,1,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 4-0
-     0,0,0,0,0,0, q,p,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 3-1__
-     0,0,0,0,0,0, 0,q,p,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 2-2
-     0,0,0,0,0,0, 0,0,q,p,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-3
-     0,0,0,0,0,0, 0,0,0,q,0,0, 0,0,1,0,0,0, 0,0,0,0,0,0;  # 0-4_
-     0,0,0,0,0,0, 0,0,0,0,0,p, 0,0,0,1,0,0, 0,0,0,0,0,0;  # 4-1
-     0,0,0,0,0,0, 0,0,0,0,0,q, p,0,0,0,0,0, 0,0,0,0,0,0;  # 3-2
-     0,0,0,0,0,0, 0,0,0,0,0,0, q,p,0,0,0,0, 0,0,0,0,0,0;  # 2-3__
-     0,0,0,0,0,0, 0,0,0,0,0,0, 0,q,0,0,0,0, 1,0,0,0,0,0;  # 1-4
-     0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,p,0, 0,1,0,0,0,0;  # 4-2
-     0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,q,p, 0,0,0,0,0,0;  # 3-3_
-     0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,q, 0,0,0,1,0,0;  # 2-4
-     0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,p,0,1,0;  # 4-3
-     0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,q,0,0,1]; # 3-4
-  w = A * v;
-endfunction
-\end{lstlisting}
-\noindent Then the Octave session was this.
-\begin{lstlisting}
-> v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
-> p=.5
-> v1=markov(p,v0)
-> v2=markov(p,v1)
-  ...
-\end{lstlisting}
-\noindent Translating to another computer algebra system should be 
-easy\Dash all 
-have commands similar to these.
+% \announcecomputercode
+% This script \textit{markov.m} for the computer algebra system Octave 
+% generated the table of World Series outcomes.
+% (The hash character \texttt{\#} marks the rest of a line as a comment.)
+% \begin{lstlisting}
+% # Octave script file to compute chance of World Series outcomes.
+% function w = markov(p,v)
+%   q = 1-p;
+%   A=[0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-0
+%      p,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-0
+%      q,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-1_
+%      0,p,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 2-0
+%      0,q,p,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-1
+%      0,0,q,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-2__
+%      0,0,0,p,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 3-0
+%      0,0,0,q,p,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 2-1
+%      0,0,0,0,q,p, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-2_
+%      0,0,0,0,0,q, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 0-3
+%      0,0,0,0,0,0, p,0,0,0,1,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 4-0
+%      0,0,0,0,0,0, q,p,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 3-1__
+%      0,0,0,0,0,0, 0,q,p,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 2-2
+%      0,0,0,0,0,0, 0,0,q,p,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0;  # 1-3
+%      0,0,0,0,0,0, 0,0,0,q,0,0, 0,0,1,0,0,0, 0,0,0,0,0,0;  # 0-4_
+%      0,0,0,0,0,0, 0,0,0,0,0,p, 0,0,0,1,0,0, 0,0,0,0,0,0;  # 4-1
+%      0,0,0,0,0,0, 0,0,0,0,0,q, p,0,0,0,0,0, 0,0,0,0,0,0;  # 3-2
+%      0,0,0,0,0,0, 0,0,0,0,0,0, q,p,0,0,0,0, 0,0,0,0,0,0;  # 2-3__
+%      0,0,0,0,0,0, 0,0,0,0,0,0, 0,q,0,0,0,0, 1,0,0,0,0,0;  # 1-4
+%      0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,p,0, 0,1,0,0,0,0;  # 4-2
+%      0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,q,p, 0,0,0,0,0,0;  # 3-3_
+%      0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,q, 0,0,0,1,0,0;  # 2-4
+%      0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,p,0,1,0;  # 4-3
+%      0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,q,0,0,1]; # 3-4
+%   w = A * v;
+% endfunction
+% \end{lstlisting}
+% \noindent Then the Octave session was this.
+% \begin{lstlisting}
+% > v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+% > p=.5
+% > v1=markov(p,v0)
+% > v2=markov(p,v1)
+%   ...
+% \end{lstlisting}
+% \noindent Translating to another computer algebra system should be 
+% easy\Dash all 
+% have commands similar to these.
 \index{Markov chains|)}
 \endinput
 
