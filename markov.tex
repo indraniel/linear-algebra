@@ -25,10 +25,10 @@ a player never leaves state~$s_0$ or state~$s_5$.
 
 Let $p_{i}(n)$ be the probability that the player is in state $s_{i}$
 after $n$ flips.
-Then, for instance, we have that the probability of being in state~$s_0$ 
+Then for instance the probability of being in state~$s_0$ 
 after flip~$n+1$ is
 $p_{0}(n+1)=p_{0}(n)+0.5\cdot p_{1}(n)$.
-This matrix equation summarizes.
+This equation summarizes.
 \begin{equation*}
   % breqn didn't like this:
   % \begin{dmat}{D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}D{.}{.}{1}}
@@ -55,7 +55,7 @@ This matrix equation summarizes.
         p_{5}(n+1)}
 \end{equation*}
 
-We can use \textit{Sage} to compute the evolution of this game. 
+\textit{Sage} will compute the evolution of this game. 
 \begin{lstlisting}
 sage: M = matrix(RDF, [[1.0, 0.5, 0.0, 0.0, 0.0, 0.0],
 ....:                  [0.5, 0.0, 0.5, 0.0, 0.0, 0.0],
@@ -72,9 +72,9 @@ sage: v2 = v1*M
 sage: v2
 (0.0, 0.25, 0.0, 0.5, 0.0, 0.25)  
 \end{lstlisting}
-Two notes: \textit{Sage} can use various number systems to 
-make the matrix entries and here we have used Real Double Float; 
-\textit{Sage} likes to do matrix multiplication from the right, 
+Two notes: (1)~\textit{Sage} can use various number systems to 
+make the matrix entries and here we have used Real Double Float 
+(2)~\textit{Sage} likes to do matrix multiplication from the right, 
 as $\vec{v}\hspace{.1em}M$ instead of our usual $M\vec{v}$, 
 so we needed to take the matrix's transpose.
 These are components of the resulting vectors.
@@ -118,11 +118,11 @@ These are components of the resulting vectors.
         0.125   \\   0   \\ 0.375 \\ 0     \\ 0.25    \\  0.25
        \end{array}$
     &$\begin{array}{l}
-        0.125   \\ 0.1875 \\ 0    \\ 0.3125 \\ 0      \\ 0.375
+        0.125   \\ 0.187\,5 \\ 0    \\ 0.312\,5 \\ 0      \\ 0.375
        \end{array}$
     &  % $\cdots$
     &$\begin{array}{l}
-        0.39600 \\ 0.00276   \\ 0    \\ 0.00447 \\ 0  \\ 0.59676
+        0.396\,00 \\ 0.002\,76   \\ 0    \\ 0.004\,47 \\ 0  \\ 0.596\,76
       \end{array}$
   \end{tabular}  
 \end{center}
@@ -133,11 +133,10 @@ the game is over.
 % (Because a player who enters either of the boundary states never leaves, they
 % are said to be \definend{absorbtive}.)\index{state!absorbtive}
 
-This is a \definend{Markov chain},\index{Markov chain} 
-named for A.A.~Markov, who worked in the first half of the $1900$'s.
+This is a \definend{Markov chain}.\index{Markov chain} 
 Each vector is a 
-\definend{probability vector}\index{vector!probability}%
-\index{probability vector}, whose entries are nonnegative real numbers that
+\definend{probability vector},\index{vector!probability}%
+\index{probability vector} whose entries are nonnegative real numbers that
 sum to $1$.  
 The matrix is a 
 \definend{transition matrix}\index{matrix!transition}%
@@ -208,7 +207,10 @@ sage: v0*M^2
 sage: v0*M^3
 (0.33553728, 0.2966432, 0.36781952)  
 \end{lstlisting}
-This table gives the next five generations.
+Here are the next five generations.
+They show upward mobility, especially in the 
+first generation.
+In particular, lower class shrinks a good bit.
 \begin{center}
   % breqn again
   \begin{tabular}{c|ccccc}
@@ -217,38 +219,20 @@ This table gives the next five generations.
                .12 \\ .32  \\ .56
       \end{array}$
     &$\begin{array}{l}
-               .23 \\ .34  \\ .42
+               .25 \\ .30  \\ .44
        \end{array}$
     &$\begin{array}{l}
-               .29 \\ .34  \\ .37  
+               .31 \\ .30  \\ .39  
        \end{array}$
     &$\begin{array}{l}
-               .31 \\ .34  \\ .35  
+               .34 \\ .30  \\ .37  
        \end{array}$
     &$\begin{array}{l}
-               .32 \\ .33 \\ .34  
+               .35 \\ .30 \\ .36  
        \end{array}$
     &$\begin{array}{l}
-               .33 \\ .33  \\ .34  
+               .35 \\ .30  \\ .35  
        \end{array}$
-    % $\dcolvec[2]{
-    %            .12 \\ .32  \\ .56
-    %    }$
-    % &$\dcolvec[2]{
-    %            .23 \\ .34  \\ .42
-    %    }$
-    % &$\dcolvec[2]{
-    %            .29 \\ .34  \\ .37  
-    %    }$
-    % &$\dcolvec[2]{
-    %            .31 \\ .34  \\ .35  
-    %    }$
-    % &$\dcolvec[2]{
-    %            .32 \\ .33 \\ .34  
-    %    }$
-    % &$\dcolvec[2]{
-    %            .33 \\ .33  \\ .34  
-    %    }$
   \end{tabular}
 \end{center}
 
@@ -441,11 +425,11 @@ is a probability of $0.625$ that the series goes at least six games.
         0              \\
         0              \\
         0              \\
-        0.0625         \\
+        0.062\,5         \\
         0.25           \\
         0.375          \\
         0.25           \\
-        0.0625         \\
+        0.062\,5         \\
         0              \\
         0              \\
         0              \\
@@ -467,14 +451,14 @@ is a probability of $0.625$ that the series goes at least six games.
         0              \\
         0              \\
         0              \\
-        0.0625         \\
+        0.062\,5         \\
         0              \\
         0              \\
         0              \\
-        0.0625         \\
+        0.062\,5         \\
         0.125          \\
-        0.3125         \\
-        0.3125         \\
+        0.312\,5         \\
+        0.312\,5         \\
         0.125          \\
         0              \\
         0              \\
@@ -493,18 +477,18 @@ is a probability of $0.625$ that the series goes at least six games.
         0               \\
         0               \\
         0               \\
-        0.0625          \\
+        0.062\,5          \\
         0               \\
         0               \\
         0               \\
-        0.0625          \\
+        0.062\,5          \\
         0.125           \\
         0               \\
         0               \\
         0.125           \\
-        0.15625         \\
-        0.3125          \\
-        0.15625         \\
+        0.156\,25         \\
+        0.312\,5          \\
+        0.156\,25         \\
         0               \\
         0                      
    \end{array}$
@@ -519,20 +503,20 @@ is a probability of $0.625$ that the series goes at least six games.
         0             \\
         0             \\
         0             \\
-        0.0625        \\
+        0.062\,5        \\
         0             \\
         0             \\
         0             \\
-        0.0625        \\
+        0.062\,5        \\
         0.125         \\
         0             \\
         0             \\
         0.125         \\
-        0.15625       \\
+        0.156\,25       \\
         0             \\
-        0.15625       \\
-        0.15625       \\
-        0.15625        
+        0.156\,25       \\
+        0.156\,25       \\
+        0.156\,25        
    \end{array}$
   % f-ing breqn
   % &$\begin{aligncolondecimal}{0}
@@ -747,7 +731,7 @@ is a probability of $0.625$ that the series goes at least six games.
 \end{center}
 
 Markov chains are a 
-widely-used applications of matrix operations.
+widely used application of matrix operations.
 They also  give us 
 an example of the use of matrices where we do not consider
 the significance of the maps represented by the matrices.
@@ -755,8 +739,8 @@ For more on Markov chains, there are many sources such as
 \cite{KemenySnell} and \cite{Iosifescu}.
 
 \begin{exercises}
-  \item[]\textit{Use a computer for these problems.
-    You can, for instance, adapt the Octave script given below.}
+  % \item[]\textit{Use a computer for these problems.
+  %   You can, for instance, adapt the Octave script given below.}
   \item 
     These questions refer to the coin-flipping game.
     \begin{exparts}
@@ -1059,6 +1043,7 @@ octave:7> v5=F*v4
     and by less unionization.
     Here is the transition matrix for large firms in 
     Electric and Electronic Equipment.
+    {\setlength\topsep{1pt plus 0.4pt minus 0.25pt}
     \begin{center}
       \begin{tabular}{c|ccccc}
             &\textit{NE}      
@@ -1073,41 +1058,41 @@ octave:7> v5=F*v4
            \textit{W}  \\
            \textit{Z}  
         \end{tabular}
-        &$\colvec[l]{
+        &$\begin{array}{l}
            0.787  \\
            0      \\
            0      \\
            0      \\
            0.021
-         }$
-        &$\colvec[l]{
+         \end{array}$
+        &$\begin{array}{l}
            0      \\
            0.966  \\
            0.063  \\
            0      \\
            0.009
-         }$
-        &$\colvec[l]{
+         \end{array}$
+        &$\begin{array}{l}
            0      \\
            0.034  \\
            0.937  \\
            0.074  \\
            0.005
-         }$
-        &$\colvec[l]{
+         \end{array}$
+        &$\begin{array}{l}
            0.111  \\
            0      \\
            0      \\
            0.612  \\
            0.010
-         }$
-        &$\colvec[l]{
+         \end{array}$
+        &$\begin{array}{l}
            0.102  \\
            0      \\
            0      \\
            0.314  \\
            0.954    
-         }$
+         \end{array}$
         % breqn
         % &$\begin{aligncolondecimal}{3}
         %    0.787  \\
@@ -1145,7 +1130,7 @@ octave:7> v5=F*v4
         %    0.954    
         %  \end{aligncolondecimal}$
       \end{tabular}
-    \end{center}
+    \end{center}}
     For example, a firm in the Northeast region will be in the West region
     next year with probability $0.111$.
     (The \textit{Z} entry is a ``birth-death'' state.
