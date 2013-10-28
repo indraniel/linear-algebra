@@ -1,5 +1,5 @@
 % Chapter 3, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Orthonormal Matrices}
 \index{orthonormal matrix|(}
@@ -21,17 +21,16 @@ but he uses it often \cite{Casey}.)
 \begin{center}
   \includegraphics{ch3.61}
 \end{center}
-In modern terminology, ``picking the plane up~\ldots'' 
-is considering a
+In modern terms ``picking the plane up~\ldots'' 
+is taking a
 map from the plane to itself. 
-Euclid considers only  
-transformations of the plane
+Euclid considers only transformations 
 that may slide or turn the plane but not bend or stretch it.
-Accordingly, we define a map $\map{f}{\Re^2}{\Re^2}$ to be 
+Accordingly, define a map $\map{f}{\Re^2}{\Re^2}$ to be 
 \definend{distance-preserving}\index{distance-preserving}%
 \index{map!distance-preserving} 
 or a \definend{rigid motion}\index{rigid motion} or an
-\definend{isometry},\index{isometry}
+\definend{isometry}\index{isometry}
 if for all points $P_1,P_2\in\Re^2$,
 the distance from $f(P_1)$ to $f(P_2)$ equals the distance from
 $P_1$ to $P_2$. 
@@ -64,13 +63,13 @@ which proposes the organizing principle that we can describe each kind of
 geometry\Dash Euclidean, projective, etc.\Dash 
 as the study of the properties that are
 invariant under some group of transformations.
-The word `group' here means more than just `collection', 
+The word `group' here means more than just `collection' 
 but that lies outside of our scope.)
 
 We can use linear algebra to characterize the distance-preserving maps
 of the plane.
 
-We must first observe that
+To begin, observe that
 there are distance-preserving transformations of the plane that are not linear.
 The obvious example is this \emph{translation}.\index{translation}
 \begin{equation*}
@@ -79,19 +78,19 @@ The obvious example is this \emph{translation}.\index{translation}
   \colvec{x \\ y}+\colvec[r]{1 \\ 0}=\colvec{x+1 \\ y}
 \end{equation*}
 However, 
-this example turns out to be the only example, in the 
-sense that if $f$ is distance-preserving and sends $\zero$ to $\vec{v}_0$ 
+this example turns out to be the only one, in 
+that if $f$ is distance-preserving and sends $\zero$ to $\vec{v}_0$ 
 then the map $\vec{v}\mapsto f(\vec{v})-\vec{v}_0$ is linear.
 That will follow immediately from this statement:~a map $t$ that is 
 distance-preserving and sends $\zero$ to itself is linear.
-To prove this equivalent statement, let
+To prove this equivalent statement, consider the standard basis and suppose that
 \begin{equation*}
   t(\vec{e}_1)=\colvec{a \\ b}
   \qquad
   t(\vec{e}_2)=\colvec{c \\ d}
 \end{equation*}
 for some $a,b,c,d\in\Re$. 
-Then to show that $t$ is linear we can show that 
+To show that $t$ is linear we can show that 
 it can be represented by a matrix, that is, that $t$ acts in this way
 for all $x,y\in\Re$.
 \begin{equation*}
@@ -110,7 +109,7 @@ the three fixed points $t(\zero)$, $t(\vec{e}_1)$, and $t(\vec{e}_2)$
 (these three are not collinear because, as mentioned above, 
 collinearity is invariant and
 $\zero$, $\vec{e}_1$, and $\vec{e}_2$ are not collinear).
-In fact, because $t$ is distance-preserving, we can say more:~for the 
+Because $t$ is distance-preserving we can say more:~for the 
 point $\vec{v}$ in the plane that is determined by being 
 the distance $d_0$ from $\zero$, 
 the distance $d_1$ from $\vec{e}_1$, and the distance $d_2$ from $\vec{e}_2$,  
@@ -141,10 +140,11 @@ and
 suffices to show that ($*$) describes $t$.
 Those checks are routine.
 
-Thus we can write any distance-preserving $\map{f}{\Re^2}{\Re^2}$ as
+Thus any distance-preserving $\map{f}{\Re^2}{\Re^2}$ is a linear map
+plus a translation,
 $f(\vec{v})=t(\vec{v})+\vec{v}_0$ for some constant vector $\vec{v}_0$
 and linear map $t$ that is distance-preserving.
-So what is left in order to understand distance-preserving maps is to
+So in order to understand distance-preserving maps what remains is to
 understand distance-preserving linear maps.
 
 Not every linear map is distance-preserving. 
@@ -191,12 +191,12 @@ are of length one and are mutually orthogonal.
 This is an 
 \definend{orthonormal matrix}\index{orthonormal matrix}%
 \index{matrix!orthonormal}
-or
+(or, more informally,
 \definend{orthogonal matrix}\index{orthogonal matrix}\index{matrix!orthogonal}
-(people often use the second term to mean not just that the columns are
+since people often use this term to mean not just that the columns are
 orthogonal but also that they have length one). 
 
-We can use this to
+We can leverage this characterization to
 understand the geometric actions of
 distance-preserving maps.
 Because $\norm{t(\vec{v}\,)}=\norm{\vec{v}\,}$, the map~$t$ 
@@ -231,7 +231,7 @@ or to one where it goes a quarter circle counterclockwise.
   \end{mat}$
 \end{center}
 
-We can geometrically describe these two cases.
+The geometric description of these two cases is easy.
 Let $\theta$ be the counterclockwise
 angle between the $x$-axis and the image of $\vec{e}_1$.
 The first matrix above represents, with respect to the standard bases,
@@ -269,19 +269,20 @@ preserves orientations
 and \definend{opposite}\index{opposite map}\index{orientation reversing map} 
 if it reverses orientation.
 
-So, we have characterized the Euclidean study of congruence.
+With that, we have characterized the Euclidean study of congruence.
 It considers, for plane figures, the properties that are invariant 
 under combinations of (i)~a rotation followed by a translation,
 or (ii)~a reflection followed by a translation
 (a reflection followed by a non-trivial 
 translation is a \definend{glide reflection}\index{reflection!glide}).
 
-Another idea, besides congruence of figures, encountered in 
-elementary geometry is
-that figures are \definend{similar}\index{similar triangles}\index{triangles!similar} 
+Another idea encountered in 
+elementary geometry, besides congruence of figures, is
+that figures are 
+\definend{similar}\index{similar triangles}\index{triangles!similar} 
 if they are congruent after a change of scale. 
-These two triangles are similar since the second is 
-the same shape as the first, but $3/2$-ths the size.
+The two triangles below are similar since the second is 
+the same shape as the first but $3/2$-ths the size.
 \begin{center}
   \includegraphics{ch3.65}
 \end{center}
@@ -475,14 +476,14 @@ More on Klein and the Erlanger Program is in \cite{Yaglom}.
       \begin{exparts}
         \partsitem The Pythagorean Theorem gives that
           three points are 
-          colinear if and only if
+          collinear if and only if
           (for some ordering of them into $P_1$, $P_2$, and $P_3$),
           $\dist(P_1,P_2)+\dist(P_2,P_3)=\dist(P_1,P_3)$.
           Of course, where $f$ is distance-preserving, this holds
           if and only if
           $\dist(f(P_1),f(P_2))+\dist(f(P_2),f(P_3))=\dist(f(P_1),f(P_3))$,
           which, again by Pythagoras, is true if and only if
-          $f(P_1)$, $f(P_2)$, and $f(P_3)$ are colinear.
+          $f(P_1)$, $f(P_2)$, and $f(P_3)$ are collinear.
         
           The argument for betweeness is similar (above, $P_2$ is 
           between $P_1$ and $P_3$).
