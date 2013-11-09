@@ -65,10 +65,10 @@ beginfig(2);
 %                         rank of $t^j$ (below)
 % 			\end{tabular} etex,OUT);
     glabel.bot(btex \small Power $j$ of the transformation etex,OUT);
-    otick.bot(btex \scriptsize $0$etex,1);    
-    otick.bot(btex \scriptsize $1$etex,2);    
-    otick.bot(btex \scriptsize $2$etex,3);    
-    otick.bot(btex \scriptsize $j$etex,5);    
+    otick.bot(btex \small $0$etex,1);    
+    otick.bot(btex \small $1$etex,2);    
+    otick.bot(btex \small $2$etex,3);    
+    otick.bot(btex \small $j$etex,5);    
     otick.bot(btex{\ }etex,8);    
     grid.bot(btex$n$etex,9) withcolor .85white;    
     otick.bot(btex{\ }etex,10);    
@@ -114,11 +114,11 @@ beginfig(4) % equiv relation; row-equiv mats from ch1.27, further split
   u:=1in; v:=u; w:=v; % was: 1in
 
   path p[]; partition; % dotlabels.ulft(5,6,7,8,9,10,11,12,13);
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-    label.rt(btex {\scriptsize $S$} etex,z14);
+    label.rt(btex {\small $S$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-    label.rt(btex {\scriptsize $T$} etex,z15);
+    label.rt(btex {\small $T$} etex,z15);
 
   pickup pencircle scaled line_width_light;
   % split part in center
@@ -159,11 +159,11 @@ beginfig(5) % equiv relation; finer partition needs more reps
   u:=1in; v:=u; w:=v; % was: 1in
 
   path p[]; partition; % dotlabels.ulft(5,6,7,8,9,10,11,12,13);
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; %drawpoint(z14);
-    label.rt(btex {\scriptsize $\star$} etex,z14);
+    label.rt(btex {\small $\star$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; %drawpoint(z15);
-    label.rt(btex {\scriptsize $\star$} etex,z15);
+    label.rt(btex {\small $\star$} etex,z15);
 
   pickup pencircle scaled line_width_light;
   % split part in center
@@ -176,16 +176,16 @@ beginfig(5) % equiv relation; finer partition needs more reps
     p21 = z23--z24;
     draw p21 dashed evenly scaled .5;
     z25=.55[z20,z24]; z26=.4[z24,z23];
-    label(btex {\scriptsize $\star$} etex,(x25,y26));
+    label(btex {\small $\star$} etex,(x25,y26));
   % split part in upper left
   z30 = point .25 of p1;
     z31 = whatever[z0,z3]; y31 = y30;
     p30 = z30--z31; 
     draw p30 dashed evenly scaled .5;
     z32=.35[z31,z30]; z33=.5[z6,z31];
-    label(btex {\scriptsize $\star$} etex,(x32,y33));
+    label(btex {\small $\star$} etex,(x32,y33));
     z34=.55[z31,z30]; z35=.5[z3,z31];
-    label(btex {\scriptsize $\star$} etex,(x34,y35));
+    label(btex {\small $\star$} etex,(x34,y35));
   % split part in upper right
   z40 = point .55 of p4;
   z41 = point .85 of p4;
@@ -197,14 +197,14 @@ beginfig(5) % equiv relation; finer partition needs more reps
     draw p41 dashed evenly scaled .5;
 
     z44=.5[z5,z43]; z45=.45[z41,z43];
-    label(btex {\scriptsize $\star$} etex,(x44,y45));
+    label(btex {\small $\star$} etex,(x44,y45));
     z46=.5[z43,z42]; z47=.55[z41,z43];
-    label(btex {\scriptsize $\star$} etex,(x46,y47));
+    label(btex {\small $\star$} etex,(x46,y47));
     z48=.45[z42,z11]; z49=.65[z40,z42];
-    label(btex {\scriptsize $\star$} etex,(x48,y49));
+    label(btex {\small $\star$} etex,(x48,y49));
   % then lower left
   z50=.4[z0,z7]; z51=.4[z0,z8];
-  label(btex {\scriptsize $\star$} etex,(x50,y51));
+  label(btex {\small $\star$} etex,(x50,y51));
 
   %dotlabels.top(20,21,22,23,24,30,31,40,41,42,43);
 endfig;
@@ -304,27 +304,27 @@ beginfig(8) % graph of rank falling and nullity rising
   for i = 1 upto 3:
     drawdot (i*w,0v);
   endfor
-  label.bot(btex \scriptsize $0$ etex,(1w,0v));
-  label.bot(btex \scriptsize $1$ etex,(2w,0v));
-  label.bot(btex \scriptsize $2$ etex,(3w,0v));
+  label.bot(btex \small $0$ etex,(1w,0v));
+  label.bot(btex \small $1$ etex,(2w,0v));
+  label.bot(btex \small $2$ etex,(3w,0v));
   drawdot (x10,0v);
-  label.bot(btex \scriptsize $j$ etex,(10w,0v));
+  label.bot(btex \small $j$ etex,(10w,0v));
   for i = 17 upto 21:
     drawdot (i*w,0v);
   endfor
-  % label.bot(btex \scriptsize $k$ etex,(18w,0v));
-  label.bot(btex \scriptsize $n$ etex,(20w,0v));
-  % label.bot(btex \scriptsize $k+1$ etex,(14w,0v));
+  % label.bot(btex \small $k$ etex,(18w,0v));
+  label.bot(btex \small $n$ etex,(20w,0v));
+  % label.bot(btex \small $k+1$ etex,(14w,0v));
   pickup sidetoside_tick;
   for i = 9 upto 9:
     drawdot (0w,i*v);
   endfor
-  label.lft(btex \scriptsize $n$ etex,(0w,9v));
+  label.lft(btex \small $n$ etex,(0w,9v));
   % drawdot (0w,y10);
   for i = 1 upto 1:
     drawdot (0w,i*v);
   endfor
-  label.lft(btex \scriptsize $0$ etex,(0w,1v));
+  label.lft(btex \small $0$ etex,(0w,1v));
   % The points
   numeric whisker_width; whisker_width=.4v;
   pickup pencircle scaled line_width_light;
@@ -333,11 +333,11 @@ beginfig(8) % graph of rank falling and nullity rising
     draw (x10,y10+0.5v)--(x10,y4-0.5v) withcolor .8white;  % vert line above dot
     draw (x10-.5whisker_width,y4-0.5v)--(x10+.5whisker_width,y4-0.5v) withcolor .8white; % whisker at  top
     draw (x10-.5whisker_width,y10+0.5v)--(x10+.5whisker_width,y10+0.5v) withcolor .8white; % whisker at  bot
-    label.rt(btex \scriptsize $\nullity (t^j)$ etex,(x10,.5[y10,y4]));
+    label.rt(btex \small $\nullity (t^j)$ etex,(x10,.5[y10,y4]));
     draw (x10,y10-0.5v)--(x10,1v) withcolor .8white; % vert line below dot
     draw (x10-.5whisker_width,y10-0.5v)--(x10+.5whisker_width,y10-0.5v) withcolor .8white; % whisker at top
     draw (x10-.5whisker_width,1v)--(x10+.5whisker_width,1v) withcolor .8white; % whisker at bot
-    label.lft(btex \scriptsize $\rank (t^j)$ etex,(x10,.55[y10,1v]));
+    label.lft(btex \small $\rank (t^j)$ etex,(x10,.55[y10,1v]));
   pickup pencircle scaled line_width_light;
   drawpoint((1w,9v));
   drawpoint((2w,7v));
@@ -347,18 +347,18 @@ beginfig(8) % graph of rank falling and nullity rising
   drawpoint((19w,2v));
   drawpoint((20w,2v));
   % drawpoint((21w,2v));
-  label(btex \scriptsize $\ldots$ etex,(21w,2v));
+  label(btex \small $\ldots$ etex,(21w,2v));
   % Generalized spaces
     z20=(20w,2v); % were to anchor the line for generalized spaces
     pickup pensquare  scaled line_width_light;
     draw (x20,y20+0.5v)--(x20,y4-0.5v) withcolor .8white;  % vert line above dot
     draw (x20-.5whisker_width,y4-0.5v)--(x20+.5whisker_width,y4-0.5v) withcolor .8white; % whisker at  top
     draw (x20-.5whisker_width,y20+0.5v)--(x20+.5whisker_width,y20+0.5v) withcolor .8white; % whisker at  bot
-    label.rt(btex \scriptsize $\dim(\gennullspace{t})$ etex,(x20,.5[y20,y4]));
+    label.rt(btex \small $\dim(\gennullspace{t})$ etex,(x20,.5[y20,y4]));
     draw (x20,y20-0.5v)--(x20,1v) withcolor .8white; % vert line below dot
     draw (x20-.5whisker_width,y20-0.5v)--(x20+.5whisker_width,y20-0.5v) withcolor .8white; % whisker at top
     draw (x20-.5whisker_width,1v)--(x20+.5whisker_width,1v) withcolor .8white; % whisker at bot
-    label.rt(btex \scriptsize $\dim(\genrangespace{t})$ etex,(x20,.8[y20,1v]));
+    label.rt(btex \small $\dim(\genrangespace{t})$ etex,(x20,.8[y20,1v]));
 endfig;
 
 

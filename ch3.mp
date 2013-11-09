@@ -247,11 +247,11 @@ beginfig(4) % R^3 and R^2
   z26=z6 shifted rtwoshift;
   pickup pencircle scaled line_width_light;
   drawarrow (z0--z4) shifted rtwoshift;
-    label.rt(btex {\scriptsize $\vec{w}_1$} etex,z24);
+    label.rt(btex {\small $\vec{w}_1$} etex,z24);
   drawarrow (z0--z6) shifted rtwoshift;
-    label.rt(btex {\scriptsize $\vec{w}_2$} etex,z26);
+    label.rt(btex {\small $\vec{w}_2$} etex,z26);
   drawarrow (z0--z2) shifted rtwoshift; % main vector 
-    label.rt(btex {\scriptsize $\vec{w}_1+\vec{w}_2$} etex,z22);
+    label.rt(btex {\small $\vec{w}_1+\vec{w}_2$} etex,z22);
 
   % The maps
   y21=y1; y23=y3; y25=y5; x21=x23=x25=.95[x0,x20];
@@ -306,11 +306,11 @@ beginfig(6) % an `a' vector
   z3=whatever[z0,z1]; x3=-.5w;
   z4=whatever[z0,z1]; y4=-.5v;
   draw z3--z4 withcolor lightgray;
-    %label.rt(btex \makebox[0pt][l]{\scriptsize $x+y=a$} etex,z4);
+    %label.rt(btex \makebox[0pt][l]{\small $x+y=a$} etex,z4);
   pickup pencircle scaled line_width_dark;
   z5=(.75w,1.25v);
   drawarrow (0,0)--z5;
-    label.urt(btex \makebox[0pt][l]{\scriptsize $\vec{v}_1$} etex,z5);
+    label.urt(btex \makebox[0pt][l]{\small $\vec{v}_1$} etex,z5);
 endfig;
 
 
@@ -333,11 +333,11 @@ beginfig(7) % an `b' vector
   z3=whatever[z0,z1]; x3=-.5w;
   z4=whatever[z0,z1]; y4=-.5v;
   draw z3--z4 withcolor lightgray;
-    %label.rt(btex \makebox[0pt][l]{\scriptsize $x+y=b$} etex,z4);
+    %label.rt(btex \makebox[0pt][l]{\small $x+y=b$} etex,z4);
   pickup pencircle scaled line_width_dark;
   z5=(2w,1v);
   drawarrow (0,0)--z5;
-    label.urt(btex \makebox[0pt][l]{\scriptsize $\vec{v}_2$} etex,z5);
+    label.urt(btex \makebox[0pt][l]{\small $\vec{v}_2$} etex,z5);
 endfig;
 
 
@@ -359,12 +359,12 @@ beginfig(8) % an `a+b' vector
   z3=whatever[z0,z1]; x3=w;
   z4=whatever[z0,z1]; y4=v;
   draw z3--z4 withcolor lightgray;
-    %label.rt(btex \makebox[0pt][l]{\scriptsize $x+y=a+b$} etex,z4);
+    %label.rt(btex \makebox[0pt][l]{\small $x+y=a+b$} etex,z4);
   draw (0,0)--(.75w,1.25v)--(2.75w,2.25v) withcolor lightgray;
   pickup pencircle scaled line_width_dark;
   z5=(2.75w,2.25v);
   drawarrow (0,0)--z5;
-    label.urt(btex \makebox[0pt][l]{\scriptsize $\vec{v}_1+\vec{v}_2$} etex,
+    label.urt(btex \makebox[0pt][l]{\small $\vec{v}_1+\vec{v}_2$} etex,
               z5);
 endfig;
 
@@ -500,7 +500,7 @@ beginfig(11) % R^3 and R^2
   pickup pencircle scaled line_width_light;
   xaxiscolor:=black;  yaxiscolor:=black; zaxiscolor:=black;
   draw_xyz_axes(1.5,3,2.5);
-    label.ulft(btex {\scriptsize $\Re^3$} etex,z3);
+    label.ulft(btex {\small $\Re^3$} etex,z3);
 
   % draw R^2 axes, in perspective (pasted from jh3d)
     save xaxis, yaxis;
@@ -512,7 +512,7 @@ beginfig(11) % R^3 and R^2
     project_point(13,yaxis);
     draw (z11--z12) shifted rtwoshift;
     draw (z11--z13) shifted rtwoshift;
-      label.urt(btex {\scriptsize $\Re^2$} etex,z13 shifted rtwoshift);
+      label.urt(btex {\small $\Re^2$} etex,z13 shifted rtwoshift);
     free_vect(yaxis);  free_vect(xaxis); 
  
   % vectors in R3
@@ -528,7 +528,7 @@ beginfig(11) % R^3 and R^2
   z22=z2 shifted rtwoshift;
   pickup pencircle scaled line_width_light;
   drawarrow (z0--z2) shifted rtwoshift;  
-    label.lrt(btex {\scriptsize $\vec{w}$} etex,z2 shifted rtwoshift);
+    label.lrt(btex {\small $\vec{w}$} etex,z2 shifted rtwoshift);
   
   % The map
   path action_path[];
@@ -550,13 +550,13 @@ beginfig(12) % `a' vectors mapped to a
   path xaxis, yaxis;
     xaxis = (-w,0v)--(3.5w,0v); draw xaxis;
     yaxis = (0w,-v)--(0w,3.5v); draw yaxis;
-    label.ulft(btex {\scriptsize $\Re^2$} etex,point 0 of xaxis);
+    label.ulft(btex {\small $\Re^2$} etex,point 0 of xaxis);
   z0=(0w,2v); z1=(2w,0v);   % line is x+y=2
   pickup pencircle scaled line_width_light;
   z3=whatever[z0,z1]; x3=-.5w;
   z4=whatever[z0,z1]; y4=-.5v;
   draw z3--z4 dashed withdots scaled 0.25;
-    %label.rt(btex \makebox[0pt][l]{\scriptsize $x+y=a$} etex,z4);
+    %label.rt(btex \makebox[0pt][l]{\small $x+y=a$} etex,z4);
   z5=(.75w,1.25v)-(.5pt,.5pt);
   pickup pencircle scaled line_width_light;
   for i=-3 step 1 until 3:
@@ -567,12 +567,12 @@ beginfig(12) % `a' vectors mapped to a
   save roneshift; pair roneshift; roneshift = (5.5w,0); % how far R1 is shifted
   pickup pensquare scaled line_width_light;
   draw (xaxis shifted roneshift);
-    label.urt(btex {\scriptsize $\Re^1$} etex,(point infinity of xaxis) shifted roneshift);
+    label.urt(btex {\small $\Re^1$} etex,(point infinity of xaxis) shifted roneshift);
   pickup pencircle scaled 2line_width_dark;
   drawdot (z1 shifted roneshift) withcolor white;
   pickup pencircle scaled line_width_light;
   drawdot (z1 shifted roneshift);
-    label.bot(btex {\scriptsize $w$} etex,z1 shifted roneshift);
+    label.bot(btex {\small $w$} etex,z1 shifted roneshift);
   % The map
   path action_path[];
   action_path1 = z5{right}...{down}(z1 shifted roneshift);
@@ -603,8 +603,8 @@ beginfig(13) % \P_5 space with some parabolas
   for j=-2 upto 2: 
     draw p shifted (j*w,0v);
   endfor
-  label.rt(btex {\scriptsize $p_0$} etex,(0w,-1v));
-  label.rt(btex {\scriptsize $p_1$} etex,(1w,-1v));
+  label.rt(btex {\small $p_0$} etex,(0w,-1v));
+  label.rt(btex {\small $p_1$} etex,(1w,-1v));
 endfig;
 
 
@@ -631,14 +631,14 @@ beginfig(14) % dialation map
   z2=(3w,3v); z3=(3w,1.5v);
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.rt(btex {\scriptsize $\vec{u}$} etex,z0);
+    label.rt(btex {\small $\vec{u}$} etex,z0);
   drawarrow (0w,0v)--z1;
-    label.rt(btex {\scriptsize $\vec{v}$} etex,z1);
+    label.rt(btex {\small $\vec{v}$} etex,z1);
   drawarrow ((0w,0v)--z2) shifted codomainshift;
-    label.rt(btex {\scriptsize $d_{1.5}(\vec{u})$} etex,
+    label.rt(btex {\small $d_{1.5}(\vec{u})$} etex,
                z2 shifted codomainshift);
   drawarrow ((0w,0v)--z3) shifted codomainshift;
-    label.rt(btex {\scriptsize $d_{1.5}(\vec{v})$} etex,
+    label.rt(btex {\small $d_{1.5}(\vec{v})$} etex,
                z3 shifted codomainshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
@@ -671,9 +671,9 @@ beginfig(15) % rotation map
   z2=((3*(sqrt 3)*.5-.5)*w,(1.5+(sqrt 3)*.5)*v); 
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.rt(btex {\scriptsize $\vec{u}$} etex,z0);
+    label.rt(btex {\small $\vec{u}$} etex,z0);
   drawarrow ((0w,0v)--z2) shifted codomainshift;
-    label.rt(btex {\scriptsize $t_{\pi/6}(\vec{u})$} etex,  % actually \pi/6
+    label.rt(btex {\small $t_{\pi/6}(\vec{u})$} etex,  % actually \pi/6
                z2 shifted codomainshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
@@ -705,14 +705,14 @@ beginfig(16) % flip over a line map
   z2=(2w,3v); 
   pickup pencircle scaled line_width_dark;
   draw (-.5w,-.5v)--(3w,3v) dashed withdots scaled .5;
-  label.ulft(btex {\scriptsize $\ell$} etex,0.5[(0w,0v),(3w,3v)]);
+  label.ulft(btex {\small $\ell$} etex,0.5[(0w,0v),(3w,3v)]);
   z3=(-.5w,-.5v) shifted codomainshift; z4=(3w,3v) shifted codomainshift;
   draw z3--z4 dashed withdots scaled .5; 
   drawarrow (0w,0v)--z0;
-    label.rt(btex {\scriptsize $\vec{u}$} etex,z0);
+    label.rt(btex {\small $\vec{u}$} etex,z0);
   drawarrow ((0w,0v)--z2) shifted codomainshift;
     picture pa;  % in case the line ell hits this label
-    pa = thelabel.urt(btex {\scriptsize $f_{\ell}(\vec{u})$} etex,
+    pa = thelabel.urt(btex {\small $f_{\ell}(\vec{u})$} etex,
                    z2 shifted codomainshift);
     unfill bbox pa; draw pa;
 
@@ -732,11 +732,11 @@ beginfig(17) % equiv relation; all vs's partitioned by iso
   u:=1.2in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-    label.rt(btex {\scriptsize $V$} etex,z14);
+    label.rt(btex {\small $V$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-    label.rt(btex {\scriptsize $W$} etex,z15);
+    label.rt(btex {\small $W$} etex,z15);
   %dotlabels.rt(1,2,3,5,6,7,8,9,10,11);
 endfig;
 
@@ -750,17 +750,17 @@ beginfig(18) % equiv relation; all vs's partitioned by iso
   u:=1.2in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.45[x0,x9]; y14=.5[y10,y9]; 
-    label.rt(btex {\scriptsize $\star\;\Re^2$} etex,z14);
+    label.rt(btex {\small $\star\;\Re^2$} etex,z14);
   x15=.15[x3,x5]; y15=.6[y6,y3]; 
-    label.rt(btex {\scriptsize $\star\;\Re^0$} etex,z15);
+    label.rt(btex {\small $\star\;\Re^0$} etex,z15);
   x16=.15[x5,x11]; y16=.35[y9,y5]; 
-    label.rt(btex {\scriptsize $\star\;\Re^3$} etex,z16);
+    label.rt(btex {\small $\star\;\Re^3$} etex,z16);
   x17=.1[x8,x7]; y17=.5[0,y8]; 
-    label.rt(btex {\scriptsize $\star\;\Re^1$} etex,z17);
+    label.rt(btex {\small $\star\;\Re^1$} etex,z17);
   %x18=.35[x8,x7]; y18=.5[y4,y8]; 
-  %  label.rt(btex {\scriptsize $\star\;\Re^4$} etex,z18);
+  %  label.rt(btex {\small $\star\;\Re^4$} etex,z18);
   %dotlabels.rt(1,2,3,5,6,7,8,9,10,11);
 endfig;
 
@@ -892,10 +892,10 @@ beginfig(22) % \pi/6 rotation map
   z1=((-3+(sqrt 3))*0.5*w,(1+(3*(sqrt 3)))*0.5*v);
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.rt(btex {\scriptsize $\colvec[r]{1 \\ 3}$} etex,z0);
+    label.rt(btex {\small $\colvec[r]{1 \\ 3}$} etex,z0);
   drawarrow ((0w,0v)--z1) shifted codomainshift;
     z2=(0w,3v);
-    label.rt(btex \makebox[0pt][l]{\scriptsize $\colvec[r]{(-3+\sqrt{3})/2 \\
+    label.rt(btex \makebox[0pt][l]{\small $\colvec[r]{(-3+\sqrt{3})/2 \\
                                         (1+3\sqrt{3})/2}$} etex,
                z2 shifted codomainshift);
 
@@ -917,11 +917,11 @@ beginfig(23) % equiv relation; all matrices partitioned by mat-equiv
   u:=1.2in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-    label.rt(btex {\scriptsize $H$} etex,z14);
+    label.rt(btex {\small $H$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-    label.rt(btex {\scriptsize $\hat{H}$} etex,z15);
+    label.rt(btex {\small $\hat{H}$} etex,z15);
   %dotlabels.rt(1,2,3,5,6,7,8,9,10,11);
 endfig;
 
@@ -935,11 +935,11 @@ beginfig(23) % equiv relation; all matrices partitioned by mat-equiv
   u:=1.2in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-    label.rt(btex {\scriptsize $H$} etex,z14);
+    label.rt(btex {\small $H$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-    label.rt(btex {\scriptsize $\hat{H}$} etex,z15);
+    label.rt(btex {\small $\hat{H}$} etex,z15);
   %dotlabels.rt(1,2,3,5,6,7,8,9,10,11);
 endfig;
 
@@ -1068,7 +1068,7 @@ beginfig(26) % (2,2,-1) and its projection
     label.rt(btex \raisebox{0ex}[0pt][0pt]{\tiny $\colvec[r]{1 \\ 2 \\ -1}$} etex,z1);
   pickup pencircle scaled (line_width_dark);
   drawarrow z0--z2;
-    %label.lrt(btex {\scriptsize $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);
+    %label.lrt(btex {\small $\colvec[r]{1 \\ 2 \\ 0}$} etex,z2);
   draw_action_arrow((z1+(1pt,0))--(z2+(1pt,0)));
   % shift so y-axes of this and prior one line up; use raisebox in TeX file.
   show ypart(llcorner currentpicture);
@@ -1094,11 +1094,11 @@ beginfig(27) % projection onto a line map
     z3=whatever[z0,z1]; x3=xpart(point 1 of xaxis);
   pickup pencircle scaled line_width_light;
   path ell; ell=z2--z3;  draw ell;
-    label.bot(btex {\scriptsize $\ell$} etex,z3);
+    label.bot(btex {\small $\ell$} etex,z3);
   pickup pencircle scaled line_width_dark;
   draw z0--1.04z1 withcolor white;
   drawarrow z0--z1;
-    label.bot(btex {\scriptsize $\vec{p}$} etex,z1);
+    label.bot(btex {\small $\vec{p}$} etex,z1);
 endfig;
 
 
@@ -1493,8 +1493,8 @@ beginfig(32) % decomposition of wind vector from prior picture
   % draw axes
   pickup pensquare scaled line_width_light;
   draw z1--z2; draw z3--z4;
-    label.lrt(btex {\scriptsize \textit{east}} etex,z4);
-    label.ulft(btex {\scriptsize \textit{north}} etex,z2);
+    label.lrt(btex {\small \textit{east}} etex,z4);
+    label.ulft(btex {\small \textit{north}} etex,z2);
   z0 = whatever[z1,z2] = whatever[z3,z4];  % location of (0,0)
   show z0;
   
@@ -1663,8 +1663,8 @@ beginfig(34) % submarine will be able to hit its target?
   z2 = whatever[z0,z1]; y2=ypart(point 1 of yaxis);
   z3 = whatever[z0,z1]; y3=ypart(point 0 of yaxis);
   draw z2--z3 dashed evenly; 
-  label.bot(btex {\scriptsize\textit{east}} etex,point 1 of xaxis);
-  label.lft(btex {\scriptsize\textit{north}} etex,point 1 of yaxis);
+  label.bot(btex {\small\textit{east}} etex,point 1 of xaxis);
+  label.lft(btex {\small\textit{north}} etex,point 1 of yaxis);
 endfig;
 
 
@@ -1695,7 +1695,7 @@ beginfig(35) % projection picture like stick figure's; for Gram-Schmidt
   draw z0--z2 withcolor white;
   pickup pencircle scaled line_width_dark; % vector projected to
   drawarrow z0--z2 cutafter bpath cps;
-    label.bot(btex \makebox[0ex][l]{\scriptsize $\proj{\vec{p}}{\spanof{\vec{s}}}$} etex,z2);
+    label.bot(btex \makebox[0ex][l]{\small $\proj{\vec{p}}{\spanof{\vec{s}}}$} etex,z2);
 
   z5=z1 rotated 55;
   z6=whatever[z0,z5]; y6=ypart(point 0 of yaxis); % endpoint of line
@@ -1709,7 +1709,7 @@ beginfig(35) % projection picture like stick figure's; for Gram-Schmidt
     draw z0--z10 withcolor white;
   pickup pencircle scaled line_width_light; % vector projected from
   drawarrow z0--z10 cutafter bpath v;
-    label.ulft(btex {\scriptsize $\vec{v}$} etex,.618[z0,z10]);
+    label.ulft(btex {\small $\vec{v}$} etex,.618[z0,z10]);
 
   % draw the dotted line
   save perppath; path perppath;
@@ -1720,7 +1720,7 @@ beginfig(35) % projection picture like stick figure's; for Gram-Schmidt
   %draw perppath dashed withdots scaled .5;
   pickup pencircle scaled line_width_dark; % 
   drawarrow z2--z10 cutbefore bpath cps cutafter bpath v; 
-  label.rt(btex {\scriptsize $\vec{v}-\proj{\vec{p}}{\spanof{\vec{s}}}$} etex,.618[z2,z10]);
+  label.rt(btex {\small $\vec{v}-\proj{\vec{p}}{\spanof{\vec{s}}}$} etex,.618[z2,z10]);
 endfig;
 
 
@@ -2106,16 +2106,16 @@ beginfig(42) % least squares coin flip
   % the axes
   pickup pensquare scaled line_width_light
   draw z0--z1;  % flips axis (x-axis)
-    label.lrt(btex {\scriptsize \textit{flips}} etex,z1);
+    label.lrt(btex {\small \textit{flips}} etex,z1);
     updown_ticks(9,(10w,0v),(10w,0v));
-    label.bot(btex {\scriptscriptsize 30} etex,(30w,0v));
-    label.bot(btex {\scriptscriptsize 60} etex,(60w,0v));
-    label.bot(btex {\scriptscriptsize 90} etex,(90w,0v));
+    label.bot(btex {\tiny 30} etex,(30w,0v));
+    label.bot(btex {\tiny 60} etex,(60w,0v));
+    label.bot(btex {\tiny 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
-    label.ulft(btex {\scriptsize \textit{heads}} etex,z2);
+    label.ulft(btex {\small \textit{heads}} etex,z2);
     sidetoside_ticks(6,(0w,10v),(0w,10v));
-    label.lft(btex {\scriptscriptsize 30} etex,(0w,30v));
-    label.lft(btex {\scriptscriptsize 60} etex,(0w,60v));
+    label.lft(btex {\tiny 30} etex,(0w,30v));
+    label.lft(btex {\tiny 60} etex,(0w,60v));
 
   % the line
   pickup pencircle scaled line_width_light;
@@ -2194,18 +2194,18 @@ beginfig(44) % least squares money denom vs life
   % the axes
   pickup pensquare scaled line_width_light
   draw z0--z1;  % denom axis (x-axis)
-    label.lrt(btex {\scriptsize \textit{denom}} etex,z1);
+    label.lrt(btex {\small \textit{denom}} etex,z1);
     updown_ticks(10,(10w,0v),(10w,0v));
-    label.bot(btex {\scriptscriptsize 10} etex,(10w,0v));
-    label.bot(btex {\scriptscriptsize 30} etex,(30w,0v));
-    label.bot(btex {\scriptscriptsize 50} etex,(50w,0v));
-    label.bot(btex {\scriptscriptsize 70} etex,(70w,0v));
-    label.bot(btex {\scriptscriptsize 90} etex,(90w,0v));
+    label.bot(btex {\tiny 10} etex,(10w,0v));
+    label.bot(btex {\tiny 30} etex,(30w,0v));
+    label.bot(btex {\tiny 50} etex,(50w,0v));
+    label.bot(btex {\tiny 70} etex,(70w,0v));
+    label.bot(btex {\tiny 90} etex,(90w,0v));
   draw z0--z2;  % heads axis (y-axis)
-    label.ulft(btex {\scriptsize \textit{life (yrs)}} etex,z2);
+    label.ulft(btex {\small \textit{life (yrs)}} etex,z2);
     sidetoside_ticks(8,(0w,1v),(0w,1v));
-    label.lft(btex {\scriptscriptsize 4} etex,(0w,4v));
-    label.lft(btex {\scriptscriptsize 8} etex,(0w,8v));
+    label.lft(btex {\tiny 4} etex,(0w,4v));
+    label.lft(btex {\tiny 8} etex,(0w,8v));
 
   % the line
   pickup pencircle scaled line_width_light;
@@ -2247,22 +2247,22 @@ beginfig(45) % least squares men's mile
     draw (z0+(5w,0v))--z0 dashed withdots scaled .25;
     label.lrt(btex {\small \textit{year}} etex,z1);
     updown_ticks(15,(10w,0v),(10w,0v));
-    label.bot(btex {\scriptsize 1870} etex,(20w,0v));
-    label.bot(btex {\scriptsize 1890} etex,(40w,0v));
-    label.bot(btex {\scriptsize 1910} etex,(60w,0v));
-    label.bot(btex {\scriptsize 1930} etex,(80w,0v));
-    label.bot(btex {\scriptsize 1950} etex,(100w,0v));
-    label.bot(btex {\scriptsize 1970} etex,(120w,0v));
-    label.bot(btex {\scriptsize 1990} etex,(140w,0v));
+    label.bot(btex {\small 1870} etex,(20w,0v));
+    label.bot(btex {\small 1890} etex,(40w,0v));
+    label.bot(btex {\small 1910} etex,(60w,0v));
+    label.bot(btex {\small 1930} etex,(80w,0v));
+    label.bot(btex {\small 1950} etex,(100w,0v));
+    label.bot(btex {\small 1970} etex,(120w,0v));
+    label.bot(btex {\small 1990} etex,(140w,0v));
   pickup pensquare scaled line_width_light;
   draw (z0+(0w,5v))--z2;  % world record axis (y-axis)
     pickup pencircle scaled line_width_light;
     draw (z0+(0w,5v))--z0 dashed withdots scaled .25;
     label.ulft(btex {\small \textit{seconds}} etex,z2);
     sidetoside_ticks(6,(0w,10v),(0w,10v));
-    label.lft(btex {\scriptsize 220} etex,(0w,10v));
-    label.lft(btex {\scriptsize 240} etex,(0w,30v));
-    label.lft(btex {\scriptsize 260} etex,(0w,50v));
+    label.lft(btex {\small 220} etex,(0w,10v));
+    label.lft(btex {\small 240} etex,(0w,30v));
+    label.lft(btex {\small 260} etex,(0w,50v));
     
   % the line
   pickup pencircle scaled line_width_light;
@@ -2451,7 +2451,7 @@ beginfig(50) % rotation ccw
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x\cos\theta-y\sin\theta \\ x\sin\theta+y\cos\theta}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{x\cos\theta-y\sin\theta \\ x\sin\theta+y\cos\theta}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2533,7 +2533,7 @@ beginfig(51) % projection to xz-axis
   
   %z30 = .25*(z10+z11+z12+z13)+.5*codomain_shift;
   z30 = (point .5 of zaxis) shifted (.5*codomain_shift);
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y \\ z} \mapsto \colvec{x \\ 0 \\ z}}$ etex,z30);
+  label(btex $\xrightarrow{\small \colvec{x \\ y \\ z} \mapsto \colvec{x \\ 0 \\ z}}$ etex,z30);
 
   % clean up the observer
   free_vect(lpn);
@@ -2568,7 +2568,7 @@ beginfig(52) % tripling the x's
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{3x \\ y}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{3x \\ y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2607,7 +2607,7 @@ beginfig(53) % negative doubling the x's
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{-2x \\ y}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{-2x \\ y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2646,7 +2646,7 @@ beginfig(54) % negative doubling the x's
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{y \\ x}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{y \\ x}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2690,7 +2690,7 @@ beginfig(55) % skew's action
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2737,7 +2737,7 @@ beginfig(56) % skew on unit square
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{x \\ 2x+y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2785,7 +2785,7 @@ beginfig(57) % second skew on unit square
           xpart(point .5 of (xaxis shifted codomain_shift))];
   y1 = .5[ypart(point .5 of yaxis),
           ypart(point .5 of (yaxis shifted codomain_shift))];
-  label(btex $\xrightarrow{\scriptsize \colvec{x \\ y} \mapsto \colvec{x+2y \\ y}}$ etex,z1);
+  label(btex $\xrightarrow{\small \colvec{x \\ y} \mapsto \colvec{x+2y \\ y}}$ etex,z1);
   
   % the vectors
   z0 = (0w,0v);
@@ -2968,9 +2968,9 @@ beginfig(62) % orthonormal bases; orientation-preserving
   z2 = z1 rotated 90;
   pickup pencircle scaled line_width_dark;
   drawarrow (0,0)--z1;
-    label.urt(btex {\scriptsize $\colvec{a \\ b}$} etex,z1);
+    label.urt(btex {\small $\colvec{a \\ b}$} etex,z1);
   drawarrow (0,0)--z2;
-    label.ulft(btex {\scriptsize $\colvec{-b \\ a}$} etex,z2);
+    label.ulft(btex {\small $\colvec{-b \\ a}$} etex,z2);
 endfig;
 
 
@@ -3008,9 +3008,9 @@ beginfig(63) % orthonormal bases; orientation-reversing
   z2 = z1 rotated -90;
   pickup pencircle scaled line_width_dark;
   drawarrow (0,0)--z1;
-    label.urt(btex {\scriptsize $\colvec{a \\ b}$} etex,z1);
+    label.urt(btex {\small $\colvec{a \\ b}$} etex,z1);
   drawarrow (0,0)--z2;
-    label.lrt(btex {\scriptsize $\colvec{b \\ -a}$} etex,z2);
+    label.lrt(btex {\small $\colvec{b \\ -a}$} etex,z2);
 endfig;
 
 
@@ -3053,9 +3053,9 @@ beginfig(64) % orthonormal bases; orientation-reversing, includes refl line
   z2 = z1 rotated -90;
   pickup pencircle scaled line_width_dark;
   drawarrow (0,0)--z1;
-    label.urt(btex {\scriptsize $\colvec{a \\ b}$} etex,z1);
+    label.urt(btex {\small $\colvec{a \\ b}$} etex,z1);
   drawarrow (0,0)--z2;
-    label.lrt(btex {\scriptsize $\colvec{b \\ -a}$} etex,z2);
+    label.lrt(btex {\small $\colvec{b \\ -a}$} etex,z2);
 endfig;
 
 
@@ -3420,14 +3420,14 @@ beginfig(72) % reflection about the line \ell
   z30 = circ_one intersectiontimes xaxis;
   z31 = circ_one intersectiontimes source_vec;
   draw subpath (x30,x31) of circ_one;
-    label.rt(btex {\scriptsize $\theta$} etex,point (.5[x30,x31]) of circ_one);
+    label.rt(btex {\small $\theta$} etex,point (.5[x30,x31]) of circ_one);
   z32 = circ_two intersectiontimes xaxis;
   z33 = circ_two intersectiontimes ell;
   draw subpath (x32,x33) of circ_two;
-    label.rt(btex {\scriptsize $\phi$} etex,point (.5[x32,x33]) of circ_two);
+    label.rt(btex {\small $\phi$} etex,point (.5[x32,x33]) of circ_two);
   z34 = circ_one intersectiontimes result_vec;
   draw (subpath (x30,x34) of circ_one) shifted codomain_shift;
-    label.rt(btex {\scriptsize $\phi-(\theta-\phi)$} etex,
+    label.rt(btex {\small $\phi-(\theta-\phi)$} etex,
        (point (.5[x30,x34]) of circ_one) shifted codomain_shift); 
 endfig;
 
@@ -3448,9 +3448,9 @@ beginfig(73)  % triangle for reflection calculation
   % draw the triangle
   pickup pencircle scaled line_width_light;
   draw base; draw alt; draw hyp;
-  label.bot(btex {\scriptsize $x$} etex,point .5 of base);
-  label.rt(btex {\scriptsize $kx$} etex,point .618 of alt);
-  label.lft(btex {\scriptsize $x\sqrt{1+k^2}$} etex,point .618 of hyp);
+  label.bot(btex {\small $x$} etex,point .5 of base);
+  label.rt(btex {\small $kx$} etex,point .618 of alt);
+  label.lft(btex {\small $x\sqrt{1+k^2}$} etex,point .618 of hyp);
   % draw the arc of the angle and label it
   save circ_rad; numeric circ_rad;
     circ_rad = 2*2u;
@@ -3459,7 +3459,7 @@ beginfig(73)  % triangle for reflection calculation
   z10 = circ intersectiontimes base;
   z11 = circ intersectiontimes hyp;
   draw subpath (x10,x11) of circ;
-    label.rt(btex {\scriptsize $\theta$} etex,point (.5[x10,x11]) of circ);
+    label.rt(btex {\small $\theta$} etex,point (.5[x10,x11]) of circ);
 endfig;
 
 
@@ -3537,14 +3537,14 @@ beginfig(75) % dialation map; like 14 but general
   z2=(3w,3v); z3=(3w,1.5v);
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.rt(btex {\scriptsize $\vec{u}$} etex,z0);
+    label.rt(btex {\small $\vec{u}$} etex,z0);
   drawarrow (0w,0v)--z1;
-    label.rt(btex {\scriptsize $\vec{v}$} etex,z1);
+    label.rt(btex {\small $\vec{v}$} etex,z1);
   drawarrow ((0w,0v)--z2) shifted codomainshift;
-    label.rt(btex {\scriptsize $d_{s}(\vec{u})$} etex,
+    label.rt(btex {\small $d_{s}(\vec{u})$} etex,
                z2 shifted codomainshift);
   drawarrow ((0w,0v)--z3) shifted codomainshift;
-    label.rt(btex {\scriptsize $d_{s}(\vec{v})$} etex,
+    label.rt(btex {\small $d_{s}(\vec{v})$} etex,
                z3 shifted codomainshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
@@ -3818,9 +3818,9 @@ beginfig(81) % reflection about the line with slope \theta
   delta2 = z0--z11;
   pickup pencircle scaled line_width_dark;
   drawarrow delta1; drawarrow delta2;
-    label.rt(btex {\scriptsize $\vec{\delta}_1=\colvec{\cos(2\theta) \\ \sin(2\theta)}$} etex,
+    label.rt(btex {\small $\vec{\delta}_1=\colvec{\cos(2\theta) \\ \sin(2\theta)}$} etex,
              point infinity of delta1);
-    label.rt(btex {\scriptsize $\vec{\delta}_2=\colvec{\sin(2\theta) \\ -\cos(2\theta)}$} etex,
+    label.rt(btex {\small $\vec{\delta}_2=\colvec{\sin(2\theta) \\ -\cos(2\theta)}$} etex,
 	     point infinity of delta2);
   z20 = (1w,0v);
   z21 = (0w,1v);
@@ -3829,8 +3829,8 @@ beginfig(81) % reflection about the line with slope \theta
   e2 = (z0--z21) shifted codomain_shift;
   pickup pencircle scaled line_width_dark;
   drawarrow e1; drawarrow e2;
-      label.bot(btex {\scriptsize $\vec{e}_1$} etex,point .8 of e1);
-      label.lft(btex {\scriptsize $\vec{e}_2$} etex,point .8 of e2);
+      label.bot(btex {\small $\vec{e}_1$} etex,point .8 of e1);
+      label.lft(btex {\small $\vec{e}_2$} etex,point .8 of e2);
 
 endfig;
 
@@ -4191,14 +4191,14 @@ beginfig(95) % skew map
   h_u=(3w,2v); h_v=(3w,1v);
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--u_vec;
-    label.rt(btex {\scriptsize $\vec{u}$} etex,u_vec);
+    label.rt(btex {\small $\vec{u}$} etex,u_vec);
   drawarrow (0w,0v)--v_vec;
-    label.rt(btex {\scriptsize $\vec{v}$} etex,v_vec);
+    label.rt(btex {\small $\vec{v}$} etex,v_vec);
   drawarrow ((0w,0v)--h_u) shifted codomainshift;
-    label.rt(btex {\scriptsize $h(\vec{u})$} etex,
+    label.rt(btex {\small $h(\vec{u})$} etex,
                h_u shifted codomainshift);
   drawarrow ((0w,0v)--h_v) shifted codomainshift;
-    label.rt(btex {\scriptsize $h(\vec{v})$} etex,
+    label.rt(btex {\small $h(\vec{v})$} etex,
                h_v shifted codomainshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
@@ -4231,14 +4231,14 @@ beginfig(96) % skew map
   h_u=(1w,1v); h_v=(2w,-1v);
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--u_vec;
-    label.rt(btex {\scriptsize $\vec{u}$} etex,u_vec);
+    label.rt(btex {\small $\vec{u}$} etex,u_vec);
   drawarrow (0w,0v)--v_vec;
-    label.rt(btex {\scriptsize $\vec{v}$} etex,v_vec);
+    label.rt(btex {\small $\vec{v}$} etex,v_vec);
   drawarrow ((0w,0v)--h_u) shifted codomainshift;
-    label.rt(btex {\scriptsize $h(\vec{u})$} etex,
+    label.rt(btex {\small $h(\vec{u})$} etex,
                h_u shifted codomainshift);
   drawarrow ((0w,0v)--h_v) shifted codomainshift;
-    label.rt(btex {\scriptsize $h(\vec{v})$} etex,
+    label.rt(btex {\small $h(\vec{v})$} etex,
                h_v shifted codomainshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
@@ -4283,14 +4283,14 @@ beginfig(97) % compound map
   
   pickup pencircle scaled line_width_dark;
   drawarrow (0w,0v)--z0;
-    label.urt(btex {\scriptsize $\colvec[r]{\sqrt{3}/2 \\ 1/2}$} etex,z0);
+    label.urt(btex {\small $\colvec[r]{\sqrt{3}/2 \\ 1/2}$} etex,z0);
   drawarrow ((0w,0v)--z1) shifted codomainshift;
-    label.urt(btex {\scriptsize $\colvec[r]{(\sqrt{3}+1)/2 \\ 1/2}$} etex,z1 shifted codomainshift);
+    label.urt(btex {\small $\colvec[r]{(\sqrt{3}+1)/2 \\ 1/2}$} etex,z1 shifted codomainshift);
   drawarrow ((0w,0v)--z2) shifted compoundshift;
-    label.urt(btex {\scriptsize $\colvec[r]{\sqrt{2}(\sqrt{3}+1)/2 \\ \sqrt{2}/2}$} etex,
+    label.urt(btex {\small $\colvec[r]{\sqrt{2}(\sqrt{3}+1)/2 \\ \sqrt{2}/2}$} etex,
                z2 shifted compoundshift);
   drawarrow ((0w,0v)--z3) shifted d_compoundshift;
-    label.lrt(btex {\scriptsize $\colvec[r]{\sqrt{2}(\sqrt{3}+1)/4 \\ \sqrt{2}(1-\sqrt{3})/4}$} etex,
+    label.lrt(btex {\small $\colvec[r]{\sqrt{2}(\sqrt{3}+1)/4 \\ \sqrt{2}(1-\sqrt{3})/4}$} etex,
                z3 shifted d_compoundshift);
 
   z5 = .5[point 1 of xaxis,point 0 of (xaxis shifted codomainshift)];
@@ -4514,19 +4514,19 @@ gtos = grandisle..(14.1u,30u)..(14.4u,31.8u)..(13.9u,32u)..(13.6u,32.5u)
 pickup pencircle scaled 2pt;
 draw burlington; draw colchester; draw grandisle; draw swanton; draw winooski;
 %label everything
-boxit.bur(btex \textit{\scriptsize Burlington} etex); bur.n+(0,2pt)=burlington;
+boxit.bur(btex \textit{\small Burlington} etex); bur.n+(0,2pt)=burlington;
   bur.dx=bur.dy=1pt; unfill bpath bur;
   drawunboxed(bur);
-boxit.col(btex \textit{\scriptsize Colchester} etex); col.nw-(2pt,0)=colchester;
+boxit.col(btex \textit{\small Colchester} etex); col.nw-(2pt,0)=colchester;
   col.dx=col.dy=1pt; unfill bpath col;
   drawunboxed(col);
-boxit.gi(btex \textit{\scriptsize Grand Isle} etex); gi.e+(2pt,0)=grandisle;
+boxit.gi(btex \textit{\small Grand Isle} etex); gi.e+(2pt,0)=grandisle;
   gi.dx=gi.dy=1pt; unfill bpath gi;
   drawunboxed(gi);
-boxit.swa(btex \textit{\scriptsize Swanton} etex); swa.sw-(2pt,2pt)=swanton;
+boxit.swa(btex \textit{\small Swanton} etex); swa.sw-(2pt,2pt)=swanton;
   swa.dx=swa.dy=1pt; unfill bpath swa;
   drawunboxed(swa);
-boxit.win(btex \textit{\scriptsize Winooski} etex); win.w+(-2pt,2pt)=winooski;
+boxit.win(btex \textit{\small Winooski} etex); win.w+(-2pt,2pt)=winooski;
   win.dx=win.dy=1pt; unfill bpath win;
   drawunboxed(win);
 %label.bot(btex \textit{\small Burlington} etex,burlington);

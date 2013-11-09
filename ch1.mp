@@ -346,14 +346,14 @@ beginfig(14) % a vector as the sum of two others; not parallelogram
   pickup pencircle scaled line_width_light;
   z0=(0w,0v); z1=(5w,.65v);
   drawarrow (n[z0,z1])--((1-n)[z0,z1]);
-    label.bot(btex {\scriptsize $\vec{v}$} etex,.5[z0,z1]);
+    label.bot(btex {\small $\vec{v}$} etex,.5[z0,z1]);
   z2=(6w,3v);
   drawarrow (n[z1,z2])--((1-n)[z1,z2]);
-    label.rt(btex {\scriptsize $\vec{w}$} etex,.5[z1,z2]);
+    label.rt(btex {\small $\vec{w}$} etex,.5[z1,z2]);
   pickup pencircle scaled line_width_dark;
   z4=0.02*(-1*(y2-y0),x2-x0);  % perp to hyp to offset from w's arrow
   drawarrow (n[z0,z2]+z4)--((1-n)[z0,z2]+z4);
-    label.ulft(btex {\scriptsize $\vec{v}+\vec{w}$} etex,.707[z0+z4,z2+z4]);
+    label.ulft(btex {\small $\vec{v}+\vec{w}$} etex,.707[z0+z4,z2+z4]);
 endfig;
 
 
@@ -378,17 +378,17 @@ beginfig(15) % parallelogram rule for a vector as the sum of two others
   drawarrow z0--z2 withcolor white;
   pickup pencircle scaled line_width_dark;
 %  drawarrow (n[z0,z2])--((1-n)[z0,z2]);
-%    label.urt(btex {\scriptsize $\vec{v}+\vec{w}=
+%    label.urt(btex {\small $\vec{v}+\vec{w}=
 %                      \smash{\colvec{v_1+w_1 \\ v_2+w_2}}$} etex,z2);
   drawarrow (n[z0,z2])--((1-n)[z0,z2]);
-    label.urt(btex {\scriptsize $\vec{v}+\vec{w}$} etex,z2);
+    label.urt(btex {\small $\vec{v}+\vec{w}$} etex,z2);
   pickup pencircle scaled line_width_light;
   drawarrow (n[z0,z1])--((1-n)[z0,z1]);
-%    label.bot(btex {\scriptsize $\vec{v}=\colvec{v_1 \\ v_2}$} etex,z1);
-    label.bot(btex {\scriptsize $\vec{v}$} etex,z1);
+%    label.bot(btex {\small $\vec{v}=\colvec{v_1 \\ v_2}$} etex,z1);
+    label.bot(btex {\small $\vec{v}$} etex,z1);
   drawarrow (n[z0,z2])--((1-n)[z0,z5]);
-%    label.ulft(btex {\scriptsize $\vec{w}=\colvec{w_1\\ w_2}$} etex,z5);
-    label.ulft(btex {\scriptsize $\vec{w}$} etex,z5);
+%    label.ulft(btex {\small $\vec{w}=\colvec{w_1\\ w_2}$} etex,z5);
+    label.ulft(btex {\small $\vec{w}$} etex,z5);
 endfig;
 
 
@@ -424,7 +424,7 @@ beginfig(16) % vector description of a line
   z4=(3w,1v);
     drawarrow z2--((1-n)[z2,z4]) withcolor shading_color;
   drawarrow z3--z4;
-  label.urt(btex {\scriptsize 
+  label.urt(btex {\small 
        \ $\colvec{2 \\ -1}=\colvec{3 \\ 1}-\colvec{1 \\ 2}$} etex,.5[z3,z4]);  
 endfig;
 
@@ -470,8 +470,8 @@ beginfig(17) % line in R3 thru (1,2,3) and (5,5,5)
   drawarrow z5--z3 withcolor shading_color;
   drawarrow z5--z4 withcolor shading_color;
   drawarrow z3--z4;
-%  label.lrt(btex {\scriptsize $\colvec{1 \\ 1 \\ 1}$} etex,.5[z3,z4]);
-  \label.lrt(btex  {\scriptsize $\set{ \colvec{1 \\ 2 \\ 1}
+%  label.lrt(btex {\small $\colvec{1 \\ 1 \\ 1}$} etex,.5[z3,z4]);
+  \label.lrt(btex  {\small $\set{ \colvec{1 \\ 2 \\ 1}
                   +t\cdot\colvec{1 \\ 1 \\ 1}
                    \suchthat t\in\Re}$} etex,z2);
 endfig;
@@ -520,7 +520,7 @@ beginfig(18) % 2-flat in R3; 2x+y+z=4
   pickup pencircle scaled line_width_dark;
   draw .5[z1,z2]--z2--z4--.5[z4,z3];
 
-  label.rt(btex {\hspace*{0.05in} \scriptsize 
+  label.rt(btex {\hspace*{0.05in} \small 
           $P=\set{\colvec{x \\ y \\ z} \suchthat 2x+y+z=4}$} etex,.618[z3,z4]);
 endfig;
 
@@ -576,7 +576,7 @@ endfig;
 %   pickup pencircle scaled line_width_dark;
 %   draw .5[z1,z2]--z2--z4--.5[z4,z3];
 
-%   label.lft(btex {\scriptsize \hspace*{1em}
+%   label.lft(btex {\small \hspace*{1em}
 %                        $P=\set{\colvec{2 \\ 0 \\ 0}
 % 		               +\colvec{-0.5 \\ 1 \\ 0} y
 % 		               +\colvec{-0.5 \\ 0 \\ 1} z
@@ -634,7 +634,7 @@ beginfig(19) % 2-flat in R3; 2x+y+z=4, paramatized
   pickup pencircle scaled line_width_dark;
   draw .5[z1,z2]--z2--z4--.5[z4,z3];
 
-%   label.rt(btex {\hspace*{0.05in} \scriptsize 
+%   label.rt(btex {\hspace*{0.05in} \small 
 %                        $P=\set{\colvec{2 \\ 0 \\ 0}
 % 		               +\colvec{-0.5 \\ 1 \\ 0} y
 % 		               +\colvec{-0.5 \\ 0 \\ 1} z
@@ -665,7 +665,7 @@ beginfig(19) % 2-flat in R3; 2x+y+z=4, paramatized
   drawarrow z5--z6 withcolor shading_color;
   drawarrow z5--z7 withcolor shading_color;
 
-  label.rt(btex {\hspace*{0.05in} \scriptsize 
+  label.rt(btex {\hspace*{0.05in} \small 
           $  P=\set{\colvec{x \\ y \\ z}=\colvec[r]{2 \\ 0 \\ 0}
          +y\cdot\colvec[r]{-1/2 \\ 1 \\ 0}
          +z\cdot\colvec[r]{-1/2 \\ 0 \\ 1}\suchthat y,z\in\Re}$} etex,.618[z3,z4]);
@@ -723,7 +723,7 @@ beginfig(20) % 2-flat in R3; 2x+y+z=4, paramatized
   pickup pencircle scaled line_width_dark;
   draw .5[z1,z2]--z2--z4--.5[z4,z3];
 
-  label.rt(btex \hbox{\hspace*{0.05in} \scriptsize 
+  label.rt(btex \hbox{\hspace*{0.05in} \small 
                        $P=\set{\colvec{2 \\ 0 \\ 0}
 		               +\colvec{-0.5 \\ 1 \\ 0} y
 		               +\colvec{-0.5 \\ 0 \\ 1} z
@@ -772,9 +772,9 @@ beginfig(21) % two vectors in R3, just in space
   drawarrow z3--z4 withcolor white;
   pickup pencircle scaled line_width_dark;
   drawarrow z1--z2;
-    label.llft(btex {\scriptsize $\vec{v}$} etex,.707[z1,z2]);
+    label.llft(btex {\small $\vec{v}$} etex,.707[z1,z2]);
   drawarrow z3--z4;
-    label.lrt(btex {\scriptsize $\vec{u}$} etex,.707[z3,z4]);
+    label.lrt(btex {\small $\vec{u}$} etex,.707[z3,z4]);
 endfig;
 
 
@@ -854,20 +854,20 @@ beginfig(23) % a vec as sum of two others; illustrate Triangle Inequality
   pickup pencircle scaled line_width_light;
   z0=(0w,0v); z1=(5w,.65v);
   drawarrow (.5n[z0,z1])--((1-n)[z0,z1]);
-    label.bot(btex {\scriptsize $\vec{u}$} etex,.5[z0,z1]);
+    label.bot(btex {\small $\vec{u}$} etex,.5[z0,z1]);
   z2=(6w,3v);
   drawarrow (n[z1,z2])--((1-n)[z1,z2]);
-    label.rt(btex {\scriptsize $\vec{v}$} etex,.5[z1,z2]);
+    label.rt(btex {\small $\vec{v}$} etex,.5[z1,z2]);
   pickup pencircle scaled line_width_dark;
   z4=0.02*(-1*(y2-y0),x2-x0);  % perp to hyp to offset from w's arrow
   drawarrow (.5n[z0,z2]+z4)--((1-n)[z0,z2]+z4);
-    label.ulft(btex {\scriptsize $\vec{u}+\vec{v}$} etex,.5[z0+z4,z2+z4]);
+    label.ulft(btex {\small $\vec{u}+\vec{v}$} etex,.5[z0+z4,z2+z4]);
   z5=whatever[z0,z1]=whatever[n[z0,z2]+z4,(1-n)[z0,z2]+z4];
   drawpoint(z5);
-    label.lft(btex {\scriptsize\textit{start}} etex,z5);
+    label.lft(btex {\small\textit{start}} etex,z5);
   z6=whatever[z1,z2]=whatever[n[z0,z2]+z4,(1-n)[z0,z2]+z4];
   drawpoint(z6);
-    label.rt(btex {\scriptsize\textit{finish}} etex,z6);
+    label.rt(btex {\small\textit{finish}} etex,z6);
 endfig;
 
 
@@ -912,9 +912,9 @@ beginfig(24) % a plane with a bend in it
   pickup pencircle scaled line_width_dark;
   draw p4 transformed t1;
   drawpoint(z8);
-    label.top(btex {\scriptsize $P$} etex,z8);
+    label.top(btex {\small $P$} etex,z8);
   drawpoint(z9);
-    label.top(btex {\scriptsize $Q$} etex,z9);
+    label.top(btex {\small $Q$} etex,z9);
 endfig;
 
 
@@ -938,7 +938,7 @@ beginfig(25) % two vectors in plane, orthogonal
   drawarrow z0--z1;
   z3=(2w,2v); z4=(3w,3v); 
   drawarrow z3--z4;
-%  label.rt(btex {\scriptsize
+%  label.rt(btex {\small
 %              $\colvec{1 \\ -1}\dotprod\colvec{1 \\ 1}=0$} etex,(3w,1.5v));
 endfig;
 
@@ -980,10 +980,10 @@ beginfig(26) % two vectors in R3, not orthogonal
   drawarrow z0--z2 withcolor white;
   pickup pencircle scaled line_width_dark;
   drawarrow z0--z1;
-    label.rt(btex {\scriptsize
+    label.rt(btex {\small
                           $\colvec{0 \\ 3 \\ 2}$} etex,z1);
   drawarrow z0--z2;
-    label.lrt(btex {\scriptsize
+    label.lrt(btex {\small
                          $\colvec{1 \\ 1 \\ 0}$} etex,z2);
 endfig;
 
@@ -997,11 +997,11 @@ beginfig(27) % equiv relation; row-equiv mats
   u:=1in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-    label.rt(btex {\scriptsize $A$} etex,z14);
+    label.rt(btex {\small $A$} etex,z14);
   x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-    label.rt(btex {\scriptsize $B$} etex,z15);
+    label.rt(btex {\small $B$} etex,z15);
 endfig;
 
 
@@ -1023,15 +1023,15 @@ beginfig(29) % equiv relation; canonical reps shown
   u:=1in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.125[x0,x1]; y14=.84[y0,y3];  % upper left zone
-    label(btex {\scriptsize $\star$} etex,z14);
+    label(btex {\small $\star$} etex,z14);
   x15=.54[x0,x1]; y15=.875[y0,y3];  % upper right 
-    label(btex {\scriptsize $\star$} etex,z15);
+    label(btex {\small $\star$} etex,z15);
   x16=.14[x0,x1]; y16=.175[y0,y3];  % bottom left
-    label(btex {\scriptsize $\star$} etex,z16);
+    label(btex {\small $\star$} etex,z16);
   x17=.28[x0,x1]; y17=.5[y0,y3];    % middle
-    label(btex {\scriptsize $\star$} etex,z17);
+    label(btex {\small $\star$} etex,z17);
 endfig;
 
 
@@ -1046,7 +1046,7 @@ beginfig(30) % equiv relation; two specific row-equiv mats
   u:=1.75in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.65[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
   label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
                                 1  &3  \\
@@ -1075,15 +1075,15 @@ beginfig(31) % equiv relation; canonical reps shown, incl 2x2 identity
   u:=1.75in; v:=u; w:=v;
 
   path p[]; partition;
-  label(btex {\scriptsize \ldots} etex,z13);
+  label(btex {\small \ldots} etex,z13);
   x14=.125[x0,x1]; y14=.84[y0,y3];  % upper left zone
-    label(btex {\scriptsize $\star$} etex,z14);
+    label(btex {\small $\star$} etex,z14);
   x15=.54[x0,x1]; y15=.875[y0,y3];  % upper right 
-    label(btex {\scriptsize $\star$} etex,z15);
+    label(btex {\small $\star$} etex,z15);
   x16=.14[x0,x1]; y16=.175[y0,y3];  % bottom left
-    label(btex {\scriptsize $\star$} etex,z16);
+    label(btex {\small $\star$} etex,z16);
   x17=.28[x0,x1]; y17=.6[y0,y3];    % middle
-    label(btex {\scriptsize $\star$} etex,z17);
+    label(btex {\small $\star$} etex,z17);
     label.bot(btex {\tiny $\Bigl(\begin{smallmatrix}
                                 1  &0  \\
                                 0  &1
@@ -1143,7 +1143,7 @@ beginfig(32) % 2-flat in R3; 2x+y+z=4, paramatized
   pickup pencircle scaled line_width_dark;
   draw .5[z1,z2]--z2--z4--.5[z4,z3];
 
-%   label.rt(btex {\hspace*{0.05in} \scriptsize 
+%   label.rt(btex {\hspace*{0.05in} \small 
 %                        $P=\set{\colvec{2 \\ 0 \\ 0}
 % 		               +\colvec{-0.5 \\ 1 \\ 0} y
 % 		               +\colvec{-0.5 \\ 0 \\ 1} z
@@ -1182,35 +1182,35 @@ beginfig(28) % equiv relation; some row-equiv mats shown double-arrowed
   input arrow
   %input arrow
   z0=(.8w,0v);
-  boxit.a0(btex \strut{\scriptsize $\displaystyle
+  boxit.a0(btex \strut{\small $\displaystyle
                  \begin{mat}
 		   1  &0  \\
 		   0  &1 
 		 \end{mat}$} etex);
   a0.c=z0;
   z1=(0w,.4v);
-  boxit.a1(btex {\scriptsize $\displaystyle
+  boxit.a1(btex {\small $\displaystyle
                  \begin{mat}
 		   2  &2  \\
 		   4  &3 
 		 \end{mat}$} etex);
   a1.c=z1;	       
   z2=(.55w,.9v);
-  boxit.a2(btex {\scriptsize $\displaystyle
+  boxit.a2(btex {\small $\displaystyle
                  \begin{mat}
 		   2  &0  \\
 		   0  &-1
 		 \end{mat}$} etex);
   a2.c=z2;
   z3=(1.35w,.75v);
-  boxit.a3(btex {\scriptsize $\displaystyle
+  boxit.a3(btex {\small $\displaystyle
                  \begin{mat}
 		   1  &1  \\
 		   0  &-1
 		 \end{mat}$} etex);
   a3.c=z3;
   z4=(1.5w,.25v);
-  boxit.a4(btex {\scriptsize $\displaystyle
+  boxit.a4(btex {\small $\displaystyle
                  \begin{mat}
 		   2  &2  \\
 		   0  &-1
@@ -1258,7 +1258,7 @@ beginfig(33) % two lines, almost identical
   draw z10--z11;
   draw z12--z13;
   z14 = (1w,1v);
-  drawpoint(z14);  label.rt(btex {\scriptsize $(1,1)$} etex,z14);
+  drawpoint(z14);  label.rt(btex {\small $(1,1)$} etex,z14);
 endfig;
 
 
@@ -1290,7 +1290,7 @@ beginfig(34) % two lines, meet at good angle
   draw z10--z11;
   draw z12--z13;
   z14 = (1w,1v);
-  drawpoint(z14);  label.rt(btex {\scriptsize $(1,1)$} etex,z14);
+  drawpoint(z14);  label.rt(btex {\small $(1,1)$} etex,z14);
 endfig;
 
 

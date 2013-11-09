@@ -16,11 +16,60 @@ COMPILING
 
 Why?
 
-Sigh.  OK.
+Sigh.  OK.  Here is what I just did on a fresh Linux Mint 
+box  (2013-Nov-06, Linux Mint 12, equivalent to Ubuntu 12.04).
 
-Unzip the linear_algebra.zip.  Run make_book_for_web.sh.  That's how I do it 
-(with TeX Live 2010 on an Ubuntu notebook; takes about 
-3 minutes).  At the end, you'll have book.pdf and jhanswer.pdf.  Put them
+0) Install the Debian TeX Live (that is, the packages from the archive).
+  (I'd rather go with TeX LIve from tug.org but I had to get Sage also and 
+  it required me to get the Debian packages and .. I didn't want to end
+  in dependency hell.)
+
+1) Clone the linear-algebra mercurial archive.  
+  cd ~/Documents
+  hg clone https://jim.hefferon@code.google.com/p/linear-algebra/ 
+
+2) Install the luximono font.
+
+  cd ~/Downloads
+  wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts 
+  sudo texlua install-getnonfreefonts
+  sudo getnonfreefonts-sys -a
+  sudo texhash
+
+  Now comes the sucky part.  I could not get it to find Luximono (running 
+  linear-algebra/make_book_for_web.sh says it can't find ul9r8r).
+  To the bottom of the file 
+    /etc/texmf/updmap.d/00updmap.cfg
+  I added the line
+    Map ul9.map
+  (see http://tug.org/pipermail/texhax/2012-July/019397.html) and ran
+    sudo update-updmap
+    sudo updmap-sys
+  and it now worked.  Dunno.
+
+3) I had to get updated packages from ctan becuase the Debian stuff is old:
+    thmtools, geometry, mh
+   and install them in /usr/local/share/tex/latex/ .  Then I had to generate 
+   the .sty files
+     cd  /usr/local/share/tex/latex/thmtools
+     sudo pdflatex thmtools.ins
+     cd  /usr/local/share/tex/latex/geometry
+     sudo pdflatex geometry.ins
+   and, just for a change of pace,
+     cd  /usr/local/share/tex/latex/mh
+     sudo tex mhsetup
+     sudo tex breqn.dtx
+     sudo tex empheq
+     sudo tex flexisym
+     sudo tex mathstyle
+     sudo tex mathtools
+
+4) Now I can run the shell script that generates the book.  
+    cd ~/Documents/linear-algebra
+    ./make_book_for_web.sh
+(if it fails with something about ul9r8r then see the note in instruction 2). 
+
+At the end, you'll have book.pdf and jhanswer.pdf.  Put them
 in the same directory.  You could have skipped the compiling, you know.
 
 If you want projector slides, cd slides and run make_slides.sh.  This takes 
