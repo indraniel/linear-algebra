@@ -38,12 +38,17 @@ box  (2013-Nov-06, Linux Mint 12, equivalent to Ubuntu 12.04).
 
   Now comes the sucky part.  I could not get it to find Luximono (running 
   linear-algebra/make_book_for_web.sh says it can't find ul9r8r).
-  To the bottom of the file 
-    /etc/texmf/updmap.d/00updmap.cfg
-  I added the line
+
+  Following the directions on this page
+    http://people.debian.org/~preining/TeX/TeX-on-Debian/ch4.html
+  I did
+    sudo mkdir /etc/texmf/updmap.d
+    sudo emacs /etc/texmf/updmap.d/10local.cfg
+  To the bottom of the file I added the line
     Map ul9.map
   (see http://tug.org/pipermail/texhax/2012-July/019397.html) and ran
     sudo update-updmap
+    sudo texhash
     sudo updmap-sys
   and it now worked.  Dunno.
 

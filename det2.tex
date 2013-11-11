@@ -1,15 +1,15 @@
 % Chapter 4, Section 2 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \section{Geometry of Determinants}
 The prior section develops the determinant algebraically, by
 considering formulas satisfying certain properties.
 This section complements that with a geometric approach.
-One advantage of this approach is that while 
-we have so far only considered whether or not a determinant is zero,
+Beyond its intuitive appeal, an advantage of this approach is that while 
+we have so far only considered whether or not a determinant is zero
 here we shall give a meaning to the value of the determinant.
-(The prior section treats determinants as functions of the
-rows but in this section we focus on columns.)
+(The prior section treats the determinant as a function of the
+rows but this section focuses on columns.)
 
 
 
@@ -36,16 +36,16 @@ formed by
 \( \sequence{\vec{v}_1,\dots,\vec{v}_n} \) 
 is the set
 \( \set{t_1\vec{v}_1+\dots+t_n\vec{v}_n
-      \suchthat t_1,\ldots,t_n\in [0..1]} \).
+      \suchthat t_1,\ldots,t_n\in \closedinterval{0}{1}} \).
 %</df:Box>
 \end{definition}
 
-\noindent Thus, the parallelogram shown above is the box defined by 
+\noindent Thus the parallelogram shown above is the box formed by 
 $\sequence{\binom{x_1}{y_1},\binom{x_2}{y_2}}$.
+A three-space box is shown in \nearbyexample{ex:VolParPiped}.
 
-We are interested in the area of the box.
-One way to compute it is to draw this rectangle
-and subtract the area of each subregion.
+We can compute the area of the above box by drawing an enclosing rectangle
+and subtracting away areas of subregion not in the box.
 \begin{center}
   \parbox{1.5in}{\hbox{}\hfil\includegraphics{ch4.31}\hfil\hbox{}}
   \quad
@@ -67,7 +67,7 @@ and subtract the area of each subregion.
     \end{array}$
     \hfil\hbox{}}
 \end{center}
-The fact that the area equals the value of the determinant
+That the area equals the value of the determinant
 \begin{equation*}
   \begin{vmat}
     x_1  &x_2  \\
@@ -76,71 +76,75 @@ The fact that the area equals the value of the determinant
   =x_1y_2-x_2y_1
 \end{equation*}
 is no coincidence.
-The properties from the definition of determinants 
+The definition of determinants contains four properties that we know
+lead to a unique function for each dimension~$n$.
+We shall argue that these properties 
 make good postulates for a function 
-that measures the size of the box
-defined by the matrix's columns.\index{size}
+that measure the size of boxes in $n$-space.\index{size}
 
 For instance, a function that measures the size of the box
 should have the property that multiplying one of the box-defining vectors by
-a scalar (here $k=1.4$)
+a scalar
 will multiply the size by that scalar.
 \begin{center}
   \includegraphics{ch4.32}
   \qquad
   \includegraphics{ch4.33}
 \end{center}
-(On the right the rescaled region is in solid lines with the 
-original region in shade for comparison.)
+Shown here is $k=1.4$.
+On the right the rescaled region is in solid lines with the 
+original region shaded for comparison.
 % The region formed by $k\vec{v}$ and~$\vec{w}$
 % is bigger by a factor of \( k \)
 % than the shaded region enclosed by $\vec{v}$ and~$\vec{w}$.
 % That is,
 % \( \size (k\vec{v},\vec{w})=k\cdot\size (\vec{v},\vec{w}) \) and
-That is, we can reasonably expect of a size measure that
+
+That is, we can reasonably expect that
 $\size (\dots,k\vec{v},\dots)=k\cdot\size (\dots,\vec{v},\dots)$.
-Of course, this property is familiar from 
+Of course, this condition is one of those in
 the definition of determinants.
 
 Another property of determinants that should apply to any 
-function giving the size of a box is that
-it is unaffected by combining rows.
+function measuring the size of a box is that
+it is unaffected by row combinations.
 Here are before-combining and 
 after-combining boxes (the scalar shown is $k=0.35$). 
-The box formed by $v$ and 
-$k\vec{v}+\vec{w}$ is
-more slanted than the original one but the two have the
-same base and the same height and hence the same area.
 \begin{center}
   \includegraphics{ch4.34}
   \qquad
   \includegraphics{ch4.35}
 \end{center}   
-(As before, the figure on the right has the 
-original region in shade for comparison.)
+The box formed by $v$ and 
+$k\vec{v}+\vec{w}$ is
+more slanted than the original one but the two have the
+same base and the same height and hence the same area.
+% (As before, the figure on the right has the 
+% original region in shade for comparison.)
 So we expect that  
 $\size (\dots,\vec{v},\dots,\vec{w},\dots)
-=\size (\dots,\vec{v},\dots,k\vec{v}+\vec{w},\dots)$;
-again, a restatement of a determinant postulate.
+=\size (\dots,\vec{v},\dots,k\vec{v}+\vec{w},\dots)$.
+As before, this is a determinant condition.
 
-Lastly, we expect that \( \size (\vec{e}_1,\vec{e}_2)=1 \)
+Lastly, we expect that the box formed by unit vectors has unit size
 \begin{center}
   \includegraphics{ch4.36}
 \end{center}
-and we naturally extend that to any number of dimensions
+and we naturally extend that to any $n$-space
 $\size(\vec{e}_1,\dots,\vec{e}_n)=1$.
 % Again, that is a determinant property.
 
-Because property~(2) of determinants is 
-redundant (as remarked following the definition) 
-we have that the properties of the determinant function are reasonable
-to expect of a function that gives the size of boxes.
-The prior section starts with these properties and shows
-that the determinant exists and is unique, so we know  
-that these postulates are consistent and 
+That's the last condition to check because 
+condition~(2) is 
+redundant, as remarked following the definition of determinant. 
+So we have that the properties of the determinant function are reasonable
+for function that gives the size of boxes.
+We know from the prior section that 
+for each~$n$ the determinant exists and is unique so we know  
+that these postulates for size functions are consistent and 
 that we do not need any more postulates.
-Thus, we will
-interpret \( \det(\vec{v}_1,\dots,\vec{v}_n) \) as the
+Thus we are justified in 
+interpreting \( \det(\vec{v}_1,\dots,\vec{v}_n) \) as giving the
 size of the box formed by the vectors.
 % (\textit{Comment.}
 %   An even more basic approach, which also leads to the definition
@@ -164,12 +168,12 @@ Consider these two.
         \end{vmat}=-10$
   \end{tabular}
 \end{center}
-Swapping changes the sign.
-On the left we take $\vec{u}$ first in the matrix and then follow the
-counterclockwise arc to $\vec{v}$,
-following the counterclockwise arc,
-and get a positive size.
-On the right following the clockwise arc gives a negative size.
+Swapping the columns changes the sign.
+On the left, starting with $\vec{u}$ and following the
+arc inside the angle to $\vec{v}$ (that is, going counterclockwise),
+we get a positive size.
+On the right, starting at $\vec{v}$ and going to~$\vec{u}$, 
+and so following the clockwise arc, gives a negative size.
 The sign returned by the size function reflects the 
 \definend{orientation}\index{box!orientation}\index{orientation} 
 or \definend{sense}\index{box!sense}\index{sense} of the box.
@@ -214,9 +218,9 @@ as the absolute value of this determinant.
 \end{equation*}
 \end{example}
 
-The next result describes some of the geometry of the linear
-functions that act on
-\( \Re^n \). 
+% The next result describes some of the geometry of the linear
+% functions that act on
+% \( \Re^n \). 
 
 \begin{theorem}\label{th:MatChVolByDetMat}
 \index{size}\index{transformation!size change}
@@ -227,7 +231,7 @@ $\deter{t(S)}$ is $\deter{T}$ times the size of the box $\deter{S}$,
 where $T$ is the matrix
 representing $t$ with respect to the standard basis.
 
-That is, for all $\nbyn{n}$ matrices, the determinant of a product is the
+That is, the determinant of a product is the
 product of the determinants $\deter{TS}=\deter{T}\cdot\deter{S}$.
 %</th:MatChVolByDetMat>
 \end{theorem}
@@ -236,8 +240,8 @@ The two sentences say the same thing, first in map terms and then
 in matrix terms. 
 This is because
 $\deter{t(S)}=\deter{TS}$, as both give the size of the box that is the
-image of the unit box $\stdbasis_n$ under the composition $\composed{t}{s}$
-(where $s$ is the map represented by $S$ with respect to the standard basis).
+image of the unit box $\stdbasis_n$ under the composition $\composed{t}{s}$,
+where the maps are represented with respect to the standard basis.
 
 % We will prove the second sentence, the matrix version, because 
 % it is more convienent for the argument 
@@ -252,7 +256,7 @@ First consider the $\deter{T}=0$ case.
 A matrix has a zero determinant if and only if it is not invertible.
 Observe that if \( TS \) is invertible then there
 is an $M$ such that \( (TS)M=I \), so 
-\( T(SM)=I \), which shows that \( T \) is invertible, with inverse $SM$.
+\( T(SM)=I \) and so \( T \) is invertible, with inverse $SM$.
 By contrapositive, 
 if \( T \) is not invertible then neither is \( TS \) \Dash 
 if $\deter{T}=0$ then $\deter{TS}=0$.
@@ -272,13 +276,13 @@ $\deter{TS}=\deter{E_1\cdots E_rS}=\deter{E_1}\cdots\deter{E_r}\cdot\deter{S}
 %</pf:MatChVolByDetMat1>
 
 %<*pf:MatChVolByDetMat2>
-There are three kinds of elementary matrix. 
+There are three types of elementary matrix. 
 We will cover the $M_i(k)$ case; 
 the $P_{i,j}$ and $C_{i,j}(k)$ checks are similar.
-We have that $M_i(k)S$ equals $S$ except that row~$i$ is multiplied by $k$.
-The third property of determinant functions
+The matrix $M_i(k)S$ equals $S$ except that row~$i$ is multiplied by $k$.
+The third condition of determinant functions
 then gives that $\deter{M_i(k)S}=k\cdot\deter{S}$.
-But $\deter{M_i(k)}=k$, again by the third property because
+But $\deter{M_i(k)}=k$, again by the third condition because
 $M_i(k)$ is derived from the identity by multiplication of row~$i$ by
 $k$. 
 Thus \( \deter{ES}=\deter{E}\cdot\deter{S} \) holds for
