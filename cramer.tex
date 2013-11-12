@@ -1,5 +1,5 @@
 % Chapter 4, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Cramer's Rule}
 \index{Cramer's rule|(}
@@ -11,36 +11,37 @@
 % Here we make a connection between the two views.
 
 %<*CramersRuleExample0>
-We have seen that a linear system
+A linear system is equivalent to a linear relationship among vectors. 
 \begin{equation*}
   \begin{linsys}{2}
      x_1  &+  &2x_2  &=  &6  \\
     3x_1  &+  &x_2   &=  &8 
   \end{linsys}
-\end{equation*}
-is equivalent to a linear relationship among vectors. 
-\begin{equation*}
+% \end{equation*}
+% \begin{equation*}
+  \qquad\Longleftrightarrow\qquad
   x_1\cdot\colvec{1 \\ 3}+x_2\cdot\colvec{2 \\ 1}=\colvec{6 \\ 8}
 \end{equation*}
-Below we picture that vector equation.
-It starts with a small parallelogram whose sides are the vectors 
-$\binom{1}{3}$ and $\binom{2}{1}$.
-That is shown nested inside another parallelogram, 
-whose sides are $x_1\binom{1}{3}$ and $x_2\binom{2}{1}$ 
-and whose far corner is, by the equation, the vector $\binom{6}{8}$.
-%</CramersRuleExample0>
+Here is a picture.
 \begin{center}
   \includegraphics{ch4.1}
 \end{center}
+The small parallelogram is formed from sides that are the vectors 
+$\binom{1}{3}$ and $\binom{2}{1}$.
+It is nested inside a parallelogram 
+with sides $x_1\binom{1}{3}$ and~$x_2\binom{2}{1}$. 
+By the vector equation above, the far corner of the larger 
+parallelogram is $\binom{6}{8}$.
+%</CramersRuleExample0>
 %<*CramersRuleExample1>
-So we can restate the algebraic question of
+This drawing restates the algebraic question of
 finding the solution of a linear system
-in geometric terms:~by 
-what factors $x_1$ and~$x_2$ must we dilate the vectors of the starting 
+into geometric terms:~by 
+what factors $x_1$ and~$x_2$ must we dilate the sides of the starting 
 parallelogram so that it will fill the other one?
 %</CramersRuleExample1>
 
-We can apply the geometric understanding of determinants
+We can use this picture, and our geometric understanding of determinants,
 to get a new formula for solving linear systems.
 Compare the sizes of these shaded boxes.
 \begin{center}
@@ -51,16 +52,18 @@ Compare the sizes of these shaded boxes.
    \includegraphics{ch4.4}
 \end{center}
 %<*CramersRuleExample2>
-The second is defined by the vectors $x_1\binom{1}{3}$ and $\binom{2}{1}$, and
+The second is defined by the vectors $x_1\binom{1}{3}$ and $\binom{2}{1}$ and
 one of the properties of the size function\Dash the determinant\Dash is 
 that therefore the size of the second box is \( x_1 \) times the size of the 
-first box.
-Since the third box is defined by the vector
-$x_1\binom{1}{3}+x_2\binom{2}{1}=\binom{6}{8}$ 
-and the vector $\binom{2}{1}$,
-and since the determinant does not change when we  add $x_2$ 
-times the second column to the first column,
+first.
+The third box is derived from the second by shearing, adding
+$x_2\binom{2}{1}$ to $x_1\binom{1}{3}$ to get
+$x_1\binom{1}{3}+x_2\binom{2}{1}=\binom{6}{8}$,
+along with $\binom{2}{1}$.
+The determinant is not affected by shearing so
 the size of the third box equals that of the second.
+
+Taken together, we have this.
 \begin{equation*}
   \begin{vmat}[r]
      6  &2  \\
@@ -132,16 +135,15 @@ we do this computation.
   =\frac{-18}{-3}
 \end{equation*}
 
-In this way we can by-eye solve systems that are small and simple. 
+Cramer's Rule lets us by-eye solve systems that are small and simple. 
 For example, we can solve systems with two equations and two unknowns,
 or three equations and three unknowns,
 where the numbers are small integers.
-Such cases appear often enough that many people find Cramer's Rule handy.
+Such cases appear often enough that many people find this formula handy.
  
 But using it to solving large or complex systems is not practical,
-either by eye or by a computer.
-A
-Gauss's Method-based approach is the best way to solve such systems.
+either by hand or by a computer.
+A Gauss's Method-based approach is faster.
 
 \begin{exercises}
   \item 

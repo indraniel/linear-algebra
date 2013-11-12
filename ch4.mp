@@ -2068,17 +2068,17 @@ beginfig(35);
   z0=(0w,0v);
   z1=(35w,0v); z2=(8w,24v);  % endpoints of the two vectors
   z3=z1+z2; % far corner
-  z4=.35*z1; %k=.35
+  z4=-.65*z1; %k=.35
   z5=z4+z2;
   z6=z5+z1;
 
   pickup pencircle scaled line_width_light;
   pgram_before = z0--z1--z3--z2--cycle;
+  fill pgram_before withcolor lightgray;  %before parallelogram
   draw z5--z6--z1;  %after parallelogram
 
   drawvec_dark_with_border(z0,z1);  drawvec_dark_with_border(z0,z5);
     %drawvec_dark_with_border(z0,z1); 
-  fill pgram_before withcolor lightgray;  %before parallelogram
   label.bot(btex {\scriptsize $\vec{v}$} etex,.5[z0,z1]);
   picture lab;
     lab=thelabel.lft(btex {\scriptsize $k\vec{v}+\vec{w}$} etex,.5[z0,z5]);
