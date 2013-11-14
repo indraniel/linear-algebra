@@ -3,8 +3,8 @@
 %  2001-Jun-12
 \topic{Speed of Calculating Determinants}
 The permutation expansion formula for computing determinants is useful 
-for proving theorems, but the method of using row operations
-is much better for finding the determinants of a large matrix.
+for proving theorems but the method of using row operations
+is faster for finding the determinants of a large matrix.
 We can make this statement 
 precise by considering, as computer algorithm designers do,
 the number of arithmetic operations that each method uses.
@@ -21,12 +21,11 @@ does the time taken by the computer grow by a factor of ten,
 or by a factor of a hundred, or by a factor of a thousand?
 That is, 
 is the time proportional to the size of the data set, 
-or to the square of that size, or to the cube of that size, etc.? 
+or the square of that size, or the cube of that size, etc.? 
 
-Recall 
+In
 the permutation expansion formula\index{determinant!permutation expansion}%
 \index{permutation expansion}
-for determinants.
 \begin{equation*}
    \begin{vmat}
       t_{1,1}  &t_{1,2}  &\ldots  &t_{1,n}  \\
@@ -50,7 +49,7 @@ for determinants.
    %         t_{n,\phi_k(n)}\deter{P_{\phi_k}} 
    % \end{aligned}
 \end{equation*}
-There are  
+there are  
 $n!=n\cdot(n-1)\cdot(n-2)\cdots 2\cdot 1$ different \( n \)-permutations.
 This factorial function grows quickly; for instance  
 when $n$ is only $10$ then the expansion above has  
@@ -61,15 +60,12 @@ multiplying the first
 two factors in $n!$ gives $n\cdot(n-1)$, which for large $n$
 is approximately $n^2$ and then multiplying in more factors will make the 
 factorial even larger).
-Similarly, the factorial function grows faster than the cube 
-or the fourth power or
-any polynomial function.
+Similarly, the factorial function grows faster than the cube, 
+or the fourth power, or any polynomial function.
 So a computer program that uses the permutation
 expansion formula, and thus performs a number of operations
 that is greater than or equal to the factorial of the number of rows,
 would be very slow.
-It would take a time longer than the square of the number of rows,
-longer than the cube, etc.
 
 In contrast, the time taken by the row reduction method does not grow so fast.
 The fragment of row-reduction code shown below is
@@ -98,10 +94,6 @@ DO 10 ROW=1, N-1
   20 CONTINUE
 10 CONTINUE
 \end{lstlisting} 
-(This code is naive; for example it does not handle the case that 
-the \lstinline[style=inline]!A(ROW,ROW)! is zero.
-Analysis of a finished version that includes all of the tests
-and subcases is messier but gives the same conclusion.)
 For each \lstinline[style=inline]!ROW!, 
 the nested \lstinline[style=inline]!I! and \lstinline[style=inline]!J! 
 loops perform the combination with the lower rows by
@@ -118,9 +110,13 @@ about $(\text{\lstinline[style=inline]!N!}/2)^2$ times,
 that is, 
 this program will run in a time proportional to the square of the number
 of equations.
-Taking into account the outer loop, we 
+Taking into account the outer loop gives the  
 estimate that the running time of the algorithm
 is proportional to the cube of the number of equations.
+(The code above is naive; for example it does not handle the case that 
+the entry \lstinline[style=inline]!A(ROW,ROW)! is zero.
+Analysis of a finished version that includes all of the tests
+and subcases is messier but gives the same conclusion.)
 
 Finding the fastest algorithm to compute the determinant 
 is a topic of current research.
@@ -144,21 +140,21 @@ square and cube of \lstinline[style=inline]!N!.
 % Those lie outside of our scope.
 The contrast between these two methods for computing determinants 
 makes the point that although in principle they give the same answer, 
-in practice we want the one that is fast.
+in practice we want the one with the best performance.
 
 
 
 
 \begin{exercises}
-  \item[\textit{Most of these presume access to a computer.}]
+  % \item[\textit{Most of these presume access to a computer.}]
   \item 
     Computer systems generate random numbers
-    (of course, these are only pseudo-random, in that they come from
-    an algorithm, but they 
+    (of course, these are only pseudo-random in that they come from
+    an algorithm but they 
     pass a number of reasonable statistical tests for randomness).
     \begin{exparts}
-      \partsitem Fill a $\nbyn{5}$ array with random numbers (say, in the
-        range $[0..1)$).
+      \partsitem Fill a $\nbyn{5}$ array with random numbers say, in the
+        range $\clopinterval{0}{1}$).
         See if it is singular.
         Repeat that experiment a few times.
         Are singular matrices frequent or rare (in this sense)?

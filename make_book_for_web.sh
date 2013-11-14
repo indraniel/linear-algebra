@@ -53,6 +53,9 @@ then
     mpost ch5.mp
     mpost voting.mp
     mpost appen.mp
+    cd asy
+    asy -noprc -fpdf ppiped
+    cd ..
 fi
 
 # Generate the book; run it twice to settle future references
