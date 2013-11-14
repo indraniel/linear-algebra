@@ -130,6 +130,9 @@ beginfig(4);
   
   drawvec_dark_with_border(z0,z1);  drawvec_dark_with_border(z0,z2);
   fill inside_pgram withcolor shading_color;
+  pickup pencircle scaled line_width_light; % far edge shown inside shaded
+  z6=whatever[z4,z3]=whatever[z1,z3+z1];
+  draw z6--z3 withcolor medgray;
   drawvec_dark(z0,z1);              drawvec_dark(z0,z2);
   label.lrt(btex {\tiny $\colvec{2 \\ 1}$}  etex,z1);
   label.ulft(btex {\tiny $\colvec{6 \\ 8}$}  etex,z3); 

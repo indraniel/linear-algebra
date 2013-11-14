@@ -1,27 +1,24 @@
 % Chapter 4, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Speed of Calculating Determinants}
 The permutation expansion formula for computing determinants is useful 
 for proving theorems but the method of using row operations
 is faster for finding the determinants of a large matrix.
 We can make this statement 
-precise by considering, as computer algorithm designers do,
-the number of arithmetic operations that each method uses.
+precise by finding how many operations each method performs.
 
-We measure the speed of an algorithm by finding
-how the time taken by the computer grows as the size of
-its input data set grows. 
-For instance, if
-we increase the size of the input data by a
-factor of ten
-% , from a $1000$~row matrix to a $10,000$~row matrix 
-% or from $10,000$ to $100,000$?
-does the time taken by the computer grow by a factor of ten,
+We compare the speed of two algorithms by finding for each one
+how the time taken grows as the size of
+its input data set grows.
+For instance, if we increase the size of the input by a
+factor of ten does the time taken grow by a factor of ten,
 or by a factor of a hundred, or by a factor of a thousand?
 That is, 
 is the time proportional to the size of the data set, 
-or the square of that size, or the cube of that size, etc.? 
+or to the square of that size, or to the cube of that size, etc.? 
+An algorithm whose time taken is proportional to the square is faster than
+one whose time taken is proportional to the cube.
 
 In
 the permutation expansion formula\index{determinant!permutation expansion}%
@@ -51,15 +48,16 @@ the permutation expansion formula\index{determinant!permutation expansion}%
 \end{equation*}
 there are  
 $n!=n\cdot(n-1)\cdot(n-2)\cdots 2\cdot 1$ different \( n \)-permutations.
-This factorial function grows quickly; for instance  
+This factorial function grows quickly;  
 when $n$ is only $10$ then the expansion above has  
-$10!=3,628,800$ terms, each with $n$~multiplications. 
-Doing $n!$ many operations is doing more than $n^2$ many operations 
-(roughly:
+$10!=3,628,800$ terms, each with $n$~multiplications and a permutation
+matrix to do. 
+Observe that performing $n!$~many operations is performing more than 
+$n^2$~many operations because
 multiplying the first
 two factors in $n!$ gives $n\cdot(n-1)$, which for large $n$
 is approximately $n^2$ and then multiplying in more factors will make the 
-factorial even larger).
+factorial even larger.
 Similarly, the factorial function grows faster than the cube, 
 or the fourth power, or any polynomial function.
 So a computer program that uses the permutation
@@ -68,19 +66,10 @@ that is greater than or equal to the factorial of the number of rows,
 would be very slow.
 
 In contrast, the time taken by the row reduction method does not grow so fast.
-The fragment of row-reduction code shown below is
-in the computer language \textsc{FORTRAN}, which is widely used for numeric code.
-The matrix is in the $\nbyn{\text{\lstinline[style=inline]!N!}}$ 
-array \lstinline[style=inline]!A!. 
-The program's outer loop runs through
-each \lstinline[style=inline]!ROW! between \lstinline[style=inline]!1! and 
-\lstinline[style=inline]!N-1! 
-and does the entry-by-entry combination 
-% \begin{equation*}
-\(  -\text{\lstinline[style=inline]!PIVINV!}\cdot \rho_{\,\text{\lstinline!ROW!}}
-      +\rho_{\,\text{\lstinline!I!}} \)
-% \end{equation*}
-with the lower rows.
+Below is a fragment of row-reduction code.
+It is 
+in the computer language \textsc{FORTRAN}, 
+which is widely used for numeric code.
 % (there are no rows below
 % the \lstinline[style=inline]!N!-th 
 % so it is not included in the loop).
@@ -94,6 +83,18 @@ DO 10 ROW=1, N-1
   20 CONTINUE
 10 CONTINUE
 \end{lstlisting} 
+The matrix is in the $\nbyn{\text{\lstinline[style=inline]!N!}}$ 
+array \lstinline[style=inline]!A!. 
+The program's outer loop runs through
+each \lstinline[style=inline]!ROW! between \lstinline[style=inline]!1! and 
+\lstinline[style=inline]!N-1! 
+and does the entry-by-entry combination 
+% \begin{equation*}
+\(  -\text{\lstinline[style=inline]!PIVINV!}\cdot \rho_{\,\text{\lstinline!ROW!}}
+      +\rho_{\,\text{\lstinline!I!}} \)
+% \end{equation*}
+with the lower rows.
+
 For each \lstinline[style=inline]!ROW!, 
 the nested \lstinline[style=inline]!I! and \lstinline[style=inline]!J! 
 loops perform the combination with the lower rows by
@@ -105,11 +106,8 @@ $(\text{\lstinline[style=inline]!N!}-\text{\lstinline[style=inline]!ROW!})^2$
 such entries. 
 On average, \lstinline[style=inline]!ROW! will be 
 $\text{\lstinline[style=inline]!N!}/2$.
-Therefore, this program will perform the arithmetic 
-about $(\text{\lstinline[style=inline]!N!}/2)^2$ times,
-that is, 
-this program will run in a time proportional to the square of the number
-of equations.
+So this program will perform the arithmetic 
+about $(\text{\lstinline[style=inline]!N!}/2)^2$ times.
 Taking into account the outer loop gives the  
 estimate that the running time of the algorithm
 is proportional to the cube of the number of equations.
@@ -138,11 +136,10 @@ square and cube of \lstinline[style=inline]!N!.
 % There are other methods besides the two discussed here
 % that we can  also used for computation of determinants.
 % Those lie outside of our scope.
-The contrast between these two methods for computing determinants 
+The contrast between the methods of permutation expansion and row operations
+for computing determinants 
 makes the point that although in principle they give the same answer, 
 in practice we want the one with the best performance.
-
-
 
 
 \begin{exercises}
@@ -257,7 +254,7 @@ ans = 0.017398
     \end{exparts*}
     Count the number of multiplications and divisions used in each case,
     for each of the methods.
-    (On a computer, multiplications and divisions take much 
+    (Computer multiplications and divisions take 
      longer than additions and subtractions, so algorithm 
      designers worry about them more.)
      \begin{answer}
@@ -277,7 +274,7 @@ ans = 0.017398
      \end{answer}
   \item 
     What $\nbyn{10}$ array can you invent that takes your computer
-    system the longest to reduce?
+    the longest time to reduce?
     The shortest?
     \begin{answer}
       One way to get started is to compare these under Octave:
