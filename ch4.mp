@@ -1366,7 +1366,7 @@ beginfig(19);  % Deasrgue's Theorem; description of perspective
   drawpoint(z1);
     label.lft(btex {\scriptsize $T_1$} etex,z1);
   drawpoint(z2);
-    label.llft(btex {\scriptsize $U_1$} etex,z2);
+    label.llft(btex {\scriptsize $U_1$} etex,z2+(.4w,0v));
   drawpoint(z3);
     label.rt(btex {\scriptsize $V_1$} etex,z3);
   drawpoint(z11);
