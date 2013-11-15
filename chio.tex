@@ -1,10 +1,12 @@
 % Chapter 4, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2012-Jun-18
 \topic{Chi\`o's Method}
 \index{Chi\`o's method|(}
 
 When doing Gauss's Method on a matrix that contains only integers
+people often like to keep it that way.
+To avoid fractions in the reduction of this matrix
 \begin{equation*}
   A=
   \begin{mat}
@@ -13,8 +15,7 @@ When doing Gauss's Method on a matrix that contains only integers
     1 &5 &1 
   \end{mat}
 \end{equation*}
-people often like to keep it that way.
-To avoid fractions they may start by multiplying the lower rows
+they may start by multiplying the lower rows
 by~$2$
 \begin{equation*}
   \grstep[2\rho_3]{2\rho_2}\;
@@ -25,7 +26,7 @@ by~$2$
   \end{mat}
   \tag{$*$}
 \end{equation*}
-and then elimination in the first column goes like this.
+so that elimination in the first column goes like this.
 \begin{equation*}
   \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}\;
   \begin{mat}
@@ -40,9 +41,9 @@ And, using integer arithmetic on a computer
 avoids some sticky issues involving floating point calculations \cite{Kahan}.
 So there are sound reasons for this approach.
 
-Another reason comes from
-observing that we can easily apply Laplace's expansion to the 
-first column of~($**$) and then we get the determinant of $A$ by 
+Another advantage of this approach is that
+we can easily apply Laplace's expansion to the 
+first column of~($**$) and then get the determinant by 
 remembering to divide by $4$ because of~($*$).
 
 Here is the general $\nbyn{3}$ case of this approach to finding the determinant.
@@ -78,11 +79,11 @@ Now eliminate down the first column.
 Let $C$ be the $1,1$ minor.
 By Laplace the determinant of the above matrix is $a_{1,1}\det(C)$.
 We thus have $a_{1,1}^2\det(A)=a_{1,1}\det(C)$ and since $a_{1,1}\neq 0$
-this $\nbyn{3}$ case gives $det(A)=\det(C)/a_{1,1}$.
+this gives $\det(A)=\det(C)/a_{1,1}$.
 
-To expand this approach to $\nbyn{n}$ matrices with $n>3$ 
+To do larger matrices
 we must see how to compute the minor's entries.
-The pattern is: each element of the minor is a 
+The pattern above is that each element of the minor is a 
 $\nbyn{2}$~determinant.
 For instance, the entry in the minor's upper left
 $a_{2,2}a_{1,1}-a_{2,1}a_{1,2}$, which is the $2,2$~entry in the above matrix,
@@ -123,7 +124,7 @@ $\det(A)=\det(C)/a_{1,1}^{n-2}$.
 nothing in Chi\`o's formula requires that the numbers be integers; it applies
 to reals as well.)
 
-To illustrate, we  finding the determinant of this $\nbyn{3}$ matrix.
+To illustrate we  find the determinant of this $\nbyn{3}$ matrix.
 \begin{equation*} 
   A=
   \begin{mat}
@@ -132,7 +133,7 @@ To illustrate, we  finding the determinant of this $\nbyn{3}$ matrix.
     1 &5 &1 
   \end{mat}
 \end{equation*}
-We derive this Chi\`o's matrix.
+This is Chi\`o's matrix.
 \begin{equation*}
   C=
   \begin{mat}
@@ -166,9 +167,9 @@ $det(A)=\det(C)/a_{1,1}$ gives $\det(A)=(50/2)=25$.
 
 For a larger determinant we must do multiple steps
 but each involves only $\nbyn{2}$ determinants. 
-So we can often calculate the determinant just by writing down only some
-intermediate information on scrap paper.
-For instance, given this $\nbyn{4}$ matrix
+So we can often calculate the determinant just by writing down a bit of
+intermediate information.
+For instance, with this $\nbyn{4}$ matrix
 \begin{equation*}
   A=
   \begin{mat}
@@ -178,8 +179,8 @@ For instance, given this $\nbyn{4}$ matrix
     1  &0  &0  &1
   \end{mat} 
 \end{equation*}
-find Chi\`o's matrix by mentally doing each of the 
-$\nbyn{2}$ calculations and only writing down the
+we can mentally doing each of the 
+$\nbyn{2}$ calculations and only write down the
 $\nbyn{3}$ result. 
 \begin{equation*}
   C_3=
@@ -228,10 +229,10 @@ $\nbyn{3}$ result.
     0  &-1  &2
   \end{mat}
 \end{equation*}
-Also note that the determinant of this is 
-$a_{1,1}^{4-2}=3^2$ times the determinant of the $\nbyn{4}$ matrix~$A$.
+Note that the determinant of this is 
+$a_{1,1}^{4-2}=3^2$ times the determinant of~$A$.
 
-Finish the calculation by repeating the process.
+To finish, iterate.
 Here is Chi\`o's matrix of $C_3$.
 \begin{equation*}
   C_2=
@@ -259,20 +260,21 @@ Here is Chi\`o's matrix of $C_3$.
     -6 &12
   \end{mat}
 \end{equation*}
-Note that the determinant of this matrix
+The determinant of this matrix
 is $6$~times the determinant of~$C_3$.
 The determinant of $C_2$ is $108$.
 So
 $\det(A)=108/(3^2\cdot 6)=2$.
 
-Laplace's expansion formula for evaluating determinants is recursive because
-it reduces the calculation of an~$\nbyn{n}$ determinant to the evaluation
+Laplace's expansion formula  
+reduces the calculation of an~$\nbyn{n}$ determinant to the evaluation
 of a number of $\nbyn{(n-1)}$~ones.
-Chi\`o's formula is also recursive, 
+Chi\`o's formula is also recursive 
 but it reduces an~$\nbyn{n}$
 determinant to a single~$\nbyn{(n-1)}$ determinant, calculated
 from a number of $\nbyn{2}$ determinants.
-However, for large matrices Gauss's Method is better than either; for instance,
+However, for large matrices Gauss's Method is better than either of these; 
+for instance,
 it takes roughly half as many operations as Chi\`o's 
 Method~\cite{FullerLogan}.
 
@@ -345,9 +347,9 @@ Method~\cite{FullerLogan}.
       where $p+1\neq i$ and $q+1\neq j$.
     \end{answer}
   \item The \definend{Rule of Sarrus}\index{Sarrus, Rule of}\index{Rule of Sarrus}
-    is a mnemonic that students often learn 
+    is a mnemonic that many people learn 
     for the $\nbyn{3}$ determinant formula.
-    On the right of the matrix copy the first two columns. 
+    To the right of the matrix, copy the first two columns. 
     \begin{equation*}
       \begin{array}{ccc|cc}
         a &b &c &a &b \\
@@ -355,7 +357,7 @@ Method~\cite{FullerLogan}.
         g &h &i &g &h
       \end{array}
     \end{equation*}
-    The determinant is the sum of the
+    Then the determinant is the sum of the
     three upper-left to lower-right diagonals minus the
     three lower-left to upper-right diagonals
     $aei+bfg+cdh-gec-hfa-idb$.
@@ -363,16 +365,16 @@ Method~\cite{FullerLogan}.
    Chi\`o's formula for the $\nbyn{3}$ case and see which uses fewer.
    \begin{answer}
      Sarrus's formula uses $12$~multiplications and $5$ additions (including
-     the subtractions).
+     the subtractions in with the additions).
      Chi\`o's formula uses two multiplications and an addition
      (which is actually a subtraction)
      for each of the four $\nbyn{2}$~determinants, and another two
-     multiplications and an addition for the $\nbyn{2}$~Chio's determinant, as
+     multiplications and an addition for the $\nbyn{2}$~Chi\'o's determinant, as
      well as a final division by $a_{1,1}$.
      That's eleven multiplication/divisions and five addition/subtractions.
      So Chi\`o is the winner.
    \end{answer}
-  \item Prove Chi\`o's Formula.
+  \item Prove Chi\`o's formula.
     \begin{answer}
       Consider an $\nbyn{n}$ matrix.
       \begin{equation*}
@@ -439,16 +441,16 @@ Method~\cite{FullerLogan}.
 
 \announcecomputercode
 This implements Chi\`o's Method.
-It is in the computer language Python but to make it as readable as
-possible the code avoids some Python facilities.
+It is in the computer language Python (to make it more readable 
+the code avoids some Python facilities).
 Note the recursive call in the final line of 
 \lstinline!chio_det!. 
 \begin{lstlisting}
 #!/usr/bin/python
 # chio.py
 #  Calculate a determinant using Chio's method.
-# Jim Hefferon; PD
-# For demonstration only; does not handle the M[0][0]=0 case!
+# Jim Hefferon; Public Domain
+# For demonstration only; for instance, does not handle the M[0][0]=0 case
 
 def det_two(a,b,c,d):
     """Return the determinant of the 2x2 matrix [[a,b], [c,d]]"""
@@ -478,13 +480,13 @@ def chio_det(M,show=None):
 if __name__=='__main__':
     M=[[2,1,1], [3,4,-1], [1,5,1]]
     print "M=",M
-    print "Chio det is", chio_det(M)
+    print "Det is", chio_det(M)
 \end{lstlisting}
 This is the result of calling the program from my command line.
 \begin{lstlisting}
 $ python chio.py
 M=[[2, 1, 1], [3, 4, -1], [1, 5, 1]]
-Chio det is 25
+Det is 25
 \end{lstlisting}
 \index{Chi\`o's method|)}
 \endinput
