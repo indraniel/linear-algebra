@@ -1,5 +1,5 @@
 % Chapter 4, Section 1 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \chapter{Similarity}
 We have shown that for any 
@@ -25,9 +25,10 @@ because most of the matrix entries are zero.
 
 This chapter considers the special case where the domain and
 codomain are the same.
-We naturally ask for the basis for the domain and codomain be the same, that is,
-we want a \( B \) so that \( \rep{t}{B,B} \) is as simple as possible
-(we will take `simple' to mean that it has many zeroes).
+Here we naturally ask for the domain basis and codomain basis to be the same.
+That is,
+we want a \( B \) so that \( \rep{t}{B,B} \) is as simple as possible, where
+we take `simple' to mean that it has many zeroes.
 We will find that we 
 cannot always get a matrix having the above block partial-identity form
 but we will develop a form that comes close, a
@@ -48,11 +49,11 @@ representation that is nearly diagonal.
 \section{Complex Vector Spaces}
 \index{vector space!over complex numbers}
 %<*ReasonForShiftToComplexNumbers>
-This chapter requires that we factor polynomials,
+This chapter requires that we factor polynomials
 but many polynomials do not factor over the real numbers.
 For instance,
 \( x^2+1 \) does not factor into a product of two linear polynomials
-with real coefficients,
+with real coefficients;
 instead it requires complex numbers $x^2+1=(x-i)(x+i)$.
 
 Therefore, in this chapter 
@@ -60,12 +61,11 @@ we shall use complex numbers for our scalars,
 including entries in vectors and matrices. 
 That is, we are shifting from studying vector spaces over the real numbers
 to vector spaces over the complex numbers.
-
 Any real number is a complex number and
 in this chapter most of the examples use
 only real numbers.
 Nonetheless, the critical theorems require that the scalars be complex so
-the first section is a quick review of complex numbers.
+this first section is a quick review of complex numbers.
 %</ReasonForShiftToComplexNumbers>
 
 In this book, our approach is to shift to this more general context 
@@ -83,23 +83,24 @@ Delightful presentations that take this approach from the start are in
 
 
 
-\subsectionoptional{Review of Factoring and Complex Numbers}
-\textit{This subsection is a review only and we take the main results as known.
-  For proofs, see \cite{BirkhoffMaclane} or \cite{Ebbinghaus}.}
+\subsectionoptional{Polynomial Factoring and Complex Numbers}
+\textit{This subsection is a review, without proofs.
+  See \cite{BirkhoffMaclane}, \cite{Ebbinghaus},
+  or \cite{Derksen}.}
 
 %<*PolynomialReview>
-We consider a \definend{polynomial}\index{polynomial} 
+Consider a polynomial\index{polynomial} 
 $p(x)=c_nx^n+\dots+c_1x+c_0$ with 
-\definend{leading coefficient}\index{polynomial!leading coefficent} 
-$c_n\neq 0$.
-The \definend{degree}\index{polynomial!degree}\index{degree of polynomial}
-of the polynomial is~$n$ if $n\geq 1$.
+leading coefficient\index{polynomial!leading coefficient} 
+$c_n\neq 0$ and $n\geq 1$.
+The degree\index{polynomial!degree}\index{degree of polynomial}
+of the polynomial is~$n$.
 If $n=0$ then $p$ is a 
-\definend{constant polynomial}\index{polynomial!constant}\index{constant polynomial} $p(x)=c_0$. 
+constant polynomial\index{polynomial!constant}\index{constant polynomial} 
+$p(x)=c_0$. 
 Constant polynomials that are not the zero polynomial, $c_0\neq 0$, 
 have degree zero.
-We define the zero polynomial to have degree 
-$-\infty$.
+We define the zero polynomial to have degree $-\infty$.
 
 Just as integers have a division operation\Dash e.g., 
 `\( 4 \) goes \( 5 \) times into \( 21 \) with remainder \( 1 \)'\Dash so 
@@ -109,82 +110,86 @@ do polynomials.
 \begin{theorem}[Division Theorem for Polynomials] \label{th:EuclidForPolys}
 \index{division theorem}\index{polynomial!division theorem}
 %<*th:EuclidForPolys>
-Let \( c(x) \) be a polynomial.
-If \( m(x) \) is a non-zero polynomial then there are \definend{quotient} and
+Let \( p(x) \) be a polynomial.
+If \( d(x) \) is a non-zero polynomial then there are \definend{quotient} and
 \definend{remainder} polynomials \( q(x) \) and \( r(x) \) such that
 \begin{equation*}
-  c(x)=m(x)\cdot q(x)+r(x)
+  p(x)=d(x)\cdot q(x)+r(x)
 \end{equation*}
-where the degree of \( r(x) \) is strictly less than the degree of \( m(x) \).
+where the degree of \( r(x) \) is strictly less than the degree of \( d(x) \).
 %</th:EuclidForPolys>
 \end{theorem}
 
 \begin{remark}
 Defining 
-the degree of the zero polynomial to be $-\infty$, 
-which most but not all authors do, 
+the degree of the zero polynomial to be $-\infty$ %, which most authors do, 
 allows the equation $\text{degree}(fg)=\text{degree}(f)+\text{degree}(g)$
-to hold for all polynomial functions $f$ and $g$.
+to hold for all polynomials.
 \end{remark}
-% \noindent In this book constant polynomials, 
-% including the zero polynomial, are defined to have degree~\( 0 \).
-% (This is not the standard definition but it is convienent here.)
 
-The point of the integer division statement
+The point of the integer statement
 `\( 4 \) goes \( 5 \) times into \( 21 \) with remainder \( 1 \)'
 is that the remainder is less than \( 4 \)\Dash while \( 4 \) goes \( 5 \)
 times, it does not go \( 6 \) times.
-In the same way, the point of the polynomial division statement
+Similarly, the point of the polynomial division statement
 is its final clause.
 
 \begin{example}
-If \( c(x)=2x^3-3x^2+4x \) and \( m(x)=x^2+1 \) then \( q(x)=2x-3 \) and
+If \( p(x)=2x^3-3x^2+4x \) and \( d(x)=x^2+1 \) then \( q(x)=2x-3 \) and
 \( r(x)=2x+3 \).
-Note that \( r(x) \) has a lower degree than \( m(x) \).
+Note that \( r(x) \) has a lower degree than does \( d(x) \).
 \end{example}
 
 \begin{corollary} \label{co:PolyDividedByLinearPolyIsConstant}
 %<*co:PolyDividedByLinearPolyIsConstant>
-The remainder when \( c(x) \) is divided by \( x-\lambda \) is the constant
-polynomial \( r(x)=c(\lambda) \).
+The remainder when \( p(x) \) is divided by \( x-\lambda \) is the constant
+polynomial \( r(x)=p(\lambda) \).
 %</co:PolyDividedByLinearPolyIsConstant>
 \end{corollary}
 
 \begin{proof}
 %<*pf:PolyDividedByLinearPolyIsConstant>
 The remainder must be a constant polynomial
-because it is of degree less than the divisor \( x-\lambda \), 
-To determine the constant,
-take $m(x)$ from the theorem to be $x-\lambda$ and 
+because it is of degree less than the divisor \( x-\lambda \).
+To determine the constant, take the theorem's $d(x)$ to be $x-\lambda$ and 
 substitute \( \lambda\/ \) for $x$ to get
-\( c(\lambda)=(\lambda-\lambda)\cdot q(\lambda)+r(x) \). 
+\( p(\lambda)=(\lambda-\lambda)\cdot q(\lambda)+r(x) \). 
 %</pf:PolyDividedByLinearPolyIsConstant>
 \end{proof}
 
 %<*PolynomialFactor>
-If a divisor \( m(x) \) goes into a dividend \( c(x) \) evenly,
+If a divisor \( d(x) \) goes into a dividend \( p(x) \) evenly,
 meaning that \( r(x) \) is the zero polynomial,
-then \( m(x) \) is a \definend{factor\/} of \( c(x) \).
-Any \definend{root\/} of the factor (any \( \lambda\in\Re \) such that
-\( m(\lambda)=0 \)) is a root of \( c(x) \) since
-\( c(\lambda)=m(\lambda)\cdot q(\lambda)=0 \).
+then \( d(x) \) is a factor\index{factor}\index{polynomial!factor} 
+of \( p(x) \).
+Any root\index{root}\index{polynomial!root} of the 
+factor, any \( \lambda\in\Re \) such that
+\( d(\lambda)=0 \), is a root of \( p(x) \) since
+\( p(\lambda)=d(\lambda)\cdot q(\lambda)=0 \).
 %</PolynomialFactor>
 
 \begin{corollary}  \label{co:RootOfPolyIsAssocLinearFactor}
 %<*co:RootOfPolyIsAssocLinearFactor>
-If \( \lambda \) is a root of the polynomial \( c(x) \)
-then \( x-\lambda \) divides \( c(x) \) evenly, that is, 
-$x-\lambda$ is a factor of $c(x)$.
+If \( \lambda \) is a root of the polynomial \( p(x) \)
+then \( x-\lambda \) divides \( p(x) \) evenly, that is, 
+$x-\lambda$ is a factor of $p(x)$.
 %</co:RootOfPolyIsAssocLinearFactor>
 \end{corollary}
 
 \begin{proof}
 %<*pf:RootOfPolyIsAssocLinearFactor>
-By the above corollary $c(x)=(x-\lambda)\cdot q(x)+c(\lambda)$.
+By the above corollary $p(x)=(x-\lambda)\cdot q(x)+p(\lambda)$.
 Since $\lambda$ is a root, 
-$c(\lambda)=0$ so $x-\lambda$ is a factor.  
+$p(\lambda)=0$ so $x-\lambda$ is a factor.  
 %</pf:RootOfPolyIsAssocLinearFactor>
 \end{proof}
+
+A repeated root of a polynomial is a number $\lambda$ such that
+the polynomial is evenly divisible by $(x-\lambda)^n$ for some power larger than
+one.
+The largest such power is called the 
+multiplicity\index{multiplicity}\index{polynomial!multiplicity} 
+of~$\lambda$.
 
 Finding the roots and factors of a high-degree polynomial can be hard.
 But for second-degree polynomials we have the quadratic formula:~the
@@ -197,7 +202,8 @@ roots of \( ax^2+bx+c \) are
 (if the discriminant \( b^2-4ac \) is negative then the polynomial
 has no real number roots).
 A polynomial that cannot be factored into two lower-degree polynomials
-with real number coefficients is \definend{irreducible over the reals}.
+with real number coefficients is irreducible over the 
+reals.\index{irreducible}\index{polynomial!irreducible}
 
 \begin{theorem}  \label{th:CubicsAndHigherFactor}
 %<*th:CubicsAndHigherFactor>
@@ -218,7 +224,7 @@ the same factors.
 \end{corollary}
 
 Note the analogy with the prime factorization of integers.
-In both cases, the uniqueness clause is very useful.
+In both cases the uniqueness clause is very useful.
 
 \begin{example}
 Because of uniqueness we know, without multiplying them out, that
@@ -234,22 +240,20 @@ we know that \( q(x)=(x-3)(x+2) \).
 
 %<*ComplexNumbers>
 While \( x^2+1 \) has no real roots and so doesn't factor over the real
-numbers, if we imagine a root\Dash traditionally denoted \( i \) 
+numbers, if we imagine a root\Dash traditionally denoted \( i \), 
 so that \( i^2+1=0 \)\Dash then \( x^2+1 \) factors into a product of linears
 \( (x-i)(x+i) \).
-
 So we adjoin this root \( i \) to the reals and close the new system with
-respect to addition, multiplication, etc.\ (i.e., we also add
-\( 3+i \), and \( 2i \), and \( 3+2i \), etc., putting in all linear
-combinations of $1$ and $i$).
-We then get a new structure, the 
-\definend{complex numbers}\index{complex numbers}
+respect to addition, multiplication, etc.\ (i.e., we also adjoin to the reals
+all linear
+combinations of $1$ and $i$ such as 
+\( 3+i \), and \( -1.5i \), and \( -1-2i \), etc.)
+then we get the 
+complex numbers\index{complex numbers}
 \( \C \).
 
-In $\C$ we can factor (obviously, at least some) quadratics that would be
-irreducible if we were to stick to the real numbers.
-Surprisingly, in \( \C \) we can not only factor \( x^2+1 \)
-and its close relatives, we can factor any quadratic.
+In \( \C \) all quadratics factor. 
+That is, in contrast with the reals, $\C$ has no irreducible quadratics.
 %</ComplexNumbers>
 %Any quadratic polynomial factors over the complex numbers.
 \begin{equation*}
@@ -308,9 +312,10 @@ For instance,
 \( (2-3i)(4-0.5i)=6.5-13i \).
 \end{example}
 
-Handling scalar operations with those rules, all of
-the operations that we've covered
-for real vector spaces carry over unchanged.
+With these rules, all of
+the operations that we've used
+for real vector spaces carry over unchanged to vector spaces with complex
+scalars.
 
 \begin{example}
 Matrix multiplication is the same, although the scalar arithmetic involves more
