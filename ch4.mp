@@ -1161,7 +1161,7 @@ beginfig(14) % projective plane like a dome
   project_point(1,ell);
   free_vect(ell);
   save ell_line; path ell_line; ell_line = 1.2[z1,z93]--z1; 
-  pickup pencircle scaled line_width_dark;
+  pickup pencircle scaled 1.5pt; % line_width_dark;
   draw ell_line withcolor white;
   pickup pencircle scaled line_width_light;
   draw ell_line;
