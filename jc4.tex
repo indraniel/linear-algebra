@@ -1,5 +1,5 @@
 % Chapter 4, Section 4 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \section{Jordan Form}
 \index{Jordan form|(}
@@ -7,40 +7,36 @@
 subsections:~Combining Subspaces, Determinants Exist, and
 Laplace's Expansion.}
 
-The chapter on linear maps shows that every $\map{h}{V}{W}$ can
-be represented by a partial identity matrix with respect to some
-bases $B\subset V$ and $D\subset W$
-that is, that the partial identity form is a canonical form for 
-matrix equivalence. 
-This chapter considers the special case that the map is a
-linear transformation $\map{t}{V}{V}$.
-The general result still applies so we can get a partial identity
-with respect to $B,D$, but
-with the codomain equal to the domain
-we naturally ask what is possible when the two bases are also equal
-so that we have $\rep{t}{B,B}$\Dash
-we will find a canonical form for matrix similarity.
-
 We began this chapter
-by noting that while a partial identity matrix is the canonical form
-for the $B,D$ case, in the $B,B$ case there are some matrix similarity
-classes without one.
-We therefore extended the forms of interest to the natural generalization, 
+by remembering that every linear map $\map{h}{V}{W}$ can
+be represented by a partial identity matrix with respect to some
+bases $B\subset V$ and $D\subset W$,
+that is, the partial identity form is a canonical form for 
+matrix equivalence. 
+This chapter considers transformations, where
+the codomain equals the domain, so 
+we naturally ask what is possible when the
+two bases are equal $\rep{t}{B,B}$.
+In short, we want a canonical form for matrix similarity.
+
+We noted that in the $B,B$ case
+a partial identity matrix is not always possible.
+We therefore extended the matrix 
+forms of interest to the natural generalization, 
 diagonal matrices, and
-showed that the map or matrix can be diagonalized
+showed that a transformation or square matrix can be diagonalized
 if its eigenvalues are distinct.
-But we also gave an example of a matrix that cannot be diagonalized
-(because it is nilpotent),
-and thus diagonal form won't do as the canonical form for all matrices. 
+But at the same time we gave an example of a 
+square matrix that cannot be diagonalized
+(because it is nilpotent)
+and thus diagonal form won't suffice as the canonical form 
+for matrix similarity. 
 
-The prior section developed that example.
-We showed that a linear map is nilpotent if and only 
-if there is a basis on which it acts via disjoint strings.
-That gave us a canonical form that applied to nilpotent matrices.
+The prior section developed that example
+to get a canonical form, subdiagonal ones, for nilpotent matrices.
 
-This section wraps up the chapter by
-showing that the two cases we've studied are exhaustive 
-in that for any linear transformation there is
+This section finishes our program by
+showing that for any linear transformation there is
 a basis such that the matrix representation $\rep{t}{B,B}$ is the sum of a 
 diagonal matrix and a nilpotent matrix.
 This is Jordan canonical form.
@@ -68,7 +64,7 @@ not all zero, such that
   c_{n^2}T^{n^2}+\dots+c_1T+c_0I
 \end{equation*}
 is the zero matrix.
-That is, every transformation has a kind of generalized 
+Therefore every transformation has a kind of generalized 
 nilpotency:~the powers
 of a square matrix cannot climb forever without a ``repeat.''
 
@@ -86,11 +82,12 @@ and verifying that \( 0T^4+0T^3+1T^2-2T-1I \) equals the zero matrix is easy.
 \end{example}
 
 \begin{definition}
-Let \( t \) be a linear transformation of a vector space~\( V \)
-and let \( T \) be a square matrix.
+Let \( t \) be a linear transformation of a vector space~\( V \).
 Where \( f(x)=c_nx^n+\dots+c_1x+c_0 \) is a polynomial,
 \( f(t) \) is the
-transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on~\( V \) and
+transformation \( c_nt^n+\dots+c_1t+c_0(\identity) \) on~\( V \).
+In the same way, if \( T \) is a square matrix
+then
 \( f(T) \) is the matrix \( c_nT^n+\dots+c_1T+c_0I \).
 \end{definition}
 
@@ -109,14 +106,14 @@ We shall follow this convention.
 \end{remark}
 
 Consider again \nearbyexample{ex:PolySendRotMatToZ}.
-The space $\matspace_{\nbyn{2}}$ has dimension four, so we know that for any
+The space $\matspace_{\nbyn{2}}$ has dimension four so we know that for any
 \( \nbyn{2} \) matrix there is a fourth degree polynomial \( f  \) such that
 \( f(T) \) equals the zero matrix. 
 But for that \( T \)  
-we exhibited a polynomial of degree less than four that gave the zero matrix. 
-So for any particular map or matrix,
-degree~$n^2$ will suffice but there may be a polynomial of
-smaller degree that works.
+we exhibited a polynomial of degree less than four that gives the zero matrix. 
+So while
+degree~$n^2$ always suffices, in some cases there is 
+a smaller-degree polynomial that works.
 
 \begin{definition}
 The \definend{minimal polynomial}\index{polynomial!minimal}%
@@ -138,29 +135,31 @@ Any transformation or square matrix has a unique minimal polynomial.
 \end{lemma}
 
 \begin{proof}
-We first show existence.
-The earlier observation 
-that degree~$n^2$ suffices shows that there is at least one 
+We first prove existence.
+By the earlier observation 
+that degree~$n^2$ suffices, there is at least one 
 nonzero polynomial $p(x)=c_kx^k+\cdots+c_0$ that
 takes the map or matrix to zero
 ($p$ is not the zero polynomial because the earlier observation includes that
 at least one of the coefficients is nonzero).
-From among all nonzero polynomials taking the map or matrix to zero, 
+From among all such nonzero polynomials 
 there must be at least one of minimal degree.
-Divide this $p$ by $c_k$ to get a leading one.
-Thus for any map or matrix a minimal polynomial exists.
+Divide this polynomial by its leading coefficient~$c_k$ to get a leading~$1$.
+Thus any map or matrix has a minimal polynomial.
 
 We now show uniqueness.
 Suppose that 
 \( m(x) \) and \( \hat{m}(x) \) both take the map or matrix to zero,
 are both of 
 minimal degree and are thus of equal degree, 
-and both have a leading one.
-In their difference \( d(x)=m(x)-\hat{m}(x) \) the leading terms cancel.
-So $d$ is of smaller degree than $m$ and $\hat{m}$.
+and both have a leading~$1$.
+Subtract: \( d(x)=m(x)-\hat{m}(x) \).
+This polynomial takes the map or matrix to zero
+and since the leading terms of $m$ and~$\hat{m}$ cancel,
+$d$ is of smaller degree than the other two.
 If $d$ were to have a leading coefficient that is nonzero then we could divide
 by it to get a polynomial that takes the map or matrix to zero and
-has leading coefficient one.
+has leading coefficient~$1$.
 This would contradict the choice of $m$ and $\hat{m}$ as of minimal degree. 
 Thus the leading coefficient of $d$ is zero,
 so \( m(x)-\hat{m}(x) \) is the zero polynomial, 
@@ -437,15 +436,15 @@ Let \( m(x) \) be minimal for \( T \).
 The Division Theorem for Polynomials gives
 \( f(x)=q(x)m(x)+r(x) \)
 where the degree of \( r \) is strictly less than the degree of \( m \).
-Plugging in \( T \) shows that \( r(T) \) is the zero matrix,
-because $T$ satisfies both $f$ and $m$.
+Because $T$ satisfies both $f$ and $m$, plugging $T$ into that equation gives
+that \( r(T) \) is the zero matrix.
 That contradicts the minimality of \( m \) unless \( r \)
 is the zero polynomial.
 \end{proof}
 
-Combining the prior two lemmas gives that the minimal polynomial 
+Combining the prior two lemmas shows that the minimal polynomial 
 divides the characteristic polynomial. 
-Thus,
+Thus
 any root of the minimal polynomial is also a root of the characteristic
 polynomial. 
 That is, so far we have that if 
@@ -472,12 +471,10 @@ $m(\lambda)=0$.
 
 Suppose that $\lambda$ is an eigenvalue of $T$ with associated 
 eigenvector~$\vec{v}$.
-Then $T^2$ has the eigenvalue $\lambda^2$ associated with $\vec{v}$
-because 
+Then
 $T\cdot T\vec{v}=T\cdot\lambda\vec{v}=\lambda T\vec{v}=\lambda^2\vec{v}$.
-Similarly $T^k$ has the eigenvalue~$\lambda^n$ associated with $\vec{v}$.
-
-With that we have that 
+Similarly, $T^n\vec{v}=\lambda^n\vec{v}$.
+With that, we have that 
 for any polynomial function \( p(x) \), application of the matrix \( p(T) \)
 to \( \vec{v} \) equals the result of multiplying \( \vec{v} \) by the scalar
 \( p(\lambda) \).
@@ -510,7 +507,7 @@ this matrix.
 \end{equation*}
 First we find its characteristic polynomial \( c(x)=(x-1)(x-2)^3 \)
 with the usual determinant.
-Now the Cayley-Hamilton Theorem says that 
+Now, the Cayley-Hamilton Theorem says that 
 \( T \)'s minimal polynomial is either
 \( (x-1)(x-2) \) or
 \( (x-1)(x-2)^2 \) or
@@ -1738,7 +1735,8 @@ characteristic polynomial so \( t^n \) is the zero map.
 Thus $t$ is nilpotent.
 \end{proof}
 
-\noindent The phrase ``nontrivial vector space'' is there because on a trivial
+\noindent The `nontrivial vector space' is in the statement of 
+that lemma because on a trivial
 space $\set{\zero}$ the only transformation is the zero map, which has
 no eigenvalues because there are no associated nonzero eigenvectors.
 
@@ -1958,7 +1956,7 @@ adopted the convention of ordering the blocks of subdiagonal ones from the
 longest block to the shortest.
 \end{example}
 
-We will now finish the program of this chapter by extending this work to 
+We will finish the program of this chapter by extending this work to 
 cover maps and matrices with multiple eigenvalues.
 The best possibility for general maps and matrices would be
 if we could break them into a part involving 
@@ -1978,7 +1976,7 @@ is nilpotent, etc.
 % where \( \lambda_1,\ldots,\lambda_z \) are \( t \)'s eigenvalues.
 
 Suppose that \( \map{t}{V}{V} \) is a linear transformation.
-The restriction\appendrefs{restrictions of functions}\spacefactor=1000  %
+The restriction %\appendrefs{restrictions of functions}\spacefactor=1000  %
 of \( t \) to a subspace \( M \) need not be a linear transformation on \( M \)
 because there may be an \( \vec{m}\in M \)
 with \( t(\vec{m})\not\in M \) (for instance, the transformation 
@@ -2060,7 +2058,7 @@ The subspace $M$ is closed under linear combinations and so if
 $t(\vec{m})\in M$ then $t(\vec{m})-\lambda\vec{m}\in M$.
 Thus if $\vec{m}\in M$ then $(t-\lambda)\,(\vec{m})\in M$.
 
-The second sentence follows from the first.
+The lemma's second sentence follows from its first.
 The
 two spaces are $t-\lambda_i$~invariant so they are \( t \)~invariant.
 Apply the first sentence again to
@@ -2078,13 +2076,12 @@ two parts \( \vec{v}=\vec{n}+\vec{r} \) where \( \vec{n}\in \mathscr{N} \) and
 \( \vec{r}\in \mathscr{R} \), and recall also 
 that if \( B_{\mathscr{N}} \) and \( B_{\mathscr{R}} \) are bases for
 \( \mathscr{N} \) and \( \mathscr{R} \) then the concatenation
-\( \cat{B_{\mathscr{N}}}{B_{\mathscr{R}}} \) is linearly independent (and
-so the two parts of \( \vec{v} \) do not ``overlap'').
+\( \cat{B_{\mathscr{N}}}{B_{\mathscr{R}}} \) is linearly independent.
 The next result says that for any subspaces
 \( \mathscr{N} \) and \( \mathscr{R} \) that are complementary 
 as well as \( t \)~invariant,
 the action
-of \( t \) on \( \vec{v} \) breaks into the ``non-overlapping'' actions of
+of \( t \) on \( \vec{v} \) breaks into the actions of
 \( t \) on \( \vec{n} \) and on \( \vec{r} \).
 
 \begin{lemma} \label{le:InvCompSubspSplitTrans}
@@ -2137,8 +2134,7 @@ The argument for the upper right is similar.
 To see that we have decomposed \( t \) into its action on the parts, 
 let $B_{\mathscr{N}}=\sequence{\vec{\nu}_1,\dots,\vec{\nu}_p}$ and 
 $B_{\mathscr{R}}=\sequence{\vec{\mu}_1,\ldots,\vec{\mu}_q}$.
-Observe
-that the restrictions of \( t \) to the subspaces \( \mathscr{N} \) 
+The restrictions of \( t \) to the subspaces \( \mathscr{N} \) 
 and~\( \mathscr{R} \) 
 are represented
 with respect to the bases $B_{\mathscr{N}},B_{\mathscr{N}}$
@@ -2289,7 +2285,7 @@ To verify it we will show that \( t-\lambda_j \) is one-to-one on
 since \( \gennullspace{t-\lambda_i} \) is \( t-\lambda_j \) invariant
 by \nearbylemma{le:tInvIfftMinLambdaInv},
 the map \( t-\lambda_j \) is an automorphism of the subspace
-\( \gennullspace{t-\lambda_i} \),
+\( \gennullspace{t-\lambda_i} \)
 and therefore that 
 \( \gennullspace{t-\lambda_i} \)  is a subset of each
 \( \rangespace{t-\lambda_j} \), \( \rangespace{(t-\lambda_j)^2} \), etc.
@@ -2368,7 +2364,7 @@ where
 We will finish by establishing that (i)~$q_j=0$ for all $j\neq i$,
 and (ii)~$q_i=p_i$.
 Together these prove clause~(2) because they show that the degree of 
-the polynomial $\deter{T_1-xI}$ is $q_i$, and
+the polynomial $\deter{T_1-xI}$ is $q_i$ and
 the degree of that polynomial equals 
 the dimension of the
 generalized null space $\gennullspace{t-\lambda_i}$. 
@@ -2409,7 +2405,8 @@ Any square matrix is similar to one in \definend{Jordan form}
   \end{mat}
 \end{equation*}
 where each \( J_{\lambda} \) is the Jordan block associated with an
-eigenvalue $\lambda$ of the original matrix (that is, is all zeroes except for
+eigenvalue $\lambda$ of the original matrix (that is, each \( J_{\lambda} \)
+is all zeroes except for
 \( \lambda \)'s down the diagonal and some subdiagonal ones).
 \end{theorem}
 
