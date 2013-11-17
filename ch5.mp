@@ -330,13 +330,13 @@ beginfig(8) % graph of rank falling and nullity rising
   pickup pencircle scaled line_width_light;
   drawpoint(z10);
     pickup pensquare  scaled line_width_light;
-    draw (x10,y10+0.5v)--(x10,y4-0.5v) withcolor .8white;  % vert line above dot
-    draw (x10-.5whisker_width,y4-0.5v)--(x10+.5whisker_width,y4-0.5v) withcolor .8white; % whisker at  top
+    draw (x10,y10+0.5v)--(x10,y4-0.5v) withcolor medgray;  % vert line above dot
+    draw (x10-.5whisker_width,y4-0.5v)--(x10+.5whisker_width,y4-0.5v) withcolor medgray; % whisker at  top
     draw (x10-.5whisker_width,y10+0.5v)--(x10+.5whisker_width,y10+0.5v) withcolor .8white; % whisker at  bot
     label.rt(btex \small $\nullity (t^j)$ etex,(x10,.5[y10,y4]));
-    draw (x10,y10-0.5v)--(x10,1v) withcolor .8white; % vert line below dot
-    draw (x10-.5whisker_width,y10-0.5v)--(x10+.5whisker_width,y10-0.5v) withcolor .8white; % whisker at top
-    draw (x10-.5whisker_width,1v)--(x10+.5whisker_width,1v) withcolor .8white; % whisker at bot
+    draw (x10,y10-0.5v)--(x10,1v) withcolor medgray; % vert line below dot
+    draw (x10-.5whisker_width,y10-0.5v)--(x10+.5whisker_width,y10-0.5v) withcolor medgray; % whisker at top
+    draw (x10-.5whisker_width,1v)--(x10+.5whisker_width,1v) withcolor medgray; % whisker at bot
     label.lft(btex \small $\rank (t^j)$ etex,(x10,.55[y10,1v]));
   pickup pencircle scaled line_width_light;
   drawpoint((1w,9v));
@@ -351,13 +351,13 @@ beginfig(8) % graph of rank falling and nullity rising
   % Generalized spaces
     z20=(20w,2v); % were to anchor the line for generalized spaces
     pickup pensquare  scaled line_width_light;
-    draw (x20,y20+0.5v)--(x20,y4-0.5v) withcolor .8white;  % vert line above dot
-    draw (x20-.5whisker_width,y4-0.5v)--(x20+.5whisker_width,y4-0.5v) withcolor .8white; % whisker at  top
-    draw (x20-.5whisker_width,y20+0.5v)--(x20+.5whisker_width,y20+0.5v) withcolor .8white; % whisker at  bot
+    draw (x20,y20+0.5v)--(x20,y4-0.5v) withcolor medgray;  % vert line above dot
+    draw (x20-.5whisker_width,y4-0.5v)--(x20+.5whisker_width,y4-0.5v) withcolor medgray; % whisker at  top
+    draw (x20-.5whisker_width,y20+0.5v)--(x20+.5whisker_width,y20+0.5v) withcolor medgray; % whisker at  bot
     label.rt(btex \small $\dim(\gennullspace{t})$ etex,(x20,.5[y20,y4]));
-    draw (x20,y20-0.5v)--(x20,1v) withcolor .8white; % vert line below dot
-    draw (x20-.5whisker_width,y20-0.5v)--(x20+.5whisker_width,y20-0.5v) withcolor .8white; % whisker at top
-    draw (x20-.5whisker_width,1v)--(x20+.5whisker_width,1v) withcolor .8white; % whisker at bot
+    draw (x20,y20-0.5v)--(x20,1v) withcolor medgray; % vert line below dot
+    draw (x20-.5whisker_width,y20-0.5v)--(x20+.5whisker_width,y20-0.5v) withcolor medgray; % whisker at top
+    draw (x20-.5whisker_width,1v)--(x20+.5whisker_width,1v) withcolor medgray; % whisker at bot
     label.rt(btex \small $\dim(\genrangespace{t})$ etex,(x20,.8[y20,1v]));
 endfig;
 

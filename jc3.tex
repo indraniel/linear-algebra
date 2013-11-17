@@ -1,12 +1,12 @@
 % Chapter 4, Section 1 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \section{Nilpotence}
-The goal of this chapter is to show that every square matrix is similar to one
+This chapter shows that every square matrix is similar to one
 that is a sum of two kinds of simple matrices.
 The prior section
 focused on the first simple kind, diagonal matrices.
-We now consider the other.
+We now consider the other kind.
 
 
 
@@ -22,15 +22,16 @@ We now consider the other.
 
 Because a linear transformation $\map{t}{V}{V}$ has the same domain as
 codomain, we can
-find the composition of $t$ with itself 
+compose $t$ with itself 
 \( t^2=\composed{t}{t} \), 
-and \( t^3=\composed{t}{\composed{t}{t}} \), etc.\appendrefs{function iteration}\spacefactor=1000 %
+and \( t^3=\composed{t}{\composed{t}{t}} \), 
+etc.\appendrefs{function iteration}\spacefactor=1000 %
 \begin{center}
   \includegraphics{ch5.1}
 \end{center}
 Note that the superscript
 power notation $t^j$ for iterates of the transformations 
-dovetails with 
+fits with 
 the notation that we've used for their square matrix representations
 because if $\rep{t}{B,B}=T$ then \( \rep{t^j}{B,B}=T^j \).
 
@@ -140,9 +141,9 @@ $\nullspace{t^j}=\nullspace{t^{j+1}}$).
 \begin{proof}
 First recall that for any map the dimension of its range space
 plus the dimension of its null space equals
-the dimension of its domain,
+the dimension of its domain.
 So if the dimensions of the range spaces shrink then the 
-dimensions of the null spaces must grow.
+dimensions of the null spaces must rise.
 We will do the range space half here and leave the rest for
 \nearbyexercise{exer:RangeAndNullChains}.
 
@@ -175,8 +176,8 @@ Each range space is a subspace of the one before it.
 For it to be a proper subspace it must be of strictly lower dimension
 (see \nearbyexercise{exer:PropSubspStrictLowerDimen}).
 These spaces are finite-dimensional and so the chain can fall for only
-finitely-many steps,
-that is, the power $k$ is at most the dimension of $V$.
+finitely many steps.
+That is, the power $k$ is at most the dimension of $V$.
 \end{proof}
 
 \begin{example}
@@ -249,12 +250,12 @@ where this is the range space and the null space.
 Let \( t \) be a transformation on an \( n \)-dimensional space.
 The \definend{generalized range space}\index{generalized range space}%
 \index{range space!generalized}
-(or the \definend{closure of the range space\/}\index{closure!of range space}%
+(or \definend{closure of the range space\/}\index{closure!of range space}%
 \index{range space!closure of})
-is $\genrangespace{t}=\rangespace{t^n}$
+is $\genrangespace{t}=\rangespace{t^n}$.
 The \definend{generalized null space}\index{generalized null space}%
 \index{null space!generalized}
-(or the \definend{closure of the null space\/}\index{closure!of null space}%
+(or \definend{closure of the null space\/}\index{closure!of null space}%
 \index{null space!closure of})
 is $\gennullspace{t}=\nullspace{t^n}$.
 \end{definition}
@@ -503,8 +504,8 @@ This must happen by the $n$-th iterate.
 
 \subsectionoptional{Strings}
 \index{nilpotent|(}
-\noindent\textit{This subsection requires material from the 
-    optional Direct Sum subsection.}
+\noindent\textit{This requires material from the 
+    optional Combining Subspaces subsection.}
 
 The prior subsection shows that as \( j \) increases,
 the dimensions of the $\rangespace{t^j}$'s fall while
@@ -548,9 +549,8 @@ Clause~(1) is true because any transformation satisfies that
 its rank plus its nullity
 equals the dimension of the space,  
 and in particular this holds for the transformation $t^n$.
-Thus we need only verify clause~(2).
 
-Assume that
+For clause~(2), assume that
 \( \vec{v}\in\genrangespace{t}\intersection\gennullspace{t} \)
 %               =\rangespace{t^n}\intersection\nullspace{t^n} \)
 to prove that $\vec{v}=\zero$.
@@ -755,7 +755,8 @@ produces this representation with respect to \( D,D \).
 \end{equation*}
 The new matrix is nilpotent; it's fourth power 
 is the zero matrix.
-We could verify this with a tedious computation, or we can observe that
+We could verify this with a tedious computation or we can 
+instead just observe that
 it is nilpotent since it is similar to the nilpotent matrix \( \hat{N}^4 \).
 \begin{equation*}
    (P\hat{N}P^{-1})^4
@@ -796,45 +797,45 @@ if they are not disjoint because a basis cannot have a repeated vector.
 \begin{example}
 In \nearbyexample{ThirdNilMap}, we can concatenate the $t$-strings
 $\sequence{\vec{\beta}_1,\vec{\beta}_2,\vec{\beta}_3}$ and
-$\sequence{\vec{\beta}_4,\vec{\beta}_5}$, of length three and two,
+$\sequence{\vec{\beta}_4,\vec{\beta}_5}$
 to make a basis for the domain of $t$.
 \end{example}
 
 \begin{lemma}  \label{le:LongestTowerIsIndex}
-If a space has a basis of \( t \)-strings then the longest string in that
-basis has 
-length equal to the index of nilpotency of $t$.
+If a space has a \( t \)-string basis then the index of nilpotency of $t$
+is the length of the longest string in that basis.
 \end{lemma}
 
 \begin{proof}
-Assume the space has a basis of $t$-strings and that $t$'s index of
-nilpotency is $k$.
+Let the space have a basis of $t$-strings and let $t$'s index of
+nilpotency be~$k$.
 We cannot have that the longest string in that basis is longer than
-$t$'s index of nilpotency:
+$t$'s index of nilpotency because
 \( t^k \) sends any vector, including the vector starting the longest
 string, to \( \zero \).
-So suppose instead that the space has a $t$-string basis~$B$ where 
+Therefore instead suppose that the space has a $t$-string basis~$B$ where 
 all of the strings are shorter than length~\( k \).
 Because $t$ has index~$k$, there is a vector \( \vec{v} \) 
 such that \( t^{k-1}(\vec{v})\neq\zero \).
 Represent $\vec{v}$ as a linear combination of elements from~$B$ 
 and apply \( t^{k-1} \).
 We are supposing that \( t^{k-1} \) maps each element of~$B$ to \( \zero \),
-and therefore each summand in the linear combination to $\zero$,
+and therefore maps each term in the linear combination to $\zero$,
 but also that it does not map \( \vec{v} \) to \( \zero \).
-That is impossible. 
+That is a contradiction. 
 \end{proof}
 
-We shall show that every
-nilpotent map has an associated string basis.
+We shall show that each
+nilpotent map has an associated string basis, a basis of disjoint strings.
 % Then our goal theorem, that every
 % nilpotent matrix is similar to one that is
 % all zeros except for blocks of subdiagonal ones, is immediate,
  %as in \nearbyexample{ThirdNilMap}.
 
-We first see main idea of the argument by considering an example.
-If we want to construct a counterexample, a nilpotent map without an associated
-disjoint string basis, we would something like 
+To see the main idea of the argument, imagine that 
+we want to construct a counterexample, a map that is nilpotent but 
+without an associated disjoint string basis. 
+We might think to make something like 
 the map \( \map{t}{\C^5}{\C^5} \) with this action.
 \begin{center}
   \begin{minipage}{1in}
@@ -862,19 +863,16 @@ the map \( \map{t}{\C^5}{\C^5} \) with this action.
     0  &0  &0  &1  &0
   \end{mat}$
 \end{center}
-The action on the basis shows that this map is nilpotent but this is not
-a disjoint string basis, because the first two of the
-three strings aren't disjoint. 
-However, the fact that this basis isn't disjoint doesn't mean there is no
-disjoint string basis.
-To produce a such a basis for this map
-we will first find the number and lengths of its strings.
+But, the fact that the shown basis isn't disjoint doesn't mean that there 
+isn't another basis that consists of disjoint strings.
 
+To produce such a basis for this map 
+we will first find the number and lengths of its strings.
 Since $t$'s index of nilpotency is two,
 \nearbylemma{le:LongestTowerIsIndex} says that 
 at least one string in the basis has length two.
 There are five basis elements so if there is a disjoint string basis then
-the map must act on it in one of these two ways.
+the map must act in one of these ways.
 \begin{equation*}
   \begin{strings}{ccccc}
     \vec{\beta}_1 &\mapsto &\vec{\beta}_2 &\mapsto &\zero  \\
@@ -895,16 +893,16 @@ null space of dimension three since that's how many basis vectors are
 mapped to zero. 
 A transformation with the right-hand action has a null space of
 dimension four.
-Thus, using the matrix representation above, we can determine which of the 
-two possible shapes is right by calculating $t$'s null space.
+Wit the matrix representation above we can determine which of the 
+two possible shapes is right.
 \begin{equation*}
   \nullspace{t}=
   \set{\colvec{x \\ -x \\ z \\ 0 \\ r}\suchthat x,z,r\in\C }
 \end{equation*}
-It is three-dimensional,
-meaning that this~\( t \) has the left-hand action, since in the 
+This is three-dimensional,
+meaning that~\( t \) has the left-hand action, since in the 
 right-hand action the number of basis vectors mapped to zero
-is~\( 4 \).
+is four.
 
 To produce a string basis first
 pick \( \vec{\beta}_2 \) and \( \vec{\beta}_4 \) from
@@ -1020,7 +1018,7 @@ Now extend \( C \) to a basis for all of \( \nullspace{t} \).
   \hat{C}=\cat{C}{\sequence{\vec{\xi}_1,\dots,\vec{\xi}_p}}
 \end{equation*}
 (In the illustration the $\vec{\xi}$'s are the vectors of kind~\( 2 \) 
-and so the set \( \hat{C} \) is the set of all vectors in a square.)
+and so the set \( \hat{C} \) is the set of vectors in squares.)
 While which vectors \( \vec{\xi} \) we choose isn't uniquely
 determined by $t$, what is uniquely determined is the number
 of them: it is the dimension of
@@ -1044,8 +1042,8 @@ Note that
   \dim (V)-i
 \end{align*}
 and so we can extend \( \cat{B}{\hat{C}} \) to a basis for all of 
-\( V \) by the addition of \( i \) more vectors, 
-provided they are not linearly dependent on what we have already.
+\( V \) by the addition of \( i \) more vectors, provided that
+they are not linearly dependent on what we have already.
 Recall that each of \( \vec{\beta}_1,\dots,\vec{\beta}_i \) is
 in \( \rangespace{t} \), and extend \( \cat{B}{\hat{C}} \) with vectors
 \( \vec{v}_1,\dots,\vec{v}_i \) such that
@@ -1100,42 +1098,42 @@ has an index of nilpotency of two, as this calculation shows.
     &\( \C^2  \)
   \end{tabular}
 \end{center}
-The calculation also describes how a map $m$ represented by $M$ must act on any
-string basis.
-With one map application the null space has dimension~one and so one
-vector of the basis maps to zero.
-On a second application, the null space has dimension~two and so
-the other basis vector maps to zero. 
-Thus, the action of the linear transformation is
+Because the matrix is $\nbyn{2}$, any transformation that it represents 
+is on a space of dimension two.
+The nullspace of one application of the map 
+$\nullspace{m}$ has dimension~one, and
+the nullspace of two applications $\nullspace{m^2}$ has dimension~two.
+Thus the action of $m$ on a string basis is
 $\vec{\beta}_1\mapsto\vec{\beta}_2\mapsto\zero$ 
 and the canonical form of the matrix is this.
 \begin{equation*}
-  \begin{mat}[r]
+  N=\begin{mat}[r]
     0  &0  \\
     1  &0
   \end{mat}
 \end{equation*}
 
-We can exhibit such a $m$-string basis 
-and the change of basis matrices witnessing the matrix similarity.
-For the basis,
-take \( M \) to represent $m$ with respect to the standard bases.
-(We could take $M$ to be a representative with respect to some other basis
+We can exhibit such a string basis, 
+and also the change of basis matrices witnessing the matrix similarity
+between $M$ and~$N$.
+Suppose that $\map{m}{\C^2}{\C^2}$ is such that \( M \) represents it 
+with respect to the standard bases.
+(We could take $M$ to be a representation with respect to some other basis
 but the standard basis is convenient.)
-Pick a \( \vec{\beta}_2\in\nullspace{m} \)
-and also pick a \( \vec{\beta}_1 \) 
+Pick \( \vec{\beta}_2\in\nullspace{m} \).
+Also pick \( \vec{\beta}_1 \) 
 so that \( m(\vec{\beta}_1)=\vec{\beta}_2 \).
 \begin{equation*}
   \vec{\beta}_2=\colvec[r]{1 \\ 1}
   \qquad
   \vec{\beta}_1=\colvec[r]{1 \\ 0}
 \end{equation*}
-Recall the similarity diagram.
+For the change of basis matrices, recall the similarity diagram.
 \begin{equation*}
   \begin{CD}
     \C^2_{\wrt{\stdbasis_2}}      @>m>M>        \C^2_{\wrt{\stdbasis_2}}     \\
     @V\scriptstyle\identity V\scriptstyle PV  @V\scriptstyle\identity V\scriptstyle PV \\
-    C^2_{\wrt{B}}                 @>m>>         \C^2_{\wrt{B}}
+    C^2_{\wrt{B}}                 @>m>N>         \C^2_{\wrt{B}}
   \end{CD}
 \end{equation*}
 The canonical form equals \( \rep{m}{B,B}=PMP^{-1} \), where
@@ -1176,7 +1174,7 @@ and the verification of the matrix calculation is routine.
 \end{example}
 
 \begin{example} \label{ex:FiveByNilStrBas}
-The matrix
+This matrix
 \begin{equation*}
   \begin{mat}[r]
      0  &0  &0  &0  &0  \\
@@ -1186,7 +1184,7 @@ The matrix
      1  &0  &-1 &1  &-1
   \end{mat}
 \end{equation*}
-is nilpotent.
+is nilpotent, of index~$3$.
 % \newlength{\extramatrixvspace}
 % \setlength{\extramatrixvspace}{.75ex}
 % \newcommand{\matrixvenlarge}[1]{\raisebox{-0.5\height}{\vbox{
@@ -1227,13 +1225,14 @@ is nilpotent.
     &\( \C^5 \)
   \end{tabular}
 \end{center}
-That table shows that any string basis must satisfy:~the 
+The table tells us this about any string basis:~the 
 null space after one map application has
 dimension~two so two basis vectors map directly to zero, 
 the null space after the second application has dimension four 
-so two additional basis vectors map to zero by the second iteration, and
-the null space after three applications is of dimension~five so the final
-basis vector maps to zero in three hops.
+so two additional basis vectors map to zero by the second iteration, 
+and
+the null space after three applications is of dimension~five so the 
+remaining one basis vector maps to zero in three hops.
 \begin{equation*}
   \begin{strings}{ccccccc}
     \vec{\beta}_1 &\mapsto &\vec{\beta}_2 &\mapsto &\vec{\beta}_3
@@ -1241,20 +1240,20 @@ basis vector maps to zero in three hops.
     \vec{\beta}_4 &\mapsto &\vec{\beta}_5 &\mapsto &\zero
   \end{strings}
 \end{equation*}
-To produce such a basis, first pick two independent vectors from
-\( \nullspace{n} \)
+To produce such a basis, first pick two vectors from
+\( \nullspace{n} \) that form a linearly independent set.
 \begin{equation*}
    \vec{\beta}_3=\colvec[r]{0 \\ 0 \\ 1 \\ 1 \\ 0} \quad
    \vec{\beta}_5=\colvec[r]{0 \\ 0 \\ 0 \\ 1 \\ 1}
 \end{equation*}
-then add \( \vec{\beta}_2,\vec{\beta}_4\in\nullspace{n^2} \)
+Then add \( \vec{\beta}_2,\vec{\beta}_4\in\nullspace{n^2} \)
 such that \( n(\vec{\beta}_2)=\vec{\beta}_3 \) and
-\( n(\vec{\beta}_4)=\vec{\beta}_5 \)
+\( n(\vec{\beta}_4)=\vec{\beta}_5 \).
 \begin{equation*}
    \vec{\beta}_2=\colvec[r]{0 \\ 1 \\ 0 \\ 0 \\ 0} \quad
    \vec{\beta}_4=\colvec[r]{0 \\ 1 \\ 0 \\ 1 \\ 0}
 \end{equation*}
-and finish by adding \( \vec{\beta}_1\in\nullspace{n^3}=\C^5 \)
+Finish by adding \( \vec{\beta}_1 \)
 such that \( n(\vec{\beta}_1)=\vec{\beta}_2 \).
 \begin{equation*}
    \vec{\beta}_1=\colvec[r]{1 \\ 0 \\ 1 \\ 0 \\ 0}
