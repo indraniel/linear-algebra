@@ -1,5 +1,5 @@
 % Chapter 4, Section 2 _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \section{Similarity}
 \index{similarity|(}
@@ -8,8 +8,8 @@ We've defined two matrices \( H \) and \( \hat{H} \) to be
 matrix equivalent if there are nonsingular \( P \) and \( Q \)
 such that \( \hat{H}=PHQ \).
 We were motivated by this diagram
-showing both $H$ and $\hat{H}$ representing a map, 
-$h$ but with respect to different
+showing both $H$ and $\hat{H}$ representing a map 
+$h$, but with respect to different
 pairs of bases, $B,D$ and $\hat{B},\hat{D}$.
 \begin{equation*}
   \begin{CD}
@@ -22,9 +22,9 @@ pairs of bases, $B,D$ and $\hat{B},\hat{D}$.
 
 %<*SimilarityMotiviation1>
 We now consider the special case
-where the codomain equals the domain and in particular we add the requirement
-that the codomain's basis equals the domain's basis,
-so we are considering representations with respect to 
+where the codomain equals the domain and we add the requirement
+that the codomain's basis equals the domain's basis.
+So, we are considering representations with respect to 
 $B,B$ and $D,D$.\index{arrow diagram}
 \begin{equation*}
   \begin{CD}
@@ -91,14 +91,14 @@ The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
 %</ex:OnlyZeroSimToZero>
 \end{example}
 
-Since matrix similarity is a special case of matrix equivalence, 
+Matrix similarity is a special case of matrix equivalence so 
 if two matrices are similar then they are matrix equivalent.
 What about the converse:~must any two matrix equivalent square matrices be 
 similar?
-No;
-the prior example shows that the similarity classes are different
-from the matrix equivalence classes because the matrix equivalence class
-of an identity consists of all nonsingular matrices of that size. 
+No; the matrix equivalence class
+of an identity matrix consists of all nonsingular matrices of that size
+while the prior example shows that the only member of the similarity class 
+of an identity matrix is itself. 
 Thus these two are
 matrix equivalent but not similar.
 \begin{equation*}
@@ -116,7 +116,7 @@ matrix equivalent but not similar.
 \end{equation*}
 So some matrix equivalence classes
 split into two or more similarity classes\Dash similarity gives a finer
-partition than does equivalence.
+partition than does matrix equivalence.
 This pictures some matrix equivalence classes subdivided into
 similarity classes.
 \begin{center}
@@ -127,7 +127,7 @@ To understand the similarity relation we shall study the similarity classes.
 We approach this question in the same way that we've studied both the
 row equivalence and matrix equivalence relations, by finding
 a canonical form for
-representatives\appendrefs{representatives}\spacefactor=1000 %
+representatives % \appendrefs{representatives}\spacefactor=1000 %
 of the similarity classes, called Jordan form.
 With this canonical form, we can decide if two matrices are similar by checking
 whether they are in a class with the same representative.
@@ -866,8 +866,8 @@ we naturally build on previous work.
 This means 
 first that the partial identity matrices should represent the similarity
 classes into which they fall. 
-Beyond that, the representatives should be as simple as possible and
-the partial identities are simple in that they consist mostly of zero entries. 
+Beyond that, the representatives should be as simple as possible
+(the partial identities are simple in that they consist mostly of zeros). 
 The simplest extension of the partial identity form is the diagonal form.
 
 \begin{definition} \label{df:Diagonalizable}
@@ -941,7 +941,8 @@ from the starting matrix, and $D$ is not the zero matrix.
 That example shows that a diagonal form will not suffice as a 
 canonical form\Dash we cannot
 find a diagonal matrix in each matrix similarity class.
-However, the canonical form that we are developing has the property that if
+However, some similarity classes contain a diagonal matrix and 
+the canonical form that we are developing has the property that if
 a matrix can be diagonalized then the diagonal matrix is the canonical
 representative of its similarity class. 
 % We now characterize which maps can be diagonalized.
@@ -1000,8 +1001,8 @@ To diagonalize
       0  &1
    \end{mat}
 \end{equation*}
-we take it as the representation of a transformation with respect to the
-standard basis $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ and we look for a basis
+we take $T$ as the representation of a transformation with respect to the
+standard basis $\rep{t}{\stdbasis_2,\stdbasis_2}$ and look for a basis
 \( B=\sequence{\vec{\beta}_1,\vec{\beta}_2} \) such that
 \begin{equation*}
   \rep{t}{B,B}
@@ -1045,16 +1046,16 @@ That's a linear system.
   \end{linsys}
 \tag*{($*$)}\end{equation*}
 Focus first on the bottom equation.
-The two numbers multiply to give zero only if
-at least one of them is zero so there are two cases,
-$b_2=0$ or $x=1$. 
-In the \( b_2=0 \) case, 
+There are two cases: either
+$b_2=0$ or~$x=1$. 
+
+In the \( b_2=0 \) case 
 the first equation gives that either $b_1=0$ or \( x=3 \).
-Since we've disallowed the case of both $b_1=0$ and $b_2=0$,
-we are left with $\lambda_1=3$. 
-Then the first equation in ($*$) is $0\cdot b_1+2\cdot b_2=0$
+Since we've disallowed the possibility of both $b_2=0$ and~$b_1=0$,
+we are left with the first diagonal entry $\lambda_1=3$. 
+With that, ($*$)'s first equation is $0\cdot b_1+2\cdot b_2=0$
 and so associated with $\lambda_1=3$ are vectors
-with a second component of zero and a first component that is free. 
+having a second component of zero while the first component is free. 
 \begin{equation*}
      \begin{mat}[r]
         3  &2  \\
@@ -1062,14 +1063,16 @@ with a second component of zero and a first component that is free.
      \end{mat}
      \colvec{b_1 \\ 0}=3\cdot\colvec{b_1 \\ 0} 
 \end{equation*}
-Choose any nonzero $b_1$ to have a first basis vector.
+To get a first basis vector 
+choose any nonzero $b_1$.
 \begin{equation*}
    \vec{\beta}_1=\colvec[r]{1 \\ 0}
 \end{equation*}
-The second case for the bottom equation of ($*$) is $\lambda_2=1$. 
-The first equation in ($*$) is then $2\cdot b_1+2\cdot b_2=0$ and so
-associated with $1$ are vectors such that their 
-second component is the negative of their first.
+
+The other case for the bottom equation of ($*$) is $\lambda_2=1$. 
+Then ($*$)'s first equation is $2\cdot b_1+2\cdot b_2=0$ and so
+associated with this case are vectors whose
+second component is the negative of the first.
 \begin{equation*}
      \begin{mat}[r]
         3  &2  \\
@@ -1077,11 +1080,13 @@ second component is the negative of their first.
      \end{mat}
      \colvec{b_1 \\ -b_1}=1\cdot\colvec{b_1 \\ -b_1} 
 \end{equation*}
-Choose a nonzero one of these to have a second basis vector.
+Get the second basis vector by 
+choosing a nonzero one of these.
 \begin{equation*}
    \vec{\beta}_2=\colvec[r]{1 \\ -1}
 \end{equation*}
-Now drawing the similarity diagram        
+
+Now draw the similarity diagram        
 \begin{equation*}
      \begin{CD}
             \Re^2_{\wrt{\stdbasis_2}}                   
@@ -1094,8 +1099,8 @@ Now drawing the similarity diagram
                \Re^2_{\wrt{B}}
       \end{CD}
 \end{equation*}
-and noting that the matrix $\rep{\identity}{B,\stdbasis_2}$ is easy
-gives us this diagonalization.
+and note that the matrix $\rep{\identity}{B,\stdbasis_2}$ is easy,
+giving this diagonalization.
 \begin{equation*}
    \begin{mat}[r]
      3  &0  \\
@@ -1117,10 +1122,10 @@ gives us this diagonalization.
 \end{equation*}
 \end{example}
 
-In the next subsection, we will expand on that example by considering 
+In the next subsection we will expand on that example by considering 
 more closely the property of \nearbylemma{lm:DiagIffBasisOfEigens}.
-This includes seeing another way, 
-the way that we will routinely use, to find the $\lambda$'s.
+This includes seeing a 
+streamlined way to find the $\lambda$'s.
 
 
 \begin{exercises}
@@ -2011,7 +2016,7 @@ the way that we will routinely use, to find the $\lambda$'s.
 
 
 \subsection{Eigenvalues and Eigenvectors}
-In this subsection we will focus on the
+We will next focus on the
 property of \nearbylemma{lm:DiagIffBasisOfEigens}.
 
 \begin{definition} \label{def:Eigen}
@@ -2031,20 +2036,20 @@ $.
 \noindent (``Eigen'' is German for ``characteristic of'' or ``peculiar to.'' 
 Some authors call these \definend{characteristic}%
 \index{characteristic!vectors, values} values and vectors.
-No one calls them ``peculiar.'')
+No authors call them ``peculiar.'')
 
 \begin{remark}
 This definition requires that the eigenvector be non-$\zero$.
 Some authors allow $\zero$ as
 an eigenvector for $\lambda$ as long as there are also
 non-$\zero$ vectors associated with $\lambda$.
-Neither style  of definition is clearly better; both involve small tradeoffs.
-In both styles the key point is 
-to not allow a case where $\lambda$ is such that
+% Neither style  of definition is clearly better; both involve small tradeoffs.
+The key point is 
+to disallow the trivial case where $\lambda$ is such that
 $t(\vec{v})=\lambda\vec{v}$ for only the single vector $\vec{v}=\zero$.
 
-Also, note that $\lambda$ could be $0$.
-The issue is whether $\vec{\zeta}$ could be $\zero$.  
+Also, note that the eigenvalue $\lambda$ could be~$0$.
+The issue is whether $\vec{\zeta}$ equals $\zero$.  
 \end{remark}
 
 \begin{example}
@@ -2055,12 +2060,12 @@ The projection map
   \colvec{x \\ y \\ 0}
    \qquad x,y,z\in\C
 \end{equation*}
-has an eigenvalue of \( 1 \) associated with any eigenvector of the form
+has an eigenvalue of \( 1 \) associated with any eigenvector
 \begin{equation*}
    \colvec{x \\ y \\ 0}
 \end{equation*}
 where \( x \) and \( y \) are scalars that are not both zero.
-On the other hand, \( 2 \) is not an eigenvalue of \( \pi \) 
+A scalar that is not an eigenvalue of $\pi$ is \( 2 \),
 since no non-$\zero$ vector is doubled.
 \end{example}
 
@@ -2069,7 +2074,7 @@ since no non-$\zero$ vector is doubled.
 % Note, however, that a matrix can have an eigenvalue of $\lambda=0$.
 
 \begin{example}  \label{ex:NoEigenOnTrivSp}
-The only transformation on the trivial space \( \set{\zero\,} \) is
+The only transformation on the trivial space \( \set{\zero} \) is
 %\begin{equation*}
 $\zero\mapsto\zero$.
 %\end{equation*}
@@ -2104,14 +2109,16 @@ A square matrix \( T \) has a scalar
 
 Although this extension from maps to matrices is natural, 
 we need to make one observation.
-Eigenvalues of a map are also the eigenvalues of matrices representing
-that map and so similar matrices have the same eigenvalues.
-But the eigenvectors can different\Dash similar matrices need not have the 
+While eigenvalues of a map are also the eigenvalues of matrices representing
+that map and so similar matrices have the same eigenvalues,
+note that the eigenvectors can 
+different\Dash similar matrices need not have the 
 same eigenvectors.
 
 \begin{example}
 Consider again the transformation \( \map{t}{\polyspace_1}{\polyspace_1} \) 
-from \nearbyexample{ex:TransPolyOne} given by
+% from \nearbyexample{ex:TransPolyOne} 
+given by
 \( c_0+c_1x\mapsto (c_0+c_1)+(c_0+c_1)x \).
 One of its eigenvalues is \( 2 \), associated with the eigenvectors
 \( c+cx \) where \( c\neq 0 \).
@@ -2241,7 +2248,7 @@ Plugging in $\lambda_1=0$ gives
   \colvec[r]{a \\ -a \\ a}
 \end{equation*}
 for \( a\neq 0 \)
-(\( a \) is non-\( 0 \) because eigenvectors must be non-\( \zero \)).
+(\( a \) must be non-\( 0 \) because eigenvectors must be non-\( \zero \)).
 Plugging in $\lambda_2=2$ gives 
 \begin{equation*}
   \begin{mat}
@@ -2323,7 +2330,7 @@ The \definend{characteristic equation}\index{characteristic equation}%
 is $\deter{T-xI}=0$.
 The \definend{characteristic polynomial of a transformation}
 \( t \) is the characteristic polynomial
-of any matrix representatation
+of any matrix representation
 \( \rep{t}{B,B} \).\index{transformation!characteristic polynomial}
 %</df:CharacteristicPoly>
 \end{definition}
@@ -2385,10 +2392,12 @@ An eigenspace is a subspace.
 
 \begin{proof}
 %<*pf:EigSpaceIsSubSp>
-An eigenspace is nonempty because it contains the zero
-vector since for any linear transformation $t(\zero)=\zero$, which equals
-$\lambda\zero$. 
-Thus we need only check closure of linear combinations.
+Notice first that
+an eigenspace contains the zero
+vector since $t(\zero)=\zero$, which equals
+$\lambda\zero$.
+That implies that the eigenspace is a nonempty subset of the space. 
+Thus we need only check closure of this set under linear combinations.
 Take \( \vec{\zeta}_1,\ldots,\vec{\zeta}_n\in V_{\lambda} \) and verify 
 \begin{align*}
   t(\lincombo{c}{\vec{\zeta}})
@@ -2396,23 +2405,12 @@ Take \( \vec{\zeta}_1,\ldots,\vec{\zeta}_n\in V_{\lambda} \) and verify
   &=c_1\lambda\vec{\zeta}_1+\dots+c_n\lambda\vec{\zeta}_n          \\
   &=\lambda(c_1\vec{\zeta}_1+\dots+c_n\vec{\zeta}_n)
 \end{align*}
-that the combination is also in $V_{\lambda}$
-(despite that the zero vector isn't an eigenvector, 
-the second equality holds even if some \( \vec{\zeta}_i \) is \( \zero \) since
-\( t(\zero)=\lambda\cdot\zero=\zero \)).
+that the combination is also an element of  $V_{\lambda}$.
+% (despite that the zero vector isn't an eigenvector, 
+% the second equality holds even if some \( \vec{\zeta}_i \) is \( \zero \) since
+% \( t(\zero)=\lambda\cdot\zero=\zero \)).
 %</pf:EigSpaceIsSubSp>
 \end{proof}
-
-\begin{example}
-In \nearbyexample{ex:AnotherCharPoly} the eigenspace associated with the
-eigenvalue \( \pi \) 
-and the eigenspace associated with the eigenvalue \( 3 \) are these.
-\begin{equation*}
-  V_{\pi}=\set{\colvec{a \\ 0}\suchthat a\in\C}
-  \qquad
-  V_3=\set{\colvec{-b/(\pi-3) \\ b}\suchthat b\in\C}
-\end{equation*}
-\end{example}
 
 \begin{example}
 In \nearbyexample{ex:IntroCharEqn}
@@ -2422,6 +2420,17 @@ and \( 2 \).
   V_0=\set{\colvec[r]{a \\ -a \\ a}\suchthat a\in\C},
   \qquad
   V_2=\set{\colvec{b \\ 0 \\ b}\suchthat b\in\C}.
+\end{equation*}
+\end{example}
+
+\begin{example}
+In \nearbyexample{ex:AnotherCharPoly} these are the eigenspaces 
+associated with the eigenvalues \( \pi \) 
+and~\( 3 \).
+\begin{equation*}
+  V_{\pi}=\set{\colvec{a \\ 0}\suchthat a\in\C}
+  \qquad
+  V_3=\set{\colvec{-b/(\pi-3) \\ b}\suchthat b\in\C}
 \end{equation*}
 \end{example}
 
@@ -2451,6 +2460,18 @@ represents projection.
   \colvec{x \\ y \\ 0}
    \qquad x,y,z\in\C
 \end{equation*}
+Its characteristic equation 
+\begin{align*}
+  0
+  &=\deter{T-x I}                                     \\
+  &=\begin{vmatrix}
+     1-x          &0            &0            \\
+     0           &1-x          &0           \\
+     0           &0            &0-x
+   \end{vmatrix}                                       \\
+  &=(1-x)^2(0-x)
+\end{align*}
+has the double root~$x=1$ along with the single root~$x=0$.
 Its eigenspace associated with the eigenvalue \( 0 \) and
 its eigenspace associated with the eigenvalue \( 1 \)
 are easy to find.
@@ -2459,13 +2480,15 @@ are easy to find.
    \qquad
    V_1=\set{\colvec{c_1 \\ c_2 \\ 0}\suchthat c_1,c_2\in\C}
 \end{equation*}
+Note that $V_1$ has dimension two.
 \end{example}
 
 By \nearbylemma{le:EigSpaceIsSubSp} 
 if two eigenvectors $\vec{v}_1$ and $\vec{v}_2$ are 
 associated with the same eigenvalue then a linear combination of those
 two is also an eigenvector, associated with the same eigenvalue.
-Thus, referring to the prior example, this sum of two members of $V_1$
+As an illustration, referring to the prior example, 
+this sum of two members of $V_1$
 \begin{equation*}
   \colvec[r]{1 \\ 0 \\ 0}+\colvec[r]{0 \\ 1 \\ 0}
 \end{equation*}
@@ -2484,17 +2507,18 @@ eigenvectors, one per eigenvalue, is linearly independent.
 \begin{proof}
 %<*pf:DistEValueGivesLIEvecs0>
 We will use induction on the number of eigenvalues.
-If there is no eigenvalue then the set of associated vectors is empty,
-and is linearly independent.
-If there is 
-only one eigenvalue then the set of associated eigenvectors is
-a singleton set with a non-$\zero$ member, 
+The base step is that there are zero eigenvalues.
+Then the set of associated vectors is empty
 and so is linearly independent.
+% If there is 
+% only one eigenvalue then the set of associated eigenvectors is
+% a singleton set with a non-$\zero$ member, 
+% and so is linearly independent.
 %</pf:DistEValueGivesLIEvecs0>
 
 %<*pf:DistEValueGivesLIEvecs1>
-For induction assume that the theorem is true for any set of \( k \)
-distinct eigenvalues. 
+For the inductive step assume that the statement is true for any set 
+of \( k\geq 0 \) distinct eigenvalues. 
 Consider distinct eigenvalues 
 \( \lambda_1,\dots,\lambda_{k+1} \)
 and let \( \vec{v}_1,\dots,\vec{v}_{k+1} \)
@@ -2507,20 +2531,21 @@ and the second by applying the map to both sides
 $\zero=c_1t(\vec{v}_1)+\dots+c_{k+1}t(\vec{v}_{k+1})
   =c_1\lambda_1\vec{v}_1+\dots+c_{k+1}\lambda_{k+1}\vec{v}_{k+1}$
 (applying the matrix gives the same result). 
-Subtract the second equation from the first
+Subtract the second from the first.
 \begin{equation*}
   \zero=
   c_1(\lambda_{k+1}-\lambda_1)\vec{v}_1+\dots
   +c_k(\lambda_{k+1}-\lambda_k)\vec{v}_k
       +c_{k+1}(\lambda_{k+1}-\lambda_{k+1})\vec{v}_{k+1}
 \end{equation*}
-so that the $\vec{v}_{k+1}$ term vanishes.
+The $\vec{v}_{k+1}$ term vanishes.
 Then the induction hypothesis gives that
 \( c_1(\lambda_{k+1}-\lambda_1)=0 \), \ldots, \( c_k(\lambda_{k+1}-\lambda_k)=0 \).
-All of the eigenvalues are distinct so 
-\( c_1,\,\dots,\,c_k \) are all \( 0 \).
-With that, \( c_{k+1} \) must be \( 0 \) because
-we are left with the equation \( \zero=c_{k+1}\vec{v}_{k+1} \).
+The eigenvalues are distinct so 
+the coefficients \( c_1,\,\dots,\,c_k \) are all~\( 0 \).
+With that
+we are left with the equation \( \zero=c_{k+1}\vec{v}_{k+1} \)
+so \( c_{k+1} \) is also~\( 0 \).
 %</pf:DistEValueGivesLIEvecs1>
 \end{proof}
 
