@@ -1,14 +1,14 @@
 % Chapter 4, Topic _Linear Algebra_ Jim Hefferon
-%  http://joshua.smcvt.edu/linalg.html
+%  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Method of Powers}
 \index{method of powers|(}
 \index{powers, method of|(}
-In applications the matrices can be quite large.
+In applications matrices can be large.
 Calculating eigenvalues and eigenvectors by
 finding and solving the characteristic polynomial
-can be too slow and too hard. 
-There are techniques that avoid the characteristic polynomial. 
+can be too slow. 
+Some techniques avoid the characteristic polynomial. 
 Here we shall see such a method that is suitable for large matrices that are
 \definend{sparse}\index{matrix!sparse}\index{sparse matrix}, 
 meaning that the great majority of the entries are zero.
@@ -43,8 +43,8 @@ is the largest and dividing through
                     \dots+c_n\frac{\lambda_n^k}{\lambda_1^k}\vec{\zeta}_n  
 \end{equation*} 
 shows that as $k$ gets larger the fractions go to zero
-and so $\lambda_1$'s term will dominate the expression.
-Thus, the entire expression has a limit of $c_1\vec{\zeta}_1$.
+and so $\lambda_1$'s term will dominate the expression and
+that expression has a limit of $c_1\vec{\zeta}_1$.
 
 Thus if $c_1\neq 0$, 
 as $k$ increases the vectors $T^k\vec{v}$ will tend toward the direction of 
@@ -53,8 +53,7 @@ and consequently
 the ratios $\norm{\,T^{k}\vec{v}\,}/\norm{\,T^{k-1}\vec{v}\,}$ 
 will tend toward that dominant eigenvalue.
 
-For example the eigenvalues of 
-the matrix 
+For example, the eigenvalues of the matrix 
 \begin{equation*}
   T=\begin{mat}[r]
     3  &0  \\
@@ -62,7 +61,8 @@ the matrix
   \end{mat}
 \end{equation*}
 are $3$ and $-1$.
-If for instance $\vec{v}$ has the components $1$ and $1$ then
+If $\vec{v}$ has the components $1$ and $1$ then 
+iterating gives this.
 \begin{center}
   \begin{tabular}{c|ccccc}
      $\vec{v}$  &$T\vec{v}$  &$T^2\vec{v}$ 
@@ -75,9 +75,9 @@ If for instance $\vec{v}$ has the components $1$ and $1$ then
         &$\matrixvenlarge{\colvec[r]{59\,049 \\ 118\,097}}$
   \end{tabular}
 \end{center}
-and the ratio between the lengths of the last two is $2.999\,9$.
+The ratio between the lengths of the last two is $2.999\,9$.
 
-We shall note two implementation issues.
+We note two implementation issues.
 First,
 instead of finding the powers of $T$ and applying them to $\vec{v}$, 
 we will compute $\vec{v}_1$ as $T\vec{v}$ and then compute $\vec{v}_2$ as
