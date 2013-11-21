@@ -30582,6 +30582,47 @@ sage: (v/v.norm()).n()
 \end{ans}
 \topic{Linear Recurrences}
 \begin{ans}{1}
+     We use the formula
+     \begin{equation*}
+       F(n)=\frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^{n}
+                               -\left(\frac{1-\sqrt{5}}{2}\right)^{n}\right]
+     \end{equation*}
+     As observed earlier, $(1+\sqrt{5})/2$ is larger than one
+     while $(1+\sqrt{5})/2$ has absolute value less than one.
+\begin{lstlisting}
+sage: phi = (1+5^(0.5))/2
+sage: psi = (1-5^(0.5))/2
+sage: phi
+1.61803398874989
+sage: psi
+-0.618033988749895
+\end{lstlisting}
+     So the value of the expression is dominated by the first term.
+     Solving $1000=(1/\sqrt{5})\cdot ((1+\sqrt{5})/2)^n$ gives
+     this.
+\begin{lstlisting}
+sage: a = ln(1000*5^(0.5))/ln(phi)
+sage: a
+16.0271918385296
+sage: psi^(17)
+-0.000280033582072583
+\end{lstlisting}
+   So by the seventeenth power, the second term does not contribute
+   enough to change the roundoff.
+   For the ten thousand and million calculations the situation is even
+   more extreme.
+\begin{lstlisting}
+sage: b = ln(10000*5^(0.5))/ln(phi)
+sage: b
+20.8121638053112
+sage: c = ln(1000000*5^(0.5))/ln(phi)
+sage: c
+30.3821077388746
+\end{lstlisting}
+   The answers in these cases are $21$ and $31$.
+   
+\end{ans}
+\begin{ans}{2}
     \begin{exparts}
       \partsitem
         We express the relation in matrix form.
