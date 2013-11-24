@@ -22,6 +22,7 @@ numeric u;  %scaling factor
 numeric v;  %vertical scaling factor
 numeric w;  %horizontal scaling factor
 u:=10pt; v:=u; w:=v;
+numeric dot_width; dot_width = 1.2pt;
 
 
 def place_P(expr loc) =
@@ -41,7 +42,7 @@ beginfig(1); % diagram of a NOT
   draw_venn_one(true,false);
   place_P((venn_circle_left_shift,venn_circle_top_shift)
            +.45(-venn_circle_diameter/2,venn_circle_diameter/2));
-  pickup pencircle scaled line_width_dark;
+  pickup pencircle scaled dot_width;
   z0 = (.15venn_width,.2venn_height);
   drawdot(z0);
   label.rt(btex {\scriptsize $x$} etex,z0);
@@ -149,6 +150,8 @@ beginfig(7); % diagram of a exists
   % endfor
 endfig;
 
+
+
 beginfig(8); % diagram of a x\in P
   numeric u;  %scaling factor
   numeric v;  %vertical scaling factor
@@ -160,7 +163,7 @@ beginfig(8); % diagram of a x\in P
            +.45(-venn_circle_diameter/2,venn_circle_diameter/2));
   z0 = (venn_circle_left_shift,venn_circle_top_shift)
            -.3(-venn_circle_diameter/2,venn_circle_diameter/2);
-  pickup pencircle scaled line_width_dark;
+  pickup pencircle scaled dot_width;
   drawdot(z0);
   label.rt(btex {\scriptsize $x$} etex,z0);
 endfig;
@@ -172,6 +175,7 @@ beginfig(9) % bean with mapsto
   numeric v;  %vertical scaling factor
   numeric w;  %horizontal scaling factor
   u:=.18in; v:=u; w:=v;
+  % numeric dot_width; dot_width = 1.2pt;
 
   save codshift; pair codshift; codshift = (7w,0); % how far shifted
   draw generic_set(2w,4.25v);
@@ -183,14 +187,14 @@ beginfig(9) % bean with mapsto
   z4 = (1.25w,3.3v); z5= (1.5w,3.1v);
   forsuffixes s = 0, 2, 4: 
     % draw (many_pts shifted z[s]) dashed withdots scaled 0.3;
-    pickup pencircle scaled line_width_dark;
+    pickup pencircle scaled dot_width;
     drawdot (z[s]);
     drawdot (z[s+1] shifted codshift);
     pickup pencircle scaled line_width_light;
     draw_action_arrow((z[s]{(3,1)}..(z[s+1] shifted codshift)));
   endfor
-  % a fe more int he codomain
-  pickup pencircle scaled line_width_dark;
+  % a few more in the codomain
+  pickup pencircle scaled dot_width;
   drawdot ((.9w,.2v) shifted codshift);
   drawdot ((1.1w,4v) shifted codshift);
 endfig;
@@ -234,21 +238,17 @@ beginfig(11) % equiv relation; fractions split into equiv classes
   path p[]; partition;
   label(btex {\scriptsize \ldots} etex,z13);
   x14=.45[x0,x9]; y14=.5[y10,y9]; 
-    label.rt(btex {\tiny $._{0/1}$} etex,z14+(0u,.02v));
-    label.rt(btex {\tiny $._{0/3}$} etex,z14+(.03u,-.07v));
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{0}{1}}$} etex,z14+(0u,.03v));
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{0}{3}}$} etex,z14+(.03u,-.07v));
   x15=.15[x3,x5]; y15=.6[y6,y3]; 
-    label.rt(btex {\tiny $._{1/1}$} etex,z15+(0u,.02v));
-    label.rt(btex {\tiny $._{2/2}$} etex,z15+(-.08u,-.06v));
-    %label.rt(btex {\tiny $._{-3/-3}$} etex,z15+(-.09u,-.06v));
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{1}{1}}$} etex,z15+(0.04u,.028v));
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{2}{2}}$} etex,z15+(-.06u,-.06v));
   x16=.15[x5,x11]; y16=.35[y9,y5]; 
-    label.rt(btex {\tiny $._{2/4}$} etex,z16+(.03u,.03v));
-    label.rt(btex {\tiny $._{-2/-4}$} etex,z16+(-.1u,-.03v));
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{2}{4}}$} etex,z16+(-.05u,-.06v));
+    label.rt(btex {.\hspace{.00em}${\scriptsize\sfrac{-2}{-4}}$} etex,z16+(-.07u,.03v));
   x17=.1[x8,x7]; y17=.5[0,y8]; 
-    label.rt(btex {\tiny $._{4/3}$} etex,z17+(0u,.03v));
-    label.rt(btex {\tiny $._{8/6}$} etex,z17+(.1u,-.08v));
-  %x18=.35[x8,x7]; y18=.5[y4,y8]; 
-  %  label.rt(btex {\scriptsize $\star\;\Re^4$} etex,z18);
-  %dotlabels.rt(1,2,3,5,6,7,8,9,10,11);
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{4}{3}}$} etex,z17+(-0.03u,.03v));
+    label.rt(btex {.\hspace{.1em}${\scriptsize\sfrac{8}{6}}$} etex,z17+(.07u,-.075v));
 endfig;
 
 
@@ -299,6 +299,43 @@ beginfig(13) % equiv relation; fractions with lowest form
   %x18=.35[x8,x7]; y18=.5[y4,y8]; 
   %  label.rt(btex {\scriptsize $\star\;\Re^4$} etex,z18);
   %dotlabels.rt(1,2,3,5,6,7,8,9,10,11);
+endfig;
+
+
+
+
+
+
+beginfig(14) % bean with mapsto; onto
+  numeric u;  %scaling factor
+  numeric v;  %vertical scaling factor
+  numeric w;  %horizontal scaling factor
+  u:=.18in; v:=u; w:=v;
+  % numeric dot_width; dot_width = 1.2pt;
+
+  save codshift; pair codshift; codshift = (7w,0); % how far shifted
+  draw generic_set(2w,4.25v);
+  draw generic_set(2.1w,4.4v) shifted codshift;
+
+  save many_pts; path many_pts; many_pts = (0,-5pt)--(0,5pt); 
+  z0 = (1.4w,.8v); z1= (1.5w,.9v);
+  z2 = (.8w,2.1v); z3= (1w,2.1v);
+  z4 = (1.25w,3.3v); z5= (1.5w,3.1v);
+  z6 = (.7w,3.85v);
+  forsuffixes s = 0, 2, 4: 
+    % draw (many_pts shifted z[s]) dashed withdots scaled 0.3;
+    pickup pencircle scaled dot_width;
+    drawdot (z[s]);
+    drawdot (z[s+1] shifted codshift);
+    pickup pencircle scaled line_width_light;
+    draw_action_arrow((z[s]{(3,1)}..(z[s+1] shifted codshift)));
+  endfor
+  % One more from the codomain
+  pickup pencircle scaled dot_width;
+  drawdot (z[6]);
+  drawdot (z[5] shifted codshift);
+  pickup pencircle scaled line_width_light;
+  draw_action_arrow((z[6]{(3,1)}..(z[5] shifted codshift)));
 endfig;
 
 
