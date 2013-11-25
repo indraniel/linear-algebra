@@ -174,7 +174,7 @@ beginfig(9) % bean with mapsto
   numeric u;  %scaling factor
   numeric v;  %vertical scaling factor
   numeric w;  %horizontal scaling factor
-  u:=.18in; v:=u; w:=v;
+  u:=.16in; v:=u; w:=v;
   % numeric dot_width; dot_width = 1.2pt;
 
   save codshift; pair codshift; codshift = (7w,0); % how far shifted
@@ -310,7 +310,7 @@ beginfig(14) % bean with mapsto; onto
   numeric u;  %scaling factor
   numeric v;  %vertical scaling factor
   numeric w;  %horizontal scaling factor
-  u:=.18in; v:=u; w:=v;
+  u:=.16in; v:=u; w:=v;
   % numeric dot_width; dot_width = 1.2pt;
 
   save codshift; pair codshift; codshift = (7w,0); % how far shifted

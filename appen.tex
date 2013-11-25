@@ -14,12 +14,10 @@ not crockery-throwing).
 This section sketches the background material and 
 argument techniques that we use in the book.
 
-This section only informally outlines these topics,
-giving an example or two
-and skiping proofs.
-For more, these are excellent:
-\cite{HowToProveIt} as well as  
-\cite{Hefferon}  and \cite{Beck}, which are available online.
+This section informally outlines the topics, skipping proofs.
+For more, \cite{HowToProveIt} is excellent. 
+Two other sources, available online, are
+\cite{Hefferon} and~\cite{Beck}.
 
 
 
@@ -34,11 +32,11 @@ Formal mathematical statements come labelled as a
 for major points,
 a \definend{Corollary}\index{corollary}  
 for results that follow immediately from
-a prior one, or as a
+a prior one, or a
 \definend{Lemma}\index{lemma} 
-for when the result is chiefly used to prove others.
+for results chiefly used to prove others.
 
-These statements can be complex, with many parts.
+Statements can be complex and have many parts.
 The truth or falsity of the entire statement depends both on the
 truth value of the parts and on how the statement is
 put together.
@@ -47,7 +45,6 @@ put together.
 Where \( P \) is a proposition,
 `it is not the case that \( P \)' is true provided that \( P \) is
 false.
-So `not' operates on statements, inverting their truth value.
 For instance, `\( n \) is not prime' is true only when \( n \) is the
 product of smaller integers.
 
@@ -61,7 +58,7 @@ to be true both halves must hold:
 `\( 7 \) is prime and so is \( 3 \)' is true, while
 `\( 7 \) is prime and \( 3 \) is not' is false.
 
-To prove `\( P \) and \( Q \)', prove each half.
+To prove a `\( P \) and \( Q \)', prove each half.
 
 
 
@@ -86,7 +83,7 @@ but always at least one).
 
 \startword{If-then}
 \index{if-then statement}
-An `if \( P \) then \( Q \)' statement may also be stated as
+An `if \( P \) then \( Q \)' statement may also appear as
 `\( P \) implies \( Q \)' or `\( P\implies Q\)' or 
 `\( P \) is sufficient to give \( Q \)' or `$Q$ if $P$'.
 It 
@@ -98,14 +95,14 @@ use in casual speech, in mathematics `if \( P \) then \( Q \)'
 does not connote that
 \( P \) precedes \( Q \) or causes \( Q \).)
 
-Note this consequence of the definition in the prior paragraph: 
+Note this consequence of the prior paragraph: 
 if $P$ is false then `if \( P \) then \( Q \)' is
-true, no matter what value $Q$ has:
+true irrespective of the value of $Q$:
 `if \( 4 \) is prime then \( 7 \) is prime' and
 `if \( 4 \) is prime then \( 7 \) is not' are both true statements.
 (They are \definend{vacuously true}.\index{vacuously true})
-Also observe that `if \( P \) then \( Q \)' is true when $Q$ is true, no matter 
-what value $P$ has: `if $4$ is prime then $7$ is prime' and 
+Also observe that `if \( P \) then \( Q \)' is true when $Q$ is true: 
+`if $4$ is prime then $7$ is prime' and 
 `if $4$ is not prime then $7$ is prime' are both true.
 
 % (We adopt this definition of implication
@@ -122,17 +119,17 @@ The first way is direct:~assume that \( P \) is true and use that
 assumption to prove \( Q \).
 For instance,
 to show `if a number is divisible by 5 then twice that
-number is divisible by 10', assume that the number is \( 5n \) and
+number is divisible by 10' we can assume that the number is \( 5n \) and
 deduce that \( 2(5n)=10n \).
-The second way is indirect:~prove the 
+The indirect way is to prove the 
 \definend{contrapositive}\index{contrapositive}
 statement: `if \( Q \) is false then \( P \) is false'
 (rephrased, `\( Q \) can only be false when \( P \) is also false').
 Thus to show `if a natural number is prime then it
-is not a perfect square', we can 
+is not a perfect square' we can 
 argue that if it were a square \( p=n^2 \) then it could be
 factored \( p=n\cdot n \) where \( n<p \) and so wouldn't be prime
-(\( p=0 \) or \( p=1 \) don't give \( n<p \) but they
+(\( p=0 \) or \( p=1 \) don't satisfy \( n<p \) but they
 are nonprime).
 
 % Note two things about this statement form.
@@ -168,8 +165,8 @@ that number ends in $0$'.
 
 Although in simple arguments a chain like 
 ``\( P \) if and only if $R$, which holds if and only if $S$ \ldots''
-may be practical to prove statements are equivalent, 
-typically we show the two halves
+may be practical, to prove that statements are equivalent we more often
+prove the two halves
 `if \( P \) then \( Q \)' and `if \( Q \) then \( P \)' separately.
 
 
@@ -181,9 +178,10 @@ typically we show the two halves
 
 \appendsection{Quantifiers}\index{quantifier}%
 Compare these statements about natural numbers:
-`there is an \( x \) such that \( x \) is
+`there is a natural number \( x \) such that \( x \) is
 divisible by \( x^2 \)' is true, while
-`for all numbers \( x \), that \( x \) is divisible by \( x^2 \)' is false.
+`for all natural numbers \( x \), 
+that \( x \) is divisible by \( x^2 \)' is false.
 The prefixes `there is' and `for all' 
 are \definend{quantifiers}.\index{quantifiers}
 
@@ -202,14 +200,14 @@ This is a \definend{typical element} proof.
 (In this kind of argument be careful not to assume 
 properties for that element
 other than the ones in the hypothesis.
-Here is an example of a wrong argument:
+This argument is wrong:
 ``If \( n \) is divisible by a prime, say \( 2 \), so that \( n=2k \)
 for some natural number~$k$,
 then \( n^2=(2k)^2=4k^2 \) and the square of $n$ is divisible
 by the square of the prime.''
-That is a proof for the speical case \( p=2 \) but it isn't a proof for
-general \( p \).
-Contrast it with a correct proof:
+That is a proof for the special case \( p=2 \) 
+but it isn't a proof for all~\( p \).
+Contrast it with a correct one:
 ``If \( n \) is divisible by a prime
 so that \( n=pk \) for some natural number~$k$
 then \( n^2=(pk)^2=p^2k^2 \) and so the square of $n$ is divisible
@@ -235,7 +233,7 @@ symbolized
 We can prove
 an existence proposition by producing something satisfying
 the property: for instance, to settle the question of primality of
-\( 2^{2^5}+1 \), Euler produced the divisor \( 641 \)\cite{Sandifer}.
+\( 2^{2^5}+1 \), Euler exhibited the divisor \( 641 \)\cite{Sandifer}.
 But there are proofs
 showing that something exists without saying how to find it;
 Euclid's argument given in the next subsection
@@ -274,50 +272,51 @@ Many proofs are iterative,
 it then follows for \( 1 \) and from there to \( 2 \) \ldots''.
 These are proofs by 
 \definend{mathematical induction}.\index{mathematical induction}\index{induction}
-This is a technique that is not obvious, even to a 
-person with a mathematical turn of mind, and also may not be familiar because
-it does not necessarily appear in prior courses.
-So we will give two examples.
+This technique is often not obvious to a person who has not seen it before, 
+even to a person with a mathematical turn of mind.
+So we will see two examples.
 
-For a first example we will prove that \( 1+2+3+\dots+n=n(n+1)/2 \). 
+We will first prove that \( 1+2+3+\dots+n=n(n+1)/2 \). 
 That formula has a natural number variable $n$
 that is free, meaning that setting $n$ to be $1$,
 or $2$, etc., gives a family of cases of the statement:
 first that $1=1(2)/2$, second that $1+2=2(3)/2$, etc.
-
 Our induction proofs involve statements with one free natural number 
 variable.
+
 Each proof has two steps. 
 In the \definend{base step}\index{base step!of induction}
 we show that the statement holds for
 some intial number $i\in \N$. 
-Often the base step is a routine, and short, verification.
+Often this step is a routine, and short, verification.
 The second step, 
 the \definend{inductive step},\index{inductive step!of induction}
-is more subtle; we will show that the following implication holds.
+is more subtle; we will show that this implication holds:
 \begin{equation*}
   \begin{tabular}{l}
     \text{If the statement holds from $n=i$ up to and including~$n=k$} 
      \\
-    \text{then the statement holds also in the $n=k+1$ case.}
+    \text{then the statement holds also in the $n=k+1$ case}
   \end{tabular}
   \tag{$*$}
 \end{equation*}
+(the first line is the 
+\definend{inductive hypothesis}\index{induction!inductive hypothesis}\index{inductive hypothesis}).
 The Principle of Mathematical Induction
 is that completing both steps proves that the statement is
 true for all natural numbers greater than or equal to $i$.
 
-For the first example statement about the sum of numbers, 
+For the sum of the initial $n$~numbers statement  
 the intuition behind the principle is that first, the base step directly 
 verifies the statement for the case of the initial number $n=1$. 
-Then because the inductive step verifies the implication ($*$)
+Then, because the inductive step verifies the implication~($*$)
 for all $k$, that implication applied to $k=1$
 gives that the statement is true for the case of the number
 $n=2$. 
 Now, with the statement established for both $1$ and $2$, 
 apply ($*$) again to conclude that the statement is true for the number
 $n=3$.
-In this way, we bootstrap to all natural numbers $n\geq 1$. 
+In this way, we bootstrap to all numbers $n\geq 1$. 
 
 Here is a proof of \( 1+2+3+\dots+n=n(n+1)/2 \), 
 with separate paragraphs for the base step 
@@ -327,15 +326,12 @@ For the base step we show that the formula holds when \( n=1 \).
 That's easy; the sum of the first \( 1 \) natural number equals 
 \( 1(1+1)/2 \).
 
-For the inductive step, assume that the formula holds
-for the numbers \( n=1 \) \( n=2 \), \ldots, \( n=k \) with $k\geq 1$.
-That is, assume all of these instances of the formula: 
-$1=1(1)/2$, and $1+2=2(3)/2$, and $1+2+3=3(4)/2$, \ldots, 
+For the inductive step, assume the inductive hypothesis that the formula holds
+for the numbers \( n=1 \), \( n=2 \), \ldots, \( n=k \) with $k\geq 1$.
+That is, assume  
+$1=1(1)/2$, and $1+2=2(3)/2$, and $1+2+3=3(4)/2$, through  
 $1+2+\cdots+k=k(k+1)/2$.
-This is the 
-\definend{inductive hypothesis}.\index{induction!inductive hypothesis}\index{inductive hypothesis}
-We use it to deduce that 
-the formula holds also in the \( n=k+1 \)~case.
+With that, the formula holds also in the \( n=k+1 \)~case:
 \begin{equation*}
   1+2+\cdots+k+(k+1)
   =
@@ -343,18 +339,18 @@ the formula holds also in the \( n=k+1 \)~case.
   =
   \frac{(k+1)(k+2)}{2}
 \end{equation*}
-(The first equality follows from the inductive hypothesis.)
+(the first equality follows from the inductive hypothesis).
 \end{quote}
-The base case shows that the formula is true holds for \( n=1 \).
-The inductive step shows that,  
-because the formula holds for \( 1 \), it also holds for \( n=2 \);
-The inductive step also shows that,  
-because the formula holds for \( 1 \) and \( 2\), it holds for \( 3=2 \);
-Continuing in this way, we see that the statement holds
-for any natural number greater than or equal to \( 1 \).
+% The base case shows that the formula is true holds for \( n=1 \).
+% The inductive step shows that,  
+% because the formula holds for \( 1 \), it also holds for \( n=2 \);
+% The inductive step also shows that,  
+% because the formula holds for \( 1 \) and \( 2\), it holds for \( 3=2 \);
+% Continuing in this way, we see that the statement holds
+% for any natural number greater than or equal to \( 1 \).
 
 Here is another example, proving
-proof that every integer greater than or equal to \( 2 \) is a product
+that every integer greater than or equal to \( 2 \) is a product
 of primes.
 \begin{quote}\small
 The base step is easy: \( 2 \) is the product of a single prime.
@@ -380,6 +376,8 @@ In either case
 \index{contradiction}
 Another technique of proof is
 to show that something is true by showing that it cannot be false.
+A proof by contradiction assumes that the proposition is
+false and derives some contradiction to known facts.
 
 The classic example of proof by contradiction is Euclid's
 argument that there are infinitely many primes.
@@ -392,8 +390,6 @@ But every number is a product of primes so this can't be.
 Therefore there cannot be only finitely many primes.
 \end{quote}
 
-A proof by contradiction assumes that the proposition is
-false and derives some contradiction to known facts.
 Another example is this proof that
 \( \sqrt{2} \) is not a rational number.
 \begin{quote}\small
@@ -410,13 +406,13 @@ Rewrite.
 \end{equation*}
 The Prime Factorization Theorem says that there must be the same number of
 factors of \( 2 \) on both sides, but there are an odd number of them
-\( 1+2k_n \) on the left and an even number of them \( 2k_m \) on the right.
-That's a contradiction, so a rational with a square of
+\( 1+2k_n \) on the left and an even number \( 2k_m \) on the right.
+That's a contradiction, so a rational number with a square of
 \( 2 \) is impossible.
 \end{quote}
 
-Both of these examples aimed to prove something doesn't exist.
-A negative proposition often suggests a proof by contradiction.
+% Both of these examples aimed to prove something doesn't exist.
+% A negative proposition often suggests a proof by contradiction.
 
 
 
@@ -444,8 +440,9 @@ Because of this, the order of the elements does not matter
 and
 repeats collapse \( \set{7,7}=\set{7} \).
 
-We can describe a set using a listing between curly braces as with
-\( \set{ 1,4,9,16 } \), or by using set-builder notation as with
+We can describe a set using a listing between curly braces
+\( \set{ 1,4,9,16 } \) (as in the prior paragraph), 
+or by using set-builder notation
 \( \set{x\suchthat x^5-3x^3+2=0 } \) (read ``the set of all \( x \)
 such that \ldots'').
 We name sets with capital roman letters; for instance the set of primes is
@@ -454,17 +451,17 @@ are so important that their names are reserved, such as the
 real numbers \( \Re \)
 and the complex numbers \( \C \)).
 To denote that something is an 
-\definend{element\/}\index{element}\index{set!element} 
-(or a \definend{member}\index{member}\index{set!member}) of a set we
+\definend{element\/},\index{element}\index{set!element} 
+or \definend{member},\index{member}\index{set!member}) of a set we
 use `\(\in \)',
 so that \( 7\in\set{3,5,7} \) while \( 8\not\in\set{3,5,7} \).
 
 We say that \( A \) is a \definend{subset} of \( B \), written
-$A\subseteq B$, if any element of $A$ is an element of $B$.
+$A\subseteq B$, when $x\in A$ implies that $x\in B$.
 In this book we use
 `\( \subset \)' for the \definend{proper subset}\index{sets!proper subset}\index{proper!subset}\index{sets!subset} %
 relationship that \( A \) is a subset of \( B \) but \( A\neq B \)
-(some authors use this symbol for any kind of subset).
+(some authors use this symbol for any kind of subset, proper or not).
 An example is 
 \( \set{2,\pi}\subset\set{2,\pi,7} \).
 These symbols may be flipped, for instance
@@ -475,8 +472,10 @@ show that they have the same members.
 Often we do this by showing mutual inclusion,\index{mutual inclusion}%
 \index{sets!mutual inclusion}
 that both \( A\subseteq B \) and \( A\supseteq B \).
+Such a proof will have a part showing that if $x\in A$ then $x\in B$,
+and a second part showing that if $x\in B$ then $x\in A$.
 
-When a sets has no members then it is
+When a set has no members then it is
 the \definend{empty set}\index{empty set}\index{set!empty} \( \set{} \),
 symbolized \( \emptyset \).
 Any set has the empty set for a subset by the `vacuously true'
@@ -565,14 +564,14 @@ Thus \( \Re^2 \) is the set of pairs of reals.
 
 \startword{Functions}
 \index{function}
-A \definend{function}\index{function} $\map{f}{D}{C}$
-or \definend{map}\index{map} is 
-is an association between input \
+A \definend{function}\index{function}
+or \definend{map}\index{map}  $\map{f}{D}{C}$ is 
+is an association between input
 \definend{arguments}\index{argument}\index{function!argument} 
 $x\in D$
 and output
 \definend{values}\index{value}\index{function!value}
-$f(x)\in C$, subject to the the requirement 
+$f(x)\in C$ subject to the the requirement 
 that the
 function must be \definend{well-defined},\index{function!well-defined}%
 \index{well-defined}
@@ -599,6 +598,10 @@ The blob on the left is the domain while on the right is the
 codomain.
 The function associates the three points of the domain with three in the
 codomain.
+Note that by the definition of a function 
+every point in the domain is associated with
+a unique point in the codomain, but the converse needn't be true.
+
 The association is arbitrary; no formula or algorithm is required, although in
 this book there typically is one.
 We often use $y$ to denote $f(x)$. 
@@ -636,7 +639,7 @@ is the identity map on \( X \).
 A \definend{right inverse}\index{inverse!right} of \( f \) is a
 \( \map{h}{Y}{X} \) such that \( \composed{f}{h} \) is the identity.
 
-For some functions~$f$ there is a single map that is 
+For some $f$'s there is a map that is 
 both a left and right inverse of \( f \).
 If such a map exists then it is unique because if both \( g_1 \) and
 \( g_2 \) have this property then
@@ -644,8 +647,8 @@ If such a map exists then it is unique because if both \( g_1 \) and
          =\composed{ (\composed{g_1}{f}) }{g_2}\,(x)
          =g_2(x) \)
 (the middle equality comes from the associativity of function composition)
-so we call it a \definend{two-sided inverse} or just ``the'' 
-\definend{inverse},\index{inverse}\index{inverse!two-sided}\index{function!inverse}
+so we call it a \definend{two-sided inverse} or just  
+\definend{``the'' inverse},\index{inverse}\index{inverse!two-sided}\index{function!inverse}
 and denote it \( f^{-1} \). 
 For instance, the inverse of the function \( \map{f}{\Re}{\Re} \)
 given by \( f(x)=2x-3 \) is the function \( \map{f^{-1}}{\Re}{\Re} \)
@@ -690,7 +693,7 @@ If a
 function $\map{f}{D}{C}$ has the property that for every
 output value there is at most one associated input value\Dash that is, 
 if no two arguments share an image so that
-\( x_1\neq x_2 \) implies  that \( f(x_1)\neq f(x_2) \)\Dash then 
+\( f(x_1)=f(x_2) \) implies  that \( x_1 = x_2 \)\Dash then 
 the function is
 \definend{one-to-one}.\index{function!one-to-one}\index{one-to-one function}
 The bean diagram from earlier illustrates.
@@ -709,7 +712,7 @@ if and only if that map is both onto and one-to-one.
 Such a function is a 
 \definend{correspondence}.\index{correspondence}\index{function!correspondence}
 It associates one and only one element of the domain with each element of the
-range.
+codomain.
 Because a composition of one-to-one maps is one-to-one, and a composition
 of onto maps is onto, a composition of correspondences is a
 correspondence.
@@ -732,18 +735,18 @@ the \definend{restriction}\index{function!restriction}\index{restriction} of
 \startword{Relations}
 \index{relation}
 Some familiar mathematical things, such as `\( < \)' or `\( = \)',
-are most naturally understood as relations between or among things.
+are most naturally understood as relations between things.
 A \definend{binary relation} on a set \( A \) is
 a set of ordered pairs of elements of \( A \).
 For example, some elements of the set that is the
-relation $<$ are
+relation `$<$' are
 \( (3,5) \), \( (3,7) \), and \( (1,100) \).
 Another binary relation on the natural numbers is equality; this relation is
 the set
 \( \set{\ldots,(-1,-1),(0,0),(1,1),\ldots} \).
 Still another example is `closer than \( 10 \)', the set
 \( \set{(x,y)\suchthat |x-y|<10 } \).
-Some members of that relation are \( (1,10) \), \( (10,1) \),
+Some members of this relation are \( (1,10) \), \( (10,1) \),
 and \( (42,44) \).
 Neither \( (11,1) \) nor \( (1,11) \) is a member.
 
@@ -759,7 +762,7 @@ are covered.
 \index{relation!equivalence}\index{equivalence relation}
 We shall need to express that two objects are alike in some way.
 They aren't identical, but they are related
-(e.g., two integers that `give the same remainder when divided by \( 2 \)').
+(e.g., two integers that give the same remainder when divided by \( 2 \)).
 
 A binary relation \( \set{(a,b),\ldots } \)
 is an 
@@ -785,22 +788,22 @@ Some examples (on the integers): `\( = \)' is an equivalence relation,
 \startword{Partitions}
 \index{partition|(}
 In the `same sign' relation \( \set{ (1,3),(-5,-7),(0,0),\ldots} \)
-there are three kinds of pairs, ones with both numbers positive,
-ones with both negative, and ones with both zero.
+there are three kinds of pairs, pairs with both numbers positive,
+pairs with both negative, and the one pair with both zero.
 So integers fall into exactly one of three classes, positive, or negative,
 or zero.
 
 A \definend{partition}\index{partition} 
 of a set \( \Omega \) is a collection of subsets
 \( \set{S_0,S_1,S_2,\ldots} \) such that
-every element of \( S \) is in one and only one subset:
+every element of \( S \) is an element of a subset
 \( S_1\union S_2\union \cdots{} = S \), and overlapping parts are equal:
 if \( S_i\intersection S_j\neq\emptyset \) then $S_i=S_j$.
 Picture that \( \Omega \) is decomposed into non-overlapping parts.
 \begin{center}
   \includegraphics{appen.10}
 \end{center}
-Thus, the first paragraph says `same sign' partitions
+Thus the prior paragraph says that `same sign' partitions
 the integers into the positives, and the negatives, and zero.
 Similarly, the equivalence relation `=' partitions the integers into
 one-element sets.
@@ -826,8 +829,8 @@ Below are two examples.
 Consider the equivalence relationship between two integers of 
 `gives the same remainder when divided by \( 2 \)',
 the set \( P=\set{ (-1,3),(2,4),(0,0),\ldots} \).
-In the set $P$ are two kinds of pairs, the ones with both members even
-and the ones with both members odd.
+In the set $P$ are two kinds of pairs, the pairs with both members even
+and the pairs with both members odd.
 This equivalence induces a partition where the parts are found by: 
 for each \( x \) we define the set of numbers related to
 it \( S_x=\set{y\suchthat (x,y)\in P} \).
@@ -842,8 +845,9 @@ two numbers are in the same part if they leave the same remainder when
 divided by $10$, that is, if they have the same least significant digit.
 This partition is induced by the equivalence relation $R$ defined by:
 two numbers $n$, $m$ are related if they are together in the same part.
-The three conditions in the definition of equivalence are straightforward.
 For example, $3$ is related to $33$, but $3$ is not related to $102$.
+Verifying the three conditions in the definition of equivalence are 
+straightforward.
 
 We call each part of a partition an \definend{equivalence class}.%
 \index{equivalence!class}\index{class!equivalence}
@@ -859,11 +863,10 @@ In that case we call them the
 \index{natural representative}\index{canonical representative}%
 \index{equivalence!class!canonical representative}%
 \index{representative!canonical}
-
 An example is that
 two fractions \( 3/5 \) and \( 9/15 \) are equivalent.
 In everyday work we often prefer to use the `simplest form' or `reduced form'
-fraction $3/5$ as the class representatives.
+fraction $3/5$ as the class representative.
 \begin{center}
   \includegraphics{appen.12}
 \end{center}
