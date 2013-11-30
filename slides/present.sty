@@ -41,6 +41,23 @@
 \usepackage[olditem,oldenum]{paralist}
 \renewcommand*\paradescriptionlabel[1]{%
 \normalfont\bfseries\color{labelcolor} #1}
+% \setlength{\topsep}{0ex}
+% \setlength{\partopsep}{0ex}
+% Redefine enumerate environment to take up less space
+\newcounter{present@enum}  
+\newcommand{\entrylabel}[1]{\hfil\mbox{#1)}}
+\renewenvironment{enumerate}{%  
+  \setcounter{present@enum}{0}
+  \list{\arabic{present@enum}}{%
+    \usecounter{present@enum}
+    \renewcommand{\makelabel}{\entrylabel}
+    \setlength{\itemsep}{0ex}
+    \setlength{\topsep}{0ex}
+    \setlength{\partopsep}{0ex}
+  }
+}{%
+  \endlist
+}
 
 %...........
 % environment: tfae
