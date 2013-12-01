@@ -54,8 +54,9 @@
 % ..... One.III.1 .....
 \section{Gauss-Jordan reduction}
 \begin{frame}{Pivoting}
+\noindent Here is an extension of Gauss's Method with some advantages.
 \ex
-Here is an extension of Gauss's Method with some advantages.
+Start as usual with elimination operations to get echelon form.
 \begin{eqnarray*}
   \begin{linsys}{3}
     x  &+  &y  &-  &z  &=  &2   \\
@@ -67,7 +68,7 @@ Here is an extension of Gauss's Method with some advantages.
     x  &+  &y  &-  &z  &=  &2   \\
        &-  &3y &   &2z &=  &-5  \\
        &-  &3y &+  &3z &=  &-3 
-  \end{linsys}                         \\
+  \end{linsys}                         \\[1ex]
   &\grstep{-1\rho_2+\rho_3}
   &\begin{linsys}{3}
     x  &+  &y  &-  &z  &=  &2   \\
@@ -75,8 +76,8 @@ Here is an extension of Gauss's Method with some advantages.
        &   &   &   &z  &=  &2 
   \end{linsys}
 \end{eqnarray*}
-Instead of doing back substitution, we continue using the row operations.
 \pause
+Now, instead of doing back substitution, we continue using row operations.
 First make all the leading entries one.
 \begin{eqnarray*}
   % \begin{linsys}{3}
@@ -92,27 +93,27 @@ First make all the leading entries one.
   \end{linsys}
 \end{eqnarray*}
 \end{frame}\begin{frame}
-\noindent Finish by eliminating upwards with the leading entries.
-\begin{equation*}
+\noindent Finish by using the leading entries to eliminate upwards,
+until we can read off the solution.
+\begin{eqnarray*}
   \begin{linsys}{3}
     x  &+  &y  &-  &z      &=  &2   \\
        &   &y  &-  &(2/3)z &=  &5/3  \\
        &   &   &   &z      &=  &2 
-  \end{linsys} \;
-  \grstep[(2/3)\rho_3+\rho_2]{\rho_3+\rho_1}\;
-  \begin{linsys}{3}
-    x  &+  &y  &   &       &=  &4   \\
+  \end{linsys} 
+  &\grstep[(2/3)\rho_3+\rho_2]{\rho_3+\rho_1}
+  &\begin{linsys}{3}
+    x  &+  &y  &\spaceforemptycolumn   &       &=  &4   \\
+       &   &y  &   &       &=  &3  \\
+       &   &   &   &z      &=  &2 
+  \end{linsys}                                                \\  \pause
+  &\grstep{-\rho_2+\rho_1}
+  &\begin{linsys}{3}
+    x  &\spaceforemptycolumn   &   &\spaceforemptycolumn   &       &=  &1   \\
        &   &y  &   &       &=  &3  \\
        &   &   &   &z      &=  &2 
   \end{linsys}
-  \;\grstep{-\rho_2+\rho_1}\;
-  \begin{linsys}{3}
-    x  &   &   &   &       &=  &1   \\
-       &   &y  &   &       &=  &3  \\
-       &   &   &   &z      &=  &2 
-  \end{linsys}
-\end{equation*}
-Now we can read off the solution.
+\end{eqnarray*}
 
 \pause\medskip
 \ExecuteMetaData[../gr3.tex]{Pivoting}
@@ -147,7 +148,7 @@ and do Gauss's Method.
     0  &0   &5/2  &1/2  &-1/2  
   \end{amat}                         
 \end{equation*}
-We can combine the operations making the leading entries to one. 
+We can combine the operations turning the leading entries to $1$. 
 \begin{equation*}
   \grstep[(2/5)\rho_3]{(1/2)\rho_2}\,
   \begin{amat}{4}
@@ -180,7 +181,7 @@ Now eliminate upwards.
     0  &0   &1    &1/5   &-1/5  
   \end{amat}                         
 \end{equation*}
-leads to this description of the solution set.
+directly gives the parametrized description of the solution set.
 \begin{equation*}
   \set{\colvec{9/5 \\ -1/5 \\ -1/5 \\ 0} 
        +\colvec{4/5  \\ -6/5 \\ -1/5 \\ 1}w
@@ -212,7 +213,7 @@ leads to this description of the solution set.
 \pause
 \pf
 \ExecuteMetaData[../gr3.tex]{pf:RowOpsRev}
-(The third clause is false if $i=j$.)
+(The third case requires that $i\neq j$.)
 \qed
 
 \pause\medskip
@@ -373,7 +374,7 @@ the third row is the sum of the first and second.
   \end{mat}
 \end{equation*}
 \pause
-But in the matrix that we get from Gauss's Method
+But after Gauss's Method
 \begin{equation*}
   \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_3}\,
   \begin{mat}[r]
