@@ -383,8 +383,17 @@ and scalar multiplication.
 r\cdot (a_0+a_1x+a_2x^2)=(ra_0)+(ra_1)x+(ra_2)x^2
 \end{equation*}
 
+In particular, note that this space is closed: 
+a linear combination of quadratic polynomials 
+is a quadratic polynomial.
+For instance, here is a sample combination in $\polyspace_2$.
+\begin{equation*}
+  4\cdot(1+2x+3x^2)-(1/5)\cdot (10+5x^2)
+  =2+8x+11x^2
+\end{equation*}
 
-\pause
+\end{frame}
+\begin{frame}
 \ex
 The set of $\nbyn{3}$ matrices
 \begin{equation*}
@@ -396,24 +405,47 @@ The set of $\nbyn{3}$ matrices
                          \suchthat a_{i,j}\in\Re}
 \end{equation*}
 is a vector space under the usual matrix addition and scalar multiplication.
+
+Here is a sample combination.
+\begin{equation*}
+  \begin{mat}
+    1 &0 &1 \\
+    2 &0 &2 \\
+   -1 &3 &1/2
+  \end{mat}
+  -3\begin{mat}
+    0 &0 &2 \\
+    1 &1 &1 \\
+    0 &4 &3/2
+  \end{mat}
+  =
+  \begin{mat}
+    1 &0  &-5 \\
+   -1 &-3 &1 \\
+   -1 &-9 &-4
+  \end{mat}
+\end{equation*}
 \end{frame}
 
 
-
-
-% ..........
 \begin{frame}
 The empty set cannot be made a vector space, regardless of which operations
-we use, because it has no element to be the zero element.
+we use, because the definition requires that the space contains 
+an additive identity.
 
 \pause
 \ex
-The set consisting only of the two-tall vector of $0$'s
+The set consisting only of the two-tall zero vector
 \begin{equation*}
   V=\set{\colvec{0  \\  0}}
 \end{equation*}
 is a vector space (under the usual vector addition and scalar multiplication
 operations).
+\begin{equation*}
+  \colvec{0 \\ 0}+\colvec{0 \\ 0}=\colvec{0 \\ 0}
+  \qquad
+  r\cdot\colvec{0 \\ 0}=\colvec{0 \\ 0}
+\end{equation*}
 
 \df[df:TrivialVectorSpace]
 \ExecuteMetaData[../vs1.tex]{df:TrivialVectorSpace}
@@ -430,12 +462,6 @@ operations).
 \pause
 \pf
 \ExecuteMetaData[../vs1.tex]{pf:ElementaryPropertiesOfVectorSpaces0}
-
-\pause
-\ExecuteMetaData[../vs1.tex]{pf:ElementaryPropertiesOfVectorSpaces1}
-
-\pause
-\ExecuteMetaData[../vs1.tex]{pf:ElementaryPropertiesOfVectorSpaces2}
 \qed
 \end{frame}
 
@@ -463,9 +489,9 @@ In the vector space $\Re^2$, the line $y=2x$
    =\set{\colvec{1 \\ 2}a \suchthat a\in\Re}
 \end{equation*}
 is a subspace.
-The operations, as required by the definition, are the ones from $\Re^2$.
-We can check all the conditions to show it is a vector space, but the next
-result gives an easier way.
+The operations, as required by the definition above, are the ones from $\Re^2$.
+We could show it is a vector space by checking the ten conditions 
+but the next result gives an easier way.
 
 \pause
 \ex
@@ -520,7 +546,7 @@ the zero vector.)
 \lm[th:SubspIffClosed]
 \ExecuteMetaData[../vs1.tex]{lm:SubspIffClosed}
 
-\pause\medskip
+\pause\bigskip
 \ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed0}
 \end{frame}\begin{frame}
 \pf[th:SubspIffClosed]
@@ -541,30 +567,31 @@ The vector space of quadratic polynomials
 $\polyspace_2=\set{a_0+a_1x+a_2x^2\suchthat a_0,a_1,a_2\in\Re}$ has a subspace
 comprised of the linear polynomials
 $L=\set{b_0+b_1x\suchthat b_0,b_1\in\Re}$.
-To verify that, take scalars $r,s\in\Re$ and consider a linear combination.
+By the prior result, to verify that we need only check 
+closure under linear combinations of two members.
 \begin{equation*}
   r(b_0+b_1x)+s(c_0+c_1x)=(rb_0+sc_0)+(rb_1+sc_1)x
 \end{equation*}
 The right side is a linear polynomial with real coefficients, and so is a 
 member of $L$.
-Thus $L$ is closed under linear combinations.
+Thus $L$ is a subspace of $\polyspace_2$.
 
 \pause
 \ex
 Another subspace of $\polyspace_2$ is the set of quadratic polynomials
-with all three coefficients equal.
+having three equal coefficients.
 \begin{equation*}
   M=\set{a+ax+ax^2\suchthat a\in\Re}
    =\set{(1+x+x^2)a\suchthat a\in\Re}
 \end{equation*}
-Verify that it is a subspace by taking two scalars $r,s\in\Re$
-and considering a linear combination of polynomials with all 
-three coefficients the same.
+Verify that it is a subspace by
+considering a linear combination of two of its members
+(under the inherited operations).
 \begin{equation*}
   r(a+ax+ax^2)+s(b+bx+bx^2)
   =(ra+sb)+(ra+sb)x+(ra+sb)x^2
 \end{equation*}
-The result is a quadratic polynomial with all three coefficents the same, 
+The result is a quadratic polynomial with three equal coefficients  
 and so $M$ is closed under linear combinations.
 \end{frame}
 
@@ -573,7 +600,7 @@ and so $M$ is closed under linear combinations.
 
 % ..........
 \begin{frame}
-The above examples of subspace paramatrize the description.
+Each of the above examples of subspaces parametrizes the description.
 
 \ex
 This set is a plane inside of $\Re^3$.
@@ -583,9 +610,8 @@ This set is a plane inside of $\Re^3$.
 We could
 verify that it is a subspace by checking that it is closed under 
 linear combination as above.
-
 \pause
-That's easier if we first paramatrize the one-equation linear system
+That's easier if we first parametrize the one-equation linear system
 $2x-y+z=0$ using the free variables $y$ and~$z$.
 \begin{equation*}
   P=\set{\colvec{(1/2)y-(1/2)z  \\ y  \\ z}\suchthat y,z\in\Re}  
@@ -594,7 +620,7 @@ $2x-y+z=0$ using the free variables $y$ and~$z$.
 \pause
 Now members of $P$ are described as a linear combination of those two vectors.
 Verifying that $P$ is closed then involves taking a linear combination of 
-linear combinations, which makes a linear combination.
+linear combinations, which gives a linear combination.
 \end{frame}
 
 
@@ -634,7 +660,8 @@ This is a subset of $\Re^3$.
   S=\set{\colvec{1 \\ -1 \\ 0},
          \colvec{1 \\ 1 \\ 0}}
 \end{equation*}
-Any vector in the $xy$-plane is a member of the span $\spanof{S}$;
+Any vector in the $xy$-plane is a member of the span $\spanof{S}$ because 
+any such vector is a combination of the two;
 for instance, this system has a solution.
 \begin{equation*}
   \colvec{3 \\ 2 \\ 0}=\colvec{1 \\ -1 \\ 0}c_1
@@ -647,7 +674,6 @@ this system does not have a solution.
   \colvec{-1 \\ -2 \\ -3}=\colvec{1 \\ -1 \\ 0}c_1
                        +\colvec{1 \\ 1 \\ 0}c_2
 \end{equation*}
-(just consider the third components).
 \end{frame}
 
 
