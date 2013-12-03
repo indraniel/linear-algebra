@@ -9,6 +9,7 @@
 \usepackage{../linalgjh}
 \usepackage{present}
 \usepackage{xr}\externaldocument{../vs3} % read refs from .aux file
+\usepackage{xr}\externaldocument{../vs2} % read refs from .aux file
 \usepackage{xr}\externaldocument{../gr1} % read refs from .aux file
 \usepackage{xr}\externaldocument{../gr3} % read refs from .aux file
 \usepackage{catchfilebetweentags}
@@ -93,52 +94,6 @@ And it spans $\Re^2$ since
 has the solution $c_1=(1/2)x-(1/2)y$
 and $c_2=(1/2)x+(1/2)y$.
 \end{frame}
-\begin{frame}
-\ex
-This is a basis for $\Re^3$.
-\begin{equation*}
-  \stdbasis_3=
-  \sequence{
-            \colvec{1 \\ 0 \\ 0},
-            \colvec{0 \\ 1 \\ 0},
-            \colvec{0 \\ 0 \\ 1}
-            }
-\end{equation*}
-Calculus books sometimes call those $\vec{imath}$, $\vec{jmath}$, and $\vec{k}$.
-
-\pause
-\df[df:StandardBasis]
-\ExecuteMetaData[../vs3.tex]{df:StandardBasis}
-
-\medskip\noindent
-Checking that $\stdbasis_n$ is a basis for $\Re^n$ is routine.
-\end{frame}
-
-
-
-%..........
-\begin{frame}
-\th[th:BasisIffUniqueRepWRT]
-\ExecuteMetaData[../vs3.tex]{th:BasisIffUniqueRepWRT}
-
-\pause
-\pf
-\ExecuteMetaData[../vs3.tex]{pf:BasisIffUniqueRepWRT0}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../vs3.tex]{pf:BasisIffUniqueRepWRT1}
-\qed
-\end{frame}
-
-
-
-%..........
-\begin{frame}
-\df[def:RepresentingVectors]
-\ExecuteMetaData[../vs3.tex]{df:RepresentingVectors}
-\end{frame}
-
-
 
 
 %..........
@@ -166,13 +121,124 @@ and that it spans the space.
   c_1=(a+b)/2,\;c_2=(a-b)/2
 \end{equation*}
 \pause
-Note that the solutions to those systems are unique.
-For instance, the polynomial $3+4x$ has a unique expression
-as a combination of the two basis vectors.
+\ex
+This is a basis for $\matspace_{\nbyn{2}}$.
+\begin{equation*}
+  \sequence{
+    \begin{mat}
+      1  &0  \\
+      0  &0 
+    \end{mat},
+    \begin{mat}
+      0  &2  \\
+      0  &0 
+    \end{mat},
+    \begin{mat}
+      0  &0  \\
+      3  &0 
+    \end{mat},
+    \begin{mat}
+      0  &0  \\
+      0  &4 
+    \end{mat}
+  }
+\end{equation*}
+This is another one.
+\begin{equation*}
+  \sequence{
+    \begin{mat}
+      1  &0  \\
+      0  &0 
+    \end{mat},
+    \begin{mat}
+      1  &2  \\
+      0  &0 
+    \end{mat},
+    \begin{mat}
+      1  &2  \\
+      3  &0 
+    \end{mat},
+    \begin{mat}
+      1  &2  \\
+      3  &4 
+    \end{mat}
+  }
+\end{equation*}
+\end{frame}
+\begin{frame}
+\ex
+This is a basis for $\Re^3$.
+\begin{equation*}
+  \stdbasis_3=
+  \sequence{
+            \colvec{1 \\ 0 \\ 0},
+            \colvec{0 \\ 1 \\ 0},
+            \colvec{0 \\ 0 \\ 1}
+            }
+\end{equation*}
+Calculus books sometimes call those 
+$\vec{\imath}$, $\vec{\jmath}$, and $\vec{k}$.
+
+\pause
+\df[df:StandardBasis]
+\ExecuteMetaData[../vs3.tex]{df:StandardBasis}
+
+\medskip\noindent
+Checking that $\stdbasis_n$ is a basis for $\Re^n$ is routine.
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+Although a basis is defined as a sequence, common practice is to be sloppy 
+and refer to it as a set.
+
+\th[th:BasisIffUniqueRepWRT]
+\ExecuteMetaData[../vs3.tex]{th:BasisIffUniqueRepWRT}
+
+\pause
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:BasisIffUniqueRepWRT0}
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../vs3.tex]{pf:BasisIffUniqueRepWRT1}
+\qed
+\end{frame}
+
+
+
+%..........
+\begin{frame}
+\df[def:RepresentingVectors]
+\ExecuteMetaData[../vs3.tex]{df:RepresentingVectors}
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+\ex
+Above we saw that in  
+$\polyspace_1=\set{a+bx\suchthat a,b\in\Re}$
+one basis is $B=\sequence{1+x,1-x}$.
+As part of that we computed the coefficients needed to 
+express a member of $\polyspace_1$ as a combination of
+basis vectors.
+\begin{equation*}
+  a+bx=c_1(1+x)+c_2(1-x)
+  % \implies
+  % a=c_1+c_2,\;b=c_1-c_2
+  \implies 
+  c_1=(a+b)/2,\;c_2=(a-b)/2
+\end{equation*}
+\pause
+For instance, the polynomial $3+4x$ has this expression
 \begin{equation*}
   3+4x=(7/2)\cdot(1+x)+(-1/2)\cdot(1-x)
 \end{equation*}
-We write this.
+so its representation is this.
 \begin{equation*}
   \rep{3+4x}{B}=\colvec{7/2 \\ -1/2}
 \end{equation*}
@@ -201,19 +267,16 @@ has $\rep{\vec{w}}{\stdbasis_n}=\vec{w}$.
 \df[df:FiniteDimensional]
 \ExecuteMetaData[../vs3.tex]{df:FiniteDimensional}
 
-\medskip
 \ex
 The space 
 $\Re^3$
 is finite-dimensional since it has a basis with three elements $\stdbasis_3$.
 
-\pause
 \ex
 The space of quadratic polynomials $\polyspace_2$ has at least one
 basis with finitely many elements, $\sequence{1,x,x^2}$, so it is
 finite-dimensional. 
 
-\pause
 \ex
 The space $\matspace_{\nbyn{2}}$ of $\nbyn{2}$ matrices is finite-dimensional.
 Here is one basis with finitely many members.
@@ -240,11 +303,72 @@ Here is one basis with finitely many members.
 
 \pause
 \no
-From this point on, we will restrict our attention to 
+From this point on we will restrict our attention to 
 vector spaces that are finite-dimensional.
 All the later examples, definitions, and theorems
-carry this presumption of the spaces
-even if they don't explicitly state that.
+assume this of the spaces.
+\end{frame}
+
+
+
+
+%..........
+\begin{frame}
+We will show that for any finite-dimensional space, all of its bases
+have the same number of elements.
+
+\ex
+Each of these is a basis for $\polyspace_2$.
+\begin{align*}
+  &B_0=\sequence{1,1+x,1+x+x^2}       \\
+  &B_1=\sequence{1+x+x^2,1+x,1}       \\
+  &B_2=\sequence{x^2,1+x,1-x}         \\
+  &B_3=\sequence{1,x,x^2}
+\end{align*}
+Each has two elements.
+
+\pause
+\ex
+Here are two different bases for $\matspace_{\nbyn{2}}$. 
+\begin{align*}
+  &B_0=\sequence{
+    \begin{mat}[r]
+      1 &0 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &1 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &1 \\
+      1 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &1 \\
+      1 &1
+    \end{mat}
+          }                 \\
+  &B_1=\sequence{
+    \begin{mat}[r]
+      0 &0 \\
+      0 &1
+    \end{mat},
+    \begin{mat}[r]
+      0 &0 \\
+      1 &0
+    \end{mat},
+    \begin{mat}[r]
+      0 &1 \\
+      0 &0
+    \end{mat},
+    \begin{mat}[r]
+      1 &0 \\
+      0 &0
+    \end{mat}
+          }                 
+\end{align*}
+Both have four elements.
 \end{frame}
 
 
@@ -287,71 +411,12 @@ even if they don't explicitly state that.
 
 
 
-
-%..........
-\begin{frame}
-\ex
-Each of these is a basis for $\polyspace_2$.
-\begin{align*}
-  &B_0=\sequence{1,1+x,1+x+x^2}       \\
-  &B_1=\sequence{1+x+x^2,1+x,1}       \\
-  &B_2=\sequence{x^2,1+x,1-x}         \\
-  &B_3=\sequence{1,x,x^2}
-\end{align*}
-Each has two elements.
-
-\pause
-\ex
-Here are two different bases for $\matspace_{\nbyn{2}}$. 
-\begin{align*}
-  &B_0=\sequence{
-    \begin{mat}[r]
-      1 &0 \\
-      0 &0
-    \end{mat},
-    \begin{mat}[r]
-      1 &1 \\
-      0 &0
-    \end{mat},
-    \begin{mat}[r]
-      1 &1 \\
-      1 &0
-    \end{mat},
-    \begin{mat}[r]
-      1 &1 \\
-      1 &1
-    \end{mat}
-          }                 \\
-  &B_1=\sequence{
-    \begin{mat}[r]
-      1 &0 \\
-      0 &0
-    \end{mat},
-    \begin{mat}[r]
-      0 &1 \\
-      0 &0
-    \end{mat},
-    \begin{mat}[r]
-      0 &0 \\
-      1 &0
-    \end{mat},
-    \begin{mat}[r]
-      0 &0 \\
-      0 &1
-    \end{mat}
-          }                 
-\end{align*}
-Each has four elements.
-\end{frame}
-
-
-
 %..........
 \begin{frame}{Definition of dimension}
 \df[df:Dimension]
 \ExecuteMetaData[../vs3.tex]{df:Dimension}
 
-\pause\medskip
+\pause
 \ex
 The vector space $\Re^n$ has dimension~$n$ because that is how many members
 are in $\stdbasis_n$.
@@ -371,7 +436,7 @@ entries~$0$'s.
 \end{frame}
 \begin{frame}
 \ex
-The solution set of this system
+The solution set $S$ of this system
 \begin{equation*}
   \begin{linsys}{4}
     x  &-  &y  &+  &z  &  &   &=  &0  \\
@@ -395,14 +460,17 @@ Solving the system
     0  &0   &0  &0  &0  
   \end{amat}
 \end{equation*}
-and parametrizing
+and parametrizing gives a basis of two vectors.
 \begin{equation*}
   \set{\colvec{x \\ y \\ z \\ w}
       =\colvec{-1 \\ 0 \\ 1 \\ 0}\cdot z
        +\colvec{-2 \\ -2 \\ 0 \\ 1}\cdot w
       \suchthat z,w\in\Re}
+  \qquad
+  B=\sequence{\colvec{-1 \\ 0 \\ 1 \\ 0},
+               \colvec{-2 \\ -2 \\ 0 \\ 1}}
 \end{equation*}
-gives a basis for the space, a sequence of those two vectors.
+So $S$ is a vector space of dimension two. 
 % \begin{equation*}
 %   B=\sequence{\colvec{-1 \\ 0 \\ 1 \\ 0},
 %               \colvec{-2 \\ 1 \\ 0 \\ 1}
@@ -577,14 +645,14 @@ is in the column space of this matrix.
 
 \pause
 \ex
-To find a basis for the column space of a matrix
+To find a basis for the column space of a matrix,
 \begin{equation*}
   \begin{mat}
     2  &3  \\
     -1 &1/2
   \end{mat}
 \end{equation*}
-we can temporarily transpose
+transpose,
 \begin{equation*}
   \trans{\begin{mat}
     2  &3  \\
@@ -596,7 +664,7 @@ we can temporarily transpose
     3 &1/2
   \end{mat}
 \end{equation*}
-linearly reduce 
+reduce, 
 \begin{equation*}
   \begin{mat}
     2  &-1  \\
