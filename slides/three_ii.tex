@@ -71,7 +71,7 @@ The function $\map{h}{\polyspace_2}{\Re^2}$ given by
   =
   \colvec{a+c \\ 0}
 \end{equation*}
-is a homomorphism (it happens to be neither one-to-one nor onto).
+is a homomorphism (it is neither one-to-one nor onto).
 We will verify that it respects the addition and
 scalar multiplication operations.
 
@@ -102,7 +102,7 @@ So is scalar multiplication.
 %..........
 \begin{frame}
 \ex
-Of these two maps $\map{h,g}{\Re^2}{\Re}$
+Of these two maps $\map{h,g}{\Re^2}{\Re}$,
 the first is linear while the second is not.
 \begin{equation*}
   \colvec{x \\ y}\mapsunder{h} 2x-3y
@@ -129,7 +129,7 @@ and scalar multiplication.
 \end{equation*}
 
 \pause
-This example shows that $g$ does not respect addition.
+In contrast, $g$ does not respect addition.
 \begin{equation*} 
   g(\colvec{1 \\ 4}+\colvec{5 \\ 6})=-17
   \quad\text{while}\quad
@@ -142,7 +142,7 @@ This example shows that $g$ does not respect addition.
 
 %..........
 \begin{frame}
-We proved these two in the context of studying isomorphisms.
+We proved the following two in the context of studying isomorphisms.
 
 \lm[le:HomoSendsZeroToZero]
 \ExecuteMetaData[../map2.tex]{lm:HomoSendsZeroToZero}
@@ -240,7 +240,7 @@ It is a homomorphism.
 \begin{frame}
 \ex
 The \definend{trace} of a square matrix 
-is the sum down the uppper-left to lower-right diagonal.
+is the sum down the upper-left to lower-right diagonal.
 Thus
 $\map{\trace}{\matspace_{\nbyn{2}}}{\Re}$
 is this.
@@ -307,6 +307,10 @@ It is linear.
 \begin{frame}
 \ExecuteMetaData[../map2.tex]{pf:HomoDetActOnBasis2}
 \qed
+
+\pause % \medskip
+\df[df:ExtendedLinearly]
+\ExecuteMetaData[../map2.tex]{df:ExtendedLinearly}
 \end{frame}
 
 
@@ -327,17 +331,18 @@ by specifying its action on that basis
   1\mapsunder{\text{eval}_3}1
 \end{equation*}
 and then extending linearly.
-\begin{equation*}
-  \text{eval}_3(ax^2+bx+c)=a\cdot\text{eval}_3(x^2)
-                          +b\cdot\text{eval}_3(x)
-                          +c\cdot\text{eval}_3(1)
-          =9a+3b+c
-\end{equation*}
-\pause
+\begin{align*}
+  \text{eval}_3(ax^2+bx+c)
+   &=a\cdot\text{eval}_3(x^2)
+     +b\cdot\text{eval}_3(x)
+     +c\cdot\text{eval}_3(1)     \\
+   &=9a+3b+c
+\end{align*}
 The action of this map on the basis elements is to plug the value~$3$ in for
 $x$. 
 That remains true when we extend linearly, so
 $\text{eval}_3(\,p(x)\,)=p(3)$.
+For instance, $\text{eval}_3(x^2+2x+3)=18$.
 \end{frame}
 
 
@@ -356,8 +361,7 @@ We can specify a rotation of the two basis vectors as here.
   \vcenteredhbox{\includegraphics{asy/three_ii_rotate.pdf}}
 \end{equation*}
 \pause
-Extend
-that linearly
+Extend linearly
 to get a homomorphism $\map{t_{\theta}}{\Re^2}{\Re^2}$. 
 \begin{align*}
   t_{\theta}(\colvec{x \\ y})
@@ -390,10 +394,11 @@ The check is easy.
 \pause
 \ex
 In $\Re^3$ the function $f_{yz}$  
+that reflects vectors over the $yz$-plane 
 \begin{equation*}
   \colvec{x \\ y \\ z}\mapsunder{f_{yz}}\colvec{-x \\ y \\ z}
 \end{equation*}
-that reflects vectors over the $yz$-plane is a linear
+is a linear
 transformation.
 \begin{multline*}
   f_{yz}(r_1\colvec{x_1 \\ y_1 \\ z_1}+r_2\colvec{x_2 \\ y_2 \\ z_2})
@@ -403,7 +408,6 @@ transformation.
   =r_1f_{yz}(\colvec{x_1 \\ y_1 \\ z_1})+r_2f_{yz}(\colvec{x_2 \\ y_2 \\ z_2}) 
 \end{multline*}
 \end{frame}
-
 
 
 
@@ -419,6 +423,39 @@ transformation.
 \ExecuteMetaData[../map2.tex]{pf:SpLinFcns}
 \qed
 \end{frame}
+\begin{frame}
+\ex
+Consider $\linmaps{\Re}{\Re^2}$.
+Fix these bases for the two spaces.
+\begin{equation*}
+  B_{\Re}=\stdbasis_1=\sequence{1}
+  \qquad
+  B_{\Re^2}=\stdbasis_2=\sequence{\colvec{1 \\ 0}, 
+                                \colvec{0 \\ 1}}
+\end{equation*}
+A linear map is determined by its action on a basis of the domain space.
+Thus the elements of $\linmaps{\Re}{\Re^2}$
+\begin{equation*}
+  1\mapsunder{t} c_1\colvec{1 \\ 0}+c_2\colvec{0 \\ 1}
+\end{equation*}
+are determined by $c_1, c_2$; we could write each such map as $t=t_{c_1,c_2}$.
+So $\linmaps{\Re}{\Re^2}$ is a dimension~$2$ space.
+\pause
+\ex
+Similarly, for $\linmaps{\Re^2}{\Re^3}$, fix
+$\stdbasis_2=\sequence{\vec{e}_1, \vec{e}_2}$ and 
+$\stdbasis_3=\sequence{\vec{e}_1, \vec{e}_2, \vec{e}_3}$
+(note that one $\vec{e}_1$ is two-tall while the other is three-tall).
+We can characterize the elements in this way.
+\begin{equation*}
+  \vec{e}_1\mapsunder{t} c_1\vec{e}_1+c_2\vec{e}_2+c_3\vec{e}_3
+  \qquad
+  \vec{e}_2\mapsunder{t} d_1\vec{e}_1+d_2\vec{e}_2+d_3\vec{e}_3
+\end{equation*}
+So, $\linmaps{\Re^2}{\Re^3}$ is six-dimensional.
+\end{frame}
+
+
 
 
 
@@ -440,8 +477,8 @@ For any angle $\theta$,
 the function $\map{t_{\theta}}{\Re^2}{\Re^2}$ that rotates 
 vectors counterclockwise by $\theta$ is a homomorphism.
 In the domain~$\Re^2$ each line through the origin is a subspace.
-The image of that line under this map is another line through the origin 
-and thus is a subspace of the codomain~$\Re^2$. 
+The image of that line under this map is another line through the origin, 
+a subspace of the codomain~$\Re^2$. 
 \end{frame}
 
 
@@ -490,7 +527,7 @@ This map from $\matspace_{\nbyn{2}}$ to $\Re^2$ is linear; the check is routine.
   \mapsunder{h}
   \colvec{a+b  \\ 2a+2b}
 \end{equation*}
-The rangespace is this line through the origin
+The range space is this line through the origin
 \begin{equation*}
   \set{\colvec{t \\ 2t} \suchthat t\in\Re}
 \end{equation*}
@@ -517,12 +554,12 @@ The rank of this map is $1$.
 When we moved from studying isomorphisms to studying homomorphisms we dropped 
 the requirements that the maps be onto and one-to-one.
 We've seen that dropping the onto condition has no effect in the sense
-that any homomorphism $\map{h}{V}{W}$ is onto some vector space,
-namely $\rangespace{h}$.
+that any homomorphism $\map{h}{V}{W}$ is onto some space,
+namely its range space $\rangespace{h}$.
 
 \pause
-We next consider the effect of dropping the one-to-one condition,
-so that for some vector $\vec{w}\in W$
+Consider the effect of dropping the one-to-one condition.
+Now, for some vector $\vec{w}\in W$
 in the range there may be many vectors $\vec{v}\in V$ mapped to $\vec{w}$. 
 \centergraphic{../ch3.5}
 \ExecuteMetaData[../map2.tex]{InverseImage}
@@ -540,13 +577,12 @@ Here is a member of the $x$-axis, drawn in red.
 \centergraphic{asy/three_ii_proj1.pdf}
 \pause
 Next are some elements of $\pi^{-1}(2)$, 
-shown both as dots as in the bean diagram and as vectors
-(these are also in red because they are associated by $\pi$ with $2$).
+shown both as dots (as in the bean diagram) and as vectors.
+These are also shown in red because they are associated by $\pi$ with $2$.
 \centergraphic{asy/three_ii_proj2.pdf}
-As an alternative to using colors we can refer to these as 
-``$2$~vectors.''
+Think of these as ``$2$~vectors.''
 \end{frame}\begin{frame}
-These are some ``$3$-vectors,'' inverse images of $3$.
+Here are some ``$3$-vectors,'' inverse images of $3$.
 \centergraphic{asy/three_ii_proj3.pdf}
 \pause
 The definition of addition preservation is that
@@ -573,10 +609,13 @@ The same analysis holds for any homomorphism.
 The projection $\map{\pi}{\Re^3}{\Re^2}$ is a linear map.
 As above we can identify the codomain with the $xy$-plane inside of
 $\Re^3$.
-\only<1>{\centergraphic{asy/three_ii_3dproj1.png}}
-\only<2>{\centergraphic{asy/three_ii_3dproj2.png}}
-\only<3->{\centergraphic{asy/three_ii_3dproj3.png}}
+\only<1>{\centergraphic{asy/three_ii_3dproj1.pdf}}
+\only<2>{\centergraphic{asy/three_ii_3dproj2.pdf}}
+\only<3->{\centergraphic{asy/three_ii_3dproj3.pdf}}
 In the $xy$-plane, red plus blue makes purple as shown by the parallelogram.
+We will illustrate that a $\vec{w}_1$ vector plus a
+  $\vec{w}_2$ vector is a $\vec{w}_3$ vector
+
 \pause
 Consider the inverse image sets; the diagram shows some of the infinitely 
 many points in each $\pi^{-1}(\vec{w}_i)$.
@@ -622,7 +661,7 @@ As above, any $\vec{v}_1\in h^{-1}(\vec{w}_1)$
 plus any $\vec{v}_2\in h^{-1}(\vec{w}_2)$
 equals a $\vec{v}_3\in h^{-1}(\vec{w}_3)$:
 a quadratic with an $x$~coefficient of $1$ 
-plus a quadratic with an $x$~coefficent of $-1$
+plus a quadratic with an $x$~coefficient of $-1$
 equals a quadratic with an $x$~coefficient of~$0$.
 That is, a ``$\vec{w}_1$~vector'' plus a
 ``$\vec{w}_2$~vector'' is a ``$\vec{w}_3$~vector.'' 
@@ -639,17 +678,15 @@ It is ``organized'' because these inverse image sets
 reflect the structure of the range
 in that a ``$\vec{w}_1$~vector'' plus a ``$\vec{w}_2$~vector'' 
 equals a ``$\vec{w}_1+\vec{w}_2$~vector.''
-
-\pause
-Vector spaces have a distinguished element, namely $\vec{0}$.
-So we next consider the inverse image of that element $h^{-1}(\zero)$.
 \end{frame}
 
 
 
 
 %..........
-\begin{frame}
+\begin{frame}{Null space}
+Vector spaces have a distinguished element, $\vec{0}$.
+So we next consider the inverse image of that element $h^{-1}(\zero)$.
 \lm[le:NullspIsSubSp]
 \ExecuteMetaData[../map2.tex]{lm:NullspIsSubSp}
 
@@ -661,28 +698,27 @@ So we next consider the inverse image of that element $h^{-1}(\zero)$.
 \pause
 \medskip
 \no
-This result complements \nearbylemma{le:RangeIsSubSp}.
+This result complements \nearbylemma{le:RangeIsSubSp}
+that for any subspace of the domain, its image is a subspace of the range.
 \end{frame}
 
 
 
 
 %..........
-\begin{frame}{Null space}
+\begin{frame}
 \df[df:NullSpace]
 \ExecuteMetaData[../map2.tex]{df:NullSpace}
 
 \centergraphic{../ch3.10}
 \pause
 \no 
-Strictly, the nullspace of the codomain is not $\zero_{W}$, it is 
-$\set{\zero_{W}}$.
-Thus we should perhaps write the nullspace 
-as $h^{-1}(\set{\zero_{W}})$.
-
+Strictly, the trivial subspace of the codomain is not $\zero_{W}$, it is 
+$\set{\zero_{W}}$, and
+so we may think to write the nullspace as $h^{-1}(\set{\zero_{W}})$.
 But we have defined the two sets $h^{-1}(\vec{w})$
 and $h^{-1}(\set{\vec{w}})$ to be equal
-and writing it the first way is easier.
+and the first is easier to write.
 \end{frame}
 
 
@@ -697,7 +733,7 @@ is linear.
   \nullspace{d/dx}=\set{ax^2+bx+c \suchthat
                                   2ax+b=0}
 \end{equation*}
-The polynomial $2ax+b$ equals the zero polynomial if an
+The polynomial $2ax+b$ equals the zero polynomial if and
 only if they have the same constant coefficient (which implies that 
 $b=0$), 
 the same coefficient of~$x$ (which implies that $a=0$), and the same
@@ -735,17 +771,17 @@ The homomorphism $\map{f}{\matspace_{\nbyn{2}}}{\Re^2}$
   \colvec{a+b \\ c+d}
 \end{equation*}
 has this null space
-\begin{equation*}
+\begin{align*}
   \nullspace{f}
-  =\set{
+  &=\set{
     \begin{mat}
       a  &b  \\
       c  &d  
     \end{mat}
     \suchthat 
     \text{$a+b=0$ and $c+d=0$}
-    }
-  =\set{
+    }                                 \\
+  &=\set{
     \begin{mat}
       -b  &b  \\
       -d  &d
@@ -753,7 +789,7 @@ has this null space
     \suchthat
     b,d\in\Re
     }
-\end{equation*}
+\end{align*}
 and a nullity of $2$.
 
 \pause
@@ -786,8 +822,38 @@ and its nullity is $0$.
 \begin{frame}
 \ExecuteMetaData[../map2.tex]{pf:RankPlusNullEqDim2}
 \qed
+\end{frame}
+\begin{frame}
+\ex
+Projection $\map{\pi}{\Re^3}{\Re^2}$ 
+\begin{equation*}
+  \colvec{a \\ b \\ c}\mapsto\colvec{a \\ b}
+\end{equation*}
+takes a three-dimensional domain
+to a two-dimensional range.  
+Its null space is the $z$-axis so
+its nullity is one.
 
 \pause
+This example illustrates the proof's steps particularly clearly.
+Take 
+the basis $B_N=\sequence{\vec{e}_3}$ for the null space. 
+\pause
+Expand that to the basis $\stdbasis_{3}$ for the entire domain.
+\pause
+The action of $\pi$ is that the third dimension collapses:
+a linear combinations in the domain 
+$\vec{v}=c_1\vec{e}_1+c_2\vec{e}_2+c_3\vec{e}_3$
+is sent to the combination
+$\vec{w}=c_1\vec{e}_1+c_2\vec{e}_2+\zero$
+in the range.
+Geometrically, the domain is organized into inverse images 
+that are vertical lines, just like the null space.
+% The action of $\pi$ is to zero them out. 
+\centergraphic{asy/three_ii_dims.pdf}
+\end{frame}
+
+\begin{frame}
 \ex
 The derivative function $\map{d/dx}{\polyspace_2}{\polyspace_1}$
 has this range space
@@ -796,14 +862,13 @@ has this range space
 \end{equation*}
 (any $cx+d\in\polyspace_{1}$ is the image of $ax^2+bx+c$ where
 $a=c/2$, $b=d$, and $c$  can be any real)
-and this null space (calculated above).
+and this null space (calculated earlier).
 \begin{equation*}
   \nullspace{d/dx}=\set{c \suchthat c\in\Re}
 \end{equation*}
 The rank is $2$ while the nullity is~$1$, and they add to the dimension
 of the domain~$\polyspace_2$.
-\end{frame}
-\begin{frame}
+\pause
 \ex
 The function $\map{h}{\Re^2}{\Re^1}$ given by
 \begin{equation*}
@@ -822,8 +887,8 @@ and this null space (calculated earlier).
 \end{equation*}
 Its rank is $1$ and its nullity is $1$.
 Its domain $\Re^2$ has dimension~$2$.
-
-\pause
+\end{frame}
+\begin{frame}
 \ex
 The dilation function $\map{d_{3}}{\Re^2}{\Re^2}$
 \begin{equation*}
@@ -834,8 +899,7 @@ and a trivial nullspace
 $\nullspace{d_{3}}=\set{\zero}$.
 So its rank is~$2$
 and its nullity is~$0$.
-\end{frame}
-\begin{frame}
+\pause
 \ex
 The homomorphism $\map{f}{\matspace_{\nbyn{2}}}{\Re^2}$
 \begin{equation*}
@@ -862,34 +926,6 @@ We found its null space earlier
     }
 \end{equation*}
 and its nullity is $2$.
-\end{frame}
-\begin{frame}
-\ex
-Projection $\map{\pi}{\Re^3}{\Re^2}$ 
-\begin{equation*}
-  \colvec{a \\ b \\ c}\mapsto\colvec{a \\ b}
-\end{equation*}
-takes a three-dimensional domain
-to a $2$-dimensional range,  with a null space of the $z$-axis and so
-a nullity of $1$.
-
-We can step through the proof by taking 
-the basis $B_N=\sequence{\vec{e}_3}$ for the null space. 
-\pause
-Expand that to the basis $\stdbasis_{3}$ for the entire domain.
-\pause
-So the action of the map is that the third dimension collapses:
-a linear combinations in the domain 
-$\vec{v}=c_1\vec{e}_1+c_2\vec{e}_2+c_3\vec{e}_3$
-is sent to the combination
-$\vec{w}=c_1\vec{e}_1+c_2\vec{e}_2+\zero$
-in the range.
-
-\pause
-Geometrically, all of the inverse images are vertical lines, just like
-the null space.
-The action of $\pi$ is to zero them out. 
-\centergraphic{asy/three_ii_dims.png}
 \end{frame}
 
 

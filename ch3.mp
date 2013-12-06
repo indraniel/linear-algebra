@@ -14,7 +14,9 @@ ahangle:=40;
 input arrow
 input jh3d
 
+numeric dot_width; dot_width = 1.2pt;  % size of a pt in a set
 
+  
 beginfig(1) % (2,2,1) and its projection
   numeric u;  %scaling factor
   numeric v;  %vertical scaling factor
@@ -234,11 +236,17 @@ beginfig(4) % R^3 and R^2
   save many_vecs; path many_vecs; many_vecs = (0,-4pt)--(0,4pt); 
   pickup pencircle scaled line_width_light;
   drawarrow z0--z3 withcolor lightgray;
-    draw (many_vecs shifted z3) dashed withdots scaled 0.2;
+    pickup pencircle scaled dot_width;
+    draw (many_vecs shifted z3) dashed withdots scaled 0.35;
+  pickup pencircle scaled line_width_light;
   drawarrow z0--z5 withcolor lightgray;  
-    draw (many_vecs shifted z5) dashed withdots scaled 0.2;
+    pickup pencircle scaled dot_width;
+    draw (many_vecs shifted z5) dashed withdots scaled 0.35;
+  pickup pencircle scaled line_width_light;
   drawarrow z0--z1 withcolor lightgray;  % main vector
-    draw (many_vecs shifted z1) dashed withdots scaled 0.2;
+    pickup pencircle scaled dot_width;
+    draw (many_vecs shifted z1) dashed withdots scaled 0.35;
+  pickup pencircle scaled line_width_light;
 
   % vectors in R^2 (shifted)
   z20=z0 shifted rtwoshift;
@@ -282,9 +290,10 @@ beginfig(5) % bean with mapsto
   z0 = (1.4w,.8v); z1= (1.5w,.9v);
   z2 = (.8w,2.1v); z3= (1w,2.1v);
   z4 = (1.25w,3.3v); z5= (1.5w,3.1v);
-  pickup pencircle scaled line_width_light;
+  % pickup pencircle scaled line_width_light;
+  pickup pencircle scaled dot_width;
   forsuffixes s = 0, 2, 4: 
-    draw (many_pts shifted z[s]) dashed withdots scaled 0.3;
+    draw (many_pts shifted z[s]) dashed withdots scaled 0.4;
     drawdot (z[s+1] shifted codshift);
     draw_action_arrow((z[s]{(3,1)}..(z[s+1] shifted codshift)));
   endfor
@@ -445,15 +454,18 @@ beginfig(10) % bean picture showing nullspace
   draw generic_set(2w,4.25v);
   draw generic_set(2.1w,4.4v) shifted codshift;
 
-  save many_pts; path many_pts; many_pts = (0,-5pt)--(0,5pt); 
+  save many_pts; path many_pts; many_pts = (0,-6pt)--(0,6pt); 
   z0 = (1.35w,2.1v); z1= (1w,2.1v);
-  pickup pencircle scaled line_width_light;
-  draw (many_pts shifted z0) dashed withdots scaled 0.3;
-  pickup pencircle scaled line_width_dark;
-  drawdot z0;
+  pickup pencircle scaled dot_width;
+  draw (many_pts shifted z0) dashed withdots scaled 0.4;
+  % pickup pencircle scaled line_width_dark;
+  pickup pencircle scaled dot_width;
+  % alresdy included as part of many_pts: drawdot z0; 
     label.lft(btex {\small $0_V$} etex,z0);
+  % pickup pencircle scaled dot_width;
   drawdot (z1 shifted codshift);
     label.rt(btex {\small $0_W$} etex,(z1 shifted codshift));
+  pickup pencircle scaled line_width_dark;
   draw_action_arrow((z0{(3,1)}..(z1 shifted codshift)));
 endfig;
 
@@ -521,7 +533,8 @@ beginfig(11) % R^3 and R^2
   for i=-3 step 1 until 3:
     drawarrow z0--(z1+i*(0,.20v));
   endfor
-  draw (many_vecs shifted (z1+(1pt,0))) dashed withdots scaled 0.25;
+  pickup pencircle scaled dot_width;
+  draw (many_vecs shifted (z1+(1pt,0))) dashed withdots scaled 0.35;
 
   % vectors in R^2 (shifted)
   z20=z0 shifted rtwoshift;
@@ -555,7 +568,8 @@ beginfig(12) % `a' vectors mapped to a
   pickup pencircle scaled line_width_light;
   z3=whatever[z0,z1]; x3=-.5w;
   z4=whatever[z0,z1]; y4=-.5v;
-  draw z3--z4 dashed withdots scaled 0.25;
+  pickup pencircle scaled dot_width;
+  draw z3--z4 dashed withdots scaled 0.35;
     %label.rt(btex \makebox[0pt][l]{\small $x+y=a$} etex,z4);
   z5=(.75w,1.25v)-(.5pt,.5pt);
   pickup pencircle scaled line_width_light;
@@ -568,9 +582,11 @@ beginfig(12) % `a' vectors mapped to a
   pickup pensquare scaled line_width_light;
   draw (xaxis shifted roneshift);
     label.urt(btex {\small $\Re^1$} etex,(point infinity of xaxis) shifted roneshift);
-  pickup pencircle scaled 2line_width_dark;
+  % pickup pencircle scaled 2line_width_dark;
+  pickup pencircle scaled 2dot_width;
   drawdot (z1 shifted roneshift) withcolor white;
-  pickup pencircle scaled line_width_light;
+  % pickup pencircle scaled line_width_light;
+  pickup pencircle scaled dot_width;
   drawdot (z1 shifted roneshift);
     label.bot(btex {\small $w$} etex,z1 shifted roneshift);
   % The map

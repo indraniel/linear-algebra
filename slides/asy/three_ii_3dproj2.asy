@@ -2,7 +2,7 @@
 import jh;
 real height; height=3.5cm; size(0,height);
 import settings;
-settings.render=-3;
+settings.render=0;  // for png want -3
 settings.maxtile=(20,20);
 
 import three;
@@ -28,7 +28,9 @@ path plane_vec[];
 for(int i=0; i < 3; ++i) {
   plane_vec.push((0,0)--plane_endpt[i]);
 }
-pen color[]={rgb(0.9,0,0), rgb(0,0,0.75), rgb(0.8,0,0.75)}; 
+pen color[]={rgb(0.9,0,0), rgb(0,0,0.75), rgb(0.8,0,0.75)};
+real colorfactor = 0.2;
+pen light_color[]={rgb(colorfactor*0.9,0,0), rgb(0,0,colorfactor*0.75), rgb(colorfactor*0.8,0,colorfactor*0.75)}; 
 path space_vec[];
 path vec1=(0,0)--(2,3);
 path vec2=(0,0)--(-4,5);
@@ -38,7 +40,7 @@ draw(path3(plane_endpt[0]--plane_endpt[2]),VECTORPEN+gray(0.9));
 draw(path3(plane_endpt[1]--plane_endpt[2]),VECTORPEN+gray(0.9));
 // draw and label the codomain plane vectors
 for(int i=0; i < 3; ++i) {
-  draw(path3(plane_vec[i]),VECTORPEN+color[i]+gray(0.95),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
+  draw(path3(plane_vec[i]),VECTORPEN+light_color[i]+gray(0.95),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 }
 // label(Label("{\tiny $\vec{w}_1$}"),path3(plane_vec[0]));
 // label(Label("{\tiny $\vec{w}_2$}"),path3(plane_vec[1]),NW);

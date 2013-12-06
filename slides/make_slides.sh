@@ -149,21 +149,34 @@ then
      eval $result
   done
 
-  # Create all the graphics that will be .png files
-  echo "================="
-  echo " creating png graphics with Asymptote"
-  echo "   (some of these take minutes for a single file to compile)"
-  echo "================="
-  declare -a png_out_files=("three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation" "four_ii_orientation_pos" "four_ii_orientation_neg")
-  cmd="asy -f png filename"  # will substitute for "filename"
+  # Converting over from png to pdf without 3d stuff
+  declare -a pdf_out_files=("three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation"  "four_ii_orientation_pos" "four_ii_orientation_neg")
+  cmd="asy -f pdf filename"  # will substitute for "filename"
 
-  for i in ${png_out_files[@]}
+  for i in ${pdf_out_files[@]}
   do
      result=${cmd//filename/$i}
      # echo $i
      echo $result
      eval $result
   done
+
+
+  # # Create all the graphics that will be .png files
+  # echo "================="
+  # echo " creating png graphics with Asymptote"
+  # echo "   (some of these take minutes for a single file to compile)"
+  # echo "================="
+  # declare -a png_out_files=("three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation" "four_ii_orientation_pos" "four_ii_orientation_neg")
+  # cmd="asy -f png filename"  # will substitute for "filename"
+
+  # for i in ${png_out_files[@]}
+  # do
+  #    result=${cmd//filename/$i}
+  #    # echo $i
+  #    echo $result
+  #    eval $result
+  # done
 
   # Done making the graphics
   cd ..

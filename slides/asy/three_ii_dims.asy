@@ -2,7 +2,7 @@
 import jh;
 real height; height=2.25cm; size(0,height);
 import settings;
-settings.render=-3;
+settings.render=0; // for png: -3;
 settings.maxtile=(20,20);
 
 import three;

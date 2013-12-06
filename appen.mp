@@ -22,7 +22,7 @@ numeric u;  %scaling factor
 numeric v;  %vertical scaling factor
 numeric w;  %horizontal scaling factor
 u:=10pt; v:=u; w:=v;
-numeric dot_width; dot_width = 1.2pt;
+numeric dot_width; dot_width = 1.2pt;  % size of a pt in a set
 
 
 def place_P(expr loc) =

@@ -2,7 +2,7 @@
 import jh;
 real height; height=3cm; size(0,height);
 import settings;
-settings.render=-10;  // fewer jaggies but very slow
+settings.render=0; // -10;  // fewer jaggies but very slow
 settings.maxtile=(10,10);
 
 import three;
