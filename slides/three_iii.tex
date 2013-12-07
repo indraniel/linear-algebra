@@ -245,13 +245,20 @@ so this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
 \begin{equation*}
   \colvec{a \\ b}\mapsunder{h} 2a+3b
 \end{equation*}
-With the standard bases $\stdbasis_2,\stdbasis_1$ we have
+Aiming to represent the map with respect to the standard bases 
+$\stdbasis_2,\stdbasis_1$, note
 \begin{equation*}
   \colvec{1 \\ 0}\mapsto 2
-  \quad
+  \qquad
   \colvec{0 \\ 1}\mapsto 3
 \end{equation*}
-and so this $\nbym{1}{2}$ matrix represents the map.
+and so
+\begin{equation*}
+  \rep{h(\vec{e}_1)}{\stdbasis_1}=\colvec{2}
+  \qquad
+  \rep{h(\vec{e}_2)}{\stdbasis_1}=\colvec{3}
+\end{equation*}
+which gives this $\nbym{1}{2}$ matrix representation.
 \begin{equation*}
   H=\rep{h}{\stdbasis_2,\stdbasis_1}
   =
@@ -259,23 +266,6 @@ and so this $\nbym{1}{2}$ matrix represents the map.
     2 &3
   \end{mat}
 \end{equation*}
-% For instance, on
-% \begin{equation*}
-%   \vec{v}=\colvec{-2 \\ 2}
-%   \qquad
-%   \rep{\vec{v}}{\stdbasis_2}
-%   =\colvec{-2 \\ 2}
-% \end{equation*}
-% the calculation is this.
-% \begin{equation*}
-%   \rep{h(\vec{v})}{\stdbasis_1}
-%   =
-%   \begin{mat}
-%     2 &3 
-%   \end{mat}
-%   \colvec{-2 \\ 2}
-%   =2
-% \end{equation*}
 \end{frame}
 
 
@@ -385,7 +375,7 @@ they compute this projection.
 \end{frame}
 
 \begin{frame}
-\ex Recall also that $\map{h}{\Re^2}{\Re}$ with this action
+\ex Recall also that the map $\map{h}{\Re^2}{\Re}$ with this action
 \begin{equation*}
   \colvec{a \\ b}\mapsunder{h} 2a+3b
 \end{equation*}
@@ -393,7 +383,7 @@ is represented
 with respect to the standard bases $\stdbasis_2,\stdbasis_1$ by a
 $\nbym{1}{2}$ matrix.
 \begin{equation*}
-  rep{h}{\stdbasis_2,\stdbasis_1}
+  \rep{h}{\stdbasis_2,\stdbasis_1}
   =
   \begin{mat}
     2 &3
@@ -414,8 +404,13 @@ has this image.
     2 &3 
   \end{mat}
   \colvec{-2 \\ 2}
-  =2
+  =
+  \colvec{2}_{\stdbasis_1}
 \end{equation*}
+Since this is a representation 
+with respect to the standard basis $\stdbasis_1$,
+meaning that vectors represent themselves, 
+the image is $h(\vec{v})=2$.
 \end{frame}
 
 
@@ -432,19 +427,20 @@ The prior subsection shows how to start with a linear map and produce its matrix
 representation.
 What about the converse?
 That is, 
-suppose instead that we start with a matrix.
+suppose instead that we start with a matrix
 \begin{equation*}
   H=\begin{mat}
     1 &2 \\
     3 &4
   \end{mat}
 \end{equation*}
-Fix a domain and codomain, and bases.
+and fix a domain and codomain, and bases.
 \begin{equation*}
   \stdbasis_2\subset\Re^2
   \quad
   \sequence{1-x,1+x}\subset\polyspace_1
 \end{equation*}
+Is there a linear map?
 \pause
 Consider $\map{h}{\Re^2}{\polyspace_1}$ defined by:
 for any domain vector $\vec{v}$, represent it with respect to the domain basis,
@@ -457,11 +453,12 @@ We will verify that $h$ is a linear function.
 Note first that $h$ is a function.
 This is because
 the representation of a vector with respect to a basis can be done in
-one and only one way, so the outcome is well-defined.
-That is, for a given input, the output from $h$ exists and is unique. 
+one and only one way, so the outcome of the operation in the prior paragraph
+is well-defined\Dash 
+for a given input, the output from $h$ exists and is unique. 
 \end{frame}
 \begin{frame}
-Now we show that $h$ is linear.
+Next we show that $h$ is linear.
 Fix domain vectors $\vec{u},\vec{v}\in\Re^2$ and represent them with 
 respect to the domain basis. 
 Multiply $c\cdot\rep{\vec{u}}{B}+d\cdot\rep{\vec{w}}{D}$ by $H$.
@@ -515,16 +512,17 @@ the result is $c\cdot\rep{h(\vec{u})}{D}+d\cdot\rep{h(\vec{v})}{D}$.
 %..........
 \begin{frame}
 We will close this subsection by connecting some properties of linear maps
-with properties of associated matrices.
+with properties of the associated matrices.
 
-We start with an easy one: 
-we claim that $\map{h}{V}{W}$ is the zero map if and only
+First an easy one: 
+observe that $\map{h}{V}{W}$ is the zero map $\vec{v}\mapsto\zero$
+if and only
 if it is represented, with respect to any bases, by the zero matrix.
 
 \pause
-First assume $h$ is the zero map.
+For one direction, assume that $h$ is the zero map.
 Then for any bases $B,D$ we have $h(\vec{\beta}_i)=\zero_W$, which is 
-represented with respect to $D$ by the zero vector.
+represented with respect to $D$ by the column vector of zeroes.
 Thus $h$ is represented by the zero matrix.
 
 \pause
@@ -536,7 +534,8 @@ Extending linearly, we have that $h$ maps each $\vec{v}\in V$ to $\zero_W$,
 and $h$ is the zero map.  
 
 \pause
-\ex The zero map $\map{z}{\Re^2}{\Re^3}$ is represented by the $\nbym{2}{3}$
+\ex The zero map $\map{z}{\Re^2}{\Re^3}$ is represented 
+$\rep{z}{B,D}$ by the $\nbym{2}{3}$
 zero matrix
 \begin{equation*}
   Z=
@@ -546,7 +545,7 @@ zero matrix
     0 &0
   \end{mat}
 \end{equation*}
-with respect to any pair of bases.
+with respect to any pair of bases $B,D$.
 
 % \pause
 % \medskip
@@ -604,7 +603,7 @@ The standard basis case is easy.  This is the other calculation.
   \rep{\colvec{-3 \\ -3}}{D}=\colvec{-6 \\ -9}
 \end{equation*}
 \pause
-We end with these two representations, each matrices of rank~$1$.
+We end with these matrix representations, each of rank~one.
 \begin{equation*}
   \rep{t}{\stdbasis_2,\stdbasis_2}
   =
@@ -636,6 +635,35 @@ We end with these two representations, each matrices of rank~$1$.
 \pause
 \ExecuteMetaData[../map3.tex]{pf:MatDescsMap1}
 \qed
+\end{frame}
+
+\begin{frame}
+\ex
+The transformation $\map{t_\Theta}{\Re^2}{\Re^2}$ rotating vectors 
+counterclockwise by $\Theta$~radians is represented with respect to the
+standard bases by this matrix.
+\begin{equation*}
+  \rep{t_\Theta}{\stdbasis_2,\stdbasis_2}
+  =
+  \begin{mat}[r]
+    \cos\Theta  &\sin\Theta  \\
+   -\sin\Theta  &\cos\Theta
+  \end{mat}
+\end{equation*}
+The $\Theta=\pi/4$ instance is
+\begin{equation*}
+  \begin{mat}[r]
+    \sqrt{2}/2  &\sqrt{2}/2  \\
+   -\sqrt{2}/2  &\sqrt{2}/2
+  \end{mat}
+  =(\sqrt{2}/2)\cdot
+  \begin{mat}
+    1  &1  \\
+   -1  &1
+  \end{mat}
+\end{equation*}
+and obviously the rank of this matrix is two, reflecting
+that the map $t_{\pi/4}$ is one-to-one and onto. 
 \end{frame}
 
 
