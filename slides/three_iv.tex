@@ -55,21 +55,23 @@
 \section{Sums and Scalar Products}
 %..........
 \begin{frame}{Representing operations on linear functions}
-Recall the operations on linear functions of scalar multiplication
-and addition defined by: for  
-$\map{f,g}{V}{W}$, where $r\in\Re$
-the scalar multiple $r\cdot f$ function does this
-\begin{equation*}
-  \vec{v}\mapsunder{r\cdot f} r\cdot (f(\vec{v}))
-\end{equation*}
-and the sum of the two functions does this.
+Recall that the collection of linear functions $\linmaps{V}{W}$
+between two spaces $V,W$ is itself a vector space.
+That is, we can add two functions
+$\map{f,g}{V}{W}$, 
 \begin{equation*}
   \vec{v}\mapsunder{f+g} f(\vec{v})+g(\vec{v})
 \end{equation*}
-We will see how the matrix representations $\rep{f}{B,D}$ and 
+and we can take 
+the scalar multiple $r\cdot f$ of a function
+\begin{equation*}
+  \vec{v}\mapsunder{r\cdot f} r\cdot (f(\vec{v}))
+\end{equation*}
+where $r\in\Re$.
+We now see how the matrix representations $\rep{f}{B,D}$ and 
 $\rep{g}{B,D}$
-combine to give $\rep{r\cdot f}{B,D}$
-and $\rep{f+g}{B,D}$.
+combine to give $\rep{f+g}{B,D}$
+and $\rep{r\cdot f}{B,D}$.
 
 \pause
 \ex
@@ -83,33 +85,36 @@ some bases~$B,D$ by this matrix.
     3  &4  
   \end{mat}
 \end{equation*}
-We will find the matrix representing the function $6f$.
-That is, we will show how to produce the matrix representation of $6f$
-from the matrix representation~F of~$f$. 
+We will first find the matrix representing the function $6f$
+and compare it with this matrix, to see the effect of the scalar~$6$.
 \end{frame}
 \begin{frame}
-Consider representations of vectors from the domain and codomain.
+\noindent Suppose that $f(\vec{v})=\vec{w}$ and that 
+these are the representations.
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
   \quad
   \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}
   % =\colvec{2v_1+v_2 \\ 3v_1+4v_2} 
 \end{equation*}
-\pause
+The action of the function $\map{6f}{V}{W}$ is $6f(\vec{v})=6\vec{w}$.
 Since $6\vec{w}=6\cdot(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
-=6w_1\vec{\delta}_1+6w_2\vec{\delta}_2$,
+=(6w_1)\vec{\delta}_1+(6w_2)\vec{\delta}_2$,
 application of the function $\map{6f}{V}{W}$
 yields this representation of the codomain vector.
 \begin{equation*}
-  \rep{6f(\vec{v})}{D}
-  =\rep{6\vec{w}}{D}=\colvec{6w_1 \\ 6w_2} 
+  % \rep{6f(\vec{v})}{D}
+  % =
+  \rep{6\vec{w}}{D}=\colvec{6w_1 \\ 6w_2} 
 \end{equation*}
-So moving from the function $f$ to the function~$6f$
-has the effect on the representations of vectors that it
-transforms the codomain vector by multiplying each entry by $6$.
+This shows how the representation of $6f$ compares with 
+the representation of~$f$.
+The matrix for $6f$ gives vector outputs where 
+each entry is $6$ times as big 
+as the entry given by the matrix for~$f$.
 \end{frame}
 \begin{frame}
-In this example the action of the function is represented as here.  
+\noindent Here is the representation of the action of~$f$.  
 \begin{equation*}\
   \rep{f}{B,D}\cdot \rep{\vec{v}}{B}=
   \begin{mat}
@@ -120,26 +125,25 @@ In this example the action of the function is represented as here.
   =\colvec{2v_1+v_2 \\ 3v_1+4v_2}
 \end{equation*}
 \pause
-We want the matrix 
-that makes this 
-true.
+The prior slide shows that the matrix representing $6f$ 
+does this.
 \begin{equation*}
   \rep{6f}{B,D}\cdot
   \colvec{v_1 \\ v_2}
   =\colvec{6(2v_1+v_2) \\ 6(3v_1+4v_2)}
   =\colvec{12v_1+6v_2 \\  18v_1+24v_2}
 \end{equation*}
-Therefore, at least in this example
+Therefore
 \begin{equation*}
-  \rep{4f}{B,D}
+  \rep{6f}{B,D}
   =
   \begin{mat}
     12 &6 \\
     18 &24
   \end{mat}
 \end{equation*}
-so going from the function $f$ to the 
-function~$6f$ has the effect on the representation~$F$ of  
+and so going from the function $f$ to the 
+function~$6f$ has the effect on the representation matrix of  
 multiplying all the entries by $6$.
 \end{frame}
 
@@ -163,19 +167,19 @@ some bases by these matrices.
     7  &6  
   \end{mat}
 \end{equation*}
-We want the matrix representing the function $f+g$.
+We will find the matrix representing the function $f+g$.
 
 \pause
 If $f(\vec{v})=\vec{u}$ and $g(\vec{v})=\vec{w}$ then
 $f+g$ does this.
 \begin{align*}
   \vec{v}
-  &\mapsunder{f+g}
-  \vec{u}+\vec{v}                      \\
-  &\qquad =u_1\vec{\delta}_1+u_2\vec{\delta}_2
+  \mapsunder{f+g}
+  \vec{u}+\vec{v}                      
+  &=(u_1\vec{\delta}_1+u_2\vec{\delta}_2)
   +
-  w_1\vec{\delta}_1+w_2\vec{\delta}_2   \\
-  &\qquad=(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2
+  (w_1\vec{\delta}_1+w_2\vec{\delta}_2)   \\
+  &=(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2
 \end{align*}
 Thus for any $\vec{v}$, the effect on the representatives 
 \begin{equation*}
@@ -189,8 +193,8 @@ of adding the functions is to add the column vectors.
 \end{equation*}
 \end{frame}
 \begin{frame}
-The particular functions in this example have 
-this action on the representations.
+\noindent The particular functions in this example have 
+this effect on the representations.
 \begin{align*}
   \rep{f(\vec{v})}{D}=
   \begin{mat}
@@ -215,7 +219,7 @@ So we want the matrix with this effect.
   =\colvec{7v_1+9v_2 \\ 10v_1+10v_2}
 \end{equation*}
 \pause
-Thus
+We want this.
 \begin{equation*}
   \rep{f+g}{B,D}=
   \begin{mat}
@@ -223,10 +227,9 @@ Thus
     10  &10  
   \end{mat}
 \end{equation*}
-\pause
-and at least in this example
-the representation of the sum function is the entry-by-entry sum of the
-representations of the two functions.  
+So,
+the representation of the sum is the entry-by-entry sum of the
+representations.  
 \end{frame}
 
 \begin{frame}{Definition of matrix sum and scalar multiple}
@@ -284,7 +287,7 @@ $B+C$, $C+B$.
 
 \pause
 \pf
-We can generalize the two examples that started this section.
+Generalize the earlier examples.
 See \nearbyexercise{exer:CorrspMapMatOps}.
 \qed
 
@@ -313,9 +316,9 @@ The zero matrix is the identity element for matrix addition.
     5 &0 &9
   \end{mat}
 \end{equation*}
-This reflects the fact that a zero matrix represents a zero function
-$\map{Z}{V}{W}$, which is the identity elements for
-function addition. 
+A zero function
+$\map{Z}{V}{W}$ is the identity element for
+function addition, and the matrix fact accords with the map fact. 
 \end{frame}
 
 
@@ -324,9 +327,10 @@ function addition.
 % ..... Three.IV.2 .....
 \section{Matrix Multiplication}
 %..........
-\begin{frame}
-Besides scalar multiplication and addition, another operation that 
-we can perform on functions is composition.
+\begin{frame}{Representing composition}
+Another function operation,
+besides scalar multiplication and addition,   
+is composition.
 
 \pause
 \lm[lm:CompositionOfLinearMapsIsLinear]
@@ -366,20 +370,22 @@ represented as here.
     9 &10 &12 
   \end{mat}
 \end{equation*}
-(The sizes of the matrices show that 
+The sizes of the matrices show that 
 $V$ has dimension~$2$, 
 $W$ has dimension~$3$, 
-and $X$ has dimension~$2$.)
+and $X$ has dimension~$2$.
+
 We want to see how these two matrices combine to represent the map
 $\map{\composed{g}{h}}{V}{X}$.
 
 \pause
-We will compute the action of $\composed{g}{h}$ by first computing the action
+We will represent the action of $\composed{g}{h}$ by first 
+representing the action
 of~$h$ on a vector~$\vec{v}\in V$.
-\begin{equation*}
+\begin{align*}
   \rep{h(\vec{v})}{C}
-  =\rep{h}{B,C}\cdot\rep{\vec{v}}{B}
-  =
+  &=\rep{h}{B,C}\cdot\rep{\vec{v}}{B}     \\
+  &=
   \begin{mat}
     3 &1 \\
     2 &5 \\
@@ -388,10 +394,10 @@ of~$h$ on a vector~$\vec{v}\in V$.
   \colvec{v_1 \\ v_2}  
   =
   \colvec{3v_1+v_2 \\ 2v_1+5v_2 \\ 4v_1+6v_2}
-\end{equation*}
+\end{align*}
 \end{frame}
 \begin{frame}
-Apply $g$ to that.
+\noindent Apply $g$ to the vector $\rep{h(\vec{v})}{C}$.
 \begin{multline*}
   \rep{g}{C,D}\cdot \rep{h(\vec{v})}{C}
   =
@@ -404,11 +410,13 @@ Apply $g$ to that.
   \colvec{8(3v_1+v_2)+7(2v_1+5v_2)+11(4v_1+6v_2)  \\
           9(3v_1+v_2)+10(2v_1+5v_2)+12(4v_1+6v_2)}
 \end{multline*}
+\pause
 Gather terms.
 \begin{equation*}
   =\colvec{(8\cdot 3+7\cdot 2+11\cdot 4)v_1+(8\cdot 1+7\cdot 5+11\cdot 6)v_2 \\
            (9\cdot 3+10\cdot 2+12\cdot 4)v_1+(9\cdot 1+10\cdot 5+12\cdot 6)v_2}
 \end{equation*}
+\pause
 Rewrite that as a matrix-vector multiplication.
 \begin{equation*}
   \begin{mat}
@@ -417,7 +425,8 @@ Rewrite that as a matrix-vector multiplication.
   \end{mat}
   \colvec{v_1 \\ v_2}
 \end{equation*}
-Here is the combination.
+\pause
+So here is how the parts combine.
 \begin{equation*}
   \begin{mat}
     8 &7 &11 \\
@@ -475,6 +484,7 @@ This product is not defined.
     2  &2  &0 
   \end{mat}
 \end{equation*}
+The number of columns on the left must equal the number of rows on the right.
 
 \pause
 \ex
@@ -558,7 +568,7 @@ The representing $\nbym{m}{n}$ matrix~$GH$ is the product of
 an $\nbym{m}{r}$ matrix~$G$
 and a $\nbym{r}{n}$ matrix~$H$.
 Briefly,
-`$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$'.
+$\nbym{m}{r}\text{\ times\ }\nbym{r}{n}\text{\ equals\ }\nbym{m}{n}$.
 \end{frame}
 
 
@@ -566,7 +576,7 @@ Briefly,
 \begin{frame}{Matrix multiplication is not commutative}
 Function composition is not a commutative operation\Dash $\cos(x^2)$
 is different than $\cos^2(x)$.
-This also holds in the special case of 
+This holds even in the special case of 
 composition of linear functions.
 \pause
 \ex
@@ -624,6 +634,10 @@ is defined in one order and not defined in the other.
 
 %..........
 \begin{frame}
+Although the matrix operation of multiplication does not have
+the property of being commutative,
+it does have some nice algebraic properties.  
+
 \th[th:MatMultWellBehaved]
 \ExecuteMetaData[../map4.tex]{th:MatMultWellBehaved}
 \pause
@@ -655,10 +669,10 @@ Here a second row and a third column combine to make a $2,3$~entry.
     \begin{mat}
       \begin{array}{@{}c@{}}  4  \\  5  \end{array}
       &\begin{array}{@{}c@{}}  6  \\  7  \end{array}
-      &\text{\highlight{ \(\begin{array}{@{}c@{}}  8  \\  9  \end{array}\) }}
+      &\text{\highlight{\(\begin{array}{@{}c@{}}  8  \\  9  \end{array}\)}}
     \end{mat}
   =
-    \begin{mat}[r]
+    \begin{mat}
       9  &13   &17                           \\
       5  &7    &\text{\highlight{ \(9\) }}   \\  
       4  &6    &8
@@ -668,12 +682,12 @@ Here a second row and a third column combine to make a $2,3$~entry.
 The \( i,j \) entry of the matrix product $GH$ is the dot product of
 row~$i$ of the left matrix $G$ with column~$j$
 of the right one~$H$.
-\begin{equation*} % \setlength{\fboxsep}{.15em}
+\begin{equation*} % 
   p_{i,j}
   =
-  g_{i,\text{\highlight{$1 $}}}h_{\text{\highlight{$1 $}},j}
-   +g_{i,\text{\highlight{$2 $}}}h_{\text{\highlight{$2 $}},j}
-   +\dots+g_{i,\text{\highlight{$r $}}}h_{\text{\highlight{$r $}},j}
+  g_{i,\text{\textcolor{red}{$1$}}}h_{\text{\textcolor{red}{$1 $}},j}
+   +g_{i,\text{\textcolor{red}{$2$}}}h_{\text{\textcolor{red}{$2 $}},j}
+   +\dots+g_{i,\text{\textcolor{red}{$r $}}}h_{\text{\textcolor{red}{$r $}},j}
 \end{equation*}
 \pause
 We can view this as the left matrix acting
@@ -1240,7 +1254,8 @@ This matrix is nonsingular and so invertible.
 \end{equation*}
 To ease the calculation called for in the Lemma, we write 
 the matrix~$A$ next to the $\nbyn{3}$ identity and as we Gauss-Jordan 
-reduce~$A$ we apply those operations to~$I$.
+reduce~the matrix on the left, 
+we apply those operations also on the right.
 \begin{align*}
   \begin{pmat}{rrr|rrr}
     1  &3  &1  &1  &0  &0  \\
