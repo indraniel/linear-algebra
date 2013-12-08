@@ -58,7 +58,7 @@
 An \( \nbyn{n} \) matrix \( T \) is nonsingular if and only if
 each of these holds:%
 \ExecuteMetaData[../det1.tex]{EquivalentOfNonsingular}
-In this chapter we will give a formula that determines whether a
+This chapter develops a formula to determine whether a
 matrix is nonsingular.
 \end{frame}
 
@@ -74,21 +74,21 @@ matrix is nonsingular.
 
 \begin{frame}
 We will define the determinant function by listing 
-some of its properties.
-We are interested in these properties 
-because they are convenient for computing the value of the determinant
+some conditions.
+These are convenient for computing the value of the determinant
 on an input square matrix. 
-Then we will show that only one function with those properties exists.
+Then we will show that there is only one function satisfying those
+conditions.
 
-\pause
-\medskip
-\no
-The first section of the text algebraically motivates the 
-determinant definition. 
-The section after this will give a geometric motivation.
-In this section, beyond defining the determinant, 
-we will show how to compute it
-and give some key results.
+% \pause
+% \medskip
+% \no
+% The first section of the text algebraically motivates the 
+% determinant definition. 
+% The section after this will give a geometric motivation.
+% In this section, beyond defining the determinant, 
+% we will show how to compute it
+% and give some key results.
 \end{frame}
 
 
@@ -133,12 +133,12 @@ and give some key results.
 
 \begin{frame}
 We can compute the determinant of a matrix using Gauss's Method
-(presuming that the determinant function exists, which we will
-cover later).
+(presuming that a function satisfying the definition exists; 
+we will prove later that it does).
 
 \ex  On this matrix the Gauss's Method reduces the first column  with 
 $-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
-Property~(1) says that these row operations
+Condition~(1) says that these row operations
 leave the determinant unchanged.
 \begin{equation*}
   \begin{vmat}
@@ -155,7 +155,7 @@ leave the determinant unchanged.
 \end{equation*}
 \pause
 Reduce the second column with $-(5/3)\rho_2+\rho_3$.
-Again, by property~(1) the determinant stays the same.
+Again, by condition~(1) the determinant stays the same.
 \begin{equation*}
   =
   \begin{vmat}
@@ -174,7 +174,8 @@ diagonal.
 \end{frame}
 \begin{frame}
 \ex
-This matrix requires a row swap, which changes the sign of the determinant.
+To reduce this matrix we do a row swap, 
+which changes the sign of the determinant.
 \begin{equation*}
   \begin{vmat}
     0  &3  &1 \\
@@ -222,7 +223,7 @@ of the original matrix is $-3$.
 \pause
 \medskip
 So if there is a function mapping $\matspace_{\nbyn{n}}$ to $\Re$ with 
-the four properties of the definition then there is only one such
+the four conditions of the definition then there is only one such
 function.
 The next two subsections show that for each~$n$ a determinant function 
 exists.
@@ -244,7 +245,8 @@ plainly eliminate the possibility that there might be, say,
 two reductions of some $\nbyn{7}$~matrix that lead to different 
 determinant outputs.
 In that case there would exist no determinant function, 
-since functions must have that for each input there is exactly one output. 
+since functions must have the property
+that for each input there is exactly one output. 
 
 \pause
 To show that determinants are well-defined 
@@ -252,14 +254,15 @@ we will give an alternative way to compute
 the value of a determinant. 
 This new way is less useful in practice since it 
 makes the computations awkward and slow, which is why we didn't start with it.
-But it is useful for theory since it makes the proof that we need easier.
+But it is useful for theory since it makes easier the proof that we need 
+now.
 \end{frame}
 
 
 
 \begin{frame}{The determinant function is not linear}
 \ex
-The second matrix is twice the first but the determinant does not double.
+The second matrix here is twice the first but the determinant does not double.
 \begin{equation*}
   \begin{vmat}
     3  &-3  &9 \\
@@ -275,27 +278,32 @@ The second matrix is twice the first but the determinant does not double.
   \end{vmat}
   =-576
 \end{equation*}
-Instead, by property~(3) of \nearbydefinition{def:Det}
-the determinant scales one row at a time:   
+Instead, by condition~(3) of \nearbydefinition{def:Det}
+the determinant scales one row at a time.   
 \begin{align*}
+  \begin{vmat}
+    6  &-6  &18 \\
+    2  &-2   &14 \\
+    4  &8   &0
+  \end{vmat}
+  &=2\cdot
+  \begin{vmat}
+    3  &-3  &9 \\
+    2  &-2   &14 \\
+    4  &8   &0
+  \end{vmat}           \\
+  &=4\cdot
+  \begin{vmat}
+    3  &-3  &9 \\
+    1  &-1   &7 \\
+    4  &8   &0
+  \end{vmat}           \\
+  &=8\cdot
   \begin{vmat}
     3  &-3  &9 \\
     1  &-1   &7 \\
     2  &4   &0
-  \end{vmat}
-  &=3\cdot
-  \begin{vmat}
-    1  &-1  &3 \\
-    1  &-1   &7 \\
-    2  &4   &0
-  \end{vmat}           \\
-  &=6\cdot
-  \begin{vmat}
-    1  &-1  &3 \\
-    1  &-1   &7 \\
-    1  &2   &0
-  \end{vmat}           
-  % &=6\cdot(-12)
+  \end{vmat}         
 \end{align*}
 \end{frame}
 
@@ -369,12 +377,13 @@ and the second row.
     0 &4
   \end{vmat}
 \end{equation*}
-We have four matrices, each with a single nonzero entry in each row.
+This ends with four matrices that are simple in that 
+each has a single nonzero entry in each row.
 
 \pause 
-The first and last determinants are $0$ because the matrices are
+The first and last of the four determinants are $0$ because the matrices are
 nonsingular (since one row is a multiple of the other).
-We are left with the two matrices in which there is 
+We are left with the two matrices, each having 
 one entry from each row and column from the starting matrix.
 \end{frame}
 
@@ -517,8 +526,10 @@ We sometimes denote a permutation as the sequence
 $\phi=\sequence{\phi(1),\phi(2),\ldots,\phi(n)}$.
 
 \pause
-\ex[ex:AllTwoThreePerms]
-\ExecuteMetaData[../det1.tex]{ex:AllTwoThreePerms}
+\ex[ex:AllTwoPerms]
+\ExecuteMetaData[../det1.tex]{ex:AllTwoPerms}
+\ex[ex:AllThreePerms]
+\ExecuteMetaData[../det1.tex]{ex:AllThreePerms}
 \end{frame}
 \begin{frame}
 \ExecuteMetaData[../det1.tex]{AssociatePermutationWithPermutationMatrix}
@@ -602,7 +613,7 @@ giving this expansion.
   t_{1,2}t_{2,1}\cdot (-1)
 \end{align*}
 The determinant $\deter{P_{\phi_2}}$ equals $-1$ because we can bring that to 
-the identitiy matrix with one row swap.
+the identity matrix with one row swap.
 \pause
 Renaming the matrix entries gives the familiar $\nbyn{2}$ formula.
 \begin{equation*}
@@ -681,7 +692,7 @@ respect to row~four.
 \ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn1}
 \end{frame}
 \begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn2}
+\noindent\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn2}
 \qed
 \end{frame}
 
@@ -758,7 +769,7 @@ So $\sgn(\psi)=+1$.
 \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist3}
 \end{frame}
 \begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist4}
+\noindent\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist4}
 \end{frame}
 \begin{frame}
 \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist5}
@@ -783,7 +794,10 @@ So $\sgn(\psi)=+1$.
 \ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans0}
 \end{frame}
 \begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans1}
+\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans1} 
+\end{frame}
+\begin{frame}
+\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans2}
 \qed
 
 \pause
