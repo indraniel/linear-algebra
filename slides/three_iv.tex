@@ -1138,7 +1138,9 @@ to the right of the matrix used second.
 
 \pause
 \medskip
-\ExecuteMetaData[../map4.tex]{FunctionInverseReview6}
+Our goal is, where a linear~$h$ has an inverse, to find the
+relationship between the matrices $\rep{h}{B,D}$
+and $\rep{h^{-1}}{D,B}$.
 \end{frame}
 
 
@@ -1165,8 +1167,8 @@ has a two-sided inverse.
     -1  &2
   \end{mat}
 \end{equation*}
-To check that we can multiply in both orders.  
-Here is one order; the other is just as easy to check.
+To check that, we can multiply them in both orders.  
+Here is one; the other order is just as easy.
 \begin{equation*}
   \begin{mat}
     2  &5  \\
@@ -1184,6 +1186,12 @@ Here is one order; the other is just as easy to check.
 \end{equation*}
 \end{frame}
 
+\begin{frame}
+
+\pause
+Here is an arrow diagram for matrix inverses.
+\centergraphic{../ch3.21}  
+\end{frame}
 
 
 
@@ -1214,10 +1222,6 @@ Here is one order; the other is just as easy to check.
 \pause
 \ExecuteMetaData[../map4.tex]{pf:ProdInvIsInv1}
 \qed
-
-\pause
-Here is the arrow diagram for matrix inverses.
-\centergraphic{../ch3.21}
 \end{frame}
 
 
@@ -1243,7 +1247,7 @@ Here is the arrow diagram for matrix inverses.
 
 \begin{frame}
 \ex
-This matrix is nonsingular and so invertible.
+This matrix is nonsingular and so is invertible.
 \begin{equation*}
   A=
   \begin{mat}
@@ -1252,7 +1256,7 @@ This matrix is nonsingular and so invertible.
     1  &2  &0
   \end{mat}
 \end{equation*}
-To ease the calculation called for in the Lemma, we write 
+To ease the inverse calculation described in the prior proof, we write 
 the matrix~$A$ next to the $\nbyn{3}$ identity and as we Gauss-Jordan 
 reduce~the matrix on the left, 
 we apply those operations also on the right.
@@ -1273,22 +1277,24 @@ we apply those operations also on the right.
     1  &3  &1    &1     &0     &0  \\
     0  &-6 &-3   &-2    &1     &0  \\
     0  &0  &-1/2 &-2/3  &-1/6  &1
-  \end{pmat}                                \\
+  \end{pmat}                                
+\end{align*}
+The right-hand side is in echelon form.
+We continue with the second half of Gauss-Jordan reduction on the next slide. 
+\end{frame}
+\begin{frame}
+\begin{align*}
   &\grstep[-2\rho_3]{-1/6\rho_2}
   \begin{pmat}{rrr|rrr}
     1  &3  &1    &1     &0     &0  \\
     0  &1  &1/2  &1/3   &-1/6  &0  \\
     0  &0  &1    &4/3   &1/3   &-2
-  \end{pmat}                                
-\end{align*}
-\end{frame}
-\begin{frame}
-\begin{align*}
-  \begin{pmat}{rrr|rrr}
-    1  &3  &1    &1     &0     &0  \\
-    0  &1  &1/2  &1/3   &-1/6  &0  \\
-    0  &0  &1    &4/3   &1/3   &-2
-  \end{pmat}                                
+  \end{pmat}                                \\
+  % &\begin{pmat}{rrr|rrr}
+  %   1  &3  &1    &1     &0     &0  \\
+  %   0  &1  &1/2  &1/3   &-1/6  &0  \\
+  %   0  &0  &1    &4/3   &1/3   &-2
+  % \end{pmat}                                \\                            
   &\grstep[-(1/2)\rho_3+\rho_2]{-\rho_3+\rho_1}    
   \begin{pmat}{rrr|rrr}
     1  &3  &0    &-1/3  &-1/3  &2  \\
@@ -1302,7 +1308,7 @@ we apply those operations also on the right.
     0  &0  &1    &4/3   &1/3   &-2
   \end{pmat}                                
 \end{align*}
-We have calculated that this is the inverse.
+This is the inverse.
 \begin{equation*}
   A^{-1}=
   \begin{mat}
