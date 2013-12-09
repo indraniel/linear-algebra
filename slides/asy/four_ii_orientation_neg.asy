@@ -31,7 +31,7 @@ triple v3=(0,-1,2);
 path3 parallelogram=(0,0,0)--v1--(v1+v2)--v2--cycle;
 
 // Draw
-draw(surface(parallelogram),rgb("fff0ca"));
+draw(surface(parallelogram),rgb("fff0ca")+opacity(0.3),nolight);
 draw((0,0,0)--v1,VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
 draw(v1--(v1+v2),VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
 draw((v1+v2)--v2,VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
@@ -47,14 +47,14 @@ draw((0,0,0)--(-1*v3),VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDra
 label("{\scriptsize $-\vec{v}_3$}",-1*v3,W);
 
 int output_suffix;
-for(int i=3; i > -5; --i) {
-  currentprojection=orthographic(camera=(20,4,i),target=(0,0,0));
-  if (i>=0) {
-    currentlight=(5,5,20);
-  } else {
-    currentlight=(5,5,-20);
-  }
-  output_suffix=3-i;
+for(int i=5; i > -6; --i) {
+  currentprojection=orthographic(camera=(20,4,2*i),target=(0,0,0));
+  // if (i>=0) {
+  //   currentlight=(5,5,-20);
+  // } else {
+  //   currentlight=(5,5,20);
+  // }
+  output_suffix=5-i;
   shipout(format("four_ii_orientation_neg%d",output_suffix));
 }
 

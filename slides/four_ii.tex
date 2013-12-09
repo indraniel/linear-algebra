@@ -62,10 +62,10 @@ This parallelogram is defined by the two vectors.
 \ExecuteMetaData[../det2.tex]{df:Box}
 
 \medskip
-The box is like the span, except that the scalars are from the unit 
+The box is a subset the span, with  the scalars limited to the unit 
 interval. 
 \end{frame}
-\begin{frame}{Area of a two dimensional box}
+\begin{frame}{Area of a box}
 \centergraphic{../ch4.31}
 \begin{align*}
   \text{box area}
@@ -75,7 +75,7 @@ interval.
   &=x_1y_2-x_2y_1        
 \end{align*}
 \pause
-That area equals the value of the determinant.
+We recognize that as the value of the determinant.
 \begin{equation*}
   \begin{vmat}
     x_1  &x_2  \\
@@ -85,21 +85,22 @@ That area equals the value of the determinant.
 \end{equation*}
 \end{frame}
 \begin{frame}
-We will argue here that
-the properties of determinants 
+We will argue that
+the conditions in the definition of determinants 
 make good postulates for a function 
 that gives the size of the box formed by the columns of the matrix.  
 
 \pause
-In line with the above use of column vectors,
-in this section we consider the determinant as a function of the columns
-of the matrix.
-Note that because the determinant of a matrix equals 
-the determinant of its transpose, we can change the determinant properties
+In line with that,
+here we will consider the determinant as a function of the columns.
+
+\pause
+Because the determinant of a matrix equals 
+the determinant of its transpose, we can change the determinant conditions
 from statements about rows to statements about columns.
-For instance, the first property as given earlier says that a
-determinant is unaffected by a row operation $k\rho_i+\rho_j$ (with $i\neq j$).
-By transposing we have the property that a determinant
+For instance, the first condition is that a
+determinant is unaffected by a row operation $k\rho_i+\rho_j$ with $i\neq j$.
+By transposing we have that a determinant
 does not change under combinations of columns. 
 \end{frame}
 
@@ -107,9 +108,9 @@ does not change under combinations of columns.
 
 
 \begin{frame}{Definition of determinant reinterpreted}
-Recall property~(3) from the definition of determinant,
+Condition~(3) from the definition of determinant is 
 that rescaling a column rescales the entire determinant
-$\det(\ldots,k\vec{v}_i,\ldots)=k\det(\ldots,\vec{v}_i,\ldots)$.
+$\det(\ldots,k\vec{v}_i,\ldots)=k\cdot\det(\ldots,\vec{v}_i,\ldots)$.
 This fits with the idea that the determinant
 gives the size of the box formed by the columns of the matrix:
 if we scale a column by a factor~$k$ then the size of the box
@@ -123,7 +124,7 @@ scales by that factor.
 % \begin{frame}
 
 \pause
-Property~(1) says that the determinant is unaffected by 
+Condition~(1) is that the determinant is unaffected by 
 combining columns.
 The picture 
 \begin{center}
@@ -133,24 +134,25 @@ The picture
 \end{center}   
 shows that the box
 formed by $\vec{v}$ and~$k\vec{v}+\vec{w}$ 
-is more slanted than the original box but the two have
+is slanted at a different angle than the original box but the two have
 the same base and height, and hence the same area.
 \end{frame}
 \begin{frame}
-As we noted after the definition, property~(2) is a consequence of the 
-other properties so we leave it aside for the moment.  
+As we noted after the definition, condition~(2) is a consequence of the 
+others so we leave it aside for the moment.  
 
-Property~(4) says that the determinant of the identity matrix is~$1$.
+Condition~(4) is that the determinant of the identity matrix is~$1$.
 \centergraphic{../ch4.36}
 \end{frame}
 
 
 
 
-\begin{frame}{Aside: Orientation in two space}
+\begin{frame}{Orientation in two space}
 \re[re:PropertyTwoGivesSign] 
-Although property~(2) is redundant, it says something notable.
+Although condition~(2) is redundant, it says something notable.
 Consider these two.
+Swapping changes the sign.
 \begin{center} \small
   \begin{tabular}{c@{\hspace*{8em}}c}
     \includegraphics{../ch4.37}  
@@ -165,20 +167,22 @@ Consider these two.
         \end{vmat}=-10$
   \end{tabular}
 \end{center}
-Swapping changes the sign;
-on the left we take $\vec{u}$ first in the matrix and then follow the
+In the picture
+on the left, $\vec{u}$ is first in the matrix and then we follow the
 counterclockwise arc to $\vec{v}$,
-following the counterclockwise arc and
-and get a positive size, while
-on the right following the clockwise arc gives a negative size.
-The sign returned by the size function, the determinant, reflects the 
-\definend{orientation}\index{box!orientation}\index{orientation} 
-or \definend{sense}\index{box!sense}\index{sense} of the box.
+and get a positive size.
 \pause
-We see the same thing if we use Property~(3) with a negative scalar.
+On the right following the clockwise arc gives a negative size.
+The sign returned by the size function, the determinant, reflects the 
+\definend{orientation}\index{box!orientation}
+or \definend{sense} of the box.
+
+\pause
+We see the same thing if we use Condition~(3) with a negative scalar.
 \end{frame}
-\begin{frame}{Aside: Orientation in three space} 
-Starting with these two vectors we want to form a box 
+
+\begin{frame}{More on orientation: three space} 
+Starting with these two vectors we want to form a three-space box 
 with positive size.
 \begin{equation*}
   \vec{v}_1=\colvec{1 \\ 4 \\ 1},\,
@@ -221,6 +225,8 @@ give a negative determinant.
     1 &1 &-2
   \end{vmat}=-25
 \end{equation*}
+\only<1-6>{These pictures start above the plane, and the box looks to be oriented clockwise.}
+\only<7->{But from below, the box looks to be oriented counterclockwise.}
 \only<1>{\centergraphic{asy/four_ii_orientation_neg0.pdf}}%
 \only<2>{\centergraphic{asy/four_ii_orientation_neg1.pdf}}%
 \only<3>{\centergraphic{asy/four_ii_orientation_neg2.pdf}}%
@@ -228,7 +234,10 @@ give a negative determinant.
 \only<5>{\centergraphic{asy/four_ii_orientation_neg4.pdf}}%
 \only<6>{\centergraphic{asy/four_ii_orientation_neg5.pdf}}%
 \only<7>{\centergraphic{asy/four_ii_orientation_neg6.pdf}}%
-\only<8->{\centergraphic{asy/four_ii_orientation_neg7.pdf}}%
+\only<8>{\centergraphic{asy/four_ii_orientation_neg7.pdf}}%
+\only<9>{\centergraphic{asy/four_ii_orientation_neg8.pdf}}%
+\only<10>{\centergraphic{asy/four_ii_orientation_neg9.pdf}}%
+\only<11->{\centergraphic{asy/four_ii_orientation_neg10.pdf}}%
 \end{frame}
 
 
@@ -257,7 +266,7 @@ angle~$\theta$ is represented
 by this matrix.
 \begin{equation*}
   T_\theta=
-  \rep{t_\theta}{\stdbasis_2}
+  \rep{t_\theta}{\stdbasis_2,\stdbasis_2}
   =
   \begin{mat}
     \cos\theta  &-\sin\theta \\
@@ -288,10 +297,11 @@ two vectors $s(\vec{v}_1)=\binom{1}{3}$ and
 $s(\vec{v}_2)=\binom{3}{7}$. 
 \begin{center}
   \vcenteredhbox{\includegraphics{asy/four_ii_2dtransedsize0.pdf}}
-  \quad$\mapsunder{s}$\quad
+  \qquad$\underrightarrow{s}$\qquad
   \vcenteredhbox{\includegraphics{asy/four_ii_2dtransedsize1.pdf}}
 \end{center}
-Note the change in orientation.
+Note the change in orientation, matching that the determinant is 
+negative.
 
 \pause
 The two sizes are easy.
@@ -311,7 +321,7 @@ The two sizes are easy.
 \end{frame}
 
 
-\begin{frame}{Determinant of the inverse is the inverse of the determinant}
+\begin{frame}{Determinant of the inverse}
 \co[co:DeterminantOfInverseIsInverseOfDeterminant]  
 \ExecuteMetaData[../det2.tex]{co:DeterminantOfInverseIsInverseOfDeterminant}
 
@@ -329,11 +339,13 @@ The two sizes are easy.
 \ExecuteMetaData[../det2.tex]{df:Volume}
 
 \ex 
-The box formed by thevectors 
+The box formed by the vectors 
 \begin{equation*}
-  \vec{v}_1=\colvec[r]{-1 \\ 1}
-  \quad
-  \vec{v}_2=\colvec{1 \\ 1}
+  \sequence{\vec{v}_1,\vec{v}_2}
+  =\sequence{\colvec[r]{-1 \\ 1},
+             \colvec{1 \\ 1}}
+  \hspace*{4em}
+  \vcenteredhbox{\includegraphics{asy/four_ii_negvolbox.pdf}}
 \end{equation*}
 gives this determinant
 \begin{equation*}
@@ -363,11 +375,9 @@ so its volume is~$2$.
 \begin{center}
  \includegraphics{../ch4.1}
 \end{center}
-
-\pause
-Next we consider expanding only one side of the parallelogram.
 \end{frame}
 \begin{frame}
+Consider expanding only one side of the parallelogram.
 Compare the sizes of these shaded boxes.
 \begin{center}
    \includegraphics{../ch4.2}
@@ -381,6 +391,8 @@ Compare the sizes of these shaded boxes.
 \end{frame}
 \begin{frame}
 \ExecuteMetaData[../cramer.tex]{CramersRuleExample3}
+\pause
+\ExecuteMetaData[../cramer.tex]{CramersRuleExample4}
 \pause
 The symmetric argument for the other side gives this.
 \begin{equation*}
@@ -455,11 +467,9 @@ so $x_2=0/-26=0$.
 \begin{frame}{A caution}
 Cramer's Rule is an interesting application of the geometry 
 that we have developed.
-And it allows us to mentally solve small systems, those with
-two or three variables.
-
-\pause
-But it is a poor choice for systems having many variables.
+And it allows us to mentally solve systems with
+two or three variables that use simple numbers.
+But don't use it for systems having many variables.
 Taking a determinant of a general large matrix is very slow.   
 \end{frame}
 

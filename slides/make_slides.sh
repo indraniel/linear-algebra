@@ -149,8 +149,8 @@ then
      eval $result
   done
 
-  # Converting over from png to pdf without 3d stuff
-  declare -a pdf_out_files=("three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation"  "four_ii_orientation_pos" "four_ii_orientation_neg")
+  # pdf's without 3d manipulatable
+  declare -a pdf_out_files=("three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation"  "four_ii_orientation_pos" "four_ii_orientation_neg four_ii_negvolbox")
   cmd="asy -f pdf filename"  # will substitute for "filename"
 
   for i in ${pdf_out_files[@]}
