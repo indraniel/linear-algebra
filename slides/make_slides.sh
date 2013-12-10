@@ -207,7 +207,7 @@ then
   beamer_files="${four_files[@]}"
 elif [[ $FIVE ]] 
 then
-  beamer_files="${file_files[@]}"
+  beamer_files="${five_files[@]}"
 else
   beamer_files=("${one_files[@]}" "${two_files[@]}" "${three_files[@]}" "${four_files[@]}" "${five_files[@]}" )
 fi
