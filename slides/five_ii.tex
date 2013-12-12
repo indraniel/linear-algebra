@@ -67,29 +67,30 @@
 Consider the derivative map $\map{d/dx}{\polyspace_2}{\polyspace_2}$.
 Fix the basis $B=\sequence{1,x,x^2}$ 
 and the basis $D=\sequence{1,1+x,1+x+x^2}$.
-In this arrow diagram we will first get $S$, and then calculate $T$ from it.
+In this arrow diagram we will first get $T$, and then calculate $\hat{T}$ 
+from it.
 \begin{equation*}
   \begin{CD}
-    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
+    V_{\wrt{B}}                   @>t>T>        V_{\wrt{B}}       \\
     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+    V_{\wrt{D}}                   @>t>\hat{T}>        V_{\wrt{D}}
   \end{CD}
 \end{equation*}
 \pause
 The action of $d/dx$ on the 
 elements of the basis $B$ is $1\mapsto 0$, $x\mapsto 1$, and $x^2\mapsto 2x$.
 \begin{equation*}
-  \rep{d/dx(1)}{B}=\colvec{0 \\ 0 \\ 0}
-  \quad
-  \rep{d/dx(x)}{B}=\colvec{1 \\ 0 \\ 0}
-  \quad
-  \rep{d/dx(x^2)}{B}=\colvec{0 \\ 2 \\ 0}
+  \rep{\frac{d}{dx}(1)}{B}=\colvec{0 \\ 0 \\ 0}
+  \hspace{0.8em}
+  \rep{\frac{d}{dx}(x)}{B}=\colvec{1 \\ 0 \\ 0}
+  \hspace{0.8em}
+  \rep{\frac{d}{dx}(x^2)}{B}=\colvec{0 \\ 2 \\ 0}
 \end{equation*}
 \end{frame}
 \begin{frame}
 So we have this matrix representation of the map.
 \begin{equation*}
-  S=\rep{d/dx}{B,B}=
+  T=\rep{\frac{d}{dx}}{B,B}=
   \begin{mat}
     0 &1 &0 \\
     0 &0 &2 \\
@@ -97,7 +98,7 @@ So we have this matrix representation of the map.
   \end{mat}
 \end{equation*}
 \pause
-Recall that the matrix changing bases from $B$ to $D$ is $\rep{\identity}{B,D}$.
+The matrix changing bases from $B$ to $D$ is $\rep{\identity}{B,D}$.
 We find these by eye
 \begin{equation*}
   \rep{1}{D}=\colvec{1 \\ 0 \\ 0}
@@ -122,9 +123,9 @@ to get this.
     0 &0  &1
   \end{mat}
 \end{equation*}
-Now, by following the arrow diagram we have $T=PSP^{-1}$.
+Now, by following the arrow diagram we have $\hat{T}=PTP^{-1}$.
 \begin{equation*}
-  T=
+  \hat{T}=
   \begin{mat}
     0 &1 &-1 \\
     0 &0 &2  \\
@@ -133,15 +134,15 @@ Now, by following the arrow diagram we have $T=PSP^{-1}$.
 \end{equation*}
 \end{frame}
 \begin{frame}
-We underline what the arrow diagram says 
+To check that, and to underline what the arrow diagram says, 
 \begin{equation*}
   \begin{CD}
-    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
+    V_{\wrt{B}}                   @>t>T>        V_{\wrt{B}}       \\
     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+    V_{\wrt{D}}                   @>t>\hat{T}>        V_{\wrt{D}}
   \end{CD}
 \end{equation*}
-by calculating $T$ directly.
+we calculating $T$ directly.
 The effect of the map on the basis elements is 
 $d/dx(1)=0$, $d/dx(1+x)=1$, and $d/dx(1+x+x^2)=1+2x$.
 Representing of those with respect to $D$
@@ -152,16 +153,16 @@ Representing of those with respect to $D$
   \quad
   \rep{1+2x}{D}=\colvec{-1 \\ 2 \\ 0}
 \end{equation*}
-gives the same matrix $\rep{d/dx}{D,D}$ as we found above.
+gives the same matrix $\hat{T}=\rep{d/dx}{D,D}$ as we found above.
 \end{frame}
 \begin{frame}
-We don't need to consider the underlying maps.
+The definition doesn't require that we consider the underlying maps.
 We can just multiply matrices.  
 
 \ex
 Where 
 \begin{equation*}
-  S=
+  T=
   \begin{mat}
     0 &-1 &-2 \\
     2 &3 &2   \\
@@ -175,9 +176,9 @@ Where
     0 &0 &3
   \end{mat}
 \end{equation*}
-(note that $P$ is nonsingular) we can compute this $T=PSP^{-1}$.
+(note that $P$ is nonsingular) we can compute this $\hat{T}=PTP^{-1}$.
 \begin{equation*}
-  T=
+  \hat{T}=
   \begin{mat}
     2   &0   &0 \\
     3   &1   &4/3 \\
@@ -202,7 +203,9 @@ if two matrices are similar then they are matrix equivalent.
 What about the converse:~must any two matrix equivalent square matrices be 
 similar?
 No; the matrix equivalence class
-of an identity consists of all nonsingular matrices of that size. 
+of an identity consists of all nonsingular matrices of that size wile the 
+prior example shows that an identity matrix is alone in its similarity
+class. 
 
 \pause
 So some matrix equivalence classes
@@ -252,9 +255,9 @@ is diagonalizable by using this
     2 &1 &1
   \end{mat}
 \end{equation*}
-to get this $T=PSP^{-1}$.
+to get this $D=PSP^{-1}$.
 \begin{equation*}
-  T=
+  D=
   \begin{mat}
     4 &0 &0 \\
     0 &8 &0 \\
@@ -280,6 +283,238 @@ to get this $T=PSP^{-1}$.
 \qed
 \end{frame}
 
+\begin{frame}
+\ex
+This matrix is not diagonal because of the nonzero entry in the upper right.
+\begin{equation*}
+  T=
+  \begin{mat}
+    4  &1  \\
+    0  &-1
+  \end{mat}
+\end{equation*}
+We will find a diagonal matrix similar to it.
+
+\pause
+Suppose $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ for $\map{t}{\Re^2}{\Re^2}$.
+We want a basis $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$ giving a 
+diagonal rempresentation
+\begin{equation*}
+  D=\rep{t}{B,B}=
+  \begin{mat}
+    \lambda_1  &0 \\
+    0    &\lambda_2
+  \end{mat}
+\end{equation*}
+Here is the arrow diagram.
+\begin{equation*}
+  \begin{CD}
+    V_{\wrt{\stdbasis_2}}            @>t>T>        V_{\wrt{\stdbasis_2}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    V_{\wrt{B}}                   @>t>D>        V_{\wrt{B}}
+  \end{CD}
+\end{equation*}
+\end{frame}
+\begin{frame}
+We want $\lambda_1$ and $\lambda_2$ making these true.
+\begin{equation*}
+  \begin{mat}
+    4  &1  \\
+    0  &-1    
+  \end{mat}
+  \vec{\beta}_1
+  =\lambda_1\cdot\vec{\beta}_1
+  \qquad
+  \begin{mat}
+    4  &1  \\
+    0  &-1    
+  \end{mat}
+  \vec{\beta}_2
+  =\lambda_2\cdot\vec{\beta}_2
+\end{equation*}
+More precisely, 
+we want to solve this system for scalars $x\in\C$ such that this system
+\begin{equation*}
+  \begin{mat}
+    4  &1  \\
+    0  &-1    
+  \end{mat}
+  \colvec{b_1 \\ b_2}
+  =x\colvec{b_1 \\ b_2}
+\end{equation*}
+has solutions $b_1,b_2\in\C$ that are not both zero
+(the zero vector is not an element of any basis).
+% \end{frame}
+% \begin{frame}
+
+\pause
+Rewrite it as a linear system.
+\begin{equation*}
+  \begin{linsys}{2}
+    (4-x)\cdot b_1 &+ &b_2             &= &0 \\
+                   &  &(-1-x)\cdot b_2 &= &0 
+  \end{linsys}
+  % \tag{$*$}
+\end{equation*}
+By eye,
+one solution is $\lambda_1=-1$, associated with
+$(b_1,b_2)$ such that $b_1=(-1/5)b_2$.
+The other solution is $\lambda_2=4$, associated with $(b_1,b_2)$ such that
+$b_2=0$.
+\end{frame}
+\begin{frame}
+Thus the original matrix  
+\begin{equation*}
+  T=
+  \begin{mat}
+    4  &1  \\
+    0  &-1
+  \end{mat}
+\end{equation*}
+is diagonalizable to
+\begin{equation*}
+  D=
+  \begin{mat}[r]
+    -1  &0  \\
+    0  &4
+  \end{mat}
+\end{equation*}
+where this is a basis.
+\begin{equation*}
+  B=\sequence{\colvec{-1 \\ 5},
+              \colvec{1 \\ 0}}
+\end{equation*}
+\end{frame}
+
+% --
+
+% \begin{frame}
+% \ex
+% Consider the matrix
+% \begin{equation*}
+%   T=
+%   \begin{mat}
+%     3  &1  \\
+%     1  &3
+%   \end{mat}
+% \end{equation*}
+% Suppose $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ for $\map{t}{\Re^2}{\Re^2}$.
+% We want a basis $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$ such that
+% the matrix $\rep{t}{B,B}$ is diagonal.
+% That is, we want this.
+% \begin{equation*}
+%   \rep{t}{B,B}=
+%   \begin{mat}
+%     \lambda_1  &0 \\
+%     0    &\lambda_2
+%   \end{mat}
+% \end{equation*}
+% \pause
+% So we want to find $\lambda_1$ and $\lambda_2$ making these two true.
+% \begin{equation*}
+%   \begin{mat}
+%     3  &1  \\
+%     1  &3    
+%   \end{mat}
+%   \vec{\beta}_1
+%   =\lambda_1\vec{\beta}_1
+%   \qquad
+%   \begin{mat}
+%     3  &1  \\
+%     1  &3    
+%   \end{mat}
+%   \vec{\beta}_2
+%   =\lambda_2\vec{\beta}_2
+% \end{equation*}
+% \end{frame}
+% \begin{frame}
+% \noindent We want scalars $x\in\C$ such that this system
+% \begin{equation*}
+%   \begin{mat}
+%     3  &1  \\
+%     1  &3    
+%   \end{mat}
+%   \colvec{b_1 \\ b_2}
+%   =x\colvec{b_1 \\ b_2}
+% \end{equation*}
+% has solutions $b_1,b_2\in\C$ that are not both zero
+% (the zero vector is not an element of any basis).
+% \pause
+% The system
+% \begin{equation*}
+%   \begin{linsys}{2}
+%     (3-x)\cdot b_1 &+ &b_2            &= &0 \\
+%     b_1            &+ &(3-x)\cdot b_2 &= &0 
+%   \end{linsys}
+%   \tag{$*$}
+% \end{equation*}
+% has a solution if this determinant is nonzero.
+% \begin{equation*}
+%   \begin{vmat}
+%     3-x  &1  \\
+%     1    &3-x
+%   \end{vmat}
+%   =x^2-6x+8
+%   =(x-2)(x-4)
+% \end{equation*}
+% \pause
+% To compute a basis consider first the $x=2$ version of~($*$).
+% \begin{equation*}
+%   \begin{linsys}{2}
+%     1\cdot b_1 &+ &b_2        &= &0 \\
+%     b_1        &+ &1\cdot b_2 &= &0 
+%   \end{linsys}
+%   \quad\Longrightarrow\quad
+%   b_1=-b_2
+% \end{equation*}
+% For instance we can take $b_1=1$ and $b_2=-1$.
+% \end{frame}
+% \begin{frame}\vspace*{-1ex}
+% \noindent To get a second basis vector do the $x=4$ version of~($*$).
+% \begin{equation*}
+%   \begin{linsys}{2}
+%     -1\cdot b_1 &+ &b_2        &= &0 \\
+%     b_1        &- &1\cdot b_2 &= &0 
+%   \end{linsys}
+%   \quad\Longrightarrow\quad
+%   b_1=b_2
+% \end{equation*}
+% We can take $b_1=b_2=1$.
+% \pause
+% Thus the original matrix  
+% \begin{equation*}
+%   T=
+%   \begin{mat}
+%     3  &1  \\
+%     1  &3
+%   \end{mat}
+% \end{equation*}
+% is diagonalizable to
+% \begin{equation*}
+%   D=
+%   \begin{mat}
+%     2  &0  \\
+%     0  &4
+%   \end{mat}
+% \end{equation*}
+% and where
+% \begin{equation*}
+%   P=
+%   \begin{mat}[r]
+%     1 &1 \\
+%    -1 &1
+%   \end{mat}
+% \end{equation*}
+% the arrow diagram
+% \begin{equation*}
+%   \begin{CD}
+%     V_{\wrt{\stdbasis_2}}            @>t>T>        V_{\wrt{\stdbasis_2}}       \\
+%     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+%     V_{\wrt{B}}                   @>t>D>        V_{\wrt{B}}
+%   \end{CD}
+% \end{equation*}
+% gives that we have $D=P^{-1}TP$. 
+% \end{frame}
 
 
 
@@ -293,15 +528,107 @@ to get this $T=PSP^{-1}$.
 \df[df:EigenOfMatrix]
 \ExecuteMetaData[../jc2.tex]{df:EigenOfMatrix}  
 
-\no
+\ex
+The matrix
+\begin{equation*}
+  D=
+  \begin{mat}
+    2  &0 \\
+    0  &4  
+  \end{mat}
+\end{equation*}
+has an eigenvalue $\lambda_1=2$ and another eigenvalue $\lambda_2=4$.
+We can verify the first by noting that an associated eigenvector is
+$\vec{e_1}$
+\begin{equation*}
+  \begin{mat}
+    2  &0 \\
+    0  &4  
+  \end{mat}
+  \colvec{1 \\ 0}
+  =
+  2\cdot\colvec{1 \\ 0}  
+\end{equation*}
+and similarly the second is true because an associated eigenvector
+is $e_2$.
+\begin{equation*}
+  \begin{mat}
+    2  &0 \\
+    0  &4  
+  \end{mat}
+  \colvec{0 \\ 1}
+  =
+  4\cdot\colvec{0 \\ 1}  
+\end{equation*}
+\end{frame}
+\begin{frame}
+\ex
+The matrix
+\begin{equation*}
+  \begin{mat}
+    3  &1  \\
+    1  &3
+  \end{mat}
+\end{equation*}
+also has the eigenvalues $\lambda_1=2$ and $\lambda_2=4$.
+\begin{equation*}
+  \begin{mat}
+    3  &1  \\
+    1  &3
+  \end{mat}
+  \colvec{1 \\ -1}
+  =
+  \colvec{2 \\ -2}
+  \qquad
+  \begin{mat}
+    3  &1  \\
+    1  &3
+  \end{mat}
+  \colvec{1 \\ 1}
+  =
+  \colvec{4 \\ 4}
+\end{equation*}
+\pause
+More generally we have this.
+\begin{equation*}
+  \begin{mat}
+    3  &1  \\
+    1  &3
+  \end{mat}
+  \colvec{s \\ -s}
+  =
+  2\cdot
+  \colvec{s \\ -s}
+  \qquad
+  \begin{mat}
+    3  &1  \\
+    1  &3
+  \end{mat}
+  \colvec{t \\ t}
+  =
+  4\cdot
+  \colvec{t \\ t}
+\end{equation*}
+Thinking of the matrix as representing a transformation of the plane,
+the transformation acts on those vectors in a particularly simple way, 
+by rescaling.
+\end{frame}
+
+
+
+\begin{frame}
 Similar matrices have the same eigenvalues, because
 eigenvalues of a map are also the eigenvalues of matrices representing
 that map.
-But similar matrices can have different eigenvectors.
+
+\pause
+However, 
+similar matrices need not have the same eigenvectors.
 % \end{frame}
 % \begin{frame}
+\medskip
 \ex
-Recall the example from the prior subsection that these two are similar.
+These two are similar since $T=PSP^{-1}$.
 \begin{equation*}
   S=
   \begin{mat}
@@ -317,7 +644,7 @@ Recall the example from the prior subsection that these two are similar.
     0 &0 &12
   \end{mat}
 \end{equation*}
-since $T=PSP^{-1}$ for this $P$.
+for this $P$.
 \begin{equation*}
   P=
   \begin{mat}
@@ -333,43 +660,49 @@ since $T=PSP^{-1}$ for this $P$.
     2 &1 &1
   \end{mat}
 \end{equation*}
+So they have the same eigenvalues.
+But they don't have the same eigenvectors.
 \end{frame}
 \begin{frame}
-Fix the vector space $\C^3$ and suppose that $\map{t}{\C^3}{\C^3}$ is the
-transformation represented by $T$ with respect to the standard basis
-$T=\rep{t}{\stdbasis_3,\stdbasis_3}$.
+\noindent Suppose that $\map{t}{\C^3}{\C^3}$ is
+represented by $T$ with respect to the standard basis.
 Then this is the action of $t$.
 \begin{equation*}
   \colvec{x \\ y \\ z}\mapsunder{t}\colvec{4x \\ 8y  \\ 12z}
 \end{equation*}
 \pause
 By eye we see that the  
-eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, $\lambda_3=12$
-and where
+eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, $\lambda_3=12$.
+Further, where
 \begin{equation*}
-  V_1=\set{\colvec{1 \\ 0 \\ 0}a\suchthat a\in\Re},\quad
-  V_2=\set{\colvec{0 \\ 1 \\ 0}b\suchthat b\in\Re},\quad
-  V_3=\set{\colvec{0 \\ 0 \\ 1}c\suchthat c\in\Re}
+  V_1=\set{\colvec{a \\ 0 \\ 0}\suchthat a\in\C}\quad
+  V_2=\set{\colvec{0 \\ b \\ 0}\suchthat b\in\C}\quad
+  V_3=\set{\colvec{0 \\ 0 \\ c}\suchthat c\in\C}
 \end{equation*}
-any nonzero member of~$V_1$ is an eigenvector associated with the eigenvalue
-$\lambda_1=4$, etc.
-\begin{equation*}
-  \vec{v}_1=\colvec{100 \\ 0 \\ 0}\mapsunder{t}\colvec{400 \\ 0 \\ 0}=t(\vec{v}_1)
-\end{equation*}
+then
+any nonzero member of~$V_1$ is an eigenvector associated with the 
+eigenvalue~$4$, 
+any nonzero member of~$V_2$ is an eigenvector associated with the 
+eigenvalue~$8$, 
+and any nonzero member of~$V_3$ is associated with~$12$. 
+% \begin{equation*}
+%   \vec{v}_1=\colvec{100 \\ 0 \\ 0}\mapsunder{t}\colvec{400 \\ 0 \\ 0}=t(\vec{v}_1)
+% \end{equation*}
 \end{frame}
 \begin{frame}
-Recall that $T=PSP^{-1}$, which we can picture as  
+\noindent Picture $T=PSP^{-1}$ as here.  
 \begin{equation*}
   \begin{CD}
     V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+    V_{\wrt{\stdbasis_3}}            @>t>T>        V_{\wrt{\stdbasis_3}}
   \end{CD}
 \end{equation*}
-where $P$ is the matrix that changes basis from $B$ to~$D$.
-In this example we have fixed $D=\stdbasis_3$ so we next find~$B$.
-We know that $P=\rep{\identity}{B,D}$ so its first column is 
-$\rep{\identity(\vec{\beta}_1)}{D}=\rep{\vec{\beta}_1}{\stdbasis_3}=\vec{\beta}_1$, and the same holds for its other columns.
+We next give the basis~$B$.
+Since $P=\rep{\identity}{B,\stdbasis_3}$, its first column is 
+$\rep{\identity(\vec{\beta}_1)}{\stdbasis_3}=\vec{\beta}_1$
+and with respect to the standard basis, any matrix is represented by itself.
+The same goes for the other two columns and we have this.
 \begin{equation*}
   B=\sequence{\colvec{1/2 \\ -1/2 \\ -1/2},
               \colvec{1/4 \\ 1/4 \\ -3/4},

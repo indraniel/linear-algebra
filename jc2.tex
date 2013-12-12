@@ -28,9 +28,9 @@ So, we are considering representations with respect to
 $B,B$ and $D,D$.\index{arrow diagram}
 \begin{equation*}
   \begin{CD}
-    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
+    V_{\wrt{B}}                   @>t>T>        V_{\wrt{B}}       \\
     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_{\wrt{D}}                   @>t>T>        V_{\wrt{D}}
+    V_{\wrt{D}}                   @>t>\hat{T}>        V_{\wrt{D}}
   \end{CD}
 \end{equation*}
 In matrix terms, 
@@ -43,18 +43,18 @@ In matrix terms,
 \subsection{Definition and Examples}
 \begin{definition} \label{df:Similar}
 %<*df:Similar>
-The matrices  \( T \) and $S$ are 
+The matrices  \( T \) and $\hat{T}$ are 
 \definend{similar}\index{matrix!similarity}%
 \index{equivalence relation!matrix similarity}\index{similar matrices}
 if there is a nonsingular \( P \) such that
 $
-  T=PSP^{-1}
+  \hat{T}=PTP^{-1}
 $.
 %</df:Similar>
 \end{definition}
 
 \noindent Since nonsingular matrices are square, 
-$T$ and $S$ must
+$T$ and $\hat{T}$ must
 be square and of the same size.
 \nearbyexercise{exer:SimIsEquivRel} checks that
 similarity is an equivalence relation.
@@ -68,15 +68,15 @@ Calculation with these two
     1  &1
   \end{mat}
   \qquad
-  S=
+  T=
   \begin{mat}[r]
     2  &-3  \\
     1  &-1
   \end{mat}
 \end{equation*}
-gives that $S$ is similar to this matrix.
+gives that $T$ is similar to this matrix.
 \begin{equation*}
-  T=
+  \hat{T}=
   \begin{mat}[r]
     12  &-19  \\
     7  &-11
@@ -93,8 +93,8 @@ The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
 
 Matrix similarity is a special case of matrix equivalence so 
 if two matrices are similar then they are matrix equivalent.
-What about the converse:~must any two matrix equivalent square matrices be 
-similar?
+What about the converse:~if they are square, 
+must any two matrix equivalent matrices be similar?
 No; the matrix equivalence class
 of an identity matrix consists of all nonsingular matrices of that size
 while the prior example shows that the only member of the similarity class 
@@ -143,13 +143,13 @@ if and only if they have the same rank).
   \item 
     For
     \begin{equation*}
-      S=
+      T=
       \begin{mat}[r]
         1  &3  \\
        -2  &-6
       \end{mat}
       \quad
-      T=
+      \hat{T}=
       \begin{mat}[r]
         0    &0  \\
        -11/2 &-5
@@ -161,11 +161,11 @@ if and only if they have the same rank).
        -3  &2
       \end{mat}
     \end{equation*}
-    check that $T=PSP^{-1}$.
+    check that $\hat{T}=PTP^{-1}$.
     \begin{answer}
       One way to proceed is left to right.
       \begin{equation*}
-        PSP^{-1}=
+        PTP^{-1}=
         \begin{mat}[r]
           4  &2  \\
          -3  &2
@@ -200,8 +200,8 @@ if and only if they have the same rank).
     the only matrix similar to the identity
     is itself.
     \begin{exparts}
-      \partsitem Show that the $\nbyn{1}$ matrix $(2)$,
-         also, is similar only to itself.
+      \partsitem Show that the $\nbyn{1}$ matrix whose single entry is $2$
+         is also similar only to itself.
       \partsitem Is a matrix of the form $cI$ for some scalar $c$
          similar only to itself?
      \partsitem Is a diagonal matrix similar only to itself?
@@ -266,8 +266,8 @@ if and only if they have the same rank).
     $x^2\mapsto x+1$, $x\mapsto x^2-1$, and $1\mapsto 3$.
     \begin{exparts}
       \partsitem Find $T=\rep{t}{B,B}$ where $B=\sequence{x^2,x,1}$. 
-      \partsitem Find $S=\rep{t}{D,D}$ where $D=\sequence{1,1+x,1+x+x^2}$. 
-      \partsitem Find the matrix $P$ such that $T=PSP^{-1}$. 
+      \partsitem Find $\hat{T}=\rep{t}{D,D}$ where $D=\sequence{1,1+x,1+x+x^2}$.
+      \partsitem Find the matrix $P$ such that $\hat{T}=PTP^{-1}$. 
     \end{exparts}
     \begin{answer}
       \begin{exparts}
@@ -311,17 +311,25 @@ if and only if they have the same rank).
               0  &1  &1
             \end{mat}
           \end{equation*}
-         \partsitem The diagram, adapted for this $T$ and $S$,
+         \partsitem The diagram
            \begin{equation*}
              \begin{CD}
-               V_{\wrt{D}}                  @>t>S>  V_{\wrt{D}}       \\
+               V_{\wrt{B}}                  @>t>T>  V_{\wrt{B}}       \\
                @V\scriptstyle\identity VPV      @V\scriptstyle\identity VPV \\
-               V_{\wrt{B}}                  @>t>T>  V_{\wrt{B}}
+               V_{\wrt{D}}                  @>t>\hat{T}>  V_{\wrt{D}}
              \end{CD}
            \end{equation*}
-           shows that $P=\rep{\identity}{D,B}$.
+           shows that these are $P=\rep{\identity}{B,D}$ and 
+           $P^{-1}=\rep{\identity}{D,B}$.
            \begin{equation*}
              P=
+             \begin{mat}[r]
+               0  &-1  &1  \\ 
+               -1  &1  &0  \\
+               1  &0  &0 
+             \end{mat}
+             \qquad
+             P^{-1}=
              \begin{mat}[r]
                0  &0  &1  \\ 
                0  &1  &1  \\
@@ -332,15 +340,15 @@ if and only if they have the same rank).
     \end{answer}
   \recommended \item
      Exhibit an nontrivial similarity relationship in this way:~let
-     \( \map{t}{\C^2}{\C^2} \) act by
+     \( \map{t}{\C^2}{\C^2} \) act in this way,
      \begin{equation*}
         \colvec[r]{1 \\ 2}\mapsto\colvec[r]{3 \\ 0}
         \qquad
         \colvec[r]{-1 \\ 1}\mapsto\colvec[r]{-1 \\ 2}
      \end{equation*}
      and pick two bases,
-     and represent \( t \) with respect to then
-     \( T=\rep{t}{B,B} \) and \( S=\rep{t}{D,D} \).
+     and represent \( t \) with respect to them
+     \( \hat{T}=\rep{t}{B,B} \) and \( T=\rep{t}{D,D} \).
      Then compute 
      the \( P \) and \( P^{-1} \) to change bases from \( B \) to \( D \) and
      back again.
@@ -352,7 +360,7 @@ if and only if they have the same rank).
          D=\stdbasis_2=\sequence{\colvec[r]{1 \\ 0},\colvec[r]{0 \\ 1}}
        \end{equation*}
        (this $B$ comes from the map description).
-       To find the matrix $T=\rep{t}{B,B}$, solve the relations 
+       To find the matrix $\hat{T}=\rep{t}{B,B}$, solve the relations 
        \begin{equation*}
           c_1\colvec[r]{1 \\ 2}+c_2\colvec[r]{-1 \\ 1}=\colvec[r]{3 \\ 0}
           \qquad
@@ -501,16 +509,20 @@ if and only if they have the same rank).
     \end{answer}
   \recommended \item \label{exer:SimIsEquivRel}
     Show that similarity is an equivalence relation.
+    (The definition given earlier already reflects this, so 
+    instead start here with the definition that $\hat{T}$ is similar to
+    $T$ if $\hat{T}=PTP^{-1}$.)
     \begin{answer}
        A matrix is similar to itself; take \( P \) to be the identity
-       matrix:~$IPI^{-1}=IPI=P$.
+       matrix:~$P=IPI^{-1}=IPI$.
 
-       If \( T \) is similar to \( S \) then \( T=PSP^{-1} \)
-       and so \( P^{-1}TP=S \).
-       Rewrite this as \( S=(P^{-1})T(P^{-1})^{-1} \) to conclude that
-       $S$ is similar to \( T \).
+       If \( \hat{T} \) is similar to \( T \) then \( \hat{T}=PTP^{-1} \)
+       and so \( P^{-1}\hat{T}P=T \).
+       Rewrite \( T=(P^{-1})\hat{T}(P^{-1})^{-1} \) to conclude that
+       $T$ is similar to \( \hat{T} \).
 
-       If \( T \) is similar to \( S \) and \( S \) is similar to \( U \)
+       For transitivity,
+       if \( T \) is similar to \( S \) and \( S \) is similar to \( U \)
        then \( T=PSP^{-1} \) and \( S=QUQ^{-1} \).
        Then \( T=PQUQ^{-1}P^{-1}=(PQ)U(PQ)^{-1} \), showing that \( T \)
        is similar to \( U \).  
@@ -914,28 +926,32 @@ is diagonalizable.
 
 \begin{example}
 %<*ex:NotDiagonalizable>
-This matrix is not diagonalizable
+We will show that this matrix is not diagonalizable.
 \begin{equation*}
   N=\begin{mat}[r]
        0  &0  \\
        1  &0
     \end{mat}
 \end{equation*}
-because it is not the zero matrix 
-but its square is the zero matrix.
 The fact that $N$ is not the zero matrix means that it cannot be similar to
-the zero matrix, by \nearbyexample{ex:OnlyZeroSimToZero}.
-So if $N$ is similar to a diagonal matrix $D$ then $D$ has at least one
-nonzero entry on its diagonal.
-The fact that the square of $N$ is the zero matrix means that
-for any map~$n$ that \( N \) represents, 
+the zero matrix, because the zero matrix is similar only to itself.
+Thus if $N$ were to be similar to a diagonal matrix then that 
+matrix would have have at least one nonzero entry on its diagonal.
+
+The square of $N$ is the zero matrix.
+This imples that for any map~$n$ represented by \( N \) 
+(with respect to some $B,B$) 
 the composition \( \composed{n}{n} \) is the zero map.
-The only matrix representing the zero map is the zero matrix and
-thus $D^2$ would have to be the zero matrix.
+This in turn implies that
+for any matrix representing~$n$ 
+(with respect to some $\hat{B},\hat{B}$), its square is the zero matrix.
 But the square of a nonzero diagonal matrix 
-cannot be the zero matrix because the square of a diagonal
+cannot be the zero matrix, because the square of a diagonal
 matrix is the diagonal matrix whose entries are the squares of the entries 
-from the starting matrix, and $D$ is not the zero matrix.
+from the starting matrix. 
+Thus there is no $\hat{B},\hat{B}$ such that $n$ is represented by 
+a diagonal matrix\Dash 
+the matrix $N$ is not diagonalizable.
 %</ex:NotDiagonalizable>
 \end{example}
 
