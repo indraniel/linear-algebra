@@ -293,12 +293,12 @@ This matrix is not diagonal because of the nonzero entry in the upper right.
     0  &-1
   \end{mat}
 \end{equation*}
-We will find a diagonal matrix similar to it.
+We will find a diagonal matrix similar to it by finding an appropriate basis.
 
 \pause
 Suppose $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ for $\map{t}{\Re^2}{\Re^2}$.
-We want a basis $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$ giving a 
-diagonal rempresentation
+We will find a basis $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$ giving a 
+diagonal representation.
 \begin{equation*}
   D=\rep{t}{B,B}=
   \begin{mat}
@@ -333,14 +333,14 @@ We want $\lambda_1$ and $\lambda_2$ making these true.
   =\lambda_2\cdot\vec{\beta}_2
 \end{equation*}
 More precisely, 
-we want to solve this system for scalars $x\in\C$ such that this system
+we want all scalars $x\in\C$ such that this system
 \begin{equation*}
   \begin{mat}
     4  &1  \\
     0  &-1    
   \end{mat}
   \colvec{b_1 \\ b_2}
-  =x\colvec{b_1 \\ b_2}
+  =x\cdot\colvec{b_1 \\ b_2}
 \end{equation*}
 has solutions $b_1,b_2\in\C$ that are not both zero
 (the zero vector is not an element of any basis).
@@ -348,7 +348,7 @@ has solutions $b_1,b_2\in\C$ that are not both zero
 % \begin{frame}
 
 \pause
-Rewrite it as a linear system.
+Rewrite that as a linear system.
 \begin{equation*}
   \begin{linsys}{2}
     (4-x)\cdot b_1 &+ &b_2             &= &0 \\
@@ -356,17 +356,17 @@ Rewrite it as a linear system.
   \end{linsys}
   % \tag{$*$}
 \end{equation*}
-By eye,
-one solution is $\lambda_1=-1$, associated with
+One solution is $\lambda_1=-1$, associated with those
 $(b_1,b_2)$ such that $b_1=(-1/5)b_2$.
-The other solution is $\lambda_2=4$, associated with $(b_1,b_2)$ such that
+The other solution is $\lambda_2=4$, associated with the
+$(b_1,b_2)$ such that
 $b_2=0$.
 \end{frame}
 \begin{frame}
 Thus the original matrix  
 \begin{equation*}
   T=
-  \begin{mat}
+  \begin{mat}[r]
     4  &1  \\
     0  &-1
   \end{mat}
@@ -381,7 +381,7 @@ is diagonalizable to
 \end{equation*}
 where this is a basis.
 \begin{equation*}
-  B=\sequence{\colvec{-1 \\ 5},
+  B=\sequence{\colvec[r]{-1 \\ 5},
               \colvec{1 \\ 0}}
 \end{equation*}
 \end{frame}
@@ -533,135 +533,91 @@ The matrix
 \begin{equation*}
   D=
   \begin{mat}
-    2  &0 \\
-    0  &4  
+    4  &0 \\
+    0  &2  
   \end{mat}
 \end{equation*}
-has an eigenvalue $\lambda_1=2$ and another eigenvalue $\lambda_2=4$.
-We can verify the first by noting that an associated eigenvector is
+has one eigenvalue $\lambda_1=4$ and a second eigenvalue $\lambda_2=2$.
+The first is true because an associated eigenvector is
 $\vec{e_1}$
 \begin{equation*}
   \begin{mat}
-    2  &0 \\
-    0  &4  
+    4  &0 \\
+    0  &2  
   \end{mat}
   \colvec{1 \\ 0}
   =
-  2\cdot\colvec{1 \\ 0}  
+  4\cdot\colvec{1 \\ 0}  
 \end{equation*}
-and similarly the second is true because an associated eigenvector
+and similarly for the second an associated eigenvector
 is $e_2$.
 \begin{equation*}
   \begin{mat}
-    2  &0 \\
-    0  &4  
+    4  &0 \\
+    0  &2  
   \end{mat}
   \colvec{0 \\ 1}
   =
-  4\cdot\colvec{0 \\ 1}  
+  2\cdot\colvec{0 \\ 1}  
 \end{equation*}
 \end{frame}
 \begin{frame}
-\ex
-The matrix
-\begin{equation*}
-  \begin{mat}
-    3  &1  \\
-    1  &3
-  \end{mat}
-\end{equation*}
-also has the eigenvalues $\lambda_1=2$ and $\lambda_2=4$.
-\begin{equation*}
-  \begin{mat}
-    3  &1  \\
-    1  &3
-  \end{mat}
-  \colvec{1 \\ -1}
-  =
-  \colvec{2 \\ -2}
-  \qquad
-  \begin{mat}
-    3  &1  \\
-    1  &3
-  \end{mat}
-  \colvec{1 \\ 1}
-  =
-  \colvec{4 \\ 4}
-\end{equation*}
-\pause
-More generally we have this.
-\begin{equation*}
-  \begin{mat}
-    3  &1  \\
-    1  &3
-  \end{mat}
-  \colvec{s \\ -s}
-  =
-  2\cdot
-  \colvec{s \\ -s}
-  \qquad
-  \begin{mat}
-    3  &1  \\
-    1  &3
-  \end{mat}
-  \colvec{t \\ t}
-  =
-  4\cdot
-  \colvec{t \\ t}
-\end{equation*}
 Thinking of the matrix as representing a transformation of the plane,
 the transformation acts on those vectors in a particularly simple way, 
 by rescaling.
+
+Not every vector is simply rescaled.
+\begin{equation*}
+  \begin{mat}
+    4  &0 \\
+    0  &2  
+  \end{mat}
+  \colvec{1 \\ 1}
+  =\colvec{4 \\ 2}
+  \neq
+  x\cdot\colvec{1 \\ 1}  
+\end{equation*}
 \end{frame}
 
 
 
 \begin{frame}
-Similar matrices have the same eigenvalues, because
-eigenvalues of a map are also the eigenvalues of matrices representing
-that map.
+Matrices that are similar have the same eigenvalues, but
+needn't have the same eigenvectors.
 
-\pause
-However, 
-similar matrices need not have the same eigenvectors.
-% \end{frame}
-% \begin{frame}
-\medskip
 \ex
-These two are similar since $T=PSP^{-1}$.
+These two are similar 
 \begin{equation*}
-  S=
-  \begin{mat}
-    6 &-1  &-1 \\
-    2 &11  &-1 \\
-   -6 &-5  &7
-  \end{mat}
-  \quad
   T=
   \begin{mat}
     4 &0 &0 \\
     0 &8 &0 \\
     0 &0 &12
   \end{mat}
+  \qquad
+  S=
+  \begin{mat}[r]
+    6 &-1  &-1 \\
+    2 &11  &-1 \\
+   -6 &-5  &7
+  \end{mat}
 \end{equation*}
-for this $P$.
+since $S=PTP^{-1}$ for this $P$.
 \begin{equation*}
   P=
-  \begin{mat}
-    1/2 &1/4  &1/4 \\
-   -1/2 &1/4  &1/4 \\
-   -1/2 &-3/4 &1/4
-  \end{mat}
-  \quad
-  P^{-1}=
-  \begin{mat}
+  \begin{mat}[r]
     1 &-1 &0 \\
     0 &1 &-1 \\
     2 &1 &1
   \end{mat}
+  \qquad
+  P^{-1}=
+  \begin{mat}[r]
+    1/2 &1/4  &1/4 \\
+   -1/2 &1/4  &1/4 \\
+   -1/2 &-3/4 &1/4
+  \end{mat}
 \end{equation*}
-So they have the same eigenvalues.
-But they don't have the same eigenvectors.
 \end{frame}
 \begin{frame}
 \noindent Suppose that $\map{t}{\C^3}{\C^3}$ is
@@ -672,83 +628,65 @@ Then this is the action of $t$.
 \end{equation*}
 \pause
 By eye we see that the  
-eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, $\lambda_3=12$.
-Further, where
+eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, $\lambda_3=12$; 
+for instance this holds.
 \begin{equation*}
-  V_1=\set{\colvec{a \\ 0 \\ 0}\suchthat a\in\C}\quad
-  V_2=\set{\colvec{0 \\ b \\ 0}\suchthat b\in\C}\quad
-  V_3=\set{\colvec{0 \\ 0 \\ c}\suchthat c\in\C}
-\end{equation*}
-then
-any nonzero member of~$V_1$ is an eigenvector associated with the 
-eigenvalue~$4$, 
-any nonzero member of~$V_2$ is an eigenvector associated with the 
-eigenvalue~$8$, 
-and any nonzero member of~$V_3$ is associated with~$12$. 
-% \begin{equation*}
-%   \vec{v}_1=\colvec{100 \\ 0 \\ 0}\mapsunder{t}\colvec{400 \\ 0 \\ 0}=t(\vec{v}_1)
-% \end{equation*}
-\end{frame}
-\begin{frame}
-\noindent Picture $T=PSP^{-1}$ as here.  
-\begin{equation*}
-  \begin{CD}
-    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       \\
-    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_{\wrt{\stdbasis_3}}            @>t>T>        V_{\wrt{\stdbasis_3}}
-  \end{CD}
-\end{equation*}
-We next give the basis~$B$.
-Since $P=\rep{\identity}{B,\stdbasis_3}$, its first column is 
-$\rep{\identity(\vec{\beta}_1)}{\stdbasis_3}=\vec{\beta}_1$
-and with respect to the standard basis, any matrix is represented by itself.
-The same goes for the other two columns and we have this.
-\begin{equation*}
-  B=\sequence{\colvec{1/2 \\ -1/2 \\ -1/2},
-              \colvec{1/4 \\ 1/4 \\ -3/4},
-              \colvec{1/4 \\ 1/4 \\ 1/4}}
-\end{equation*}
-\end{frame}
-\begin{frame}
-Now, we know that the transformation~$t$ has eigenvalues of $4$, $8$, and~$12$.
-We know for instance that there is $\vec{v}_1$ such that 
-$t(\vec{v}_1)=4\vec{v}_1$.
-Since it represents the transformation, the matrix~$S$ also has that behavior.
-\begin{equation*}
-  S\cdot\rep{\vec{v}_1}{B}=
-  \begin{mat}
-    6 &-1  &-1 \\
-    2 &11  &-1 \\
-   -6 &-5  &7
-  \end{mat}
-  \colvec{100 \\ 0 \\ 200}
-  =
-  \colvec{400 \\ 0  \\ 800}
-  =4\rep{\vec{v}_1}{B}
-\end{equation*}
-\pause
-Note in particular that
-\begin{equation*}
-  \begin{mat}
+  T\cdot\colvec{1 \\ 0 \\ 0}
+  =\begin{mat}
     4 &0 &0 \\
     0 &8 &0 \\
     0 &0 &12
-  \end{mat}
-  \colvec{100 \\ 0 \\ 0}
-  =
-  \colvec{400 \\ 0  \\ 0}
-  \quad\text{but}\quad
-  \begin{mat}
-    6 &-1  &-1 \\
-    2 &11  &-1 \\
-   -6 &-5  &7
-  \end{mat}
-  \colvec{100 \\ 0 \\ 0}
-  \neq
-  \colvec{400 \\ 0  \\ 0}
+  \end{mat}\colvec{1 \\ 0 \\ 0}
+  =4\cdot\colvec{1 \\ 0 \\ 0}
 \end{equation*}
-so this is a case where similar matrices, which must share eigenvalues,
-do not share the eigenvectors associated with those eigenvalues.
+\end{frame}
+\begin{frame}
+Contrast that with $S$.
+Of course, $S=PTP^{-1}$ represents the same function, but 
+with respect to a different basis.  
+\begin{equation*}
+  \begin{CD}
+    V_{\wrt{\stdbasis_3}}            @>t>T>        V_{\wrt{\stdbasis_3}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       
+  \end{CD}
+\end{equation*}
+We can easily find the basis~$B$.
+Since $P^{-1}=\rep{\identity}{B,\stdbasis_3}$, its first column is 
+$\rep{\identity(\vec{\beta}_1)}{\stdbasis_3}=\rep{\vec{\beta}_1}{\stdbasis_3}$.
+With respect to the standard basis any vector is represented by itself 
+so the first basis element $\vec{\beta}_1$ is the first column of $P^{-1}$.
+The same goes for the other two columns.
+\begin{equation*}
+  B=\sequence{\colvec[r]{1/2 \\ -1/2 \\ -1/2},
+              \colvec[r]{1/4 \\ 1/4 \\ -3/4},
+              \colvec[r]{1/4 \\ 1/4 \\ 1/4}}
+\end{equation*}
+\end{frame}
+\begin{frame}
+% We know that the transformation~$t$ has eigenvalues of $4$, $8$, and~$12$.
+% For instance $t(\vec{e}_1)=4\vec{e}_1$.
+Now, since each represents the transformation~$t$, the matrices~$T$ and $S$
+reflect the same action $\vec{e}_1\mapsto4\vec{e}_1$.
+\begin{align*}
+  &\rep{t}{\stdbasis_3,\stdbasis_3}\cdot\rep{\vec{e}_1}{\stdbasis_3}
+    =T\cdot\rep{\vec{e}_1}{\stdbasis_3}                
+    =4\cdot\rep{\vec{e}_1}{\stdbasis_3}                  \\               
+    &\rep{t}{B,B}\cdot\rep{\vec{e}_1}{B}
+    =S\cdot\rep{\vec{e}_1}{B}                                 
+    =4\cdot\rep{\vec{e}_1}{B}
+\end{align*}
+But, while in the two equations the $4$'s are the same, the vectors
+representations are not. 
+\begin{align*}
+    T\cdot\rep{\vec{e}_1}{\stdbasis_3}
+    =T\colvec{1 \\ 0 \\ 0}
+    &=4\cdot\colvec{1 \\ 0 \\ 0}                \\
+    S\cdot\rep{\vec{e}_1}{B}  
+    =S\cdot\colvec{1 \\ 0 \\ 2}
+    &=4\cdot\colvec{1 \\ 0 \\ 2}
+\end{align*}
+So the two matrices have the same eigenvalues but different eigenvectors.
 \end{frame}
 
 
