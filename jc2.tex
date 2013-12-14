@@ -14,7 +14,7 @@ pairs of bases, $B,D$ and $\hat{B},\hat{D}$.
 \begin{equation*}
   \begin{CD}
     V_{\wrt{B}}                   @>h>H>        W_{\wrt{D}}       \\
-    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    @V{\scriptstyle\identity} VV             @V{\scriptstyle\identity} VV \\
     V_{\wrt{\hat{B}}}             @>h>\hat{H}>  W_{\wrt{\hat{D}}}
   \end{CD}
 \end{equation*}
@@ -2124,73 +2124,163 @@ A square matrix \( T \) has a scalar
 %</df:EigenOfMatrix>
 \end{definition}
 
-Although this extension from maps to matrices is natural, 
-we need to make one observation.
-While eigenvalues of a map are also the eigenvalues of matrices representing
-that map and so similar matrices have the same eigenvalues,
-note that the eigenvectors can 
-different\Dash similar matrices need not have the 
+This extension of the definition for maps to a definition
+for matrices is natural but we must be careful.
+While the eigenvalues of a map are also the eigenvalues of matrices representing
+that map, and so similar matrices have the same eigenvalues,
+the eigenvectors can 
+differ\Dash similar matrices need not have the 
 same eigenvectors.
+The next example explains.
 
 \begin{example}
-Consider again the transformation \( \map{t}{\polyspace_1}{\polyspace_1} \) 
-% from \nearbyexample{ex:TransPolyOne} 
-given by
-\( c_0+c_1x\mapsto (c_0+c_1)+(c_0+c_1)x \).
-One of its eigenvalues is \( 2 \), associated with the eigenvectors
-\( c+cx \) where \( c\neq 0 \).
-If we represent \( t \) with respect to \( B=\sequence{1+1x,1-1x} \)
+These matrices are similar
 \begin{equation*}
-   T=\rep{t}{B,B}=
-   \begin{mat}[r]
-      2  &0  \\
-      0  &0
-   \end{mat}
+  T=
+  \begin{mat}
+    2  &0  \\
+    0  &0
+  \end{mat}
+  \quad
+  \hat{T}
+  =
+  \begin{mat}[r]
+    4  &-2  \\
+    4  &-2
+  \end{mat}
 \end{equation*}
-then \( 2 \) is an eigenvalue of the matrix \( T \), 
-associated with these eigenvectors.
+since $\hat{T}=PTP^{-1}$ for this $P$.
 \begin{equation*}
-   \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
-                                         2  &0  \\
-                                         0  &0
-                                      \end{mat}\colvec{c_0 \\ c_1}
-                                      =\colvec{2c_0 \\ 2c_1}  }
-  =\set{\colvec{c_0 \\ 0}\suchthat c_0\in\C,\, c_0\neq 0 }
+  P=
+  \begin{mat}
+    1  &1  \\
+    1  &2
+  \end{mat}
+  \quad
+  P^{-1}=
+  \begin{mat}[r]
+    2   &-1  \\
+    -1  &1
+  \end{mat}
 \end{equation*}
-On the other hand, if we represent $t$ with respect to
-\( D=\sequence{2+1x,1+0x} \)  
+The matrix $T$
+has two eigenvalues, $\lambda_1=2$ and~$\lambda_2=0$.
+The first one is associated with this eigenvector.
 \begin{equation*}
-   S=\rep{t}{D,D}=
-   \begin{mat}[r]
-      3  &1  \\
-     -3  &-1
-   \end{mat}
+  T\vec{e}_1=
+  \begin{mat}
+    2  &0  \\
+    0  &0
+  \end{mat}
+  \colvec{1 \\ 0}
+  =\colvec{2 \\ 0}
+  =2\vec{e}_1
 \end{equation*}
-then the eigenvectors associated with the eigenvalue \( 2 \) are
-these.
+Suppose that $T$ represents a transformation $\map{t}{\C^2}{\C^2}$
+with respect to the standard basis.
+Then the action of this transformation $t$ is simple.
 \begin{equation*}
-   \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
-                                         3  &1  \\
-                                        -3  &-1
-                                      \end{mat}\colvec{c_0 \\ c_1}
-                                      =\colvec{2c_0 \\ 2c_1}  }
-  =\set{\colvec{0 \\ c_1}\suchthat c_1\in\C,\, c_1\neq 0 }
+  \colvec{x \\ y}\mapsunder{t}\colvec{2x \\ 0}
 \end{equation*}
+Of course, $\hat{T}$ represents the same transformation but with 
+respect to a different basis~$B$.
+We can easily find this basis.
+The arrow diagram
+\begin{equation*}
+  \begin{CD}
+    V_{\wrt{\stdbasis_3}}            @>t>T>        V_{\wrt{\stdbasis_3}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    V_{\wrt{B}}                   @>t>\hat{T}>        V_{\wrt{B}}       
+  \end{CD}
+\end{equation*}
+shows that $P^{-1}=\rep{\identity}{B,\stdbasis_3}$.
+By the definition of the matrix representation of a map, its first column is 
+$\rep{\identity(\vec{\beta}_1)}{\stdbasis_3}=\rep{\vec{\beta}_1}{\stdbasis_3}$.
+With respect to the standard basis any vector is represented by itself, 
+so the first basis element $\vec{\beta}_1$ is the first column of $P^{-1}$.
+The same goes for the other one.
+\begin{equation*}
+  B=\sequence{\colvec[r]{2 \\ -1},
+              \colvec[r]{-1 \\ 1}
+              }
+\end{equation*}
+Since the matrices $T$ and~$\hat{T}$ both represent the transformation~$t$,
+both reflect the action $t(\vec{e}_1)=2\vec{e}_1$.
+\begin{align*}
+  &\rep{t}{\stdbasis_2,\stdbasis_2}\cdot\rep{\vec{e}_1}{\stdbasis_2}
+    =T\cdot\rep{\vec{e}_1}{\stdbasis_2}                
+    =2\cdot\rep{\vec{e}_1}{\stdbasis_2}                  \\               
+    &\rep{t}{B,B}\cdot\rep{\vec{e}_1}{B}
+    =\hat{T}\cdot\rep{\vec{e}_1}{B}                                 
+    =2\cdot\rep{\vec{e}_1}{B}  
+\end{align*}
+But while in those two equations the eigenvalue $2$'s are the same, the
+vector representations differ.
+\begin{align*}
+    T\cdot\rep{\vec{e}_1}{\stdbasis_2}
+    =T\colvec{1 \\ 0}
+    &=2\cdot\colvec{1 \\ 0}                \\
+    \hat{T}\cdot\rep{\vec{e}_1}{B}  
+    =\hat{T}\cdot\colvec{1 \\ 1}
+    &=2\cdot\colvec{1 \\ 1}
+\end{align*}
+That is, when the matrix representing the transformation is
+\( T=\rep{t}{\stdbasis_2,\stdbasis_2} \) then it ``assumes'' that 
+column vectors are 
+representations with respect to \( \stdbasis_2 \).
+However \( \hat{T}=\rep{t}{B,B} \) ``assumes'' that column vectors 
+are representations with respect to \( B \), and
+so the column vectors that get doubled 
+are different.
 \end{example}
 
-\begin{remark}
-Here is an informal description of the reason for the difference.
-The underlying transformation doubles the 
-eigenvectors $\vec{v}\mapsto 2\cdot\vec{v}$ so all matrices
-representing that map exhibit the behavior of doubling some vectors.
-But when the matrix representing the transformation is
-\( T=\rep{t}{B,B} \) then the matrix ``assumes'' that column vectors are 
-representations with respect to \( B \).
-In contrast \( S=\rep{t}{D,D} \) ``assumes'' that column vectors 
-are representations with respect to \( D \).
-So the column vector representations that get doubled by each matrix 
-are different.
-\end{remark}
+
+% \begin{example}
+% Consider again the transformation \( \map{t}{\polyspace_1}{\polyspace_1} \) 
+% % from \nearbyexample{ex:TransPolyOne} 
+% given by
+% \( c_0+c_1x\mapsto (c_0+c_1)+(c_0+c_1)x \).
+% One of its eigenvalues is \( 2 \), associated with the eigenvectors
+% \( c+cx \) where \( c\neq 0 \).
+% If we represent \( t \) with respect to \( B=\sequence{1+1x,1-1x} \)
+% \begin{equation*}
+%    T=\rep{t}{B,B}=
+%    \begin{mat}[r]
+%       2  &0  \\
+%       0  &0
+%    \end{mat}
+% \end{equation*}
+% then \( 2 \) is an eigenvalue of the matrix \( T \), 
+% associated with these eigenvectors.
+% \begin{equation*}
+%    \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
+%                                          2  &0  \\
+%                                          0  &0
+%                                       \end{mat}\colvec{c_0 \\ c_1}
+%                                       =\colvec{2c_0 \\ 2c_1}  }
+%   =\set{\colvec{c_0 \\ 0}\suchthat c_0\in\C,\, c_0\neq 0 }
+% \end{equation*}
+% On the other hand, if we represent $t$ with respect to
+% \( D=\sequence{2+1x,1+0x} \)  
+% \begin{equation*}
+%    S=\rep{t}{D,D}=
+%    \begin{mat}[r]
+%       3  &1  \\
+%      -3  &-1
+%    \end{mat}
+% \end{equation*}
+% then the eigenvectors associated with the eigenvalue \( 2 \) are
+% these.
+% \begin{equation*}
+%    \set{\colvec{c_0 \\ c_1}\suchthat \begin{mat}[r]
+%                                          3  &1  \\
+%                                         -3  &-1
+%                                       \end{mat}\colvec{c_0 \\ c_1}
+%                                       =\colvec{2c_0 \\ 2c_1}  }
+%   =\set{\colvec{0 \\ c_1}\suchthat c_1\in\C,\, c_1\neq 0 }
+% \end{equation*}
+% \end{example}
+
 
 We next see the basic tool for
 finding eigenvectors and eigenvalues.
@@ -2354,10 +2444,13 @@ of any matrix representation
 %</df:CharacteristicPoly>
 \end{definition}
 
-\noindent \nearbyexercise{exer:CharPolyTransWellDefed} checks that the 
+\noindent 
+%<*df:CharacteristicPolyExer>
+\nearbyexercise{exer:CharPolyTransWellDefed} checks that the 
 characteristic polynomial of a transformation is 
 well-defined, that is, that the characteristic polynomial is the same
 no matter which basis we use for the representation.
+%</df:CharacteristicPolyExer>
 
 \begin{lemma} \label{le:MapNonTrivSpHasEigen}
 %<*lm:MapNonTrivSpHasEigen>
@@ -2590,16 +2683,33 @@ A set of associated eigenvectors
 is linearly independent.
 \end{example}
 
-\begin{corollary}
+\begin{corollary} \label{co:DistinctEivenvaluesImpliesDiagonal}
+%<*co:DistinctEivenvaluesImpliesDiagonal>
 An \( \nbyn{n} \) matrix with \( n \) distinct eigenvalues is diagonalizable.
+%</co:DistinctEivenvaluesImpliesDiagonal>
 \end{corollary}
 
 \begin{proof}
+%<*pf:DistinctEivenvaluesImpliesDiagonal>
 Form a basis of eigenvectors.
 Apply \nearbylemma{lm:DiagIffBasisOfEigens}.
+%</pf:DistinctEivenvaluesImpliesDiagonal>
 \end{proof}
 
+This section observes that some
+matrices are similar to a diagonal matrix. 
+The idea of eigenvalues arose as the entries of that diagonal matrix,
+although the definition applies more broadly than just to 
+diagonalizable matrices.  
+To find eigenvalues we defined the characteristic equation and
+that led to the final result, a 
+criteria for diagonalizability.
+(While it is useful for the theory, note that 
+in applications finding eigenvalues this way
+is typically impractical; for one thing the matrix may be large and
+finding roots of large-degree polynomials is hard.) 
 
+In the next section we study matrices that cannot be diagonalized. 
 
 
 \begin{exercises}

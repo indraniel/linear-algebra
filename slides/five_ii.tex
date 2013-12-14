@@ -386,135 +386,6 @@ where this is a basis.
 \end{equation*}
 \end{frame}
 
-% --
-
-% \begin{frame}
-% \ex
-% Consider the matrix
-% \begin{equation*}
-%   T=
-%   \begin{mat}
-%     3  &1  \\
-%     1  &3
-%   \end{mat}
-% \end{equation*}
-% Suppose $T=\rep{t}{\stdbasis_2,\stdbasis_2}$ for $\map{t}{\Re^2}{\Re^2}$.
-% We want a basis $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$ such that
-% the matrix $\rep{t}{B,B}$ is diagonal.
-% That is, we want this.
-% \begin{equation*}
-%   \rep{t}{B,B}=
-%   \begin{mat}
-%     \lambda_1  &0 \\
-%     0    &\lambda_2
-%   \end{mat}
-% \end{equation*}
-% \pause
-% So we want to find $\lambda_1$ and $\lambda_2$ making these two true.
-% \begin{equation*}
-%   \begin{mat}
-%     3  &1  \\
-%     1  &3    
-%   \end{mat}
-%   \vec{\beta}_1
-%   =\lambda_1\vec{\beta}_1
-%   \qquad
-%   \begin{mat}
-%     3  &1  \\
-%     1  &3    
-%   \end{mat}
-%   \vec{\beta}_2
-%   =\lambda_2\vec{\beta}_2
-% \end{equation*}
-% \end{frame}
-% \begin{frame}
-% \noindent We want scalars $x\in\C$ such that this system
-% \begin{equation*}
-%   \begin{mat}
-%     3  &1  \\
-%     1  &3    
-%   \end{mat}
-%   \colvec{b_1 \\ b_2}
-%   =x\colvec{b_1 \\ b_2}
-% \end{equation*}
-% has solutions $b_1,b_2\in\C$ that are not both zero
-% (the zero vector is not an element of any basis).
-% \pause
-% The system
-% \begin{equation*}
-%   \begin{linsys}{2}
-%     (3-x)\cdot b_1 &+ &b_2            &= &0 \\
-%     b_1            &+ &(3-x)\cdot b_2 &= &0 
-%   \end{linsys}
-%   \tag{$*$}
-% \end{equation*}
-% has a solution if this determinant is nonzero.
-% \begin{equation*}
-%   \begin{vmat}
-%     3-x  &1  \\
-%     1    &3-x
-%   \end{vmat}
-%   =x^2-6x+8
-%   =(x-2)(x-4)
-% \end{equation*}
-% \pause
-% To compute a basis consider first the $x=2$ version of~($*$).
-% \begin{equation*}
-%   \begin{linsys}{2}
-%     1\cdot b_1 &+ &b_2        &= &0 \\
-%     b_1        &+ &1\cdot b_2 &= &0 
-%   \end{linsys}
-%   \quad\Longrightarrow\quad
-%   b_1=-b_2
-% \end{equation*}
-% For instance we can take $b_1=1$ and $b_2=-1$.
-% \end{frame}
-% \begin{frame}\vspace*{-1ex}
-% \noindent To get a second basis vector do the $x=4$ version of~($*$).
-% \begin{equation*}
-%   \begin{linsys}{2}
-%     -1\cdot b_1 &+ &b_2        &= &0 \\
-%     b_1        &- &1\cdot b_2 &= &0 
-%   \end{linsys}
-%   \quad\Longrightarrow\quad
-%   b_1=b_2
-% \end{equation*}
-% We can take $b_1=b_2=1$.
-% \pause
-% Thus the original matrix  
-% \begin{equation*}
-%   T=
-%   \begin{mat}
-%     3  &1  \\
-%     1  &3
-%   \end{mat}
-% \end{equation*}
-% is diagonalizable to
-% \begin{equation*}
-%   D=
-%   \begin{mat}
-%     2  &0  \\
-%     0  &4
-%   \end{mat}
-% \end{equation*}
-% and where
-% \begin{equation*}
-%   P=
-%   \begin{mat}[r]
-%     1 &1 \\
-%    -1 &1
-%   \end{mat}
-% \end{equation*}
-% the arrow diagram
-% \begin{equation*}
-%   \begin{CD}
-%     V_{\wrt{\stdbasis_2}}            @>t>T>        V_{\wrt{\stdbasis_2}}       \\
-%     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-%     V_{\wrt{B}}                   @>t>D>        V_{\wrt{B}}
-%   \end{CD}
-% \end{equation*}
-% gives that we have $D=P^{-1}TP$. 
-% \end{frame}
 
 
 
@@ -641,8 +512,7 @@ for instance this holds.
 \end{equation*}
 \end{frame}
 \begin{frame}
-Contrast that with $S$.
-Of course, $S=PTP^{-1}$ represents the same function, but 
+Contrast that with $S=PTP^{-1}$, which represents the same function, but 
 with respect to a different basis.  
 \begin{equation*}
   \begin{CD}
@@ -733,17 +603,17 @@ matrix is nonsingular, that is, has a determinant of zero.
 \end{frame}
 \begin{frame}
 Some computation gives the determinant and its factors.
-\begin{equation*}
-  0=
+\begin{align*}
+  0&=
   \begin{vmat}
     0-x &5   &7 \\
    -2   &7-x &7 \\
    -1   &1   &4-x
-  \end{vmat}
-  =
+  \end{vmat}          \\
+  &=
   x^3 - 11x^2 + 38x - 40
   =(x - 5)(x - 4)(x - 2)
-\end{equation*}
+\end{align*}
 So the eigenvalues are $\lambda_1=5$, $\lambda_2=4$, and $\lambda_3=2$.
 
 \pause
@@ -759,7 +629,8 @@ specialize equation~($*$) for $x=5$.
   =
   \colvec{0 \\ 0 \\ 0}
 \end{equation*}
-Gauss's Method gives this solution set.
+Gauss's Method gives this solution set; its nonzero elements are the 
+eigenvectors.
 \begin{equation*}
   V_5=\set{\colvec{1 \\ 1 \\ 0}z_2\suchthat z_2\in\C}
 \end{equation*}
@@ -802,10 +673,73 @@ gives this.
 
 
 
+% --
+
+\begin{frame}
+\ex
+To find the eigenvalues and associated eigenvectors for the matrix
+\begin{equation*}
+  T=
+  \begin{mat}
+    3  &1  \\
+    1  &3
+  \end{mat}
+\end{equation*}
+start with this equation.
+\begin{equation*}
+  \begin{mat}
+    3  &1  \\
+    1  &3    
+  \end{mat}
+  \colvec{b_1 \\ b_2}
+  =x\colvec{b_1 \\ b_2}
+  \quad\Longrightarrow\quad
+  \begin{mat}
+    3-x  &1  \\
+    1    &3-x    
+  \end{mat}
+  \colvec{b_1 \\ b_2}
+  =\colvec{0 \\ 0}
+  \tag{$*$}
+\end{equation*}
+\pause
+That system
+has a nontrivial solution if this determinant is nonzero.
+\begin{equation*}
+  \begin{vmat}
+    3-x  &1  \\
+    1    &3-x
+  \end{vmat}
+  =x^2-6x+8
+  =(x-2)(x-4)
+\end{equation*}
+\pause
+First take the $x=2$ version of~($*$).
+\begin{equation*}
+  \begin{linsys}{2}
+    1\cdot b_1 &+ &b_2        &= &0 \\
+    b_1        &+ &1\cdot b_2 &= &0 
+  \end{linsys}
+  \quad\Longrightarrow\quad
+  V_2=\set{\colvec{b_1 \\ b_2}\suchthat \text{$b_1=-b_2$ where $b_2\in\C$}}
+\end{equation*}
+Solving the second system is just as easy.
+\begin{equation*}
+  \begin{linsys}{2}
+    -1\cdot b_1 &+ &b_2        &= &0 \\
+    b_1        &- &1\cdot b_2 &= &0 
+  \end{linsys}
+  \quad\Longrightarrow\quad
+  V_4=\set{\colvec{b_1 \\ b_2}\suchthat \text{$b_1=b_2$ where $b_2\in\C$}}
+\end{equation*}
+\end{frame}
+
+
+
+
 \begin{frame}
 \ex 
-If the matrix is either upper diagonal or lower diagonal
-then the polynomial is easy to factor.
+If the matrix is upper diagonal or lower diagonal
 \begin{equation*}
   T=
   \begin{mat}
@@ -814,7 +748,7 @@ then the polynomial is easy to factor.
     0 &0 &2
   \end{mat}
 \end{equation*}
-The value of the determinant is easy.
+then the polynomial is easy to factor.
 \begin{equation*}
   0=
   \begin{vmat}
@@ -823,9 +757,9 @@ The value of the determinant is easy.
     0   &0   &2-x
   \end{vmat}
   =(3-x)(2-x)^2
-  \tag{*}
 \end{equation*}
-The vectors associated with $\lambda_1=3$
+\pause
+These are the solutions for $\lambda_1=3$.
 \begin{equation*}
   \begin{mat}
     -1  &1   &0 \\
@@ -835,14 +769,10 @@ The vectors associated with $\lambda_1=3$
   \colvec{z_1 \\ z_2 \\ z_3}
   =
   \colvec{0 \\ 0 \\ 0}
-\end{equation*}
-are here.
-\begin{equation*}
+  \quad\Longrightarrow\quad
   V_3=\set{\colvec{1 \\ 1 \\ 0}z_2\suchthat z_2\in\C}
 \end{equation*}
-\end{frame}
-\begin{frame}
-The vectors associated with $\lambda_2=2$
+These are for $\lambda_2=2$.
 \begin{equation*}
   \begin{mat}
     0  &1   &0 \\
@@ -852,9 +782,7 @@ The vectors associated with $\lambda_2=2$
   \colvec{z_1 \\ z_2 \\ z_3}
   =
   \colvec{0 \\ 0 \\ 0}
-\end{equation*}
-are here.
-\begin{equation*}
+  \quad\Longrightarrow\quad
   V_2=\set{\colvec{1 \\ 0 \\ 0}z_1\suchthat z_1\in\C}
 \end{equation*}  
 \end{frame}
@@ -866,6 +794,9 @@ are here.
 \df[df:CharacteristicPoly]
 \ExecuteMetaData[../jc2.tex]{df:CharacteristicPoly}
 
+\no
+\ExecuteMetaData[../jc2.tex]{df:CharacteristicPolyExer}
+
 \pause
 \lm[le:MapNonTrivSpHasEigen] 
 \ExecuteMetaData[../jc2.tex]{lm:MapNonTrivSpHasEigen}
@@ -876,16 +807,16 @@ are here.
 \qed
 
 \pause
-\no
-This result is why we switched from working with real number scalars
-to scalars that are complex.
+\re
+This result is why we switched in this chapter 
+from working with real number scalars
+to complex number scalars.
 \end{frame}
 
 
 
 
 \begin{frame}{Eigenspace}
-\vspace*{-2ex}
 \df[df:Eigenspace]
 \ExecuteMetaData[../jc2.tex]{df:Eigenspace}
 
@@ -893,18 +824,20 @@ to scalars that are complex.
 Recall that this matrix has three eigenvalues, $5$, $4$, and~$2$.
 \begin{equation*}
   T=
-  \begin{mat}
+  \begin{mat}[r]
     0 &5 &7 \\
    -2 &7 &7 \\
    -1 &1 &4
   \end{mat}
 \end{equation*}
-Earlier, we found that the associated eigenspaces are these.
-\begin{align*}
-    &V_5=\set{\colvec{1 \\ 1 \\ 0}c\suchthat c\in\C}  \\
-    &V_4=\set{\colvec{-7 \\ -7 \\ 1}c\suchthat c\in\C} \\
-    &V_2=\set{\colvec{1 \\ -1 \\ 1}c\suchthat c\in\C}    
-\end{align*}
+Earlier, we found that these are the eigenspaces.
+\begin{equation*}
+    V_5=\set{\colvec[r]{1 \\ 1 \\ 0}c\suchthat c\in\C}  
+    \quad
+    V_4=\set{\colvec[r]{-7 \\ -7 \\ 1}c\suchthat c\in\C} 
+    \quad
+    V_2=\set{\colvec[r]{1 \\ -1 \\ 1}c\suchthat c\in\C}    
+\end{equation*}
 \end{frame}
 \begin{frame}
 \lm[le:EigSpaceIsSubSp] 
@@ -956,7 +889,7 @@ set (which is a basis because it has three elements).
 
 \pause
 \ex 
-We've also computed that this matrix has the eigenvalues $3$ and~$2$
+This upper-triangular matrix has the eigenvalues $2$ and~$3$
 \begin{equation*}
   \begin{mat}
     2 &1 &0 \\
@@ -972,6 +905,14 @@ Picking a vector from each of $V_3$ and~$V_2$ gives this linearly independent se
 \end{frame}
 
 
+
+\begin{frame}[A criteria for diagonalizability]
+\co[co:DistinctEivenvaluesImpliesDiagonal]
+\ExecuteMetaData[../jc2.tex]{co:DistinctEivenvaluesImpliesDiagonal}
+\pf
+\ExecuteMetaData[../jc2.tex]{pf:DistinctEivenvaluesImpliesDiagonal}
+\qed
+\end{frame}
 
 
 %...........................
