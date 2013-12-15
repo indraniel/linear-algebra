@@ -3183,6 +3183,11 @@
                0  &0  &0
              \end{mat}$,
           $\begin{mat}[r]
+               0  &1  &0  \\
+               0  &0  &1  \\
+               0  &0  &0
+             \end{mat}$,
+          $\begin{mat}[r]
                0  &0  &1  \\
                0  &0  &0  \\
                0  &0  &0
@@ -4012,30 +4017,66 @@ sage: n(a_by_a)
           These are the equations.
 	  \begin{equation*}
 	    \begin{linsys}{2}
-	       (11.79/18.69)s   &-   &(1.28/4.27)a &= &11.56 \\
-	       -(0/18.69)s   &+   &(9.87/4.27)a &= &11.35
+	       (11.79/18.69)s   &-   &(1.28/14.27)a &= &10.51 \\
+	       -(0/18.69)s   &+   &(9.87/14.27)a &= &9.87
 	    \end{linsys}
 	  \end{equation*}
-          \textit{Octave} gives $s=20.66$ and $a=16.41$.
+          \textit{Sage} gives this result (including an inital check).
+\begin{lstlisting}
+sage: var('a,s')
+(a, s)
+sage: eqns=[(11.79/18.69)*s - (1.28/14.27)*a == 10.51,
+....:       (-0)*s         + (9.87/14.27)*a == 9.87]
+sage: solve(eqns,s,a)
+[[s == (1869/100), a == (1427/100)]]
+sage: n(1869/100)
+18.6900000000000
+sage: n(1427/100)
+14.2700000000000
+sage: eqns=[(11.79/18.69)*s - (1.28/14.27)*a == 11.561,
+....:       (-0)*s         + (9.87/14.27)*a == 11.3505]
+sage: solve(eqns,s,a)
+[[s == (8119559/393000), a == (32821/2000)]]
+sage: n(8119559/393000)
+20.6604554707379
+sage: n(32821/2000)
+16.4105000000000
+\end{lstlisting}
 	\partsitem
-          These are the ratios.
+          These are the 1947 ratios, to three decimal places.
 	  \begin{center}
             \begin{tabular}{r|cc}
                1947   &\textit{by steel}  &\textit{by autos}  \\ \hline
-               \textit{use of steel}  &$0.63$ &$0.09$  \\
-               \textit{use of autos}  &$0.00$ &$0.69$
+               \textit{use of steel}  &$(6.90/18.69)=0.369$ &$(1.28/14.27)=0.090$  \\
+               \textit{use of autos}  &$(0/18.69)=0.00$ &$(4.40/14.27)=0.308$
             \end{tabular}
-            \qquad
+          \end{center}
+          These are the 1958 ratios.
+          \begin{center}
             \begin{tabular}{r|cc}
-               1958   &\textit{by steel}  &\textit{by autos}  \\ \hline
-               \textit{use of steel}  &$0.79$ &$0.09$  \\
-               \textit{use of autos}  &$0.00$ &$0.70$
+               1958           &\textit{by steel}  &\textit{by autos}  \\ \hline
+               \textit{use of steel}  &$(5395/25448)=0.212$ &$(2664/30346)=0.088$  \\
+               \textit{use of autos}  &$(48/25448)=0.002$ &$(9030/30346)=0.298$
             \end{tabular}
           \end{center}
 	\partsitem
-          \textit{Octave} gives (in billions of 1947 dollars)
-          $s=24.82$ and $a=23.63$.
-          In billions of 1958 dollars that is $s=32.26$ and $a=30.71$.
+          The external demands in 1958 are $17.589$ and~$21.243$,
+          in billions of 1958 dollars.
+          In 1948 dollars those are $(17.589/1.3)=13.53$ and
+          $(21.243/1.3)=16.34$.
+          \textit{Sage} gives these numbers.
+\begin{lstlisting}
+sage: eqns=[(11.79/18.69)*s - (1.28/14.27)*a == 13.53,
+....:       (-0)*s         + (9.87/14.27)*a == 16.34]
+sage: solve(eqns,s,a)
+[[s == (137466107/5541300), a == (1165859/49350)]]
+sage: n(137466107/5541300)
+24.8075554472777
+sage: n(1165859/49350)
+23.6242958459980
+\end{lstlisting}
+      Converting back to 1958 dollars by multiplying by $1.3$ gives
+      $32.25$ and~$30.71$.
       \end{exparts}
     
 \end{ans}
@@ -8561,13 +8602,19 @@ sage: n(a_by_a)
     
 \end{ans}
 \begin{ans}{Two.III.3.20}
+     % Using Sage:
+     % M = matrix(QQ, [[2,0,3,4], [0,1,1,-1], [3,1,0,2], [1,0,-4,-1]])
+     % M1 = M.with_added_multiple_of_row(2,0,-3/2)
+     % M2 = M1.with_added_multiple_of_row(3,0,-1/2)
+     % M3 = M2.with_added_multiple_of_row(2,1,-1)
+     % M4 = M3.with_added_multiple_of_row(3,2,-1)
      A routine Gaussian reduction
      \begin{equation*}
        \begin{mat}[r]
          2  &0  &3 &4   \\
          0  &1  &1  &-1 \\
          3  &1  &0  &2  \\
-         1  &0  &-4  &1
+         1  &0  &-4  &-1
        \end{mat}
        \grstep[-(1/2)\rho_1+\rho_4]{-(3/2)\rho_1+\rho_3}
        \;\grstep{-\rho_2+\rho_3}
@@ -8583,7 +8630,14 @@ sage: n(a_by_a)
      $\sequence{\rowvec{2 &0 &3 &4},
          \rowvec{0 &1 &1 &-1},\rowvec{0 &0 &-11/2 &-3}}$.
 
-      Another, perhaps more convenient procedure, is to swap rows first,
+      Another procedure, perhaps more convenient, is to swap rows first,
+      % From Sage
+      % M = matrix(QQ, [[2,0,3,4], [0,1,1,-1], [3,1,0,2], [1,0,-4,-1]])
+      % M1 = M.with_swapped_rows(0,3)
+      % M2 = M1.with_added_multiple_of_row(2,0,-3)
+      % M3 = M2.with_added_multiple_of_row(3,0,-2)
+      % M4 = M3.with_added_multiple_of_row(2,1,-1)
+      % M5 = M4.with_added_multiple_of_row(3,2,-1)
       \begin{equation*}
         \grstep{\rho_1\swap\rho_4}
         \;\grstep[-2\rho_1+\rho_4]{-3\rho_1+\rho_3}
@@ -13217,13 +13271,13 @@ sage: n(a_by_a)
         \partsitem Proceeding as in the prior item, we represent the images
           of the domain's basis vectors
         \begin{equation*}
-          \rep{\frac{d\,1}{dx}}{B}=\colvec[r]{0 \\ 0 \\ 0 \\ 0}
+          \rep{\frac{d\,1}{dx}}{D}=\colvec[r]{0 \\ 0 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x}{dx}}{B}=\colvec[r]{1 \\ 0 \\ 0 \\ 0}
+          \rep{\frac{d\,x}{dx}}{D}=\colvec[r]{1 \\ 0 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x^2}{dx}}{B}=\colvec[r]{0 \\ 1 \\ 0 \\ 0}
+          \rep{\frac{d\,x^2}{dx}}{D}=\colvec[r]{0 \\ 1 \\ 0 \\ 0}
           \quad
-          \rep{\frac{d\,x^3}{dx}}{B}=\colvec[r]{0 \\ 0 \\ 1 \\ 0}
+          \rep{\frac{d\,x^3}{dx}}{D}=\colvec[r]{0 \\ 0 \\ 1 \\ 0}
         \end{equation*}
         and adjoin to make the matrix.
         \begin{equation*}
@@ -27347,36 +27401,36 @@ ans = 0.017398
       To find the associated eigenvectors, consider this system.
       \begin{equation*}
         \begin{linsys}{3}
-          (5-x)\cdot b_1 &+ &6\cdot b_2      &+ &2\cdot b_3      &= &0 \\
-                         &  &(-1-x)\cdot b_2 &- &8\cdot b_3      &= &0 \\
+          (5-x)\cdot b_1 &+ &6b_2      &+ &2b_3      &= &0 \\
+                         &  &(-1-x)\cdot b_2 &- &8b_3      &= &0 \\
           b_1            &  &                &+ &(-2-x)\cdot b_3 &= &0
         \end{linsys}
       \end{equation*}
-      Plugging in $x=\lambda_1=-4$ gives
+      Plugging in $\lambda_1=-4$ for $x$ gives
       \begin{equation*}
         \begin{linsys}{3}
-                    9b_1 &+ &6\cdot b_2      &+ &2\cdot b_3      &= &0 \\
-                         &  &3\cdot b_2      &- &8\cdot b_3      &= &0 \\
-                     b_1 &  &                &+ & 2\cdot b_3     &= &0
+                    9b_1 &+ &6b_2      &+ &2b_3      &= &0 \\
+                         &  &3b_2      &- &8b_3      &= &0 \\
+                     b_1 &  &          &+ &2b_3     &= &0
         \end{linsys}
         \grstep{-(1/9)\rho_1+\rho_3}\quad
         \grstep{(2/9)\rho_2+\rho_3}\quad
         \begin{linsys}{3}
-                     9b_1 &+ &6\cdot b_2      &+ &2\cdot b_3      &= &0 \\
-                         &  &3\cdot b_2       &- &8\cdot b_3      &= &0
+                     9b_1 &+ &6b_2      &+ &2b_3      &= &0 \\
+                         &  &3b_2       &- &8b_3      &= &0
         \end{linsys}
       \end{equation*}
-      The eigenspace and eigenvector are this.
+      Here is the eigenspace and an eigenvector.
            \begin{equation*}
              V_{-4}
-             =\set{\colvec{(14/9)\cdot b_3  \\
-                           (-8/3)\cdot b_3    \\
+             =\set{\colvec{2\cdot b_3  \\
+                           (8/3)\cdot b_3    \\
                            b_3}
                     \suchthat b_3\in\C}
              \qquad
-             \colvec{14/9  \\
-                     -8/3  \\
-                       1}
+             \colvec{2  \\
+                     8/3  \\
+                      1}
            \end{equation*}
 
       Similarly, plugging in $x=\lambda_2=3$ gives
