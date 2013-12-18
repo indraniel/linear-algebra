@@ -4258,7 +4258,31 @@ sage: solve(system, x,y)
     
 \end{ans}
 \begin{ans}{3}
-     Not yet done.
+     Kirchoff's Current Law, applied to the node where
+     $r_1$, $r_2$, and~$r_g$ come together, and also
+     applied to the node where $r_3$, $r_4$, and~$r_g$ come
+     together gives these.
+     \begin{equation*}
+       \begin{linsys}{3}
+         i_1 &- &i_2 &- &i_g &= &0  \\
+         i_3 &- &i_4 &+ &i_g &= &0
+       \end{linsys}
+     \end{equation*}
+     Kirchoff's Voltage law, applied to the loop in the top right,
+     and to the loop in the bottom right, gives these.
+     \begin{equation*}
+       \begin{linsys}{3}
+         i_3r_3 &- &i_gr_g &- &i_1r_1 &= &0  \\
+         i_4r_4 &- &i_2r_2 &+ &i_gr_g &= &0
+       \end{linsys}
+     \end{equation*}
+     Assuming that $i_g$ is zero gives that $i_1=i_2$, that $i_3=i_4$,
+     that $i_1r_1=i_3r_3$, and that $i_2r_2=i_4r_4$.
+     Then rearranging the last equality
+     \begin{equation*}
+       r_4=\frac{i_2r_2}{i_4}\cdot\frac{i_3r_3}{i_1r_1}
+     \end{equation*}
+     and cancelling the $i$'s gives the desired conclusion.
    
 \end{ans}
 \begin{ans}{4}
@@ -4357,7 +4381,7 @@ sage: solve(system, x,y)
             i_2  &=  i_3-25=(-i_4+i_7+20)-25=-i_4+i_7-5 \\
             i_1  &=  i_2+10=(-i_4+i_7-5)+10=-i_4+i_7+5
           \end{split}
-          \tag{}\end{equation*}
+          \end{equation*}
           Obviously $i_4$ and $i_7$ have to be positive, and in fact
           the first equation shows that $i_7$ must be at least $30$.
           If we start with $i_7$, then the $i_2$~equation shows that
