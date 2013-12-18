@@ -2950,7 +2950,7 @@
               0  &1  &3  &2  \\
               0  &0  &5  &6
             \end{mat}                    \\
-            \begin{split}
+            \begin{aligned}
               &\grstep{(1/5)\rho_3}
               \begin{mat}[r]
                 1  &5  &1  &5  \\
@@ -2969,7 +2969,7 @@
                 0  &1  &0  &-8/5  \\
                 0  &0  &1  &6/5
               \end{mat}
-            \end{split}
+            \end{aligned}
           \end{multline*}
       \end{exparts}
     
@@ -4436,8 +4436,8 @@ sage: solve(system, x,y)
 
           The verification is just like \nearbyexample{ex:RealVecSpaces}.
           We first do
-          conditions $1$-$5$, from
-          the paragraph of \nearbydefinition{def:VecSpace} having to
+          conditions $1$-$5$ from
+          \nearbydefinition{def:VecSpace}, having to
           do with addition.
           For closure under addition, condition~(1),
           note that where $a+bx,c+dx\in\polyspace_1$
@@ -4557,9 +4557,10 @@ sage: solve(system, x,y)
       \nearbyexample{ex:RealVecSpaces} as a guide.
       (\textit{Comment.}
       Because many of the conditions are quite easy to check,
-      sometimes a person can be left with the sense that they must have missed
+      sometimes a person can feel that they must have missed
       something.
-      But easy or routine to do is different from not necessary to do.)
+      Keep in mind that
+      easy to do, or routine, is different from not necessary to do.)
       \begin{exparts}
         \partsitem
           Here are three elements.
@@ -4671,10 +4672,11 @@ sage: solve(system, x,y)
           the additive inverse is the matrix whose entries are the negative of
           $A$'s, the matrix $-1\cdot A$.
 
-          Condition~$6$ holds because a scalar multiple of a $\nbyn{2}$ matrix
+          Condition~($6$)
+          holds because a scalar multiple of a $\nbyn{2}$ matrix
           is a $\nbyn{2}$ matrix.
           For condition~(7) we have this.
-          \begin{equation*}
+          \begin{multline*}
             (r+s)
             \begin{mat}
               a  &b  \\
@@ -4684,7 +4686,7 @@ sage: solve(system, x,y)
             \begin{mat}
               (r+s)a  &(r+s)b  \\
               (r+s)c  &(r+s)d
-            \end{mat}
+            \end{mat}               \\
             =
             \begin{mat}
               ra+sa  &rb+sb  \\
@@ -4702,7 +4704,7 @@ sage: solve(system, x,y)
               a  &b  \\
               c  &d
             \end{mat}
-          \end{equation*}
+          \end{multline*}
           Condition~(8) goes the same way.
           \begin{multline*}
             r
@@ -4878,14 +4880,14 @@ sage: solve(system, x,y)
           is also a three-component row vector
          (all of the letters $a,\ldots,f$ represent real numbers).
          Verification of~(2) is routine
-          \begin{equation*}
+          \begin{multline*}
             \rowvec{a  &b  &c}
             +\rowvec{d  &e  &f}
-            =\rowvec{a+d  &b+e  &c+f}
+            =\rowvec{a+d  &b+e  &c+f}   \\
             =\rowvec{d+a  &e+b  &f+c}
             =\rowvec{d  &e  &f}
             +\rowvec{a  &b  &c}
-          \end{equation*}
+          \end{multline*}
           (the second equality holds because the three entries are real
           numbers and real number addition commutes).
          Condition~(3)'s verification is similar.
@@ -4915,23 +4917,31 @@ sage: solve(system, x,y)
           scalar multiplication operation that was given,
           note that $r\rowvec{a  &b  &c}=\rowvec{ra  &rb  &rc}$ is a
           three-component row vector with real entries.
-          For~(7) we compute
-          $(r+s)\rowvec{a  &b  &c}=\rowvec{(r+s)a  &(r+s)b  &(r+s)c}
-            =\rowvec{ra+sa  &rb+sb  &rc+sc}
+          For~(7) we compute.
+          \begin{multline*}
+            (r+s)\rowvec{a  &b  &c}=\rowvec{(r+s)a  &(r+s)b  &(r+s)c}
+            =\rowvec{ra+sa  &rb+sb  &rc+sc}                             \\
             =\rowvec{ra  &rb  &rc}+\rowvec{sa  &sb  &sc}
-            =r\rowvec{a  &b  &c}+s\rowvec{a  &b  &c}$.
-          Condition~(8) is very similar:
-          $r\big(\rowvec{a  &b  &c}+\rowvec{d  &e  &f}\big)
-            =r\rowvec{a+d  &b+e  &c+f}
-            =\rowvec{r(a+d)  &r(b+e)  &r(c+f)}
-            =\rowvec{ra+rd  &rb+re  &rc+rf}
-            =\rowvec{ra  &rb  &rc}+\rowvec{rd  &re  &rf}
-            =r\rowvec{a  &b  &c}+r\rowvec{d  &e  &f}$.
-          So is the computation for condition~(9):
-          $(rs)\rowvec{a  &b  &c}
+            =r\rowvec{a  &b  &c}+s\rowvec{a  &b  &c}
+          \end{multline*}
+          Condition~(8) is very similar.
+          \begin{multline*}
+            r\big(\rowvec{a  &b  &c}+\rowvec{d  &e  &f}\big)  \\
+            \begin{aligned}
+            &=r\rowvec{a+d  &b+e  &c+f}
+            =\rowvec{r(a+d)  &r(b+e)  &r(c+f)}                     \\
+            &=\rowvec{ra+rd  &rb+re  &rc+rf}
+            =\rowvec{ra  &rb  &rc}+\rowvec{rd  &re  &rf}          \\
+            &=r\rowvec{a  &b  &c}+r\rowvec{d  &e  &f}
+            \end{aligned}
+          \end{multline*}
+          So is the computation for condition~(9).
+          \begin{equation*}
+            (rs)\rowvec{a  &b  &c}
              =\rowvec{rsa  &rsb  &rsc}
              =r\rowvec{sa  &sb  &sc}
-             =r\big(s\rowvec{a  &b  &c}\big)$.
+             =r\big(s\rowvec{a  &b  &c}\big)
+          \end{equation*}
           Condition~(10) is just as routine
           $1\rowvec{a  &b  &c}
              =\rowvec{1\cdot a  &1\cdot b  &1\cdot c}
@@ -5572,7 +5582,7 @@ sage: solve(system, x,y)
                     &   &r_2  &  &    &=  &y \\
                 r_1 &   &     &+ &r_3 &=  &z \\
              \end{linsys}
-             \;\grstep{-(1/2)\rho_1+\rho_3}\;\;\grstep{(1/2)\rho_2+\rho_3}\;
+             \grstep{-(1/2)\rho_1+\rho_3}\repeatedgrstep{(1/2)\rho_2+\rho_3}
              \begin{linsys}{3}
                2r_1 &+  &r_2  &  &    &=  &x\hfill\hbox{} \\
                     &   &r_2  &  &    &=  &y\hfill\hbox{} \\
@@ -5605,7 +5615,7 @@ sage: solve(system, x,y)
              0  &1  &0   &1  &y  \\
              1  &0  &0   &5  &z
            \end{amat}
-           \grstep{-\rho_1+\rho_3}\;\grstep{3\rho_2+\rho_3}
+           \grstep{-\rho_1+\rho_3}\repeatedgrstep{3\rho_2+\rho_3}
            \begin{amat}{4}
              1  &3  &-1  &2  &x \\
              0  &1  &0   &1  &y  \\
@@ -5626,20 +5636,20 @@ sage: solve(system, x,y)
            =\colvec{x \\ y \\ z}
          \end{equation*}
          leads to this reduction.
-         \begin{equation*}
+         \begin{multline*}
            \begin{amat}{4}
              2  &3  &5   &6  &x  \\
              1  &0  &1   &0  &y  \\
              1  &1  &2   &2  &z
-           \end{amat}
+           \end{amat}                                             \\
            \grstep[-(1/2)\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
-          \;\grstep{-(1/3)\rho_2+\rho_3}
+           \repeatedgrstep{-(1/3)\rho_2+\rho_3}
            \begin{amat}{4}
              2  &3     &5     &6  &x \\
              0  &-3/2  &-3/2  &-3 &-(1/2)x+y  \\
              0  &0     &0     &0  &-(1/3)x-(1/3)y+z
            \end{amat}
-         \end{equation*}
+         \end{multline*}
          This shows that not every three-tall vector can be so expressed.
          Only the vectors satisfying the restriction that
          $-(1/3)x-(1/3)y+z=0$ are in the span.
@@ -5695,20 +5705,23 @@ sage: solve(system, x,y)
            \end{equation*}
           That shows that a set spanning this subspace consists of those
           two matrices.
-        \partsitem The $a=2b-c$ gives
-           \( \set{(2b-c)+bx+cx^3 \suchthat b,c\in\Re}
-           =\set{b(2+x)+c(-1+x^3) \suchthat b,c\in\Re}  \).
+        \partsitem The $a=2b-c$ gives that the set
+           \( \set{(2b-c)+bx+cx^3 \suchthat b,c\in\Re} \)
+           equals the set
+           \( \set{b(2+x)+c(-1+x^3) \suchthat b,c\in\Re}  \).
            So the subspace is the span of the set $\set{2+x, -1+x^3}$.
         \partsitem The set
           \( \set{a+bx+cx^2\suchthat a+7b+49c=0} \)
-          parametrized as
-          \( \set{b(-7+x)+c(-49+x^2)\suchthat b,c\in\Re} \)
+          can be parametrized as
+          \begin{equation*}
+            \set{b(-7+x)+c(-49+x^2)\suchthat b,c\in\Re}
+          \end{equation*}
+          and so
           has the spanning set $\set{-7+x,-49+x^2}$.
       \end{exparts}
     
 \end{ans}
 \begin{ans}{Two.I.2.26}
-      Each answer given is only one out of many possible.
       \begin{exparts}
         \partsitem We can parametrize in this way
           \begin{equation*}
@@ -5720,11 +5733,13 @@ sage: solve(system, x,y)
           \begin{equation*}
              \set{\colvec[r]{1 \\ 0 \\ 0},\colvec[r]{0 \\ 0 \\ 1}}
           \end{equation*}
-        \item Parametrize it with
-          \( \set{y\colvec[r]{-2/3 \\ 1 \\ 0}+z\colvec[r]{-1/3 \\ 0 \\ 1}
-                 \suchthat y,z\in\Re } \)
-          to get
-          \( \set{\colvec[r]{-2/3 \\ 1 \\ 0},\colvec[r]{-1/3 \\ 0 \\ 1} } \).
+        \item Here is a parametrization, and the associated spanning set.
+          \begin{equation*}
+             \set{y\colvec[r]{-2/3 \\ 1 \\ 0}+z\colvec[r]{-1/3 \\ 0 \\ 1}
+                 \suchthat y,z\in\Re }
+             \qquad
+             \set{\colvec[r]{-2/3 \\ 1 \\ 0},\colvec[r]{-1/3 \\ 0 \\ 1} }
+          \end{equation*}
         \partsitem \( \set{\colvec[r]{1 \\ -2 \\ 1 \\ 0},
                       \colvec[r]{-1/2 \\ 0 \\ 0 \\ 1} } \)
         \partsitem Parametrize the description as
@@ -5902,13 +5917,13 @@ sage: solve(system, x,y)
            scalar multiplication into one single argument
            showing closure under linear combinations of two vectors.
            If $r_1,r_2,x_1,x_2,y_1,y_2,z_1,z_2$ are in $\Re$ then
-           \begin{equation*}
+           \begin{multline*}
               r_1\colvec{x_1 \\ y_1 \\ z_1}
               +r_2\colvec{x_2 \\ y_2 \\ z_2}
               =\colvec{r_1x_1-r_1+1 \\ r_1y_1 \\ r_1z_1}
-               +\colvec{r_2x_2-r_2+1 \\ r_2y_2 \\ r_2z_2}
+               +\colvec{r_2x_2-r_2+1 \\ r_2y_2 \\ r_2z_2}                 \\
             =\colvec{r_1x_1-r_1+r_2x_2-r_2+1 \\ r_1y_1+r_2y_2 \\ r_1z_1+r_2z_2}
-           \end{equation*}
+           \end{multline*}
            (note that the definition of addition in this space is that
            the first
            components combine as $(r_1x_1-r_1+1)+(r_2x_2-r_2+1)-1$,
@@ -5960,11 +5975,11 @@ sage: solve(system, x,y)
              =\colvec{(r+s)x-(r+s)+1 \\ (r+s)y \\ (r+s)z}
            \end{equation*}
            while
-           \begin{equation*}
+           \begin{multline*}
              r\colvec{x \\ y \\ z}+s\colvec{x \\ y \\ z}
-             =\colvec{rx-r+1 \\ ry \\ rz}+\colvec{sx-s+1 \\ sy \\ sz}
+             =\colvec{rx-r+1 \\ ry \\ rz}+\colvec{sx-s+1 \\ sy \\ sz}  \\
              =\colvec{(rx-r+1)+(sx-s+1)-1 \\ ry+sy \\ rz+sz}
-           \end{equation*}
+           \end{multline*}
            and the two are equal.
            The second condition compares
            \begin{equation*}
@@ -5973,12 +5988,12 @@ sage: solve(system, x,y)
              =\colvec{r(x_1+x_2-1)-r+1 \\ r(y_1+y_2) \\ r(z_1+z_2)}
            \end{equation*}
            with
-           \begin{equation*}
+           \begin{multline*}
              r\colvec{x_1 \\ y_1 \\ z_1}+r\colvec{x_2 \\ y_2 \\ z_2}
              =\colvec{rx_1-r+1 \\ ry_1 \\ rz_1}
-                     +\colvec{rx_2-r+1 \\ ry_2 \\ rz_2}
+                     +\colvec{rx_2-r+1 \\ ry_2 \\ rz_2}                  \\
              =\colvec{(rx_1-r+1)+(rx_2-r+1)-1 \\ ry_1+ry_2 \\ rz_1+rz_2}
-           \end{equation*}
+           \end{multline*}
            and they are equal.
            For the third condition,
            \begin{equation*}
@@ -6248,17 +6263,17 @@ sage: solve(system, x,y)
       If \( c_1\vec{s}_1+\dots+c_n\vec{s}_n,
         c_{n+1}\vec{s}_{n+1}+\dots+c_m\vec{s}_m\in\spanof{S} \) then
       for any \( p,r\in\Re \) we have
-      \begin{equation*}
+      \begin{multline*}
         p\cdot(c_1\vec{s}_1+\cdots+c_n\vec{s}_n)+
-             r\cdot(c_{n+1}\vec{s}_{n+1}+\cdots+c_m\vec{s}_m)
+             r\cdot(c_{n+1}\vec{s}_{n+1}+\cdots+c_m\vec{s}_m)        \\
         =
         pc_1\vec{s}_1+\cdots+pc_n\vec{s}_n
           +rc_{n+1}\vec{s}_{n+1}+\cdots+rc_m\vec{s}_m
-      \end{equation*}
+      \end{multline*}
       which is an element of \( \spanof{S} \).
-      (\textit{Remark.}
-      If the set $S$ is empty, then that
-      `if \ldots\ then \ldots' statement is vacuously true.)
+      % (\textit{Remark.}
+      % If the set $S$ is empty, then that
+      % `if \ldots\ then \ldots' statement is vacuously true.)
     
 \end{ans}
 \begin{ans}{Two.I.2.48}
