@@ -1,0 +1,563 @@
+% Chapter 1, Topic from _Linear Algebra_ Jim Hefferon
+%  http://joshua.smcvt.edu/linalg.html
+%  2001-Jun-09
+\topic{Input-Output Analysis}
+\index{Input-Output Analysis|(}
+An economy is an immensely complicated network of interdependence.
+Changes in one part can ripple out to affect other parts.
+Economists have struggled to be able to describe, and to make
+predictions about, such a complicated object.
+Mathematical models using systems of linear equations
+are a key tool.
+One example is Input-Output Analysis, pioneered by 
+W.~Leontief,\index{Leontief, W.} 
+who won the 1973 Nobel Prize in Economics.
+
+Consider an economy with many parts, two of which are the steel industry and
+the auto industry.
+These two interact tightly
+as they work to meet the demand for their product
+from other parts of the economy, from users external to the steel and
+auto sectors.
+For instance, should the external demand for autos go up, that would 
+increase in the auto industry's usage of steel.
+Or should the external demand for steel fall, then it would lower
+steel's purchase of trucks.
+The model that
+we consider here takes in the external demands
+and predicts how the two interact to meet those demands.
+
+We start with production and consumption statistics.
+(These numbers, giving dollar values in 
+millions, are from
+\cite{Leontief1965} describing the 1958 U.S.\ economy.
+Today's statistics would be different because of
+inflation and because of technical changes in the industries.)
+\begin{center}
+  \begin{tabular}{r|rrrr}
+         \multicolumn{1}{c}{\ }  %put the | in the right place
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{steel} 
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{auto} 
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{others} 
+                              \end{tabular}}
+         &\textit{total}                                                \\
+         \cline{2-5}
+    \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{steel} \end{tabular}
+         &$5\,395$  &$2\,664$  &     &$25\,448$                          \\
+    \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{auto} \end{tabular}
+         &$48$      &$9\,030$  &     &$30\,346$                          
+  \end{tabular}
+\end{center}
+For instance, the dollar value of steel used by the auto industry in this
+year is $2,664$ million.
+Note that industries may consume some of their own output.
+
+We can fill in the external demands.
+This year's value of the steel used by others is $17,389$ 
+and the external value of autos is $21,268$.
+With that we have a complete description of
+how auto and steel interact to meet their demands.
+
+Now imagine that the external demand for steel has recently been going up by
+$200$ per year and so we estimate that next year it will be $17,589$.
+We also estimate that next year's 
+external demand for autos will be down $25$ to $21,243$.
+We wish to predict next year's total outputs.
+
+That prediction isn't as simple as adding $200$ to this year's steel
+total and subtracting $25$ from this year's auto total.
+For one thing, a rise in steel will cause
+that industry to have an increased demand for autos, which will mitigate
+the loss in external demand for autos.
+On the other hand, the drop in external demand for autos will cause
+the auto industry to use less steel and so lessen somewhat the
+upswing in steel's business.
+In short, these two industries form a system.
+We must predict where the system as a whole will settle.
+
+Here are the equations.
+\begin{align*}
+  \text{next year's production of steel}
+     &=\text{next year's use of steel by steel}   \\[-.8ex]
+     &\quad\hbox{}+\text{next year's use of steel by auto}  \\[-.8ex]  
+     &\quad\hbox{}+\text{next year's use of steel by others} \\
+  \text{next year's production of autos}
+     &=\text{next year's use of autos by steel}   \\[-.8ex]
+     &\quad\hbox{}+\text{next year's use of autos by auto}  \\[-.8ex] 
+     &\quad\hbox{}+\text{next year's use of autos by others} 
+\end{align*}
+For the left side let
+$s$ be next years total production of steel and
+let $a$ be next year's total output of autos.
+For the right side, as discussed above,
+our external demand estimates are $17,589$ and $21,243$.
+
+For next year's use of steel by steel, note that this year the
+steel industry used $5,395$ units of steel input to produce $25,448$ units of
+steel output.
+So next year, when the steel industry will produce $s$ units out, 
+we guess that doing so will take $s\cdot (5\,395)/(25\,448)$
+units of steel input\Dash this is simply the assumption that input is
+proportional to output. 
+(We are assuming that the ratio of input to output remains constant over time;
+in practice, models may try to take account of trends of change in the
+ratios.)
+
+Next year's use of steel by the auto industry is similar.
+This year the auto industry uses $2,664$ units of steel input to produce
+$30,346$ units of auto output.
+So next year, when the auto industry's total output is $a$, we expect it to 
+consume $a\cdot (2\,664)/(30\,346)$ units of steel.
+
+Filling in the other equation in the same way gives this system of linear
+equations.
+\begin{equation*}
+  \begin{linsys}{3}
+    (5\,395/25\,448)\cdot s 
+      &+ &(2\,664/30\,346)\cdot a &+ &17\,589 
+         &= &s \\ 
+    (48/25\,448)\cdot s     
+      &+ &(9\,030/30\,346)\cdot a &+ &21\,243 
+         &= &a
+  \end{linsys}
+\end{equation*}
+Moving the variables to one side and the constants to the other
+\begin{equation*}
+  \begin{linsys}{2}
+      (20\,053/25\,448)s &- &(2\,664/30\,346)a &= &17\,589 \\ 
+     -(48/25\,448)s      &+ &(21\,316/30\,346)a &= &21\,243 
+  \end{linsys}
+\end{equation*}
+and applying Gauss's Method or using \textit{Sage}, as here
+\begin{lstlisting}
+sage: var('a,s')
+(a, s)
+sage: eqns=[(20053/25448)*s - (2664/30346)*a == 17589,  
+....:        (-48/25448)*s + (21316/30346)*a == 21243] 
+sage: solve(eqns, s, a)
+[[s == (2745320544312/106830469), a == (6476293881123/213660938)]]
+sage: n(2745320544312/106830469)
+25697.9171767186
+sage: n(6476293881123/213660938)
+30311.0804517904
+\end{lstlisting}
+gives our prediction:
+$s=25,698$ and $a=30,311$.
+
+Above, we discussed that the prediction of next year's
+totals isn't as simple as adding $200$ to last year's steel total and
+subtracting $25$ from last year's auto total.
+Comparing these predictions 
+to the numbers for the current year
+shows that the total production of the steel industry should rise by~$250$
+while
+auto's total drops by $35$.
+The increase in external demand for steel causes an increase in 
+internal demand by the steel industry, which is lessened somewhat by 
+the drop in autos, but results in a total that is more than
+$200$ higher.
+Similarly, auto's total drops more than~$25$ despite the help that 
+it gets from steel.
+
+One of the advantages of having a mathematical model is that we can
+ask ``What if \ldots?'' questions.
+For instance, we can ask,
+``What if our estimates for next year's external demands are somewhat off?''
+To try to understand how much the model's predictions change in 
+reaction to changes in our estimates, we can revise the estimate of
+next year's external steel demand from $17,589$ down to
+$17,489$, while keeping the assumption of next year's external demand for
+autos fixed at $21,243$. 
+The resulting system
+\begin{equation*}
+  \begin{linsys}{2}
+        (20\,053/25\,448)s &- &(2\,664/30\,346)a &= &17\,489 \\ 
+      -(48/25\,448)s      &+ &(21\,316/30\,346)a &= &21\,243 
+  \end{linsys}
+\end{equation*}
+gives $s=25,571$ and $a=30,311$.
+% sage: var('a,s')                                        
+% (a, s)
+% sage: eqns=[(20053/25448)*s - (2664/30346)*a == 17489, 
+% ....:        (-48/25448)*s + (21316/30346)*a == 21243] 
+% sage: solve(eqns, s, a)                             
+% [[s == (2731759305112/106830469), a == (6476221050723/213660938)]]
+% sage: n(2731759305112/106830469)                    
+% 25570.9754968126
+% sage: n(6476221050723/213660938)
+% 30310.7395827449
+This is \definend{sensitivity analysis}.
+We are seeing how sensitive the predictions of our model are to the 
+accuracy of the assumptions.
+
+Naturally, we can consider larger models that detail the interactions 
+among more sectors of an economy;
+these models are typically solved on a computer.
+Naturally also, a single model does not suit every case and 
+assuring that the assumptions underlying a model
+are reasonable for a particular prediction requires the judgments of experts.
+With those caveats
+however, this model has proven in practice to be a useful and accurate tool for
+economic analysis.
+For further reading, try \cite{Leontief1951} and \cite{Leontief1965}. 
+
+
+\begin{exercises}
+  \item 
+    With the steel-auto system given above, estimate next year's
+    total productions in these cases.
+    \begin{exparts}
+      \partsitem Next year's external demands are up $200$ from this
+         year for steel and are unchanged for autos.
+      \partsitem Next year's external demands are up $100$ for steel and
+         are up $200$ for autos.
+      \partsitem Next year's external demands are up $200$ for steel and
+         are up $200$ for autos.
+    \end{exparts} 
+    \begin{answer}
+      These answers are from \textit{Octave}.
+      \begin{exparts}
+        \partsitem \Sage{} gets $s\approx 25\,952$ and $a\approx 30\,312$.
+\begin{lstlisting}
+sage: var('s,a')
+(s, a)
+sage: system = [(20053/25448)*s -  (2664/30346)*a == 17789,
+....:             -(48/25448)*s + (21316/30346)*a == 21243]
+sage: solve(system, s,a)
+[[s == (2772443022712/106830469), a == (6476439541923/213660938)]]
+sage: n(2772443022712/106830469), n(6476439541923/213660938)
+(25951.8005365305, 30311.7621898814)          
+\end{lstlisting}
+        \partsitem \Sage{} gets $s\approx 25\,857$ and $a\approx 30\,596$.
+\begin{lstlisting}
+sage: system = [(20053/25448)*s -  (2664/30346)*a == 17689,
+....:             -(48/25448)*s + (21316/30346)*a == 21443]
+sage: solve(system, s,a)
+[[s == (2762271457112/106830469), a == (6537219545323/213660938)]]
+sage: n(2762271457112/106830469), n(6537219545323/213660938)
+(25856.5883213711, 30596.2316112410)
+\end{lstlisting}
+        \partsitem \Sage{} gets $s\approx 25\,984$ and $a\approx 30\,597$.
+\begin{lstlisting}
+sage: system = [(20053/25448)*s -  (2664/30346)*a == 17789,
+....:             -(48/25448)*s + (21316/30346)*a == 21443]
+sage: solve(system, s,a)
+[[s == (2775832696312/106830469), a == (6537292375723/213660938)]]
+sage: n(2775832696312/106830469), n(6537292375723/213660938)
+(25983.5300012771, 30596.5724802865)          
+\end{lstlisting}
+      \end{exparts}
+    \end{answer}
+  \item 
+    For the steel-auto system,  
+    with the external demand estimates of $17,589$ and $21,243$
+    discussed above, what will be the value of steel used by steel,
+    the value of steel used by auto, etc.? 
+    \begin{answer}
+      This \textit{Sage} session
+\begin{lstlisting}
+sage: var('a,s')
+(a, s)
+sage: eqns=[(20053/25448)*s - (2664/30346)*a == 17589,
+....:       (-48/25448)*s + (21316/30346)*a == 21243] 
+sage: solve(eqns, s, a)
+[[s == (2745320544312/106830469), a == (6476293881123/213660938)]]
+sage: s_by_s = (5395/25448)*2745320544312/106830469
+sage: s_by_s
+582010544505/106830469
+sage: n(s_by_s)
+5447.98267716114
+sage: s_by_a = (2664/30346)*6476293881123/213660938  
+sage: n(s_by_a)
+2660.93449955743
+sage: a_by_s = (48/25448)*2745320544312/106830469
+sage: n(a_by_s)
+48.4713936058822
+sage: a_by_a = (9030/30346)*6476293881123/213660938
+sage: n(a_by_a)
+9019.60905818451        
+\end{lstlisting}
+      gives this table.
+      \begin{center}
+        \begin{tabular}{r|rrrr}
+         \multicolumn{1}{c}{\ }  %put the | in the right place
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{steel} 
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{auto} 
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{others} 
+                              \end{tabular}}
+         &\textit{total}                                                \\
+         \cline{2-5}
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{steel} \end{tabular}
+           &$5\,448$  &$2\,661$  &$17\,589$     &$25\,698$                          \\
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{auto} \end{tabular}
+           &$48$      &$9\,020$  &$21\,243$     &$30\,311$                          
+        \end{tabular}
+      \end{center}
+      For comparison here is the original table.
+      \begin{center}
+        \begin{tabular}{r|rrrr}
+         \multicolumn{1}{c}{\ }  %put the | in the right place
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{steel} 
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{auto} 
+                             \end{tabular}}
+         &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                \textit{used by} \\[-.65ex] \textit{others} 
+                              \end{tabular}}
+         &\textit{total}                                                \\
+         \cline{2-5}
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{steel} \end{tabular}
+           &$5\,395$  &$2\,664$  &$17\,389$     &$25\,448$                          \\
+         \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{auto} \end{tabular}
+           &$48$      &$9\,030$  &$21\,268$     &$30\,346$                          
+        \end{tabular}
+      \end{center}
+    \end{answer}
+  \item 
+    In the steel-auto system, the ratio for the use of steel by the auto
+    industry is $2,664/30,346$, about $0.0878$.
+    Imagine that a new process for making autos reduces this 
+    ratio to $.0500$.
+    \begin{exparts}
+      \partsitem How will the predictions for next year's total
+        productions change compared to the first example discussed
+        above (i.e., taking next year's external demands to be
+        $17,589$ for steel and $21,243$ for autos)?
+      \partsitem Predict next year's totals if, in addition,
+        the external demand for
+        autos rises to be $21,500$ because the new cars are cheaper.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem \Sage{} gives  $s=24,244$, $a=30,307$.
+\begin{lstlisting}
+ sage: var('s,a')
+(s, a)
+sage: system = [(20053/25448)*s -  0.0500*a == 17589,
+....:             -(48/25448)*s + (21316/30346)*a == 21243]
+sage: solve(system, s,a)
+[[s == (12951731858499/534221147), a == (32381469405615/1068442294)]]
+sage: n(12951731858499/534221147), n(32381469405615/1068442294)
+(24244.1392131918, 30307.1767071166)         
+\end{lstlisting}
+        \partsitem Sage gives $s=24,267$, $a=30,673$.
+\begin{lstlisting}
+sage: system = [(20053/25448)*s -  0.0500*a == 17589,
+....:             -(48/25448)*s + (21316/30346)*a == 21500]
+sage: solve(system, s,a)
+[[s == (12964136043940/534221147), a == (16386224431390/534221147)]]
+sage: n(12964136043940/534221147), n(16386224431390/534221147)
+(24267.3584090448, 30673.1107957993)          
+\end{lstlisting}
+      \end{exparts}
+    \end{answer}
+  \item 
+    This table gives the numbers for the auto-steel system from
+    a different year, 1947 (see \cite{Leontief1951}).
+    The units here are billions of 1947 dollars.
+    \begin{center}
+      \begin{tabular}{r|rrrr}
+             \multicolumn{1}{c}{\ }  % omit the | 
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                   \textit{used by} \\[-.65ex] \textit{steel} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                   \textit{used by} \\[-.65ex] \textit{auto} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                   \textit{used by} \\[-.65ex] \textit{others} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\textit{total}}             \\ \cline{2-5}
+        \begin{tabular}{r} \textit{value of} \\[-.65ex] 
+                           \textit{steel} 
+            \end{tabular}
+            &$6.90$  &$1.28$  &   &$18.69$                              \\
+        \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{autos} 
+            \end{tabular}
+            &$0$     &$4.40$  &   &$14.27$ 
+      \end{tabular}
+    \end{center}
+    \begin{exparts}
+      \partsitem Solve for total output if next year's external
+         demands are: steel's demand up $10$\% and auto's demand up
+         $15$\%.
+      \partsitem How do the ratios compare to those given above in the
+         discussion for the 1958 economy?
+      \partsitem Solve the 1947 equations with the 1958 external demands
+         (note the difference in units; a 1947 dollar buys about
+         what \$$1.30$ in 1958 dollars buys).
+         How far off are the predictions for total output?
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          These are the equations.
+	  \begin{equation*}
+	    \begin{linsys}{2}
+	       (11.79/18.69)s   &-   &(1.28/14.27)a &= &10.51 \\ 
+	       -(0/18.69)s   &+   &(9.87/14.27)a &= &9.87 
+	    \end{linsys}
+	  \end{equation*}
+          \textit{Sage} gives this result (including an inital check).
+\begin{lstlisting}
+sage: var('a,s')
+(a, s)
+sage: eqns=[(11.79/18.69)*s - (1.28/14.27)*a == 10.51,
+....:       (-0)*s         + (9.87/14.27)*a == 9.87]
+sage: solve(eqns,s,a)
+[[s == (1869/100), a == (1427/100)]]
+sage: n(1869/100)
+18.6900000000000
+sage: n(1427/100)
+14.2700000000000
+sage: eqns=[(11.79/18.69)*s - (1.28/14.27)*a == 11.561,
+....:       (-0)*s         + (9.87/14.27)*a == 11.3505]
+sage: solve(eqns,s,a)
+[[s == (8119559/393000), a == (32821/2000)]]
+sage: n(8119559/393000)
+20.6604554707379
+sage: n(32821/2000)
+16.4105000000000            
+\end{lstlisting}
+	\partsitem
+          These are the 1947 ratios, to three decimal places.
+	  \begin{center}
+            \begin{tabular}{r|cc}
+               1947   &\textit{by steel}  &\textit{by autos}  \\ \hline
+               \textit{use of steel}  &$(6.90/18.69)=0.369$ &$(1.28/14.27)=0.090$  \\
+               \textit{use of autos}  &$(0/18.69)=0.00$ &$(4.40/14.27)=0.308$  
+            \end{tabular}
+          \end{center}
+          These are the 1958 ratios.
+          \begin{center}
+            \begin{tabular}{r|cc}
+               1958           &\textit{by steel}  &\textit{by autos}  \\ \hline
+               \textit{use of steel}  &$(5395/25448)=0.212$ &$(2664/30346)=0.088$  \\
+               \textit{use of autos}  &$(48/25448)=0.002$ &$(9030/30346)=0.298$  
+            \end{tabular}
+          \end{center}
+	\partsitem
+          The external demands in 1958 are $17.589$ and~$21.243$,
+          in billions of 1958 dollars.
+          In 1948 dollars those are $(17.589/1.3)=13.53$ and
+          $(21.243/1.3)=16.34$. 
+          \textit{Sage} gives these numbers.
+\begin{lstlisting}
+sage: eqns=[(11.79/18.69)*s - (1.28/14.27)*a == 13.53,
+....:       (-0)*s         + (9.87/14.27)*a == 16.34]
+sage: solve(eqns,s,a)
+[[s == (137466107/5541300), a == (1165859/49350)]]
+sage: n(137466107/5541300)
+24.8075554472777
+sage: n(1165859/49350)
+23.6242958459980            
+\end{lstlisting}
+      Converting back to 1958 dollars by multiplying by $1.3$ gives
+      $32.25$ and~$30.71$.
+      \end{exparts}
+    \end{answer}
+  \item 
+    Predict next year's total productions of each of the three
+    sectors of the hypothetical economy shown below
+    \begin{center}
+      \begin{tabular}{r|rrrrr}
+             \multicolumn{1}{c}{\ }  % omit the |
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                     \textit{used by} \\[-.65ex] \textit{farm} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                    \textit{used by} \\[-.65ex] \textit{rail} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                    \textit{used by} \\[-.65ex] 
+                                    \textit{shipping} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                   \textit{used by} \\[-.65ex] \textit{others} 
+                                 \end{tabular}}
+             &\textit{total}                                                \\
+             \cline{2-6}
+        \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{farm} 
+             \end{tabular}
+             &$25$  &$50$  &$100$ &     &$800$             \\
+        \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{rail} 
+             \end{tabular}
+             &$25$  &$50$  &$50$  &     &$300$             \\
+        \begin{tabular}{r} \textit{value of} \\[-.65ex] \textit{shipping} 
+             \end{tabular}
+             &$15$  &$10$  &$0$   &     &$500$                          
+      \end{tabular}
+    \end{center}
+    if next year's external demands are as stated.
+    \begin{exparts}
+      \partsitem $625$ for farm, $200$ for rail, $475$ for shipping 
+      \partsitem $650$ for farm, $150$ for rail, $450$ for shipping 
+    \end{exparts}
+  \item 
+      This table gives the interrelationships among three segments of an 
+      economy (see \cite{BangorRpt}).
+      \begin{center}
+        \begin{tabular}{r|rrrrr}
+             \multicolumn{1}{c}{\ }  % omit the |
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                    \textit{used by} \\[-.65ex] \textit{food} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                   \textit{used by} \\[-.65ex] 
+                                   \textit{wholesale} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                    \textit{used by} \\[-.65ex] \textit{retail} 
+                                 \end{tabular}}
+             &\multicolumn{1}{r}{\begin{tabular}[b]{@{}c@{}} 
+                                    \textit{used by} \\[-.65ex] \textit{others} 
+                                 \end{tabular}}
+             &\textit{total}                                             \\
+          \cline{2-6}
+          \begin{tabular}[b]{r} \textit{value of} \\[-.65ex] \textit{food} 
+              \end{tabular}
+              &$0$    &$2\,318$   &$4\,679$   &     &$11\,869$   \\
+          \begin{tabular}[b]{r} \textit{value of} \\[-.65ex] \textit{wholesale}
+              \end{tabular}
+              &$393$  &$1\,089$   &$22\,459$  &     &$122\,242$   \\
+          \begin{tabular}[b]{r} \textit{value of} \\[-.65ex] \textit{retail} 
+              \end{tabular}
+              &$3$    &$53$       &$75$       &     &$116\,041$   \\
+        \end{tabular}
+      \end{center}
+      We will do an Input-Output analysis on this
+      system.
+      \begin{exparts}
+        \partsitem Fill in the numbers for this year's external
+          demands.
+        \partsitem Set up the linear system, leaving next year's
+          external demands blank.
+        \partsitem Solve the system where we get next year's external demands
+          by taking this year's external demands and
+          inflating them $10$\%.
+          Do all three sectors increase their total business by
+          $10$\%?
+          Do they all even increase at the same rate? 
+        \partsitem Solve the system where we get next year's external demands
+          by taking this year's external demands and
+          reducing them $7$\%.
+          (The study from which these numbers come concluded that
+          because of the closing of a local military facility, overall
+          personal income in the area would fall $7$\%, so this might 
+          be a first guess at what would actually happen.)
+      \end{exparts}
+\end{exercises}
+\index{Input-Output Analysis|)}
+\endinput
