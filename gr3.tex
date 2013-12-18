@@ -126,27 +126,27 @@ while the combination operations in the third stage move right to left.
 The middle stage operations that 
 turn the leading entries into \( 1 \)'s
 don't interact, so we can combine multiple ones into a single step.
-\begin{eqnarray*}
+\begin{align*}
     \begin{amat}[r]{2}
        2   &1   &7   \\
        4   &-2  &6
     \end{amat}
   &\grstep{-2\rho_1+\rho_2}
-  &\begin{amat}[r]{2}
+  \begin{amat}[r]{2}
        2   &1   &7   \\
        0   &-4  &-8
     \end{amat}                                   \\
   &\grstep[(-1/4)\rho_2]{(1/2)\rho_1}
-  &\begin{amat}[r]{2}
+  \begin{amat}[r]{2}
        1   &1/2   &7/2   \\
        0   &1     &2
     \end{amat}                                    \\
   &\grstep{-(1/2)\rho_2+\rho_1}
-  &\begin{amat}[r]{2}
+  \begin{amat}[r]{2}
        1   &0   &5/2   \\
        0   &1   &2
     \end{amat}
-\end{eqnarray*}
+\end{align*}
 The answer is $x=5/2$ and $y=2$.
 \end{example}
 
@@ -209,8 +209,8 @@ of an infinite solution set.
      0  &0  &0  &-2 &4
   \end{amat}                                        \\
   \grstep[(1/3)\rho_2 \\ -(1/2)\rho_3]{(1/2)\rho_1}
-  \;\;\grstep[-\rho_3+\rho_1]{-(4/3)\rho_3+\rho_2}
-  \;\;\grstep{-3\rho_2+\rho_1}
+  \repeatedgrstep[-\rho_3+\rho_1]{-(4/3)\rho_3+\rho_2}
+  \repeatedgrstep{-3\rho_2+\rho_1}
   \begin{amat}[r]{4}
      1  &0  &-1/2  &0  &-9/2  \\
      0  &1  &1/3   &0  &3  \\
@@ -261,17 +261,17 @@ is undone by subtracting the same multiple of row \( i \) from row \( j \).
 \begin{equation*}
       A
      \grstep{\rho_i\leftrightarrow\rho_j}
-     \;\grstep{\rho_j\leftrightarrow\rho_i}
+     \repeatedgrstep{\rho_j\leftrightarrow\rho_i}
       A
   \qquad
         A
      \grstep{k\rho_i}
-     \;\grstep{(1/k)\rho_i}
+     \repeatedgrstep{(1/k)\rho_i}
       A
   \qquad
         A
      \grstep{k\rho_i+\rho_j}
-     \;\grstep{-k\rho_i+\rho_j}
+     \repeatedgrstep{-k\rho_i+\rho_j}
       A                          
 \end{equation*}
 %</pf:RowOpsRev>
@@ -398,7 +398,9 @@ class.
        These answers show only the Gauss-Jordan reduction.
        With it, describing the solution set is easy. 
        \begin{exparts}
-         \partsitem $\begin{amat}[r]{2}
+         \partsitem The solution set contains only a single element.
+           \begin{multline*}
+             \begin{amat}[r]{2}
                1  &1  &2  \\
                1  &-1 &0
              \end{amat}
@@ -406,7 +408,7 @@ class.
              \begin{amat}[r]{2}
                1  &1  &2  \\
                0  &-2 &-2
-             \end{amat}                         
+             \end{amat}                          \\                       
              \grstep{-(1/2)\rho_2}
              \begin{amat}[r]{2}
                1  &1  &2  \\
@@ -416,8 +418,10 @@ class.
              \begin{amat}[r]{2}
                1  &0  &1  \\
                0  &1  &1
-             \end{amat}$
-         \partsitem $
+             \end{amat}
+           \end{multline*}
+         \partsitem The solution set has one parameter.
+            \begin{equation*}
              \begin{amat}[r]{3}
                1  &0  &-1  &4  \\
                2  &2  &0   &1
@@ -431,9 +435,10 @@ class.
              \begin{amat}[r]{3}
                1  &0  &-1  &4  \\
                0  &1  &1   &-7/2
-             \end{amat}$
-         \partsitem 
-           \begin{equation*}
+             \end{amat}
+           \end{equation*}
+         \partsitem There is a unique solution.
+           \begin{multline*}
              \begin{amat}[r]{2}
                3  &-2  &1  \\
                6  &1   &1/2
@@ -442,7 +447,7 @@ class.
              \begin{amat}[r]{2}
                3  &-2  &1  \\
                0  &5   &-3/2
-             \end{amat}                       
+             \end{amat}                            \\                       
              \grstep[(1/5)\rho_2]{(1/3)\rho_1}
              \begin{amat}[r]{2}
                1  &-2/3&1/3 \\
@@ -453,8 +458,8 @@ class.
                1  &0   &2/15 \\
                0  &1   &-3/10
              \end{amat}
-          \end{equation*}
-        \partsitem A row swap here makes the arithmetic easier.
+          \end{multline*}
+        \partsitem A row swap in the second step makes the arithmetic easier.
          \begin{multline*}
           \begin{amat}[r]{3}
             2  &-1  &0  &-1  \\
@@ -466,33 +471,33 @@ class.
             2  &-1  &0  &-1   \\
             0  &7/2 &-1 &11/2 \\
             0  &1   &2  &5
-          \end{amat}                     
-          \grstep{\rho_2\leftrightarrow\rho_3}
+          \end{amat}                                \\
+          \begin{aligned}
+          &\grstep{\rho_2\leftrightarrow\rho_3}
           \begin{amat}[r]{3}
             2  &-1  &0  &-1   \\
             0  &1   &2  &5    \\
             0  &7/2 &-1 &11/2
-          \end{amat}                   \\                 
-          \begin{aligned}
-            &\grstep{-(7/2)\rho_2+\rho_3}
+          \end{amat}                      
+            \grstep{-(7/2)\rho_2+\rho_3}
             \begin{amat}[r]{3}
               2  &-1  &0  &-1   \\
               0  &1   &2  &5    \\
               0  &0   &-8 &-12
-            \end{amat}                     
-            \grstep[-(1/8)\rho_2]{(1/2)\rho_1}
+            \end{amat}                               \\     
+            &\grstep[-(1/8)\rho_2]{(1/2)\rho_1}
             \begin{amat}[r]{3}
               1  &-1/2&0  &-1/2 \\
               0  &1   &2  &5    \\
               0  &0   &1  &3/2
-            \end{amat}                     \\                     
-            &\grstep{-2\rho_3+\rho_2}
+            \end{amat}                                
+            \grstep{-2\rho_3+\rho_2}
             \begin{amat}[r]{3}
               1  &-1/2&0  &-1/2 \\
               0  &1   &0  &2    \\
               0  &0   &1  &3/2
-            \end{amat}                     
-            \grstep{(1/2)\rho_2+\rho_1}
+            \end{amat}                                    \\             
+            &\grstep{(1/2)\rho_2+\rho_1}
             \begin{amat}[r]{3}
               1  &0   &0  &1/2  \\
               0  &1   &0  &2    \\
@@ -528,7 +533,9 @@ class.
     \begin{answer}
       Use Gauss-Jordan reduction.
       \begin{exparts}
-        \partsitem $
+        \partsitem The reduced echelon form is all zeroes except
+          for a diagonal of ones.
+          \begin{equation*}
             \grstep{-(1/2)\rho_1+\rho_2}
             \begin{mat}[r]
               2  &1  \\
@@ -543,8 +550,11 @@ class.
             \begin{mat}[r]
               1  &0  \\
               0  &1
-            \end{mat}$
-        \partsitem $
+            \end{mat}
+          \end{equation*}
+        \partsitem As in the prior problem, the reduced echelon form is 
+          all zeroes but for a diagonal of ones.
+          \begin{multline*}
             \grstep[\rho_1+\rho_3]{-2\rho_1+\rho_2}
             \begin{mat}[r]
               1  &3  &1  \\
@@ -556,7 +566,7 @@ class.
               1  &3  &1     \\
               0  &1  &-1/3  \\
               0  &0  &1
-            \end{mat}                  
+            \end{mat}                                      \\              
             \grstep[-\rho_3+\rho_1]{(1/3)\rho_3+\rho_2}
             \begin{mat}[r]
               1  &3  &0     \\
@@ -568,8 +578,11 @@ class.
               1  &0  &0     \\
               0  &1  &0     \\
               0  &0  &1
-            \end{mat}$
-        \partsitem \ \begin{multline*}
+            \end{mat}
+           \end{multline*}
+        \partsitem There are more columns than rows so we must get more
+          than just a diagonal of ones.
+          \begin{multline*}
             \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
             \begin{mat}[r]
               1  &0  &3  &1  &2  \\
@@ -595,7 +608,8 @@ class.
               0  &0  &0    &1  &7/2
             \end{mat}
           \end{multline*}
-        \partsitem \ \begin{multline*}
+        \partsitem As in the prior item, this is not a square matrix. 
+          \begin{multline*}
             \grstep{\rho_1\leftrightarrow\rho_3}
             \begin{mat}[r]
               1  &5  &1  &5  \\
@@ -607,25 +621,27 @@ class.
               1  &5  &1  &5  \\
               0  &1  &3  &2  \\
               0  &0  &5  &6
-            \end{mat}                  
-            \grstep{(1/5)\rho_3}
-            \begin{mat}[r]
-              1  &5  &1  &5  \\
-              0  &1  &3  &2  \\
-              0  &0  &1  &6/5
-            \end{mat}                  \\
-            \grstep[-\rho_3+\rho_1]{-3\rho_3+\rho_2}
-            \begin{mat}[r]
-              1  &5  &0  &19/5  \\
-              0  &1  &0  &-8/5  \\
-              0  &0  &1  &6/5
-            \end{mat}                  
-            \grstep{-5\rho_2+\rho_1}
-            \begin{mat}[r]
-              1  &0  &0  &59/5  \\
-              0  &1  &0  &-8/5  \\
-              0  &0  &1  &6/5
-            \end{mat}
+            \end{mat}                    \\
+            \begin{split}
+              &\grstep{(1/5)\rho_3}
+              \begin{mat}[r]
+                1  &5  &1  &5  \\
+                0  &1  &3  &2  \\
+                0  &0  &1  &6/5
+              \end{mat}                  
+              \grstep[-\rho_3+\rho_1]{-3\rho_3+\rho_2}
+              \begin{mat}[r]
+                1  &5  &0  &19/5  \\
+                0  &1  &0  &-8/5  \\
+                0  &0  &1  &6/5
+              \end{mat}                   \\
+              &\grstep{-5\rho_2+\rho_1}
+              \begin{mat}[r]
+                1  &0  &0  &59/5  \\
+                0  &1  &0  &-8/5  \\
+                0  &0  &1  &6/5
+              \end{mat}
+            \end{split}
           \end{multline*}
       \end{exparts}  
     \end{answer}
@@ -664,7 +680,7 @@ class.
           \begin{amat}[r]{3}
             1  &1/2 &-1/2 &1/2  \\
             0  &1   &-2/3 &-1/3
-          \end{amat}
+          \end{amat}                           
           \grstep{-(1/2)\rho_2+\rho_1}
           \begin{amat}[r]{3}
             1  &0   &-1/6 &2/3  \\
@@ -711,18 +727,18 @@ class.
         \end{equation*}
         (of course, we could omit the zero vector from the description).
       \partsitem The ``Jordan'' half
-        \begin{equation*}
-          \grstep{-(1/7)\rho_2}
+        \begin{align*}
+          &\grstep{-(1/7)\rho_2}
           \begin{amat}[r]{5}
             1  &2  &3   &1   &-1   &1  \\
             0  &1  &8/7 &2/7 &-4/7 &0
-          \end{amat}
-          \grstep{-2\rho_2+\rho_1}
+          \end{amat}                   \\
+          &\grstep{-2\rho_2+\rho_1}
           \begin{amat}[r]{5}
             1  &0  &5/7 &3/7 &1/7  &1  \\
             0  &1  &8/7 &2/7 &-4/7 &0
           \end{amat}
-        \end{equation*}
+        \end{align*}
         ends with this solution set.
         \begin{equation*}
           \set{\colvec[r]{1 \\ 0 \\ 0 \\ 0 \\ 0}
@@ -758,7 +774,7 @@ class.
           0  &0  &19/2 &35
         \end{mat}
       \end{equation*}
-      and any cosmetic change, like multiplying the bottom row by \( 2 \),
+      and any cosmetic change, such as multiplying the bottom row by \( 2 \),
       \begin{equation*}
         \begin{mat}[r]
           2  &1  &1    &3  \\
@@ -899,19 +915,19 @@ class.
       A nonsingular homogeneous linear system has a unique solution.
       So a nonsingular matrix must reduce to a (square) 
       matrix that is all \( 0 \)'s
-      except for \( 1 \)'s down the upper-left to lower-right diagonal, e.g.,
+      except for \( 1 \)'s down the upper-left to lower-right diagonal, 
+      such as these.
       \begin{equation*}
          \begin{mat}[r]
            1  &0  \\
            0  &1  \\
-         \end{mat},
-         \quad\text{or}\quad
+         \end{mat}
+         \qquad
          \begin{mat}[r]
            1  &0  &0  \\
            0  &1  &0  \\
            0  &0  &1
-         \end{mat},
-         \quad\text{etc.}
+         \end{mat}
       \end{equation*}  
     \end{answer}
  \item \cite{Cleary}
@@ -941,12 +957,6 @@ class.
    The proof of \nearbylemma{le:RowOpsRev} contains a reference to the 
    $i\neq j$ condition on the row combination operation.
    \begin{exparts}
-     \partsitem The definition of row operations has an $i\neq j$ condition on
-        the swap operation $\rho_i\leftrightarrow\rho_j$. 
-        Show that in 
-        $A\grstep{\rho_i\leftrightarrow\rho_j}\;
-          \grstep{\rho_i\leftrightarrow\rho_j}A$
-        this condition is not needed.
      \partsitem Write down a $\nbyn{2}$ matrix with nonzero entries,
         and show that the $-1\cdot\rho_1+\rho_1$ operation is not
         reversed by $1\cdot\rho_1+\rho_1$.
@@ -955,8 +965,6 @@ class.
    \end{exparts}
    \begin{answer}
     \begin{exparts}
-      \partsitem The $\rho_i\leftrightarrow\rho_i$ operation does not
-        change $A$.
       \partsitem For instance,
         \begin{equation*}
           \begin{mat}[r]
@@ -975,8 +983,8 @@ class.
           \end{mat}
         \end{equation*}
         leaves the matrix changed.
-      \partsitem If $i\neq j$ then
-        \begin{eqnarray*}
+      \partsitem This operation
+        \begin{equation*}
           \begin{mat}
             \vdotswithin{a_{i,1}}                     \\
             a_{i,1}  &\cdots  &a_{i,n}  \\
@@ -984,26 +992,30 @@ class.
             a_{j,1}  &\cdots  &a_{j,n}  \\
             \vdotswithin{a_{i,1}}                     
           \end{mat}
-          &\grstep{k\rho_i+\rho_j}
-          &\begin{mat}
+          \grstep{k\rho_i+\rho_j}
+          \begin{mat}
             \vdotswithin{a_{i,1}}                                      \\
             a_{i,1}           &\cdots  &a_{i,n}          \\
             \vdotswithin{a_{i,1}}                                      \\
             ka_{i,1}+a_{j,1}  &\cdots  &ka_{i,n}+a_{j,n}  \\
             \vdotswithin{a_{i,1}}                     
-          \end{mat}                                        \\
-          &\grstep{-k\rho_i+\rho_j}
-          &\begin{mat}
+          \end{mat}
+        \end{equation*}      
+        leaves the $i$-th row unchanged because of the $i\neq j$ restriction.
+        Because the $i$-th row is unchanged, this operation 
+        \begin{equation*}                                        
+          \grstep{-k\rho_i+\rho_j}
+          \begin{mat}
             \vdotswithin{a_{i,1}}                                      \\
             a_{i,1}           &\cdots  &a_{i,n}          \\
             \vdotswithin{a_{i,1}}                                      \\
             -ka_{i,1}+ka_{i,1}+a_{j,1}  &\cdots &-ka_{i,n}+ka_{i,n}+a_{j,n} \\
             \vdotswithin{a_{i,1}}                     
           \end{mat}
-        \end{eqnarray*}
-        does indeed give $A$ back.
-        (Of course, if $i=j$ then the third matrix would have entries of the 
-        form $-k(ka_{i,j}+a_{i,j})+ka_{i,j}+a_{i,j}$.)
+        \end{equation*}
+        returns the $j$-th row to its original state.
+        % (If $i=j$ then the third matrix would have entries of the 
+        % form $-k(ka_{i,j}+a_{i,j})+ka_{i,j}+a_{i,j}$.)
     \end{exparts}
    \end{answer}
  \item \cite{Cleary}
@@ -1176,51 +1188,51 @@ they combine the rows linearly, that is, the new rows are
 linear combinations of the old rows.
 
 \begin{example}
-Consider this reduction.
-\begin{multline*}
+Consider this Gauss-Jordan reduction.
+\begin{align*}
   \begin{amat}{2}
     2  &1  &0  \\
     1  &3  &5
   \end{amat}
-  \;\grstep{-(1/2)\rho_1+\rho_2}\;
+  &\grstep{-(1/2)\rho_1+\rho_2}
   \begin{amat}{2}
     2  &1    &0  \\
     0  &5/2  &5
-  \end{amat}
-  \;\grstep[(2/5)\rho_2]{(1/2)\rho_1}\;
+  \end{amat}                           \\
+  &\grstep[(2/5)\rho_2]{(1/2)\rho_1}
   \begin{amat}{2}
     1  &1/2  &0  \\
     0  &1    &2
   \end{amat}                        \\
-  \grstep{-(1/2)\rho_2+\rho_1}\;
+  &\grstep{-(1/2)\rho_2+\rho_1}\;
   \begin{amat}{2}
     1  &0    &-1  \\
     0  &1    &2
   \end{amat}                       
-\end{multline*}
+\end{align*}
 Denoting those matrices $A\rightarrow D\rightarrow G\rightarrow B$
 and writing the rows of $A$ as $\alpha_1$ and $\alpha_2$, etc., we have this.
-\begin{eqnarray*}  % multline looks worse
+\begin{align*}  % multline looks worse
   \left(\begin{array}{l}
     \alpha_1 \\
     \alpha_2
   \end{array}\right)
   &\grstep{-(1/2)\rho_1+\rho_2}
-  &\left(\begin{array}{l}
+  \left(\begin{array}{l}
     \delta_1=\alpha_1 \\
     \delta_2=-(1/2)\alpha_1+\alpha_2
   \end{array}\right)                          \\
   &\grstep[(2/5)\rho_2]{(1/2)\rho_1}
-  &\left(\begin{array}{l}
+  \left(\begin{array}{l}
     \gamma_1=(1/2)\alpha_1 \\
     \gamma_2=-(1/5)\alpha_1+(2/5)\alpha_2
   \end{array}\right)                          \\
   &\grstep{-(1/2)\rho_2+\rho_1}
-  &\left(\begin{array}{l}
+  \left(\begin{array}{l}
     \beta_1=(3/5)\alpha_1-(1/5)\alpha_2  \\
     \beta_2=-(1/5)\alpha_1+(2/5)\alpha_2
   \end{array}\right)                         
-\end{eqnarray*} 
+\end{align*} 
 \end{example}
 
 \begin{example}
@@ -2186,25 +2198,25 @@ and the class of matrices row equivalent to this
      know what $s+c+d$ is.
      Fortunately, $s+c+d$ is a linear combination of $4s+c+10d$ and $3s+c+7d$.
      Calling the unknown price $p$, we have this reduction.
-     \begin{equation*}
+     \begin{align*}
        \begin{amat}{3}
          4  &1  &10  &8.45 \\
          3  &1  &7   &6.30 \\
          1  &1  &1   &p
        \end{amat}
-       \grstep[-(1/4)\rho_1+\rho_3]{-(3/4)\rho_1+\rho_2}
+       &\grstep[-(1/4)\rho_1+\rho_3]{-(3/4)\rho_1+\rho_2}
        \begin{amat}{3}
          4  &1    &10     &8.45      \\
          0  &1/4  &-1/2   &-0.037\,5 \\
          0  &3/4  &-3/2   &p-2.112\,5
-       \end{amat}
-       \grstep{-3\rho_2+\rho_3}
+       \end{amat}                                      \\
+       &\grstep{-3\rho_2+\rho_3}
        \begin{amat}{3}
          4  &1    &10     &8.45      \\
          0  &1/4  &-1/2   &-0.037\,5 \\
          0  &0    &0      &p-2.00
        \end{amat}
-     \end{equation*}
+     \end{align*}
      The price paid is \$$2.00$.
    \end{answer}
   % \item
@@ -2249,9 +2261,9 @@ and the class of matrices row equivalent to this
    \end{enumerate}
    \begin{answer}
      \begin{enumerate}
-        \item An easy answer is this:
+        \item An easy answer is this.
           \begin{equation*}
-            0=3.
+            0=3
           \end{equation*}
           For a less wise-guy-ish answer, solve the system:
           \begin{equation*}
@@ -2269,8 +2281,8 @@ and the class of matrices row equivalent to this
           Now any equation not satisfied by \( (-7/5,11/5) \) will do,
           e.g., \( 5x+5y=3 \).
         \item Every equation can be derived from an inconsistent system.
-          For instance, here is how to derive ``\( 3x+2y=4 \)'' from
-          ``\( 0=5 \)''.
+          For instance, here is how to derive \( 3x+2y=4 \) from
+          \( 0=5 \).
           First,
           \begin{equation*}
             0=5

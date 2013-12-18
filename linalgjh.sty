@@ -43,10 +43,24 @@
 %--------grstep
 % For denoting a Gauss' reduction step.
 % Use as: \grstep{\rho_1+\rho_3} or \grstep[2\rho_5 \\ 3\rho_6]{\rho_1+\rho_3}
+% \newcommand{\grstep}[2][\relax]{%
+%    \ensuremath{\mathrel{
+%        \mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+%                                    \begin{subarray}{l} #1 \end{subarray}}}}}
+
+% Advantage of length formulation is that between adjacent 
+% \grstep's you can add \hspace{-\grsteplength} to make it look not too wide
+\newlength{\grsteplength}
+\setlength{\grsteplength}{1.5ex plus .1ex minus .1ex}
+
 \newcommand{\grstep}[2][\relax]{%
    \ensuremath{\mathrel{
-       \mathop{\longrightarrow}\limits^{#2\mathstrut}_{
-                                     \begin{subarray}{l} #1 \end{subarray}}}}}
+       \hspace{\grsteplength}\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}\hspace{\grsteplength}}}}
+% If two or more \grsteps are in a row then they need to be tightened
+\newcommand{\repeatedgrstep}[2][\relax]{\hspace{-\grsteplength}\grstep[#1]{#2}}
+
+% row swap operation: \rho_1\swap\rho_2
 \newcommand{\swap}{\leftrightarrow}
 
 
@@ -91,12 +105,14 @@
 % There is an optional argument \begin{mat}[r]{3} .. \end{mat} for
 % right-flushed columns.  Perhaps the rule is that numbers are better 
 % right-flushed but if there are any letters it is better centered?
-\newenvironment{mat}[1][c]{\begin{pmatrix*}[#1] % If mat starts with &\vdots get an error; why?  No apparent macro fix, according to texexchange
+\newenvironment{mat}[1][c]{\begin{pmatrix*} % disable optional arg [#1] 
       }{\end{pmatrix*}}
-\newenvironment{vmat}[1][c]{\begin{vmatrix*}[#1] %
+% If mat starts with &\vdots get an error; why?  No apparent macro fix, according to texexchange
+\newenvironment{vmat}[1][c]{\begin{vmatrix*} % disable optional arg [#1] 
       }{\end{vmatrix*}}
 \newenvironment{amat}[2][c]{%
-  \left(\begin{array}{@{}*{#2}{#1}|#1@{}}
+  % disable optional arg \left(\begin{array}{@{}*{#2}{#1}|#1@{}}
+  \left(\begin{array}{@{}*{#2}{c}|#1@{}}
 }{%
   \end{array}\right)
 }
@@ -223,6 +239,8 @@
 
 %\newcommand{\implies}{\Longrightarrow}
 \newcommand{\isimpliedby}{\Longleftarrow}
+
+\newcommand{\Sage}{\textit{Sage}}
 
 %\newcommand{\complement}[1]{\overline{#1}}
 \newcommand{\cat}[2]{#1\!\mathbin{\raise.6ex\hbox{\( {}^\frown \)}}\!#2}
