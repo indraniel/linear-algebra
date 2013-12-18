@@ -31,13 +31,13 @@ construct is that the \lstinline[style=inline]!-=! in the innermost
 loop has the effect of
 \lstinline[style=inline]!a[row_below,col]=-1*multiplier*a[row,col]+a[row_below,col]!.
 
-That code gives a quick first take on mechanizing Gauss's Method.
-But it is naive; it needs more development to make it practical.
+While that code is a first take on mechanizing Gauss's Method,
+it is naive.
 For one thing, it assumes that 
 the entry in the
 \lstinline[style=inline]!row,row! position is nonzero.
-So it needs to be extended cover
-the case where finding a zero in that location leads to a row swap, or to the
+So one way that it needs to be extended is to cover
+the case where finding a zero in that location leads to a row swap or to the
 conclusion that the matrix is singular.
 
 We could add some \lstinline[style=inline]!if! statements to cover those cases 
@@ -189,7 +189,7 @@ for(row=1; row<=n-1; row++){
 \end{lstlisting}
 
 A full analysis of the best way to implement Gauss's Method 
-is outside the scope of the book (see \cite{Wilkinson65}),
+is beyond the scope of this book (see \cite{Wilkinson65}),
 but the method recommended by most experts 
 first finds the best entry
 among the candidates and then scales it to a number that is less
@@ -216,18 +216,16 @@ where experts have worked hard to counter what can go wrong.
   \item 
     Using two decimal places, add $253$ and $2/3$.
     \begin{answer}
-      Scientific notation is convenient to express the two-place restriction.
-      We have $.25\times 10^{2}+.67\times 10^{0}=.25\times 10^{2}$.
-      The $2/3$ has no apparent effect.
+      Scientific notation because is convenient for expressing 
+      the two-place restriction:
+      $.25\times 10^{2}+.67\times 10^{0}=.25\times 10^{2}$.
+      Notice that the $2/3$ has no effect.
     \end{answer}
   \item 
     This intersect-the-lines problem contrasts with the example
     discussed above.
     \begin{center}
-      \renewcommand{\arraystretch}{1.5}
-      \begin{tabular}{@{}c@{}}
-        \includegraphics{ch1.34}
-      \end{tabular}
+      \vcenteredhbox{\includegraphics{ch1.34}}
       \qquad
       $\displaystyle \begin{linsys}{2}
             x &+ &2y &= &3  \\
@@ -244,11 +242,13 @@ where experts have worked hard to counter what can go wrong.
       \begin{equation*}
         \grstep{-3\rho_1+\rho_2}
         \begin{linsys}{2}
-          x  &+  &2y  &=  &3  \\
-             &   &-8  &=  &-7.992
+          x  &+  &2y   &=  &3  \\
+             &   &-8y  &=  &-7.992
         \end{linsys}
       \end{equation*}
-      gives a solution of \( (x,y)=(1.002,0.999) \).
+      gives \( (x,y)=(1.002,0.999) \).
+      So for this system a small change in the constant produces only a small
+      change in the solution.
     \end{answer}
   \item 
     Solve this system by hand (\cite{Rice}).
@@ -266,16 +266,16 @@ where experts have worked hard to counter what can go wrong.
     \begin{answer}
       \begin{exparts}
         \partsitem The fully accurate solution is that $x=10$ and $y=0$.
-        \partsitem The four-digit conclusion is quite different.
+        \partsitem The four-digit reduction
           \begin{equation*}
             \grstep{-(.3454/.0003)\rho_1+\rho_2}
             \begin{amat}{2}
               .0003  &1.556  &1.569  \\
               0      &1789   &-1805
             \end{amat}
-            \Longrightarrow
-            x=10460,\,y=-1.009
           \end{equation*}
+          gives the conclusion that $x=10460$ and~$y=-1.009$. 
+          Of course, this is wildly different than the correct answer.
       \end{exparts}
     \end{answer}
   \item 
@@ -295,6 +295,7 @@ where experts have worked hard to counter what can go wrong.
           $.666\,666\,67-.333\,333\,33=.333\,333\,34$
           and so 
           $(2/3)+((2/3)-(1/3))=.666\,666\,67+.333\,333\,34=1.000\,000\,0$.
+
           For the other one, first 
           $((2/3)+(2/3))=.666\,666\,67+.666\,666\,67=1.333\,333\,3$
           and so 
@@ -334,26 +335,31 @@ where experts have worked hard to counter what can go wrong.
     \begin{answer}
       \begin{exparts}
         \partsitem This calculation
-          \begin{eqnarray*}
-            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}\;
-            &\begin{amat}{3}
+          \begin{align*}
+            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}
+            \begin{amat}{3}
               3  &2                   &1                   &6               \\
               0  &-(4/3)+2\varepsilon &-(2/3)+2\varepsilon &-2+4\varepsilon \\
               0  &-(2/3)+2\varepsilon &-(1/3)-\varepsilon  &-1+\varepsilon 
             \end{amat}                                                    \\
-            &\grstep{-(1/2)\rho_2+\rho_3}\;
-            &\begin{amat}{3}
+            &\grstep{-(1/2)\rho_2+\rho_3}
+            \begin{amat}{3}
               3  &2                   &1                   &6               \\
               0  &-(4/3)+2\varepsilon &-(2/3)+2\varepsilon &-2+4\varepsilon \\
               0  &\varepsilon         &-2\varepsilon       &-\varepsilon 
             \end{amat}
-          \end{eqnarray*}
+          \end{align*}
           gives a third equation of $y-2z=-1$.
           Substituting into the second equation gives 
           $((-10/3)+6\varepsilon)\cdot z=(-10/3)+6\varepsilon$ 
           so $z=1$ and thus $y=1$.
           With those, the first equation says that $x=1$. 
-        \partsitem The solution with two digits kept 
+        \partsitem 
+          As above, scientific notation is convenient to express the
+          restriction on the numbe of digits.
+
+          The solution with two digits retained
+          is $z=2.1$, $y=2.6$, and $x=-.43$.
           \begin{multline*}
             \begin{amat}{3}
               .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1} 
@@ -364,7 +370,7 @@ where experts have worked hard to counter what can go wrong.
                  &.10\times 10^{1}        
             \end{amat}                                           \\
             \begin{aligned}
-            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}\;
+            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}
             \begin{amat}{3}
               .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1} 
                  &.60\times 10^{1}        \\
@@ -373,7 +379,7 @@ where experts have worked hard to counter what can go wrong.
               0                 &-.67\times 10^{0}  &-.33\times 10^{0} 
                  &-.10\times 10^{1}        
             \end{amat}                                          \\
-            &\grstep{-(.67/1.3)\rho_2+\rho_3}\;
+            &\grstep{-(.67/1.3)\rho_2+\rho_3}
             \begin{amat}{3}
               .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1} 
                  &.60\times 10^{1}        \\
@@ -384,7 +390,6 @@ where experts have worked hard to counter what can go wrong.
             \end{amat}
             \end{aligned}
           \end{multline*}
-          comes out to be $z=2.1$, $y=2.6$, and $x=-.43$.
       \end{exparts}
     \end{answer}
 \end{exercises}

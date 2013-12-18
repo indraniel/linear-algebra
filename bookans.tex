@@ -4050,9 +4050,10 @@ sage: solve(system, x,y)
 \end{ans}
 \topic{Accuracy of Computations}
 \begin{ans}{1}
-      Scientific notation is convenient to express the two-place restriction.
-      We have $.25\times 10^{2}+.67\times 10^{0}=.25\times 10^{2}$.
-      The $2/3$ has no apparent effect.
+      Scientific notation because is convenient for expressing
+      the two-place restriction:
+      $.25\times 10^{2}+.67\times 10^{0}=.25\times 10^{2}$.
+      Notice that the $2/3$ has no effect.
     
 \end{ans}
 \begin{ans}{2}
@@ -4060,26 +4061,28 @@ sage: solve(system, x,y)
       \begin{equation*}
         \grstep{-3\rho_1+\rho_2}
         \begin{linsys}{2}
-          x  &+  &2y  &=  &3  \\
-             &   &-8  &=  &-7.992
+          x  &+  &2y   &=  &3  \\
+             &   &-8y  &=  &-7.992
         \end{linsys}
       \end{equation*}
-      gives a solution of \( (x,y)=(1.002,0.999) \).
+      gives \( (x,y)=(1.002,0.999) \).
+      So for this system a small change in the constant produces only a small
+      change in the solution.
     
 \end{ans}
 \begin{ans}{3}
       \begin{exparts}
         \partsitem The fully accurate solution is that $x=10$ and $y=0$.
-        \partsitem The four-digit conclusion is quite different.
+        \partsitem The four-digit reduction
           \begin{equation*}
             \grstep{-(.3454/.0003)\rho_1+\rho_2}
             \begin{amat}{2}
               .0003  &1.556  &1.569  \\
               0      &1789   &-1805
             \end{amat}
-            \Longrightarrow
-            x=10460,\,y=-1.009
           \end{equation*}
+          gives the conclusion that $x=10460$ and~$y=-1.009$.
+          Of course, this is wildly different than the correct answer.
       \end{exparts}
     
 \end{ans}
@@ -4089,6 +4092,7 @@ sage: solve(system, x,y)
           $.666\,666\,67-.333\,333\,33=.333\,333\,34$
           and so
           $(2/3)+((2/3)-(1/3))=.666\,666\,67+.333\,333\,34=1.000\,000\,0$.
+
           For the other one, first
           $((2/3)+(2/3))=.666\,666\,67+.666\,666\,67=1.333\,333\,3$
           and so
@@ -4103,26 +4107,31 @@ sage: solve(system, x,y)
 \begin{ans}{5}
       \begin{exparts}
         \partsitem This calculation
-          \begin{eqnarray*}
-            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}\;
-            &\begin{amat}{3}
+          \begin{align*}
+            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}
+            \begin{amat}{3}
               3  &2                   &1                   &6               \\
               0  &-(4/3)+2\varepsilon &-(2/3)+2\varepsilon &-2+4\varepsilon \\
               0  &-(2/3)+2\varepsilon &-(1/3)-\varepsilon  &-1+\varepsilon
             \end{amat}                                                    \\
-            &\grstep{-(1/2)\rho_2+\rho_3}\;
-            &\begin{amat}{3}
+            &\grstep{-(1/2)\rho_2+\rho_3}
+            \begin{amat}{3}
               3  &2                   &1                   &6               \\
               0  &-(4/3)+2\varepsilon &-(2/3)+2\varepsilon &-2+4\varepsilon \\
               0  &\varepsilon         &-2\varepsilon       &-\varepsilon
             \end{amat}
-          \end{eqnarray*}
+          \end{align*}
           gives a third equation of $y-2z=-1$.
           Substituting into the second equation gives
           $((-10/3)+6\varepsilon)\cdot z=(-10/3)+6\varepsilon$
           so $z=1$ and thus $y=1$.
           With those, the first equation says that $x=1$.
-        \partsitem The solution with two digits kept
+        \partsitem
+          As above, scientific notation is convenient to express the
+          restriction on the numbe of digits.
+
+          The solution with two digits retained
+          is $z=2.1$, $y=2.6$, and $x=-.43$.
           \begin{multline*}
             \begin{amat}{3}
               .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1}
@@ -4133,7 +4142,7 @@ sage: solve(system, x,y)
                  &.10\times 10^{1}
             \end{amat}                                           \\
             \begin{aligned}
-            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}\;
+            &\grstep[-(1/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}
             \begin{amat}{3}
               .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1}
                  &.60\times 10^{1}        \\
@@ -4142,7 +4151,7 @@ sage: solve(system, x,y)
               0                 &-.67\times 10^{0}  &-.33\times 10^{0}
                  &-.10\times 10^{1}
             \end{amat}                                          \\
-            &\grstep{-(.67/1.3)\rho_2+\rho_3}\;
+            &\grstep{-(.67/1.3)\rho_2+\rho_3}
             \begin{amat}{3}
               .30\times 10^{1}  &.20\times 10^{1}  &.10\times 10^{1}
                  &.60\times 10^{1}        \\
@@ -4153,7 +4162,6 @@ sage: solve(system, x,y)
             \end{amat}
             \end{aligned}
           \end{multline*}
-          comes out to be $z=2.1$, $y=2.6$, and $x=-.43$.
       \end{exparts}
     
 \end{ans}
