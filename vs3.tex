@@ -458,7 +458,7 @@ That will start in the next subsection.
               3  &1  &1  &z
             \end{amat}
             \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
-            \;\grstep{-2\rho_2+\rho_3}
+            \repeatedgrstep{-2\rho_2+\rho_3}
             \begin{amat}{3}
               1  &3  &0  &x \hfill\hbox{}  \\
               0  &-4 &0  &-2x+y \hfill\hbox{}  \\
@@ -483,7 +483,7 @@ That will start in the next subsection.
               3  &1  &z
             \end{amat}
             \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
-            \;\grstep{-2\rho_2+\rho_3}
+            \repeatedgrstep{-2\rho_2+\rho_3}
             \begin{amat}{2}
               1  &3  &x\hfill\hbox{}  \\ 
               0  &-4 &-2x+y\hfill\hbox{}  \\
@@ -506,8 +506,8 @@ That will start in the next subsection.
              -1  &1  &0  &z 
             \end{amat}
             \grstep{\rho_1\swap\rho_3}
-            \;\grstep{2\rho_1+\rho_2}
-            \;\grstep{-(1/3)\rho_2+\rho_3}
+            \repeatedgrstep{2\rho_1+\rho_2}
+            \repeatedgrstep{-(1/3)\rho_2+\rho_3}
             \begin{amat}{3}
              -1  &1  &0   &z  \hfill\hbox{} \\
               0  &3  &5   &y+2z \hfill\hbox{} \\
@@ -525,8 +525,8 @@ That will start in the next subsection.
              -1  &1  &0  &z  
             \end{amat}
             \grstep{\rho_1\swap\rho_3}
-            \;\grstep{2\rho_1+\rho_2}
-            \grstep{(-1/3)\rho_2+\rho_3}
+            \repeatedgrstep{2\rho_1+\rho_2}
+            \repeatedgrstep{(-1/3)\rho_2+\rho_3}
             \begin{amat}{3}
              -1  &1  &0  &z  \hfill\hbox{} \\
               0  &3  &3  &y+2z  \hfill\hbox{} \\
@@ -621,13 +621,13 @@ That will start in the next subsection.
       gives that the only condition is that 
       $x_1=4x_2-3x_3+x_4$.
       The solution set is
-      \begin{equation*}
+      \begin{multline*}
         \set{\colvec{4x_2-3x_3+x_4 \\ x_2 \\ x_3 \\ x_4}
-               \suchthat x_2,x_3,x_4\in\Re}
+               \suchthat x_2,x_3,x_4\in\Re}                          \\
         =\set{x_2\colvec[r]{4 \\ 1 \\ 0 \\ 0}
              +x_3\colvec[r]{-3 \\ 0 \\ 1 \\ 0}
              +x_4\colvec[r]{1 \\ 0 \\ 0 \\ 1} \suchthat x_2,x_3,x_4\in\Re}
-      \end{equation*}
+      \end{multline*}
       and so the obvious candidate for the basis is this.
       \begin{equation*}
        \sequence{\colvec[r]{4 \\ 1 \\ 0 \\ 0},
@@ -686,10 +686,10 @@ That will start in the next subsection.
             $a_2=2a_1+a_0$.
             Then
             $a_2x^2+a_1x+a_0$ is $(2a_1+a_0)x^2+a_1x+a_0$ and
-            \begin{equation*} 
-              \set{(2a_1+a_0)x^2+a_1x+a_0\suchthat a_1,a_0\in\Re}
+            \begin{multline*} 
+              \set{(2a_1+a_0)x^2+a_1x+a_0\suchthat a_1,a_0\in\Re}          \\
               =\set{a_1\cdot(2x^2+x)+a_0\cdot(x^2+1)\suchthat a_1,a_0\in\Re}
-            \end{equation*}
+            \end{multline*}
             suggests 
             $\sequence{2x^2+x,x^2+1}$.
             This only shows that 
@@ -746,7 +746,7 @@ That will start in the next subsection.
           c_1\cdot 1    &+  &c_2\cdot 2   &=  &0  \\
           c_1\cdot (-1) &+  &c_2\cdot 3   &=  &0  
         \end{linsys}
-        \;\grstep{\rho_1+\rho_2}\;
+        \grstep{\rho_1+\rho_2}
         \begin{linsys}{2}
           c_1  &+  &2c_2   &=  &0  \\
                &+  &5c_2   &=  &0 
@@ -804,8 +804,8 @@ That will start in the next subsection.
                -2c_1 &  &      &= &a_1 \\
                      &  &4c_2  &= &a_2
               \end{linsys}
-             \;\grstep{\rho_1+\rho_2}
-             \;\grstep{(-4/3)\rho_2+\rho_3}\;
+             \grstep{\rho_1+\rho_2}
+             \repeatedgrstep{(-4/3)\rho_2+\rho_3}
              \begin{linsys}{2}
                2c_1  &+ &3c_2  &= &a_0\hfill\hbox{} \\
                      &  &3c_2  &= &a_0+a_1\hfill\hbox{} \\
@@ -815,8 +815,10 @@ That will start in the next subsection.
            Thus, the only quadratic polynomials $a_0+a_1x+a_2x^2$ with 
            associated $c$'s are the ones such that 
            $0=(-4/3)a_0-(4/3)a_1+a_2$.
-           Hence the span is
-           $\set{(-a_1+(3/4)a_2)+a_1x+a_2x^2\suchthat a_1,a_2\in\Re}$.
+           Hence the span is this.
+           \begin{equation*}
+             \set{(-a_1+(3/4)a_2)+a_1x+a_2x^2\suchthat a_1,a_2\in\Re}
+           \end{equation*}
            Parametrizing gives
            $\set{a_1\cdot (-1+x)+a_2\cdot ((3/4)+x^2)\suchthat a_1,a_2\in\Re}$,
            which suggests $\sequence{-1+x,(3/4)+x^2}$
@@ -838,12 +840,17 @@ That will start in the next subsection.
     \end{exparts}
     \begin{answer}
        \begin{exparts}
-        \partsitem The subspace is
-          \( \set{a_0+a_1x+a_2x^2+a_3x^3 \suchthat a_0+7a_1+49a_2+343a_3=0 }\).
-          Rewriting $a_0=-7a_1-49a_2-343a_3$ gives
-          \( \set{(-7a_1-49a_2-343a_3)+a_1x+a_2x^2+a_3x^3 
-               \suchthat a_1,a_2,a_3\in\Re }\), which, on breaking out the
-          parameters, suggests \( \sequence{-7+x,-49+x^2,-343+x^3} \)  
+        \partsitem The subspace is this.
+          \begin{equation*}
+             \set{a_0+a_1x+a_2x^2+a_3x^3 \suchthat a_0+7a_1+49a_2+343a_3=0 }
+          \end{equation*}
+          Rewriting $a_0=-7a_1-49a_2-343a_3$ gives this.
+          \begin{equation*}
+             \set{(-7a_1-49a_2-343a_3)+a_1x+a_2x^2+a_3x^3 
+               \suchthat a_1,a_2,a_3\in\Re }
+          \end{equation*}
+          On breaking out the
+          parameters, this suggests \( \sequence{-7+x,-49+x^2,-343+x^3} \)  
           for the basis (it is easily verified).
         \partsitem The given subspace is the collection of cubics
           $p(x)=a_0+a_1x+a_2x^2+a_3x^3$ such that $a_0+7a_1+49a_2+343a_3=0$
@@ -854,7 +861,7 @@ That will start in the next subsection.
               a_0  &+  &7a_1  &+  &49a_2  &+  &343a_3  &=  &0  \\
               a_0  &+  &5a_1  &+  &25a_2  &+  &125a_3  &=  &0    
             \end{linsys}
-            \;\grstep{-\rho_1+\rho_2}\;
+            \grstep{-\rho_1+\rho_2}
             \begin{linsys}{4}
               a_0  &+  &7a_1  &+  &49a_2  &+  &343a_3  &=  &0  \\
                    &   &-2a_1 &-  &24a_2  &-  &218a_3  &=  &0    
@@ -879,8 +886,8 @@ That will start in the next subsection.
               a_0  &+  &5a_1  &+  &25a_2  &+  &125a_3  &=  &0  \\    
               a_0  &+  &3a_1  &+  &9a_2   &+  &27a_3   &=  &0    
             \end{linsys}
-            \;\grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}
-            \;\grstep{-2\rho_2+\rho_3}\;
+            \grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}
+            \repeatedgrstep{-2\rho_2+\rho_3}
             \begin{linsys}{4}
               a_0  &+  &7a_1  &+  &49a_2  &+  &343a_3  &=  &0  \\
                    &   &-2a_1 &-  &24a_2  &-  &218a_3  &=  &0  \\    
@@ -890,10 +897,11 @@ That will start in the next subsection.
           yields the single free variable $a_3$, with 
           $a_2=-15a_3$, $a_1=71a_3$, and $a_0=-105a_3$.
           The parametrization is this.
-          \begin{equation*} 
-            \set{(-105a_3)+(71a_3)x+(-15a_3)x^2+(a_3)x^3\suchthat a_3\in\Re}=
+          \begin{multline*} 
+            \set{(-105a_3)+(71a_3)x+(-15a_3)x^2+(a_3)x^3\suchthat a_3\in\Re} \\
+            =
             \set{a_3\cdot(-105+71x-15x^2+x^3)\suchthat a_3\in\Re}
-          \end{equation*}
+          \end{multline*}
           Therefore, a natural candidate for the basis is 
           $\sequence{-105+71x-15x^2+x^3}$.
           It spans the space by the work above.
@@ -938,10 +946,10 @@ That will start in the next subsection.
     \end{exparts}
     \begin{answer}
       \begin{exparts}
-         \partsitem To show that it is linearly independent, note that
+         \partsitem To show that it is linearly independent, note that if
            \( d_1(c_1\vec{\beta}_1)+d_2(c_2\vec{\beta}_2)+d_3(c_3\vec{\beta}_3)
                =\zero \)
-           gives that
+           then
            \( (d_1c_1)\vec{\beta}_1+(d_2c_2)\vec{\beta}_2+(d_3c_3)\vec{\beta}_3
                =\zero \), which in turn 
            implies that each \( d_ic_i \) is zero.
@@ -1236,16 +1244,16 @@ That will start in the next subsection.
     \end{equation*}
     Find a basis.
     \begin{answer}
-      We have (using these peculiar operations with care)
-      \begin{equation*}
+      We have (using these odball operations with care)
+      \begin{multline*}
         \set{\colvec{1-y-z \\ y \\ z}\suchthat y,z\in\Re}
          =\set{\colvec{-y+1 \\ y \\ 0}
                +\colvec{-z+1 \\ 0 \\ z}
-              \suchthat y,z\in\Re}              
+              \suchthat y,z\in\Re}                           \\
          =\set{y\cdot\colvec{0 \\ 1 \\ 0}
                +z\cdot\colvec{0 \\ 0 \\ 1}
               \suchthat y,z\in\Re}
-      \end{equation*}
+      \end{multline*}
       and so a natural candidate for a basis is this.
       \begin{equation*}
         \sequence{\colvec[r]{0 \\ 1 \\ 0},\colvec[r]{0 \\ 0 \\ 1}}
@@ -1699,11 +1707,11 @@ that the two senses of `minimal' are equivalent.
     the vector space of \( \nbyn{2} \) matrices.
     \begin{answer}
       For this space
-      \begin{equation*}
+      \begin{multline*}
         \set{\begin{mat}
                a  &b  \\
                c  &d
-             \end{mat} \suchthat a,b,c,d\in\Re}
+             \end{mat} \suchthat a,b,c,d\in\Re}            \\
         =\set{a\cdot\begin{mat}[r]
              1  &0  \\
              0  &0
@@ -1713,7 +1721,7 @@ that the two senses of `minimal' are equivalent.
              0  &0  \\
              0  &1
            \end{mat} \suchthat a,b,c,d\in\Re}
-      \end{equation*}
+      \end{multline*}
       this is a natural basis.
       \begin{equation*}
         \sequence{
@@ -1775,11 +1783,11 @@ that the two senses of `minimal' are equivalent.
         \end{equation*}
         and so the dimension is four.
       \partsitem For this space
-        \begin{equation*}
+        \begin{multline*}
          \set{\begin{mat}
                a  &b  \\
                c  &d
-             \end{mat} \suchthat \text{$a=b-2c$ and $d\in\Re$}}
+             \end{mat} \suchthat \text{$a=b-2c$ and $d\in\Re$}}     \\
          =\set{b\cdot\begin{mat}[r]
              1  &1  \\
              0  &0
@@ -1792,7 +1800,7 @@ that the two senses of `minimal' are equivalent.
              0  &0  \\
              0  &1
            \end{mat} \suchthat b,c,d\in\Re}
-        \end{equation*}
+        \end{multline*}
         this is a natural basis.
         \begin{equation*}
           \sequence{
@@ -1987,7 +1995,7 @@ that the two senses of `minimal' are equivalent.
     operations.
     \begin{answer}
       We need only produce an infinite linearly independent set.
-      One is \( \sequence{f_1,f_2,\ldots} \) where
+      One is such sequence is \( \sequence{f_1,f_2,\ldots} \) where
       \( \map{f_i}{\Re}{\Re} \) is
       \begin{equation*}
          f_i(x)=\begin{cases}
@@ -2205,9 +2213,11 @@ that the two senses of `minimal' are equivalent.
             Since \( U \) and \( W \) have the same bases, they are equal.
           \partsitem Let \( W \) be the space of finite-degree polynomials and
             let \( U \) be the subspace of polynomials that have only
-            even-powered terms
-            \( \set{a_0+a_1x^2+a_2x^4+\dots+a_nx^{2n}\suchthat
-                a_0,\ldots,a_n\in\Re} \).
+            even-powered terms.
+            \begin{equation*}
+               \set{a_0+a_1x^2+a_2x^4+\dots+a_nx^{2n}\suchthat
+                a_0,\ldots,a_n\in\Re} 
+            \end{equation*}
             Both spaces have infinite dimension, but \( U \) is a proper
             subspace.
        \end{exparts}  
@@ -2417,20 +2427,20 @@ From any matrix, we can produce a basis for the row space by
 performing Gauss's Method and taking the nonzero rows of the resulting
 echelon form matrix.
 For instance,
-\begin{eqnarray*}
+\begin{equation*}
   \begin{mat}[r]
     1  &3  &1  \\
     1  &4  &1  \\
     2  &0  &5
   \end{mat}
-  &\grstep[-2\rho_1+\rho_3]{-\rho_1+\rho_2}
-  \;\grstep{6\rho_2+\rho_3}
-  &\begin{mat}[r]
+  \grstep[-2\rho_1+\rho_3]{-\rho_1+\rho_2}
+  \repeatedgrstep{6\rho_2+\rho_3}
+  \begin{mat}[r]
     1  &3  &1  \\
     0  &1  &0  \\
     0  &0  &3
   \end{mat}
-\end{eqnarray*}
+\end{equation*}
 produces the basis $\sequence{\rowvec{1 &3 &1},
             \rowvec{0 &1 &0},
             \rowvec{0 &0 &3} }$ for the row space.
@@ -2484,20 +2494,20 @@ Given this matrix,
 \end{equation*}
 to get a basis for the column space,
 temporarily turn the columns into rows and reduce.
-\begin{eqnarray*}
+\begin{equation*}
     \begin{mat}[r]
        1  &2  &0  &4  \\
        3  &3  &1  &0  \\
        7  &8  &2  &4
     \end{mat}
-  &\grstep[-7\rho_1+\rho_3]{-3\rho_1+\rho_2}
-  \;\grstep{-2\rho_2+\rho_3}
-  &\begin{mat}[r]
+  \grstep[-7\rho_1+\rho_3]{-3\rho_1+\rho_2}
+  \repeatedgrstep{-2\rho_2+\rho_3}
+  \begin{mat}[r]
      1  &2  &0  &4  \\
      0  &-3 &1  &-12\\
      0  &0  &0  &0
   \end{mat}
-\end{eqnarray*}
+\end{equation*}
 Now turn the rows back to columns.
 \begin{equation*}
   \sequence{
@@ -2530,20 +2540,20 @@ To get a basis for the span of
 as ``the same'' as the row vectors \( \rowvec{0 &0 &1 &0 &1} \),
 \( \rowvec{0 &0 &2 &0 &3} \), and
 \( \rowvec{0 &0 &-1 &0 &-3} \), apply Gauss's Method
-\begin{eqnarray*}
+\begin{equation*}
   \begin{mat}[r]
     0  &0  &1  &0  &1  \\
     0  &0  &2  &0  &3  \\
     0  &0  &-1 &0  &-3
   \end{mat}
-  &\grstep[\rho_1+\rho_3]{-2\rho_1+\rho_2}
-  \;\grstep{2\rho_2+\rho_3}
-  &\begin{mat}[r]
+  \grstep[\rho_1+\rho_3]{-2\rho_1+\rho_2}
+  \repeatedgrstep{2\rho_2+\rho_3}
+  \begin{mat}[r]
     0  &0  &1  &0  &1  \\
     0  &0  &0  &0  &1  \\
     0  &0  &0  &0  &0
   \end{mat}
-\end{eqnarray*}
+\end{equation*}
 and translate back to get the basis
 \( \sequence{x^2+x^4,x^4} \).
 (As mentioned earlier, 
@@ -2557,17 +2567,17 @@ Gaussian reduction.
 
 For the second point
 observe that row operations on a matrix can change its column space.
-\begin{eqnarray*}
+\begin{equation*}
   \begin{mat}[r]
     1  &2  \\
     2  &4
   \end{mat}
-  &\grstep{-2\rho_1+\rho_2}
-  &\begin{mat}[r]
+  \grstep{-2\rho_1+\rho_2}
+  \begin{mat}[r]
     1  &2  \\
     0  &0
   \end{mat}
-\end{eqnarray*}
+\end{equation*}
 The column space of the left-hand matrix contains vectors with
 a second component that is nonzero
 but the column space of the right-hand matrix 
@@ -2611,19 +2621,19 @@ Gauss's Method has something to say about the column space as well as about
 the row space is with Gauss-Jordan reduction.
 Recall that it ends with
 the reduced echelon form of a matrix, as here.
-\begin{eqnarray*}
+\begin{equation*}
   \begin{mat}[r]
     1  &3  &1  &6  \\
     2  &6  &3  &16 \\
     1  &3  &1  &6
   \end{mat}
-  &\grstep{}\;\cdots\;\grstep{}
-  &\begin{mat}[r]
+  \grstep{}\cdots\grstep{}
+  \begin{mat}[r]
     1  &3  &0  &2  \\
     0  &0  &1  &4  \\
     0  &0  &0  &0
   \end{mat}
-\end{eqnarray*}
+\end{equation*}
 Consider the row space and the column space of this result.
 
 The first point made earlier in this subsection says
@@ -2838,8 +2848,8 @@ Where there are \( r \) independent equations, the general solution involves
                3  &1   &7   &1
              \end{amat}
              \grstep{\rho_1\leftrightarrow\rho_2}
-             \;\grstep{-3\rho_1+\rho_2}
-             \;\grstep{\rho_2+\rho_3}
+             \grstep{-3\rho_1+\rho_2}
+             \repeatedgrstep{\rho_2+\rho_3}
              \begin{amat}[r]{3}
                1  &0   &2   &1  \\
                0  &-1  &-1  &1  \\
@@ -2880,7 +2890,7 @@ Where there are \( r \) independent equations, the general solution involves
                  c_1  &+  &c_2  &=  &3  
               \end{linsys}
               \grstep{-\rho_1+\rho_2}
-              \;\begin{linsys}{2}
+              \begin{linsys}{2}
                  c_1  &+  &c_2  &=  &1  \\
                       &   &0    &=  &2  
               \end{linsys}
@@ -2902,7 +2912,7 @@ Where there are \( r \) independent equations, the general solution involves
                 1  &-3 &-3 &0
               \end{amat}
               \grstep[-\rho_1+\rho_3]{-2\rho_1+\rho_2}
-              \;\grstep{-\rho_2+\rho_3}
+              \repeatedgrstep{-\rho_2+\rho_3}
               \begin{amat}[r]{3}
                 1  &3  &1  &1  \\
                 0  &-6 &2  &-2 \\
@@ -2943,7 +2953,7 @@ Where there are \( r \) independent equations, the general solution involves
               2c_1  &+  &c_2  &=  &1  \\
               2c_1  &+  &5c_2 &=  &-3
             \end{linsys}
-            \;\grstep{-\rho_1+\rho_2}\;
+            \grstep{-\rho_1+\rho_2}
             \begin{linsys}{2}
               2c_1  &+  &c_2  &=  &1  \\
                     &   &4c_2 &=  &-4
@@ -2986,13 +2996,13 @@ Where there are \( r \) independent equations, the general solution involves
               c_1  &+  &c_2  &-  &c_3  &=  &0  \\
              -c_1  &-  &c_2  &+  &c_3  &=  &0    
             \end{linsys}
-            \;\grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}\;
+            \grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}
             \begin{linsys}{3}
               c_1  &-  &c_2  &+  &c_3  &=  &2  \\
                    &   &2c_2 &-  &2c_3 &=  &-2  \\
                    &   &-2c_2&+  &2c_3 &=  &2    
             \end{linsys}
-            \;\grstep{\rho_2+\rho_3}\;
+            \grstep{\rho_2+\rho_3}
             \begin{linsys}{3}
               c_1  &-  &c_2  &+  &c_3  &=  &2  \\
                    &   &2c_2 &-  &2c_3 &=  &-2  \\
@@ -3032,8 +3042,8 @@ Where there are \( r \) independent equations, the general solution involves
          1  &0  &-4  &-1
        \end{mat}
        \grstep[-(1/2)\rho_1+\rho_4]{-(3/2)\rho_1+\rho_3}
-       \;\grstep{-\rho_2+\rho_3}
-       \;\grstep{-\rho_3+\rho_4}
+       \grstep{-\rho_2+\rho_3}
+       \repeatedgrstep{-\rho_3+\rho_4}
        \begin{mat}[r]
          2  &0  &3      &4   \\
          0  &1  &1      &-1 \\
@@ -3055,9 +3065,9 @@ Where there are \( r \) independent equations, the general solution involves
       % M5 = M4.with_added_multiple_of_row(3,2,-1)
       \begin{equation*}
         \grstep{\rho_1\swap\rho_4}
-        \;\grstep[-2\rho_1+\rho_4]{-3\rho_1+\rho_3}
-        \;\grstep{-\rho_2+\rho_3}
-        \;\grstep{-\rho_3+\rho_4}
+        \repeatedgrstep[-2\rho_1+\rho_4]{-3\rho_1+\rho_3}
+        \repeatedgrstep{-\rho_2+\rho_3}
+        \repeatedgrstep{-\rho_3+\rho_4}
         \begin{mat}[r]
            1  &0  &-4 &-1 \\
            0  &1  &1  &-1 \\
@@ -3103,7 +3113,7 @@ Where there are \( r \) independent equations, the general solution involves
            \begin{equation*}
              \mbox{}
              \grstep[-(1/2)\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
-             \;\grstep{-(1/3)\rho_2+\rho_3}
+             \repeatedgrstep{-(1/3)\rho_2+\rho_3}
              \begin{mat}[r]
                2  &1     &3     \\
                0  &-3/2  &1/2   \\
@@ -3139,7 +3149,7 @@ Where there are \( r \) independent equations, the general solution involves
                6  &4  &3  
              \end{mat}
              \grstep[-6\rho_1+\rho_3]{-5\rho_1+\rho_2}
-             \;\grstep{-\rho_2+\rho_3}
+             \repeatedgrstep{-\rho_2+\rho_3}
              \begin{mat}[r]
                1  &3   &2  \\
                0  &-14 &-9 \\
@@ -3234,7 +3244,7 @@ Where there are \( r \) independent equations, the general solution involves
               3  &2  &-1 &0
             \end{mat}
             \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
-            \;\grstep{-\rho_2+\rho_3}
+            \repeatedgrstep{-\rho_2+\rho_3}
             \begin{mat}[r]
               1  &1  &0  &0 \\
               0  &-1 &-1 &0 \\
@@ -3250,7 +3260,7 @@ Where there are \( r \) independent equations, the general solution involves
              -1  &0  &-5  &-1 &-1 &-9
             \end{mat}
             \grstep[\rho_1+\rho_3]{-\rho_1+\rho_2}
-            \;\grstep{2\rho_2+\rho_3}
+            \repeatedgrstep{2\rho_2+\rho_3}
             \begin{mat}[r]
               1  &0  &1  &3  &1  &-1  \\
               0  &0  &2  &-1 &0  &5   \\
@@ -3405,7 +3415,7 @@ Where there are \( r \) independent equations, the general solution involves
           3  &-1  &6  &-6
         \end{mat}
         \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
-        \;\grstep{-\rho_2+\rho_3}
+        \repeatedgrstep{-\rho_2+\rho_3}
         \begin{mat}[r]
           1  &-1  &2  &-3  \\
           0  &2   &0  &3   \\
@@ -3421,8 +3431,8 @@ Where there are \( r \) independent equations, the general solution involves
           1  &0   &1  &0
         \end{mat}
         \grstep[-3\rho_1+\rho_3 \\ -\rho_1+\rho_4]{-\rho_1+\rho_2}
-        \;\grstep[-(1/2)\rho_2+\rho_4]{-\rho_2+\rho_3}
-        \;\grstep{\rho_3\leftrightarrow\rho_4}
+        \repeatedgrstep[-(1/2)\rho_2+\rho_4]{-\rho_2+\rho_3}
+        \repeatedgrstep{\rho_3\leftrightarrow\rho_4}
         \begin{mat}[r]
           1  &-1  &2  &-3  \\
           0  &2   &0  &3   \\
@@ -3475,7 +3485,7 @@ Where there are \( r \) independent equations, the general solution involves
            4  &-1 &5
          \end{mat}
          \grstep[-(4/3)\rho_1+\rho_3]{-(2/3)\rho_1+\rho_2}
-         \;\grstep{-(7/2)\rho_2+\rho_3}
+         \repeatedgrstep{-(7/2)\rho_2+\rho_3}
          \begin{mat}[r]
            3  &1     &2  \\
            0  &-2/3  &2/3  \\
@@ -3554,7 +3564,7 @@ Where there are \( r \) independent equations, the general solution involves
               1  &2  &1
             \end{mat}
             \grstep{-\rho_1+\rho_2}
-            \;\grstep{2\rho_2}
+            \repeatedgrstep{2\rho_2}
             \begin{mat}[r]
               1  &2  &0  \\
               0  &0  &2
@@ -3841,10 +3851,10 @@ Where there are \( r \) independent equations, the general solution involves
       sequence of reduction steps
       \begin{equation*}
         (A+B)
-        \;\grstep{\text{step}_1}
-        \;\cdots
-        \;\grstep{\text{step}_k}
-        \;\text{echelon form}
+        \grstep{\text{step}_1}
+        \cdots
+        \grstep{\text{step}_k}
+        \text{echelon form}
       \end{equation*}
       or we can get the same results by performing \( \text{step}_1 \) through
       \( \text{step}_k \) separately on \( A \) and \( B \), and then adding.
@@ -4151,19 +4161,16 @@ that $\text{(2)}\implies\text{(3)}$,
 and finally that $\text{(3)}\implies\text{(1)}$.
 For these arguments, observe that we can pass from a combination of 
 $\vec{w}$'s to a combination of $\vec{\beta}$'s
-% \renewcommand{\theequation}{$*$}
-\begin{multline*}
-  d_1\vec{w}_1+\dots+d_k\vec{w}_k      \tag{$*$}                      \\
-  \begin{aligned}[b]
-    \mbox{}
-    &= d_1(c_{1,1}\vec{\beta}_{1,1}+\dots+c_{1,n_1}\vec{\beta}_{1,n_1})
-        +\dots
+\begin{align*}
+  d_1\vec{w}_1+\dots+d_k\vec{w}_k                                 
+    &= d_1(c_{1,1}\vec{\beta}_{1,1}+\dots+c_{1,n_1}\vec{\beta}_{1,n_1})   \\
+    &\qquad\hbox{}+\dots
         +d_k(c_{k,1}\vec{\beta}_{k,1}+\dots+c_{k,n_k}\vec{\beta}_{k,n_k}) \\
     &= d_1c_{1,1}\cdot\vec{\beta}_{1,1}
         +\dots
         +d_kc_{k,n_k}\cdot\vec{\beta}_{k,n_k}   
-  \end{aligned}    % \tag{$*$}
-\end{multline*}
+  \tag{$*$}
+\end{align*}
 and vice versa
 (we can move from the bottom to the top by taking each $d_i$ to be $1$).
 
@@ -4854,7 +4861,7 @@ at the end of the Chapter Five.
                c_1  &+  &c_2    &=  &a  \\
                c_1  &+  &1.1c_2 &=  &b
              \end{linsys}
-             \;\grstep{-\rho_1+\rho_2}\;
+             \grstep{-\rho_1+\rho_2}
              \begin{linsys}{2}
                c_1  &+  &c_2    &=  &a  \\
                     &   &0.1c_2 &=  &-a+b
@@ -4973,24 +4980,24 @@ at the end of the Chapter Five.
      Each of these is $\Re^3$.
      \begin{exparts}
       \partsitem 
-        These are broken into lines for legibility.
+        These are broken into some separate lines for readability.
         \begin{center}
-          \begin{tabular}[t]{l} 
+          \begin{tabular}{l} 
             $W_1+W_2+W_3$, 
               $W_1+W_2+W_3+W_4$, 
-              $W_1+W_2+W_3+W_5$, 
-              $W_1+W_2+W_3+W_4+W_5$, \\ \quad %line too long
+              $W_1+W_2+W_3+W_5$,  \\ \quad %line too long
+              $W_1+W_2+W_3+W_4+W_5$, 
               $W_1+W_2+W_4$, 
-              $W_1+W_2+W_4+W_5$, 
-              $W_1+W_2+W_5$,         \\
+              $W_1+W_2+W_4+W_5$,     \\ \quad %line too long
+              $W_1+W_2+W_5$,         
               $W_1+W_3+W_4$, 
               $W_1+W_3+W_5$, 
-              $W_1+W_3+W_4+W_5$,     \\ 
+              $W_1+W_3+W_4+W_5$,     \\ \quad 
               $W_1+W_4$, 
-              $W_1+W_4+W_5$,         \\ 
+              $W_1+W_4+W_5$,         
               $W_1+W_5$,             \\ 
               $W_2+W_3+W_4$, 
-              $W_2+W_3+W_4+W_5$,     \\
+              $W_2+W_3+W_4+W_5$,     
               $W_2+W_4$, 
               $W_2+W_4+W_5$,         \\ 
               $W_3+W_4$, 
@@ -5132,7 +5139,7 @@ at the end of the Chapter Five.
       \( \sequence{\vec{\omega}_1,\dots,\vec{\omega}_k,
                      \vec{\beta}_{k+1},\dots,\vec{\beta}_n} \) for the whole
       space.
-      Then the complement of the original subspace has this for a basis:
+      Then the complement of the original subspace has this basis
       \( \sequence{\vec{\beta}_{k+1},\dots,\vec{\beta}_n} \).  
      \end{answer}
   \recommended \item 
