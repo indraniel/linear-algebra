@@ -332,27 +332,28 @@ no matter what domain and codomain bases we use.
                    +(h_{m,1}v_1+\dots+h_{m,n}v_n)\vec{\delta}_m \bigr) 
          \end{multline*}
          regroups
-         \begin{equation*}
+         \begin{multline*}
           =((g_{1,1}+h_{1,1})v_1+\dots+
-                 (g_{1,1}+h_{1,n})v_n)\cdot\vec{\delta}_1       
+                 (g_{1,1}+h_{1,n})v_n)\cdot\vec{\delta}_1              \\       
             +\cdots                            
            +((g_{m,1}+h_{m,1})v_1+\dots+
                  (g_{m,n}+h_{m,n})v_n)\cdot\vec{\delta}_m
-        \end{equation*} 
+        \end{multline*} 
         to the entry-by-entry
         sum of the representation of \( g(\vec{v}) \) and the representation of
         \( h(\vec{v}) \).
       \partsitem The representation of
         $(r\cdot h)\,(\vec{v})=r\cdot \bigl(h(\vec{v})\bigr)$
-        \begin{multline*}
-          r\cdot \bigl(
-               (h_{1,1}v_1+h_{1,2}v_2+\dots+h_{1,n}v_n)\vec{\delta}_1  
-               +\dots      
-               +(h_{m,1}v_1+h_{m,2}v_2+\dots+h_{m,n}v_n)\vec{\delta}_m\bigr) \\
-          =(rh_{1,1}v_1+\dots+rh_{1,n}v_n)\cdot\vec{\delta}_1           
-          +\dots                                    
-          +(rh_{m,1}v_1+\dots+rh_{m,n}v_n)\cdot\vec{\delta}_m
-        \end{multline*}
+        \begin{align*}
+          r\cdot 
+             &\bigl(
+               (h_{1,1}v_1+h_{1,2}v_2+\dots+h_{1,n}v_n)\vec{\delta}_1   \\  
+             &\quad +\dots      
+             +(h_{m,1}v_1+h_{m,2}v_2+\dots+h_{m,n}v_n)\vec{\delta}_m\bigr)   \\
+             &=(rh_{1,1}v_1+\dots+rh_{1,n}v_n)\cdot\vec{\delta}_1         \\ 
+             &\quad+\dots                                    
+              +(rh_{m,1}v_1+\dots+rh_{m,n}v_n)\cdot\vec{\delta}_m
+        \end{align*}
         is the  entry-by-entry
         multiple of \( r \) and the representation of \( h \).
      \end{exparts}  
@@ -399,7 +400,9 @@ no matter what domain and codomain bases we use.
           \vdots           &        &\vdots           \\
           g_{m,1}+h_{m,1}  &\ldots  &g_{m,n}+h_{m,n}       
         \end{mat}
-        \qquad
+      \end{equation*}
+      and
+      \begin{equation*}
         H+G=
         \begin{mat}
           h_{1,1}+g_{1,1}  &\ldots  &h_{1,n}+g_{1,n}  \\
@@ -1383,7 +1386,7 @@ explore this operation.
       \end{equation*}
       We can express the starting system 
       and the system used for the substitutions
-      in matrix language.
+      in matrix language, as
       \begin{equation*}
         \begin{mat}
           h_{1,1}  &h_{1,2}  &h_{1,3}  \\
@@ -1391,7 +1394,9 @@ explore this operation.
         \end{mat}
         \colvec{x_1 \\ x_2 \\ x_3}
         =H\colvec{x_1 \\ x_2 \\ x_3}=\colvec{d_1 \\ d_2}
-        \qquad
+      \end{equation*}
+      and
+      \begin{equation*}
         \begin{mat}
           g_{1,1}  &g_{1,2}  \\
           g_{2,1}  &g_{2,2}  \\
@@ -1400,7 +1405,7 @@ explore this operation.
         \colvec{y_1 \\ y_2}
         =G\colvec{y_1 \\ y_2}=\colvec{x_1 \\ x_2 \\ x_3}
       \end{equation*}
-      With this, the substitution is 
+      and with this, the substitution is 
       $\vec{d}=H\vec{x}=H(G\vec{y})=(HG)\vec{y}$.
     \end{answer}
   \item 
@@ -1979,7 +1984,7 @@ explore this operation.
               +\begin{mat}[r]
                  1/2         &-\sqrt{3}/2  \\
                  \sqrt{3}/2  &1/2
-              \end{mat}c_2
+              \end{mat}c_2                                     \\
               +\begin{mat}[r]
                  \sqrt{3}/2  &-1/2       \\
                  1/2         &\sqrt{3}/2
@@ -1987,7 +1992,7 @@ explore this operation.
               +\begin{mat}[r]
                  1  &0  \\
                  0  &1 
-               \end{mat}c_0                          \\
+               \end{mat}c_0                          
                =\begin{mat}[r]
                   0  &0  \\
                   0  &0 
@@ -2007,10 +2012,10 @@ explore this operation.
               \end{linsys} 
            \end{equation*}
            Apply Gaussian reduction.
-           \begin{eqnarray*}
+           \begin{align*}
              &\grstep{-\rho_1+\rho_4}
-             \;\grstep{\rho_2+\rho_3}
-             &\begin{linsys}{5}
+             \repeatedgrstep{\rho_2+\rho_3}
+             \begin{linsys}{5}
                 -(1/2)c_4         &  &  &+ &(1/2)c_2
                     &+ &(\sqrt{3}/2)c_1  &+  &c_0  &=  &0      \\
                 -(\sqrt{3}/2)c_4  &- &c_3 &- &(\sqrt{3}/2)c_2
@@ -2020,8 +2025,8 @@ explore this operation.
                                   &  &  &  &     
                     &  &                 &   &0    &=  &0      
              \end{linsys}                                               \\
-             &\;\grstep{-\sqrt{3}\rho_1+\rho_2}                   
-             &\begin{linsys}{5}
+             &\grstep{-\sqrt{3}\rho_1+\rho_2}                   
+             \begin{linsys}{5}
                 -(1/2)c_4         &  &  &+ &(1/2)c_2
                     &+ &(\sqrt{3}/2)c_1  &+  &c_0  &=  &0      \\
                                   &- &c_3 &- &\sqrt{3}c_2
@@ -2031,7 +2036,7 @@ explore this operation.
                                   &  &  &  &     
                     &  &                 &   &0    &=  &0      
               \end{linsys} 
-           \end{eqnarray*}
+           \end{align*}
            Setting \( c_4 \), \( c_3 \), and \( c_2 \) to zero 
            makes \( c_1 \) and \( c_0 \) also come out to be zero so
            no degree one or degree zero polynomial will do.
@@ -3478,12 +3483,12 @@ clearer idea then we will go with it.
           1  &0  \\
           0  &1
         \end{mat}
-        \;\grstep{}\;
+        \grstep{}
         \begin{mat}[r]
           1  &0  \\
           0  &3
         \end{mat}
-        \;\grstep{}\;
+        \grstep{}
         \begin{mat}[r]
           1  &0  \\
           -3  &3
@@ -3770,8 +3775,8 @@ clearer idea then we will go with it.
            shows which is cheapest.
          \partsitem This is an improvement by S.~Winograd of a formula due to
            V.~Strassen:
-           where \( w=aA-(a-c-d)(A-C+D) \),
-           \begin{multline*}
+           let \( w=aA-(a-c-d)(A-C+D) \) and then
+           \begin{equation*}
                \begin{mat}
                  a  &b  \\
                  c  &d
@@ -3782,13 +3787,21 @@ clearer idea then we will go with it.
                  \end{mat}    \\
                =
                \begin{mat}
-                  aA+bB
-                  &w+(c+d)(C-A)+(a+b-c-d)D \\
-                  w+(a-c)(D-C)-d(A-B-C+D)
-                  &w+(a-c)(D-C)+(c+d)(C-A)
+                 \alpha  &\beta  \\
+                 \gamma  &\delta
                \end{mat}
-           \end{multline*}
-           takes seven multiplications and fifteen additions (save the
+               \end{equation*}
+             where $\alpha=aA+bB$,
+             and $\beta=w+(c+d)(C-A)+(a+b-c-d)D$,
+             and $\gamma=w+(a-c)(D-C)-d(A-B-C+D)$,
+             and $\delta=w+(a-c)(D-C)+(c+d)(C-A)$.
+               % \begin{mat}
+               %    aA+bB
+               %    &w+(c+d)(C-A)+(a+b-c-d)D \\
+               %    w+(a-c)(D-C)-d(A-B-C+D)
+               %    &w+(a-c)(D-C)+(c+d)(C-A)
+               % \end{mat}
+           This takes seven multiplications and fifteen additions (save the
            intermediate results).
       \end{exparts}  
     \end{answer}
@@ -3839,13 +3852,15 @@ clearer idea then we will go with it.
           independent iff \( \trans{A}A\vec{x}_1 \),\ldots,
           \( \trans{A}A\vec{v}_n \) are linearly independent.
         \partsitem We have 
-          \( \text{col rank}(A)=\text{col rank}(\trans{A}A)
-          =\dim\set{\trans{A}(A\vec{x})\suchthat \text{all \(\vec{x}\)} }
-          \leq \dim\set{\trans{A}\vec{y}\suchthat \text{all \(\vec{y}\)} }
-          =\text{col rank}(\trans{A}) \).
+          \begin{multline*}
+            \text{col rank}(A)=\text{col rank}(\trans{A}A)
+            =\dim\set{\trans{A}(A\vec{x})\suchthat \text{all \(\vec{x}\)} }  \\
+            \leq \dim\set{\trans{A}\vec{y}\suchthat \text{all \(\vec{y}\)} }
+            =\text{col rank}(\trans{A}).
+          \end{multline*}
           Thus also \( \text{col rank}(\trans{A})
                        \leq\text{col rank}(\trans{\trans{A}}) \)
-          and so we have \( \text{col rank}(A)=\text{col rank}(\trans{A})
+          and so \( \text{col rank}(A)=\text{col rank}(\trans{A})
                     =\text{row rank}(A) \).
       \end{exparts} 
     \end{answer}
@@ -4359,27 +4374,27 @@ do Gauss-Jordan reduction, meanwhile performing the same operations on
 the identity.
 For clerical convenience we write the matrix and the identity side-by-side
 and do the reduction steps together.
-\begin{eqnarray*}
+\begin{align*}
     \begin{pmat}{rr|rr}
        1  &1   &1  &0  \\
        2  &-1  &0  &1
     \end{pmat}
   &\grstep{-2\rho_1+\rho_2}
-  &\begin{pmat}{rr|rr}
+  \begin{pmat}{rr|rr}
         1  &1   &1  &0  \\
         0  &-3  &-2 &1
      \end{pmat}                 \\
   &\grstep{-1/3\rho_2}
-  &\begin{pmat}{rr|rr}
+  \begin{pmat}{rr|rr}
         1  &1   &1   &0     \\
         0  &1   &2/3 &-1/3
      \end{pmat}                   \\
   &\grstep{-\rho_2+\rho_1}
-  &\begin{pmat}{rr|rr}
+  \begin{pmat}{rr|rr}
         1  &0   &1/3 &1/3  \\
         0  &1   &2/3 &-1/3
      \end{pmat}
-\end{eqnarray*}
+\end{align*}
 This calculation has found the inverse.
 \begin{equation*}
     \begin{mat}[r]
@@ -4396,32 +4411,32 @@ This calculation has found the inverse.
 
 \begin{example} \label{exam:ThreeByThreeMatInv}
 This one happens to start with a row swap.
-\begin{eqnarray*}
+\begin{align*}
      \begin{pmat}{rrr|rrr}
         0  &3  &-1  &1  &0  &0  \\
         1  &0  &1   &0  &1  &0  \\
         1  &-1 &0   &0  &0  &1
      \end{pmat}
   &\grstep{\rho_1\leftrightarrow\rho_2}
-  &   \begin{pmat}{rrr|rrr}
+  \begin{pmat}{rrr|rrr}
          1  &0  &1   &0  &1  &0  \\
          0  &3  &-1  &1  &0  &0  \\
          1  &-1 &0   &0  &0  &1
       \end{pmat}                             \\
   &\grstep{-\rho_1+\rho_3}
-  &   \begin{pmat}{rrr|rrr}
+  \begin{pmat}{rrr|rrr}
          1  &0  &1   &0  &1  &0  \\
          0  &3  &-1  &1  &0  &0  \\
          0  &-1 &-1  &0  &-1 &1
       \end{pmat}                             \\
-  &\vdots                                  \\
-  &\grstep{}
-  &   \begin{pmat}{rrr|rrr}
+  &\quad\vdotswithin{\longrightarrow}                        \\
+  &\;\grstep{}
+  \begin{pmat}{rrr|rrr}
          1  &0  &0   &1/4  &1/4  &3/4  \\
          0  &1  &0   &1/4  &1/4  &-1/4 \\
          0  &0  &1   &-1/4 &3/4  &-3/4
       \end{pmat}
-\end{eqnarray*}
+\end{align*}
 \end{example}
 
 \begin{example}
@@ -4504,40 +4519,43 @@ real number one can be interesting and useful.
     \nearbyexample{exam:ThreeByThreeMatInv}.
     \begin{answer}
       Here is one way to proceed.
-      \begin{multline*}
-       \grstep{\rho_1\leftrightarrow\rho_2}\;
+      Follow
+      \begin{equation*}
+       \grstep{\rho_1\leftrightarrow\rho_2}
        \begin{pmat}{rrr|rrr}
               1  &0  &1   &0  &1  &0  \\
               0  &3  &-1  &1  &0  &0  \\
               1  &-1 &0   &0  &0  &1
            \end{pmat}                          
-       \;\grstep{-\rho_1+\rho_3}\;
+       \grstep{-\rho_1+\rho_3}
        \begin{pmat}{rrr|rrr}
               1  &0  &1   &0  &1  &0  \\
               0  &3  &-1  &1  &0  &0  \\
               0  &-1 &-1  &0  &-1 &1
-           \end{pmat}                        \\                          
-       \begin{aligned}
-         &\grstep{(1/3)\rho_2+\rho_3}\;
+           \end{pmat}                        
+       \end{equation*}
+       with    
+       \begin{align*}
+         &\grstep{(1/3)\rho_2+\rho_3}
          \begin{pmat}{rrr|rrr}
                 1  &0  &1     &0   &1  &0  \\
                 0  &3  &-1    &1   &0  &0  \\
                 0  &0  &-4/3  &1/3 &-1 &1
-             \end{pmat}                          
-         \;\grstep[-(3/4)\rho_3]{(1/3)\rho_2}\;
+             \end{pmat}                                           \\ 
+         &\grstep[-(3/4)\rho_3]{(1/3)\rho_2}
          \begin{pmat}{rrr|rrr}
                 1  &0  &1     &0    &1   &0    \\
                 0  &1  &-1/3  &1/3  &0   &0    \\
                 0  &0  &1     &-1/4 &3/4 &-3/4
              \end{pmat}                                  \\
-         &\grstep[-\rho_3+\rho_1]{(1/3)\rho_3+\rho_2}\;
+         &\grstep[-\rho_3+\rho_1]{(1/3)\rho_3+\rho_2}
          \begin{pmat}{rrr|rrr}
                 1  &0  &0     &1/4  &1/4 &3/4  \\
                 0  &1  &0     &1/4  &1/4 &-1/4 \\
                 0  &0  &1     &-1/4 &3/4 &-3/4
              \end{pmat}                         
-       \end{aligned}
-    \end{multline*} 
+    \end{align*} 
+    and read the answer off of the right side.
    \end{answer}
  \recommended \item 
     Use \nearbycorollary{cor:TwoByTwoInv} to decide if each matrix 
@@ -4634,22 +4652,22 @@ real number one can be interesting and useful.
     \begin{answer}
       \begin{exparts}
         \partsitem The reduction is routine. 
-          \begin{equation*}
+          \begin{align*}
             \begin{pmat}{rr|rr}
               3  &1  &1  &0 \\
               0  &2  &0  &1
             \end{pmat}
-            \;\grstep[(1/2)\rho_2]{(1/3)\rho_1}\;
+            &\grstep[(1/2)\rho_2]{(1/3)\rho_1}
             \begin{pmat}{rr|rr}
               1  &1/3  &1/3  &0   \\
               0  &1    &0    &1/2
-            \end{pmat}
-            \;\grstep{-(1/3)\rho_2+\rho_1}\;
+            \end{pmat}                                 \\
+            &\grstep{-(1/3)\rho_2+\rho_1}
             \begin{pmat}{rr|rr}
               1  &0    &1/3  &-1/6 \\
               0  &1    &0    &1/2
             \end{pmat}
-          \end{equation*}
+          \end{align*}
           This answer agrees with the answer from the check.
           \begin{equation*}
             \begin{mat}[r]
@@ -4673,17 +4691,17 @@ real number one can be interesting and useful.
               2  &1/2  &1  &0  \\
               3  &1    &0  &1
             \end{pmat}
-            \;\grstep{-(3/2)\rho_1+\rho_2}\;
+            \grstep{-(3/2)\rho_1+\rho_2}
             \begin{pmat}{rr|rr}
               2  &1/2  &1     &0  \\
               0  &1/4  &-3/2  &1
             \end{pmat}                       \\
-            \;\grstep[4\rho_2]{(1/2)\rho_1}\;
+            \grstep[4\rho_2]{(1/2)\rho_1}
             \begin{pmat}{rr|rr}
               1  &1/4   &1/2   &0  \\
               0  &1     &-6    &4
             \end{pmat}                         
-            \;\grstep{-(1/4)\rho_2+\rho_1}\;
+            \grstep{-(1/4)\rho_2+\rho_1}
             \begin{pmat}{rr|rr}
               1  &0     &2     &-1 \\
               0  &1     &-6    &4
@@ -4708,7 +4726,7 @@ real number one can be interesting and useful.
               2  &-4  &1  &0  \\
              -1  &2   &0  &1 
             \end{pmat}
-            \;\grstep{(1/2)\rho_1+\rho_2}\;
+            \grstep{(1/2)\rho_1+\rho_2}
             \begin{pmat}{rr|rr}
               2  &-4  &1   &0  \\
               0  &0   &1/2 &1 
@@ -4724,32 +4742,32 @@ real number one can be interesting and useful.
               0  &2  &4  &0  &1  &0  \\
              -1  &1  &0  &0  &0  &1 
             \end{pmat}  
-            \;\grstep{\rho_1+\rho_3}\;
+            \grstep{\rho_1+\rho_3}
             \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0  &0  \\ 
               0  &2  &4  &0  &1  &0  \\
               0  &2  &3  &1  &0  &1 
-            \end{pmat}
-            \;\grstep{-\rho_2+\rho_3}\;
+            \end{pmat}                                             \\
+           \begin{aligned}
+            &\grstep{-\rho_2+\rho_3}
             \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0  &0  \\ 
               0  &2  &4  &0  &1  &0  \\
               0  &0  &-1 &1  &-1 &1 
-            \end{pmat}                                              \\
-           \begin{aligned}
-            &\grstep[-\rho_3]{(1/2)\rho_2}\;
+            \end{pmat}             
+           \grstep[-\rho_3]{(1/2)\rho_2}
             \begin{pmat}{rrr|rrr}
               1  &1  &3  &1  &0   &0  \\ 
               0  &1  &2  &0  &1/2 &0  \\
               0  &0  &1  &-1 &1   &-1
-            \end{pmat}
-            \;\grstep[-3\rho_3+\rho_1]{-2\rho_3+\rho_2}\;
+            \end{pmat}                                        \\
+            &\grstep[-3\rho_3+\rho_1]{-2\rho_3+\rho_2}
             \begin{pmat}{rrr|rrr}
               1  &1  &0  &4  &-3   &3  \\ 
               0  &1  &0  &2  &-3/2 &2  \\
               0  &0  &1  &-1 &1    &-1
             \end{pmat}                                         \\
-            &\grstep{-\rho_2+\rho_1}\;
+            &\grstep{-\rho_2+\rho_1}
             \begin{pmat}{rrr|rrr}
               1  &0  &0  &2  &-3/2 &1  \\ 
               0  &1  &0  &2  &-3/2 &2  \\
@@ -4764,32 +4782,32 @@ real number one can be interesting and useful.
               0  &-2 &4  &0  &1  &0  \\ 
               2  &3  &-2 &0  &0  &1
             \end{pmat}
-            \;\grstep{\rho_3\leftrightarrow\rho_1}\;
+            \grstep{\rho_3\leftrightarrow\rho_1}\;
             \begin{pmat}{rrr|rrr}
               2  &3  &-2 &0  &0  &1  \\
               0  &-2 &4  &0  &1  &0  \\ 
               0  &1  &5  &1  &0  &0  
             \end{pmat}                                            \\
             \begin{aligned}
-              &\;\grstep{(1/2)\rho_2+\rho_3}\;
+              &\grstep{(1/2)\rho_2+\rho_3}
               \begin{pmat}{rrr|rrr}
                 2  &3  &-2 &0  &0   &1  \\
                 0  &-2 &4  &0  &1   &0  \\ 
                 0  &0  &7  &1  &1/2 &0  
-              \end{pmat}                    
-              \grstep[-(1/2)\rho_2 \\ (1/7)\rho_3]{(1/2)\rho_1}\;
+              \end{pmat}                                             \\
+              &\grstep[-(1/2)\rho_2 \\ (1/7)\rho_3]{(1/2)\rho_1}
               \begin{pmat}{rrr|rrr}
                 1  &3/2  &-1 &0    &0     &1/2  \\
                 0  &1    &-2 &0    &-1/2  &0    \\ 
                 0  &0    &1  &1/7  &1/14  &0  
               \end{pmat}                                   \\
-              &\;\grstep[\rho_3+\rho_1]{2\rho_3+\rho_2}\;
+              &\grstep[\rho_3+\rho_1]{2\rho_3+\rho_2}
               \begin{pmat}{rrr|rrr}
                 1  &3/2  &0  &1/7  &1/14  &1/2  \\
                 0  &1    &0  &2/7  &-5/14 &0    \\ 
                 0  &0    &1  &1/7  &1/14  &0  
-              \end{pmat}                                   
-              \grstep{-(3/2)\rho_2+\rho_1}\;
+              \end{pmat}                                   \\
+              &\grstep{-(3/2)\rho_2+\rho_1}
               \begin{pmat}{rrr|rrr}
                 1  &0    &0  &-2/7 &17/28 &1/2  \\
                 0  &1    &0  &2/7  &-5/14 &0    \\ 
@@ -4804,13 +4822,13 @@ real number one can be interesting and useful.
               1  &-2 &-3 &0  &1  &0  \\
               4  &-2 &-3 &0  &0  &1
             \end{pmat}
-            &\;\grstep[-2\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}\;
+            &\grstep[-2\rho_1+\rho_3]{-(1/2)\rho_1+\rho_2}
             \begin{pmat}{rrr|rrr}
               2  &2  &3    &1     &0  &0  \\
               0  &-3 &-9/2 &-1/2  &1  &0  \\
               0  &-6 &-9   &-2    &0  &1
             \end{pmat}                                          \\
-            &\grstep{-2\rho_2+\rho_3}\;
+            &\grstep{-2\rho_2+\rho_3}
             \begin{pmat}{rrr|rrr}
               2  &2  &3    &1     &0   &0  \\
               0  &-3 &-9/2 &-1/2  &1   &0  \\
@@ -4947,11 +4965,12 @@ real number one can be interesting and useful.
     \begin{answer}
       One way to check that the first is true is with
       the angle sum formulas from trigonometry.
-      \begin{align*}
+      \begin{multline*}
         \begin{mat}
           \cos(\theta_1+\theta_2) &-\sin(\theta_1+\theta_2)  \\
           \sin(\theta_1+\theta_2) &\cos(\theta_1+\theta_2)
-        \end{mat}
+        \end{mat}                                                 \\
+        \begin{aligned}
         &=\begin{mat}
           \cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2
             &-\sin\theta_1\cos\theta_2-\cos\theta_1\sin\theta_2  \\
@@ -4966,7 +4985,8 @@ real number one can be interesting and useful.
           \cos\theta_2 &-\sin\theta_2  \\
           \sin\theta_2 &\cos\theta_2
         \end{mat}
-      \end{align*}
+        \end{aligned}
+      \end{multline*}
       Checking the second equation in this way is similar.
 
       Of course, the equations can be not just checked but also understood
@@ -4993,23 +5013,23 @@ real number one can be interesting and useful.
       shows that the matrix is invertible (in this \( a\neq 0 \) case) 
       if and only if  \( ad-bc\neq 0 \).
       To find the inverse, we finish with the Jordan half of the reduction.
-      \begin{equation*}
-        \grstep[(a/ad-bc)\rho_2]{(1/a)\rho_1}
+      \begin{align*}
+        &\grstep[(a/ad-bc)\rho_2]{(1/a)\rho_1}
         \begin{pmat}{cc|cc}
            1   &b/a     &1/a         &0   \\
            0   &1       &-c/(ad-bc)  &a/(ad-bc)
-         \end{pmat}                                
-        \grstep{-(b/a)\rho_2+\rho_1}
+         \end{pmat}                                       \\   
+        &\grstep{-(b/a)\rho_2+\rho_1}
         \begin{pmat}{cc|cc}
            1   &0       &d/(ad-bc)   &-b/(ad-bc)   \\
            0   &1       &-c/(ad-bc)  &a/(ad-bc)
          \end{pmat}                                
-      \end{equation*}
+      \end{align*}
 
       The other case is the \( a=0 \) case.
       We swap to get $c$ into the $1,1$ position.
       \begin{equation*}
-        \grstep{\rho_1\leftrightarrow\rho_2}\;
+        \grstep{\rho_1\leftrightarrow\rho_2}
         \begin{pmat}{cc|cc}
           c  &d  &0  &1  \\
           0  &b  &1  &0
@@ -5022,12 +5042,12 @@ real number one can be interesting and useful.
       To find the inverse
       we do the Jordan half.
       \begin{equation*}
-        \grstep[(1/b)\rho_2]{(1/c)\rho_1}\;
+        \grstep[(1/b)\rho_2]{(1/c)\rho_1}
         \begin{pmat}{cc|cc}
           1  &d/c  &0       &1/c  \\
           0  &1    &1/b     &0
         \end{pmat}                        
-        \;\grstep{-(d/c)\rho_2+\rho_1}\;
+        \grstep{-(d/c)\rho_2+\rho_1}
         \begin{pmat}{cc|cc}
           1  &0  &-d/bc  &1/c  \\
           0  &1  &1/b    &0
@@ -5235,8 +5255,7 @@ real number one can be interesting and useful.
     Show that \( G \) is a zero matrix.
     \begin{answer}
       The associativity of matrix multiplication gives
-      on the one hand
-      \( H^{-1}(HG)=H^{-1}Z=Z \), and on the other that
+      \( H^{-1}(HG)=H^{-1}Z=Z \) and also
       \( H^{-1}(HG)=(H^{-1}H)G=IG=G \).
     \end{answer}
   \item 
