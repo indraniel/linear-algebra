@@ -10686,13 +10686,13 @@ sage: solve(system, x,y)
        is $f\left(\rowvec{x &y}\right)$.
 
        The computation for preservation of addition is this.
-       \begin{equation*}
+       \begin{multline*}
          f\left(\rowvec{a &b}+\rowvec{c &d}\right)
            = f\left(\rowvec{a+c &b+d}\right)
-           = \colvec{a+c \\ b+d}
+           = \colvec{a+c \\ b+d}                               \\
            = \colvec{a \\ b}+\colvec{c \\ d}
            = f\left(\rowvec{a &b}\right)+f\left(\rowvec{c &d}\right)
-       \end{equation*}
+       \end{multline*}
        The computation for preservation of scalar multiplication is similar.
        \begin{equation*}
          f\left(r\cdot\rowvec{a &b}\right)
@@ -10722,13 +10722,15 @@ sage: solve(system, x,y)
 
       As for structure,
       this shows that $f$ preserves addition
-      \begin{align*}
-        f\left(\,(a_0+a_1x+a_2x^2)+(b_0+b_1x+b_2x^2)\,\right)
+      \begin{multline*}
+        f\left(\,(a_0+a_1x+a_2x^2)+(b_0+b_1x+b_2x^2)\,\right)           \\
+        \begin{aligned}
         &=f\left(\,(a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2\,\right)       \\
         &=\colvec{a_0+b_0 \\ a_1+b_1 \\ a_2+b_2}                    \\
         &=\colvec{a_0 \\ a_1 \\ a_2} +\colvec{b_0 \\ b_1 \\ b_2}   \\
         &=f(a_0+a_1x+a_2x^2)+f(b_0+b_1x+b_2x^2)
-      \end{align*}
+        \end{aligned}
+      \end{multline*}
       and this shows
       \begin{align*}
         f(\,r(a_0+a_1x+a_2x^2)\,)
@@ -10795,13 +10797,15 @@ sage: solve(system, x,y)
       (For instance, $0+3x+6x^2=f_1(0x+3y+6z)$.)
 
       The computation checking that $f_1$ preserves addition is this.
-      \begin{align*}
-        f_1\left(\,(c_1x+c_2y+c_3z)+(d_1x+d_2y+d_3z)\,\right)
+      \begin{multline*}
+        f_1\left(\,(c_1x+c_2y+c_3z)+(d_1x+d_2y+d_3z)\,\right)            \\
+          \begin{aligned}
           &=f_1\left(\,(c_1+d_1)x+(c_2+d_2)y+(c_3+d_3)z\,\right)  \\
           &=(c_1+d_1)+(c_2+d_2)x+(c_3+d_3)x^2  \\
           &=(c_1+c_2x+c_3x^2)+(d_1+d_2x+d_3x^2)  \\
           &=f_1(c_1x+c_2y+c_3z)+f_1(d_1x+d_2y+d_3z)
-      \end{align*}
+          \end{aligned}
+      \end{multline*}
 
       The check that $f_1$ preserves scalar multiplication is this.
       \begin{align*}
@@ -10821,8 +10825,8 @@ sage: solve(system, x,y)
       \partsitem Yes, this is an isomorphism.
 
         It is one-to-one:
-        \begin{equation*}
-          \text{if }
+        \begin{align*}
+          &\text{if }
           f(\begin{mat}
               a_1  &b_1  \\
               c_1  &d_1
@@ -10830,11 +10834,11 @@ sage: solve(system, x,y)
          =f(\begin{mat}
               a_2  &b_2  \\
               c_2  &d_2
-            \end{mat})
-          \text{ then }
+            \end{mat})                                     \\
+          &\qquad\text{ then }
           \colvec{a_1+b_1+c_1+d_1 \\ a_1+b_1+c_1 \\ a_1+b_1 \\ a_1}
           =\colvec{a_2+b_2+c_2+d_2 \\ a_2+b_2+c_2 \\ a_2+b_2 \\ a_2}
-        \end{equation*}
+        \end{align*}
         gives that \( a_1=a_2 \), and that \( b_1=b_2 \),
         and that \( c_1=c_2 \), and that \( d_1=d_2 \).
 
@@ -10849,7 +10853,7 @@ sage: solve(system, x,y)
         that any four-tall vector is the image of a $\nbyn{2}$~matrix.
 
         Finally, it preserves combinations
-        \begin{align*}
+        \begin{multline*}
           f(\,r_1\cdot\begin{mat}
               a_1  &b_1  \\
               c_1  &d_1
@@ -10857,7 +10861,8 @@ sage: solve(system, x,y)
             +r_2\cdot\begin{mat}
               a_2  &b_2  \\
               c_2  &d_2
-            \end{mat}\,)
+            \end{mat}\,)                                   \\
+          \begin{aligned}
           &=f(\begin{mat}
               r_1a_1+r_2a_2  &r_1b_1+r_2b_2  \\
               r_1c_1+r_2c_2  &r_1d_1+r_2d_2
@@ -10876,7 +10881,8 @@ sage: solve(system, x,y)
                   a_2  &b_2  \\
                   c_2  &d_2
             \end{mat})
-        \end{align*}
+         \end{aligned}
+        \end{multline*}
         and so item~(2) of \nearbylemma{le:PresStructIffPresCombos} shows that
         it preserves structure.
       \partsitem Yes, it is an isomorphism.
@@ -10918,7 +10924,7 @@ sage: solve(system, x,y)
 
         We can check that $f$ preserves structure by using
         item~(2) of \nearbylemma{le:PresStructIffPresCombos}.
-        \begin{align*}
+        \begin{multline*}
           f(r_1\cdot\begin{mat}
               a_1  &b_1  \\
               c_1  &d_1
@@ -10926,7 +10932,8 @@ sage: solve(system, x,y)
             +r_2\cdot\begin{mat}
               a_2  &b_2  \\
               c_2  &d_2
-            \end{mat})
+            \end{mat})                                      \\
+           \begin{aligned}
            &=
            f(\begin{mat}
                r_1a_1+r_2a_2  &r_1b_1+r_2b_2  \\
@@ -10951,7 +10958,8 @@ sage: solve(system, x,y)
               a_2  &b_2  \\
               c_2  &d_2
             \end{mat})
-        \end{align*}
+            \end{aligned}
+        \end{multline*}
       \partsitem No, this map does not preserve structure.
         For instance, it does not send the matrix of all zeroes
         to the zero polynomial.
@@ -11083,42 +11091,38 @@ sage: solve(system, x,y)
 \end{ans}
 \begin{ans}{Three.I.1.23}
       This is the map, expanded.
-      \begin{align*}
-        f(a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+a_5x^5)
-        &=\begin{aligned}[t]
-             &a_0+a_1(x-1)+a_2(x-1)^2+a_3(x-1)^3 \\
-             &\mbox{}\quad +a_4(x-1)^4+a_5(x-1)^5
-          \end{aligned}                                          \\
-        &=\begin{aligned}[t]
-             &a_0+a_1(x-1)+a_2(x^2-2x+1)         \\
-             &\mbox{}\quad +a_3(x^3-3x^2+3x-1)   \\
-             &\mbox{}\quad +a_4(x^4-4x^3+6x^2-4x+1) \\
-             &\mbox{}\quad +a_5(x^5-5x^4+10x^3-10x^2+5x-1)
-           \end{aligned}   \\
-        &=\begin{aligned}[t]
-           &(a_0-a_1+a_2-a_3+a_4-a_5)  \\
-           &\mbox{}\quad +(a_1-2a_2+3a_3-4a_4+5a_5)x  \\
-           &\mbox{}\quad +(a_2-3a_3+6a_4-10a_5)x^2
-                        +(a_3-4a_4+10a_5)x^3         \\
-           &\mbox{}\quad +(a_4-5a_5)x^4
+      \begin{multline*}
+        f(a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+a_5x^5)                        \\
+        \begin{aligned}
+        &=a_0+a_1(x-1)+a_2(x-1)^2+a_3(x-1)^3               \\
+        &\mbox{}\quad +a_4(x-1)^4+a_5(x-1)^5               \\
+        &=a_0+a_1(x-1)+a_2(x^2-2x+1)         \\
+        &\mbox{}\quad +a_3(x^3-3x^2+3x-1)   \\
+        &\mbox{}\quad +a_4(x^4-4x^3+6x^2-4x+1) \\
+        &\mbox{}\quad +a_5(x^5-5x^4+10x^3-10x^2+5x-1)       \\
+        &=(a_0-a_1+a_2-a_3+a_4-a_5)  \\
+        &\mbox{}\quad +(a_1-2a_2+3a_3-4a_4+5a_5)x  \\
+        &\mbox{}\quad +(a_2-3a_3+6a_4-10a_5)x^2  \\
+        &\quad+(a_3-4a_4+10a_5)x^3         \\
+        &\mbox{}\quad +(a_4-5a_5)x^4
                         +a_5x^5
-          \end{aligned}
-      \end{align*}
+        \end{aligned}
+      \end{multline*}
       This map is a correspondence because it has an inverse, the map
       \( p(x)\mapsto p(x+1) \).
 
-      To finish checking that it is an isomorphism, we apply
+      To finish checking that it is an isomorphism we apply
       item~(2) of \nearbylemma{le:PresStructIffPresCombos} and show
       that it preserves linear combinations of two polynomials.
-      Briefly, the check goes like this.
+      Briefly,
+      $f(c\cdot (a_0+a_1x+\dots +a_5x^5)+d\cdot (b_0+b_1x+\dots +b_5x^5))$
+      equals this
       \begin{multline*}
-        f(c\cdot (a_0+a_1x+\dots +a_5x^5)+d\cdot (b_0+b_1x+\dots +b_5x^5))  \\
-         =\dots=
-         (ca_0-ca_1+ca_2-ca_3+ca_4-ca_5+db_0-db_1+db_2-db_3+db_4-db_5)
-          +\dots+(ca_5+db_5)x^5                                 \\
-         =\dots=
-         c\cdot f(a_0+a_1x+\dots +a_5x^5)+d\cdot f(b_0+b_1x+\dots +b_5x^5)
+         (ca_0-ca_1+ca_2-ca_3+ca_4-ca_5+db_0-db_1+db_2-db_3+db_4-db_5)  \\
+          +\dots+(ca_5+db_5)x^5
       \end{multline*}
+      which equals
+      $c\cdot f(a_0+a_1x+\dots +a_5x^5)+d\cdot f(b_0+b_1x+\dots +b_5x^5)$.
     
 \end{ans}
 \begin{ans}{Three.I.1.24}
@@ -11288,16 +11292,16 @@ sage: solve(system, x,y)
           \end{equation*}
           Now the calculation for preservation of addition
           is routine.
-          \begin{equation*}
+          \begin{multline*}
             \colvec{x_1+x_2 \\ y_1+y_2}
               \mapsunder{t_\theta}
             \colvec{(x_1+x_2)\cos\theta-(y_1+y_2)\sin\theta \\
-                       (x_1+x_2)\sin\theta+(y_1+y_2)\cos\theta}
+                       (x_1+x_2)\sin\theta+(y_1+y_2)\cos\theta}    \\
             =\colvec{x_1\cos\theta-y_1\sin\theta \\
                        x_1\sin\theta+y_1\cos\theta}
             +\colvec{x_2\cos\theta-y_2\sin\theta \\
                        x_2\sin\theta+y_2\cos\theta}
-          \end{equation*}
+          \end{multline*}
           The calculation for preservation of scalar multiplication is similar.
         \partsitem
           This map is a correspondence because it has an inverse (namely,
@@ -11480,10 +11484,10 @@ sage: solve(system, x,y)
        There are many answers; two are linear independence and
        subspaces.
 
-       To show that if a set $\set{\vec{v}_1,\dots,\vec{v}_n}$ is linearly
+       First we show that if a set $\set{\vec{v}_1,\dots,\vec{v}_n}$ is linearly
        independent then its image $\set{f(\vec{v}_1),\dots,f(\vec{v}_n)}$
-       is also linearly independent, consider a linear relationship
-       among members of the image set.
+       is also linearly independent.
+       Consider a linear relationship among members of the image set.
        \begin{equation*}
          0=c_1f(\vec{v}_1)+\dots+c_nf(\vec{v_n})
           =f(c_1\vec{v}_1)+\dots+f(c_n\vec{v_n})
@@ -11860,14 +11864,14 @@ sage: solve(system, x,y)
       \begin{multline*}
         \hat{f}(\,(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)+
                   (d_1\vec{\beta}_1+\dots+d_n\vec{\beta}_n)\,)    \\
-       \begin{split}
+       \begin{aligned}
         &=\hat{f}(\,(c_1+d_1)\vec{\beta}_1+\dots+(c_n+d_n)\vec{\beta}_n\,) \\
         &=(c_1+d_1)f(\vec{\beta}_1)+\dots+(c_n+d_n)f(\vec{\beta}_n) \\
         &=c_1f(\vec{\beta}_1)+\dots+c_nf(\vec{\beta}_n)
           +d_1f(\vec{\beta}_1)+\dots+d_nf(\vec{\beta}_n) \\
         &=\hat{f}(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)+
           +\hat{f}(d_1\vec{\beta}_1+\dots+d_n\vec{\beta}_n)
-      \end{split}
+      \end{aligned}
       \end{multline*}
       (The second equality is the definition of $\hat{f}$.)
       Preservation of scalar multiplication is similar.
