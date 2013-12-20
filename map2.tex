@@ -562,9 +562,10 @@ is more fruitful and more central to progress.
         \partsitem Yes.
            This is the check that it preserves combinations of two members of
            the domain.
-           \begin{align*}
+           \begin{multline*}
              h(r_1\cdot\begin{mat} a_1 &b_1 \\ c_1 &d_1 \end{mat}
-               +r_2\cdot\begin{mat} a_2 &b_2 \\ c_2 &d_2 \end{mat})
+               +r_2\cdot\begin{mat} a_2 &b_2 \\ c_2 &d_2 \end{mat})     \\
+             \begin{aligned}
              &=h(\begin{mat} 
                    r_1a_1+r_2a_2 &r_1b_1+r_2b_2   \\ 
                    r_1c_1+r_2c_2 &r_1d_1+r_2d_2 
@@ -575,9 +576,11 @@ is more fruitful and more central to progress.
                +r_2(2a_2+3b_2+c_2-d_2)              \\
              &=r_1\cdot h(\begin{mat} a_1 &b_1 \\ c_1 &d_1 \end{mat}
                +r_2\cdot h(\begin{mat} a_2 &b_2 \\ c_2 &d_2 \end{mat})
-           \end{align*}
+             \end{aligned}
+           \end{multline*}
         \partsitem No.
-          An example of a combination that is not preserved is this.
+          An example of a combination that is not preserved is that
+          doing it one way gives this
           \begin{equation*}
             h(\begin{mat}[r]
               1  &0  \\
@@ -592,7 +595,9 @@ is more fruitful and more central to progress.
               0  &0
             \end{mat})
            =4
-           \quad\text{while}\quad
+           \end{equation*}
+           while the other way gives this.
+           \begin{equation*}
             h(\begin{mat}[r]
               1  &0  \\
               0  &0
@@ -922,9 +927,10 @@ is more fruitful and more central to progress.
       \begin{exparts}
         \partsitem Where \( c \) and \( d \) are scalars,
           we have this.
-          \begin{align*}
+          \begin{multline*}
             h(c\cdot \colvec{x_1 \\ \vdots \\ x_n} 
-              +d\cdot \colvec{y_1 \\ \vdots \\ y_n})
+              +d\cdot \colvec{y_1 \\ \vdots \\ y_n})                     \\
+            \begin{aligned}
             &=h(\colvec{cx_1+dy_1 \\ \vdots \\ cx_n+dy_n})        \\
             &=\colvec{a_{1,1}(cx_1+dy_1)+\dots+a_{1,n}(cx_n+dy_n) \\
                          \vdots                                   \\
@@ -937,13 +943,14 @@ is more fruitful and more central to progress.
                          a_{m,1}y_1+\dots+a_{m,n}y_n} \\
             &=c\cdot h(\colvec{x_1 \\ \vdots \\ x_n})
               +d\cdot h(\colvec{y_1 \\ \vdots \\ y_n})
-          \end{align*}
+            \end{aligned}
+          \end{multline*}
         \partsitem Each power $i$ of the derivative operator is linear 
           because of these rules familiar from calculus.
           \begin{equation*}
             \frac{d^i}{dx^i}(\,f(x)+g(x)\,)=\frac{d^i}{dx^i}f(x)
                                          +\frac{d^i}{dx^i}g(x)
-            \quad\text{and}\quad
+            \qquad
             \frac{d^i}{dx^i}\,r\cdot f(x)=r\cdot\frac{d^i}{dx^i}f(x)
           \end{equation*}
           Thus the given map is a linear transformation of \( \polyspace_n \)
@@ -1038,7 +1045,7 @@ is more fruitful and more central to progress.
       Recall that the entry in row~$i$ and column~$j$ of the transpose of $M$
       is the entry $m_{j,i}$ from row~$j$ and column~$i$ of $M$.
       Now, the check is routine. 
-      \begin{align*}
+      \begin{multline*}
         \trans{[r\cdot\begin{mat}
                 \    &\vdots          \\
              \cdots &a_{i,j} &\cdots \\
@@ -1048,7 +1055,8 @@ is more fruitful and more central to progress.
                 \    &\vdots          \\
              \cdots &b_{i,j} &\cdots \\
                     &\vdots
-           \end{mat}]}
+           \end{mat}]}                                              \\
+        \begin{aligned}
         &=\trans{\begin{mat}
                  \       &\vdots                    \\
                   \cdots &ra_{i,j}+sb_{i,j} &\cdots \\
@@ -1079,7 +1087,8 @@ is more fruitful and more central to progress.
             \cdots &b_{j,i} &\cdots \\
                    &\vdots
           \end{mat} }
-      \end{align*}
+         \end{aligned}
+      \end{multline*}
       The domain is \( \matspace_{\nbym{m}{n}} \) 
       while the codomain is \( \matspace_{\nbym{n}{m}} \).  
      \end{answer}
@@ -1153,8 +1162,8 @@ is more fruitful and more central to progress.
           If \( h(\vec{v}_1) \) is the zero vector then this line is 
           degenerate.
         \partsitem A \( k \)-dimensional linear surface in \( \Re^n \) maps to
-          a (possibly degenerate) \( k \)-dimensional linear surface in
-          \( \Re^m \).
+          a \( k \)-dimensional linear surface in
+          \( \Re^m \) (possibly it is degenerate).
           The proof is just like that the one for the line.
       \end{exparts}  
      \end{answer}
@@ -1235,7 +1244,7 @@ is more fruitful and more central to progress.
           subspace of is a subspace.
 
           Suppose that \( X \) is a subspace of \( W \).
-          Note that \( \zero_W\in X \) so the set
+          Note that \( \zero_W\in X \) so that the set
           \( \set{\vec{v}\in V \suchthat h(\vec{v})\in X} \) is not empty.
           To show that this set is closed under combinations, let
           \( \vec{v}_1,\dots,\vec{v}_n \) be elements of \( V \)
@@ -1303,14 +1312,14 @@ is more fruitful and more central to progress.
     \begin{answer}
       \begin{exparts}
         \partsitem Briefly, the check of linearity is this.
-          \begin{equation*}
+          \begin{multline*}
             F(r_1\cdot \vec{v}_1+r_2\cdot \vec{v}_2)
             =\colvec{f_1(r_1\vec{v}_1+r_2\vec{v}_2) \\ 
-                        f_2(r_1\vec{v}_1+r_2\vec{v}_2)}
+                        f_2(r_1\vec{v}_1+r_2\vec{v}_2)}           \\
             =r_1\colvec{f_1(\vec{v}_1) \\ f_2(\vec{v}_1)}
             +r_2\colvec{f_1(\vec{v}_2) \\ f_2(\vec{v}_2)}
             =r_1\cdot F(\vec{v}_1)+r_2\cdot F(\vec{v}_2)
-          \end{equation*}
+          \end{multline*}
         \partsitem Yes.
           Let \( \map{\pi_1}{\Re^2}{\Re^1} \) and
           \( \map{\pi_2}{\Re^2}{\Re^1} \) be the projections
@@ -2256,7 +2265,7 @@ point and the map is an isomorphism between the domain and the range.
     \end{answer}
   \recommended \item 
     Each of these transformations of \( \polyspace_3 \) is one-to-one.
-    Find the inverse of each.
+    For each, find the inverse.
     \begin{exparts}
       \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_0+a_1x+2a_2x^2+3a_3x^3 \)
       \partsitem \( a_0+a_1x+a_2x^2+a_3x^3\mapsto a_0+a_2x+a_1x^2+a_3x^3 \)
@@ -2551,7 +2560,7 @@ point and the map is an isomorphism between the domain and the range.
       transformation of
       \( \polyspace_n \) for each \( k \).
       Prove that this map
-      is a linear transformation of that space
+      is a linear transformation of the space
       \begin{equation*}
         f\mapsto
         \frac{d^k}{dx^k}f+c_{k-1}\frac{d^{k-1}}{dx^{k-1}}f
@@ -2564,7 +2573,7 @@ point and the map is an isomorphism between the domain and the range.
     \begin{answer}
       \begin{exparts}
         \partsitem 
-          We will show that the two sets are equal
+          We will show the sets are equal
           $h^{-1}(\vec{w})
             =\set{\vec{v}+\vec{n}\suchthat \vec{n}\in\nullspace{h} }$ 
           by mutual inclusion.
@@ -2735,8 +2744,9 @@ point and the map is an isomorphism between the domain and the range.
         c_1h_2(\vec{\beta}_1)+\dots+c_nh_2(\vec{\beta}_n)
       \end{align*}
       we have
-      \begin{align*}
-        (r_1h_1+r_2h_2)(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)
+      \begin{multline*}
+        (r_1h_1+r_2h_2)(c_1\vec{\beta}_1+\dots+c_n\vec{\beta}_n)       \\
+        \begin{aligned}
         &=
         c_1(r_1h_1(\vec{\beta}_1)+r_2h_2(\vec{\beta}_1))
           +\dots
@@ -2744,7 +2754,8 @@ point and the map is an isomorphism between the domain and the range.
         &=
         r_1(c_1h_1(\vec{\beta}_1)+\dots+c_nh_1(\vec{\beta}_n))
           + r_2(c_1h_2(\vec{\beta}_1)+\dots+c_nh_2(\vec{\beta}_n))
-      \end{align*}
+        \end{aligned}
+      \end{multline*}
       so \( \Phi(r_1h_1+r_2h_2)=r_1\Phi(h_1)+r_2\Phi(h_2) \).  
     \end{answer}
   \item 
