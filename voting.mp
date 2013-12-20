@@ -5,6 +5,7 @@ verbatimtex
 \documentclass{book}
 \usepackage{bookjh} 
 \usepackage{linalgjh}
+% \usepackage{xfrac}
 \begin{document}
 etex
 

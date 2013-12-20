@@ -9941,8 +9941,9 @@ sage: solve(system, x,y)
 \end{ans}
 \topic{Voting Paradoxes}
 \begin{ans}{1}
-      This is one example that yields a non-rational preference order for a
+      This example yields a non-rational preference order for a
       single voter.
+      \smallskip
       \begin{center}
         \begin{tabular}{l|c|c|c|}
              \multicolumn{1}{c}{\ }
@@ -9956,21 +9957,23 @@ sage: solve(system, x,y)
           \cline{2-4}
         \end{tabular}
       \end{center}
-      The Democrat is preferred to the Republican for character and
+      \smallskip
+      The Democrat is better than the Republican for character and
       experience.
-      The Republican is preferred to the Third for character and policies.
-      And, the Third is preferred to the Democrat for experience and policies.
+      The Republican wins over the Third for character and policies.
+      And, the Third beats the Democrat for experience and policies.
     
 \end{ans}
 \begin{ans}{2}
       First, compare the $D>R>T$ decomposition that was covered in the Topic
-      with the decomposition of the opposite $T>R>D$ voter.
       \begin{equation*}
         \votepreflist{-1}{1}{1}
           =\frac{1}{3}\cdot\votepreflist{1}{1}{1}
            +\frac{2}{3}\cdot\votepreflist{-1}{1}{0}
            +\frac{2}{3}\cdot\votepreflist{-1}{0}{1}
-        \quad\text{and}\quad
+      \end{equation*}
+      with the decomposition of the opposite $T>R>D$ voter.
+      \begin{equation*}
         \votepreflist{1}{-1}{-1}
           =d_1\cdot\votepreflist{1}{1}{1}
            +d_2\cdot\votepreflist{-1}{1}{0}
@@ -9988,9 +9991,9 @@ sage: solve(system, x,y)
           c_1  &+  &c_2  &   &     &=  &1  \\
           c_1  &   &     &+  &c_3  &=  &-1
         \end{linsys}
-        \;\grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}\;
-        \grstep{(-1/2)\rho_2+\rho_3}
-        \;\begin{linsys}{3}
+        \grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}
+        \repeatedgrstep{(-1/2)\rho_2+\rho_3}
+        \begin{linsys}{3}
           c_1  &-  &c_2  &-  &c_3      &=  &1 \\
                &   &2c_2 &+  &c_3      &=  &0  \\
                &   &     &   &(3/2)c_3 &=  &-2
@@ -10004,9 +10007,9 @@ sage: solve(system, x,y)
           c_1  &+  &c_2  &   &     &=  &-1  \\
           c_1  &   &     &+  &c_3  &=  &1
         \end{linsys}
-        \;\grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}\;
-        \grstep{(-1/2)\rho_2+\rho_3}
-        \;\begin{linsys}{3}
+        \grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}
+        \repeatedgrstep{(-1/2)\rho_2+\rho_3}
+        \begin{linsys}{3}
           c_1  &-  &c_2  &-  &c_3      &=  &1 \\
                &   &2c_2 &+  &c_3      &=  &-2  \\
                &   &     &   &(3/2)c_3 &=  &1
@@ -10019,9 +10022,10 @@ sage: solve(system, x,y)
       The mock election corresponds to the table on
       page~\pageref{table:Voting} in the way shown in the first table,
       and after cancellation the result is the second table.
+     \smallskip
       \begin{center}
-         \renewcommand{\arraystretch}{1.3}
-         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+         % \renewcommand{\arraystretch}{1.2}
+         \begin{tabular}{|c|c|} \hline
            \textit{positive spin}
            &\textit{negative spin}  \\ \hline
            \begin{tabular}{l}
@@ -10050,7 +10054,7 @@ sage: solve(system, x,y)
           \end{tabular}                  \\ \hline
         \end{tabular}
         \qquad
-         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+         \begin{tabular}{|c|c|} \hline
            \textit{positive spin}
            &\textit{negative spin}  \\ \hline
            \begin{tabular}{l}
@@ -10059,7 +10063,7 @@ sage: solve(system, x,y)
            \end{tabular}
           &\begin{tabular}{l}
              $T>R>D$          \\
-             --
+             \textit{-cancelled-}
            \end{tabular}                  \\ \hline
           \begin{tabular}{l}
              $R>T>D$           \\
@@ -10067,7 +10071,7 @@ sage: solve(system, x,y)
           \end{tabular}
          &\begin{tabular}{l}
              $D>T>R$             \\
-             --
+             \textit{-cancelled-}
            \end{tabular}                  \\ \hline
           \begin{tabular}{l}
             $T>D>R$             \\
@@ -10075,10 +10079,11 @@ sage: solve(system, x,y)
           \end{tabular}
          &\begin{tabular}{l}
             $R>D>T$            \\
-            --
+            \textit{-cancelled-}
           \end{tabular}                  \\ \hline
         \end{tabular}
        \end{center}
+       \smallskip
        All three come from the same side of the table (the left),
        as the result from this Topic says must happen.
        Tallying the election can now proceed, using the canceled numbers
@@ -10142,24 +10147,25 @@ sage: solve(system, x,y)
 \end{ans}
 \begin{ans}{4}
       \begin{exparts}
-        \partsitem The two can be rewritten as $-c\leq a-b$ and $-c\leq b-a$.
+        \partsitem We can rewrite the two as $-c\leq a-b$ and $-c\leq b-a$.
           Either $a-b$ or $b-a$ is nonpositive and so $-c\leq-\absval{a-b}$,
           as required.
         \partsitem This is immediate from the supposition that $0\leq a+b-c$.
         \partsitem A trivial example starts with the zero-voter election and
           adds any one voter.
-          A more interesting example is to take the Political Science mock
+          A more interesting example takes the Political Science mock
           election and add two $T>D>R$ voters
           (they can be added one at a time, to satisfy the
           ``addition of one more voter'' criteria in the question).
-          Observe that the additional voters have positive spin, which is the
+          The additional voters have positive spin, which is the
           spin of the votes remaining after cancellation in the original mock
           election.
-          This is the resulting table of voters, and next to it is
+          This is the resulting table of voters and next to it is
           the result of cancellation.
+      \smallskip
       \begin{center}
-         \renewcommand{\arraystretch}{1.3}
-         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+         % \renewcommand{\arraystretch}{1.3}
+         \begin{tabular}{|c|c|} \hline
            \textit{positive spin}
            &\textit{negative spin}  \\ \hline
            \begin{tabular}{l}
@@ -10188,7 +10194,7 @@ sage: solve(system, x,y)
           \end{tabular}                  \\ \hline
         \end{tabular}
         \qquad
-         \begin{tabular}{@{}|@{}c@{}|@{}c@{}|@{}} \hline
+         \begin{tabular}{|c|c|} \hline
            \textit{positive spin}
            &\textit{negative spin}  \\ \hline
            \begin{tabular}{l}
@@ -10197,7 +10203,7 @@ sage: solve(system, x,y)
            \end{tabular}
           &\begin{tabular}{l}
              $T>R>D$          \\
-             --
+             \textit{-cancelled}
            \end{tabular}                  \\ \hline
           \begin{tabular}{l}
              $R>T>D$           \\
@@ -10205,7 +10211,7 @@ sage: solve(system, x,y)
           \end{tabular}
          &\begin{tabular}{l}
              $D>T>R$             \\
-             --
+             \textit{-cancelled-}
            \end{tabular}                  \\ \hline
           \begin{tabular}{l}
             $T>D>R$             \\
@@ -10213,11 +10219,12 @@ sage: solve(system, x,y)
           \end{tabular}
          &\begin{tabular}{l}
             $R>D>T$            \\
-            --
+            \textit{-cancelled-}
           \end{tabular}                  \\ \hline
         \end{tabular}
        \end{center}
-       The election, using the canceled numbers, is this.
+       \smallskip
+       This is the election using the canceled numbers.
        \begin{equation*}
          % \psset{xunit=4pt,yunit=4pt,runit=4pt}
          3\cdot\votinggraphic{35}
@@ -10278,7 +10285,7 @@ sage: solve(system, x,y)
          all three be nonnegative or all three be nonpositive,
          and:~$\absval{c}<\absval{a+b}$ and $\absval{b}<\absval{a+c}$
          and $\absval{a}<\absval{b+c}$.
-          This follows from this diagram.
+          That follows from this diagram.
          \begin{equation*}
            \votinggraphic{27}  %\votecycle{a}{a}{-a}{4}
            +
@@ -10407,26 +10414,28 @@ sage: solve(system, x,y)
       \tag*{}\end{equation*}
       and so $c_1\vec{v}_1+c_2\vec{v}_2\in U^\perp$.
 
-      This holds if $U$ is any subset, subspace or not.
+      As to whether it holds if $U$ is a subset but not a subspace,
+      the answer is yes.
     
 \end{ans}
 \topic{Dimensional Analysis}
 \begin{ans}{1}
       \begin{exparts}
-        \partsitem This relationship
+        \partsitem Assuming that this
           \begin{equation*}
             (L^1M^0T^0)^{p_1}(L^1M^0T^0)^{p_2}(L^1M^0T^{-1})^{p_3}
-             (L^0M^0T^0)^{p_4}(L^1M^0T^{-2})^{p_5}(L^0M^0T^1)^{p_6}=L^0M^0T^0
+             (L^0M^0T^0)^{p_4}(L^1M^0T^{-2})^{p_5}(L^0M^0T^1)^{p_6}
           \end{equation*}
+          equals $L^0M^0T^0$
           gives rise to this linear system
           \begin{equation*}
-            \begin{linsys}{6}
-              p_1  &+  &p_2  &+  &p_3  &\   &\   &+  &p_5  &   &    &=  &0  \\
-                   &   &     &   &     &    &    &   &     &   &0   &=  &0  \\
-                   &   &     &   &-p_3 &    &    &-  &2p_5 &+  &p_6 &=  &0
+            \begin{linsys}{5}
+              p_1  &+  &p_2  &+  &p_3  &+  &p_5  &   &    &=  &0  \\
+              %      &   &     &   &     &   &     &   &0   &=  &0  \\
+                   &   &     &   &-p_3 &-  &2p_5 &+  &p_6 &=  &0
             \end{linsys}
           \end{equation*}
-          (note that there is no restriction on $p_4$).
+          (there is no restriction on $p_4$).
           The natural parametrization uses the free variables to give
           $p_3=-2p_5+p_6$ and $p_1=-p_2+p_5-p_6$.
           The resulting description of the solution set
@@ -10492,7 +10501,7 @@ sage: solve(system, x,y)
     
 \end{ans}
 \begin{ans}{2}
-      We consider
+      Consider
       \begin{equation*}
         (L^0M^0T^{-1})^{p_1}(L^1M^{-1}T^2)^{p_2}
           (L^{-3}M^0T^0)^{p_3}(L^0M^1T^0)^{p_4}=(L^0M^0T^0)
@@ -10504,8 +10513,8 @@ sage: solve(system, x,y)
                &    &-p_2  &   &      &+  &p_4 &=  &0  \\
          -p_1  &+   &2p_2  &   &      &   &    &=  &0
         \end{linsys}
-        \;\grstep{\rho_1\leftrightarrow\rho_3}
-        \;\grstep{\rho_2+\rho_3}\;
+        \grstep{\rho_1\leftrightarrow\rho_3}
+        \repeatedgrstep{\rho_2+\rho_3}
         \begin{linsys}{4}
          -p_1  &+   &2p_2  &   &      &   &    &=  &0  \\
                &    &-p_2  &   &      &+  &p_4 &=  &0  \\
@@ -10549,20 +10558,20 @@ sage: solve(system, x,y)
               (L^{-3}M^1T^0)^{p_4}=(L^0M^0T^0)
           \end{equation*}
           gives this.
-          \begin{equation*}
+          \begin{multline*}
             \begin{linsys}{4}
               2p_1  &   &    &+  &3p_3  &-  &3p_4 &=  &0  \\
               p_1   &   &    &   &      &+  &p_4  &=  &0  \\
               -2p_1 &-  &p_2 &   &      &   &     &=  &0
-            \end{linsys}
-            \;\grstep[\rho_1+\rho_3]{(-1/2)\rho_1+\rho_2}
-            \;\grstep{\rho_2\leftrightarrow\rho_3}
+            \end{linsys}                                         \\
+            \grstep[\rho_1+\rho_3]{(-1/2)\rho_1+\rho_2}
+            \repeatedgrstep{\rho_2\leftrightarrow\rho_3}
             \begin{linsys}{4}
               2p_1  &   &      &+  &3p_3       &-   &3p_4      &=  &0  \\
                     &   &-p_2  &+  &3p_3       &-   &3p_4      &=  &0  \\
-                    &\  &      &   &(-3/2)p_3  &+   &(5/2)p_4  &=  &0
+                    &  &      &   &(-3/2)p_3  &+   &(5/2)p_4  &=  &0
             \end{linsys}
-          \end{equation*}
+          \end{multline*}
           Taking $p_1$ as parameter to express the torque gives this
           description of the solution set.
           \begin{equation*}
@@ -10604,7 +10613,7 @@ sage: solve(system, x,y)
                        &   &     &   &     &   &0    &=  &0  \\
                  -p_1  &   &     &   &     &-  &2p_4 &=  &0
                 \end{linsys}
-                \;\grstep{\rho_1+\rho_4}\;
+                \grstep{\rho_1+\rho_4}
                 \begin{linsys}{4}
                   p_1  &+  &p_2  &+  &p_3  &+  &p_4  &=  &0  \\
                        &   &p_2  &+  &p_3  &-  &p_4  &=  &0
