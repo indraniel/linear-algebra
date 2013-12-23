@@ -579,26 +579,26 @@ write it as a function of the rows
     \begin{answer}
       We first reduce the matrix to echelon form.
       To begin, assume that \( a\neq 0 \) and that \( ae-bd\neq 0 \).
-      \begin{eqnarray*}
-        \grstep{(1/a)\rho_1}\;
+      \begin{multline*}
+        \grstep{(1/a)\rho_1}
         \begin{mat}
            1   &b/a   &c/a   \\
            d   &e     &f     \\
            g   &h     &i
          \end{mat}                                           
-        &\grstep[-g\rho_1+\rho_3]{-d\rho_1+\rho_2}
-        &\begin{mat}
+        \grstep[-g\rho_1+\rho_3]{-d\rho_1+\rho_2}
+        \begin{mat}
            1   &b/a           &c/a           \\
            0   &(ae-bd)/a     &(af-cd)/a     \\
            0   &(ah-bg)/a     &(ai-cg)/a
          \end{mat}                                            \\
-        &\grstep{(a/(ae-bd))\rho_2}
-        &\begin{mat}
+        \grstep{(a/(ae-bd))\rho_2}
+        \begin{mat}
            1   &b/a           &c/a             \\
            0   &1             &(af-cd)/(ae-bd) \\
            0   &(ah-bg)/a     &(ai-cg)/a
          \end{mat}
-      \end{eqnarray*}
+      \end{multline*}
       This step finishes the calculation.
       \begin{equation*}
         \grstep{((ah-bg)/a)\rho_2+\rho_3}
@@ -637,11 +637,11 @@ write it as a function of the rows
       the condition `\( (ah-bg)(af-cd)=0 \)'.
       Multiplying out and using the case assumption that $ae-bd=0$
       to substitute $ae$ for $bd$ gives this.
-      \begin{equation*}
+      \begin{multline*}
          0=ahaf-ahcd-bgaf+bgcd
-          =ahaf-ahcd-bgaf+aegc
+          =ahaf-ahcd-bgaf+aegc            \\
           =a(haf-hcd-bgf+egc)
-      \end{equation*}
+      \end{multline*}
       Since \( a\neq 0 \), we have that the matrix
       is nonsingular if and only if \( haf-hcd-bgf+egc=0 \).
       Therefore, in this \( a\neq 0 \) and \( ae-bd=0 \) case, 
@@ -1059,15 +1059,16 @@ We often write \( \deter{T} \) for \( \det (T) \).
 \begin{remark}  \label{rem:SwapRowsRedun}
 %<*re:SwapRowsRedun>
 Condition~(2) is redundant since
-% \begin{equation*}
-$   T\;\grstep{\rho_i+\rho_j}
-    \;\grstep{-\rho_j+\rho_i}
-    \;\grstep{\rho_i+\rho_j}
-    \;\grstep{-\rho_i}
-    \;\hat{T} $
-% \end{equation*}
+ \begin{equation*}
+   T\grstep{\rho_i+\rho_j}
+    \repeatedgrstep{-\rho_j+\rho_i}
+    \repeatedgrstep{\rho_i+\rho_j}
+    \repeatedgrstep{-\rho_i}
+    \hat{T} 
+\end{equation*}
 swaps rows \( i \) and~\( j \).
-We have only listed it for convenience.
+We have listed it just for 
+consistency with the Gauss's Method presentation in earlier chapters.
 %</re:SwapRowsRedun>
 \end{remark}
 
@@ -1362,7 +1363,7 @@ The rest of this section does that.
                \end{vmat} \)
     \end{exparts*}
     \begin{answer}
-     \begin{exparts*}
+     \begin{exparts}
       \partsitem \(
         \begin{vmat}[r]
                  2  &-1  \\
@@ -1388,7 +1389,7 @@ The rest of this section does that.
                  0  &0  &0
                \end{vmat}
               =0 \)
-     \end{exparts*}  
+     \end{exparts}  
     \end{answer}
   \item 
     For which values of \( k \) does this system 
@@ -1472,7 +1473,7 @@ The rest of this section does that.
             \end{vmat}
           \end{equation*}
         \partsitem Condition~(3) applies.
-          \begin{equation*}
+          \begin{multline*}
             \begin{vmat}
              -h_{1,1}   &-h_{1,2}  &-h_{1,3} \\
              -2h_{2,1}  &-2h_{2,2} &-2h_{2,3} \\
@@ -1484,7 +1485,7 @@ The rest of this section does that.
              h_{1,1}   &h_{1,2}  &h_{1,3} \\
              h_{2,1}   &h_{2,2}  &h_{2,3} \\
              h_{3,1}   &h_{3,2}  &h_{3,3}
-            \end{vmat}
+            \end{vmat}                                  \\
             =
             (-6)\cdot
             \begin{vmat}
@@ -1492,14 +1493,15 @@ The rest of this section does that.
              h_{2,1}   &h_{2,2}  &h_{2,3} \\
              h_{3,1}   &h_{3,2}  &h_{3,3}
             \end{vmat}
-          \end{equation*}
+          \end{multline*}
         \partsitem 
-          \begin{align*}
+          \begin{multline*}
           \begin{vmat}
             h_{1,1}+h_{3,1}  &h_{1,2}+h_{3,2} &h_{1,3}+h_{3,3} \\
             h_{2,1}          &h_{2,2}         &h_{2,3} \\
             5h_{3,1}         &5h_{3,2}        &5h_{3,3}
-          \end{vmat}
+          \end{vmat}                                                 \\
+          \begin{aligned}
           &=
           5\cdot     
           \begin{vmat}
@@ -1513,7 +1515,8 @@ The rest of this section does that.
             h_{2,1}          &h_{2,2}         &h_{2,3} \\
             h_{3,1}          &h_{3,2}         &h_{3,3}
           \end{vmat}
-          \end{align*}
+          \end{aligned}
+          \end{multline*}
       \end{exparts}  
      \end{answer}
   \recommended \item 
@@ -2253,7 +2256,8 @@ sum of \( n^n \)-many determinants, where
 each row of each determinant contains a single entry from the
 starting matrix.
 
-In this expansion, many of the determinants are zero.
+In this expansion, although there are lots of terms, 
+most of them have a determinant of zero.
 
 \begin{example} \label{ex:SamplePermExp}
 In each of these examples from the prior expansion,
@@ -2277,12 +2281,14 @@ two of the entries from the original matrix are in the same column.
      0               &0  &5
   \end{vmat}
 \end{equation*}
-% For instance
-% in the first matrix, the $2$ and the $4$ both come from the first column
-% of the original matrix.
+For instance,
+in the first matrix the $2$ and the $4$ both come from the first column
+of the original matrix.
+In the second matrix the $-1$ and~$5$ both come from the third column.
+And in the third matrix the $0$ and~$5$ both come from the third column.
 Any such matrix is singular because 
 one row is a multiple of the other.
-Thus, any such determinant is zero, by \nearbylemma{le:IdenRowsDetZero}.
+Thus any such determinant is zero, by \nearbylemma{le:IdenRowsDetZero}.
 
 With that observation 
 the above expansion of the \( \nbyn{3} \) determinant into
@@ -2954,7 +2960,7 @@ Determinant some,         \\*
     \end{exparts}
     \begin{answer}
       Each of these is easy to check.
-      \begin{exparts*}
+      \begin{exparts}
         \partsitem 
           \begin{tabular}[t]{r|cc}
             \textit{permutation} &$\phi_1$  &$\phi_2$ \\
@@ -2969,7 +2975,7 @@ Determinant some,         \\*
             \textit{inverse}
               &$\phi_1$ &$\phi_2$ &$\phi_3$ &$\phi_5$ &$\phi_4$ &$\phi_6$ 
           \end{tabular}
-      \end{exparts*}
+      \end{exparts}
     \end{answer}
   \item 
      Prove that \( f \) is multilinear if and only if for all
@@ -3149,7 +3155,7 @@ Determinant some,         \\*
       The row combination operations of 
       $-x_1\rho_2+\rho_3$ and $-x_1\rho_1+\rho_2$
       give this.
-      \begin{equation*}
+      \begin{multline*}
         \begin{vmat}
           1     &1     &1     \\
           x_1   &x_2   &x_3   \\
@@ -3160,14 +3166,14 @@ Determinant some,         \\*
           1     &1             &1             \\
           x_1   &x_2           &x_3           \\
           0     &(-x_1+x_2)x_2 &(-x_1+x_3)x_3 
-        \end{vmat}
+        \end{vmat}                                           \\
         =
         \begin{vmat}
           1     &1             &1             \\
           0     &-x_1+x_2      &-x_1+x_3      \\
           0     &(-x_1+x_2)x_2 &(-x_1+x_3)x_3 
         \end{vmat}
-      \end{equation*}
+      \end{multline*}
       Then the row combination operation of $x_2\rho_2+\rho_3$ gives
       the desired result.
       \begin{equation*}
@@ -3228,16 +3234,17 @@ Determinant some,         \\*
       a permutation of
       \( p+1,\dots,p+q \).
       To see this gives \( \deter{J}\cdot\deter{K}  \), distribute.
-      \begin{equation*}
+      \begin{multline*}
          \bigg[\sum_{\substack{\text{\scriptsize perms }\phi_1 \\
                               \text{\scriptsize of } 1,\dots,p}}
                t_{1,\phi_1(1)}\cdots t_{p,\phi_1(p)} 
-               \deter{P_{\phi_1}}                            \bigg]\cdot
+               \deter{P_{\phi_1}} \bigg]                                  \\    
+         \cdot
          \bigg[\sum_{\substack{\text{\scriptsize perms }\phi_2 \\
                               \text{\scriptsize of } p+1,\dots,p+q}}
                t_{p+1,\phi_2(p+1)}\cdots t_{p+q,\phi_2(p+q)} 
                \deter{P_{\phi_2}}                          \bigg]
-      \end{equation*}  
+      \end{multline*}  
     \end{answer}
   \recommended \item
     Prove that for any \( \nbyn{n} \) matrix \( T \) there are at most
@@ -3491,20 +3498,20 @@ or with three.
 \begin{equation*}
    P_{\phi}
    \grstep{\rho_3\leftrightarrow\rho_1}
-   \begin{mat}[r]
-      0  &0  &1  &0 \\
-      1  &0  &0  &0 \\
-      0  &1  &0  &0 \\
-      0  &0  &0  &1
-   \end{mat}
-   \grstep{\rho_2\leftrightarrow\rho_3}
-   \begin{mat}[r]
-      0  &0  &1  &0 \\
-      0  &1  &0  &0 \\
-      1  &0  &0  &0 \\
-      0  &0  &0  &1
-   \end{mat}
-   \grstep{\rho_1\leftrightarrow\rho_3}
+   % \begin{mat}[r]
+   %    0  &0  &1  &0 \\
+   %    1  &0  &0  &0 \\
+   %    0  &1  &0  &0 \\
+   %    0  &0  &0  &1
+   % \end{mat}
+   \repeatedgrstep{\rho_2\leftrightarrow\rho_3}
+   % \begin{mat}[r]
+   %    0  &0  &1  &0 \\
+   %    0  &1  &0  &0 \\
+   %    1  &0  &0  &0 \\
+   %    0  &0  &0  &1
+   % \end{mat}
+   \repeatedgrstep{\rho_1\leftrightarrow\rho_3}
    \begin{mat}[r]
       1  &0  &0  &0 \\
       0  &1  &0  &0 \\
@@ -3638,8 +3645,8 @@ via a sequence of adjacent swaps, first bringing row~$k$ up
      \iota_{\phi(k)}    \\
      \vdots
    \end{mat}
-  \grstep{\rho_k\swap\rho_{k-1}}\;\;
-  \grstep{\rho_{k-1}\swap\rho_{k-2}}
+  \grstep{\rho_k\swap\rho_{k-1}}
+  \repeatedgrstep{\rho_{k-1}\swap\rho_{k-2}}
   \cdots
   \grstep{\rho_{j+1}\swap\rho_j}
    \begin{mat}
@@ -3656,8 +3663,8 @@ via a sequence of adjacent swaps, first bringing row~$k$ up
 %<*pf:SwapsChangeSgn2>
 and then bringing row~$j$ down.
 \begin{equation*}
-  \grstep{\rho_{j+1}\swap\rho_{j+2}}\;\;
-  \grstep{\rho_{j+2}\swap\rho_{j+3}}
+  \grstep{\rho_{j+1}\swap\rho_{j+2}}
+  \repeatedgrstep{\rho_{j+2}\swap\rho_{j+3}}
   \cdots
   \grstep{\rho_{k-1}\swap\rho_k}
    \begin{mat}
@@ -3809,7 +3816,7 @@ Factor out~\( k \) to get the desired equality.
 
 %<*pf:DeterminantsExist3>
 For~(2) suppose that 
-\( T\;\smash[b]{\grstep{\rho_i\swap\rho_j}}\;\hat{T} \).
+\( T\smash[b]{\grstep{\rho_i\swap\rho_j}}\hat{T} \).
 We must show that $d(\hat{T})$ is the negative of $d(T)$.
 \begin{equation*}
   d(\hat{T})=
@@ -3899,7 +3906,7 @@ Thus \( d(\hat{T})=-d(T) \).
 
 %<*pf:DeterminantsExist6>
 Finally, for condition~(1) suppose that
-\( T\;\smash[b]{\grstep{k\rho_i+\rho_j}}\;\hat{T} \).
+\( T\smash[b]{\grstep{k\rho_i+\rho_j}}\hat{T} \).
 \begin{align*}
   d(\hat{T})
   &=\sum_{\text{perm\ }\phi}
@@ -4187,7 +4194,7 @@ of $P_{\phi^{-1}}$, as shown in
     \end{exparts}
     \begin{answer}
       Each of these is easy to check.
-      \begin{exparts*}
+      \begin{exparts}
         \partsitem 
           \begin{tabular}[t]{r|cc}
             \textit{permutation} &$\phi_1$  &$\phi_2$ \\
@@ -4202,7 +4209,7 @@ of $P_{\phi^{-1}}$, as shown in
             \textit{inverse}
               &$\phi_1$ &$\phi_2$ &$\phi_3$ &$\phi_5$ &$\phi_4$ &$\phi_6$ 
           \end{tabular}
-      \end{exparts*}
+      \end{exparts}
     \end{answer}
   \recommended \item
     \begin{exparts}
@@ -4281,8 +4288,9 @@ of $P_{\phi^{-1}}$, as shown in
      \end{exparts}
     \begin{answer}
       \begin{exparts}
-       \partsitem We can view permutations as one-one and onto maps
-         \( \map{\phi}{\set{1,\ldots,n}}{\set{1,\ldots,n}} \).
+       \partsitem We can view permutations as maps
+         \( \map{\phi}{\set{1,\ldots,n}}{\set{1,\ldots,n}} \)
+         that are one-to-one and onto.
          Any one-one and onto map has an inverse.
        \partsitem If it always takes an odd number of swaps to get 
          from \( P_\phi \)
