@@ -25000,7 +25000,7 @@ octave:6> gplot z
 \topic{Cramer's Rule}
 \begin{ans}{1}
       \begin{exparts*}
-        \partsitem
+        \partsitem Solve for the variables separately.
           \begin{equation*}
             x=
              \frac{ \begin{vmat}[r]
@@ -25036,12 +25036,12 @@ octave:6> gplot z
       Determinants are unchanged by combinations,
       including column combinations, so
       \( \det(B_i)=\det(\vec{a}_1,\dots,
-      x_1\vec{a}_1+\dots+x_i\vec{a}_i+\dots+x_n\vec{a}_n,\dots,\vec{a}_n) \)
+      x_1\vec{a}_1+\dots+x_i\vec{a}_i+\dots+x_n\vec{a}_n,\dots,\vec{a}_n) \).
+      Use the operation of taking $-x_1$ times the first column and adding
+      it to the $i$-th column, etc., to see this
       is equal to
-      $\det(\vec{a}_1,\dots,x_i\vec{a}_i,\dots,\vec{a}_n)$
-      (use the operation of taking $-x_1$ times the first column and adding
-      it to the $i$-th column, etc.).
-      That is equal to
+      $\det(\vec{a}_1,\dots,x_i\vec{a}_i,\dots,\vec{a}_n)$.
+      In turn, that is equal to
       $x_i\cdot\det(\vec{a}_1,\dots,\vec{a}_i,\dots,\vec{a}_n)
          =x_i\cdot\det(A)$,
       as required.
@@ -25167,29 +25167,37 @@ ans = 0.017398
 \end{lstlisting}
           \partsitem Here is the data (rounded a bit), and the graph.
             \begin{center}
-              \begin{tabular}{r|ccccccccc}
+              \begin{tabular}{l}
+              \begin{tabular}{r|cccccc}
                  \textit{matrix rows}
-                    &$15$ &$25$ &$35$ &$45$ &$55$ &$65$ &$75$ &$85$ &$95$ \\
+                    &$15$ &$25$ &$35$ &$45$ &$55$ &$65$  \\
                  \hline
                  \textit{time per ten}
-                    &$0.0034$
-                    &$0.0098$
-                    &$0.0675$
-                    &$0.0285$
-                    &$0.0443$
-                    &$0.0663$
-                    &$0.1428$
-                    &$0.2282$
-                    &$0.1686$
+                    &$0.003\,4$
+                    &$0.009\,8$
+                    &$0.067\,5$
+                    &$0.028\,5$
+                    &$0.044\,3$
+                    &$0.066\,3$
+              \end{tabular}                                       \\
+              \qquad\begin{tabular}{r|ccc}
+                 \textit{matrix rows}
+                    &$75$ &$85$ &$95$ \\
+                 \hline
+                 \textit{time per ten}
+                    &$0.142\,8$
+                    &$0.228\,2$
+                    &$0.168\,6$
+              \end{tabular}
               \end{tabular}
             \end{center}
-          (This data is from an average of twenty runs of the above script,
+          This data is from an average of twenty runs of the above script,
           because of the possibility that the randomly chosen matrix
           happens to take an unusually long or short time.
           Even so, the timing cannot be relied on too heavily; this is
-          just an experiment.)
+          just an experiment.
           \begin{center}
-            \includegraphics{ch4.28}
+            \includegraphics[width=0.4\textwidth]{ch4.28}
           \end{center}
       \end{exparts}
     
@@ -25296,7 +25304,7 @@ ans = 0.017398
       \end{equation*}
       Rescale every row but the first by~$a_{1,1}$.
       \begin{equation*}
-        \grstep[a_{1,1}\rho_3 \\ \vdots \\ a_{1,1}\rho_{n}]{a_{1,1}\rho_2}\;
+        \grstep[a_{1,1}\rho_3 \\ \vdots \\ a_{1,1}\rho_{n}]{a_{1,1}\rho_2}
         \begin{mat}
           a_{1,1}         &a_{1,2}        &\cdots &a_{1,n-1}        &a_{1,n} \\
           a_{2,1}a_{1,1}   &a_{2,2}a_{1,1}  &\cdots &a_{2,n-1}a_{1,1}  &a_{2,n}a_{1,1} \\
@@ -25311,23 +25319,25 @@ ans = 0.017398
       $-a_{i,1}\rho_1+\rho_i$ on each row~$i>1$.
       These row operations don't change the determinant.
       \begin{equation*}
-        \grstep[-a_{3,1}\rho_1+\rho_3 \\ \vdotswithin{-a_{3,1}\rho_1+\rho_3} \\ -a_{n,1}\rho_1+\rho_n]{-a_{2,1}\rho_1+\rho_2}\;
+        \grstep[-a_{3,1}\rho_1+\rho_3 \\ \vdotswithin{-a_{3,1}\rho_1+\rho_3} \\ -a_{n,1}\rho_1+\rho_n]{-a_{2,1}\rho_1+\rho_2}
+      \end{equation*}
+      The result is a matrix whose first row is unchanged, whose
+      first column is all zero's (except for
+      the $1,1$ entry of $a_{1,1}$), and whose remaining entries are these.
+      \begin{equation*}
         \begin{mat}
-          a_{1,1}
-              &a_{1,2}
+              a_{1,2}
               &\cdots
               &a_{1,n-1}
               &a_{1,n}
               \\
-          0
-              &a_{2,2}a_{1,1}-a_{2,1}a_{1,2}
+              a_{2,2}a_{1,1}-a_{2,1}a_{1,2}
               &\cdots
               &a_{2,n-1}a_{n,n}-a_{2,n-1}a_{1,n-1}
               &a_{2,n}a_{n,n}-a_{2,n}a_{1,n}
               \\
               \vdots                         \\
-          0
-             &a_{n,2}a_{1,1}-a_{n,1}a_{1,2}
+             a_{n,2}a_{1,1}-a_{n,1}a_{1,2}
              &\cdots
              &a_{n,n-1}a_{1,1}-a_{n,1}a_{1,n-1}
              &a_{n,n}a_{1,1}-a_{n,1}a_{1,n}
