@@ -19749,8 +19749,8 @@ sage: solve(system, x,y)
              \end{mat}
              \begin{mat}[r]
                -1/2  &0  &1/2
-             \end{mat}
-             =
+             \end{mat}                                 \\
+             &=
              \begin{mat}[r]
                1/2  &0  &-1/2  \\
                0    &0  &0     \\
@@ -20110,172 +20110,6 @@ sage: solve(system, x,y)
     
 \end{ans}
 \topic{Line of Best Fit}
-  % write the records to the answer file.
-    \textit{Data on the progression of the world's records
-       (taken from the \textit{Runner's World} web site)
-       is below.}
-    \begin{figure}
-      \rotatebox[origin=lb]{90}{\hbox{\scriptsize
-        \begin{tabular}[t]{|l|ll|}
-%        \hline
-%          \multicolumn{3}{|c|}{\textit{Amateurs}}    \\
-        \hline
-          \multicolumn{3}{|c|}{\textit{Progression of Men's Mile Record}}  \\
-        \hline
-        \textit{time}  &\textit{name}  &\textit{date}  \\
-         \hline
-           $\text{4:52}.0$      &Cadet Marshall (GBR)       &02Sep52 \\
-           $\text{4:45}.0$      &Thomas Finch (GBR)         &03Nov58 \\
-           %$\text{4:45}.0$      &St.~Vincent Hammick (GBR)  &15Nov58 \\
-           $\text{4:40}.0$      &Gerald Surman (GBR)        &24Nov59 \\
-           $\text{4:33}.0$      &George Farran (IRL)        &23May62 \\
-           $\text{4:29}\;3/5$   &Walter Chinnery (GBR)      &10Mar68 \\
-           $\text{4:28}\;4/5$   &William Gibbs (GBR)        &03Apr68 \\
-           $\text{4:28}\;3/5$   &Charles Gunton (GBR)       &31Mar73 \\
-           $\text{4:26}.0$      &Walter Slade (GBR)         &30May74 \\
-           $\text{4:24}\;1/2$   &Walter Slade (GBR)         &19Jun75 \\
-           $\text{4:23}\;1/5$   &Walter George (GBR)        &16Aug80 \\
-           $\text{4:19}\;2/5$   &Walter George (GBR)        &03Jun82 \\
-           $\text{4:18}\;2/5$   &Walter George (GBR)        &21Jun84 \\
-           $\text{4:17}\;4/5$   &Thomas Conneff (USA)       &26Aug93 \\
-           $\text{4:17}.0$      &Fred Bacon (GBR)           &06Jul95 \\
-           $\text{4:15}\;3/5$   &Thomas Conneff (USA)       &28Aug95 \\
-           $\text{4:15}\;2/5$   &John Paul Jones (USA)      &27May11 \\
-           $\text{4:14}.4$      &John Paul Jones (USA)      &31May13 \\
-           $\text{4:12}.6$      &Norman Taber (USA)         &16Jul15 \\
-           $\text{4:10}.4$      &Paavo Nurmi (FIN)          &23Aug23 \\
-           $\text{4:09}\;1/5$   &Jules Ladoumegue (FRA)     &04Oct31 \\
-           $\text{4:07}.6$      &Jack Lovelock (NZL)        &15Jul33 \\
-           $\text{4:06}.8$      &Glenn Cunningham (USA)     &16Jun34 \\
-           $\text{4:06}.4$      &Sydney Wooderson (GBR)     &28Aug37 \\
-           $\text{4:06}.2$      &Gunder Hagg (SWE)          &01Jul42 \\
-           %$\text{4:06}.2$      &Arne Andersson (SWE)       &10Jul42 \\
-           $\text{4:04}.6$      &Gunder Hagg (SWE)          &04Sep42 \\
-           $\text{4:02}.6$      &Arne Andersson (SWE)       &01Jul43 \\
-           $\text{4:01}.6$      &Arne Andersson (SWE)       &18Jul44 \\
-           $\text{4:01}.4$      &Gunder Hagg (SWE)          &17Jul45 \\
-           $\text{3:59}.4$      &Roger Bannister (GBR)      &06May54 \\
-           $\text{3:58}.0$      &John Landy (AUS)           &21Jun54 \\
-           $\text{3:57}.2$      &Derek Ibbotson (GBR)       &19Jul57 \\
-           $\text{3:54}.5$      &Herb Elliott (AUS)         &06Aug58 \\
-           $\text{3:54}.4$      &Peter Snell (NZL)          &27Jan62 \\
-           $\text{3:54}.1$      &Peter Snell (NZL)          &17Nov64 \\
-           $\text{3:53}.6$      &Michel Jazy (FRA)          &09Jun65 \\
-           $\text{3:51}.3$      &Jim Ryun (USA)             &17Jul66 \\
-           $\text{3:51}.1$      &Jim Ryun (USA)             &23Jun67 \\
-           $\text{3:51}.0$      &Filbert Bayi (TAN)         &17May75 \\
-           $\text{3:49}.4$      &John Walker (NZL)          &12Aug75 \\
-           $\text{3:49}.0$      &Sebastian Coe (GBR)        &17Jul79 \\
-           $\text{3:48}.8$      &Steve Ovett (GBR)          &01Jul80 \\
-           $\text{3:48}.53$     &Sebastian Coe (GBR)        &19Aug81 \\
-           $\text{3:48}.40$     &Steve Ovett (GBR)          &26Aug81 \\
-           $\text{3:47}.33$     &Sebastian Coe (GBR)        &28Aug81 \\
-           $\text{3:46}.32$     &Steve Cram (GBR)           &27Jul85 \\
-           $\text{3:44}.39$     &Noureddine Morceli (ALG)   &05Sep93 \\
-	   $\text{3:43}.13$     &Hicham el Guerrouj (MOR)   &07Jul99 \\
-      \hline
-      \end{tabular}
-      \   %
-        \begin{tabular}[t]{|l|ll|}
-        \hline
-          \multicolumn{3}{|c|}{\textit{Progression of Men's $1500$~Meter Record}}  \\
-        \hline
-        \textit{time}  &\textit{name}  &\textit{date}  \\
-         \hline
-         $\text{4:09}.0$   &John Bray (USA)        &30May00  \\
-         $\text{4:06}.2$   &Charles Bennett (GBR)  &15Jul00  \\
-         $\text{4:05}.4$   &James Lightbody (USA)  &03Sep04  \\
-         $\text{3:59}.8$   &Harold Wilson (GBR)    &30May08  \\
-         $\text{3:59}.2$   &Abel Kiviat (USA)      &26May12  \\
-         $\text{3:56}.8$   &Abel Kiviat (USA)      &02Jun12  \\
-         $\text{3:55}.8$   &Abel Kiviat (USA)      &08Jun12  \\
-         $\text{3:55}.0$   &Norman Taber (USA)     &16Jul15  \\
-         $\text{3:54}.7$   &John Zander (SWE)      &05Aug17  \\
-         $\text{3:53}.0$   &Paavo Nurmi (FIN)      &23Aug23  \\
-         $\text{3:52}.6$   &Paavo Nurmi (FIN)      &19Jun24  \\
-         $\text{3:51}.0$   &Otto Peltzer (GER)     &11Sep26  \\
-         $\text{3:49}.2$   &Jules Ladoumegue (FRA) &05Oct30  \\
-         %$\text{3:49}.2$   &Luigi Beccali (ITA)    &09Sep33  \\
-         $\text{3:49}.0$   &Luigi Beccali (ITA)    &17Sep33  \\
-         $\text{3:48}.8$   &William Bonthron (USA) &30Jun34  \\
-         $\text{3:47}.8$   &Jack Lovelock (NZL)    &06Aug36  \\
-         $\text{3:47}.6$   &Gunder Hagg (SWE)      &10Aug41  \\
-         $\text{3:45}.8$   &Gunder Hagg (SWE)      &17Jul42  \\
-         $\text{3:45}.0$   &Arne Andersson (SWE)   &17Aug43  \\
-         $\text{3:43}.0$   &Gunder Hagg (SWE)      &07Jul44  \\
-         %$\text{3:43}.0$   &Lennart Strand (SWE)   &15Jul47  \\
-         %$\text{3:43}.0$   &Werner Lueg (FRG)      &29Jun52  \\
-         %$\text{3:43}.0$   &Roger Bannister (GBR)  &06May54  \\
-         $\text{3:42}.8$   &Wes Santee (USA)       &04Jun54  \\
-         $\text{3:41}.8$   &John Landy (AUS)       &21Jun54  \\
-         $\text{3:40}.8$   &Sandor Iharos (HUN)    &28Jul55  \\
-         %$\text{3:40}.8$   &Laszlo Tabori (HUN)    &06Sep55  \\
-         %$\text{3:40}.8$   &Gunnar Nielsen (DEN)   &06Sep55  \\
-         $\text{3:40}.6$   &Istvan Rozsavolgyi (HUN) &03Aug56 \\
-         $\text{3:40}.2$   &Olavi Salsola (FIN)    &11Jul57  \\
-         %$\text{3:40}.2$   &Olavi Salonen (FIN)    &11Jul57  \\
-         $\text{3:38}.1$   &Stanislav Jungwirth (CZE) &12Jul57  \\
-         $\text{3:36}.0$   &Herb Elliott (AUS)     &28Aug58  \\
-         $\text{3:35}.6$   &Herb Elliott (AUS)     &06Sep60  \\
-         $\text{3:33}.1$   &Jim Ryun (USA)         &08Jul67  \\
-         $\text{3:32}.2$   &Filbert Bayi (TAN)     &02Feb74  \\
-         $\text{3:32}.1$   &Sebastian Coe (GBR)    &15Aug79  \\
-         %$\text{3:32}.1$   &Steve Ovett (GBR)      &15Jul80  \\
-         $\text{3:31}.36$  &Steve Ovett (GBR)      &27Aug80  \\
-         $\text{3:31}.24$  &Sydney Maree (usa)     &28Aug83  \\
-         $\text{3:30}.77$  &Steve Ovett (GBR)      &04Sep83  \\
-         $\text{3:29}.67$  &Steve Cram (GBR)       &16Jul85  \\
-         $\text{3:29}.46$  &Said Aouita (MOR)      &23Aug85  \\
-         $\text{3:28}.86$  &Noureddine Morceli (ALG)  &06Sep92  \\
-         $\text{3:27}.37$  &Noureddine Morceli (ALG)  &12Jul95  \\
-         $\text{3:26}.00$  &Hicham el Guerrouj (MOR)  &14Jul98  \\
-     \hline
-     \end{tabular}
-      \   %
-        \begin{tabular}[t]{|l|ll|}
-        \hline
-          \multicolumn{3}{|c|}{\textit{Progression of Women's Mile Record}}  \\
-        \hline
-        \textit{time}  &\textit{name}  &\textit{date}  \\
-         \hline
-           $\text{6:13}.2$    &Elizabeth Atkinson (GBR)    &24Jun21 \\
-           $\text{5:27}.5$    &Ruth Christmas (GBR)        &20Aug32 \\
-           $\text{5:24}.0$    &Gladys Lunn (GBR)           &01Jun36 \\
-           $\text{5:23}.0$    &Gladys Lunn (GBR)           &18Jul36 \\
-           $\text{5:20}.8$    &Gladys Lunn (GBR)           &08May37 \\
-           $\text{5:17}.0$    &Gladys Lunn (GBR)           &07Aug37 \\
-           $\text{5:15}.3$    &Evelyne Forster (GBR)       &22Jul39 \\
-           $\text{5:11}.0$    &Anne Oliver (GBR)           &14Jun52 \\
-           $\text{5:09}.8$    &Enid Harding (GBR)          &04Jul53 \\
-           $\text{5:08}.0$    &Anne Oliver (GBR)           &12Sep53 \\
-           $\text{5:02}.6$    &Diane Leather (GBR)         &30Sep53 \\
-           $\text{5:00}.3$    &Edith Treybal (ROM)         &01Nov53 \\
-           $\text{5:00}.2$    &Diane Leather (GBR)         &26May54 \\
-           $\text{4:59}.6$    &Diane Leather (GBR)         &29May54 \\
-           $\text{4:50}.8$    &Diane Leather (GBR)         &24May55 \\
-           $\text{4:45}.0$    &Diane Leather (GBR)         &21Sep55 \\
-           $\text{4:41}.4$    &Marise Chamberlain (NZL)    &08Dec62 \\
-           $\text{4:39}.2$    &Anne Smith (GBR)            &13May67 \\
-           $\text{4:37}.0$    &Anne Smith (GBR)            &03Jun67 \\
-           $\text{4:36}.8$    &Maria Gommers (HOL)         &14Jun69 \\
-           $\text{4:35}.3$    &Ellen Tittel (FRG)          &20Aug71 \\
-           $\text{4:34}.9$    &Glenda Reiser (CAN)         &07Jul73 \\
-           $\text{4:29}.5$    &Paola Pigni-Cacchi (ITA)    &08Aug73 \\
-           $\text{4:23}.8$    &Natalia Marasescu (ROM)     &21May77 \\
-           $\text{4:22}.1$    &Natalia Marasescu (ROM)     &27Jan79 \\
-           $\text{4:21}.7$    &Mary Decker (USA)           &26Jan80 \\
-           $\text{4:20}.89$   &Lyudmila Veselkova (SOV)    &12Sep81 \\
-           $\text{4:18}.08$   &Mary Decker-Tabb (USA)      &09Jul82 \\
-           $\text{4:17}.44$   &Maricica Puica (ROM)        &16Sep82 \\
-           $\text{4:15}.8$    &Natalya Artyomova (SOV)     &05Aug84 \\
-           $\text{4:16}.71$   &Mary Decker-Slaney (USA)    &21Aug85 \\
-           $\text{4:15}.61$   &Paula Ivan (ROM)            &10Jul89 \\
-           $\text{4:12}.56$   &Svetlana Masterkova (RUS)   &14Aug96 \\
-       \hline
-       \end{tabular}
-      }}  %end the rotatebox
-    \end{figure}
-  
 \begin{ans}{1}
       As with the first example discussed above, we are trying to find a
       best $m$ to ``solve'' this system.
@@ -20418,10 +20252,23 @@ sage: solve(system, x,y)
 \end{ans}
 \begin{ans}{6}
       \textit{Sage} gives the line of best fit as
-      $\text{toll}=-0.05\text{dist}+5.63$.
-      But the graph shows that the equation has no predictive value.
+      $\text{toll}=-0.05\cdot\text{dist}+5.63$.
+\begin{lstlisting}
+sage: dist = [2, 7, 8, 16, 27, 47, 67, 82, 102, 120]
+sage: toll = [6, 6, 6, 6.5, 2.5, 1, 1, 1, 1, 1]
+sage: var('a,b,t')
+(a, b, t)
+sage: model(t) = a*t+b
+sage: data = zip(dist,toll)
+sage: fit = find_fit(data, model, solution_dict=True)
+sage: model.subs(fit)
+t |--> -0.0508568169130319*t + 5.630955848442933
+sage: p = plot(model.subs(fit), (t,0,120))+points(data,size=25,color='red')
+sage: p.save('bridges.pdf')
+\end{lstlisting}
+      But the graph shows that the equation has little predictive value.
       \begin{center}
-        \includegraphics{bridges.png}
+        \includegraphics[width=.5\textwidth]{bridges.pdf}
       \end{center}
       Apparently a better model is that
       (with only one intermediate exception) crossings in the city
@@ -20755,7 +20602,7 @@ sage: solve(system, x,y)
 \end{ans}
 \begin{ans}{3}
       This Gaussian reduction
-      \begin{equation*}
+      \begin{multline*}
         \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}
         \begin{mat}[r]
           1  &2  &1  \\
@@ -20767,7 +20614,7 @@ sage: solve(system, x,y)
           1  &2  &1  \\
           0  &0  &-3 \\
           0  &0  &0
-        \end{mat}
+        \end{mat}                                     \\
         \grstep{(-1/3)\rho_2}
         \begin{mat}[r]
           1  &2  &1  \\
@@ -20780,7 +20627,7 @@ sage: solve(system, x,y)
           0  &0  &1 \\
           0  &0  &0
         \end{mat}
-      \end{equation*}
+      \end{multline*}
       gives the reduced echelon form of the matrix.
       Now the two column operations of taking $-2$ times the first column
       and adding it to the second, and then of swapping columns two and three
@@ -20945,7 +20792,7 @@ sage: solve(system, x,y)
 \end{ans}
 \begin{ans}{2}
       For any $k$ we have this.
-      \begin{equation*}
+      \begin{multline*}
         \begin{amat}{4}
           1  &1  &0  &0  &s  \\
           0  &0  &1  &1  &s  \\
@@ -20953,7 +20800,8 @@ sage: solve(system, x,y)
           0  &1  &0  &1  &s  \\
           1  &0  &0  &1  &s  \\
           0  &1  &1  &0  &s
-        \end{amat}\;\grstep[-\rho_1+\rho_5]{-\rho_1+\rho_3}\;
+        \end{amat}
+        \grstep[-\rho_1+\rho_5]{-\rho_1+\rho_3}
         \begin{amat}{4}
           1  &1  &0  &0  &s  \\
           0  &0  &1  &1  &s  \\
@@ -20961,7 +20809,8 @@ sage: solve(system, x,y)
           0  &1  &0  &1  &s  \\
           0  &-1 &0  &1  &0  \\
           0  &1  &1  &0  &s
-        \end{amat}\;\grstep{-\rho_2\leftrightarrow\rho_6}\;
+        \end{amat}                                            \\
+        \grstep{-\rho_2\leftrightarrow\rho_6}
         \begin{amat}{4}
           1  &1  &0  &0  &s  \\
           0  &1  &1  &0  &s  \\
@@ -20969,7 +20818,8 @@ sage: solve(system, x,y)
           0  &1  &0  &1  &s  \\
           0  &-1 &0  &1  &0  \\
           0  &0  &1  &1  &s
-        \end{amat}\;\grstep[-\rho_2+\rho_4 \\ \rho_2+\rho_5]{-\rho_2+\rho_3}\;
+        \end{amat}
+        \grstep[-\rho_2+\rho_4 \\ \rho_2+\rho_5]{-\rho_2+\rho_3}
         \begin{amat}{4}
           1  &1  &0  &0  &s  \\
           0  &1  &1  &0  &s  \\
@@ -20978,7 +20828,7 @@ sage: solve(system, x,y)
           0  &0  &1  &1  &s  \\
           0  &0  &1  &1  &s
         \end{amat}
-      \end{equation*}
+      \end{multline*}
       The unique solution is $a=b=c=d=s/2$.
     
 \end{ans}
@@ -21291,20 +21141,20 @@ octave:6> B100*[0;1;0;0;0;0]
         \partsitem From these equations
           \begin{equation*}
             \begin{linsys}{6}
-              (1/6)s_{1}(n) &+ &0s_{2}(n) &+ &0s_{3}(n)
+              s_{1}(n)/6 &+ &0s_{2}(n) &+ &0s_{3}(n)
                   &+ &0s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  &= &s_{1}(n+1) \\
-              (1/6)s_{1}(n) &+ &(2/6)s_{2}(n) &+ &0s_{3}(n)
+              s_{1}(n)/6 &+ &2s_{2}(n)/6 &+ &0s_{3}(n)
                   &+ &0s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  &= &s_{2}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(3/6)s_{3}(n)
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &3s_{3}(n)/6
                   &+ &0s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  &= &s_{3}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(1/6)s_{3}(n)
-                  &+ &(4/6)s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &s_{3}(n)/6
+                  &+ &4s_{4}(n)/6 &+ &0s_{5}(n)  &+ &0s_{6}(n)
                   &=  &s_{4}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(1/6)s_{3}(n)
-                  &+ &(1/6)s_{4}(n) &+ &(5/6)s_{5}(n)  &+ &0s_{6}(n)
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &s_{3}(n)/6
+                  &+ &s_{4}(n)/6 &+ &5s_{5}(n)/6  &+ &0s_{6}(n)
                   &=  &s_{5}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(1/6)s_{3}(n)
-                  &+ &(1/6)s_{4}(n) &+ &(1/6)s_{5}(n)  &+ &(6/6)s_{6}(n)
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &s_{3}(n)/6
+                  &+ &s_{4}(n)/6 &+ &s_{5}(n)/6  &+ &6s_{6}(n)/6
                   &=  &s_{6}(n+1)
             \end{linsys}
           \end{equation*}
@@ -21683,7 +21533,7 @@ octave:5> gplot z
         There is no threshold value \Dash  no probability above which the
         curve rises sharply.
         \begin{center}
-          \includegraphics{learn5.eps}
+          \includegraphics[width=.55\textwidth]{learn5.eps}
         \end{center}
       \end{exparts}
     
@@ -21758,9 +21608,9 @@ octave:5> gplot z
      
 \end{ans}
 \begin{ans}{6}
-     These are the $p=.55$ vectors,
-     \begin{center}\small
-       \begin{tabular}{@{}rc|ccccccc@{}}
+     These are the $p=.55$ vectors, and the $p=0.60$ vectors.
+     \begin{center}\footnotesize
+       \begin{tabular}{@{}r@{}cccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\
         \hline
         \begin{tabular}{@{}c@{}}
@@ -21997,11 +21847,11 @@ octave:5> gplot z
           0.16677 \\
           0.13645
          \end{aligncolondecimal}$
-       \end{tabular}
-       \end{center}
-       and these are the $p=.60$ vectors.
-       \begin{center}\small
-       \begin{tabular}{@{}rc|ccccccc@{}}
+       \end{tabular}                      \\
+       % \end{center}
+       % and these are the $p=.60$ vectors.
+       % \begin{center}\small
+       \begin{tabular}{@{}r@{}cccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\
         \hline
         \begin{tabular}{@{}c@{}}
@@ -22274,13 +22124,13 @@ function w = markov(p,v)
   w = v7(11)+v7(16)+v7(20)+v7(23)
 endfunction
 \end{lstlisting}
-       Using this script, we get that when the American League has a
+       When the American League has a
        $p=0.55$ probability of winning each game then their probability
-       of winning the first-to-win-four series is $0.60829$.
+       of winning the series is $0.60829$.
        When their probability of winning any one game is $p=0.6$
        then their probability of winning the series is
        $0.71021$.
-      \partsitem This Octave session
+      \partsitem From this Octave session and its graph
 \begin{lstlisting}
 octave:1> v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
 octave:2> x=(.01:.01:.99)';
@@ -22291,11 +22141,10 @@ octave:4> for i=.01:.01:.99
 octave:5> z=[x, y];
 octave:6> gplot z
 \end{lstlisting}
-       yields this graph.
-       By eye we judge that if $p>0.7$ then the team is close to assured
+       by eye we judge that if $p>0.7$ then the team is close to assured
        of the series.
        \begin{center}
-         \includegraphics{ws.eps}
+         \includegraphics[width=0.4\textwidth]{ws.eps}
        \end{center}
      \end{exparts}
     
@@ -22325,23 +22174,23 @@ octave:6> gplot z
             \end{pmatrix}
            \end{equation*}
             has these two column sums
-            \begin{equation*}
+            \begin{multline*}
               (a_{1,1}b_{1,1}+a_{1,2}b_{2,1})
               +(a_{2,1}b_{1,1}+a_{2,2}b_{2,1})
               =(a_{1,1}+a_{2,1})\cdot b_{1,1}
-                +(a_{1,2}+a_{2,2})\cdot b_{2,1}
+                +(a_{1,2}+a_{2,2})\cdot b_{2,1}            \\
               =1\cdot b_{1,1}+1\cdot b_{2,1}
               =1
-            \end{equation*}
+            \end{multline*}
             and
-            \begin{equation*}
+            \begin{multline*}
               (a_{1,1}b_{1,2}+a_{1,2}b_{2,2})
               +(a_{2,1}b_{1,2}+a_{2,2}b_{2,2})
               =(a_{1,1}+a_{2,1})\cdot b_{1,2}
-                +(a_{1,2}+a_{2,2})\cdot b_{2,2}
+                +(a_{1,2}+a_{2,2})\cdot b_{2,2}              \\
               =1\cdot b_{1,2}+1\cdot b_{2,2}
               =1
-            \end{equation*}
+            \end{multline*}
             as required.
       \end{exparts}
     

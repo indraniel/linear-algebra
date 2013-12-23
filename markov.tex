@@ -934,20 +934,20 @@ octave:6> B100*[0;1;0;0;0;0]
         \partsitem From these equations
           \begin{equation*}
             \begin{linsys}{6}
-              (1/6)s_{1}(n) &+ &0s_{2}(n) &+ &0s_{3}(n) 
+              s_{1}(n)/6 &+ &0s_{2}(n) &+ &0s_{3}(n) 
                   &+ &0s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  &= &s_{1}(n+1) \\
-              (1/6)s_{1}(n) &+ &(2/6)s_{2}(n) &+ &0s_{3}(n) 
+              s_{1}(n)/6 &+ &2s_{2}(n)/6 &+ &0s_{3}(n) 
                   &+ &0s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  &= &s_{2}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(3/6)s_{3}(n) 
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &3s_{3}(n)/6 
                   &+ &0s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  &= &s_{3}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(1/6)s_{3}(n) 
-                  &+ &(4/6)s_{4}(n) &+ &0s_{5}(n)  &+ &0s_{6}(n)  
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &s_{3}(n)/6 
+                  &+ &4s_{4}(n)/6 &+ &0s_{5}(n)  &+ &0s_{6}(n)  
                   &=  &s_{4}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(1/6)s_{3}(n) 
-                  &+ &(1/6)s_{4}(n) &+ &(5/6)s_{5}(n)  &+ &0s_{6}(n)  
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &s_{3}(n)/6 
+                  &+ &s_{4}(n)/6 &+ &5s_{5}(n)/6  &+ &0s_{6}(n)  
                   &=  &s_{5}(n+1) \\
-              (1/6)s_{1}(n) &+ &(1/6)s_{2}(n) &+ &(1/6)s_{3}(n) 
-                  &+ &(1/6)s_{4}(n) &+ &(1/6)s_{5}(n)  &+ &(6/6)s_{6}(n)  
+              s_{1}(n)/6 &+ &s_{2}(n)/6 &+ &s_{3}(n)/6 
+                  &+ &s_{4}(n)/6 &+ &s_{5}(n)/6  &+ &6s_{6}(n)/6  
                   &=  &s_{6}(n+1) 
             \end{linsys}
           \end{equation*}
@@ -1479,7 +1479,7 @@ octave:5> gplot z
         There is no threshold value \Dash  no probability above which the
         curve rises sharply.
         \begin{center}
-          \includegraphics{learn5.eps}
+          \includegraphics[width=.55\textwidth]{learn5.eps}
         \end{center}
       \end{exparts}
     \end{answer}
@@ -1580,9 +1580,9 @@ octave:5> gplot z
     \end{exparts}
     % (Some sample code is included below.)
     \begin{answer}
-     These are the $p=.55$ vectors, 
-     \begin{center}\small
-       \begin{tabular}{@{}rc|ccccccc@{}}
+     These are the $p=.55$ vectors, and the $p=0.60$ vectors.
+     \begin{center}\footnotesize
+       \begin{tabular}{@{}r@{}cccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\ 
         \hline
         \begin{tabular}{@{}c@{}}
@@ -1819,11 +1819,11 @@ octave:5> gplot z
           0.16677 \\
           0.13645
          \end{aligncolondecimal}$
-       \end{tabular}
-       \end{center}
-       and these are the $p=.60$ vectors.
-       \begin{center}\small
-       \begin{tabular}{@{}rc|ccccccc@{}}
+       \end{tabular}                      \\
+       % \end{center}
+       % and these are the $p=.60$ vectors.
+       % \begin{center}\small
+       \begin{tabular}{@{}r@{}cccccccc@{}}
          &$n=0$  &$n=1$  &$n=2$  &$n=3$  &$n=4$  &$n=5$  &$n=6$  &$n=7$  \\ 
         \hline
         \begin{tabular}{@{}c@{}}
@@ -2096,13 +2096,13 @@ function w = markov(p,v)
   w = v7(11)+v7(16)+v7(20)+v7(23)
 endfunction
 \end{lstlisting}
-       Using this script, we get that when the American League has a
+       When the American League has a
        $p=0.55$ probability of winning each game then their probability
-       of winning the first-to-win-four series is $0.60829$.
+       of winning the series is $0.60829$.
        When their probability of winning any one game is $p=0.6$
        then their probability of winning the series is  
        $0.71021$.
-      \partsitem This Octave session
+      \partsitem From this Octave session and its graph
 \begin{lstlisting}
 octave:1> v0=[1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
 octave:2> x=(.01:.01:.99)';
@@ -2113,11 +2113,10 @@ octave:4> for i=.01:.01:.99
 octave:5> z=[x, y];
 octave:6> gplot z
 \end{lstlisting}
-       yields this graph.
-       By eye we judge that if $p>0.7$ then the team is close to assured
+       by eye we judge that if $p>0.7$ then the team is close to assured
        of the series.
        \begin{center}
-         \includegraphics{ws.eps}
+         \includegraphics[width=0.4\textwidth]{ws.eps}
        \end{center}
      \end{exparts}
     \end{answer}
@@ -2160,23 +2159,23 @@ octave:6> gplot z
             \end{pmatrix}
            \end{equation*}
             has these two column sums
-            \begin{equation*}
+            \begin{multline*}
               (a_{1,1}b_{1,1}+a_{1,2}b_{2,1})
               +(a_{2,1}b_{1,1}+a_{2,2}b_{2,1})
               =(a_{1,1}+a_{2,1})\cdot b_{1,1}
-                +(a_{1,2}+a_{2,2})\cdot b_{2,1}
+                +(a_{1,2}+a_{2,2})\cdot b_{2,1}            \\
               =1\cdot b_{1,1}+1\cdot b_{2,1}
               =1
-            \end{equation*}
+            \end{multline*}
             and
-            \begin{equation*}
+            \begin{multline*}
               (a_{1,1}b_{1,2}+a_{1,2}b_{2,2})
               +(a_{2,1}b_{1,2}+a_{2,2}b_{2,2})
               =(a_{1,1}+a_{2,1})\cdot b_{1,2}
-                +(a_{1,2}+a_{2,2})\cdot b_{2,2}
+                +(a_{1,2}+a_{2,2})\cdot b_{2,2}              \\
               =1\cdot b_{1,2}+1\cdot b_{2,2}
               =1
-            \end{equation*}
+            \end{multline*}
             as required.
       \end{exparts}
     \end{answer}
