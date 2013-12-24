@@ -113,6 +113,38 @@ if the eigenvalue isn't one then it is a dynamic stability.
     For the park discussed above, what should be the initial park population
     in the
     case where the populations decline by $11\%$ every year?
+    \begin{answer}
+      The equation 
+      \begin{equation*}
+         0.89I-T
+         =
+         \begin{mat}
+           0.89 &0 \\
+           0 &0.89
+         \end{mat}
+         -
+         \begin{mat}
+           .90  &.01  \\
+           .10  &.99
+         \end{mat}
+         =
+         \begin{mat}
+           -.01  &-.01  \\
+           -.10  &-.10
+         \end{mat}
+      \end{equation*} 
+      leads to this system.
+      \begin{equation*}
+        \begin{mat}
+          -.01  &-.01  \\
+          -.10  &-.10
+        \end{mat}
+        \colvec{p \\ r}
+        =
+        \colvec{0  \\ 0}
+      \end{equation*}\
+      So the eigenvectors have $p=-r$.
+    \end{answer}
   \item 
     What will happen to the population of the park in the event of
     a growth in world population of $1\%$ per year?
@@ -120,12 +152,72 @@ if the eigenvalue isn't one then it is a dynamic stability.
     Assume that the initial park population is ten thousand, and the
     world population is one hundred thousand, 
     and calculate over a ten year span.
+    \begin{answer}
+      \Sage{} finds this.
+\begin{lstlisting}
+sage: M = matrix(RDF, [[0.90,0.01], [0.10,0.99]])
+sage: v = vector(RDF, [10000, 100000])
+sage: for y in range(10):
+....:     v[1] = v[1]*(1+.01)^y
+....:     print "pop vector year",y," is",v
+....:     v = M*v
+....:     
+pop vector year 0  is (10000.0, 100000.0)
+pop vector year 1  is (10000.0, 101000.0)
+pop vector year 2  is (10010.0, 103019.899)
+pop vector year 3  is (10039.19899, 106111.421211)
+pop vector year 4  is (10096.3933031, 110360.453787)
+pop vector year 5  is (10190.3585107, 115891.187687)
+pop vector year 6  is (10330.2345365, 122872.349786)
+pop vector year 7  is (10525.9345807, 131525.973067)
+pop vector year 8  is (10788.6008533, 142139.351965)
+pop vector year 9  is (11131.1342876, 155081.09214)
+\end{lstlisting}
+       So inside the park the population grows by about eleven percent while
+       outside the park the population grows by about fifty five percent.
+    \end{answer}
   \item 
     The park discussed above is partially fenced so that now,
     every year, only $5\%$ of the animals from inside of the park leave (still,
     about $1\%$ of the animals from the outside 
     find their way in).
     Under what conditions can the park maintain a stable population now?
+    \begin{answer}
+      The matrix equation 
+      \begin{equation*}
+        \colvec{p_{n+1}  \\ r_{n+1}}
+        =
+        \begin{mat}
+          0.95  &0.01  \\
+          0.05  &0.99
+        \end{mat}
+        \colvec{p_n  \\ r_n}
+      \end{equation*}
+      means that to find eigenvalues we want to solve this.
+      \begin{equation*}
+        0
+        =
+        \begin{vmat}
+          \lambda-0.95  &0.01  \\
+          0.10          &\lambda-0.99
+        \end{vmat}
+        =\lambda^2-1.94\lambda-0.9404
+      \end{equation*}
+      \Sage{} gives this.
+\begin{lstlisting}
+sage: a,b,c = var('a,b,c') 
+sage: qe = (x^2 - 1.94*x -.9404 == 0)
+sage: print solve(qe, x)
+[
+x == -1/100*sqrt(18813) + 97/100,
+x == 1/100*sqrt(18813) + 97/100
+]
+sage: n(-1/100*sqrt(18813) + 97/100)
+-0.401604899378826
+sage: n(1/100*sqrt(18813) + 97/100)
+2.34160489937883       
+\end{lstlisting}
+    \end{answer}
   \item 
     Suppose that a species of bird only lives in Canada, the United States,
     or in Mexico.
@@ -136,9 +228,40 @@ if the eigenvalue isn't one then it is a dynamic stability.
     \begin{exparts}
       \partsitem Give the transition matrix.
       \partsitem Is there a way for the three countries to have constant
-         populations?
-      \partsitem Find all stable situations.   
+         populations?  
     \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem This is the recurrence.
+          \begin{equation*}
+            \colvec{c_{n+1} \\ u_{n+1} \\ m_{n+1}}
+            \begin{mat}
+              .95  &.06  &0  \\
+              .04  &.90  &.10  \\
+              .01  &.04  &.90
+            \end{mat}
+            \colvec{c_n \\ u_n  \\ m_n}
+          \end{equation*}
+        \partsitem The system
+          \begin{equation*}
+            \begin{linsys}{3}
+              .05c &- &.06u &  &     &= &0  \\
+             -.04c &+ &.10u &- &.10m &= &0  \\
+             -.01c &- &.04u &+ &.10m &= &0
+            \end{linsys}
+          \end{equation*}
+          has infinitely many solutions.
+\begin{lstlisting}
+sage: var('c,u,m')
+(c, u, m)
+sage: eqns = [ .05*c-.06*u  == 0,
+....:         -.04*c+.10*u-.10*m == 0,
+....:         -.01*c-.04*u+.10*m == 0 ]
+sage: solve(eqns, c,u,m)
+[[c == 30/13*r1, u == 25/13*r1, m == r1]]            
+\end{lstlisting}
+      \end{exparts}
+    \end{answer}
 \end{exercises}
 \index{populations, stable|)}
 \index{stable populations|)}
