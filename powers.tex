@@ -50,7 +50,7 @@ Thus if $c_1\neq 0$,
 as $k$ increases the vectors $T^k\vec{v}$ will tend toward the direction of 
 the eigenvectors associated with the dominant eigenvalue.
 Consequently,
-the ratios  of the vector lengths $\norm{T^{k}\vec{v}}/\norm{T^{k-1}\vec{v}}$ 
+the ratios  of the vector lengths $\absval{T^{k}\vec{v}}/\absval{T^{k-1}\vec{v}}$ 
 tend to that dominant eigenvalue.
 
 For example, the eigenvalues of the matrix 
@@ -94,30 +94,34 @@ For instance, we can divide each $\vec{v}_i$ by its length
 by its first component).
 We thus implement this method by generating
 \begin{align*}
-  \vec{w}_0  &=\vec{v}_0/\norm{\vec{v}_0} \\
+  \vec{w}_0  &=\vec{v}_0/\absval{\vec{v}_0} \\
   \vec{v}_1  &=T\vec{w}_0                 \\
-  \vec{w}_1  &=\vec{v}_1/\norm{\vec{v}_1} \\
+  \vec{w}_1  &=\vec{v}_1/\absval{\vec{v}_1} \\
   \vec{v}_2  &=T\vec{w}_2                 \\
              &\vdotswithin{=}    \\
-  \vec{w}_{k-1}  &=\vec{v}_{k-1}/\norm{\vec{v}_{k-1}} \\
+  \vec{w}_{k-1}  &=\vec{v}_{k-1}/\absval{\vec{v}_{k-1}} \\
   \vec{v}_k  &=T\vec{w}_k                 
 \end{align*}
 until we are satisfied.
 Then $\vec{v}_k$ is an approximation of an eigenvector, and 
 the approximation of the dominant eigenvalue is
-the ratio $\norm{\vec{v}_{k}}/\norm{\vec{w}_{k-1}}$.
+the ratio % $\absval{\vec{v}_{k}}/\absval{\vec{w}_{k-1}}$.
+$(T\dotprod \vec{v}_k)/(\vec{v}_k\dotprod\vec{v}_k)
+  \approx (\lambda_1\vec{v}_k\cdot\vec{v}_k)/(\vec{v}_k\dotprod\vec{v}_k)
+  =\lambda_1$.
+
 
 One way that we could be `satisfied'
 is to iterate until our approximation of the eigenvalue settles down.
 We could decide for instance to stop the iteration
 process not after some fixed number of steps, but instead
-when $\norm{\vec{v}_k}$ differs from $\norm{\vec{v}_{k-1}}$ 
+when $\absval{\vec{v}_k}$ differs from $\absval{\vec{v}_{k-1}}$ 
 by less than one percent, or when they agree up to the 
 second significant digit. 
 
 The rate of convergence is determined by the rate at which 
 the powers of $|\lambda_2/\lambda_1|$ go to zero,
-where $\lambda_2$ is the eigenvalue of second largest norm. 
+where $\lambda_2$ is the eigenvalue of second largest length. 
 If that ratio is much less than one then convergence is fast but
 if it is only slightly less than one then convergence can be quite slow.
 Consequently, the method of powers
@@ -156,17 +160,78 @@ A good reference is \cite{Goult}
     \end{exparts*}
     \begin{answer}
      \begin{exparts}
-       \partsitem The largest eigenvalue is $4$.
-       \partsitem The largest eigenvalue is $2$.
+       \partsitem By eye, we see that the largest eigenvalue is $4$.
+         \Sage{} gives this.
+\begin{lstlisting}
+sage: def eigen(M,v,num_loops=10):
+....:     for p in range(num_loops):
+....:         v_normalized = (1/v.norm())*v
+....:         v = M*v
+....:     return v 
+....: 
+sage: M = matrix(RDF, [[1,5], [0,4]])
+sage: v = vector(RDF, [1, 2])
+sage: v = eigen(M,v)
+sage: (M*v).dot_product(v)/v.dot_product(v)
+4.00000147259
+\end{lstlisting}
+       \partsitem A simple calculation shows that the largest eigenvalue 
+          is~$2$.
+          \Sage{} gives this.
+\begin{lstlisting}
+sage: M = matrix(RDF, [[3,2], [-1,0]])
+sage: v = vector(RDF, [1, 2])
+sage: v = eigen(M,v)
+sage: (M*v).dot_product(v)/v.dot_product(v)
+2.00097741083
+\end{lstlisting}
      \end{exparts}
     \end{answer}
   \item 
      Redo the prior exercise by iterating until 
-     $\norm{\vec{v}_k}-\norm{\vec{v}_{k-1}}$ has absolute value less than
+     $\absval{\vec{v}_k}-\absval{\vec{v}_{k-1}}$ has absolute value less than
      $0.01$
      At each step, normalize by dividing each vector by its length.
      How many iterations does it take?
      Are the answers significantly different?
+     \begin{answer}
+       \begin{exparts}
+         \partsitem Here is \Sage.
+ \begin{lstlisting}
+sage: def eigen_by_iter(M, v, toler=0.01):
+....:     dex = 0
+....:     diff = 10
+....:     while abs(diff)>toler:
+....:         dex = dex+1
+....:         v_next = M*v
+....:         v_normalized = (1/v.norm())*v
+....:         v_next_normalized = (1/v_next.norm())*v_next
+....:         diff = (v_next_normalized-v_normalized).norm()
+....:         v_prior = v_normalized
+....:         v = v_next_normalized
+....:     return v, v_prior, dex
+....: 
+sage: M = matrix(RDF, [[1,5], [0,4]])
+sage: v = vector(RDF, [1, 2])
+sage: v,v_prior,dex = eigen_by_iter(M,v)
+sage: (M*v).norm()/v.norm()
+4.00604111686
+sage: dex
+4           
+ \end{lstlisting}
+      \partsitem \Sage{} takes a few more iterations on this one.
+        This makes use of the procedure defined in the prior item.
+\begin{lstlisting}
+sage: M = matrix(RDF, [[3,2], [-1,0]])
+sage: v = vector(RDF, [1, 2])
+sage: v,v_prior,dex = eigen_by_iter(M,v)
+sage: (M*v).norm()/v.norm()
+2.01585174302
+sage: dex
+6        
+\end{lstlisting}
+       \end{exparts}
+     \end{answer}
   \item 
     Use ten iterations to estimate the largest eigenvalue of these
     matrices, starting from the vector with components $1$, $2$, and $3$.
@@ -187,16 +252,90 @@ A good reference is \cite{Goult}
     \begin{answer}
      \begin{exparts}
        \partsitem The largest eigenvalue is $3$.
+         \Sage{} gives this.
+\begin{lstlisting}
+sage: M = matrix(RDF, [[4,0,1], [-2,1,0], [-2,0,1]])
+sage: v = vector(RDF, [1, 2, 3])
+sage: v = eigen(M,v)
+sage: (M*v).dot_product(v)/v.dot_product(v)
+3.02362112326
+\end{lstlisting}
        \partsitem The largest eigenvalue is $-3$.
+\begin{lstlisting}
+sage: M = matrix(RDF, [[-1,2,2], [2,2,2], [-3,-6,-6]])
+sage: v = vector(RDF, [1, 2, 3])
+sage: v = eigen(M,v)
+sage: (M*v).dot_product(v)/v.dot_product(v)
+-3.00941127145
+\end{lstlisting}
      \end{exparts}
     \end{answer}
   \item 
      Redo the prior exercise by iterating until 
-     $\norm{\vec{v}_k}-\norm{\vec{v}_{k-1}}$ has absolute value less than
+     $\absval{\vec{v}_k}-\absval{\vec{v}_{k-1}}$ has absolute value less than
      $0.01$.
      At each step, normalize by dividing each vector by its length.
      How many iterations does it take?
      Are the answers significantly different?
+     \begin{answer}
+       \begin{exparts}
+         \partsitem
+           \Sage{} gets this, where \lstinline!eigen_by_iter! is defined
+           above.
+\begin{lstlisting}
+sage: M = matrix(RDF, [[4,0,1], [-2,1,0], [-2,0,1]])
+sage: v = vector(RDF, [1, 2, 3])
+sage: v,v_prior,dex = eigen_by_iter(M,v) 
+sage: (M*v).dot_product(v)/v.dot_product(v)
+3.05460392934
+sage: dex
+8            
+\end{lstlisting}
+         \partsitem With this setup, 
+\begin{lstlisting}
+sage: M = matrix(RDF, [[-1,2,2], [2,2,2], [-3,-6,-6]])
+sage: v = vector(RDF, [1, 2, 3])       
+\end{lstlisting}
+            \Sage{} does not return (use \lstinline!<Ctrl>-c! to interrupt the
+            computation).
+            Adding some error checking code to the routine 
+\begin{lstlisting}
+def eigen_by_iter(M, v, toler=0.01):
+    dex = 0
+    diff = 10
+    while abs(diff)>toler:
+        dex = dex+1
+        if dex>1000:
+            print "oops! probably in some loop: \nv=",v,"\nv_next=",v_next
+        v_next = M*v
+        if (v.norm()==0):
+            print "oops! v is zero"
+	    return None
+        if (v_next.norm()==0):
+            print "oops! v_next is zero"
+            return None
+        v_normalized = (1/v.norm())*v
+        v_next_normalized = (1/v_next.norm())*v_next
+        diff = (v_next_normalized-v_normalized).norm()
+        v_prior = v_normalized
+        v = v_next_normalized
+    return v, v_prior, dex              
+\end{lstlisting}
+           gives this.
+\begin{lstlisting}
+oops! probably in some loop: 
+  v= (0.707106781187, -1.48029736617e-16, -0.707106781187) 
+  v_next= (2.12132034356, -4.4408920985e-16, -2.12132034356) 
+oops! probably in some loop: 
+  v= (-0.707106781187, 1.48029736617e-16, 0.707106781187) 
+  v_next= (-2.12132034356, 4.4408920985e-16, 2.12132034356)
+oops! probably in some loop: 
+  v= (0.707106781187, -1.48029736617e-16, -0.707106781187) 
+  v_next= (2.12132034356, -4.4408920985e-16, -2.12132034356)           
+\end{lstlisting}
+          So it is circling.
+       \end{exparts}
+     \end{answer}
   \item 
       What happens if $c_1=0$?
       That is, what happens if the initial vector does not to have any 
