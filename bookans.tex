@@ -8293,9 +8293,13 @@ sage: solve(system, x,y)
 \begin{ans}{Two.III.2.33}
        Let \( B_U \) be a basis for \( U \) and let \( B_W \)
        be a basis for \( W \).
-       The set \( B_U\union B_W \) is linearly dependent as it is a
+       Consider the concatenation of the two basis sequences.
+       If there is a repeated element then the intersection
+       \( U\intersection W \) is nontrivial.
+       Otherwise,
+       the set \( B_U\union B_W \) is linearly dependent as it is a
        six member subset of the five-dimensional space \( \Re^5 \).
-       Thus some member of \( B_W \) is in the span of \( B_U \), and
+       In either case some member of \( B_W \) is in the span of \( B_U \), and
        thus \( U\intersection W \) is more than just the trivial space
        \( \set{\zero\,} \).
 
@@ -23398,8 +23402,9 @@ octave:6> gplot z
       False.
       \begin{equation*}
         \begin{vmat}[r]
-          1  &-1  \\
-          1  &1
+          0 &1  &1  \\
+          1 &0  &1 \\
+          1  &1 &0
         \end{vmat}
         =2
       \end{equation*}
@@ -27651,7 +27656,7 @@ ans = 0.017398
     
 \end{ans}
 \begin{ans}{Five.II.3.42}
-      The characteristic polynomial $x^3-5x^2+6x$ has distinct roots
+      The characteristic polynomial $x^3+5x^2+6x$ has distinct roots
       \( \lambda_1=0 \), \( \lambda_2=-2 \), and \( \lambda_3=-3 \).
       Thus the matrix can be diagonalized into this form.
       \begin{equation*}
@@ -31013,4 +31018,126 @@ sage: c
         $c_1(-1)^n+c_22^n+c_34^n$ solves the recurrence.
     \end{exparts}
    
+\end{ans}
+\begin{ans}{3}
+      \begin{exparts}
+        \partsitem The solution of the homogeneous recurrence is
+          $f(n)=c_12^n+c_23^n$.
+          Substituting $f(0)=1$ and $f(1)=1$ gives this linear system.
+          \begin{equation*}
+            \begin{linsys}{2}
+              c_1 &+ &c_2   &= &1 \\
+             2c_1 &+ &3c_2  &= &1
+            \end{linsys}
+          \end{equation*}
+          By eye we see that $c_1=2$ and $c_2=-1$.
+        \partsitem
+          The solution of the homogeneous recurrence is
+          $c_12^n+c_2(-2)^n$.
+          The initial conditions give this linear system.
+          \begin{equation*}
+            \begin{linsys}{2}
+              c_1 &+ &c_2  &= &0  \\
+             2c_1 &- &2c_2 &= &1
+            \end{linsys}
+          \end{equation*}
+          The solution is $c_1=1/4$, $c_2=-1/4$.
+        \partsitem
+          The homogeneous recurrence has the solution
+          $f(n)=c_1(-1)^n+c_22^n+c_34^n$.
+          With the initial conditions we get this linear system.
+          \begin{equation*}
+            \begin{linsys}{3}
+              c_1 &+  &c_2   &+  &c_3  &= &1 \\
+             -c_1 &+  &2c_2  &+  &4c_3  &= &1 \\
+              c_1 &+  &4c_2  &+  &16c_3  &= &3
+            \end{linsys}
+          \end{equation*}
+          Its solution is $c_1=1/3$, $c_2=2/3$, $c_3=0$.
+      \end{exparts}
+    
+\end{ans}
+\begin{ans}{4}
+      Fix a linear homogeneous recurrence of order~$k$.
+      Let $S$ be the set of functions $\map{f}{\N}{\C}$ satisfying the
+      recurrence.
+      Consider the function $\map{\Phi}{S}{\C^k}$ given as here.
+      \begin{equation*}
+        f\mapsunder{\Phi}\colvec{f(0) \\ f(1) \\ \vdots \\ f(k-1)}
+      \end{equation*}
+      This shows linearity.
+      \begin{multline*}
+        \Phi(a\cdot f_1+b\cdot f_2)
+        =
+        \colvec{af_1(0)+bf_2(0) \\ \vdots \\ af_1(k-1)+bf_2(k-1)}     \\
+        =
+        a\colvec{f_1(0) \\ \vdots \\ f_1(k-1)}
+        +
+        b\colvec{f_2(0) \\ \vdots \\ f_2(k-1)}
+        =a\cdot \Phi(f_1)+b\cdot \Phi(f_2)
+      \end{multline*}
+    
+\end{ans}
+\begin{ans}{5}
+      We use the hint to prove this.
+      \begin{align*}
+        0 &=
+        \begin{vmat}
+          a_{n-1}-\lambda &a_{n-2}  &a_{n-3}  &\ldots  &a_{n-k+1} &a_{n-k}  \\
+          1              &-\lambda &0        &\ldots  &0         &0        \\
+          0              &1        &-\lambda                               \\
+          0              &0        &1                                      \\
+          \vdots         &\vdots &         &\ddots   &           &\vdots  \\
+          0             &0        &0        &\ldots   &1          &-\lambda
+        \end{vmat}                                                           \\
+        &=(-1)^{k-1}(-\lambda^k+a_{n-1}\lambda^{k-1}+a_{n-2}\lambda^{k-2}
+               +\dots+a_{n-k+1}\lambda+a_{n-k})                      \\
+        &=\pm(-\lambda^k+a_{n-1}\lambda^{k-1}+a_{n-2}\lambda^{k-2}
+               +\dots+a_{n-k+1}\lambda+a_{n-k})
+      \end{align*}
+      The base step is trivial.
+      For the inductive step,
+      expanding down the final column gives two nonzero terms.
+      \begin{equation*}
+        (-1)^{k-1}a_{n-k}\cdot 1
+        -\lambda\cdot
+        \begin{vmat}
+          a_{n-1}-\lambda &a_{n-2}  &a_{n-3}  &\ldots  &a_{n-k+1}  \\
+          1              &-\lambda &0        &\ldots  &0       \\
+          0              &1        &-\lambda                               \\
+          0              &0        &1                                      \\
+          \vdots         &\vdots &         &\ddots   &        \\
+          0             &0        &0        &\ldots   &1
+        \end{vmat}
+      \end{equation*}
+      (The matrix is square so the sign in front of $-\lambda$
+      is $-1^{\text{even}}$).
+      Application of the inductive hypothesis gives the desired result.
+      \begin{multline*}
+        =(-1)^{k-1}a_{n-k}\cdot 1                     \\
+        -\lambda\cdot
+         (-1)^{k-2}(-\lambda^{k-1}+a_{n-1}\lambda^{k-2}+a_{n-2}\lambda^{k-3}
+               +\dots+a_{n-k+1}\lambda^0)
+      \end{multline*}
+    
+\end{ans}
+\begin{ans}{6}
+       This is a straightforward induction on $n$.
+    
+\end{ans}
+\begin{ans}{7}
+      \Sage{} says that we are safe.
+\begin{lstlisting}
+sage: T64 = 18446744073709551615
+sage: T64_days = T64/(60*60*24)
+sage: T64_days
+1229782938247303441/5760
+sage: T64_years = T64_days/365.25
+sage: T64_years
+5.84542046090626e11
+sage: age_of_universe = 13.8e9
+sage: T64_years/age_of_universe
+42.3581192819294
+\end{lstlisting}
+    
 \end{ans}
