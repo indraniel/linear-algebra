@@ -26,10 +26,11 @@ material m_yz=
 pen p=linewidth(0.4)+squarecap+miterjoin+black+opacity(0.2);
 defaultpen(p);
 
-pen slateblue = rgb(2/255,  101/255,  116/255);
-pen puffblue  = rgb(0/255,  194/255,  196/255);
-pen beige     = rgb(216/255, 195/255, 148/255);
-pen burgundy  = rgb(166/255, 5/255,   3/255);
+// From https://kuler.adobe.com/Lollapalooza-color-theme-3446379/edit/?copy=true
+pen darkcolor = rgb(0/255,  38/255,  53/255);
+pen lightcolor  = rgb(217/255,  121/255,  37/255);
+pen bgcolor     = rgb(171/255, 26/255, 37/255);
+pen flourishcolor  = rgb(116/255, 6/255,   17/255);
 
 real XLIMIT_POS=1;
 real XLIMIT_NEG=-1*XLIMIT_POS;
@@ -132,9 +133,9 @@ face[] faces;
 // pen[] p={red,green,blue,black};
 // latticeshade(faces.push(floor_q1),floor_q1,new pen[][] {{INSIDE_SHADE,OUTSIDE_SHADE},{OUTSIDE_SHADE,OUTSIDE_SHADE}});
 
-filldraw(faces.push(xy),project(xy),fillpen=beige,drawpen=p);
-filldraw(faces.push(xz),project(xz),fillpen=puffblue,drawpen=p);
-filldraw(faces.push(yz),project(yz),fillpen=slateblue,drawpen=p);
+filldraw(faces.push(xy),project(xy),fillpen=bgcolor,drawpen=p);
+filldraw(faces.push(xz),project(xz),fillpen=lightcolor,drawpen=p);
+filldraw(faces.push(yz),project(yz),fillpen=darkcolor,drawpen=p);
 add(pic,faces);
 // add(xscale3(4.0)*pic);
 

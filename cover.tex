@@ -1,151 +1,104 @@
-%\documentstyle[12pt]{article}
-%\input{latexmac}
-%\begin{document}
-%\pagestyle{empty}
-\title{Linear Algebra}
-\author{Jim Hef{}feron}
-\date{\today}
-\thispagestyle{empty}
-%\maketitle
-\vfill
-\vspace*{.5in}
-\begin{center}
-{\bsifamily\Huge Linear Algebra}  \\[.25in]
-{\Large Jim Hef{}feron}
-\end{center}
-\vspace*{.5in}
-\begin{center}
-  \begin{tabular}{ccc}
-    \begin{tabular}{c}
-       \includegraphics{ch4.2}  \\[\covgraphsep]
-       $\begin{vmatrix}
-          1  &2  \\
-          3  &1
-        \end{vmatrix}$
-    \end{tabular}                        \\
-    &\begin{tabular}{c}
-       \includegraphics{ch4.3} \\[\covgraphsep]
-       $\begin{vmatrix}
-          x_1\cdot 1  &2  \\
-          x_1\cdot 3  &1
-        \end{vmatrix}$
-     \end{tabular}                       \\
-    &&\begin{tabular}{c}
-        \includegraphics{ch4.4}  \\[\covgraphsep]
-        $\begin{vmatrix}
-           6  &2  \\
-           8  &1
-         \end{vmatrix}$
-      \end{tabular}
-  \end{tabular}
-\end{center}
-%   \setlength{\unitlength}{10pt}        % parallel-o-gram with region
-% % \setlength{\unitlength}{8pt}      % parallel-o-gram with det box drawn.
-% % \begin{picture}(3,9)(0,-1)          % to (6,8)
-%   \begin{picture}(6,25)(0,-15)          % to (6,8)
-%     \put(0,0){\begin{pspicture}(0,0)(6,8) 
-%     \pspolygon(0,0)(4,2)(6,8)(2,6)
-%     \pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(2,1)(3,4)(1,3)
-%     \psline[linecolor=white,linewidth=1pt]{C-C}(0,0)(2,1)
-%       \psline[linewidth=.8pt]{->}(0,0)(2,1)
-%     \psline[linecolor=white,linewidth=1pt]{C-C}(0,0)(1,3)
-%       \psline[linewidth=.8pt]{->}(0,0)(1,3)
-%   \end{pspicture}}
-%     \thicklines
-%     \put(0,0){\vector(1,3){1} }
-%     \put(0,0){\vector(2,1){2} }
-%   \thinlines
-%     \put(1.1,3.3){\line(1,3){0.9} }
-%       \put(2,6){\line(2,1){4} }
-%     \put(2.1,1.05){\line(2,1){1.9} }
-%       \put(4,2){\line(1,3){2} }
-%     \put(1.1,3.0){\line(2,1){1.9} }
-%     \put(2.1,1.3){\line(1,3){0.9} }
-%     \multiput(0.25,0.30)(0.15,0.45){7}{\makebox(0,0){\scriptsize .} }
-%      \multiput(0.55,0.45)(0.15,0.45){7}{\makebox(0,0){\scriptsize .} }
-%      \multiput(0.85,0.60)(0.15,0.45){7}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.15,0.75)(0.15,0.45){7}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.45,0.90)(0.15,0.45){7}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.75,1.05)(0.15,0.45){7}{\makebox(0,0){\scriptsize .} }
-%    \put(2,-.8){\makebox(0,0)[t]{$\begin{vmatrix}
-%                                  1  &2  \\
-%                                  3  &1
-%                                \end{vmatrix}$}}
-%  \end{picture}
-% \qquad\raisebox{8pt}{versus}\qquad
-%   \hbox to .5in{\hbox{}\hfil\hbox{}}
-% \setlength{\unitlength}{8pt}      % parallel-o-gram with kv box drawn.
-% \begin{picture}(3,9)(0,-1)          % to (6,8)
-%   \begin{picture}(6,17)(0,-8)          % to (6,8)
-%     \put(0,0){\begin{pspicture}(0,0)(6,8)  
-%     \pspolygon(0,0)(4,2)(6,8)(2,6)
-%     \pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(2,6)(4,7)(2,1)
-%     \psline[linecolor=white,linewidth=1pt]{C-C}(0,0)(2,1)
-%       \psline[linewidth=.8pt]{->}(0,0)(2,1)
-%     \psline[linecolor=white,linewidth=1pt]{C-C}(0,0)(1,3)
-%       \psline[linewidth=.8pt]{->}(0,0)(1,3)
-%   \end{pspicture}}
-%     \thicklines
-%     \put(0,0){\vector(1,3){1} }
-%     \put(0,0){\vector(2,1){2} }
-%   \thinlines
-%     \put(1.1,3.3){\line(1,3){0.9} }
-%       \put(2,6){\line(2,1){4} }
-%     \put(2.1,1.05){\line(2,1){1.9} }
-%       \put(4,2){\line(1,3){2} }
-%     \put(2.1,1.3){\line(1,3){1.9} }
-%     \multiput(0.25,0.30)(0.15,0.45){13}{\makebox(0,0){\scriptsize .} }
-%      \multiput(0.55,0.45)(0.15,0.45){13}{\makebox(0,0){\scriptsize .} }
-%      \multiput(0.85,0.60)(0.15,0.45){13}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.15,0.75)(0.15,0.45){13}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.45,0.90)(0.15,0.45){13}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.75,1.05)(0.15,0.45){13}{\makebox(0,0){\scriptsize .} }
-%    \put(2,-.8){\makebox(0,0)[t]{$\begin{vmatrix}
-%                                  x\cdot 1  &2  \\
-%                                  x\cdot 3  &1
-%                                \end{vmatrix}$}}
-%  \end{picture}
-%   \hbox to .5in{\hbox{}\hfil\hbox{}}
-% \qquad\raisebox{8pt}{versus}\qquad
-% \setlength{\unitlength}{8pt}        % parallel-o-gram with region
-%  \setlength{\unitlength}{12pt}        % parallel-o-gram with region
-%   \begin{picture}(6,9)(0,-1)          % to (6,8)
-%     \put(0,0){\begin{pspicture}(0,0)(8,9)
-%       \pspolygon(0,0)(4,2)(6,8)(2,6)
-%       \pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(6,8)(8,9)(2,1)
-% %        \psline[linewidth=.8pt,linecolor=white](6,8)(2,6)
-%         \psline[linecolor=stronggray](6,8)(5,5) %intersection
-%       \psline[linecolor=white,linewidth=1pt]{C-C}(0,0)(2,1)
-%         \psline[linewidth=.8pt]{->}(0,0)(2,1)
-%       \psline[linecolor=white,linewidth=1pt]{C-C}(0,0)(1,3)
-%         \psline[linewidth=.8pt]{->}(0,0)(1,3)
-%     \end{pspicture}}
-%     \thicklines
-%     \put(0,0){\vector(1,3){1} }
-%     \put(0,0){\vector(2,1){2} }
-%   \thinlines
-%     \put(1.1,3.3){\line(1,3){0.9} }
-%       \put(2,6){\line(2,1){3.9} }
-%     \put(2.1,1.05){\line(2,1){1.9} }
-%       \put(4,2){\line(1,3){1.9} }
-%     \put(0.1,0.1333){\line(3,4){5.9} }
-%     \put(2.1,1.1333){\line(3,4){5.9} }
-%     \put(6,8){\line(2,1){2} }
-%     \multiput(0.55,0.45)(0.30,0.40){20}{\makebox(0,0){\scriptsize .} }
-%      \multiput(0.85,0.60)(0.30,0.40){20}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.15,0.75)(0.30,0.40){20}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.45,0.90)(0.30,0.40){20}{\makebox(0,0){\scriptsize .} }
-%      \multiput(1.75,1.05)(0.30,0.40){20}{\makebox(0,0){\scriptsize .} }
-%    \put(2,-.8){\makebox(0,0)[t]{$\begin{vmatrix}
-%                                  6  &2  \\
-%                                  8  &1
-%                                \end{vmatrix}$}}
-%  \end{picture}
-%\end{center}
-%\vspace*{.5in}
-%\begin{center}
-%  {{%\fontshape{ol}
-%      \selectfont\Large Jim Hef{}feron}}
-%\end{center}
-\vfill
-%\end{document}
+\documentclass[12pt]{article}
+\usepackage{covergraphic}
+
+\newlength{\totalcoverwidth} \setlength{\totalcoverwidth}{15.0in} % 7.5+7.5
+\newlength{\spinewidth} \setlength{\spinewidth}{1in}
+\addtolength{\totalcoverwidth}{\spinewidth}
+\usepackage[papersize={16in,9.25in},margin=0in]{geometry}  
+
+\newcommand{\spinetext}[1]{\makebox[1in]{\color{black}\fontsize{40pt}{8pt}{\fontfamily{ugq}\selectfont #1}}}
+\newcommand{\spineauthortext}[1]{\makebox[1in]{\color{coverdarkcolor}\fontsize{20pt}{8pt}{\fontfamily{ugq}\selectfont #1}}}
+\newcommand{\spine}{%
+\setlength{\unitlength}{1in}
+\begin{picture}(1,9.5)
+  \put(0,8.5){\spinetext{L}}
+  \put(0,7.95){\spinetext{I}}
+  \put(0,7.4){\spinetext{N}}
+  \put(0,6.85){\spinetext{E}}
+  \put(0,6.3){\spinetext{A}}
+  \put(0,5.75){\spinetext{R}}
+  % line
+  % \put(0,5.2){{\color{coverflourishcolor}\rule{1in}{3pt}}}
+  % Author
+  \put(0,2.625){\spineauthortext{H}}
+  \put(0,2.4){\spineauthortext{e}}
+  \put(0,2.15){\spineauthortext{f}}
+  \put(0,1.9){\spineauthortext{f}}
+  \put(0,1.675){\spineauthortext{e}}
+  \put(0,1.45){\spineauthortext{r}}
+  \put(0,1.225){\spineauthortext{o}}
+  \put(0,1.0){\spineauthortext{n}}
+\end{picture}
+}
+
+\newcommand{\backcovertext}{%
+\color{coverboldcolor}\fontsize{14pt}{19pt}\fontfamily{fos}\selectfont
+\begin{minipage}{5.5in}
+%\setlength{\parindent}{2em}
+\setlength{\parskip}{1.2ex}
+This text covers a standard first course:
+Gauss's method, vector spaces, linear maps and matrices, determinants,
+and eigenvalues and eigenvectors.
+In addition, each chapter ends with some
+topics such as brief descriptions of applications.
+
+What sets this text apart is that
+while we prove everything, we do not start by assuming that  
+readers are already able at abstract work.
+Instead, we develop each student's  
+mathematical maturity with
+careful motivation, 
+many examples, 
+and most importantly, extensive exercise sets 
+that range from routine verifications to a few challenges. 
+
+This is a paper version of the well-known Free text.
+It has been available online for many years and has been widely used, 
+both in classrooms and for self-study.
+It is supported by worked answers
+for all exercises, 
+including proofs, 
+beamer slides for classroom use, 
+and a lab manual for computer work using \textit{Sage},
+all of which are freely available online. 
+\end{minipage}
+}
+
+\newcommand{\backcoverhead}{%
+\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+  \put(1,-.1){{\color{coverflourishcolor}\rule{4.4in}{2pt}}}
+  \put(0,0){\color{coverdarkcolor}\fontsize{25pt}{8pt}\fontfamily{fos}\selectfont \textit{A developmental approach to}}
+  \put(2.9,-.45){\color{coverlightcolor}\fontsize{25pt}{8pt}\fontfamily{fos}\selectfont \textbf{Linear Algebra}}
+\end{picture}
+}
+
+\setlength{\parindent}{0in}
+\begin{document}\pagestyle{empty}\thispagestyle{empty}
+
+\setlength{\unitlength}{1in}
+
+\begin{picture}(0,0) 
+  % \put(0,-1){\makebox[0in]{\color{red}0}}
+  % \put(1,-1){\makebox[0in]{\color{red}1}}
+  % \put(2,-1){\makebox[0in]{\color{red}2}}
+  % \put(3,-1){\makebox[0in]{\color{red}3}}
+  % \put(4,-1){\makebox[0in]{\color{red}4}}
+  % \put(5,-1){\makebox[0in]{\color{red}5}}
+  % \put(6,-1){\makebox[0in]{\color{red}6}}
+  % \put(7,-1){\makebox[0in]{\color{red}7}}
+  % \put(8,-1){\makebox[0in]{\color{red}8}}
+  % \put(9,-1){\makebox[0in]{\color{red}9}}
+  % \put(10,-1){\makebox[0in]{\color{red}10}}
+  % \put(11,-1){\makebox[0in]{\color{red}11}}
+  % \put(12,-1){\makebox[0in]{\color{red}12}}
+  % \put(13,-1){\makebox[0in]{\color{red}13}}
+  % \put(14,-1){\makebox[0in]{\color{red}14}}
+  % \put(15,-1){\makebox[0in]{\color{red}15}}
+  % \put(16,-1){\makebox[0in]{\color{red}16}}
+  \put(8.75,-1){\covergraphic}
+  \put(7.5,-9.5){\spine}
+  \put(1,-1.6){\backcoverhead}
+  \put(1,-5){\backcovertext}
+\end{picture}
+\end{document}

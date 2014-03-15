@@ -42,7 +42,7 @@ do
      esac
 done
 
-# Generate the MetaPost figures
+# Generate the MetaPost and Asymptote figures
 if [[ -z $REGENERATING ]] 
 then
     mpost dotprod.mp
@@ -55,6 +55,7 @@ then
     mpost appen.mp
     cd asy
     asy -noprc -fpdf ppiped
+    asy axes
     cd ..
 fi
 
