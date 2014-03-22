@@ -16,8 +16,14 @@
 % \usepackage{bookjh}
 %\usepackage{makeidx}
 %  \usepackage{showidx} \typeout{REMOVE showidx on final runs!}
+
+% To make print copies, comment out symlist lines, here and below in 
+% the \include{..} area, and uncomment the titlepage lines.  You may
+% have to "rm *.aux" to get it to compile.
 \includeonly{
-covernew,symlist,%
+covernew,% 
+symlist, % comment this out for printed version
+% titlepage, % uncomment for printed version
 pref,%
 gr1,gr2,gr3,cas,leontief,ppivot,network,%
 vs1,vs2,vs3,fields,crystal,voting,dimen,%
@@ -36,8 +42,10 @@ bib%
 \begin{document}
 \frontmatter
 \pagenumbering{roman}
-\include{covernew}\include{symlist}
-\pagestyle{bookfront}\clearemptydoublepage\setcounter{page}{1}\thispagestyle{empty}\include{pref} %
+\include{covernew}\include{symlist}\clearemptydoublepage % comment out for printed version
+% \include{titlepage} % uncomment for printed version
+\pagestyle{bookfront} 
+\setcounter{page}{1}\thispagestyle{empty}\include{pref} %
 \pagestyle{booktoc}\clearemptydoublepage\tableofcontents\bigskip\par\noindent${}^*\!$Starred subsections are optional.\clearemptydoublepage %
 \mainmatter
 \pagenumbering{arabic}
