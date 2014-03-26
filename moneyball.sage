@@ -41,5 +41,5 @@ model(t) = a*t+b
 data = zip(sal,wins)
 fit = find_fit(data, model, solution_dict=True)
 model.subs(fit)
-p = plot(model.subs(fit),(t,30,130))+points(data,size=25,color='red')
+p = points(data,size=25)+plot(model.subs(fit),(t,30,130),color='red',typeset='latex')
 p.save('moneyball.pdf')

@@ -1,17 +1,13 @@
 # mile.sage
 # Data for mens mile for lstsqs topic
-# inside sage run load "mile.sage" and the .png appears
-data=[[1870,268.8], 
-      [1880,264.5], 
-      [1890,258.4], 
-      [1900,255.6],  
-      [1910,255.6], 
-      [1920,252.6], 
-      [1930,250.4], 
-      [1940,246.4], 
-      [1950,241.4]]
-var('slope,intercept')
-model(x) = slope*x+intercept
-g=points(data)+plot(model(intercept=find_fit(data,model)[0].rhs(),slope=find_fit(data,model)[1].rhs()),(x,1860,1960),color='red',figsize=3,fontsize=7)
+# inside sage run load "mile.sage" and the .pdf appears
+year = [1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950]
+secs = [268.8, 264.5, 258.4, 255.6, 255.6, 252.6, 250.4, 246.4, 241.4]
+var('a, b, t')
+model(t) = a*t+b
+data = zip(year, secs)
+fit = find_fit(data, model, solution_dict=True)
+model.subs(fit)
+g=points(data)+plot(model.subs(fit),(t,1860,1960),color='red',figsize=3,fontsize=7,typeset='latex')
 g.save("four_minute_mile.pdf")
 

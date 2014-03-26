@@ -98,12 +98,6 @@ of each decade through the first half of that century.
 \end{center}
 We can use this to give a circa 1950 prediction of the date for $240$ seconds, 
 and then compare that to the actual date.
-(There are different sequences of times from competing standards
-bodies but these are from \cite{WikipediaMensMile}.
-Restricting to the times at the start of 
-each decade reduces the data entry burden, smooths the data to some extent, 
-and gives much the same result as entering all of the dates and records.)
-
 As with the penny data, these numbers do not line in a perfect line.
 That is, this system does not have an exact solution for the slope
 and intercept.
@@ -116,6 +110,18 @@ and intercept.
   \end{linsys}
 \end{equation*}
 We find a best approximation by using orthogonal projection.
+
+(\textit{Comments on the data.}
+Restricting to the times at the start of 
+each decade reduces the data entry burden, smooths the data to some extent, 
+and gives much the same result as entering all of the dates and records.
+There are different sequences of times from competing standards
+bodies but the ones here are from \cite{WikipediaMensMile}.
+We've started the plot at 1870 because at one point there were two 
+classes of records, called `professional' and `amateur',
+and after a while the first class stopped being active so we've
+followed the second class.)
+
 Write the linear system's matrix of coefficients and also its
 vector of constants, the world record times.
 \begin{equation*}
@@ -136,61 +142,24 @@ of $A$'s columns as close as possible to $\vec{v}$.
 Those coefficients are the entries of 
 the vector $(\trans{A}A)^{-1}\trans{A}\cdot\vec{v}$.
 
-%\begin{center}
-%  \begin{tabular}{r|ccccccc}
-%    \textit{year} &1870  &1880  &1890  &1900  &1910  &1920  &1930   \\
-%    \hline
-%    \textit{seconds}  &$268.8$  &$264.5$  &$258.4$  &$255.6$  
-%        &$255.6$  &$252.6$  &$250.4$
-%  \end{tabular}        \\[2ex]
-%  \begin{tabular}{|ccccccc}
-%      1940  &1950  &1960  &1970  &1980  &1990 &2000                  \\
-%      \hline
-%      $246.4$  &$241.4$  &$234.5$  &$231.1$  &$229.0$  &$226.3$ &$223.1$
-%  \end{tabular}
-
 \textit{Sage} can do the computation for us.
 \begin{lstlisting}
 sage: year = [1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950]
 sage: secs = [268.8, 264.5, 258.4, 255.6, 255.6, 252.6, 250.4, 246.4, 241.4]
-sage: var('m, b, t')
-(m, b, t)
-sage: model(t) = m*t+b
+sage: var('a, b, t')
+(a, b, t)
+sage: model(t) = a*t+b
 sage: data = zip(year, secs)
 sage: fit = find_fit(data, model, solution_dict=True)
 sage: model.subs(fit)
-t |--> -0.30483333572258886*t + 837.0872267857003
-sage: p = plot(model.subs(fit),(t,1870,1960))+points(data,size=25,color='red')
-sage: p.save('four_minute_mile.pdf')
+t |--> -0.3048333333333295*t + 837.0872222222147
+sage: g=points(data)+plot(model.subs(fit),(t,1860,1960),color='red',
+....:                     figsize=3,fontsize=7,typeset='latex')
+sage: g.save("four_minute_mile.pdf")
+sage: g
 \end{lstlisting}
 
-
-
-% % see mile.sage
-% \begin{lstlisting}
-% sage: data=[[1870,268.8], [1880,264.5], [1890,258.4],   
-% ....:  [1900,255.6], [1910,255.6], [1920,252.6],   
-% ....:  [1930,250.4], [1940,246.4], [1950,241.4]] 
-% sage: var('slope,intercept')
-% (slope, intercept)
-% sage: model(x) = slope*x+intercept
-% sage: find_fit(data,model)
-% [intercept == 837.0872267857003, 
-%   slope == -0.30483333572258886]
-% \end{lstlisting}
-% (People in the year~$0$ didn't run very fast!)
-% Plotting the data and the line
-% \begin{lstlisting}
-% sage: points(data)
-% ....:  +plot(model(intercept=find_fit(data,model)[0].rhs(),
-% ....:    slope=find_fit(data,model)[1].rhs()),
-% ....:    (x,1860,1960),color='red',data=25)  
-% \end{lstlisting}
-% gives this graph.  
-\begin{center}
-  % black and white
-  % \scannedpicture{four_minute_mile_greyscale}
-  % or the color version: 
+\begin{center}  
   \includegraphics[width=0.5\textwidth]{four_minute_mile.pdf}
 \end{center}
 Note that the progression is surprisingly linear.
@@ -211,18 +180,19 @@ To do the computations we again use \textit{Sage}.
 % http://ask.sagemath.org/question/768/fitting-a-curve-to-a-straight-line?answer=1271#1271
 % by Joaquim Puig on 2011-Sep-27; gathered on 2013-Oct-23 JH
 \begin{lstlisting}
-sage: sal = [40, 40, 39, 42, 45, 42, 62, 34, 41, 57, 58, 63, 47, 75, 57, 78, 80, 50, 60, 93, 
-....: 77, 55, 95, 103, 79, 76, 108, 126, 95, 106]
-sage: wins = [103, 94, 83, 79, 78, 72, 99, 55, 66, 81, 80, 84, 62, 97, 73, 95, 93, 56, 67, 
-....:  101, 78, 55, 92, 98, 74, 67, 93, 103, 75, 72]
+sage: sal = [40, 40, 39, 42, 45, 42, 62, 34, 41, 57, 58, 63, 47, 75, 57, 78, 80, 50, 60, 93,
+....:        77, 55, 95, 103, 79, 76, 108, 126, 95, 106]
+sage: wins = [103, 94, 83, 79, 78, 72, 99, 55, 66, 81, 80, 84, 62, 97, 73, 95, 93, 56, 67,
+....:        101, 78, 55, 92, 98, 74, 67, 93, 103, 75, 72]
 sage: var('a, b, t')
 (a, b, t)
 sage: model(t) = a*t+b
 sage: data = zip(sal,wins)
 sage: fit = find_fit(data, model, solution_dict=True)
 sage: model.subs(fit)
-t |--> 0.26349812514202064*t + 63.064776427950136
-sage: plot(model.subs(fit),(t,30,130))+points(data,size=25,color='red')
+t |--> 0.2634981251436269*t + 63.06477642781477
+sage: p = points(data,size=25)+plot(model.subs(fit),(t,30,130),color='red',typeset='latex')
+sage: p.save('moneyball.pdf')
 \end{lstlisting}
 
 The graph is below.

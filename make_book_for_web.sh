@@ -42,7 +42,7 @@ do
      esac
 done
 
-# Generate the MetaPost and Asymptote figures
+# Generate the MetaPost and Asymptote figures, and Sage plots
 if [[ -z $REGENERATING ]] 
 then
     mpost dotprod.mp
@@ -57,6 +57,9 @@ then
     asy -noprc -fpdf ppiped
     asy axes
     cd ..
+    sage bridges.sage
+    sage mile.sage
+    sage moneyball.sage
 fi
 
 # Generate the book; run it twice to settle future references
