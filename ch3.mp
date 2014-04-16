@@ -158,14 +158,14 @@ beginfig(3) % (1,3,3) and its projection
   %pickup pencircle scaled (2*line_width_dark);
   %drawarrow z0--z1 withcolor white;
   pickup pencircle scaled (line_width_light);
-  draw z0--z3 withcolor lightgray;
-  draw z3--z1 withcolor lightgray;  
+  draw z0--z3 withcolor shading_color;
+  draw z3--z1 withcolor shading_color;  
   drawarrow z0--z1;
   %pickup pencircle scaled (2*line_width_light);
   %drawarrow z0--z2 withcolor white;
   pickup pencircle scaled (line_width_dark);
-  draw z0--z4 withcolor lightgray;
-  draw z4--z2 withcolor lightgray;
+  draw z0--z4 withcolor shading_color;
+  draw z4--z2 withcolor shading_color;
   drawarrow z0--z2;
 %  pickup pencircle scaled line_width_dark;
 %  draw .5[z1,z2]--z2--z4--.5[z4,z3];
@@ -235,15 +235,15 @@ beginfig(4) % R^3 and R^2
   % vectors in R3
   save many_vecs; path many_vecs; many_vecs = (0,-4pt)--(0,4pt); 
   pickup pencircle scaled line_width_light;
-  drawarrow z0--z3 withcolor lightgray;
+  drawarrow z0--z3 withcolor shading_color;
     pickup pencircle scaled dot_width;
     draw (many_vecs shifted z3) dashed withdots scaled 0.35;
   pickup pencircle scaled line_width_light;
-  drawarrow z0--z5 withcolor lightgray;  
+  drawarrow z0--z5 withcolor shading_color;  
     pickup pencircle scaled dot_width;
     draw (many_vecs shifted z5) dashed withdots scaled 0.35;
   pickup pencircle scaled line_width_light;
-  drawarrow z0--z1 withcolor lightgray;  % main vector
+  drawarrow z0--z1 withcolor shading_color;  % main vector
     pickup pencircle scaled dot_width;
     draw (many_vecs shifted z1) dashed withdots scaled 0.35;
   pickup pencircle scaled line_width_light;
@@ -314,7 +314,7 @@ beginfig(6) % an `a' vector
   pickup pencircle scaled line_width_light;
   z3=whatever[z0,z1]; x3=-.5w;
   z4=whatever[z0,z1]; y4=-.5v;
-  draw z3--z4 withcolor lightgray;
+  draw z3--z4 withcolor shading_color;
     %label.rt(btex \makebox[0pt][l]{\small $x+y=a$} etex,z4);
   pickup pencircle scaled line_width_dark;
   z5=(.75w,1.25v);
@@ -341,7 +341,7 @@ beginfig(7) % an `b' vector
   pickup pencircle scaled line_width_light;
   z3=whatever[z0,z1]; x3=-.5w;
   z4=whatever[z0,z1]; y4=-.5v;
-  draw z3--z4 withcolor lightgray;
+  draw z3--z4 withcolor shading_color;
     %label.rt(btex \makebox[0pt][l]{\small $x+y=b$} etex,z4);
   pickup pencircle scaled line_width_dark;
   z5=(2w,1v);
@@ -367,9 +367,9 @@ beginfig(8) % an `a+b' vector
   pickup pencircle scaled line_width_light;
   z3=whatever[z0,z1]; x3=w;
   z4=whatever[z0,z1]; y4=v;
-  draw z3--z4 withcolor lightgray;
+  draw z3--z4 withcolor shading_color;
     %label.rt(btex \makebox[0pt][l]{\small $x+y=a+b$} etex,z4);
-  draw (0,0)--(.75w,1.25v)--(2.75w,2.25v) withcolor lightgray;
+  draw (0,0)--(.75w,1.25v)--(2.75w,2.25v) withcolor shading_color;
   pickup pencircle scaled line_width_dark;
   z5=(2.75w,2.25v);
   drawarrow (0,0)--z5;
@@ -1643,8 +1643,8 @@ beginfig(33) %  projection of (1,3,2) onto a line in R^3
   draw z3--z4 withcolor lightgray;
     draw (.5[z0,z2])--(1.03[z0,z2]) withcolor white;
   pickup pencircle scaled line_width_dark;
-  drawarrow z0--z1 withcolor lightgray;
-  drawarrow z0--z2 withcolor lightgray;
+  drawarrow z0--z1 withcolor shading_color;
+  drawarrow z0--z2 withcolor shading_color;
 
   % little man
   pickup pencircle scaled line_width_light;
@@ -2673,7 +2673,7 @@ beginfig(54) % negative doubling the x's
   % the line of reflection
   z4 = (xmin,ymin); z5 = (xmax,ymax);
   draw (z4--z5) shifted codomain_shift dashed evenly scaled .75;
-  drawarrow (z0--z2) shifted codomain_shift withcolor lightgray;
+  drawarrow (z0--z2) shifted codomain_shift withcolor shading_color;
   draw (z2--z3) shifted codomain_shift dashed withdots scaled .5;
 endfig;
 
@@ -2977,7 +2977,7 @@ beginfig(62) % orthonormal bases; orientation-preserving
   save unitcircle; path unitcircle;
   unitcircle = fullcircle scaled 2u;
   pickup pencircle scaled  line_width_light;
-  draw unitcircle withcolor lightgray;
+  draw unitcircle withcolor shading_color;
   % the vectors
   z0 = (1w,0v);
   z1 = z0 rotated 20;
@@ -3014,7 +3014,7 @@ beginfig(63) % orthonormal bases; orientation-reversing
   save unitcircle; path unitcircle;
   unitcircle = fullcircle scaled 2u;
   pickup pencircle scaled  line_width_light;
-  draw unitcircle withcolor lightgray;
+  draw unitcircle withcolor shading_color;
   % the line of reflection
   save angle_of_refl_line; numeric angle_of_refl_line;
   angle_of_refl_line = 10;

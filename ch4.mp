@@ -638,15 +638,15 @@ beginfig(9) % projection with rail tracks on S
   % draw the planes and lines
   pickup pencircle scaled line_width_light;
   fill iplane_lower--cycle withcolor white; draw iplane_lower;
-    draw z41--z43 withcolor lightgray; % bot of vert line thru P
+    draw z41--z43 withcolor shading_color; % bot of vert line thru P
     fill splane_lower--cycle withcolor white; draw splane_lower; 
     fill splane_upper--cycle withcolor white; draw splane_upper;
     draw z54--z55; % rail track
     draw z56--z57 dashed evenly scaled .75; % other
-    draw z42--z41 withcolor lightgray; % top of vert line thru P
-    draw z44--z45 withcolor lightgray; % right of slant line
+    draw z42--z41 withcolor shading_color; % top of vert line thru P
+    draw z44--z45 withcolor shading_color; % right of slant line
     fill iplane_upper--cycle withcolor white; draw iplane_upper; 
-    draw z45--z46 withcolor lightgray; % left of slant line
+    draw z45--z46 withcolor shading_color; % left of slant line
     drawpoint(z40); 
   
   % labels
@@ -746,17 +746,17 @@ beginfig(10) % projection with rail tracks on P->S->I
   % draw the planes and lines
   pickup pencircle scaled line_width_light;
   fill iplane_lower--cycle withcolor white; draw iplane_lower;
-    draw z41--z43 withcolor lightgray; % bot of vert line thru P
+    draw z41--z43 withcolor shading_color; % bot of vert line thru P
     draw z10--z11; % projection of solid track
     draw z12--z13 dashed evenly scaled .75; % projection of dashed track
     fill splane_lower--cycle withcolor white; draw splane_lower; 
     fill splane_upper--cycle withcolor white; draw splane_upper;
     draw z10--z22; % rail track
     draw z12--z23 dashed evenly scaled .75; % other
-    draw z42--z41 withcolor lightgray; % top of vert line thru P
-    draw z44--z45 withcolor lightgray; % right of slant line
+    draw z42--z41 withcolor shading_color; % top of vert line thru P
+    draw z44--z45 withcolor shading_color; % right of slant line
     fill iplane_upper--cycle withcolor white; draw iplane_upper; 
-    draw z45--z46 withcolor lightgray; % left of slant line
+    draw z45--z46 withcolor shading_color; % left of slant line
     drawpoint(z40); 
   
   % labels
@@ -850,17 +850,17 @@ beginfig(11) % projection with rail tracks S->I->P
   % draw the planes and lines
   pickup pencircle scaled line_width_light;
   fill iplane_lower--cycle withcolor white; draw iplane_lower;
-    draw z41--z43 withcolor lightgray; % bot of vert line thru P
+    draw z41--z43 withcolor shading_color; % bot of vert line thru P
     fill splane_lower--cycle withcolor white; draw splane_lower; 
     fill splane_upper--cycle withcolor white; draw splane_upper;
     draw z54--z10; % rail track
     draw z56--z12 dashed evenly scaled .75; % other
-    draw z42--z41 withcolor lightgray; % top of vert line thru P
-    draw z44--z45 withcolor lightgray; % right of slant line
+    draw z42--z41 withcolor shading_color; % top of vert line thru P
+    draw z44--z45 withcolor shading_color; % right of slant line
     fill iplane_upper--cycle withcolor white; draw iplane_upper; 
     draw z10--z45; % image of solid track
     draw z12--z45 dashed evenly scaled .75; % image of dashed track
-    draw z45--z46 withcolor lightgray; % left of slant line
+    draw z45--z46 withcolor shading_color; % left of slant line
     drawpoint(z40); 
   
   % labels
@@ -963,17 +963,17 @@ beginfig(12) % projection with rail tracks on S
   % draw the planes and lines
   pickup pencircle scaled line_width_light;
   fill iplane_lower--cycle withcolor white; draw iplane_lower;
-    draw z41--z43 withcolor lightgray; % bot of vert line thru P
+    draw z41--z43 withcolor shading_color; % bot of vert line thru P
     fill splane_lower--cycle withcolor white; draw splane_lower; 
     fill splane_upper--cycle withcolor white; draw splane_upper;
     draw z55--z22; % rail track
     draw z57--z23 dashed evenly scaled .75; % other
-    draw z42--z41 withcolor lightgray; % top of vert line thru P
-    draw z44--z45 withcolor lightgray; % right of slant line
+    draw z42--z41 withcolor shading_color; % top of vert line thru P
+    draw z44--z45 withcolor shading_color; % right of slant line
     fill iplane_upper--cycle withcolor white; draw iplane_upper; 
     draw z45--z11; % image of solid track
     draw z45--z13 dashed evenly scaled .75; % image of dashed track
-    draw z45--z46 withcolor lightgray; % left of slant line
+    draw z45--z46 withcolor shading_color; % left of slant line
     drawpoint(z40); 
   
   % labels
@@ -1076,15 +1076,15 @@ beginfig(13) % projection, like with rail tracks, on S, showing infinities
   % draw the planes and lines
   pickup pencircle scaled line_width_light;
   fill iplane_lower--cycle withcolor white; draw iplane_lower;
-    draw z41--z43 withcolor lightgray; % bot of vert line thru P
+    draw z41--z43 withcolor shading_color; % bot of vert line thru P
     fill splane_lower--cycle withcolor white; draw splane_lower; 
     fill splane_upper--cycle withcolor white; draw splane_upper;
     %draw z55--z22; % rail track
     %draw z57--z23 dashed evenly scaled .75; % other
-    draw z42--z41 withcolor lightgray; % top of vert line thru P
-    draw z44--z45 withcolor lightgray; % right of slant line
+    draw z42--z41 withcolor shading_color; % top of vert line thru P
+    draw z44--z45 withcolor shading_color; % right of slant line
     fill iplane_upper--cycle withcolor white; draw iplane_upper; 
-    draw z45--z46 withcolor lightgray; % left of slant line
+    draw z45--z46 withcolor shading_color; % left of slant line
     drawpoint(z40); 
   pickup pencircle scaled line_width_dark;
   drawdot(z22); drawdot(z23); % sent to infinity
@@ -1151,7 +1151,7 @@ beginfig(14) % projective plane like a dome
   xaxiscolor:=white;  yaxiscolor:=white; zaxiscolor:=white;
   draw_xyz_axes(2.5,2.5,2.5);
   pickup pencircle scaled line_width_light;
-  xaxiscolor:=lightgray;  yaxiscolor:=lightgray; zaxiscolor:=lightgray;
+  xaxiscolor:=shading_color;  yaxiscolor:=shading_color; zaxiscolor:=shading_color;
   draw_xyz_axes(2.5,2.5,2.5);
 
   % line seen edge-on by projector person
@@ -1192,7 +1192,7 @@ beginfig(15);  % antipodal points are one point in projective plane
     sphere = fullcircle scaled (2*sphere_rad);
     equator = sphere yscaled .4;
   pickup pencircle scaled line_width_light;
-  draw equator withcolor lightgray;
+  draw equator withcolor shading_color;
   draw sphere;
 
   save proj_line; path proj_line;
@@ -1222,7 +1222,7 @@ beginfig(16);  % projective line with antipodal points in projective plane
     sphere = fullcircle scaled (2*sphere_rad);
     equator = sphere yscaled .4;
   pickup pencircle scaled line_width_light;
-  %draw equator withcolor lightgray;
+  %draw equator withcolor shading_color;
   draw sphere;
 
   save proj_line; path proj_line;
@@ -1286,7 +1286,7 @@ beginfig(18);  % correspondence: projective plane <--> z=1
     sphere = fullcircle scaled (2*sphere_rad);
     equator = sphere yscaled .4;
   pickup pencircle scaled line_width_light;
-  draw equator withcolor lightgray;
+  draw equator withcolor shading_color;
   draw sphere;
 
   save proj_line; path proj_line;
@@ -1699,7 +1699,7 @@ beginfig(24);  % a walk around the projective plane
     meridian = sphere xscaled .4; % fig is intersection of two ellipses
     proj_line = sphere yscaled .3;
   pickup pencircle scaled line_width_light;
-  draw meridian withcolor lightgray;
+  draw meridian withcolor shading_color;
   draw sphere;
   % z1/z2 is the projective point, the antipodal spots
   z1 = proj_line intersectionpoint meridian;
@@ -1750,7 +1750,7 @@ beginfig(25);  % a walk around the projective plane
     meridian = sphere xscaled .4; % fig is intersection of two ellipses
     proj_line = sphere yscaled .7;
   pickup pencircle scaled line_width_light;
-  draw meridian withcolor lightgray;
+  draw meridian withcolor shading_color;
   draw sphere;
   % z1/z2 is the projective point, the antipodal spots
   z1 = proj_line intersectionpoint meridian;
@@ -1800,7 +1800,7 @@ beginfig(26);  % a walk around the projective plane; back fig thru south pole
     meridian = sphere rotated 90 xscaled .4; % intersection of two ellipses
     proj_line = sphere rotated 90 yscaled .7;
   pickup pencircle scaled line_width_light;
-  draw meridian withcolor lightgray;
+  draw meridian withcolor shading_color;
   draw sphere;
   % z1/z2 is the projective point, the antipodal spots
   z1 = proj_line intersectionpoint meridian;
@@ -1850,7 +1850,7 @@ beginfig(27);  % a walk around the projective plane; back fig near equator
     meridian = sphere rotated 90 xscaled .4; % intersection of two ellipses
     proj_line = sphere rotated 90 yscaled .1;
   pickup pencircle scaled line_width_light;
-  draw meridian withcolor lightgray;
+  draw meridian withcolor shading_color;
   draw sphere;
   % z1/z2 is the projective point, the antipodal spots
   z1 = proj_line intersectionpoint meridian;

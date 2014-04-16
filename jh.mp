@@ -20,7 +20,7 @@ color medgray;
 color darkgray;
   darkgray=.35white;
 color shading_color;
-  shading_color=lightgray;  
+  shading_color=.70white;  % compromise: .6 shows on printing but not so much on .pdf, while .85 shows on .pdf but not so much on printing
 
 color highlighted_color, usual_color, shadow_color;
   highlighted_color=black;

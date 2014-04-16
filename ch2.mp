@@ -343,8 +343,8 @@ endfig;
 % ================== crystal ==================
 def draw_small_atom(expr loc) =
     fill small_atom_sphere shifted loc withcolor white;
-    draw small_atom_sphere shifted loc withcolor lightgray;
-    draw small_atom_eq shifted loc withcolor lightgray;
+    draw small_atom_sphere shifted loc withcolor shading_color;
+    draw small_atom_eq shifted loc withcolor shading_color;
 enddef;
 def draw_small_atoms(text t) =
   for s = t:
@@ -354,8 +354,8 @@ enddef;
 
 def draw_large_atom(expr loc) =
     fill large_atom_sphere shifted loc withcolor white;
-    draw large_atom_sphere shifted loc withcolor lightgray;
-    draw large_atom_eq shifted loc withcolor lightgray;
+    draw large_atom_sphere shifted loc withcolor shading_color;
+    draw large_atom_eq shifted loc withcolor shading_color;
 enddef;
 def draw_large_atoms(text t) =
   forsuffixes s = t:
