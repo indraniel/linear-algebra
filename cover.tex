@@ -1,38 +1,59 @@
 \documentclass[12pt]{article}
 \usepackage{covergraphic}
+\usepackage{stackengine}
+\renewcommand{\stackalignment}{c}
 
+% I want the booleans offered by this package
+\usepackage{etoolbox}
+% Guidelines help to arrange the parts visually.  Show or not?
+\newbool{showguidelinesbool}
+  % set the default by uncommenting one or the other
+  % \booltrue{showguidelinesbool} 
+  \boolfalse{showguidelinesbool}  
+% You can cause guidelines to be shown by invoking with
+%   pdflatex "\def\showguidelines{}\input{cover}"
+% See http://stackoverflow.com/a/1466610
+\ifdefined\showguidelines
+  \booltrue{showguidelinesbool}
+\fi
+\ifbool{showguidelinesbool}{\typeout{!!! GUIDELINES SHOWN}}{}
+
+% Size of page
 \newlength{\totalcoverwidth} \setlength{\totalcoverwidth}{15.0in} % 7.5+7.5
 \newlength{\spinewidth} \setlength{\spinewidth}{1in}
 \addtolength{\totalcoverwidth}{\spinewidth}
 \usepackage[papersize={16in,9.25in},margin=0in]{geometry}  
 
-\newcommand{\spinetext}[1]{\makebox[1in]{\color{black}\fontsize{40pt}{8pt}{\fontfamily{ugq}\selectfont #1}}}
-\newcommand{\spineauthortext}[1]{\makebox[1in]{\color{coverdarkcolor}\fontsize{20pt}{8pt}{\fontfamily{ugq}\selectfont #1}}}
+% \newcommand{\spinetext}[1]{\makebox[1in]{\color{black}\fontsize{40pt}{8pt}{\fontfamily{ugq}\selectfont #1}}}
+\newcommand{\spinetext}[1]{\color{black}\fontsize{40pt}{8pt}{\fontfamily{ugq}\selectfont #1}}
+% ewcommand{\spineauthortext}[1]{\makebox[1in]{\color{coverdarkcolor}\fontsize{20pt}{8pt}{\fontfamily{ugq}\selectfont #1}}}
+\newcommand{\spineauthortext}[1]{\color{coverdarkcolor}\fontsize{14pt}{8pt}{\fontfamily{ugq}\selectfont #1}}
 \newcommand{\spine}{%
 \setlength{\unitlength}{1in}
 \begin{picture}(1,9.5)
-  \put(0,8.5){\spinetext{L}}
-  \put(0,7.95){\spinetext{I}}
-  \put(0,7.4){\spinetext{N}}
-  \put(0,6.85){\spinetext{E}}
-  \put(0,6.3){\spinetext{A}}
-  \put(0,5.75){\spinetext{R}}
-  % line
-  % \put(0,5.2){{\color{coverflourishcolor}\rule{1in}{3pt}}}
-  % Author
-  \put(0,2.65){\spineauthortext{H}}
-  \put(0,2.425){\spineauthortext{e}}
-  \put(0,2.15){\spineauthortext{f}}
-  \put(0,1.9){\spineauthortext{f}}
-  \put(0,1.675){\spineauthortext{e}}
-  \put(0,1.45){\spineauthortext{r}}
-  \put(0,1.225){\spineauthortext{o}}
-  \put(0,1.0){\spineauthortext{n}}
+  % \put(0,8.5){\spinetext{L}}
+  % \put(0,7.95){\spinetext{I}}
+  % \put(0,7.4){\spinetext{N}}
+  % \put(0,6.85){\spinetext{E}}
+  % \put(0,6.3){\spinetext{A}}
+  % \put(0,5.75){\spinetext{R}}
+  % \put(0,2.65){\spineauthortext{H}}
+  % \put(0,2.425){\spineauthortext{e}}
+  % \put(0,2.15){\spineauthortext{f}}
+  % \put(0,1.9){\spineauthortext{f}}
+  % \put(0,1.675){\spineauthortext{e}}
+  % \put(0,1.45){\spineauthortext{r}}
+  % \put(0,1.225){\spineauthortext{o}}
+  % \put(0,1.0){\spineauthortext{n}}
+  \setstackgap{S}{2.1ex}
+  \put(0.25,5.65){\Shortstack{{\spinetext{L}} {\spinetext{I}} {\spinetext{N}} {\spinetext{E}} {\spinetext{A}} {\spinetext{R}}}}
+  \setstackgap{S}{0.9ex}
+  \put(0.375,1.15){\Shortstack{{\spineauthortext{H}} {\spineauthortext{e}} {\spineauthortext{f}} {\spineauthortext{f}} {\spineauthortext{e}} {\spineauthortext{r}} {\spineauthortext{o}} {\spineauthortext{n}}}}
 \end{picture}
 }
 
 \newcommand{\backcovertext}{%
-\color{coverboldcolor}\fontsize{14pt}{19pt}\fontfamily{fos}\selectfont
+\color{coverboldcolor}\fontsize{14pt}{16pt}\fontfamily{fos}\selectfont
 \begin{minipage}{5.5in}
 %\setlength{\parindent}{2em}
 \setlength{\parskip}{1.4ex}
@@ -74,27 +95,34 @@ and a lab manual of computer work.
 \setlength{\unitlength}{1in}
 
 \begin{picture}(0,0) 
-  % \put(0,-1){\makebox[0in]{\color{red}0}}
-  % \put(1,-1){\makebox[0in]{\color{red}1}}
-  % \put(2,-1){\makebox[0in]{\color{red}2}}
-  % \put(3,-1){\makebox[0in]{\color{red}3}}
-  % \put(4,-1){\makebox[0in]{\color{red}4}}
-  % \put(5,-1){\makebox[0in]{\color{red}5}}
-  % \put(6,-1){\makebox[0in]{\color{red}6}}
-  % \put(7,-1){\makebox[0in]{\color{red}7}}
-  % \put(8,-1){\makebox[0in]{\color{red}8}}
-  % \put(9,-1){\makebox[0in]{\color{red}9}}
-  % \put(10,-1){\makebox[0in]{\color{red}10}}
-  % \put(11,-1){\makebox[0in]{\color{red}11}}
-  % \put(12,-1){\makebox[0in]{\color{red}12}}
-  % \put(13,-1){\makebox[0in]{\color{red}13}}
-  % \put(14,-1){\makebox[0in]{\color{red}14}}
-  % \put(15,-1){\makebox[0in]{\color{red}15}}
-  % \put(16,-1){\makebox[0in]{\color{red}16}}
+  \ifbool{showguidelinesbool}{% 
+    \put(0,-1){\makebox[0in]{\color{red}0}}
+    \put(1,-1){\makebox[0in]{\color{red}1}}
+    \put(2,-1){\makebox[0in]{\color{red}2}}
+    \put(3,-1){\makebox[0in]{\color{red}3}}
+    \put(4,-1){\makebox[0in]{\color{red}4}}
+    \put(5,-1){\makebox[0in]{\color{red}5}}
+    \put(6,-1){\makebox[0in]{\color{red}6}}
+    \put(7,-1){\makebox[0in]{\color{red}7}}
+    \put(7.5,-1){\color{red}\line(0,-1){8}}
+    \put(8,-1){\makebox[0in]{\color{red}8}}
+    \put(8,-1){\color{blue}\line(0,-1){8}}
+    \put(8.5,-1){\color{red}\line(0,-1){8}}
+    \put(9,-1){\makebox[0in]{\color{red}9}}
+    \put(9.5,-1){\color{blue}\line(0,-1){8}}
+    \put(10,-1){\makebox[0in]{\color{red}10}}
+    \put(11,-1){\makebox[0in]{\color{red}11}}
+    \put(12,-1){\makebox[0in]{\color{red}12}}
+    \put(13,-1){\makebox[0in]{\color{red}13}}
+    \put(14,-1){\makebox[0in]{\color{red}14}}
+    \put(15,-1){\makebox[0in]{\color{red}15}}
+    \put(15,-1){\color{blue}\line(0,-1){8}}
+    \put(16,-1){\makebox[0in]{\color{red}16}}
+  }{} 
   \put(8.75,-1){\covergraphic}
   \put(7.5,-9.5){\spine}
   \put(1,-1.1){\backcoverhead}
-  \put(1,-4){\backcovertext}
+  \put(1,-3.75){\backcovertext}
   % \put(2.5,-7){\line(0,-1){1}}
 \end{picture}
 \end{document}
