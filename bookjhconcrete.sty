@@ -2,6 +2,21 @@
 %% bookjh.sty 
 % The INITIAL CODE part
 
+% I want the booleans offered by this package
+\usepackage{etoolbox}
+% Are printing a hard copy or not?
+\newbool{hardcopybool}
+  % set the default by uncommenting one or the other
+  % \booltrue{hardcopybool} 
+  \boolfalse{hardcopybool}  
+% You can cause guidelines to be shown by invoking with
+%   pdflatex "\def\hardcopy{}\input{book}"
+% See http://stackoverflow.com/a/1466610
+\ifdefined\hardcopy 
+  \booltrue{hardcopybool}
+\fi
+\ifbool{hardcopybool}{\typeout{!!! PRINTING HARD COPY}}{}
+
 % The DECLARATION OF OPTIONS part
 %\DeclareOption{singleanswerfile}{}
 
@@ -876,8 +891,7 @@
 % \ifhrefout %
   \usepackage[
                 colorlinks=true,
-                % linkcolor=darkcolor,citecolor=darkcolor,filecolor=darkcolor,urlcolor=darkcolor, % usual colors for online version of book
-                linkcolor=black,citecolor=black,filecolor=black,urlcolor=black, % black links for printed version
+                \ifbool{hardcopybool}{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}{linkcolor=darkcolor,citecolor=darkcolor,filecolor=darkcolor,urlcolor=darkcolor}, % usual colors for online version of book is links are blue.  but for hard copy links are black
                 naturalnames=false,  
                 hypertexnames=false, % if true, index links works but a chapter 3 link to 2.6 will go to chapter 1's 2.6 
                 hyperindex=false, % if true, page numbers are correct but links are to a page ten too early.

@@ -117,7 +117,7 @@ beginfig(4) % equiv relation; row-equiv mats from ch1.27, further split
   label(btex {\small \ldots} etex,z13);
   x14=.8[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
     label.rt(btex {\small $S$} etex,z14);
-  x15=.75[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
+  x15=.85[x0,x9]; y15=.3[y10,y9]; drawpoint(z15);
     label.rt(btex {\small $T$} etex,z15);
 
   pickup pencircle scaled line_width_light;

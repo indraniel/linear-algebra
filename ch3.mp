@@ -5,6 +5,7 @@ verbatimtex
 \documentclass{book}
 \usepackage{bookjh} 
 \usepackage{linalgjh}
+\usepackage{tabstackengine} \setstacktabbedgap{1pt}
 \begin{document}
 etex
 
@@ -972,20 +973,32 @@ beginfig(24) % equiv relation; all matrices partitioned by mat-equiv
   draw partitionbox;
 
   x10=.00[x0,x1]; y10=.2[y3,y0]; 
-    label.rt(btex {\tiny $\star\;\left(\begin{smallmatrix}
+    % label.rt(btex {\tiny $\star\;\left(\begin{smallmatrix}
+    %                                      0  &0  \\
+    % 					 0 &0
+    % 					\end{smallmatrix}\right)$} etex,z10);
+    label.rt(btex {\tiny $\star\;\parenMatrixstack{
                                          0  &0  \\
-					 0 &0
-					\end{smallmatrix}\right)$} etex,z10);
+    					 0 &0
+    					}$} etex,z10);
   x11=.60[x0,x1]; y11=.25[y3,y0]; 
-    label.rt(btex {\tiny $\star\;\left(\begin{smallmatrix}
+    % label.rt(btex {\tiny $\star\;\left(\begin{smallmatrix}
+    %                                      1  &0  \\
+    % 					 0 &0
+    % 					\end{smallmatrix}\right)$} etex,z11);
+    label.rt(btex {\tiny $\star\;\parenMatrixstack{
                                          1  &0  \\
-					 0 &0
-					\end{smallmatrix}\right)$} etex,z11);
+    					 0 &0
+    					}$} etex,z11);
   x12=.20[x0,x1]; y12=.75[y3,y0]; 
-    label.rt(btex {\tiny $\star\;\left(\begin{smallmatrix}
+    % label.rt(btex {\tiny $\star\;\left(\begin{smallmatrix}
+    %                                      1  &0  \\
+    % 					 0 &1
+    % 					\end{smallmatrix}\right)$} etex,z12);
+    label.rt(btex {\tiny $\star\;\parenMatrixstack{
                                          1  &0  \\
-					 0 &1
-					\end{smallmatrix}\right)$} etex,z12);
+    					 0 &1
+    					}$} etex,z12);
   
   path p[];
 

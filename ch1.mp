@@ -5,6 +5,7 @@ verbatimtex
 \documentclass{book}
 \usepackage{bookjh} 
 \usepackage{linalgjh}
+\usepackage{tabstackengine} \setstacktabbedgap{1pt}
 \begin{document}
 etex
 
@@ -1007,7 +1008,7 @@ endfig;
 
 
 
-
+% 28 is below.  Why?
 
 
 
@@ -1048,15 +1049,23 @@ beginfig(30) % equiv relation; two specific row-equiv mats
   path p[]; partition;
   label(btex {\small \ldots} etex,z13);
   x14=.65[x0,x9]; y14=.7[y10,y9]; drawpoint(z14);
-  label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
+  % label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
+  %                               1  &3  \\
+  %                               2  &7
+  %                             \end{smallmatrix}\Bigr)$} etex,z14);
+  label.rt(btex {\tiny       $\parenMatrixstack{
                                 1  &3  \\
                                 2  &7
-                              \end{smallmatrix}\Bigr)$} etex,z14);
+                              }$} etex,z14);
   x15=.7[x0,x9]; y15=.35[y10,y9]; drawpoint(z15);
-  label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
+  % label.rt(btex {\tiny       $\Bigl(\begin{smallmatrix}
+  %                               1  &3  \\
+  %                               0  &1
+  %                             \end{smallmatrix}\Bigr)$} etex,z15);
+  label.rt(btex {\tiny       $\parenMatrixstack{
                                 1  &3  \\
                                 0  &1
-                              \end{smallmatrix}\Bigr)$} etex,z15);
+                              }$} etex,z15);
 endfig;
 
 
@@ -1084,10 +1093,14 @@ beginfig(31) % equiv relation; canonical reps shown, incl 2x2 identity
     label(btex {\small $\star$} etex,z16);
   x17=.28[x0,x1]; y17=.6[y0,y3];    % middle
     label(btex {\small $\star$} etex,z17);
-    label.bot(btex {\tiny $\Bigl(\begin{smallmatrix}
+    % label.bot(btex {\tiny $\Bigl(\begin{smallmatrix}
+    %                             1  &0  \\
+    %                             0  &1
+    %                           \end{smallmatrix}\Bigr)$} etex,z17);
+    label.bot(btex {\tiny $\parenMatrixstack{
                                 1  &0  \\
                                 0  &1
-                              \end{smallmatrix}\Bigr)$} etex,z17);
+                             }$} etex,z17);
 endfig;
 
 
