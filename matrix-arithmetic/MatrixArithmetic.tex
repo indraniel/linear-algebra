@@ -1,0 +1,644 @@
+\documentclass[12pt]{article}
+%Page set up
+\setlength{\topmargin}{-1in}
+\setlength{\textwidth}{7in}
+\setlength{\oddsidemargin}{-.25in}
+\setlength{\textheight}{9in}
+%Shortcuts
+\def\it{\item}
+\def\ul#1{\underline{#1}} \def\spul{\underline{\hspace{.75in}}} \def\ol#1{\overline{#1}}
+\def\sspul{\ \underline{\hspace{.25in}} \ } \def\blank{\ul{\h{1.5}}}
+\def\v#1{\vspace{#1in}} \def\h#1{\hspace{#1in}}
+\def\be{\begin{enumerate}} \def\ee{\end{enumerate}}
+\def\bc{\begin{center}} \def\ec{\end{center}}
+\def\bd{\begin{description}} \def\ed{\end{description}}
+\def\bt{\begin{tabular}} \def\et{\end{tabular}}
+\def\lp{\left(} \def\rp{\right)} \def\abs#1{\vert #1 \vert}
+\def\bar#1{\overline{#1}}
+%General Math
+\def\dis{\displaystyle}
+\def\Frac#1#2{\displaystyle{\frac{#1}{#2}}}
+\def\rta{\rightarrow}
+\def\inv#1{{#1}^{-1}} % inverse of arg 
+\def\th{\theta} \def\al{\alpha} \def\ba{\beta} \def\ga{\gamma}
+\def\R{\mathbb{R}} \def\Q{\mathbb{Q}} \def\N{\mathbb{N}} \def\Z{\mathbb{Z}} \def\P{\mathbb{P}}
+\def\X{\mathbb{X}} \def\Y{\mathbb{Y}} \def\U{\mathbb{U}} \def\E{\mathbb{E}} \def\C{\mathbb{C}}
+\def\F{\mathbb{F}}
+\def\mtrx#1{\begin{pmatrix}
+#1_{11} & #1_{12} & \cdots & #1_{1n} \\
+#1_{21} & #1_{22} & \cdots & #1_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+#1_{m1} & #1_{m2} & \cdots & #1_{mn}
+\end{pmatrix} }
+\def\Idd{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}}
+\def\Iddd{\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}}
+\def\coll#1#2{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+\def\colll#1#2#3{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+\def\collll#1#2#3#4{\begin{pmatrix} #1 \\ #2 \\ #3 \\ #4 \end{pmatrix}}
+\def\colp#1{\begin{pmatrix} #1_1 \\ #1_2 \\ \vdots \\ #1_p \end{pmatrix}}
+\def\colm#1{\begin{pmatrix} #1_1 \\ #1_2 \\ \vdots \\ #1_m \end{pmatrix}}
+\def\coln#1{\begin{pmatrix} #1_1 \\ #1_2 \\ \vdots \\ #1_n \end{pmatrix}}
+\def\rowp#1{\begin{pmatrix} #1_1 & #1_2 & \cdots & #1_p \end{pmatrix}}
+\def\roww#1#2{\begin{pmatrix} #1 & #2 \end{pmatrix}}
+\def\rowww#1#2#3{\begin{pmatrix} #1 & #2 & #3 \end{pmatrix}}
+\def\rowwww#1#2#3#4{\begin{pmatrix} #1 & #2 & #3 & #4 \end{pmatrix}}
+\def\bfourt{\begin{tabbing}
+xxxxxxxxxxxxxxxxxx \=
+xxxxxxxxxxxxxxxxxx \=
+xxxxxxxxxxxxxxxxxx \=
+xxxxxxxxxxxxxxxxxx \kill}\def\bttt{\begin{tabbing}
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxx \=
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxx \=
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill}
+\def\btt{\begin{tabbing}
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \=
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill}
+\def\etb{\end{tabbing}}
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}[thm]{Example}
+\newenvironment{linsys}[2][m]{%
+\setlength{\arraycolsep}{.1111em} % p. 170 TeXbook; a medmuskip
+\begin{array}[#1]{@{}*{#2}{rc}r@{}} 
+}{%
+\end{array}}
+
+\usepackage{amssymb,amsmath}
+\input seteps
+\usepackage{pstricks}
+\setcounter{page}{1}
+\begin{document}
+\begin{center}
+Matrix Arithmetic \\
+Harold W. Ellingsen Jr. \\
+SUNY Potsdam \\
+ellinghw@potsdam.edu
+\end{center}
+
+This supplements \underline{Linear Algebra} by Hefferon, which is lacking a chapter of matrix arithmetic for its own sake. Instructors who wish to introduce these manipulations earlier and without the rigor of linear transformations may find this useful. Please be sure to cover the text's Chapter One first.
+
+This material is Free, including the LaTeX source, under the Creative Commons Attribution-ShareAlike 2.5 License. The latest version should be the one on this site.
+Any feedback on the note is appreciated. \\[.25in]
+
+\noindent
+{\Large Matrix Arithmetic} \\
+
+\noindent
+In this note we explore matrix arithmetic for its own sake. The author introduces it in Chapter Four using linear transformations. While his approach is quite rigorous, matrix arithmetic can be studied after Chapter One. This note assumes that Chapter One has been completed.
+
+For a shortcut notation instead of writing a matrix $A$ as $\mtrx{a}$, we will write $A = (a_{ij})_{m \times n}$ or just $A = (a_{ij})$ if the size of $A$ is understood. %We understand that $1 \leq i \leq m$ and $1 \leq j \leq n$.
+
+When given a set of objects in mathematics, there are two basic questions one should ask: When are two objects equal? and How can we combine two objects to produce
+a third object? For the first question we have the following definition.
+
+\noindent
+{\bf Definition 1} \\
+We say that two matrices $A = (a_{ij})$ and $B = (b_{ij})$ are {\itshape equal}, written $A=B$, provided they have the same size and their corresponding entries are equal, that is, their sizes are both $m \times n$ and for each $1 \leq i \leq m$ and $1 \leq j \leq n$, $a_{ij} = b_{ij}$. 
+
+\noindent
+{\bf Example 1}
+\be
+\it Let $A = \begin{pmatrix} 1 & -9 & 7 \\ 0 & 1 & -5 \end{pmatrix}$ and $B = \begin{pmatrix} 1 & -9 \\ 0 & 1 \\ 7 & -5 \end{pmatrix}$. Since the size of $A$ is 
+$2 \times 3$ and that of $B$ is $3 \times 2$, $A \not= B$. Do note, however, that the entries of $A$ and $B$ are the same.
+\it Find all values of $x$ and $y$ so that $\begin{pmatrix} x^2 & y-x \\ 2 & y^2 \end{pmatrix} = \begin{pmatrix} 1 & x-y \\ x+1 & 1 \end{pmatrix}$. We see that the size of each matrix is $2 \times 2$. So we set the corresponding entries equal: 
+\begin{align*}
+x^2 &= 1 & y-x &= x-y \\
+2 &= x+1 & y^2 &= 1
+\end{align*}
+\noindent
+We see that $x = \pm 1$ and $y = \pm 1$. From $2 = x + 1$, we get that $x$ must be $1$. From $y-x = x-y$, we get that $2y = 2x$ and so $x=y$. Thus $y$ is also $1$. 
+\ee
+
+As for the second question, we have been doing this for quite a while now: Adding, subtracting, multiplying, and dividing(when possible) real numbers. So how can we add and subtract two matrices? Eventually we will multiply matrices, but for now we consider another multiplication. Here are the definitions.
+
+\noindent
+{\bf Definition 2}
+Let $A = (a_{ij})$ and $B = (b_{ij})$ be $m \times n$ matrices. We define their {\itshape sum}, denoted by $A + B$, and their {\itshape difference}, denoted by $A - B$, to be the respective matrices $(a_{ij} + b_{ij})$ and $(a_{ij} - b_{ij})$. We define {\itshape scalar multiplication} by for any $r \in \R$, $rA$ is the matrix $(ra_{ij})$. 
+
+These definitions should appear quite natural: When two matrices have the same size, we just add or subtract their corresponding entries, and for the scalar multiplication, we just multiply each entry by the scalar. Here are some examples.
+
+\noindent
+{\bf Example 2} \\
+Let
+\bc
+$A = \begin{pmatrix} 2 & 3 \\ -1 & 2 \end{pmatrix}$, $B = \begin{pmatrix} -1 & 2 \\ 6 & -2 \end{pmatrix}$, and $C = \begin{pmatrix} 1 & 2 & 3 \\ -1 & -2 & -3 
+\end{pmatrix}$.
+\ec
+Compute each of the following, if possible.
+\be
+\it $A + B$. \\
+Since $A$ and $B$ are both $2 \times 2$ matrices, we can add them. Here we go: $A + B = \\ \begin{pmatrix} 2 & 3 \\ -1 & 2 \end{pmatrix} + \begin{pmatrix} -1 & 2 \\ 6 & -2 \end{pmatrix} = \begin{pmatrix} 2+(-1) & 3+2 \\ -1+6 & 2+(-2) \end{pmatrix} = \begin{pmatrix} 1 & 5 \\ 5 & 0 \end{pmatrix}$.
+\it $B - A$. \\
+Since $A$ and $B$ are both $2 \times 2$ matrices, we can subtract them. Here we go: $B - A = \begin{pmatrix} -1 & 2 \\ 6 & -2 \end{pmatrix} - \begin{pmatrix} 2 & 3 \\ -1 & 2 \end{pmatrix} = \begin{pmatrix} -1-2 & 2-3 \\ 6-(-1) & -2-2 \end{pmatrix} = \begin{pmatrix} -3 & -1 \\ 7 & -4 \end{pmatrix}$.
+\it $B + C$. \\
+No can do. $B$ and $C$ have different sizes: $B$ is $2 \times 2$ and $C$ is $2 \times 3$.
+\it $4C$. \\
+We just multiply each entry of $C$ by $4$: $4C = \begin{pmatrix} 4 \cdot 1 & 4 \cdot 2 & 4 \cdot 3 \\ 4 \cdot (-1) & 4 \cdot (-2) & 4 \cdot (-3) \end{pmatrix}
+= \begin{pmatrix} 4 & 8 & 24 \\ -4 & -8 & -24 \end{pmatrix}$.
+\it $2A - 3B$. \\
+These matrices have the same size, so we'll do the scalar multiplication first and then the subtraction. Here we go: $2A - 3B = 
+\begin{pmatrix} 4 & 6 \\ -2 & 4 \end{pmatrix} - \begin{pmatrix} -3 & 6 \\ 18 & -6 \end{pmatrix} = \begin{pmatrix} 7 & 0 \\ -20 & 10 \end{pmatrix}$.
+\ee
+
+Matrix arithmetic has some of the same properties as real number arithmetic.
+
+\noindent
+{\bf Properties of Matrix Arithmetic} \\
+Let $A$, $B$, and $C$ be $m \times n$ matrices and $r, s \in \R$. 
+\be
+\it $A + B = B + A$ \h{.25} (Matrix addition is commutative.)
+\it $A + (B + C) = (A + B) + C$  \h{.25}  (Matrix addition is associative.)
+\it $r(A + B) = rA + rB$ \h{.25} (Scalar multiplication distributes over matrix addition.)
+\it $(r + s)A = rA + sA$ \h{.25} (Real number addition distributes over scalar multiplication.)
+\it $(rs)A = r(sA)$ \h{.25} (An associativity for scalar multiplication.)
+\it There is a unique $m \times n$ matrix $\Theta$ such that for any $m \times n$ matrix $M$, $M + \Theta = M$. (This $\Theta$ is called the $m \times n$ 
+	{\itshape zero matrix}.)
+\it For every $m \times n$ matrix $M$ there is a unique $m \times n$ matrix $N$ such that $M + N = \Theta$. (This $N$ is called the {\itshape negative} of $M$ 
+	and is denoted $-M$.)
+\ee
+
+Let's prove something. How about that real number addition distributes over matrix addition, there is a zero matrix, and each matrix has a negative? 
+You should prove the rest at some point in your life.
+
+\noindent
+{\bf Proof} \\
+Let $A = (a_{ij})$ be an $m \times n$ matrix and $r, s \in \R$. By definition, $(r + s)A$ and $rA + sA$ have the same size. Now we must show that their corresponding entries are equal.  Let $1 \leq i \leq m$ and $1 \leq j \leq n$. Then the $ij$-entry of $(r + s)A$ is $(r + s)a_{ij}$. Using the usual properties of real number arithmetic, we have $(r + s)(a_{ij}) = ra_{ij} + sa_{ij} = ra_{ij} + sa_{ij}$, which is the sum of the $ij$-entries of $rA$ and $sA$, that is, the $ij$-entry of $rA + sA$. Hence $(r + s)A = rA + sA$. 
+%\begin{align*}
+%(r + s)A &= (r + s)(a_{ij}) \\
+%&= ((r + s)a_{ij}) && \text{by scalar multiplication} \\
+%&= (ra_{ij} + sa_{ij}) && \text{by distributivity in the real numbers} \\
+%&= (ra_{ij}) + (sa_{ij}) && \text{by matrix ``unaddition''} \\
+%&= r(a_{ij}) + s(a_{ij}) && \text{by scalar ``unmultiplicaton''} \\
+%&= rA + sA.
+%\end{align*}
+
+Let $M = (m_{ij})$ be an $m \times n$ matrix and let $\Theta$ be the $m \times n$ matrix all of whose entries are $0$. By assumption $M$, $\Theta$, and $M + \Theta$
+have the same size. Notice that the $ij$-entry of $M + \Theta$ is $m_{ij} + 0$. This is exactly the $ij$-entry of $M$. Hence they're equal. For uniqueness, suppose that $\Psi$ is an $m \times n$ matrix with the property that for any $m \times n$ matrix $C$, $C + \Psi = C$. Then $\Theta = \Theta + \Psi$ by the property of $\Psi$. But by the property of $\Theta$, $\Psi = \Psi + \Theta$. Since matrix addition is commutative, we see that $\Theta = \Psi$. Hence $\Theta$ is unique.
+
+Let $N = (-m_{ij})$. Now this makes sense as each $m_{ij}$ is a real number and so its negative is also a real number. Notice that $M$, $N$, $M + N$, and $\Theta$ all have the same size. Now the $ij$-entry of $M + N$ is $m_{ij} + (-m_{ij}) = 0$, the $ij$-entry of $\Theta$. Hence a desired $N$ exists. For uniqueness suppose that $P$ is an $m \times n$ matrix with the property that $M + P = \Theta$. Then 
+\begin{align*}
+N &= N + \Theta && \text{as $\Theta$ is the zero matrix} \\
+  &= N + (M + P) && \text{as $M + P = \Theta$} \\
+  &= (N + M) + P && \text{by associativity of matrix addition} \\
+  &= \Theta + P && \text{as $N + M = \Theta$} \\
+  &= P && \text{as $\Theta$ is the zero matrix}.
+\end{align*}
+Hence this $N$ is unique.
+
+Now we will multiply matrices, but not in the way you're thinking. We will NEVER just simply multiply the corresponding entries! What we do is an extension of the dot product of vectors. (If you're not familiar with this, don't worry about it.) First we will multiply a row by a column and the result will be a real number(or scalar).
+
+\newpage
+
+\noindent
+{\bf Definition 3} \\
+We take a row vector $\rowp{a}$ with $p$ entries and a column vector $\colp{b}$ with $p$ entries and define their {\itshape product}, denoted by 
+$\rowp{a} \colp{b}$, to be the real number $a_1 b_1 + a_2 b_2 + \cdots + a_p b_p$. Notice that we're just taking the sum of the products of the corresponding entries and that we may view a real number as a $1 \times 1$ matrix. Let's do a couple of examples. 
+
+\noindent
+{\bf Example 3} \\
+Multiply! 
+\be
+\it $\rowww{2}{3}{4} \colll{3}{4}{5} = 2(3) + 3(4) + 4(5) = 38$.
+\it $\rowwww{-1}{2}{-2}{3} \collll{2}{-2}{-1}{2} = -1(2) + 2(-2) + (-2)(-1) + 3(2) = 2$.
+\ee
+
+Now we'll multiply a general matrix by a column. Afterall, we can think of a matrix as several row vectors of the same size put together. To do such a multiplication, the number of entries in each row must be the number of entries in the column and then we multiply each row of the matrix by the column. 
+
+\noindent
+{\bf Definition 4}
+Let $A$ be an $m \times p$ matrix and $\bar{b}$ a $p \times 1$ column vector. We define their {\itshape product}, denoted by $A\bar{b}$, to be the $m \times 1$ column vector whose $i$-th entry, $1 \leq i \leq m$, is the product of the $i$-th row of $A$ and $\bar{b}$. Here is a couple of examples. 
+
+\noindent
+{\bf Example 4} \\
+Multiply the matrix by the column.
+\be
+\it $\begin{pmatrix} 1 & 2 & 3 \\ -2 & 1 & 2 \end{pmatrix} \colll{1}{2}{-3} = \coll{1(1)+2(2)+3(-3)}{-2(1)+1(2)+2(-3)} = \coll{-4}{-6}$.
+\it $\begin{pmatrix} 2 & -2 \\ 0 & 3 \\ -1 & 4 \end{pmatrix} \coll{5}{-1} = \colll{2(5)+(-2)(-1)}{0(5)+3(-1)}{-1(5)+4(-1)} = \colll{12}{-3}{-9}$.
+\ee
+
+Now we can extend this multiplication to appropriately sized arbitrary matrices. We can think of a matrix as several column vectors of the same size put together. To multiply a row by a column, we must be sure that they have the same number of entries. This means that the number of columns of our first matrix must be the number of rows of the second. 
+
+\newpage
+
+\noindent
+{\bf Definition 5} \\
+Let $A$ be an $m \times p$ matrix and $B$ a $p \times n$ matrix. We define their {\itshape product}, denoted by $AB$,  to be the $m \times n$ matrix whose $ij$-entry, $1 \leq i \leq m$ and $1 \leq j \leq n$, is the product of the $i$-th row of $A$ and the $j$-th column of $B$. Here are a few examples.
+
+\noindent
+{\bf Example 5}\\
+Multiply, if possible.
+\be
+\it Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 4 & -3 \\ -2 & 1 \end{pmatrix}$.
+Since both matrices are $2 \times 2$, we can find $AB$ and $BA$. Note that the size of both products is $2 \times 2$.  Here we go: \\
+$AB = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} 4 & -3 \\ -2 & 1 \end{pmatrix} = \\[.1in]
+\begin{pmatrix} \mbox{$1^{\text{st}}$ row of $A$ times $1^{\text{st}}$ column of $B$} & \mbox{$1^{\text{st}}$ row of $A$ times $2^{\text{nd}}$ column of $B$} \\
+\mbox{$2^{\text{nd}}$ row of $A$ times $1^{\text{st}}$ column of $B$} & \mbox{$2^{\text{nd}}$ row of $A$ times $2^{\text{nd}}$ column of $B$} \end{pmatrix} = \\[.1in]
+\begin{pmatrix} 1(4)+2(-2) & 1(-3)+2(1) \\ 3(4)+4(-2) & 3(-3)+4(1) \end{pmatrix} = \begin{pmatrix} 0 & -1 \\ 4 & -5 \end{pmatrix}$ and \\
+$BA = \begin{pmatrix} 4 & -3 \\ -2 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = \\[.1in]
+\begin{pmatrix} \mbox{$1^{\text{st}}$ row of $B$ times $1^{\text{st}}$ column of $A$} & \mbox{$1^{\text{st}}$ row of $B$ times $2^{\text{nd}}$ column of $A$} \\
+\mbox{$2^{\text{nd}}$ row of $B$ times $1^{\text{st}}$ column of $A$} & \mbox{$2^{\text{nd}}$ row of $B$ times $2^{\text{nd}}$ column of $A$} \end{pmatrix} = \\[.1in]
+\begin{pmatrix} 4(1)+(-3)(3) & 4(2)+(-3)(4) \\ -2(1)+1(3) & -2(2)+1(4) \end{pmatrix} = \begin{pmatrix} -5 & -4 \\ 1 & 0 \end{pmatrix}$.
+
+Did you notice what just happened? We have that $AB \not= BA$! Yes, it's true: Matrix multiplication is not commutative.
+
+\it Can we multiply $\begin{pmatrix} 2 & 2 & 9 \\ -1 & 0 & 8 \end{pmatrix} \begin{pmatrix} 1 & 2 & 3 \\ 5 & 2 & 3 \end{pmatrix}$? \\
+No. The first matrix is $2 \times 3$ and then second is also $2 \times 3$. The number of columns of the first is not the same as the number of rows of the second.
+
+\it Can we multiply $\begin{pmatrix} 2 & 2 & 9 \\ -1 & 0 & 8 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 5 & 2 \\ -1 & 3 \end{pmatrix}$? \\
+Yes, the first is $2 \times 3$ and the second is $3 \times 2$, so their product is $2 \times 2$. Here we go:
+$\begin{pmatrix} 2 & 2 & 9 \\ -1 & 0 & 8 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 5 & 2 \\ -1 & 3 \end{pmatrix} = 
+\begin{pmatrix} 2(1)+2(5)+9(-1) & 2(2)+2(2)+9(3) \\ -1(1)+0(5)+8(-1) & -1(2)+0(2)+8(3) \end{pmatrix} = \begin{pmatrix} 3 & 35 \\ -9 & 22 \end{pmatrix}$.
+\ee
+
+Now we state some nice, and natural, \\
+{\bf Properties of Matrix Multiplication}: Let $A$, $B$, and $C$ be matrices of the appropriate sizes and $r \in \R$. Then
+\be
+\it $A(BC) = (AB)C$  \h{.25}  (Matrix multiplication is associative.)
+\it $(rA)B = r(AB) = A(rB)$ \h{.25} (Scalar multiplication commutes with matrix multiplication.)
+\it $A(B + C) = AB + AC$
+\it $(A + B)C = AC + BC$ \h{.25} (Matrix multiplication distributes over matrix addition.)
+\it There exists a unique $n \times n$ matrix $I$ such that for all $n \times n$ matrices $M$, $I M = M I = M$. ($I$ is called the $n \times n$ {\itshape identity matrix}.)
+\ee
+%$\begin{pmatrix} a_{i1} + b_{i1} & a_{i2} + b_{i2} & \cdots & a_{in} + b_{in} \end{pmatrix}$.
+A proof that matrix multiplication is associative would be quite messy at this point. We will just take it to be true. There is an elegant proof, but we need to learn some more linear algebra first. Let's prove the first distributive property and existence of the identity matrix. You should prove the rest at some point in your life.
+
+\noindent
+{\bf Proof} \\
+ Let $A$ be an $m \times p$ matrix and $B$ and $C$ $p \times n$ matrices. This is what we mean by appropriate sizes: $B$ and $C$ must be the same size in order to add them, and the number of columns in $A$ must be the number of rows in $B$ and $C$ in order to multiply them. We have that the two matrices on each side of the equals sign have the same size, namely, $m \times n$. Now we show their corresponding entries are equal. So let's write $A = (a_{ik})$, $B = (b_{kj})$, and 
+$C = (c_{kj})$. Notice that we're using the $k$ to denote the row numbers of $B$ and $C$. Let $1 \leq i \leq m$ and $1 \leq j \leq n$. For simplicity, write the $i$-th row of $A$ as $\begin{pmatrix} a_1 & a_2 & \cdots & a_p \end{pmatrix}$ and the $j$-th columns of $B$ and $C$ as
+$\begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_p \end{pmatrix}$ and $\begin{pmatrix} c_1 \\ c_2 \\ \vdots \\ c_p \end{pmatrix}$, respectively. Then the $j$-th column of $B + C$ is $\begin{pmatrix} b_1 + c_1 \\ b_2 +c_2 \\ \vdots \\ b_p + c_2 \end{pmatrix}$. So the $ij$-entry of $A(B + C)$ is the product of the $i$-th row of $A$ and the $j$-th column of $B+C$. Multiplying and then using the usual properties of real number arithmetic, we have $\begin{pmatrix} a_1 & a_2 & \cdots & a_p \end{pmatrix} \begin{pmatrix} b_1 + c_1 \\ b_2 +c_2 \\ \vdots \\ b_p + c_2 \end{pmatrix} =$
+\begin{align*}
+a_1(b_1 + c_1) + a_2(b_2 + c_2) + \cdots + a_p(b_p + c_p) &= \\
+a_1 b_1 + a_1 c_1 + a_2 b_2 + b_2 c_2 + \cdots + a_p b_p + a_p c_p &= \\
+(a_1 b_1 + a_2 b_2 + \cdots + a_p b_p) + (a_1 c_1 + a_2 c_2 + \cdots +  a_p c_p).
+\end{align*}
+
+\noindent
+Notice that the expressions in parentheses are the products of the $i$-th row of $A$ with each of the $j$-th columns of $B$ and $C$ and that the sum of these two is the $ij$-entry of $AB + AC$. So we're done.
+
+Now we will prove that last statement, about this mysterious identity matrix. We need a definition first: The {\itshape main diagonal} of a matrix $A$ consists of the entries of the from $a_{ii}$. Let $M = (m_{ij})$ be an $n \times n$ matrix. Let $I$ be the $n \times n$ matrix whose main diagonal entries are all $1's$ and all of its other entries $0's$, i.e., $I = 
+\begin{pmatrix} 1 & 0 & 0 & 0 & \cdots & 0 \\ 
+                0 & 1 & 0 & 0 & \cdots & 0 \\ 
+                0 & 0 & 1 & 0 & \cdots & 0 \\
+		\vdots & \vdots & \vdots & \ddots & \ & \vdots \\
+		\vdots & \vdots & \vdots & \      &  \ddots  & \vdots \\
+		0 & 0 & 0 & 0 & \cdots & 1
+\end{pmatrix}$. 
+Since $M$ and $I$ are both $n \times n$, thier products $IM$ and $MI$ are both $n \times n$. 
+Notice that the $i$-th row of $I$ is the row vector whose $i$-th entry is $1$ and all others $0$'s. So when we multiply this $i$-th row of $I$ by the $j$-th column of $M$, the only entry in the column that gets multiplied by the $1$ is $m_{ij}$. Thus $IM = M$. Now notice that the $j$-th column of $I$ is the column vector whose $j$-th entry is a $1$ and all others $0$'s. So when we multiply the $i$-th row of $M$ by the $j$-th column of $I$, the only entry in the row that gets multiplied the $1$ is $m_{ij}$. Thus $MI = M$. The proof that $I$ is unique is quite similar to that of the zero matrix. And we're done. \\
+
+Now we return to systems of linear equations. Here's a generic one:
+\begin{align*}
+	a_{11}x_1 &+ a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+	a_{21}x_1 &+ a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+	\vdots  \\
+	a_{m1}x_1 &+ a_{m2}x_2 + \cdots + a_{mn}x_n = b_m.
+	\end{align*}
+We can express this system as a matrix equation $A\bar{x} = \bar{b}$. How?, you ask. Just look at each equation: We're multiplying $a$'s by $x$'s and adding them up. This is exactly how we multiply a row by a column. The matrix $A$ we need is the matrix of the coefficients in the system and the $\bar{x}$ is the column vector of the variables. So the $\bar{b}$ is the column vector of the constants. More explicitly, we have $A = \mtrx{a}$, $\bar{x} = \coln{x}$, and $\bar{b} = \colm{b}$. So our matrix equation $A\bar{x} = \bar{b}$ represents the system of linear equations, which is a much more concise way of writing a system. It also provides a more convenient way of determining whether or not $\coln{u}$ is a solution to the system: Just check whether or not $A\bar{u} = \bar{b}$. Let's do an example. 
+
+\noindent
+{\bf Example 6} \\
+Consider the linear system
+\bc
+$\begin{linsys}{3}
+2x &- &y  &\ &\  &= 0 \\
+ x &  &\  &+ &z &= 4 \\
+ x &+ &2y &- &z &= -1
+\end{linsys}$.
+\ec
+
+\be
+\it Write it as a matrix equation. So following the above, we let $A$ be the matrix of coefficients, $\bar{x}$ the column vector of the variables, and $\bar{b}$ the column vector of the constants. We have $A = \begin{pmatrix} 2 & -1 & 0 \\ 1 & 0 & 1 \\ 1 & 2 & -2 \end{pmatrix}$, $\bar{x} = \colll{x}{y}{z}$, $\bar{b} = \colll{0}{4}{-1}$, and the equation is 
+$\begin{pmatrix} 2 & -1 & 0 \\ 1 & 0 & 1 \\ 1 & 2 & -2 \end{pmatrix} \colll{x}{y}{z} = \colll{0}{4}{-1}$.
+\it Determine whether or not $\colll{1}{2}{3}$ is a solution to the system. \\
+Let $\bar{u} = \colll{1}{2}{3}$. Then multiplying, we have $A\bar{u} = 
+\begin{pmatrix} 2 & -1 & 0 \\ 1 & 0 & 1 \\ 1 & 2 & -2 \end{pmatrix} \colll{1}{2}{3} = \colll{2(1)-1(2)+0(3)}{1(1)+0(2)+1(3)}{1(1)+2(2)-2(3)} = \colll{0}{4}{-1} = \bar{b}$. So $\colll{1}{2}{3}$ is a solution to the system. 
+\it Determine whether or not $\colll{2}{4}{2}$ is a solution. \\
+Let $\bar{v} = \colll{2}{4}{2}$. Then multiplying, we have $A\bar{v} =
+\begin{pmatrix} 2 & -1 & 0 \\ 1 & 0 & 1 \\ 1 & 2 & -2 \end{pmatrix} \colll{2}{4}{2} = \colll{2(2)-1(4)+0(2)}{1(2)+0(4)+1(2)}{1(2)+2(4)-2(2)} = \colll{0}{4}{6}
+\not= \bar{b}$. So $\colll{2}{4}{2}$ is not a solution to the system.
+\ee
+
+\noindent
+{\bf Invertible Matrices} \\
+We know that every nonzero real number $x$ has a multiplicative inverse, namely $x^{-1} = 1/x$, as $x x^{-1} = 1$. Is there an analogous inverse for matrices? That is, for any nonzero square matrix $A$, is there a matrix $B$ such that $AB = BA = I$, where $I$ is the appropriate identity matrix? Consider the specific nonzero matrix $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Let's try to find its $B$. So let $B = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. Then $AB = \begin{pmatrix} a & b \\ 0 & 0 \end{pmatrix}$. Oh. The matrix $AB$ has a row of $0$'s, so it can never be the identity, which is $\Idd$. So the answer to our question is no. Here, then, is a definition:
+
+\noindent
+{\bf Definition 6} \\
+We will say that an $n \times n$ matrix $A$ is {\itshape invertible} provided there is an $n \times n$ matrix $B$ for which $AB = BA = I$. This $B$ is called {\itshape an inverse} of $A$. 
+
+Notice that $II = I$, so there is at least one invertible matrix for each possible size. Are there more? Why, yes, there are. Thanks for asking. Here's one now.
+
+\noindent
+{\bf Example 7} \\
+Let $A = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}$. Multiplying, we get that
+$AB = \begin{pmatrix} 2(1)+1(-1) & 2(-1)+1(2) \\ 1(1)+ 1(-1) & 1(-1)+1(2) \end{pmatrix} = \Idd$ and $BA = \begin{pmatrix} 1(2)-1(1) & 1(1)-1(1) \\
+-1(2)+2(1) & -1(1)+2(1) \end{pmatrix} = \Idd$. So $A$ is invertible. Perhaps you've noticed that $B$ is also invertible.
+
+As you may have guessed, there are lots of invertible matrices. But there are also lots of matrices that are not invertible. Before determining a method to determine whether or not a matrix is invertible, let's state and prove a few results about invertible matrices.
+
+\noindent
+{\bf Proposition 1} \\
+Let $A$ be an $n \times n$ invertible matrix. If $B$ and $C$ are two inverses for $A$, then $B = C$. In other words, the inverse of a square matrix, if it exists, is unique.
+
+\noindent
+{\bf Proof} \\
+Let $A$, $B$, and $C$ be $n \times n$ matrices. Assume that $A$ is invertible and $B$ and $C$ are its inverses. So we have that $AB = BA = AC = CA = I$. Now
+$B = BI = B(AC) = (BA)C = IC = C$. Notice that we used the associativity of matrix multiplication here.
+
+Now we can refer to {\itshape the inverse} of a square matrix $A$ and so we will write its inverse as $A^{-1}$ and read it as ``$A$ inverse". In this case
+we have $AA^{-1} = A^{-1}A = I$. Next we prove a theorem about the inverses of matrices.
+
+\noindent
+{\bf Proposition 2} \\
+Let $A$ and $B$ be $n \times n$ invertible matrices. Then 
+\be
+\it $A^{-1}$ is invertible and $(A^{-1})^{-1} = A$ and
+\it $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+\ee
+{\bf Note} that we reverse the order of the inverses in the product. This is due to the fact that matrix multiplication is not commutative.
+
+\noindent
+{\bf Proof} \\
+Let $A$ and $B$ be $n \times n$ invertible matrices. Then $AA^{-1} = A^{-1}A = I$. So $A$ satisfies the definition for $A^{-1}$ being invertible. Thus $(A^{-1})^{-1} = A$. 
+
+To show that $AB$ is invertible, we will just multiply, taking full advantage that matrix multiplication is associative:
+\begin{align*}
+(AB)(B^{-1}A^{-1}) &= A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I &&\text{and} \\
+(B^{-1}A^{-1})(AB) &= B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I. 
+\end{align*}
+Hence $AB$ is invertible and its inverse is $B^{-1}A^{-1}$.
+
+The proof of the following corollary is a nice exercise using induction.
+
+\noindent
+{\bf Corollary to Proposition 2} \\
+If $A_1, A_2, \ldots, A_m$ are invertible $n \times n$ matrices, then $A_1 A_2 \cdots A_m$ is invertible and $(A_1 A_2 \cdots A_m)^{-1} = A_{m}^{-1} \cdots A_{2}^{-1} A_{1}^{-1}$.
+
+How do we know if a matrix is invertible or not? The following theorem tells us. All vectors in $\R^n$ will be written as columns.
+
+\newpage
+
+\noindent
+{\bf The Invertible Matrix Theorem(IMT) Part I} \\
+Let $A$ be an $n \times n$ matrix, $I$ the $n \times n$ identity matrix, and $\bar{\th}$ the zero vector in $\R^n$. Then the following are equivalent.
+\be
+\it $A$ is invertible.
+\it The reduced row echelon form of $A$ is $I$.
+\it For any $\bar{b} \in \R^n$ the matrix equation $A\bar{x} = \bar{b}$ has exactly one solution.
+\it The matrix equation $A\bar{x} = \bar{\th}$ has only $\bar{x} = \bar{\th}$ as its solution.
+\ee
+
+What we mean that ``the following are equivalent'' is that for any two of the statements, one is true if and only if the other is true. In the proof we take advantage that the logical connective ``implies'' is transitive, that is, if $P \Rightarrow Q$ and $Q \Rightarrow R$, then $P \Rightarrow R$. We will prove that $(2) \Rightarrow (1)$, $(1) \Rightarrow (3)$, $(3) \Rightarrow (4)$, and $(4) \Rightarrow (2)$.
+
+\noindent
+{\bf Proof} \\
+Let $A$ be an $n \times n$ matrix, $I$ the $n \times n$ identity matrix, and $\bar{\th}$ the zero vector in $\R^n$. Assume that the reduced echelon form of $A$ is $I$. We wish to find an $n \times n$ matrix $B$ so that $AB = BA = I$. Recall that we can view the multiplication of two matrices as the multiplication of a matrix by a sequence of columns. In this way finding a matrix $B$ for which $AB = I$ is the same as solving the $n$ systems of linear equations whose matrix equations are given by $A\bar{x}_j = \bar{e}_j$ where $\bar{e}_j$ is the $j$-th column of $I$ for $1 \leq j \leq n$. To solve each system, we must reduce the augmented matrix $(A | \bar{e}_j)$. Since the reduced echelon form of $A$ is $I$, each of these systems has a unique solution. Notice, however, that it is the 
+$A$ part of the augmented matrix that dictates the row operations we must use; each $\bar{e}_j$ is just along for the ride. This suggests that in practice we can  reduce the giant augmented matrix $(A | I)$ until the $A$ part is in its reduced echelon form, which we assumed is $I$. Hence we can reduce $(A | I)$ to 
+$(I | B)$ for some $n \times n$ matrix $B$. For each $1 \leq j \leq n$ the solution to $A\bar{x}_j = \bar{e}_j$ is the $j$-th column of $B$. Thus $AB = I$.
+
+Now since matrix multiplication is not commutative, we must still show that $BA = I$. Since we have reduced that giant augmented matrix $(A | I)$ to $(I | B)$, we have in fact reduced $I$ to $B$. By Lemma 1.6 in Chapter One Section III, ``reduces to'' is an equivalence relation. Since we can reduce $I$ to $B$, we can reduce 
+$B$ to $I$. In other words, the reduced echelon form of $B$ is $I$. The previous argument then shows that there is an $n \times n$ matrix $C$ for which $BC = I$. Then $A = AI = A(BC) = (AB)C = IC = C$. Hence $BA = I$. Thus $A$ is invertible.
+
+Now we assume that $A$ is invertible. Let $\bar{b} \in \R^n$ and consider $A^{-1}\bar{b}$. Since $A^{-1}$ is $n \times n$ and $\bar{b} \in \R^n$, $A^{-1}\bar{b} \in \R^n$. Now $A(A^{-1}\bar{b}) = (AA^{-1})\bar{b} = I\bar{b} = \bar{b}$. Technically we showed that $I$ is the identity for square matrices, but since we can make a square matrix whose columns are all $\bar{b}$, we see that $I\bar{b}$ is indeed $\bar{b}$. We have just shown that the equation $A\bar{x} = \bar{b}$ has a solution. For uniqueness, suppose that $\bar{u} \in \R^n$ is another one. Then we have
+\begin{align*}
+A\bar{u} &= \bar{b} \\
+A^{-1}(A\bar{u}) &= A^{-1}\bar{b} \\
+(A^{-1}A)\bar{u} &= A^{-1}\bar{b} \\
+I\bar{u} &= A^{-1}\bar{b} \\
+\bar{u} &= A^{-1}\bar{b}.
+\end{align*}
+Hence the only solution is $\bar{x} = A^{-1}\bar{b}$. 
+
+Since $\bar{\th}$ is a particular vector in $\R^n$, we automatically have that if for any $\bar{b} \in \R^n$ the matrix equation $A\bar{x} = \bar{b}$ has exactly one solution, then the matrix equation $A\bar{x} = \bar{\th}$ has only $\bar{x} = \bar{\th}$ as its solution. 
+
+Now to complete the proof, we must show that if the matrix equation $A\bar{x} = \bar{\th}$ has only $\bar{x} = \bar{\th}$ as its solution, then the reduced echelon form of $A$ is $I$. We do so by contraposition. Assume that the reduced echelon form of $A$ is not $I$. Since $A$ is square, its reduced echelon form must contain a row of zeroes. In solving the homogeneous system of linear equations corresponding to $A\bar{x} = \bar{\th}$, the augmented matrix $(A | \bar{\th})$ will have an entire row of zeroes when $A$ has been reduced to its reduced echelon form. As the number of equations and unknowns are the same, the system must have a free variable. This means that the system has more than one solution(in fact it has infinitely many, but who's counting?). Hence the matrix equation $A\bar{x} = \bar{\th}$ has more than one solution. Thus by contraposition we have proved that if the matrix equation $A\bar{x} = \bar{\th}$ has only $\bar{x} = \bar{\th}$ as its solution, then the reduced echelon form of $A$ is $I$. Therefore we have proved the theorem.
+
+\noindent
+{\bf Example 8}
+\be
+\it The first part of the proof provides a method for determining whether or not a matrix is invertible and if so, finding its inverse: Given an $n \times n$
+	matrix $A$, we form the giant augmented matrix $(A | I)$ and row reduce it until the $A$ part is in reduced echelon form. If this form is $I$, then we
+	know that $A$ is invertible and the matrix in the $I$ part is its inverse; if this form is not $I$, then $A$ is not invertible. Determine whether or not
+	the matrix is invertible and if so, to find its inverse.
+\be
+\it Let $A = \begin{pmatrix} 2 & 1 \\ 1 & -1 \end{pmatrix}$. We form the giant augmented matrix $(A | I )$ and row reduce:
+$\begin{pmatrix} 2 & 1  & | & 1 & 0 \\ 
+                1 & -1 & | & 0 & 1 \end{pmatrix} \sim
+\begin{pmatrix} 1 & -1 & | & 0 & 1 \\ 
+                2 & 1  & | & 1 & 0 \end{pmatrix} \sim
+\begin{pmatrix} 1 & -1 & | & 0 & 1 \\ 
+                0 &  3 & | & 1 & -2 \end{pmatrix} \sim
+\begin{pmatrix} 1 & -1 & | & 0 & 1 \\ 
+                0 &  1 & | & 1/3 & -2/3 \end{pmatrix} \sim
+\begin{pmatrix} 1 &  0 & | & 1/3 & 1/3 \\ 
+                0 &  1 & | & 1/3 & -2/3 \end{pmatrix}$ 
+So we see that the reduced echelon form of $A$ is the identity. Thus $A$ is invertible and $A^{-1} = \begin{pmatrix} 1/3 & 1/3 \\ 1/3 & -2/3 \end{pmatrix}$. We can rewrite this inverse a bit more nicely by factoring out the $1/3$: $A^{-1} = \Frac{1}{3} \begin{pmatrix} 1 & 1 \\ 1 & -2 \end{pmatrix}$. 
+
+\it Let $A = \begin{pmatrix} 1 & 0 & 2 \\ -1 & 1 & -2 \\ 2 & 2 & 1 \end{pmatrix}$. We form giant augmented matrix $(A | I)$ and row reduce: \\
+$\begin{pmatrix} 1 & 0 & 2  & | & 1 & 0 & 0 \\ 
+		-1 & 1 & -2 & | & 0 & 1 & 0 \\ 
+		 2 & 2 & 1 & | & 0 & 0 & 1 \end{pmatrix} \sim
+\begin{pmatrix} 1 & 0 &  2 & | &  1 & 0 & 0 \\ 
+		0 & 1 &  0 & | &  1 & 1 & 0 \\ 
+		0 & 2 & -3 & | & -2 & 0 & 1 \end{pmatrix} \sim
+\begin{pmatrix} 1 & 0 &  2 & | &  1 &  0 & 0 \\ 
+		0 & 1 &  0 & | &  1 &  1 & 0 \\ 
+		0 & 0 & -3 & | & -4 & -2 & 1 \end{pmatrix} \sim \\
+\begin{pmatrix} 1 & 0 & 2 & | &  1   &  0  & 0 \\ 
+		0 & 1 & 0 & | &  1   &  1  & 0 \\ 
+		0 & 0 & 1 & | &  4/3 & 2/3 & -1/3 \end{pmatrix} \sim 
+\begin{pmatrix} 1 & 0 & 0 & | &  -5/3 & -4/3 & 2/3 \\ 
+		0 & 1 & 0 & | &  1    &  1   & 0 \\ 
+		0 & 0 & 1 & | &  4/3  & 2/3  & -1/3 \end{pmatrix}$.
+
+So we see that $A$ is invertible and $A^{-1} = \begin{pmatrix} -5/3 & -4/3 & 2/3 \\ 1 & 1 & 0 \\ 4/3  & 2/3  & -1/3 \end{pmatrix}$. Notice all of those thirds in the inverse? Factoring out a $1/3$, we get $A^{-1} = \Frac{1}{3} \begin{pmatrix} -5 & -4 & 2 \\ 3 & 3 & 0 \\ 4 & 2 & -1 \end{pmatrix}$.
+
+\it Let $B = \begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$. We form the giant augmented matrix $(B | I)$ and row reduce: \\
+$\begin{pmatrix} 1 & -1 & | & 1 & 0 \\ 
+               -1 & 1  & | & 0 & 1  \end{pmatrix} \sim
+\begin{pmatrix} 1 & -1 & | & 1 & 0 \\ 
+                0 &  0 & | & 1 & 1  \end{pmatrix}$. 
+Since the reduced echelon form of $B$ is not $I$, $B$ is not invertible.
+\ee
+
+\it As seen in the proof of the theorem, we can use the inverse of a matrix to solve a system of linear equations with the same number of equations and unknowns.
+	Specifically, we express the system as a matrix equation $A\bar{x} = \bar{b}$, where $A$ is the matrix of the coefficients. If $A$ is invertible, then the
+	solution is $\bar{x} = A^{-1}\bar{b}$. Solve the following system of linear equations using the inverse of the matrix of coefficients.
+\begin{alignat*}{4}
+x  &&  &&+2z &= 3 \\
+-x &&+y &&- 2z &= -3 \\
+2x &&+2y &&+ z &= 6.
+\end{alignat*}
+Notice that the coefficient matrix is, conveniently, the matrix $A$ from part (b) above, whose inverse we've already found. The matrix equation for this system is 
+$A\bar{x} = \bar{b}$ where $\bar{x} = \colll{x}{y}{z}$ and $\bar{b} = \colll{3}{-3}{6}$. Then $\bar{x} = A^{-1}\bar{b} = 
+\Frac{1}{3} \begin{pmatrix} -5 & -4 & 2 \\ 3 & 3 & 0 \\ 4 & 2 & -1 \end{pmatrix} \colll{3}{-3}{6} = \colll{3}{0}{0}$.
+\ee
+
+The following theorem tells us that if the product of two square matrices is the identity, then they are in fact inverses of each other.
+
+\noindent
+{\bf Theorem 2} \\
+Let $A$ and $B$ be $n \times n$ matrices and $I$ the $n \times n$ identity matrix. If $AB = I$, then $A$ and $B$ are invertible and $A^{-1} = B$. \\
+\noindent
+{\bf Proof} \\
+Let $A$ and $B$ be $n \times n$ matrices, $I$ the $n \times n$ identity matrix, and $\bar{\th}$ the zero vector in $\R^n$. Assume $AB = I$. We will use the IMT Part I to prove that $B$ is invertible first. Consider the matrix equation $B\bar{x} = \bar{\th}$ and let $\bar{u} \in \R^n$ be a solution. So we have 
+\begin{align*}
+B\bar{u} &= \bar{\th} \\
+A(B\bar{u}) &= A\bar{\th} \\
+(AB)\bar{u} &= \bar{\th} \\
+I\bar{u} &= \bar{\th} \\
+\bar{u} &= \bar{\th}.
+\end{align*}
+The only solution to $B\bar{x} = \bar{\th}$ is $\bar{x} = \bar{\th}$. Hence by the IMT Part I, $B$ is invertible. So $B^{-1}$ exists. Then multiplying both sides of $AB = I$ on the right by $B^{-1}$ gives us that $A = B^{-1}$. Since $B^{-1}$ is invertible, $A$ is too and $A^{-1} = (B^{-1})^{-1} = B$.
+
+\v{.25}
+
+\noindent
+{\bf Transposes} \\
+We finish this section off with what's called the transpose of a matrix. Here's the definition.
+
+\noindent
+{\bf Definition 7} \\
+Let $A = (a_{ij})$ be an $m \times n$ matrix. The {\itshape transpose} of $A$, denoted by $A^T$, is the matrix whose $i$-th column is the $i$-th row of $A$, or equivalently, whose $j$-th row is the $j$-th column of $A$. Notice that $A^T$ is an $n \times m$ matrix. We will write $A^T = (a^{T}_{ji})$ where $a^{T}_{ji} = a_{ij}$. Here is a couple of examples.
+
+\noindent
+{\bf Example 9}
+\be
+\it Let $A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$. The first row of $A$ is $\begin{pmatrix} 1 & 2 & 3 \end{pmatrix}$ and the second row is $\begin{pmatrix} 4 & 5 & 6 \end{pmatrix}$. So these become the columns of $A^T$, that is, $A^T = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix}$. Alternatively, we see that the columns of $A$ are $\begin{pmatrix} 1 \\ 4 \end{pmatrix}$, $\begin{pmatrix} 2 \\ 5 \end{pmatrix}$, and $\begin{pmatrix} 3 \\ 6 \end{pmatrix}$. So these become the rows of $A^T$, as we can see above.
+\it Let $B = \begin{pmatrix} -1 & 0 & 2 \\ -4 & 1 & 9 \\ 2 & 3 & 0 \end{pmatrix}$. We make the rows of $B$ the columns of $B^T$. Doing so, we get
+$B^T = \begin{pmatrix} -1 & -4 & 2 \\ 0 & 1 & 3 \\ 2 & 9 & 0 \end{pmatrix}$.
+\ee
+
+{\bf Note} that the main diagonals of a matrix and its transpose are the same.
+
+\noindent
+{\bf Proposition 3} \\
+Let $A$ and $B$ be appropriately sized matrices and $r \in \R$. Then
+\be
+\it $(A^T)^T = A$
+\it $(A + B)^T = A^T + B^T$
+\it $(rA)^T = rA^T$
+\it $(AB)^T = B^T A^T$
+\ee
+
+\noindent
+{\bf Proof} \\
+The first three properties seem perfectly natural. Some time when you get bored, you should try to prove them. But what about that multiplication one? Does that seem natural? Maybe. Given how the inverse of the product of matrices works, maybe this is fine. Let's prove it. Let $A$ be an $m \times p$ matrix and $B$ a $p \times n$ matrix. Then $AB$ is an $m \times n$ matrix. This means that $(AB)^T$ is an $n \times m$ matrix. Then $B^T$ is an $n \times p$ matrix and $A^T $ is a $p \times m$ matrix. So multiplying $B^T A^T$ makes sense and its size is also $n \times m$. But what about their corresponding entries? The $ji$-entry of $(AB)^T$ is the $ij$-entry of $AB$, which is the $i$-th row of $A$ times the $j$-th column of $B$. For simplicity, let $\rowp{a}$ be the $i$-th row of $A$ and $\colp{b}$ the $j$-th column of $B$. Then the $ij$-entry of $AB$ is $a_1 b_1 + a_2 b_2 + \cdots + a_p b_p$, but this is also equal to $b_1 a_1 + b_2 a_2 + \cdots b_p a_p$, which is the product of $\rowp{b}$ and $\colp{a}$. This is exactly the product of the $j$-th row of $B^T$ and the $i$-th column of $A^T$, which is the $ji$-entry of $B^T A^T$. Thus $ji$-entry of $(AB)^T$ is the $ji$-entry of $B^T A^T$. Therefore $(AB)^T = B^T A^T$.
+
+\v{.25}
+
+\noindent
+{\large Here are some exercises. Enjoy.}
+
+\be
+\it Let $A = \begin{bmatrix} 1 & -2 & 3 \\ 1 & -1 & 0 \end{bmatrix}$, $B = \begin{bmatrix} 3 & 4 \\ 5 & -1 \\ 1 & -1 \end{bmatrix}$, 
+$C = \begin{bmatrix} 4 & -1 & 2 \\ -1 & 5 & 1 \end{bmatrix}$, $D = \begin{bmatrix} -1 & 0 & 1 \\ 0 & 2 & 1 \end{bmatrix}$, \\
+$E = \begin{bmatrix} 3 & 4 \\ -2 & 3 \\ 0 & 1 \end{bmatrix}$, $F = \begin{bmatrix} 2 \\ -3 \end{bmatrix}$, and $G = \begin{bmatrix} 2 & -1 \end{bmatrix}$.
+Compute each of the following and simplify, whenever possible. If a computation is not possible, state why.
+\bfourt
+(a) $3C - 4D$ \> (b) $A - (D + 2C)$ \> (c) $A - E$ \> (d) $AE$ \\
+(e) $3BC - 4BD$ \> (f) $CB + D$ \> (g) $GC$ \> (h) $FG$
+\etb
+
+\it Illustrate the associativity of matrix multiplication by multiplying $(AB)C$ and $A(BC)$ where $A$, $B$, and $C$ are matrices above.
+
+\it Let $A$ be an $n \times n$ matrix. Let $m \in \N$. As you would expect, we define $A^m$ to be the product of $A$ with itself $m$ times. Notice that this makes 
+	sense as matrix multiplication is associative. 
+	\be
+	\it Compute $A^4$ for $A = \begin{bmatrix} 1 & -2 \\ 1 & -1 \end{bmatrix}$. 
+	\it Provide a counter-example to the statement: For any $2 \times 2$ matrices $A$ and $B$, $(AB)^2 = A^2 B^2$.
+	\ee
+
+\it Prove that for all $m \times n$ matrices $A$, $B$, and $C$, if $A + C = B + C$, then $A = B$.
+
+\it Let $\Theta$ be the $m \times n$ zero matrix. Prove that for any $m \times n$ matrix $A$, $-A = (-1)A$ and $0A = \Theta$.
+
+\it Let $\Theta$ be the $m \times n$ zero matrix. Prove that for any $r \in \R$ and $m \times n$ matrix $A$, if $rA = \Theta$, then $r = 0$ or $A = \Theta$.
+
+\it We have seen an example of two $2 \times 2$ matrices $A$ and $B$ for which $AB \not= BA$, showing us that matrix multiplication is not commutative.
+	However, it's more that just not commutative, it's soooooo not commutative. Doing the following problems will illustrate what we mean by this.
+	\be
+	\it Find two matrices $A$ and $B$ for which $AB$ and $BA$ are defined, but have different sizes.
+	\it Find two matrices $A$ and $B$ for which $AB$ is defined, but $BA$ is not.
+	\ee
+\it Let $\Theta$ be the $2 \times 2$ zero matrix and $I$ the $2 \times 2$ identity matrix. Provide a counter-example to each of the following statements:
+	\be
+	\it For any $2 \times 2$ matrices $A$ and $B$, if $AB = \Theta$, then $A = \Theta$ or $B = \Theta$.
+	\it For any $2 \times 2$ matrices, $A$, $B$, and $C$, if $AB = AC$, then $B = C$.
+	\it For any $2 \times 2$ matrix $A$, if $A^2 = A$, then $A = \Theta$ or $A = I$.
+	\ee
+
+\it Suppose that we have a homogeneous system of linear equations whose matrix equation is given by $A\bar{x} = \bar{\th}$ where $A$ is the $m \times n$ matrix of 
+	coefficients, $\bar{x}$ is the column matrix of the $n$ variables, and $\bar{\th}$ is the column matrix of the $m$ zeroes. Use the properties of matrix
+	arithmetic to show that for any solutions $\bar{u}$ and $\bar{v}$ to the system and $r \in \R$, $\bar{u+v}$ and $r\bar{u}$ are also solutions.
+
+\it Consider the system of linear equations:  
+\begin{align*}
+x_1 + x_2 + x_3 + x_4 &= 3 \\
+x_1 - x_2 + x_3 + x_4 &= 5 \\
+      x_2 - x_3 - x_4 &= -4 \\
+x_1 + x_2 - x_3 - x_4 &= -3.
+\end{align*}
+\be
+\it Express the system as a matrix equation.
+\it Use matrix multiplication to determine whether or not $\bar{u} = \begin{bmatrix} 1 \\ -1 \\ 1 \\ 2 \end{bmatrix}$ and $\bar{v} = \begin{bmatrix} -1 \\ 2 \\ 0 \\ 3 \end{bmatrix}$ are solutions to the system.
+\ee
+
+\it Determine whether or not each of the following matrices is invertible. If so, find its inverse. 
+\btt
+(a) $A = \begin{bmatrix} 1 & -2 & 0 & -1 \\ 2 & 3 & 3 & 8 \\ 4 & -6 & -3 & -5 \\ 7 & -5 & 0 & 2 \end{bmatrix}$ \>
+(b) $B = \begin{bmatrix} 2 & 1 & -1 \\ 2 & -1 & 2 \\ 1 & 1 & -1 \end{bmatrix}$ \\[.1in]
+(c) $C = \begin{bmatrix} 4 & 3 \\ 2 & 3 \end{bmatrix}$ \>
+(d) $D^T D$ where $D = \begin{bmatrix} -1 & 0 & 1 \\ 0 & 2 & 1 \end{bmatrix}$
+\etb
+
+\it Solve the systems of linear equations using the inverse of the coefficient matrix. \\
+\begin{minipage}[t]{2in}
+(a) \begin{align*}
+2x + y - z &= 2 \\
+2x - y + 2z &= -1 \\
+x + y - z &= 3
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{2in}
+(b) \begin{alignat*}{5}
+x_1 &&+ 2x_2 &&+ x_3 &&   &= 2 \\
+    &&  x_2 &&- x_3 &&+ x_4 &= -2 \\
+2x_1 &&+ 4x_2 &&+ 3x_3 &&    &= 0 \\
+x_1 &&+ 2x_2 &&- x_3 &&+ 2x_4 & = -4 
+\end{alignat*}
+\end{minipage}
+
+\it Provide a counter-example to the statement: For any $n \times n$ invertible matrices $A$ and $B$, $A + B$ is invertible.
+
+\it Find an example of a $2 \times 2$ nonidentity matrix whose inverse is its transpose.
+
+\it Using the matrices in Problem \#1, compute each of the following, if possible.
+	\bttt
+	(a) $3A - 2E^T$ \> (b) $A^T B$ \> (c) $D^T (F + G^T)$ \\
+	(d) $3A^T - 2E$ \> (e) $C C^T + FG$ \> (f) $(F^T + G)D$
+	\etb
+
+\it Let $A$ be an $n \times n$ invertible matrix.
+	\be
+	\it Prove that for all $m \in \N$, $A^m$ is invertible and determine a formula for its inverse in terms of $A^{-1}$. Hint: Use induction and the fact that
+		$A^{n+1} = A^n A$.
+	\it Prove that $A^T$ is invertible and determine its inverse in terms of $A^{-1}$. Hint: Use Proposition 3.
+	\ee
+
+\it Determine $(B^T)^{-1}$ for the matrix $B$ in Problem \#10.
+
+\it We say that an $n \times n$ matrix $A$ is \ul{symmetric} provided $A^T = A$; we say that $A$ is \ul{skew-symmetric} provided $A^T = -A$. 
+	\be
+	\it Give examples of symmetric and skew-symmetric $2 \times 2$, $3 \times 3$, and $4 \times 4$ matrices.
+	\it What can you say about the main diagonal of a skew-symmetric matrix?
+	\it Prove that for any $n \times n$ matrix $A$, $A + A^T$, $AA^T$, and $A^T A$ are symmetric and $A - A^T$ is skew-symmetric.
+	\it Prove that any $n \times n$ can be written as the sum of a symmetric and skew-symmetric matrices. Hint: Did you do part (c) yet?
+	\ee
+
+
+\ee
+
+
+
+\end{document}
