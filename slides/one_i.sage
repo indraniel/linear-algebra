@@ -42,13 +42,13 @@ print s
 
 
 print "==== Parametrizing ===="
-print ".. inf many solutions (second), parametrized .."
-M = matrix(QQ,[[-1,-1,3,3], [1,0,1,3], [3,-1,7,15]])
-gauss_method(M,rescale_leading_entry=False)
+print ".. three eqns, four vars, parametrized .."
+M = matrix(QQ,[[2,0,1,-1,5], [0,-1,1,4,6], ])
+# gauss_method(M,rescale_leading_entry=False)
 # print M.echelon_form()
-var('x,y,z')
-eqn = [-x-y+3*z==3, x+z==3, 3*x-y+7*z==15]
-s = solve(eqn, x,y,z); 
+var('x,y,z,w')
+eqn = [2*x+z-1*w==5, -1*y+z+4*w==6]
+s = solve(eqn, x,y,z,w); 
 print s
 
 print ".. three eqns, four vars, parametrized .."
@@ -58,6 +58,15 @@ gauss_method(M,rescale_leading_entry=False)
 var('x,y,z,w')
 eqn = [x-y+2*z+3*w==14, 2*x-2*y-z+2*w==6, -3*z+2*w==0]
 s = solve(eqn, x,y,z,w); 
+print s
+
+print ".. inf many solutions (second), parametrized .."
+M = matrix(QQ,[[-1,-1,3,3], [1,0,1,3], [3,-1,7,15]])
+gauss_method(M,rescale_leading_entry=False)
+# print M.echelon_form()
+var('x,y,z')
+eqn = [-x-y+3*z==3, x+z==3, 3*x-y+7*z==15]
+s = solve(eqn, x,y,z); 
 print s
 
 print ".. two eqs, four vars, already echelon form .."
