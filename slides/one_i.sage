@@ -93,3 +93,17 @@ eqn = [x+2*y-z==2, 2*x-y-2*z+w==5]
 s = solve(eqn, x,y); 
 print s
 
+
+# ========================  for youtube #2
+M = matrix(QQ,[[-1,-1,3,3], [1,0,1,3], [2,1,1,6]])
+gauss_method(M,rescale_leading_entry=False)
+
+M = matrix(QQ,[[-1,-1,3,3], [1,0,1,3], [2,1,1,6], [3,0,3,9]])
+gauss_method(M,rescale_leading_entry=False)
+
+M = matrix(QQ,[[-1,-1,3,3], [1,0,1,3], [2,1,1,6], [3,0,3,104]])
+gauss_method(M,rescale_leading_entry=False)
+
+M = matrix(QQ,[[-1,-1,3,3], [1,0,1,3], [2,1,1,6]])
+gauss_method(M,rescale_leading_entry=False)
+

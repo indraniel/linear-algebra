@@ -66,13 +66,13 @@ Start as usual with elimination operations to get echelon form.
   &\grstep[-1\rho_1+\rho_3]{-2\rho_1+\rho_2}
   &\begin{linsys}{3}
     x  &+  &y  &-  &z  &=  &2   \\
-       &-  &3y &   &2z &=  &-5  \\
+       &-  &3y &+  &2z &=  &-5  \\
        &-  &3y &+  &3z &=  &-3 
   \end{linsys}                         \\[1ex]
   &\grstep{-1\rho_2+\rho_3}
   &\begin{linsys}{3}
     x  &+  &y  &-  &z  &=  &2   \\
-       &-  &3y &   &2z &=  &-5  \\
+       &-  &3y &+  &2z &=  &-5  \\
        &   &   &   &z  &=  &2 
   \end{linsys}
 \end{eqnarray*}
@@ -181,7 +181,7 @@ Now eliminate upwards.
     0  &0   &1    &1/5   &-1/5  
   \end{amat}                         
 \end{equation*}
-directly gives the parametrized description of the solution set.
+gives the parametrized description of the solution set.
 \begin{equation*}
   \set{\colvec{9/5 \\ -1/5 \\ -1/5 \\ 0} 
        +\colvec{4/5  \\ -6/5 \\ -1/5 \\ 1}w
@@ -228,16 +228,54 @@ directly gives the parametrized description of the solution set.
 \lm[lm:ReducesToIsEqRel]
 \ExecuteMetaData[../gr3.tex]{lm:ReducesToIsEqRel}
 
-\pause
-\pf
-\ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel0}
+\iftoggle{showallproofs}{
+  \pf
+  \ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel0}
 
-\pause
-\ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel1}
+  \pause
+  \ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel1}
 
-\pause
-\ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel2}
-\qed
+  \pause
+  \ExecuteMetaData[../gr3.tex]{pf:ReducesToIsEqRel2}
+  \qed}{%
+  The book has the full proof.  
+  For the basic idea, consider
+  this Gauss's Method application.
+  \begin{equation*}
+      \begin{mat}[r]
+        1  &2  &-1  \\
+        2  &4  &-5   
+      \end{mat}
+    \grstep{-2\rho_1+\rho_2}
+    \begin{mat}[r]
+        1  &2  &-1  \\
+        0  &0  &-3    
+      \end{mat}
+  \end{equation*}
+  While our initial experience applying Gauss's Method leads
+  us to feel that the second matrix in some way ``comes after'' the first, 
+  in fact the two are inter-reducible.
+  Here are some other $\nbym{2}{3}$ matrices
+  that are inter-reducible with those two.
+  \begin{equation*}
+    \begin{mat}[r]
+        1  &2  &-1  \\
+        0  &0  &1    
+      \end{mat}  
+    \quad  
+    \begin{mat}[r]
+        2  &4  &-2  \\
+        2  &4  &-1    
+      \end{mat}
+    \quad    
+    \begin{mat}[r]
+        1  &2  &-1  \\
+        3  &6  &-6    
+      \end{mat}    
+  \end{equation*} 
+  In general, the collection of all matrices breaks into
+  classes of inter-reducible matrices.
+}
 \end{frame}
 
 
@@ -281,8 +319,8 @@ directly gives the parametrized description of the solution set.
     0  &1  &1  
   \end{amat}
 \end{multline*}
-Denote the matrices as $A\rightarrow D\rightarrow G\rightarrow B$
-The steps take us through these combinations.
+Denote the matrices as $A\rightarrow D\rightarrow G\rightarrow B$.
+The steps take us through these row combinations.
 \begin{eqnarray*}
   \left(\begin{array}{l}
     \alpha_1 \\
@@ -296,12 +334,12 @@ The steps take us through these combinations.
   &\grstep{-(1/2)\rho_2}
   &\left(\begin{array}{l}
     \gamma_1=\alpha_1  \\ 
-    \gamma_2=-1\alpha_1+(1/2)\alpha_2
+    \gamma_2=\alpha_1-(1/2)\alpha_2
   \end{array}\right)                                 \\
   &\grstep{-3\rho_2+\rho_1}
   &\left(\begin{array}{l}
-    \beta_1= 4\alpha_1-(3/2)\alpha_2  \\
-    \beta_2=-1\alpha_1+(1/2)\alpha_2
+    \beta_1= -2\alpha_1+(3/2)\alpha_2  \\
+    \beta_2=\alpha_1-(1/2)\alpha_2
   \end{array}\right)                      
 \end{eqnarray*}
 \pause

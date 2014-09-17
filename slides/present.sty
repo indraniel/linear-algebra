@@ -186,3 +186,30 @@
 % From http://tex.stackexchange.com/questions/7219/how-to-vertically-center-two-images
 % \newcommand*{\vcenteredhbox}[1]{\begingroup
 % \setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
+
+
+% ======= showallproofs ===================================
+% Show all proofs?
+%   In some cases an instructor may prefer to give some illustration of 
+% a proof than to show the entire argument.  Here is a toggle that 
+% allows us to prepare the slides for that.
+% You can say \toggletrue{showallproofs} or \togglefalse{..}
+% or \iftoggle{..}{if true}{if flase} and \nottoggle{..}{if not true}{if true}  
+
+\usepackage{etoolbox}
+\newtoggle{showallproofs}  % default is false
+  % uncomment one if you want to alter the default
+  % \toggletrue{showallproofs}
+  \togglefalse{showallproofs}
+
+% This allows you to change what happens from the command line.
+% Do like this to get away from your default.
+%   pdflatex "\def\includeallproofs{1} \input{one_i}"
+\ifdefined\includeallproofs
+  \toggletrue{showallproofs}
+\fi
+\ifdefined\omitsomeproofs
+  \togglefalse{showallproofs}
+\fi
+
+

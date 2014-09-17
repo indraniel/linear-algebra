@@ -280,7 +280,7 @@ Another system with infinitely many solutions.
          x   &   &   &+  &z   &=  &3  \\
         3x   &-  &y  &+  &7z  &=  &15   
   \end{linsys} 
-  &\grstep[3\rho_1+\rho_3]{-\rho_1+\rho_2}   
+  &\grstep[3\rho_1+\rho_3]{\rho_1+\rho_2}   
   &\begin{linsys}{3}
         -x   &-  &y   &+  &3z  &=  &3  \\
              &   &-y  &+  &4z  &=  &6  \\
@@ -353,7 +353,7 @@ This system is already in echelon form.
 \begin{equation*}
   \begin{linsys}{4}
     2x  &+   &y     &+  &z   &-   &w  &= &5  \\
-        &   &-y   &   &z   &+   &4w &= &6 
+        &   &-y   &+   &z   &+   &4w &= &6 
   \end{linsys} 
 \end{equation*}
 The leading variables are $x$ and $y$ so we will 
@@ -366,19 +366,24 @@ so $x=(11/2)-z-(3/2)w$.
 
 \pause
 \ex
-This system is also already in echelon form.
+This is also already in echelon form.
 \begin{equation*}
   \begin{linsys}{4}
    -2x  &+  &y  &-  &z   &+   &w  &= &3/2  \\
         &   &   &   &2z  &-   &w  &= &1/2 
   \end{linsys} 
 \end{equation*}
-Here the free variables are $y$ and~$w$, so we 
-parametrize the solution set with those.
-\pause
+We parametrize with $y$ and~$w$.
 The second row gives $z=1/4+(1/2)w$.
-Substituting back into the first row and solving for $x$ leaves
+Substituting back into the first row leaves
 $x=-(7/8)+(1/2)y+(1/4)w$.
+\pause
+\begin{align*}
+  x &= -(7/8)+(1/2)y+(1/4)w  \\
+  y &= y   \\
+  z &= 1/4+(1/2)w   \\
+  w &= w
+\end{align*}
 \end{frame}
 
 
@@ -414,6 +419,12 @@ The bottom row gives $w=3$ and substituting that into the next
 row up gives $z=2$.
 The top equation is $x-y+2\cdot 2+3\cdot 3=14$ so 
 we have $x=1-y$.
+\begin{align*}
+  x &= 1-y  \\
+  y &= y   \\
+  z &= 2   \\
+  w &= 3
+\end{align*}
 \end{frame}
 
 
@@ -522,8 +533,12 @@ $-3x+2z=-1$ and $-2y+(8/3)z=-2$.
 \begin{frame}
 Parametrizing
 $-3x+2z=-1$ and $-2y+(8/3)z=-2$
-gives 
-$y=1+(4/3)z$ and $x=(1/3)+(2/3)z$.
+gives this.
+\begin{align*}
+  x &= (1/3)+(2/3)z  \\
+  y &= 1+(4/3)z   \\
+  z &= z
+\end{align*}
 
 \pause
 We can write the solution set in vector notation.
@@ -615,7 +630,8 @@ system.
 \ExecuteMetaData[../gr1.tex]{df:HomogeneousEquation}
 
 \ex
-Consider the system of homogeneous equations derived from the above system
+From the above system we get this associated system
+of homogeneous equations 
 by changing the constants to $0$'s.
 \begin{equation*}
   \begin{linsys}{4}
@@ -653,7 +669,8 @@ zero vector.
 \lm[le:HomoSltnSpanVecs]
 \ExecuteMetaData[../gr1.tex]{le:HomoSltnSpanVecs}
 \ex
-Consider this system of homogeneous equations.
+\iftoggle{showallproofs}{Before the proof,}{The book has the full proof.  For the key idea}
+          consider this system of homogeneous equations.
 \begin{equation*}
   \begin{linsys}{5}
      x  &+  &y   &+  &z  &+  &w  &=  &0  \\
@@ -679,21 +696,19 @@ with $z$ and~$w$.
 \end{frame}
 
 
+  % ..........
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \pf[le:HomoSltnSpanVecs]
+  \ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs0}
 
-% ..........
-\begin{frame}
-\pf[le:HomoSltnSpanVecs]
-\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs0}
-
-\pause
-\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs1}
-\pause
-\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs2}
-\end{frame}\begin{frame}
-\ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs3}\qed
-\end{frame}
-
-
+  \pause
+  \ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs1}
+  \pause
+  \ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs2}
+  \end{frame}\begin{frame}
+  \ExecuteMetaData[../gr1.tex]{pf:HomoSltnSpanVecs3}\qed
+  \end{frame}}{}
 
 % ..........
 \begin{frame}
