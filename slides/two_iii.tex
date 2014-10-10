@@ -191,7 +191,8 @@ Checking that $\stdbasis_n$ is a basis for $\Re^n$ is routine.
 
 %..........
 \begin{frame}
-Although a basis is defined as a sequence, common practice is to be sloppy 
+Although a basis is a sequence we will follow the  
+common practice 
 and refer to it as a set.
 
 \th[th:BasisIffUniqueRepWRT]
@@ -375,6 +376,56 @@ Both have four elements.
 
 %..........
 \begin{frame}{Exchange Lemma}
+\ex
+This is a basis for $\Re^3$.
+\begin{equation*}
+  B=\sequence{\colvec{1 \\ 1 \\ 0},
+              \colvec{1 \\ -1 \\0},
+              \colvec{0 \\ 0 \\ 1}}
+\end{equation*}
+Here are the representations of two vectors with respect to $B$.
+\begin{align*}
+  \vec{v}_1
+  &=\colvec{3 \\ 2 \\ 0}
+  =(5/2)\cdot\colvec{1 \\ 1 \\ 0}
+    +(1/2)\cdot\colvec{1 \\ -1 \\ 0}
+    +0\cdot\colvec{0 \\ 0 \\ 1}               \\
+  \vec{v}_2
+  &=\colvec{3 \\ 0 \\ 2}
+  =(3/2)\cdot\colvec{1 \\ 1 \\ 0}
+    +(3/2)\cdot\colvec{1 \\ -1 \\ 0}
+    +2\cdot\colvec{0 \\ 0 \\ 1}              
+\end{align*}
+For the first line, the coefficient of the third vector is $0$
+so $\vec{v}_1$ has no part in the direction of the third vector.
+In the second line, the coefficient of the third vector is nonzero
+so $\vec{v}_2$ has some part in the direction of the third vector of $B$.
+\end{frame}
+\begin{frame}
+Consider what results when we exchange this third vector from $B$ for
+$\vec{v}_1$ and~$\vec{v}_2$.
+\begin{equation*}
+  B_1=\sequence{\colvec{1 \\ 1 \\ 0},
+                \colvec{1 \\ -1 \\0},
+                \colvec{3 \\ 2 \\ 0}}
+  \qquad
+  B_2=\sequence{\colvec{1 \\ 1 \\ 0},
+                \colvec{1 \\ -1 \\0},
+                \colvec{3 \\ 0 \\ 2}}
+\end{equation*}
+\pause
+Because $\vec{v}_1$ does not involve the third element of~$B$\Dash
+that is, because in the reprresentation the coefficient of the 
+thrid vector is $0$\Dash
+the set~$B_1$ is linearly dependent.
+But the second set $B_2$ is linearly independent
+because in the representation of $\vec{v}_2$ 
+the coefficient of the third vector of~$B$ is not zero,
+so $\vec{v}_2$ is not redundant on the other two members of $B_2$.
+% See Lemma~II.\ref{lm:AddVecLiSetIsLiIffVecNotInSpan}.
+\end{frame}
+
+\begin{frame}
 \lm[lm:ExchangeLemma]
 \ExecuteMetaData[../vs3.tex]{lm:ExchangeLemma}
 
@@ -394,17 +445,47 @@ Both have four elements.
 \th[th:AllBasesSameSize]
 \ExecuteMetaData[../vs3.tex]{th:AllBasesSameSize}
 
+\ex
+The idea of the proof is that, given two bases, exchange
+members of the second for members of the first, which shows that they
+have the same number of elements.
+For an illustration, these are bases for $\polyspace_2$.
+\begin{equation*}
+  B=\sequence{1+x+x^2,1+x,1}
+  \qquad
+  D=\sequence{2,2x,2x^2}
+\end{equation*}
 \pause
+For the first element of~$D$,
+represent it with respect to~$B$, look for a nonzero coefficient, and exchange.
+\begin{equation*}
+  2=0\cdot(1+x+x^2)+0\cdot(1+x)+2\cdot(1)
+  \quad B_1=\sequence{1+x+x^2,1+x,2}
+\end{equation*}
+\pause
+Iterate (only exchanging for elements of $B$).
+\begin{equation*}
+  2x=0\cdot(1+x+x^2)+2\cdot(1+x)-1\cdot(2)
+  \quad B_2=\sequence{1+x+x^2,2x,2}
+\end{equation*}
+The third exchange finishes it off.
+\begin{equation*}
+  2x^2=2\cdot(1+x+x^2)-1\cdot(2x)-1\cdot(2)
+  \quad B_3=D
+\end{equation*}
+\end{frame}
+
+\begin{frame}
 \pf
 \ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize0}
 
 \pause
 \ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize1}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize2}
 
 \pause
+\ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize2}
+\end{frame}
+\begin{frame}
 \ExecuteMetaData[../vs3.tex]{pf:AllBasesSameSize3}
 \qed
 \end{frame}
@@ -430,7 +511,7 @@ More generally, $\polyspace_n$ has dimension~$n+1$.
 
 \pause
 \ex
-The vector space $\matspace_{\nbym{n}{m}}$ has dimension $nm$.
+The vector space $\matspace_{\nbym{n}{m}}$ has dimension $n\cdot m$.
 A natural basis consists of matrices with a single~$1$ and the other
 entries~$0$'s.
 \end{frame}
@@ -493,26 +574,23 @@ So $S$ is a vector space of dimension two.
 \re
 This is an example of a result that assumes the vector spaces are
 finite-dimensional without specifically saying so.
-
-\pause
-\medskip
-\co[cor:LIExpBas]
-\ExecuteMetaData[../vs3.tex]{co:LIExpBas}
-
-\pause
-\pf
-\ExecuteMetaData[../vs3.tex]{pf:LIExpBas}
-\qed
 \end{frame}
 
 
 
 %..........
 \begin{frame}
+\co[cor:LIExpBas]
+\ExecuteMetaData[../vs3.tex]{co:LIExpBas}
+
+\pf
+\ExecuteMetaData[../vs3.tex]{pf:LIExpBas}
+\qed
+
+\pause
 \co[co:SpanningSetShrinksToABasis]
 \ExecuteMetaData[../vs3.tex]{co:SpanningSetShrinksToABasis}
 
-\pause
 \pf
 \ExecuteMetaData[../vs3.tex]{pf:SpanningSetShrinksToABasis}
 \qed
@@ -529,6 +607,17 @@ finite-dimensional without specifically saying so.
 \pf
 \ExecuteMetaData[../vs3.tex]{pf:NVecsRNSpanIffLI}
 \qed
+
+\pause
+\ex
+This clearly spans the space.
+\begin{equation*}
+  \sequence{\colvec{1 \\ 1 \\ 1},
+            \colvec{1 \\ 1 \\ 0},
+            \colvec{1 \\ 0 \\ 0}}\subseteq\Re^3
+\end{equation*}
+Because it has same number of elements as the dimension of the space,
+it is therefore a basis.
 \end{frame}
 
 

@@ -16,13 +16,15 @@ pen THINPEN=linecap(0)
 pen DASHPEN=linecap(0)
              +linewidth(0.4pt)
              +linetype(new real[] {8,8});
-pen FCNPEN=linecap(0)
+pen CURVEPEN=linecap(0)
              +gray(0.3)
-             +linewidth(1.5pt)
+             +linewidth(1.5pt);
+pen FCNPEN=CURVEPEN
              +opacity(.5,"Normal");
 pen AXISPEN=linecap(0)
              +gray(0.3)
              +linewidth(0.4pt)
+             +fontsize(9pt)
              +opacity(.5,"Normal");
 pen DXPEN=linecap(0)
              +red

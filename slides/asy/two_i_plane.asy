@@ -4,7 +4,9 @@ real height; height=3cm; size(0,height);
 import settings;
 settings.render=0;   // for png: -10;  // fewer jaggies but very slow
 settings.maxtile=(10,10);
-
+settings.outformat="pdf";
+settings.prc=false;
+  
 import three;
 import graph3;
 currentprojection=orthographic(camera=(20,4,3),target=(0,0,0));
@@ -38,26 +40,26 @@ surface s=surface(newpath);
 
 draw((0,0,0)--(0,-3.5,0),AXISPEN);
 draw((0,0,0)--(-8,0,0),AXISPEN);
-draw((0,0,0)--(0,0,-2),AXISPEN);
-// draw(s,lightgreen+opacity(0.05));
-draw(newpath,MAINPEN+linewidth(1)+white);
-draw(newpath,MAINPEN);
-draw((0,0,0)--(0,3.5,0),AXISPEN+linewidth(1)+white);
+draw((0,0,0)--(0,0,-1.8),AXISPEN);
+draw(newpath,MAINPEN+linewidth(1.6)+white);
+draw(newpath,MAINPEN+yellow);
+draw((0,0,0)--(0,3.5,0),AXISPEN+linewidth(1.6)+white);
+draw((0,0,0)--(8,0,0),AXISPEN+linewidth(1.6)+white);
+draw((0,0,0)--(0,0,1.8),AXISPEN+linewidth(1.6)+white);
+draw(s,MAINPEN+paleyellow+opacity(0.9));  // only works on adobe renderer?
 draw((0,0,0)--(0,3.5,0),AXISPEN);
-draw((0,0,0)--(8,0,0),AXISPEN+linewidth(1)+white);
 draw((0,0,0)--(8,0,0),AXISPEN);
-draw((0,0,0)--(0,0,2),AXISPEN+linewidth(1)+white);
-draw((0,0,0)--(0,0,2),AXISPEN);
+draw((0,0,0)--(0,0,1.8),AXISPEN);
 
 triple w1 = (1,1,-1);
 triple w2 = (-.5,1,0);
 triple w3 = w1+w2;
 
-draw((0,0,0)--w1,red+grey,Arrow3(DefaultHead2,.75*VECTORHEADSIZE,FillDraw));
-draw((0,0,0)--w2,red+grey,Arrow3(DefaultHead2,.75*VECTORHEADSIZE,FillDraw));
+draw((0,0,0)--w1,red,Arrow3(DefaultHead2,.75*VECTORHEADSIZE,FillDraw));
+draw((0,0,0)--w2,red,Arrow3(DefaultHead2,.75*VECTORHEADSIZE,FillDraw));
 draw((0,0,0)--(w1+w2),red,Arrow3(DefaultHead2,.75*VECTORHEADSIZE,FillDraw));
-draw(w1--(w1+w2),DASHPEN+red);
-draw(w2--(w1+w2),DASHPEN+red);
+draw(w1--(w1+w2),DASHPEN+red+white);
+draw(w2--(w1+w2),DASHPEN+red+white);
 
 // Draw
 // draw(surface(parallelogram),rgb("fff0ca"));

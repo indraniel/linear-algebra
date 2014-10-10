@@ -122,6 +122,55 @@
 \newcommand{\prewordspace}{.15em}
 \newcommand{\postwordspace}{0.15em plus.1em minus.1em}
 
+% I can't get wrapping to work.  This simulates it.  It puts the graphic on 
+% the left and text on the right.
+%   \begin{graphicbytext}{.2}{momma.jpg}
+%      To me she was so wonderful.
+%   \end{graphicbytext}
+
+% #1  number between 0 and 1; sets width as a factor of \textwidth
+% #2  string;  location of graphic
+% body  string;  text associated with graphic 
+\usepackage[export]{adjustbox}
+\usepackage{calc}
+\newlength{\jhpresentscalar}  % what frac of textwidth to make cols?
+  \newlength{\jhpresentscalari} 
+  \newlength{\jhpresentvert}  % vert space before graphic
+\newsavebox{\jhpresentgraphic} % picture (can't use #3 in second half of a
+                               % newenvironment defn)
+\newenvironment{graphicbytext}[3][0ex]{%
+  \setlength{\jhpresentscalar}{#2\textwidth}
+  \setlength{\jhpresentvert}{#1}
+  \savebox{\jhpresentgraphic}{\includegraphics[width=\jhpresentscalar,valign=t]{#3}}
+  \begin{columns}
+    \begin{column}{\jhpresentscalar}
+      \vspace*{\jhpresentvert}
+      \usebox{\jhpresentgraphic}
+    \end{column}
+    \setlength{\jhpresentscalari}{\textwidth-\jhpresentscalar}  % (1-#1)*\textwidth
+    \begin{column}{\jhpresentscalari}
+}{%
+    \end{column}
+  \end{columns}\smallskip
+}
+% Put the graphic on the right
+\newenvironment{graphicbytextright}[3][0ex]{%
+  \setlength{\jhpresentscalar}{#2\textwidth}
+  \setlength{\jhpresentvert}{#1}
+  \savebox{\jhpresentgraphic}{\includegraphics[width=\jhpresentscalar,valign=t]{#3}}
+  \begin{columns}
+    \setlength{\jhpresentscalari}{\textwidth-\jhpresentscalar}  % (1-#1)*\textwidth
+    \begin{column}{\jhpresentscalari}
+}{%
+    \end{column}
+    \begin{column}{\jhpresentscalar}
+      \vspace*{\jhpresentvert}
+      \usebox{\jhpresentgraphic}
+    \end{column}
+  \end{columns}\smallskip
+}
+
+
 % Text headers: Example, Definition, etc.
 % Each comes with an optional argument into which you can put a 
 % string that is a \label{..} from the book. For instance: \th[th:GaussMethod].

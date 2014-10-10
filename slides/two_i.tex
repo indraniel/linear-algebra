@@ -78,27 +78,27 @@ and all \definend{scalars}
 \item the set $V$ is \definend{closed} under
   vector addition, that is, 
   \( \vec{v}+\vec{w}\in V \)
-\pause\item vector addition is commutative,
+\item vector addition is commutative
   \( \vec{v}+\vec{w}=\vec{w}+\vec{v} \) 
-\pause\item vector addition is associative,
+\item vector addition is associative
   \( (\vec{v}+\vec{w})+\vec{u}=\vec{v}+(\vec{w}+\vec{u}) \)
-\pause\item there is a \definend{zero vector}
+\item there is a \definend{zero vector}
     \( \zero\in V \) such that
     \( \vec{v}+\zero=\vec{v}\, \) for all \( \vec{v}\in V\/ \)
-\pause\item each \( \vec{v}\in V \) has an
+\item each \( \vec{v}\in V \) has an
     \definend{additive inverse}
     \( \vec{w}\in V \) such that \( \vec{w}+\vec{v}=\zero \)
 \pause\item  the set $V$ is closed under
     scalar multiplication, that is, 
    \( r\cdot\vec{v}\in V \)
-\pause\item addition of scalars distributes over scalar multiplication,
+\item addition of scalars distributes over scalar multiplication
  \( (r+s)\cdot\vec{v}=r\cdot\vec{v}+s\cdot\vec{v} \)
-\pause\item scalar multiplication distributes over vector addition,
+\item scalar multiplication distributes over vector addition
   \( r\cdot(\vec{v}+\vec{w})=r\cdot\vec{v}+r\cdot\vec{w} \)
-\pause\item ordinary multipication of scalars associates with 
-  scalar multiplication, \( (rs)\cdot\vec{v} =r\cdot(s\cdot\vec{v}) \)
-\pause\item multiplication by the scalar~$1$ is the 
-  identity operation, \( 1\cdot\vec{v}=\vec{v} \).
+\item ordinary multipication of scalars associates with 
+  scalar multiplication \( (rs)\cdot\vec{v} =r\cdot(s\cdot\vec{v}) \)
+\item multiplication by the scalar~$1$ is the 
+  identity operation \( 1\cdot\vec{v}=\vec{v} \).
 \end{enumerate}
 \end{frame}
 
@@ -112,7 +112,7 @@ consisting of all multiples of $\rowvec{1 &2}$.
 \begin{equation*}
   V=\set{\rowvec{a  &2a}\suchthat a\in\Re}
 \end{equation*}
-Some members of $V$ are $\rowvec{4 &6}$, $\rowvec{1/2 &1}$,
+Some members of $V$ are $\rowvec{4 &8}$, $\rowvec{1/2 &1}$,
 $\rowvec{-100 &-200}$, and $\rowvec{0 &0}$.
 
 \pause
@@ -376,7 +376,8 @@ This plane through the origin subset of $\Re^3$
   P=\set{\colvec{x \\ y \\ z} \suchthat 2x+y+3z=0}  
 \end{equation*}
 is a vector space.
-We will verify conditions~(1) and~(6).
+We will verify conditions~(1) and~(6)
+(the others are exactly as in the prior example).
 
 \pause
 For (1) suppose that these are members of the plane
@@ -428,7 +429,8 @@ and scalar multiplication.
 r\cdot (a_0+a_1x+a_2x^2)=(ra_0)+(ra_1)x+(ra_2)x^2
 \end{equation*}
 
-In particular, note that this space is closed: 
+We won't here check all the conditions but
+in particular note that this space is closed: 
 a linear combination of quadratic polynomials 
 is a quadratic polynomial.
 For instance, here is a sample combination in $\polyspace_2$:
@@ -453,8 +455,9 @@ The set of $\nbyn{3}$ matrices
                          \suchthat a_{i,j}\in\Re}
 \end{equation*}
 is a vector space under the usual matrix addition and scalar multiplication.
+The check of the ten conditions is straightforward.
 
-Here is a sample combination.
+Here is a sample linear combination.
 \begin{equation*}
   \begin{mat}
     1 &0 &1 \\
@@ -582,8 +585,9 @@ $T$.
   +\colvec{0 \\ 1 \\ 0}
   =\colvec{1 \\ 1 \\ 0}
 \end{equation*}
-(Another reason that it is not a vector space is that it does not contain 
-the zero vector.)
+(Another reason that it is not a vector space is that it does not satisfy
+condition~(6).
+Still another is that it does not contain the zero vector.)
 \end{frame}
 
 
@@ -595,14 +599,35 @@ the zero vector.)
 \ExecuteMetaData[../vs1.tex]{lm:SubspIffClosed}
 
 \pause\bigskip
-\ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed0}
-\end{frame}\begin{frame}
-\pf[th:SubspIffClosed]
-\ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed1}
+\iftoggle{showallproofs}{
+  \ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed0}
+  \end{frame}\begin{frame}
+  \pf[th:SubspIffClosed]
+  \ExecuteMetaData[../vs1.tex]{pf:SubspIffClosed1}
 
-\pause
-The conditions for scalar multiplication are similar.
-\qed
+  \pause
+  The conditions for scalar multiplication are similar.
+  \qed
+}{
+  The book has the full proof.
+  Its idea is that if $V$ is a vector space with a subset $S$
+  then many of the ten properties required for $S$ to be a 
+  vector space are automatic.
+  For instance, suppose that 
+  $\vec{s}_1,\vec{s}_2\in S$ and consider commutativity 
+  of addition: does $\vec{s}_1+\vec{s}_2$ equal $\vec{s}_2+\vec{s}_1$? 
+  \pause
+  Because the $+$ operation is inherited from $V$ and
+  as sums of elements of~$V$ the two are equal
+  $\vec{s}_1+\vec{s}_2=\vec{s}_2+\vec{s}_1$, 
+  then provided $S$ is closed the two are equal in~$S$.
+
+  \pause
+  Many of the other nine conditions are also automatic.
+  The only ones that need to be checked are the closure conditions.
+  Both statements~(2) and~(3) above just combine the two closure conditions
+  into a single one, to make the subspace verification faster.
+}
 \end{frame}
 
 
@@ -666,7 +691,7 @@ $2x-y+z=0$ using the free variables $y$ and~$z$.
    =\set{\colvec{1/2 \\ 1 \\ 0}y+\colvec{-1/2 \\ 0 \\ 1 }z\suchthat y,z\in\Re}  
 \end{equation*}
 \pause
-Now members of $P$ are described as a linear combination of those two vectors.
+Now we've described each member of $P$ as a linear combination of those two.
 Verifying that $P$ is closed then involves taking a linear combination of 
 linear combinations, which gives a linear combination.
 \end{frame}
@@ -705,18 +730,20 @@ is this.
 \ex
 This is a subset of $\Re^3$.
 \begin{equation*}
-  S=\set{\colvec{1 \\ -1 \\ 0},
+  \hat{S}=\set{\colvec{1 \\ -1 \\ 0},
          \colvec{1 \\ 1 \\ 0}}
 \end{equation*}
 Any vector in the $xy$-plane is a member of the span $\spanof{S}$ because 
 any such vector is a combination of the two;
-for instance, this system has a solution.
+for instance, this system has a solution
 \begin{equation*}
   \colvec{3 \\ 2 \\ 0}=\colvec{1 \\ -1 \\ 0}c_1
                        +\colvec{1 \\ 1 \\ 0}c_2
 \end{equation*}
+(the top two rows gives a linear system with a unique solution).
 \pause
-But vectors not in the $xy$-plane are not in the span; for instance,
+But vectors not in the $xy$-plane are not in the span. 
+For instance,
 this system does not have a solution.
 \begin{equation*}
   \colvec{-1 \\ -2 \\ -3}=\colvec{1 \\ -1 \\ 0}c_1
@@ -737,7 +764,37 @@ this system does not have a solution.
 \ExecuteMetaData[../vs1.tex]{pf:SpanIsASubsp}
 \qed
 \end{frame}
-
+\begin{frame}
+\ex
+We can illustrate that a span is closed under linear combinations.
+Where 
+\begin{equation*}
+  \hat{S}=\set{\colvec{1 \\ -1 \\ 0},
+         \colvec{1 \\ 1 \\ 0}}\subset\Re^3
+\end{equation*}
+these are two elements of the span $\spanof{\hat{S}}$.
+\begin{equation*}
+  \vec{v}_1=5\cdot\colvec{1 \\ -1 \\ 0}
+   +3\cdot\colvec{1 \\ 1 \\ 0}
+  \qquad
+  \vec{v}_2=-2\cdot\colvec{1 \\ -1 \\ 0}
+    +10\cdot\colvec{1 \\ 1 \\ 0}
+\end{equation*}
+The linear combination $-3\vec{v}_1+7\vec{v_2}$
+makes another element of the span.
+\begin{equation*}
+  -3\cdot\big( 5\colvec{1 \\ -1 \\ 0}
+   +3\colvec{1 \\ 1 \\ 0}\big)
+  +7\cdot\big(-2\colvec{1 \\ -1 \\ 0}
+    +10\colvec{1 \\ 1 \\ 0}\big)
+  =
+  -29\cdot\colvec{1 \\ -1 \\ 0}
+    +61\colvec{1 \\ 1 \\ 0}
+\end{equation*}
+This is just an instance of
+the Linear Combination Lemma: a linear combination of 
+linear combinations is a linear combination. 
+\end{frame}
 
 
 %...........................

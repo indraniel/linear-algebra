@@ -76,6 +76,15 @@ Otherwise it is \definend{linearly dependent}.
 \pf
 \ExecuteMetaData[../vs2.tex]{pf:LDIffANonTrivLinRel}
 \qed
+
+\bigskip
+So to decide if a list of vectors 
+$\vec{s}_0, \ldots,\vec{s}_n$
+is linearly independent,
+set up the equation
+$\vec{0}=c_0\vec{s}_0+\cdots+c_n\vec{s}_n$,
+and calculate whether it has any solutions other than
+the trivial one where all coefficents are zero.
 \end{frame}
 
 
@@ -92,17 +101,17 @@ The only solution to this equation
 \begin{equation*}
   c_1\colvec{1 \\ 0}+c_2\colvec{0 \\ 1}=\colvec{0 \\ 0}
 \end{equation*}
-is the trivial solution $c_1=0$, $c_2=0$.
+is trivial $c_1=0$, $c_2=0$.
 \pause
 \ex In the vector space of cubic polynomials 
 $\polyspace_3=\set{a_0+a_1x+a_2x^2+a_3x^3\suchthat a_i\in\Re}$ the set
-$\set{1-x,1+x^2}$ is linearly independent.
+$\set{1-x,1+x}$ is linearly independent.
 The equation
-$c_0(1-x)+c_1(1+x^2)=0$ leads to this linear system
+$c_0(1-x)+c_1(1+x)=0$ leads to this linear system
 \begin{equation*}
   \begin{linsys}{2}
-    c_0 &- &c_1 &=  &0 \\
-    c_0 &+ &c_1 &=  &0
+    c_0 &+ &c_1 &=  &0 \\
+    c_0 &- &c_1 &=  &0 
   \end{linsys}
 \end{equation*}
 which has only the trivial solution.
@@ -134,7 +143,7 @@ This subset of $\Re^3$ is linearly dependent.
        \colvec[r]{-1 \\ 1 \\ 0},
        \colvec[r]{1  \\ 3 \\ 6}}
 \end{equation*}
-One way to check that is to spot that the third vector is twice the first plus 
+One way to see that is to spot that the third vector is twice the first plus 
 the second.
 Another way is to solve the linear system
 \begin{equation*}
@@ -144,7 +153,7 @@ Another way is to solve the linear system
     3c_1 &   &     &+  &6c_3   &=  &0
   \end{linsys}
 \end{equation*}
-and note that there are more solutions than just the trivial one.
+and note that it has more than just the trivial solution.
 \end{frame}
 
 
@@ -158,12 +167,38 @@ and note that there are more solutions than just the trivial one.
 \ExecuteMetaData[../vs2.tex]{lm:AddVecSpanNoGrowIffVecInSpan}
 
 \pause
-\pf
-\ExecuteMetaData[../vs2.tex]{pf:AddVecSpanNoGrowIffVecInSpan0}
-
-\pause
-\ExecuteMetaData[../vs2.tex]{pf:AddVecSpanNoGrowIffVecInSpan1}
-\qed
+\iftoggle{showallproofs}{
+  \pf
+  \ExecuteMetaData[../vs2.tex]{pf:AddVecSpanNoGrowIffVecInSpan0}
+  
+  \pause
+  \ExecuteMetaData[../vs2.tex]{pf:AddVecSpanNoGrowIffVecInSpan1}
+  \qed
+}{
+  \bigskip
+  The book has the proof; here is an illustration. 
+  The span of this set is the $xy$-plane.
+  \begin{equation*}
+    P=\set{\colvec{2 \\ 0 \\ 0},
+           \colvec{0 \\ 2 \\ 0}}\subset\Re^3
+  \end{equation*}
+  If we expand the set by adding a vector $\set{\vec{p}_1,\vec{p}_2,\vec{q}}$ 
+  then there are two possibilities. 
+  \begin{equation*}
+    P_0=\set{\colvec{2 \\ 0 \\ 0},
+                 \colvec{0 \\ 2 \\ 0},
+                 \colvec{3 \\ 2 \\ 0}}
+    \qquad
+    P_1=\set{\colvec{2 \\ 0 \\ 0},
+                 \colvec{0 \\ 2 \\ 0},
+                 \colvec{0 \\ 0 \\ -1}}
+  \end{equation*}
+  \pause
+  If the new vector is already in the starting span $\vec{q}\in\spanof{P}$
+  then the span is unchanged $\spanof{P_0}=\spanof{P}$.
+  But if the new vector is outside the starting span $\vec{q}\notin\spanof{P}$
+  then the span grows $\spanof{P_1}\supsetneq\spanof{P}$.
+}
 \end{frame}
 
 \begin{frame}
@@ -208,30 +243,36 @@ because in the first set $\vec{v}_3=2\vec{v}_2-\vec{v}_1$.
 \begin{frame}
 \ex 
 In $\polyspace_2$ consider the set $S=\set{1-x,1+x}$.
-The span $\spanof{S}$ is the subset of
+The span $\spanof{S}$ is the subset of all
 linear polynomials $\set{a+bx\suchthat a,b\in\Re}$.
-(The span is a subset of the linear polynomials because no member of
-$S$ has a quadratic term.
-To see that the span is all of the set of linear polynomials, consider 
-a linear polynomial $a+bx$ and use
-the equation $a+bx=r_1(1-x)+r_2(1+x)$ to get a linear system
-that solves as $r_2=(1/2)a+(1/2)b$ and 
+(To see that, consider 
+a relationship $a+bx=r_1(1-x)+r_2(1+x)$, which gives a linear system
+with equations
+$r_1+r_2=a$ and 
+$-r_1+r_2=b$, having
+the solution, for any $a$, $b$ of 
+$r_2=(1/2)a+(1/2)b$ and 
 $r_1=(1/2)a-(1/2)b$.)  
 
 \pause
-If we add a linear polynomial $S_1=S\union\set{2+2x}$
-then the span is unchanged $\spanof{S}=\spanof{S_1}$.
-This is because span of $S$ is all of the linear polynomials 
-and the new 
-member does not add any quadratic terms.
+Here are two supersets.
+\begin{equation*}
+  S_1=S\cup\set{2+2x}
+  \qquad
+  S_2=S\union\set{2+x^2}
+\end{equation*}
 
 \pause
-If we add a quadratic polynomial 
-$S_2=S\union\set{2+x^2}$ then we enlarge the span: 
-the span of $S_2$ is all of $\polyspace_2$.
-To see this, consider a quadratic $a+bx+cx^2$ and use  
+In case one adding a linear polynomial just adds ``repeat information''
+so $\spanof{S_1}=\spanof{S}$ and $S_1$ is linearly dependent.
+
+\pause
+Case two, with ``new information,'' enlarges the span 
+$\spanof{S_2}=\polyspace_2\supsetneq \spanof{S}$
+and the new set $S_2$ is linearly independent, just as is $S$.
+(To check this, use  
 $a+bx+cx^2=r_1(1-x)+r_2(1+x)+r_3(2+x^2)$ to get a linear system
-that has the solution $r_3=c$, $r_2=(1/2)a+(1/2)b$ and $r_1=(1/2)a-(1/2)b-c$.
+with solution $r_3=c$, $r_2=(1/2)a+(1/2)b$ and $r_1=(1/2)a-(1/2)b-c$.)
 \end{frame}
 
 
