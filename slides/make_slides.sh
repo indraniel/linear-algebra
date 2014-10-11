@@ -212,6 +212,7 @@ else
   beamer_files=("${one_files[@]}" "${two_files[@]}" "${three_files[@]}" "${four_files[@]}" "${five_files[@]}" )
 fi
 
+# ----  create .pdf files that may skip some proofs in favor of more examples
 cmd="pdflatex filename"  # will substitute for "filename"
 
 for i in ${beamer_files[@]}
@@ -221,6 +222,27 @@ do
    echo $result
    eval $result
 done
+
+# ------- create .pdf files that include all proofs
+# to see the expansions: set -xv
+cmd="pdflatex -jobname filename_allproofs \"\def\includeallproofs{1} \input{filename}\""  # will substitute for "filename"
+
+for i in ${beamer_files[@]}
+do
+   jn=${i%.tex}
+   result=${cmd//filename/$jn}
+   echo $jn
+   echo $result
+   eval $result
+done
+
+# create .zip files
+# Make .zip fo slides without all proofs
+rm slides.zip
+find . -iregex "./[^a].*_.*[^[_allproofs]\.pdf" -print | zip slides -@
+# Make .zip of slides with all proofs
+rm slides_allproofs.zip
+find . -iregex "./[^a].*_.*_allproofs\.pdf" -print | zip slides_allproofs -@
 
 echo " -- Done --"
 exit
