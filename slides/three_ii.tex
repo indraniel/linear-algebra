@@ -71,12 +71,10 @@ The function $\map{h}{\polyspace_2}{\Re^2}$ given by
   =
   \colvec{a+c \\ 0}
 \end{equation*}
-is a homomorphism (it is neither one-to-one nor onto).
-We will verify that it respects the addition and
-scalar multiplication operations.
-
+is a homomorphism. 
+(Note that it is neither one-to-one nor onto.)
 \pause
-Addition is routine.
+Showing that it respects addition is routine.
 \begin{gather*}
   h(\,(a_1+b_1x+c_1x^2)+(a_2+b_2x+c_2x^2)\,)      \\
   \begin{align*}
@@ -88,7 +86,7 @@ Addition is routine.
   \end{align*}
 \end{gather*}
 \pause
-So is scalar multiplication.
+So is showing that it respects scalar multiplication.
 \begin{equation*}
   r\cdot h(a+bx+cx^2)
   =r\cdot\colvec{a+c \\ 0}  
@@ -103,7 +101,7 @@ So is scalar multiplication.
 \begin{frame}
 \ex
 Of these two maps $\map{h,g}{\Re^2}{\Re}$,
-the first is linear while the second is not.
+the first is a homomorphism while the second is not.
 \begin{equation*}
   \colvec{x \\ y}\mapsunder{h} 2x-3y
   \qquad
@@ -142,7 +140,7 @@ In contrast, $g$ does not respect addition.
 
 %..........
 \begin{frame}
-We proved the following two in the context of studying isomorphisms.
+We proved these two while studying isomorphisms.
 
 \lm[le:HomoSendsZeroToZero]\hspace*{-1em}
 \ExecuteMetaData[../map2.tex]{lm:HomoSendsZeroToZero}
@@ -151,13 +149,14 @@ We proved the following two in the context of studying isomorphisms.
 \ExecuteMetaData[../map2.tex]{lm:HomoPreserveLinCombo}
 
 \medskip
-Clause~(2) is often convenient for verifying that a map is a homomorphism. 
+To verify that a map is a homomorphism the one that we use most often
+is statement~(2). 
 
 \pause
 \ex
 Between any two vector spaces the zero map $\map{Z}{V}{W}$ given by
-$Z(\vec{v})=\zero_W$ is a homomorphism.
-The check using~(2) is: 
+$Z(\vec{v})=\zero_W$ is a linear map.
+Using~(2): 
 $Z(c_1\vec{v}_1+c_2\vec{v}_2)=\zero_W
    =\zero_W+\zero_W=c_1Z(\vec{v}_1)+c_2Z(\vec{v}_2)$.
 \end{frame}
@@ -174,7 +173,6 @@ The \definend{inclusion map} $\map{\iota}{\Re^2}{\Re^3}$
   =\colvec{x \\ y \\ 0}
 \end{equation*}
 is a homomorphism.
-Here is the verification.
 \begin{align*}
   \iota(c_1\cdot\colvec{x_1 \\ y_1}+c_2\cdot\colvec{x_2 \\ y_2})
   &=\iota(\colvec{c_1x_1+c_2x_2 \\ c_1y_1+c_2y_2})       \\
@@ -200,7 +198,7 @@ Here are two examples of the action of this function: $1+2x\mapsto 2+2x$
 and $3-x\mapsto-1-x$. 
 
 \pause
-This function is linear.
+This is a linear map.
 \begin{multline*}
   h(\,c_1\cdot (a_1+b_1x)+c_2\cdot(a_2+b_2x)\,)                  \\
   \begin{aligned}
@@ -218,8 +216,12 @@ This function is linear.
 %..........
 \begin{frame}
 \ex
-The derivative map $\map{d/dx}{\polyspace_2}{\polyspace_1}$
-is given by $d/dx\,(ax^2+bx+c)=2ax+b$.
+The derivative
+is the usual transformation of polynomial space
+$\map{d/dx}{\polyspace_2}{\polyspace_1}$.
+\begin{equation*}
+  d/dx\,(ax^2+bx+c)=2ax+b
+\end{equation*}
 For instance, $d/dx\,(3x^2-2x+4)=6x-2$
 and $d/dx\,(x^2+1)=2x$.
 
@@ -341,11 +343,14 @@ and then extending linearly.
      +c\cdot\text{eval}_3(1)     \\
    &=9a+3b+c
 \end{align*}
-The action of this map on the basis elements is to plug the value~$3$ in for
-$x$. 
+For instance,
+$\text{eval}_3(x^2+2x+3)=9+6+3=18$.
+
+\pause
+On the basis elements, we can describe the action of this map as: 
+plugging the value~$3$ in for $x$. 
 That remains true when we extend linearly, so
 $\text{eval}_3(\,p(x)\,)=p(3)$.
-For instance, $\text{eval}_3(x^2+2x+3)=18$.
 \end{frame}
 
 
@@ -421,10 +426,15 @@ transformation.
 
 \ExecuteMetaData[../map2.tex]{SpLinFcns}
 
-\pause
-\pf\hspace*{-1em}
-\ExecuteMetaData[../map2.tex]{pf:SpLinFcns}
-\qed
+\iftoggle{showallproofs}{
+  \pause
+  \pf\hspace*{-1em}
+  \ExecuteMetaData[../map2.tex]{pf:SpLinFcns}
+  \qed
+}{
+  \bigskip
+  The book contains the lemma's proof.
+}
 \end{frame}
 \begin{frame}
 \ex
@@ -565,9 +575,9 @@ namely its range space $\rangespace{h}$.
 
 \pause
 Consider the effect of dropping the one-to-one condition.
-Now, for some vectors $\vec{w}\in W$
+With that restriction gone, for some vectors $\vec{w}\in W$
 in the range there may be many vectors $\vec{v}\in V$ mapped to $\vec{w}$.
-(Below, to avoid a confused picture there is only one `$\mapsto$' arrow for 
+(To avoid a confused picture, below there is only one `$\mapsto$' arrow for 
 many domain elements.) 
 \centergraphic{../ch3.5}
 \ExecuteMetaData[../map2.tex]{InverseImage}
@@ -682,7 +692,7 @@ In each of those examples, because there is a homomorphism
 $\map{h}{V}{W}$ we can view the domain $V$ as organized into the 
 inverse images $h^{-1}(\vec{w})$ for each $\vec{w}\in\rangespace{h}$.
 
-It is ``organized'' because these inverse image sets 
+We say ``organized'' because these inverse image sets 
 reflect the structure of the range
 in that a ``$\vec{w}_1$~vector'' plus a ``$\vec{w}_2$~vector'' 
 equals a ``$\vec{w}_1+\vec{w}_2$~vector.''
@@ -870,7 +880,7 @@ has this range space
 \end{equation*}
 (any $cx+d\in\polyspace_{1}$ is the image of $ax^2+bx+c$ where
 $a=c/2$, $b=d$, and $c$  can be any real)
-and this null space (calculated earlier).
+and this null space.
 \begin{equation*}
   \nullspace{d/dx}=\set{c \suchthat c\in\Re}
 \end{equation*}
@@ -989,21 +999,27 @@ The set $\set{1,0,2}$ is linearly dependent in $\Re$.
 \th[th:OOHomoEquivalence]
 \ExecuteMetaData[../map2.tex]{th:OOHomoEquivalence}
 
-\pause
-\pf
-\ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence0}
+\iftoggle{showallproofs}{
+  \pause
+  \pf
+  \ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence0}
+}{
+  \bigskip
+  The book has the proof.
+}
 \end{frame}
-\begin{frame}
-\ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence1}
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence1}
 
-\pause
-\ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence2}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence3}
-\qed
-\end{frame}
-
+  \pause
+  \ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence2}
+  \end{frame}
+  \begin{frame}
+  \ExecuteMetaData[../map2.tex]{pf:OOHomoEquivalence3}
+  \qed
+  \end{frame}
+}{}
 
 
 

@@ -56,33 +56,38 @@
 \section{Representing Linear Maps with Matrices}
 %..........
 \begin{frame}{\parbox[t]{\paperwidth}{Linear maps are determined by the action on a basis}}
-We've seen that if we fix
+Consider
 a domain space~$V$, a codomain space~$W$,
 and a basis~$B_{V}=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$ for
-the domain, and 
-for any linear map $\map{h}{V}{W}$ we fix the 
+the domain.
+We've seen that we can specify a  
+linear map $\map{h}{V}{W}$ by defining the 
 action of $h$ on the basis elements
 $h(\vec{\beta}_1)$, \ldots, $h(\vec{\beta}_n)$, 
-\pause
-then we can find
+which then determines
 the action of $h$ on any $\vec{v}\in V$.
 \begin{equation*}
   h(\vec{v})=h(c_1\cdot\vec{\beta}_1+\cdots+c_n\cdot\vec{\beta}_n)
             =c_1\cdot h(\vec{\beta}_1)+\cdots+c_n\cdot h(\vec{\beta}_n)
   \tag{$*$}
 \end{equation*}
-We next develop a scheme to easily do those calculations easily.
+We described this above as that we `extend linearly' 
+the action on the basis elements
+to action on the entire space.
+We now develop a computational scheme for this.
 
 \pause\medskip
 \ex
-Let the domain be $V=\polyspace_2$ with the basis
+Consider the domain $V=\polyspace_2$ with the basis
 $B_{V}=\sequence{1,1+x,1+x+x^2}$.
 Let the codomain be $\Re^2$ with this basis.
 \begin{equation*}
   B_{W}
   =\sequence{\colvec{2 \\ 0}, \colvec{-1 \\ 1}}
 \end{equation*}
-Suppose that the map $\map{h}{\polyspace_2}{\Re^2}$ has this 
+\end{frame}
+\begin{frame}
+Define $\map{h}{\polyspace_2}{\Re^2}$ with this 
 action on the domain basis.
 \begin{equation*}
   h(1)=\colvec{0 \\ 1}
@@ -91,27 +96,26 @@ action on the domain basis.
   \quad
   h(1+x+x^2)=\colvec{-2 \\ -1}
 \end{equation*}
-\end{frame}
-\begin{frame}
+\pause
 Find the representation, with respect to the codomain's basis $B_{W}$,
 of the action of $h$ on $B_{V}$.
 \begin{align*}
   &\rep{h(\vec{\beta}_1)}{B_{W}}
   =\colvec{1/2 \\ 1}
   \quad\text{since }
-  (1/2)\cdot\colvec{2 \\ 0}+1\cdot\colvec{-1 \\ 1}=\colvec{0 \\ 1}     \\
+  \colvec{0 \\ 1}=(1/2)\cdot\colvec{2 \\ 0}+1\cdot\colvec{-1 \\ 1}     \\
   &\rep{h(\vec{\beta}_2)}{B_{W}}
   =\colvec{5/2 \\ 2}
   \quad\text{since }
-  (5/2)\cdot\colvec{2 \\ 0}+2\cdot\colvec{-1 \\ 1}=\colvec{3 \\ 2}     \\
+  \colvec{3 \\ 2}=(5/2)\cdot\colvec{2 \\ 0}+2\cdot\colvec{-1 \\ 1}     \\
   &\rep{h(\vec{\beta}_3)}{B_{W}}
   =\colvec{-3/2 \\ -1}
   \quad\text{since }
-  (-3/2)\cdot\colvec{2 \\ 0}-1\cdot\colvec{-1 \\ 1}=\colvec{-2 \\ -1}     
+  \colvec{-2 \\ -1}=(-3/2)\cdot\colvec{2 \\ 0}-1\cdot\colvec{-1 \\ 1}   
 \end{align*}
 \pause
-Summarize that by writing those three vectors side-by-side, in order, 
-to make a matrix.
+Summarize by writing those three vectors side-by-side, in order, 
+in a matrix.
 \begin{equation*}
   \begin{mat}
     1/2 &5/2 &-3/2 \\
@@ -508,10 +512,16 @@ calculation works for all matrices, spaces
 
 \th[th:MatIsLinMap]
 \ExecuteMetaData[../map3.tex]{th:MatIsLinMap}
-\pause
-\pf
-\ExecuteMetaData[../map3.tex]{pf:MatIsLinMap}
-\qed
+\iftoggle{showallproofs}{
+  \pause
+  \pf
+  \ExecuteMetaData[../map3.tex]{pf:MatIsLinMap}
+  \qed
+}{
+ 
+  \bigskip
+  The book has the proof.
+}
 \end{frame}
 
 
@@ -571,18 +581,25 @@ with respect to any pair of bases $B,D$.
 \begin{frame}
 \th[th:RankMatEqRankMap]
 \ExecuteMetaData[../map3.tex]{th:RankMatEqRankMap}
-\pause
-\pf
-\ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap0}
+\iftoggle{showallproofs}{
+  \pause
+  \pf
+  \ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap0}
 
-\pause
-\ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap1}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap2}
-\qed
-\end{frame}
+  \pause
+  \ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap1}
+}{
 
+  \bigskip
+  The book has the proof.
+}
+\end{frame}
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \ExecuteMetaData[../map3.tex]{pf:RankMatEqRankMap2}
+  \qed
+  \end{frame}
+}{}
 
 
 
@@ -637,13 +654,19 @@ The two representing matrices are each of rank~$1$.
 \begin{frame}
 \co[cor:MatDescsMap]
 \ExecuteMetaData[../map3.tex]{co:MatDescsMap}
-\pause
-\pf
-\ExecuteMetaData[../map3.tex]{pf:MatDescsMap0}
+\iftoggle{showallproofs}{
+  \pause
+  \pf
+  \ExecuteMetaData[../map3.tex]{pf:MatDescsMap0}
 
-\pause
-\ExecuteMetaData[../map3.tex]{pf:MatDescsMap1}
-\qed
+  \pause
+  \ExecuteMetaData[../map3.tex]{pf:MatDescsMap1}
+  \qed
+}{
+
+  \bigskip
+  The book has the proof.
+}
 \end{frame}
 
 \begin{frame}
