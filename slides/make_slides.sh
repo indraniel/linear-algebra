@@ -150,7 +150,7 @@ then
   done
 
   # pdf's without 3d manipulatable
-  declare -a pdf_out_files=("two_i_plane" "three_i_line" "three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation"  "four_ii_orientation_pos" "four_ii_orientation_neg four_ii_negvolbox")
+  declare -a pdf_out_files=("two_i_plane" "three_i_line" "three_ii_rotate_basis" "three_ii_rotate_sum_before" "three_ii_rotate_sum_after" "three_ii_rotate_prod_before" "three_ii_rotate_prod_after" "three_ii_3dproj1" "three_ii_3dproj2" "three_ii_3dproj3" "three_ii_dims" "three_vi_3dprojtoline" "three_vi_3dgramschmidt0" "three_vi_3dgramschmidt1" "four_ii_orientation"  "four_ii_orientation_pos" "four_ii_orientation_neg four_ii_negvolbox")
   cmd="asy -f pdf filename"  # will substitute for "filename"
 
   for i in ${pdf_out_files[@]}
