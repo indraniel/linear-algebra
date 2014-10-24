@@ -1,20 +1,27 @@
 // jh.asy  Asmyptote common definitions
 
 import fontsize;
-defaultpen(fontsize(9.24994pt));
+// small: defaultpen(fontsize(9.24994pt));8.50012
+defaultpen(fontsize(7.97224));  // scriptsize at 10pt doc
 import texcolors;
+
+// For setting figure sizes
+real beamerpaperwidth=12.8cm; // a 4:3 ratio
+real beamerpaperheight=9.6cm; 
 
 pen FILLCOLOR=rgb("fff0ca");
 
+real MAINPEN_WIDTH=0.4pt;  // match Knuth, for no special reason
+
 pen MAINPEN=linecap(0)
-             +linewidth(0.4pt);
+             +linewidth(MAINPEN_WIDTH);
 pen VECTORPEN=linecap(0)
-              +linewidth(0.8pt);
+              +linewidth(2.0*MAINPEN_WIDTH);
 real VECTORHEADSIZE=5;
 pen THINPEN=linecap(0)
              +linewidth(0.25pt);
 pen DASHPEN=linecap(0)
-             +linewidth(0.4pt)
+             +linewidth(MAINPEN_WIDTH)
              +linetype(new real[] {8,8});
 pen CURVEPEN=linecap(0)
              +gray(0.3)
@@ -23,7 +30,7 @@ pen FCNPEN=CURVEPEN
              +opacity(.5,"Normal");
 pen AXISPEN=linecap(0)
              +gray(0.3)
-             +linewidth(0.4pt)
+             +linewidth(MAINPEN_WIDTH)
              +fontsize(9pt)
              +opacity(.5,"Normal");
 pen DXPEN=linecap(0)

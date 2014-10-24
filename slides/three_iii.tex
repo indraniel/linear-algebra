@@ -61,33 +61,30 @@ a domain space~$V$, a codomain space~$W$,
 and a basis~$B_{V}=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$ for
 the domain.
 We've seen that we can specify a  
-linear map $\map{h}{V}{W}$ by defining the 
+homomorphism $\map{h}{V}{W}$ by naming the 
 action of $h$ on the basis elements
 $h(\vec{\beta}_1)$, \ldots, $h(\vec{\beta}_n)$, 
-which then determines
+which then extending linearly to 
 the action of $h$ on any $\vec{v}\in V$.
 \begin{equation*}
   h(\vec{v})=h(c_1\cdot\vec{\beta}_1+\cdots+c_n\cdot\vec{\beta}_n)
             =c_1\cdot h(\vec{\beta}_1)+\cdots+c_n\cdot h(\vec{\beta}_n)
   \tag{$*$}
 \end{equation*}
-We described this above as that we `extend linearly' 
-the action on the basis elements
-to action on the entire space.
-We now develop a computational scheme for this.
+We will see a scheme to do these computations.
 
 \pause\medskip
 \ex
 Consider the domain $V=\polyspace_2$ with the basis
-$B_{V}=\sequence{1,1+x,1+x+x^2}$.
-Let the codomain be $\Re^2$ with this basis.
+$B_{V}=\sequence{1,1+x,1+x+x^2}$ and
+the codomain $\Re^2$ with this basis.
 \begin{equation*}
   B_{W}
   =\sequence{\colvec{2 \\ 0}, \colvec{-1 \\ 1}}
 \end{equation*}
 \end{frame}
 \begin{frame}
-Define $\map{h}{\polyspace_2}{\Re^2}$ with this 
+Let $\map{h}{\polyspace_2}{\Re^2}$ have this 
 action on the domain basis.
 \begin{equation*}
   h(1)=\colvec{0 \\ 1}
@@ -97,8 +94,8 @@ action on the domain basis.
   h(1+x+x^2)=\colvec{-2 \\ -1}
 \end{equation*}
 \pause
-Find the representation, with respect to the codomain's basis $B_{W}$,
-of the action of $h$ on $B_{V}$.
+Represent the action of $h$ on $B_{V}$,
+with respect to the codomain's basis $B_{W}$.
 \begin{align*}
   &\rep{h(\vec{\beta}_1)}{B_{W}}
   =\colvec{1/2 \\ 1}
@@ -114,7 +111,7 @@ of the action of $h$ on $B_{V}$.
   \colvec{-2 \\ -1}=(-3/2)\cdot\colvec{2 \\ 0}-1\cdot\colvec{-1 \\ 1}   
 \end{align*}
 \pause
-Summarize by writing those three vectors side-by-side, in order, 
+Summarize by writing those side-by-side, in order, 
 in a matrix.
 \begin{equation*}
   \begin{mat}
@@ -147,8 +144,7 @@ Regroup.
 \end{frame}
 \begin{frame}
 \noindent
-So equation~($*$)
-gives that the action of the linear map summarized by this matrix
+So, the action of the linear map summarized by the matrix
 \begin{equation*}
   \begin{mat}
     1/2 &5/2 &-3/2 \\
@@ -180,7 +176,7 @@ representing the input.
 
 \pause
 \medskip
-We often omit the subscript on the matrix.
+(We often omit the matrix's subscript $B,D$.)
 \end{frame}
 \begin{frame}
 \ex
@@ -188,24 +184,21 @@ Consider projection $\map{\pi}{\Re^2}{\Re^2}$ onto the $x$-axis.
 \begin{equation*}
   \colvec{a \\ b}\mapsunder{\pi}\colvec{a \\ 0}
 \end{equation*}
-If we take the input and output bases to be 
+Let the domain and codomain bases be 
 \begin{equation*}
   B=\sequence{\colvec{1 \\ 1}, \colvec{-1 \\ 1}}
   \qquad
   D=\sequence{\colvec{0 \\ 1}, \colvec{2 \\ 2}}
 \end{equation*}
 then by the computations 
-\begin{equation*}
+\begin{align*}
   \colvec{1 \\ 1}\mapsunder{\pi}\colvec{1 \\ 0}
-  \quad\text{ so }
-  \rep{\pi(\vec{\beta}_1)}{D}=\colvec{-1 \\ 1/2} 
-\end{equation*}
-and
-\begin{equation*}
+  &\quad\text{so}\quad
+  \rep{\pi(\vec{\beta}_1)}{D}=\colvec{-1 \\ 1/2}     \\
   \colvec{-1 \\ 1}\mapsunder{\pi}\colvec{-1 \\ 0}
-  \quad\text{ so }
+  &\quad\text{so}\quad
   \rep{\pi(\vec{\beta}_2)}{D}=\colvec{1 \\ -1/2}
-\end{equation*}
+\end{align*}
 this is the matrix representation of $\pi$.
 \begin{equation*}
   \rep{\pi}{B,D}=
@@ -227,18 +220,15 @@ but this time take the input and output bases to be the standard.
   =\sequence{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
 \end{equation*}
 We have
-\begin{equation*}
+\begin{gather*}
   \colvec{1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
   \quad\text{ so }
-  \rep{\pi(\vec{\beta}_1)}{D}=\colvec{1 \\ 0}
-\end{equation*}
-and
-\begin{equation*}
+  \rep{\pi(\vec{\beta}_1)}{D}=\colvec{1 \\ 0}               \\
   \colvec{0 \\ 1}\mapsunder{\pi}\colvec{0 \\ 0}
   \quad\text{ so }
   \rep{\pi(\vec{\beta}_2)}{D}=\colvec{0 \\ 0}
-\end{equation*}
-so this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
+\end{gather*}
+and this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
 \begin{equation*}
   \begin{mat}
     1  &0  \\
@@ -253,14 +243,14 @@ so this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
   \colvec{a \\ b}\mapsunder{h} 2a+3b
 \end{equation*}
 We will represent the map with respect to the bases 
-$\stdbasis_2$ and~$\stdbasis_1$,
-so first find the effect of $h$ on the basis for the domain.
+$\stdbasis_2$ and~$\stdbasis_1$.
+First find the effect of $h$ on the domain's basis.
 \begin{equation*}
   \colvec{1 \\ 0}\mapsto 2
   \qquad
   \colvec{0 \\ 1}\mapsto 3
 \end{equation*}
-Next, represent those with respect to the codomain's basis.
+Represent those with respect to the codomain's basis.
 \begin{equation*}
   \rep{h(\vec{e}_1)}{\stdbasis_1}=\colvec{2}
   \qquad
@@ -529,7 +519,7 @@ calculation works for all matrices, spaces
 
 %..........
 \begin{frame}
-We will close this subsection by connecting some properties of linear maps
+We will connect some properties of linear maps
 with properties of the associated matrices.
 
 First an easy one: 
@@ -544,17 +534,19 @@ represented with respect to $D$ by the column vector of zeroes.
 Thus $h$ is represented by the zero matrix.
 
 \pause
-Now assume that there are bases $B,D$ such that $\rep{h}{B,D}$ is the zero
+For the other direction 
+assume that there are bases $B,D$ such that $\rep{h}{B,D}$ is the zero
 matrix.
-Then for each $\vec{\beta}_i$ we have that $\rep{h(\vec{\beta}_1)}{D}$ is a
-column vector of zeros, and so $h(\vec{\beta}_i)$ is $\zero_W$.
-Extending linearly, we have that $h$ maps each $\vec{v}\in V$ to $\zero_W$,
+For each $\vec{\beta}_i$ we have that $\rep{h(\vec{\beta}_1)}{D}$ is a
+vector of zeros, and so $h(\vec{\beta}_i)$ is $\zero_W$.
+Extending linearly gives that $h$ maps each $\vec{v}\in V$ to $\zero_W$,
 and $h$ is the zero map.  
 
 \pause
-\ex The zero map $\map{z}{\Re^2}{\Re^3}$ is represented 
-$\rep{z}{B,D}$ by the $\nbym{2}{3}$
-zero matrix
+\ex The zero map $\map{z}{\Re^2}{\Re^3}$ is represented, 
+with respect to any pair of bases,
+by the $\nbym{2}{3}$
+zero matrix.
 \begin{equation*}
   Z=
   \begin{mat}
@@ -563,7 +555,6 @@ zero matrix
     0 &0
   \end{mat}
 \end{equation*}
-with respect to any pair of bases $B,D$.
 
 % \pause
 % \medskip
@@ -678,20 +669,20 @@ standard bases by this matrix.
   \rep{t_\Theta}{\stdbasis_2,\stdbasis_2}
   =
   \begin{mat}[r]
-    \cos\Theta  &\sin\Theta  \\
-   -\sin\Theta  &\cos\Theta
+    \cos\Theta  &-\sin\Theta  \\
+    \sin\Theta  &\cos\Theta
   \end{mat}
 \end{equation*}
 The $\Theta=\pi/4$ instance is
 \begin{equation*}
   \begin{mat}[r]
-    \sqrt{2}/2  &\sqrt{2}/2  \\
-   -\sqrt{2}/2  &\sqrt{2}/2
+    \sqrt{2}/2  &-\sqrt{2}/2  \\
+    \sqrt{2}/2  &\sqrt{2}/2
   \end{mat}
   =(\sqrt{2}/2)\cdot
   \begin{mat}
-    1  &1  \\
-   -1  &1
+    1  &-1  \\
+    1  &1
   \end{mat}
 \end{equation*}
 and the rank of this matrix is two, reflecting

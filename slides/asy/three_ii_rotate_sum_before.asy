@@ -1,6 +1,6 @@
-// three_ii_rotate.asy
+// three_ii_rotate_sum_before.asy
 import jh;
-real height; height=2.5cm; size(0,height);
+real height; height=.25*beamerpaperheight; size(0,height);
 import settings;
 settings.render=0;   // for png: -10;  // fewer jaggies but very slow
 // settings.maxtile=(10,10);
@@ -41,6 +41,6 @@ draw(v1,VECTORPEN+red,Arrow(DefaultHead,.7*VECTORHEADSIZE));
 draw(v2,VECTORPEN+blue,Arrow(DefaultHead,.7*VECTORHEADSIZE));
 draw(sum,VECTORPEN+purple,Arrow(DefaultHead,.7*VECTORHEADSIZE));
 // Label
-label("\tiny $\vec{v}_1$",a1,SE);
-label("\tiny $\vec{v}_2$",a2,N);
-label("\tiny $\vec{v}_1+\vec{v}_2$",a1+a2,E);
+label("$\vec{v}_1$",a1,SE);
+label("$\vec{v}_2$",a2,N);
+label("$\vec{v}_1+\vec{v}_2$",a1+a2,E);

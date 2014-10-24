@@ -57,42 +57,41 @@
 \begin{frame}{Representing operations on linear functions}
 Recall that the collection of linear functions $\linmaps{V}{W}$
 between two spaces $V,W$ is itself a vector space.
-That is, the sum of two linear functions
-$\map{f,g}{V}{W}$
-\begin{equation*}
-  \vec{v}\mapsunder{f+g} f(\vec{v})+g(\vec{v})
-\end{equation*}
-is linear,
-and 
-the scalar multiple $r\cdot f$ of a linear function (where $r\in\Re$)
+That is, given 
+a linear map $\map{f}{V}{W}$ then 
+the scalar multiple $r\cdot f$
 \begin{equation*}
   \vec{v}\mapsunder{r\cdot f} r\cdot (f(\vec{v}))
 \end{equation*}
-is linear.
-We now see how the matrix representations $\rep{f}{B,D}$ and 
-$\rep{g}{B,D}$
-combine to give $\rep{f+g}{B,D}$
-and $\rep{r\cdot f}{B,D}$.
+is a linear map $\map{rf}{V}{W}$.
+And, where $\map{f,g}{V}{W}$ are 
+linear then their sum 
+\begin{equation*}
+  \vec{v}\mapsunder{f+g} f(\vec{v})+g(\vec{v})
+\end{equation*}
+is also linear $\map{f+g}{V}{W}$.
 
 \pause
-We first do an exploratory calculation.
+We now see how the matrix representations
+s $\rep{f}{B,D}$ and 
+$\rep{g}{B,D}$
+combine to give the representations $\rep{r\cdot f}{B,D}$
+and $\rep{f+g}{B,D}$.
+\end{frame}
+\begin{frame}
 \ex
 Let $\map{f}{V}{W}$ be the linear map represented 
 in this way with respect to 
-some bases.
+some bases $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$
+and $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$
 \begin{equation*}
-  F=
   \rep{f}{B,D}=
   \begin{mat}
     2  &1  \\
     3  &4  
   \end{mat}
 \end{equation*}
-We will find the matrix representing $6f$
-and compare it with this one.
-\end{frame}
-\begin{frame}
-\noindent Suppose that $f(\vec{v})=\vec{w}$ and that 
+and suppose that where $f(\vec{v})=\vec{w}$,
 these are the representations.
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
@@ -100,17 +99,20 @@ these are the representations.
   \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}
   % =\colvec{2v_1+v_2 \\ 3v_1+4v_2} 
 \end{equation*}
-The action of the function $\map{6f}{V}{W}$ is $6f\,(\vec{v})=6\vec{w}$.
-Since $6\vec{w}=6\cdot(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
+We will find the matrix representing $6f$.
+
+The action of $6f$ is 
+$\vec{v}\mapsto 6\vec{w}=6(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
 =(6w_1)\vec{\delta}_1+(6w_2)\vec{\delta}_2$,
-application of the function $\map{6f}{V}{W}$
-yields this representation of the codomain vector.
+so the output vector has
+this representation.
 \begin{equation*}
   % \rep{6f(\vec{v})}{D}
   % =
   \rep{6\vec{w}}{D}=\colvec{6w_1 \\ 6w_2} 
 \end{equation*}
-So, on the same input vector, compared with the representation of the output
+Thus, on the same input vector, 
+compared with the representation of the output
 vector from~$f$, the 
 representation of the output 
 vector from function $6f$ has entries that are
@@ -119,7 +121,7 @@ $6$ times as big.
 % Then how do the matrices representing each function compare? 
 \end{frame}
 \begin{frame}
-\noindent Here is the representation of the action of~$f$.  
+\noindent Here is the matrix-vector representation of the action of~$f$.  
 \begin{equation*}\
   \rep{f}{B,D}\cdot \rep{\vec{v}}{B}=
   \begin{mat}
@@ -138,7 +140,7 @@ does this.
   =\colvec{6(2v_1+v_2) \\ 6(3v_1+4v_2)}
   =\colvec{12v_1+6v_2 \\  18v_1+24v_2}
 \end{equation*}
-Therefore 
+Therefore this matrix represents the map $\map{6f}{V}{W}$.
 \begin{equation*}
   \rep{6f}{B,D}
   =
@@ -147,38 +149,41 @@ Therefore
     18 &24
   \end{mat}
 \end{equation*}
-going from the function $f$ to the 
+Going from the function $f$ to the 
 function~$6f$ has the effect on the representation matrix of  
 multiplying all the entries by $6$.
 \end{frame}
 
 
 \begin{frame}
-\noindent We next do a similar exploratory calculation for addition.
-
 \ex
 Suppose that $\map{f,g}{V}{W}$ are linear maps represented with respect to 
 some bases by these matrices.
 \begin{equation*}
-  F=
   \rep{f}{B,D}=
   \begin{mat}
     2  &1  \\
     3  &4  
   \end{mat}
   \qquad
-  G=
   \rep{g}{B,D}=
   \begin{mat}
     5  &8  \\
     7  &6  
   \end{mat}
 \end{equation*}
-We will find the matrix representing the function $f+g$.
+Let $f(\vec{v})=\vec{u}$ and $g(\vec{v})=\vec{w}$ 
+with these the column vector representations.
+\begin{equation*}
+  \rep{f(\vec{v})}{D}=\colvec{u_1 \\ u_2}
+  \quad
+  \rep{g(\vec{v})}{D}=\colvec{w_1 \\ w_2}
+\end{equation*}
+We will find the matrix representing $f+g$.
 
 \pause
-If $f(\vec{v})=\vec{u}$ and $g(\vec{v})=\vec{w}$ then
-$f+g$ does this.
+The action of 
+$f+g$ is this. 
 \begin{align*}
   \vec{v}
   \mapsunder{f+g}
@@ -188,15 +193,10 @@ $f+g$ does this.
   (w_1\vec{\delta}_1+w_2\vec{\delta}_2)   \\
   &=(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2
 \end{align*}
-Thus for any $\vec{v}$, the effect on the representatives 
-\begin{equation*}
-  \rep{f(\vec{v})}{D}=\colvec{u_1 \\ u_2}
-  \quad
-  \rep{g(\vec{v})}{D}=\colvec{w_1 \\ w_2}
-\end{equation*}
+Thus for any $\vec{v}$, the effect on the representations
 of adding the functions is to add the column vectors.
 \begin{equation*}
-  \rep{(f+g)\,(\vec{v})}{D}=\colvec{u_1+w_1 \\ u_2+w_2}
+  \rep{\,(f+g)\,(\vec{v})\,}{D}=\colvec{u_1+w_1 \\ u_2+w_2}
 \end{equation*}
 \end{frame}
 \begin{frame}
@@ -221,7 +221,7 @@ this effect on the representations.
 \end{align*}
 So we want the matrix with this effect.
 \begin{equation*}
-  \rep{(f+g)\,(\vec{v})}{D}
+  \rep{\,(f+g)\,(\vec{v})\,}{D}
   \colvec{v_1 \\ v_2}
   =\colvec{7v_1+9v_2 \\ 10v_1+10v_2}
 \end{equation*}
@@ -381,14 +381,13 @@ The sizes of the matrices show that
 $V$ has dimension~$2$, 
 $W$ has dimension~$3$, 
 and $X$ has dimension~$2$.
-
 We want to see how these two matrices combine to represent the map
 $\map{\composed{g}{h}}{V}{X}$.
 
 \pause
-We will represent the action of $\composed{g}{h}$ by first 
-representing the action
-of~$h$ on a vector~$\vec{v}\in V$.
+We will develop the representation of the action of $\composed{g}{h}$ by 
+starting with the action
+of~$h$ on a~$\vec{v}\in V$.
 \begin{align*}
   \rep{h(\vec{v})}{C}
   &=\rep{h}{B,C}\cdot\rep{\vec{v}}{B}     \\
@@ -404,7 +403,7 @@ of~$h$ on a vector~$\vec{v}\in V$.
 \end{align*}
 \end{frame}
 \begin{frame}
-\noindent Apply $g$ to the vector $\rep{h(\vec{v})}{C}$.
+\noindent Apply $g$ to that vector's representation.
 \begin{multline*}
   \rep{g}{C,D}\cdot \rep{h(\vec{v})}{C}
   =
@@ -424,7 +423,7 @@ Gather terms.
            (9\cdot 3+10\cdot 2+12\cdot 4)v_1+(9\cdot 1+10\cdot 5+12\cdot 6)v_2}
 \end{equation*}
 \pause
-Rewrite that as a matrix-vector multiplication.
+Rewrite as a matrix-vector multiplication.
 \begin{equation*}
   \begin{mat}
     8\cdot 3+7\cdot 2+11\cdot 4 &8\cdot 1+7\cdot 5+11\cdot 6 \\
@@ -525,15 +524,23 @@ functions from a space to itself $\map{f,g}{V}{V}$.
 \begin{frame}{Matrix multiplication represents composition}
 \th[th:MatMultRepComp]
 \ExecuteMetaData[../map4.tex]{th:MatMultRepComp}
-\pause
-\pf
-\ExecuteMetaData[../map4.tex]{pf:MatMultRepComp0}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../map4.tex]{pf:MatMultRepComp1}
-\qed
-\end{frame}
 
+\iftoggle{showallproofs}{
+  \pause
+  \pf
+  \ExecuteMetaData[../map4.tex]{pf:MatMultRepComp0}
+}{
+
+  \bigskip
+  The book has the proof, which retraces the steps of the example.
+}
+\end{frame}
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \ExecuteMetaData[../map4.tex]{pf:MatMultRepComp1}
+  \qed
+  \end{frame}
+}{}
 
 
 

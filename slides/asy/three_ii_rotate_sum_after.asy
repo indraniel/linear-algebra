@@ -1,6 +1,6 @@
 // three_ii_rotate.asy
 import jh;
-real height; height=2.5cm; size(0,height);
+real height; height=.25*beamerpaperheight; size(0,height);
 import settings;
 settings.render=0;   // for png: -10;  // fewer jaggies but very slow
 // settings.maxtile=(10,10);
@@ -43,6 +43,6 @@ draw(v1,VECTORPEN+red,Arrow(DefaultHead,.7*VECTORHEADSIZE));
 draw(v2,VECTORPEN+blue,Arrow(DefaultHead,.7*VECTORHEADSIZE));
 draw(sum,VECTORPEN+purple,Arrow(DefaultHead,.7*VECTORHEADSIZE));
 // Label
-label("\tiny $t_\Theta(\vec{v}_1)$",a1,SE);
-label("\tiny $t_\Theta(\vec{v}_2)$",a2,N);
-label("\tiny $t_\Theta(\vec{v}_1+\vec{v}_2)$",a1+a2,E);
+label("$t_\Theta(\vec{v}_1)$",a1,SE);
+label("$t_\Theta(\vec{v}_2)$",a2,N);
+label("$t_\Theta(\vec{v}_1+\vec{v}_2)$",a1+a2,E);
