@@ -56,35 +56,33 @@
 \section{Representing Linear Maps with Matrices}
 %..........
 \begin{frame}{\parbox[t]{\paperwidth}{Linear maps are determined by the action on a basis}}
-Consider
-a domain space~$V$, a codomain space~$W$,
-and a basis~$B_{V}=\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$ for
-the domain.
-We've seen that we can specify a  
-homomorphism $\map{h}{V}{W}$ by naming the 
-action of $h$ on the basis elements
-$h(\vec{\beta}_1)$, \ldots, $h(\vec{\beta}_n)$, 
-which then extending linearly to 
-the action of $h$ on any $\vec{v}\in V$.
+Fix a domain space~$V$ 
+with basis~$\sequence{\vec{\beta}_1,\ldots,\vec{\beta}_n}$, 
+and a codomain space~$W$.
+We've seen that to specify the action of a  
+homomorphism $\map{h}{V}{W}$ on all domain vectors, we need only
+specify its action
+on the basis elements.
 \begin{equation*}
   h(\vec{v})=h(c_1\cdot\vec{\beta}_1+\cdots+c_n\cdot\vec{\beta}_n)
             =c_1\cdot h(\vec{\beta}_1)+\cdots+c_n\cdot h(\vec{\beta}_n)
   \tag{$*$}
 \end{equation*}
-We will see a scheme to do these computations.
+We've called this extending the action linearly from the basis to the entire 
+domain. 
+We now introduce a scheme for these calculations.
 
 \pause\medskip
 \ex
-Consider the domain $V=\polyspace_2$ with the basis
-$B_{V}=\sequence{1,1+x,1+x+x^2}$ and
-the codomain $\Re^2$ with this basis.
+Let the domain be $V=\polyspace_2$ and the codomain be $W=\Re^2$,
+with these bases.
 \begin{equation*}
+  B_{V}=\sequence{1,1+x,1+x+x^2}
+  \qquad
   B_{W}
   =\sequence{\colvec{2 \\ 0}, \colvec{-1 \\ 1}}
 \end{equation*}
-\end{frame}
-\begin{frame}
-Let $\map{h}{\polyspace_2}{\Re^2}$ have this 
+Suppose that $\map{h}{\polyspace_2}{\Re^2}$ has this 
 action on the domain basis.
 \begin{equation*}
   h(1)=\colvec{0 \\ 1}
@@ -93,77 +91,97 @@ action on the domain basis.
   \quad
   h(1+x+x^2)=\colvec{-2 \\ -1}
 \end{equation*}
-\pause
-Represent the action of $h$ on $B_{V}$,
+\end{frame}
+\begin{frame}
+\noindent With this effect on the domain's basis,
+\begin{equation*}
+  h(\vec{\beta}_1)=\colvec{0 \\ 1}
+  \quad
+  h(\vec{\beta}_2)=\colvec{3 \\ 2}
+  \quad
+  h(\vec{\beta}_3)=\colvec{-2 \\ -1}
+\end{equation*}
+next find the
+representation of the three outputs 
 with respect to the codomain's basis $B_{W}$.
 \begin{align*}
   &\rep{h(\vec{\beta}_1)}{B_{W}}
   =\colvec{1/2 \\ 1}
-  \quad\text{since }
+  \qquad\text{since }
   \colvec{0 \\ 1}=(1/2)\cdot\colvec{2 \\ 0}+1\cdot\colvec{-1 \\ 1}     \\
   &\rep{h(\vec{\beta}_2)}{B_{W}}
   =\colvec{5/2 \\ 2}
-  \quad\text{since }
+  \qquad\text{since }
   \colvec{3 \\ 2}=(5/2)\cdot\colvec{2 \\ 0}+2\cdot\colvec{-1 \\ 1}     \\
   &\rep{h(\vec{\beta}_3)}{B_{W}}
   =\colvec{-3/2 \\ -1}
-  \quad\text{since }
+  \qquad\text{since }
   \colvec{-2 \\ -1}=(-3/2)\cdot\colvec{2 \\ 0}-1\cdot\colvec{-1 \\ 1}   
 \end{align*}
 \pause
-Summarize by writing those side-by-side, in order, 
-in a matrix.
+Summarize by writing those side-by-side.
 \begin{equation*}
   \begin{mat}
     1/2 &5/2 &-3/2 \\
     1   &2   &-1
   \end{mat}
 \end{equation*}
+This is the matrix representation of~$h$ (with respect to $B_V,B_W$).
 \end{frame}
 \begin{frame}
-Now, to an arbitrary domain vector
+The point of arranging those numbers in that way is that
+if we start by representing a domain vector with respect to the domain's basis 
 $\vec{v}=c_1\cdot\vec{\beta}_1+c_2\cdot\vec{\beta}_2+c_3\cdot\vec{\beta}_3$
 % \begin{equation*}
 %   \rep{\vec{v}}{B_{V}}=\colvec{c_1 \\ c_2 \\ c_3}
 % \end{equation*}
-apply equation~($*$).
+and apply equation~($*$)
 \begin{align*}
-  h(\vec{v})
-            &=c_1\cdot h(\vec{\beta}_1)+\cdots+c_n\cdot h(\vec{\beta}_n) \\
-    &=c_1\cdot(\,(1/2)\cdot\colvec{2 \\ 0}+1\cdot\colvec{-1 \\ 1}\,)  \\
-      &\quad +c_2\cdot(\,(5/2)\cdot\colvec{2 \\ 0}+2\cdot\colvec{-1 \\ 1}\,)  \\
-      &\quad +c_3\cdot(\,(-3/2)\cdot\colvec{2 \\ 0}-1\cdot\colvec{-1 \\ 1}\,)
+   h(c_1\vec{\beta}_1+c_2\vec{\beta}_2+c_3\vec{\beta}_3)  
+   &=c_1\cdot h(\vec{\beta}_1)+c_2\cdot h(\vec{\beta}_2)+c_3\cdot h(\vec{\beta}_3) \\
+    &=c_1\cdot\bigl((1/2)\cdot\colvec{2 \\ 0}+1\cdot\colvec{-1 \\ 1}\bigr)  \\
+      &\quad +c_2\cdot\bigl((5/2)\cdot\colvec{2 \\ 0}+2\cdot\colvec{-1 \\ 1}\bigr)  \\
+      &\quad +c_3\cdot\bigl((-3/2)\cdot\colvec{2 \\ 0}-1\cdot\colvec{-1 \\ 1}\bigr)
 \end{align*}
-Regroup.
-\begin{gather*}
+then regrouping
+\begin{equation*}
   =((1/2)c_1+(5/2)c_2-(3/2)c_3)\cdot\colvec{2 \\ 0}
-  +(1c_1+2c_2-1c_3)\cdot\colvec{-1 \\ 1}          \\
+  +(1c_1+2c_2-1c_3)\cdot\colvec{-1 \\ 1}         
+\end{equation*}
+expresses the image of $h(\vec{v})$ with respect to the codomain's 
+basis.
+\begin{equation*}
   \rep{h(\vec{v})}{B_{W}}
   =\colvec{(1/2)c_1+(5/2)c_2-(3/2)c_3 \\ 1c_1+2c_2-1c_3}
-\end{gather*}
+\end{equation*}
 \end{frame}
 \begin{frame}
 \noindent
-So, the action of the linear map summarized by the matrix
+In summary, to represent application of the linear map
+\begin{equation*}
+  h(\vec{v})
+\end{equation*}
+we write the representation of the map next to the representation of
+the input
 \begin{equation*}
   \begin{mat}
     1/2 &5/2 &-3/2 \\
     1   &2   &-1
-  \end{mat}
+  \end{mat}_{B_V,B_W}
+  \colvec{c_1 \\ c_2 \\ c_3}_{B_V}
 \end{equation*}
-on the domain element represented in this way
-\begin{equation*}
-  \rep{\vec{v}}{B_{V}}=\colvec{c_1 \\ c_2 \\ c_3}_{B_V}
-\end{equation*}
-is to send it to the codomain element represented in this way. 
+and compute the representation of the output.
 \begin{equation*}
   \rep{h(\vec{v})}{B_{W}}=\colvec{(1/2)c_1+(5/2)c_2-(3/2)c_3 \\ 1c_1+2c_2-1c_3}_{B_W}
 \end{equation*}
-In short, we
-get the representation of the output by taking 
-the dot product of each row of the matrix representation
+
+\pause
+The way the numbers combine to do this computation is:
+take
+the dot product of the rows of the representing matrix
 with the single column 
-representing the input.
+representing the input,
+to get the single column representing the output.
 \end{frame}
 
 
@@ -208,43 +226,48 @@ this is the matrix representation of $\pi$.
   \end{mat}
 \end{equation*}
 \end{frame}
-\begin{frame}
-\ex
-Again consider projection onto the $x$-axis
-\begin{equation*}
-  \colvec{a \\ b}\mapsunder{\pi}\colvec{a \\ 0}
-\end{equation*}
-but this time take the input and output bases to be the standard.
-\begin{equation*}
-  B=D=\stdbasis_2
-  =\sequence{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
-\end{equation*}
-We have
-\begin{gather*}
-  \colvec{1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
-  \quad\text{ so }
-  \rep{\pi(\vec{\beta}_1)}{D}=\colvec{1 \\ 0}               \\
-  \colvec{0 \\ 1}\mapsunder{\pi}\colvec{0 \\ 0}
-  \quad\text{ so }
-  \rep{\pi(\vec{\beta}_2)}{D}=\colvec{0 \\ 0}
-\end{gather*}
-and this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
-\begin{equation*}
-  \begin{mat}
-    1  &0  \\
-    0  &0
-  \end{mat}
-\end{equation*}
-\end{frame}
+% \begin{frame}
+% \ex
+% Again consider projection onto the $x$-axis
+% \begin{equation*}
+%   \colvec{a \\ b}\mapsunder{\pi}\colvec{a \\ 0}
+% \end{equation*}
+% but this time take the input and output bases to be the standard.
+% \begin{equation*}
+%   B=D=\stdbasis_2
+%   =\sequence{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
+% \end{equation*}
+% We have
+% \begin{gather*}
+%   \colvec{1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
+%   \quad\text{ so }
+%   \rep{\pi(\vec{\beta}_1)}{D}=\colvec{1 \\ 0}               \\
+%   \colvec{0 \\ 1}\mapsunder{\pi}\colvec{0 \\ 0}
+%   \quad\text{ so }
+%   \rep{\pi(\vec{\beta}_2)}{D}=\colvec{0 \\ 0}
+% \end{gather*}
+% and this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
+% \begin{equation*}
+%   \begin{mat}
+%     1  &0  \\
+%     0  &0
+%   \end{mat}
+% \end{equation*}
+% \end{frame}
 
 \begin{frame}
-\ex Consider this map $\map{h}{\Re^2}{\Re}$.
+\ex Consider the domain~$\Re^2$ and the codomain~$\Re$.
+Recall that with respect to the standard basis, a vector represents itself.
+\begin{equation*}
+  \rep{\colvec{-2 \\ 2}}{\stdbasis_2}=\colvec{-2 \\ 2}_{\stdbasis_2}
+\end{equation*}
+To represent $\map{h}{\Re^2}{\Re}$ 
 \begin{equation*}
   \colvec{a \\ b}\mapsunder{h} 2a+3b
 \end{equation*}
-We will represent the map with respect to the bases 
-$\stdbasis_2$ and~$\stdbasis_1$.
-First find the effect of $h$ on the domain's basis.
+with respect to 
+$\stdbasis_2$ and~$\stdbasis_1$,
+first find the effect of $h$ on the domain's basis.
 \begin{equation*}
   \colvec{1 \\ 0}\mapsto 2
   \qquad
@@ -300,46 +323,39 @@ We can perform the operation without any reference to spaces and bases.
 \end{frame}
 \begin{frame}
 \ex
-Recall the two matrices 
+Recall the matrix
+representing 
+projection $\map{\pi}{\Re^2}{\Re^2}$ onto the $x$-axis
 \begin{equation*}  
   \rep{\pi}{B,D}=
   \begin{mat}
     -1  &1 \\
    1/2  &-1/2
   \end{mat}
-  \qquad
-  \rep{\pi}{\stdbasis_2,\stdbasis_2}
-  \begin{mat}
-    1  &0  \\
-    0  &0
-  \end{mat}
 \end{equation*}
-representing 
-projection $\map{\pi}{\Re^2}{\Re^2}$ onto the $x$-axis
 % \begin{equation*}
 %   \colvec{a \\ b}\mapsunder{\pi}\colvec{a \\ 0}
 % \end{equation*}
-with respect to 
+with respect to these. 
 \begin{equation*}
-  B=\sequence{\colvec{1 \\ 1}, \colvec{-1 \\ 1}},\,
+  B=\sequence{\colvec{1 \\ 1}, \colvec{-1 \\ 1}}\quad
   D=\sequence{\colvec{0 \\ 1}, \colvec{2 \\ 2}}
 \end{equation*}
-and also with respect to the standard bases $\stdbasis_{2},\stdbasis_{2}$.
-\pause
-This domain vector 
+The domain vector 
 \begin{equation*}
   \vec{v}=\colvec{-1 \\ 5}
 \end{equation*} 
-has these representations with respect to the two domain bases.
+has this representation with respect to the domain basis.
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{2 \\ 3}
   \qquad
-  \rep{\vec{v}}{\stdbasis_{2}}
-  =\colvec{-1 \\ 5}
+  \text{since 
+  $2\cdot\colvec{1 \\ 1}+3\cdot\colvec{-1 \\ 1}=\colvec{-1 \\ 5}$}
 \end{equation*}
 \end{frame}
 \begin{frame}
-\noindent The matrix-vector products
+\noindent The matrix-vector product
+gives the representation
 \begin{equation*}
   \begin{mat}
     -1  &1 \\
@@ -347,26 +363,14 @@ has these representations with respect to the two domain bases.
   \end{mat}
   \colvec{2 \\ 3}
   =\colvec{1 \\ -1/2}
-  \qquad
-  \begin{mat}
-    1  &0  \\
-    0  &0
-  \end{mat}
-  \colvec{-1 \\ 5}
-  =
-  \colvec{-1 \\ 0}
+  =\rep{\,\pi(\vec{v})\,}{D}
 \end{equation*}
-give the two representations
-$\rep{\pi(\vec{v})}{D}$ and $\rep{\pi(\vec{v})}{\stdbasis_{2}}$.
-In both cases 
+As a check,
 \begin{equation*}
   1\cdot\colvec{0 \\ 1}-(1/2)\cdot\colvec{2 \\ 2}
   =\colvec{-1 \\ 0}
-  \qquad
-  -1\cdot\vec{e}_1+0\cdot\vec{e}_2
-  =\colvec{-1 \\ 0}
 \end{equation*}
-they compute this projection.
+so it correctly computes the action of the projection map on the domain vector.
 \begin{equation*}
   \pi(\,\colvec{-1 \\ 5}\,)=\colvec{-1 \\ 0}
 \end{equation*}
@@ -441,22 +445,37 @@ Is there a linear map between the spaces associated with the matrix?
 
 \pause
 Consider $\map{h}{\Re^2}{\polyspace_1}$ defined by:
-for any domain vector $\vec{v}$, represent it with respect to the domain basis,
-multiply that representation by~$H$, 
-and then $h(\vec{v})$ is the codomain vector represented by
+for any domain vector $\vec{v}$, represent it with respect to the domain basis
+\begin{equation*}
+  \vec{v}=c_1\vec{e}_1+c_2\vec{e}_2
+  \qquad 
+  \rep{\vec{v}}{E_2}=\colvec{c_1 \\ c_2}
+\end{equation*}
+multiply that representation by~$H$
+\begin{equation*}
+  \begin{mat}
+    1 &2 \\
+    3 &4
+  \end{mat}
+  \colvec{c_1 \\ c_2}
+  =\colvec{c_1+2c_2 \\ 3c_1+4c_2}
+\end{equation*}
+and then call $h(\vec{v})$ the codomain vector represented by
 the result.
-We will verify that $h$ is a linear function.
+\begin{equation*}
+  h(\vec{v})=(c_1+2c_2)\cdot (1-x)+(3c_1+4c_2)\cdot(1+x)
+\end{equation*}
+\end{frame}
 
-\pause
-Note first that $h$ is a function.
+\begin{frame}
+Note first that $h$ is a function, that is, it is well-defined\Dash 
+for a given input $\vec{v}$, the output $h(\vec{v})$ exists and is unique.
 This is because
 the representation of a vector with respect to a basis can be done in
-one and only one way, so the outcome of the operation in the prior paragraph
-is well-defined\Dash 
-for a given input, the output from $h$ exists and is unique. 
-\end{frame}
-\begin{frame}
-Next we show that $h$ is linear.
+one and only one way. 
+
+\pause
+We will now verify that $h$ is a linear function.
 Fix domain vectors $\vec{u},\vec{v}\in\Re^2$ and represent them with 
 respect to the domain basis. 
 Multiply $c\cdot\rep{\vec{u}}{B}+d\cdot\rep{\vec{w}}{D}$ by $H$.
@@ -496,10 +515,6 @@ the result is $c\cdot\rep{h(\vec{u})}{D}+d\cdot\rep{h(\vec{v})}{D}$.
 \end{frame}
 
 \begin{frame}
-The next result verifies that the above 
-calculation works for all matrices, spaces
-(of suitable dimension), and bases.
-
 \th[th:MatIsLinMap]
 \ExecuteMetaData[../map3.tex]{th:MatIsLinMap}
 \iftoggle{showallproofs}{
@@ -629,7 +644,7 @@ The two representing matrices are each of rank~$1$.
     2  &-1  
   \end{mat}
   \qquad
-  \rep{t}{}
+  \rep{t}{B,D}
   =
   \begin{mat}
     2  &-6  \\
@@ -662,8 +677,9 @@ The two representing matrices are each of rank~$1$.
 
 \begin{frame}
 \ex
-The transformation $\map{t_\Theta}{\Re^2}{\Re^2}$ rotating vectors 
-counterclockwise by $\Theta$~radians is represented with respect to the
+Any transformation rotating vectors 
+counterclockwise by $\Theta$~radians $\map{t_\Theta}{\Re^2}{\Re^2}$ 
+is represented with respect to the
 standard bases by this matrix.
 \begin{equation*}
   \rep{t_\Theta}{\stdbasis_2,\stdbasis_2}
@@ -675,6 +691,8 @@ standard bases by this matrix.
 \end{equation*}
 The $\Theta=\pi/4$ instance is
 \begin{equation*}
+  \rep{t_{\pi/4}}{\stdbasis_2,\stdbasis_2}
+  =
   \begin{mat}[r]
     \sqrt{2}/2  &-\sqrt{2}/2  \\
     \sqrt{2}/2  &\sqrt{2}/2
