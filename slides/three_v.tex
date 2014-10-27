@@ -55,7 +55,7 @@
 \section{Changing representations of vectors}
 %..........
 \begin{frame}{Coordinates vary with the basis}
-\ex Consider this vector $\vec{v}\in\Re^3$ and bases for the space. 
+Consider this vector $\vec{v}\in\Re^3$ and bases for the space. 
 \begin{equation*}
   \vec{v}=\colvec{1 \\ 2 \\ 3}
   \qquad
@@ -70,10 +70,9 @@ With respect to the different bases, the coordinates of $\vec{v}$ are different.
   \rep{\vec{v}}{B}=\colvec{0 \\ 2 \\ 1}
 \end{equation*}
 Here we will see how to convert between the two representations:
-we will develop a formula that, given two bases for a space, 
-converts the representation
-of a vector with respect to the first basis to its representation with 
-respect to the second.
+we will develop a formula that converts the representation
+of a vector with respect to a first basis to its representation with 
+respect to a second.
 \end{frame}
 
 
@@ -108,9 +107,7 @@ This result supports the definition.
 $B=\sequence{1,1+x,1+x+x^2}$ and
 $D=\sequence{x^2-1,x,x^2+1}$.
 Compute $\rep{id}{B,D}$ in the same way that we compute the representation
-of any function: find 
-$\rep{\identity(1)}{D}$, $\rep{\identity(1+x)}{D}$, and
-$\rep{\identity(1+x+x^2)}{D}$.
+of any function: using $\rep{id(1)}{D}$, etc. 
 \begin{equation*}
   \rep{1}{D}=\colvec{-1/2 \\ 0 \\ 1/2}
   \quad
@@ -118,7 +115,7 @@ $\rep{\identity(1+x+x^2)}{D}$.
   \quad
   \rep{1+x+x^2}{D}=\colvec{0 \\ 1 \\ 1}
 \end{equation*}
-We put them together into the change of basis matrix.
+Concatenate them to get the change of basis matrix.
 \begin{equation*}
   \rep{id}{B,D}=
   \begin{mat}
@@ -127,16 +124,22 @@ We put them together into the change of basis matrix.
     1/2  &1/2  &1 
   \end{mat}
 \end{equation*}
-For an example consider $\vec{v}=2-x+3x^2$.
+For example, consider $\vec{v}=2-x+3x^2$.
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{3 \\ -4 \\ 3}
   \qquad
   \rep{\vec{v}}{D}
   =\colvec{1/2 \\ -1 \\ 5/2}
+  =\begin{mat}
+    -1/2 &-1/2 &0 \\
+     0   &1    &1 \\
+    1/2  &1/2  &1 
+  \end{mat}
+  \colvec{3 \\ -4 \\ 3}
 \end{equation*}
 \end{frame}
 \begin{frame}
-The change of basis matrix does the conversion.
+\noindent while
 \begin{equation*}
   \begin{mat}
     -1/2 &-1/2 &0 \\
@@ -147,6 +150,7 @@ The change of basis matrix does the conversion.
   =
   \colvec{1/2 \\ -1 \\ 5/2}
 \end{equation*}
+so the change of basis matrix does indeed do the conversion.
 \end{frame}
 
 
@@ -154,80 +158,116 @@ The change of basis matrix does the conversion.
 \begin{frame}
 \lm[le:NonSingIsChBasis]
 \ExecuteMetaData[../map5.tex]{lm:NonSingIsChBasis}
-\pf
-\ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis0}
+\iftoggle{showallproofs}{
+  \pf
+  \ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis0}
 
-\pause
-\ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis1}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis2}
-\begin{equation*}\hspace*{-1.5em}
-  M_{i}(k)
-    \colvec{
-       c_1     \\
-       \vdots  \\
-       c_i    \\
-       \vdots  \\
-       c_n  }
-  =
-    \colvec{
-       c_1     \\
-       \vdots  \\
-       kc_i    \\
-       \vdots  \\
-       c_n  }
-  \quad
-  P_{i,j}
-    \colvec{
-       c_1     \\
-       \vdots  \\
-       c_i    \\
-       \vdots  \\
-       c_j    \\
-       \vdots  \\
-       c_n  }
-  =
-    \colvec{
-       c_1     \\
-       \vdots  \\
-       c_j    \\
-       \vdots  \\
-       c_i    \\
-       \vdots  \\
-       c_n  }
-  \quad
-  C_{i,j}(k)
-    \colvec{
-       c_1     \\
-       \vdots  \\
-       c_i    \\
-       \vdots  \\
-       c_j    \\
-       \vdots  \\
-       c_n  }
-  =
-    \colvec{
-       c_1     \\
-       \vdots  \\
-       c_i    \\
-       \vdots  \\
-       kc_i+c_j    \\
-       \vdots  \\
-       c_n  }
-\end{equation*}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis3}
+  \pause
+  \ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis1}
+}{
 
-\pause
-\ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis4}
+  \medskip
+  The book contains the proof; we give an example that illustrates.
+  \medskip
+  \ex
+  To show that any nonsingular matrix $M$ changes bases recall that
+  it decomposes into a product of elementary
+  reduction matrices $M=R_1\cdots R_r$; we will be finished
+  if we show that each such matrix changes bases.
+  Consider this $\nbyn{3}$ case.
+  \begin{equation*}
+    C_{1,3}(-4)\cdot\rep{\vec{v}}{B}
+    =
+    \begin{mat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+     -4 &0 &1
+    \end{mat}
+    \colvec{r_1 \\ r_2 \\ r_3}
+    =
+    \colvec{r_1 \\ r_2 \\ -4r_1+r_3}
+  \end{equation*}
+  Where $B=\sequence{\vec{\beta}_1,\vec{\beta}_2,\vec{\beta}_3}$,
+  the right side represents the same vector~$\vec{v}$ with respect to
+  $\hat{B}=\sequence{\vec{\beta}_1+4\vec{\beta}_3,\vec{\beta}_2,\vec{\beta}_3}$.
+  \begin{equation*}
+    r_1\cdot(\vec{\beta}_1+4\vec{\beta}_3)
+      +r_2\cdot\beta_2
+      +(-4r_1+r_3)\cdot\vec{\beta}_3
+    =r_1\vec{\beta}_1+r_2\beta_2+r_3\vec{\beta}_3
+  \end{equation*}
+  Verifying that $\hat{B}$ is a basis is routine.
+}
 \end{frame}
-\begin{frame}
-\ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis5}
-\qed
-\end{frame}
-
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis2}
+  \begin{equation*}\hspace*{-1.5em}
+    M_{i}(k)
+      \colvec{
+         c_1     \\
+         \vdots  \\
+         c_i    \\
+         \vdots  \\
+         c_n  }
+    =
+      \colvec{
+         c_1     \\
+         \vdots  \\
+         kc_i    \\
+         \vdots  \\
+         c_n  }
+    \quad
+    P_{i,j}
+      \colvec{
+         c_1     \\
+         \vdots  \\
+         c_i    \\
+         \vdots  \\
+         c_j    \\
+         \vdots  \\
+         c_n  }
+    =
+      \colvec{
+         c_1     \\
+         \vdots  \\
+         c_j    \\
+         \vdots  \\
+         c_i    \\
+         \vdots  \\
+         c_n  }
+    \quad
+    C_{i,j}(k)
+      \colvec{
+         c_1     \\
+         \vdots  \\
+         c_i    \\
+         \vdots  \\
+         c_j    \\
+         \vdots  \\
+         c_n  }
+    =
+      \colvec{
+         c_1     \\
+         \vdots  \\
+         c_i    \\
+         \vdots  \\
+         kc_i+c_j    \\
+         \vdots  \\
+         c_n  }
+  \end{equation*}
+  \end{frame}
+  \begin{frame}
+  \ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis3}
+  
+  \pause
+  \ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis4}
+  \end{frame}
+  \begin{frame}
+  \ExecuteMetaData[../map5.tex]{pf:NonSingIsChBasis5}
+  \qed
+  \end{frame}
+}{}
 
 
 \begin{frame}
@@ -251,10 +291,10 @@ Here is the arrow diagram.
 
 
 
-\begin{frame}
+\begin{frame}\vspace*{-1ex}
 \ex
-Consider the derivative map $\map{d/dx}{\polyspace_2}{\polyspace_2}$,
-and consider also these two pairs of bases
+Consider the derivative map $\map{d/dx}{\polyspace_2}{\polyspace_2}$
+as well as
 $B=\sequence{1,1+x,1+x+x^2}, D=\sequence{1+x^2,x,1-x^2}$
 and 
 $\hat{B}=\sequence{1,x,x^2}, \hat{D}=\sequence{1+x,x+x^2,1+x^2}$.
@@ -293,7 +333,7 @@ To do the conversion we find these.
     1  &-1/2   &0
   \end{mat}
 \end{equation*}
-Equation~($*$) says that this equals $\rep{d/dx}{\hat{B},\hat{D}}$.
+Equation~($*$) says this product $\rep{d/dx}{\hat{B},\hat{D}}$.
 \begin{equation*}
   \begin{mat}
     0  &1/2    &1  \\
