@@ -226,34 +226,34 @@ this is the matrix representation of $\pi$.
   \end{mat}
 \end{equation*}
 \end{frame}
-% \begin{frame}
-% \ex
-% Again consider projection onto the $x$-axis
-% \begin{equation*}
-%   \colvec{a \\ b}\mapsunder{\pi}\colvec{a \\ 0}
-% \end{equation*}
-% but this time take the input and output bases to be the standard.
-% \begin{equation*}
-%   B=D=\stdbasis_2
-%   =\sequence{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
-% \end{equation*}
-% We have
-% \begin{gather*}
-%   \colvec{1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
-%   \quad\text{ so }
-%   \rep{\pi(\vec{\beta}_1)}{D}=\colvec{1 \\ 0}               \\
-%   \colvec{0 \\ 1}\mapsunder{\pi}\colvec{0 \\ 0}
-%   \quad\text{ so }
-%   \rep{\pi(\vec{\beta}_2)}{D}=\colvec{0 \\ 0}
-% \end{gather*}
-% and this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
-% \begin{equation*}
-%   \begin{mat}
-%     1  &0  \\
-%     0  &0
-%   \end{mat}
-% \end{equation*}
-% \end{frame}
+\begin{frame}
+\ex
+Again consider projection onto the $x$-axis
+\begin{equation*}
+  \colvec{a \\ b}\mapsunder{\pi}\colvec{a \\ 0}
+\end{equation*}
+but this time take the input and output bases to be the standard.
+\begin{equation*}
+  B=D=\stdbasis_2
+  =\sequence{\colvec{1 \\ 0}, \colvec{0 \\ 1}}
+\end{equation*}
+We have
+\begin{gather*}
+  \colvec{1 \\ 0}\mapsunder{\pi}\colvec{1 \\ 0}
+  \quad\text{ so }
+  \rep{\pi(\vec{\beta}_1)}{D}=\colvec{1 \\ 0}               \\
+  \colvec{0 \\ 1}\mapsunder{\pi}\colvec{0 \\ 0}
+  \quad\text{ so }
+  \rep{\pi(\vec{\beta}_2)}{D}=\colvec{0 \\ 0}
+\end{gather*}
+and this is $\rep{\pi}{\stdbasis_2,\stdbasis_2}$.
+\begin{equation*}
+  \begin{mat}
+    1  &0  \\
+    0  &0
+  \end{mat}
+\end{equation*}
+\end{frame}
 
 \begin{frame}
 \ex Consider the domain~$\Re^2$ and the codomain~$\Re$.
@@ -484,7 +484,7 @@ Multiply $c\cdot\rep{\vec{u}}{B}+d\cdot\rep{\vec{w}}{D}$ by $H$.
     1 &2 \\
     3 &4
   \end{mat}
-  \left(c\cdot\colvec{u_1 \\ u_2}+d\cdot\colvec{v_1 \\ v_2}\right)
+  (c\cdot\colvec{u_1 \\ u_2}+d\cdot\colvec{v_1 \\ v_2})
   &=
   \begin{mat}
     1 &2 \\
@@ -619,31 +619,23 @@ given by
 \end{equation*}
 Its range is the line~$x=y$ and so the rank of the map
 is~$1$.
-
+\pause
 We will see two matrices representing this map,
-the first with respect the standard bases $\stdbasis_2,\stdbasis_2$
-and the second with respect to these.
+the first with respect to these.
 \begin{equation*}
   B=\sequence{\colvec{1 \\ 1}, \colvec{-1 \\ 1}},
   \quad
   D=\sequence{\colvec{1/2 \\ 0}, \colvec{0 \\ 1/3}}
 \end{equation*}
-The standard basis case is easy.  This is the other calculation.
+This calculation is routine.
 \begin{equation*}
-  \rep{\colvec{1 \\ 1}}{D}=\colvec{2 \\ 3}
-  \quad
+  \rep{t(\vec{\beta}_1)}{D}=\rep{\colvec{1 \\ 1}}{D}=\colvec{2 \\ 3}
+  \qquad
   \rep{\colvec{-3 \\ -3}}{D}=\colvec{-6 \\ -9}
 \end{equation*}
-\pause
-The two representing matrices are each of rank~$1$.
+The representing matrix has matrix rank~$1$ since the second row is $3/2$ of
+the first.
 \begin{equation*}
-  \rep{t}{\stdbasis_2,\stdbasis_2}
-  =
-  \begin{mat}
-    2  &-1  \\
-    2  &-1  
-  \end{mat}
-  \qquad
   \rep{t}{B,D}
   =
   \begin{mat}
@@ -651,6 +643,32 @@ The two representing matrices are each of rank~$1$.
     3  &-9  
   \end{mat}
 \end{equation*}
+\end{frame}
+\begin{frame}
+Still considering $\map{t}{\Re^2}{\Re^2}$
+given by
+\begin{equation*}
+  \colvec{a \\ b}\mapsto\colvec{2a-b \\ 2a-b}
+\end{equation*}
+this time represent it with respect to the standard bases
+$\stdbasis_3,\stdbasis_3$.
+\begin{align*}
+  &t(\vec{e}_1)=t(\colvec{1 \\ 0})=\colvec{2 \\ 2}
+  \qquad \rep{\colvec{2 \\ 2}}{\stdbasis_2}=\colvec{2 \\ 2}  \\
+  &t(\vec{e}_2)=t(\colvec{0 \\ 1})=\colvec{-1 \\ -1}
+  \qquad \rep{\colvec{-1 \\ -1}}{\stdbasis_2}=\colvec{-1 \\ -1}
+\end{align*}
+(Remember that with respect to the standard basis, a vector represents itself.)
+\begin{equation*}
+  \rep{t}{\stdbasis_2,\stdbasis_2}
+  =
+  \begin{mat}
+    2  &-1  \\
+    2  &-1  
+  \end{mat}
+\end{equation*}
+Gauss's Method on that matrix ends with one
+nonzero row so it has matrix rank~$1$, as on the prior slide. 
 \end{frame}
 
 
@@ -672,8 +690,11 @@ The two representing matrices are each of rank~$1$.
 
   \bigskip
   The book has the proof.
+  There are many examples in the section below.
 }
 \end{frame}
+
+
 
 \begin{frame}
 \ex
@@ -768,6 +789,362 @@ is not an isomorphism.
 
 
 
+
+%=======================================
+\section{Finding Map Facts From the Matrix}
+
+
+
+\begin{frame}{Review examples}
+We will revisit some of the results about
+representing a map with a matrix, and do a number of calculations that 
+show how we can study the map with calculations on 
+associated matrices.
+
+\ex 
+First, the number of rows and columns.
+\begin{align*}
+  \rep{h}{B,D}\cdot\rep{\vec{v}}{B}
+  &=\rep{\vec{w}}{D}                  \\
+  \begin{mat}
+    1 &2 &3 \\ 
+    4 &5 &6
+  \end{mat}
+  \colvec{x \\ y \\ z}
+  &=
+  \colvec{a \\ b}
+\end{align*}
+(Here and below we write representations
+of the domain vector using $x$, $y$, etc., and 
+representations of the codomain vector with $a$, $b$, etc.)
+
+\pause
+That equation has $H$ acting on three-tall vector inputs, and 
+yielding two-tall vector outputs.
+Matrix and vector entries combine by taking the
+dot product of $H$'s rows with $\rep{\vec{v}}{B}$'s column.
+So, given $H$ we can tell the dimension of the $h$'s domain because it
+is the width of~$H$'s rows, in other words it is the number of columns in~$H$.
+Similarly, the dimension of $h$'s codomain is the number of rows in~$H$.
+\end{frame}
+
+\begin{frame}
+\ex Let $h$ be the transformation of~$\Re^2$ represented with respect to 
+some bases by this matrix.
+\begin{equation*}
+  H=
+  \begin{mat}
+    1 &2 \\ 
+    3 &4
+  \end{mat}
+\end{equation*}
+This matrix has rank~$2$ since the second row is not a multiple
+of the first.
+\pause
+Consider this equation.
+\begin{align*}
+  \rep{h}{B,D}\cdot\rep{\vec{v}}{B}
+  &=\rep{\vec{w}}{D}                  \\
+  \begin{mat}
+    1 &2 \\ 
+    3 &4
+  \end{mat}
+  \colvec{x \\ y}
+  &=
+  \colvec{a \\ b}
+  \tag{$*$}
+\end{align*}
+We will solve this linear system for $x$ and~$y$ and then 
+use that to understand 
+why this map is onto, and why it is one-to-one.
+\begin{multline*}
+  \begin{amat}{2}
+    1 &2  &a \\
+    3 &4  &b
+  \end{amat}
+  \grstep{-3\rho_1+\rho_2}
+  \begin{amat}{2}
+    1 &2  &a \\
+    0 &-2 &-3a+b
+  \end{amat}                   \\    
+  \grstep{-(1/2)\rho_2}        
+  \begin{amat}{2}
+    1 &2  &a \\
+    0 &1  &(3/2)a-(1/2)b
+  \end{amat}
+  \grstep{-2\rho_2+\rho_1}
+  \begin{amat}{2}
+    1 &0  &-2a+b     \\
+    0 &1  &(3/2)a-(1/2)b
+  \end{amat}
+\end{multline*}
+\end{frame}
+
+\begin{frame}
+\begin{equation*}
+  \begin{amat}{2}
+    1 &2  &a \\
+    3 &4  &b
+  \end{amat}
+  \grstep{-3\rho_1+\rho_2}
+  \cdots\quad
+  % \grstep{-(1/2)\rho_2}        
+  % \grstep{-2\rho_2+\rho_1}
+  \begin{amat}{2}
+    1 &0  &-2a+b     \\
+    0 &1  &(3/2)a-(1/2)b
+  \end{amat}
+\end{equation*}
+\medskip
+
+A function is onto if every member of the codomain~$\vec{w}$
+is the image of at least one member~$\vec{v}$ of the domain.
+The calculation shows that for all $\vec{w}$\Dash
+for all representation entries $a,b\in\Re$\Dash there 
+is an associated $\vec{v}$,
+namely the domain member
+represented with
+$x=-2a+b$ and~$y=(3/2)a-(1/2)b$.
+So $h$ is onto.
+
+Thus $\rangespace{h}=\Re^2$, and so
+the rank of~$h$ is as large as it could be,~$2$.
+
+\pause
+\medskip
+A function is one-to-one if every member 
+of the codomain~$\vec{w}$
+is the image of at most one member~$\vec{v}$ of the domain.
+The calculation shows that for all~$\vec{w}$,  
+for all representing $a,b\in\Re$, the associated~$\vec{v}$
+is unique, as represented by unique $x$ and~$y$.
+So this~$h$ is one-to-one.
+
+To compute the null space set $a=0$, $b=0$, giving 
+the trivial domain subspace $x=0$, $y=0$.
+So the nullity is~$0$.
+(This is redundant given the prior paragraph since we know $\vec{0}_V$
+maps to $\vec{0}_W$ and with the map being one-to-one, only one
+domain vector is sent to $\vec{0}_W$, so it must be $\vec{0}_V$.)
+\end{frame}
+
+
+\begin{frame}{Leveraging existing tools}
+The lesson is that 
+we can fix bases and determine things about the map by doing
+calculations with the representations of the map and vectors.
+
+For instance, if we fix a basis~$B$ for the domain space~$V$ then every
+vector $\vec{v}\in V$ is represented by one and only one column 
+$\rep{\vec{v}}{B}$.
+The same holds for the codomain vectors $\vec{w}\in W$.
+So if we fix bases and calculate that for every output representation 
+there exists an input representation, we have found that for 
+every output vector there exists an input vector,
+that the map is onto. 
+
+We find working with the representations convenient because we have a bunch of 
+tools, most notably Gauss's Method.
+
+In these calculations, what is represented (polynomials, matrices, etc.)
+is often not relevant.
+Several examples below use maps between real spaces and with
+respect to the standard bases so we can suppress the ``representation''
+wording (because in such cases vector are their own representations).
+\end{frame}
+
+
+
+\begin{frame}
+\ex   
+Suppose that a map~$h$ between real spaces is represented by this.
+\begin{equation*}
+  H=
+  \begin{mat}
+    1 &2 &1 \\ 
+    2 &3 &0
+  \end{mat}
+\end{equation*}
+The domain has dimension~$3$ and the codomain has dimension~$2$
+so $\map{f}{\Re^3}{\Re^2}$.
+\pause
+\begin{equation*}
+  \begin{amat}{3}
+    1 &2 &1  &a \\
+    2 &3 &0  &b
+  \end{amat}
+  \grstep{-2\rho_1+\rho_2}
+  \grstep{-\rho_2}
+  \grstep{-2\rho_2+\rho_1}
+  \begin{amat}{3}
+    1 &0 &-3  &-3a+2b \\
+    0 &1 &2   &2a-b
+  \end{amat}
+\end{equation*}
+\pause
+For each $a,b$ there is at least one triple
+$x,y,z$ so this map is onto;
+$\rank(h)=2$.
+
+\pause 
+For each $a,b$ there is more than one
+triple $x,y,z$ so
+this map is not one-to-one.
+To find the null space set $a=0$, $b=0$.
+\begin{equation*}
+  \nullspace{h}
+   =\set{\colvec{x \\ y \\ z}\suchthat \text{$y+2z=0$ and $x-3z=0$}}
+   =\set{\colvec{3 \\ -2 \\ 1}z\suchthat z\in\Re}
+\end{equation*}
+The nullity is~$1$.
+\end{frame}
+
+
+\begin{frame}
+\ex Let $h$ be the transformation of~$\Re^2$ represented with respect to the
+standard bases $\stdbasis_2,\stdbasis_2$ by this matrix.
+\begin{equation*}
+  H=
+  \begin{mat}
+    1 &3 \\ 
+    2 &6
+  \end{mat}
+\end{equation*}
+The matrix rank is~$1$.
+\begin{equation*}
+  \begin{amat}{2}
+    1 &3  &a \\
+    2 &6  &b
+  \end{amat}
+  \grstep{-2\rho_1+\rho_2}
+  \begin{amat}{2}
+    1 &3  &a \\
+    0 &0 &-2a+b
+  \end{amat}                   
+\end{equation*}
+\pause
+The map is not onto; $\rank(h)=1$.
+\begin{equation*}
+  \rangespace{h}
+  =\set{\colvec{a \\ b}\suchthat -2a+b=0}
+  =\set{\colvec{1/2 \\ 1}b\suchthat b\in\Re}
+\end{equation*}
+\pause
+The map is also not one-to-one; $\nullity(h)=1$.
+\begin{equation*}
+  \nullspace{h}
+  =\set{\colvec{x \\ y}\suchthat x+3y=0}
+  =\set{\colvec{-3 \\ 1}y\suchthat y\in\Re}
+\end{equation*}
+Note that rank plus nullity equals the dimension of the domain.
+\end{frame}
+
+\begin{frame}
+\ex
+The definition of this map $\map{h}{\Re^3}{\Re^3}$  
+\begin{equation*}
+  \colvec{x \\ y \\ z}\mapsto\colvec{x \\ x+z \\ x-z}
+\end{equation*}
+shows that there is a restriction on which outputs are possible\Dash
+the first component of the output is the average of
+the other two\Dash so it is not onto.
+It is not one-to-one because the output entries don't use~$y$,
+so holding $x$ and~$z$ constant and varying~$y$ gives many inputs all
+associated with the same output. 
+We will do the calculations and see how those facts show themselves.
+
+To represent~$h$ fix bases (we'll use the standard ones).
+\begin{equation*}
+  \colvec{1 \\ 0 \\ 0}\mapsto\colvec{1 \\ 1 \\ 1}
+  \quad
+  \colvec{0 \\ 1 \\ 0}\mapsto\colvec{0 \\ 0 \\ 0}
+  \quad
+  \colvec{0 \\ 0 \\ 1}\mapsto\colvec{0 \\ 1 \\ -1}
+\end{equation*}
+So $H$ is this.
+\begin{equation*}
+  \rep{h}{\stdbasis_3,\stdbasis_3}
+  =
+  \begin{mat}
+    1 &0 &0 \\
+    1 &0 &1 \\
+    1 &0 &-1
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+This calculation
+\begin{equation*}
+  \begin{amat}{3}
+    1 &0 &0  &a \\
+    1 &0 &1  &b \\
+    1 &0 &-1 &c   
+  \end{amat}
+  \grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}
+  % \begin{amat}{3}
+  %   1 &0 &0  &a \\
+  %   0 &0 &1  &-a+b \\
+  %   0 &0 &-1 &-a+c   
+  % \end{amat}
+  \grstep{\rho_2+\rho_3}
+  \begin{amat}{3}
+    1 &0 &0  &a \\
+    0 &0 &1  &-a+b \\
+    0 &0 &0  &-2a+b+c   
+  \end{amat}
+\end{equation*}
+shows that these are true.
+\begin{align*}
+  \rangespace{h}
+   &=\set{\colvec{a \\ b \\ c}\suchthat a=(b+c)/2}    
+   =\set{\colvec{1/2 \\ 1 \\ 0}b+\colvec{1/2 \\ 0 \\ 1}c\suchthat b,c\in\Re}    \\
+  \nullspace{h}
+   &=\set{\colvec{x \\ y \\ z}\suchthat \text{$x=0$ and $z=0$}}  
+   =\set{\colvec{0 \\ 1 \\ 0}y\suchthat y\in\Re}
+\end{align*}
+By the first the map is not onto since the range space is not $3$~dimensional,
+it is $2$~dimensional.
+By the second the map is not one-to-one since the null space is not
+$0$~dimensional, it is $1$~dimensional.
+\end{frame}
+
+
+\begin{frame}
+\ex A linear map represented as here
+\begin{equation*}
+  H=
+  \begin{mat}
+    1 &2 \\
+    1 &3 \\
+    1 &4
+  \end{mat}
+\end{equation*}
+has a dimension~$2$ domain and a dimension~$3$ codomain.
+Then
+\begin{equation*}
+  \begin{amat}{2}
+    1 &2 &a \\
+    1 &3 &b \\
+    1 &4 &c   
+  \end{amat}
+  \grstep[-\rho_1+\rho_3]{-\rho_1+\rho_2}
+  \grstep{-2\rho_2+\rho_3}
+  \grstep{-2\rho_2+\rho_1}
+  \begin{amat}{2}
+    1 &0 &3a-2b \\
+    0 &1 &-a+b \\
+    0 &0 &a-2b+c   
+  \end{amat}
+\end{equation*}
+gives these.
+\begin{align*}
+  \rangespace{h}
+  &=\set{\colvec{a \\ b \\ c}\suchthat a=2b-c}  \\
+  \nullspace{h}
+  &=\set{\colvec{x \\ y}\suchthat x=y=0}
+\end{align*}
+The map~$h$ is not onto but it is one-to-one.
+\end{frame}
 
 %...........................
 % \begin{frame}
