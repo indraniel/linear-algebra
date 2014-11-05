@@ -4,7 +4,7 @@
 \usefonttheme{professionalfonts}
 \usefonttheme{serif}
 \PassOptionsToPackage{pdfpagemode=FullScreen}{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color}
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 % \DeclareGraphicsRule{*}{mps}{*}{}
 \usepackage{../linalgjh}
 \usepackage{present}
@@ -59,7 +59,7 @@ Recall that the collection of linear functions
 between two spaces $\linmaps{V}{W}$ is a vector space.
 That is, given 
 a linear map $\map{f}{V}{W}$ then 
-the scalar multiple $r\cdot f$
+the scalar multiple $rf$
 \begin{equation*}
   \vec{v}\mapsunder{r\cdot f} r\cdot (\,f(\vec{v})\,)
 \end{equation*}
@@ -72,58 +72,61 @@ linear then their sum
 is also linear $\map{f+g}{V}{W}$.
 
 \pause
-We now see how the matrix representations
-s $\rep{f}{B,D}$ and 
-$\rep{g}{B,D}$
-combine to give the representations $\rep{r\cdot f}{B,D}$
-and $\rep{f+g}{B,D}$.
+We now see how the matrix representation of
+$\rep{f}{B,D}$ 
+is related to that of $\rep{rf}{B,D}$, 
+and how the representations of 
+$\rep{f}{B,D}$ and $\rep{g}{B,D}$
+combine to give the representation of $\rep{f+g}{B,D}$.
 \end{frame}
 \begin{frame}
 \ex
+Fix a domain~$V$ and codomain~$W$ with bases
+$B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$
+and $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$.
 Let $\map{f}{V}{W}$ be the linear map represented 
-in this way with respect to 
-some bases $B=\sequence{\vec{\beta}_1,\vec{\beta}_2}$
-and $D=\sequence{\vec{\delta}_1,\vec{\delta}_2}$
+by a matrix~$H$
+We will find the matrix representing the map $\map{6f}{V}{W}$.
 \begin{equation*}
-  \rep{f}{B,D}=
+  \vec{v}\mapsunder{6f} 6\cdot f(\vec{v})
+\end{equation*}
+Let
+this be the representation
+of an output vector~$f(\vec{v})$.
+\begin{equation*}
+  % \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
+  % \qquad
+  \rep{\,f(\vec{v})\,}{D}=\colvec{w_1 \\ w_2}
+  % =\colvec{2v_1+v_2 \\ 3v_1+4v_2} 
+\end{equation*}
+Note that
+$6\cdot f(\vec{v})=6\cdot (w_1\vec{\delta}_1+w_2\vec{\delta}_2)
+=(6w_1)\cdot\vec{\delta}_1+(6w_2)\cdot\vec{\delta}_2$,
+so $6f\:(\vec{v})$ has
+this representation.
+\begin{equation*}
+  % \rep{6f(\vec{v})}{D}
+  % =
+  \rep{6f\;(\vec{v})}{D}=\colvec{6w_1 \\ 6w_2} 
+\end{equation*}
+Entries of the
+representation of $6f\:(\vec{v})$ are
+$6$ times as big as the entries of the representation of~$f(\vec{v})$.
+So the matrix representing $6f$ needs entries that are $6$~times as big
+as those of the matrix representing~$f$.
+\end{frame}
+\begin{frame}
+\noindent For example, if~$f$ is represented by this matrix
+\begin{equation*}
+  H=\rep{f}{B,D}=
   \begin{mat}
     2  &1  \\
     3  &4  
   \end{mat}
 \end{equation*}
-and suppose that where $f(\vec{v})=\vec{w}$,
-these are the representations.
-\begin{equation*}
-  \rep{\vec{v}}{B}=\colvec{v_1 \\ v_2}
-  \quad
-  \rep{\vec{w}}{D}=\colvec{w_1 \\ w_2}
-  % =\colvec{2v_1+v_2 \\ 3v_1+4v_2} 
-\end{equation*}
-We will find the matrix representing $6f$.
-
-The action of $6f$ is 
-$\vec{v}\mapsto 6\vec{w}=6(w_1\vec{\delta}_1+w_2\vec{\delta}_2)
-=(6w_1)\vec{\delta}_1+(6w_2)\vec{\delta}_2$,
-so the output vector has
-this representation.
-\begin{equation*}
-  % \rep{6f(\vec{v})}{D}
-  % =
-  \rep{6\vec{w}}{D}=\colvec{6w_1 \\ 6w_2} 
-\end{equation*}
-Thus,
-compared with the representation of the output
-vector from~$f$, the 
-representation of the output 
-vector from $6f$ has entries that are
-$6$ times as big.
-
-% Then how do the matrices representing each function compare? 
-\end{frame}
-\begin{frame}
-\noindent Here is the matrix-vector representation of the action of~$f$.  
+then this is the matrix-vector representation of the action of~$f$.  
 \begin{equation*}\
-  \rep{f}{B,D}\cdot \rep{\vec{v}}{B}=
+  % \rep{f}{B,D}\cdot \rep{\vec{v}}{B}=
   \begin{mat}
     2  &1 \\
     3  &4
@@ -131,15 +134,13 @@ $6$ times as big.
   \colvec{v_1 \\ v_2}
   =\colvec{2v_1+v_2 \\ 3v_1+4v_2}
 \end{equation*}
-\pause
-The prior slide shows that on the same $\vec{v}$ the matrix representing $6f$ 
-does this.
+and this is the matrix-vector representation of the action of~$6f$.
 \begin{equation*}
   \rep{6f}{B,D}\cdot
   \colvec{v_1 \\ v_2}
   =\colvec{12v_1+6v_2 \\  18v_1+24v_2}
 \end{equation*}
-Therefore this is the matrix representing the map $\map{6f}{V}{W}$.
+So this is the matrix representing~$6f$.
 \begin{equation*}
   \rep{6f}{B,D}
   =
@@ -148,15 +149,42 @@ Therefore this is the matrix representing the map $\map{6f}{V}{W}$.
     18 &24
   \end{mat}
 \end{equation*}
-Going from the function $f$ to the 
-function~$6f$ has the effect on the representation matrix of  
-multiplying all the entries by $6$.
 \end{frame}
 
 
 \begin{frame}
 \ex
-Suppose that $\map{f,g}{V}{W}$ are linear maps represented by these matrices.
+Next consider the representation of the sum~$f+g$ of two linear maps
+$\map{f,g}{V}{W}$. 
+For a domain vector~$\vec{v}$ let the outputs $f(\vec{v})$ and $g(\vec{v})$ 
+have these representations.
+\begin{equation*}
+  \rep{f(\vec{v})}{D}=\colvec{u_1 \\ u_2}
+  \qquad
+  \rep{g(\vec{v})}{D}=\colvec{w_1 \\ w_2}
+\end{equation*}
+The action of $f+g$ is this.
+\begin{align*}
+  \vec{v}
+  \mapsunder{f+g}
+  \vec{u}+\vec{v}                      
+  &=(u_1\vec{\delta}_1+u_2\vec{\delta}_2)
+  +
+  (w_1\vec{\delta}_1+w_2\vec{\delta}_2)   \\
+  &=(u_1+w_1)\cdot\vec{\delta}_1+(u_2+w_2)\cdot\vec{\delta}_2
+\end{align*}
+The effect on the representations
+of adding the functions is to add the column vectors.
+\begin{equation*}
+  \rep{\,(f+g)\,(\vec{v})\,}{D}=\colvec{u_1+w_1 \\ u_2+w_2}
+\end{equation*}
+Therefore, the matrix representing $f+g$ needs entries that are the sum
+of those of the two matrix representations.
+\end{frame}
+\begin{frame}
+\noindent 
+For instance, 
+suppose that the maps are represented by these.
 \begin{equation*}
   \rep{f}{B,D}=
   \begin{mat}
@@ -170,35 +198,7 @@ Suppose that $\map{f,g}{V}{W}$ are linear maps represented by these matrices.
     7  &6  
   \end{mat}
 \end{equation*}
-Let $f(\vec{v})=\vec{u}$ and $g(\vec{v})=\vec{w}$ 
-with these the column vector representations.
-\begin{equation*}
-  \rep{f(\vec{v})}{D}=\colvec{u_1 \\ u_2}
-  \quad
-  \rep{g(\vec{v})}{D}=\colvec{w_1 \\ w_2}
-\end{equation*}
-We will find the matrix representing $f+g$.
-
-\pause
-The action of 
-$f+g$ is this. 
-\begin{align*}
-  \vec{v}
-  \mapsunder{f+g}
-  \vec{u}+\vec{v}                      
-  &=(u_1\vec{\delta}_1+u_2\vec{\delta}_2)
-  +
-  (w_1\vec{\delta}_1+w_2\vec{\delta}_2)   \\
-  &=(u_1+w_1)\vec{\delta}_1+(u_2+w_2)\vec{\delta}_2
-\end{align*}
-Thus for any $\vec{v}$, the effect on the representations
-of adding the functions is to add the column vectors.
-\begin{equation*}
-  \rep{\,(f+g)\,(\vec{v})\,}{D}=\colvec{u_1+w_1 \\ u_2+w_2}
-\end{equation*}
-\end{frame}
-\begin{frame}
-\noindent The functions given have 
+The functions given have 
 this effect.
 \begin{align*}
   \rep{f(\vec{v})}{D}=
@@ -217,14 +217,13 @@ this effect.
   \colvec{v_1 \\ v_2}
   =\colvec{5v_1+8v_2 \\ 7v_1+6v_2}
 \end{align*}
-\pause
-So we want the matrix that acts in this way.
+The $f+g$ matrix acts in this way
 \begin{equation*}
   \rep{\,(f+g)\,(\vec{v})\,}{D}
   \colvec{v_1 \\ v_2}
   =\colvec{7v_1+9v_2 \\ 10v_1+10v_2}
 \end{equation*}
-This matrix is it.
+so this is its matrix representation.
 \begin{equation*}
   \rep{f+g}{B,D}=
   \begin{mat}
@@ -232,9 +231,6 @@ This matrix is it.
     10  &10  
   \end{mat}
 \end{equation*}
-So, in this exploratory example,
-the representation of the sum is the entry-by-entry sum of the
-representations.  
 \end{frame}
 
 \begin{frame}{Definition of matrix sum and scalar multiple}
@@ -488,29 +484,29 @@ the number of columns on the left must equal the number of rows on the right.
   \end{mat}
 \end{equation*}
 
-% \pause
-% \ex
-% Square matrices of the same size have a defined product.
-% \begin{equation*}
-%   \begin{mat}
-%     1  &3  &-1 \\
-%     0  &0  &0  \\
-%     2  &0  &0
-%   \end{mat}
-%   \begin{mat}
-%     5  &7  &1 \\
-%     2  &2  &0 \\
-%     1  &-1 &2 
-%   \end{mat}
-%   =
-%   \begin{mat}
-%     10  &14  &-1  \\
-%      0  &0   &0   \\
-%     10  &14  &2
-%   \end{mat}
-% \end{equation*}
-% This reflects the fact that we can compose two
-% functions from a space to itself $\map{f,g}{V}{V}$.
+\pause
+\ex
+Square matrices of the same size have a defined product.
+\begin{equation*}
+  \begin{mat}
+    1  &3  &-1 \\
+    0  &0  &0  \\
+    2  &0  &0
+  \end{mat}
+  \begin{mat}
+    5  &7  &1 \\
+    2  &2  &0 \\
+    1  &-1 &2 
+  \end{mat}
+  =
+  \begin{mat}
+    10  &14  &-1  \\
+     0  &0   &0   \\
+    10  &14  &2
+  \end{mat}
+\end{equation*}
+This reflects the fact that we can compose two
+functions from a space to itself $\map{f,g}{V}{V}$.
 \end{frame}
 
 
@@ -549,12 +545,191 @@ This pictures the relationship between maps and matrices.
 \ExecuteMetaData[../map4.tex]{MatMultArrowDiag1}
 \end{frame}
 
+\begin{frame}
+\ex 
+Let $V=\Re^2$, $W=\polyspace_2$, and~$X=\matspace_{\nbyn{2}}$. 
+Fix these bases.  
+\begin{gather*}
+  B=\sequence{\colvec{1 \\ 1}, \colvec{1 \\ -1}}    
+  \qquad
+  C=\sequence{x^2, x^2+x, x^2+x+1}              \\
+  D=\sequence{
+    \begin{mat}
+      1 &0 \\
+      0 &0
+    \end{mat},
+    \begin{mat}
+      0 &2 \\
+      0 &0
+    \end{mat},
+    \begin{mat}
+      0 &0 \\
+      3 &0
+    \end{mat},
+    \begin{mat}
+      0 &0 \\
+      0 &4
+    \end{mat}}
+\end{gather*}
+Suppose that $\map{f}{\Re^2}{\polyspace_2}$ and
+$\map{g}{\polyspace_2}{\matspace_{\nbyn{2}}}$ have these actions.
+\begin{equation*}
+  \colvec{a \\ b}\mapsunder{f} ax^2+(a+b)
+  \qquad
+  px^2+qx+r\mapsunder{g}
+  \begin{mat}
+    p &p+q \\  
+    0 &r
+  \end{mat}
+\end{equation*}
+Then the composition does this.
+\begin{equation*}
+  \colvec{a \\ b}\mapsunder{f}ax^2+(a+b)\mapsunder{g}
+  \begin{mat}
+    a &a \\
+    0 &a+b
+  \end{mat}
+\end{equation*}
+Here is the same statement in the other notation.
+\begin{equation*}
+  \composed{g}{f}\,(\colvec{a \\ b})=  
+  \begin{mat}
+    a &a \\
+    0 &a+b
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+So far in this example we have given the maps above the arrows, $f$, $g$, 
+and $\composed{g}{f}$. 
+\centergraphic{../ch3.20}
+We next compute the matrices representing those maps, and we will
+finish by checking that the product of $H$ and~$G$ is the matrix 
+representing $\composed{g}{h}$.
+
+\pause
+First, find $H=\rep{f}{B,D}$: compute the action of $h$
+on the domain basis vectors,
+\begin{equation*}
+  \colvec{1 \\ 1}\mapsunder{f}x^2+2
+  \quad
+  \colvec{1 \\ -1}\mapsunder{f}x^2
+\end{equation*}
+represent the results with respect to $D$, and make the matrix.
+\begin{equation*}
+  \rep{x^2+2}{C}=\colvec{1  \\ -2 \\ 2}
+  \quad
+  \rep{x^2}{C}=\colvec{1  \\ 0 \\ 0}         
+  \qquad
+  H=
+  \begin{mat}
+    1 &1 \\
+   -2 &0 \\
+    2 &0
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+Do the same for~$g$: see where it maps its domain basis
+\begin{equation*}
+  x^2\mapsto
+  \begin{mat}
+    1 &1 \\
+    0 &0
+  \end{mat}
+  \quad
+  x^2+x\mapsto
+  \begin{mat}
+    1 &2 \\
+    0 &0
+  \end{mat}
+  \quad
+  x^2+x+1\mapsto
+  \begin{mat}
+    1 &2 \\
+    0 &1
+  \end{mat}
+\end{equation*}
+and represent those with respect to its codomain basis.
+\begin{equation*}
+  G=
+  \begin{mat}
+    1   &1  &1  \\
+    1/2 &1  &1  \\
+    0   &0  &0  \\
+    0   &0  &1/4
+  \end{mat}
+\end{equation*}
+
+\pause
+Next, $\composed{g}{f}$ has this action.
+\begin{equation*}
+  \colvec{1 \\ 1}\mapsto
+  \begin{mat}
+    1 &1 \\
+    0 &2
+  \end{mat}
+  \colvec{1 \\ -1}\mapsto
+  \begin{mat}
+    1 &1   \\
+    0 &0
+  \end{mat}
+\end{equation*}
+This represents the composition.
+\begin{equation*}
+  \rep{\composed{g}{h}}{B,D}
+  =
+  \begin{mat}
+    1   &1  \\
+    1/2 &1/2 \\
+    0   &0    \\
+    1/2 &0
+  \end{mat}
+\end{equation*}
+\end{frame}
+\begin{frame}
+To finish the example, check that the product of $G$ with~$H$
+equals the matrix representing~$\composed{g}{h}$.
+\begin{align*}
+  \rep{g}{C,D}\cdot\rep{h}{B,C}
+  &=\rep{\composed{g}{h}}{B,D}           \\
+  \begin{mat}
+    1   &1  &1  \\
+    1/2 &1  &1  \\
+    0   &0  &0  \\
+    0   &0  &1/4
+  \end{mat}
+  \begin{mat}
+    1 &1 \\
+   -2 &0 \\
+    2 &0
+  \end{mat}                    
+  &=  
+  \begin{mat}
+    1   &1  \\
+    1/2 &1/2 \\
+    0   &0    \\
+    1/2 &0
+  \end{mat}
+\end{align*}
+\bigskip
+\centergraphic{../ch3.20}
+\end{frame}
 
 
 \begin{frame}{Order, dimensions, and sizes}
-Consider the order in which we write a composition.
-In $\composed{g}{h}$ the function $g$ is written first, or leftmost, 
-but it is the one applied second.
+These two functions can be composed 
+\begin{equation*}
+  \map{h}{V}{W}
+  \qquad
+  \map{g}{W}{X}
+\end{equation*}
+because the codomain of~$f$ is the domain of~$g$.
+
+Observe about the order of the notation:~in 
+writing the composition~$\composed{g}{h}$,
+the function $g$ is written first (meaning leftmost) 
+but it is applied second.
 \begin{equation*}
   \vec{v}\mapsunder{h} h(\vec{v}) \mapsunder{g} g( h(\vec{v}))
 \end{equation*}
@@ -563,7 +738,7 @@ but it is the one applied second.
 That order carries over to matrices:~$\composed{g}{h}$
 is represented by $GH$.
 
-\pause\medskip
+\pause
 Also consider the dimensions of the spaces.
 \begin{equation*}
   \text{dimension \( n \) space}
@@ -677,26 +852,27 @@ of the right one~$H$.
    +g_{i,\text{\textcolor{red}{$2$}}}h_{\text{\textcolor{red}{$2 $}},j}
    +\dots+g_{i,\text{\textcolor{red}{$r $}}}h_{\text{\textcolor{red}{$r $}},j}
 \end{equation*}
-Here a second row and a third column combine to make a $2,3$~entry.
+Here a second row and a third column combine to make a $2,3$~entry,
+in teal.
 \begin{equation*}
 \setlength{\fboxsep}{1.5pt}
     \begin{mat}
        \begin{array}{@{}cc@{}} 1  &1 \end{array}                         \\ 
-       {\color{green} \begin{array}{@{}cc@{}} 0  &1 \end{array}}           \\ 
+       {\color{teal} \begin{array}{@{}cc@{}} 0  &1 \end{array}}           \\ 
        % \text{\highlight{\( \begin{array}{@{}cc@{}}  0  &1  \end{array} \)}}   \\  
        \begin{array}{@{}cc@{}} 1  &0 \end{array}
     \end{mat}
     \begin{mat}
       \begin{array}{@{}c@{}}  4  \\  5  \end{array}
       &\begin{array}{@{}c@{}}  6  \\  7  \end{array}
-      &{\color{green}\begin{array}{@{}c@{}}  6  \\  7  \end{array}}
+      &{\color{teal}\begin{array}{@{}c@{}}  6  \\  7  \end{array}}
       % &\text{\highlight{\(\begin{array}{@{}c@{}}  8  \\  9  \end{array}\)}}
     \end{mat}
   =
     \begin{mat}
       9  &13   &17                           \\
       % 5  &7    &\text{\highlight{ \(9\) }}   \\  
-      5  &7    &{\color{green} 9 }   \\  
+      5  &7    &{\color{teal} 9 }   \\  
       4  &6    &8
     \end{mat}
 \end{equation*}
@@ -729,8 +905,7 @@ The $2,1$ unit $\nbym{2}{3}$ matrix multiplies from the left
   =
   \begin{mat}
     0 &0 &0 \\
-    2 &1 &3 \\
-    0 &0 &0
+    2 &1 &3 
   \end{mat}
 \end{equation*}
 to copy row~$1$ of the multiplicand into row~$2$ of the result. 
@@ -1192,9 +1367,60 @@ Here is one; the other order is just as easy.
   \end{mat}
 \end{equation*}
 \end{frame}
+\begin{frame}
+One advantage of knowing a matrix inverse is that it makes solving a 
+linear system easy and quick.
+To solve
+\begin{equation*}
+  \begin{linsys}{2}
+    2x &+ &5y &= &-3 \\
+    x  &+ &3y &= &10
+  \end{linsys}
+\end{equation*}
+rewrite as a matrix equation
+\begin{equation*}
+  \begin{mat}
+    2 &5 \\
+    1 &3
+  \end{mat}
+  \colvec{x \\ y}
+  =
+  \colvec{-3 \\ 10}
+\end{equation*}
+and multiply both sides (from the left) by the matrix inverse.
+\begin{align*}
+  \begin{mat}
+    3  &-5 \\
+    -1 &2 
+  \end{mat}\cdot
+  \begin{mat}
+    2 &5 \\
+    1 &3
+  \end{mat}
+  \colvec{x \\ y}
+  &=
+  \begin{mat}
+    3  &-5 \\
+    -1 &2 
+  \end{mat}\cdot
+  \colvec{-3 \\ 10}             \\
+  \begin{mat}
+    1 &0 \\
+    0 &1
+  \end{mat}
+  \colvec{x \\ y}
+  &=
+  \colvec{-59 \\ 23}           \\
+  \colvec{x \\ y}
+  &=
+  \colvec{-59 \\ 23}           
+\end{align*}
+\end{frame}
+
 
 \begin{frame}
-Here is an arrow diagram for matrix inverses.
+This specializes the arrow diagram for composition 
+to the case of inverses.
 \centergraphic{../ch3.21}  
 \end{frame}
 
@@ -1325,7 +1551,8 @@ This is the inverse.
 \end{frame}
 \begin{frame}
 Finding the inverse of a matrix $A$
-is a lot of work but once we have it then solving linear
+is a lot of work but as we noted earlier,
+once we have it then solving linear
 systems $A\vec{x}=\vec{b}$ is easy. 
 \ex
 The linear system
@@ -1367,7 +1594,37 @@ the inverse that we found earlier.
   \colvec{16/3 \\ -2/3 \\ -4/3}
 \end{equation*}
 \end{frame}
-
+\begin{frame}
+We sometimes want to repeatedly solve systems with the same left side
+but different right sides.
+This system equals the one on the prior slide but for one number on the
+right.  
+\begin{equation*}
+  \begin{linsys}{3}
+    x  &+  &3y  &+  &z  &=  &1   \\
+   2x  &   &    &-  &z  &=  &12  \\
+    x  &+  &2y  &   &   &=  &4
+  \end{linsys}
+\end{equation*}
+The solution is this.
+\begin{equation*}
+  % \begin{mat}
+  %   1  &0  &0  \\
+  %   0  &1  &0 \\
+  %   0  &0  &1
+  % \end{mat}
+  \colvec{x \\ y  \\ z}
+  =
+  \begin{mat}
+    2/3   &2/3   &-1  \\
+   -1/3   &-1/3  &1   \\
+    4/3   &1/3   &-2
+  \end{mat}                                 
+  \colvec{1  \\ 12  \\ 4}
+  =
+  \colvec{14/3 \\ -1/3 \\ -8/3}
+\end{equation*}
+\end{frame}
 
 
 

@@ -136,16 +136,21 @@
 \newlength{\jhpresentscalar}  % what frac of textwidth to make cols?
   \newlength{\jhpresentscalari} 
   \newlength{\jhpresentvert}  % vert space before graphic
+  \newlength{\jhpresentintercolumnspace}  % space betweek cols
+  \setlength{\jhpresentintercolumnspace}{.25em}
 \newsavebox{\jhpresentgraphic} % picture (can't use #3 in second half of a
                                % newenvironment defn)
 \newenvironment{graphicbytext}[3][0ex]{%
   \setlength{\jhpresentscalar}{#2\textwidth}
   \setlength{\jhpresentvert}{#1}
   \savebox{\jhpresentgraphic}{\includegraphics[width=\jhpresentscalar,valign=t]{#3}}
-  \begin{columns}
+  \begin{columns}[onlytextwidth]
     \begin{column}{\jhpresentscalar}
       \vspace*{\jhpresentvert}
       \usebox{\jhpresentgraphic}
+    \end{column}
+    \begin{column}{\jhpresentintercolumnspace}
+      \relax
     \end{column}
     \setlength{\jhpresentscalari}{\textwidth-\jhpresentscalar}  % (1-#1)*\textwidth
     \begin{column}{\jhpresentscalari}
@@ -162,6 +167,9 @@
     \setlength{\jhpresentscalari}{\textwidth-\jhpresentscalar}  % (1-#1)*\textwidth
     \begin{column}{\jhpresentscalari}
 }{%
+    \end{column}
+    \begin{column}{\jhpresentintercolumnspace}
+      \relax
     \end{column}
     \begin{column}{\jhpresentscalar}
       \vspace*{\jhpresentvert}
