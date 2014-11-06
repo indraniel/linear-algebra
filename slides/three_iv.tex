@@ -1235,7 +1235,7 @@ This Gaussian reduction
   \end{mat}
 \end{equation*}
 can be expressed as this product.
-\begin{equation*}
+\begin{align*}
   \begin{mat}
     1 &-2 \\
     0 &1
@@ -1253,19 +1253,21 @@ can be expressed as this product.
     1 &2 \\
     4 &3 
   \end{mat}
-  =
+  &=
   \begin{mat}
     1 &0 \\
     0 &1 
-  \end{mat}
-\end{equation*}
+  \end{mat}              \\[1ex]
+  C_{2,1}(-2)\,M_2(-1/5)\,C_{1,2}(4)\cdot H
+  &= I
+\end{align*}
 
 \end{frame}
 
 
 \begin{frame}
 \ex
-We can bring this augmented matrix to echelon form with matrix multiplication.
+To can bring this augmented matrix to echelon form with matrix multiplication
 \begin{equation*}
   \begin{amat}{3}
     1  &-1  &2  &4 \\
@@ -1275,7 +1277,7 @@ We can bring this augmented matrix to echelon form with matrix multiplication.
 \end{equation*}
 \end{frame}
 \begin{frame}
-We first perform $-2\rho_1+\rho_2$ via left multiplication by $C_{1,2}(-2)$.
+first perform $-2\rho_1+\rho_2$ via left multiplication by $C_{1,2}(-2)$.
 \begin{equation*}
   \begin{mat}
     1  &0  &0  \\
@@ -1295,7 +1297,7 @@ We first perform $-2\rho_1+\rho_2$ via left multiplication by $C_{1,2}(-2)$.
   \end{amat}
 \end{equation*}
 \pause
-Now we swap rows $2$ and $3$ with $P_{2,3}$
+Swap rows $2$ and $3$ with $P_{2,3}$
 \begin{equation*}
   \begin{mat}
     1  &0  &0  \\
@@ -1315,7 +1317,7 @@ Now we swap rows $2$ and $3$ with $P_{2,3}$
   \end{amat}
 \end{equation*}
 \pause
-When writing them out in full, remember that the matrix used first appears
+Note that the matrix used first is written
 to the right of the matrix used second.
 \begin{equation*}
   \begin{mat}
@@ -1340,7 +1342,6 @@ to the right of the matrix used second.
     0  &0   &-5 &-2 
   \end{amat}
 \end{equation*}
-Reduced echelon form would just take a couple of more multiplications.
 \end{frame}
 
 
@@ -1393,8 +1394,8 @@ has a two-sided inverse.
     -1  &2
   \end{mat}
 \end{equation*}
-To check that, we can multiply them in both orders.  
-Here is one; the other order is just as easy.
+To check that, we multiply them in both orders.  
+Here is one; the other is just as easy.
 \begin{equation*}
   \begin{mat}
     2  &5  \\
@@ -1412,7 +1413,7 @@ Here is one; the other order is just as easy.
 \end{equation*}
 \end{frame}
 \begin{frame}
-One advantage of knowing a matrix inverse is that it makes solving a 
+\ex One advantage of knowing a matrix inverse is that it makes solving a 
 linear system easy and quick.
 To solve
 \begin{equation*}
@@ -1462,19 +1463,16 @@ and multiply both sides (from the left) by the matrix inverse.
 \end{frame}
 
 
+
+%..........
 \begin{frame}
 This specializes the arrow diagram for composition 
 to the case of inverses.
 \centergraphic{../ch3.21}  
-\end{frame}
-
-
-
-%..........
-\begin{frame}
+\pause
 \lm[le:LeftAndRightInvEqual]
 \ExecuteMetaData[../map4.tex]{lm:LeftAndRightInvEqual}
-\pause
+
 \th[th:MatrixInvertibleIffNonsingular]
 \ExecuteMetaData[../map4.tex]{th:MatrixInvertibleIffNonsingular}
 \pause
@@ -1593,6 +1591,46 @@ This is the inverse.
   \end{mat}                                 
 \end{equation*}
 \end{frame}
+\begin{frame}
+\ex This is the same kind of calculation applied to a $\nbyn{2}$ matrix.
+\begin{align*}
+  \begin{pmat}{cc|cc}
+    2 &1 &1 &0 \\
+    4 &3 &0 &1
+  \end{pmat}
+  &\grstep{-2\rho_1+\rho_2}
+  \begin{pmat}{cc|cc}
+    2 &1 &1 &0 \\
+    0 &1 &-2 &1
+  \end{pmat}                      \\
+  &\grstep{(1/2)\rho_1}
+  \begin{pmat}{cc|cc}
+    1 &1/2 &1/2 &0 \\
+    0 &1   &-2 &1
+  \end{pmat}                      \\
+  &\grstep{-(1/2)\rho_2+\rho_1}
+  \begin{pmat}{cc|cc}
+    1 &0 &3/2 &-1/2 \\
+    0 &1 &-2 &1
+  \end{pmat}
+\end{align*}
+The inverse is this.
+\begin{equation*}
+  \begin{mat}
+    2 &1 \\
+    4 &3
+  \end{mat}^{-1}
+  =
+  \begin{mat}
+    3/2 &-1/2 \\
+    -2  &1
+  \end{mat}
+\end{equation*}
+\end{frame}
+
+
+
+
 \begin{frame}
 Finding the inverse of a matrix $A$
 is a lot of work but as we noted earlier,
