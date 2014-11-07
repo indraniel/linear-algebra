@@ -1,0 +1,297 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{../linalgjh}
+
+\setlength{\parindent}{0em}
+\begin{document}
+\makebox[\linewidth]{\textbf{Homework, MA~213}\hspace*{4in}\textbf{Due 2014-Sep-22}}
+
+\vspace*{3ex}
+\textit{You may work with others to figure out how to do questions, 
+and you are welcome to look for answers in the book, online, by talking
+to someone who had the course before, etc.
+However, you must write 
+the answers on your own.
+You must also show your work (you may, of course, 
+quote any result from the book).}
+
+\begin{enumerate}
+\item Verify that each is a vector space by checking the conditions.
+  \begin{enumerate}
+  \item The collection of $\nbyn{2}$ matrices with $0$'s in the 
+    upper right and lower left entries.
+    \begin{equation*}
+      \set{
+        \begin{mat}
+          a  &0  \\
+          0  &b  
+        \end{mat}
+        \suchthat a,b\in\Re}
+    \end{equation*}
+  Condition~(1), closure under addition follows from this sum
+  (take all scalars $a_i,b_j\in\Re$)
+  \begin{equation*}
+    \begin{mat}
+      a_1  &0  \\
+      0    &b_1
+    \end{mat}
+    +
+    \begin{mat}
+      a_2  &0  \\
+      0    &b_2
+    \end{mat}
+    =
+    \begin{mat}
+      a_1+a_2  &0  \\
+      0        &b_1+b_2
+    \end{mat}
+  \end{equation*}
+  and the observation that the matrix on the right has $0$'s in the upper right 
+  and the lower left.
+
+  For the other closure condition, (6), closure under scalar multiplication,
+  \begin{equation*}
+    r\cdot
+    \begin{mat}
+      a  &0  \\
+      0    &b
+    \end{mat}
+    =
+    \begin{mat}
+      ra  &0  \\
+      0   &rb
+    \end{mat}
+  \end{equation*}
+  observe that the matrix on the right has $0$'s in the upper right and 
+  lower left.
+
+  The other conditions are routine and won't be shown here.
+  For example, commutativity of addition goes just as in the argument for
+  general $\nbyn{2}$~matrices.
+  \begin{equation*}
+    \begin{mat}
+      a_1  &0  \\
+      0    &b_1
+    \end{mat}
+    +
+    \begin{mat}
+      a_2  &0  \\
+      0    &b_2
+    \end{mat}
+    =
+    \begin{mat}
+      a_1+a_2  &0  \\
+      0        &b_1+b_2
+    \end{mat}
+    =
+    \begin{mat}
+      a_2  &0  \\
+      0    &b_2
+    \end{mat}
+    +
+    \begin{mat}
+      a_1  &0  \\
+      0    &b_1
+    \end{mat}
+  \end{equation*}
+  (In addition, we had a result that said that for subspaces, which this
+  space is, we need only check closure.)
+
+  \item The collection  $\set{a_0+a_1x+a_3x^3 \suchthat a_0,a_1,a_3\in\Re}$
+     of cubic polynomials with no quadratic term.
+  
+  As with the prior item we focus on the two closure conditions.
+  For closure under addition, where each $a_i,,b_j\in\Re$,
+  the sum
+  $(a_0+a_1x+a_3x^3)+(b_0+b_1x+b_3x^3)
+  =(a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^3$ 
+  gives a cubic polynomial with no quadratic term.
+
+  For closure under scalar multiplication,
+  $r\cdot(a_0+a_1x+a_3x^3)=(ra_0)+(ra_1)x+(ra_2)x^3$
+  is a cubic polynomial with no quadratic term.
+
+  As above, the other conditions are routine.
+  For instance, here is associtivity under addition
+  $[(a_0+a_1x+a_3x^3)+(b_0+b_1x+b_3x^3)]+(c_0+c_1x+c_3x^3)
+   =(a_0+b_0+c_0)+(a_1+b_1+c_1)x+(a_3+b_3+c_3)x^3
+   =(a_0+a_1x+a_3x^3)+[(b_0+b_1x+b_3x^3)+(c_0+c_1x+c_3x^3)]$.
+  \end{enumerate}
+
+
+
+\item Determine if each set is linearly independent (in the natural vector 
+space).
+  \begin{enumerate}
+  \item $\set{\colvec{1 \\ 2 \\ 0}, 
+              \colvec{-1 \\ 1 \\ 0}}$
+
+  The natural vector space is $\Re^3$.
+  We set up the equation
+  \begin{equation*}
+    \colvec{0 \\ 0 \\ 0}=c_1\colvec{1 \\ 2 \\ 0}
+                         +c_2\colvec{-1 \\ 1 \\ 0}
+  \end{equation*}
+  and consider the resulting homogeneous system.
+  \begin{equation*}
+    \begin{amat}{2}
+      1  &-1 &0  \\
+      2  &1  &0  \\
+      0  &0  &0
+    \end{amat}
+    \grstep{-2\rho_1+\rho_2}
+    \begin{amat}{2}
+      1  &-1 &0  \\
+      0  &3  &0  \\
+      0  &0  &0
+    \end{amat} 
+  \end{equation*}
+  This has the unique solution, that $c_1=0$, $c_2=0$.
+  So it is linearly independent.
+
+
+  \item $\set{\rowvec{1 &3 &1}, \rowvec{-1 &4 &3}, \rowvec{-1 &11 &7}}$
+
+  The natural vector space is the set of three-wide row vectors.
+  The equation
+  \begin{equation*}
+    \rowvec{0 &0 &0}=c_1\rowvec{1 &3 &1}
+                     +c_2\rowvec{-1 &4 &3}
+                     +c_3\rowvec{-1 &11 &7}
+  \end{equation*}
+  gives rise to a linear system
+  \begin{equation*}
+    \begin{amat}{3}
+      1  &-1  &-1  &0  \\
+      3  &4   &11  &0  \\
+      1  &3   &7   &0
+    \end{amat}
+    \grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}
+    \begin{amat}{3}
+      1  &-1  &-1  &0  \\
+      0  &7   &14  &0  \\
+      0  &4   &8   &0
+    \end{amat}
+    \grstep{(4/7)\rho_2+\rho_3}
+    \begin{amat}{3}
+      1  &-1  &-1  &0  \\
+      0  &7   &14  &0  \\
+      0  &0   &0   &0
+    \end{amat}
+  \end{equation*}
+  with infinitely many solutions, that is, more than just the trivial solution.
+  \begin{equation*}
+    \set{\colvec{c_1 \\ c_2 \\ c_3}
+          =\colvec{-1 \\ -2 \\ 1}c_3
+          \suchthat c_3\in\Re}
+  \end{equation*}
+  So the set is linearly dependent.
+  One dependence comes from setting $c_3=2$, giving 
+  $c_1=-2$ and $c_2=-4$.
+
+  \item $\set{\begin{mat}
+                5 &4 \\
+                1 &2 
+              \end{mat},
+              \begin{mat}
+                0 &0 \\
+                0 &0
+              \end{mat},
+              \begin{mat}
+                1 &0 \\
+               -1 &4
+              \end{mat}
+           }$
+
+  Without having to set up a system we can see that the second element
+  of the set is a multiple of the first (namely, $0$ times the first). 
+  \end{enumerate}
+
+\item Is the vector in the span of the set?
+  \begin{equation*}
+    \colvec{1 \\ 0 \\ 3}
+    \quad
+    \set{\colvec{2 \\ 1 \\ -1},
+         \colvec{1 \\ -1 \\ 1}}
+  \end{equation*}
+
+  The equation
+  \begin{equation*}
+    \colvec{1 \\ 0 \\ 3} = 
+             c_1\colvec{2 \\ 1 \\ -1}
+             +c_2\colvec{1 \\ -1 \\ 1}
+  \end{equation*}
+  gives rise to a linear system
+  \begin{equation*}
+    \begin{amat}{2}
+      2  &1  &1  \\
+      1  &-1 &0  \\
+      -1 &1  &3
+    \end{amat}
+    \grstep[(1/2)\rho_1+\rho_3]{(-1/2)\rho_1+\rho_2}
+    \begin{amat}{2}
+      2  &1    &1  \\
+      0  &-3/2 &-1/2  \\
+      0  &0  &3
+    \end{amat}
+  \end{equation*}
+  that has no solution, so the matrix is not in the span.
+\end{enumerate}
+\end{document}
+
+
+sage: load "../lab/gauss_method.sage"
+sage: M = matrix(QQ, [[1,-1], [2,1], [0,0] ])
+sage: v = vector(QQ, [0,0,0])
+sage: M_prime = M.augment(v, subdivide=True)
+sage: gauss_method(M_prime)
+[ 1 -1| 0]
+[ 2  1| 0]
+[ 0  0| 0]
+ take -2 times row 1 plus row 2
+[ 1 -1| 0]
+[ 0  3| 0]
+[ 0  0| 0]
+
+sage: M = matrix(QQ, [[1,-1,-1], [3,4,11], [1,3,7] ])
+sage: v = vector(QQ, [0,0,0])
+sage: M_prime = M.augment(v, subdivide=True)
+sage: gauss_method(M_prime)
+[ 1 -1 -1| 0]
+[ 3  4 11| 0]
+[ 1  3  7| 0]
+ take -3 times row 1 plus row 2
+ take -1 times row 1 plus row 3
+[ 1 -1 -1| 0]
+[ 0  7 14| 0]
+[ 0  4  8| 0]
+ take -4/7 times row 2 plus row 3
+[ 1 -1 -1| 0]
+[ 0  7 14| 0]
+[ 0  0  0| 0]
+age: eqns = [c1-c2-c3==0, 3*c1+4*c2+11*c3==0, c1+3*c2+7*c3==0]
+sage: solve(eqns, c1, c2, c3)
+[[c1 == -r1, c2 == -2*r1, c3 == r1]]
+
+sage: M = matrix(QQ, [[2,1], [1,-1], [-1,1] ])
+sage: var('c1,c2,c3,c4')
+(c1, c2, c3, c4)
+sage: v = vector(QQ, [1,0,3])
+sage: M_prime = M.augment(v, subdivide=True)
+sage: gauss_method(M_prime)
+[ 2  1| 1]
+[ 1 -1| 0]
+[-1  1| 3]
+ take -1/2 times row 1 plus row 2
+ take 1/2 times row 1 plus row 3
+[   2    1|   1]
+[   0 -3/2|-1/2]
+[   0  3/2| 7/2]
+ take 1 times row 2 plus row 3
+[   2    1|   1]
+[   0 -3/2|-1/2]
+[   0    0|   3]
+
+
+
+

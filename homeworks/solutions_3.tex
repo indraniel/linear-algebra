@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{../linalgjh}
+
+\setlength{\parindent}{0em}
+\pagestyle{empty}
+\begin{document}\thispagestyle{empty}
+\makebox[\linewidth]{\textbf{Homework, MA~213}\hspace*{4in}\textbf{Due: 2014-Sep-29}}
+
+\begin{enumerate}
+\item
+Find a basis for each space.
+Verify that it is a basis.
+  \begin{enumerate}
+  \item The subspace $M=\set{a+bx+cx^2+dx^3\suchthat a-2b+c-d=0}$ 
+   of $\polyspace_3$.
+
+   Parametrize $a-2b+c-d=0$ as $a=2b-c+d$, $b=b$, $c=c$, and~$d=d$ to get
+   this description of $M$ as the span of a set of three vectors.
+   \begin{equation*}
+     M=\set{
+      (2+x)\cdot b+(-1+x^2)\cdot c+(1+x^3)\cdot d
+      \suchthat b,c,d\in\Re
+      }
+   \end{equation*}
+   To show that this three-vector set is a basis, what remains is for us to
+   verify that it is linearly independent.
+   \begin{equation*}
+      0+0x+0x^2+0x^3=(2+x)\cdot c_1+(-1+x^2)\cdot c_2+(1+x^3)\cdot c_3
+   \end{equation*}
+   From the $x$~terms we see that $c_1=0$.
+   From the $x^2$~terms we see that $c_2=0$.
+   The $x^3$~terms give that $c_3=0$. 
+
+  \item This subspace of $\matspace_{\nbyn{2}}$.
+    \begin{equation*}
+      W=\set{
+        \begin{mat}
+          a  &b  \\
+          c  &d
+        \end{mat}
+        \suchthat a-c=0}
+    \end{equation*}
+
+  First parametrize the description
+  (note that the fact that $b$ and~$d$ are not mentioned in the description
+  of $W$ does not mean
+  they are zero or absent, it means that they are unrestricted).
+  \begin{equation*}
+    W=\set{
+      \begin{mat}
+        0 &1 \\
+        0 &0
+      \end{mat}\cdot b
+      +
+      \begin{mat}
+        1 &0 \\
+        1 &0
+      \end{mat}\cdot c
+      +
+      \begin{mat}
+        0 &0 \\
+        0 &1
+      \end{mat}\cdot d
+      \suchthat b,c,d\in\Re}
+  \end{equation*}
+  That gives $W$ as the span of a three element set.
+  We will be done if we show that the set is linearly independent.
+  \begin{equation*}
+      \begin{mat}
+        0 &0 \\
+        0 &0
+      \end{mat}
+      =
+      \begin{mat}
+        0 &1 \\
+        0 &0
+      \end{mat}\cdot c_1
+      +
+      \begin{mat}
+        1 &0 \\
+        1 &0
+      \end{mat}\cdot c_2
+      +
+      \begin{mat}
+        0 &0 \\
+        0 &1
+      \end{mat}\cdot c_3   
+  \end{equation*}
+  Using the upper right entries we see that $c_1=0$.
+  The upper left entries give that $c_2=0$, and the lower left entries 
+  show that $c_3=0$.
+  \end{enumerate}
+
+\item Give two different bases for $\Re^3$.
+  Verify that each is a basis.
+
+  Obviously there are many different correct choices of bases.
+  The natural basis for $\Re^3$ is this.
+  \begin{equation*}
+    \stdbasis_3=\sequence{\colvec{1 \\ 0 \\ 0},
+                          \colvec{0 \\ 1 \\ 0},
+                          \colvec{0 \\ 0 \\ 1}}
+  \end{equation*}
+  The verification that it spans $\Re^3$ is easy: for any $x,y,z\in\Re$
+  this equation has a solution,
+  \begin{equation*}
+    \colvec{x \\ y \\ z}
+      =\colvec{1 \\ 0 \\ 0 }\cdot c_1
+       +\colvec{0 \\ 1 \\ 0}\cdot c_2
+       +\colvec{0 \\ 0 \\ 1}\cdot c_3
+     \tag{$*$}
+  \end{equation*}
+  namely, $c_1=x$, $c_2=y$, and~$c_3=z$.
+  Further, the set is linearly independent since the relationship
+  \begin{equation*}
+    \colvec{0 \\ 0 \\ 0}
+      =\colvec{1 \\ 0 \\ 0 }\cdot c_1
+       +\colvec{0 \\ 1 \\ 0}\cdot c_2
+       +\colvec{0 \\ 0 \\ 1}\cdot c_3    
+  \end{equation*}
+  obviously has only the trivial solution.
+  (\textit{Comment.}
+   We could have done the argument in one step by observing that 
+   equation~($*$) shows that 
+   each vector from $\Re^3$ is represented with respect to
+   this basis~$\stdbasis_3$ in one and only one way.)
+
+  This is a second basis for $\Re^3$.
+  \begin{equation*}
+    B=\sequence{\colvec{1 \\ 0 \\ 0},
+                \colvec{1 \\ 1 \\ 0},
+                \colvec{1 \\ 1 \\ 1}}
+  \end{equation*}
+  To verify that that it spans $\Re^3$ suppose $x,y,z\in\Re$,
+  then
+  \begin{equation*}
+    \colvec{x \\ y \\ z}
+      =\colvec{1 \\ 0 \\ 0 }\cdot c_1
+       +\colvec{1 \\ 1 \\ 0}\cdot c_2
+       +\colvec{1 \\ 1 \\ 1}\cdot c_3
+  \end{equation*}
+  has a solution,
+  namely $c_1=x-y$, $c_2=y-z$, and~$c_3=z$.
+  Further, the set~$B$ is linearly independent since in the relationship
+  \begin{equation*}
+    \colvec{0 \\ 0 \\ 0}
+      =\colvec{1 \\ 0 \\ 0 }\cdot c_1
+       +\colvec{1 \\ 1 \\ 0}\cdot c_2
+       +\colvec{1 \\ 1 \\ 1}\cdot c_3    
+  \end{equation*}
+  the third components give that $c_3=0$, then the second components 
+  give that $c_2=0$, and with those two the first components give that
+  $c_1=0$.
+
+\item Represent the vector with respect to each of the two bases.
+  \begin{equation*}
+    \vec{v}=\colvec{3  \\ -1}
+    \quad
+    B_1=\sequence{\colvec{1  \\ -1}, \colvec{1  \\ 1}},\;
+    B_2=\sequence{\colvec{1 \\ 2}, \colvec{1 \\ 3}}
+  \end{equation*}
+
+  Solving
+  \begin{equation*}
+    \colvec{3 \\ -1}=\colvec{1 \\ -1}\cdot c_1
+                     +\colvec{1 \\ 1}\cdot c_2
+  \end{equation*}
+  gives $c_1=2$ and~$c_2=1$. 
+  \begin{equation*}
+    \rep{\colvec{3 \\ -1}}{B_1}
+       =\colvec{2 \\ 1}_{B_1}
+  \end{equation*}
+  Similarly, solving
+  \begin{equation*}
+    \colvec{3 \\ -1}=\colvec{1 \\ 2}\cdot c_1
+                     +\colvec{1 \\ 3}\cdot c_2
+  \end{equation*}
+  gives this. 
+  \begin{equation*}
+    \rep{\colvec{3 \\ -1}}{B_2}
+       =\colvec{10 \\ -7}_{B_2}
+  \end{equation*}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{../linalgjh}
+
+\setlength{\parindent}{0em}
+\pagestyle{empty}
+\begin{document}\thispagestyle{empty}
+\makebox[\linewidth]{\textbf{Homework, MA~213}\hspace*{4in}\textbf{Due: 2014-Oct-24}}
+
+\vspace*{3ex}
+\textit{You may work with others to figure out how to do questions, 
+and you are welcome to look for answers in the book, online, by talking
+to someone who had the course before, etc.
+However, you must write 
+the answers on your own.
+You must also show your work (you may, of course, 
+quote any result from the book).}
+
+\begin{enumerate}
+\item
+Verify that each map is a homomorphism.
+  \begin{enumerate}
+  \item $\map{h}{\polyspace_3}{\Re^2}$ given by
+    \begin{equation*}
+      ax^2+bx+c\mapsto \colvec{a+b \\ a+c}
+    \end{equation*}
+
+This verifies that it preserves linear combinations.
+\begin{align*}
+  h(\,d_1(a_1x^2+b_1x+c_1)+d_2(a_2x^2+b_2x+c_2)\,)
+   &=h((d_1a_1+d_2a_2)x^2+(d_1b_1+d_2b_2)x+(d_1c_1+d_2c_2))  \\
+   &=\colvec{(d_1a_1+d_2a_2)+(d_1b_1+d_2b_2) \\ (d_1a_1+d_2a_2)+(d_1c_1+d_2c_2)} \\
+   &=\colvec{d_1a_1+d_1b_1 \\  d_1a_1+d_1c_1}+
+       \colvec{d_2a_2+d_2b_2 \\  d_2a_2+d_2c_2}  \\
+   &=d_1\colvec{a_1+b_1 \\  a_1+c_1}+
+       d_2\colvec{a_2+b_2 \\  a_2+c_2}  \\
+  &=d_1\cdot h(a_1x^2+b_1x+c_1)+d_2\cdot h(a_2x^2+b_2x+c_2)
+\end{align*}
+
+  \item $\map{f}{\Re^2}{\Re^3}$ given by 
+    \begin{equation*}
+      \colvec{x \\ y}\mapsto\colvec{0 \\ x-y \\ 3y} 
+    \end{equation*}
+
+This verifies that the map perserves linear combinations.
+\begin{align*}
+  f(\,a_1\colvec{x_1 \\ y_1}+a_2\colvec{x_2 \\ y_2}\,)
+    &=f(\,\colvec{a_1x_1+a_2x_2 \\ a_1y_1+a_2y_2}\,)  \\
+    &=\colvec{0 \\ (a_1x_1+a_2x_2)-(a_1y_1+a_2y_2) \\ 3(a_1y_1+a_2y_2) }  \\
+    &=a_1\colvec{0 \\ x_1-y_1 \\ 3y_1}
+       +a_2\colvec{0 \\ x_2-y_2 \\ 3y_2}  \\
+    &=a_1f(\colvec{x_1 \\ y_1})+a_2f(\colvec{x_2 \\ y_2})
+\end{align*}
+  \end{enumerate}
+
+
+
+
+
+\item For each map in the prior question, describe the range space and find
+  the rank of the map.
+
+  \begin{enumerate}
+  \item The range of $h$ is all of the codomain~$\Re^2$ because given 
+    \begin{equation*}
+      \colvec{x \\ y}\in\Re^2
+    \end{equation*}
+    it is the image under~$h$ of the domain vector $0x^2+bx+c$.
+    So the rank of~$h$ is~$2$.
+
+  \item
+    The range is the $yz$~plane.  Any 
+    \begin{equation*}
+      \colvec{0 \\ a \\ b}
+    \end{equation*}
+    is the image under~$f$ of this domain vector.
+    \begin{equation*}
+      \colvec{a+b/3  \\ b/3}
+    \end{equation*}
+    So the rank of the map is~$2$.
+  \end{enumerate}
+
+
+\item Verify that this map is an isomorphism: 
+  $\map{h}{\Re^4}{\matspace_{\nbyn{2}}}$ given by
+  \begin{equation*}
+    \colvec{a \\ b \\ c \\ d}
+    \mapsto
+    \begin{mat}
+      c  &a+d \\
+      b  &d
+    \end{mat}
+  \end{equation*}
+
+We first verify that $h$ is one-to-one.
+To do this we will show that $h(\vec{v}_1)=h(\vec{v}_2)$ implies that 
+$\vec{v}_1=\vec{v}_2$.
+So assume that
+\begin{equation*}
+    h(\vec{v}_1)
+    =
+    h(\colvec{a_1 \\ b_1 \\ c_1 \\ d_1})
+    =
+    h(\colvec{a_2 \\ b_2 \\ c_2 \\ d_2})
+    =h(\vec{v}_2)
+\end{equation*}
+which gives
+\begin{equation*}
+    \begin{mat}
+      c_1  &a_1+d_1 \\
+      b_1  &d_1
+    \end{mat}
+    =
+    \begin{mat}
+      c_2  &a_2+d_2 \\
+      b_2  &d_2
+    \end{mat}
+\end{equation*}
+from which we conclude that 
+$c_1=c_2$ (by the upper-left entries),
+$b_1=b_2$ (by the lower-left entries),
+$d_1=d_2$ (by the lower-right entries),
+and with this last we get $a_1=a_2$ (by the upper right).
+Therefore $\vec{v}_1=\vec{v}_2$.
+
+Next we will show that the map is onto, that every member of the codomain
+$\matspace_{\nbyn{2}}$ is the image of some four-tall member of the domain.
+So, given
+\begin{equation*}
+    \vec{w}=
+    \begin{mat}
+      m  &n \\
+      p  &q
+    \end{mat}
+    \in\matspace_{\nbyn{2}}
+\end{equation*}
+observe that it is the image of this domain vector.
+\begin{equation*}
+  \vec{v}=
+  \colvec{n-q \\ p \\ m \\ q}
+\end{equation*}
+
+To finish we verify that the map preserves linear combinations.
+\begin{align*}
+    h(r_1\cdot\colvec{a_1 \\ b_1 \\ c_1 \\ d_1}
+      +
+      r_2\cdot\colvec{a_2 \\ b_2 \\ c_2 \\ d_2})
+    &=h(\colvec{r_1a_1+r_2a_2 \\ r_1b_1+r_2b_2 \\ r_1c_1+r_2c_2 \\ r_1d_1+r_2d_2})  \\
+    &=
+    \begin{mat}
+       r_1c_1+r_2c_2 &(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)  \\
+       r_1b_1+r_2b_2 &r_1d_1+r_2d_2
+    \end{mat}                               \\
+    &=
+    r_1\begin{mat}
+       c_1 &a_1+d_1  \\
+       b_1 &d_1
+    \end{mat}                               
+    +
+    r_2\begin{mat}
+       c_2 &a_2+d_2  \\
+       b_2 &d_2
+    \end{mat}                               \\
+   &=r_1\cdot h(\colvec{a_1 \\ b_1 \\ c_1 \\ d_1})
+      +
+      r_2\cdot h(\colvec{a_2 \\ b_2 \\ c_2 \\ d_2})
+\end{align*}
+
+
+\end{enumerate}
+\end{document}

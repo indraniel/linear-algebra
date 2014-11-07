@@ -1,0 +1,252 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{../linalgjh}
+
+\setlength{\parindent}{0em}
+\pagestyle{empty}
+\begin{document}\thispagestyle{empty}
+\makebox[\linewidth]{\textbf{Homework, MA~213}\hspace*{4in}\textbf{Due: 2014-Oct-06}}
+
+\vspace*{3ex}
+\textit{You may work with others to figure out how to do questions, 
+and you are welcome to look for answers in the book, online, by talking
+to someone who had the course before, etc.
+However, you must write 
+the answers on your own.
+You must also show your work (you may, of course, 
+quote any result from the book).}
+
+\begin{enumerate}
+\item
+Find a basis for, and the dimension of, each space.
+\begin{enumerate}
+\item
+  \begin{equation*}
+    \set{\colvec{x \\ y \\ z \\ w}\in\Re^4
+         \suchthat x-w+z=0}
+  \end{equation*}
+
+Parametrize to get this description of the space.
+\begin{equation*}
+  \set{\colvec{w-z \\ y \\ z \\ w}
+       =\colvec{0 \\ 1 \\ 0 \\ 0}y+
+       \colvec{-1 \\ 0 \\ 1 \\ 0}z+
+       \colvec{1 \\ 0 \\ 0 \\ 1}w
+       \suchthat y,z,w\in\Re}
+\end{equation*}
+That gives the space as the span of the three-vector set.
+To show the three vector set makes a basis we check that it is 
+linearly independent.
+\begin{equation*}
+   \colvec{0 \\ 0 \\ 0 \\ 0}
+       =\colvec{0 \\ 1 \\ 0 \\ 0}c_1+
+       \colvec{-1 \\ 0 \\ 1 \\ 0}c_2+
+       \colvec{1 \\ 0 \\ 0 \\ 1}c_3
+\end{equation*}
+The second components give that $c_1=0$, and the third and fourth 
+components give that $c_2=0$ and~$c_3=0$.
+So one basis is this.
+\begin{equation*}
+    \sequence{
+       \colvec{0 \\ 1 \\ 0 \\ 0},
+       \colvec{-1 \\ 0 \\ 1 \\ 0},
+       \colvec{1 \\ 0 \\ 0 \\ 1} 
+    } 
+\end{equation*}
+The dimension is the number of vectors in a basis: $3$.
+
+\item the set of $\nbym{5}{5}$ matrices whose only nonzero entries 
+   are on the diagonal (e.g., in entry $1,1$ and $2,2$, etc.) 
+
+The natural parametrization is this.
+\begin{multline*}
+  \set{
+    \begin{mat}
+      a &0 &0 &0 &0 \\
+      0 &b &0 &0 &0 \\
+      0 &0 &c &0 &0 \\
+      0 &0 &0 &d &0 \\
+      0 &0 &0 &0 &e 
+    \end{mat}
+    \suchthat a,\ldots,e\in\Re}   \\
+  \set{
+    \begin{mat}
+      1 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 
+    \end{mat}\cdot a
+    +\begin{mat}
+      0 &0 &0 &0 &0 \\
+      0 &1 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 
+    \end{mat}\cdot b
+    +\cdots
+    \suchthat a,\ldots,e\in\Re}
+\end{multline*}
+Checking that the five-element set is linearly independent is trivial.
+So this is a basis; the dimension is $5$.
+\begin{equation*}
+  \sequence{
+    \begin{mat}
+      1 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 
+    \end{mat},
+    \begin{mat}
+      0 &0 &0 &0 &0 \\
+      0 &1 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 
+    \end{mat},
+    \,\ldots\,,
+    \begin{mat}
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &0 \\
+      0 &0 &0 &0 &1 
+    \end{mat}
+}
+\end{equation*}
+
+
+\item $\set{a_0+a_1x+a_2x^2+a_3x^3\suchthat 
+            \text{$a_0+a_1=0$ and $a_2-2a_3=0$}}\subseteq\polyspace_3$ 
+
+The restrictions form a two-equations, four-unknowns linear system.
+Parametrizing that system to express the leading variables in terms of 
+those that are
+free gives $a_0=-a_1$, $a_1=a_1$, $a_2=2a_3$, and~$a_3=a_3$.
+\begin{equation*}
+  \set{-a_1+a_1x+2a_3x^2+a_3x^3\suchthat a_1,a_3\in\Re}
+  =\set{(-1+x)\cdot a_1+(2x^2+x^3)\cdot a_3\suchthat a_1,a_3\in\Re}
+\end{equation*}
+That description shows that the space is the span of the two-element set
+$\set{-1+x,x^2+x^3}$.  
+We will be done if we show the set is linearly independent.
+This relationship
+\begin{equation*}
+  0+0x+0x^2+0x^3=(-1+x)\cdot c_1+(2x^2+x^3)\cdot c_2
+\end{equation*}
+gives that $c_1=0$ from the constant terms, and $c_2=0$ from the 
+cubic terms.
+One basis for the space is $\sequence{-1+x,2x^2+x^3}$.
+This is a two-dimensional space.
+\end{enumerate}
+
+\item Give a basis for the column space of this matrix.
+  Give the matrix's rank.
+  \begin{equation*}
+    \begin{mat}
+      1 &3 &-1 &2 \\
+      2 &1 &1  &0 \\
+      0 &1 &1  &4
+    \end{mat}
+  \end{equation*}
+
+We want a basis for this span.
+\begin{equation*}
+  \spanof{\colvec{1 \\ 2 \\ 0},
+          \colvec{3 \\ 1 \\ 1},
+          \colvec{-1 \\ 1 \\ 1},
+          \colvec{2 \\ 0 \\ 4}}\subseteq\Re^3
+\end{equation*}
+The most straightforward approach 
+is to transpose those columns to rows, use Gauss's Method
+to find a basis for the span of the rows, and then transpose them back to 
+columns. 
+\begin{equation*}
+  \begin{mat}
+    1 &2 &0 \\
+    3 &1 &1 \\
+   -1 &1 &1 \\
+    2 &0 &4
+  \end{mat}
+  \grstep[\rho_1+\rho_3 \\ -2\rho_1+\rho_4]{-3\rho_1+\rho_2}
+  \grstep[-(4/5)\rho_2+\rho_4]{(3/5)\rho_2+\rho_3}
+  \grstep{-2\rho_3+\rho_4}
+  \begin{mat}
+    1 &2  &0 \\
+    0 &-5 &1 \\
+    0 &0  &8/5 \\
+    0 &0  &0
+  \end{mat}
+\end{equation*}
+Discard the zero vector as showing that there was  a redundancy among the 
+starting vectors, to get this basis for the column space.
+\begin{equation*}
+  \sequence{
+    \colvec{1 \\ 2 \\ 0},
+    \colvec{0 \\ -5 \\ 1},
+    \colvec{0 \\ 0 \\ 8/5}
+    }
+\end{equation*}
+The matrix's rank is the dimension of its column space, so it is three.
+(It is also equal to the dimension of its row space.)
+
+
+\item Give a basis for the span of each set, in the natural vector space.
+  \begin{enumerate}
+  \item $\set{\colvec{1 \\ 1 \\ 3},
+              \colvec{-1 \\ 2 \\ 0},
+              \colvec{0  \\ 12 \\ 6}}$
+
+Transpose the columns to rows, bring to echelon form 
+(and then lose any zero rows), and transpose back to columns.
+\begin{equation*}
+  \begin{mat}
+    1 &1  &3 \\
+   -1 &2  &0 \\
+    0 &12 &6
+  \end{mat}
+  \grstep{\rho_1+\rho_2}
+  \grstep{-4\rho_2+\rho_3}
+  \begin{mat}
+    1 &1  &3 \\
+    0 &3  &3 \\
+    0 &0  &-6
+  \end{mat}
+\end{equation*}
+One basis for the span is this.
+\begin{equation*}
+  \sequence{
+    \colvec{1 \\ 1 \\ 3},
+    \colvec{0 \\ 3 \\ 3},
+    \colvec{0 \\ 0 \\ -6}
+}
+\end{equation*}
+
+  \item $\set{x+x^2, 2-2x, 7, 4+3x+2x^2}$
+
+As in the prior part we think of those as rows, to take advantage of 
+the work we've done with Gauss's Method.
+\begin{equation*}
+  \begin{mat}
+    0 &1  &1 \\
+    2 &-2 &0 \\
+    7 &0 &0 \\
+    4 &3  &2
+  \end{mat}
+  \grstep{\rho_1\leftrightarrow\rho_2}
+  \grstep{2\rho_1+\rho_4}{-(7/2)\rho_1+\rho_3}
+  \grstep[-7\rho_2+\rho_4]{-7\rho_2+\rho_3}
+  \grstep{-(5/7)\rho_3+\rho_4}
+  \begin{mat}
+    2 &-2  &0 \\
+    0 &1 &1 \\
+    0 &0  &-7 \\
+    0 &0 &0
+  \end{mat}
+\end{equation*}
+One basis for the span of that set is 
+$\sequence{2-2x, x+x^2, -5x^2}$.
+  \end{enumerate}
+\end{enumerate}
+\end{document}

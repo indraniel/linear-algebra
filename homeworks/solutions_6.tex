@@ -1,0 +1,376 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{../linalgjh}
+
+\setlength{\parindent}{0em}
+\pagestyle{empty}
+\begin{document}\thispagestyle{empty}
+\makebox[\linewidth]{\textbf{Homework, MA~213}\hspace*{4in}\textbf{Due: 2014-Nov-03}}
+
+\vspace*{3ex}
+\textit{You may work with others to figure out how to do questions, 
+and you are welcome to look for answers in the book, online, by talking
+to someone who had the course before, etc.
+However, you must write 
+the answers on your own.
+You must also show your work (you may, of course, 
+quote any result from the book).}
+
+\begin{enumerate}
+\item
+  Assume that each matrix represents a map $\map{h}{\Re^m}{\Re^n}$
+  with respect to the standard bases.
+  In each case, 
+  (i)~state $m$ and~$n$
+  (ii)~find $\rangespace{h}$ and $\rank(h)$
+  (iii)~find $\nullspace{h}$ and $\nullity(h)$,
+  and (iv)~state whether the map is onto and whether it is one-to-one.
+  \begin{enumerate}
+  \item
+    $
+    \begin{mat}
+      2  &1  \\ 
+      -1 &3
+    \end{mat}
+    $
+
+    For parts of the answer we will need to solve this system
+    \begin{equation*}
+      \begin{mat}
+        2  &1  \\ 
+       -1  &3        
+      \end{mat}
+      \colvec{x \\ y}
+      =
+      \colvec{a \\ b}
+      \tag{$*$}
+    \end{equation*}
+    for $x$ and~$y$ so we do that calculation first.
+    \begin{equation*}
+      \begin{amat}{2}
+      2  &1 &a  \\ 
+      -1 &3 &b       
+      \end{amat}
+      \grstep{(1/2)\rho_1+\rho_2}
+      \grstep[(2/7)\rho_2]{(1/2)\rho_1}
+      \grstep{-(1/2)\rho_2+\rho_1}
+      \begin{amat}{2}
+        1  &0 &(3/7)a-(1/7)b  \\ 
+        0  &1 &(1/7)a+(2/7)b       
+      \end{amat}
+    \end{equation*}
+    (i)~The dimension of the domain space is the number of columns~$m=2$,
+    and the dimension of the codomain space is the number of rows~$n=2$.
+    (ii)~For all
+    \begin{equation*}
+      \colvec{a \\ b}\in\Re^2
+    \end{equation*}
+    in equation~($*$) the system has a solution, by the calculation.
+    So the range space is all of the codomain~$\rangespace{h}=\Re^2$.
+    The map's rank is the dimension of the range,~$2$
+    (iii)~Again by the calculation, setting $a=b=0$ in equation~($*$)
+    gives that $x=y=0$.
+    The null space is the trivial subspace of the domain.
+    \begin{equation*}
+      \nullspace{h}=\set{\colvec{0 \\ 0}}
+    \end{equation*}
+    The nullity is the dimension of that null space,~$0$.
+    (iv)~The map is onto because the range space is all of the codomain.
+    The map is one-to-one because the null space is trivial. 
+
+  \item
+    $
+    \begin{mat}
+      0  &1  &3  \\ 
+      2  &3  &4  \\
+     -2  &-1 &2 
+    \end{mat}
+    $
+
+   The calculation is this.
+    \begin{multline*}
+      \begin{amat}{3}
+        0  &1  &3  &a \\ 
+        2  &3  &4  &b \\
+       -2  &-1 &2  &c
+      \end{amat}
+      \grstep{\rho_1\leftrightarrow\rho_2}
+      \grstep{\rho_1+\rho_3}
+      \grstep{-2\rho_2+\rho_3}                 \\
+      \grstep{(1/2)\rho_1}
+      \grstep{-(3/2)\rho_2+\rho_1}
+      \begin{amat}{3}
+        1  &0 &-5/2 &-(3/2)a+(1/2)b  \\ 
+        0  &1 &3    &a  \\
+        0  &0 &0    &-2a+b+c      
+      \end{amat}
+    \end{multline*}
+    (i)~The dimension of the domain space is the number of columns,~$m=3$,
+    and the dimension of the codomain space is the number of rows,~$n=3$.
+    (ii)~There are codomain triples
+    \begin{equation*}
+      \colvec{a \\ b \\ c}\in\Re^3
+    \end{equation*}
+    for which the system does not have a solution,
+    specifically the system only has a solution if $-2a+b+c=0$.
+    \begin{equation*}
+      \rangespace{h}=\set{\colvec{a \\ b \\ c}\suchthat a=(b+c)/2}
+                    =\set{\colvec{1/2 \\ 1 \\ 0}b
+                          +\colvec{1/2 \\ 0 \\ 1}c\suchthat b,c\in\Re} 
+    \end{equation*}
+    The map's rank is the range's dimension,~$2$
+    (iii)~Setting $a=b=c=0$ in the calculation
+    gives infinitely many solutions.
+    Paramatrizing using the free variable~$z$ leads to this description
+    of the nullspace.
+    \begin{equation*}
+      \nullspace{h}=\set{\colvec{x \\ y \\ z}\suchthat 
+                       \text{$y=-3z$ and $x=(5/2)z$}}
+                   =\set{\colvec{5/2 \\ -3 \\ 1}z\suchthat z\in\Re}
+    \end{equation*}
+    The nullity is the dimension of that null space,~$1$.
+    (iv)~The map is not onto because the range space is not all of the codomain.
+    The map is not one-to-one because the null space is not trivial. 
+
+
+
+  \item
+    $
+    \begin{mat}
+      1  &1  \\ 
+      2  &1  \\
+      3  &1
+    \end{mat}
+    $
+  \end{enumerate}
+
+  Here is the calculation.
+    \begin{equation*}
+      \begin{amat}{2}
+        1  &1  &a \\ 
+        2  &1  &b \\
+        3  &1  &c
+      \end{amat}
+      \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
+      \grstep{-2\rho_2+\rho_3}
+      \grstep{-\rho_2}                 
+      \grstep{(1/2)\rho_1}
+      \grstep{-\rho_2+\rho_1}
+      \begin{amat}{2}
+        1  &0 &(5/2)a-b  \\ 
+        0  &1 &-2a+b  \\
+        0  &0 &a-2b+c      
+      \end{amat}
+    \end{equation*}
+  (i)~The domain has dimension $m=2$ while the codomain has dimension~$n=3$.
+  (ii)~The range is this subspace of the codomain.
+  \begin{equation*}
+    \rangespace{h}=\set{\colvec{2b-c \\ b \\ c}\suchthat b,c\in\Re}
+        =\set{\colvec{2 \\ 1 \\ 0}b+\colvec{-1 \\ 0 \\ 1}c\suchthat b,c\in\Re}
+  \end{equation*}
+  The rank is~$2$.
+  (iii)~The null space is the trivialsubspace of the domain.
+  \begin{equation*}
+    \nullspace{h}=\set{\colvec{x \\ y}=\colvec{0 \\ 0}}
+  \end{equation*}
+  The nullity is~$0$.
+  (iv)~The map is not onto, and is one-to-one.
+
+
+\item Verify that the map $\map{h}{\Re^m}{\Re^n}$ represented by this matrix
+  with respect to the standard bases
+  \begin{equation*}
+    \begin{mat}
+      2  &1  &0  \\
+      3  &1  &1  \\
+      7  &2  &1
+    \end{mat}
+  \end{equation*}
+  is an isomorphism. 
+
+  We have shown that, given a $\nbym{n}{m}$ matrix~$H$ and vector spaces 
+  $V,W$ of dimension~$m$ and~$n$, if we fix bases $B\subseteq V$ and
+  $D\subseteq W$ then the map $\map{h}{V}{W}$ defined by $\rep{h}{B,D}=H$
+  is linear (Theorem Three.III.2.2).
+  So it only remains to show that the map is onto and one-to-one.
+  For that we don't need to augment the matrix with $a$, $b$, 
+  and~$c$; this calculation
+    \begin{equation*}
+      \begin{mat}
+        2  &1  &0 \\ 
+        3  &1  &1 \\
+        7  &2  &1
+      \end{mat}
+      \grstep[-(7/2)\rho_1+\rho_3]{-(3/2)\rho_1+\rho_2}
+      \grstep{-3\rho_2+\rho_3}
+      \grstep[-2\rho_2 \\ -(1/2)\rho_3]{(1/2)\rho_1}                 
+      \grstep{2\rho_3+\rho_2}
+      \grstep{-(1/2)\rho_2+\rho_1}
+      \begin{mat}
+        1  &0 &0  \\ 
+        0  &1 &0  \\
+        0  &0 &1      
+      \end{mat}
+    \end{equation*}
+ shows that for each codomain vector there is one and only one associated
+ domain vector.
+
+\item For these matrices
+  \begin{equation*}
+    A=
+    \begin{mat}
+      2  &1  \\
+      4  &3
+    \end{mat}
+    \quad
+    B=
+    \begin{mat}
+      3  &4  &-2 \\
+      0  &0  &0  \\
+      1  &-1 &5
+    \end{mat}
+    \quad
+    C=
+    \begin{mat}
+      2  &1  &1 \\
+      1  &1  &2
+    \end{mat}
+  \end{equation*}
+    \begin{enumerate}
+      \item Find, or state ``not defined'': $5A$, $6B$, $7C$. 
+
+  \begin{equation*}
+    5A=
+    \begin{mat}
+      10  &5  \\
+      20  &15
+    \end{mat}
+    \quad
+    6B=
+    \begin{mat}
+      18  &24  &-12 \\
+      0  &0  &0  \\
+      6  &-6 &30
+    \end{mat}
+    \quad
+    C=
+    \begin{mat}
+      14  &7  &7 \\
+      7  &7  &14
+    \end{mat}
+  \end{equation*}
+
+      \item Find, or state ``not defined'': $A+B$, $B+C$. 
+    \end{enumerate}
+
+  Neither is defined.
+
+\end{enumerate}
+\end{document}
+
+
+sage: load "../lab/gauss_method.sage"
+sage: M = matrix(QQ, [[2,1], [-1,3]])
+sage: gauss_jordan(M)
+[ 2  1]
+[-1  3]
+ take 1/2 times row 1 plus row 2
+[  2   1]
+[  0 7/2]
+ take 1/2 times row 1
+ take 2/7 times row 2
+[  1 1/2]
+[  0   1]
+ take -1/2 times row 2 plus row 1
+[1 0]
+[0 1]
+sage: var('x,y,a,b')
+(x, y, a, b)
+sage: eqs=[2*x+y==a, -x+3*y==b]
+sage: solve(eqs, x, y)
+[[x == 3/7*a - 1/7*b, y == 1/7*a + 2/7*b]]
+
+
+sage: M = matrix(QQ, [[0,1,3], [2,3,4], [-2,-1,2]])
+sage: load "../lab/gauss_method.sage"
+/usr/lib/sagemath/local/lib/python2.7/site-packages/sage/misc/sage_extension.py:371: DeprecationWarning: Use %runfile instead of load.
+See http://trac.sagemath.org/12719 for details.
+  line = f(line, line_number)
+sage: gauss_jordan(M)
+[ 0  1  3]
+[ 2  3  4]
+[-2 -1  2]
+ swap row 1 with row 2
+[ 2  3  4]
+[ 0  1  3]
+[-2 -1  2]
+ take 1 times row 1 plus row 3
+[2 3 4]
+[0 1 3]
+[0 2 6]
+ take -2 times row 2 plus row 3
+[2 3 4]
+[0 1 3]
+[0 0 0]
+ take 1/2 times row 1
+[  1 3/2   2]
+[  0   1   3]
+[  0   0   0]
+ take -3/2 times row 2 plus row 1
+[   1    0 -5/2]
+[   0    1    3]
+[   0    0    0]
+
+
+sage: M = matrix(QQ, [[1,1], [2,1], [3,1]])
+sage: gauss_jordan(M)
+[1 1]
+[2 1]
+[3 1]
+ take -2 times row 1 plus row 2
+ take -3 times row 1 plus row 3
+[ 1  1]
+[ 0 -1]
+[ 0 -2]
+ take -2 times row 2 plus row 3
+[ 1  1]
+[ 0 -1]
+[ 0  0]
+ take -1 times row 2
+[1 1]
+[0 1]
+[0 0]
+ take -1 times row 2 plus row 1
+[1 0]
+[0 1]
+[0 0]
+
+
+M = matrix(QQ, [[2,1,0], [3,1,1], [7,2,1]])
+sage: gauss_jordan(M)
+[2 1 0]
+[3 1 1]
+[7 2 1]
+ take -3/2 times row 1 plus row 2
+ take -7/2 times row 1 plus row 3
+[   2    1    0]
+[   0 -1/2    1]
+[   0 -3/2    1]
+ take -3 times row 2 plus row 3
+[   2    1    0]
+[   0 -1/2    1]
+[   0    0   -2]
+ take 1/2 times row 1
+ take -2 times row 2
+ take -1/2 times row 3
+[  1 1/2   0]
+[  0   1  -2]
+[  0   0   1]
+ take 2 times row 3 plus row 2
+[  1 1/2   0]
+[  0   1   0]
+[  0   0   1]
+ take -1/2 times row 2 plus row 1
+[1 0 0]
+[0 1 0]
+[0 0 1]
