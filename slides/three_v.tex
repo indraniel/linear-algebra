@@ -69,8 +69,8 @@ With respect to the different bases, the coordinates of $\vec{v}$ are different.
   \qquad
   \rep{\vec{v}}{B}=\colvec{0 \\ 2 \\ 1}
 \end{equation*}
-We will see how to translate between the two representations:
-we will develop a formula that converts the representation
+
+In this section we will see how to convert the representation
 of a vector with respect to a first basis to its representation with 
 respect to a second.
 \end{frame}
@@ -91,8 +91,6 @@ This is the arrow diagram.
 
 
 \begin{frame}
-This result supports the definition.
-
 \lm[le:ChBasisMatDoesChBases]
 \ExecuteMetaData[../map5.tex]{lm:ChBasisMatDoesChBases}
 \pf
@@ -103,14 +101,13 @@ This result supports the definition.
 
 
 \begin{frame}
-\ex Two bases for $\polyspace_2$ are
-$B=\sequence{1,1+x,1+x+x^2}$ and
-$D=\sequence{x^2-1,x,x^2+1}$.
+\ex To change a representation of a member of $\polyspace_2$ 
+from being with respect to
+$B=\sequence{1,1+x,1+x+x^2}$ to being with respect to
+$D=\sequence{x^2-1,x,x^2+1}$, 
+Compute $\rep{id}{B,D}$.
 The identity map acting on the elements of~$B$ has no effect,
-and we then represent them with respect to the second basis.
-% Compute $\rep{id}{B,D}$.
-% in the same way that we compute the representation
-% of any function: using $\rep{id(1)}{D}$, etc. 
+and so represent those elements with respect to~$D$. 
 \begin{equation*}
   \rep{1}{D}=\colvec{-1/2 \\ 0 \\ 1/2}
   \quad
@@ -118,7 +115,7 @@ and we then represent them with respect to the second basis.
   \quad
   \rep{1+x+x^2}{D}=\colvec{0 \\ 1 \\ 1}
 \end{equation*}
-To get the change of basis matrix, concatenate.
+To get the change of basis matrix just concatenate.
 \begin{equation*}
   \rep{id}{B,D}=
   \begin{mat}
@@ -127,7 +124,7 @@ To get the change of basis matrix, concatenate.
     1/2  &1/2  &1 
   \end{mat}
 \end{equation*}
-For example, we can translate the representation of $\vec{v}=2-x+3x^2$:
+For example, we can translate the representation of $\vec{v}=2-x+3x^2$.
 \begin{equation*}
   \rep{\vec{v}}{B}=\colvec{3 \\ -4 \\ 3}
   \qquad
@@ -140,20 +137,6 @@ For example, we can translate the representation of $\vec{v}=2-x+3x^2$:
   \end{mat}
   \colvec{3 \\ -4 \\ 3}
 \end{equation*}
-\end{frame}
-\begin{frame}
-\noindent while
-\begin{equation*}
-  \begin{mat}
-    -1/2 &-1/2 &0 \\
-     0   &1    &1 \\
-    1/2  &1/2  &1 
-  \end{mat}
-  \colvec{3 \\ -4 \\ 3}
-  =
-  \colvec{1/2 \\ -1 \\ 5/2}
-\end{equation*}
-so the change of basis matrix does indeed do the conversion.
 \end{frame}
 
 
@@ -302,25 +285,26 @@ $B=\sequence{1,1+x,1+x+x^2}, D=\sequence{1+x^2,x,1-x^2}$
 and 
 $\hat{B}=\sequence{1,x,x^2}, \hat{D}=\sequence{1+x,x+x^2,1+x^2}$.
 
+\pause
 We can find $H$ and~$\hat{H}$ using the methods we have already seen.
 \begin{equation*}
   \rep{d/dx}{B,D}
   =
   \begin{mat}
     0 &1/2 &1/2 \\
-    0 &0   &1 \\
+    0 &0   &2 \\
     0 &1/2 &1/2
   \end{mat}
   \quad
   \rep{d/dx}{\hat{B},\hat{D}}
   =
   \begin{mat}
-    0 &1/2  &1/2 \\
-    0 &-1/2 &1/2 \\
-    0 &1/2  &-1/2
+    0 &1/2  &1 \\
+    0 &-1/2 &1 \\
+    0 &1/2  &-1
   \end{mat}
 \end{equation*}
-To do the conversion we find these.
+These do the base changes.
 \begin{equation*}
   \rep{id}{\hat{B},B}=
   \begin{mat}
@@ -336,16 +320,18 @@ To do the conversion we find these.
     1  &-1/2   &0
   \end{mat}
 \end{equation*}
-Equation~($*$) says that this product equals $\rep{d/dx}{\hat{B},\hat{D}}$.
-\begin{equation*}
-  \begin{mat}
+We can check this case of equation~($*$) by multiplying through.
+\begin{align*}
+  \rep{d/dx}{\hat{B},\hat{D}}
+  &=\rep{id}{D,\hat{D}}\cdot \rep{d/dx}{B,D}\cdot \rep{id}{\hat{B},B}     \\
+  &=\begin{mat}
     0  &1/2    &1  \\
     0  &1/2    &-1 \\
     1  &-1/2   &0
   \end{mat}
   \begin{mat}
     0 &1/2 &1/2 \\
-    0 &0   &1 \\
+    0 &0   &2 \\
     0 &1/2 &1/2
   \end{mat}
   \begin{mat}
@@ -353,7 +339,85 @@ Equation~($*$) says that this product equals $\rep{d/dx}{\hat{B},\hat{D}}$.
     0  &1   &-1 \\
     0  &0   &1
   \end{mat}  
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\ex Consider the map $\map{t_{\pi/6}}{\Re^2}{\Re^2}$
+rotating vectors counterclockwise by $\pi/6$~radians.
+With respect to the standard bases it
+has this representation. 
+\begin{equation*}
+  \rep{t_{\pi/6}}{\stdbasis_2,\stdbasis_2}
+  =
+  \begin{mat}
+    \sqrt{3}/2  &-1/2 \\
+    1/2         &\sqrt{3}/2
+  \end{mat}
 \end{equation*}
+We can translate to the representatation with respect to
+\begin{equation*}
+  B=D=\sequence{\colvec{1 \\ 1},
+                \colvec{1 \\ -1}}
+\end{equation*}
+using the change of basis matrices.
+Here is the diagram, specialized for this case.
+\begin{equation*}
+  \begin{CD}
+    \Re^2_{\wrt{B}}                   @>t_{\pi/6}>H>        \Re^2_{\wrt{D}}       \\
+    @V{\text{\scriptsize$\identity$}} VV                @V{\text{\scriptsize$\identity$}} VV \\
+    \Re^2_{\wrt{\stdbasis_2}}             @>t_{\pi/6}>\rep{t_{\pi/6}}{\stdbasis_2,\stdbasis_2}>  \Re^2_{\wrt{\stdbasis_2}}
+  \end{CD}
+\end{equation*}
+To get $H$ we move down from the upper left, then across, then up. 
+\end{frame}
+\begin{frame}
+With respect to the standard basis real vectors represent themselves,
+so the matrix representing moving down is easy.
+\begin{equation*}
+  \rep{id}{B,\stdbasis_2}
+  \begin{mat}
+    1 &1 \\
+    1 &-1
+  \end{mat}
+\end{equation*}
+The matrix moving up is the inverse.
+\begin{equation*}
+  \rep{id}{\stdbasis_2,D}
+  =(\rep{id}{D,\stdbasis_2})^{-1}
+  =
+  \begin{mat}
+    1 &1 \\
+    1 &-1
+  \end{mat}^{-1}
+  =\frac{-1}{2}\cdot
+  \begin{mat}
+    -1 &-1 \\
+   -1  &1
+  \end{mat}
+\end{equation*}
+Thus we have this.
+\begin{align*}
+  \rep{t_{\pi/6}}{B,D}
+  &=\frac{-1}{2}\cdot
+  \begin{mat}
+    -1 &-1 \\
+   -1  &1
+  \end{mat}
+  \begin{mat}
+    \sqrt{3}/2  &-1/2 \\
+    1/2         &\sqrt{3}/2
+  \end{mat}
+  \begin{mat}
+    1 &1 \\
+    1 &-1
+  \end{mat}                         \\
+  &=
+  \begin{mat}
+    \sqrt{3}/2 &1/2 \\
+    -1/2       &\sqrt{3}/2   
+  \end{mat}
+\end{align*}
 \end{frame}
 
 
