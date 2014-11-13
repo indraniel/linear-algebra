@@ -463,7 +463,209 @@ the set of matrices into matrix equivalence classes.
 \qed
 \end{frame}
 
+\begin{frame}
+Recall that any nonsingular matrix $M$ can be rewritten
+as a product of elementary reduction matrices
+$M=R_1\cdots R_r$ where each $R_i$ is one of the
+$C_{i,j}(k)$, or $M_i(k)$, or $P_{i,j}$.    
 
+\pause\medskip
+Recall also that from the left matrices perform operations on rows.
+\begin{equation*}
+  C_{1,3}(-4)\cdot
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+  =
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+   -4 &0 &1 
+  \end{mat}
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+  =
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    3 &0 &-3
+  \end{mat}
+\end{equation*}
+From the right, they act on columns: this
+\begin{equation*}
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+   -4 &0 &1 
+  \end{mat}
+  =
+  \begin{mat}
+    -11 &2 &3 \\
+    -20 &5 &6 \\
+    -29 &8 &9
+  \end{mat}
+\end{equation*}
+does $-4\cdot\text{col}_3+\text{col}_1$.
+
+\ex This matrix has rank~$2$.
+\begin{equation*}
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+\end{equation*}
+We will find $P$ and~$Q$ to get the $\nbyn{3}$ canonical matrix of
+rank~$2$.
+\end{frame}
+\begin{frame}
+\noindent Row operations produce echelon form.
+\begin{equation*}
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+  \grstep[-7\rho_1+\rho_3]{-4\rho_1+\rho_2}
+  \grstep{-2\rho_2+\rho_3}  
+  \grstep{-(1/3)\rho_2}
+  \begin{mat}
+    1 &2 &3 \\
+    0 &1 &2 \\
+    0 &0 &0
+  \end{mat}
+\end{equation*}
+Multiplying the reduction matrices gives $P$ (note the right-to-left
+order).
+\begin{multline*}
+  \begin{mat}
+    1 &0 &0 \\
+    0 &-1/3 &0 \\
+    0 &0 &1
+  \end{mat}
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+    0 &-2 &1
+  \end{mat}
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+    -7 &0 &1
+  \end{mat}
+  \begin{mat}
+    1 &0 &0 \\
+    -4 &1 &0 \\
+    0 &0 &1
+  \end{mat}                    \\
+  =\begin{mat}
+      1   &0    &0 \\
+      4/3 &-1/3 &0 \\
+      1   &-2   &1
+   \end{mat}
+\end{multline*}
+So far we have this.
+\begin{equation*}
+  PHQ
+  =\begin{mat}
+      1   &0    &0 \\
+      4/3 &-1/3 &0 \\
+      1   &-2   &1
+   \end{mat}
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+  Q
+  =
+  \begin{mat}
+    1 &2 &3 \\
+    0 &1 &2 \\
+    0 &0 &0
+  \end{mat}
+  Q
+\end{equation*}
+\end{frame}
+\begin{frame}
+Column operations will produce block partial identity.
+\begin{equation*}
+  \begin{mat}
+    1 &2 &3 \\
+    0 &1 &2 \\
+    0 &0 &0
+  \end{mat}
+  \grstep{-2\text{col}_2+\text{col}_3}
+  \grstep{-2\text{col}_1+\text{col}_2}
+  \grstep{\text{col}_1+\text{col}_3}
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+    0 &0 &0
+  \end{mat}    
+\end{equation*}
+Combine the associated reduction matrices to get $Q$.
+(In contrast with the construction of~$P$, here they come in 
+right-to-left order.)
+\begin{equation*}
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &-2 \\
+    0 &0 &1
+  \end{mat}
+  \begin{mat}
+    1 &-2 &0 \\
+    0 &1 &0 \\
+    0 &0 &1
+  \end{mat}
+  \begin{mat}
+    1 &0 &1 \\
+    0 &1 &0 \\
+    0 &0 &1
+  \end{mat}
+  =
+  \begin{mat}
+    1 &-2 &1 \\
+    0 &1 &-2 \\
+    0 &0 &1
+  \end{mat}
+\end{equation*}
+Here is the equation.
+\begin{equation*}
+  PHQ
+  =\begin{mat}
+      1   &0    &0 \\
+      4/3 &-1/3 &0 \\
+      1   &-2   &1
+   \end{mat}
+  \begin{mat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{mat}
+  \begin{mat}
+    1 &-2 &1 \\
+    0 &1 &-2 \\
+    0 &0 &1
+  \end{mat}
+  =
+  \begin{mat}
+    1 &0 &0 \\
+    0 &1 &0 \\
+    0 &0 &0
+  \end{mat}    
+\end{equation*}  
+\end{frame}
 
 
 \begin{frame}{Matrix equivalence is characterized by rank}

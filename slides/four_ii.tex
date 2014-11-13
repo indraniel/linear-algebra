@@ -62,7 +62,8 @@ This parallelogram is defined by the two vectors.
 \ExecuteMetaData[../det2.tex]{df:Box}
 
 \medskip
-The box is a subset the span, with  the scalars limited to the unit 
+This is the same as the definition of the span,
+but with the scalars limited to the unit 
 interval. 
 \end{frame}
 \begin{frame}{Area of a box}
@@ -74,8 +75,9 @@ interval.
     &\quad-x_2y_2/2-x_2y_2/2-x_1y_1/2-x_2y_1         \\
   &=x_1y_2-x_2y_1        
 \end{align*}
-\pause
-We recognize that as the value of the determinant.
+We will argue that
+the determinant of a square matrix   
+gives the size of the box formed by the matrix's columns.  
 \begin{equation*}
   \begin{vmat}
     x_1  &x_2  \\
@@ -84,36 +86,48 @@ We recognize that as the value of the determinant.
   =x_1y_2-x_2y_1
 \end{equation*}
 \end{frame}
-\begin{frame}
-We will argue that
-the conditions in the definition of determinants 
-make good postulates for a function 
-that gives the size of the box formed by the columns of the matrix.  
+\begin{frame}{Restatement for columns}
+We switch from considering the determinant as a function of the 
+rows to considering it as a function of the columns.
+Observe that the row operation conditions in the definition 
+translate over to column operation conditions.
+
+The first condition is that a
+determinant is unchanged by a row combination:~where 
+$A$ is square and  
+$A\!\!\raisebox{-.5ex}{\smash{\grstep{k\rho_i+\rho_j}}}\!\! \hat{A}$
+(with~$i\neq j$)
+then $\det(A)=\det{\hat{A}}$.
+To see that the same holds about column combinations, recall that 
+the determinant of a matrix equals 
+the determinant of its transpose.
+We can do a column combination on a square matrix
+by transposing, doing a row combination,
+and transposing back;
+none of these changes the determinant.
 
 \pause
-In line with that,
-here we will consider the determinant as a function of the columns.
+The second condition in the definition is that a row swap 
+changes the determinant's sign. 
+The third condition is that multiplying a row by a
+scalar multiplies the entire determinant by that scalar.
+Here also transposing, performing the row operation, and transposing back
+shows that the column translations hold.
 
-\pause
-Because the determinant of a matrix equals 
-the determinant of its transpose, we can change the determinant conditions
-from statements about rows to statements about columns.
-For instance, the first condition is that a
-determinant is unaffected by a row operation $k\rho_i+\rho_j$ with $i\neq j$.
-By transposing we have that a determinant
-does not change under combinations of columns. 
+The final condition is that the determinant of the identity matrix is~$1$.
+This isn't about row operations so we don't need to
+translate. 
 \end{frame}
 
 
 
 
 \begin{frame}\vspace*{-1ex}
-  \frametitle{Definition of determinant reinterpreted}
+  \frametitle{Geometric interpretation of the definition}
 Condition~(3) from the definition of determinant is 
 that rescaling a column rescales the entire determinant
 $\det(\ldots,k\vec{v}_i,\ldots)=k\cdot\det(\ldots,\vec{v}_i,\ldots)$.
-This fits with the idea that the determinant
-gives the size of the box formed by the columns of the matrix:
+This fits :
 if we scale a column by a factor~$k$ then the size of the box
 scales by that factor. 
 \begin{center}
@@ -139,21 +153,25 @@ is slanted at a different angle than the original box but the two have
 the same base and height, and hence the same area.
 \end{frame}
 \begin{frame}
-As we noted after the definition, condition~(2) is a consequence of the 
+As we noted after the determinamt's definition, 
+condition~(2) is a consequence of the 
 others so we leave it aside for the moment.  
 
 Condition~(4) is that the determinant of the identity matrix is~$1$.
+This fits also
+with the proposal that the determinant
+gives the size of the box formed by the columns of the matrix.
 \centergraphic{../ch4.36}
 \end{frame}
 
 
 
 
-\begin{frame}{Orientation in two space}
+\begin{frame}{Orientation}
 \re[re:PropertyTwoGivesSign] 
-Although condition~(2) is redundant, it says something notable.
+Although condition~(2) is redundant, what it says is notable.
 Consider these two.
-Swapping changes the sign.
+Swapping changes the sign of the determinant.
 \begin{center} \small
   \begin{tabular}{c@{\hspace*{8em}}c}
     \includegraphics{../ch4.37}  
@@ -168,18 +186,16 @@ Swapping changes the sign.
         \end{vmat}=-10$
   \end{tabular}
 \end{center}
-In the picture
-on the left, $\vec{u}$ is first in the matrix and then we follow the
+\pause
+On the left $\vec{u}$ is first in the matrix and then we follow the
 counterclockwise arc to $\vec{v}$,
 and get a positive size.
-\pause
 On the right following the clockwise arc gives a negative size.
 The sign returned by the size function, the determinant, reflects the 
 \definend{orientation}\index{box!orientation}
 or \definend{sense} of the box.
 
-\pause
-We see the same thing if we use Condition~(3) with a negative scalar.
+(The same effect appears if we use Condition~(3) with a negative scalar.)
 \end{frame}
 
 \begin{frame}{More on orientation: three space} 

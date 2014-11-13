@@ -32,15 +32,17 @@ path3 parallelogram=(0,0,0)--v1--(v1+v2)--v2--cycle;
 
 // Draw
 draw(surface(parallelogram),rgb("fff0ca"));
-draw((0,0,0)--v1,VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
-draw(v1--(v1+v2),VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
-draw((v1+v2)--v2,VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
-draw(v2--(0,0,0),VECTORPEN+blue+gray(0.9),Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw,Relative(0.75)));
-// draw((0,0,0)--v1,line_pen+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
+draw((0,0,0)--v1,VECTORPEN+blue+gray(0.9),Arrow3(HookHead2,0.5*VECTORHEADSIZE,FillDraw,Relative(0.75),VECTORPEN+blue));
+draw(v1--(v1+v2),VECTORPEN+blue+gray(0.9),Arrow3(HookHead2,0.5*VECTORHEADSIZE,FillDraw,Relative(0.75),VECTORPEN+blue));
+draw((v1+v2)--v2,VECTORPEN+blue+gray(0.9),Arrow3(HookHead2,0.5*VECTORHEADSIZE,FillDraw,Relative(0.75),VECTORPEN+blue));
+draw(v2--(0,0,0),VECTORPEN+blue+gray(0.9),Arrow3(HookHead2,0.5*VECTORHEADSIZE,FillDraw,Relative(0.75),VECTORPEN+blue));
+// draw((0,0,0)--v1,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 // draw((0,0,0)--v2,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 draw((0,0,0)--v3,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 // Label
-label("{\scriptsize $\vec{v}_1$}",v1,SE);
-label("{\scriptsize $\vec{v}_2$}",v2,NW);
-label("{\scriptsize $\vec{v}_3$}",v3,NE);
+//label("{\scriptsize $\vec{v}_1$}",v1,SE);
+//label("{\scriptsize $\vec{v}_2$}",v2,NW);
+//label("{\scriptsize $\vec{v}_3$}",v3,NE);
+
+// Person
 
