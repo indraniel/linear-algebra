@@ -9,6 +9,7 @@ import three;
 import graph3;
 
 currentprojection=orthographic(camera=(20,4,3),target=(0,0,0));
+currentlight=nolight;
 
 pen line_pen=linecap(0)
              +linewidth(1.5pt);
@@ -17,7 +18,7 @@ pen dotted_line_pen=linecap(1)
   +gray(0.7)
   +linetype(new real[] {0,4});
 
-pen bcolor=black+gray(0.95);
+pen bcolor=black+gray(0.9);
 pen kcolor=red;
 
 // Axes

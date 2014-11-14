@@ -9,6 +9,7 @@ import three;
 import graph3;
 //currentprojection=perspective((20,2,4),target=(0,0,0));
 currentprojection=orthographic(camera=(20,4,3),target=(0,0,0));
+currentlight=nolight;  // make arrowheads look the intended color
 
 pen line_pen=linecap(0)
              +linewidth(1.5pt);
@@ -30,9 +31,9 @@ triple s=(2,1,1);
 triple p=(1/3,1/6,1/6);
 
 // Draw
-draw(-1.5s--1.5*s,line_pen+blue+gray(0.97));
+draw(-1.5s--1.5*s,line_pen+blue+gray(0.97),Arrows3(HookHead2,0.35*VECTORHEADSIZE));
 draw(v--p,dotted_line_pen);  // dotted line
-draw((0,0,0)--p,line_pen+red,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
+draw((0,0,0)--p,line_pen+red,Arrow3(DefaultHead2,VECTORHEADSIZE,red));
 draw((0,0,0)--v,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 // Label
 label("$\vec{v}$",v,SW);

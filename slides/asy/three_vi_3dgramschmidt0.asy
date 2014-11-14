@@ -9,6 +9,7 @@ import three;
 import graph3;
 
 currentprojection=orthographic(camera=(20,4,3),target=(0,0,0));
+currentlight=nolight;
 
 pen line_pen=linecap(0)
              +linewidth(1.5pt);
