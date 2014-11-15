@@ -61,12 +61,12 @@ This parallelogram is defined by the two vectors.
 \df[df:Box]
 \ExecuteMetaData[../det2.tex]{df:Box}
 
-\medskip
-This is the same as the definition of the span,
-but with the scalars limited to the unit 
-interval. 
+% \medskip
+% This is the same as the definition of the span,
+% but with the scalars limited to the unit 
+% interval. 
 \end{frame}
-\begin{frame}{Area of a box}
+\begin{frame}{Area}
 \centergraphic{../ch4.31}
 \begin{align*}
   \text{box area}
@@ -87,32 +87,32 @@ gives the size of the box formed by the matrix's columns.
 \end{equation*}
 \end{frame}
 \begin{frame}{Restatement for columns}
-We switch from considering the determinant as a function of the 
+We now switch from considering the determinant as a function of the 
 rows to considering it as a function of the columns.
-Observe that the row operation conditions in the definition 
+For that, observe that the row operation conditions in the definition 
 translate over to column operation conditions.
 
-The first condition is that a
+The first row condition is that a
 determinant is unchanged by a row combination:~where 
 $A$ is square and  
 $A\!\!\raisebox{-.5ex}{\smash{\grstep{k\rho_i+\rho_j}}}\!\! \hat{A}$
 (with~$i\neq j$)
 then $\det(A)=\det{\hat{A}}$.
-To see that the same holds about column combinations, recall that 
+To see that the same holds for column combinations, recall that 
 the determinant of a matrix equals 
-the determinant of its transpose.
-We can do a column combination on a square matrix
+the determinant of its transpose and
+so we can do a column combination on a square matrix
 by transposing, doing a row combination,
-and transposing back;
-none of these changes the determinant.
+and then transposing back.
+These three don't change the determinant.
 
 \pause
-The second condition in the definition is that a row swap 
+The second row condition is that a row swap 
 changes the determinant's sign. 
 The third condition is that multiplying a row by a
 scalar multiplies the entire determinant by that scalar.
 Here also transposing, performing the row operation, and transposing back
-shows that the column translations hold.
+shows that the column operations also hold.
 
 The final condition is that the determinant of the identity matrix is~$1$.
 This isn't about row operations so we don't need to
@@ -124,10 +124,11 @@ translate.
 
 \begin{frame}\vspace*{-1ex}
   \frametitle{Geometric interpretation of the definition}
-Condition~(3) from the definition of determinant is 
+The third condition on a determinant, stated in column form, is 
 that rescaling a column rescales the entire determinant
 $\det(\ldots,k\vec{v}_i,\ldots)=k\cdot\det(\ldots,\vec{v}_i,\ldots)$.
-This fits :
+This fits our program of arguing that determinant conditions make
+good axioms for a function measuring the size of a box:
 if we scale a column by a factor~$k$ then the size of the box
 scales by that factor. 
 \begin{center}
@@ -139,7 +140,7 @@ scales by that factor.
 % \begin{frame}
 
 \pause
-Condition~(1) is that the determinant is unaffected by 
+The determinant's first condition is that it is unaffected by 
 combining columns.
 The picture 
 \begin{center}
@@ -148,19 +149,21 @@ The picture
   \includegraphics{../ch4.35}
 \end{center}   
 shows that the box
-formed by $\vec{v}$ and~$k\vec{v}+\vec{w}$ 
-is slanted at a different angle than the original box but the two have
+formed by the two vectors $\vec{v}$ and~$k\vec{v}+\vec{w}$ 
+is slanted at a different angle than the one formed
+by $\vec{v}$ and~$\vec{w}$ but the two boxes have
 the same base and height, and hence the same area.
 \end{frame}
 \begin{frame}
-As we noted after the determinamt's definition, 
-condition~(2) is a consequence of the 
-others so we leave it aside for the moment.  
+As we noted after the determinant's definition, 
+its second condition is a consequence of the 
+others so we leave it aside for a moment.  
 
-Condition~(4) is that the determinant of the identity matrix is~$1$.
-This fits also
-with the proposal that the determinant
-gives the size of the box formed by the columns of the matrix.
+The final condition is that the determinant of the identity matrix is~$1$.
+This also fits 
+with our program of arguing that the conditions in the 
+definnition of determinant are good ones for defining the function
+giving the size of the box formed by the columns of the matrix.
 \centergraphic{../ch4.36}
 \end{frame}
 
@@ -169,9 +172,11 @@ gives the size of the box formed by the columns of the matrix.
 
 \begin{frame}{Orientation}
 \re[re:PropertyTwoGivesSign] 
-Although condition~(2) is redundant, what it says is notable.
-Consider these two.
-Swapping changes the sign of the determinant.
+The second condition in the definition is that
+swapping changes the sign of the determinant.
+Although this condition is redundant, 
+it is nonetheless notable.
+Consider these pictures, using the same pair of vectors.
 \begin{center} \small
   \begin{tabular}{c@{\hspace*{8em}}c}
     \includegraphics{../ch4.37}  
@@ -187,22 +192,22 @@ Swapping changes the sign of the determinant.
   \end{tabular}
 \end{center}
 \pause
-On the left $\vec{u}$ is first in the matrix and then we follow the
-counterclockwise arc to $\vec{v}$,
-and get a positive size.
-On the right following the clockwise arc gives a negative size.
-The sign returned by the size function, the determinant, reflects the 
+On the left, $\vec{u}$ is the first column in the matrix and 
+we get a positive size.
+On the right, $\vec{v}$ is first and we get a negative size.
+On the left, the arc from first vector to second is counterclockwise while
+on the right, the arc from first to second is clockwise.
+The sign returned by the determinant reflects the 
 \definend{orientation}\index{box!orientation}
 or \definend{sense} of the box.
 
-(The same effect appears if we use Condition~(3) with a negative scalar.)
+% (The same effect appears if we use Condition~(3) with a negative scalar.)
 \end{frame}
 
-\begin{frame}{More on orientation: three space} 
-Starting with these two vectors we want to form a three-space box 
-with positive size.
-Those two vectors span a plane dividing three-space in two,
-the part above the plane and the part below.
+\begin{frame}{More on orientation: $\Re^3$} 
+These two vectors span a plane.
+The plane divides three-space into two parts,
+the part above and the part below.
 \begin{equation*}
   \vec{v}_1=\colvec{1 \\ 4 \\ 1},\,
   \vec{v}_2=\colvec{-2 \\ 3 \\ 1}
@@ -212,16 +217,13 @@ the part above the plane and the part below.
                  \only<2->{\includegraphics{asy/four_ii_orientation_pos.pdf}}}
 \end{equation*}
 \pause
-The $\vec{v}_3$ shown is on the side of the plane containing vectors
-with this property: 
+Take a $\vec{v}_3$ above that plane.
+More precisely, the $\vec{v}_3$ shown is on the side of the plane
+with the property that 
 a person at the tip of $\vec{v}_3$ 
-looking at the box and tracing
-out the parallelogram starting from the first vector~$\vec{v}_1$
-finds that the trace looks counterclockwise.
-Any such vector~$\vec{v}_3$ makes a box that is positive-sized.
-\end{frame}
-\begin{frame}
-Shown is this vector~$\vec{v}_3$.
+looking at the arc from $\vec{v}_1$ to~$\vec{v}_2$
+sees that arc as counterclockwise.
+Any such vector defines a box that is positive-sized.
 \begin{equation*}
   \vec{v}_3=\colvec{0 \\ -1 \\ 2}
   \qquad
@@ -231,10 +233,24 @@ Shown is this vector~$\vec{v}_3$.
     1 &1 &2
   \end{vmat}=25
 \end{equation*}
-\pause
-A vector on the other side of the plane,
-such as $-\vec{v}_3$, will have the same trace look clockwise, and will
-give a negative determinant.
+\end{frame}
+\begin{frame}
+This is the \textit{right~hand rule}:~place your right hand's pinky finger
+on the spanned plane so that your fingers curl from $\vec{v}_1$ to~$\vec{v}_2$.
+Then vectors on the side of the plane with your thumb define
+positive-sized boxes. 
+\begin{equation*}
+  % \vec{v}_1=\colvec{1 \\ 4 \\ 1},\,
+  % \vec{v}_2=\colvec{-2 \\ 3 \\ 1},\,
+  % \vec{v}_3=\colvec{0 \\ -1 \\ 2}
+  % \qquad
+  \vcenteredhbox{\includegraphics{asy/four_ii_orientation_pos.pdf}}
+\end{equation*}
+\end{frame}
+\begin{frame}
+A vector on the plane's other side,
+such as $-\vec{v}_3$, will have the same arc from $\vec{v}_1$ to~$\vec{v}_2$
+look clockwise and will define a negative-sized box.
 \begin{equation*}
   \begin{vmat}
     1 &-2 &0 \\
@@ -242,8 +258,10 @@ give a negative determinant.
     1 &1 &-2
   \end{vmat}=-25
 \end{equation*}
-\only<1-6>{These pictures start above the plane, and the box looks to be oriented clockwise.}
-\only<7->{But from below, the box looks to be oriented counterclockwise.}
+\only<1-6>{These pictures start above the plane, the perspective of 
+the prior slide.}
+\only<7->{From below, to a person standing on $-\vec{v}_3$, 
+     the arc is clockwise.}
 \only<1>{\centergraphic{asy/four_ii_orientation_neg0.pdf}}%
 \only<2>{\centergraphic{asy/four_ii_orientation_neg1.pdf}}%
 \only<3>{\centergraphic{asy/four_ii_orientation_neg2.pdf}}%
@@ -255,13 +273,16 @@ give a negative determinant.
 \only<9>{\centergraphic{asy/four_ii_orientation_neg8.pdf}}%
 \only<10>{\centergraphic{asy/four_ii_orientation_neg9.pdf}}%
 \only<11->{\centergraphic{asy/four_ii_orientation_neg10.pdf}}%
+\only<11->{To have it so that when
+  you curl your fingers from $\vec{v}_1$ to~$\vec{v}_2$ then
+  the vector lies with your thumb, you must use your left hand.}
 \end{frame}
 
 
 
 
 \begin{frame}{Determinants are multiplicative}
-\th[th:MatChVolByDetMat]  
+\th[th:MatChVolByDetMat]%   
 \ExecuteMetaData[../det2.tex]{th:MatChVolByDetMat}
 
 \pause
@@ -429,7 +450,8 @@ The symmetric argument for the other side gives this.
 
 
 \begin{frame}{Cramer's Rule}
-Let $A$ be an $\nbyn{n}$ matrix, let $\vec{b}$ be an $n$-tall column vector,
+Let $A$ be an $\nbyn{n}$ matrix with a nonzero determinant,
+let $\vec{b}$ be an $n$-tall column vector,
 and consider the linear system $A\vec{x}=\vec{b}$.
 For any~$i\in[1,\ldots,n]$ let $B_i$ be the matrix obtained by
 substituting $\vec{b}$ for column~$i$ of $A$.
@@ -439,10 +461,13 @@ Then the value of the $i$-th unknown is $x_i=\deter{B_i}/\deter{A}$.
 \medskip
 \nearbyexercise{ex:CramerRule} gives the proof.
 
+\medskip
+Of course, if the matrix has a zero determinant then the system does not 
+have a unique solution.
 \end{frame}
 \begin{frame}
 \ex
-Given this system
+This system
 \begin{equation*}
   \begin{linsys}{3}
     2x_1 &+ &x_2 &- &x_3 &= &4 \\
@@ -450,7 +475,7 @@ Given this system
          &  &x_2 &- &5x_3 &= &0 \\
   \end{linsys}
 \end{equation*}
-we can rewrite it as 
+is 
 \begin{equation*}
   \begin{mat}[r]
     2 &1 &-1 \\
@@ -482,12 +507,11 @@ and
 so $x_2=0/-26=0$.
 \end{frame}
 \begin{frame}{A caution}
-Cramer's Rule is an interesting application of the geometry 
-that we have developed.
-And it allows us to mentally solve systems with
-two or three variables that use simple numbers.
-But don't use it for systems having many variables.
-Taking a determinant of a general large matrix is very slow.   
+Cramer's Rule is an interesting application of the geometry.
+And, it allows us to mentally solve small systems with
+simple numbers.
+But don't use it for systems having many variables;
+taking a determinant of a general large matrix is very slow.   
 \end{frame}
 
 

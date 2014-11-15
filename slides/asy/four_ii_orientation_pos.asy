@@ -52,8 +52,8 @@ draw(arrow_loc--(arrow_loc+0.2*dir(orient_arc,0.5)),blue,Arrow3(HookHead2(normal
 path3 vertical_vec=(0,0,0)--v3;
 draw(vertical_vec,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 // Label
-//label("{\scriptsize $\vec{v}_1$}",v1,SE);
-//label("{\scriptsize $\vec{v}_2$}",v2,NW);
+label("{\scriptsize $\vec{v}_1$}",v1,E);
+label("{\scriptsize $\vec{v}_2$}",v2,E);
 //label("{\scriptsize $\vec{v}_3$}",v3,NE);
 
 // Person
