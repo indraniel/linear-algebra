@@ -392,11 +392,12 @@ has the determinant scale one row at a time.
   \end{vmat}         
 \end{align*}
 \end{frame}
-\begin{frame}That example illustrates that determinants are not linear
-with respect to scalar multiplication.
-What about with respect to addition?
+\begin{frame}
+So determinants are not linear:~with scalar multiplication,
+the scalars come out one row at a time.
+What happens with addition?
 
-Consider condition~(3) in the case   
+Consider condition~(3) applied to the case   
 % \begin{equation*}
 %   \det (\vec{\rho}_1,\dots,k\vec{\rho}_i,\dots,\vec{\rho}_n)
 %        = k\cdot \det (\vec{\rho}_1,\dots,\vec{\rho}_i,\dots,\vec{\rho}_n)
@@ -414,7 +415,7 @@ Rewrite it as addition.
 \end{multline*}
 Of course this extends to $k=3$, etc.
 
-This strongly hints that besides bringing out scalars one row at a time,
+This hints that besides bringing out scalars one row at a time,
 determinants also break along a plus sign one row at a time.
 \end{frame}
 
@@ -468,7 +469,7 @@ along the first row
     3 &4
   \end{vmat}
 \end{equation*}
-and the second row.
+and then expand both of those on second row.
 \begin{equation*}
   =\begin{vmat}
     1 &0 \\
@@ -487,14 +488,19 @@ and the second row.
     0 &4
   \end{vmat}
 \end{equation*}
-This ends with four matrices that are simple in that 
-each has a single nonzero entry in each row.
+Each matrix is simple in that  
+of its rows are all zeroes except
+for a single entry from the starting matrix.
 
-\pause 
-The first and last of the four determinants are $0$ because the matrices are
-nonsingular, since one row is a multiple of the other.
-We are left with two matrices, each having 
-one entry from each row and column from the starting matrix.
+\pause
+Of these four, the first and last are~$0$ 
+because the matrices are
+nonsingular, since they have a second row that is a multiple of 
+the first.
+We are left with two determinants, where 
+in each the matrix is all zeros except for 
+one entry from the starting matrix in each row and each column.
+We'll show our strategy for evaluating these determinants below.
 \end{frame}
 
 
@@ -502,20 +508,81 @@ one entry from each row and column from the starting matrix.
 
 \begin{frame}
 \ex
-Similarly we can start to evaluate this determinant 
+Similarly we can use multilinearity to expand this determinant. 
+\begin{align*}
+  \begin{vmat}
+    1 &2 &3 \\
+    4 &5 &6 \\
+    7 &8 &9
+  \end{vmat}
+  &=\begin{vmat}
+    1 &0 &0 \\
+    4 &0 &0 \\
+    7 &0 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    4 &0 &0 \\
+    0 &8 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    4 &0 &0 \\
+    0 &0 &9
+  \end{vmat}  \\
+  &\quad+\begin{vmat}
+    1 &0 &0 \\
+    0 &5 &0 \\
+    7 &0 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    0 &5 &0 \\
+    0 &8 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    0 &5 &0 \\
+    0 &0 &9
+  \end{vmat}           \\
+  &\quad+\begin{vmat}
+    1 &0 &0 \\
+    0 &0 &6 \\
+    7 &0 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    0 &0 &6 \\
+    0 &8 &0
+  \end{vmat}
+  +\begin{vmat}
+    1 &0 &0 \\
+    0 &0 &6 \\
+    0 &0 &9
+  \end{vmat}       \\
+  &\quad+\begin{vmat}
+    0 &2 &0 \\
+    4 &0 &0 \\
+    7 &0 &0
+  \end{vmat}
+  +\qquad\cdots\qquad+
+  \begin{vmat}
+    0 &0 &3 \\
+    0 &0 &6 \\
+    0 &0 &9
+  \end{vmat}
+\end{align*}
+In each of the $3^3=27$~determinants on the right the matrix is all zeros but
+for a single entry from the starting matrix in each row. 
+\end{frame}
+
+\begin{frame}
 \begin{equation*}
   \begin{vmat}
     1 &2 &3 \\
     4 &5 &6 \\
     7 &8 &9
   \end{vmat}
-\end{equation*}
-by breaking it into
-a sum of determinants of matrices.
-These summand matrices will be all~$0$'s except that each
-row will have one entry from the 
-starting matrix.   
-\begin{equation*}
   =\begin{vmat}
     1 &0 &0 \\
     4 &0 &0 \\
@@ -538,13 +605,15 @@ starting matrix.
     0 &0 &9
   \end{vmat}
 \end{equation*}
+For any of these, if two of the matrix rows have their original 
+matrix entries in the same column then the determinant is~$0$
+since then one matrix row is a multiple of the other.
 
 \pause
-For any of these determinants, if two rows have their original matrix entry 
-in the same column then the determinant is~$0$
-since one row is a multiple of the other.
-Therefore, the above reduces to a sum of determinants, each all $0$'s but
-for a single entry in each row and column from the original matrix. 
+We've reduced to a sum of determinants, 
+where each matrix is all $0$'s but
+for a single entry from the original in each row and column.
+There are $3\cdot 2\cdot 1=6$ of these. 
 \end{frame}
 \begin{frame}
 \vspace*{-3ex}
@@ -616,7 +685,17 @@ for a single entry in each row and column from the original matrix.
   \end{vmat}
 \end{align*}
 \end{frame}
+\begin{frame}
+\noindent
+After bringing out each entry from the original matrix, we are left with 
+matrices that are all $0$'s except for a single~$1$ in each row and column.
 
+So, the only one thing remains 
+to be done in our process of justifying the definition 
+of determinant by finding a way to express 
+determinants without using Gauss's Method:~give a formula for
+the determinant of such matrices (not involving Gauss's Method).
+\end{frame}
 
 
 
@@ -628,13 +707,21 @@ for a single entry in each row and column from the original matrix.
 \ExecuteMetaData[../det1.tex]{df:permutation}
 
 So, in a permutation each number 
-$1$, \ldots, $n$ appears as the output for one and only one input.
+$1$, \ldots, $n$ is the output associated with one and only one input.
 We sometimes denote a permutation as the sequence 
 $\phi=\sequence{\phi(1),\phi(2),\ldots,\phi(n)}$.
 
-\pause
-\ex[ex:AllTwoPerms]
-\ExecuteMetaData[../det1.tex]{ex:AllTwoPerms}
+\ex[ex:AllTwoThreePerms]
+These are the $2$-permutations.
+\begin{center}
+  \begin{tabular}{rcc}
+    $\phi_1$:  &$1\mapsto 1$  &$2\mapsto 2$  \\
+    $\phi_2$:  &$1\mapsto 2$  &$2\mapsto 1$      
+  \end{tabular}
+\end{center}
+The sequence notation is shorter:
+\( \phi_1=\sequence{1,2} \) and \( \phi_2=\sequence{2,1} \).
+% \ExecuteMetaData[../det1.tex]{ex:AllTwoPerms}
 \ex[ex:AllThreePerms]
 \ExecuteMetaData[../det1.tex]{ex:AllThreePerms}
 \end{frame}
@@ -678,9 +765,7 @@ matrix whose rows are the matching $\iota$'s.
 \ex
 Recall that there are two $2$-permutations
 \( \phi_1=\sequence{1,2} \) and \( \phi_2=\sequence{2,1} \).
-So for the $\nbyn{2}$ case, the sum over all permutations has two terms.
-
-\pause
+% So for the $\nbyn{2}$ case, the sum over all permutations has two terms.
 These are the associated permutation matrices
 \begin{equation*}
   P_{\phi_1}=
@@ -703,13 +788,13 @@ giving this expansion.
     t_{2,1}  &t_{2,2}
   \end{vmat}
   &=
-  t_{1,1}t_{2,2}
+  t_{1,1}t_{2,2}\cdot
   \begin{vmat}
     1  &0 \\
     0  &1
   \end{vmat}               
   +
-  t_{1,2}t_{2,1}
+  t_{1,2}t_{2,1}\cdot
   \begin{vmat}
     0  &1 \\
     1  &0
@@ -719,8 +804,9 @@ giving this expansion.
   +
   t_{1,2}t_{2,1}\cdot (-1)
 \end{align*}
-The determinant $\deter{P_{\phi_2}}$ equals $-1$ because we can bring that to 
-the identity matrix with one row swap.
+(From prior work we know that the determinant $\deter{P_{\phi_2}}$ 
+equals~$-1$ because we can bring that to 
+the identity matrix with one row swap.)
 \pause
 Renaming the matrix entries gives the familiar $\nbyn{2}$ formula.
 \begin{equation*}
@@ -736,7 +822,8 @@ Renaming the matrix entries gives the familiar $\nbyn{2}$ formula.
 
 
 \begin{frame}
-Proofs for these two theorems are in the next subsection.
+The next subsection does the proof of 
+these two theorems.
 
 \th[th:DetsExist]
 \ExecuteMetaData[../det1.tex]{th:DetsExist}
@@ -745,7 +832,6 @@ Proofs for these two theorems are in the next subsection.
 \ExecuteMetaData[../det1.tex]{th:DeterminantOfAMatrixEqualsDeterminantOfTranspose}
 
 \pause
-\medskip
 \co[cor:ColSwapChgSign]
 \ExecuteMetaData[../det1.tex]{co:ColSwapChgSign}
 \pause
@@ -855,6 +941,14 @@ So $\sgn(\psi)=+1$.
 
 %..........
 \begin{frame}{Determinants exist}
+Recall the process we are going through in the validation of the definition 
+of determinant.
+We want a formula for the determinant that gives an
+obviously well-defined value.
+(This is in contrast to calculating determinants using Gauss's Method,
+which can be done in more than one way.)
+Here is that formula.
+
 \ExecuteMetaData[../det1.tex]{DefiningDFunction}
 \end{frame}
 \begin{frame}
