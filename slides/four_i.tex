@@ -72,23 +72,28 @@ matrix is nonsingular.
 
 
 
-\begin{frame}
-We will define the determinant function by listing 
-some conditions.
-These are convenient for computing the value of the determinant
-on an input square matrix. 
-Then we will show that there is only one function satisfying those
-conditions.
+\begin{frame}{A remark on how we will proceed}
+The prior slide gives a formula for the $\nbyn{1}$, $\nbyn{2}$, and~$\nbyn{3}$
+determinants. 
+We will eventually give a formula for the general $\nbyn{n}$~case,
+the permutation expansion.
+However, this formula has a number of disadvantages, including that 
+it is much too slow for practical computations when $n$ is of any
+substantial size. 
 
-% \pause
-% \medskip
-% \no
-% The first section of the text algebraically motivates the 
-% determinant definition. 
-% The section after this will give a geometric motivation.
-% In this section, beyond defining the determinant, 
-% we will show how to compute it
-% and give some key results.
+Instead, we will define a
+determinant function as one that satisfies some conditions. 
+These conditions let us apply Gauss's Method, which we know to
+be fast and easy.
+(They conditions extrapolate from the $\nbyn{1}$, $\nbyn{2}$, 
+and~$\nbyn{3}$cases; see the discussion in the book.) 
+
+Proceeding by using a list of conditions has the downside that we must 
+show that there is at most one function satisfying those conditions, and 
+we must also show that such a function exists at all. 
+So this development introduces some technicalities of theory.
+But mastering them is well within our scope so this is the
+best way to proceed.
 \end{frame}
 
 
@@ -132,13 +137,15 @@ conditions.
 
 
 \begin{frame}
-We can compute the determinant of a matrix using Gauss's Method
-(presuming that a function satisfying the definition exists; 
-we will prove later that it does).
+We will prove later that there is a function satisfying the definition 
+of determinant. 
+For the moment we proceed without that assurance.
 
-\ex  On this matrix the Gauss's Method reduces the first column  with 
+We can compute the determinant of a matrix using Gauss's Method
+
+\ex  On this matrix we can perform the Gauss's Method steps of
 $-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
-Condition~(1) says that these row operations
+Condition~(1) says that these row combination operations
 leave the determinant unchanged.
 \begin{equation*}
   \begin{vmat}
@@ -154,8 +161,8 @@ leave the determinant unchanged.
   \end{vmat}
 \end{equation*}
 \pause
-Reduce the second column with $-(5/3)\rho_2+\rho_3$.
-Again, by condition~(1) the determinant stays the same.
+Again by condition~(1), the operation
+$-(5/3)\rho_2+\rho_3$ does not change the determinant.
 \begin{equation*}
   =
   \begin{vmat}
@@ -172,10 +179,12 @@ diagonal.
   =1\cdot(-6)\cdot(-7/3)=14
 \end{equation*}
 \end{frame}
+
 \begin{frame}
 \ex
-To reduce this matrix we do a row swap, 
-which changes the sign of the determinant.
+To illustrate what happens with a row swap operation,
+consider this matrix. 
+The swap changes the determinant's sign.
 \begin{equation*}
   \begin{vmat}
     0  &3  &1 \\
@@ -189,7 +198,7 @@ which changes the sign of the determinant.
     1  &5  &2
   \end{vmat}
 \end{equation*}
-Performing $-\rho_1+\rho_3$
+Finish by performing $-\rho_1+\rho_3$
 \begin{equation*}
   =-\begin{vmat}
     1  &2  &0 \\
@@ -205,13 +214,82 @@ and $-\rho_2+\rho_3$
     0  &0  &1
   \end{vmat}
 \end{equation*}
-and then multiplying down the diagonal gives that the determinant
-of the original matrix is $-3$.
+and then multiplying down the diagonal.
+The determinant of the original matrix is $-3$.
+\end{frame}
+
+
+\begin{frame}
+\ex
+Finally, to illustrate condition~(3) contrast these two.
+\begin{equation*}
+  \begin{vmat}
+    5 &10 \\
+    3 &4
+  \end{vmat}
+  \qquad
+  \begin{vmat}
+    1 &2 \\
+    3 &4
+  \end{vmat}
+\end{equation*}
+Condition~(3) gives
+\begin{equation*}
+  \begin{vmat}
+    5 &10 \\
+    3 &4
+  \end{vmat}
+  =5\cdot
+  \begin{vmat}
+    1 &2 \\
+    3 &4
+  \end{vmat}
+\end{equation*}
+and by performing $-3\rho_1+\rho_2$
+and multiplying down the diagonal we get this.
+\begin{equation*}
+  =5\cdot
+  \begin{vmat}
+    1 &2 \\
+    3 &4
+  \end{vmat}
+  =5\cdot
+  \begin{vmat}
+    1 &2 \\
+    0 &-2
+  \end{vmat}
+  =5\cdot(-2)
+  =-10
+\end{equation*}
+Thus here is the contrast.
+\begin{equation*}
+  \begin{vmat}
+    5 &10 \\
+    3 &4
+  \end{vmat}
+  =-10
+  \qquad
+  \begin{vmat}
+    1 &2 \\
+    3 &4
+  \end{vmat}
+  =-2
+\end{equation*}
 \end{frame}
 
 
 
-\begin{frame}{The $\nbyn{n}$ determinant is unique}
+\begin{frame}{The  determinant is unique}
+
+Recall the process by which we are developing the determinant.
+The definition gives four conditions that any determinant function must
+satisfy.
+The prior slides show how these conditions 
+allow us to use Gauss's Method to produce a value.
+That value has to be the output any function satisfying
+the definition.
+
+
 \lm[lm:DetFcnIsUnique]
 \ExecuteMetaData[../det1.tex]{lm:DetFcnIsUnique}
 
@@ -220,46 +298,57 @@ of the original matrix is $-3$.
 \ExecuteMetaData[../det1.tex]{pf:DetFcnIsUnique}
 \qed
 
-\pause
 \medskip
-So if there is a function mapping $\matspace_{\nbyn{n}}$ to $\Re$ with 
-the four conditions of the definition then there is only one such
+So if there is a function mapping $\matspace_{\nbyn{n}}$ to $\Re$ that
+satisfies the four conditions of the definition then there is only one such
 function.
-The next two subsections show that for each~$n$ a determinant function 
-exists.
+\end{frame}
+\begin{frame}{More process discussion}
+How could there fail to be such a function?
+\ExecuteMetaData[../det1.tex]{DifferentGaussMethodReductions}
+
+\pause
+That we get consistent results for these two
+reductions on a single matrix does not ensure that all determinants
+give well-defined values.
+Our algorithm does not
+plainly eliminate the possibility that there may be, say,
+two Gauss's Method reductions of some $\nbyn{7}$~matrix that lead to different 
+returned values.
+\end{frame}
+\begin{frame}
+In particular, recall that the definition's condition~(2),
+that row swaps change the sign of the determinant, is 
+redundant.
+Imagine that we did not notice the need for a sign change and had mistakenly
+proposed a definition where row swaps leave the determinant unchanged.
+Then the prior slide's pair of $\nbyn{2}$ calculations yield the
+conflicting values of $-2$ and~$2$.
+We must prove that our defintion does not lead to 
+such a thing, 
+
+\pause
+To show that determinants are well-defined 
+we will give an alternative way to compute
+the value of a determinant, a formula that does not involve 
+Gauss's Method.
+We mentioned this above, it is the Permutation Expansion. 
+It is less useful than Gauss's Method in practice since it 
+is awkward and slow.
+But it is useful for theory, and we need it now.
 \end{frame}
 
 
 
 % ..... Four.I.3 .....
 \section{The Permutation Expansion}
-\begin{frame}\vspace*{-1ex}
-\ExecuteMetaData[../det1.tex]{DifferentGaussMethodReductions}
-\end{frame}
-\begin{frame}
-That the above computation gives a consistent result for these two
-ways to do a reduction on one matrix does not ensure that determinants
-always give a well-defined value.
-Our algorithm for computing determinant values does not
-plainly eliminate the possibility that there might be, say,
-two Gauss's Method reductions of some $\nbyn{7}$~matrix that lead to different 
-determinant values.
-
-\pause
-To show that determinants are well-defined 
-we will give an alternative way to compute
-the value of a determinant. 
-This new way is less useful in practice since it 
-makes the computations awkward and slow.
-But it is useful for theory since it makes easier the proof that 
-determinants are well-defined.
-\end{frame}
-
-
 
 \begin{frame}{The determinant function is not linear}
 \ex
-The second matrix here is twice the first but the determinant does not double.
+The determinant does not in general satisfy that 
+$\det(k\cdot T)=k\cdot\det(T)$.
+The second matrix here is twice the first
+but the determinant does not double.
 \begin{equation*}
   \begin{vmat}
     3  &-3  &9 \\
@@ -275,8 +364,8 @@ The second matrix here is twice the first but the determinant does not double.
   \end{vmat}
   =-576
 \end{equation*}
-Instead, by condition~(3) of \nearbydefinition{def:Det}%
-the determinant scales one row at a time.   
+Condition~(3) % of \nearbydefinition{def:Det}%
+has the determinant scale one row at a time.   
 \begin{align*}
   \begin{vmat}
     6  &-6  &18 \\
@@ -303,7 +392,31 @@ the determinant scales one row at a time.
   \end{vmat}         
 \end{align*}
 \end{frame}
+\begin{frame}That example illustrates that determinants are not linear
+with respect to scalar multiplication.
+What about with respect to addition?
 
+Consider condition~(3) in the case   
+% \begin{equation*}
+%   \det (\vec{\rho}_1,\dots,k\vec{\rho}_i,\dots,\vec{\rho}_n)
+%        = k\cdot \det (\vec{\rho}_1,\dots,\vec{\rho}_i,\dots,\vec{\rho}_n)
+% \end{equation*}
+$k=2$.
+\begin{equation*}
+  \det (\vec{\rho}_1,\dots,2\vec{\rho}_i,\dots,\vec{\rho}_n)
+       = 2\cdot \det (\vec{\rho}_1,\dots,\vec{\rho}_i,\dots,\vec{\rho}_n)
+\end{equation*}
+Rewrite it as addition. 
+\begin{multline*}
+  \det (\vec{\rho}_1,\dots,\vec{\rho}_i+\vec{\rho}_i,\dots,\vec{\rho}_n) \\
+       = \det (\vec{\rho}_1,\dots,\vec{\rho}_i,\dots,\vec{\rho}_n)
+         +\det (\vec{\rho}_1,\dots,\vec{\rho}_i,\dots,\vec{\rho}_n)
+\end{multline*}
+Of course this extends to $k=3$, etc.
+
+This strongly hints that besides bringing out scalars one row at a time,
+determinants also break along a plus sign one row at a time.
+\end{frame}
 
 
 %..........
@@ -333,7 +446,7 @@ the determinant scales one row at a time.
 
 
 \begin{frame}
-We can use multilinearity to break a determinant into a sum of 
+Multilinearity breaks a determinant into a sum of 
 simple ones.
 
 \ex
