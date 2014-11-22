@@ -854,13 +854,12 @@ these two theorems.
 $3$ is before $2$, $3$ is before $1$, and $2$ is before $1$.
 \begin{center} \small
   \begin{tabular}{r|cc}
-    \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+    \multicolumn{1}{r|}{\makebox[0em][r]{before}} 
         &$1$  &$2$  \\ \cline{1-2}
     $2$ &\multicolumn{1}{c|}{$\times$} \\ \cline{3-3}
     $3$ &$\times$ &\multicolumn{1}{c|}{$\times$} \\ \cline{2-3}
   \end{tabular}
 \end{center}
-
 \end{frame}
 \begin{frame}
 \ex
@@ -886,7 +885,7 @@ has two inversions:~row~$2$
 comes before row~$1$, and row~$4$ is before row~$3$.
 \begin{center} \small
   \begin{tabular}{r|ccc}
-    \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+    \multicolumn{1}{r|}{\makebox[0em][r]{before}} 
         &$1$  &$2$ &$3$ \\ \cline{1-2}
     $2$ &\multicolumn{1}{c|}{$\times$} \\ \cline{3-3}
     $3$ & &\multicolumn{1}{c|}{\ }  \\ \cline{4-4}
@@ -932,7 +931,7 @@ comes before row~$1$, and row~$4$ is before row~$3$.
   \begin{center} \small
     \hspace*{1.5em}  % nudge it to the right
     \begin{tabular}{r|ccc}
-      \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+      \multicolumn{1}{r|}{\makebox[0em][r]{before}} 
           &$1$  &$2$ &$3$ \\ \cline{1-2}
       $2$ &\multicolumn{1}{c|}{\ } \\ \cline{3-3}
       $3$ & &\multicolumn{1}{c|}{$\times$}  \\ \cline{4-4}
@@ -940,7 +939,7 @@ comes before row~$1$, and row~$4$ is before row~$3$.
     \end{tabular}
     \hspace*{4em}
     \begin{tabular}{r|ccc}
-      \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+      \multicolumn{1}{r|}{\makebox[0em][r]{before}} 
           &$1$  &$2$ &$3$ \\ \cline{1-2}
       $2$ &\multicolumn{1}{c|}{} \\ \cline{3-3}
       $3$ &$\times$ &\multicolumn{1}{c|}{$\times$}  \\ \cline{4-4}
@@ -1029,17 +1028,23 @@ associated with this matrix
     1 &0 &0
   \end{mat}
 \end{equation*}
-has three inversions:
-$3$ is before $2$, $3$ is before $1$, and 
-$2$ is before $1$.
-So the signum is $\sgn(\phi)=-1$.
+has three inversions.
+\begin{center} \small
+  \begin{tabular}{r|cc}
+    \multicolumn{1}{r|}{\makebox[0em][r]{before}} 
+        &$1$  &$2$  \\ \cline{1-2}
+    $2$ &\multicolumn{1}{c|}{$\times$} \\ \cline{3-3}
+    $3$ &$\times$ &\multicolumn{1}{c|}{$\times$} \\ \cline{2-3}
+  \end{tabular}
+\end{center}
+The signum is $\sgn(\phi)=-1$.
 
 \pause
 \ex
-The permutation $\psi=\sequence{3,2,4,1}$
+The permutation $\phi=\sequence{3,2,4,1}$
 has four inversions: $3$ is before $2$ and~$1$,
 $2$ is before~$1$, and $4$ is before~$1$.
-So $\sgn(\psi)=+1$.
+So $\sgn(\phi)=+1$.
 \end{frame}
 
 
@@ -1075,36 +1080,320 @@ Here is that formula.
 \lm[lm:DeterminantsExist]
 \ExecuteMetaData[../det1.tex]{lm:DeterminantsExist}
 
-\pf
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist0}
+\iftoggle{showallproofs}{
+  \pf
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist0}
 
-\pause
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist1}
-% \end{frame}
-% \begin{frame}
+  \pause
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist1}
+  % \end{frame}
+  % \begin{frame}
 
-\pause
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist2}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist3}
-\end{frame}
-\begin{frame}
-\noindent\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist4}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist5}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist6}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist7}
-\qed
-\end{frame}
+  \pause
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist2}
+}{%
 
+  \pause  
+  \smallskip
+  The book has the proof.
+  We shall go through an illustration.
+  \ex
+  This is the permutation expansion for $\nbyn{3}$~matrices.
+  \begin{align*}
+    \begin{vmat}
+      a &b &c \\
+      d &e &f \\
+      g &h &i
+    \end{vmat}
+    &=aei\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{vmat}
+    +afh\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{vmat}            \\
+    &\quad+bdi\cdot\begin{vmat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{vmat}
+    +bfg\cdot\begin{vmat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{vmat}         \\
+    &\quad+cdh\cdot\begin{vmat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{vmat}
+    +ceg\cdot\begin{vmat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{vmat}
+    \tag{$*$}
+  \end{align*}
+  We will illustrate the proof's verification of the four conditions 
+  using a generic example matrix.
+  \begin{equation*}
+    \begin{vmat}
+      1 &2 &3 \\
+      4 &5 &6 \\
+      7 &8 &9
+    \end{vmat}
+  \end{equation*}
+}
+\end{frame}
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist3}
+  \end{frame}
+  \begin{frame}
+  \noindent\ExecuteMetaData[../det1.tex]{pf:DeterminantsExist4}
+  \end{frame}
+  \begin{frame}
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist5}
+  \end{frame}
+  \begin{frame}
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist6}
+  \end{frame}
+  \begin{frame}
+  \ExecuteMetaData[../det1.tex]{pf:DeterminantsExist7}% 
+  \qed
+  \end{frame}
+}{}
 
+\iftoggle{showallproofs}{}{%
+  \begin{frame}
+  Condition~(4) is easy.
+  In the identity matrix all entries are~$0$
+  other than $a$, $e$, and $i$, which are~$1$.
+  So for the identity matrix equation~($*$) adds to~$1$.
 
+  \pause
+  For condition~(3) consider the effect of $k\rho_2$ on the generic example
+  matrix.
+  Here is the expansion, following~($*$).
+  \begin{align*}
+    \begin{vmat}
+      1  &2  &3 \\
+      4k &5k &6k \\
+      7  &8  &9
+    \end{vmat}                                
+    &=1(5k)9\cdot
+    \begin{vmat}
+      1 &0 &0 \\
+      0 &1 &0 \\ 
+      0 &0 &1
+    \end{vmat}
+    +1(6k)8\cdot
+    \begin{vmat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{vmat}            \\
+    &\quad+2(4k)9\cdot 
+    \begin{vmat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{vmat}
+     +2(6k)7\cdot 
+    \begin{vmat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{vmat}         \\
+    &\quad+3(4k)8\cdot
+    \begin{vmat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{vmat}
+    +3(5k)7\cdot
+    \begin{vmat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{vmat}
+  \end{align*}
+  The $k$ factors out and the result is $k$ times the determinant of the
+  original generic matrix.
+  \end{frame}
+  \begin{frame}
+  Next, condition~(2).  Contrast the permutation expansion of the 
+  generic matrix after
+  the swap $\rho_2\leftrightarrow\rho_3$
+  \begin{align*}
+    \begin{vmat}
+      1 &2 &3 \\
+      7 &8 &9 \\
+      4 &5 &6
+    \end{vmat}
+    &=1(8)6\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{vmat}
+    +1(9)5\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{vmat}           
+    +2(7)6\cdot\begin{vmat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{vmat}                          \\
+    &\quad+2(9)4\cdot\begin{vmat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{vmat}         
+    +3(7)5\cdot\begin{vmat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{vmat}
+    +3(8)4\cdot\begin{vmat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{vmat}            
+  \end{align*}
+  with the expansion before that swap.
+  \begin{align*}
+    \begin{vmat}
+      1 &2 &3 \\ 
+      4 &5 &6 \\
+      7 &8 &9 
+    \end{vmat}
+    &=1(5)9\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{vmat}
+    +1(6)8\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{vmat}           
+    2(4)9\cdot\begin{vmat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{vmat}                          \\
+    &\quad+2(6)7\cdot\begin{vmat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{vmat}         
+    +3(4)8\cdot\begin{vmat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{vmat}
+    +3(5)7\cdot\begin{vmat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{vmat}           
+  \end{align*}
+  For instance, each has a term involving $1\cdot 5\cdot 9$ and the 
+  associated matrices differ by a row swap; that is, the two terms differ in
+  sign.  
+  The expansions are negatives of each other.
+  \end{frame}
+  \begin{frame} \vspace*{-1ex}
+  Last, condition~(1).  Consider $10\rho_1+\rho_2$.
+  \begin{align*}
+    \begin{vmat}
+      1    &2    &3 \\
+      10+4 &20+5 &30+6 \\
+      7    &8    &9 
+    \end{vmat}
+    &=1(20+5)9\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{vmat}
+    +1(30+6)8\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{vmat}                           \\           
+    &\quad+2(10+4)9\cdot\begin{vmat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{vmat}                          
+    +2(30+6)7\cdot\begin{vmat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{vmat}                          \\
+    &\quad+3(10+4)8\cdot\begin{vmat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{vmat}
+    +3(20+5)7\cdot\begin{vmat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{vmat}           
+  \end{align*}
+  Break along the plus signs to get two sums.
+  One is the determinant of the original generic matrix.
+  The other, after factoring out~$10$, is this.
+  \begin{align*}
+    1(2)9\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{vmat}
+    +1(3)8\cdot\begin{vmat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{vmat}                                      
+    +2(1)9\cdot\begin{vmat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{vmat}                          \\                          
+    \quad+2(3)7\cdot\begin{vmat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{vmat}                         
+    +3(1)8\cdot\begin{vmat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{vmat}
+    +3(2)7\cdot\begin{vmat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{vmat}          
+    &=\begin{vmat}
+      1    &2    &3 \\
+      1    &2    &3 \\
+      7    &8    &9 
+    \end{vmat}
+  \end{align*}
+  \end{frame}
+  \begin{frame}
+  Because that matrix has two identitical rows, its determinant is~$0$.
+  Hence the operation $10\rho_1+\rho_2$ does not change the value of the
+  determinant.
+  \end{frame}
+} % end of iftoggle
 
 %..........
 \begin{frame}{The determinant of the transpose}
@@ -1118,19 +1407,21 @@ Here is that formula.
 \ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans1} 
 \end{frame}
 \begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans2}
+\ExecuteMetaData[../det1.tex]{pf:DetMatrixEqualsDetTrans2}%
 \qed
 
 \pause
 \ex
 We know the formula for $\nbyn{2}$~matrices.
 \begin{equation*}
+  |A|=
   \begin{vmat}
     a  &b  \\
     c  &d
   \end{vmat}
   =ad-bc
   \qquad
+  |\trans{A}|=
   \begin{vmat}
     a  &c  \\
     b  &d
