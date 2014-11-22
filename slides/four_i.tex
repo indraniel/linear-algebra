@@ -729,10 +729,10 @@ The sequence notation is shorter:
 \ExecuteMetaData[../det1.tex]{AssociatePermutationWithPermutationMatrix}
 
 \ex
-Associated with the $4$-permutation $\psi=\sequence{2,4,3,1}$ is the
+Associated with the $4$-permutation $\phi=\sequence{2,4,3,1}$ is the
 matrix whose rows are the matching $\iota$'s.
 \begin{equation*}
-  P_{\psi}
+  P_{\phi}
   =
   \begin{mat}
     \iota_2 \\
@@ -851,22 +851,48 @@ these two theorems.
 \ExecuteMetaData[../det1.tex]{df:Inversion}
 \pause
 \ex The permutation $\phi=\sequence{3,2,1}$ has three inversions:
-$3$ is before $2$, $3$ is before $1$, and 
-$2$ is before $1$.
+$3$ is before $2$, $3$ is before $1$, and $2$ is before $1$.
+\begin{center} \small
+  \begin{tabular}{r|cc}
+    \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+        &$1$  &$2$  \\ \cline{1-2}
+    $2$ &\multicolumn{1}{c|}{$\times$} \\ \cline{3-3}
+    $3$ &$\times$ &\multicolumn{1}{c|}{$\times$} \\ \cline{2-3}
+  \end{tabular}
+\end{center}
+
 \end{frame}
 \begin{frame}
 \ex
-Here there are two inversions:
+This matrix
 \begin{equation*}
+  P_{\phi}=
   \begin{mat}
     0 &1 &0 &0 \\
     1 &0 &0 &0 \\
     0 &0 &0 &1 \\
     0 &0 &1 &0
   \end{mat}
+  =
+  \begin{mat}
+    \iota_2 \\
+    \iota_1 \\
+    \iota_4 \\
+    \iota_3 
+  \end{mat}
 \end{equation*}
-row one is inverted with respect to row~two and row~three is inverted with 
-respect to row~four.
+associated with the permutation $\phi=\sequence{2,1,4,3}$
+has two inversions:~row~$2$ 
+comes before row~$1$, and row~$4$ is before row~$3$.
+\begin{center} \small
+  \begin{tabular}{r|ccc}
+    \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+        &$1$  &$2$ &$3$ \\ \cline{1-2}
+    $2$ &\multicolumn{1}{c|}{$\times$} \\ \cline{3-3}
+    $3$ & &\multicolumn{1}{c|}{\ }  \\ \cline{4-4}
+    $4$ & & &\multicolumn{1}{c|}{$\times$} \\ \cline{2-4}
+  \end{tabular}
+\end{center}
 \end{frame}
 
 
@@ -878,17 +904,111 @@ respect to row~four.
 \ExecuteMetaData[../det1.tex]{lm:SwapsChangeSgn}
 
 \pause
-\pf
-\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn0}
-\end{frame}
-\begin{frame}
-\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn1}
-\end{frame}
-\begin{frame}
-\noindent\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn2}
-\qed
-\end{frame}
+\iftoggle{showallproofs}{\pf
+  \ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn0}
+}{%
 
+  \medskip
+  The book contains the proof; 
+  we will illustrate.
+  There are two cases, that the rows are adjacent and that they aren't.
+  \ex Swapping adjacent rows
+  \begin{equation*}
+    \begin{mat}
+      0 &0 &0 &1 \\
+      1 &0 &0 &0 \\
+      0 &0 &1 &0 \\
+      0 &1 &0 &0 
+    \end{mat}
+    \grstep{\rho_2\leftrightarrow\rho_3}
+    \begin{mat}
+      0 &0 &0 &1 \\
+      0 &0 &1 &0 \\
+      1 &0 &0 &0 \\
+      0 &1 &0 &0 
+    \end{mat}
+  \end{equation*}
+  changes the number of inversions by one.
+  \begin{center} \small
+    \hspace*{1.5em}  % nudge it to the right
+    \begin{tabular}{r|ccc}
+      \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+          &$1$  &$2$ &$3$ \\ \cline{1-2}
+      $2$ &\multicolumn{1}{c|}{\ } \\ \cline{3-3}
+      $3$ & &\multicolumn{1}{c|}{$\times$}  \\ \cline{4-4}
+      $4$ &$\times$ &$\times$ &\multicolumn{1}{c|}{$\times$} \\ \cline{2-4}
+    \end{tabular}
+    \hspace*{4em}
+    \begin{tabular}{r|ccc}
+      \multicolumn{1}{r|}{\makebox[0em][r]{is before}} 
+          &$1$  &$2$ &$3$ \\ \cline{1-2}
+      $2$ &\multicolumn{1}{c|}{} \\ \cline{3-3}
+      $3$ &$\times$ &\multicolumn{1}{c|}{$\times$}  \\ \cline{4-4}
+      $4$ &$\times$ &$\times$ &\multicolumn{1}{c|}{$\times$} \\ \cline{2-4}
+    \end{tabular}
+  \end{center}
+  Except for the $\iota_1$ and $\iota_3$ involved in the swap, 
+  all of the inter-row relationships are unchanged.
+}
+\end{frame}
+\iftoggle{showallproofs}{
+  \begin{frame}
+  \ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn1}
+  \end{frame}
+  \begin{frame}
+  \noindent\ExecuteMetaData[../det1.tex]{pf:SwapsChangeSgn2}
+  \qed
+  \end{frame}
+}{%
+  \begin{frame}
+  \ex To swap non-adjacent rows
+  \begin{equation*}
+    \begin{mat}
+      0 &0 &0 &1 \\
+      1 &0 &0 &0 \\
+      0 &0 &1 &0 \\
+      0 &1 &0 &0 
+    \end{mat}
+    \grstep{\rho_1\leftrightarrow\rho_4}
+    \begin{mat}
+      0 &1 &0 &0 \\
+      1 &0 &0 &0 \\
+      0 &0 &1 &0 \\
+      0 &0 &0 &1 
+    \end{mat}
+  \end{equation*}
+  do a sequence of swaps of adjacent rows. 
+  \begin{align*}
+    \begin{mat}
+      0 &0 &0 &1 \\
+      1 &0 &0 &0 \\
+      0 &0 &1 &0 \\
+      0 &1 &0 &0 
+    \end{mat} 
+    &\grstep{\rho_1\leftrightarrow\rho_2}
+    \grstep{\rho_2\leftrightarrow\rho_3}
+    \grstep{\rho_3\leftrightarrow\rho_4}
+    \begin{mat}
+      1 &0 &0 &0 \\
+      0 &0 &1 &0 \\
+      0 &1 &0 &0 \\
+      0 &0 &0 &1 
+    \end{mat}                                        \\
+    &\grstep{\rho_3\leftrightarrow\rho_2}
+    \grstep{\rho_2\leftrightarrow\rho_1}
+    \begin{mat}
+      0 &1 &0 &0 \\
+      1 &0 &0 &0 \\
+      0 &0 &1 &0 \\
+      0 &0 &0 &1 
+    \end{mat}
+  \end{align*}
+  That's an odd number of swaps, five of them,
+  each of which flips the parity of the number of
+  inversions. 
+  Altogether the parity changes, from even to odd. 
+  \end{frame}
+}
 
 
 
@@ -909,7 +1029,7 @@ associated with this matrix
     1 &0 &0
   \end{mat}
 \end{equation*}
-has three inversions
+has three inversions:
 $3$ is before $2$, $3$ is before $1$, and 
 $2$ is before $1$.
 So the signum is $\sgn(\phi)=-1$.
