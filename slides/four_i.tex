@@ -1028,7 +1028,7 @@ associated with this matrix
     1 &0 &0
   \end{mat}
 \end{equation*}
-has three inversions.
+has an odd number of inversions, three.
 \begin{center} \small
   \begin{tabular}{r|cc}
     \multicolumn{1}{r|}{\makebox[0em][r]{before}} 
@@ -1066,14 +1066,20 @@ So $\sgn(\phi)=+1$.
 
 %..........
 \begin{frame}{Determinants exist}
-Recall the process we are going through in the validation of the definition 
-of determinant.
-We want a formula for the determinant that gives an
-obviously well-defined value.
-(This is in contrast to calculating determinants using Gauss's Method,
-which can be done in more than one way.)
-Here is that formula.
+Recall the process by which we are validating the determinant definition.
+That definition is given as four conditions and it is not
+clear that for each input matrix there is one and only one 
+associated output, that the determinant
+gives a well-defined value.
 
+Performing Gauss's Method on the input matrix shows that for each
+input there is at least one possible output.
+But Gauss's Method can be done in more than one way so 
+to show there is exactly one we want a formula 
+that gives an
+obviously well-defined value.
+
+\pause
 \ExecuteMetaData[../det1.tex]{DefiningDFunction}
 \end{frame}
 \begin{frame}
@@ -1095,57 +1101,10 @@ Here is that formula.
 
   \pause  
   \smallskip
-  The book has the proof.
-  We shall go through an illustration.
-  \ex
-  This is the permutation expansion for $\nbyn{3}$~matrices.
-  \begin{align*}
-    \begin{vmat}
-      a &b &c \\
-      d &e &f \\
-      g &h &i
-    \end{vmat}
-    &=aei\cdot\begin{vmat}
-      1 &0 &0 \\
-      0 &1 &0 \\
-      0 &0 &1
-    \end{vmat}
-    +afh\cdot\begin{vmat}
-      1 &0 &0 \\
-      0 &0 &1 \\
-      0 &1 &0
-    \end{vmat}            \\
-    &\quad+bdi\cdot\begin{vmat}
-      0 &1 &0 \\
-      1 &0 &0 \\
-      0 &0 &1
-    \end{vmat}
-    +bfg\cdot\begin{vmat}
-      0 &1 &0 \\
-      0 &0 &1 \\
-      1 &0 &0
-    \end{vmat}         \\
-    &\quad+cdh\cdot\begin{vmat}
-      0 &0 &1 \\
-      1 &0 &0 \\
-      0 &1 &0
-    \end{vmat}
-    +ceg\cdot\begin{vmat}
-      0 &0 &1 \\
-      0 &1 &0 \\
-      1 &0 &0
-    \end{vmat}
-    \tag{$*$}
-  \end{align*}
-  We will illustrate the proof's verification of the four conditions 
-  using a generic example matrix.
-  \begin{equation*}
-    \begin{vmat}
-      1 &2 &3 \\
-      4 &5 &6 \\
-      7 &8 &9
-    \end{vmat}
-  \end{equation*}
+  The book has the proof, which verifies that the definition of 
+  determinant's four conditions
+  are satisfied by the function~$d$.
+  We shall here instead go through an illustrative example.
 }
 \end{frame}
 \iftoggle{showallproofs}{
@@ -1169,229 +1128,383 @@ Here is that formula.
 
 \iftoggle{showallproofs}{}{%
   \begin{frame}
+  \ex
+  This is the $d$~expansion formula for a $\nbyn{3}$~matrix.
+  (To save space on the slides, 
+  in this example we write $s(\cdots\hspace*{-1\mu})$ 
+  in place of 
+  $\sgn(\cdots\hspace*{-1\mu})$.) 
+  \begin{align*}
+    d(\begin{mat}
+      a &b &c \\
+      e &f &g \\
+      h &i &j
+    \end{mat})
+    &=afj\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{mat})
+    +agi\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{mat})            \\
+    &\quad+bej\cdot s(\begin{mat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{mat})
+    +cei\cdot s(\begin{mat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{mat})         \\
+    &\quad+cfh\cdot s(\begin{mat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{mat})
+    +ceg\cdot s(\begin{mat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{mat})
+    \tag{$*$}
+  \end{align*}
+  We illustrate the proof's verification of the four conditions 
+  using this generic matrix.
+  \begin{equation*}
+    M=\begin{mat}
+      1 &2 &3 \\
+      4 &5 &6 \\
+      7 &8 &9
+    \end{mat}
+  \end{equation*}
+  \end{frame}
+  \begin{frame}
   Condition~(4) is easy.
-  In the identity matrix all entries are~$0$
-  other than $a$, $e$, and $i$, which are~$1$.
-  So for the identity matrix equation~($*$) adds to~$1$.
+  In terms of equation~($*$), in the identity matrix
+  all entries are~$0$
+  other than $a$, $f$, and $j$, which are~$1$.
+  So equation~($*$) has only one non-zero term, and the sum is~$1$.
 
   \pause
   For condition~(3) consider the effect of $k\rho_2$ on the generic example
   matrix.
   Here is the expansion, following~($*$).
   \begin{align*}
-    \begin{vmat}
+    d(\begin{mat}
       1  &2  &3 \\
       4k &5k &6k \\
       7  &8  &9
-    \end{vmat}                                
+    \end{mat})                                
     &=1(5k)9\cdot
-    \begin{vmat}
+    s(\begin{mat}
       1 &0 &0 \\
       0 &1 &0 \\ 
       0 &0 &1
-    \end{vmat}
+    \end{mat})
     +1(6k)8\cdot
-    \begin{vmat}
+    s(\begin{mat}
       1 &0 &0 \\
       0 &0 &1 \\
       0 &1 &0
-    \end{vmat}            \\
+    \end{mat})            \\
     &\quad+2(4k)9\cdot 
-    \begin{vmat}
+    s(\begin{mat}
       0 &1 &0 \\
       1 &0 &0 \\
       0 &0 &1
-    \end{vmat}
+    \end{mat})
      +2(6k)7\cdot 
-    \begin{vmat}
+    s(\begin{mat}
       0 &1 &0 \\
       0 &0 &1 \\
       1 &0 &0
-    \end{vmat}         \\
+    \end{mat})         \\
     &\quad+3(4k)8\cdot
-    \begin{vmat}
+    s(\begin{mat}
       0 &0 &1 \\
       1 &0 &0 \\
       0 &1 &0
-    \end{vmat}
+    \end{mat})
     +3(5k)7\cdot
-    \begin{vmat}
+    s(\begin{mat}
       0 &0 &1 \\
       0 &1 &0 \\
       1 &0 &0
-    \end{vmat}
+    \end{mat})
   \end{align*}
-  The $k$ factors out and the result is $k$ times the determinant of the
+  The $k$ factors out and the result is $k$ times the $d$~value of the
   original generic matrix.
   \end{frame}
-  \begin{frame}
-  Next, condition~(2).  Contrast the permutation expansion of the 
-  generic matrix after
-  the swap $\rho_2\leftrightarrow\rho_3$
-  \begin{align*}
-    \begin{vmat}
-      1 &2 &3 \\
-      7 &8 &9 \\
-      4 &5 &6
-    \end{vmat}
-    &=1(8)6\cdot\begin{vmat}
-      1 &0 &0 \\
-      0 &1 &0 \\
-      0 &0 &1
-    \end{vmat}
-    +1(9)5\cdot\begin{vmat}
-      1 &0 &0 \\
-      0 &0 &1 \\
-      0 &1 &0
-    \end{vmat}           
-    +2(7)6\cdot\begin{vmat}
-      0 &1 &0 \\
-      1 &0 &0 \\
-      0 &0 &1
-    \end{vmat}                          \\
-    &\quad+2(9)4\cdot\begin{vmat}
-      0 &1 &0 \\
-      0 &0 &1 \\
-      1 &0 &0
-    \end{vmat}         
-    +3(7)5\cdot\begin{vmat}
-      0 &0 &1 \\
-      1 &0 &0 \\
-      0 &1 &0
-    \end{vmat}
-    +3(8)4\cdot\begin{vmat}
-      0 &0 &1 \\
-      0 &1 &0 \\
-      1 &0 &0
-    \end{vmat}            
-  \end{align*}
-  with the expansion before that swap.
-  \begin{align*}
-    \begin{vmat}
+  \begin{frame}  \vspace*{-1ex}
+  Next, condition~(2).  Contrast the $d$~expansion of these two.
+  \begin{equation*}
+    \begin{mat}
       1 &2 &3 \\ 
       4 &5 &6 \\
       7 &8 &9 
-    \end{vmat}
-    &=1(5)9\cdot\begin{vmat}
+    \end{mat}
+    \grstep{\rho_2\leftrightarrow\rho_3}    
+       \begin{mat}
+      1 &2 &3 \\
+      7 &8 &9 \\
+      4 &5 &6
+    \end{mat}                           
+  \end{equation*}
+  The first expansion is
+  \begin{align*}
+    &1(5)9\cdot s(\begin{mat}
       1 &0 &0 \\
       0 &1 &0 \\
       0 &0 &1
-    \end{vmat}
-    +1(6)8\cdot\begin{vmat}
+    \end{mat})
+    +1(6)8\cdot s(\begin{mat}
       1 &0 &0 \\
       0 &0 &1 \\
       0 &1 &0
-    \end{vmat}           
-    2(4)9\cdot\begin{vmat}
+    \end{mat})           
+    +2(4)9\cdot s(\begin{mat}
       0 &1 &0 \\
       1 &0 &0 \\
       0 &0 &1
-    \end{vmat}                          \\
-    &\quad+2(6)7\cdot\begin{vmat}
+    \end{mat})                          \\
+    &\quad+2(6)7\cdot s(\begin{mat}
       0 &1 &0 \\
       0 &0 &1 \\
       1 &0 &0
-    \end{vmat}         
-    +3(4)8\cdot\begin{vmat}
+    \end{mat})         
+    +3(4)8\cdot s(\begin{mat}
       0 &0 &1 \\
       1 &0 &0 \\
       0 &1 &0
-    \end{vmat}
-    +3(5)7\cdot\begin{vmat}
+    \end{mat})
+    +3(5)7\cdot s(\begin{mat}
       0 &0 &1 \\
       0 &1 &0 \\
       1 &0 &0
-    \end{vmat}           
+    \end{mat})           
   \end{align*}
-  For instance, each has a term involving $1\cdot 5\cdot 9$ and the 
-  associated matrices differ by a row swap; that is, the two terms differ in
+  while the second is this.
+  \begin{align*}
+    &1(8)6\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{mat})
+    +1(9)5\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{mat})           
+    +2(7)6\cdot s(\begin{mat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{mat})                          \\
+    &\quad+2(9)4\cdot s(\begin{mat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{mat})         
+    +3(7)5\cdot s(\begin{mat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{mat})
+    +3(8)4\cdot s(\begin{mat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{mat})  
+  \end{align*}
+  \end{frame}
+  \begin{frame} 
+  The two match term-by-term.
+  For instance, both have terms involving $1\cdot 5\cdot 9$ and the 
+  associated matrices differ by a row swap.
+  The signum function causes them to differ in
   sign.  
   The expansions are negatives of each other.
-  \end{frame}
-  \begin{frame} \vspace*{-1ex}
-  Last, condition~(1).  Consider $10\rho_1+\rho_2$.
-  \begin{align*}
-    \begin{vmat}
+
+  \pause
+  Last, condition~(1).  
+  By equation~($*$) the second matrix here
+  \begin{equation*}
+    \begin{mat}
+      1    &2    &3 \\
+      4    &5    &6 \\
+      7    &8    &9 
+    \end{mat}
+    \grstep{10\rho_1+\rho_2}
+    \begin{mat}
       1    &2    &3 \\
       10+4 &20+5 &30+6 \\
       7    &8    &9 
-    \end{vmat}
-    &=1(20+5)9\cdot\begin{vmat}
-      1 &0 &0 \\
-      0 &1 &0 \\
-      0 &0 &1
-    \end{vmat}
-    +1(30+6)8\cdot\begin{vmat}
-      1 &0 &0 \\
-      0 &0 &1 \\
-      0 &1 &0
-    \end{vmat}                           \\           
-    &\quad+2(10+4)9\cdot\begin{vmat}
-      0 &1 &0 \\
-      1 &0 &0 \\
-      0 &0 &1
-    \end{vmat}                          
-    +2(30+6)7\cdot\begin{vmat}
-      0 &1 &0 \\
-      0 &0 &1 \\
-      1 &0 &0
-    \end{vmat}                          \\
-    &\quad+3(10+4)8\cdot\begin{vmat}
-      0 &0 &1 \\
-      1 &0 &0 \\
-      0 &1 &0
-    \end{vmat}
-    +3(20+5)7\cdot\begin{vmat}
-      0 &0 &1 \\
-      0 &1 &0 \\
-      1 &0 &0
-    \end{vmat}           
-  \end{align*}
-  Break along the plus signs to get two sums.
-  One is the determinant of the original generic matrix.
-  The other, after factoring out~$10$, is this.
+    \end{mat}
+  \end{equation*}
+  has this $d$ expansion.
   \begin{align*}
-    1(2)9\cdot\begin{vmat}
+    &1(20+5)9\cdot s(\begin{mat}
       1 &0 &0 \\
       0 &1 &0 \\
       0 &0 &1
-    \end{vmat}
-    +1(3)8\cdot\begin{vmat}
+    \end{mat})
+    +1(30+6)8\cdot s(\begin{mat}
       1 &0 &0 \\
       0 &0 &1 \\
       0 &1 &0
-    \end{vmat}                                      
-    +2(1)9\cdot\begin{vmat}
+    \end{mat})                           \\           
+    &\quad+2(10+4)9\cdot s(\begin{mat}
       0 &1 &0 \\
       1 &0 &0 \\
       0 &0 &1
-    \end{vmat}                          \\                          
-    \quad+2(3)7\cdot\begin{vmat}
+    \end{mat})                          
+    +2(30+6)7\cdot s(\begin{mat}
       0 &1 &0 \\
       0 &0 &1 \\
       1 &0 &0
-    \end{vmat}                         
-    +3(1)8\cdot\begin{vmat}
+    \end{mat})                          \\
+    &\quad+3(10+4)8\cdot s(\begin{mat}
       0 &0 &1 \\
       1 &0 &0 \\
       0 &1 &0
-    \end{vmat}
-    +3(2)7\cdot\begin{vmat}
+    \end{mat})
+    +3(20+5)7\cdot s(\begin{mat}
       0 &0 &1 \\
       0 &1 &0 \\
       1 &0 &0
-    \end{vmat}          
-    &=\begin{vmat}
-      1    &2    &3 \\
-      1    &2    &3 \\
-      7    &8    &9 
-    \end{vmat}
+    \end{mat})           
   \end{align*}
   \end{frame}
   \begin{frame}
-  Because that matrix has two identitical rows, its determinant is~$0$.
-  Hence the operation $10\rho_1+\rho_2$ does not change the value of the
-  determinant.
+  \noindent   Break along the plus signs to get two sums.
+  One is the $d$~expansion of the original generic matrix.
+  \begin{align*}
+    &1(5)9\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{mat})
+    +1(6)8\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{mat})                             
+    +2(4)9\cdot s(\begin{mat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{mat})                          \\
+    &\quad+2(6)7\cdot s(\begin{mat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{mat})                          
+    +3(4)8\cdot s(\begin{mat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{mat})
+    +3(5)7\cdot s(\begin{mat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{mat})           
+    \\          
+    &=d(\begin{mat}
+      1    &2    &3 \\
+      4    &5    &6 \\
+      7    &8    &9 
+    \end{mat})
+  \end{align*}
+  The other is this.
+  \begin{align*}
+    &1(20)9\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{mat})
+    +1(30)8\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{mat})                                      
+    +2(10)9\cdot s(\begin{mat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{mat})                          \\                          
+    &+2(30)7\cdot s(\begin{mat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{mat})                         
+    +3(10)8\cdot s(\begin{mat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{mat})
+    +3(20)7\cdot s(\begin{mat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{mat})                    
+    % \\          
+    % &=10\cdot d(\begin{mat}
+    %   1    &2    &3 \\
+    %   1    &2    &3 \\
+    %   7    &8    &9 
+    % \end{mat})
+  \end{align*}
+  \end{frame}
+  \begin{frame}
+  \noindent Factor out~$10$. 
+  What's left, by equation~($*$), is this $d$ expansion.
+  \begin{align*}
+    &1(2)9\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &1 &0 \\
+      0 &0 &1
+    \end{mat})
+    +1(3)8\cdot s(\begin{mat}
+      1 &0 &0 \\
+      0 &0 &1 \\
+      0 &1 &0
+    \end{mat})                                      
+    +2(1)9\cdot s(\begin{mat}
+      0 &1 &0 \\
+      1 &0 &0 \\
+      0 &0 &1
+    \end{mat})                          \\                          
+    &+2(3)7\cdot s(\begin{mat}
+      0 &1 &0 \\
+      0 &0 &1 \\
+      1 &0 &0
+    \end{mat})                         
+    +3(1)8\cdot s(\begin{mat}
+      0 &0 &1 \\
+      1 &0 &0 \\
+      0 &1 &0
+    \end{mat})
+    +3(2)7\cdot s(\begin{mat}
+      0 &0 &1 \\
+      0 &1 &0 \\
+      1 &0 &0
+    \end{mat})                    \\          
+    &=d(\begin{mat}
+      1    &2    &3 \\
+      1    &2    &3 \\
+      7    &8    &9 
+    \end{mat})
+  \end{align*}
+  This matrix has two identical rows so its $d$~expansion gives~$0$
+  (condition~(2) shows this, since swapping the two rows changes the sign but
+  doesn't change the matrix).
+  Hence the operation $10\rho_1+\rho_2$ does not change the value of
+  the function~$d$.
   \end{frame}
 } % end of iftoggle
 
