@@ -72,28 +72,31 @@ matrix is nonsingular.
 
 
 
-\begin{frame}{A remark on how we will proceed}
+\begin{frame}{Remark: how we will proceed}
 The prior slide gives a formula for the $\nbyn{1}$, $\nbyn{2}$, and~$\nbyn{3}$
 determinants. 
-We will eventually give a formula for the general $\nbyn{n}$~case,
+We can give a formula for the general $\nbyn{n}$~case,
 the permutation expansion.
-However, this formula has a number of disadvantages, including that 
-it is much too slow for practical computations when $n$ is of any
-substantial size. 
+However, this formula has a number of disadvantages, including 
+its complexity and that 
+it is too slow for practical computations. 
 
 Instead, we will define a
 determinant function as one that satisfies some conditions. 
-These conditions let us apply Gauss's Method, which we know to
-be fast and easy.
-(They conditions extrapolate from the $\nbyn{1}$, $\nbyn{2}$, 
-and~$\nbyn{3}$cases; see the discussion in the book.) 
+These conditions let us compute the determinant via Gauss's Method, 
+which we know to be fast and easy.
+(The conditions extrapolate from the $\nbyn{1}$, $\nbyn{2}$, 
+and~$\nbyn{3}$ cases; see the discussion in the book.) 
 
-Proceeding by using a list of conditions has the downside that we must 
-show that there is at most one function satisfying those conditions, and 
-we must also show that such a function exists at all. 
-So this development introduces some technicalities of theory.
-But mastering them is well within our scope so this is the
-best way to proceed.
+Defining a function by giving a list of conditions it must satisfy is 
+common in more advanced courses. 
+But it has the downside that we must 
+show that there is one and only one function satisfying those conditions.
+We will first give an algorithm that, following the conditions, goes from 
+any square matrix input to a real number output.
+Later we will develop the formula for the determinant, which will
+show that the determinant is well-defined (that is, 
+for any input there is exactly one associated output). 
 \end{frame}
 
 
@@ -137,11 +140,14 @@ best way to proceed.
 
 
 \begin{frame}
-We will prove later that there is a function satisfying the definition 
-of determinant. 
-For the moment we proceed without that assurance.
+(As remarked above, it is not evident from the definition that there is
+a function satisfying the conditions, or that there is only one such function.
+We will show later that the determinant exists and is unique.
+For the moment we proceed without that assurance.)
 
-We can compute the determinant of a matrix using Gauss's Method
+\pause
+The conditions allow us to
+compute the determinant of a matrix using Gauss's Method
 
 \ex  On this matrix we can perform the Gauss's Method steps of
 $-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
@@ -174,15 +180,13 @@ $-(5/3)\rho_2+\rho_3$ does not change the determinant.
 \pause
 By the prior lemma we can now 
 find the determinant by taking the product down the
-diagonal.
-\begin{equation*}
-  =1\cdot(-6)\cdot(-7/3)=14
-\end{equation*}
+diagonal: 
+$=1\cdot(-6)\cdot(-7/3)=14$.
 \end{frame}
 
 \begin{frame}
 \ex
-To illustrate what happens with a row swap operation,
+To see what happens with a row swap,
 consider this matrix. 
 The swap changes the determinant's sign.
 \begin{equation*}
@@ -280,15 +284,16 @@ Thus here is the contrast.
 
 
 \begin{frame}{The  determinant is unique}
-
 Recall the process by which we are developing the determinant.
-The definition gives four conditions that any determinant function must
+We gave four conditions that any determinant function must
 satisfy.
-The prior slides show how these conditions 
-allow us to use Gauss's Method to produce a value.
-That value has to be the output any function satisfying
-the definition.
-
+From that definition it is not evident that a function satisfying those 
+conditions exists.
+If such a function exists, from the definition it also 
+is not immediately evident that 
+the function is unique; perhaps there are $f_1$ and $f_2$ that give different
+outputs for some inputs.
+We now settle the second issue.
 
 \lm[lm:DetFcnIsUnique]
 \ExecuteMetaData[../det1.tex]{lm:DetFcnIsUnique}
@@ -304,17 +309,14 @@ satisfies the four conditions of the definition then there is only one such
 function.
 \end{frame}
 \begin{frame}{More process discussion}
-How could there fail to be such a function?
+We are left with the possibility that such a function does not exist.
+How could there fail to be such a function, when we have been using 
+Gauss's Method to compute its outputs?
 \ExecuteMetaData[../det1.tex]{DifferentGaussMethodReductions}
 
-\pause
-That we get consistent results for these two
-reductions on a single matrix does not ensure that all determinants
+That we get consistent results in this one case
+does not ensure that all determinant computations using Gauss's Method
 give well-defined values.
-Our algorithm does not
-plainly eliminate the possibility that there may be, say,
-two Gauss's Method reductions of some $\nbyn{7}$~matrix that lead to different 
-returned values.
 \end{frame}
 \begin{frame}
 In particular, recall that the definition's condition~(2),
@@ -322,20 +324,21 @@ that row swaps change the sign of the determinant, is
 redundant.
 Imagine that we did not notice the need for a sign change and had mistakenly
 proposed a definition where row swaps leave the determinant unchanged.
-Then the prior slide's pair of $\nbyn{2}$ calculations yield the
-conflicting values of $-2$ and~$2$.
-We must prove that our defintion does not lead to 
+Then the prior slide's pair of $\nbyn{2}$ calculations would yield the
+conflicting output values of $-2$ and~$2$.
+We must prove that our definition does not lead to 
 such a thing, 
 
 \pause
-To show that determinants are well-defined 
-we will give an alternative way to compute
-the value of a determinant, a formula that does not involve 
-Gauss's Method.
-We mentioned this above, it is the Permutation Expansion. 
-It is less useful than Gauss's Method in practice since it 
-is awkward and slow.
-But it is useful for theory, and we need it now.
+The rest of this section gives an alternative way to compute
+the value of a determinant, a formula.
+Because it does not involve Gauss's Method, this formula
+makes plain that the determinant is a function, 
+that it returns well-defined outputs.
+As mentioned earlier, using this formula  
+is less practical than using the algorithm of Gauss's Method since it 
+is slow.
+But it is very valuable for theory.
 \end{frame}
 
 
@@ -822,8 +825,8 @@ Renaming the matrix entries gives the familiar $\nbyn{2}$ formula.
 
 
 \begin{frame}
-The next subsection does the proof of 
-these two theorems.
+The next subsection is optional, 
+so we give the statements of its results here.
 
 \th[th:DetsExist]
 \ExecuteMetaData[../det1.tex]{th:DetsExist}
@@ -844,7 +847,7 @@ these two theorems.
 
 
 % ..... Four.I.4 .....
-\section{Determinants Exist}
+\section{Determinants Exist (optional)}
 %..........
 \begin{frame}{Inversion}
 \df[df:Inversion]

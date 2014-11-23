@@ -8,7 +8,8 @@ settings.maxtile=(10,10);
 import three;
 import graph3;
 currentprojection=orthographic(camera=(20,4,3),target=(0,0,0));
-currentlight=(5,5,20);
+// currentlight=(5,5,20);
+currentlight=nolight;
 
 pen line_pen=linecap(0)
              +linewidth(1.5pt);
@@ -36,7 +37,7 @@ draw((0,0,0)--v1,line_pen+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 draw((0,0,0)--v2,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 draw((0,0,0)--v3,VECTORPEN+black,Arrow3(DefaultHead2,VECTORHEADSIZE,FillDraw));
 // Label
-label("{\scriptsize $\vec{v}_1$}",v1,SE);
-label("{\scriptsize $\vec{v}_2$}",v2,NW);
+label("{\scriptsize $\vec{v}_1$}",v1,E);
+label("{\scriptsize $\vec{v}_2$}",v2,E);
 label("{\scriptsize $\vec{v}_3$}",v3,NE);
 
