@@ -58,6 +58,7 @@ then
     asy axes
     cd ..
     sage bridges.sage
+    sage detspeed.sage
     sage mile.sage
     sage moneyball.sage
 fi

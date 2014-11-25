@@ -23983,6 +23983,12 @@ octave:6> gplot z
     
 \end{ans}
 \begin{ans}{Four.II.1.18}
+  % due to math.stackexchange.com user dgrasines517
+     Because $\deter{AB}=\deter{A}\cdot\deter{B}=\deter{BA}$ and these
+     two matrices have different determinants.
+   
+\end{ans}
+\begin{ans}{Four.II.1.19}
       \begin{exparts}
         \partsitem If it is defined then it is
            \( (3^2)\cdot (2)\cdot (2^{-2})\cdot (3) \).
@@ -23990,14 +23996,14 @@ octave:6> gplot z
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Four.II.1.19}
+\begin{ans}{Four.II.1.20}
        \(\begin{vmat}
                 \cos\theta  &-\sin\theta  \\
                 \sin\theta  &\cos\theta
               \end{vmat}=1 \)
     
 \end{ans}
-\begin{ans}{Four.II.1.20}
+\begin{ans}{Four.II.1.21}
       No, for instance the determinant of
       \begin{equation*}
         T=\begin{mat}[r]
@@ -24009,11 +24015,11 @@ octave:6> gplot z
       has length \( 2 \).
     
 \end{ans}
-\begin{ans}{Four.II.1.21}
+\begin{ans}{Four.II.1.22}
        It is zero.
     
 \end{ans}
-\begin{ans}{Four.II.1.22}
+\begin{ans}{Four.II.1.23}
       Two of the three sides of the triangle are formed by these vectors.
       \begin{equation*}
         \colvec[r]{2 \\ 2 \\ 2}-\colvec[r]{1 \\ 2 \\ 1}=\colvec[r]{1 \\ 0 \\ 1}
@@ -24064,7 +24070,7 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.II.1.23}
+\begin{ans}{Four.II.1.24}
       \begin{exparts}
         \partsitem Because the image of a linearly dependent set is
           linearly dependent,
@@ -24115,7 +24121,7 @@ octave:6> gplot z
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Four.II.1.24}
+\begin{ans}{Four.II.1.25}
       Any permutation matrix has the property that the transpose of the
       matrix is its inverse.
 
@@ -24132,19 +24138,19 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.II.1.25}
+\begin{ans}{Four.II.1.26}
       Where the sides of the box are \( c \) times longer, the box
       has \( c^3 \) times as many cubic units of volume.
     
 \end{ans}
-\begin{ans}{Four.II.1.26}
+\begin{ans}{Four.II.1.27}
       If \( H=P^{-1}GP \)
       then \( \deter{H}=\deter{P^{-1}}\deter{G}\deter{P}
         =\deter{P^{-1}}\deter{P}\deter{G}=\deter{P^{-1}P}\deter{G}
         =\deter{G} \).
     
 \end{ans}
-\begin{ans}{Four.II.1.27}
+\begin{ans}{Four.II.1.28}
       \begin{exparts}
         \partsitem The new basis is the old basis rotated by \( \pi/4 \).
         \partsitem
@@ -24192,7 +24198,7 @@ octave:6> gplot z
       \end{exparts}
     
 \end{ans}
-\begin{ans}{Four.II.1.28}
+\begin{ans}{Four.II.1.29}
       We will compare \( \det(\vec{s}_1,\dots,\vec{s}_n) \) with
       \( \det(t(\vec{s}_1),\dots,t(\vec{s}_n)) \) to show that the second
       differs from the first by a factor of $\deter{T}$.
@@ -24286,7 +24292,7 @@ octave:6> gplot z
       \end{equation*}
     
 \end{ans}
-\begin{ans}{Four.II.1.29}
+\begin{ans}{Four.II.1.30}
       \begin{exparts}
         \partsitem An algebraic check is easy.
         \begin{equation*}
@@ -25136,75 +25142,79 @@ octave:6> gplot z
 \end{ans}
 \topic{Speed of Calculating Determinants}
 \begin{ans}{1}
-      \begin{exparts}
-        \partsitem Under Octave, \texttt{rank(rand(5))} finds the
-          rank of a $\nbyn{5}$ matrix whose entries are (uniformly
-          distributed) in the interval $[0..1)$.
-          This loop which runs the test $5000$ times
-\begin{lstlisting}
-octave:1> for i=1:5000
-> if rank(rand(5))<5 printf("That's one."); endif
-> endfor
-\end{lstlisting}
-          produces (after a few seconds) returns the prompt, with no output.
+      Your timing will depend in part on the computer algebra system
+      that you use, and in part on the power of the computer on which
+      you do the calculation.
+      But you should get a curve that is similar to the one show.
+%       \begin{exparts}
+%         \partsitem Under Octave, \texttt{rank(rand(5))} finds the
+%           rank of a $\nbyn{5}$ matrix whose entries are (uniformly
+%           distributed) in the interval $[0..1)$.
+%           This loop which runs the test $5000$ times
+% \begin{lstlisting}
+% octave:1> for i=1:5000
+% > if rank(rand(5))<5 printf("That's one."); endif
+% > endfor
+% \end{lstlisting}
+%           produces (after a few seconds) returns the prompt, with no output.
 
-          The Octave script
-\begin{lstlisting}
-function elapsed_time = detspeed (size)
-  a=rand(size);
-  tic();
-  for i=1:10
-     det(a);
-  endfor
-  elapsed_time=toc();
-endfunction
-\end{lstlisting}
-          lead to this session (obviously, your times will vary).
-\begin{lstlisting}
-octave:1> detspeed(5)
-ans = 0.019505
-octave:2> detspeed(15)
-ans = 0.0054691
-octave:3> detspeed(25)
-ans = 0.0097431
-octave:4> detspeed(35)
-ans = 0.017398
-\end{lstlisting}
-          \partsitem Here is the data (rounded a bit), and the graph.
-            \begin{center}
-              \begin{tabular}{l}
-              \begin{tabular}{r|cccccc}
-                 \textit{matrix rows}
-                    &$15$ &$25$ &$35$ &$45$ &$55$ &$65$  \\
-                 \hline
-                 \textit{time per ten}
-                    &$0.003\,4$
-                    &$0.009\,8$
-                    &$0.067\,5$
-                    &$0.028\,5$
-                    &$0.044\,3$
-                    &$0.066\,3$
-              \end{tabular}                                       \\
-              \qquad\begin{tabular}{r|ccc}
-                 \textit{matrix rows}
-                    &$75$ &$85$ &$95$ \\
-                 \hline
-                 \textit{time per ten}
-                    &$0.142\,8$
-                    &$0.228\,2$
-                    &$0.168\,6$
-              \end{tabular}
-              \end{tabular}
-            \end{center}
-          This data is from an average of twenty runs of the above script,
-          because of the possibility that the randomly chosen matrix
-          happens to take an unusually long or short time.
-          Even so, the timing cannot be relied on too heavily; this is
-          just an experiment.
-          \begin{center}
-            \includegraphics[width=0.4\textwidth]{ch4.28}
-          \end{center}
-      \end{exparts}
+%           The Octave script
+% \begin{lstlisting}
+% function elapsed_time = detspeed (size)
+%   a=rand(size);
+%   tic();
+%   for i=1:10
+%      det(a);
+%   endfor
+%   elapsed_time=toc();
+% endfunction
+% \end{lstlisting}
+%           lead to this session (obviously, your times will vary).
+% \begin{lstlisting}
+% octave:1> detspeed(5)
+% ans = 0.019505
+% octave:2> detspeed(15)
+% ans = 0.0054691
+% octave:3> detspeed(25)
+% ans = 0.0097431
+% octave:4> detspeed(35)
+% ans = 0.017398
+% \end{lstlisting}
+%           \partsitem Here is the data (rounded a bit), and the graph.
+%             \begin{center}
+%               \begin{tabular}{l}
+%               \begin{tabular}{r|cccccc}
+%                  \textit{matrix rows}
+%                     &$15$ &$25$ &$35$ &$45$ &$55$ &$65$  \\
+%                  \hline
+%                  \textit{time per ten}
+%                     &$0.003\,4$
+%                     &$0.009\,8$
+%                     &$0.067\,5$
+%                     &$0.028\,5$
+%                     &$0.044\,3$
+%                     &$0.066\,3$
+%               \end{tabular}                                       \\
+%               \qquad\begin{tabular}{r|ccc}
+%                  \textit{matrix rows}
+%                     &$75$ &$85$ &$95$ \\
+%                  \hline
+%                  \textit{time per ten}
+%                     &$0.142\,8$
+%                     &$0.228\,2$
+%                     &$0.168\,6$
+%               \end{tabular}
+%               \end{tabular}
+%             \end{center}
+%           This data is from an average of twenty runs of the above script,
+%           because of the possibility that the randomly chosen matrix
+%           happens to take an unusually long or short time.
+%           Even so, the timing cannot be relied on too heavily; this is
+%           just an experiment.
+%           \begin{center}
+%             \includegraphics[width=0.4\textwidth]{ch4.28}
+%           \end{center}
+%       \end{exparts}
     
 \end{ans}
 \begin{ans}{2}
@@ -25224,16 +25234,21 @@ ans = 0.017398
      
 \end{ans}
 \begin{ans}{3}
-      One way to get started is to compare these under Octave:
-      \texttt{det(rand(10));}, versus
-      \texttt{det(hilb(10));}, versus
-      \texttt{det(eye(10));}, versus
-      \texttt{det(zeroes(10));}.
-      You can time them as in \texttt{tic(); det(rand(10)); toc()}.
+      The identity matrix typically does not take long to reduce.
+      For matrices that are slow, in Python you can try ones with numbers that
+      are quite large.
+      (Some computer algebra system also have the ability to generate
+      special matrices; try some of those.)
+      % One way to get started is to compare these under Octave:
+      % \texttt{det(rand(10));}, versus
+      % \texttt{det(hilb(10));}, versus
+      % \texttt{det(eye(10));}, versus
+      % \texttt{det(zeroes(10));}.
+      % You can time them as in \texttt{tic(); det(rand(10)); toc()}.
     
 \end{ans}
 \begin{ans}{4}
-      Yes, because the $J$ is in the innermost loop.
+      No, the above code handles the numbers by row.
     
 \end{ans}
 \topic{Chi\`o's Method}

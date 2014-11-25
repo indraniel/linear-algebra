@@ -2,26 +2,26 @@
 %  http://joshua.smcvt.edu/linearalgebra
 %  2001-Jun-12
 \topic{Speed of Calculating Determinants}
-The permutation expansion formula for computing determinants is useful 
-for proving theorems but the method of using row operations
-is faster for finding the determinants of a large matrix.
-We can make this statement 
+For large matrices, finding the determinant by 
+using row operations
+is typically much faster than using the permutation expansion.
+We make this statement 
 precise by finding how many operations each method performs.
 
-We compare the speed of two algorithms by finding for each one
+To compare the speed of two algorithms, we find for each one
 how the time taken grows as the size of
 its input data set grows.
 For instance, if we increase the size of the input by a
 factor of ten does the time taken grow by a factor of ten,
 or by a factor of a hundred, or by a factor of a thousand?
 That is, 
-is the time proportional to the size of the data set, 
+is the time taken proportional to the size of the data set, 
 or to the square of that size, or to the cube of that size, etc.? 
-An algorithm whose time taken is proportional to the square is faster than
-one whose time taken is proportional to the cube.
+An algorithm whose time is proportional to the square is faster than
+one that takes time proportional to the cube.
 
-In
-the permutation expansion formula\index{determinant!permutation expansion}%
+First consider
+the permutation expansion formula.\index{determinant!permutation expansion}%
 \index{permutation expansion}
 \begin{equation*}
    \begin{vmat}
@@ -46,98 +46,166 @@ the permutation expansion formula\index{determinant!permutation expansion}%
    %         t_{n,\phi_k(n)}\deter{P_{\phi_k}} 
    % \end{aligned}
 \end{equation*}
-there are  
-$n!=n\cdot(n-1)\cdot(n-2)\cdots 2\cdot 1$ different \( n \)-permutations.
-This factorial function grows quickly;  
-when $n$ is only $10$ then the expansion above has  
-$10!=3,628,800$ terms, each with $n$~multiplications and a permutation
-matrix to do. 
-Observe that performing $n!$~many operations is performing more than 
-$n^2$~many operations because
-multiplying the first
+There are
+$n!=n\cdot(n-1)\cdots 2\cdot 1$ different \( n \)-permutations so
+for a matrix with $n$~rows this sum has $n!$ terms
+(and inside each term is $n$-many multiplications). 
+The factorial function grows quickly:  
+when $n$ is only $10$ the expansion already has  
+$10!=3,628,800$ terms. 
+Observe that growth proportional to 
+the factorial is bigger than growth proportional to the square  $n!>n^2$ 
+because multiplying the first
 two factors in $n!$ gives $n\cdot(n-1)$, which for large $n$
 is approximately $n^2$ and then multiplying in more factors will make the 
 factorial even larger.
-Similarly, the factorial function grows faster than the cube, 
-or the fourth power, or any polynomial function.
-So a computer program that uses the permutation
+Similarly, the factorial function grows faster than~$n^3$, 
+etc.
+So an algorithm that uses the permutation
 expansion formula, and thus performs a number of operations
-that is greater than or equal to the factorial of the number of rows,
+at least as large as the factorial of the number of rows,
 would be very slow.
 
 In contrast, the time taken by the row reduction method does not grow so fast.
-Below is a fragment of row-reduction code.
-It is 
-in the computer language \textsc{FORTRAN}, 
-which is widely used for numeric code.
-% (there are no rows below
-% the \lstinline[style=inline]!N!-th 
-% so it is not included in the loop).
-\begin{lstlisting}
-DO 10 ROW=1, N-1
-  PIVINV=1.0/A(ROW,ROW)
-  DO 20 I=ROW+1, N
-    DO 30 J=I, N
-      A(I,J)=A(I,J)-PIVINV*A(ROW,J)
-    30 CONTINUE
-  20 CONTINUE
-10 CONTINUE
-\end{lstlisting} 
-The matrix is in the $\nbyn{\text{\lstinline[style=inline]!N!}}$ 
-array \lstinline[style=inline]!A!. 
-The program's outer loop runs through
-each \lstinline[style=inline]!ROW! between \lstinline[style=inline]!1! and 
-\lstinline[style=inline]!N-1! 
-and does the entry-by-entry combination 
-% \begin{equation*}
-\(  -\text{\lstinline[style=inline]!PIVINV!}\cdot \rho_{\,\text{\lstinline!ROW!}}
-      +\rho_{\,\text{\lstinline!I!}} \)
-% \end{equation*}
-with the lower rows.
-
-For each \lstinline[style=inline]!ROW!, 
-the nested \lstinline[style=inline]!I! and \lstinline[style=inline]!J! 
-loops perform the combination with the lower rows by
-doing arithmetic on the entries
-in \lstinline[style=inline]!A! that are below and to the right of 
-\lstinline[style=inline]!A(ROW,ROW)!.
-There are 
-$(\text{\lstinline[style=inline]!N!}-\text{\lstinline[style=inline]!ROW!})^2$ 
-such entries. 
-On average, \lstinline[style=inline]!ROW! will be 
-$\text{\lstinline[style=inline]!N!}/2$.
-So this program will perform the arithmetic 
-about $(\text{\lstinline[style=inline]!N!}/2)^2$ times.
-Taking into account the outer loop gives the  
-estimate that the running time of the algorithm
-is proportional to the cube of the number of equations.
-(The code above is naive; for example it does not handle the case that 
-the entry \lstinline[style=inline]!A(ROW,ROW)! is zero.
+% Below is a fragment of row-reduction code.
+% It is 
+% in the computer language \textsc{FORTRAN}, 
+% which is widely used for numeric code.
+% % (there are no rows below
+% % the \lstinline[style=inline]!N!-th 
+% % so it is not included in the loop).
+% \begin{lstlisting}
+% DO 10 ROW=1, N-1
+%   PIVINV=1.0/A(ROW,ROW)
+%   DO 20 I=ROW+1, N
+%     DO 30 J=I, N
+%       A(I,J)=A(I,J)-PIVINV*A(ROW,J)
+%     30 CONTINUE
+%   20 CONTINUE
+% 10 CONTINUE
+% \end{lstlisting} 
+Below is a script for row reduction
+in the computer language Python.
+(\textit{Note:}
+The code here is naive; for example it does not handle the case that 
+the \lstinline[style=inline]!m(p_row, p_row)! entry is zero.
 Analysis of a finished version that includes all of the tests
-and subcases is messier but gives the same conclusion.)
+and subcases is messier but would gives us roughly the same speed
+results.)
+\begin{lstlisting}
+import random
+
+def random_matrix(num_rows, num_cols):
+    m = []
+    for col in range(num_cols):
+        new_row = []
+        for row in range(num_rows):
+            new_row.append(random.uniform(0,100))
+        m.append(new_row)
+    return m
+
+def gauss_method(m):
+    """Perform Gauss's Method on m.  This code is for illustration only
+    and should not be used in practice.
+      m  list of lists of numbers; each included list is a row
+    """
+    num_rows, num_cols = len(m), len(m[0])
+    for p_row in range(num_rows):
+        for row in range(p_row+1, num_rows):
+            factor = -m[row][p_row] / float(m[p_row][p_row])
+            new_row = []
+            for col_num in range(num_cols): 
+                p_entry, entry = m[p_row][col_num], m[row][col_num]
+                new_row.append(entry+factor*p_entry)
+            m[row] = new_row
+    return m
+
+response = raw_input('number of rows? ')
+num_rows = int(response)
+m = random_matrix(num_rows, num_rows)
+for row in m:
+    print row
+M = gauss_method(m)
+print "-----"
+for row in M:
+    print row
+\end{lstlisting}
+Besides a routine to do Gauss's Method, this program also has a routine
+to generate a matrix filled with random numbers (the numbers are
+between $0$ and~$100$, to make them readable below).
+This program prompts a user
+for the number of rows, generates a random square matrix of
+that size, and does row reduction on it.
+\begin{lstlisting}
+$ python gauss_method.py
+number of rows? 4
+[69.48033741746909, 32.393754742132586, 91.35245787350696, 87.04557918402462]
+[98.64189032145111, 28.58228108715638, 72.32273998878178, 26.310252241189257]
+[85.22896214660841, 39.93894635139987, 4.061683241757219, 70.5925099861901]
+[24.06322759315518, 26.699175587284373, 37.398583921673314, 87.42617087562161]
+-----
+[69.48033741746909, 32.393754742132586, 91.35245787350696, 87.04557918402462]
+[0.0, -17.40743803545155, -57.37120602662462, -97.2691774792963]
+[0.0, 0.0, -108.66513774392809, -37.31586824349682]
+[0.0, 0.0, 0.0, -13.678536859817994]
+\end{lstlisting}  %$
+
+Inside of the
+\lstinline[style=inline]!gauss_method!
+routine, for each row \lstinline[style=inline]!prow!, the routine performs
+$\text{\lstinline[style=inline]!factor!}\cdot\rho_{\text{\lstinline[style=inline]!prow!}}+\rho_{\text{\lstinline[style=inline]!row!}}$ 
+on the rows below.
+For each of these rows below, 
+this involves operating on every entry in that row.
+That makes a triply-nested loop.
+As a result, this program has a running time that is something like the  
+cube of the number of rows in the matrix.
+(\textit{Comment.}
+We are glossing over some issues.
+For instance, we can worry that after a large number of 
+arithmetic operations the numbers grow so unwieldy that the time taken
+by the program is dominated by the time it takes to store and 
+retrieve the numbers.
+These considerations lie outside our scope.)
+
+If we add this code at the bottom,
+\begin{lstlisting}
+def do_matrix(num_rows):
+    gauss_method(random_matrix(num_rows, num_rows))
+
+import timeit
+for num_rows in [10,20,30,40,50,60,70,80,90,100]:
+    s = "do_matrix("+str(num_rows)+")"
+    t = timeit.timeit(stmt=s, setup="from __main__ import do_matrix",
+                      number=100)
+    print "num_rows=", num_rows, " seconds=", t  
+\end{lstlisting}
+then Python will time the program. 
+Here is the output from a timed test run.
+\begin{lstlisting}
+num_rows= 10  seconds= 0.0162539482117
+num_rows= 20  seconds= 0.0808238983154
+num_rows= 30  seconds= 0.248152971268
+num_rows= 40  seconds= 0.555531978607
+num_rows= 50  seconds= 1.05453586578
+num_rows= 60  seconds= 1.77881097794
+num_rows= 70  seconds= 2.75969099998
+num_rows= 80  seconds= 4.10647988319
+num_rows= 90  seconds= 5.81125879288
+num_rows= 100  seconds= 7.86893582344  
+\end{lstlisting}
+Graphing that data gives part of the curve of a cubic.
+\begin{center}
+  \includegraphics{detspeed.pdf}
+\end{center}
 
 Finding the fastest algorithm to compute the determinant 
 is a topic of current research.
-So far, people have found algorithms that run in time between the 
-square and cube of \lstinline[style=inline]!N!.
+So far, researchers have found algorithms that run in time between the 
+square and cube of the number of rows.
 
-% Speed estimates like these help us to understand how quickly or
-% slowly an algorithm will run.
-% Algorithms that run in time proportional to the size of the 
-% data set are fast, algorithms that run in time proportional to the
-% square of the size of the data set are less fast, but typically quite
-% usable, and algorithms that run in time proportional to the cube of
-% the size of the data set are still reasonable in speed for
-% not-too-big input data. 
-% However, algorithms that run in time that is the factorial
-% of the size of the data set are not practical for input of any
-% appreciable size.
-
-% There are other methods besides the two discussed here
-% that we can  also used for computation of determinants.
-% Those lie outside of our scope.
-The contrast between the methods of permutation expansion and row operations
-for computing determinants 
+The contrast between the times taken by the two determinant computation
+methods of permutation expansion and row operations 
 makes the point that although in principle they give the same answer, 
 in practice we want the one with the best performance.
 
@@ -145,7 +213,8 @@ in practice we want the one with the best performance.
 \begin{exercises}
   % \item[\textit{Most of these presume access to a computer.}]
   \item 
-    Computer systems generate random numbers
+    To get an idea of what happens for typical matrices
+    we can use the ability of computer systems to generate random numbers
     (of course, these are only pseudo-random in that they come from
     an algorithm but they 
     pass a number of reasonable statistical tests for randomness).
@@ -154,14 +223,13 @@ in practice we want the one with the best performance.
         range $\clopinterval{0}{1}$).
         See if it is singular.
         Repeat that experiment a few times.
-        Are singular matrices frequent or rare (in this sense)?
+        Are singular matrices frequent or rare in this sense?
       \partsitem Time your computer algebra system at finding the
-        determinant of ten $\nbyn{5}$ arrays of random numbers.
+        determinant of ten $\nbyn{10}$ arrays of random numbers.
         Find the average time per array.
-        Repeat the prior item for $\nbyn{15}$ arrays,
-        $\nbyn{25}$ arrays, $\nbyn{35}$ arrays, etc.
-        You may find that you need to get above a certain size
-        to get a timing that you can use. 
+        Repeat the prior item for $\nbyn{20}$ arrays,
+        $\nbyn{30}$ arrays, \ldots $\nbyn{100}$ arrays, 
+        and compare to the numbers given above.
         (Notice that, when an array is singular, we can sometimes decide that
         quickly,
         for instance if the first row equals the second.
@@ -170,75 +238,79 @@ in practice we want the one with the best performance.
       \partsitem Graph the input size versus the average time.
     \end{exparts}
     \begin{answer}
-      \begin{exparts}
-        \partsitem Under Octave, \texttt{rank(rand(5))} finds the
-          rank of a $\nbyn{5}$ matrix whose entries are (uniformly
-          distributed) in the interval $[0..1)$.
-          This loop which runs the test $5000$ times
-\begin{lstlisting}
-octave:1> for i=1:5000
-> if rank(rand(5))<5 printf("That's one."); endif
-> endfor
-\end{lstlisting}  
-          produces (after a few seconds) returns the prompt, with no output.
+      Your timing will depend in part on the computer algebra system
+      that you use, and in part on the power of the computer on which
+      you do the calculation.
+      But you should get a curve that is similar to the one show.
+%       \begin{exparts}
+%         \partsitem Under Octave, \texttt{rank(rand(5))} finds the
+%           rank of a $\nbyn{5}$ matrix whose entries are (uniformly
+%           distributed) in the interval $[0..1)$.
+%           This loop which runs the test $5000$ times
+% \begin{lstlisting}
+% octave:1> for i=1:5000
+% > if rank(rand(5))<5 printf("That's one."); endif
+% > endfor
+% \end{lstlisting}  
+%           produces (after a few seconds) returns the prompt, with no output.
 
-          The Octave script
-\begin{lstlisting}
-function elapsed_time = detspeed (size)
-  a=rand(size);
-  tic();
-  for i=1:10
-     det(a);
-  endfor
-  elapsed_time=toc();
-endfunction
-\end{lstlisting}  
-          lead to this session (obviously, your times will vary). 
-\begin{lstlisting}
-octave:1> detspeed(5)
-ans = 0.019505
-octave:2> detspeed(15)
-ans = 0.0054691
-octave:3> detspeed(25)
-ans = 0.0097431
-octave:4> detspeed(35)
-ans = 0.017398
-\end{lstlisting}  
-          \partsitem Here is the data (rounded a bit), and the graph.
-            \begin{center}
-              \begin{tabular}{l}
-              \begin{tabular}{r|cccccc}
-                 \textit{matrix rows} 
-                    &$15$ &$25$ &$35$ &$45$ &$55$ &$65$  \\
-                 \hline
-                 \textit{time per ten}
-                    &$0.003\,4$                     
-                    &$0.009\,8$
-                    &$0.067\,5$
-                    &$0.028\,5$ 
-                    &$0.044\,3$
-                    &$0.066\,3$ 
-              \end{tabular}                                       \\
-              \qquad\begin{tabular}{r|ccc}
-                 \textit{matrix rows} 
-                    &$75$ &$85$ &$95$ \\
-                 \hline
-                 \textit{time per ten}
-                    &$0.142\,8$  
-                    &$0.228\,2$ 
-                    &$0.168\,6$              
-              \end{tabular}
-              \end{tabular}
-            \end{center}
-          This data is from an average of twenty runs of the above script,
-          because of the possibility that the randomly chosen matrix
-          happens to take an unusually long or short time.
-          Even so, the timing cannot be relied on too heavily; this is
-          just an experiment.
-          \begin{center}
-            \includegraphics[width=0.4\textwidth]{ch4.28}
-          \end{center}
-      \end{exparts}
+%           The Octave script
+% \begin{lstlisting}
+% function elapsed_time = detspeed (size)
+%   a=rand(size);
+%   tic();
+%   for i=1:10
+%      det(a);
+%   endfor
+%   elapsed_time=toc();
+% endfunction
+% \end{lstlisting}  
+%           lead to this session (obviously, your times will vary). 
+% \begin{lstlisting}
+% octave:1> detspeed(5)
+% ans = 0.019505
+% octave:2> detspeed(15)
+% ans = 0.0054691
+% octave:3> detspeed(25)
+% ans = 0.0097431
+% octave:4> detspeed(35)
+% ans = 0.017398
+% \end{lstlisting}  
+%           \partsitem Here is the data (rounded a bit), and the graph.
+%             \begin{center}
+%               \begin{tabular}{l}
+%               \begin{tabular}{r|cccccc}
+%                  \textit{matrix rows} 
+%                     &$15$ &$25$ &$35$ &$45$ &$55$ &$65$  \\
+%                  \hline
+%                  \textit{time per ten}
+%                     &$0.003\,4$                     
+%                     &$0.009\,8$
+%                     &$0.067\,5$
+%                     &$0.028\,5$ 
+%                     &$0.044\,3$
+%                     &$0.066\,3$ 
+%               \end{tabular}                                       \\
+%               \qquad\begin{tabular}{r|ccc}
+%                  \textit{matrix rows} 
+%                     &$75$ &$85$ &$95$ \\
+%                  \hline
+%                  \textit{time per ten}
+%                     &$0.142\,8$  
+%                     &$0.228\,2$ 
+%                     &$0.168\,6$              
+%               \end{tabular}
+%               \end{tabular}
+%             \end{center}
+%           This data is from an average of twenty runs of the above script,
+%           because of the possibility that the randomly chosen matrix
+%           happens to take an unusually long or short time.
+%           Even so, the timing cannot be relied on too heavily; this is
+%           just an experiment.
+%           \begin{center}
+%             \includegraphics[width=0.4\textwidth]{ch4.28}
+%           \end{center}
+%       \end{exparts}
     \end{answer}
   \item 
     Compute the determinant of each of these by hand using the 
@@ -262,9 +334,9 @@ ans = 0.017398
     \end{exparts*}
     Count the number of multiplications and divisions used in each case,
     for each of the methods.
-    (Computer multiplications and divisions take 
-     longer than additions and subtractions, so algorithm 
-     designers worry about them more.)
+    % (Computer multiplications and divisions take 
+    %  longer than additions and subtractions, so algorithm 
+    %  designers worry about them more.)
      \begin{answer}
        The number of operations depends on exactly how we do the operations.
        \begin{exparts}
@@ -285,12 +357,17 @@ ans = 0.017398
     the longest time to reduce?
     The shortest?
     \begin{answer}
-      One way to get started is to compare these under Octave:
-      \texttt{det(rand(10));}, versus
-      \texttt{det(hilb(10));}, versus
-      \texttt{det(eye(10));}, versus
-      \texttt{det(zeroes(10));}. 
-      You can time them as in \texttt{tic(); det(rand(10)); toc()}.
+      The identity matrix typically does not take long to reduce.
+      For matrices that are slow, in Python you can try ones with numbers that
+      are quite large.
+      (Some computer algebra system also have the ability to generate
+      special matrices; try some of those.)
+      % One way to get started is to compare these under Octave:
+      % \texttt{det(rand(10));}, versus
+      % \texttt{det(hilb(10));}, versus
+      % \texttt{det(eye(10));}, versus
+      % \texttt{det(zeroes(10));}. 
+      % You can time them as in \texttt{tic(); det(rand(10)); toc()}.
     \end{answer}
 %   \item 
 %     Write the rest of the FORTRAN program to do a
@@ -312,14 +389,14 @@ ans = 0.017398
 % 5 CONTINUE
 % \end{lstlisting}     
 %     \end{answer}
-  \item The \textsc{FORTRAN} language specification requires that arrays be
+  \item Some computer language specifications requires that arrays be
     stored ``by column,'' that is, the entire first column is stored
     contiguously, then the second column, etc.
     Does the code fragment given take advantage of this,
     or can it be rewritten to make it faster, by taking advantage of
     the fact that computer fetches are faster from contiguous locations?
     \begin{answer}
-      Yes, because the $J$ is in the innermost loop.
+      No, the above code handles the numbers by row.
     \end{answer}
 \end{exercises}
 \endinput
