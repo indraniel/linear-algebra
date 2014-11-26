@@ -149,8 +149,8 @@ A multiset subset of a vector space is
 \index{sets!dependent, independent}
 if none of its elements is a linear combination of the 
 others.\footnote{More information on multisets is in the appendix. 
-Most of the time we won't need the set-multiset distinction and  
-we will
+Most of the time we won't need the 
+set-multiset distinction and we will
 follow the standard terminology of referring to a linearly independent or 
 dependent `set'.
 \nearbyremark{rem:WhyLIUsesMultiset} explains why 
@@ -362,28 +362,50 @@ set, specifically,
 the zero vector is a combination of the empty subset.
 \end{example}
 
-\begin{remark}\cite{Velleman} \label{rem:WhyLIUsesMultiset}
+\begin{remark} \label{rem:WhyLIUsesMultiset} %\cite{Velleman} 
 \nearbydefinition{def:LinInd} says that when we 
 decide whether some $S$ is linearly independent, we must
 consider it as a multiset.
-(Recall that in a set repeated elements collapse so the set 
-$\set{0,1,0}$ equals the set $\set{0,1}$, whereas in a multiset they
-do not collapse so the multiset $\set{0,1,0}$ contains the element 
-$0$ twice.)
-Here is an example showing that we can need multiset rather than set.
-In the next chapter we will look at functions from one vector space to another.
-Let the function $\map{f}{\polyspace_1}{\Re}$ be
-$f(a+bx)=a$ so that for instance $f(1+2x)=1$. 
-Consider the subset $B=\set{1,1+x}$ of the domain.
-The images of the elements are $f(1)=1$ and~$f(1+x)=1$.
-Because in a set repeated elements collapse 
-these images form a set with one element $\set{1}$,
-which is linearly independent.
-But in a multiset repeated elements do not collapse so 
-these images form a linearly 
-dependent multiset~$\set{1,1}$.
-The second case is the correct one:~$B$ is linearly independent but its image 
-under~$f$ is linearly dependent.
+Recall that in a set repeated elements collapse, so the set 
+$\set{0,1,0}$ equals the set $\set{0,1}$. 
+But in a multiset they
+do not collapse, so the multiset $\set{0,1,0}$ contains the element 
+$0$ twice.
+Here is an example showing that the definition requires a multiset.
+Below, on the left, the set of matrix rows 
+$\set{\rowvec{1 &1 &1}, \rowvec{2 &2 &2}, \rowvec{1 &2 &3}}$ is
+linearly dependent.
+\begin{equation*}
+  \begin{mat}
+    1 &1 &1 \\
+    2 &2 &2 \\
+    1 &2 &3
+  \end{mat}
+  \grstep{(1/2)\rho_2}
+  \begin{mat}
+    1 &1 &1 \\
+    1 &1 &1 \\
+    1 &2 &3
+  \end{mat}
+\end{equation*}
+But on the right the set 
+$\set{\rowvec{1 &1 &1}, \rowvec{1 &1 &1}, \rowvec{1 &2 &3}}=
+\set{\rowvec{1 &1 &1}, \rowvec{1 &2 &3}}$ is linearly independent.
+That's not what we need; we rely on Gauss's Method to preserve dependence
+so we need that $\rowvec{1 &1 &1}$ appears twice.
+% In the next chapter we will look at functions from one vector space to another.
+% Let the function $\map{f}{\polyspace_1}{\Re}$ be
+% $f(a+bx)=a$ so that for instance $f(1+2x)=1$. 
+% Consider the subset $B=\set{1,1+x}$ of the domain.
+% The images of the elements are $f(1)=1$ and~$f(1+x)=1$.
+% Because in a set repeated elements collapse 
+% these images form a set with one element $\set{1}$,
+% which is linearly independent.
+% But in a multiset repeated elements do not collapse so 
+% these images form a linearly 
+% dependent multiset~$\set{1,1}$.
+% The second case is the correct one:~$B$ is linearly independent but its image 
+% under~$f$ is linearly dependent.
 
 % Most of the time we won't need the set-multiset distinction and  
 % we will typically 
@@ -944,6 +966,93 @@ a spanning set is minimal if and only if it is linearly independent.
            nontrivial linear relation. 
       \end{exparts}  
      \end{answer}
+  \item Determine if each set is linearly independent in the natural 
+    space.
+    \begin{exparts*}
+      \partsitem $\set{\colvec{1 \\ 2 \\ 0}, 
+              \colvec{-1 \\ 1 \\ 0}}$
+      \partsitem $\set{\rowvec{1 &3 &1}, \rowvec{-1 &4 &3}, \rowvec{-1 &11 &7}}$
+      \partsitem $\set{\begin{mat}
+                5 &4 \\
+                1 &2 
+              \end{mat},
+              \begin{mat}
+                0 &0 \\
+                0 &0
+              \end{mat},
+              \begin{mat}
+                1 &0 \\
+               -1 &4
+              \end{mat}
+           }$
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem   The natural vector space is $\Re^3$.
+          Set up the equation
+          \begin{equation*}
+            \colvec{0 \\ 0 \\ 0}=c_1\colvec{1 \\ 2 \\ 0}
+                                 +c_2\colvec{-1 \\ 1 \\ 0}
+          \end{equation*}
+          and consider the resulting homogeneous system.
+          \begin{equation*}
+             \begin{amat}{2}
+               1  &-1 &0  \\
+               2  &1  &0  \\
+               0  &0  &0
+             \end{amat}
+             \grstep{-2\rho_1+\rho_2}
+             \begin{amat}{2}
+              1  &-1 &0  \\
+              0  &3  &0  \\
+              0  &0  &0
+            \end{amat} 
+          \end{equation*}
+          This has the unique solution, that $c_1=0$, $c_2=0$.
+          So it is linearly independent.
+        \partsitem   The natural vector space is the set of three-wide 
+          row vectors.
+          The equation
+          \begin{equation*}
+            \rowvec{0 &0 &0}=c_1\rowvec{1 &3 &1}
+                            +c_2\rowvec{-1 &4 &3}
+                            +c_3\rowvec{-1 &11 &7}
+          \end{equation*}
+          gives rise to a linear system
+          \begin{align*}
+            \begin{amat}{3}
+              1  &-1  &-1  &0  \\
+              3  &4   &11  &0  \\
+              1  &3   &7   &0
+           \end{amat}
+           &\grstep[-\rho_1+\rho_3]{-3\rho_1+\rho_2}
+           \begin{amat}{3}
+             1  &-1  &-1  &0  \\
+             0  &7   &14  &0  \\
+             0  &4   &8   &0
+          \end{amat}                                   \\
+          &\grstep{(4/7)\rho_2+\rho_3}
+          \begin{amat}{3}
+            1  &-1  &-1  &0  \\
+            0  &7   &14  &0  \\
+            0  &0   &0   &0
+         \end{amat}
+       \end{align*}
+       with infinitely many solutions, that is, more than just the 
+       trivial solution.
+       \begin{equation*}
+         \set{\colvec{c_1 \\ c_2 \\ c_3}
+              =\colvec{-1 \\ -2 \\ 1}c_3
+              \suchthat c_3\in\Re}
+       \end{equation*}
+       So the set is linearly dependent.
+       One dependence comes from setting $c_3=2$, giving 
+       $c_1=-2$ and $c_2=-4$.
+      \partsitem   Without having to set up a system we can see 
+        that the second element of the set is a multiple of the first 
+        (namely, $0$ times the first). 
+      \end{exparts}
+    \end{answer}
   \recommended \item
     Prove that each set \( \set{f,g} \) is linearly independent in the
     vector space of all functions from \( \Re^+ \) to \( \Re \).

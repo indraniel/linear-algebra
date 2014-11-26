@@ -274,29 +274,6 @@ and \ldots\  $a_{j,1}s_1+a_{j,2}s_2+\cdots+a_{j,n}s_n=d_j$
 and \ldots\  $a_{m,1}s_1+a_{m,2}s_2+\cdots+a_{m,n}s_n=d_m$.
 %</pf:GaussMethod0>
 
-% {\renewcommand{\arraystretch}{.75}
-% \begin{equation*}
-%   \begin{linsys}{4}
-%     a_{1,1}x_1  &+  &a_{1,2}x_2 &+  &\cdots  &&a_{1,n}x_n  &=  &d_1  \\
-%                 &   &           &   &        &   &     &\shortvdotswithin{=}  \\
-%     a_{i,1}x_1  &+  &a_{i,2}x_2 &+  &\cdots  &&a_{i,n}x_n  &=  &d_i  \\
-%                 &   &           &   &        &   &     &\shortvdotswithin{=}  \\
-%     a_{j,1}x_1  &+  &a_{j,2}x_2 &+  &\cdots  &&a_{j,n}x_n  &=  &d_j  \\
-%                 &   &           &   &        &   &     &\shortvdotswithin{=} \\
-%     a_{m,1}x_1  &+  &a_{m,2}x_2 &+  &\cdots  &&a_{m,n}x_n  &=  &d_m  
-%   \end{linsys}
-%   \grstep{}
-%   \begin{linsys}{4}
-%     a_{1,1}x_1  &+  &a_{1,2}x_2 &+  &\cdots  &&a_{1,n}x_n  &=  &d_1  \\
-%                 &   &           &   &        &   &    &\shortvdotswithin{=}   \\
-%     a_{j,1}x_1  &+  &a_{j,2}x_2 &+  &\cdots  &&a_{j,n}x_n  &=  &d_j  \\
-%                 &   &           &   &        &   &     &\shortvdotswithin{=}  \\
-%     a_{i,1}x_1  &+  &a_{i,2}x_2 &+  &\cdots  &&a_{i,n}x_n  &=  &d_i  \\
-%                 &   &           &   &        &   &    &\shortvdotswithin{=}   \\
-%     a_{m,1}x_1  &+  &a_{m,2}x_2 &+  &\cdots  &&a_{m,n}x_n  &=  &d_m  
-%   \end{linsys}
-% \end{equation*} }% end change of arraystretch
-
 %<*pf:GaussMethod1>
 In a list of statements joined with `and' we can  
 rearrange the order of the statements. 
@@ -2637,6 +2614,137 @@ We will know exactly what can and cannot happen in a reduction.
         \end{equation*}
     \end{exparts}  
    \end{answer}
+  \item 
+    Solve each system using matrix notation.
+    Express the solution set using vectors.
+    \begin{exparts*}
+      \partsitem 
+        $\begin{linsys}{3}
+          3x &+ &2y &+ &z &= &1 \\
+          x  &- &y  &+ &z &= &2 \\
+          5x &+ &5y &+ &z &= &0
+        \end{linsys}$
+      \partsitem
+        $\begin{linsys}{4}
+          x  &+ &y  &- &2z &= &0 \\
+          x  &- &y  &  &   &= &-3 \\
+          3x &- &y  &- &2z &= &-6  \\
+             &  &2y &- &2z &= &3  
+        \end{linsys}$
+      \partsitem
+        $\begin{linsys}{5}
+          2x  &- &y  &- &z &+ &w &= &4 \\
+           x  &+ &y  &+ &z &  &  &= &-1 
+        \end{linsys}$
+      \partsitem
+         $\begin{linsys}{3}
+          x  &+ &y  &- &2z &= &0 \\
+          x  &- &y  &  &   &= &-3 \\
+          3x &- &y  &- &2z &= &0    
+        \end{linsys}$ 
+    \end{exparts*}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem This reduction
+          \begin{align*}
+            \begin{amat}{3}
+              3 &2  &1  &1 \\
+              1 &-1 &1  &2 \\
+              5 &5  &1  &0
+            \end{amat}
+            &\grstep[-(5/3)\rho_1+\rho_3]{-(1/3)\rho_1+\rho_2}
+            \begin{amat}{3}
+              3 &2    &1     &1 \\
+              0 &-5/3 &2/3   &5/3 \\
+              0 &5/3  &-2/3  &-5/3
+            \end{amat}                                     \\
+            &\grstep{\rho_2+\rho_3}
+            \begin{amat}{3}
+              3 &2    &1     &1 \\
+              0 &-5/3 &2/3   &5/3 \\
+              0 &0    &0     &0
+            \end{amat}
+          \end{align*}
+          gives this solution set.
+          \begin{equation*}
+            \set{\colvec{x \\ y \\ z}=\colvec{1 \\ -1 \\ 0}
+                                       +\colvec{-3/5 \\ 2/5 \\ 1}z
+                             \suchthat z\in\Re}
+          \end{equation*}
+        \partsitem
+          This is the reduction.
+          \begin{align*}
+            \begin{amat}{3}
+              1 &1   &-2 &0 \\
+              1 &-1  &0  &3  \\
+              3 &-1  &-2 &-6 \\
+              0 &2   &-2 &3
+            \end{amat}
+            &\grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
+            \begin{amat}{3}
+              1 &1   &-2 &0 \\
+              0 &-2  &2  &-3  \\
+              0 &-4  &4  &-6 \\
+              0 &2   &-2 &3
+            \end{amat}                                  \\
+            &\grstep[\rho_2+\rho_4]{-2\rho_2+\rho_3}
+            \begin{amat}{3}
+              1 &1   &-2 &0 \\
+              0 &-2  &2  &-3  \\
+              0 &0   &0  &0 \\
+              0 &0   &0  &0
+            \end{amat}
+          \end{align*}
+          The solution set is this.
+          \begin{equation*}
+            \set{\colvec{-3/2 \\ 3/2 \\ 0}
+                 +\colvec{1 \\ 1 \\ 1}z
+                 \suchthat z\in\Re}
+          \end{equation*}
+      \partsitem
+         Gauss's Method
+         \begin{equation*}
+           \begin{amat}{4}
+             2 &-1 &-1 &1 &4 \\
+             1 &1  &1  &0 &-1
+           \end{amat}
+           \grstep{-(1/2)\rho_1+\rho_2}
+           \begin{amat}{4}
+             2 &-1   &-1   &1    &4 \\
+             0 &3/2  &3/2  &-1/2 &-3
+           \end{amat}
+         \end{equation*}
+         gives the solution set.
+         \begin{equation*}
+           \set{\colvec{1 \\ -2 \\ 0 \\ 0}
+                  +\colvec{0 \\ -1 \\ 1 \\ 0}z
+                   \colvec{-1/3 \\ 1/3 \\ 0 \\ 1}w
+                 \suchthat z,w\in\Re}
+         \end{equation*}
+       \partsitem
+          Here is the reduction.
+          \begin{equation*}
+            \begin{amat}{3}
+              1 &1  &-2 &0  \\
+              1 &-1 &0  &-3 \\
+              3 &-1 &-2 &0
+           \end{amat}
+           \grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
+           \begin{amat}{3}
+             1 &1  &-2 &0  \\
+             0 &-2 &2  &-3 \\
+             0 &-4  &4  &0
+          \end{amat}
+          \grstep{-2\rho_2+\rho_3}
+          \begin{amat}{3}
+            1 &1  &-2 &0  \\
+            0 &-2 &2  &-3 \\
+            0 &0  &0  &6
+          \end{amat}
+        \end{equation*}
+        The solution set is empty~$\set{}$.
+      \end{exparts}
+    \end{answer}
   \recommended \item 
     The vector is in the set.
     What value of the parameters produces that vector?
@@ -3421,7 +3529,7 @@ and solve for the leading variable
 $x=-z-2v$.
 To finish, write the solution in vector notation
 \begin{equation*}
-  \colvec{x \\ y \\ z \\ s \\ t}
+  \colvec{x \\ y \\ z \\ u \\ v}
   =\colvec[r]{-1 \\ -1 \\ 1 \\ 0 \\ 0}z
    +\colvec[r]{-2 \\ 2 \\ 0 \\ -1 \\ 1}v 
   \qquad \text{for $z,v\in\Re$}
@@ -3534,8 +3642,8 @@ in a lower equation \( x_{\ell_m} \), \ldots, \( x_{\ell_{m-t}} \)
 and substitute
 its expression in terms of free variables.
 We only need expressions for leading variables from lower equations
-because the system is in echelon form, so  
-leading variables in higher equation do not appear in this equation.
+because the system is in echelon form, so the
+leading variables in equations above this one do not appear in this equation.
 The result has a leading term of   
 $a_{m-(t+1),\ell_{m-(t+1)}}x_{\ell_{m-(t+1)}}$ with \( a_{m-(t+1),\ell_{m-(t+1)}}\neq 0 \),
 and the rest of the left hand side
@@ -4006,6 +4114,76 @@ That will be our focus in the second chapter, after we finish the study
 of Gauss's Method itself in the rest of this chapter.
 
 \begin{exercises}
+  \item Solve this system.
+    Then solve the associated homogeneous system.
+    \begin{equation*}
+      \begin{linsys}{4}
+        x  &+ &y  &- &2z &= &0 \\
+        x  &- &y  &  &   &= &-3 \\
+        3x &- &y  &- &2z &= &-6  \\
+           &  &2y &- &2z &= &3  
+      \end{linsys}
+   \end{equation*}
+   \begin{answer}
+     This reduction solves the system.
+     \begin{align*}
+       \begin{amat}{3}
+         1 &1   &-2 &0 \\
+         1 &-1  &0  &3  \\
+         3 &-1  &-2 &-6 \\
+         0 &2   &-2 &3
+       \end{amat}
+       &\grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
+       \begin{amat}{3}
+         1 &1   &-2 &0 \\
+         0 &-2  &2  &-3  \\
+         0 &-4  &4  &-6 \\
+         0 &2   &-2 &3
+       \end{amat}                                 \\
+       &\grstep[\rho_2+\rho_4]{-2\rho_2+\rho_3}
+       \begin{amat}{3}
+         1 &1   &-2 &0 \\
+         0 &-2  &2  &-3  \\
+         0 &0   &0  &0 \\
+         0 &0   &0  &0
+       \end{amat}
+     \end{align*}
+     The solution set is this.
+     \begin{equation*}
+       \set{\colvec{-3/2 \\ 3/2 \\ 0}
+            +\colvec{1 \\ 1 \\ 1}z
+            \suchthat z\in\Re}
+     \end{equation*}
+     Similarly we can reduce the associated homogeneous system
+     \begin{align*}
+       \begin{amat}{3}
+         1 &1   &-2 &0 \\
+         1 &-1  &0  &0  \\
+         3 &-1  &-2 &0 \\
+         0 &2   &-2 &0
+       \end{amat}
+       &\grstep[-3\rho_1+\rho_3]{-\rho_1+\rho_2}
+       \begin{amat}{3}
+         1 &1   &-2 &0 \\
+         0 &-2  &2  &0  \\
+         0 &-4  &4  &0 \\
+         0 &2   &-2 &0
+       \end{amat}                                         \\
+       &\grstep[\rho_2+\rho_4]{-2\rho_2+\rho_3}
+       \begin{amat}{3}
+         1 &1   &-2 &0 \\
+         0 &-2  &2  &0  \\
+         0 &0   &0  &0 \\
+         0 &0   &0  &0
+       \end{amat}
+     \end{align*}
+     to get its solution set.
+     \begin{equation*}
+       \set{
+            \colvec{1 \\ 1 \\ 1}z
+            \suchthat z\in\Re}
+     \end{equation*}
+   \end{answer}
   \recommended \item 
     Solve each system.
     Express the solution set using vectors.

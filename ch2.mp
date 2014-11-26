@@ -887,7 +887,7 @@ endfig;
 
 
 
-beginfig(17)  % 0.16 beta_1+4.42 beta_2 in graphite_unit_cell
+beginfig(17)  % 2.55 beta_1+2.72 beta_2 in graphite_unit_cell
   pickup pencircle scaled line_width_light;
 
   draw graphite_unit_cell shifted -(point 3 of graphite_unit_cell)
@@ -907,8 +907,8 @@ beginfig(17)  % 0.16 beta_1+4.42 beta_2 in graphite_unit_cell
   save p; path p[];
   p1 = beta_one shifted -(point 0 of beta_one);
   p2 = beta_two shifted -(point 0 of beta_two);
-  p3 = (point 0 of p1)--(0.16(point 1 of p1));
-  p4 = (point 0 of p2)--(4.42(point 1 of p2));
+  p3 = (point 0 of p1)--(2.55(point 1 of p1));
+  p4 = (point 0 of p2)--(2.72(point 1 of p2));
   p5 = p3 shifted (point 0 of beta_one);
   p6 = p4 shifted (point 0 of beta_two);
   
@@ -957,7 +957,7 @@ beginfig(18)  % 0.16 beta_1+4.42 beta_2 in graphite plane
     endfor
   endfor
 
-  % the basis for the iriginal third of a single ring
+  % the basis for the original third of a single ring
   save beta_one, beta_two; path beta_one, beta_two;
   beta_one = (point 3 of cell_path[0])--(point 2 of cell_path[0]); 
   beta_two = (point 3 of cell_path[0])--(point 4 of cell_path[0]);
@@ -968,8 +968,8 @@ beginfig(18)  % 0.16 beta_1+4.42 beta_2 in graphite plane
   save p; path p[];
   p1 = beta_one shifted -(point 0 of beta_one); % now starts at the origin
   p2 = beta_two shifted -(point 0 of beta_two);
-  p3 = (point 0 of p1)--(0.16(point infinity of p1)); % now 0.16 as long
-  p4 = (point 0 of p2)--(4.42(point infinity of p2));
+  p3 = (point 0 of p1)--(2.55(point infinity of p1)); % now 0.16 as long
+  p4 = (point 0 of p2)--(2.72(point infinity of p2));
   p5 = p3 shifted (point 0 of beta_one); % now back to start of beta_one
   p6 = p4 shifted (point 0 of beta_two);
   

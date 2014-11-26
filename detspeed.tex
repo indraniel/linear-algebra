@@ -157,16 +157,19 @@ $\text{\lstinline[style=inline]!factor!}\cdot\rho_{\text{\lstinline[style=inline
 on the rows below.
 For each of these rows below, 
 this involves operating on every entry in that row.
-That makes a triply-nested loop.
-As a result, this program has a running time that is something like the  
+That is a triply-nested loop.
+So this program has a running time that is something like the  
 cube of the number of rows in the matrix.
 (\textit{Comment.}
-We are glossing over some issues.
-For instance, we can worry that after a large number of 
-arithmetic operations the numbers grow so unwieldy that the time taken
-by the program is dominated by the time it takes to store and 
-retrieve the numbers.
-These considerations lie outside our scope.)
+We are glossing over issues.
+For example we may worry that even if the matrix entries start off
+fitting in a machine's register, after a few hundred 
+arithmetic operations they may become unwieldy, 
+so the time taken by the program
+is dominated by the time to store and 
+retrieve entries.
+However, development of a computation model is outside of
+our scope.)
 
 If we add this code at the bottom,
 \begin{lstlisting}
@@ -352,6 +355,21 @@ in practice we want the one with the best performance.
          \partsitem The determinant is $4$.
        \end{exparts}
      \end{answer}
+  \item The use by the timing routine of \lstinline[style=inline]!do_matrix!   
+    has a bug.
+    That routine does two things, generate a random matrix and 
+    then do \lstinline[style=inline]!gauss_method! on it, and the 
+    timing number returned is for the combination.
+    Produce code that times only the 
+    \lstinline[style=inline]!gauss_method! routine. 
+    \begin{answer}
+      You should build the matrix once and then time it being reduced
+      many times.
+      Note that \lstinline[style=inline]!gauss_method!, as written,
+      changes the input matrix, so be careful not to loop using 
+      the output of that routine or all the loops but the first will 
+      be on an echelon form matrix.
+    \end{answer}
   \item 
     What $\nbyn{10}$ array can you invent that takes your computer
     the longest time to reduce?
