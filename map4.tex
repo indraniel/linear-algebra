@@ -3381,37 +3381,46 @@ clearer idea then we will go with it.
           \end{equation*}
       \end{exparts}
     \end{answer}
-  \recommended \item
-    This table gives the number of hours of each 
-    type done by each worker, and the associated pay rates.
-    Use matrices to compute the wages due.
-    \begin{center}
-      \begin{tabular}[t]{l|cc}
-        \multicolumn{1}{c}{\ }  
-         &\multicolumn{1}{c}{\textit{regular}} 
-         &\multicolumn{1}{c}{\textit{overtime}}  \\
-        \cline{2-3}
-        Alan      &40        &12        \\
-        Betty     &35        &6         \\  
-        Catherine &40        &18         \\  
-        Donald    &28        &0         %\\  \cline{2-3}
-      \end{tabular}
-      \qquad
-      \begin{tabular}[t]{l|c}
-        \multicolumn{1}{c}{\ }   &\multicolumn{1}{c}{\textit{wage}}   \\
-        \cline{2-2}
-        regular   &$\$ 25.00$  \\
-        overtime  &$\$ 45.00$  %\\  \cline{2-2}
-      \end{tabular}
-    \end{center}
-    \textit{Remark.}
-    This illustrates that in practice
-    we often want to compute linear combinations of rows and
-    columns in a context where we really aren't interested in any
-    associated linear maps.
+  \recommended \item  Show how to use matrix multiplication to bring this matrix
+    to echelon form.
+    \begin{equation*}
+      \begin{mat}
+        1 &2 &1  &0   \\
+        2 &3 &1  &-1  \\
+        7 &11 &4 &-3
+      \end{mat}
+    \end{equation*}
     \begin{answer}
-      The pay due each person appears in the matrix product of the two
-      arrays. 
+      Multiply by $C_{1,2}(-2)$, then by~$C_{1,3}(-7)$, and then by~$C_{2,3}(-3)$,
+      paying attention to the right-to-left order.
+      \begin{multline*}
+        \begin{mat}
+          1  &0 &0 \\
+          0  &1 &0 \\
+          0  &-3 &1    
+        \end{mat}
+        \begin{mat}
+          1  &0 &0 \\
+          0  &1 &0 \\
+          -7 &0 &1    
+        \end{mat}
+        \begin{mat}
+          1 &0 &0 \\
+         -2 &1 &0 \\
+          0 &0 &1
+        \end{mat}
+          \begin{mat}
+            1 &2 &1  &0   \\
+            2 &3 &1  &-1  \\
+            7 &11 &4 &-3
+          \end{mat}                 \\
+        =
+          \begin{mat}
+            1 &2 &1  &0   \\
+            0 &-1 &-1  &-1  \\
+            0 &0  &0 &0
+          \end{mat}
+      \end{multline*}     
     \end{answer}
   \item 
     Find the product of this matrix with its transpose.
@@ -3453,9 +3462,9 @@ clearer idea then we will go with it.
         \index{matrix!adjacency} 
         of a map is the square matrix
         whose \( i,j \) entry is the number of roads from city \( i \)
-        to city \( j \).
-        Produce the incidence matrix of this map (take the cities in
-        alphabetical order).
+        to city \( j \) (all $(i,i)$ entries are~$0$).
+        Produce the adjacency matrix of this map, with the cities in
+        alphabetical order.
       \partsitem A matrix is 
         \definend{symmetric}\index{matrix!symmetric} 
         if it equals its transpose.
@@ -3489,6 +3498,194 @@ clearer idea then we will go with it.
           by trips involving two roads.
       \end{exparts}  
    \end{answer}
+  \recommended \item
+    This table gives the number of hours of each 
+    type done by each worker, and the associated pay rates.
+    Use matrices to compute the wages due.
+    \begin{center}
+      \begin{tabular}[t]{l|cc}
+        \multicolumn{1}{c}{\ }  
+         &\multicolumn{1}{c}{\textit{regular}} 
+         &\multicolumn{1}{c}{\textit{overtime}}  \\
+        \cline{2-3}
+        Alan      &40        &12        \\
+        Betty     &35        &6         \\  
+        Catherine &40        &18         \\  
+        Donald    &28        &0         %\\  \cline{2-3}
+      \end{tabular}
+      \qquad
+      \begin{tabular}[t]{l|c}
+        \multicolumn{1}{c}{\ }   &\multicolumn{1}{c}{\textit{wage}}   \\
+        \cline{2-2}
+        regular   &$\$ 25.00$  \\
+        overtime  &$\$ 45.00$  %\\  \cline{2-2}
+      \end{tabular}
+    \end{center}
+    \textit{Remark.}
+    This illustrates that in practice
+    we often want to compute linear combinations of rows and
+    columns in a context where we really aren't interested in any
+    associated linear maps.
+    \begin{answer}
+      The pay due each person appears in the matrix product of the two
+      arrays. 
+    \end{answer}
+  \item Express this nonsingular matrix as a product of elementary reduction
+  matrices.
+  \begin{equation*}
+    T=\begin{mat}
+      1 &2  &0 \\
+      2 &-1 &0 \\
+      3 &1 &2
+    \end{mat}
+  \end{equation*}
+  \begin{answer}
+    The Gauss-Jordan reduction is routine.
+    \begin{equation*}
+        \begin{mat}
+          1 &2  &0 \\
+          2 &-1 &0 \\
+          3 &1 &2
+        \end{mat}
+      \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
+      \grstep{-\rho_2+\rho_3}
+      \grstep[(1/2)\rho_3]{-(1/5)\rho_2}
+      \grstep{-2\rho_2+\rho_1}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        0 &0 &1
+      \end{mat}
+    \end{equation*}
+    Thus we know elementary reduction matrices $R_1,\ldots,R_6$ such that
+    $R_6\cdot R_5\cdots R_1\cdot T=I$.
+    Move the matrices to the other side, paying attention to order.
+    For instance, first multiply both sides from the left by $R_6^{-1}$
+    to get $(R_6^{-1}R_6)\cdot R_5\cdots R_1\cdot T=R_6^{-1}I$, 
+    which simplifies to $R_5\cdots R_1\cdot T=R_6^{-1}$, etc.
+    \begin{align*}
+      T=
+      &\begin{mat}
+        1 &0 &0 \\
+        -2 &1 &0 \\
+        0 &0 &1 
+      \end{mat}^{-1}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        -3 &0 &1 
+      \end{mat}^{-1}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        0 &-1 &1 
+      \end{mat}^{-1}          \\
+      &\qquad\cdot
+      \begin{mat}
+        1 &0 &0 \\
+        0 &-1/5 &0 \\
+        0 &0 &1 
+      \end{mat}^{-1}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        0 &0 &1/2 
+      \end{mat}^{-1}
+      \begin{mat}
+        1 &-2 &0 \\
+        0 &1 &0 \\
+        0 &0 &1 
+      \end{mat}^{-1}             
+    \end{align*}
+    Then just remember how to take the inverse of an elementary reduction 
+    matrix.
+    For instance, $C_{i,j}(k)^{-1}=C_{i,j}(-k)$.
+    \begin{equation*}
+      =
+      \begin{mat}
+        1 &0 &0 \\
+        2 &1 &0 \\
+        0 &0 &1
+      \end{mat}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        3 &0 &1
+      \end{mat}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        0 &1 &1
+      \end{mat}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &-5 &0 \\
+        0 &0 &1
+      \end{mat}
+      \begin{mat}
+        1 &0 &0 \\
+        0 &1 &0 \\
+        0 &0 &2
+      \end{mat}
+      \begin{mat}
+        1 &2 &0 \\
+        0 &1 &0 \\
+        0 &0 &1
+      \end{mat}
+    \end{equation*}    
+    \end{answer}
+  \item 
+    Express
+    \begin{equation*}
+      \begin{mat}[r]
+        1   &0  \\
+        -3  &3
+      \end{mat}
+    \end{equation*}
+    as the product of two elementary reduction matrices.
+    \begin{answer}
+      One way to produce this matrix from the identity is to use 
+      the column operations
+      of first multiplying the second column by three, and then adding the 
+      negative of the resulting second column to the first.
+      \begin{equation*}
+        \begin{mat}[r]
+          1  &0  \\
+          0  &1
+        \end{mat}
+        \grstep{}
+        \begin{mat}[r]
+          1  &0  \\
+          0  &3
+        \end{mat}
+        \grstep{}
+        \begin{mat}[r]
+          1  &0  \\
+          -3  &3
+        \end{mat}
+      \end{equation*}
+      In contrast with row operations, column operations are written from
+      left to right, so this matrix product expresses
+      doing the above two operations.
+      \begin{equation*}
+        \begin{mat}[r]
+          1  &0  \\
+          0  &3
+        \end{mat}
+        \begin{mat}[r]
+          1  &0  \\
+         -1  &1
+        \end{mat}
+      \end{equation*}
+      \textit{Remark.}
+      Alternatively, we could get the required matrix with row operations.
+      Starting with the identity, first adding the negative of the first 
+      row to the  second, and then multiplying the second row by three
+      will work.
+      Because we write successive row operations as matrix products from
+      right to left, doing these two row operations is expressed with:~the 
+      same matrix product.    
+    \end{answer}
   \recommended \item 
     Prove that the diagonal matrices form a subspace of
     \( \matspace_{\nbyn{n}} \).
@@ -3627,58 +3824,6 @@ clearer idea then we will go with it.
       of the products:~where \( G,H \) are equal-sized diagonal matrices,
       \( GH \) is all zeros except each that \( i,i \) entry is
       \( g_{i,i}h_{i,i} \).
-    \end{answer}
-  \item 
-    Write
-    \begin{equation*}
-      \begin{mat}[r]
-        1   &0  \\
-        -3  &3
-      \end{mat}
-    \end{equation*}
-    as the product of two elementary reduction matrices.
-    \begin{answer}
-      One way to produce this matrix from the identity is to use 
-      the column operations
-      of first multiplying the second column by three, and then adding the 
-      negative of the resulting second column to the first.
-      \begin{equation*}
-        \begin{mat}[r]
-          1  &0  \\
-          0  &1
-        \end{mat}
-        \grstep{}
-        \begin{mat}[r]
-          1  &0  \\
-          0  &3
-        \end{mat}
-        \grstep{}
-        \begin{mat}[r]
-          1  &0  \\
-          -3  &3
-        \end{mat}
-      \end{equation*}
-      In contrast with row operations, column operations are written from
-      left to right, so this matrix product expresses
-      doing the above two operations.
-      \begin{equation*}
-        \begin{mat}[r]
-          1  &0  \\
-          0  &3
-        \end{mat}
-        \begin{mat}[r]
-          1  &0  \\
-         -1  &1
-        \end{mat}
-      \end{equation*}
-      \textit{Remark.}
-      Alternatively, we could get the required matrix with row operations.
-      Starting with the identity, first adding the negative of the first 
-      row to the  second, and then multiplying the second row by three
-      will work.
-      Because we write successive row operations as matrix products from
-      right to left, doing these two row operations is expressed with:~the 
-      same matrix product.    
     \end{answer}
   \recommended \item 
     Show that if \( G \) has a row of zeros then \( GH \)
@@ -3843,7 +3988,7 @@ clearer idea then we will go with it.
        &=1
      \end{align*}  
     \end{answer}
-  \recommended \item
+  \item
     Give an example of two matrices of the same rank and size
     with squares of differing rank.
     \begin{answer}
@@ -4133,7 +4278,6 @@ clearer idea then we will go with it.
 We finish this section by considering how to represent the 
 inverse of a linear map.
 %</FunctionInverseReview0>
-
 %<*FunctionInverseReview1>
 We first recall some things about
 inverses. % \appendrefs{function inverses}\spacefactor=1000 

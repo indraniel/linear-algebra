@@ -588,6 +588,97 @@ with respect to some pair of bases.
           \end{equation*}
       \end{exparts}  
     \end{answer}
+  \item   For each space find the matrix changing a vector representation with 
+    respect to $B$ to one with respect to~$D$.
+    \begin{exparts}
+      \partsitem $V=\Re^3$, $B=\stdbasis_3$, 
+          $D=\sequence{\colvec{1 \\ 2 \\ 3},
+                   \colvec{1 \\ 1 \\ 1},
+                   \colvec{0 \\ 1 \\ -1}}$
+      \partsitem $V=\Re^3$,  
+        $B=\sequence{\colvec{1 \\ 2 \\ 3},
+                     \colvec{1 \\ 1 \\ 1},
+                     \colvec{0 \\ 1 \\ -1}}$,
+        $D=\stdbasis_3$
+      \partsitem $V=\polyspace_2$,
+        $B=\sequence{x^2, x^2+x, x^2+x+1}$,
+        $D=\sequence{2, -x, x^2}$
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem 
+          Start by computing the effect of the identity function 
+          on each element of the
+          starting basis~$B$.  Obviously this is the effect.
+          \begin{equation*}
+            \colvec{1 \\ 0 \\ 0}\mapsunder{\identity}\colvec{1 \\ 0 \\ 0}
+            \quad
+            \colvec{0 \\ 1 \\ 0}\mapsunder{\identity}\colvec{0 \\ 1 \\ 0}
+            \quad
+            \colvec{0 \\ 0 \\ 1}\mapsunder{\identity}\colvec{0 \\ 0 \\ 1}
+          \end{equation*}
+          Now represent the three outputs with respect to the ending basis.
+          \begin{equation*}
+            \rep{\colvec{1 \\ 0 \\ 0}}{D}=\colvec{-2/3 \\ 5/3 \\ -1/3}
+            \quad
+            \rep{\colvec{0 \\ 1 \\ 0}}{D}=\colvec{1/3 \\ -1/3 \\ 2/3}
+            \quad
+            \rep{\colvec{0 \\ 0 \\ 1}}{D}=\colvec{1/3 \\ -1/3 \\ -1/3}
+          \end{equation*}
+          Concatenate them into a basis.
+          \begin{equation*}
+            \rep{\identity}{B,D}=
+            \begin{mat}
+              -2/3 &1/3  &1/3  \\
+               5/3 &-1/3 &-1/3 \\
+              -1/3 &2/3  &-1/3
+            \end{mat}
+          \end{equation*}
+        \partsitem
+          One way to find this is to take the inverse of the prior matrix, 
+          since it 
+          converts bases in the other direction.
+          Alternatively, we can compute these three
+          \begin{equation*}
+            \rep{\colvec{1 \\ 2 \\ 3}}{\stdbasis_3}
+              =\colvec{1 \\ 2 \\ 3}
+            \quad
+            \rep{\colvec{1 \\ 1 \\ 1}}{\stdbasis_3}
+              =\colvec{1 \\ 1 \\ 1}
+            \quad
+            \rep{\colvec{0 \\ 1 \\ -1}}{\stdbasis_3}
+               =\colvec{0 \\ 1 \\ -1}
+          \end{equation*}
+          and put them in a matrix.
+          \begin{equation*}
+            \rep{\identity}{B,D}=
+            \begin{mat}
+              1 &1 &0 \\
+              2 &1 &1 \\
+              3 &1 &-1
+            \end{mat}
+          \end{equation*}
+        \partsitem
+          Representing $\identity(x^2)$, $\identity(x^2+x)$, and~$\identity(x^2+x+1)$
+          with respect to the ending basis gives this.
+          \begin{equation*}
+            \rep{x^2}{D}=\colvec{0 \\ 0 \\ 1}
+            \quad
+            \rep{x^2+x}{D}=\colvec{0 \\ -1 \\ 1}
+            \quad
+            \rep{x^2+x+1}{D}=\colvec{1/2 \\ -1 \\ 1}
+          \end{equation*}
+          Put them together.
+          \begin{equation*}
+            \rep{\identity}{B,D}=
+            \begin{mat}
+              0 &0 &1/2 \\
+              0 &-1 &-1 \\
+              1 &1  &1
+            \end{mat}
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
   \item 
     Find bases such that this matrix represents the identity map
     with respect to those bases.
@@ -1771,11 +1862,107 @@ Thus we can view any linear map as a projection.
       \end{equation*}
       \end{exparts} 
     \end{answer}
-  \recommended \item 
+  \item 
     What sizes are \( P \) and \( Q \) in the equation $\hat{H}=PHQ$?
     \begin{answer}
       Where \( H \) and \( \hat{H} \) are \( \nbym{m}{n} \), the
       matrix \( P \) is \( \nbyn{m} \) while \( Q \) is \( \nbyn{n} \).  
+    \end{answer}
+  \recommended \item Find the $P$ and~$Q$ to express $H$ via $PHQ$ 
+    as a block partial identity matrix.
+    \begin{equation*}
+      H=
+      \begin{mat}
+        2 &1  &1  \\
+        3 &-1 &0  \\
+        1 &3  &2 
+      \end{mat}
+    \end{equation*}
+    \begin{answer}
+      Gauss's Method gives this.
+      \begin{equation*}
+          \begin{mat}
+            2 &1  &1  \\
+            3 &-1 &0  \\
+            1 &3  &2 
+          \end{mat}
+          \grstep[-(1/2)\rho_1+\rho_3]{-(3/2)\rho_1+\rho_2}
+          \grstep{\rho_2+\rho_3}
+          \grstep[-(2/5)\rho_2]{(1/2)\rho_1}
+          \begin{mat}
+            1 &1/2  &1/2  \\
+            0 &1    &3/5  \\
+            0 &0    &0 
+          \end{mat}
+      \end{equation*}
+      Column operations complete the job of reaching the canonical form
+      for matrix equivalence.
+      \begin{equation*}
+        \grstep{-(3/5)\text{col}_2+\text{col}_3}
+        \grstep[-(1/5)\text{col}_1+\text{col}_3]{-(1/2)\text{col}_1+\text{col}_2}
+          \begin{mat}
+            1 &0    &0  \\
+            0 &1 &0  \\
+            0 &0  &0 
+          \end{mat}
+      \end{equation*}
+      Then these are the two matrices.
+      \begin{align*}
+        P&=
+        \begin{mat}
+          1 &0 &0 \\
+          0 &-2/5 &0 \\
+          0 &0 &1
+         \end{mat}
+        \begin{mat}
+          1/2 &0 &0 \\
+          0 &1 &0 \\
+          0 &0 &1
+         \end{mat}
+        \begin{mat}
+          1 &0 &0 \\
+          0 &1 &0 \\
+          0 &1 &1
+         \end{mat}
+        \begin{mat}
+          1    &0 &0 \\
+          0    &1 &0 \\
+          -1/2 &0 &1
+         \end{mat}
+        \begin{mat}
+          1    &0 &0 \\
+          -3/2 &1 &0 \\
+          0    &0 &1
+         \end{mat}                                 \\ 
+         &=
+         \begin{mat}
+           1/2   &0     &0 \\
+           3/5   &-2/5  &0 \\
+           -2    &1     &1
+         \end{mat}                              \\
+        Q&=
+        \begin{mat}
+          1 &0 &0 \\
+          0 &1 &-3/5 \\
+          0 &0 &1
+        \end{mat}
+        \begin{mat}
+          1 &-1/2 &0 \\
+          0 &1    &0 \\
+          0 &0    &1
+        \end{mat}
+        \begin{mat}
+          1 &0 &-1/5 \\
+          0 &1 &0 \\
+          0 &0 &1
+        \end{mat}
+        =
+        \begin{mat}
+          1 &1/2 &-1/5 \\
+          0 &1   &-3/5 \\
+          0 &0   &1
+        \end{mat}
+      \end{align*}      
     \end{answer}
   \recommended \item
     Use \nearbytheorem{th:CanonFormForMatEquiv} to show that a square matrix
