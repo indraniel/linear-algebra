@@ -2602,6 +2602,208 @@ And, we shall see how to find the matrix that represents a map's inverse.
          \partsitem One plus one equals two. 
       \end{exparts}
     \end{answer}
+  \recommended \item
+     Assume that each matrix represents a map $\map{h}{\Re^m}{\Re^n}$
+     with respect to the standard bases.
+     In each case, (i)~state $m$ and~$n$.
+     Then set up an augmented matrix with the given matrix on the left and
+     a vector representing a range space element on the right
+     (e.g., if the codomain is~$\Re^3$ then on the right put 
+     $a$, $b$, and $c$).
+     Perform Gauss-Jordan reduction.
+     Use that to 
+     (ii)~find $\rangespace{h}$ and $\rank(h)$ (and state whether the 
+     underlying map is onto),
+     and (iii)~find $\nullspace{h}$ and $\nullity(h)$
+     (and state whether the underlying map is one-to-one).
+     \begin{exparts}
+       \partsitem     $
+         \begin{mat}
+           2  &1  \\ 
+           -1 &3
+         \end{mat}$
+      \partsitem
+        $\begin{mat}
+          0  &1  &3  \\ 
+          2  &3  &4  \\
+         -2  &-1 &2 
+        \end{mat}$
+      \partsitem
+        $\begin{mat}
+          1  &1  \\ 
+          2  &1  \\
+          3  &1
+       \end{mat}$
+      \partsitem Verify that the map represented by this matrix
+        is an isomorphism.
+        \begin{equation*}
+          \begin{mat}
+            2  &1  &0  \\
+            3  &1  &1  \\
+            7  &2  &1
+          \end{mat}
+        \end{equation*}
+     \end{exparts}
+     \begin{answer}
+       \begin{exparts}
+         \partsitem
+           (i)~The dimension of the domain space is the number of columns~$m=2$.
+           The dimension of the codomain space is the number of rows~$n=2$.
+
+           For the rest, we consider this matrix-vector equation.
+           \begin{equation*}
+             \begin{mat}
+               2  &1  \\ 
+              -1  &3        
+             \end{mat}
+             \colvec{x \\ y}
+             =
+             \colvec{a \\ b}
+             \tag{$*$}
+           \end{equation*}
+           We solve for $x$ and~$y$.
+           \begin{equation*}
+             \begin{amat}{2}
+             2  &1 &a  \\ 
+             -1 &3 &b       
+             \end{amat}
+             \grstep{(1/2)\rho_1+\rho_2}
+             \grstep[(2/7)\rho_2]{(1/2)\rho_1}
+             \grstep{-(1/2)\rho_2+\rho_1}
+             \begin{amat}{2}
+               1  &0 &(3/7)a-(1/7)b  \\ 
+               0  &1 &(1/7)a+(2/7)b       
+             \end{amat}
+           \end{equation*}
+           (ii)~For all
+           \begin{equation*}
+             \colvec{a \\ b}\in\Re^2
+           \end{equation*}
+           in equation~($*$) the system has a solution, by the calculation.
+           So the range space is all of the codomain~$\rangespace{h}=\Re^2$.
+           The map's rank is the dimension of the range,~$2$.
+           The map is onto because the range space is all of the codomain.
+
+           (iii)~Again by the calculation, to find the nullspace,
+           setting $a=b=0$ in equation~($*$)
+           gives that $x=y=0$.
+           The null space is the trivial subspace of the domain.
+           \begin{equation*}
+             \nullspace{h}=\set{\colvec{0 \\ 0}}
+           \end{equation*}
+           The nullity is the dimension of that null space,~$0$.
+           The map is one-to-one because the null space is trivial. 
+         \partsitem
+            (i)~The dimension of the domain space is the number of 
+            matrix columns,~$m=3$,
+            and the dimension of the codomain space is the number of 
+            rows,~$n=3$.
+
+           The calculation is this. 
+            \begin{multline*}
+              \begin{amat}{3}
+                0  &1  &3  &a \\ 
+                2  &3  &4  &b \\
+               -2  &-1 &2  &c
+              \end{amat}
+              \grstep{\rho_1\leftrightarrow\rho_2}
+              \grstep{\rho_1+\rho_3}
+              \grstep{-2\rho_2+\rho_3}                 \\
+              \grstep{(1/2)\rho_1}
+              \grstep{-(3/2)\rho_2+\rho_1}
+              \begin{amat}{3}
+                1  &0 &-5/2 &-(3/2)a+(1/2)b  \\ 
+                0  &1 &3    &a  \\
+                0  &0 &0    &-2a+b+c      
+              \end{amat}
+            \end{multline*}
+            (ii)~There are codomain triples
+            \begin{equation*}
+              \colvec{a \\ b \\ c}\in\Re^3
+            \end{equation*}
+            for which the system does not have a solution,
+            specifically the system only has a solution if $-2a+b+c=0$.
+            \begin{equation*}
+              \rangespace{h}=\set{\colvec{a \\ b \\ c}\suchthat a=(b+c)/2}
+                            =\set{\colvec{1/2 \\ 1 \\ 0}b
+                                  +\colvec{1/2 \\ 0 \\ 1}c\suchthat b,c\in\Re} 
+            \end{equation*}
+            The map's rank is the range's dimension,~$2$.
+            The map is not onto because the range space is not all of the 
+            codomain.
+
+            (iii)~Setting $a=b=c=0$ in the calculation
+            gives infinitely many solutions.
+            Paramatrizing using the free variable~$z$ leads to this description
+            of the nullspace.
+            \begin{equation*}
+              \nullspace{h}=\set{\colvec{x \\ y \\ z}\suchthat 
+                               \text{$y=-3z$ and $x=(5/2)z$}}
+                           =\set{\colvec{5/2 \\ -3 \\ 1}z\suchthat z\in\Re}
+            \end{equation*}
+            The nullity is the dimension of that null space,~$1$.
+            The map is not one-to-one because the null space is not trivial. 
+          \partsitem
+            (i)~The domain has dimension $m=2$ while the codomain has 
+            dimension~$n=3$.
+            Here is the calculation.
+              \begin{equation*}
+                \begin{amat}{2}
+                  1  &1  &a \\ 
+                  2  &1  &b \\
+                  3  &1  &c
+                \end{amat}
+                \grstep[-3\rho_1+\rho_3]{-2\rho_1+\rho_2}
+                \grstep{-2\rho_2+\rho_3}
+                \grstep{-\rho_2}                 
+                \grstep{-\rho_2+\rho_1}
+                \begin{amat}{2}
+                  1  &0 &-a+b  \\ 
+                  0  &1 &2a-b  \\
+                  0  &0 &a-2b+c      
+                \end{amat}
+              \end{equation*}
+
+            (ii)~The range is this subspace of the codomain.
+            \begin{equation*}
+              \rangespace{h}=\set{\colvec{2b-c \\ b \\ c}\suchthat b,c\in\Re}
+                  =\set{\colvec{2 \\ 1 \\ 0}b+\colvec{-1 \\ 0 \\ 1}c\suchthat b,c\in\Re}
+            \end{equation*}
+            The rank is~$2$.
+            The map is not onto.
+
+            (iii)~The null space is the trivial subspace of the domain.
+            \begin{equation*}
+              \nullspace{h}=\set{\colvec{x \\ y}=\colvec{0 \\ 0}}
+            \end{equation*}
+            The nullity is~$0$.
+            The map is one-to-one.
+        \partsitem  Here, (i)~the domain and codomain are each of dimension~$3$.
+           To show (ii) and~(iii), that the map is an isomorphism, 
+           we must show it is both onto and one-to-one.
+           For that we don't need to augment the matrix with $a$, $b$, 
+           and~$c$; this calculation
+             \begin{multline*}
+               \begin{mat}
+                 2  &1  &0 \\ 
+                 3  &1  &1 \\
+                 7  &2  &1
+               \end{mat}
+               \grstep[-(7/2)\rho_1+\rho_3]{-(3/2)\rho_1+\rho_2}
+               \grstep{-3\rho_2+\rho_3}
+               \grstep[-2\rho_2 \\ -(1/2)\rho_3]{(1/2)\rho_1}                 
+               \grstep{2\rho_3+\rho_2}                          \\
+               \grstep{-(1/2)\rho_2+\rho_1}
+               \begin{mat}
+                 1  &0 &0  \\ 
+                 0  &1 &0  \\
+                 0  &0 &1      
+               \end{mat}
+             \end{multline*}
+          gives that for each codomain vector there is one and only one 
+          associated domain vector.
+       \end{exparts}
+     \end{answer}
   \item This is an alternative proof of 
     \nearbylemma{le:NonsingMatIffNonsingMap}.
     Given an $\nbyn{n}$ matrix $H$,

@@ -1396,6 +1396,179 @@ explore this operation.
       and with this, the substitution is 
       $\vec{d}=H\vec{x}=H(G\vec{y})=(HG)\vec{y}$.
     \end{answer}
+  \recommended \item   Consider the two linear functions 
+    $\map{h}{\Re^3}{\polyspace_2}$
+    and
+    $\map{g}{\polyspace_2}{\matspace_{\nbyn{2}}}$
+    given as here.
+    \begin{equation*}
+      \colvec{a \\ b \\ c}\mapsto (a+b)x^2+(2a+2b)x+c
+      \qquad
+      px^2+qx+r\mapsto
+      \begin{mat}
+        p &p-2q \\
+        q &0
+      \end{mat}
+    \end{equation*}
+    Use these bases for the spaces.
+    \begin{gather*}
+      B=\sequence{\colvec{1 \\ 1 \\ 1}, 
+                  \colvec{0 \\ 1 \\ 1}, 
+                  \colvec{0 \\ 0 \\ 1}}
+     \qquad
+     C=\sequence{1+x,1-x,x^2}
+     \\
+     D=\sequence{
+       \begin{mat}
+         1 &0 \\
+         0 &0
+       \end{mat},
+       \begin{mat}
+         0 &2 \\
+         0 &0
+       \end{mat},
+       \begin{mat}
+         0 &0 \\
+         3 &0
+       \end{mat},
+       \begin{mat}
+         0 &0 \\
+         0 &4
+       \end{mat}}
+    \end{gather*}
+    \begin{exparts}
+      \partsitem Give the formula for the composition map 
+        $\map{\composed{g}{h}}{\Re^3}{\matspace_{\nbyn{2}}}$ derived
+        directly from the above definition. 
+      \partsitem Represent $h$ and~$g$ with respect to the appropriate bases.
+      \partsitem Represent the map $\composed{g}{h}$ computed in the first part 
+        with respect to the appropriate bases.
+      \partsitem Check that the product of the two matrices from the second 
+        part is the matrix from the third part.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          Following the definitions gives this.
+          \begin{align*}
+            \colvec{a \\ b \\ c}
+            &\mapsto 
+            (a+b)x^2+(2a+2b)x+c                   \\
+            &\mapsto
+            \begin{mat}
+              a+b &(a+b)-2(2a+2b) \\
+              2a+2b &0
+            \end{mat}    
+            =
+            \begin{mat}
+              a+b   &-3a-3b  \\
+              2a+2b &0
+            \end{mat}    
+          \end{align*}
+        \partsitem
+          Because
+          \begin{equation*}
+            \colvec{1 \\ 1 \\ 1}\mapsto 2x^2+4x+1
+            \quad
+            \colvec{0 \\ 1 \\ 1}\mapsto x^2+2x+1
+            \quad
+            \colvec{0 \\ 0 \\ 1}\mapsto 0x^2+0x+1   
+          \end{equation*}
+          we get this representation for~$h$.
+          \begin{equation*}
+            \rep{h}{B,C}
+            =
+            \begin{mat}
+              5/2 &3/2  &1/2  \\ 
+             -3/2 &-1/2 &1/2  \\
+              2   &1    &0
+            \end{mat}
+          \end{equation*}
+          Similarly, because
+          \begin{equation*}
+            1+x\mapsto
+            \begin{mat}
+              0 &-2 \\
+              1 &0
+            \end{mat}
+            \quad
+            1-x\mapsto
+            \begin{mat}
+              0 &2 \\
+              -1 &0
+            \end{mat}
+            \quad
+            x^2\mapsto
+            \begin{mat}
+              1 &1 \\
+              0 &0
+            \end{mat}
+          \end{equation*}
+          this is the representation of~$g$.
+          \begin{equation*}
+            \rep{g}{C,D}=
+            \begin{mat}
+              0  &0    &1  \\
+             -1  &1    &1/2 \\
+             1/3 &-1/3 &0   \\
+              0  &0    &0
+            \end{mat}
+          \end{equation*}
+        \partsitem
+          The action of $\composed{g}{h}$ on the domain basis is this.
+          \begin{equation*}
+            \colvec{1 \\ 1 \\ 1}\mapsto 
+              \begin{mat}
+                2 &-6 \\
+                4 &0
+              \end{mat}
+            \quad
+            \colvec{0 \\ 1 \\ 1}\mapsto
+              \begin{mat}
+                1 &-3 \\
+                2 &0
+              \end{mat}
+            \quad
+            \colvec{0 \\ 0 \\ 1}\mapsto
+              \begin{mat}
+                0 &0 \\
+                0 &0
+              \end{mat}
+          \end{equation*}
+          We have this.
+          \begin{equation*}
+            \rep{\composed{g}{h}}{B,D}=
+            \begin{mat}
+               2   &1    &0  \\  
+              -3   &-3/2 &0  \\
+             4/3   &2/3  &0  \\
+               0   &0    &0
+            \end{mat}
+          \end{equation*}
+        \partsitem 
+          The matrix multiplication is routine, just take care with the order.
+          \begin{equation*}
+            \begin{mat}
+              0  &0    &1  \\
+             -1  &1    &1/2 \\
+             1/3 &-1/3 &0   \\
+              0  &0    &0
+            \end{mat}
+            \begin{mat}
+              5/2 &3/2  &1/2  \\ 
+             -3/2 &-1/2 &1/2  \\
+              2   &1    &0
+            \end{mat}
+            =        
+            \begin{mat}
+               2   &1    &0  \\  
+              -3   &-3/2 &0  \\
+             4/3   &2/3  &0  \\
+               0   &0    &0
+           \end{mat}
+          \end{equation*}
+      \end{exparts}
+    \end{answer}
   \item 
     As \nearbydefinition{def:MatMult} points out, the matrix product
     operation generalizes the dot product.
@@ -1517,7 +1690,7 @@ explore this operation.
       It would not represent linear map composition; 
       \nearbytheorem{th:MatMultRepComp} would fail.  
     \end{answer}
-  \recommended \item \label{exer:NicePropsMatMult} 
+  \item \label{exer:NicePropsMatMult} 
     \begin{exparts}
       \partsitem Prove that $H^pH^q=H^{p+q}$ and $(H^p)^q=H^{pq}$ 
         for positive integers \( p,q \).

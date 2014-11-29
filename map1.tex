@@ -676,6 +676,93 @@ partitions the collection of vector spaces.
           &=r\cdot f_1(c_1x+c_2y+c_3z)
       \end{align*}
     \end{answer}
+  \item Verify that this map is an isomorphism: 
+    $\map{h}{\Re^4}{\matspace_{\nbyn{2}}}$ given by
+    \begin{equation*}
+      \colvec{a \\ b \\ c \\ d}
+      \mapsto
+      \begin{mat}
+        c  &a+d \\
+        b  &d
+      \end{mat}
+    \end{equation*}
+    \begin{answer}
+      We first verify that $h$ is one-to-one.
+      To do this we will show that $h(\vec{v}_1)=h(\vec{v}_2)$ implies that 
+      $\vec{v}_1=\vec{v}_2$.
+      So assume that
+      \begin{equation*}
+          h(\vec{v}_1)
+          =
+          h(\colvec{a_1 \\ b_1 \\ c_1 \\ d_1})
+          =
+          h(\colvec{a_2 \\ b_2 \\ c_2 \\ d_2})
+          =h(\vec{v}_2)
+      \end{equation*}
+      which gives
+      \begin{equation*}
+          \begin{mat}
+            c_1  &a_1+d_1 \\
+            b_1  &d_1
+          \end{mat}
+          =
+          \begin{mat}
+            c_2  &a_2+d_2 \\
+            b_2  &d_2
+          \end{mat}
+      \end{equation*}
+      from which we conclude that 
+      $c_1=c_2$ (by the upper-left entries),
+      $b_1=b_2$ (by the lower-left entries),
+      $d_1=d_2$ (by the lower-right entries),
+      and with this last we get $a_1=a_2$ (by the upper right).
+      Therefore $\vec{v}_1=\vec{v}_2$.
+
+      Next we will show that the map is onto, that every member of the codomain
+      $\matspace_{\nbyn{2}}$ is the image of some four-tall member of the domain.
+      So, given
+      \begin{equation*}
+          \vec{w}=
+          \begin{mat}
+            m  &n \\
+            p  &q
+          \end{mat}
+          \in\matspace_{\nbyn{2}}
+      \end{equation*}
+      observe that it is the image of this domain vector.
+      \begin{equation*}
+        \vec{v}=
+        \colvec{n-q \\ p \\ m \\ q}
+      \end{equation*}
+
+      To finish we verify that the map preserves linear combinations.
+      By \nearbylemma{le:PresStructIffPresCombos} this will show that the
+      map preserves the operations.
+      \begin{align*}
+          h(r_1\cdot\colvec{a_1 \\ b_1 \\ c_1 \\ d_1}
+            +
+            r_2\cdot\colvec{a_2 \\ b_2 \\ c_2 \\ d_2})
+          &=h(\colvec{r_1a_1+r_2a_2 \\ r_1b_1+r_2b_2 \\ r_1c_1+r_2c_2 \\ r_1d_1+r_2d_2})  \\
+          &=
+          \begin{mat}
+             r_1c_1+r_2c_2 &(r_1a_1+r_2a_2)+(r_1d_1+r_2d_2)  \\
+             r_1b_1+r_2b_2 &r_1d_1+r_2d_2
+          \end{mat}                               \\
+          &=
+          r_1\begin{mat}
+             c_1 &a_1+d_1  \\
+             b_1 &d_1
+          \end{mat}                               
+          +
+          r_2\begin{mat}
+             c_2 &a_2+d_2  \\
+             b_2 &d_2
+          \end{mat}                               \\
+         &=r_1\cdot h(\colvec{a_1 \\ b_1 \\ c_1 \\ d_1})
+            +
+            r_2\cdot h(\colvec{a_2 \\ b_2 \\ c_2 \\ d_2})
+      \end{align*}      
+    \end{answer}
   \recommended \item 
    Decide whether each map is an isomorphism
    (if it is an isomorphism then prove it and if it isn't then

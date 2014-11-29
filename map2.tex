@@ -613,7 +613,8 @@ is more fruitful and more central to progress.
       \end{exparts*}   
     \end{answer}
   \recommended \item
-    Show that these two maps are homomorphisms.
+    Show that these are homomorphisms.
+    Are they inverse to each other?
     \begin{exparts}
       \partsitem \( \map{d/dx}{\polyspace_3}{\polyspace_2} \)
         given by \( a_0+a_1x+a_2x^2+a_3x^3 \) maps to
@@ -621,7 +622,6 @@ is more fruitful and more central to progress.
       \partsitem \( \map{\int}{\polyspace_2}{\polyspace_3} \) given by
         \( b_0+b_1x+b_2x^2 \) maps to \( b_0x+(b_1/2)x^2+(b_2/3)x^3 \)
     \end{exparts}
-    Are these maps inverse to each other?
     \begin{answer}
       The check that each is a homomorphisms is routine.
       Here is the check for the differentiation map.
@@ -681,6 +681,51 @@ is more fruitful and more central to progress.
       Verification that each is a homomorphism is straightforward.
       (The last one, of course, is the zero transformation on $\Re^3$.)  
      \end{answer}
+  \item Verify that each map is a homomorphism.
+    \begin{exparts}
+      \partsitem $\map{h}{\polyspace_3}{\Re^2}$ given by
+        \begin{equation*}
+          ax^2+bx+c\mapsto \colvec{a+b \\ a+c}
+        \end{equation*}
+      \partsitem $\map{f}{\Re^2}{\Re^3}$ given by 
+        \begin{equation*}
+          \colvec{x \\ y}\mapsto\colvec{0 \\ x-y \\ 3y} 
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          This verifies that the map preserves linear combinations.
+          By \nearbylemma{le:HomoPreserveLinCombo} that suffices to show that 
+          it is a homomorphism.
+          \begin{multline*}
+            h(\,d_1(a_1x^2+b_1x+c_1)+d_2(a_2x^2+b_2x+c_2)\,)      \\
+             \begin{aligned}
+             &=h((d_1a_1+d_2a_2)x^2+(d_1b_1+d_2b_2)x+(d_1c_1+d_2c_2))  \\
+             &=\colvec{(d_1a_1+d_2a_2)+(d_1b_1+d_2b_2) \\ 
+             (d_1a_1+d_2a_2)+(d_1c_1+d_2c_2)} \\
+             &=\colvec{d_1a_1+d_1b_1 \\  d_1a_1+d_1c_1}+
+                 \colvec{d_2a_2+d_2b_2 \\  d_2a_2+d_2c_2}  \\
+             &=d_1\colvec{a_1+b_1 \\  a_1+c_1}+
+                 d_2\colvec{a_2+b_2 \\  a_2+c_2}  \\
+            &=d_1\cdot h(a_1x^2+b_1x+c_1)+d_2\cdot h(a_2x^2+b_2x+c_2)
+            \end{aligned}
+          \end{multline*}
+        \partsitem
+          It preserves linear combinations.
+          \begin{align*}
+            f(\,a_1\colvec{x_1 \\ y_1}+a_2\colvec{x_2 \\ y_2}\,)
+              &=f(\,\colvec{a_1x_1+a_2x_2 \\ a_1y_1+a_2y_2}\,)  \\
+              &=\colvec{0 \\ (a_1x_1+a_2x_2)-(a_1y_1+a_2y_2) \\ 
+              3(a_1y_1+a_2y_2) }  \\
+              &=a_1\colvec{0 \\ x_1-y_1 \\ 3y_1}
+                 +a_2\colvec{0 \\ x_2-y_2 \\ 3y_2}  \\
+              &=a_1f(\colvec{x_1 \\ y_1})+a_2f(\colvec{x_2 \\ y_2})
+          \end{align*}
+      \end{exparts}
+    \end{answer}
+
+
   \item 
     Show that, while the maps from \nearbyexample{exam:TwoMapsHomoNotIso}
     preserve linear operations, they are not isomorphisms.
@@ -2097,8 +2142,41 @@ point and the map is an isomorphism between the domain and the range.
             range space because of the constant term.
       \end{exparts}
     \end{answer}
+  \item Find the range space and the rank of each homomorphism.
+    \begin{exparts}
+      \partsitem
+        $\map{h}{\polyspace_3}{\Re^2}$ given by
+        \begin{equation*}
+           ax^2+bx+c\mapsto \colvec{a+b \\ a+c}
+        \end{equation*}
+      \partsitem $\map{f}{\Re^2}{\Re^3}$ given by 
+        \begin{equation*}
+          \colvec{x \\ y}\mapsto\colvec{0 \\ x-y \\ 3y} 
+        \end{equation*}     
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          The range of $h$ is all of the codomain~$\Re^2$ because given 
+          \begin{equation*}
+            \colvec{x \\ y}\in\Re^2
+          \end{equation*}
+          it is the image under~$h$ of the domain vector $0x^2+bx+c$.
+          So the rank of~$h$ is~$2$.
+        \partsitem
+          The range is the $yz$~plane.  Any 
+          \begin{equation*}
+            \colvec{0 \\ a \\ b}
+          \end{equation*}
+          is the image under~$f$ of this domain vector.
+          \begin{equation*}
+            \colvec{a+b/3  \\ b/3}
+          \end{equation*}
+          So the rank of the map is~$2$.
+      \end{exparts}
+    \end{answer}
   \recommended \item
-    Find the null space, nullity, range space, and rank of each map.
+    Find the range space and rank of each map.
     \begin{exparts}
       \partsitem \( \map{h}{\Re^2}{\polyspace_3} \) given by
         \begin{equation*}
@@ -2124,20 +2202,40 @@ point and the map is an isomorphism between the domain and the range.
     \end{exparts}
     \begin{answer}
       \begin{exparts}
-        \partsitem The null space is
-          \begin{equation*}
-            \nullspace{h}
-              =\set{\colvec{a \\ b}\in\Re^2\suchthat 
-                                    a+ax+ax^2+0x^3=0+0x+0x^2+0x^3}
-              =\set{\colvec{0 \\ b}\suchthat b\in\Re}
-          \end{equation*}
-          while the range space is
+        \partsitem The range space is
           \begin{equation*}
             \rangespace{h}
             =\set{a+ax+ax^2\in\polyspace_3\suchthat a,b\in\Re}
             =\set{a\cdot(1+x+x^2)\suchthat a\in\Re}
           \end{equation*}
-          and so the nullity is one and the rank is one.
+          and so the rank is one.
+        \partsitem The range space
+          \begin{equation*}
+            \rangespace{h}=
+             \set{a+d\suchthat a,b,c,d\in\Re}
+          \end{equation*}
+          is all of $\Re$ (we can get any real number by
+          taking $d$ to be $0$ and taking $a$ to be the desired number).
+          Thus, the rank is one.
+        \partsitem The range space is 
+          $\rangespace{h}=\set{r+sx^2\suchthat r,s\in\Re}$.
+          The rank is two.
+        \partsitem The range space is the trivial subspace of \( \Re^4 \) 
+          so the rank is zero.
+      \end{exparts}  
+    \end{answer}
+  \recommended \item
+    For each linear map in the prior exercise, find the null space and nullity.
+    \begin{answer}
+      \begin{exparts}
+        \partsitem The null space is
+          \begin{align*}
+            \nullspace{h}
+              &=\set{\colvec{a \\ b}\in\Re^2\suchthat 
+                                    a+ax+ax^2+0x^3=0+0x+0x^2+0x^3}  \\
+              &=\set{\colvec{0 \\ b}\suchthat b\in\Re}
+          \end{align*}
+        and so the nullity is one.
         \partsitem The null space is this.
           \begin{equation*}
             \nullspace{h}
@@ -2150,37 +2248,16 @@ point and the map is an isomorphism between the domain and the range.
                       c  &d
                    \end{mat} \suchthat b,c,d\in\Re }
           \end{equation*}
-          The range space
-          \begin{equation*}
-            \rangespace{h}=
-             \set{a+d\suchthat a,b,c,d\in\Re}
-          \end{equation*}
-          is all of $\Re$ (we can get any real number by
-          taking $d$ to be $0$ and taking $a$ to be the desired number).
-          Thus, the nullity is three and the rank is one.
-        \partsitem The null space is
-          \begin{equation*}
-            \nullspace{h}=\set{\begin{mat}
-                                 a     &b  \\
-                                 c     &d
-                               \end{mat} \suchthat 
-                                 \text{$a+b+c=0$ and $d=0$}}
-                         =\set{\begin{mat}
-                                 -b-c  &b  \\
-                                  c    &0
-                               \end{mat} \suchthat b,c\in\Re }
-          \end{equation*}
-          while the range space is 
+          Thus, the nullity is three.
+        \partsitem The range space is 
           $\rangespace{h}=\set{r+sx^2\suchthat r,s\in\Re}$.
-          Thus, the nullity is two and the rank is two.
-        \partsitem The null space is all of \( \Re^3 \) 
-          so the nullity is three.
-          The range space is the trivial subspace of \( \Re^4 \) so the rank
-          is zero.
+          Thus, the rank is two.
+        \partsitem The range space is the trivial subspace of \( \Re^4 \) 
+          so the rank is zero.
       \end{exparts}  
     \end{answer}
   \recommended \item 
-    Find the nullity of each map.
+    Find the nullity of each map below.
     \begin{exparts*}
       \partsitem \( \map{h}{\Re^5}{\Re^8} \) of rank five
       \partsitem \( \map{h}{\polyspace_3}{\polyspace_3} \) of rank one
