@@ -750,6 +750,44 @@ for any matrix there is an associated linear map.
           is the desired representation.
       \end{exparts}  
     \end{answer}
+  \item Represent the homomorphism $\map{h}{\Re^3}{\Re^2}$ given by this formula
+    and with respect to these bases.
+    \begin{equation*}
+      \colvec{x \\ y \\ z}\mapsto\colvec{x+y \\ x+z}
+      \qquad
+       B=\sequence{\colvec{1 \\ 1 \\ 1},
+                   \colvec{1 \\ 1 \\ 0},
+                   \colvec{1 \\ 0 \\ 0}}
+       \quad
+          D=\sequence{\colvec{1 \\ 0},
+                  \colvec{0 \\ 2}}
+    \end{equation*}
+    \begin{answer}
+      The action of the map on the domain's basis vectors is this.
+      \begin{equation*}
+          \colvec{1 \\ 1 \\ 1}\mapsto\colvec{2 \\ 2}
+          \quad
+          \colvec{1 \\ 1 \\ 0}\mapsto\colvec{2 \\ 1}
+          \quad
+          \colvec{1 \\ 0 \\ 0}\mapsto\colvec{1 \\ 1}
+      \end{equation*}
+      Represent those with respect to the codomain's basis.
+      \begin{equation*}
+        \rep{\colvec{2 \\ 2}}{D}=\colvec{2 \\ 1}_D
+        \quad
+        \rep{\colvec{2 \\ 1}}{D}=\colvec{2 \\ 1/2}_D
+        \quad
+        \rep{\colvec{1 \\ 1}}{D}=\colvec{1 \\ 1/2}_D
+      \end{equation*}
+      Concatenate them together into a matrix.
+      \begin{equation*}
+        \rep{h}{B,D}=
+        \begin{mat}
+          2 &2   &1 \\
+          1 &1/2 &1/2
+        \end{mat}
+      \end{equation*}      
+    \end{answer}
   \recommended \item  
     Let \( \map{d/dx}{\polyspace_3}{\polyspace_3} \) be the derivative
     transformation.
@@ -2603,13 +2641,13 @@ And, we shall see how to find the matrix that represents a map's inverse.
       \end{exparts}
     \end{answer}
   \recommended \item
-     Assume that each matrix represents a map $\map{h}{\Re^m}{\Re^n}$
+     Take each matrix to represent $\map{h}{\Re^m}{\Re^n}$
      with respect to the standard bases.
-     In each case, (i)~state $m$ and~$n$.
+     For each (i)~state $m$ and~$n$.
      Then set up an augmented matrix with the given matrix on the left and
      a vector representing a range space element on the right
-     (e.g., if the codomain is~$\Re^3$ then on the right put 
-     $a$, $b$, and $c$).
+     (e.g., if the codomain is~$\Re^3$ then in the right-hand column put 
+     the three entries $a$, $b$, and $c$).
      Perform Gauss-Jordan reduction.
      Use that to 
      (ii)~find $\rangespace{h}$ and $\rank(h)$ (and state whether the 
@@ -2634,15 +2672,6 @@ And, we shall see how to find the matrix that represents a map's inverse.
           2  &1  \\
           3  &1
        \end{mat}$
-      \partsitem Verify that the map represented by this matrix
-        is an isomorphism.
-        \begin{equation*}
-          \begin{mat}
-            2  &1  &0  \\
-            3  &1  &1  \\
-            7  &2  &1
-          \end{mat}
-        \end{equation*}
      \end{exparts}
      \begin{answer}
        \begin{exparts}
@@ -2778,6 +2807,67 @@ And, we shall see how to find the matrix that represents a map's inverse.
             \end{equation*}
             The nullity is~$0$.
             The map is one-to-one.
+       \end{exparts}
+     \end{answer}
+  \item Use the method from the prior exercise on each.
+    \begin{exparts}
+      \partsitem
+        $\begin{mat}
+          1 &0 &-1 \\
+          2 &1 &0  \\
+          2 &2 &2
+        \end{mat}$
+      \partsitem Verify that the map represented by this matrix
+        is an isomorphism.
+        \begin{equation*}
+          \begin{mat}
+            2  &1  &0  \\
+            3  &1  &1  \\
+            7  &2  &1
+          \end{mat}
+        \end{equation*}
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          Here is the Gauss-Jordan reduction.
+          \begin{align*}
+            \begin{amat}{3}
+                1 &0 &-1 &a \\
+                2 &1 &0  &b \\
+                2 &2 &2  &c  
+            \end{amat}
+            &\grstep[-2\rho_1+\rho_3]{-2\rho_1+\rho_2}
+            \begin{amat}{3}
+                1 &0 &-1 &a \\
+                0 &1 &2  &-2a+b \\
+                0 &2 &4  &-2a+c  
+            \end{amat}                                    \\
+            &\grstep{-2\rho_2+\rho_3}
+            \begin{amat}{3}
+                1 &0 &-1 &a \\
+                0 &1 &2  &-2a+b \\
+                0 &0 &0  &2a-2b+c  
+            \end{amat}
+          \end{align*}
+          (i)~The dimensions are $m=n=3$.
+          (ii)~The range space is the set containing all of the members 
+          of the codomain 
+          for which this system has a solution.
+          \begin{equation*}
+            \rangespace{h}=\set{\colvec{b-(1/2)c \\ b \\ c}\suchthat b,c\in\Re}
+          \end{equation*}
+          The rank is 2.
+          Because the rank is less than the dimension~$n=3$ of the codomain,
+          the map is not onto.
+      
+          (iii)~The null space is the set of members of the domain that map to 
+          $a=0$, $b=0$, and~$c=0$.
+          \begin{equation*}
+            \nullspace{h}=\set{\colvec{z \\ -2z \\ z}\suchthat z\in\Re}
+          \end{equation*}
+          The nullity is~$1$.
+          Because the nullity is not~$0$ the map is not one-to-one.
         \partsitem  Here, (i)~the domain and codomain are each of dimension~$3$.
            To show (ii) and~(iii), that the map is an isomorphism, 
            we must show it is both onto and one-to-one.
@@ -2802,8 +2892,8 @@ And, we shall see how to find the matrix that represents a map's inverse.
              \end{multline*}
           gives that for each codomain vector there is one and only one 
           associated domain vector.
-       \end{exparts}
-     \end{answer}
+      \end{exparts}
+    \end{answer}
   \item This is an alternative proof of 
     \nearbylemma{le:NonsingMatIffNonsingMap}.
     Given an $\nbyn{n}$ matrix $H$,

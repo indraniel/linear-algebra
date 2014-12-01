@@ -1868,6 +1868,123 @@ Thus we can view any linear map as a projection.
       Where \( H \) and \( \hat{H} \) are \( \nbym{m}{n} \), the
       matrix \( P \) is \( \nbyn{m} \) while \( Q \) is \( \nbyn{n} \).  
     \end{answer}
+  \recommended \item
+    Consider the spaces $V=\polyspace_2$ and~$W=\matspace_{\nbyn{2}}$, 
+    with these bases.
+    \begin{gather*}
+      B=\sequence{1, 1+x, 1+x^2}
+      \qquad
+      D=\sequence{
+        \begin{mat}
+          0 &0 \\
+          0 &1
+        \end{mat},
+        \begin{mat}
+          0 &0 \\
+          1 &1
+        \end{mat},
+        \begin{mat}
+          0 &1 \\
+          1 &1
+        \end{mat},
+        \begin{mat}
+          1 &1 \\
+          1 &1
+        \end{mat}
+         }                        \\
+      \hat{B}=\sequence{1, x, x^2}
+      \qquad
+      \hat{D}=\sequence{
+        \begin{mat}
+          -1 &0 \\
+          0 &0
+        \end{mat},
+        \begin{mat}
+          0 &-1 \\
+          0 &0
+        \end{mat},
+        \begin{mat}
+          0 &0 \\
+          1 &0
+        \end{mat},
+        \begin{mat}
+          0 &0 \\
+          0 &1
+        \end{mat}
+         }
+    \end{gather*}
+    We will find $P$ and~$Q$ to convert the representation of a map with 
+    respect to $B,D$ to one with respect to $\hat{B},\hat{D}$
+    \begin{exparts}
+      \partsitem Draw the appropriate arrow diagram.
+      \partsitem Compute $P$ and~$Q$.
+    \end{exparts}
+    \begin{answer}
+      \begin{exparts}
+        \partsitem
+          For the equation $\hat{H}=PHQ$ this is the arrow diagram.
+          \begin{equation*}
+            \begin{CD}
+              V_{\wrt{B}}                   @>h>H>        W_{\wrt{D}}       \\
+              @V{\text{\scriptsize$\identity$}} VV      @V{\text{\scriptsize$\identity$}} VV \\
+              V_{\wrt{\hat{B}}}             @>h>\hat{H}>   W_{\wrt{\hat{D}}}
+            \end{CD}
+          \end{equation*}
+        \partsitem
+          We want $P=\rep{\identity}{\hat{B},B}$ and~$Q=\rep{\identity}{D,\hat{D}}$.
+          For $P$ we do these calculations (done here by eye).
+          \begin{equation*}
+            \rep{\identity(1)}{B}=\colvec{1 \\ 0 \\ 0}
+            \quad
+            \rep{\identity(x)}{B}=\colvec{-1 \\ 1 \\ 0}
+            \quad
+            \rep{\identity(x^2)}{B}=\colvec{-1 \\ 0 \\ 1}
+          \end{equation*}
+          These calcuations give $Q$.
+          \begin{multline*}
+            \rep{\identity(
+              \begin{mat}
+                0 &0 \\
+                0 &1
+              \end{mat})}{\hat{D}}=\colvec{0 \\ 0 \\ 0 \\ 1} 
+            \quad
+            \rep{\identity(    
+              \begin{mat}
+                0 &0 \\
+                1 &1
+              \end{mat})}{\hat{D}}=\colvec{0 \\ 0 \\ 1 \\ 1} 
+            \\
+            \rep{\identity(    
+              \begin{mat}
+                0 &1 \\
+                1 &1
+              \end{mat})}{\hat{D}}=\colvec{0 \\ -1 \\ 1 \\ 1} 
+            \rep{\identity(    
+              \begin{mat}
+                1 &1 \\
+                1 &1
+              \end{mat})}{\hat{D}}=\colvec{-1 \\ -1 \\ 1 \\ 1} 
+          \end{multline*}
+          This is the answer.
+          \begin{equation*}
+            P=\begin{mat}
+              1 &-1 &-1 \\
+              0 &1  &0  \\
+              0 &0  &1
+            \end{mat}
+            \qquad
+            Q=
+            \begin{mat}
+              0 &0 &0  &-1 \\
+              0 &0 &-1 &-1  \\
+              0 &1 &1  &1  \\
+              1 &1 &1  &1
+            \end{mat}
+          \end{equation*}      
+      \end{exparts}
+    \end{answer}
+
+
   \recommended \item Find the $P$ and~$Q$ to express $H$ via $PHQ$ 
     as a block partial identity matrix.
     \begin{equation*}
@@ -2010,7 +2127,7 @@ Thus we can view any linear map as a projection.
     \begin{answer}
       Only a zero matrix has rank zero.  
     \end{answer}
-  \recommended \item \label{exer:MatEqIsEqRel}
+  \item \label{exer:MatEqIsEqRel}
     Show that matrix equivalence is an equivalence relation.
     \begin{answer}
       For reflexivity, to show that any matrix is matrix equivalent to
