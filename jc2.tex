@@ -91,6 +91,141 @@ The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
 %</ex:OnlyZeroSimToZero>
 \end{example}
 
+\begin{example}
+Consider the derivative transformation
+$\map{d/dx}{\polyspace_2}{\polyspace_2}$,
+and two bases for that space.
+\begin{equation*}
+  B=\sequence{x^2,x,1}
+  \qquad
+  D=\sequence{1,1+x,1+x^2}
+\end{equation*}
+We will compute the four sides of the arrow square.
+\begin{equation*}
+  \begin{CD}
+    {\polyspace_2\,}_{\wrt{B}}                   @>d/dx>T>        {\polyspace_2\,}_{\wrt{B}}       \\
+    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+    {\polyspace_2\,}_{\wrt{D}}                   @>d/dx>\hat{T}>        {\polyspace_2\,}_{\wrt{D}}
+  \end{CD}
+\end{equation*}
+First the top.
+The effect of the transformation on the starting basis~$B$
+\begin{equation*}
+  x^2\mapsunder{d/dx} 2x
+  \quad
+  x\mapsunder{d/dx} 1
+  \quad
+  1\mapsunder{d/dx} 0
+\end{equation*}
+represented with respect to the ending basis (also~$B$)
+\begin{equation*}
+  \rep{2x}{B}=\colvec{0 \\ 2 \\ 0}
+  \qquad
+  \rep{1}{B}=\colvec{0 \\ 0 \\ 1}
+  \qquad
+  \rep{0}{B}=\colvec{0 \\ 0 \\ 0}
+\end{equation*}
+gives the representation 
+of the map.
+\begin{equation*}
+  T=
+  \rep{d/dx}{B,B}=
+  \begin{mat}
+    0 &0 &0 \\
+    2 &0 &0 \\
+    0 &1 &0
+  \end{mat}
+\end{equation*}
+
+Next, the bottom.
+The effect of the transformation on elements of~$D$
+\begin{equation*}
+  1\mapsunder{d/dx} 0
+  \qquad
+  1+x\mapsunder{d/dx} 1
+  \qquad
+  1+x^2\mapsunder{d/dx} 2x
+\end{equation*}
+represented with respect to~$D$
+gives the matrix~$\hat{T}$.
+\begin{equation*}
+  \hat{T}=
+  \rep{d/dx}{D,D}=
+  \begin{mat}
+    0 &1 &-2 \\
+    0 &0 &2 \\
+    0 &0 &0
+  \end{mat}
+\end{equation*}
+
+Third, computing the matrix for the right-hand side involves
+finding the effect of the identity map on the elements of~$B$.
+Of course, the identity map does not transform them at all so
+to find $\rep{id}{B,D}$ we represent $B$'s elements with respect 
+to~$D$.
+\begin{equation*}
+  \rep{x^2}{D}=\colvec{-1 \\ 0 \\ 1}
+  \quad
+  \rep{x}{D}=\colvec{-1 \\ 1 \\ 0}
+  \quad
+  \rep{1}{D}=\colvec{1 \\ 0 \\ 0}
+\end{equation*}
+So the matrix for going down the right side is the concatenation of those.
+\begin{equation*}
+  P=\rep{id}{B,D}=
+  \begin{mat}
+    -1 &-1  &1 \\
+     0 &1   &0 \\
+     1 &0   &0   
+  \end{mat}
+\end{equation*}
+
+With that, we can compute in two ways the matrix for going up on 
+left side.
+Fpr direct computation, represent elements of~$D$ with
+respect to~$B$
+\begin{equation*}
+  \rep{1}{B}=\colvec{0 \\ 0 \\ 1}
+  \quad
+  \rep{1+x}{B}=\colvec{0 \\ 1 \\ 1}
+  \quad
+  \rep{1+x^2}{B}=\colvec{1 \\ 0 \\ 1}
+\end{equation*}
+and concatenate to make the matrix.
+\begin{equation*}
+  \begin{mat}
+    0 &0 &1 \\
+    0 &1 &0 \\ 
+    1 &1 &1
+  \end{mat}
+\end{equation*}
+The other way to compute the matrix for going up on the left 
+is to find it as the inverse of the matrix~$P$ for
+going down on the right.
+\begin{equation*}
+  \begin{pmat}{ccc|ccc}
+    -1 &-1 &1 &1 &0 &0 \\
+     0 &1  &0 &0 &1 &0 \\
+     1 &0  &0 &0 &0 &1
+  \end{pmat}
+  % \grstep{\rho_1+\rho_3}
+  % \grstep{\rho_2+\rho_3}
+  % \grstep{-\rho_1}
+  % \grstep{\rho_3+\rho_1}
+  % \grstep{-\rho_2+\rho_1}
+  \grstep{}
+  \cdots
+  \grstep{}
+  \begin{pmat}{ccc|ccc}
+     1 &0  &0 &0 &0 &1 \\
+     0 &1  &0 &0 &1 &0 \\
+     0 &0  &1 &1 &1 &1
+  \end{pmat}
+\end{equation*}
+The definition expresses the relationship in the second 
+way, as $\hat{T}=PTP^{-1}$.
+\end{example}
+
 Matrix similarity is a special case of matrix equivalence so 
 if two matrices are similar then they are matrix equivalent.
 What about the converse:~if they are square, 

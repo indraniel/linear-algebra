@@ -1,6 +1,6 @@
 // four_ii_orientation_pos.asy
 import jh;
-real height; height=3cm; size(0,height);
+real height; height=2.8cm; size(0,height);
 import settings;
 settings.render=0;   // for png: -10;  // fewer jaggies but very slow
 settings.maxtile=(10,10);
@@ -22,7 +22,7 @@ pen dotted_line_pen=linecap(1)
 // Axes
 axes3(xlabel="{\tiny x}",ylabel="{\tiny y}",zlabel="{\tiny z}", 
       min=(-2.75,-0.75,-1),
-      max=(4.25,6.25,4.25),
+      max=(4.25,6.25,3.75),
       AXISPEN,
       arrow=None);
 

@@ -86,37 +86,26 @@ gives the size of the box formed by the matrix's columns.
   =x_1y_2-x_2y_1
 \end{equation*}
 \end{frame}
-\begin{frame}{Restatement for columns}
+\begin{frame}{Determinant as a function of the columns}
 We now switch from considering the determinant as a function of the 
 rows to considering it as a function of the columns.
-For that, observe that the row operation conditions in the definition 
+
+For that observe again that, because the determinant of the transpose equals
+the determinant of the matrix,
+the row operation conditions in the definition 
 translate over to column operation conditions.
-
-The first row condition is that a
-determinant is unchanged by a row combination:~where 
+That is, (1)~a
+determinant is unchanged by a column combination:~where 
 $A$ is square and  
-$A\!\!\raisebox{-.5ex}{\smash{\grstep{k\rho_i+\rho_j}}}\!\! \hat{A}$
+$A\!\!\raisebox{-.5ex}{\smash{\grstep{k\text{col}_i+\text{col}_j}}}\!\! \hat{A}$
 (with~$i\neq j$)
-then $\det(A)=\det{\hat{A}}$.
-To see that the same holds for column combinations, recall that 
-the determinant of a matrix equals 
-the determinant of its transpose and
-so we can do a column combination on a square matrix
-by transposing, doing a row combination,
-and then transposing back.
-These three don't change the determinant.
-
-\pause
-The second row condition is that a row swap 
-changes the determinant's sign. 
-The third condition is that multiplying a row by a
+then $\det(A)=\det{\hat{A}}$,
+(2)~a column swap 
+changes the determinant's sign,
+and (3)~multiplying a column by a
 scalar multiplies the entire determinant by that scalar.
-Here also transposing, performing the row operation, and transposing back
-shows that the column operations also hold.
-
-The final condition is that the determinant of the identity matrix is~$1$.
-This isn't about row operations so we don't need to
-translate. 
+Condition~(4), that the determinant of the identity matrix is~$1$,
+isn't about row operations so there is no translation. 
 \end{frame}
 
 
@@ -367,6 +356,22 @@ The two sizes are easy.
 \pf
 \ExecuteMetaData[../det2.tex]{pf:DeterminantOfInverseIsInverseOfDeterminant}
 \qed
+
+\ex These matrices are inverse.
+\begin{equation*}
+  \begin{vmat}
+    1 &2 \\
+    3  &4
+  \end{vmat}
+  =-2
+  \qquad
+  \begin{vmat}
+    -2 &-1 \\
+    -3/2  &-1/2
+  \end{vmat}
+  =-1/2
+\end{equation*}
+
 \end{frame}
 
 
@@ -404,11 +409,9 @@ so its volume is~$2$.
 %..........
 \begin{frame}{Geometric interpretation of linear systems}
 \ExecuteMetaData[../cramer.tex]{CramersRuleExample0}
-\begin{center}
- \includegraphics{../ch4.1}
-\end{center}
-\end{frame}
-\begin{frame}
+% \begin{center}
+%  \includegraphics{../ch4.1}
+% \end{center}
 \ExecuteMetaData[../cramer.tex]{CramersRuleExample1}
 \begin{center}
  \includegraphics{../ch4.1}
@@ -425,14 +428,14 @@ Compare the sizes of these shaded boxes.
    \includegraphics{../ch4.4}
 \end{center}
 \pause
-\ExecuteMetaData[../cramer.tex]{CramersRuleExample2}
+\ExecuteMetaData[../cramer.tex]{CramersRuleExample3}
+(The last equality is by the first condition in the definition of
+determinants, applied to columns.)
 \end{frame}
 \begin{frame}
-\ExecuteMetaData[../cramer.tex]{CramersRuleExample3}
-\pause
 \ExecuteMetaData[../cramer.tex]{CramersRuleExample4}
 \pause
-The symmetric argument for the other side gives this.
+The symmetric argument for the other side gives the other value.
 \begin{equation*}
   x_2=
   \frac{
@@ -446,10 +449,11 @@ The symmetric argument for the other side gives this.
   \end{vmat}}
   =2
 \end{equation*}
-\end{frame}
+% \end{frame}
 
 
-\begin{frame}{Cramer's Rule}
+% \begin{frame}{Cramer's Rule}
+\th[Cramer's Rule]
 Let $A$ be an $\nbyn{n}$ matrix with a nonzero determinant,
 let $\vec{b}$ be an $n$-tall column vector,
 and consider the linear system $A\vec{x}=\vec{b}$.
@@ -458,8 +462,8 @@ substituting $\vec{b}$ for column~$i$ of $A$.
 Then the value of the $i$-th unknown is $x_i=\deter{B_i}/\deter{A}$.
 
 \pause
-\medskip
-\nearbyexercise{ex:CramerRule} gives the proof.
+% \medskip
+% \nearbyexercise{ex:CramerRule} gives the proof.
 
 \medskip
 Of course, if the matrix has a zero determinant then the system does not 

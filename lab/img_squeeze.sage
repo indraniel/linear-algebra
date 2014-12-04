@@ -1,5 +1,5 @@
 # Compress the image
-import Image
+from PIL import Image
 
 def img_squeeze(fn_in, fn_out, percent):
     """Squeeze an image using Singular Value Decomposition.
@@ -9,6 +9,7 @@ def img_squeeze(fn_in, fn_out, percent):
     img = Image.open(fn_in)
     img = img.convert("RGB")
     rows, cols = img.size
+    print "image has",rows,"rows and",cols,"columns"
     cutoff = int(round(percent*min(rows,cols),0))
     # Gather data into three arrays, then give to Sage's matrix()
     rd, gr, bl = [], [], []
@@ -32,8 +33,9 @@ def img_squeeze(fn_in, fn_out, percent):
     print "  :"
     print "sigma_RD",cutoff,"=",Sigma_RD[cutoff][cutoff]
     print "  :"
-    for i in range(Sigma_RD.nrows()-8,Sigma_RD.nrows()):
-        print "sigma_RD",i,"=",Sigma_RD[i][i]
+    print "Sigma_RD.nrows()",Sigma_RD.nrows()
+    # for i in range(Sigma_RD.nrows()-8,Sigma_RD.nrows()):
+    #     print " at bottom, sigma_RD",i,"=",Sigma_RD[i][i]
     # Compute sigma_1 u_1 v_1^trans+ ..
     a=[]
     for i in range(rows):     
