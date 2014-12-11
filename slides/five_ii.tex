@@ -103,11 +103,11 @@ So we have this matrix representation of the map.
 The matrix changing bases from $B$ to $D$ is $\rep{\identity}{B,D}$.
 We find these by eye
 \begin{equation*}
-  \rep{1}{D}=\colvec{1 \\ 0 \\ 0}
+  \rep{\identity(1)}{D}=\colvec{1 \\ 0 \\ 0}
   \quad
-  \rep{x}{D}=\colvec{-1 \\ 1 \\ 0}
+  \rep{\identity(x)}{D}=\colvec{-1 \\ 1 \\ 0}
   \quad
-  \rep{x^2}{D}=\colvec{0 \\ -1 \\ 1}
+  \rep{\identity(x^2)}{D}=\colvec{0 \\ -1 \\ 1}
 \end{equation*}
 to get this.
 \begin{equation*}
@@ -144,7 +144,7 @@ To check that, and to underline what the arrow diagram says
     V_{\wrt{D}}                   @>t>\hat{T}>        V_{\wrt{D}}
   \end{CD}
 \end{equation*}
-we calculate $T$ directly.
+we calculate $\hat{T}$ directly.
 The effect of the map on the basis elements is 
 $d/dx(1)=0$, $d/dx(1+x)=1$, and $d/dx(1+x+x^2)=1+2x$.
 Representing of those with respect to $D$
@@ -155,7 +155,7 @@ Representing of those with respect to $D$
   \quad
   \rep{1+2x}{D}=\colvec{-1 \\ 2 \\ 0}
 \end{equation*}
-gives the same matrix $\hat{T}=\rep{d/dx}{D,D}$ as we found above.
+gives the same matrix $\hat{T}=\rep{d/dx}{D,D}$ as above.
 \end{frame}
 \begin{frame}
 The definition doesn't require that we consider the underlying maps.
@@ -455,115 +455,6 @@ Not every vector is simply rescaled.
 
 
 
-\begin{frame}
-Matrices that are similar have the same eigenvalues, but
-needn't have the same eigenvectors.
-
-\ex
-These two are similar 
-\begin{equation*}
-  T=
-  \begin{mat}
-    4 &0 &0 \\
-    0 &8 &0 \\
-    0 &0 &12
-  \end{mat}
-  \qquad
-  S=
-  \begin{mat}[r]
-    6 &-1  &-1 \\
-    2 &11  &-1 \\
-   -6 &-5  &7
-  \end{mat}
-\end{equation*}
-since $S=PTP^{-1}$ for this $P$.
-\begin{equation*}
-  P=
-  \begin{mat}[r]
-    1 &-1 &0 \\
-    0 &1 &-1 \\
-    2 &1 &1
-  \end{mat}
-  \qquad
-  P^{-1}=
-  \begin{mat}[r]
-    1/2 &1/4  &1/4 \\
-   -1/2 &1/4  &1/4 \\
-   -1/2 &-3/4 &1/4
-  \end{mat}
-\end{equation*}
-\end{frame}
-\begin{frame}
-\noindent Suppose that $\map{t}{\C^3}{\C^3}$ is
-represented by $T$ with respect to the standard basis.
-Then this is the action of $t$.
-\begin{equation*}
-  \colvec{x \\ y \\ z}\mapsunder{t}\colvec{4x \\ 8y  \\ 12z}
-\end{equation*}
-\pause
-By eye we see that three 
-eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, and~$\lambda_3=12$.
-For instance this holds.
-\begin{equation*}
-  T\cdot\colvec{1 \\ 0 \\ 0}
-  =\begin{mat}
-    4 &0 &0 \\
-    0 &8 &0 \\
-    0 &0 &12
-  \end{mat}\colvec{1 \\ 0 \\ 0}
-  =4\cdot\colvec{1 \\ 0 \\ 0}
-\end{equation*}
-\end{frame}
-\begin{frame}
-Contrast that with $S=PTP^{-1}$, which represents the same function, but 
-with respect to a different basis.  
-\begin{equation*}
-  \begin{CD}
-    V_{\wrt{\stdbasis_3}}            @>t>T>        V_{\wrt{\stdbasis_3}}       \\
-    @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
-    V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       
-  \end{CD}
-\end{equation*}
-We can easily find the basis~$B$.
-Since $P^{-1}=\rep{\identity}{B,\stdbasis_3}$, its first column is 
-$\rep{\identity(\vec{\beta}_1)}{\stdbasis_3}=\rep{\vec{\beta}_1}{\stdbasis_3}$.
-With respect to the standard basis any vector is represented by itself 
-so the first basis element $\vec{\beta}_1$ is the first column of $P^{-1}$.
-The same goes for the other two columns.
-\begin{equation*}
-  B=\sequence{\colvec[r]{1/2 \\ -1/2 \\ -1/2},
-              \colvec[r]{1/4 \\ 1/4 \\ -3/4},
-              \colvec[r]{1/4 \\ 1/4 \\ 1/4}}
-\end{equation*}
-\end{frame}
-\begin{frame}
-% We know that the transformation~$t$ has eigenvalues of $4$, $8$, and~$12$.
-% For instance $t(\vec{e}_1)=4\vec{e}_1$.
-Now, since each represents the transformation~$t$, the matrices~$T$ and $S$
-reflect the same action $\vec{e}_1\mapsto4\vec{e}_1$.
-\begin{align*}
-  &\rep{t}{\stdbasis_3,\stdbasis_3}\cdot\rep{\vec{e}_1}{\stdbasis_3}
-    =T\cdot\rep{\vec{e}_1}{\stdbasis_3}                
-    =4\cdot\rep{\vec{e}_1}{\stdbasis_3}                  \\               
-    &\rep{t}{B,B}\cdot\rep{\vec{e}_1}{B}
-    =S\cdot\rep{\vec{e}_1}{B}                                 
-    =4\cdot\rep{\vec{e}_1}{B}
-\end{align*}
-But, while in the two equations the $4$'s are the same, the vectors
-representations are not. 
-\begin{align*}
-    T\cdot\rep{\vec{e}_1}{\stdbasis_3}
-    =T\colvec{1 \\ 0 \\ 0}
-    &=4\cdot\colvec{1 \\ 0 \\ 0}                \\
-    S\cdot\rep{\vec{e}_1}{B}  
-    =S\cdot\colvec{1 \\ 0 \\ 2}
-    &=4\cdot\colvec{1 \\ 0 \\ 2}
-\end{align*}
-So the two matrices have the same eigenvalues but different eigenvectors.
-\end{frame}
-
-
-
 
 \begin{frame}{Computing eigenvalues and eigenvectors}
 \ex
@@ -789,6 +680,121 @@ These are for $\lambda_2=2$.
   V_2=\set{\colvec{1 \\ 0 \\ 0}z_1\suchthat z_1\in\C}
 \end{equation*}  
 \end{frame}
+
+
+\begin{frame}
+Matrices that are similar have the same eigenvalues, but
+needn't have the same eigenvectors.
+
+\ex
+These two are similar 
+\begin{equation*}
+  T=
+  \begin{mat}
+    4 &0 &0 \\
+    0 &8 &0 \\
+    0 &0 &12
+  \end{mat}
+  \qquad
+  S=
+  \begin{mat}[r]
+    6 &-1  &-1 \\
+    2 &11  &-1 \\
+   -6 &-5  &7
+  \end{mat}
+\end{equation*}
+since $S=PTP^{-1}$ for this $P$.
+\begin{equation*}
+  P=
+  \begin{mat}[r]
+    1 &-1 &0 \\
+    0 &1 &-1 \\
+    2 &1 &1
+  \end{mat}
+  \qquad
+  P^{-1}=
+  \begin{mat}[r]
+    1/2 &1/4  &1/4 \\
+   -1/2 &1/4  &1/4 \\
+   -1/2 &-3/4 &1/4
+  \end{mat}
+\end{equation*}
+For the first matrix
+\begin{equation*}
+  \colvec{1 \\ 0 \\ 0}
+\end{equation*}
+is an eigenvector associated with the eigenvalue~$4$ but 
+that does not hold for the second matrix.
+\end{frame}
+% \begin{frame}
+% \noindent Suppose that $\map{t}{\C^3}{\C^3}$ is
+% represented by $T$ with respect to the standard basis.
+% Then this is the action of $t$.
+% \begin{equation*}
+%   \colvec{x \\ y \\ z}\mapsunder{t}\colvec{4x \\ 8y  \\ 12z}
+% \end{equation*}
+% \pause
+% By eye we see that three 
+% eigenvalues of~$t$ are $\lambda_1=4$, $\lambda_2=8$, and~$\lambda_3=12$.
+% For instance this holds.
+% \begin{equation*}
+%   T\cdot\colvec{1 \\ 0 \\ 0}
+%   =\begin{mat}
+%     4 &0 &0 \\
+%     0 &8 &0 \\
+%     0 &0 &12
+%   \end{mat}\colvec{1 \\ 0 \\ 0}
+%   =4\cdot\colvec{1 \\ 0 \\ 0}
+% \end{equation*}
+% \end{frame}
+% \begin{frame}
+% Contrast that with $S=PTP^{-1}$, which represents the same function, but 
+% with respect to a different basis.  
+% \begin{equation*}
+%   \begin{CD}
+%     V_{\wrt{\stdbasis_3}}            @>t>T>        V_{\wrt{\stdbasis_3}}       \\
+%     @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+%     V_{\wrt{B}}                   @>t>S>        V_{\wrt{B}}       
+%   \end{CD}
+% \end{equation*}
+% We can easily find the basis~$B$.
+% Since $P^{-1}=\rep{\identity}{B,\stdbasis_3}$, its first column is 
+% $\rep{\identity(\vec{\beta}_1)}{\stdbasis_3}=\rep{\vec{\beta}_1}{\stdbasis_3}$.
+% With respect to the standard basis any vector is represented by itself 
+% so the first basis element $\vec{\beta}_1$ is the first column of $P^{-1}$.
+% The same goes for the other two columns.
+% \begin{equation*}
+%   B=\sequence{\colvec[r]{1/2 \\ -1/2 \\ -1/2},
+%               \colvec[r]{1/4 \\ 1/4 \\ -3/4},
+%               \colvec[r]{1/4 \\ 1/4 \\ 1/4}}
+% \end{equation*}
+% \end{frame}
+% \begin{frame}
+% % We know that the transformation~$t$ has eigenvalues of $4$, $8$, and~$12$.
+% % For instance $t(\vec{e}_1)=4\vec{e}_1$.
+% Now, since each represents the transformation~$t$, the matrices~$T$ and $S$
+% reflect the same action $\vec{e}_1\mapsto4\vec{e}_1$.
+% \begin{align*}
+%   &\rep{t}{\stdbasis_3,\stdbasis_3}\cdot\rep{\vec{e}_1}{\stdbasis_3}
+%     =T\cdot\rep{\vec{e}_1}{\stdbasis_3}                
+%     =4\cdot\rep{\vec{e}_1}{\stdbasis_3}                  \\               
+%     &\rep{t}{B,B}\cdot\rep{\vec{e}_1}{B}
+%     =S\cdot\rep{\vec{e}_1}{B}                                 
+%     =4\cdot\rep{\vec{e}_1}{B}
+% \end{align*}
+% But, while in the two equations the $4$'s are the same, the vectors
+% representations are not. 
+% \begin{align*}
+%     T\cdot\rep{\vec{e}_1}{\stdbasis_3}
+%     =T\colvec{1 \\ 0 \\ 0}
+%     &=4\cdot\colvec{1 \\ 0 \\ 0}                \\
+%     S\cdot\rep{\vec{e}_1}{B}  
+%     =S\cdot\colvec{1 \\ 0 \\ 2}
+%     &=4\cdot\colvec{1 \\ 0 \\ 2}
+% \end{align*}
+% So the two matrices have the same eigenvalues but different eigenvectors.
+% \end{frame}
+
 
 
 

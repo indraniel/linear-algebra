@@ -41,65 +41,12 @@ In matrix terms,
 
 
 \subsection{Definition and Examples}
-\begin{definition} \label{df:Similar}
-%<*df:Similar>
-The matrices  \( T \) and $\hat{T}$ are 
-\definend{similar}\index{matrix!similarity}%
-\index{equivalence relation!matrix similarity}\index{similar matrices}
-if there is a nonsingular \( P \) such that
-$
-  \hat{T}=PTP^{-1}
-$.
-%</df:Similar>
-\end{definition}
-
-\noindent Since nonsingular matrices are square, 
-$T$ and $\hat{T}$ must
-be square and of the same size.
-\nearbyexercise{exer:SimIsEquivRel} checks that
-similarity is an equivalence relation.
-
-\begin{example}
-Calculation with these two
-\begin{equation*}
-  P=
-  \begin{mat}[r]
-    2  &1  \\
-    1  &1
-  \end{mat}
-  \qquad
-  T=
-  \begin{mat}[r]
-    2  &-3  \\
-    1  &-1
-  \end{mat}
-\end{equation*}
-gives that $T$ is similar to this matrix.
-\begin{equation*}
-  \hat{T}=
-  \begin{mat}[r]
-    12  &-19  \\
-    7  &-11
-  \end{mat}
-\end{equation*}
-\end{example}
-
-\begin{example}  \label{ex:OnlyZeroSimToZero}
-%<*ex:OnlyZeroSimToZero>
-The only matrix similar to the zero matrix is itself:~$PZP^{-1}=PZ=Z$.
-The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
-%</ex:OnlyZeroSimToZero>
-\end{example}
-
 \begin{example}
 Consider the derivative transformation
 $\map{d/dx}{\polyspace_2}{\polyspace_2}$,
-and two bases for that space.
-\begin{equation*}
-  B=\sequence{x^2,x,1}
-  \qquad
-  D=\sequence{1,1+x,1+x^2}
-\end{equation*}
+and two bases for that space
+$B=\sequence{x^2,x,1}$ and
+$D=\sequence{1,1+x,1+x^2}$
 We will compute the four sides of the arrow square.
 \begin{equation*}
   \begin{CD}
@@ -108,7 +55,7 @@ We will compute the four sides of the arrow square.
     {\polyspace_2\,}_{\wrt{D}}                   @>d/dx>\hat{T}>        {\polyspace_2\,}_{\wrt{D}}
   \end{CD}
 \end{equation*}
-First the top.
+The top is first.
 The effect of the transformation on the starting basis~$B$
 \begin{equation*}
   x^2\mapsunder{d/dx} 2x
@@ -161,7 +108,7 @@ gives the matrix~$\hat{T}$.
 Third, computing the matrix for the right-hand side involves
 finding the effect of the identity map on the elements of~$B$.
 Of course, the identity map does not transform them at all so
-to find $\rep{id}{B,D}$ we represent $B$'s elements with respect 
+to find the matrix we represent $B$'s elements with respect 
 to~$D$.
 \begin{equation*}
   \rep{x^2}{D}=\colvec{-1 \\ 0 \\ 1}
@@ -180,9 +127,9 @@ So the matrix for going down the right side is the concatenation of those.
   \end{mat}
 \end{equation*}
 
-With that, we can compute in two ways the matrix for going up on 
+With that, we have two options to compute the matrix for going up on 
 left side.
-Fpr direct computation, represent elements of~$D$ with
+The direct computation represents elements of~$D$ with
 respect to~$B$
 \begin{equation*}
   \rep{1}{B}=\colvec{0 \\ 0 \\ 1}
@@ -191,7 +138,7 @@ respect to~$B$
   \quad
   \rep{1+x^2}{B}=\colvec{1 \\ 0 \\ 1}
 \end{equation*}
-and concatenate to make the matrix.
+and concatenates to make the matrix.
 \begin{equation*}
   \begin{mat}
     0 &0 &1 \\
@@ -199,8 +146,8 @@ and concatenate to make the matrix.
     1 &1 &1
   \end{mat}
 \end{equation*}
-The other way to compute the matrix for going up on the left 
-is to find it as the inverse of the matrix~$P$ for
+The other option to compute the matrix for going up on the left 
+is to take the inverse of the matrix~$P$ for
 going down on the right.
 \begin{equation*}
   \begin{pmat}{ccc|ccc}
@@ -222,9 +169,59 @@ going down on the right.
      0 &0  &1 &1 &1 &1
   \end{pmat}
 \end{equation*}
-The definition expresses the relationship in the second 
-way, as $\hat{T}=PTP^{-1}$.
 \end{example}
+
+\begin{definition} \label{df:Similar}
+%<*df:Similar>
+The matrices  \( T \) and $\hat{T}$ are 
+\definend{similar}\index{matrix!similarity}%
+\index{equivalence relation!matrix similarity}\index{similar matrices}
+if there is a nonsingular \( P \) such that
+$
+  \hat{T}=PTP^{-1}
+$.
+%</df:Similar>
+\end{definition}
+
+\noindent Since nonsingular matrices are square, 
+$T$ and $\hat{T}$ must
+be square and of the same size.
+\nearbyexercise{exer:SimIsEquivRel} checks that
+similarity is an equivalence relation.
+
+\begin{example}
+The definition does not require that we consider a map.
+Calculation with these two
+\begin{equation*}
+  P=
+  \begin{mat}[r]
+    2  &1  \\
+    1  &1
+  \end{mat}
+  \qquad
+  T=
+  \begin{mat}[r]
+    2  &-3  \\
+    1  &-1
+  \end{mat}
+\end{equation*}
+gives that $T$ is similar to this matrix.
+\begin{equation*}
+  \hat{T}=
+  \begin{mat}[r]
+    12  &-19  \\
+    7  &-11
+  \end{mat}
+\end{equation*}
+\end{example}
+
+\begin{example}  \label{ex:OnlyZeroSimToZero}
+%<*ex:OnlyZeroSimToZero>
+The only matrix similar to the zero matrix is itself:~$PZP^{-1}=PZ=Z$.
+The identity matrix has the same property:~$PIP^{-1}=PP^{-1}=I$.
+%</ex:OnlyZeroSimToZero>
+\end{example}
+
 
 Matrix similarity is a special case of matrix equivalence so 
 if two matrices are similar then they are matrix equivalent.
@@ -329,7 +326,7 @@ if and only if they have the same rank).
         \end{mat}
       \end{multline*}
     \end{answer}
-  \recommended \item
+  \item
     \nearbyexample{ex:OnlyZeroSimToZero} shows that the only matrix similar
     to a zero matrix is itself and that 
     the only matrix similar to the identity
@@ -375,25 +372,127 @@ if and only if they have the same rank).
         \end{equation*} 
     \end{exparts}  
    \end{answer}
-  \recommended \item 
-    Show that these matrices are not similar.
+  \recommended \item Consider this transformation of~$\C^3$
     \begin{equation*}
-       \begin{mat}[r]
-          1  &0  &4  \\
-          1  &1  &3  \\
-          2  &1  &7
-       \end{mat}
-       \qquad
-       \begin{mat}[r]
-          1  &0  &1  \\
-          0  &1  &1  \\
-          3  &1  &2
-       \end{mat}
+      t(\colvec{x \\ y \\ z})=\colvec{x-z \\ z \\ 2y}
     \end{equation*}
+    and these bases.
+    \begin{equation*}
+      B=\sequence{\colvec{1 \\ 2 \\ 3}, 
+                  \colvec{0 \\ 1 \\ 0}, 
+                  \colvec{0 \\ 0 \\ 1}}
+      \qquad
+      D=\sequence{\colvec{1 \\ 0 \\ 0},
+                  \colvec{1 \\ 1 \\ 0},
+                  \colvec{1 \\ 0 \\ 1}}
+    \end{equation*}
+    We will compute the parts of the arrow diagram to 
+    represent the transformation using two similar matrices.
+    \begin{exparts}
+      \partsitem Draw the arrow diagram, specialized for this case.
+      \partsitem Compute $T=\rep{t}{B,B}$.
+      \partsitem Compute $\hat{T}=\rep{t}{D,D}$.
+      \partsitem Compute the matrices for other the two sides of the arrow 
+         square.
+    \end{exparts}
     \begin{answer}
-      Gauss's Method shows that
-      the first matrix represents maps of rank two while the second
-      matrix represents maps of rank three.
+      \begin{exparts}
+        \partsitem
+          \begin{equation*}
+            \begin{CD}
+              \C^3_{\wrt{B}}                   @>t>T>        \C^3_{\wrt{B}}       \\
+              @V{\scriptstyle\identity} VV              @V{\scriptstyle\identity} VV \\
+              \C^3_{\wrt{D}}                   @>t>\hat{T}>        \C^3_{\wrt{D}}
+            \end{CD}
+          \end{equation*}
+        \partsitem
+          For each element of the starting basis~$B$ find the effect of 
+          the transformation
+          \begin{equation*}
+             \colvec{1 \\ 2 \\ 3}\mapsunder{t}\colvec{-2 \\ 3 \\ 4}
+             \qquad 
+             \colvec{0 \\ 1 \\ 0}\mapsunder{t}\colvec{0 \\ 0 \\ 2}
+             \qquad 
+             \colvec{0 \\ 0 \\ 1}\mapsunder{t}\colvec{-1 \\ 1 \\ 0}
+          \end{equation*}
+          and represented those outputs with respect to the ending basis~$B$
+          \begin{equation*}
+            \rep{\colvec{-2 \\ 3 \\ 4}}{B}=\colvec{-2 \\ 7 \\ 10}
+            \qquad
+            \rep{\colvec{0 \\ 0 \\ 2}}{B}=\colvec{0 \\ 0 \\ 2}
+            \qquad
+            \rep{\colvec{-1 \\ 1 \\ 0}}{B}=\colvec{-1 \\ 3 \\ 3}
+          \end{equation*}
+          to get the matrix.
+          \begin{equation*}
+            T=\rep{t}{B,B}=
+            \begin{mat}
+              -2 &0 &-1 \\
+               7 &0 &3  \\
+              10 &2 &3 
+            \end{mat}
+          \end{equation*}
+        \partsitem
+          Find the effect of the transformation on the elements of~$D$
+          \begin{equation*}
+             \colvec{1 \\ 0 \\ 0}\mapsunder{t}\colvec{1 \\ 0 \\ 0}
+             \qquad 
+             \colvec{1 \\ 1 \\ 0}\mapsunder{t}\colvec{1 \\ 0 \\ 2}
+             \qquad 
+             \colvec{1 \\ 0 \\ 1}\mapsunder{t}\colvec{0 \\ 1 \\ 0}
+          \end{equation*}
+          and represented those with respect to the ending basis~$D$
+          \begin{equation*}
+            \rep{\colvec{1 \\ 0 \\ 0}}{D}=\colvec{1 \\ 0 \\ 0}
+            \qquad
+            \rep{\colvec{1 \\ 0 \\ 2}}{D}=\colvec{-1 \\ 0 \\ 2}
+            \qquad
+            \rep{\colvec{0 \\ 1 \\ 0}}{D}=\colvec{-1 \\ 1 \\ 0}
+          \end{equation*}
+          to get the matrix.
+          \begin{equation*}
+            \hat{T}=\rep{t}{D,D}=
+            \begin{mat}
+               1 &-1 &-1 \\
+               0 &0  &1  \\
+               0 &2  &0 
+            \end{mat}
+          \end{equation*}
+        \partsitem
+          To go down on the right we need 
+          $\rep{\identity}{B,D}$
+          so we first compute the effect of the identity map on each element 
+          of~$D$,
+          which is no effect, and then represent the results with respect 
+          to~$B$. 
+          \begin{equation*}
+            \rep{\colvec{1 \\ 2 \\ 3}}{D}=\colvec{-4 \\ 2 \\ 3}
+            \qquad
+            \rep{\colvec{0 \\ 1 \\ 0}}{D}=\colvec{-1 \\ 1 \\ 0}
+            \qquad
+            \rep{\colvec{0 \\ 0 \\ 1}}{D}=\colvec{-1 \\ 0 \\ 1}
+          \end{equation*}
+          So this is~$P$.
+          \begin{equation*}
+            P=
+            \begin{mat}
+              -4 &-1 &-1 \\
+               2 &1  &0  \\
+               3 &0  &1
+            \end{mat}
+          \end{equation*}
+          For the other matrix~$\rep{\identity}{D,B}$ we can either find 
+          it directly, as we just have with~$P$, or we can do the 
+          usual calculation of a matrix inverse.
+          \begin{equation*}
+            P^{-1}=
+            \begin{mat}
+               1 &1 &1 \\
+               -2 &-1  &-2  \\
+               -3 &-3  &-2
+            \end{mat}
+          \end{equation*}
+      \end{exparts}
     \end{answer}
   \item 
     Consider the transformation $\map{t}{\polyspace_2}{\polyspace_2}$
@@ -474,15 +573,15 @@ if and only if they have the same rank).
       \end{exparts}
     \end{answer}
   \recommended \item
-     Exhibit an nontrivial similarity relationship in this way:~let
+     Exhibit an nontrivial similarity relationship by letting
      \( \map{t}{\C^2}{\C^2} \) act in this way,
      \begin{equation*}
         \colvec[r]{1 \\ 2}\mapsto\colvec[r]{3 \\ 0}
         \qquad
         \colvec[r]{-1 \\ 1}\mapsto\colvec[r]{-1 \\ 2}
      \end{equation*}
-     and pick two bases,
-     and represent \( t \) with respect to them
+     picking two bases~$B,D$,
+     and representing \( t \) with respect to them
      \( \hat{T}=\rep{t}{B,B} \) and \( T=\rep{t}{D,D} \).
      Then compute 
      the \( P \) and \( P^{-1} \) to change bases from \( B \) to \( D \) and
@@ -613,6 +712,26 @@ if and only if they have the same rank).
           -4/3 &2/3
          \end{mat}
       \end{equation*}  
+    \end{answer}
+  \recommended \item 
+    Show that these matrices are not similar.
+    \begin{equation*}
+       \begin{mat}[r]
+          1  &0  &4  \\
+          1  &1  &3  \\
+          2  &1  &7
+       \end{mat}
+       \qquad
+       \begin{mat}[r]
+          1  &0  &1  \\
+          0  &1  &1  \\
+          3  &1  &2
+       \end{mat}
+    \end{equation*}
+    \begin{answer}
+      Gauss's Method shows that
+      the first matrix represents maps of rank two while the second
+      matrix represents maps of rank three.
     \end{answer}
   \item 
     Explain \nearbyexample{ex:OnlyZeroSimToZero} in terms of maps.
