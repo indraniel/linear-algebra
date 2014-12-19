@@ -55,10 +55,12 @@
 
 \usepackage{fontspec}
 \setmainfont[Ligatures=TeX,  % CM-Super
-             Path = /usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/,
+             % Path = /usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/,
+             Path = /usr/share/texmf/fonts/type1/public/cm-super/,
              ItalicFont = sfoti10.pfb,
              SmallCapsFont = sfocc10]{sform10.pfb}
-\setsansfont{Computer Modern Sans Serif Demi Condensed}
+% \setsansfont{Computer Modern Sans Serif Demi Condensed}
+\setsansfont{Latin Modern Sans Demi Cond}
 % \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
 %              Scale=0.87]{ul9r8a.pfb}  % Luxi Mono Regular
 % \setmonofont[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
@@ -81,9 +83,11 @@
 \newfontfamily\luximono[Path=/usr/local/texlive/texmf-local/fonts/type1/bh/luxi/,
                         ItalicFont = ul9ro8a.pfb,
                         BoldFont = ul9b8a.pfb]{ul9r8a.pfb}
-\newfontfamily\berasans[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
+\newfontfamily\berasans[Path=/usr/share/texlive/texmf-dist/fonts/type1/public/bera/,
+  % Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
                         BoldFont = fvsb8a.pfb]{fvsr8a.pfb}
-\newfontfamily\berasansx[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
+\newfontfamily\berasansx[Path=/usr/share/texlive/texmf-dist/fonts/type1/public/bera/,
+  % Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/bera/,
                         BoldFont = fvsb8a.pfb,
                         Scale = MatchLowercase]{fvsr8a.pfb}
 % \newfontfamily\latinmodernmono[Path=fonts/tmp/,
@@ -96,7 +100,8 @@
 \setmathfont[Path=/usr/local/texlive/texmf-local/fonts/opentype/euler/]{euler.otf}
 \AtBeginDocument{\DeclareMathAlphabet\mathbf{U}{eur}{b}{n}} % fontspec manual p. 11; doesn't seem to do anything.
 \setmathfont[range=\mathbb,
-             Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/]{msbm10.pfb}	
+             % Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/
+            Path=/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/]{msbm10.pfb}	
 
 % \newfontfamily\lcircleone[Path=/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/latxfont/]{lcircle1.pfb}
 % \newcommand{\lcircleonedot}{\lcircleone \char"119}
@@ -388,7 +393,7 @@
 \newcommand{\pgm}[1]{\texttt{#1}}
 \newcommand{\pkg}[1]{\textit{#1}}
 \newcommand{\keyboardkey}[1]{\textit{$\langle$#1\,$\rangle$}}
-\newcommand{\Sage}{Sage}
+% already defined \newcommand{\Sage}{Sage}
 \newcommand{\Sagecmd}[1]{\texttt{#1}}
 \newcommand{\python}{Python}
 \newcommand{\pythoncmd}[1]{\texttt{#1}}

@@ -3,7 +3,7 @@
 """Test runrepl.py
 """
 import sys, os, re, pprint, argparse
-import unittest, runrepl
+import unittest, runrepl, tempfile
 
 
 class difftest(unittest.TestCase):
@@ -305,6 +305,58 @@ class edit_linestest(unittest.TestCase):
         expected = ["\n".join(_new_first_line)] + [elet[0] for elet in source[1:]]  
         self.failUnlessEqual(result,expected)
 
+class strip_cursor_seqs_test(unittest.TestCase):
+    """Test the strip_cursor_seqs routine
+    """
+
+    def setUp(self):
+        self.f_cmds = open(self.fn_cmds, 'w')
+        self.f_cmds_new = open(self.fn_cmds_new, 'w')
+        self.f_edits = open(self.fn_edits, 'w')
+        self.f_edits_new = open(self.fn_edits_new, 'w')
+
+    def tearDown(self):
+        try:  # tests exist for if this file not here
+            self.f_cmds.close()
+            os.remove(self.fn_cmds)
+        except: 
+            pass
+        self.f_cmds_new.close() 
+        os.remove(self.fn_cmds_new)
+        try:  # tests exist for if this file not here
+            self.f_edits.close()
+            os.remove(self.fn_edits)
+        except: 
+            pass
+        self.f_edits_new.close()
+        os.remove(self.fn_edits_new)
+
+    def testBasic(self):
+        """See if it works at all"""
+        line = "abcdefg"
+        result = runrepl.strip_cursor_seqs(line)
+        self.assertEqual(result, line)
+
+    def testStripping(self):
+        """Pull off a simple escape sequence"""
+        line = "abcdefg"
+        result = runrepl.strip_cursor_seqs("\x1b[0m"+line) # one sequence
+        self.assertEqual(result, line)
+        result = runrepl.strip_cursor_seqs("\x1b[0m\x1b[31m"+line) # two sequences
+        self.assertEqual(result, line)
+        result = runrepl.strip_cursor_seqs("\x1b[0m\x1b[0;31m"+line) # complex-er
+        self.assertEqual(result, line)
+
+    def testStrippingLine(self):
+        """Pull off a simple escape sequence"""
+        line = "abcdefg"
+        result = runrepl.strip_cursor_seqs("\x1b[0m"+line) # one sequence
+        self.assertEqual(result, line)
+        result = runrepl.strip_cursor_seqs("\x1b[0m\x1b[31m"+line) # two sequences
+        self.assertEqual(result, line)
+        result = runrepl.strip_cursor_seqs("\x1b[0m\x1b[0;31m"+line) # complex-er
+        self.assertEqual(result, line)
+
 
 class edit_outputtest(unittest.TestCase):
     """Test the edit_output routine
@@ -336,6 +388,7 @@ class edit_outputtest(unittest.TestCase):
         """See if it works at all"""
         try:
             self._writeAndFlush(self.source,"d,0,1")
+            # print "self.fn_prefix is",self.fn_prefix
             result = runrepl.edit_output(self.fn_prefix)
             # print "result is", pprint.pformat(result)
         except Exception, e:
@@ -345,6 +398,19 @@ class edit_outputtest(unittest.TestCase):
             self._writeAndFlush(self.source,"d,2,3;s,0,5,10")
             result = runrepl.edit_output(self.fn_prefix)
             # print "result is", pprint.pformat(result)
+        except Exception, e:
+            self.fail(str(e))
+
+    def testCursorCmdStrip(self):
+        """multiline cursor commands"""
+        s="""sage: [0mversion()
+[0;31m[0m'Sage Version 6.1.1, Release Date: 2014-02-04'
+[0;34m"""
+        try:
+            self._writeAndFlush(s,"d,0,1")
+            # print "self.fn_prefix is",self.fn_prefix
+            result = runrepl.edit_output(self.fn_prefix,True)
+            print "result is", pprint.pformat(result)
         except Exception, e:
             self.fail(str(e))
 

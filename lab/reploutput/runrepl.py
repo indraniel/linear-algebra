@@ -3,9 +3,12 @@
 #  Generates the output from from a repl, given a file 
 # containing a list of commands
 #
+# 2014-Dec-15 JH for some reason Sage is doing cursor termcap cmds.  
+#   Strip those.
 # 2012-Nov-04 Jim Hefferon jhefferon@smcvt.edu  adapted from runsage.py
 
 import sys, os, re, pprint, argparse
+from __future__ import print_function
 import pexpect
 import shutil
 
@@ -29,6 +32,7 @@ EDITS_NEW_EXTENSION = 'editnew' # From current run of this pgm
 RESULT_EXTENSION = 'result' # Result of editing output
 ERROR_EXTENSION = 'err'  # Any error traceback
 RETURN_CODE_EXTENSION = 'rc'  # System return code
+CURSOR_CMDS_STRIPPED_EXTENSION = 'cursorstripped' # Strip termcap codes
 
 
 # =============== What to feed expect =========================
@@ -57,7 +61,8 @@ EXPECT_INFO = {'sage': SAGE_DATA,
                'python': PYTHON_DATA}
 EXPECT_TIMEOUT = 120
 
-DEBUG = False
+FORCE_DEFAULT = True
+DEBUG = True
 
 
 class RunreplError(Exception):
@@ -69,22 +74,25 @@ class ReplFailure(RunreplError):
     def __init__(self, msg):
         self.msg = msg
 
+def warning(*objs):
+    msg = ' '.join(objs)
+    print('WARNING:', msg, file=sys.stderr)
+    return msg
+def error(*objs):
+    msg = warning(s='ERROR', *objs)
+    print('ERROR!', msg, file=sys.stderr)  
+    raise ReplFailure, msg
 
-def _open_input(fn):
+def open_input(fn):
     try:
         return open(fn,'r')
     except Exception, e:
-        print "ERROR opening input file",fn
-        print e
-        sys.exit(2)
-
-def _open_output(fn):
+        error("unable to open input file ",fn,': ',str(e))
+def open_output(fn):
     try:
         return open(fn,'w')
     except Exception, e:
-        print "ERROR opening output file",fn
-        print e
-        sys.exit(2)
+        error("unable to open out file ",fn,': ',str(e))
 
 # =============== diff ====================
 def diff(outname):
@@ -137,21 +145,21 @@ def _feed_lines(lines,repl,fn_in):
     child.expect(prompt, timeout=EXPECT_TIMEOUT)  # skip past intro
     for i, line in enumerate(lines):
         if DEBUG:
-            print "\n++++++++ feed_lines: line=\n"+pprint.pformat(line)
+            print("\n++++++++ feed_lines: line=\n"+pprint.pformat(line), file=sys.stderr)
         if child.after:  # get the prompt
             if DEBUG:
-                print "  _feed_lines: child.after=",pprint.pformat(child.after)
+                print("  _feed_lines: child.after="+pprint.pformat(child.after), file=sys.stderr)
             r.append(child.after)
         child.sendline(line)
         dex = child.expect([prompt, prompt_continue])
         if DEBUG:
-            print "  _feed_lines sent the line: dex=", str(dex)
-            print "   appended to r is child.before:", pprint.pformat(child.before)
-            print "    child.after is ", pprint.pformat(child.after)
+            print("  _feed_lines sent the line: dex=", str(dex), file=sys.stderr)
+            print("   appended to r is child.before:", pprint.pformat(child.before), file=sys.stderr)
+            print("    child.after is ", pprint.pformat(child.after), file=sys.stderr)
         r.append(child.before)
     if DEBUG:
-        print "  _feed_lines after loop: child.before is ", pprint.pformat(child.before)
-        print "    child.after is ", pprint.pformat(child.after)
+        print("  _feed_lines after loop: child.before is ", pprint.pformat(child.before), file=sys.stderr)
+        print("    child.after is ", pprint.pformat(child.after), file=sys.stderr)
     if child.after != prompt:
         r.append(child.after)
     child.sendline(exit_cmd)  
@@ -171,7 +179,7 @@ def feed_lines(outname,repl):
     exit_cmd = repl_info['exit_cmd']
     # Read from the commands input tile
     fn_in = outname+'.'+CMDS_EXTENSION
-    f_in = _open_input(fn_in)
+    f_in = open_input(fn_in)
     cmd_lines = f_in.readlines()
     f_in.close()
     # Strip any leading and trailing blank lines
@@ -186,15 +194,36 @@ def feed_lines(outname,repl):
     responses = responses.replace("\r\n","\n")
     responses = responses.rstrip()
     if DEBUG:
-        print "responses is \n",pprint.pformat(responses)
+        print("responses is \n",pprint.pformat(responses), file=sys.stderr)
     # Put them in the output
     fn_out = outname+'.'+UNEDITED_OUTPUT_EXTENSION
-    f_out = _open_output(fn_out)
+    f_out = open_output(fn_out)
     f_out.write(responses)
     f_out.close()
     return responses
 
 # ======= edit routines ==============
+CURSOR_SEQ_RE = re.compile("\x1b\[(\d+|;)*m")
+def _strip_cursor_seqs(line):
+    """Remove the cursor movement control sequences
+    """
+    return CURSOR_SEQ_RE.sub('',line)
+
+def strip_cursor_seqs(fn_in,fn_out):
+    """Remove the cursor movement control sequences
+    """
+    f_in = open_input(fn_in)
+    inlines = f_in.readlines()
+    f_in.close()
+    outlines = []
+    for line in inlines:
+        outline = _strip_cursor_seqs(line)
+        outlines.append(outline)
+    f_out = open_output(fn_out)
+    for lne in outlines:
+        f_out.write(lne)
+    f_out.close()
+
 def _edit_line(source,edit,fn):
     """Execute one edit.  Return array of lines.
       source  list   elets are: a list of strings (representing lines of text)
@@ -207,8 +236,8 @@ def _edit_line(source,edit,fn):
     edit_lst = edit_lst.split(',')
     edit_lst = [entry.strip() for entry in edit_lst]  # strip whitespace
     if DEBUG:
-        print "_edit_line: edit_lst is",edit_lst
-        print "    source to edit is:", pprint.pformat(r)
+        print("_edit_line: edit_lst is",edit_lst, file=sys.stderr)
+        print("    source to edit is:", pprint.pformat(r), file=sys.stderr)
     if not(len(edit_lst)) >= 1:
         raise RunreplError("bad edit command "+edit+" for file "+fn)
     if (edit_lst[0] == 'd'):  # will delete lines
@@ -223,7 +252,7 @@ def _edit_line(source,edit,fn):
                 raise RunreplError("delete argument out of bounds in edit "+edit+" for file "+fn)
     elif (edit_lst[0] == 's'): # split line
         if DEBUG:
-            print "  _edit_line: splitting line with "+edit
+            print("  _edit_line: splitting line with "+edit, file=sys.stderr)
         try:
             line_no, split_point, padding = int(edit_lst[1]), int(edit_lst[2]), int(edit_lst[3])
         except Exception, e:
@@ -232,7 +261,7 @@ def _edit_line(source,edit,fn):
         try:
             line_lst = r[line_no]
             if DEBUG:
-                print "  _edit_line: line_no="+str(line_no)+" and line_lst is "+pprint.pformat(line_lst)
+                print("  _edit_line: line_no="+str(line_no)+" and line_lst is "+pprint.pformat(line_lst), file=sys.stderr)
         except Exception, e:
             raise RunreplError("line number argument out of bounds in split command "+edit+" for "+fn)
         if line_lst is None:
@@ -245,10 +274,10 @@ def _edit_line(source,edit,fn):
                 insert_line = []  # omit it if padding is less than 0
             lines = [text[:split_point]] + insert_line + line_lst[1:]
             if DEBUG:
-                print "  _edit_line: lines is "+pprint.pformat(lines)
+                print("  _edit_line: lines is "+pprint.pformat(lines), file=sys.stderr)
             r[line_no] = lines
             if DEBUG:
-                print "  _edit_line: r is now "+pprint.pformat(r)
+                print("  _edit_line: r is now "+pprint.pformat(r), file=sys.stderr)
     else:
         raise RunreplError("unknown starting letter edit command "+edit+" for "+fn)
     return r
@@ -263,54 +292,56 @@ def edit_lines(source,edit_cmds,fn):
     s = source[:]
     for edit in edit_cmds:
         if DEBUG:
-            print "==== edit_lines: doing edit",edit
-            print "\n"+pprint.pformat(s)
+            print("==== edit_lines: doing edit",edit, file=sys.stderr)
+            print("\n"+pprint.pformat(s), file=sys.stderr)
         if edit.strip():
             s = _edit_line(s,edit,fn)
     # Concatenate into an array of lines
     r = []
     for line in s:  # line was a single line in output
         if DEBUG:
-            print "edit_lines: line is "+pprint.pformat(line)
+            print("edit_lines: line is "+pprint.pformat(line), file=sys.stderr)
         if line is None:
             continue
         else:
             r.append("\n".join(line)) 
     return r
 
-def edit_output(outname):
+def edit_output(fn_source, fn_edit, fn_result, debug=DEBUG):
     """Read the lines from the file of repl output and from the file of
     edits, and make the changes. 
       outname  string  Prefix name of the files
     """
     # Get the source information
-    fn_source = outname+'.'+UNEDITED_OUTPUT_EXTENSION
-    f_source = _open_input(fn_source)
+    # fn_source = outname+'.'+UNEDITED_OUTPUT_EXTENSION
+    f_source = open_input(fn_source)
     source_lines = f_source.readlines()
     f_source.close()
-    if not(source_lines[0].strip()): # strip empty first and last line
+    if debug:
+        print("editing: source lines are ", pprint.pformat(source_lines), file=sys.stderr))
+    # strip empty first and last line
+    if not(source_lines[0].strip()): 
         source_lines = source_lines[1:]
     if not(source_lines[-1].strip()):
         source_lines = source_lines[:-1]
-    source = [[line.strip()] for line in source_lines] # for editing need list of strings 
-    if DEBUG:
-        print "edit_output: source lines are \n",pprint.pformat(source)
+    source = [[line.strip()] for line in source_lines] # for editing need list of strings
+    if debug:
+        print("edit_output: source lines are \n",pprint.pformat(source), file=sys.stderr)
     # Get the edit information
-    fn_edit = outname+'.'+EDITS_EXTENSION
-    f_edit = _open_input(fn_edit)
+    # fn_edit = outname+'.'+EDITS_EXTENSION
+    f_edit = open_input(fn_edit)
     edits = f_edit.read().strip()
     f_edit.close()
     edit_cmds = edits.split(";")
     edit_cmds = [cmd.strip() for cmd in edit_cmds] # omit whitespace in cmd
-    if DEBUG:
-        print "edit_output: edit_cmds are \n",pprint.pformat(edit_cmds)
+    if debug:
+        print("edit_output: edit_cmds are \n",pprint.pformat(edit_cmds), file=sys.stderr)
     # Edit the lines
-    response_lines = edit_lines(source, edit_cmds, outname)
-    if DEBUG:
-        print "  response_lines is \n",pprint.pformat(response_lines)
+    response_lines = edit_lines(source, edit_cmds, fn_edit)
+    if debug:
+        print("  response_lines is \n",pprint.pformat(response_lines), file=sys.stderr)
     finish = "\n".join(response_lines)
     # Put them in the result file
-    fn_result = outname+'.'+RESULT_EXTENSION
     f_result = _open_output(fn_result)
     f_result.write(finish)
     f_result.close()
@@ -330,6 +361,8 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
     arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("-f", "--force", help="force running the repl (don't check for diff's)",
+                            action="store_true", default=FORCE_DEFAULT)
     arg_parser.add_argument("repl",default="sage",choices=['python','sage'],
                             help='REPL to use')
     arg_parser.add_argument("outname",help="sageoutput.sty's @outname: labnn")
@@ -338,25 +371,31 @@ def main(argv=None):
     repl = args.repl
     # Main program logic
     try:
-        if diff(outname):
+        if args.force or diff(outname):
             if DEBUG:
-                print "\n\n\n++there is a difference outname=",outname
+                if args.force:
+                    print("\n\n++runrepl.py forced to proceed as though there is a difference between outname=",outname+'.'+CMDS_NEW_EXTENSION, "and outname=", outname+'.'+CMDS_EXTENSION, file=sys.stderr)
+                else:
+                    print("\n\n++runrepl.py there is a difference between outname=",outname+'.'+CMDS_NEW_EXTENSION, "and outname=", outname+'.'+CMDS_EXTENSION, file=sys.stderr)
             shutil.copy2(outname+'.'+CMDS_NEW_EXTENSION,outname+'.'+CMDS_EXTENSION)
             shutil.copy2(outname+'.'+EDITS_NEW_EXTENSION,outname+'.'+EDITS_EXTENSION)
             # if DEBUG:
             #     print "++copy done"
             unedited_output = feed_lines(outname, repl)
             if DEBUG:
-                print "++unedited_output:\n", pprint.pformat(unedited_output)
-            result = edit_output(outname)
+                print("++unedited_output:\n", pprint.pformat(unedited_output), file=sys.stderr)
+            strip_cursor_seqs(outname+'.'+UNEDITED_OUTPUT_EXTENSION,outname+'.'+CURSOR_CMDS_STRIPPED_EXTENSION)
+            result = edit_output(outname+'.'+CURSOR_CMDS_STRIPPED_EXTENSION, 
+                                 outname+'.'+EDITS_EXTENSION, 
+                                 outname+'.'+RESULT_EXTENSION)
             if DEBUG:
-                print "++edit output:\n", pprint.pformat(result)
+                print("++edit output:\n", pprint.pformat(result), file=sys.stderr)
         else:
             if DEBUG:
-                print "\n\n\n++there is no difference outname=",outname
+                print("\n\n\n++there is no difference between outname=",outname+'.'+CMDS_NEW_EXTENSION, "and outname=", outname+'.'+CMDS_EXTENSION, file=sys.stderr)) 
     except RunreplError, err:
-        print >>sys.stderr, err.msg
-        print >>sys.stderr, "for help use --help"
+        print('global trouble', err.msg, file=sys.stderr)
+        print("for help use --help", file=sys.stderr)
         return 2
     return 0
 
