@@ -140,17 +140,18 @@ for any input there is exactly one associated output).
 
 
 \begin{frame}
-(As remarked above, it is not evident from the definition that there is
-a function satisfying the conditions, or that there is only one such function.
-We will show later that the determinant exists and is unique.
-For the moment we proceed without that assurance.)
+% (As remarked above, it is not evident from the definition that there is
+% a function satisfying the conditions, or that there is only one such function.
+% We will show later that the determinant exists and is unique.
+% For the moment we proceed without that assurance.)
 
-\pause
+% \pause
 The conditions allow us to
 compute the determinant of a matrix using Gauss's Method
 
 \ex  On this matrix we can perform the Gauss's Method steps of
-$-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$.
+$-2\rho_1+\rho_2$ and $-3\rho_1+\rho_3$, followed by
+$-(5/3)\rho_2+\rho_3$.
 Condition~(1) says that these row combination operations
 leave the determinant unchanged.
 \begin{equation*}
@@ -165,11 +166,6 @@ leave the determinant unchanged.
     0  &-6  &-8  \\
     0  &-10 &-11
   \end{vmat}
-\end{equation*}
-\pause
-Again by condition~(1), the operation
-$-(5/3)\rho_2+\rho_3$ does not change the determinant.
-\begin{equation*}
   =
   \begin{vmat}
     1  &3   &-2 \\
@@ -178,10 +174,9 @@ $-(5/3)\rho_2+\rho_3$ does not change the determinant.
   \end{vmat}
 \end{equation*}
 \pause
-By the prior lemma we can now 
-find the determinant by taking the product down the
+The determinant is the product down the
 diagonal: 
-$=1\cdot(-6)\cdot(-7/3)=14$.
+$1\cdot(-6)\cdot(-7/3)=14$.
 \end{frame}
 
 \begin{frame}
@@ -203,15 +198,13 @@ The swap changes the determinant's sign.
   \end{vmat}
 \end{equation*}
 Finish by performing $-\rho_1+\rho_3$
+followed by $-\rho_2+\rho_3$
 \begin{equation*}
   =-\begin{vmat}
     1  &2  &0 \\
     0  &3  &1 \\
     0  &3  &2
   \end{vmat}
-\end{equation*}
-and $-\rho_2+\rho_3$
-\begin{equation*}
   =-\begin{vmat}
     1  &2  &0 \\
     0  &3  &1 \\
@@ -283,6 +276,39 @@ Thus here is the contrast.
 
 
 
+\begin{frame}
+  \frametitle{Warning}
+The formula for the determinant of a $\nbyn{2}$ matrix has something to
+do with multiplying diagonals.
+\begin{equation*}
+  \begin{vmat}
+    a &b \\
+    c &d
+  \end{vmat}
+  =ad-bc
+\end{equation*}
+Sometimes people have learned a mnemonic for the $\nbyn{3}$ formula
+that has to do with multplying diagonals.   
+\begin{equation*}
+  \begin{vmat}
+    a &b &c \\
+    d &e &f \\
+    g &h &i 
+  \end{vmat}
+  =aei+bfg+cdh
+   -gec-hfa-idb
+  \qquad
+  \begin{pmat}{ccc|cc}
+    a &b &c &a &b \\
+    d &e &f &d &e \\
+    g &h &i &g &h
+  \end{pmat}
+\end{equation*}
+Don't try to extend to $\nbyn{4}$ or larger sizes.
+For those cases instead use Gauss's Method.
+\end{frame}
+
+
 \begin{frame}{The  determinant is unique}
 Recall our definition, that a function is a determinant if
 it satisfies four conditions.
@@ -304,6 +330,10 @@ a function exists at all.
 \pf 
 \ExecuteMetaData[../det1.tex]{pf:DetFcnIsUnique}
 \qed
+
+
+
+
 
 % \medskip
 % So if there is a function mapping $\matspace_{\nbyn{n}}$ to $\Re$ that
@@ -342,6 +372,7 @@ is less practical than using the algorithm of Gauss's Method since it
 is slow.
 But it nonetheless is invaluable for the theory.
 \end{frame}
+
 
 
 
