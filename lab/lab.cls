@@ -399,3 +399,32 @@
 \newcommand{\pythoncmd}[1]{\texttt{#1}}
 \newcommand{\inlinecode}[1]{\hspace{0.1em}\lstinline[style=inline]!#1!\hspace{0.1em}}
 
+\newcommand{\noterightmult}{Recall that 
+\protect\Sage{} prefers to do matrix-vector 
+multiplication as $\vec{v}M$ (here $\vec{v}$ is a row vector).
+Translate to the book's convention by transposing
+$\trans{M}\trans{\vec{v}}$.
+See the discussion on page~\protect\pageref{sec:leftright}. 
+% Can't get LaTeX to take the equation* environment, although a test file does fine.
+% Thus, for the $\protect\nbyn{2}$ case \protect\Sage's way 
+% $\protect\vec{v}M$
+% is first below.
+% \begin{equation*}
+%   \protect\rowvec{x &y}
+%   \protect\begin{mat}
+%     a &b \\
+%     c &d
+%   \protect\end{mat}
+%   =\protect\rowvec{ax+cy &bx+dy}
+%   \protect\qquad
+%   \protect\begin{mat}
+%     a &c \\
+%     b &d
+%   \protect\end{mat}
+%   \protect\colvec{x \\ y}
+%   =\protect\colvec{ax+cy \\ bx+dy}
+% \end{equation*}
+% Second is
+% the translation to the book's convention $\protect\trans{M}\protect\vec{v}$.
+}
+

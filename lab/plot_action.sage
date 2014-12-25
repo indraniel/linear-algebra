@@ -20,8 +20,8 @@ def color_circle_list(a, b, c, d, colors, full_circle=False):
     n = len(colors)
     for i in range(n):
         color = colors[i]
-        x(t) = a*cos(t)+b*sin(t)
-        y(t) = c*cos(t)+d*sin(t)
+        x(t) = a*cos(t)+c*sin(t)
+        y(t) = b*cos(t)+d*sin(t)
         g = parametric_plot((x(t), y(t)), 
                             (t, p*i/n, p*(i+1)/n), 
                             color = color, thickness=CIRCLE_THICKNESS)

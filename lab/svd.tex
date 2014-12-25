@@ -70,7 +70,7 @@ graph came from  using a routine that draws the effect of a transformation
 on the unit circle
 and then specifying the identity transformation.
 \begin{sageoutput}
-load "plot_action.sage"
+runfile "plot_action.sage"
 p = plot_circle_action(1,0,0,1)  # identity matrix
 p.set_axes_range(-1.5, 1.5, -0.5, 1.5) 
 p.save("graphics/svd000.png")
@@ -96,9 +96,9 @@ the transformation
 \end{equation*}
 that doubles the $x$~component of input vectors. 
 It shows before and after, the upper half circle domain
-and the output codomain.
+and the output codomain.\footnote{noterightmult}
 \begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -1, 2) 
 q.save("graphics/svd001a.png")
@@ -107,7 +107,7 @@ p.set_axes_range(-2, 2, -1, 2)
 p.save("graphics/svd001b.png")
 \end{sageoutput}
 \begin{sagesilent}
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -1, 2) 
 q.save("graphics/svd001a.png",dip=1200)
@@ -129,7 +129,7 @@ the effect of the transformation
 that triples the $y$~component and multiplies the 
 $x$~component by $-1$. 
 \begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -4, 4) 
 q.save("graphics/svd002a.png")
@@ -138,7 +138,7 @@ p.set_axes_range(-2, 2, -4, 4)
 p.save("graphics/svd002b.png")
 \end{sageoutput}
 \begin{sagesilent}
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -4, 4) 
 q.save("graphics/svd002a.png",dpi=1200)
@@ -167,7 +167,7 @@ The next transformation is a skew.
 The output's first component is affected
 by the input vector's distance from the $y$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 3, -1, 2) 
 q.save("graphics/svd003a.png")
@@ -176,7 +176,7 @@ p.set_axes_range(-2, 3, -1, 2)
 p.save("graphics/svd003b.png")
 \end{sageoutput}
 \begin{sagesilent}
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 3, -1, 2) 
 q.save("graphics/svd003a.png",dpi=1200)
@@ -195,7 +195,7 @@ In this case the output's
 second component is affected by the input's distance from 
 the $x$-axis.
 \begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -2, 2) 
 q.save("graphics/svd004a.png")
@@ -204,7 +204,7 @@ p.set_axes_range(-2, 2, -2, 2)
 p.save("graphics/svd004b.png")
 \end{sageoutput}
 \begin{sagesilent}
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 2, -2, 2) 
 q.save("graphics/svd004a.png",dpi=1200)
@@ -221,7 +221,7 @@ p.save("graphics/svd004b.png",dpi=1200)
 And here is a generic transformation.
 It changes orientation also.
 \begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 4, -3, 6) 
 q.save("graphics/svd005a.png")
@@ -230,7 +230,7 @@ p.set_axes_range(-2, 4, -3, 6)
 p.save("graphics/svd005b.png")
 \end{sageoutput}
 \begin{sagesilent}
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-2, 4, -3, 6) 
 q.save("graphics/svd005a.png",figsize=3,dpi=1200)
@@ -265,21 +265,22 @@ plot.options['aspect_ratio'] = 1
 sigma_1=3
 sigma_2=1
 E = ellipse((0,0), sigma_1, sigma_2)
-E.save("graphics/svd100.png")
+E.save("graphics/svd100.pdf")
 \end{sageoutput}
 \begin{sagesilent}
 plot.options['axes_pad'] = 0.5
 plot.options['fontsize'] = 5
 plot.options['dpi'] = 1200
 plot.options['aspect_ratio'] = 1
+plot.options['figsize'] = 1
 sigma_1=3
 sigma_2=1
 E = ellipse((0,0), sigma_1, sigma_2)
-# E.save("graphics/svd100.png", axes_pad=0.075, dpi=1200, fontsize=7, ticks=([-3,-2,-1,1,2,3],[-1,1]), figsize=2.5)
-E.save("graphics/svd100.png", axes_pad=0.075, dpi=1200, fontsize=7, figsize=2.5)
+# E.save("graphics/svd100.pdf", axes_pad=0.075, dpi=1200, fontsize=7, ticks=([-3,-2,-1,1,2,3],[-1,1]), figsize=1.5)
+E.save("graphics/svd100.pdf", axes_pad=0.075, fontsize=0.01)
 \end{sagesilent}
 \begin{center}
-  \includegraphics{graphics/svd100.png}
+  \includegraphics{graphics/svd100.pdf}
 \end{center}
 In an ellipse the two axes are orthogonal.
 In the above graph the major axis lies along the $x$-axis while the
@@ -305,7 +306,7 @@ So consider again the generic matrix.
 Here is its action again, this time shown
 on a full circle.
 \begin{sageoutput}[d,0,4;d,5,7]
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1,full_circle=True) 
 q.set_axes_range(-2, 2, -5, 6) 
 q.save("graphics/svd101a.png")
@@ -314,7 +315,7 @@ p.set_axes_range(-4, 4, -5, 6)
 p.save("graphics/svd101b.png")
 \end{sageoutput}
 \begin{sagesilent}
-load "plot_action.sage"
+runfile "plot_action.sage"
 q = plot_circle_action(1,0,0,1,full_circle=True) 
 q.set_axes_range(-2, 2, -5, 6) 
 q.save("graphics/svd101a.png", dpi=1200)
@@ -724,7 +725,7 @@ This image is $\nbyn{512}$  so that will sum the terms associated
 with the first $51$ singular 
 values.
 \begin{lstlisting}
-sage: load "img_squeeze.sage"                                 
+sage: runfile "img_squeeze.sage"                                 
 sage: img_squeeze("Lenna.png", "Lenna_squeezed.png", 0.10)
 \end{lstlisting}
 Below is the squeezed image.

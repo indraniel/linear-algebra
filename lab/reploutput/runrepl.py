@@ -6,9 +6,9 @@
 # 2014-Dec-15 JH for some reason Sage is doing cursor termcap cmds.  
 #   Strip those.
 # 2012-Nov-04 Jim Hefferon jhefferon@smcvt.edu  adapted from runsage.py
+from __future__ import print_function
 
 import sys, os, re, pprint, argparse
-from __future__ import print_function
 import pexpect
 import shutil
 
@@ -61,7 +61,7 @@ EXPECT_INFO = {'sage': SAGE_DATA,
                'python': PYTHON_DATA}
 EXPECT_TIMEOUT = 120
 
-FORCE_DEFAULT = True
+FORCE_DEFAULT = False # set to True to remake all sage plots 
 DEBUG = True
 
 
@@ -318,7 +318,7 @@ def edit_output(fn_source, fn_edit, fn_result, debug=DEBUG):
     source_lines = f_source.readlines()
     f_source.close()
     if debug:
-        print("editing: source lines are ", pprint.pformat(source_lines), file=sys.stderr))
+        print("editing: source lines are ", pprint.pformat(source_lines), file=sys.stderr)
     # strip empty first and last line
     if not(source_lines[0].strip()): 
         source_lines = source_lines[1:]
@@ -342,7 +342,7 @@ def edit_output(fn_source, fn_edit, fn_result, debug=DEBUG):
         print("  response_lines is \n",pprint.pformat(response_lines), file=sys.stderr)
     finish = "\n".join(response_lines)
     # Put them in the result file
-    f_result = _open_output(fn_result)
+    f_result = open_output(fn_result)
     f_result.write(finish)
     f_result.close()
     return finish
@@ -392,7 +392,7 @@ def main(argv=None):
                 print("++edit output:\n", pprint.pformat(result), file=sys.stderr)
         else:
             if DEBUG:
-                print("\n\n\n++there is no difference between outname=",outname+'.'+CMDS_NEW_EXTENSION, "and outname=", outname+'.'+CMDS_EXTENSION, file=sys.stderr)) 
+                print("\n\n\n++there is no difference between outname=",outname+'.'+CMDS_NEW_EXTENSION, "and outname=", outname+'.'+CMDS_EXTENSION, file=sys.stderr)
     except RunreplError, err:
         print('global trouble', err.msg, file=sys.stderr)
         print("for help use --help", file=sys.stderr)
