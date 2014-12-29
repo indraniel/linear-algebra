@@ -11,7 +11,7 @@ In this chapter we consider another geometric effect.
 Consider again the geometry of the action of a skew map on the unit 
 circle.\footnote{\noterightmult}
 \begin{sageoutput}
-runfile "plot_action.sage"  
+runfile("plot_action.sage")  
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -3, 3) 
 q.save("graphics/eigen000a.png")
@@ -20,7 +20,7 @@ p.set_axes_range(-3, 3, -3, 3)
 p.save("graphics/eigen000b.png")
 \end{sageoutput}
 \begin{sagesilent}
-runfile "plot_action.sage"  
+load("plot_action.sage")  
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -3, 3) 
 q.save("graphics/eigen000a.png",dpi=1200)
@@ -39,13 +39,13 @@ On the left the curve begins with red at $(x,y)=(1,0)$
 while on the right it begins with red at $(1,2)$.
 Here are the before and after vectors for that red point.
 \begin{sageoutput}[d,0,1;d,2,4]
-runfile "plot_action.sage"  
+runfile("plot_action.sage")  
 p = plot_before_after_action(2,2,0,2, [(1,0)], ['red']) 
 p.set_axes_range(-0.5, 2, -0.5, 2) 
 p.save("graphics/eigen001.png", ticks=([1,2],[1,2]))
 \end{sageoutput}
 \begin{sagesilent}
-runfile "plot_action.sage"  
+load("plot_action.sage")  
 p = plot_before_after_action(2,2,0,2, [(1,0)], ['red']) 
 p.set_axes_range(-0.5, 2, -0.5, 2) 
 p.save("graphics/eigen001.png", ticks=([1,2],[1,2]), figsize=2, dpi=1200)
@@ -90,7 +90,7 @@ Also there is the source of \inlinecode{circle_points} that takes in a
 number and returns that many vectors evenly spaced around the half-circle. 
 We can use those two to make a graph.
 \begin{sageoutput}[d,0,1]
-runfile "plot_action.sage"  
+runfile("plot_action.sage")  
 angles = find_angles(2,2,0,2,12)
 angles[0:2]
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
@@ -99,7 +99,7 @@ p.set_axes_range(0, pi, 0, pi)
 p.save("graphics/eigen002.png", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
 \begin{sagesilent}
-runfile "plot_action.sage"  
+load("plot_action.sage")  
 angles = find_angles(2,2,0,2,12)
 angles[0:2]
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
@@ -124,7 +124,7 @@ It is resized but it isn't rotated.
 We can do the same analysis for our usual generic $\nbyn{2}$~matrix.
 Here is its action on the unit circle.
 \begin{sageoutput}[d,0,4;d,5,7]
-runfile "plot_action.sage"
+runfile("plot_action.sage")
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -5, 5) 
 q.save("graphics/eigen100a.png")
@@ -133,7 +133,7 @@ p.set_axes_range(-3, 3, -5, 5)
 p.save("graphics/eigen100b.png")
 \end{sageoutput}
 \begin{sagesilent}
-runfile "plot_action.sage"
+load("plot_action.sage")
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -5, 5) 
 q.save("graphics/eigen100a.png",dpi=1200)
@@ -149,14 +149,14 @@ p.save("graphics/eigen100b.png",dpi=1200)
 This graphs the angle between the each before arrow and its associated after
 arrows.
 \begin{sageoutput}[d,0,1]
-runfile "plot_action.sage"  
+runfile("plot_action.sage")  
 angles = find_angles(1,2,3,4,1000)
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', ticks=ticks)
 p.save("graphics/eigen101.png", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
 \begin{sagesilent}
-runfile "plot_action.sage"  
+load("plot_action.sage")  
 angles = find_angles(1,2,3,4,1000)
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', markersize=10, edgecolor='blue', ticks=ticks)
@@ -222,7 +222,7 @@ That fits with the fact that the eigenvalue is a negative number.
 
 \Sage{} can draw before and after pictures for the two eigenvectors.
 \begin{sageoutput}[d,0,3]
-runfile "plot_action.sage"  
+runfile("plot_action.sage")  
 M = matrix(RDF, [[1, 2], [3, 4]])
 evs = M.eigenvectors_left()  
 p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red']) 
@@ -232,7 +232,7 @@ p.set_axes_range(-4, 1, -4.5, 1)
 p.save("graphics/eigen102.png", figsize=3.25)
 \end{sageoutput}
 \begin{sagesilent}
-runfile "plot_action.sage"  
+load("plot_action.sage")  
 M = matrix(RDF, [[1, 2], [3, 4]])
 evs = M.eigenvectors_left()  
 p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red']) 
@@ -258,7 +258,7 @@ The after vector is scaled from the before vector.
 % represented with respect to the standard bases by our generic matrix with
 % entries $1$, $2$, $3$, and $4$.
 % \begin{sageoutput}
-% runfile "plot_action.sage"
+% runfile("plot_action.sage")
 % plot.options['figsize']=4.5
 % g = point_grid(3, 3)
 % p = plot_point_action(1, 2, 3, 4, g)
@@ -272,7 +272,7 @@ The after vector is scaled from the before vector.
 % This is the \textit{power method}:
 
 % \begin{sageoutput}
-% runfile "plot_action.sage"
+% runfile("plot_action.sage")
 % plot.options['figsize']=4.5
 % g = point_grid(5, 5)
 % p = plot_point_action(2, 2, 0, 2, g)
