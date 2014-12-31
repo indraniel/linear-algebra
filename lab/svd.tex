@@ -445,17 +445,18 @@ Consider an~$\nbyn{n}$ matrix~$T$ that is nonsingular, and the
 nonsingular transformation~$\map{t}{\Re^n}{\Re^n}$ represented by
 $T$ with respect to the standard bases.
 
-Recall the Extreme Value Theorem from Calculus~I: for a continuous
-function~$f$, if $D\subset \Re$ is a closed and bounded set then
-the image $f(D)$ is also a closed and bounded 
-set (see \cite{wiki:ExtremeValueThm}).
+Recall Calculus~I's Extreme Value Theorem: for a continuous
+function~$f$, if a subset $D\subset \Re$ of the real line 
+is closed and bounded then
+its image $f(D)=\set{f(d)\suchthat d\in D}$ 
+is also closed and bounded (see \cite{wiki:ExtremeValueThm}).
 A generalization of that result gives that because the unit sphere in $\Re^n$
 is closed and bounded then its image under~$t$ is closed and bounded.
 Although we won't prove this, the image is an ellipsoid
 so we will call it that. 
 
-Because the ellipsoid is closed and bounded it has a point furthest from the
-origin.
+Because this ellipsoid is closed and bounded it has (at least one) 
+point furthest from the origin.
 Let $\vec{w}$ be a vector extending from the origin to that furthest point.
 Let $\vec{v}$ be the member of the unit sphere that maps to $\vec{w}$.
 Let $P$ be the plane that touches the sphere only at the endpoint of $\vec{v}$.
@@ -465,28 +466,29 @@ Since $t$ is one-to-one, $Q$ touches the ellipsoid only at~$\vec{w}$.
   \includegraphics{asy/ellipsoid1.pdf}
 \end{center}
 
-The tangent plane~$P$ has the property that 
-the set of vectors whose bodies lie in~$P$
-are the set of vectors perpendicular to $\vec{v}$.
-That is, if in the picture above we slide $P$ along the vector~$\vec{v}$ to
-the origin then we clearly have the subspace of $\Re^n$ of vectors perpendicular
+The picture shows that if we slide the tangent plane~$P$ along the 
+vector~$\vec{v}$ to
+the origin then we can recognize it as 
+the subspace of $\Re^n$ of vectors perpendicular
 to~$\vec{v}$.
 This subspace has dimension~$n-1$. 
 We will argue below 
 that if we similarly slide $Q$ to the origin then we have the
 set of vectors perpendicular to~$\vec{w}$.
-With that we will have an argument by induction: we start constructing the 
+With that we will have what we need for an argument by induction:~we 
+start constructing the 
 bases~$B$ and~$D$ by taking $\vec{\beta}_1$ to be~$\vec{v}$, taking
 $\sigma_1$ to be the length $\norm{\vec{w}}$, and taking
 $\vec{\delta}_1$ to be $\vec{w}/\norm{\vec{w}}$.
 Then we proceed by considering the restriction of $t$ to~$P$.
 
-So consider~$Q$.
-First observe that there is a unique plane that touches the ellipsoid
+Therefore consider~$Q$.
+There is a unique plane that touches the ellipsoid
 only at~$\vec{w}$ since if there were another then its inverse image
 under $t$
 would be a second plane, besides~$P$, 
-that touches the sphere only at~$\vec{v}$, which is impossible.
+that touches the sphere only at~$\vec{v}$, which is impossible (since it is a
+sphere).
 To see that $Q$ is perpendicular to~$\vec{w}$ consider a sphere
 centered at the origin whose radius is $\norm{\vec{w}}$.
 This sphere has a plane tangent at the endpoint of~$\vec{w}$, 
@@ -549,6 +551,25 @@ $\trans{\vec{v}}_2$.
     \sigma_1 &0 \\
     0        &\sigma_2
   \end{mat}
+  \begin{mat}
+    \trans{\vec{v}}_1 \\[.75ex]
+    \trans{\vec{v}}_2
+  \end{mat}             \\[.5ex]
+  &=
+  \begin{mat}
+    \vec{u}_1 &\vec{u}_2
+  \end{mat}
+  \,[
+  \begin{mat}
+    \sigma_1 &0 \\
+    0        &0
+  \end{mat}
+  +
+  \begin{mat}
+    0 &0 \\
+    0        &\sigma_2
+  \end{mat}
+  ]\,
   \begin{mat}
     \trans{\vec{v}}_1 \\[.75ex]
     \trans{\vec{v}}_2
@@ -628,12 +649,34 @@ In short, we get this.
     u_{1,1}v_{1,1} &u_{1,1}v_{2,1} \\
     u_{2,1}v_{1,1} &u_{2,1}v_{2,1}
   \end{mat}
+  =\colvec{u_{1,1} \\ u_{2,1}}\rowvec{v_{1,1} &v_{2,1}}
   =\vec{u}_1\trans{\vec{v}}_1
+\end{equation*}
+The second term simplifies in the same way.
+\begin{equation*}
+  \begin{mat}
+    u_{1,1} &u_{1,2} \\
+    u_{2,1} &u_{2,2}
+  \end{mat}
+  \begin{mat}
+    0 &0 \\
+    0 &1
+  \end{mat}
+  \begin{mat}
+    v_{1,1} &v_{2,1} \\
+    v_{1,2} &v_{2,2}
+  \end{mat}
+  =
+  \begin{mat}
+    u_{1,2}v_{1,2} &u_{1,2}v_{2,2} \\
+    u_{2,2}v_{1,2} &u_{2,2}v_{2,2}
+  \end{mat}
+  =\vec{u}_2\trans{\vec{v}}_2
 \end{equation*}
 Thus, equation~($*{*}*$) simplifies to
 $U\Sigma \trans{V}=\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1
    +\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2$.
-Cases other than~$\nbyn{2}$ simplify in the same way.
+Cases other than~$\nbyn{2}$ work the same way.
 
 
 
@@ -646,22 +689,25 @@ $M=\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1
 where the vectors have unit size and the $\sigma_i$'s decrease in size.
 
 Suppose that the matrix is $\nbyn{n}$.
-To store or transmit it we need to work with $n^2$ real numbers.
+To work with it\Dash for example, 
+to store it in a computer's memory or to transmit it over the Internet\Dash 
+we must work with $n^2$ real numbers
+(that is, floating point numbers).
 For instance, if $n=500$ then we have $50^2=250\,000$~reals.
-To express the matrix as a sum, 
+If we instead express the matrix as a sum then
 each term requires 
 $n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
 more real for $\sigma_i$.
-So keeping all the terms would require $500*(2*500+1)=500\,500$~reals,
+So keeping all the terms would require $500\cdot(2cdot 500+1)=500\,500$~reals,
 which is twice the data of the original matrix.
 
-But if you keep only some of the terms, say the first $50$ of them, then
-you would save:~$50\cdot (2n+1)=50\,050$, which is about $20\%$ of the
-$500^2$~size of the full matrix.
+But keeping only some of the terms, say the first $50$ of them, 
+would be a savings:~$50\cdot (2\cdot 50+1)=50\,050$ reals 
+is about $20\%$ of the $500^2$~real size of the full matrix.
 Thus, if you have data as a matrix then you can hope to compress it
 with that summation formula by dropping terms with small $\sigma$'s.  
-The issue is whether you lose too much information by only 
-retaining the information associated with some of the singular values.
+The question is whether you lose too much information by only 
+retaining some of the singular values.
 
 To illustrate that you can succeed in retaining at least some aspects of data
 we will do image compression.
@@ -723,8 +769,8 @@ even setting aside the ones at the end
 that are zero except for numerical issues.
 
 We want to see how badly the image degrades for various cutoffs.
-The code below sets the cutoff at $0.10$.
-This image is $\nbyn{512}$  so that will sum the terms associated
+The code below sets the cutoff at $10$\%.
+This image is $\nbyn{512}$ so that will sum the terms associated
 with the first $51$ singular 
 values.
 \begin{lstlisting}
@@ -747,8 +793,8 @@ The original image requires $n^2$ reals so we want to choose a cutoff value
 less than $0.50$.
 The above image with a cutoff of $0.10$ has the advantage is that it needs 
 only $20\%$ of the storage
-and transmission requirements of the original image
-but its quality may not be acceptable.
+and transmission requirements of the original image.
+However, its quality may not be acceptable.
 That is, selecting a cutoff parameter is an engineering decision where
 on a fidelity versus resource-consumption continuum 
 you choose a value appropriate for your application.

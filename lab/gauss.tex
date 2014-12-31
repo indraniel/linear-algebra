@@ -22,19 +22,20 @@ $C=2\pi\cdot r$ the two variables do not have fixed values, nor
 are they tied to a location in the computer's memory. 
 
 To illustrate the difference enter an unassigned 
-variable.\footnote{These output blocks are taken directly from \protect\Sage{}
-without any by-hand copying and pasting.
-This has the advantage that 
-there is no chance of confusion caused by author-introduced differences
-between what this manual showy and what \protect\Sage{} actually does.
-But it has two drawbacks.
-First, \protect\Sage{} puts out some lines too long to fit in the block.
+variable.\footnote{These output blocks are taken automatically from 
+\protect\Sage{}'s responses,
+without any by-hand copying and pasting, ensuring
+that this manual shows what \protect\Sage{} actually does.
+But this has two drawbacks.
+First, some of \protect\Sage{}'s response lines are 
+too long to fit in the block.
 Sometimes these lines will be split and have their tail 
 carried to the next line, as here, 
-while sometimes they will be truncated if the extra characters are unimportant.
+while sometimes 
+the response lines get truncated if the extra characters are a distraction.
 The second drawback is that \protect\Sage{} occasionally gives 
-system-specific responses, as in the line here giving the directory.
-Naturally the response on your system will show your directory.
+system-specific responses, say by naming the directory of a file with an error.
+Naturally on your system it will show your directory.
 This is the first time in this manual 
 that the issue of these artifacts appears; we won't note them again.}
 \begin{sageoutput}[s,1,71,67;s,2,70,66]
@@ -95,8 +96,10 @@ Most of the matrices in the book
 have entries that are fractions so here we stick
 to those.
 \Sage{} uses `QQ' for the rational numbers,
-`RR' or 'RDF' for real numbers,
-`CC' for the complex numbers,
+`RR' or 'RDF' for real numbers (the first are arbitrary precision reals while
+the second are double-length floats; for most practical calculations the 
+second type is best),
+`CC'  or `CDF' for the complex numbers (arbitrary precision or double floats),
 and
 `ZZ' for the integers.
 
@@ -405,7 +408,7 @@ The source file of the script is below, at the end.
 First here are a few sample calls.
 Start \Sage{} in the directory containing the file \path{gauss_method.sage}.
 \begin{sageoutput}
-runfile "gauss_method.sage"
+runfile("gauss_method.sage")
 M = matrix(QQ, [[1/2, 1, 4], [2, 4, -1], [1, 2, 0]])          
 v = vector(QQ, [-2, 5, 4])
 M_prime = M.augment(v, subdivide=True)  
@@ -436,14 +439,14 @@ exact\Dash without floating point issues.
 
 The remaining examples skip the steps to make an augmented matrix. 
 \begin{sageoutput}[d,0,1]
-runfile "gauss_method.sage"
+runfile("gauss_method.sage")
 M1 = matrix(QQ, [[2, 0, 1, 3], [-1, 1/2, 3, 1], [0, 1, 7, 5]])
 gauss_method(M1)
 \end{sageoutput}
 
 The script also has a routine to go all the way to reduced echelon form.
 \begin{sageoutput}[d,0,1]
-runfile "gauss_method.sage"
+runfile("gauss_method.sage")
 r1 = [1, 2, 3, 4]
 r2 = [1, 2, 3, 4]
 r3 = [2, 4, -1, 5]

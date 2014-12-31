@@ -61,7 +61,7 @@ EXPECT_INFO = {'sage': SAGE_DATA,
                'python': PYTHON_DATA}
 EXPECT_TIMEOUT = 120
 
-FORCE_DEFAULT = True # set to True to remake all sage plots 
+FORCE_DEFAULT = False # set to True to remake all sage plots 
 DEBUG = True
 
 

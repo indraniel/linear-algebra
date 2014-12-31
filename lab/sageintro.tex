@@ -319,8 +319,8 @@ One reason this is useful is that because of it
 tuples can be keys in dictionaries while
 list cannot.
 \begin{pythonoutput}
-a = ['Jim', 2138]
-b = ('Jim', 2138)
+a = ['ke1az', 5418]
+b = ('ke1az', 5418)
 d = {a: 'active'}
 d = {b: 'active'}
 d
@@ -426,7 +426,7 @@ while (n != 1):
 (This listing is incomplete; it takes $111$ steps to finish.)\footnote{The 
 \protect\textit{Collatz conjecture} is 
 that for any starting~$n$ this loop will 
-terminate, but this is not known.}
+terminate; no one knows if it is true.}
 Note that ``not equal'' is \lstinline[style=inline]@!=@. 
 
 The \inlinecode{break} command gets you out of a loop right away.
@@ -498,7 +498,8 @@ hello()
 Functions always return something; 
 if a function never executes a \inlinecode{return} then it will
 return the value \inlinecode{None}.
-They can also contain multiple \inlinecode{return} statements.
+They can also contain multiple \inlinecode{return} statements, for instance 
+one for an \inlinecode{if} branch and one for an \inlinecode{else}.
 
 
 
@@ -753,11 +754,14 @@ def normal_curve(upper_limit):
                              0, upper_limit)    
     print "area is", area[0]
 \end{lstlisting}
-Bring in the file with a \Sagecmd{runfile} command.
-\begin{sageoutput}
-runfile "sage_normal.sage"
-normal_curve(1.0)   
-\end{sageoutput}
+Bring in the file with a \Sagecmd{runfile} command
+and then you can use the commands defined there.
+% sageoutput is a problem: http://ask.sagemath.org/question/25360/sagetexs-sage-file-gives-runfile-is-not-defined/
+% Briefly, runfile won't work and load gives a "discouraged" message
+\begin{lstlisting}[style=python]
+sage: runfile("sage_normal.sage")
+sage: normal_curve(1.0)   
+\end{lstlisting}
 
 
 \subsection{Notebook}

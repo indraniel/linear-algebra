@@ -8,9 +8,9 @@
 
 # generate the asy graphics
 cd asy
-asy -render=0 -f pdf -noprc ellipsoid
+# asy -render=0 -f pdf -noprc ellipsoid
 asy -render=0 -f pdf -noprc ellipsoid1
-asy -render=0 -f pdf -noprc ellipsoid2
+# asy -render=0 -f pdf -noprc ellipsoid2
 cd ..
 
 # generate the lab proper
