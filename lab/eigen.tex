@@ -28,7 +28,7 @@ p = plot_circle_action(2,2,0,2)
 p.set_axes_range(-3, 3, -3, 3) 
 p.save("graphics/eigen000b.png",dpi=1200)
 \end{sagesilent}
-\begin{equation*}
+\begin{equation*} \label{gr:firstgraphic}
   \vcenteredhbox{\includegraphics{graphics/eigen000a.png}}
   \quad\mapsunder{\big (\begin{smallmatrix} 2 &2 \\ 0 &2 \end{smallmatrix}\big )}\quad
   \vcenteredhbox{\includegraphics{graphics/eigen000b.png}}
@@ -88,7 +88,8 @@ for each vector finds the angle between itself and its image and
 returns a list of those angles.
 Also there is the source of \inlinecode{circle_points} that takes in a
 number and returns that many vectors evenly spaced around the half-circle. 
-We can use those two to make a graph.
+We can use those two to make a graph plotting the angle of the input vector
+against the angle of the output.
 \begin{sageoutput}[d,0,1]
 runfile("plot_action.sage")  
 angles = find_angles(2,2,0,2,12)
@@ -96,7 +97,7 @@ angles[0:2]
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', ticks=ticks)
 p.set_axes_range(0, pi, 0, pi) 
-p.save("graphics/eigen002.png", figsize=2.5, tick_formatter=pi)
+p.save("graphics/eigen002.pdf", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
@@ -105,17 +106,21 @@ angles[0:2]
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', edgecolor='blue', ticks=ticks)
 p.set_axes_range(0, pi, 0, pi) 
-p.save("graphics/eigen002.png", figsize=2.5, tick_formatter=pi, dpi=1200)
+# p.axes_labels(['angle of input vector', 'angle of output vector'])
+p.save("graphics/eigen002.pdf", figsize=2.5, tick_formatter=pi)
 \end{sagesilent}
+% ? won't show axes labels
 \begin{center}
-  \vcenteredhbox{\includegraphics{graphics/eigen002.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen002.pdf}}
 \end{center}
-The most interesting point on this graph is where the angle is $0$\Dash
-for this transformation there is a input vector that does not turn at all.
-It is the vector halfway around the circle, with endpoint~$(0,1)$. 
-We can see it above on this chapter's first graphic, labeled~($*$), 
-where the green input vector lies on the $y$-axis and so does its green image.
-It is resized but it isn't rotated.
+The most interesting point on this graph is where the output angle is $0$,
+at the input angle of~$\pi$.
+This is a input vector that the transformation does not turn at all. 
+It is resized but not rotated.
+This appears in this chapter's first graphic, the one labeled~($*$)
+on page~\pageref{gr:firstgraphic}, 
+as the green input vector lying on the $y$-axis
+that is associated with the green output that also lies on the $y$-axis.
 
 
 
@@ -127,57 +132,60 @@ Here is its action on the unit circle.
 runfile("plot_action.sage")
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -5, 5) 
-q.save("graphics/eigen100a.png")
+q.save("graphics/eigen100a.pdf")
 p = plot_circle_action(1,2,3,4) 
 p.set_axes_range(-3, 3, -5, 5) 
-p.save("graphics/eigen100b.png")
+p.save("graphics/eigen100b.pdf")
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -5, 5) 
-q.save("graphics/eigen100a.png",dpi=1200)
+q.save("graphics/eigen100a.pdf")
 p = plot_circle_action(1,2,3,4) 
 p.set_axes_range(-3, 3, -5, 5) 
-p.save("graphics/eigen100b.png",dpi=1200)
+p.save("graphics/eigen100b.pdf")
 \end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{graphics/eigen100a.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen100a.pdf}}
   \quad\mapsunder{\big (\begin{smallmatrix} 1 &2 \\ 3 &4 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{graphics/eigen100b.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen100b.pdf}}
 \end{equation*}
 This graphs the angle between the each before arrow and its associated after
 arrows.
 \begin{sageoutput}[d,0,1]
 runfile("plot_action.sage")  
-angles = find_angles(1,2,3,4,1000)
+angles = find_angles(1,2,3,4,50)
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
 p = scatter_plot(angles, marker='.', ticks=ticks)
-p.save("graphics/eigen101.png", figsize=2.5, tick_formatter=pi)
+p.save("graphics/eigen101.pdf", figsize=2.5, tick_formatter=pi)
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
-angles = find_angles(1,2,3,4,1000)
+angles = find_angles(1,2,3,4,50)
 ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
-p = scatter_plot(angles, marker='.', markersize=10, edgecolor='blue', ticks=ticks)
-p.save("graphics/eigen101.png", figsize=2.5, tick_formatter=pi, dpi=1200)
+p = scatter_plot(angles, marker='.', markersize=2, facecolor='blue', edgecolor='blue', ticks=ticks)
+p.set_axes_range(0, pi, 0, pi) 
+p.save("graphics/eigen101.pdf", figsize=2.5, tick_formatter=pi)
 \end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{graphics/eigen101.png}}
-  \tag{**}
+  \vcenteredhbox{\includegraphics{graphics/eigen101.pdf}}
+  \tag{$**$}
 \end{equation*}
 This graph has two interesting points, where $y=0$ and where 
 $y=\pi$.
-In the second case
-the angle of $\pi$~radians means that the vector remains on the
-same line through the origin but is multiplied by a negative scalar.
 In both places the vector is not turned at all, only resized.
+In the second case
+the input vector is on the
+same line through the origin as the output,
+but it gets rescaled by a negative number.
 
 A vectors that is not turned by a transformation~$t$ but instead
 is purely resized 
-is an \textit{eigenvectors} for~$t$, and the amount by which it is 
+is an \textit{eigenvector} for~$t$ and the amount by which it is 
 resized is the \textit{eigenvalue} for that vector.
-For a fixed eigenvalue~$\lambda$, the set of vectors associated with
+
+For an eigenvalue~$\lambda$, the set of vectors associated with
 it is an \textit{eigenspace}.
 \begin{sageoutput}[s,3,59,13]
 M = matrix(RDF, [[1, 2], [3, 4]])
@@ -195,14 +203,18 @@ The \Sage{} operation \inlinecode{eigenvectors_left} covers the
 $\vec{v}M$ case and naturally \inlinecode{eigenvectors_right}
 covers the other.
 
-The first information that \Sage{} gives, \inlinecode{evs[0]}, 
-is that the set of vectors with a basis consisting of the single unit
+When computing the eigenvectors and eigenvalues, \Sage{} gives a list
+with two elements.
+The first element, \inlinecode{evs[0]}, 
+says that the set of vectors with a basis consisting of the single unit
 vector with endpoint approximately $(-0.91, 0.42)$  is an
-eigenspace associated with the eigenvalue approximately $-0.37$.
-\Sage{} also finds with \inlinecode{evs[1]} that a second eigenspace
-has a basis consisting of the vector with endpoint around
-$(-0.57, -0.82)$, associated with the
-eigenvalue about~$5.37$. 
+eigenspace associated with the eigenvalue approximately equal to $-0.37$
+(we ignore the trailing~$1$ here).
+The second element, \inlinecode{evs[1]}, 
+says that \Sage{} has found a second eigenspace
+whose a basis consisting of the single vector with endpoint around
+$(-0.57, -0.82)$ that is associated with the
+eigenvalue that is about~$5.37$. 
 
 \Sage{} will tell us which of those vectors is which on the graph 
 labeled~($**$).
@@ -216,9 +228,11 @@ n(angle_v/pi)
 (Remember that the \inlinecode{n()} function gives the numerical value of
 the argument.)
 So the eigenspace listed first is the one associated with the right-hand
-of the two interesting points in ($**$), the vector that is turned by
-$\pi$.
-That fits with the fact that the eigenvalue is a negative number.
+of the two interesting points in ($**$), the vector that is turned by an angle
+of $\pi$.
+That dovetails with the observation that the eigenvalue is a negative number 
+because both say that the transformation's action in passing from the
+domain to the codomain is to turn the vector around.
 
 \Sage{} can draw before and after pictures for the two eigenvectors.
 \begin{sageoutput}[d,0,3]
@@ -242,9 +256,14 @@ p.set_axes_range(-4, 1, -4.5, 1)
 p.save("graphics/eigen102.png", figsize=3.25, dpi=1200)
 \end{sagesilent}
 \noindent
-Each before vector is a unit vector, so it is easy to pick it from among the
+This picture has two pair of before and after vectors.
+One pair is in blue and one is in red.
+Each before vector is a unit vector so it is easy to pick it from among the
 two.
-The after vector is scaled from the before vector.
+Again we see that 
+the after vector is scaled from the before vector, 
+in the blue case by the positive factor $\lambda_2\approx 5.37$ and
+in the red case by the negative factor $\lambda_1\approx -0.37$.
 \begin{equation*}
   \vcenteredhbox{\includegraphics{graphics/eigen102.png}}
 \end{equation*}

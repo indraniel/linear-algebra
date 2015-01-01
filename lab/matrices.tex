@@ -20,18 +20,23 @@ A = matrix(QQ, [[1, 2], [3, 4]])
 A                               
 \end{sageoutput}
 \noindent
-As with the real numbers, \Sage{} has two choices for models of the complex
-numbers and we use here the one connected with the computer's hardware.
+Here we represent reals with the model connected to the computer's hardware
+floating point implementation. 
+For the complex
+numbers we've again 
+used floating points but there is an additional consideration.
 By default \Sage{} uses $i$ for the square root of $-1$ (in contrast with 
 \python, which uses~$j$).
-Note that before working with complex numbers we reset 
-$i$ because that letter is used for many things, so 
-resetting is a good habit.
+Note that before working with complex numbers we reset~$i$ 
+because that letter is used for many things\Dash perhaps earlier in 
+a session we used it for the index of an array and we want it to lose that
+prior value\Dash so 
+resetting is a good practice.
 
 Unless we have a reason to do otherwise, in this chapter
-we'll use rational numbers because the matrices easier to 
+we'll use rational numbers because the matrices are easier to 
 read\Dash $1$ is easier than $1.0$\Dash and 
-because the matrices in the book have rational entries.
+because the matrices in the book usually have rational entries.
 
 The \inlinecode{matrix} constructor allows you to specify the number of
 rows and columns.
@@ -40,10 +45,10 @@ B = matrix(QQ, 2, 3, [[1, 1, 1], [2, 2, 2]])
 B
 \end{sageoutput}
 \noindent
-If your specified size doesn't match the entries 
-\begin{sageoutput}
+If your specified size doesn't match the entries you list 
+\begin{lstlisting}[style=python]
 sage: B = matrix(QQ, 3, 3, [[1, 1, 1], [2, 2, 2]])  
-\end{sageoutput}
+\end{lstlisting}
 \noindent
 then \Sage's error says
 \inlinecode{Number of rows does not match up with specified number}.
@@ -105,14 +110,14 @@ C = matrix(QQ, [[0, 0, 2], [3, 2, 1]])
 A+C
 \end{sageoutput}
 \noindent
-Some of the lines in that output block don't contain key information so 
+Some of the lines in that output block don't contain useful information so 
 they've just been truncated.
 But the last line, which is so long it had to be broken and wrapped 
 twice, is where the action is.
 It says that the \inlinecode{+} operand is not defined between a
 $\nbyn{2}$~matrix and a $\nbym{2}{3}$~matrix.
 
-Scalar multiplication is also natural
+Scalar multiplication is also natural,
 so you have linear combinations.
 \begin{sageoutput}[d,0,2]
 A = matrix(QQ, [[1, 2], [3, 4]])
@@ -146,10 +151,10 @@ v = vector(QQ, [1, 2, 3, 4])
 v*A
 \end{sageoutput}
 \noindent
-As in the earlier error traceback 
-some lines are truncated and the final line is wrapped 
+As in the earlier error message, 
+some lines are truncated but the final line is wrapped 
 twice to show it all.
-That final line says, in short, that the product of a size~$4$ vector with
+It says, in short, that the product of a size~$4$ vector with
 a size~$\nbym{2}{4}$ matrix is not defined.
 
 Of course you can multiply from the left by a vector if it has a size that 
@@ -160,12 +165,13 @@ w = vector(QQ, [3, 5])
 w*A
 \end{sageoutput}
 \noindent
-In practice you will see matrix-vector multiplications done with vectors
-on the left, and others on the right.
-In the book we multiply on the right, just to settle on one rather than
-switch around arbitrarily (and to have the matrix application
-$H\vec{x}$ fit with the map application $h(x)$).
-\Sage{} will do either, although in some ways it has a preference
+In practice you will sometimes 
+see matrix-vector multiplications done with vectors
+on the left, and sometimes on the right.
+The textbook has the vector on the right, 
+to have the product
+$H\vec{x}$ fit visually with the map application $h(x)$.
+\Sage{} will do either, although it has something of a preference
 for the vector on the left (as we will see in Chapter~\ref{chapter:maps}).
 
 
@@ -179,7 +185,7 @@ B = matrix(QQ, [[5, 6, 7], [8, 9, 10]])
 A*B
 \end{sageoutput}
 Trying $\inlinecode{B*A}$ gives an error 
-\inlinecode{TypeError: unsupported operand parent(s) for '*'}, meaning that
+\inlinecode{TypeError: unsupported operand parent(s) for '*'}, reflecting that
 the product operation in this order is undefined.
 % \begin{sageoutput}
 % A = matrix(QQ, [[2, 1], [4, 3]])
@@ -213,7 +219,7 @@ random_matrix(RDF, 3, min=-1, max=1)
 \noindent  
 (Note the \inlinecode{RDF}.
 We prefer real number entries here because
-\inlinecode{random_matrix} 
+\Sage's \inlinecode{random_matrix} 
 is more straightforward in this case than in the  
 rational entry case.)
 % \begin{sageoutput}
@@ -250,9 +256,9 @@ A = matrix(QQ, [[1, 3, 1], [2, 1, 0], [4, -1, 0]])
 A.is_singular()
 \end{sageoutput}
 \noindent
-We have a formula for $\nbyn{2}$ matrix inverses
-but in the book to by-hand compute inverses for larger matrices 
-we write the original matrix next to the identity, 
+For $\nbyn{2}$ matrix inverses we have a formula.
+In the book to do by-hand inverses for larger cases 
+we write the original matrix next to the identity 
 and then do Gauss-Jordan reduction.
 \begin{sageoutput}[d,0,1]
 A = matrix(QQ, [[1, 3, 1], [2, 1, 0], [4, -1, 0]])
@@ -275,7 +281,7 @@ A*A_inv
 A_inv*A
 \end{sageoutput}
 
-Since this is an operation that \Sage{} users do all the time, there is a
+This is an operation that \Sage{} users do all the time so there is a
 standalone command.
 \begin{sageoutput}[d,0,1]
 A = matrix(QQ, [[1, 3, 1], [2, 1, 0], [4, -1, 0]])
@@ -326,25 +332,25 @@ Since computers are fast and accurate
 they open up the possibility of solving problems that are quite large.
 Large linear algebra problems occur frequently in science and
 engineering.
-In this section we will suggest what limits there are to computers.
+In this section we will suggest what limits there are to how big the 
+problems can get, and still be solvable.
 (In this section we will use matrices with real entries because they are 
 common in applications.)
 
-One of the limits on just how large a problem we can do is how quickly the 
-computer program can give answers.
+One of the limits on just how large a problem we can do is how quickly 
+the computer can give us the answer.
 Naturally computers take longer to perform operations 
 on matrices that are larger
 but it may be that the time the program takes to compute the answer
 grows more quickly than does the size of the problem\Dash for instance, 
-when the size of the matrix doubles then the time to 
+it may be that when the size of the problem doubles then the time to 
 do the job more than doubles.
 
-We will time the matrix inverse operation.
+The matrix inverse operation is a good illustration.
 This is an important operation; for instance, if we could do large matrix 
 inverses
 quickly then we could quickly solve large linear systems, 
 with just a matrix-vector product.
-We also use it because it makes a good illustration.
 \begin{sageoutput}
 A = matrix(RDF, [[1, 3, 1], [2, 1, 0], [4, -1, 0]])
 A
@@ -352,9 +358,9 @@ A.is_singular()
 timeit('A.inverse()')
 \end{sageoutput}
 \noindent
-Note that \Sage's \inlinecode{timeit} runs the command 
-many times and makes a best guess about how long
-the operation ideally takes, because on any one time your
+\Sage's \inlinecode{timeit} makes a best guess about how long
+the operation ideally takes by running the command 
+a number of times, because on any one time your
 computer may have been slowed down by a 
 disk write or some other interruption.
 
@@ -363,7 +369,8 @@ A single microsecond is
 $0.000\,001$~seconds.
 That's fast, but then $A$ is only a $\nbyn{3}$ matrix.
 
-Worse, $A$ is a particular~$\nbyn{3}$ matrix, and you'd like to know
+And, $A$ is a particular~$\nbyn{3}$ matrix. 
+You'd like to know
 how long it takes to invert a generic, or average, matrix.
 You could try finding the inverse of a random matrix.
 \begin{sageoutput}
@@ -381,7 +388,7 @@ In addition, there is a subtler point: we also can't tell right away if
 this command generates many random matrices and finds 
 each's inverse,
 or if it generates one random matrix and applies the inverse many times.
-This code at least makes that point clear.
+The next code at least makes that point clear.
 For the sizes $\nbyn{3}$, $\nbyn{10}$, etc.,
 if finds a single random matrix and then 
 gets the time to compute its inverse.
@@ -436,29 +443,28 @@ d = [(3, 0.000125), (10, 0.000940), (25, 0.012),
      (50, 0.0924), (75, 0.308), (100, 0.727), 
      (150, 2.45), (200, 5.78)]
 g = scatter_plot(d)  
-g.save("graphics/mat001.png")            
+g.save("graphics/mat001.pdf")            
 \end{sageoutput}
 \begin{sagesilent}
 d = [(3, 0.000125), (10, 0.000940), (25, 0.012),  
      (50, 0.0924), (75, 0.308), (100, 0.727), 
      (150, 2.45), (200, 5.78)]
 g = scatter_plot(d, markersize=10, facecolor='#b9b9ff')
-g.save("graphics/mat001.png", figsize=[2.25,1.5], axes_pad=0.05, fontsize=7, dpi=1200)              
+g.save("graphics/mat001.pdf", figsize=[2.25,1.5], axes_pad=0.05, fontsize=7)
 \end{sagesilent}
 \noindent
 (If you enter \inlinecode{scatter_plot(d)} at the prompt, that is, 
 without saving it as~$g$, then \Sage{} will pop up a window with the
-graphic.)\footnote{The graphics shown in this book were generated using a few 
-more of \protect\Sage's drawing options than appear in the output block,
-both to make them easier to read and to fit the page width.
-For instance, this graphic was generated with the command
-\protect\inlinecode{g = scatter_plot(d, markersize=10, facecolor='#b9b9ff')}.
-The \protect\Sage{} command used to get the plot here was 
-\protect\inlinecode{g.save("graphics/mat001.png", figsize=[2.25,1.5], axes_pad=0.05, fontsize=7, dpi=1200)}.
+graphic.)\footnote{The graphics in this manual are generated using 
+more drawing options than appear in the output block.
+For instance, the scatter plot here came from
+\protect\inlinecode{g = scatter_plot(d, markersize=10, facecolor='#b9b9ff')}
+and was saved in a file with
+\protect\inlinecode{g.save("graphics/mat001.pdf", figsize=[2.25,1.5], axes_pad=0.05, fontsize=7)}.
 We shall omit much of this code about decoration as clutter.
 See the \protect\Sage{} manual for \protect\inlinecode{plot} options.}
 \begin{center}
-  \includegraphics{graphics/mat001.png}
+  \includegraphics{graphics/mat001.pdf}
 \end{center}
 The graph dramatizes that the ratio $\text{time}/\text{size}$
 is not constant
@@ -495,7 +501,7 @@ d = [(3, 0.000125), (10, 0.000940), (25, 0.012),
      (150, 2.45), (200, 5.78)]
 d = d + [(500, 89.2), (750, 299), (1000, 705)]
 g = scatter_plot(d)                           
-g.save("graphics/mat002.png")                      
+g.save("graphics/mat002.pdf")                      
 \end{sageoutput}
 \begin{sagesilent}
 d = [(3, 0.000125), (10, 0.000940), (25, 0.012),  
@@ -503,11 +509,11 @@ d = [(3, 0.000125), (10, 0.000940), (25, 0.012),
      (150, 2.45), (200, 5.78)]
 d = d + [(500, 89.2), (750, 299), (1000, 705)]
 g = scatter_plot(d, markersize=10, facecolor='#b9b9ff')
-g.save("graphics/mat002.png", figsize=[2.25,2.25], axes_pad=0.05, fontsize=7, dpi=1200)              
+g.save("graphics/mat002.pdf", figsize=[2.25,2.25], axes_pad=0.05, fontsize=7)              
 \end{sagesilent}
 The result is this graphic.
 \begin{center}
-  \includegraphics{graphics/mat002.png}
+  \includegraphics{graphics/mat002.pdf}
 \end{center}
 Note that the two graphs have different scales;
 if you generated this graph with the same vertical scale as the prior one
@@ -519,7 +525,7 @@ not a line.
 The time required grows much faster than the size, and just gets too large. 
 
 A major effort in Computer Science is to find fast algorithms to 
-do tasks.
+do practical tasks.
 Many people have worked on tasks in Linear Algebra in particular,
 such as finding the inverse of a matrix, because
 they are so common in applications.

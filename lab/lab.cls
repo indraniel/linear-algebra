@@ -402,7 +402,7 @@
 \newcommand{\noterightmult}{Recall that 
 \protect\Sage{} prefers to do matrix-vector 
 multiplication as $\vec{v}M$ (here $\vec{v}$ is a row vector).
-Translate to the book's convention by transposing
+Translate to the book's convention by transposing,
 $\trans{M}\trans{\vec{v}}$.
 See the discussion on page~\protect\pageref{sec:leftright}. 
 % Can't get LaTeX to take the equation* environment, although a test file does fine.

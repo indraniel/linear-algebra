@@ -14,7 +14,7 @@ The other is \Sagecmd{RR}, an arbitrary precision model of
 reals.\footnote{It defaults to $53$~bits of precision to reproduce 
 double-precision computations.}
 The second model is useful in some circumstances but the first runs faster
-and is more widely used in practice so that is what we will use.
+and is more widely used in practice so that is what we will use here.
  
 
 
@@ -23,20 +23,26 @@ and is more widely used in practice so that is what we will use.
 %========================================
 \section{Real $n$-spaces}
 
-Start by creating a real vector space~$\Re^3$.
+\Sage{} allows us to create vector spaces.
+Here is~$\Re^3$.
 \begin{sageoutput}
-V = RDF^3
+V = VectorSpace(RDF,3)
 V
 \end{sageoutput}
-You can test for membership.
-\begin{sageoutput}[d,0,1]
-V = RDF^3
-v1 = vector(RDF, [1, 2, 3])
-v1
-v1 in V
-v2 = vector(RDF, [1, 2, 3, 4])
-v2 in V
-\end{sageoutput}
+% Omit this until the bug is fixed.
+% https://groups.google.com/forum/#!topic/sage-support/ObKhoCN3KCs
+% and
+% http://trac.sagemath.org/ticket/17576
+% ............. 
+% You can test for membership.
+% \begin{sageoutput}[d,0,1]
+% V = VectorSpace(RDF,3)
+% v1 = vector(RDF, [1, 2, 3])
+% v1
+% v1 in V
+% v2 = vector(RDF, [1, 2, 3, 4])
+% v2 in V
+% \end{sageoutput}
 
 Next we can try subspaces.
 The plane through the origin in $\Re^3$ described by the equation
@@ -49,10 +55,10 @@ You can describe it as a span.
   =\set{\colvec{2 \\ 1 \\ 0}y+\colvec[r]{-2 \\ 0 \\ 1}z
         \suchthat y,z\in\Re}
 \end{equation*}
-You can create that subspace
-and you can check it by doing some membership tests.
+In addition to creating that subspace,
+you can test membership.
 \begin{sageoutput}
-V = RDF^3 
+V = VectorSpace(RDF,3) 
 v1 = vector(RDF, [2, 1, 0])
 v2 = vector(RDF, [-2, 0, 1])
 W = V.span([v1, v2])
@@ -62,25 +68,26 @@ v4 = vector(RDF, [1, 0, 0])
 v4 in W
 \end{sageoutput}
 
-For a closer look at what's happening here, create a subspace of $\Re^4$.
+For a closer look at what's happening, look at this subspace of $\Re^4$.
 \begin{sageoutput}
-V = RDF^4
+V = VectorSpace(RDF,4)
 V
 v1 = vector(RR, [2, 0, -1, 0])
 W = V.span([v1])
 W
 \end{sageoutput}
+As part of creating it,
 \Sage{} has identified the dimension of the subspace and found
 a basis containing one vector (it prefers the vector with a leading~$1$).
 
 As earlier, the membership set relation works here.
 \begin{sageoutput}[d,0,3]
-V = RDF^4
-v1 = vector(RR, [2, 0, -1, 0])
+V = VectorSpace(RDF,4)
+v1 = vector(RDF, [2, 0, -1, 0])
 W = V.span([v1])
-v2 = vector(RR, [2, 1, -1, 0])
+v2 = vector(RDF, [2, 1, -1, 0])
 v2 in W
-v3 = vector(RR, [-4, 0, 2, 0])
+v3 = vector(RDF, [-4, 0, 2, 0])
 v3 in W
 \end{sageoutput}
 
@@ -89,7 +96,7 @@ v3 in W
 \subsection{Basis}
 \Sage{} has a command to retrieve a basis for a space.
 \begin{sageoutput}
-V = RDF^2
+V = VectorSpace(RDF,2)
 v = vector(RDF, [1, -1])
 W = V.span([v])     
 W.basis()
@@ -97,7 +104,7 @@ W.basis()
 \noindent
 This is the basis you will see if you ask for a description of $W$.
 \begin{sageoutput}[d,0,3]
-V = RDF^2
+V = VectorSpace(RDF,2)
 v = vector(RDF, [1, -1])
 W = V.span([v])     
 W  
@@ -105,7 +112,7 @@ W
 
 Of course, there are subspaces with bases of size greater than one.
 \begin{sageoutput}
-V = RDF^3               
+V = VectorSpace(RDF,3)               
 v1 = vector(RDF, [1, -1, 0]) 
 v2 = vector(RDF, [1, 1, 0]) 
 W = V.span([v1, v2])       
@@ -114,7 +121,7 @@ W.basis()
 Adding a linearly dependent vector $\vec{v}_3$ to the spanning
 set doesn't change the space.
 \begin{sageoutput}[d,0,3]
-V = RDF^3               
+V = VectorSpace(RDF,3)               
 v1 = vector(RDF, [1, -1, 0]) 
 v2 = vector(RDF, [1, 1, 0]) 
 W = V.span([v1, v2])       
@@ -138,7 +145,7 @@ this is the \textit{canonical basis} for the space.
 It is this basis that \Sage{} shows when you ask for a description
 of the space.
 \begin{sageoutput}[d,0,3]
-V=RDF^3               
+V = VectorSpace(RDF,3)               
 v1 = vector(RDF, [1, -1, 0]) 
 v2 = vector(RDF, [1, 1, 0]) 
 W = V.span([v1, v2])       
@@ -151,7 +158,7 @@ W_prime
 If you are keen on your own basis then \Sage{} will
 accommodate you.
 \begin{sageoutput}
-V = RDF^3
+V = VectorSpace(RDF,3)
 v1 = vector(RDF, [1, 2, 3])
 v2 = vector(RDF, [2, 1, 3])
 W = V.span_of_basis([v1, v2])
@@ -166,7 +173,7 @@ W
 
 You can test whether spaces are equal.
 \begin{sageoutput}
-V = RDF^4
+V = VectorSpace(RDF,4)
 v1 = vector(RDF, [1, 0, 0, 0])
 v2 = vector(RDF, [1, 1, 0, 0])
 W12 = V.span([v1, v2])
@@ -177,7 +184,7 @@ W13 = V.span([v1, v3])
 One way to assure yourself that the two spaces $W_{1,2}$ and $W_{1,3}$ 
 are equal is to use set membership.
 \begin{sageoutput}[d,0,6]
-V = RDF^4
+V = VectorSpace(RDF,4)
 v1 = vector(RDF, [1, 0, 0, 0])
 v2 = vector(RDF, [1, 1, 0, 0])
 W12 = V.span([v1, v2])
@@ -190,9 +197,9 @@ v2 in W13
 Then, since obviously $\vec{v}_1\in W_{1,2}$ and $\vec{v}_1\in W_{1,3}$, the two
 spans are equal.
 
-But the more straightforward approach is to just ask \Sage{}.
+But the more straightforward way to test equality is to just ask \Sage{}.
 \begin{sageoutput}[d,0,6]
-V = RDF^4
+V = VectorSpace(RDF,4)
 v1 = vector(RDF, [1, 0, 0, 0])
 v2 = vector(RDF, [1, 1, 0, 0])
 W12 = V.span([v1, v2])
@@ -200,11 +207,11 @@ v3 = vector(RDF, [2, 1, 0, 0])
 W13 = V.span([v1, v3])  
 W12 == W13
 \end{sageoutput}
-
-Your exercise of \inlinecode{==} equality between spaces 
-would be only half-hearted without an test of inequality. 
+\noindent
+The exercise of \inlinecode{==} equality 
+would be half-hearted without a test of inequality. 
 \begin{sageoutput}[d,0,6]
-V = RDF^4
+V = VectorSpace(RDF,4)
 v1 = vector(RDF, [1, 0, 0, 0])
 v2 = vector(RDF, [1, 1, 0, 0])
 W12 = V.span([v1, v2])
@@ -247,7 +254,7 @@ Form two spans, the $xy$-plane $W_{1,2}=\spanof{\vec{v}_1, \vec{v}_2}$
 and the $yz$-plane $W_{2,3}=\spanof{\vec{v}_2, \vec{v}_3}$.
 The intersection of these two is the $y$-axis. 
 \begin{sageoutput}
-V=RDF^3
+V = VectorSpace(RDF,3)
 v1 = vector(RDF, [1, 0, 0])
 v2 =  vector(RDF, [0, 1, 0])
 W12 = V.span([v1, v2])
@@ -261,7 +268,7 @@ W.basis()
 
 Remember that the trivial space $\set{\zero}$ is the span of the empty set.
 \begin{sageoutput}[d,0,4]
-V=RDF^3
+V = VectorSpace(RDF,3)
 v1 = vector(RDF, [1, 0, 0])
 v2 =  vector(RDF, [0, 1, 0])
 W12 = V.span([v1, v2])
@@ -274,7 +281,7 @@ W4.basis()
 
 \Sage{} will also find the sum of spaces, the span of their union.
 \begin{sageoutput}[d,0,6]
-V=RDF^3
+V = VectorSpace(RDF,3)
 v1 = vector(RDF, [1, 0, 0])
 v2 =  vector(RDF, [0, 1, 0])
 W12 = V.span([v1, v2])
@@ -295,13 +302,13 @@ W5
 \section{Other spaces}
 
 These computations extend to
-vector spaces that aren't a subspace of some $\Re^n$.
-You only need to find a real space that is just like the one you have.
+vector spaces that aren't a subspace of some $\Re^n$
+by finding a real space that is just like the one you have.
 
-Consider the vector space of quadratic polynomials
-(under the usual operations of polynomial addition and scalar multiplication).
+Consider this vector space of quadratic polynomials,
+under the usual operations of polynomial addition and scalar multiplication.
 \begin{equation*}
-  \set{ a_2x^2+a_1x+a_0\suchthat a_2-a_1=a_0}           
+  \set{ a_2x^2+a_1x+a_0\suchthat a_2=a_0+a_1}           
    =\set{ (a_1+a_0)x^2+a_1x+a_0 \suchthat a_1,a_0\in\Re}
 \end{equation*}
 It is just like
@@ -312,7 +319,7 @@ this subspace of $\Re^3$.\footnote{The textbook's chapter on Maps Between Spaces
   =\set{\colvec{1 \\ 1 \\ 0}a_1+\colvec{1 \\ 0 \\ 1}a_0\suchthat a_1,a_0\in\Re}
 \end{equation*}
 \begin{sageoutput}
-V = RDF^3
+V = VectorSpace(RDF,3)
 v1 = vector(RDF, [1, 1, 0])
 v2 = vector(RDF, [1, 0, 1])
 W = V.span([v1, v2])
@@ -346,7 +353,7 @@ Rewrite the given space
 \end{equation*}
 and then here is a natural matching real space.
 \begin{sageoutput}
-V = RDF^4
+V = VectorSpace(RDF,4)
 v1 = vector(RDF, [-1, 0, 1, 0])
 v2 = vector(RDF, [-1, -1, 0, 1])
 W = V.span([v1, v2])
@@ -355,14 +362,14 @@ W.basis()
 You could have gotten another matching space by going down the columns 
 instead of across the rows.  
 \begin{sageoutput}
-V = RDF^4
+V = VectorSpace(RDF,4)
 v1 = vector(RDF, [-1, 1, 0, 0])
 v2 = vector(RDF, [-1, 0, -1, 1])
 W = V.span([v1, v2])
 W.basis()
 \end{sageoutput}
 \noindent
-There are other ways to produce a matching space.
+There are still other ways to produce a matching space.
 They look different than each other
 but the important things about the spaces, such as dimension, are 
 unaffected by their look.

@@ -10,11 +10,11 @@ line through the origin
 is determined by the action
 of $h$ on any nonzero vector in that line.
 
-For instance consider the line~$y=2x$ in the plane.
+For instance, consider the line~$y=2x$ in the plane,
 \begin{equation*}
   \set{r\cdot\colvec{1 \\ 2}\suchthat r\in\Re}
 \end{equation*}
-If $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
+suppose that $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
 \begin{equation*}
   \rep{t}{\stdbasis_2,\stdbasis_2}
   =
@@ -23,12 +23,16 @@ If $\map{t}{\Re^2}{\Re^2}$ is represented by the matrix
     3 &4
   \end{mat}
 \end{equation*}
-then here is the effect of $t$ on one vector in the line
-(calculating with the vector on the left $\vec{v}T$).
+then here is the effect of $t$ on one of the line's vectors
+(calculating with the vector on the left $\vec{v}T$).\footnote{\noterightmult}
 \begin{equation*}
   \vec{v}=\colvec{1 \\ 2}\mapsunder{t}\colvec{7 \\ 10}
 \end{equation*}
-The map $t$ has twice the effect on $2\vec{v}$, three times the
+The point is that the 
+scalar multiplication property in the definition of linear map 
+imposes a simple
+uniformity on its action on lines through the origin:
+the map $t$ has twice the effect on $2\vec{v}$, three times the
 effect on $3\vec{v}$, etc.
 \begin{equation*}
   \colvec{2 \\ 4}\mapsunder{t}\colvec{14 \\ 20}
@@ -37,9 +41,10 @@ effect on $3\vec{v}$, etc.
   \qquad
   \colvec{r \\ 2r}\mapsunder{t}\colvec{7r \\ 10r}
 \end{equation*}
-So this condition in the definition of linear map imposes a simple
-uniformity on its action on lines through the origin.
-
+The action of of a linear map on any vector in a 
+line through the origin
+is determined by the action
+of that map on any single nonzero vector in that line.
 
 
 
@@ -92,8 +97,7 @@ the unit circle by this matrix.
     c &d
   \end{mat}
 \end{equation*}
-The colors are for the 
-before and after pictures below.
+(The reason for the colors is given below.)
 
 Here is the effect of 
 the transformation 
@@ -102,7 +106,7 @@ the transformation
 \end{equation*}
 that doubles the $x$~component of input vectors. 
 It shows before and after, the upper half circle domain
-and the output codomain.\footnote{noterightmult}
+and the output codomain.
 \begin{sageoutput}[d,0,4;d,5,7]
 runfile("plot_action.sage")
 q = plot_circle_action(1,0,0,1) 
@@ -263,7 +267,7 @@ and if both have length zero then it is a point.}
 Write $\sigma_1$ for the length of the semi-major axis, 
 the distance from the center to the furthest-away point on the ellipse,
 and write $\sigma_2$ for the length of the semi-minor axis.
-\begin{sageoutput}[d,0,4]
+\begin{sageoutput}[d,0,3]
 plot.options['axes_pad'] = 0.5
 plot.options['fontsize'] = 5
 plot.options['aspect_ratio'] = 1
@@ -434,7 +438,7 @@ semi-minor axis.
 \section{Proof sketch}
 
 \textit{This argument, 
-adapted from \cite{BlankKrikorianSpring89},
+from \cite{BlankKrikorianSpring89},
 is a sketch because it uses results that a typical reader has only 
 seen in a less general version and because it relies on material from the
 book that is optional.
@@ -455,49 +459,50 @@ is closed and bounded then its image under~$t$ is closed and bounded.
 Although we won't prove this, the image is an ellipsoid
 so we will call it that. 
 
-Because this ellipsoid is closed and bounded it has (at least one) 
-point furthest from the origin.
+Because this ellipsoid is closed and bounded it has a 
+point furthest from the origin (it may have more than one but we just pick one).
 Let $\vec{w}$ be a vector extending from the origin to that furthest point.
 Let $\vec{v}$ be the member of the unit sphere that maps to $\vec{w}$.
-Let $P$ be the plane that touches the sphere only at the endpoint of $\vec{v}$.
+Let $P$ be the plane tangent to the sphere at the endpoint of $\vec{v}$.
 Let $Q$ be the image of $P$ under~$t$.
 Since $t$ is one-to-one, $Q$ touches the ellipsoid only at~$\vec{w}$.
 \begin{center}
   \includegraphics{asy/ellipsoid1.pdf}
 \end{center}
 
-The picture shows that if we slide the tangent plane~$P$ along the 
+The picture illustrates that if we slide~$P$ along the 
 vector~$\vec{v}$ to
 the origin then we can recognize it as 
 the subspace of $\Re^n$ of vectors perpendicular
 to~$\vec{v}$.
 This subspace has dimension~$n-1$. 
-We will argue below 
-that if we similarly slide $Q$ to the origin then we have the
-set of vectors perpendicular to~$\vec{w}$.
+We will argue in the next paragraph 
+that similarly $Q$ contains only
+vectors perpendicular to~$\vec{w}$.
 With that we will have what we need for an argument by induction:~we 
 start constructing the 
 bases~$B$ and~$D$ by taking $\vec{\beta}_1$ to be~$\vec{v}$, taking
 $\sigma_1$ to be the length $\norm{\vec{w}}$, and taking
 $\vec{\delta}_1$ to be $\vec{w}/\norm{\vec{w}}$.
-Then we proceed by considering the restriction of $t$ to~$P$.
+Then induction proceeds by taking the restriction of $t$ to~$P$.
 
 Therefore consider~$Q$.
-There is a unique plane that touches the ellipsoid
-only at~$\vec{w}$ since if there were another then its inverse image
+The plane that touches the ellipsoid
+only at~$\vec{w}$ is unique since if there were another then its inverse image
 under $t$
 would be a second plane, besides~$P$, 
 that touches the sphere only at~$\vec{v}$, which is impossible (since it is a
 sphere).
-To see that $Q$ is perpendicular to~$\vec{w}$ consider a sphere
+To see that $Q$ is perpendicular to~$\vec{w}$ consider a sphere in the codomain
 centered at the origin whose radius is $\norm{\vec{w}}$.
-This sphere has a plane tangent at the endpoint of~$\vec{w}$, 
-which is perpendicular
+This sphere has a plane tangent at the endpoint of~$\vec{w}$ 
+that is perpendicular
 to $\vec{w}$.
 Because $\vec{w}$ ends at a point on the ellipsoid furthest from the origin,
-the ellipsoid is entirely contained in the sphere, so this plane touches
-the ellipsoid only at~$\vec{w}$.
-Therefore, from the second sentence of this paragraph, this plane is~$Q$. 
+the ellipsoid is entirely contained in this sphere, so its tangent plane 
+touches the ellipsoid only at~$\vec{w}$.
+Therefore, from the second sentence of this paragraph, 
+this tangent plane is~$Q$. 
 That ends the argument.
 
 
@@ -698,7 +703,7 @@ If we instead express the matrix as a sum then
 each term requires 
 $n$~real numbers for $\vec{u}_i$, another $n$ reals for~$\vec{v}_i$, and one
 more real for $\sigma_i$.
-So keeping all the terms would require $500\cdot(2cdot 500+1)=500\,500$~reals,
+So keeping all the terms would require $500\cdot(2\cdot 500+1)=500\,500$~reals,
 which is twice the data of the original matrix.
 
 But keeping only some of the terms, say the first $50$ of them, 
@@ -799,13 +804,13 @@ That is, selecting a cutoff parameter is an engineering decision where
 on a fidelity versus resource-consumption continuum 
 you choose a value appropriate for your application.
  
-Experimenting with percentage value shows that setting
+Experimenting shows that setting
 the cutoff parameter to $0.20$ is enough to make the output image hard to tell
 from the original.
-For a final contrast, below we use this cutoff on the picture of Suzy 
+Below is the picture of Suzy 
 from this manual's cover.
 On the left is the original image
-and on the right it is squeezed using $0.20$.
+and on the right it is squeezed using a parameter value of~$0.20$.
 \begin{center}
   \vcenteredhbox{\includegraphics[width=.4\textwidth]{suzy_cover.png}}
   \quad
@@ -837,7 +842,8 @@ If this routine is plotting the upper half circle then it adds a
 small empty circle at the end to show that the image of $(-1,0)$
 is not part of the graph.
 
-The global variable \inlinecode{CIRCLE_THICKNESS} sets the thickness of 
+There are two global values to set graphic values.
+The variable \inlinecode{CIRCLE_THICKNESS} sets the thickness of 
 the plotted curve, in points (a printer's unit, here $1/72$~inch).
 Similarly \inlinecode{DOT_SIZE} sets the size of the small empty circle.
 
@@ -861,19 +867,19 @@ three Python arrays \inlinecode{rd}, \inlinecode{gr},
 and \inlinecode{bl}, which then initialize the 
 three \Sage{} matrices \inlinecode{RD},
 \inlinecode{GR}, and~\inlinecode{BL}.
-\lstinputlisting[firstline=9,lastline=23]{img_squeeze.sage}
+\lstinputlisting[firstline=9,lastline=24]{img_squeeze.sage}
 
 The next step finds the Singular Value Decomposition of those three.
 Out of curiosity, we have a peek at the eight largest singular
 values in the red matrix, the singular value where we make the cutoff,
 and the eight smallest.
-\lstinputlisting[firstline=24,lastline=36]{img_squeeze.sage}
+\lstinputlisting[firstline=25,lastline=34]{img_squeeze.sage}
 
 Finally, for each matrix we compute the sum
 $\sigma_1\cdot\vec{u}_1\trans{\vec{v}}_1+\sigma_2\cdot\vec{u}_2\trans{\vec{v}}_2
    +\cdots$
 up through the cutoff index.
-\lstinputlisting[firstline=37,lastline=56]{img_squeeze.sage}
+\lstinputlisting[firstline=39,lastline=58]{img_squeeze.sage}
 The code asks for the transpose of the
 \protect\inlinecode{U_RD.column(i)}, etc., which may seem to be a mistake.
 Remember that \protect\Sage{} favors rows for vectors, so this is how we
@@ -881,12 +887,12 @@ make the $\vec{u}$ vector a column, while $\vec{v}$ is already a row.
 Because of this operation on the vector, the first time you run this
 code in a \protect\Sage{} session you may get a depreciation warning.
 
-To finish, we put the data in the \path{.PNG} format and save it to 
-disk.\lstinputlisting[firstline=57,lastline=66]{img_squeeze.sage}
-This part of the routine function takes a very long time to run, in part because
+To finish, we put the data in the \path{.png} format and save it to 
+disk.\lstinputlisting[firstline=59,lastline=68]{img_squeeze.sage}
+This part of the routine takes a long time, in part because
 the code is intended to be easy to read rather than fast.
-Consequently, in the function source there are some status lines that
-help convince a person executing the code that it is still working; 
+Consequently, in the source there are some status lines to
+convince a user that it is still working; 
 those busy-work lines are left out of 
 some of the earlier output listings.
 
