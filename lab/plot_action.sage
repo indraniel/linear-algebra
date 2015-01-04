@@ -163,8 +163,8 @@ def before_after_list(a, b, c, d, pts, colors=None):
     r = []
     for dex, pt in enumerate(pts):
         x, y = pt
-        v = vector(RR, pt)
-        M = matrix(RR, [[a, b], [c, d]])
+        v = vector(RDF, pt)
+        M = matrix(RDF, [[a, b], [c, d]])
         f_x, f_y = v*M
         if colors:
             color = colors[dex]
@@ -175,9 +175,9 @@ def before_after_list(a, b, c, d, pts, colors=None):
                             thickness=BA_THICKNESS))
         else:
             r.append(arrow((0,0), (x,y), color=color, 
-                     width=BA_THICKNESS, arrowsize=10*BA_THICKNESS))
+                     width=BA_THICKNESS, arrowsize=2*BA_THICKNESS))
             r.append(arrow((0,0), (f_x,f_y), color=color, 
-                     width=BA_THICKNESS, arrowsize=10*BA_THICKNESS))
+                     width=BA_THICKNESS, arrowsize=2*BA_THICKNESS))
     return r
 
 def plot_before_after_action(a, b, c, d, pts, colors=None):
@@ -194,31 +194,69 @@ def plot_before_after_action(a, b, c, d, pts, colors=None):
     p = plot(G)
     return p
 
-def find_angles(a,b,c,d,num_pts):
+def find_angles(a,b,c,d,num_pts,lower_limit=None,upper_limit=None):
     """Apply the matrix to points around the upper half circle, and 
-    return the angles between the input and output vectors.
-      a, b, c, d  reals  Upper left, ur, ll, lr or matrix.
+    return the angle between the input and output vectors.
+      a, b, c, d  reals  Upper left, ur, ll, lr of matrix.
       num_pts  positive integer  number of points
+      lower_limit=0, upper_limit=pi  ignore angles outside these limits
     """
+    if lower_limit is None:
+        lower_limit=0
+    if upper_limit is None:
+        upper_limit=pi
     r = []
-    M = Matrix(RR, [[a, b], [c, d]])
+    M = Matrix(RDF, [[a, b], [c, d]])
     for i in range(num_pts):
         t = i*pi/num_pts
+	if ((t<lower_limit) or (t>upper_limit)):
+	    continue
         pt = (cos(t), sin(t))
-        v = vector(RR, pt)
+        v = vector(RDF, pt)
         w = v*M
         try:
-            angle = arccos(w*v/(w.norm()*v.norm()))
-            # angle_v = atan2(v[1], v[0])
-            # angle_w = atan2(w[1], w[0])
-            # angle =  angle_w - angle_v
+            angle = arccos(w*v/(1.0*w.norm()*v.norm()))
         except:
             angle = None
         r.append((t,angle))
     return r
 
+MARKERSIZE = 2
+TICKS = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
+def color_angles_list(a, b, c, d, num_pts, colors):
+    """Return list of graph instances for the action of a 2x2 matrix on 
+    half of the unit circle.  That circle is broken into chunks each
+    colored a different color.
+      a, b, c, d  reals  entries of the matrix ul, ur, ll, lr
+      colors  list of rgb tuples; len of this list is how many chunks
+    (Terribly inefficient; runs through scatter_points many times)
+    """
+    r = []
+    num_colors = len(colors)
+    for i in range(num_colors):
+        color = colors[i]
+	# print "color=",repr(color)
+	points = find_angles(a,b,c,d,num_pts,lower_limit=i*pi/num_colors,upper_limit=(i+1)*pi/num_colors)
+        g = scatter_plot(points,facecolor=color,edgecolor=color,markersize=MARKERSIZE,ticks=TICKS) 
+        r.append(g)
+    return r
+
+def plot_color_angles(a, b, c, d, num_points=1000):
+    """Show the action of the matrix with entries a, b, c, d on half
+    of the unit circle, broken into a number of colors.
+     a, b, c, d  reals  Entries are upper left, ur, ll, lr.
+     num_points=1000  Number of points along half circle to plot
+    """
+    colors = rainbow(num_points*1.5)[:num_points]   # just a hack
+    # colors = rainbow(6)
+    G = Graphics()  # holds graph parts until they are to be shown
+    for g_part in color_angles_list(a,b,c,d,num_points,colors):
+        G += g_part
+    return plot(G)    
+
+
 plot.options['figsize'] = 2.5
 plot.options['axes_pad'] = 0.05
 plot.options['fontsize'] = 7
-plot.options['dpi'] = 500
+plot.options['dpi'] = 1200
 plot.options['aspect_ratio'] = 1

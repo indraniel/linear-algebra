@@ -101,10 +101,16 @@ then
      echo $result
      eval $result
   done
+  cd ..
 
   # Create the graphics for the optional slides.
-  sage three_ii_a.sage 
-
+  echo ".. create graphics for optional slides (can take ten minutes)"
+  sage ./three_ii_a.sage 
+  sage ./five_ii_a.sage
+  cd graphics
+  ./fix_pdf_error.sh
+  cd ..
+ 
   # # Create all the graphics that will be .png files
   # echo "================="
   # echo " creating png graphics with Asymptote"
@@ -122,7 +128,6 @@ then
   # done
 
   # Done making the graphics
-  cd ..
 fi
 
 
