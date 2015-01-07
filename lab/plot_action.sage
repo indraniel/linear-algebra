@@ -209,8 +209,8 @@ def find_angles(a,b,c,d,num_pts,lower_limit=None,upper_limit=None):
     M = Matrix(RDF, [[a, b], [c, d]])
     for i in range(num_pts):
         t = i*pi/num_pts
-	if ((t<lower_limit) or (t>upper_limit)):
-	    continue
+        if ((t<lower_limit) or (t>upper_limit)):
+            continue
         pt = (cos(t), sin(t))
         v = vector(RDF, pt)
         w = v*M
@@ -235,9 +235,11 @@ def color_angles_list(a, b, c, d, num_pts, colors):
     num_colors = len(colors)
     for i in range(num_colors):
         color = colors[i]
-	# print "color=",repr(color)
-	points = find_angles(a,b,c,d,num_pts,lower_limit=i*pi/num_colors,upper_limit=(i+1)*pi/num_colors)
-        g = scatter_plot(points,facecolor=color,edgecolor=color,markersize=MARKERSIZE,ticks=TICKS) 
+        points = find_angles(a,b,c,d,num_pts,
+                             lower_limit=i*pi/num_colors,
+                             upper_limit=(i+1)*pi/num_colors)
+        g = scatter_plot(points,facecolor=color,edgecolor=color,
+                         markersize=MARKERSIZE,ticks=TICKS) 
         r.append(g)
     return r
 
@@ -247,8 +249,8 @@ def plot_color_angles(a, b, c, d, num_points=1000):
      a, b, c, d  reals  Entries are upper left, ur, ll, lr.
      num_points=1000  Number of points along half circle to plot
     """
-    colors = rainbow(num_points*1.5)[:num_points]   # just a hack
-    # colors = rainbow(6)
+    # colors = rainbow(num_points*1.5)[:num_points]   # just a hack
+    colors = rainbow(6)
     G = Graphics()  # holds graph parts until they are to be shown
     for g_part in color_angles_list(a,b,c,d,num_points,colors):
         G += g_part

@@ -14,44 +14,44 @@ circle.\footnote{\noterightmult}
 runfile("plot_action.sage")  
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -3, 3) 
-q.save("graphics/eigen000a.png")
+q.save("graphics/eigen000a.pdf")
 p = plot_circle_action(2,2,0,2) 
 p.set_axes_range(-3, 3, -3, 3) 
-p.save("graphics/eigen000b.png")
+p.save("graphics/eigen000b.pdf")
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
 q = plot_circle_action(1,0,0,1) 
 q.set_axes_range(-3, 3, -3, 3) 
-q.save("graphics/eigen000a.png",dpi=1200)
+q.save("graphics/eigen000a.pdf")
 p = plot_circle_action(2,2,0,2) 
 p.set_axes_range(-3, 3, -3, 3) 
-p.save("graphics/eigen000b.png",dpi=1200)
+p.save("graphics/eigen000b.pdf")
 \end{sagesilent}
 \begin{equation*} \label{gr:firstgraphic}
-  \vcenteredhbox{\includegraphics{graphics/eigen000a.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen000a.pdf}}
   \quad\mapsunder{\big (\begin{smallmatrix} 2 &2 \\ 0 &2 \end{smallmatrix}\big )}\quad
-  \vcenteredhbox{\includegraphics{graphics/eigen000b.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen000b.pdf}}
   \tag{$*$}
 \end{equation*}
-There are twelve colors.
-On the left the curve begins with red at $(x,y)=(1,0)$
-while on the right it begins with red at $(1,2)$.
+On the left plot, going counterclockwise, 
+the curve begins with red at $(x,y)=(1,0)$.
+On the right plot it begins with red at $(1,2)$.
 Here are the before and after vectors for that red point.
 \begin{sageoutput}[d,0,1;d,2,4]
 runfile("plot_action.sage")  
 p = plot_before_after_action(2,2,0,2, [(1,0)], ['red']) 
 p.set_axes_range(-0.5, 2, -0.5, 2) 
-p.save("graphics/eigen001.png", ticks=([1,2],[1,2]))
+p.save("graphics/eigen001.pdf", ticks=([1,2],[1,2]))
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
 p = plot_before_after_action(2,2,0,2, [(1,0)], ['red']) 
 p.set_axes_range(-0.5, 2, -0.5, 2) 
-p.save("graphics/eigen001.png", ticks=([1,2],[1,2]), figsize=2, dpi=1200)
+p.save("graphics/eigen001.pdf", ticks=([1,2],[1,2]), figsize=2)
 \end{sagesilent}
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{graphics/eigen001.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen001.pdf}}
 \end{equation*}
 The matrix's action on the red vector is to both resize and rotate.
 \begin{sageoutput}
@@ -67,11 +67,13 @@ half circle, at $(-1,0)$, by the
 same amount as it does the red vector ending at $(1,0)$. 
 This is because a linear map has the same action on 
 all vectors that lie on the same line through the origin.
-But intermediate vectors are not resized and rotated by the same
-amount.
-Here is the second of the twelve points on the half-circle.
+
+But other vectors may be resized and rotated by the other
+amounts.
+Here is the effect of the transformation on the point
+one sixth of the way around the half-circle.
 \begin{sageoutput}
-v = vector(RR, [cos(pi/12),sin(pi/12)])
+v = vector(RR, [cos(pi/6),sin(pi/6)])
 M = matrix(RR, [[2, 2], [0, 2]])
 w = v*M
 w.norm(), v.norm() 
@@ -79,42 +81,41 @@ angle = arccos(w*v/(w.norm()*v.norm()))
 angle 
 \end{sageoutput}
 
-\Sage{} will show us the rotation of each of the twelve points 
-under the transformation.
+\Sage{} will compute for us the rotations of the vectors.
 At the end of this chapter is the source for a routine 
-\inlinecode{find_angles}
-that takes in the matrix entries and a list of input vectors, then
-for each vector finds the angle between itself and its image and
-returns a list of those angles.
-Also there is the source of \inlinecode{circle_points} that takes in a
-number and returns that many vectors evenly spaced around the half-circle. 
-We can use those two to make a graph plotting the angle of the input vector
-against the angle of the output.
+\inlinecode{plot_color_angles} that
+picks many vectors in the 
+half circle, applies the transformation to each, 
+computes the angle by which that
+vector is rotated, and draws a scatter plot. 
+That scatter plot shows the points using
+the colors of the input vectors.
+Because there are many points, the result looks like a smooth curve.
+% was:
+% angles = find_angles(2,2,0,2,12)
+% angles[0:2]
+% ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
+% p = scatter_plot(angles, marker='.', ticks=ticks)
+% p.set_axes_range(0, pi, 0, pi) 
+% p.save("graphics/eigen002.pdf", figsize=2.5, tick_formatter=pi)
 \begin{sageoutput}[d,0,1]
 runfile("plot_action.sage")  
-angles = find_angles(2,2,0,2,12)
-angles[0:2]
-ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
-p = scatter_plot(angles, marker='.', ticks=ticks)
-p.set_axes_range(0, pi, 0, pi) 
-p.save("graphics/eigen002.pdf", figsize=2.5, tick_formatter=pi)
+p = plot_color_angles(2,2,0,2)
+p.set_axes_range(0,pi,0,pi)
+p.save("graphics/eigen003.pdf", figsize=3, tick_formatter=[pi,pi])
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
-angles = find_angles(2,2,0,2,12)
-angles[0:2]
-ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
-p = scatter_plot(angles, marker='.', edgecolor='blue', ticks=ticks)
-p.set_axes_range(0, pi, 0, pi) 
-# p.axes_labels(['angle of input vector', 'angle of output vector'])
-p.save("graphics/eigen002.pdf", figsize=2.5, tick_formatter=pi)
+p = plot_color_angles(2,2,0,2)
+p.set_axes_range(0,pi,0,pi)
+p.save("graphics/eigen003.pdf", figsize=3, tick_formatter=[pi,pi])
 \end{sagesilent}
 % ? won't show axes labels
 \begin{center}
-  \vcenteredhbox{\includegraphics{graphics/eigen002.pdf}}
+  \vcenteredhbox{\includegraphics{graphics/eigen003.pdf}}
 \end{center}
 The most interesting point on this graph is where the output angle is $0$,
-at the input angle of~$\pi$.
+at the input angle of~$\pi/2$.
 This is a input vector that the transformation does not turn at all. 
 It is resized but not rotated.
 This appears in this chapter's first graphic, the one labeled~($*$)
@@ -153,20 +154,22 @@ p.save("graphics/eigen100b.pdf")
 \end{equation*}
 This graphs the angle between the each before arrow and its associated after
 arrows.
+% was:
+% angles = find_angles(1,2,3,4,50)
+% ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
+% p = scatter_plot(angles, marker='.', ticks=ticks)
+% p.save("graphics/eigen101.pdf", figsize=2.5, tick_formatter=pi)
 \begin{sageoutput}[d,0,1]
 runfile("plot_action.sage")  
-angles = find_angles(1,2,3,4,50)
-ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
-p = scatter_plot(angles, marker='.', ticks=ticks)
-p.save("graphics/eigen101.pdf", figsize=2.5, tick_formatter=pi)
+p = plot_color_angles(1,2,3,4)
+p.set_axes_range(0,pi,0,pi)
+p.save("graphics/eigen101.pdf", tick_formatter=[pi,pi])
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
-angles = find_angles(1,2,3,4,50)
-ticks = ([0,pi/4,pi/2,3*pi/4,pi], [0,pi/2,pi])
-p = scatter_plot(angles, marker='.', markersize=2, facecolor='blue', edgecolor='blue', ticks=ticks)
-p.set_axes_range(0, pi, 0, pi) 
-p.save("graphics/eigen101.pdf", figsize=2.5, tick_formatter=pi)
+p = plot_color_angles(1,2,3,4)
+p.set_axes_range(0,pi,0,pi)
+p.save("graphics/eigen101.pdf", figsize=3, tick_formatter=[pi,pi])
 \end{sagesilent}
 \begin{equation*}
   \vcenteredhbox{\includegraphics{graphics/eigen101.pdf}}
@@ -243,7 +246,7 @@ p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red'])
 p2 = plot_before_after_action(1,2,3,4, [evs[1][1][0]], ['blue']) 
 p = p1+p2
 p.set_axes_range(-4, 1, -4.5, 1) 
-p.save("graphics/eigen102.png", figsize=3.25)
+p.save("graphics/eigen102.pdf", figsize=3.25)
 \end{sageoutput}
 \begin{sagesilent}
 load("plot_action.sage")  
@@ -253,7 +256,7 @@ p1 = plot_before_after_action(1,2,3,4, [evs[0][1][0]], ['red'])
 p2 = plot_before_after_action(1,2,3,4, [evs[1][1][0]], ['blue']) 
 p = p1+p2
 p.set_axes_range(-4, 1, -4.5, 1) 
-p.save("graphics/eigen102.png", figsize=3.25, dpi=1200)
+p.save("graphics/eigen102.pdf", figsize=3.25)
 \end{sagesilent}
 \noindent
 This picture has two pair of before and after vectors.
@@ -265,7 +268,7 @@ the after vector is scaled from the before vector,
 in the blue case by the positive factor $\lambda_2\approx 5.37$ and
 in the red case by the negative factor $\lambda_1\approx -0.37$.
 \begin{equation*}
-  \vcenteredhbox{\includegraphics{graphics/eigen102.png}}
+  \vcenteredhbox{\includegraphics{graphics/eigen102.pdf}}
 \end{equation*}
 
 
@@ -281,10 +284,10 @@ in the red case by the negative factor $\lambda_1\approx -0.37$.
 % plot.options['figsize']=4.5
 % g = point_grid(3, 3)
 % p = plot_point_action(1, 2, 3, 4, g)
-% p.save("sageoutput/plot_action110.png")  
+% p.save("sageoutput/plot_action110.pdf")  
 % \end{sageoutput}
 % \begin{center}
-%   \includegraphics{"sageoutput/plot_action110.png"}
+%   \includegraphics{"sageoutput/plot_action110.pdf"}
 % \end{center}
 % This picture shows that the eigenspace associated with the eigenvector
 % having the largest absolute value is attractive.
@@ -295,10 +298,10 @@ in the red case by the negative factor $\lambda_1\approx -0.37$.
 % plot.options['figsize']=4.5
 % g = point_grid(5, 5)
 % p = plot_point_action(2, 2, 0, 2, g)
-% p.save("sageoutput/plot_action111.png")  
+% p.save("sageoutput/plot_action111.pdf")  
 % \end{sageoutput}
 % \begin{center}
-%   \includegraphics{"sageoutput/plot_action111.png"}
+%   \includegraphics{"sageoutput/plot_action111.pdf"}
 % \end{center}
 
 
@@ -389,13 +392,23 @@ M.jordan_form()
 
 
 
+\section{Source of plot\_color\_angles}
+This routine gathers graphic instances and returns the plot of that list.
+\lstinputlisting[firstline=246, lastline=257]{plot_action.sage}
+
+\section{Source of color\_angles\_list}
+This finds the angles for the effect of the transformation on the vectors,
+and draws a scatter plot of those points.
+It draws them in the color of the input vector.
+\lstinputlisting[firstline=224, lastline=244]{plot_action.sage}
+
 \section{Source of find\_angles}
-This routine uses a formula for the angel between two vectors that 
+This routine uses a formula for the angle between two vectors that 
 always gives a positive value, that is, it is the angle without orientiation.
 That's fine for purpose here, which is to use the graph to 
 roughly locate places where the action of the matrix does not turn the
 vector. 
-\lstinputlisting[firstline=197, lastline=218]{plot_action.sage}
+\lstinputlisting[firstline=197, lastline=222]{plot_action.sage}
 
 
 \section{Source of plot\_before\_after\_action}
